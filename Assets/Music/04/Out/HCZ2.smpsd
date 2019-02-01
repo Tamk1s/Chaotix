@@ -1,0 +1,8553 @@
+--; args=[]
+--; filein=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\music\HCZ2.bin
+--; fileout=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\music\HCZ2.asm
+--; folder=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1
+--; script=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\SMPS\Sonic3K\smps2asm.smpss
+--; lable=Maniax
+--; type=
+--; Prepare script parse
+--------------------------------------------------------------------------------
+0000: =type ''
+0005: c ('\type\' != 'voice') && ('\type\' != 'sfx') && ('\type\' != '') && ('\type\' != 'music') {
+0006: 	+Available types: Music, SFX, Voice
+0007: 	$.cc
+0008: 	;
+0009: }
+0011: =endian 'little'
+0012: =upb 0x17D8
+0014: c '\type\' == 'voice' {
+0015: 	=offset 0
+0016: 	~£_Patches .of
+0017: 	/ >patch
+0018: 	;
+0019: }
+0021: @? offset 0 Please specify offset of this song in Z80 bank 0xC0C6
+0023: c '\type\' == 'sfx' {
+0024: 	/ >headersfx
+0025: }{
+0026: 	/ >header
+0027: }
+0029: ?header {
+0030: 	! > sHeaderInit: {
+0031: 		~£_Header .of
+0032: 		%; Z80 offset is {$4!\offset\}
+0033: 	}
+0034: 	c .nw == \upb\ {
+0035: 		! > sHeaderPatchUniv: ;
+0036: 		$.sw
+0037: 	}{
+0038: 		! > sHeaderPatch: .dw{
+0039: 			~£_Patches :0
+0040: 		}
+0041: 	}
+0043: 	=FMnum .db
+0044: 	=PSGnum .nb
+0045: 	! > sHeaderCh: .lb, .db;
+0046: 	! > sHeaderTempo: .db, .db;
+0047: 	! > sHeaderDAC: .dw{
+0048: 		~£_DAC :0
+0049: 	}
+0050: 	$.sw
+0051: 	f \FMnum\ - 1 {
+0052: 		! > sHeaderFM: .dw, .db, .db{
+0053: 			~£_FM? :0
+0054: 		}
+0055: 	}
+0057: 	f \PSGnum\ {
+0058: 		! > sHeaderPSG: .dw, .db, .db, .db, .db{
+0059: 			~£_PSG? :0
+0060: 			:? 4 {
+0061: 				?volenv;
+0062: 			}
+0063: 		}
+0064: 	}
+0066: 	/£_FM? ?note ?comm
+0067: 	/£_PSG? ?note ?comm
+0068: 	/£_DAC ?DAC ?comm
+0069: 	/£_Patches >patch
+0070: }
+0072: ?headersfx {
+0073: 	! > sHeaderInit: {
+0074: 		~£_Header .of
+0075: 		%; Z80 offset is {$4!\offset\}
+0076: 	}
+0078: 	c .nw == \upb\ {
+0079: 		! > sHeaderPatchUniv: ;
+0080: 		$.sw
+0081: 	}{
+0082: 		! > sHeaderPatch: .dw{
+0083: 			~£_Patches :0
+0084: 		}
+0085: 	}
+0087: 	! > sHeaderTick: .db;
+0088: 	=CHnum .db
+0089: 	! > sHeaderCh: \CHnum\;
+0090: 	=trpd 0
+0091: 	=trpn 0
+0093: 	f \CHnum\ {
+0094: 		>f 1
+0095: 		=trpd .nb
+0096: 		>b 1
+0097: 		c (\trpd\ & 0x80) == 0 {
+0098: 			=trpn (\trpd\&3)+1
+0100: 			c (\trpd\ & 4) != 0 {
+0101: 				=trpn \trpn\+3
+0102: 			}
+0104: 			! > sHeaderSFX: .db, .db, .dw, .db, .db{
+0105: 				~£_FM\trpn\ :2
+0106: 			}
+0107: 		}{
+0108: 			=trpn ((\trpd\&0x60)>>5)+1
+0109: 			! > sHeaderSFX: .db, .db, .dw, .db, .db{
+0110: 				~£_PSG\trpn\ :2
+0111: 			}
+0112: 		}
+0114: 	}
+0116: 	/£_FM? ?note ?comm
+0117: 	/£_PSG? ?note ?comm
+0118: 	/£_Patches >patch
+0119: }
+0121: ?patch {
+0122: 	=num 0
+0123: 	=b1 0
+0124: 	=b2 0
+0125: 	=b3 0
+0126: 	=b4 0
+0127: 	f (.an-.pc)/25 {
+0128: 		%\n\t; Patch {$2!\num\}\r\n\t; {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}
+0129: 		>b 25
+0130: 		! > spAlgorithm: .nb&0x7;
+0131: 		! > spFeedback: (.db&0x38)>>3;
+0132: 		=b1 .db
+0133: 		=b3 .db
+0134: 		=b2 .db
+0135: 		=b4 .db
+0136: 		! > spDetune: (\b1\&0xF0)>>4, (\b2\&0xF0)>>4, (\b3\&0xF0)>>4, (\b4\&0xF0)>>4;
+0137: 		! > spMultiple: \b1\&0xF, \b2\&0xF, \b3\&0xF, \b4\&0xF;
+0138: 		=b1 .db
+0139: 		=b3 .db
+0140: 		=b2 .db
+0141: 		=b4 .db
+0142: 		! > spRateScale: (\b1\&0xC0)>>6, (\b2\&0xC0)>>6, (\b3\&0xC0)>>6, (\b4\&0xC0)>>6;
+0143: 		! > spAttackRt: \b1\&0x1F, \b2\&0x1F, \b3\&0x1F, \b4\&0x1F;
+0144: 		=b1 .db
+0145: 		=b3 .db
+0146: 		=b2 .db
+0147: 		=b4 .db
+0148: 		! > spAmpMod: (\b1\&0x80)>>7, (\b2\&0x80)>>7, (\b3\&0x80)>>7, (\b4\&0x80)>>7;
+0149: 		! > spSustainRt: \b1\&0x1F, \b2\&0x1F, \b3\&0x1F, \b4\&0x1F;
+0150: 		=d1 .db
+0151: 		=d3 .db
+0152: 		=d2 .db
+0153: 		=d4 .db
+0154: 		=b1 .db
+0155: 		=b3 .db
+0156: 		=b2 .db
+0157: 		=b4 .db
+0158: 		! > spSustainLv: (\b1\&0xF0)>>4, (\b2\&0xF0)>>4, (\b3\&0xF0)>>4, (\b4\&0xF0)>>4;
+0159: 		! > spDecayRt: \d1\, \d2\, \d3\, \d4\;
+0160: 		! > spReleaseRt: \b1\&0xF, \b2\&0xF, \b3\&0xF, \b4\&0xF;
+0161: 		=b1 .db
+0162: 		=b3 .db
+0163: 		=b2 .db
+0164: 		! > spTotalLv: \b1\&0x7F, \b2\&0x7F, \b3\&0x7F, .db&0x7F;
+0165: 		=num \num\+1
+0166: 	}
+0167: }
+0169: ?volenv {
+0170: 	=v00 0
+0171: 	=v01 1
+0172: 	=v02 2
+0173: 	=v03 3
+0174: 	=v04 4
+0175: 	=v05 5
+0176: 	=v06 6
+0177: 	=v07 7
+0178: 	=v08 8
+0179: 	=v09 9
+0180: 	=v0A 0x0A
+0181: 	=v0B 0x0B
+0182: 	=v0C 0x0C
+0183: 	=v0D 0x0D
+0184: 	=v0E 0x0E
+0185: 	=v0F 0x0F
+0186: 	=v10 0x10
+0187: 	=v11 0x11
+0188: 	=v12 0x12
+0189: 	=v13 0x13
+0190: 	=v14 0x14
+0191: 	=v15 0x15
+0192: 	=v16 0x16
+0193: 	=v17 0x17
+0194: 	=v18 0x18
+0195: 	=v19 0x19
+0196: 	=v1A 0x1A
+0197: 	=v1B 0x1B
+0198: 	=v1C 0x1C
+0199: 	=v1D 0x1D
+0200: 	=v1E 0x1E
+0201: 	=v1F 0x1F
+0202: 	=v20 0x20
+0203: 	=v21 0x21
+0204: 	=v22 0x22
+0205: 	=v23 0x23
+0206: 	=v24 0x24
+0207: 	=v25 0x25
+0208: 	=v26 0x26
+0209: 	=v27 0x27
+0210: }
+0212: ?modenv {
+0213: 	=m00 0
+0214: 	=m01 1
+0215: 	=m02 2
+0216: 	=m03 3
+0217: 	=m04 4
+0218: 	=m05 5
+0219: 	=m06 6
+0220: 	=m07 7
+0221: 	=m08 8
+0222: }
+0224: ?DAC {
+0225: 	=nRst 0x80
+0226: 	=dSnare 0x81
+0227: 	=dHighTom 0x82
+0228: 	=dMidTom 0x83
+0229: 	=dLowTom 0x84
+0230: 	=dFloorTom 0x85
+0231: 	=dKick 0x86
+0232: 	=dMuffledSnare 0x87
+0233: 	=dCrashCymbal 0x88
+0234: 	=dRideCymbal 0x89
+0235: 	=dLowMetalHit 0x8A
+0236: 	=dMetalHit 0x8B
+0237: 	=dHighMetalHit 0x8C
+0238: 	=dHigherMetalHit 0x8D
+0239: 	=dMidMetalHit 0x8E
+0240: 	=dClap 0x8F
+0241: 	=dElectricHighTom 0x90
+0242: 	=dElectricMidTom 0x91
+0243: 	=dElectricLowTom 0x92
+0244: 	=dElectricFloorTom 0x93
+0245: 	=dTightSnare 0x94
+0246: 	=dMidpitchSnare 0x95
+0247: 	=dLooseSnare 0x96
+0248: 	=dLooserSnare 0x97
+0249: 	=dHiTimpani 0x98
+0250: 	=dLowTimpani 0x99
+0251: 	=dMidTimpani 0x9A
+0252: 	=dQuickLooseSnare 0x9B
+0253: 	=dClick 0x9C
+0254: 	=dPowerKick 0x9D
+0255: 	=dQuickGlassCrash 0x9E
+0256: 	=dGlassCrashSnare 0x9F
+0257: 	=dGlassCrash 0xA0
+0258: 	=dGlassCrashKick 0xA1
+0259: 	=dQuietGlassCrash 0xA2
+0260: 	=dOddSnareKick 0xA3
+0261: 	=dKickExtraBass 0xA4
+0262: 	=dComeOn 0xA5
+0263: 	=dDanceSnare 0xA6
+0264: 	=dLooseKick 0xA7
+0265: 	=dModLooseKick 0xA8
+0266: 	=dWoo 0xA9
+0267: 	=dGo 0xAA
+0268: 	=dSnareGo 0xAB
+0269: 	=dPowerTom 0xAC
+0270: 	=dHiWoodBlock 0xAD
+0271: 	=dLowWoodBlock 0xAE
+0272: 	=dHiHitDrum 0xAF
+0273: 	=dLowHitDrum 0xB0
+0274: 	=dMetalCrashHit 0xB1
+0275: 	=dEchoedClapHit 0xB2
+0276: 	=dLowerEchoedClapHit 0xB3
+0277: 	=dHipHopHitKick 0xB4
+0278: 	=dHipHopHitPowerKick 0xB5
+0279: 	=dBassHey 0xB6
+0280: 	=dDanceStyleKick 0xB7
+0281: 	=dHipHopHitKick2 0xB8
+0282: 	=dHipHopHitKick3 0xB9
+0283: 	=dReverseFadingWind 0xBA
+0284: 	=dScratch 0xBB
+0285: 	=dLooseSnareNoise 0xBC
+0286: 	=dPowerKick2 0xBD
+0287: 	=dCrashingNoiseWoo 0xBE
+0288: 	=dQuickHit 0xBF
+0289: 	=dKickHey 0xC0
+0290: 	=dPowerKickHit 0xC1
+0291: 	=dLowPowerKickHit 0xC2
+0292: 	=dLowerPowerKickHit 0xC3
+0293: 	=dLowestPowerKickHit 0xC4
+0294: 	=dEchoedClapHit2 0xC5
+0295: 	=dLowerEchoedClapHit2 0xC6
+0296: }
+0298: --; macro: parse another file '..\SMPS\SMPS default notes.smpss' (102 lines)
+--------------------------------------------------------------------------------
+0005: ?note {
+0006: 	=nRst 0x80
+0007: 	=nC0 0x81
+0008: 	=nCs0 0x82
+0009: 	=nD0 0x83
+0010: 	=nEb0 0x84
+0011: 	=nE0 0x85
+0012: 	=nF0 0x86
+0013: 	=nFs0 0x87
+0014: 	=nG0 0x88
+0015: 	=nAb0 0x89
+0016: 	=nA0 0x8A
+0017: 	=nBb0 0x8B
+0018: 	=nB0 0x8C
+0019: 	=nC1 0x8D
+0020: 	=nCs1 0x8E
+0021: 	=nD1 0x8F
+0022: 	=nEb1 0x90
+0023: 	=nE1 0x91
+0024: 	=nF1 0x92
+0025: 	=nFs1 0x93
+0026: 	=nG1 0x94
+0027: 	=nAb1 0x95
+0028: 	=nA1 0x96
+0029: 	=nBb1 0x97
+0030: 	=nB1 0x98
+0031: 	=nC2 0x99
+0032: 	=nCs2 0x9A
+0033: 	=nD2 0x9B
+0034: 	=nEb2 0x9C
+0035: 	=nE2 0x9D
+0036: 	=nF2 0x9E
+0037: 	=nFs2 0x9F
+0038: 	=nG2 0xA0
+0039: 	=nAb2 0xA1
+0040: 	=nA2 0xA2
+0041: 	=nBb2 0xA3
+0042: 	=nB2 0xA4
+0043: 	=nC3 0xA5
+0044: 	=nCs3 0xA6
+0045: 	=nD3 0xA7
+0046: 	=nEb3 0xA8
+0047: 	=nE3 0xA9
+0048: 	=nF3 0xAA
+0049: 	=nFs3 0xAB
+0050: 	=nG3 0xAC
+0051: 	=nAb3 0xAD
+0052: 	=nA3 0xAE
+0053: 	=nBb3 0xAF
+0054: 	=nB3 0xB0
+0055: 	=nC4 0xB1
+0056: 	=nCs4 0xB2
+0057: 	=nD4 0xB3
+0058: 	=nEb4 0xB4
+0059: 	=nE4 0xB5
+0060: 	=nF4 0xB6
+0061: 	=nFs4 0xB7
+0062: 	=nG4 0xB8
+0063: 	=nAb4 0xB9
+0064: 	=nA4 0xBA
+0065: 	=nBb4 0xBB
+0066: 	=nB4 0xBC
+0067: 	=nC5 0xBD
+0068: 	=nCs5 0xBE
+0069: 	=nD5 0xBF
+0070: 	=nEb5 0xC0
+0071: 	=nE5 0xC1
+0072: 	=nF5 0xC2
+0073: 	=nFs5 0xC3
+0074: 	=nG5 0xC4
+0075: 	=nAb5 0xC5
+0076: 	=nA5 0xC6
+0077: 	=nBb5 0xC7
+0078: 	=nB5 0xC8
+0079: 	=nC6 0xC9
+0080: 	=nCs6 0xCA
+0081: 	=nD6 0xCB
+0082: 	=nEb6 0xCC
+0083: 	=nE6 0xCD
+0084: 	=nF6 0xCE
+0085: 	=nFs6 0xCF
+0086: 	=nG6 0xD0
+0087: 	=nAb6 0xD1
+0088: 	=nA6 0xD2
+0089: 	=nBb6 0xD3
+0090: 	=nB6 0xD4
+0091: 	=nC7 0xD5
+0092: 	=nCs7 0xD6
+0093: 	=nD7 0xD7
+0094: 	=nEb7 0xD8
+0095: 	=nE7 0xD9
+0096: 	=nF7 0xDA
+0097: 	=nFs7 0xDB
+0098: 	=nG7 0xDC
+0099: 	=nAb7 0xDD
+0100: 	=nA7 0xDE
+0101: 	=nBb7 0xDF
+0102: }
+--------------------------------------------------------------------------------
+0298: --; return to previous file
+0300: ?comm {
+0301: 	!0xE0 > sPan: .db & 0xC0, .lb & 0x3F{
+0302: 		:? 0 {
+0303: 			=spNone 0x00
+0304: 			=spRight 0x40
+0305: 			=spLeft 0x80
+0306: 			=spCenter 0xC0
+0307: 		}
+0309: 		c .n1 == 0 {
+0310: 			:- 1
+0311: 			}
+0312: 		}
+0313: 		!0xE1 > ssDetune: .db;
+0314: 		!0xE2 > sFade: .db;
+0315: 		!0xE3 > sStopFM: {
+0316: 			;
+0317: 		}
+0318: 		!0xE4 > ssVol: $2!-(.db | 0x80);
+0319: 		!0xE5 > saVolFMP: .db, .db;
+0320: 		!0xE6 > saVolFM: .db;
+0321: 		=sHold 0xE7
+0322: 		!0xE8 > sNoteTimeOut: .db;
+0323: 		!0xE9 > sSpDashRev: ;
+0324: 		!0xEA > sPlayDAC: .db | 0x80;
+0325: 		!0xEB > sLoopExit: .db, .dw{
+0326: 			~£_Jumpe? :1
+0327: 		}
+0328: 		!0xEC > saVolPSG: .db;
+0329: 		!0xED > ssTransposeS3K: .db;
+0330: 		!0xEE > sYM1cmd: .db, .db;
+0331: 		!0xEF, 0-0x7F > sPatFM: .lb & 0x7F;
+0332: 		!0xEF, 0x80-0xFF > sPatFM: .lb & 0x7F, .db - 0x81;
+0333: 		!0xF0 > ssModZ80: .db, .db, .db, .db;
+0334: 		!0xF1 > sModEnv: .db, .db{
+0335: 			:? 0 {
+0336: 				?modenv;
+0337: 			}
+0338: 			:? 1 {
+0339: 				?modenv;
+0340: 			}
+0341: 		}
+0342: 		!0xF2 > sStop: {
+0343: 			;
+0344: 		}
+0345: 		!0xF3 > sNoisePSG: .db;
+0346: 		!0xF4, 0x80 > sModOn: ;
+0347: 		!0xF4 > sModEnv: .lb{
+0348: 			:? 0 {
+0349: 				?modenv;
+0350: 			}
+0351: 		}
+0352: 		!0xF5 > sVolEnvPSG: .db{
+0353: 			:? 0 {
+0354: 				?volenv;
+0355: 			}
+0356: 		}
+0357: 		!0xF6 > sJump: .dw{
+0358: 			~£_Jump? :0
+0359: 			;
+0360: 		}
+0361: 		!0xF7 > sLoop: .db, .db, .dw{
+0362: 			~£_Loop? :2
+0363: 		}
+0364: 		!0xF8 > sCall: .dw{
+0365: 			~£_Call? :0
+0366: 		}
+0367: 		!0xF9 > sRet: {
+0368: 			;
+0369: 		}
+0370: 		!0xFA > sModOff: ;
+0371: 		!0xFB > saTranspose: .db;
+0372: 		!0xFC > sCont: .dw{
+0373: 			~£_Continous? :0
+0374: 		}
+0375: 		!0xFD > sRawFreq: .db;
+0376: 		!0xFE > sSpecFM3: .db, .db, .db, .db{
+0377: 			%; Broken?
+0378: 		}
+0379: 		!0xFF, 0 > ssTempo: .db;
+0380: 		!0xFF, 1 > sPlaySound: .db;
+0381: 		!0xFF, 2 > sMusPause: .db;
+0382: 		!0xFF, 3 > sCopyMem: .dw, .db{
+0383: 			%; No song should ever use this command. It may good idea to remove it.
+0384: 		}
+0385: 		!0xFF, 4 > ssTickMul: .db;
+0386: 		!0xFF, 5 > sSSGEG: .db, .db, .db, .db{
+0387: 			=op2 .a2
+0388: 			:= 2 .a1
+0389: 				:= 1 \op2\
+0390: 				}
+0391: 				!0xFF, 6 > sVolEnvFM: .db, .db;
+0392: 				!0xFF, 7 > sSpDashReset: ;
+0393: 			}
+--------------------------------------------------------------------------------
+Prepare conversion
+--------------------------------------------------------------------------------
+--> Start conversion with subscript ''
+$0000 EQU0 0:   	=type '' 
+$0000 CON5 5:   	c ('\type\' != 'voice') && ('\type\' != 'sfx') && ('\type\' != '') && ('\type\' != 'music') (false)
+$0000 EQU11 11:   	=endian 'little' little
+$0000 EQU12 12:   	=upb 0x17D8 6104
+$0000 CON14 14:   	c '\type\' == 'voice' (false)
+$0000 EQU21 21:   	=offset 0xC0C6 49350
+$0000 CON23 23:   	c '\type\' == 'sfx' (false)
+$0000 EXE26 26:   	/
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=False run=True
+$C0C6 MAC30 30:   	! > sHeaderInit
+$C0C6 LAC31 31:   	~Maniax_Header .of $C0C6
+$C0C6 COM32 32:   	%; Z80 offset is $C0C6
+$C0C6 CON34 34:   	c .nw == \upb\ (true)
+$C0C6 MAC35 35:   	! > sHeaderPatchUniv
+--! ERROR IN EXPRESSION: 
+--! INITIAL EXPRESSION: .sw
+--! System.ArgumentException: Expression can't be empty
+Parameter name: expression
+   at NCalc.Expression..ctor(String expression, EvaluateOptions options)
+   at SMPS2ASMv2.Parse.ParseNumber(String s, Nullable`1 lnun)
+$C0C8 OPR36 36:   	$.sw 
+$C0C9 EQU43 43:   	=FMnum .db 6
+$C0C9 EQU44 44:   	=PSGnum .nb 3
+$C0C9 MAC45 45:   	! > sHeaderCh: $06, $03
+$C0CA MAC46 46:   	! > sHeaderTempo: $01, $25
+$C0CC MAC47 47:   	! > sHeaderDAC: $C0F8
+$C0CE LAM48 48:   	~Maniax_DAC :0 $C0F8
+--! ERROR IN EXPRESSION: 
+--! INITIAL EXPRESSION: .sw
+--! System.ArgumentException: Expression can't be empty
+Parameter name: expression
+   at NCalc.Expression..ctor(String expression, EvaluateOptions options)
+   at SMPS2ASMv2.Parse.ParseNumber(String s, Nullable`1 lnun)
+$C0D0 OPR50 50:   	$.sw 
+$C0D0 REP51 51:   	f 5 {
+$C0D0 MAC52 52:   	! > sHeaderFM: $C210, $18, $0F
+$C0D4 LAM53 53:   	~Maniax_FM1 :0 $C210
+$C0D4 MAC52 52:   	! > sHeaderFM: $C4B7, $18, $0A
+$C0D8 LAM53 53:   	~Maniax_FM2 :0 $C4B7
+$C0D8 MAC52 52:   	! > sHeaderFM: $C7B5, $18, $13
+$C0DC LAM53 53:   	~Maniax_FM3 :0 $C7B5
+$C0DC MAC52 52:   	! > sHeaderFM: $C7DF, $0C, $0F
+$C0E0 LAM53 53:   	~Maniax_FM4 :0 $C7DF
+$C0E0 MAC52 52:   	! > sHeaderFM: $CB67, $0C, $0C
+$C0E4 LAM53 53:   	~Maniax_FM5 :0 $CB67
+$C0E4 REP57 57:   	f 3 {
+$C0E4 MAC58 58:   	! > sHeaderPSG: $CEBE, $F4, $04, $00, $0C
+$C0EA LAM59 59:   	~Maniax_PSG1 :0 $CEBE
+$C0EA AGM60 60:   	:?4 $0C $0024
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 182:   	v0C $0C
+$C0EA MAC58 58:   	! > sHeaderPSG: $D104, $F4, $04, $00, $0C
+$C0F0 LAM59 59:   	~Maniax_PSG2 :0 $D104
+$C0F0 AGM60 60:   	:?4 $0C $002A
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 182:   	v0C $0C
+$C0F0 MAC58 58:   	! > sHeaderPSG: $D111, $00, $03, $00, $0C
+$C0F6 LAM59 59:   	~Maniax_PSG3 :0 $D111
+$C0F6 AGM60 60:   	:?4 $0C $0030
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 182:   	v0C $0C
+$C0F6 EXE66 66:   	/£_FM?
+--> InitConvertVars: endian=little offset=$C0C6
+--: Maniax_FM1 $C210 LUT=True run=True
+$C212 MAC331 331:   	!$EF, $03 > sPatFM: $03
+$C213 MAC313 313:   	!$E1 > ssDetune: $FE
+$C215 MAC333 333:   	!$F0 > ssModZ80: $0F, $01, $06, $06
+$C21A MAC364 364:   	!$F8 > sCall: $C237
+$C21C LAM365 365:   	~Maniax_Call1 :0 $C237
+--: Maniax_Call1 $C237 LUT=True run=True
+$C237 False 6:   	nRst $80
+$C239 False 6:   	nRst $80
+$C23A False 6:   	nRst $80
+$C23C False 62:   	nG4 $B8
+$C23E False 65:   	nBb4 $BB
+$C23F False 67:   	nC5 $BD
+$C240 False 62:   	nG4 $B8
+$C241 False 60:   	nF4 $B6
+$C243 False 58:   	nEb4 $B4
+$C244 False 57:   	nD4 $B3
+$C245 False 55:   	nC4 $B1
+$C246 False 53:   	nBb3 $AF
+$C247 False 52:   	nA3 $AE
+$C248 False 50:   	nG3 $AC
+$C249 False 6:   	nRst $80
+$C24B False 53:   	nBb3 $AF
+$C24D False 55:   	nC4 $B1
+$C24E False 50:   	nG3 $AC
+$C24F False 48:   	nF3 $AA
+$C251 False 49:   	nFs3 $AB
+$C253 False 48:   	nF3 $AA
+$C255 False 46:   	nEb3 $A8
+$C256 False 43:   	nC3 $A5
+$C257 False 50:   	nG3 $AC
+$C259 False 52:   	nA3 $AE
+$C25A False 53:   	nBb3 $AF
+$C25C False 53:   	nBb3 $AF
+$C25E False 53:   	nBb3 $AF
+$C260 False 52:   	nA3 $AE
+$C262 False 50:   	nG3 $AC
+$C264 False 49:   	nFs3 $AB
+$C265 False 48:   	nF3 $AA
+$C266 False 46:   	nEb3 $A8
+$C267 False 45:   	nD3 $A7
+$C268 False 43:   	nC3 $A5
+$C269 False 41:   	nBb2 $A3
+$C26A False 40:   	nA2 $A2
+$C26B False 38:   	nG2 $A0
+$C26C False 6:   	nRst $80
+$C26E False 53:   	nBb3 $AF
+$C270 False 54:   	nB3 $B0
+$C271 False 55:   	nC4 $B1
+$C272 False 49:   	nFs3 $AB
+$C274 False 50:   	nG3 $AC
+$C276 False 48:   	nF3 $AA
+$C278 False 46:   	nEb3 $A8
+$C279 False 43:   	nC3 $A5
+$C27A False 41:   	nBb2 $A3
+$C27B False 40:   	nA2 $A2
+$C27C False 38:   	nG2 $A0
+$C27D False 36:   	nF2 $9E
+$C27E False 34:   	nEb2 $9C
+$C280 False 48:   	nF3 $AA
+$C282 False 49:   	nFs3 $AB
+$C284 False 48:   	nF3 $AA
+$C286 False 46:   	nEb3 $A8
+$C287 False 48:   	nF3 $AA
+$C288 False 46:   	nEb3 $A8
+$C289 False 43:   	nC3 $A5
+$C28A False 41:   	nBb2 $A3
+$C28B False 50:   	nG3 $AC
+$C28D False 50:   	nG3 $AC
+$C28F False 55:   	nC4 $B1
+$C291 False 52:   	nA3 $AE
+$C293 False 50:   	nG3 $AC
+$C294 False 48:   	nF3 $AA
+$C295 False 46:   	nEb3 $A8
+$C296 False 45:   	nD3 $A7
+$C297 False 43:   	nC3 $A5
+$C298 False 6:   	nRst $80
+$C29A False 62:   	nG4 $B8
+$C29C False 65:   	nBb4 $BB
+$C29D False 67:   	nC5 $BD
+$C29E False 62:   	nG4 $B8
+$C29F False 60:   	nF4 $B6
+$C2A1 False 58:   	nEb4 $B4
+$C2A2 False 57:   	nD4 $B3
+$C2A3 False 55:   	nC4 $B1
+$C2A4 False 53:   	nBb3 $AF
+$C2A5 False 52:   	nA3 $AE
+$C2A6 False 50:   	nG3 $AC
+$C2A7 False 6:   	nRst $80
+$C2A9 False 53:   	nBb3 $AF
+$C2AB False 55:   	nC4 $B1
+$C2AC False 50:   	nG3 $AC
+$C2AD False 48:   	nF3 $AA
+$C2AF False 49:   	nFs3 $AB
+$C2B1 False 48:   	nF3 $AA
+$C2B3 False 46:   	nEb3 $A8
+$C2B4 False 43:   	nC3 $A5
+$C2B5 False 50:   	nG3 $AC
+$C2B7 False 52:   	nA3 $AE
+$C2B8 False 53:   	nBb3 $AF
+$C2BA False 53:   	nBb3 $AF
+$C2BC False 53:   	nBb3 $AF
+$C2BE False 52:   	nA3 $AE
+$C2C0 False 50:   	nG3 $AC
+$C2C2 False 48:   	nF3 $AA
+$C2C3 False 46:   	nEb3 $A8
+$C2C4 False 45:   	nD3 $A7
+$C2C5 False 43:   	nC3 $A5
+$C2C6 False 41:   	nBb2 $A3
+$C2C7 False 40:   	nA2 $A2
+$C2C8 False 38:   	nG2 $A0
+$C2C9 False 36:   	nF2 $9E
+$C2CA False 6:   	nRst $80
+$C2CC False 53:   	nBb3 $AF
+$C2CE False 54:   	nB3 $B0
+$C2CF False 55:   	nC4 $B1
+$C2D0 False 49:   	nFs3 $AB
+$C2D2 False 50:   	nG3 $AC
+$C2D4 False 48:   	nF3 $AA
+$C2D6 False 46:   	nEb3 $A8
+$C2D7 False 43:   	nC3 $A5
+$C2D8 False 41:   	nBb2 $A3
+$C2D9 False 40:   	nA2 $A2
+$C2DA False 38:   	nG2 $A0
+$C2DB False 36:   	nF2 $9E
+$C2DC False 34:   	nEb2 $9C
+$C2DE False 48:   	nF3 $AA
+$C2E0 False 49:   	nFs3 $AB
+$C2E2 False 48:   	nF3 $AA
+$C2E4 False 46:   	nEb3 $A8
+$C2E5 False 48:   	nF3 $AA
+$C2E6 False 46:   	nEb3 $A8
+$C2E7 False 43:   	nC3 $A5
+$C2E8 False 41:   	nBb2 $A3
+$C2E9 False 50:   	nG3 $AC
+$C2EB False 50:   	nG3 $AC
+$C2ED False 46:   	nEb3 $A8
+$C2EF False 45:   	nD3 $A7
+$C2F1 False 43:   	nC3 $A5
+$C2F2 False 41:   	nBb2 $A3
+$C2F3 False 40:   	nA2 $A2
+$C2F4 False 38:   	nG2 $A0
+$C2F5 False 36:   	nF2 $9E
+$C2F6 False 6:   	nRst $80
+$C2F9 MAC367 367:   	!$F9 > sRet
+$C2F9 STP368 368:   	;
+$C21E MAC331 331:   	!$EF, $0E > sPatFM: $0E
+$C21F MAC313 313:   	!$E1 > ssDetune: $01
+$C221 MAC333 333:   	!$F0 > ssModZ80: $0F, $01, $06, $06
+$C226 MAC364 364:   	!$F8 > sCall: $C2F9
+$C228 LAM365 365:   	~Maniax_Call2 :0 $C2F9
+--: Maniax_Call2 $C2F9 LUT=True run=True
+$C2FA MAC371 371:   	!$FB > saTranspose: $F4
+$C2FB False 48:   	nF3 $AA
+$C2FD False 49:   	nFs3 $AB
+$C2FF False 50:   	nG3 $AC
+$C301 False 53:   	nBb3 $AF
+$C303 False 58:   	nEb4 $B4
+$C304 False 60:   	nF4 $B6
+$C305 False 62:   	nG4 $B8
+$C306 False 65:   	nBb4 $BB
+$C307 False 69:   	nD5 $BF
+$C309 False 70:   	nEb5 $C0
+$C30B False 6:   	nRst $80
+$C30D False 72:   	nF5 $C2
+$C30F False 6:   	nRst $80
+$C311 False 73:   	nFs5 $C3
+$C312 False 74:   	nG5 $C4
+$C314 False 6:   	nRst $80
+$C316 False 67:   	nC5 $BD
+$C318 False 6:   	nRst $80
+$C31A False 73:   	nFs5 $C3
+$C31B False 74:   	nG5 $C4
+$C31D False 6:   	nRst $80
+$C31F False 72:   	nF5 $C2
+$C321 False 6:   	nRst $80
+$C323 False 70:   	nEb5 $C0
+$C325 False 6:   	nRst $80
+$C327 False 68:   	nCs5 $BE
+$C328 False 69:   	nD5 $BF
+$C32A False 6:   	nRst $80
+$C32C False 65:   	nBb4 $BB
+$C32E False 6:   	nRst $80
+$C330 False 68:   	nCs5 $BE
+$C331 False 69:   	nD5 $BF
+$C333 False 6:   	nRst $80
+$C335 False 70:   	nEb5 $C0
+$C337 False 6:   	nRst $80
+$C339 False 71:   	nE5 $C1
+$C33A False 72:   	nF5 $C2
+$C33C False 6:   	nRst $80
+$C33E False 65:   	nBb4 $BB
+$C340 False 6:   	nRst $80
+$C342 False 72:   	nF5 $C2
+$C343 False 72:   	nF5 $C2
+$C345 False 6:   	nRst $80
+$C347 False 70:   	nEb5 $C0
+$C349 False 6:   	nRst $80
+$C34B False 69:   	nD5 $BF
+$C34D False 6:   	nRst $80
+$C34F False 67:   	nC5 $BD
+$C351 False 6:   	nRst $80
+$C353 False 69:   	nD5 $BF
+$C355 False 6:   	nRst $80
+$C357 False 70:   	nEb5 $C0
+$C359 False 6:   	nRst $80
+$C35B False 72:   	nF5 $C2
+$C35D False 6:   	nRst $80
+$C35F False 69:   	nD5 $BF
+$C360 False 70:   	nEb5 $C0
+$C362 False 6:   	nRst $80
+$C364 False 72:   	nF5 $C2
+$C366 False 6:   	nRst $80
+$C368 False 73:   	nFs5 $C3
+$C369 False 74:   	nG5 $C4
+$C36B False 6:   	nRst $80
+$C36D False 67:   	nC5 $BD
+$C36F False 6:   	nRst $80
+$C371 False 74:   	nG5 $C4
+$C373 False 6:   	nRst $80
+$C375 False 72:   	nF5 $C2
+$C377 False 6:   	nRst $80
+$C379 False 70:   	nEb5 $C0
+$C37B False 6:   	nRst $80
+$C37D False 68:   	nCs5 $BE
+$C37E False 69:   	nD5 $BF
+$C380 False 6:   	nRst $80
+$C382 False 70:   	nEb5 $C0
+$C384 False 6:   	nRst $80
+$C386 False 70:   	nEb5 $C0
+$C388 False 6:   	nRst $80
+$C38A False 72:   	nF5 $C2
+$C38C False 6:   	nRst $80
+$C38E False 73:   	nFs5 $C3
+$C38F False 74:   	nG5 $C4
+$C391 False 6:   	nRst $80
+$C393 False 70:   	nEb5 $C0
+$C395 False 6:   	nRst $80
+$C397 False 74:   	nG5 $C4
+$C399 False 6:   	nRst $80
+$C39B False 65:   	nBb4 $BB
+$C39D False 6:   	nRst $80
+$C39F False 67:   	nC5 $BD
+$C3A1 False 6:   	nRst $80
+$C3A3 False 70:   	nEb5 $C0
+$C3A5 False 6:   	nRst $80
+$C3A7 False 72:   	nF5 $C2
+$C3A9 False 6:   	nRst $80
+$C3AB False 74:   	nG5 $C4
+$C3AD False 6:   	nRst $80
+$C3AF False 72:   	nF5 $C2
+$C3B1 False 70:   	nEb5 $C0
+$C3B3 False 69:   	nD5 $BF
+$C3B4 False 67:   	nC5 $BD
+$C3B5 False 65:   	nBb4 $BB
+$C3B6 False 63:   	nAb4 $B9
+$C3B7 False 62:   	nG4 $B8
+$C3B8 False 60:   	nF4 $B6
+$C3B9 False 58:   	nEb4 $B4
+$C3BA False 57:   	nD4 $B3
+$C3BC MAC367 367:   	!$F9 > sRet
+$C3BC STP368 368:   	;
+$C22A MAC331 331:   	!$EF, $03 > sPatFM: $03
+$C22B MAC313 313:   	!$E1 > ssDetune: $FE
+$C22D MAC333 333:   	!$F0 > ssModZ80: $0F, $01, $06, $06
+$C232 MAC364 364:   	!$F8 > sCall: $C3BC
+$C234 LAM365 365:   	~Maniax_Call3 :0 $C3BC
+--: Maniax_Call3 $C3BC LUT=True run=True
+$C3BD MAC371 371:   	!$FB > saTranspose: $0C
+$C3BE False 55:   	nC4 $B1
+$C3C0 False 6:   	nRst $80
+$C3C2 False 57:   	nD4 $B3
+$C3C4 False 6:   	nRst $80
+$C3C6 False 58:   	nEb4 $B4
+$C3C8 False 57:   	nD4 $B3
+$C3CA False 55:   	nC4 $B1
+$C3CB False 53:   	nBb3 $AF
+$C3CC False 51:   	nAb3 $AD
+$C3CD False 50:   	nG3 $AC
+$C3CE False 48:   	nF3 $AA
+$C3CF False 55:   	nC4 $B1
+$C3D1 False 6:   	nRst $80
+$C3D3 False 58:   	nEb4 $B4
+$C3D5 False 6:   	nRst $80
+$C3D7 False 59:   	nE4 $B5
+$C3D8 False 60:   	nF4 $B6
+$C3D9 False 6:   	nRst $80
+$C3DB False 57:   	nD4 $B3
+$C3DD False 6:   	nRst $80
+$C3DF False 55:   	nC4 $B1
+$C3E1 False 6:   	nRst $80
+$C3E3 False 53:   	nBb3 $AF
+$C3E5 False 6:   	nRst $80
+$C3E7 False 49:   	nFs3 $AB
+$C3E9 False 50:   	nG3 $AC
+$C3EB False 6:   	nRst $80
+$C3ED False 49:   	nFs3 $AB
+$C3EE False 50:   	nG3 $AC
+$C3F0 False 6:   	nRst $80
+$C3F2 False 48:   	nF3 $AA
+$C3F4 False 6:   	nRst $80
+$C3F6 False 49:   	nFs3 $AB
+$C3F7 False 50:   	nG3 $AC
+$C3F9 False 55:   	nC4 $B1
+$C3FB False 6:   	nRst $80
+$C3FD False 57:   	nD4 $B3
+$C3FF False 6:   	nRst $80
+$C401 False 58:   	nEb4 $B4
+$C403 False 57:   	nD4 $B3
+$C405 False 55:   	nC4 $B1
+$C406 False 53:   	nBb3 $AF
+$C407 False 51:   	nAb3 $AD
+$C408 False 50:   	nG3 $AC
+$C409 False 48:   	nF3 $AA
+$C40A False 55:   	nC4 $B1
+$C40C False 6:   	nRst $80
+$C40E False 58:   	nEb4 $B4
+$C410 False 6:   	nRst $80
+$C412 False 59:   	nE4 $B5
+$C413 False 60:   	nF4 $B6
+$C414 False 6:   	nRst $80
+$C416 False 57:   	nD4 $B3
+$C418 False 6:   	nRst $80
+$C41A False 55:   	nC4 $B1
+$C41C False 6:   	nRst $80
+$C41E False 54:   	nB3 $B0
+$C420 False 6:   	nRst $80
+$C422 False 55:   	nC4 $B1
+$C424 False 6:   	nRst $80
+$C426 False 55:   	nC4 $B1
+$C428 False 6:   	nRst $80
+$C42A False 57:   	nD4 $B3
+$C42C False 6:   	nRst $80
+$C42E False 55:   	nC4 $B1
+$C430 False 6:   	nRst $80
+$C432 False 57:   	nD4 $B3
+$C434 False 6:   	nRst $80
+$C436 False 58:   	nEb4 $B4
+$C438 False 6:   	nRst $80
+$C43A False 60:   	nF4 $B6
+$C43C False 6:   	nRst $80
+$C43E False 55:   	nC4 $B1
+$C440 False 6:   	nRst $80
+$C442 False 57:   	nD4 $B3
+$C444 False 6:   	nRst $80
+$C446 False 58:   	nEb4 $B4
+$C448 False 57:   	nD4 $B3
+$C44A False 55:   	nC4 $B1
+$C44B False 53:   	nBb3 $AF
+$C44C False 51:   	nAb3 $AD
+$C44D False 50:   	nG3 $AC
+$C44E False 48:   	nF3 $AA
+$C44F False 55:   	nC4 $B1
+$C451 False 6:   	nRst $80
+$C453 False 58:   	nEb4 $B4
+$C455 False 6:   	nRst $80
+$C457 False 59:   	nE4 $B5
+$C458 False 60:   	nF4 $B6
+$C459 False 6:   	nRst $80
+$C45B False 57:   	nD4 $B3
+$C45D False 6:   	nRst $80
+$C45F False 55:   	nC4 $B1
+$C461 False 6:   	nRst $80
+$C463 False 53:   	nBb3 $AF
+$C465 False 6:   	nRst $80
+$C467 False 49:   	nFs3 $AB
+$C469 False 50:   	nG3 $AC
+$C46B False 6:   	nRst $80
+$C46D False 49:   	nFs3 $AB
+$C46E False 50:   	nG3 $AC
+$C470 False 6:   	nRst $80
+$C472 False 48:   	nF3 $AA
+$C474 False 6:   	nRst $80
+$C476 False 49:   	nFs3 $AB
+$C477 False 50:   	nG3 $AC
+$C479 False 55:   	nC4 $B1
+$C47B False 6:   	nRst $80
+$C47D False 57:   	nD4 $B3
+$C47F False 6:   	nRst $80
+$C481 False 58:   	nEb4 $B4
+$C483 False 6:   	nRst $80
+$C485 False 58:   	nEb4 $B4
+$C487 False 6:   	nRst $80
+$C489 False 57:   	nD4 $B3
+$C48B False 6:   	nRst $80
+$C48D False 58:   	nEb4 $B4
+$C48F False 6:   	nRst $80
+$C491 False 58:   	nEb4 $B4
+$C493 False 6:   	nRst $80
+$C495 False 60:   	nF4 $B6
+$C497 False 6:   	nRst $80
+$C499 False 58:   	nEb4 $B4
+$C49B False 6:   	nRst $80
+$C49D False 63:   	nAb4 $B9
+$C49F False 6:   	nRst $80
+$C4A1 False 67:   	nC5 $BD
+$C4A3 False 6:   	nRst $80
+$C4A5 False 67:   	nC5 $BD
+$C4A7 False 6:   	nRst $80
+$C4A9 False 67:   	nC5 $BD
+$C4AB False 6:   	nRst $80
+$C4AD False 67:   	nC5 $BD
+$C4AF False 6:   	nRst $80
+$C4B1 False 66:   	nB4 $BC
+$C4B3 False 6:   	nRst $80
+$C4B6 MAC367 367:   	!$F9 > sRet
+$C4B6 STP368 368:   	;
+$C235 MAC357 357:   	!$F6 > sJump: $C210
+$C237 LAM358 358:   	~Maniax_FM1 :0 NULL
+$C237 STP359 359:   	;
+--: Maniax_FM2 $C4B7 LUT=True run=True
+$C4B9 MAC331 331:   	!$EF, $15 > sPatFM: $15
+$C4BA MAC313 313:   	!$E1 > ssDetune: $00
+$C4BC MAC333 333:   	!$F0 > ssModZ80: $0F, $01, $06, $06
+$C4C0 False 19:   	nC1 $8D
+$C4C2 False 6:   	nRst $80
+$C4C4 False 22:   	nEb1 $90
+$C4C5 False 6:   	nRst $80
+$C4C7 False 19:   	nC1 $8D
+$C4C9 False 6:   	nRst $80
+$C4CB False 22:   	nEb1 $90
+$C4CC False 6:   	nRst $80
+$C4CE False 24:   	nF1 $92
+$C4CF False 6:   	nRst $80
+$C4D1 False 22:   	nEb1 $90
+$C4D3 False 6:   	nRst $80
+$C4D5 False 24:   	nF1 $92
+$C4D7 False 6:   	nRst $80
+$C4D9 False 19:   	nC1 $8D
+$C4DB False 6:   	nRst $80
+$C4DD False 16:   	nA0 $8A
+$C4DE False 6:   	nRst $80
+$C4E0 False 19:   	nC1 $8D
+$C4E2 False 16:   	nA0 $8A
+$C4E4 False 6:   	nRst $80
+$C4E6 False 17:   	nBb0 $8B
+$C4E8 False 6:   	nRst $80
+$C4EA False 14:   	nG0 $88
+$C4EC False 6:   	nRst $80
+$C4EE False 17:   	nBb0 $8B
+$C4F0 False 6:   	nRst $80
+$C4F2 False 19:   	nC1 $8D
+$C4F4 False 6:   	nRst $80
+$C4F6 False 22:   	nEb1 $90
+$C4F7 False 6:   	nRst $80
+$C4F9 False 19:   	nC1 $8D
+$C4FB False 6:   	nRst $80
+$C4FD False 22:   	nEb1 $90
+$C4FE False 6:   	nRst $80
+$C500 False 24:   	nF1 $92
+$C501 False 6:   	nRst $80
+$C503 False 22:   	nEb1 $90
+$C505 False 6:   	nRst $80
+$C507 False 24:   	nF1 $92
+$C509 False 6:   	nRst $80
+$C50B False 19:   	nC1 $8D
+$C50D False 6:   	nRst $80
+$C50F False 16:   	nA0 $8A
+$C510 False 6:   	nRst $80
+$C512 False 19:   	nC1 $8D
+$C514 False 16:   	nA0 $8A
+$C516 False 6:   	nRst $80
+$C518 False 17:   	nBb0 $8B
+$C51A False 6:   	nRst $80
+$C51C False 14:   	nG0 $88
+$C51E False 6:   	nRst $80
+$C520 False 17:   	nBb0 $8B
+$C522 False 6:   	nRst $80
+$C524 False 19:   	nC1 $8D
+$C526 False 6:   	nRst $80
+$C528 False 22:   	nEb1 $90
+$C529 False 6:   	nRst $80
+$C52B False 19:   	nC1 $8D
+$C52D False 6:   	nRst $80
+$C52F False 22:   	nEb1 $90
+$C530 False 6:   	nRst $80
+$C532 False 24:   	nF1 $92
+$C533 False 6:   	nRst $80
+$C535 False 22:   	nEb1 $90
+$C537 False 6:   	nRst $80
+$C539 False 24:   	nF1 $92
+$C53B False 6:   	nRst $80
+$C53D False 19:   	nC1 $8D
+$C53F False 6:   	nRst $80
+$C541 False 16:   	nA0 $8A
+$C542 False 6:   	nRst $80
+$C544 False 19:   	nC1 $8D
+$C546 False 16:   	nA0 $8A
+$C548 False 6:   	nRst $80
+$C54A False 17:   	nBb0 $8B
+$C54C False 6:   	nRst $80
+$C54E False 14:   	nG0 $88
+$C550 False 6:   	nRst $80
+$C552 False 17:   	nBb0 $8B
+$C554 False 6:   	nRst $80
+$C556 False 19:   	nC1 $8D
+$C558 False 6:   	nRst $80
+$C55A False 22:   	nEb1 $90
+$C55B False 6:   	nRst $80
+$C55D False 19:   	nC1 $8D
+$C55F False 6:   	nRst $80
+$C561 False 22:   	nEb1 $90
+$C562 False 6:   	nRst $80
+$C564 False 24:   	nF1 $92
+$C565 False 6:   	nRst $80
+$C567 False 22:   	nEb1 $90
+$C569 False 6:   	nRst $80
+$C56B False 24:   	nF1 $92
+$C56D False 6:   	nRst $80
+$C56F False 19:   	nC1 $8D
+$C571 False 6:   	nRst $80
+$C573 False 16:   	nA0 $8A
+$C574 False 6:   	nRst $80
+$C576 False 19:   	nC1 $8D
+$C578 False 16:   	nA0 $8A
+$C57A False 6:   	nRst $80
+$C57C False 17:   	nBb0 $8B
+$C57E False 6:   	nRst $80
+$C580 False 14:   	nG0 $88
+$C582 False 6:   	nRst $80
+$C584 False 17:   	nBb0 $8B
+$C586 False 6:   	nRst $80
+$C588 False 19:   	nC1 $8D
+$C58A False 6:   	nRst $80
+$C58C False 22:   	nEb1 $90
+$C58D False 6:   	nRst $80
+$C58F False 19:   	nC1 $8D
+$C591 False 6:   	nRst $80
+$C593 False 22:   	nEb1 $90
+$C595 False 6:   	nRst $80
+$C597 False 24:   	nF1 $92
+$C599 False 6:   	nRst $80
+$C59B False 22:   	nEb1 $90
+$C59D False 6:   	nRst $80
+$C59F False 24:   	nF1 $92
+$C5A1 False 6:   	nRst $80
+$C5A3 False 19:   	nC1 $8D
+$C5A5 False 6:   	nRst $80
+$C5A7 False 16:   	nA0 $8A
+$C5A8 False 6:   	nRst $80
+$C5AA False 19:   	nC1 $8D
+$C5AC False 16:   	nA0 $8A
+$C5AE False 6:   	nRst $80
+$C5B0 False 17:   	nBb0 $8B
+$C5B2 False 6:   	nRst $80
+$C5B4 False 14:   	nG0 $88
+$C5B6 False 6:   	nRst $80
+$C5B8 False 17:   	nBb0 $8B
+$C5BA False 6:   	nRst $80
+$C5BC False 19:   	nC1 $8D
+$C5BE False 6:   	nRst $80
+$C5C0 False 22:   	nEb1 $90
+$C5C1 False 6:   	nRst $80
+$C5C3 False 19:   	nC1 $8D
+$C5C5 False 6:   	nRst $80
+$C5C7 False 22:   	nEb1 $90
+$C5C9 False 6:   	nRst $80
+$C5CB False 24:   	nF1 $92
+$C5CD False 6:   	nRst $80
+$C5CF False 22:   	nEb1 $90
+$C5D1 False 6:   	nRst $80
+$C5D3 False 24:   	nF1 $92
+$C5D5 False 6:   	nRst $80
+$C5D7 False 22:   	nEb1 $90
+$C5D9 False 6:   	nRst $80
+$C5DB False 31:   	nC2 $99
+$C5DD False 6:   	nRst $80
+$C5DF False 29:   	nBb1 $97
+$C5E1 False 6:   	nRst $80
+$C5E3 False 26:   	nG1 $94
+$C5E5 False 6:   	nRst $80
+$C5E7 False 24:   	nF1 $92
+$C5E9 False 25:   	nFs1 $93
+$C5EA False 24:   	nF1 $92
+$C5EB False 22:   	nEb1 $90
+$C5ED False 19:   	nC1 $8D
+$C5EF False 6:   	nRst $80
+$C5F1 False 14:   	nG0 $88
+$C5F3 False 6:   	nRst $80
+$C5F5 False 15:   	nAb0 $89
+$C5F7 False 6:   	nRst $80
+$C5F9 False 15:   	nAb0 $89
+$C5FA False 6:   	nRst $80
+$C5FC False 27:   	nAb1 $95
+$C5FD False 6:   	nRst $80
+$C5FF False 15:   	nAb0 $89
+$C601 False 6:   	nRst $80
+$C603 False 15:   	nAb0 $89
+$C605 False 6:   	nRst $80
+$C607 False 27:   	nAb1 $95
+$C609 False 6:   	nRst $80
+$C60B False 15:   	nAb0 $89
+$C60D False 6:   	nRst $80
+$C60F False 15:   	nAb0 $89
+$C611 False 6:   	nRst $80
+$C613 False 14:   	nG0 $88
+$C615 False 6:   	nRst $80
+$C617 False 14:   	nG0 $88
+$C618 False 6:   	nRst $80
+$C61A False 26:   	nG1 $94
+$C61B False 6:   	nRst $80
+$C61D False 14:   	nG0 $88
+$C61F False 6:   	nRst $80
+$C621 False 14:   	nG0 $88
+$C623 False 6:   	nRst $80
+$C625 False 26:   	nG1 $94
+$C627 False 6:   	nRst $80
+$C629 False 14:   	nG0 $88
+$C62B False 6:   	nRst $80
+$C62D False 14:   	nG0 $88
+$C62F False 6:   	nRst $80
+$C631 False 17:   	nBb0 $8B
+$C633 False 6:   	nRst $80
+$C635 False 17:   	nBb0 $8B
+$C636 False 6:   	nRst $80
+$C638 False 29:   	nBb1 $97
+$C639 False 6:   	nRst $80
+$C63B False 17:   	nBb0 $8B
+$C63D False 6:   	nRst $80
+$C63F False 17:   	nBb0 $8B
+$C641 False 6:   	nRst $80
+$C643 False 29:   	nBb1 $97
+$C645 False 6:   	nRst $80
+$C647 False 17:   	nBb0 $8B
+$C649 False 6:   	nRst $80
+$C64B False 17:   	nBb0 $8B
+$C64C False 6:   	nRst $80
+$C64E False 17:   	nBb0 $8B
+$C64F False 6:   	nRst $80
+$C651 False 19:   	nC1 $8D
+$C653 False 6:   	nRst $80
+$C655 False 19:   	nC1 $8D
+$C657 False 6:   	nRst $80
+$C659 False 31:   	nC2 $99
+$C65B False 6:   	nRst $80
+$C65D False 19:   	nC1 $8D
+$C65F False 6:   	nRst $80
+$C661 False 31:   	nC2 $99
+$C663 False 6:   	nRst $80
+$C665 False 19:   	nC1 $8D
+$C667 False 6:   	nRst $80
+$C669 False 31:   	nC2 $99
+$C66B False 6:   	nRst $80
+$C66D False 15:   	nAb0 $89
+$C66F False 6:   	nRst $80
+$C671 False 15:   	nAb0 $89
+$C672 False 6:   	nRst $80
+$C674 False 27:   	nAb1 $95
+$C675 False 6:   	nRst $80
+$C677 False 15:   	nAb0 $89
+$C679 False 6:   	nRst $80
+$C67B False 15:   	nAb0 $89
+$C67D False 6:   	nRst $80
+$C67F False 27:   	nAb1 $95
+$C681 False 6:   	nRst $80
+$C683 False 15:   	nAb0 $89
+$C685 False 6:   	nRst $80
+$C687 False 15:   	nAb0 $89
+$C689 False 6:   	nRst $80
+$C68B False 14:   	nG0 $88
+$C68D False 6:   	nRst $80
+$C68F False 14:   	nG0 $88
+$C690 False 6:   	nRst $80
+$C692 False 26:   	nG1 $94
+$C693 False 6:   	nRst $80
+$C695 False 14:   	nG0 $88
+$C697 False 6:   	nRst $80
+$C699 False 14:   	nG0 $88
+$C69B False 6:   	nRst $80
+$C69D False 26:   	nG1 $94
+$C69F False 6:   	nRst $80
+$C6A1 False 14:   	nG0 $88
+$C6A3 False 6:   	nRst $80
+$C6A5 False 14:   	nG0 $88
+$C6A7 False 6:   	nRst $80
+$C6A9 False 12:   	nF0 $86
+$C6AB False 6:   	nRst $80
+$C6AD False 12:   	nF0 $86
+$C6AE False 6:   	nRst $80
+$C6B0 False 24:   	nF1 $92
+$C6B1 False 6:   	nRst $80
+$C6B3 False 12:   	nF0 $86
+$C6B5 False 6:   	nRst $80
+$C6B7 False 12:   	nF0 $86
+$C6B9 False 6:   	nRst $80
+$C6BB False 24:   	nF1 $92
+$C6BD False 6:   	nRst $80
+$C6BF False 12:   	nF0 $86
+$C6C1 False 6:   	nRst $80
+$C6C3 False 12:   	nF0 $86
+$C6C4 False 6:   	nRst $80
+$C6C6 False 15:   	nAb0 $89
+$C6C7 False 6:   	nRst $80
+$C6C9 False 15:   	nAb0 $89
+$C6CB False 6:   	nRst $80
+$C6CD False 15:   	nAb0 $89
+$C6CF False 6:   	nRst $80
+$C6D1 False 15:   	nAb0 $89
+$C6D3 False 6:   	nRst $80
+$C6D5 False 15:   	nAb0 $89
+$C6D7 False 6:   	nRst $80
+$C6D9 False 14:   	nG0 $88
+$C6DB False 6:   	nRst $80
+$C6DD False 14:   	nG0 $88
+$C6DF False 6:   	nRst $80
+$C6E1 False 14:   	nG0 $88
+$C6E3 False 6:   	nRst $80
+$C6E5 False 26:   	nG1 $94
+$C6E7 False 6:   	nRst $80
+$C6E9 False 14:   	nG0 $88
+$C6EB False 6:   	nRst $80
+$C6ED False 14:   	nG0 $88
+$C6EF False 6:   	nRst $80
+$C6F1 False 12:   	nF0 $86
+$C6F3 False 6:   	nRst $80
+$C6F5 False 12:   	nF0 $86
+$C6F6 False 6:   	nRst $80
+$C6F8 False 14:   	nG0 $88
+$C6FA False 6:   	nRst $80
+$C6FC False 26:   	nG1 $94
+$C6FE False 6:   	nRst $80
+$C700 False 14:   	nG0 $88
+$C702 False 6:   	nRst $80
+$C704 False 15:   	nAb0 $89
+$C706 False 6:   	nRst $80
+$C708 False 15:   	nAb0 $89
+$C709 False 6:   	nRst $80
+$C70B False 17:   	nBb0 $8B
+$C70D False 6:   	nRst $80
+$C70F False 29:   	nBb1 $97
+$C711 False 6:   	nRst $80
+$C713 False 17:   	nBb0 $8B
+$C715 False 6:   	nRst $80
+$C717 False 29:   	nBb1 $97
+$C719 False 6:   	nRst $80
+$C71B False 12:   	nF0 $86
+$C71D False 6:   	nRst $80
+$C71F False 12:   	nF0 $86
+$C720 False 6:   	nRst $80
+$C722 False 14:   	nG0 $88
+$C724 False 6:   	nRst $80
+$C726 False 26:   	nG1 $94
+$C728 False 6:   	nRst $80
+$C72A False 14:   	nG0 $88
+$C72C False 6:   	nRst $80
+$C72E False 19:   	nC1 $8D
+$C730 False 6:   	nRst $80
+$C732 False 31:   	nC2 $99
+$C733 False 6:   	nRst $80
+$C735 False 17:   	nBb0 $8B
+$C737 False 6:   	nRst $80
+$C739 False 29:   	nBb1 $97
+$C73A False 6:   	nRst $80
+$C73C False 15:   	nAb0 $89
+$C73E False 6:   	nRst $80
+$C740 False 27:   	nAb1 $95
+$C742 False 6:   	nRst $80
+$C744 False 14:   	nG0 $88
+$C746 False 6:   	nRst $80
+$C748 False 26:   	nG1 $94
+$C74A False 6:   	nRst $80
+$C74C False 12:   	nF0 $86
+$C74E False 6:   	nRst $80
+$C750 False 12:   	nF0 $86
+$C751 False 6:   	nRst $80
+$C753 False 14:   	nG0 $88
+$C755 False 6:   	nRst $80
+$C757 False 26:   	nG1 $94
+$C759 False 6:   	nRst $80
+$C75B False 14:   	nG0 $88
+$C75D False 6:   	nRst $80
+$C75F False 15:   	nAb0 $89
+$C761 False 6:   	nRst $80
+$C763 False 15:   	nAb0 $89
+$C764 False 6:   	nRst $80
+$C766 False 17:   	nBb0 $8B
+$C768 False 6:   	nRst $80
+$C76A False 29:   	nBb1 $97
+$C76C False 6:   	nRst $80
+$C76E False 17:   	nBb0 $8B
+$C770 False 6:   	nRst $80
+$C772 False 29:   	nBb1 $97
+$C774 False 6:   	nRst $80
+$C776 False 15:   	nAb0 $89
+$C778 False 6:   	nRst $80
+$C77A False 15:   	nAb0 $89
+$C77B False 6:   	nRst $80
+$C77D False 12:   	nF0 $86
+$C77F False 6:   	nRst $80
+$C781 False 12:   	nF0 $86
+$C783 False 6:   	nRst $80
+$C785 False 10:   	nEb0 $84
+$C787 False 6:   	nRst $80
+$C789 False 12:   	nF0 $86
+$C78B False 6:   	nRst $80
+$C78D False 14:   	nG0 $88
+$C78F False 6:   	nRst $80
+$C791 False 14:   	nG0 $88
+$C793 False 6:   	nRst $80
+$C795 False 14:   	nG0 $88
+$C797 False 6:   	nRst $80
+$C799 False 14:   	nG0 $88
+$C79B False 6:   	nRst $80
+$C79D False 14:   	nG0 $88
+$C79F False 6:   	nRst $80
+$C7A1 False 12:   	nF0 $86
+$C7A3 False 6:   	nRst $80
+$C7A5 False 13:   	nFs0 $87
+$C7A7 False 6:   	nRst $80
+$C7A9 False 14:   	nG0 $88
+$C7AB False 6:   	nRst $80
+$C7AD False 17:   	nBb0 $8B
+$C7AF False 6:   	nRst $80
+$C7B2 MAC357 357:   	!$F6 > sJump: $C4B7
+$C7B4 LAM358 358:   	~Maniax_FM2 :0 NULL
+$C7B4 STP359 359:   	;
+--: Maniax_FM3 $C7B5 LUT=True run=True
+$C7B5 False 6:   	nRst $80
+$C7B9 MAC331 331:   	!$EF, $03 > sPatFM: $03
+$C7BA MAC313 313:   	!$E1 > ssDetune: $02
+$C7BC MAC333 333:   	!$F0 > ssModZ80: $0F, $01, $06, $06
+$C7C1 MAC364 364:   	!$F8 > sCall: $C237
+$C7C3 LAM365 365:   	~Maniax_Call1 :0 NULL
+$C7C5 MAC331 331:   	!$EF, $0E > sPatFM: $0E
+$C7C6 MAC313 313:   	!$E1 > ssDetune: $FF
+$C7C8 MAC333 333:   	!$F0 > ssModZ80: $0F, $01, $06, $06
+$C7CD MAC364 364:   	!$F8 > sCall: $C2F9
+$C7CF LAM365 365:   	~Maniax_Call2 :0 NULL
+$C7D1 MAC331 331:   	!$EF, $03 > sPatFM: $03
+$C7D2 MAC313 313:   	!$E1 > ssDetune: $02
+$C7D4 MAC333 333:   	!$F0 > ssModZ80: $0F, $01, $06, $06
+$C7D9 MAC364 364:   	!$F8 > sCall: $C3BC
+$C7DB LAM365 365:   	~Maniax_Call3 :0 NULL
+$C7DC MAC357 357:   	!$F6 > sJump: $C7B7
+$C7DE LAM358 358:   	~Maniax_Jump1 :0 $C7B7
+$C7DE STP359 359:   	;
+--: Maniax_FM4 $C7DF LUT=True run=True
+$C7E1 MAC331 331:   	!$EF, $06 > sPatFM: $06
+$C7E2 MAC313 313:   	!$E1 > ssDetune: $01
+$C7E4 MAC333 333:   	!$F0 > ssModZ80: $0A, $01, $03, $06
+$C7E8 False 48:   	nF3 $AA
+$C7EA False 6:   	nRst $80
+$C7EC False 48:   	nF3 $AA
+$C7EE False 6:   	nRst $80
+$C7F0 False 48:   	nF3 $AA
+$C7F2 False 6:   	nRst $80
+$C7F4 False 48:   	nF3 $AA
+$C7F5 False 6:   	nRst $80
+$C7F7 False 48:   	nF3 $AA
+$C7F9 False 6:   	nRst $80
+$C7FB False 48:   	nF3 $AA
+$C7FD False 6:   	nRst $80
+$C7FF False 41:   	nBb2 $A3
+$C801 False 6:   	nRst $80
+$C803 False 48:   	nF3 $AA
+$C805 False 6:   	nRst $80
+$C807 False 48:   	nF3 $AA
+$C809 False 6:   	nRst $80
+$C80B False 46:   	nEb3 $A8
+$C80D False 6:   	nRst $80
+$C80F False 46:   	nEb3 $A8
+$C811 False 6:   	nRst $80
+$C813 False 46:   	nEb3 $A8
+$C815 False 6:   	nRst $80
+$C817 False 46:   	nEb3 $A8
+$C818 False 6:   	nRst $80
+$C81A False 47:   	nE3 $A9
+$C81B False 6:   	nRst $80
+$C81D False 47:   	nE3 $A9
+$C81F False 6:   	nRst $80
+$C821 False 47:   	nE3 $A9
+$C823 False 6:   	nRst $80
+$C825 False 47:   	nE3 $A9
+$C827 False 6:   	nRst $80
+$C829 False 48:   	nF3 $AA
+$C82B False 6:   	nRst $80
+$C82D False 48:   	nF3 $AA
+$C82F False 6:   	nRst $80
+$C831 False 48:   	nF3 $AA
+$C833 False 6:   	nRst $80
+$C835 False 48:   	nF3 $AA
+$C836 False 6:   	nRst $80
+$C838 False 48:   	nF3 $AA
+$C83A False 6:   	nRst $80
+$C83C False 48:   	nF3 $AA
+$C83E False 6:   	nRst $80
+$C840 False 41:   	nBb2 $A3
+$C842 False 6:   	nRst $80
+$C844 False 48:   	nF3 $AA
+$C846 False 6:   	nRst $80
+$C848 False 48:   	nF3 $AA
+$C84A False 6:   	nRst $80
+$C84C False 46:   	nEb3 $A8
+$C84E False 6:   	nRst $80
+$C850 False 46:   	nEb3 $A8
+$C852 False 6:   	nRst $80
+$C854 False 46:   	nEb3 $A8
+$C856 False 6:   	nRst $80
+$C858 False 46:   	nEb3 $A8
+$C859 False 6:   	nRst $80
+$C85B False 47:   	nE3 $A9
+$C85C False 6:   	nRst $80
+$C85E False 47:   	nE3 $A9
+$C860 False 6:   	nRst $80
+$C862 False 47:   	nE3 $A9
+$C864 False 6:   	nRst $80
+$C866 False 47:   	nE3 $A9
+$C868 False 6:   	nRst $80
+$C86A False 48:   	nF3 $AA
+$C86C False 6:   	nRst $80
+$C86E False 48:   	nF3 $AA
+$C870 False 6:   	nRst $80
+$C872 False 48:   	nF3 $AA
+$C874 False 6:   	nRst $80
+$C876 False 48:   	nF3 $AA
+$C877 False 6:   	nRst $80
+$C879 False 48:   	nF3 $AA
+$C87B False 6:   	nRst $80
+$C87D False 48:   	nF3 $AA
+$C87F False 6:   	nRst $80
+$C881 False 41:   	nBb2 $A3
+$C883 False 6:   	nRst $80
+$C885 False 48:   	nF3 $AA
+$C887 False 6:   	nRst $80
+$C889 False 48:   	nF3 $AA
+$C88B False 6:   	nRst $80
+$C88D False 46:   	nEb3 $A8
+$C88F False 6:   	nRst $80
+$C891 False 46:   	nEb3 $A8
+$C893 False 6:   	nRst $80
+$C895 False 46:   	nEb3 $A8
+$C897 False 6:   	nRst $80
+$C899 False 46:   	nEb3 $A8
+$C89A False 6:   	nRst $80
+$C89C False 47:   	nE3 $A9
+$C89D False 6:   	nRst $80
+$C89F False 47:   	nE3 $A9
+$C8A1 False 6:   	nRst $80
+$C8A3 False 47:   	nE3 $A9
+$C8A5 False 6:   	nRst $80
+$C8A7 False 47:   	nE3 $A9
+$C8A9 False 6:   	nRst $80
+$C8AB False 48:   	nF3 $AA
+$C8AD False 6:   	nRst $80
+$C8AF False 48:   	nF3 $AA
+$C8B1 False 6:   	nRst $80
+$C8B3 False 48:   	nF3 $AA
+$C8B5 False 6:   	nRst $80
+$C8B7 False 48:   	nF3 $AA
+$C8B8 False 6:   	nRst $80
+$C8BA False 48:   	nF3 $AA
+$C8BC False 6:   	nRst $80
+$C8BE False 48:   	nF3 $AA
+$C8C0 False 6:   	nRst $80
+$C8C2 False 41:   	nBb2 $A3
+$C8C4 False 6:   	nRst $80
+$C8C6 False 48:   	nF3 $AA
+$C8C8 False 6:   	nRst $80
+$C8CA False 48:   	nF3 $AA
+$C8CC False 6:   	nRst $80
+$C8CE False 46:   	nEb3 $A8
+$C8D0 False 6:   	nRst $80
+$C8D2 False 46:   	nEb3 $A8
+$C8D4 False 6:   	nRst $80
+$C8D6 False 46:   	nEb3 $A8
+$C8D8 False 6:   	nRst $80
+$C8DA False 46:   	nEb3 $A8
+$C8DB False 6:   	nRst $80
+$C8DD False 47:   	nE3 $A9
+$C8DE False 6:   	nRst $80
+$C8E0 False 47:   	nE3 $A9
+$C8E2 False 6:   	nRst $80
+$C8E4 False 47:   	nE3 $A9
+$C8E6 False 6:   	nRst $80
+$C8E8 False 47:   	nE3 $A9
+$C8EA False 6:   	nRst $80
+$C8EC False 48:   	nF3 $AA
+$C8EE False 6:   	nRst $80
+$C8F0 False 48:   	nF3 $AA
+$C8F2 False 6:   	nRst $80
+$C8F4 False 48:   	nF3 $AA
+$C8F6 False 6:   	nRst $80
+$C8F8 False 48:   	nF3 $AA
+$C8F9 False 6:   	nRst $80
+$C8FB False 48:   	nF3 $AA
+$C8FD False 6:   	nRst $80
+$C8FF False 48:   	nF3 $AA
+$C901 False 6:   	nRst $80
+$C903 False 41:   	nBb2 $A3
+$C905 False 6:   	nRst $80
+$C907 False 48:   	nF3 $AA
+$C909 False 6:   	nRst $80
+$C90B False 48:   	nF3 $AA
+$C90D False 6:   	nRst $80
+$C90F False 46:   	nEb3 $A8
+$C911 False 6:   	nRst $80
+$C913 False 46:   	nEb3 $A8
+$C915 False 6:   	nRst $80
+$C917 False 46:   	nEb3 $A8
+$C919 False 6:   	nRst $80
+$C91B False 46:   	nEb3 $A8
+$C91C False 6:   	nRst $80
+$C91E False 47:   	nE3 $A9
+$C91F False 6:   	nRst $80
+$C921 False 47:   	nE3 $A9
+$C923 False 6:   	nRst $80
+$C925 False 47:   	nE3 $A9
+$C927 False 6:   	nRst $80
+$C929 False 47:   	nE3 $A9
+$C92B False 6:   	nRst $80
+$C92D False 48:   	nF3 $AA
+$C92F False 6:   	nRst $80
+$C931 False 48:   	nF3 $AA
+$C933 False 6:   	nRst $80
+$C935 False 48:   	nF3 $AA
+$C937 False 6:   	nRst $80
+$C939 False 48:   	nF3 $AA
+$C93A False 6:   	nRst $80
+$C93C False 48:   	nF3 $AA
+$C93E False 6:   	nRst $80
+$C940 False 48:   	nF3 $AA
+$C942 False 6:   	nRst $80
+$C944 False 41:   	nBb2 $A3
+$C946 False 6:   	nRst $80
+$C948 False 48:   	nF3 $AA
+$C94A False 6:   	nRst $80
+$C94C False 48:   	nF3 $AA
+$C94E False 6:   	nRst $80
+$C950 False 46:   	nEb3 $A8
+$C952 False 6:   	nRst $80
+$C954 False 55:   	nC4 $B1
+$C956 False 53:   	nBb3 $AF
+$C957 False 50:   	nG3 $AC
+$C958 False 48:   	nF3 $AA
+$C95A False 49:   	nFs3 $AB
+$C95B False 48:   	nF3 $AA
+$C95C False 46:   	nEb3 $A8
+$C95E False 43:   	nC3 $A5
+$C95F False 6:   	nRst $80
+$C961 False 48:   	nF3 $AA
+$C963 False 46:   	nEb3 $A8
+$C965 False 6:   	nRst $80
+$C967 False 45:   	nD3 $A7
+$C969 False 6:   	nRst $80
+$C96B False 46:   	nEb3 $A8
+$C96D False 6:   	nRst $80
+$C96F False 45:   	nD3 $A7
+$C971 False 6:   	nRst $80
+$C973 False 46:   	nEb3 $A8
+$C975 False 6:   	nRst $80
+$C977 False 55:   	nC4 $B1
+$C979 False 6:   	nRst $80
+$C97B False 55:   	nC4 $B1
+$C97D False 6:   	nRst $80
+$C97F False 57:   	nD4 $B3
+$C981 False 6:   	nRst $80
+$C983 False 58:   	nEb4 $B4
+$C985 False 6:   	nRst $80
+$C987 False 45:   	nD3 $A7
+$C989 False 6:   	nRst $80
+$C98B False 48:   	nF3 $AA
+$C98D False 6:   	nRst $80
+$C98F False 45:   	nD3 $A7
+$C991 False 6:   	nRst $80
+$C993 False 48:   	nF3 $AA
+$C995 False 6:   	nRst $80
+$C997 False 45:   	nD3 $A7
+$C999 False 6:   	nRst $80
+$C99B False 53:   	nBb3 $AF
+$C99D False 6:   	nRst $80
+$C99F False 53:   	nBb3 $AF
+$C9A1 False 6:   	nRst $80
+$C9A3 False 55:   	nC4 $B1
+$C9A5 False 6:   	nRst $80
+$C9A7 False 57:   	nD4 $B3
+$C9A9 False 6:   	nRst $80
+$C9AB False 45:   	nD3 $A7
+$C9AD False 6:   	nRst $80
+$C9AF False 43:   	nC3 $A5
+$C9B1 False 6:   	nRst $80
+$C9B3 False 45:   	nD3 $A7
+$C9B5 False 6:   	nRst $80
+$C9B7 False 43:   	nC3 $A5
+$C9B9 False 6:   	nRst $80
+$C9BB False 45:   	nD3 $A7
+$C9BD False 6:   	nRst $80
+$C9BF False 57:   	nD4 $B3
+$C9C1 False 6:   	nRst $80
+$C9C3 False 57:   	nD4 $B3
+$C9C5 False 6:   	nRst $80
+$C9C7 False 58:   	nEb4 $B4
+$C9C9 False 6:   	nRst $80
+$C9CB False 60:   	nF4 $B6
+$C9CD False 6:   	nRst $80
+$C9CF False 53:   	nBb3 $AF
+$C9D1 False 6:   	nRst $80
+$C9D3 False 53:   	nBb3 $AF
+$C9D5 False 6:   	nRst $80
+$C9D7 False 53:   	nBb3 $AF
+$C9D9 False 6:   	nRst $80
+$C9DB False 53:   	nBb3 $AF
+$C9DD False 6:   	nRst $80
+$C9DF False 53:   	nBb3 $AF
+$C9E1 False 6:   	nRst $80
+$C9E3 False 46:   	nEb3 $A8
+$C9E5 False 6:   	nRst $80
+$C9E7 False 48:   	nF3 $AA
+$C9E9 False 6:   	nRst $80
+$C9EB False 46:   	nEb3 $A8
+$C9ED False 6:   	nRst $80
+$C9EF False 45:   	nD3 $A7
+$C9F1 False 6:   	nRst $80
+$C9F3 False 46:   	nEb3 $A8
+$C9F5 False 6:   	nRst $80
+$C9F7 False 45:   	nD3 $A7
+$C9F9 False 6:   	nRst $80
+$C9FB False 46:   	nEb3 $A8
+$C9FD False 6:   	nRst $80
+$C9FF False 55:   	nC4 $B1
+$CA01 False 6:   	nRst $80
+$CA03 False 55:   	nC4 $B1
+$CA05 False 6:   	nRst $80
+$CA07 False 57:   	nD4 $B3
+$CA09 False 6:   	nRst $80
+$CA0B False 58:   	nEb4 $B4
+$CA0D False 6:   	nRst $80
+$CA0F False 45:   	nD3 $A7
+$CA11 False 6:   	nRst $80
+$CA13 False 48:   	nF3 $AA
+$CA15 False 6:   	nRst $80
+$CA17 False 45:   	nD3 $A7
+$CA19 False 6:   	nRst $80
+$CA1B False 48:   	nF3 $AA
+$CA1D False 6:   	nRst $80
+$CA1F False 41:   	nBb2 $A3
+$CA21 False 6:   	nRst $80
+$CA23 False 53:   	nBb3 $AF
+$CA25 False 6:   	nRst $80
+$CA27 False 53:   	nBb3 $AF
+$CA29 False 6:   	nRst $80
+$CA2B False 58:   	nEb4 $B4
+$CA2D False 6:   	nRst $80
+$CA2F False 62:   	nG4 $B8
+$CA31 False 6:   	nRst $80
+$CA33 False 46:   	nEb3 $A8
+$CA35 False 6:   	nRst $80
+$CA37 False 41:   	nBb2 $A3
+$CA39 False 6:   	nRst $80
+$CA3B False 46:   	nEb3 $A8
+$CA3D False 6:   	nRst $80
+$CA3F False 41:   	nBb2 $A3
+$CA41 False 6:   	nRst $80
+$CA43 False 43:   	nC3 $A5
+$CA45 False 6:   	nRst $80
+$CA47 False 52:   	nA3 $AE
+$CA49 False 6:   	nRst $80
+$CA4B False 52:   	nA3 $AE
+$CA4D False 6:   	nRst $80
+$CA4F False 55:   	nC4 $B1
+$CA51 False 6:   	nRst $80
+$CA53 False 58:   	nEb4 $B4
+$CA55 False 6:   	nRst $80
+$CA57 False 58:   	nEb4 $B4
+$CA59 False 6:   	nRst $80
+$CA5B False 58:   	nEb4 $B4
+$CA5D False 6:   	nRst $80
+$CA5F False 58:   	nEb4 $B4
+$CA61 False 6:   	nRst $80
+$CA63 False 58:   	nEb4 $B4
+$CA65 False 6:   	nRst $80
+$CA67 False 54:   	nB3 $B0
+$CA69 False 6:   	nRst $80
+$CA6B False 54:   	nB3 $B0
+$CA6D False 6:   	nRst $80
+$CA6F False 54:   	nB3 $B0
+$CA71 False 6:   	nRst $80
+$CA73 False 46:   	nEb3 $A8
+$CA75 False 6:   	nRst $80
+$CA77 False 48:   	nF3 $AA
+$CA79 False 6:   	nRst $80
+$CA7B False 50:   	nG3 $AC
+$CA7D False 6:   	nRst $80
+$CA7F False 48:   	nF3 $AA
+$CA81 False 6:   	nRst $80
+$CA83 False 46:   	nEb3 $A8
+$CA85 False 6:   	nRst $80
+$CA87 False 45:   	nD3 $A7
+$CA89 False 6:   	nRst $80
+$CA8B False 46:   	nEb3 $A8
+$CA8D False 6:   	nRst $80
+$CA8F False 43:   	nC3 $A5
+$CA91 False 6:   	nRst $80
+$CA93 False 53:   	nBb3 $AF
+$CA95 False 6:   	nRst $80
+$CA97 False 50:   	nG3 $AC
+$CA99 False 6:   	nRst $80
+$CA9B False 48:   	nF3 $AA
+$CA9D False 6:   	nRst $80
+$CA9F False 57:   	nD4 $B3
+$CAA1 False 6:   	nRst $80
+$CAA3 False 53:   	nBb3 $AF
+$CAA5 False 6:   	nRst $80
+$CAA7 False 50:   	nG3 $AC
+$CAA9 False 6:   	nRst $80
+$CAAB False 46:   	nEb3 $A8
+$CAAD False 6:   	nRst $80
+$CAAF False 45:   	nD3 $A7
+$CAB1 False 6:   	nRst $80
+$CAB3 False 50:   	nG3 $AC
+$CAB5 False 6:   	nRst $80
+$CAB7 False 48:   	nF3 $AA
+$CAB9 False 6:   	nRst $80
+$CABB False 46:   	nEb3 $A8
+$CABD False 6:   	nRst $80
+$CABF False 45:   	nD3 $A7
+$CAC1 False 6:   	nRst $80
+$CAC3 False 46:   	nEb3 $A8
+$CAC5 False 6:   	nRst $80
+$CAC7 False 43:   	nC3 $A5
+$CAC9 False 6:   	nRst $80
+$CACB False 54:   	nB3 $B0
+$CACD False 6:   	nRst $80
+$CACF False 50:   	nG3 $AC
+$CAD1 False 6:   	nRst $80
+$CAD3 False 48:   	nF3 $AA
+$CAD5 False 6:   	nRst $80
+$CAD7 False 50:   	nG3 $AC
+$CAD9 False 6:   	nRst $80
+$CADB False 53:   	nBb3 $AF
+$CADD False 6:   	nRst $80
+$CADF False 53:   	nBb3 $AF
+$CAE1 False 6:   	nRst $80
+$CAE3 False 51:   	nAb3 $AD
+$CAE5 False 6:   	nRst $80
+$CAE7 False 50:   	nG3 $AC
+$CAE9 False 6:   	nRst $80
+$CAEB False 50:   	nG3 $AC
+$CAED False 6:   	nRst $80
+$CAEF False 48:   	nF3 $AA
+$CAF1 False 6:   	nRst $80
+$CAF3 False 46:   	nEb3 $A8
+$CAF5 False 6:   	nRst $80
+$CAF7 False 45:   	nD3 $A7
+$CAF9 False 6:   	nRst $80
+$CAFB False 46:   	nEb3 $A8
+$CAFD False 6:   	nRst $80
+$CAFF False 43:   	nC3 $A5
+$CB01 False 6:   	nRst $80
+$CB03 False 53:   	nBb3 $AF
+$CB05 False 6:   	nRst $80
+$CB07 False 50:   	nG3 $AC
+$CB09 False 6:   	nRst $80
+$CB0B False 48:   	nF3 $AA
+$CB0D False 6:   	nRst $80
+$CB0F False 57:   	nD4 $B3
+$CB11 False 6:   	nRst $80
+$CB13 False 53:   	nBb3 $AF
+$CB15 False 6:   	nRst $80
+$CB17 False 50:   	nG3 $AC
+$CB19 False 6:   	nRst $80
+$CB1B False 46:   	nEb3 $A8
+$CB1D False 6:   	nRst $80
+$CB1F False 45:   	nD3 $A7
+$CB21 False 6:   	nRst $80
+$CB23 False 50:   	nG3 $AC
+$CB25 False 6:   	nRst $80
+$CB27 False 48:   	nF3 $AA
+$CB29 False 6:   	nRst $80
+$CB2B False 46:   	nEb3 $A8
+$CB2D False 6:   	nRst $80
+$CB2F False 45:   	nD3 $A7
+$CB31 False 6:   	nRst $80
+$CB33 False 46:   	nEb3 $A8
+$CB35 False 6:   	nRst $80
+$CB37 False 43:   	nC3 $A5
+$CB39 False 6:   	nRst $80
+$CB3B False 34:   	nEb2 $9C
+$CB3D False 6:   	nRst $80
+$CB3F False 39:   	nAb2 $A1
+$CB41 False 6:   	nRst $80
+$CB43 False 34:   	nEb2 $9C
+$CB45 False 6:   	nRst $80
+$CB47 False 46:   	nEb3 $A8
+$CB49 False 6:   	nRst $80
+$CB4B False 51:   	nAb3 $AD
+$CB4D False 6:   	nRst $80
+$CB4F False 50:   	nG3 $AC
+$CB51 False 6:   	nRst $80
+$CB53 False 50:   	nG3 $AC
+$CB55 False 6:   	nRst $80
+$CB57 False 50:   	nG3 $AC
+$CB59 False 6:   	nRst $80
+$CB5B False 50:   	nG3 $AC
+$CB5D False 6:   	nRst $80
+$CB5F False 50:   	nG3 $AC
+$CB61 False 6:   	nRst $80
+$CB64 MAC357 357:   	!$F6 > sJump: $C7DF
+$CB66 LAM358 358:   	~Maniax_FM4 :0 NULL
+$CB66 STP359 359:   	;
+--: Maniax_FM5 $CB67 LUT=True run=True
+$CB69 MAC331 331:   	!$EF, $06 > sPatFM: $06
+$CB6A MAC313 313:   	!$E1 > ssDetune: $FF
+$CB6C MAC333 333:   	!$F0 > ssModZ80: $0A, $01, $03, $06
+$CB70 False 41:   	nBb2 $A3
+$CB72 False 6:   	nRst $80
+$CB74 False 41:   	nBb2 $A3
+$CB76 False 6:   	nRst $80
+$CB78 False 41:   	nBb2 $A3
+$CB7A False 6:   	nRst $80
+$CB7C False 41:   	nBb2 $A3
+$CB7D False 6:   	nRst $80
+$CB7F False 41:   	nBb2 $A3
+$CB81 False 6:   	nRst $80
+$CB83 False 41:   	nBb2 $A3
+$CB85 False 6:   	nRst $80
+$CB87 False 41:   	nBb2 $A3
+$CB89 False 6:   	nRst $80
+$CB8B False 41:   	nBb2 $A3
+$CB8D False 6:   	nRst $80
+$CB8F False 40:   	nA2 $A2
+$CB91 False 6:   	nRst $80
+$CB93 False 40:   	nA2 $A2
+$CB95 False 6:   	nRst $80
+$CB97 False 40:   	nA2 $A2
+$CB99 False 6:   	nRst $80
+$CB9B False 40:   	nA2 $A2
+$CB9C False 6:   	nRst $80
+$CB9E False 41:   	nBb2 $A3
+$CB9F False 6:   	nRst $80
+$CBA1 False 41:   	nBb2 $A3
+$CBA3 False 6:   	nRst $80
+$CBA5 False 41:   	nBb2 $A3
+$CBA7 False 6:   	nRst $80
+$CBA9 False 41:   	nBb2 $A3
+$CBAB False 6:   	nRst $80
+$CBAD False 41:   	nBb2 $A3
+$CBAF False 6:   	nRst $80
+$CBB1 False 41:   	nBb2 $A3
+$CBB3 False 6:   	nRst $80
+$CBB5 False 41:   	nBb2 $A3
+$CBB7 False 6:   	nRst $80
+$CBB9 False 41:   	nBb2 $A3
+$CBBA False 6:   	nRst $80
+$CBBC False 41:   	nBb2 $A3
+$CBBE False 6:   	nRst $80
+$CBC0 False 41:   	nBb2 $A3
+$CBC2 False 6:   	nRst $80
+$CBC4 False 41:   	nBb2 $A3
+$CBC6 False 6:   	nRst $80
+$CBC8 False 41:   	nBb2 $A3
+$CBCA False 6:   	nRst $80
+$CBCC False 40:   	nA2 $A2
+$CBCE False 6:   	nRst $80
+$CBD0 False 40:   	nA2 $A2
+$CBD2 False 6:   	nRst $80
+$CBD4 False 40:   	nA2 $A2
+$CBD6 False 6:   	nRst $80
+$CBD8 False 40:   	nA2 $A2
+$CBD9 False 6:   	nRst $80
+$CBDB False 41:   	nBb2 $A3
+$CBDC False 6:   	nRst $80
+$CBDE False 41:   	nBb2 $A3
+$CBE0 False 6:   	nRst $80
+$CBE2 False 41:   	nBb2 $A3
+$CBE4 False 6:   	nRst $80
+$CBE6 False 41:   	nBb2 $A3
+$CBE8 False 6:   	nRst $80
+$CBEA False 41:   	nBb2 $A3
+$CBEC False 6:   	nRst $80
+$CBEE False 41:   	nBb2 $A3
+$CBF0 False 6:   	nRst $80
+$CBF2 False 41:   	nBb2 $A3
+$CBF4 False 6:   	nRst $80
+$CBF6 False 41:   	nBb2 $A3
+$CBF7 False 6:   	nRst $80
+$CBF9 False 41:   	nBb2 $A3
+$CBFB False 6:   	nRst $80
+$CBFD False 41:   	nBb2 $A3
+$CBFF False 6:   	nRst $80
+$CC01 False 41:   	nBb2 $A3
+$CC03 False 6:   	nRst $80
+$CC05 False 41:   	nBb2 $A3
+$CC07 False 6:   	nRst $80
+$CC09 False 40:   	nA2 $A2
+$CC0B False 6:   	nRst $80
+$CC0D False 40:   	nA2 $A2
+$CC0F False 6:   	nRst $80
+$CC11 False 40:   	nA2 $A2
+$CC13 False 6:   	nRst $80
+$CC15 False 40:   	nA2 $A2
+$CC16 False 6:   	nRst $80
+$CC18 False 41:   	nBb2 $A3
+$CC19 False 6:   	nRst $80
+$CC1B False 41:   	nBb2 $A3
+$CC1D False 6:   	nRst $80
+$CC1F False 41:   	nBb2 $A3
+$CC21 False 6:   	nRst $80
+$CC23 False 41:   	nBb2 $A3
+$CC25 False 6:   	nRst $80
+$CC27 False 41:   	nBb2 $A3
+$CC29 False 6:   	nRst $80
+$CC2B False 41:   	nBb2 $A3
+$CC2D False 6:   	nRst $80
+$CC2F False 41:   	nBb2 $A3
+$CC31 False 6:   	nRst $80
+$CC33 False 41:   	nBb2 $A3
+$CC34 False 6:   	nRst $80
+$CC36 False 41:   	nBb2 $A3
+$CC38 False 6:   	nRst $80
+$CC3A False 41:   	nBb2 $A3
+$CC3C False 6:   	nRst $80
+$CC3E False 41:   	nBb2 $A3
+$CC40 False 6:   	nRst $80
+$CC42 False 41:   	nBb2 $A3
+$CC44 False 6:   	nRst $80
+$CC46 False 40:   	nA2 $A2
+$CC48 False 6:   	nRst $80
+$CC4A False 40:   	nA2 $A2
+$CC4C False 6:   	nRst $80
+$CC4E False 40:   	nA2 $A2
+$CC50 False 6:   	nRst $80
+$CC52 False 40:   	nA2 $A2
+$CC53 False 6:   	nRst $80
+$CC55 False 41:   	nBb2 $A3
+$CC56 False 6:   	nRst $80
+$CC58 False 41:   	nBb2 $A3
+$CC5A False 6:   	nRst $80
+$CC5C False 41:   	nBb2 $A3
+$CC5E False 6:   	nRst $80
+$CC60 False 41:   	nBb2 $A3
+$CC62 False 6:   	nRst $80
+$CC64 False 41:   	nBb2 $A3
+$CC66 False 6:   	nRst $80
+$CC68 False 41:   	nBb2 $A3
+$CC6A False 6:   	nRst $80
+$CC6C False 41:   	nBb2 $A3
+$CC6E False 6:   	nRst $80
+$CC70 False 41:   	nBb2 $A3
+$CC71 False 6:   	nRst $80
+$CC73 False 41:   	nBb2 $A3
+$CC75 False 6:   	nRst $80
+$CC77 False 41:   	nBb2 $A3
+$CC79 False 6:   	nRst $80
+$CC7B False 41:   	nBb2 $A3
+$CC7D False 6:   	nRst $80
+$CC7F False 41:   	nBb2 $A3
+$CC81 False 6:   	nRst $80
+$CC83 False 40:   	nA2 $A2
+$CC85 False 6:   	nRst $80
+$CC87 False 40:   	nA2 $A2
+$CC89 False 6:   	nRst $80
+$CC8B False 40:   	nA2 $A2
+$CC8D False 6:   	nRst $80
+$CC8F False 40:   	nA2 $A2
+$CC90 False 6:   	nRst $80
+$CC92 False 41:   	nBb2 $A3
+$CC93 False 6:   	nRst $80
+$CC95 False 41:   	nBb2 $A3
+$CC97 False 6:   	nRst $80
+$CC99 False 41:   	nBb2 $A3
+$CC9B False 6:   	nRst $80
+$CC9D False 41:   	nBb2 $A3
+$CC9F False 6:   	nRst $80
+$CCA1 False 41:   	nBb2 $A3
+$CCA3 False 6:   	nRst $80
+$CCA5 False 41:   	nBb2 $A3
+$CCA7 False 6:   	nRst $80
+$CCA9 False 41:   	nBb2 $A3
+$CCAB False 6:   	nRst $80
+$CCAD False 41:   	nBb2 $A3
+$CCAE False 6:   	nRst $80
+$CCB0 False 41:   	nBb2 $A3
+$CCB2 False 6:   	nRst $80
+$CCB4 False 41:   	nBb2 $A3
+$CCB6 False 6:   	nRst $80
+$CCB8 False 41:   	nBb2 $A3
+$CCBA False 6:   	nRst $80
+$CCBC False 41:   	nBb2 $A3
+$CCBE False 6:   	nRst $80
+$CCC0 False 41:   	nBb2 $A3
+$CCC2 False 6:   	nRst $80
+$CCC4 False 42:   	nB2 $A4
+$CCC6 False 43:   	nC3 $A5
+$CCC8 False 6:   	nRst $80
+$CCCA False 41:   	nBb2 $A3
+$CCCC False 6:   	nRst $80
+$CCCE False 43:   	nC3 $A5
+$CCD0 False 6:   	nRst $80
+$CCD2 False 41:   	nBb2 $A3
+$CCD4 False 6:   	nRst $80
+$CCD6 False 43:   	nC3 $A5
+$CCD8 False 6:   	nRst $80
+$CCDA False 51:   	nAb3 $AD
+$CCDC False 6:   	nRst $80
+$CCDE False 51:   	nAb3 $AD
+$CCE0 False 6:   	nRst $80
+$CCE2 False 53:   	nBb3 $AF
+$CCE4 False 6:   	nRst $80
+$CCE6 False 55:   	nC4 $B1
+$CCE8 False 6:   	nRst $80
+$CCEA False 41:   	nBb2 $A3
+$CCEC False 6:   	nRst $80
+$CCEE False 45:   	nD3 $A7
+$CCF0 False 6:   	nRst $80
+$CCF2 False 41:   	nBb2 $A3
+$CCF4 False 6:   	nRst $80
+$CCF6 False 45:   	nD3 $A7
+$CCF8 False 6:   	nRst $80
+$CCFA False 41:   	nBb2 $A3
+$CCFC False 6:   	nRst $80
+$CCFE False 50:   	nG3 $AC
+$CD00 False 6:   	nRst $80
+$CD02 False 50:   	nG3 $AC
+$CD04 False 6:   	nRst $80
+$CD06 False 51:   	nAb3 $AD
+$CD08 False 6:   	nRst $80
+$CD0A False 53:   	nBb3 $AF
+$CD0C False 6:   	nRst $80
+$CD0E False 41:   	nBb2 $A3
+$CD10 False 6:   	nRst $80
+$CD12 False 39:   	nAb2 $A1
+$CD14 False 6:   	nRst $80
+$CD16 False 41:   	nBb2 $A3
+$CD18 False 6:   	nRst $80
+$CD1A False 39:   	nAb2 $A1
+$CD1C False 6:   	nRst $80
+$CD1E False 41:   	nBb2 $A3
+$CD20 False 6:   	nRst $80
+$CD22 False 53:   	nBb3 $AF
+$CD24 False 6:   	nRst $80
+$CD26 False 53:   	nBb3 $AF
+$CD28 False 6:   	nRst $80
+$CD2A False 55:   	nC4 $B1
+$CD2C False 6:   	nRst $80
+$CD2E False 57:   	nD4 $B3
+$CD30 False 6:   	nRst $80
+$CD32 False 50:   	nG3 $AC
+$CD34 False 6:   	nRst $80
+$CD36 False 48:   	nF3 $AA
+$CD38 False 6:   	nRst $80
+$CD3A False 48:   	nF3 $AA
+$CD3C False 6:   	nRst $80
+$CD3E False 50:   	nG3 $AC
+$CD40 False 6:   	nRst $80
+$CD42 False 45:   	nD3 $A7
+$CD44 False 6:   	nRst $80
+$CD46 False 43:   	nC3 $A5
+$CD48 False 6:   	nRst $80
+$CD4A False 45:   	nD3 $A7
+$CD4C False 6:   	nRst $80
+$CD4E False 43:   	nC3 $A5
+$CD50 False 6:   	nRst $80
+$CD52 False 41:   	nBb2 $A3
+$CD54 False 6:   	nRst $80
+$CD56 False 43:   	nC3 $A5
+$CD58 False 6:   	nRst $80
+$CD5A False 41:   	nBb2 $A3
+$CD5C False 6:   	nRst $80
+$CD5E False 43:   	nC3 $A5
+$CD60 False 6:   	nRst $80
+$CD62 False 51:   	nAb3 $AD
+$CD64 False 6:   	nRst $80
+$CD66 False 51:   	nAb3 $AD
+$CD68 False 6:   	nRst $80
+$CD6A False 53:   	nBb3 $AF
+$CD6C False 6:   	nRst $80
+$CD6E False 55:   	nC4 $B1
+$CD70 False 6:   	nRst $80
+$CD72 False 41:   	nBb2 $A3
+$CD74 False 6:   	nRst $80
+$CD76 False 45:   	nD3 $A7
+$CD78 False 6:   	nRst $80
+$CD7A False 41:   	nBb2 $A3
+$CD7C False 6:   	nRst $80
+$CD7E False 45:   	nD3 $A7
+$CD80 False 6:   	nRst $80
+$CD82 False 38:   	nG2 $A0
+$CD84 False 6:   	nRst $80
+$CD86 False 50:   	nG3 $AC
+$CD88 False 6:   	nRst $80
+$CD8A False 50:   	nG3 $AC
+$CD8C False 6:   	nRst $80
+$CD8E False 53:   	nBb3 $AF
+$CD90 False 6:   	nRst $80
+$CD92 False 58:   	nEb4 $B4
+$CD94 False 6:   	nRst $80
+$CD96 False 41:   	nBb2 $A3
+$CD98 False 6:   	nRst $80
+$CD9A False 38:   	nG2 $A0
+$CD9C False 6:   	nRst $80
+$CD9E False 41:   	nBb2 $A3
+$CDA0 False 6:   	nRst $80
+$CDA2 False 38:   	nG2 $A0
+$CDA4 False 6:   	nRst $80
+$CDA6 False 40:   	nA2 $A2
+$CDA8 False 6:   	nRst $80
+$CDAA False 48:   	nF3 $AA
+$CDAC False 6:   	nRst $80
+$CDAE False 48:   	nF3 $AA
+$CDB0 False 6:   	nRst $80
+$CDB2 False 52:   	nA3 $AE
+$CDB4 False 6:   	nRst $80
+$CDB6 False 55:   	nC4 $B1
+$CDB8 False 6:   	nRst $80
+$CDBA False 50:   	nG3 $AC
+$CDBC False 6:   	nRst $80
+$CDBE False 50:   	nG3 $AC
+$CDC0 False 6:   	nRst $80
+$CDC2 False 50:   	nG3 $AC
+$CDC4 False 6:   	nRst $80
+$CDC6 False 50:   	nG3 $AC
+$CDC8 False 6:   	nRst $80
+$CDCA False 48:   	nF3 $AA
+$CDCC False 6:   	nRst $80
+$CDCE False 48:   	nF3 $AA
+$CDD0 False 6:   	nRst $80
+$CDD2 False 48:   	nF3 $AA
+$CDD4 False 6:   	nRst $80
+$CDD6 False 43:   	nC3 $A5
+$CDD8 False 6:   	nRst $80
+$CDDA False 45:   	nD3 $A7
+$CDDC False 6:   	nRst $80
+$CDDE False 46:   	nEb3 $A8
+$CDE0 False 6:   	nRst $80
+$CDE2 False 45:   	nD3 $A7
+$CDE4 False 6:   	nRst $80
+$CDE6 False 43:   	nC3 $A5
+$CDE8 False 6:   	nRst $80
+$CDEA False 41:   	nBb2 $A3
+$CDEC False 6:   	nRst $80
+$CDEE False 43:   	nC3 $A5
+$CDF0 False 6:   	nRst $80
+$CDF2 False 39:   	nAb2 $A1
+$CDF4 False 6:   	nRst $80
+$CDF6 False 48:   	nF3 $AA
+$CDF8 False 6:   	nRst $80
+$CDFA False 46:   	nEb3 $A8
+$CDFC False 6:   	nRst $80
+$CDFE False 45:   	nD3 $A7
+$CE00 False 6:   	nRst $80
+$CE02 False 53:   	nBb3 $AF
+$CE04 False 6:   	nRst $80
+$CE06 False 50:   	nG3 $AC
+$CE08 False 6:   	nRst $80
+$CE0A False 46:   	nEb3 $A8
+$CE0C False 6:   	nRst $80
+$CE0E False 43:   	nC3 $A5
+$CE10 False 6:   	nRst $80
+$CE12 False 36:   	nF2 $9E
+$CE14 False 6:   	nRst $80
+$CE16 False 46:   	nEb3 $A8
+$CE18 False 6:   	nRst $80
+$CE1A False 45:   	nD3 $A7
+$CE1C False 6:   	nRst $80
+$CE1E False 43:   	nC3 $A5
+$CE20 False 6:   	nRst $80
+$CE22 False 41:   	nBb2 $A3
+$CE24 False 6:   	nRst $80
+$CE26 False 43:   	nC3 $A5
+$CE28 False 6:   	nRst $80
+$CE2A False 39:   	nAb2 $A1
+$CE2C False 6:   	nRst $80
+$CE2E False 48:   	nF3 $AA
+$CE30 False 6:   	nRst $80
+$CE32 False 46:   	nEb3 $A8
+$CE34 False 6:   	nRst $80
+$CE36 False 45:   	nD3 $A7
+$CE38 False 6:   	nRst $80
+$CE3A False 46:   	nEb3 $A8
+$CE3C False 6:   	nRst $80
+$CE3E False 48:   	nF3 $AA
+$CE40 False 6:   	nRst $80
+$CE42 False 48:   	nF3 $AA
+$CE44 False 6:   	nRst $80
+$CE46 False 46:   	nEb3 $A8
+$CE48 False 6:   	nRst $80
+$CE4A False 45:   	nD3 $A7
+$CE4C False 6:   	nRst $80
+$CE4E False 46:   	nEb3 $A8
+$CE50 False 6:   	nRst $80
+$CE52 False 45:   	nD3 $A7
+$CE54 False 6:   	nRst $80
+$CE56 False 43:   	nC3 $A5
+$CE58 False 6:   	nRst $80
+$CE5A False 41:   	nBb2 $A3
+$CE5C False 6:   	nRst $80
+$CE5E False 43:   	nC3 $A5
+$CE60 False 6:   	nRst $80
+$CE62 False 39:   	nAb2 $A1
+$CE64 False 6:   	nRst $80
+$CE66 False 48:   	nF3 $AA
+$CE68 False 6:   	nRst $80
+$CE6A False 46:   	nEb3 $A8
+$CE6C False 6:   	nRst $80
+$CE6E False 45:   	nD3 $A7
+$CE70 False 6:   	nRst $80
+$CE72 False 53:   	nBb3 $AF
+$CE74 False 6:   	nRst $80
+$CE76 False 50:   	nG3 $AC
+$CE78 False 6:   	nRst $80
+$CE7A False 46:   	nEb3 $A8
+$CE7C False 6:   	nRst $80
+$CE7E False 43:   	nC3 $A5
+$CE80 False 6:   	nRst $80
+$CE82 False 36:   	nF2 $9E
+$CE84 False 6:   	nRst $80
+$CE86 False 46:   	nEb3 $A8
+$CE88 False 6:   	nRst $80
+$CE8A False 45:   	nD3 $A7
+$CE8C False 6:   	nRst $80
+$CE8E False 43:   	nC3 $A5
+$CE90 False 6:   	nRst $80
+$CE92 False 41:   	nBb2 $A3
+$CE94 False 6:   	nRst $80
+$CE96 False 43:   	nC3 $A5
+$CE98 False 6:   	nRst $80
+$CE9A False 39:   	nAb2 $A1
+$CE9C False 6:   	nRst $80
+$CE9E False 43:   	nC3 $A5
+$CEA0 False 6:   	nRst $80
+$CEA2 False 46:   	nEb3 $A8
+$CEA4 False 6:   	nRst $80
+$CEA6 False 45:   	nD3 $A7
+$CEA8 False 6:   	nRst $80
+$CEAA False 45:   	nD3 $A7
+$CEAC False 6:   	nRst $80
+$CEAE False 45:   	nD3 $A7
+$CEB0 False 6:   	nRst $80
+$CEB2 False 45:   	nD3 $A7
+$CEB4 False 6:   	nRst $80
+$CEB6 False 45:   	nD3 $A7
+$CEB8 False 6:   	nRst $80
+$CEBB MAC357 357:   	!$F6 > sJump: $CB67
+$CEBD LAM358 358:   	~Maniax_FM5 :0 NULL
+$CEBD STP359 359:   	;
+$CEBD EXE67 67:   	/£_PSG?
+--> InitConvertVars: endian=little offset=$C0C6
+--: Maniax_PSG1 $CEBE LUT=True run=True
+$CEBF MAC352 352:   	!$F5 > sVolEnvPSG: $0A
+$CEC0 AGM353 353:   	:?0 $0A $0DFA
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 180:   	v0A $0A
+$CEC0 False 55:   	nC4 $B1
+$CEC2 False 6:   	nRst $80
+$CEC4 False 50:   	nG3 $AC
+$CEC6 False 6:   	nRst $80
+$CEC8 False 53:   	nBb3 $AF
+$CECA False 6:   	nRst $80
+$CECC False 50:   	nG3 $AC
+$CECE False 6:   	nRst $80
+$CED0 False 50:   	nG3 $AC
+$CED2 False 6:   	nRst $80
+$CED4 False 53:   	nBb3 $AF
+$CED6 False 6:   	nRst $80
+$CED8 False 50:   	nG3 $AC
+$CEDA False 6:   	nRst $80
+$CEDC False 55:   	nC4 $B1
+$CEDE False 6:   	nRst $80
+$CEE0 False 50:   	nG3 $AC
+$CEE2 False 6:   	nRst $80
+$CEE4 False 53:   	nBb3 $AF
+$CEE6 False 6:   	nRst $80
+$CEE8 False 50:   	nG3 $AC
+$CEEA False 6:   	nRst $80
+$CEEC False 6:   	nRst $80
+$CEEE False 55:   	nC4 $B1
+$CEF0 False 6:   	nRst $80
+$CEF2 False 50:   	nG3 $AC
+$CEF4 False 6:   	nRst $80
+$CEF6 False 53:   	nBb3 $AF
+$CEF8 False 6:   	nRst $80
+$CEFA False 50:   	nG3 $AC
+$CEFC False 6:   	nRst $80
+$CEFE False 50:   	nG3 $AC
+$CF00 False 6:   	nRst $80
+$CF02 False 53:   	nBb3 $AF
+$CF04 False 6:   	nRst $80
+$CF06 False 50:   	nG3 $AC
+$CF08 False 6:   	nRst $80
+$CF0A False 55:   	nC4 $B1
+$CF0C False 6:   	nRst $80
+$CF0E False 50:   	nG3 $AC
+$CF10 False 6:   	nRst $80
+$CF12 False 53:   	nBb3 $AF
+$CF14 False 6:   	nRst $80
+$CF16 False 50:   	nG3 $AC
+$CF18 False 6:   	nRst $80
+$CF1A False 6:   	nRst $80
+$CF1B False 6:   	nRst $80
+$CF1D False 60:   	nF4 $B6
+$CF1F False 61:   	nFs4 $B7
+$CF20 False 62:   	nG4 $B8
+$CF21 False 77:   	nBb5 $C7
+$CF22 False 6:   	nRst $80
+$CF23 False 67:   	nC5 $BD
+$CF24 False 73:   	nFs5 $C3
+$CF26 False 74:   	nG5 $C4
+$CF28 False 6:   	nRst $80
+$CF2A False 55:   	nC4 $B1
+$CF2C False 6:   	nRst $80
+$CF2E False 64:   	nA4 $BA
+$CF30 False 6:   	nRst $80
+$CF32 False 62:   	nG4 $B8
+$CF34 False 6:   	nRst $80
+$CF36 False 60:   	nF4 $B6
+$CF38 False 6:   	nRst $80
+$CF3A False 61:   	nFs4 $B7
+$CF3B False 62:   	nG4 $B8
+$CF3D False 59:   	nE4 $B5
+$CF3E False 6:   	nRst $80
+$CF40 False 6:   	nRst $80
+$CF42 False 60:   	nF4 $B6
+$CF44 False 61:   	nFs4 $B7
+$CF45 False 62:   	nG4 $B8
+$CF46 False 77:   	nBb5 $C7
+$CF47 False 6:   	nRst $80
+$CF48 False 67:   	nC5 $BD
+$CF49 False 73:   	nFs5 $C3
+$CF4B False 74:   	nG5 $C4
+$CF4D False 6:   	nRst $80
+$CF4F False 67:   	nC5 $BD
+$CF51 False 65:   	nBb4 $BB
+$CF52 False 62:   	nG4 $B8
+$CF53 False 60:   	nF4 $B6
+$CF55 False 61:   	nFs4 $B7
+$CF56 False 60:   	nF4 $B6
+$CF57 False 58:   	nEb4 $B4
+$CF59 False 55:   	nC4 $B1
+$CF5A False 6:   	nRst $80
+$CF5C False 53:   	nBb3 $AF
+$CF5E False 6:   	nRst $80
+$CF60 False 55:   	nC4 $B1
+$CF62 False 6:   	nRst $80
+$CF64 False 55:   	nC4 $B1
+$CF66 False 6:   	nRst $80
+$CF68 False 57:   	nD4 $B3
+$CF6A False 6:   	nRst $80
+$CF6C False 58:   	nEb4 $B4
+$CF6E False 6:   	nRst $80
+$CF70 False 53:   	nBb3 $AF
+$CF72 False 6:   	nRst $80
+$CF74 False 53:   	nBb3 $AF
+$CF76 False 6:   	nRst $80
+$CF78 False 55:   	nC4 $B1
+$CF7A False 6:   	nRst $80
+$CF7C False 57:   	nD4 $B3
+$CF7E False 6:   	nRst $80
+$CF80 False 57:   	nD4 $B3
+$CF82 False 6:   	nRst $80
+$CF84 False 57:   	nD4 $B3
+$CF86 False 6:   	nRst $80
+$CF88 False 58:   	nEb4 $B4
+$CF8A False 6:   	nRst $80
+$CF8C False 60:   	nF4 $B6
+$CF8E False 6:   	nRst $80
+$CF90 False 70:   	nEb5 $C0
+$CF92 False 6:   	nRst $80
+$CF94 False 69:   	nD5 $BF
+$CF96 False 6:   	nRst $80
+$CF98 False 69:   	nD5 $BF
+$CF9A False 6:   	nRst $80
+$CF9C False 70:   	nEb5 $C0
+$CF9E False 6:   	nRst $80
+$CFA0 False 69:   	nD5 $BF
+$CFA2 False 6:   	nRst $80
+$CFA4 False 70:   	nEb5 $C0
+$CFA6 False 6:   	nRst $80
+$CFA8 False 72:   	nF5 $C2
+$CFAA False 6:   	nRst $80
+$CFAC False 55:   	nC4 $B1
+$CFAE False 6:   	nRst $80
+$CFB0 False 55:   	nC4 $B1
+$CFB2 False 6:   	nRst $80
+$CFB4 False 57:   	nD4 $B3
+$CFB6 False 6:   	nRst $80
+$CFB8 False 58:   	nEb4 $B4
+$CFBA False 6:   	nRst $80
+$CFBC False 53:   	nBb3 $AF
+$CFBE False 6:   	nRst $80
+$CFC0 False 53:   	nBb3 $AF
+$CFC2 False 6:   	nRst $80
+$CFC4 False 58:   	nEb4 $B4
+$CFC6 False 6:   	nRst $80
+$CFC8 False 62:   	nG4 $B8
+$CFCA False 6:   	nRst $80
+$CFCC False 52:   	nA3 $AE
+$CFCE False 6:   	nRst $80
+$CFD0 False 52:   	nA3 $AE
+$CFD2 False 6:   	nRst $80
+$CFD4 False 55:   	nC4 $B1
+$CFD6 False 6:   	nRst $80
+$CFD8 False 58:   	nEb4 $B4
+$CFDA False 6:   	nRst $80
+$CFDC False 58:   	nEb4 $B4
+$CFDE False 6:   	nRst $80
+$CFE0 False 46:   	nEb3 $A8
+$CFE2 False 6:   	nRst $80
+$CFE4 False 58:   	nEb4 $B4
+$CFE6 False 6:   	nRst $80
+$CFE8 False 46:   	nEb3 $A8
+$CFEA False 6:   	nRst $80
+$CFEC False 58:   	nEb4 $B4
+$CFEE False 6:   	nRst $80
+$CFF0 False 58:   	nEb4 $B4
+$CFF2 False 6:   	nRst $80
+$CFF4 False 46:   	nEb3 $A8
+$CFF6 False 6:   	nRst $80
+$CFF8 False 57:   	nD4 $B3
+$CFFA False 6:   	nRst $80
+$CFFC False 57:   	nD4 $B3
+$CFFE False 6:   	nRst $80
+$D000 False 57:   	nD4 $B3
+$D002 False 6:   	nRst $80
+$D004 False 53:   	nBb3 $AF
+$D006 False 6:   	nRst $80
+$D008 False 50:   	nG3 $AC
+$D00A False 6:   	nRst $80
+$D00C False 53:   	nBb3 $AF
+$D00E False 6:   	nRst $80
+$D010 False 53:   	nBb3 $AF
+$D012 False 6:   	nRst $80
+$D014 False 53:   	nBb3 $AF
+$D016 False 6:   	nRst $80
+$D018 False 50:   	nG3 $AC
+$D01A False 6:   	nRst $80
+$D01C False 53:   	nBb3 $AF
+$D01E False 6:   	nRst $80
+$D020 False 57:   	nD4 $B3
+$D022 False 6:   	nRst $80
+$D024 False 53:   	nBb3 $AF
+$D026 False 6:   	nRst $80
+$D028 False 57:   	nD4 $B3
+$D02A False 6:   	nRst $80
+$D02C False 60:   	nF4 $B6
+$D02E False 6:   	nRst $80
+$D030 False 57:   	nD4 $B3
+$D032 False 6:   	nRst $80
+$D034 False 53:   	nBb3 $AF
+$D036 False 6:   	nRst $80
+$D038 False 50:   	nG3 $AC
+$D03A False 6:   	nRst $80
+$D03C False 54:   	nB3 $B0
+$D03E False 6:   	nRst $80
+$D040 False 50:   	nG3 $AC
+$D042 False 6:   	nRst $80
+$D044 False 54:   	nB3 $B0
+$D046 False 6:   	nRst $80
+$D048 False 48:   	nF3 $AA
+$D04A False 6:   	nRst $80
+$D04C False 50:   	nG3 $AC
+$D04E False 6:   	nRst $80
+$D050 False 54:   	nB3 $B0
+$D052 False 6:   	nRst $80
+$D054 False 57:   	nD4 $B3
+$D056 False 6:   	nRst $80
+$D058 False 43:   	nC3 $A5
+$D05A False 6:   	nRst $80
+$D05C False 46:   	nEb3 $A8
+$D05E False 6:   	nRst $80
+$D060 False 50:   	nG3 $AC
+$D062 False 6:   	nRst $80
+$D064 False 46:   	nEb3 $A8
+$D066 False 6:   	nRst $80
+$D068 False 45:   	nD3 $A7
+$D06A False 6:   	nRst $80
+$D06C False 48:   	nF3 $AA
+$D06E False 6:   	nRst $80
+$D070 False 53:   	nBb3 $AF
+$D072 False 6:   	nRst $80
+$D074 False 45:   	nD3 $A7
+$D076 False 6:   	nRst $80
+$D078 False 46:   	nEb3 $A8
+$D07A False 6:   	nRst $80
+$D07C False 51:   	nAb3 $AD
+$D07E False 6:   	nRst $80
+$D080 False 55:   	nC4 $B1
+$D082 False 6:   	nRst $80
+$D084 False 46:   	nEb3 $A8
+$D086 False 6:   	nRst $80
+$D088 False 48:   	nF3 $AA
+$D08A False 6:   	nRst $80
+$D08C False 50:   	nG3 $AC
+$D08E False 6:   	nRst $80
+$D090 False 57:   	nD4 $B3
+$D092 False 6:   	nRst $80
+$D094 False 50:   	nG3 $AC
+$D096 False 6:   	nRst $80
+$D098 False 53:   	nBb3 $AF
+$D09A False 6:   	nRst $80
+$D09C False 50:   	nG3 $AC
+$D09E False 6:   	nRst $80
+$D0A0 False 53:   	nBb3 $AF
+$D0A2 False 6:   	nRst $80
+$D0A4 False 53:   	nBb3 $AF
+$D0A6 False 6:   	nRst $80
+$D0A8 False 53:   	nBb3 $AF
+$D0AA False 6:   	nRst $80
+$D0AC False 50:   	nG3 $AC
+$D0AE False 6:   	nRst $80
+$D0B0 False 53:   	nBb3 $AF
+$D0B2 False 6:   	nRst $80
+$D0B4 False 57:   	nD4 $B3
+$D0B6 False 6:   	nRst $80
+$D0B8 False 53:   	nBb3 $AF
+$D0BA False 6:   	nRst $80
+$D0BC False 57:   	nD4 $B3
+$D0BE False 6:   	nRst $80
+$D0C0 False 60:   	nF4 $B6
+$D0C2 False 6:   	nRst $80
+$D0C4 False 57:   	nD4 $B3
+$D0C6 False 6:   	nRst $80
+$D0C8 False 53:   	nBb3 $AF
+$D0CA False 6:   	nRst $80
+$D0CC False 50:   	nG3 $AC
+$D0CE False 6:   	nRst $80
+$D0D0 False 46:   	nEb3 $A8
+$D0D2 False 6:   	nRst $80
+$D0D4 False 51:   	nAb3 $AD
+$D0D6 False 6:   	nRst $80
+$D0D8 False 46:   	nEb3 $A8
+$D0DA False 6:   	nRst $80
+$D0DC False 46:   	nEb3 $A8
+$D0DE False 6:   	nRst $80
+$D0E0 False 55:   	nC4 $B1
+$D0E2 False 6:   	nRst $80
+$D0E4 False 51:   	nAb3 $AD
+$D0E6 False 6:   	nRst $80
+$D0E8 False 58:   	nEb4 $B4
+$D0EA False 6:   	nRst $80
+$D0EC False 70:   	nEb5 $C0
+$D0EE False 6:   	nRst $80
+$D0F0 False 70:   	nEb5 $C0
+$D0F2 False 6:   	nRst $80
+$D0F4 False 70:   	nEb5 $C0
+$D0F6 False 6:   	nRst $80
+$D0F8 False 70:   	nEb5 $C0
+$D0FA False 6:   	nRst $80
+$D0FC False 69:   	nD5 $BF
+$D0FE False 6:   	nRst $80
+$D101 MAC357 357:   	!$F6 > sJump: $CEC0
+$D103 LAM358 358:   	~Maniax_Jump2 :0 $CEC0
+$D103 STP359 359:   	;
+--: Maniax_PSG2 $D104 LUT=True run=True
+$D105 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D106 AGM353 353:   	:?0 $08 $1040
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D106 False 6:   	nRst $80
+$D109 MAC313 313:   	!$E1 > ssDetune: $01
+$D10B MAC357 357:   	!$F6 > sJump: $CEC0
+$D10D LAM358 358:   	~Maniax_Jump2 :0 NULL
+$D10D STP359 359:   	;
+--: Maniax_PSG3 $D111 LUT=True run=True
+$D112 MAC352 352:   	!$F5 > sVolEnvPSG: $02
+$D113 AGM353 353:   	:?0 $02 $104D
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 172:   	v02 $02
+$D114 MAC345 345:   	!$F3 > sNoisePSG: $E7
+$D115 False 6:   	nRst $80
+$D117 False 6:   	nRst $80
+$D119 False 6:   	nRst $80
+$D11B False 6:   	nRst $80
+$D11D False 6:   	nRst $80
+$D120 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D121 AGM353 353:   	:?0 $01 $105B
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D121 False 89:   	nBb6 $D3
+$D123 False 89:   	nBb6 $D3
+$D125 False 89:   	nBb6 $D3
+$D128 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D129 AGM353 353:   	:?0 $08 $1063
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D129 False 89:   	nBb6 $D3
+$D12C MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D12D AGM353 353:   	:?0 $01 $1067
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D12D False 89:   	nBb6 $D3
+$D12F False 321:   	sHold $E7
+$D132 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D133 AGM353 353:   	:?0 $08 $106D
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D133 False 89:   	nBb6 $D3
+$D136 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D137 AGM353 353:   	:?0 $01 $1071
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D137 False 89:   	nBb6 $D3
+$D139 False 321:   	sHold $E7
+$D13B False 321:   	sHold $E7
+$D13D False 321:   	sHold $E7
+$D13F False 321:   	sHold $E7
+$D141 False 321:   	sHold $E7
+$D143 False 321:   	sHold $E7
+$D145 False 89:   	nBb6 $D3
+$D147 False 89:   	nBb6 $D3
+$D149 False 89:   	nBb6 $D3
+$D14C MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D14D AGM353 353:   	:?0 $08 $1087
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D14D False 89:   	nBb6 $D3
+$D150 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D151 AGM353 353:   	:?0 $01 $108B
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D151 False 89:   	nBb6 $D3
+$D153 False 321:   	sHold $E7
+$D156 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D157 AGM353 353:   	:?0 $08 $1091
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D157 False 89:   	nBb6 $D3
+$D15A MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D15B AGM353 353:   	:?0 $01 $1095
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D15B False 89:   	nBb6 $D3
+$D15D False 321:   	sHold $E7
+$D160 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D161 AGM353 353:   	:?0 $01 $109B
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D161 False 89:   	nBb6 $D3
+$D163 False 89:   	nBb6 $D3
+$D166 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D167 AGM353 353:   	:?0 $08 $10A1
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D167 False 89:   	nBb6 $D3
+$D16A MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D16B AGM353 353:   	:?0 $01 $10A5
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D16B False 89:   	nBb6 $D3
+$D16D False 89:   	nBb6 $D3
+$D170 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D171 AGM353 353:   	:?0 $08 $10AB
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D171 False 89:   	nBb6 $D3
+$D174 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D175 AGM353 353:   	:?0 $01 $10AF
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D175 False 89:   	nBb6 $D3
+$D177 False 89:   	nBb6 $D3
+$D179 False 89:   	nBb6 $D3
+$D17B False 89:   	nBb6 $D3
+$D17D False 89:   	nBb6 $D3
+$D17F False 89:   	nBb6 $D3
+$D181 False 89:   	nBb6 $D3
+$D183 False 89:   	nBb6 $D3
+$D185 False 89:   	nBb6 $D3
+$D187 False 89:   	nBb6 $D3
+$D189 False 89:   	nBb6 $D3
+$D18B False 89:   	nBb6 $D3
+$D18E MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D18F AGM353 353:   	:?0 $08 $10C9
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D18F False 89:   	nBb6 $D3
+$D192 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D193 AGM353 353:   	:?0 $01 $10CD
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D193 False 89:   	nBb6 $D3
+$D195 False 89:   	nBb6 $D3
+$D198 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D199 AGM353 353:   	:?0 $08 $10D3
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D199 False 89:   	nBb6 $D3
+$D19C MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D19D AGM353 353:   	:?0 $01 $10D7
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D19D False 89:   	nBb6 $D3
+$D19F False 89:   	nBb6 $D3
+$D1A1 False 89:   	nBb6 $D3
+$D1A3 False 89:   	nBb6 $D3
+$D1A5 False 89:   	nBb6 $D3
+$D1A7 False 89:   	nBb6 $D3
+$D1A9 False 89:   	nBb6 $D3
+$D1AB False 89:   	nBb6 $D3
+$D1AE MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D1AF AGM353 353:   	:?0 $08 $10E9
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D1AF False 89:   	nBb6 $D3
+$D1B2 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D1B3 AGM353 353:   	:?0 $01 $10ED
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D1B3 False 89:   	nBb6 $D3
+$D1B6 MAC361 361:   	!$F7 > sLoop: $01, $03, $D15F
+$D1BA LAM362 362:   	~Maniax_Loop1 :2 $D15F
+$D1BA False 89:   	nBb6 $D3
+$D1BC False 89:   	nBb6 $D3
+$D1BF MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D1C0 AGM353 353:   	:?0 $08 $10FA
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D1C0 False 89:   	nBb6 $D3
+$D1C3 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D1C4 AGM353 353:   	:?0 $01 $10FE
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D1C4 False 89:   	nBb6 $D3
+$D1C6 False 89:   	nBb6 $D3
+$D1C9 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D1CA AGM353 353:   	:?0 $08 $1104
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D1CA False 89:   	nBb6 $D3
+$D1CD MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D1CE AGM353 353:   	:?0 $01 $1108
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D1CE False 89:   	nBb6 $D3
+$D1D0 False 89:   	nBb6 $D3
+$D1D2 False 89:   	nBb6 $D3
+$D1D4 False 89:   	nBb6 $D3
+$D1D6 False 89:   	nBb6 $D3
+$D1D8 False 89:   	nBb6 $D3
+$D1DA False 89:   	nBb6 $D3
+$D1DC False 89:   	nBb6 $D3
+$D1DE False 89:   	nBb6 $D3
+$D1E0 False 89:   	nBb6 $D3
+$D1E2 False 321:   	sHold $E7
+$D1E4 False 321:   	sHold $E7
+$D1E6 False 321:   	sHold $E7
+$D1E8 False 321:   	sHold $E7
+$D1EB MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D1EC AGM353 353:   	:?0 $01 $1126
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D1EC False 89:   	nBb6 $D3
+$D1EF MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D1F0 AGM353 353:   	:?0 $08 $112A
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D1F0 False 89:   	nBb6 $D3
+$D1F3 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D1F4 AGM353 353:   	:?0 $01 $112E
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D1F4 False 89:   	nBb6 $D3
+$D1F7 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D1F8 AGM353 353:   	:?0 $08 $1132
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D1F8 False 89:   	nBb6 $D3
+$D1FB MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D1FC AGM353 353:   	:?0 $01 $1136
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D1FC False 89:   	nBb6 $D3
+$D1FF MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D200 AGM353 353:   	:?0 $08 $113A
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D200 False 89:   	nBb6 $D3
+$D203 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D204 AGM353 353:   	:?0 $01 $113E
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D204 False 89:   	nBb6 $D3
+$D207 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D208 AGM353 353:   	:?0 $08 $1142
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D208 False 89:   	nBb6 $D3
+$D20B MAC361 361:   	!$F7 > sLoop: $01, $03, $D1EA
+$D20F LAM362 362:   	~Maniax_Loop2 :2 $D1EA
+$D20F False 321:   	sHold $E7
+$D211 False 321:   	sHold $E7
+$D213 False 321:   	sHold $E7
+$D215 False 321:   	sHold $E7
+$D218 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D219 AGM353 353:   	:?0 $01 $1153
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D219 False 89:   	nBb6 $D3
+$D21C MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D21D AGM353 353:   	:?0 $08 $1157
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D21D False 89:   	nBb6 $D3
+$D220 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D221 AGM353 353:   	:?0 $01 $115B
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D221 False 89:   	nBb6 $D3
+$D224 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D225 AGM353 353:   	:?0 $08 $115F
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D225 False 89:   	nBb6 $D3
+$D228 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D229 AGM353 353:   	:?0 $01 $1163
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D229 False 89:   	nBb6 $D3
+$D22C MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D22D AGM353 353:   	:?0 $08 $1167
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D22D False 89:   	nBb6 $D3
+$D230 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D231 AGM353 353:   	:?0 $01 $116B
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D231 False 89:   	nBb6 $D3
+$D234 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D235 AGM353 353:   	:?0 $08 $116F
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D235 False 89:   	nBb6 $D3
+$D238 MAC361 361:   	!$F7 > sLoop: $01, $03, $D217
+$D23C LAM362 362:   	~Maniax_Loop3 :2 $D217
+$D23C False 321:   	sHold $E7
+$D23E False 321:   	sHold $E7
+$D240 False 321:   	sHold $E7
+$D242 False 321:   	sHold $E7
+$D245 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D246 AGM353 353:   	:?0 $01 $1180
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D246 False 89:   	nBb6 $D3
+$D248 False 89:   	nBb6 $D3
+$D24B MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D24C AGM353 353:   	:?0 $08 $1186
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D24C False 89:   	nBb6 $D3
+$D24F MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D250 AGM353 353:   	:?0 $01 $118A
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D250 False 89:   	nBb6 $D3
+$D252 False 89:   	nBb6 $D3
+$D254 False 89:   	nBb6 $D3
+$D257 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D258 AGM353 353:   	:?0 $08 $1192
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D258 False 89:   	nBb6 $D3
+$D25B MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D25C AGM353 353:   	:?0 $01 $1196
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D25C False 89:   	nBb6 $D3
+$D25E False 89:   	nBb6 $D3
+$D260 False 89:   	nBb6 $D3
+$D262 False 89:   	nBb6 $D3
+$D264 False 89:   	nBb6 $D3
+$D266 False 89:   	nBb6 $D3
+$D268 False 89:   	nBb6 $D3
+$D26B MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D26C AGM353 353:   	:?0 $08 $11A6
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D26C False 89:   	nBb6 $D3
+$D26F MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D270 AGM353 353:   	:?0 $01 $11AA
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D270 False 89:   	nBb6 $D3
+$D272 False 89:   	nBb6 $D3
+$D274 False 89:   	nBb6 $D3
+$D276 False 89:   	nBb6 $D3
+$D278 False 89:   	nBb6 $D3
+$D27A False 89:   	nBb6 $D3
+$D27C False 89:   	nBb6 $D3
+$D27E False 89:   	nBb6 $D3
+$D280 False 89:   	nBb6 $D3
+$D282 False 89:   	nBb6 $D3
+$D284 False 89:   	nBb6 $D3
+$D286 False 89:   	nBb6 $D3
+$D288 False 89:   	nBb6 $D3
+$D28A False 89:   	nBb6 $D3
+$D28C False 89:   	nBb6 $D3
+$D28F MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D290 AGM353 353:   	:?0 $08 $11CA
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D290 False 89:   	nBb6 $D3
+$D293 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D294 AGM353 353:   	:?0 $01 $11CE
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D294 False 89:   	nBb6 $D3
+$D296 False 89:   	nBb6 $D3
+$D298 False 89:   	nBb6 $D3
+$D29B MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D29C AGM353 353:   	:?0 $08 $11D6
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D29C False 89:   	nBb6 $D3
+$D29F MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D2A0 AGM353 353:   	:?0 $01 $11DA
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D2A0 False 89:   	nBb6 $D3
+$D2A2 False 89:   	nBb6 $D3
+$D2A4 False 89:   	nBb6 $D3
+$D2A7 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D2A8 AGM353 353:   	:?0 $08 $11E2
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D2A8 False 89:   	nBb6 $D3
+$D2AB MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D2AC AGM353 353:   	:?0 $01 $11E6
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D2AC False 89:   	nBb6 $D3
+$D2AE False 89:   	nBb6 $D3
+$D2B0 False 89:   	nBb6 $D3
+$D2B2 False 89:   	nBb6 $D3
+$D2B4 False 89:   	nBb6 $D3
+$D2B6 False 89:   	nBb6 $D3
+$D2B8 False 89:   	nBb6 $D3
+$D2BB MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D2BC AGM353 353:   	:?0 $08 $11F6
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D2BC False 89:   	nBb6 $D3
+$D2BF MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D2C0 AGM353 353:   	:?0 $01 $11FA
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D2C0 False 89:   	nBb6 $D3
+$D2C2 False 89:   	nBb6 $D3
+$D2C4 False 89:   	nBb6 $D3
+$D2C6 False 89:   	nBb6 $D3
+$D2C8 False 89:   	nBb6 $D3
+$D2CA False 89:   	nBb6 $D3
+$D2CC False 89:   	nBb6 $D3
+$D2CE False 89:   	nBb6 $D3
+$D2D0 False 89:   	nBb6 $D3
+$D2D2 False 89:   	nBb6 $D3
+$D2D4 False 89:   	nBb6 $D3
+$D2D6 False 89:   	nBb6 $D3
+$D2D8 False 89:   	nBb6 $D3
+$D2DA False 321:   	sHold $E7
+$D2DC False 89:   	nBb6 $D3
+$D2DE False 89:   	nBb6 $D3
+$D2E1 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D2E2 AGM353 353:   	:?0 $08 $121C
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D2E2 False 89:   	nBb6 $D3
+$D2E5 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D2E6 AGM353 353:   	:?0 $01 $1220
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D2E6 False 89:   	nBb6 $D3
+$D2E8 False 89:   	nBb6 $D3
+$D2EA False 89:   	nBb6 $D3
+$D2ED MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D2EE AGM353 353:   	:?0 $08 $1228
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D2EE False 89:   	nBb6 $D3
+$D2F1 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D2F2 AGM353 353:   	:?0 $01 $122C
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D2F2 False 89:   	nBb6 $D3
+$D2F4 False 89:   	nBb6 $D3
+$D2F6 False 89:   	nBb6 $D3
+$D2F8 False 89:   	nBb6 $D3
+$D2FA False 89:   	nBb6 $D3
+$D2FC False 89:   	nBb6 $D3
+$D2FE False 89:   	nBb6 $D3
+$D301 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D302 AGM353 353:   	:?0 $08 $123C
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D302 False 89:   	nBb6 $D3
+$D305 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D306 AGM353 353:   	:?0 $01 $1240
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D306 False 89:   	nBb6 $D3
+$D308 False 89:   	nBb6 $D3
+$D30A False 89:   	nBb6 $D3
+$D30C False 89:   	nBb6 $D3
+$D30E False 89:   	nBb6 $D3
+$D310 False 89:   	nBb6 $D3
+$D312 False 89:   	nBb6 $D3
+$D314 False 89:   	nBb6 $D3
+$D316 False 89:   	nBb6 $D3
+$D318 False 89:   	nBb6 $D3
+$D31A False 89:   	nBb6 $D3
+$D31C False 89:   	nBb6 $D3
+$D31E False 89:   	nBb6 $D3
+$D320 False 89:   	nBb6 $D3
+$D322 False 89:   	nBb6 $D3
+$D325 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D326 AGM353 353:   	:?0 $08 $1260
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D326 False 89:   	nBb6 $D3
+$D329 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D32A AGM353 353:   	:?0 $01 $1264
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D32A False 89:   	nBb6 $D3
+$D32C False 89:   	nBb6 $D3
+$D32E False 89:   	nBb6 $D3
+$D331 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D332 AGM353 353:   	:?0 $08 $126C
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D332 False 89:   	nBb6 $D3
+$D335 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D336 AGM353 353:   	:?0 $01 $1270
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D336 False 89:   	nBb6 $D3
+$D338 False 89:   	nBb6 $D3
+$D33A False 89:   	nBb6 $D3
+$D33D MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D33E AGM353 353:   	:?0 $08 $1278
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D33E False 89:   	nBb6 $D3
+$D341 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D342 AGM353 353:   	:?0 $01 $127C
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D342 False 89:   	nBb6 $D3
+$D344 False 89:   	nBb6 $D3
+$D346 False 89:   	nBb6 $D3
+$D348 False 89:   	nBb6 $D3
+$D34A False 89:   	nBb6 $D3
+$D34C False 89:   	nBb6 $D3
+$D34E False 89:   	nBb6 $D3
+$D351 MAC352 352:   	!$F5 > sVolEnvPSG: $08
+$D352 AGM353 353:   	:?0 $08 $128C
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 178:   	v08 $08
+$D352 False 89:   	nBb6 $D3
+$D355 MAC352 352:   	!$F5 > sVolEnvPSG: $01
+$D356 AGM353 353:   	:?0 $01 $1290
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 171:   	v01 $01
+$D356 False 89:   	nBb6 $D3
+$D358 False 321:   	sHold $E7
+$D35A False 321:   	sHold $E7
+$D35C False 321:   	sHold $E7
+$D35E False 321:   	sHold $E7
+$D361 MAC357 357:   	!$F6 > sJump: $D115
+$D363 LAM358 358:   	~Maniax_Jump3 :0 $D115
+$D363 STP359 359:   	;
+$D363 EXE68 68:   	/£_DAC
+--> InitConvertVars: endian=little offset=$C0C6
+--: Maniax_DAC $C0F8 LUT=True run=True
+$C0F8 False 231:   	dKick $86
+$C0FB MAC301 301:   	!$E0 > sPan: $80, $00
+$C0FB AGM302 302:   	:?0 $80 $0035
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 305:   	spLeft $80
+$C0FC CON309 309:   	c .n1 == 0 (true)
+$C0FC AGR310 310:   	:-1 $00
+$C0FC False 227:   	dHighTom $82
+$C0FE False 227:   	dHighTom $82
+$C100 False 227:   	dHighTom $82
+$C102 False 227:   	dHighTom $82
+$C103 False 227:   	dHighTom $82
+$C104 False 227:   	dHighTom $82
+$C106 MAC301 301:   	!$E0 > sPan: $C0, $00
+$C106 AGM302 302:   	:?0 $C0 $0040
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 306:   	spCenter $C0
+$C107 CON309 309:   	c .n1 == 0 (true)
+$C107 AGR310 310:   	:-1 $00
+$C107 False 228:   	dMidTom $83
+$C108 False 228:   	dMidTom $83
+$C109 False 228:   	dMidTom $83
+$C10A False 228:   	dMidTom $83
+$C10B False 228:   	dMidTom $83
+$C10C False 229:   	dLowTom $84
+$C10E MAC301 301:   	!$E0 > sPan: $40, $00
+$C10E AGM302 302:   	:?0 $40 $0048
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 304:   	spRight $40
+$C10F CON309 309:   	c .n1 == 0 (true)
+$C10F AGR310 310:   	:-1 $00
+$C10F False 229:   	dLowTom $84
+$C111 False 229:   	dLowTom $84
+$C113 False 229:   	dLowTom $84
+$C115 False 230:   	dFloorTom $85
+$C116 False 230:   	dFloorTom $85
+$C118 MAC301 301:   	!$E0 > sPan: $C0, $00
+$C118 AGM302 302:   	:?0 $C0 $0052
+--> InitConvertVars: endian=little offset=$C0C6
+--:  $C0C6 LUT=True run=False
+$C0C6 True 306:   	spCenter $C0
+$C119 CON309 309:   	c .n1 == 0 (true)
+$C119 AGR310 310:   	:-1 $00
+$C119 False 231:   	dKick $86
+$C11B False 226:   	dSnare $81
+$C11D False 231:   	dKick $86
+$C11F False 231:   	dKick $86
+$C121 False 231:   	dKick $86
+$C123 False 226:   	dSnare $81
+$C125 MAC361 361:   	!$F7 > sLoop: $00, $02, $C0F8
+$C129 LAM362 362:   	~Maniax_DAC :2 NULL
+$C129 False 231:   	dKick $86
+$C12B False 226:   	dSnare $81
+$C12D False 231:   	dKick $86
+$C12F False 231:   	dKick $86
+$C130 False 231:   	dKick $86
+$C132 False 226:   	dSnare $81
+$C134 False 231:   	dKick $86
+$C136 MAC361 361:   	!$F7 > sLoop: $00, $03, $C129
+$C13A LAM362 362:   	~Maniax_Loop4 :2 $C129
+$C13A False 231:   	dKick $86
+$C13C False 226:   	dSnare $81
+$C13E False 231:   	dKick $86
+$C140 False 231:   	dKick $86
+$C142 False 231:   	dKick $86
+$C144 False 226:   	dSnare $81
+$C145 False 231:   	dKick $86
+$C147 False 226:   	dSnare $81
+$C149 False 231:   	dKick $86
+$C14B False 231:   	dKick $86
+$C14C False 231:   	dKick $86
+$C14E False 226:   	dSnare $81
+$C150 False 231:   	dKick $86
+$C152 MAC361 361:   	!$F7 > sLoop: $00, $02, $C145
+$C156 LAM362 362:   	~Maniax_Loop5 :2 $C145
+$C156 False 231:   	dKick $86
+$C158 False 226:   	dSnare $81
+$C15A False 231:   	dKick $86
+$C15C False 231:   	dKick $86
+$C15D False 231:   	dKick $86
+$C15F False 226:   	dSnare $81
+$C161 False 231:   	dKick $86
+$C163 False 226:   	dSnare $81
+$C165 False 231:   	dKick $86
+$C166 False 231:   	dKick $86
+$C168 False 227:   	dHighTom $82
+$C169 False 228:   	dMidTom $83
+$C16A False 229:   	dLowTom $84
+$C16B False 226:   	dSnare $81
+$C171 False 226:   	dSnare $81
+$C173 MAC364 364:   	!$F8 > sCall: $C1EC
+$C175 LAM365 365:   	~Maniax_Call4 :0 $C1EC
+--: Maniax_Call4 $C1EC LUT=True run=True
+$C1EC False 231:   	dKick $86
+$C1EE False 226:   	dSnare $81
+$C1F0 False 231:   	dKick $86
+$C1F2 False 231:   	dKick $86
+$C1F4 False 226:   	dSnare $81
+$C1F6 False 231:   	dKick $86
+$C1F7 False 231:   	dKick $86
+$C1F9 False 226:   	dSnare $81
+$C1FB False 231:   	dKick $86
+$C1FD False 231:   	dKick $86
+$C1FF False 226:   	dSnare $81
+$C201 False 231:   	dKick $86
+$C203 MAC367 367:   	!$F9 > sRet
+$C203 STP368 368:   	;
+$C175 False 231:   	dKick $86
+$C177 False 226:   	dSnare $81
+$C179 False 231:   	dKick $86
+$C17B False 231:   	dKick $86
+$C17D False 226:   	dSnare $81
+$C17F False 231:   	dKick $86
+$C181 False 226:   	dSnare $81
+$C182 False 226:   	dSnare $81
+$C184 False 226:   	dSnare $81
+$C186 False 226:   	dSnare $81
+$C188 False 226:   	dSnare $81
+$C18A False 226:   	dSnare $81
+$C18C False 226:   	dSnare $81
+$C18D False 226:   	dSnare $81
+$C18E False 226:   	dSnare $81
+$C190 MAC364 364:   	!$F8 > sCall: $C1EC
+$C192 LAM365 365:   	~Maniax_Call4 :0 NULL
+$C192 False 231:   	dKick $86
+$C194 False 226:   	dSnare $81
+$C196 False 231:   	dKick $86
+$C198 False 231:   	dKick $86
+$C19A False 226:   	dSnare $81
+$C19C False 231:   	dKick $86
+$C19E False 231:   	dKick $86
+$C1A0 False 231:   	dKick $86
+$C1A1 False 231:   	dKick $86
+$C1A3 False 226:   	dSnare $81
+$C1A4 False 231:   	dKick $86
+$C1A5 False 231:   	dKick $86
+$C1A6 False 226:   	dSnare $81
+$C1A7 False 231:   	dKick $86
+$C1A8 False 231:   	dKick $86
+$C1AA False 226:   	dSnare $81
+$C1AB False 226:   	dSnare $81
+$C1AD False 226:   	dSnare $81
+$C1AE False 226:   	dSnare $81
+$C1B0 MAC364 364:   	!$F8 > sCall: $C203
+$C1B2 LAM365 365:   	~Maniax_Call5 :0 $C203
+--: Maniax_Call5 $C203 LUT=True run=True
+$C203 False 231:   	dKick $86
+$C205 False 231:   	dKick $86
+$C207 False 226:   	dSnare $81
+$C209 False 231:   	dKick $86
+$C20B False 231:   	dKick $86
+$C20D False 226:   	dSnare $81
+$C210 MAC367 367:   	!$F9 > sRet
+$C210 STP368 368:   	;
+$C1B3 MAC361 361:   	!$F7 > sLoop: $00, $02, $C1AF
+$C1B7 LAM362 362:   	~Maniax_Loop6 :2 $C1AF
+$C1B8 MAC364 364:   	!$F8 > sCall: $C203
+$C1BA LAM365 365:   	~Maniax_Call5 :0 NULL
+$C1BA False 231:   	dKick $86
+$C1BC False 226:   	dSnare $81
+$C1BD False 231:   	dKick $86
+$C1BF False 226:   	dSnare $81
+$C1C2 False 231:   	dKick $86
+$C1C3 False 226:   	dSnare $81
+$C1C6 False 226:   	dSnare $81
+$C1C7 False 226:   	dSnare $81
+$C1C8 False 226:   	dSnare $81
+$C1CA False 226:   	dSnare $81
+$C1CC MAC364 364:   	!$F8 > sCall: $C203
+$C1CE LAM365 365:   	~Maniax_Call5 :0 NULL
+$C1CF MAC361 361:   	!$F7 > sLoop: $00, $02, $C1CB
+$C1D3 LAM362 362:   	~Maniax_Loop7 :2 $C1CB
+$C1D3 False 231:   	dKick $86
+$C1D6 False 226:   	dSnare $81
+$C1D8 False 231:   	dKick $86
+$C1DB False 226:   	dSnare $81
+$C1E9 MAC357 357:   	!$F6 > sJump: $C0F8
+$C1EB LAM358 358:   	~Maniax_DAC :0 NULL
+$C1EB STP359 359:   	;
+$C1EB EXE69 69:   	/£_Patches
+--> InitConvertVars: endian=little offset=$C0C6
+--------------------------------------------------------------------------------
+--; Prepare output to G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\music\HCZ2.asm
+--------------------------------------------------------------------------------
+$C0C6: Maniax_Header:
+$C0C6: 	sHeaderInit						; Z80 offset is $C0C6
+$C0C6: 	sHeaderPatchUniv
+$C0C9: 	sHeaderCh	$06, $03
+$C0CA: 	sHeaderTempo	$01, $25
+$C0CC: 	sHeaderDAC	Maniax_DAC
+$C0D0: 	sHeaderFM	Maniax_FM1, $18, $0F
+$C0D4: 	sHeaderFM	Maniax_FM2, $18, $0A
+$C0D8: 	sHeaderFM	Maniax_FM3, $18, $13
+$C0DC: 	sHeaderFM	Maniax_FM4, $0C, $0F
+$C0E0: 	sHeaderFM	Maniax_FM5, $0C, $0C
+$C0E4: 	sHeaderPSG	Maniax_PSG1, $F4, $04, $00, v0C
+$C0EA: 	sHeaderPSG	Maniax_PSG2, $F4, $04, $00, v0C
+$C0F0: 	sHeaderPSG	Maniax_PSG3, $00, $03, $00, v0C
+$C0F6: 	dc.
+--= $F2
+--= $F2
+$C0F8: 	dc.b $F2, $F2	; Unused
+$C0F8: Maniax_DAC:
+$C0F8: 	dc.	; Unused
+--& dKick
+--& $06
+$C0FA: 	dc.b dKick, $06
+$C0FA: 	sPan		spLeft
+--& dHighTom
+--& $02
+--& dHighTom
+--& $04
+--& dHighTom
+--& $06
+--& dHighTom
+--& dHighTom
+$C103: 	dc.b dHighTom, $02, dHighTom, $04, dHighTom, $06, dHighTom, dHighTom
+--& dHighTom
+$C105: 	dc.b dHighTom
+$C105: 	sPan		spCenter
+--& dMidTom
+--& dMidTom
+--& dMidTom
+--& dMidTom
+--& dMidTom
+--& dLowTom
+$C10D: 	dc.b dMidTom, dMidTom, dMidTom, dMidTom, dMidTom, dLowTom
+$C10D: 	sPan		spRight
+--& dLowTom
+--& $02
+--& dLowTom
+--& $04
+--& dLowTom
+--& $06
+--& dFloorTom
+--& dFloorTom
+$C116: 	dc.b dLowTom, $02, dLowTom, $04, dLowTom, $06, dFloorTom, dFloorTom
+$C117: 	sPan		spCenter
+--& dKick
+--& $0C
+--& dSnare
+--& $1E
+--& dKick
+--& $0C
+--& dKick
+--& $12
+$C120: 	dc.b dKick, $0C, dSnare, $1E, dKick, $0C, dKick, $12
+--& dKick
+--& $0C
+--& dSnare
+$C124: 	dc.b dKick, $0C, dSnare
+$C124: 	sLoop		$00, $02, Maniax_DAC
+$C129: Maniax_Loop4:
+--& dKick
+--& $18
+--& dSnare
+--& $06
+--& dKick
+--& $0C
+--& dKick
+--& dKick
+$C130: 	dc.b dKick, $18, dSnare, $06, dKick, $0C, dKick, dKick
+--& $12
+--& dSnare
+--& $0C
+--& dKick
+$C135: 	dc.b $12, dSnare, $0C, dKick
+$C135: 	sLoop		$00, $03, Maniax_Loop4
+--& dKick
+--& $24
+--& dSnare
+--& $06
+--& dKick
+--& $0C
+--& dKick
+--& $12
+$C141: 	dc.b dKick, $24, dSnare, $06, dKick, $0C, dKick, $12
+--& dKick
+--& $0C
+--& dSnare
+$C145: 	dc.b dKick, $0C, dSnare
+$C145: Maniax_Loop5:
+--& dKick
+--& $18
+--& dSnare
+--& $06
+--& dKick
+--& $0C
+--& dKick
+--& dKick
+$C14C: 	dc.b dKick, $18, dSnare, $06, dKick, $0C, dKick, dKick
+--& $12
+--& dSnare
+--& $0C
+--& dKick
+$C151: 	dc.b $12, dSnare, $0C, dKick
+$C151: 	sLoop		$00, $02, Maniax_Loop5
+--& dKick
+--& $18
+--& dSnare
+--& $06
+--& dKick
+--& $0C
+--& dKick
+--& dKick
+$C15D: 	dc.b dKick, $18, dSnare, $06, dKick, $0C, dKick, dKick
+--& $12
+--& dSnare
+--& $0C
+--& dKick
+--& $06
+--& dSnare
+--& $0C
+--& dKick
+$C165: 	dc.b $12, dSnare, $0C, dKick, $06, dSnare, $0C, dKick
+--& dKick
+--& $06
+--& dHighTom
+--& dMidTom
+--& dLowTom
+--& dSnare
+--& $18
+--& $0C
+$C16D: 	dc.b dKick, $06, dHighTom, dMidTom, dLowTom, dSnare, $18, $0C
+--& $02
+--& $04
+--& $06
+--& dSnare
+$C172: 	dc.b $02, $04, $06, dSnare
+$C172: 	sCall		Maniax_Call4
+--& dKick
+--& $18
+--& dSnare
+--& $06
+--& dKick
+--& $0C
+--& dKick
+--& $1E
+$C17C: 	dc.b dKick, $18, dSnare, $06, dKick, $0C, dKick, $1E
+--& dSnare
+--& $0C
+--& dKick
+--& $12
+--& dSnare
+--& dSnare
+--& $0C
+--& dSnare
+$C184: 	dc.b dSnare, $0C, dKick, $12, dSnare, dSnare, $0C, dSnare
+--& $06
+--& dSnare
+--& $0C
+--& dSnare
+--& $12
+--& dSnare
+--& $06
+--& dSnare
+$C18C: 	dc.b $06, dSnare, $0C, dSnare, $12, dSnare, $06, dSnare
+--& dSnare
+--& dSnare
+$C18F: 	dc.b dSnare, dSnare
+$C18F: 	sCall		Maniax_Call4
+--& dKick
+--& $18
+--& dSnare
+--& $06
+--& dKick
+--& $0C
+--& dKick
+--& $1E
+$C199: 	dc.b dKick, $18, dSnare, $06, dKick, $0C, dKick, $1E
+--& dSnare
+--& $0C
+--& dKick
+--& $06
+--& dKick
+--& $0C
+--& dKick
+--& dKick
+$C1A1: 	dc.b dSnare, $0C, dKick, $06, dKick, $0C, dKick, dKick
+--& $06
+--& dSnare
+--& dKick
+--& dKick
+--& dSnare
+--& dKick
+--& dKick
+--& $0C
+$C1A9: 	dc.b $06, dSnare, dKick, dKick, dSnare, dKick, dKick, $0C
+--& dSnare
+--& dSnare
+--& $06
+--& dSnare
+--& dSnare
+$C1AF: 	dc.b dSnare, dSnare, $06, dSnare, dSnare
+$C1AF: Maniax_Loop6:
+$C1AF: 	sCall		Maniax_Call5
+$C1B2: 	sLoop		$00, $02, Maniax_Loop6
+$C1B7: 	sCall		Maniax_Call5
+--& dKick
+--& $0C
+--& dSnare
+--& dKick
+--& $06
+--& dSnare
+--& $0C
+--& $06
+$C1C1: 	dc.b dKick, $0C, dSnare, dKick, $06, dSnare, $0C, $06
+--& dKick
+--& dSnare
+--& $12
+--& $04
+--& dSnare
+--& dSnare
+--& dSnare
+--& $06
+$C1C9: 	dc.b dKick, dSnare, $12, $04, dSnare, dSnare, dSnare, $06
+--& dSnare
+$C1CB: 	dc.b dSnare
+$C1CB: Maniax_Loop7:
+$C1CB: 	sCall		Maniax_Call5
+$C1CE: 	sLoop		$00, $02, Maniax_Loop7
+--& dKick
+--& $12
+--& $06
+--& dSnare
+--& $1E
+--& dKick
+--& $06
+--& $0C
+$C1DA: 	dc.b dKick, $12, $06, dSnare, $1E, dKick, $06, $0C
+--& dSnare
+--& $1E
+--& $0C
+--& $0C
+--& $06
+--& $0C
+--& $18
+--& $02
+$C1E2: 	dc.b dSnare, $1E, $0C, $0C, $06, $0C, $18, $02
+--& $02
+--& $02
+--& $06
+--& $06
+--& $06
+$C1E8: 	dc.b $02, $02, $06, $06, $06
+$C1E8: 	sJump		Maniax_DAC
+$C1EB: 	dc.
+--= $F2
+$C1EC: 	dc.b $F2	; Unused
+$C1EC: Maniax_Call4:
+$C1EC: 	dc.	; Unused
+--& dKick
+--& $18
+--& dSnare
+--& $06
+--& dKick
+--& $0C
+--& dKick
+--& $1E
+$C1F3: 	dc.b dKick, $18, dSnare, $06, dKick, $0C, dKick, $1E
+--& dSnare
+--& $0C
+--& dKick
+--& dKick
+--& $18
+--& dSnare
+--& $06
+--& dKick
+$C1FB: 	dc.b dSnare, $0C, dKick, dKick, $18, dSnare, $06, dKick
+--& $0C
+--& dKick
+--& $1E
+--& dSnare
+--& $0C
+--& dKick
+$C202: 	dc.b $0C, dKick, $1E, dSnare, $0C, dKick
+$C202: 	sRet
+$C203: Maniax_Call5:
+--& dKick
+--& $12
+--& dKick
+--& $06
+--& dSnare
+--& $1E
+--& dKick
+--& $06
+$C20A: 	dc.b dKick, $12, dKick, $06, dSnare, $1E, dKick, $06
+--& dKick
+--& $0C
+--& dSnare
+--& $18
+$C20F: 	dc.b dKick, $0C, dSnare, $18
+$C20F: 	sRet
+$C210: Maniax_FM1:
+$C210: 	sPatFM		$03
+$C212: 	ssDetune	$FE
+$C214: 	ssModZ80	$0F, $01, $06, $06
+$C219: 	sCall		Maniax_Call1
+$C21C: 	sPatFM		$0E
+$C21E: 	ssDetune	$01
+$C220: 	ssModZ80	$0F, $01, $06, $06
+$C225: 	sCall		Maniax_Call2
+$C228: 	sPatFM		$03
+$C22A: 	ssDetune	$FE
+$C22C: 	ssModZ80	$0F, $01, $06, $06
+$C231: 	sCall		Maniax_Call3
+$C234: 	sJump		Maniax_FM1
+$C237: Maniax_Call1:
+--& nRst
+--& $7F
+--& nRst
+--& nRst
+--& $76
+--& nG4
+--& $06
+--& nBb4
+$C23E: 	dc.b nRst, $7F, nRst, nRst, $76, nG4, $06, nBb4
+--& nC5
+--& nG4
+--& nF4
+--& $02
+--& nEb4
+--& nD4
+--& nC4
+--& nBb3
+$C246: 	dc.b nC5, nG4, nF4, $02, nEb4, nD4, nC4, nBb3
+--& nA3
+--& nG3
+--& nRst
+--& $04
+--& nBb3
+--& $06
+--& nC4
+--& nG3
+$C24E: 	dc.b nA3, nG3, nRst, $04, nBb3, $06, nC4, nG3
+--& nF3
+--& $02
+--& nFs3
+--& $04
+--& nF3
+--& $06
+--& nEb3
+--& nC3
+$C256: 	dc.b nF3, $02, nFs3, $04, nF3, $06, nEb3, nC3
+--& nG3
+--& $02
+--& nA3
+--& nBb3
+--& $08
+--& nBb3
+--& $02
+--& nBb3
+$C25E: 	dc.b nG3, $02, nA3, nBb3, $08, nBb3, $02, nBb3
+--& $04
+--& nA3
+--& $12
+--& nG3
+--& $02
+--& nFs3
+--& nF3
+--& nEb3
+$C266: 	dc.b $04, nA3, $12, nG3, $02, nFs3, nF3, nEb3
+--& nD3
+--& nC3
+--& nBb2
+--& nA2
+--& nG2
+--& nRst
+--& $36
+--& nBb3
+$C26E: 	dc.b nD3, nC3, nBb2, nA2, nG2, nRst, $36, nBb3
+--& $06
+--& nB3
+--& nC4
+--& nFs3
+--& $02
+--& nG3
+--& $04
+--& nF3
+$C276: 	dc.b $06, nB3, nC4, nFs3, $02, nG3, $04, nF3
+--& $02
+--& nEb3
+--& nC3
+--& nBb2
+--& nA2
+--& nG2
+--& nF2
+--& nEb2
+$C27E: 	dc.b $02, nEb3, nC3, nBb2, nA2, nG2, nF2, nEb2
+--& $04
+--& nF3
+--& $02
+--& nFs3
+--& $04
+--& nF3
+--& $06
+--& nEb3
+$C286: 	dc.b $04, nF3, $02, nFs3, $04, nF3, $06, nEb3
+--& nF3
+--& nEb3
+--& nC3
+--& nBb2
+--& nG3
+--& $0C
+--& nG3
+--& $06
+$C28E: 	dc.b nF3, nEb3, nC3, nBb2, nG3, $0C, nG3, $06
+--& nC4
+--& $12
+--& nA3
+--& $02
+--& nG3
+--& nF3
+--& nEb3
+--& nD3
+$C296: 	dc.b nC4, $12, nA3, $02, nG3, nF3, nEb3, nD3
+--& nC3
+--& nRst
+--& $3C
+--& nG4
+--& $06
+--& nBb4
+--& nC5
+--& nG4
+$C29E: 	dc.b nC3, nRst, $3C, nG4, $06, nBb4, nC5, nG4
+--& nF4
+--& $02
+--& nEb4
+--& nD4
+--& nC4
+--& nBb3
+--& nA3
+--& nG3
+$C2A6: 	dc.b nF4, $02, nEb4, nD4, nC4, nBb3, nA3, nG3
+--& nRst
+--& $04
+--& nBb3
+--& $06
+--& nC4
+--& nG3
+--& nF3
+--& $02
+$C2AE: 	dc.b nRst, $04, nBb3, $06, nC4, nG3, nF3, $02
+--& nFs3
+--& $04
+--& nF3
+--& $06
+--& nEb3
+--& nC3
+--& nG3
+--& $02
+$C2B6: 	dc.b nFs3, $04, nF3, $06, nEb3, nC3, nG3, $02
+--& nA3
+--& nBb3
+--& $08
+--& nBb3
+--& $02
+--& nBb3
+--& $04
+--& nA3
+$C2BE: 	dc.b nA3, nBb3, $08, nBb3, $02, nBb3, $04, nA3
+--& $12
+--& nG3
+--& $02
+--& nF3
+--& nEb3
+--& nD3
+--& nC3
+--& nBb2
+$C2C6: 	dc.b $12, nG3, $02, nF3, nEb3, nD3, nC3, nBb2
+--& nA2
+--& nG2
+--& nF2
+--& nRst
+--& $36
+--& nBb3
+--& $06
+--& nB3
+$C2CE: 	dc.b nA2, nG2, nF2, nRst, $36, nBb3, $06, nB3
+--& nC4
+--& nFs3
+--& $02
+--& nG3
+--& $04
+--& nF3
+--& $02
+--& nEb3
+$C2D6: 	dc.b nC4, nFs3, $02, nG3, $04, nF3, $02, nEb3
+--& nC3
+--& nBb2
+--& nA2
+--& nG2
+--& nF2
+--& nEb2
+--& $04
+--& nF3
+$C2DE: 	dc.b nC3, nBb2, nA2, nG2, nF2, nEb2, $04, nF3
+--& $02
+--& nFs3
+--& $04
+--& nF3
+--& $06
+--& nEb3
+--& nF3
+--& nEb3
+$C2E6: 	dc.b $02, nFs3, $04, nF3, $06, nEb3, nF3, nEb3
+--& nC3
+--& nBb2
+--& nG3
+--& $0C
+--& nG3
+--& $06
+--& nEb3
+--& $12
+$C2EE: 	dc.b nC3, nBb2, nG3, $0C, nG3, $06, nEb3, $12
+--& nD3
+--& $02
+--& nC3
+--& nBb2
+--& nA2
+--& nG2
+--& nF2
+--& nRst
+$C2F6: 	dc.b nD3, $02, nC3, nBb2, nA2, nG2, nF2, nRst
+--& $1E
+$C2F8: 	dc.b $1E
+$C2F8: 	sRet
+$C2F9: Maniax_Call2:
+$C2F9: 	saTranspose	$F4
+--& nF3
+--& $06
+--& nFs3
+--& $02
+--& nG3
+--& $04
+--& nBb3
+--& $06
+$C302: 	dc.b nF3, $06, nFs3, $02, nG3, $04, nBb3, $06
+--& nEb4
+--& nF4
+--& nG4
+--& nBb4
+--& nD5
+--& $02
+--& nEb5
+--& $08
+$C30A: 	dc.b nEb4, nF4, nG4, nBb4, nD5, $02, nEb5, $08
+--& nRst
+--& $02
+--& nF5
+--& $04
+--& nRst
+--& $02
+--& nFs5
+--& nG5
+$C312: 	dc.b nRst, $02, nF5, $04, nRst, $02, nFs5, nG5
+--& $08
+--& nRst
+--& $02
+--& nC5
+--& $0A
+--& nRst
+--& $02
+--& nFs5
+$C31A: 	dc.b $08, nRst, $02, nC5, $0A, nRst, $02, nFs5
+--& nG5
+--& $26
+--& nRst
+--& $02
+--& nF5
+--& $04
+--& nRst
+--& $02
+$C322: 	dc.b nG5, $26, nRst, $02, nF5, $04, nRst, $02
+--& nEb5
+--& $04
+--& nRst
+--& $02
+--& nCs5
+--& nD5
+--& $26
+--& nRst
+$C32A: 	dc.b nEb5, $04, nRst, $02, nCs5, nD5, $26, nRst
+--& $02
+--& nBb4
+--& $34
+--& nRst
+--& $02
+--& nCs5
+--& nD5
+--& $08
+$C332: 	dc.b $02, nBb4, $34, nRst, $02, nCs5, nD5, $08
+--& nRst
+--& $02
+--& nEb5
+--& $04
+--& nRst
+--& $02
+--& nE5
+--& nF5
+$C33A: 	dc.b nRst, $02, nEb5, $04, nRst, $02, nE5, nF5
+--& $08
+--& nRst
+--& $02
+--& nBb4
+--& $0A
+--& nRst
+--& $02
+--& nF5
+$C342: 	dc.b $08, nRst, $02, nBb4, $0A, nRst, $02, nF5
+--& nF5
+--& $26
+--& nRst
+--& $02
+--& nEb5
+--& $04
+--& nRst
+--& $02
+$C34A: 	dc.b nF5, $26, nRst, $02, nEb5, $04, nRst, $02
+--& nD5
+--& $04
+--& nRst
+--& $02
+--& nC5
+--& $2E
+--& nRst
+--& $08
+$C352: 	dc.b nD5, $04, nRst, $02, nC5, $2E, nRst, $08
+--& nD5
+--& $10
+--& nRst
+--& $02
+--& nEb5
+--& $0A
+--& nRst
+--& $02
+$C35A: 	dc.b nD5, $10, nRst, $02, nEb5, $0A, nRst, $02
+--& nF5
+--& $0A
+--& nRst
+--& $02
+--& nD5
+--& nEb5
+--& $08
+--& nRst
+$C362: 	dc.b nF5, $0A, nRst, $02, nD5, nEb5, $08, nRst
+--& $02
+--& nF5
+--& $04
+--& nRst
+--& $02
+--& nFs5
+--& nG5
+--& $08
+$C36A: 	dc.b $02, nF5, $04, nRst, $02, nFs5, nG5, $08
+--& nRst
+--& $02
+--& nC5
+--& $0A
+--& nRst
+--& $02
+--& nG5
+--& $28
+$C372: 	dc.b nRst, $02, nC5, $0A, nRst, $02, nG5, $28
+--& nRst
+--& $02
+--& nF5
+--& $04
+--& nRst
+--& $02
+--& nEb5
+--& $04
+$C37A: 	dc.b nRst, $02, nF5, $04, nRst, $02, nEb5, $04
+--& nRst
+--& $02
+--& nCs5
+--& nD5
+--& $26
+--& nRst
+--& $02
+--& nEb5
+$C382: 	dc.b nRst, $02, nCs5, nD5, $26, nRst, $02, nEb5
+--& $1C
+--& nRst
+--& $0E
+--& nEb5
+--& $04
+--& nRst
+--& $02
+--& nF5
+$C38A: 	dc.b $1C, nRst, $0E, nEb5, $04, nRst, $02, nF5
+--& $04
+--& nRst
+--& $02
+--& nFs5
+--& nG5
+--& $08
+--& nRst
+--& $02
+$C392: 	dc.b $04, nRst, $02, nFs5, nG5, $08, nRst, $02
+--& nEb5
+--& $04
+--& nRst
+--& $02
+--& nG5
+--& $0A
+--& nRst
+--& $02
+$C39A: 	dc.b nEb5, $04, nRst, $02, nG5, $0A, nRst, $02
+--& nBb4
+--& $0A
+--& nRst
+--& $02
+--& nC5
+--& $28
+--& nRst
+--& $02
+$C3A2: 	dc.b nBb4, $0A, nRst, $02, nC5, $28, nRst, $02
+--& nEb5
+--& $04
+--& nRst
+--& $02
+--& nF5
+--& $04
+--& nRst
+--& $02
+$C3AA: 	dc.b nEb5, $04, nRst, $02, nF5, $04, nRst, $02
+--& nG5
+--& $2E
+--& nRst
+--& $02
+--& nF5
+--& $12
+--& nEb5
+--& $02
+$C3B2: 	dc.b nG5, $2E, nRst, $02, nF5, $12, nEb5, $02
+--& nD5
+--& nC5
+--& nBb4
+--& nAb4
+--& nG4
+--& nF4
+--& nEb4
+--& nD4
+$C3BA: 	dc.b nD5, nC5, nBb4, nAb4, nG4, nF4, nEb4, nD4
+$C3BB: 	sRet
+$C3BC: Maniax_Call3:
+$C3BC: 	saTranspose	$0C
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nD4
+--& $04
+--& nRst
+--& $02
+$C3C5: 	dc.b nC4, $04, nRst, $02, nD4, $04, nRst, $02
+--& nEb4
+--& $0C
+--& nD4
+--& $02
+--& nC4
+--& nBb3
+--& nAb3
+--& nG3
+$C3CD: 	dc.b nEb4, $0C, nD4, $02, nC4, nBb3, nAb3, nG3
+--& nF3
+--& nC4
+--& $0A
+--& nRst
+--& $02
+--& nEb4
+--& $04
+--& nRst
+$C3D5: 	dc.b nF3, nC4, $0A, nRst, $02, nEb4, $04, nRst
+--& $02
+--& nE4
+--& nF4
+--& nRst
+--& $08
+--& nD4
+--& $10
+--& nRst
+$C3DD: 	dc.b $02, nE4, nF4, nRst, $08, nD4, $10, nRst
+--& $02
+--& nC4
+--& $04
+--& nRst
+--& $08
+--& nBb3
+--& $04
+--& nRst
+$C3E5: 	dc.b $02, nC4, $04, nRst, $08, nBb3, $04, nRst
+--& $08
+--& nFs3
+--& $02
+--& nG3
+--& $14
+--& nRst
+--& $02
+--& nFs3
+$C3ED: 	dc.b $08, nFs3, $02, nG3, $14, nRst, $02, nFs3
+--& nG3
+--& $08
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+--& $02
+$C3F5: 	dc.b nG3, $08, nRst, $02, nF3, $04, nRst, $02
+--& nFs3
+--& nG3
+--& $28
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nD4
+$C3FD: 	dc.b nFs3, nG3, $28, nC4, $04, nRst, $02, nD4
+--& $04
+--& nRst
+--& $02
+--& nEb4
+--& $0C
+--& nD4
+--& $02
+--& nC4
+$C405: 	dc.b $04, nRst, $02, nEb4, $0C, nD4, $02, nC4
+--& nBb3
+--& nAb3
+--& nG3
+--& nF3
+--& nC4
+--& $0A
+--& nRst
+--& $02
+$C40D: 	dc.b nBb3, nAb3, nG3, nF3, nC4, $0A, nRst, $02
+--& nEb4
+--& $04
+--& nRst
+--& $02
+--& nE4
+--& nF4
+--& nRst
+--& $08
+$C415: 	dc.b nEb4, $04, nRst, $02, nE4, nF4, nRst, $08
+--& nD4
+--& $10
+--& nRst
+--& $02
+--& nC4
+--& $04
+--& nRst
+--& $08
+$C41D: 	dc.b nD4, $10, nRst, $02, nC4, $04, nRst, $08
+--& nB3
+--& $04
+--& nRst
+--& $08
+--& nC4
+--& $10
+--& nRst
+--& $02
+$C425: 	dc.b nB3, $04, nRst, $08, nC4, $10, nRst, $02
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nD4
+--& $0A
+--& nRst
+--& $02
+$C42D: 	dc.b nC4, $04, nRst, $02, nD4, $0A, nRst, $02
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nD4
+--& $04
+--& nRst
+--& $08
+$C435: 	dc.b nC4, $04, nRst, $02, nD4, $04, nRst, $08
+--& nEb4
+--& $10
+--& nRst
+--& $02
+--& nF4
+--& $0A
+--& nRst
+--& $02
+$C43D: 	dc.b nEb4, $10, nRst, $02, nF4, $0A, nRst, $02
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nD4
+--& $04
+--& nRst
+--& $02
+$C445: 	dc.b nC4, $04, nRst, $02, nD4, $04, nRst, $02
+--& nEb4
+--& $0C
+--& nD4
+--& $02
+--& nC4
+--& nBb3
+--& nAb3
+--& nG3
+$C44D: 	dc.b nEb4, $0C, nD4, $02, nC4, nBb3, nAb3, nG3
+--& nF3
+--& nC4
+--& $0A
+--& nRst
+--& $02
+--& nEb4
+--& $04
+--& nRst
+$C455: 	dc.b nF3, nC4, $0A, nRst, $02, nEb4, $04, nRst
+--& $02
+--& nE4
+--& nF4
+--& nRst
+--& $08
+--& nD4
+--& $10
+--& nRst
+$C45D: 	dc.b $02, nE4, nF4, nRst, $08, nD4, $10, nRst
+--& $02
+--& nC4
+--& $04
+--& nRst
+--& $08
+--& nBb3
+--& $04
+--& nRst
+$C465: 	dc.b $02, nC4, $04, nRst, $08, nBb3, $04, nRst
+--& $08
+--& nFs3
+--& $02
+--& nG3
+--& $14
+--& nRst
+--& $02
+--& nFs3
+$C46D: 	dc.b $08, nFs3, $02, nG3, $14, nRst, $02, nFs3
+--& nG3
+--& $08
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+--& $02
+$C475: 	dc.b nG3, $08, nRst, $02, nF3, $04, nRst, $02
+--& nFs3
+--& nG3
+--& $28
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nD4
+$C47D: 	dc.b nFs3, nG3, $28, nC4, $04, nRst, $02, nD4
+--& $04
+--& nRst
+--& $02
+--& nEb4
+--& $10
+--& nRst
+--& $02
+--& nEb4
+$C485: 	dc.b $04, nRst, $02, nEb4, $10, nRst, $02, nEb4
+--& $04
+--& nRst
+--& $08
+--& nD4
+--& $04
+--& nRst
+--& $02
+--& nEb4
+$C48D: 	dc.b $04, nRst, $08, nD4, $04, nRst, $02, nEb4
+--& $10
+--& nRst
+--& $02
+--& nEb4
+--& $04
+--& nRst
+--& $02
+--& nF4
+$C495: 	dc.b $10, nRst, $02, nEb4, $04, nRst, $02, nF4
+--& $0A
+--& nRst
+--& $02
+--& nEb4
+--& $04
+--& nRst
+--& $08
+--& nAb4
+$C49D: 	dc.b $0A, nRst, $02, nEb4, $04, nRst, $08, nAb4
+--& $04
+--& nRst
+--& $0E
+--& nC5
+--& $04
+--& nRst
+--& $08
+--& nC5
+$C4A5: 	dc.b $04, nRst, $0E, nC5, $04, nRst, $08, nC5
+--& $04
+--& nRst
+--& $08
+--& nC5
+--& $04
+--& nRst
+--& $02
+--& nC5
+$C4AD: 	dc.b $04, nRst, $08, nC5, $04, nRst, $02, nC5
+--& $0A
+--& nRst
+--& $02
+--& nB4
+--& $04
+--& nRst
+--& $2C
+$C4B5: 	dc.b $0A, nRst, $02, nB4, $04, nRst, $2C
+$C4B5: 	sRet
+$C4B6: 	dc.
+--= $F2
+$C4B7: 	dc.b $F2	; Unused
+$C4B7: Maniax_FM2:
+$C4B7: 	sPatFM		$15
+$C4B9: 	ssDetune	$00
+$C4BB: 	ssModZ80	$0F, $01, $06, $06
+$C4C0: 	dc.	; Unused
+--& nC1
+--& $0A
+--& nRst
+--& $02
+--& nEb1
+--& nRst
+--& $04
+--& nC1
+$C4C7: 	dc.b nC1, $0A, nRst, $02, nEb1, nRst, $04, nC1
+--& $10
+--& nRst
+--& $02
+--& nEb1
+--& nRst
+--& $04
+--& nF1
+--& nRst
+$C4CF: 	dc.b $10, nRst, $02, nEb1, nRst, $04, nF1, nRst
+--& $08
+--& nEb1
+--& $10
+--& nRst
+--& $02
+--& nF1
+--& $16
+--& nRst
+$C4D7: 	dc.b $08, nEb1, $10, nRst, $02, nF1, $16, nRst
+--& $02
+--& nC1
+--& $0A
+--& nRst
+--& $02
+--& nA0
+--& nRst
+--& $04
+$C4DF: 	dc.b $02, nC1, $0A, nRst, $02, nA0, nRst, $04
+--& nC1
+--& $12
+--& nA0
+--& $04
+--& nRst
+--& $02
+--& nBb0
+--& $04
+$C4E7: 	dc.b nC1, $12, nA0, $04, nRst, $02, nBb0, $04
+--& nRst
+--& $08
+--& nG0
+--& $10
+--& nRst
+--& $02
+--& nBb0
+--& $16
+$C4EF: 	dc.b nRst, $08, nG0, $10, nRst, $02, nBb0, $16
+--& nRst
+--& $02
+--& nC1
+--& $0A
+--& nRst
+--& $02
+--& nEb1
+--& nRst
+$C4F7: 	dc.b nRst, $02, nC1, $0A, nRst, $02, nEb1, nRst
+--& $04
+--& nC1
+--& $10
+--& nRst
+--& $02
+--& nEb1
+--& nRst
+--& $04
+$C4FF: 	dc.b $04, nC1, $10, nRst, $02, nEb1, nRst, $04
+--& nF1
+--& nRst
+--& $08
+--& nEb1
+--& $10
+--& nRst
+--& $02
+--& nF1
+$C507: 	dc.b nF1, nRst, $08, nEb1, $10, nRst, $02, nF1
+--& $16
+--& nRst
+--& $02
+--& nC1
+--& $0A
+--& nRst
+--& $02
+--& nA0
+$C50F: 	dc.b $16, nRst, $02, nC1, $0A, nRst, $02, nA0
+--& nRst
+--& $04
+--& nC1
+--& $12
+--& nA0
+--& $04
+--& nRst
+--& $02
+$C517: 	dc.b nRst, $04, nC1, $12, nA0, $04, nRst, $02
+--& nBb0
+--& $04
+--& nRst
+--& $08
+--& nG0
+--& $10
+--& nRst
+--& $02
+$C51F: 	dc.b nBb0, $04, nRst, $08, nG0, $10, nRst, $02
+--& nBb0
+--& $16
+--& nRst
+--& $02
+--& nC1
+--& $0A
+--& nRst
+--& $02
+$C527: 	dc.b nBb0, $16, nRst, $02, nC1, $0A, nRst, $02
+--& nEb1
+--& nRst
+--& $04
+--& nC1
+--& $10
+--& nRst
+--& $02
+--& nEb1
+$C52F: 	dc.b nEb1, nRst, $04, nC1, $10, nRst, $02, nEb1
+--& nRst
+--& $04
+--& nF1
+--& nRst
+--& $08
+--& nEb1
+--& $10
+--& nRst
+$C537: 	dc.b nRst, $04, nF1, nRst, $08, nEb1, $10, nRst
+--& $02
+--& nF1
+--& $16
+--& nRst
+--& $02
+--& nC1
+--& $0A
+--& nRst
+$C53F: 	dc.b $02, nF1, $16, nRst, $02, nC1, $0A, nRst
+--& $02
+--& nA0
+--& nRst
+--& $04
+--& nC1
+--& $12
+--& nA0
+--& $04
+$C547: 	dc.b $02, nA0, nRst, $04, nC1, $12, nA0, $04
+--& nRst
+--& $02
+--& nBb0
+--& $04
+--& nRst
+--& $08
+--& nG0
+--& $10
+$C54F: 	dc.b nRst, $02, nBb0, $04, nRst, $08, nG0, $10
+--& nRst
+--& $02
+--& nBb0
+--& $16
+--& nRst
+--& $02
+--& nC1
+--& $0A
+$C557: 	dc.b nRst, $02, nBb0, $16, nRst, $02, nC1, $0A
+--& nRst
+--& $02
+--& nEb1
+--& nRst
+--& $04
+--& nC1
+--& $10
+--& nRst
+$C55F: 	dc.b nRst, $02, nEb1, nRst, $04, nC1, $10, nRst
+--& $02
+--& nEb1
+--& nRst
+--& $04
+--& nF1
+--& nRst
+--& $08
+--& nEb1
+$C567: 	dc.b $02, nEb1, nRst, $04, nF1, nRst, $08, nEb1
+--& $10
+--& nRst
+--& $02
+--& nF1
+--& $16
+--& nRst
+--& $02
+--& nC1
+$C56F: 	dc.b $10, nRst, $02, nF1, $16, nRst, $02, nC1
+--& $0A
+--& nRst
+--& $02
+--& nA0
+--& nRst
+--& $04
+--& nC1
+--& $12
+$C577: 	dc.b $0A, nRst, $02, nA0, nRst, $04, nC1, $12
+--& nA0
+--& $04
+--& nRst
+--& $02
+--& nBb0
+--& $04
+--& nRst
+--& $08
+$C57F: 	dc.b nA0, $04, nRst, $02, nBb0, $04, nRst, $08
+--& nG0
+--& $10
+--& nRst
+--& $02
+--& nBb0
+--& $16
+--& nRst
+--& $02
+$C587: 	dc.b nG0, $10, nRst, $02, nBb0, $16, nRst, $02
+--& nC1
+--& $0A
+--& nRst
+--& $02
+--& nEb1
+--& nRst
+--& $04
+--& nC1
+$C58F: 	dc.b nC1, $0A, nRst, $02, nEb1, nRst, $04, nC1
+--& $10
+--& nRst
+--& $02
+--& nEb1
+--& $04
+--& nRst
+--& $02
+--& nF1
+$C597: 	dc.b $10, nRst, $02, nEb1, $04, nRst, $02, nF1
+--& $04
+--& nRst
+--& $08
+--& nEb1
+--& $10
+--& nRst
+--& $02
+--& nF1
+$C59F: 	dc.b $04, nRst, $08, nEb1, $10, nRst, $02, nF1
+--& $16
+--& nRst
+--& $02
+--& nC1
+--& $0A
+--& nRst
+--& $02
+--& nA0
+$C5A7: 	dc.b $16, nRst, $02, nC1, $0A, nRst, $02, nA0
+--& nRst
+--& $04
+--& nC1
+--& $12
+--& nA0
+--& $04
+--& nRst
+--& $02
+$C5AF: 	dc.b nRst, $04, nC1, $12, nA0, $04, nRst, $02
+--& nBb0
+--& $04
+--& nRst
+--& $08
+--& nG0
+--& $10
+--& nRst
+--& $02
+$C5B7: 	dc.b nBb0, $04, nRst, $08, nG0, $10, nRst, $02
+--& nBb0
+--& $16
+--& nRst
+--& $02
+--& nC1
+--& $0A
+--& nRst
+--& $02
+$C5BF: 	dc.b nBb0, $16, nRst, $02, nC1, $0A, nRst, $02
+--& nEb1
+--& nRst
+--& $04
+--& nC1
+--& $10
+--& nRst
+--& $02
+--& nEb1
+$C5C7: 	dc.b nEb1, nRst, $04, nC1, $10, nRst, $02, nEb1
+--& $04
+--& nRst
+--& $02
+--& nF1
+--& $04
+--& nRst
+--& $08
+--& nEb1
+$C5CF: 	dc.b $04, nRst, $02, nF1, $04, nRst, $08, nEb1
+--& $10
+--& nRst
+--& $02
+--& nF1
+--& $10
+--& nRst
+--& $02
+--& nEb1
+$C5D7: 	dc.b $10, nRst, $02, nF1, $10, nRst, $02, nEb1
+--& $04
+--& nRst
+--& $08
+--& nC2
+--& $04
+--& nRst
+--& $02
+--& nBb1
+$C5DF: 	dc.b $04, nRst, $08, nC2, $04, nRst, $02, nBb1
+--& $04
+--& nRst
+--& $02
+--& nG1
+--& $04
+--& nRst
+--& $02
+--& nF1
+$C5E7: 	dc.b $04, nRst, $02, nG1, $04, nRst, $02, nF1
+--& $04
+--& nFs1
+--& nF1
+--& nEb1
+--& $06
+--& nC1
+--& $04
+--& nRst
+$C5EF: 	dc.b $04, nFs1, nF1, nEb1, $06, nC1, $04, nRst
+--& $14
+--& nG0
+--& $1C
+--& nRst
+--& $02
+--& nAb0
+--& $0A
+--& nRst
+$C5F7: 	dc.b $14, nG0, $1C, nRst, $02, nAb0, $0A, nRst
+--& $02
+--& nAb0
+--& nRst
+--& $04
+--& nAb1
+--& nRst
+--& $08
+--& nAb0
+$C5FF: 	dc.b $02, nAb0, nRst, $04, nAb1, nRst, $08, nAb0
+--& $04
+--& nRst
+--& $08
+--& nAb0
+--& $04
+--& nRst
+--& $08
+--& nAb1
+$C607: 	dc.b $04, nRst, $08, nAb0, $04, nRst, $08, nAb1
+--& $04
+--& nRst
+--& $02
+--& nAb0
+--& $16
+--& nRst
+--& $02
+--& nAb0
+$C60F: 	dc.b $04, nRst, $02, nAb0, $16, nRst, $02, nAb0
+--& $04
+--& nRst
+--& $08
+--& nG0
+--& $0A
+--& nRst
+--& $02
+--& nG0
+$C617: 	dc.b $04, nRst, $08, nG0, $0A, nRst, $02, nG0
+--& nRst
+--& $04
+--& nG1
+--& nRst
+--& $08
+--& nG0
+--& $04
+--& nRst
+$C61F: 	dc.b nRst, $04, nG1, nRst, $08, nG0, $04, nRst
+--& $08
+--& nG0
+--& $04
+--& nRst
+--& $08
+--& nG1
+--& $04
+--& nRst
+$C627: 	dc.b $08, nG0, $04, nRst, $08, nG1, $04, nRst
+--& $02
+--& nG0
+--& $16
+--& nRst
+--& $02
+--& nG0
+--& $04
+--& nRst
+$C62F: 	dc.b $02, nG0, $16, nRst, $02, nG0, $04, nRst
+--& $08
+--& nBb0
+--& $0A
+--& nRst
+--& $02
+--& nBb0
+--& nRst
+--& $04
+$C637: 	dc.b $08, nBb0, $0A, nRst, $02, nBb0, nRst, $04
+--& nBb1
+--& nRst
+--& $08
+--& nBb0
+--& $04
+--& nRst
+--& $08
+--& nBb0
+$C63F: 	dc.b nBb1, nRst, $08, nBb0, $04, nRst, $08, nBb0
+--& $04
+--& nRst
+--& $08
+--& nBb1
+--& $04
+--& nRst
+--& $02
+--& nBb0
+$C647: 	dc.b $04, nRst, $08, nBb1, $04, nRst, $02, nBb0
+--& $10
+--& nRst
+--& $02
+--& nBb0
+--& nRst
+--& $04
+--& nBb0
+--& nRst
+$C64F: 	dc.b $10, nRst, $02, nBb0, nRst, $04, nBb0, nRst
+--& $0E
+--& nC1
+--& $04
+--& nRst
+--& $0E
+--& nC1
+--& $04
+--& nRst
+$C657: 	dc.b $0E, nC1, $04, nRst, $0E, nC1, $04, nRst
+--& $08
+--& nC2
+--& $04
+--& nRst
+--& $02
+--& nC1
+--& $04
+--& nRst
+$C65F: 	dc.b $08, nC2, $04, nRst, $02, nC1, $04, nRst
+--& $08
+--& nC2
+--& $10
+--& nRst
+--& $02
+--& nC1
+--& $0A
+--& nRst
+$C667: 	dc.b $08, nC2, $10, nRst, $02, nC1, $0A, nRst
+--& $02
+--& nC2
+--& $0A
+--& nRst
+--& $02
+--& nAb0
+--& $0A
+--& nRst
+$C66F: 	dc.b $02, nC2, $0A, nRst, $02, nAb0, $0A, nRst
+--& $02
+--& nAb0
+--& nRst
+--& $04
+--& nAb1
+--& nRst
+--& $08
+--& nAb0
+$C677: 	dc.b $02, nAb0, nRst, $04, nAb1, nRst, $08, nAb0
+--& $04
+--& nRst
+--& $08
+--& nAb0
+--& $04
+--& nRst
+--& $08
+--& nAb1
+$C67F: 	dc.b $04, nRst, $08, nAb0, $04, nRst, $08, nAb1
+--& $04
+--& nRst
+--& $02
+--& nAb0
+--& $16
+--& nRst
+--& $02
+--& nAb0
+$C687: 	dc.b $04, nRst, $02, nAb0, $16, nRst, $02, nAb0
+--& $04
+--& nRst
+--& $08
+--& nG0
+--& $0A
+--& nRst
+--& $02
+--& nG0
+$C68F: 	dc.b $04, nRst, $08, nG0, $0A, nRst, $02, nG0
+--& nRst
+--& $04
+--& nG1
+--& nRst
+--& $08
+--& nG0
+--& $04
+--& nRst
+$C697: 	dc.b nRst, $04, nG1, nRst, $08, nG0, $04, nRst
+--& $08
+--& nG0
+--& $04
+--& nRst
+--& $08
+--& nG1
+--& $04
+--& nRst
+$C69F: 	dc.b $08, nG0, $04, nRst, $08, nG1, $04, nRst
+--& $02
+--& nG0
+--& $16
+--& nRst
+--& $02
+--& nG0
+--& $04
+--& nRst
+$C6A7: 	dc.b $02, nG0, $16, nRst, $02, nG0, $04, nRst
+--& $08
+--& nF0
+--& $0A
+--& nRst
+--& $02
+--& nF0
+--& nRst
+--& $04
+$C6AF: 	dc.b $08, nF0, $0A, nRst, $02, nF0, nRst, $04
+--& nF1
+--& nRst
+--& $08
+--& nF0
+--& $04
+--& nRst
+--& $08
+--& nF0
+$C6B7: 	dc.b nF1, nRst, $08, nF0, $04, nRst, $08, nF0
+--& $04
+--& nRst
+--& $08
+--& nF1
+--& $04
+--& nRst
+--& $02
+--& nF0
+$C6BF: 	dc.b $04, nRst, $08, nF1, $04, nRst, $02, nF0
+--& $16
+--& nRst
+--& $02
+--& nF0
+--& nRst
+--& $04
+--& nAb0
+--& nRst
+$C6C7: 	dc.b $16, nRst, $02, nF0, nRst, $04, nAb0, nRst
+--& $08
+--& nAb0
+--& $04
+--& nRst
+--& $08
+--& nAb0
+--& $04
+--& nRst
+$C6CF: 	dc.b $08, nAb0, $04, nRst, $08, nAb0, $04, nRst
+--& $08
+--& nAb0
+--& $04
+--& nRst
+--& $02
+--& nAb0
+--& $0A
+--& nRst
+$C6D7: 	dc.b $08, nAb0, $04, nRst, $02, nAb0, $0A, nRst
+--& $02
+--& nG0
+--& $04
+--& nRst
+--& $02
+--& nG0
+--& $04
+--& nRst
+$C6DF: 	dc.b $02, nG0, $04, nRst, $02, nG0, $04, nRst
+--& $08
+--& nG0
+--& $04
+--& nRst
+--& $08
+--& nG1
+--& $04
+--& nRst
+$C6E7: 	dc.b $08, nG0, $04, nRst, $08, nG1, $04, nRst
+--& $02
+--& nG0
+--& $04
+--& nRst
+--& $02
+--& nG0
+--& $04
+--& nRst
+$C6EF: 	dc.b $02, nG0, $04, nRst, $02, nG0, $04, nRst
+--& $02
+--& nF0
+--& $10
+--& nRst
+--& $02
+--& nF0
+--& nRst
+--& $22
+$C6F7: 	dc.b $02, nF0, $10, nRst, $02, nF0, nRst, $22
+--& nG0
+--& $02
+--& nRst
+--& $04
+--& nG1
+--& $0A
+--& nRst
+--& $02
+$C6FF: 	dc.b nG0, $02, nRst, $04, nG1, $0A, nRst, $02
+--& nG0
+--& $16
+--& nRst
+--& $02
+--& nAb0
+--& $10
+--& nRst
+--& $02
+$C707: 	dc.b nG0, $16, nRst, $02, nAb0, $10, nRst, $02
+--& nAb0
+--& nRst
+--& $22
+--& nBb0
+--& $02
+--& nRst
+--& $04
+--& nBb1
+$C70F: 	dc.b nAb0, nRst, $22, nBb0, $02, nRst, $04, nBb1
+--& $0A
+--& nRst
+--& $02
+--& nBb0
+--& $0A
+--& nRst
+--& $02
+--& nBb1
+$C717: 	dc.b $0A, nRst, $02, nBb0, $0A, nRst, $02, nBb1
+--& $0A
+--& nRst
+--& $02
+--& nF0
+--& $10
+--& nRst
+--& $02
+--& nF0
+$C71F: 	dc.b $0A, nRst, $02, nF0, $10, nRst, $02, nF0
+--& nRst
+--& $22
+--& nG0
+--& $02
+--& nRst
+--& $04
+--& nG1
+--& $0A
+$C727: 	dc.b nRst, $22, nG0, $02, nRst, $04, nG1, $0A
+--& nRst
+--& $02
+--& nG0
+--& $16
+--& nRst
+--& $02
+--& nC1
+--& $10
+$C72F: 	dc.b nRst, $02, nG0, $16, nRst, $02, nC1, $10
+--& nRst
+--& $02
+--& nC2
+--& nRst
+--& $04
+--& nBb0
+--& $10
+--& nRst
+$C737: 	dc.b nRst, $02, nC2, nRst, $04, nBb0, $10, nRst
+--& $02
+--& nBb1
+--& nRst
+--& $0A
+--& nAb0
+--& $02
+--& nRst
+--& $04
+$C73F: 	dc.b $02, nBb1, nRst, $0A, nAb0, $02, nRst, $04
+--& nAb1
+--& $0A
+--& nRst
+--& $02
+--& nG0
+--& $0A
+--& nRst
+--& $02
+$C747: 	dc.b nAb1, $0A, nRst, $02, nG0, $0A, nRst, $02
+--& nG1
+--& $0A
+--& nRst
+--& $02
+--& nF0
+--& $10
+--& nRst
+--& $02
+$C74F: 	dc.b nG1, $0A, nRst, $02, nF0, $10, nRst, $02
+--& nF0
+--& nRst
+--& $22
+--& nG0
+--& $02
+--& nRst
+--& $04
+--& nG1
+$C757: 	dc.b nF0, nRst, $22, nG0, $02, nRst, $04, nG1
+--& $0A
+--& nRst
+--& $02
+--& nG0
+--& $16
+--& nRst
+--& $02
+--& nAb0
+$C75F: 	dc.b $0A, nRst, $02, nG0, $16, nRst, $02, nAb0
+--& $10
+--& nRst
+--& $02
+--& nAb0
+--& nRst
+--& $22
+--& nBb0
+--& $02
+$C767: 	dc.b $10, nRst, $02, nAb0, nRst, $22, nBb0, $02
+--& nRst
+--& $04
+--& nBb1
+--& $0A
+--& nRst
+--& $02
+--& nBb0
+--& $0A
+$C76F: 	dc.b nRst, $04, nBb1, $0A, nRst, $02, nBb0, $0A
+--& nRst
+--& $02
+--& nBb1
+--& $0A
+--& nRst
+--& $02
+--& nAb0
+--& $10
+$C777: 	dc.b nRst, $02, nBb1, $0A, nRst, $02, nAb0, $10
+--& nRst
+--& $02
+--& nAb0
+--& nRst
+--& $22
+--& nF0
+--& $02
+--& nRst
+$C77F: 	dc.b nRst, $02, nAb0, nRst, $22, nF0, $02, nRst
+--& $04
+--& nF0
+--& $0A
+--& nRst
+--& $02
+--& nEb0
+--& $0A
+--& nRst
+$C787: 	dc.b $04, nF0, $0A, nRst, $02, nEb0, $0A, nRst
+--& $02
+--& nF0
+--& $0A
+--& nRst
+--& $08
+--& nG0
+--& $04
+--& nRst
+$C78F: 	dc.b $02, nF0, $0A, nRst, $08, nG0, $04, nRst
+--& $08
+--& nG0
+--& $04
+--& nRst
+--& $08
+--& nG0
+--& $04
+--& nRst
+$C797: 	dc.b $08, nG0, $04, nRst, $08, nG0, $04, nRst
+--& $02
+--& nG0
+--& $0A
+--& nRst
+--& $02
+--& nG0
+--& $04
+--& nRst
+$C79F: 	dc.b $02, nG0, $0A, nRst, $02, nG0, $04, nRst
+--& $14
+--& nF0
+--& $04
+--& nRst
+--& $02
+--& nFs0
+--& $04
+--& nRst
+$C7A7: 	dc.b $14, nF0, $04, nRst, $02, nFs0, $04, nRst
+--& $02
+--& nG0
+--& $04
+--& nRst
+--& $02
+--& nBb0
+--& $04
+--& nRst
+$C7AF: 	dc.b $02, nG0, $04, nRst, $02, nBb0, $04, nRst
+--& $02
+$C7B1: 	dc.b $02
+$C7B1: 	sJump		Maniax_FM2
+$C7B4: 	dc.
+--= $F2
+$C7B5: 	dc.b $F2	; Unused
+$C7B5: Maniax_FM3:
+$C7B5: 	dc.	; Unused
+--& nRst
+--& $07
+$C7B7: 	dc.b nRst, $07
+$C7B7: Maniax_Jump1:
+$C7B7: 	sPatFM		$03
+$C7B9: 	ssDetune	$02
+$C7BB: 	ssModZ80	$0F, $01, $06, $06
+$C7C0: 	sCall		Maniax_Call1
+$C7C3: 	sPatFM		$0E
+$C7C5: 	ssDetune	$FF
+$C7C7: 	ssModZ80	$0F, $01, $06, $06
+$C7CC: 	sCall		Maniax_Call2
+$C7CF: 	sPatFM		$03
+$C7D1: 	ssDetune	$02
+$C7D3: 	ssModZ80	$0F, $01, $06, $06
+$C7D8: 	sCall		Maniax_Call3
+$C7DB: 	sJump		Maniax_Jump1
+$C7DE: 	dc.
+--= $F2
+$C7DF: 	dc.b $F2	; Unused
+$C7DF: Maniax_FM4:
+$C7DF: 	sPatFM		$06
+$C7E1: 	ssDetune	$01
+$C7E3: 	ssModZ80	$0A, $01, $03, $06
+$C7E8: 	dc.	; Unused
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $0E
+$C7EF: 	dc.b nF3, $04, nRst, $08, nF3, $04, nRst, $0E
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nF3
+--& nRst
+--& $04
+--& nF3
+$C7F7: 	dc.b nF3, $04, nRst, $02, nF3, nRst, $04, nF3
+--& $0A
+--& nRst
+--& $02
+--& nF3
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+$C7FF: 	dc.b $0A, nRst, $02, nF3, $0A, nRst, $02, nBb2
+--& $04
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nF3
+$C807: 	dc.b $04, nRst, $02, nF3, $04, nRst, $08, nF3
+--& $04
+--& nRst
+--& $08
+--& nEb3
+--& $04
+--& nRst
+--& $08
+--& nEb3
+$C80F: 	dc.b $04, nRst, $08, nEb3, $04, nRst, $08, nEb3
+--& $04
+--& nRst
+--& $0E
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+$C817: 	dc.b $04, nRst, $0E, nEb3, $04, nRst, $02, nEb3
+--& nRst
+--& $04
+--& nE3
+--& nRst
+--& $08
+--& nE3
+--& $10
+--& nRst
+$C81F: 	dc.b nRst, $04, nE3, nRst, $08, nE3, $10, nRst
+--& $02
+--& nE3
+--& $04
+--& nRst
+--& $08
+--& nE3
+--& $04
+--& nRst
+$C827: 	dc.b $02, nE3, $04, nRst, $08, nE3, $04, nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+$C82F: 	dc.b $08, nF3, $04, nRst, $08, nF3, $04, nRst
+--& $0E
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nF3
+--& nRst
+--& $04
+$C837: 	dc.b $0E, nF3, $04, nRst, $02, nF3, nRst, $04
+--& nF3
+--& $0A
+--& nRst
+--& $02
+--& nF3
+--& $0A
+--& nRst
+--& $02
+$C83F: 	dc.b nF3, $0A, nRst, $02, nF3, $0A, nRst, $02
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+--& $08
+$C847: 	dc.b nBb2, $04, nRst, $02, nF3, $04, nRst, $08
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nEb3
+--& $04
+--& nRst
+--& $08
+$C84F: 	dc.b nF3, $04, nRst, $08, nEb3, $04, nRst, $08
+--& nEb3
+--& $04
+--& nRst
+--& $0E
+--& nEb3
+--& $04
+--& nRst
+--& $02
+$C857: 	dc.b nEb3, $04, nRst, $0E, nEb3, $04, nRst, $02
+--& nEb3
+--& nRst
+--& $04
+--& nE3
+--& nRst
+--& $08
+--& nE3
+--& $10
+$C85F: 	dc.b nEb3, nRst, $04, nE3, nRst, $08, nE3, $10
+--& nRst
+--& $02
+--& nE3
+--& $04
+--& nRst
+--& $08
+--& nE3
+--& $04
+$C867: 	dc.b nRst, $02, nE3, $04, nRst, $08, nE3, $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+$C86F: 	dc.b nRst, $08, nF3, $04, nRst, $08, nF3, $04
+--& nRst
+--& $0E
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nF3
+--& nRst
+$C877: 	dc.b nRst, $0E, nF3, $04, nRst, $02, nF3, nRst
+--& $04
+--& nF3
+--& $0A
+--& nRst
+--& $02
+--& nF3
+--& $0A
+--& nRst
+$C87F: 	dc.b $04, nF3, $0A, nRst, $02, nF3, $0A, nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+$C887: 	dc.b $02, nBb2, $04, nRst, $02, nF3, $04, nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nEb3
+--& $04
+--& nRst
+$C88F: 	dc.b $08, nF3, $04, nRst, $08, nEb3, $04, nRst
+--& $08
+--& nEb3
+--& $04
+--& nRst
+--& $0E
+--& nEb3
+--& $04
+--& nRst
+$C897: 	dc.b $08, nEb3, $04, nRst, $0E, nEb3, $04, nRst
+--& $02
+--& nEb3
+--& nRst
+--& $04
+--& nE3
+--& nRst
+--& $08
+--& nE3
+$C89F: 	dc.b $02, nEb3, nRst, $04, nE3, nRst, $08, nE3
+--& $10
+--& nRst
+--& $02
+--& nE3
+--& $04
+--& nRst
+--& $08
+--& nE3
+$C8A7: 	dc.b $10, nRst, $02, nE3, $04, nRst, $08, nE3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nF3
+$C8AF: 	dc.b $04, nRst, $08, nF3, $04, nRst, $08, nF3
+--& $04
+--& nRst
+--& $0E
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nF3
+$C8B7: 	dc.b $04, nRst, $0E, nF3, $04, nRst, $02, nF3
+--& nRst
+--& $04
+--& nF3
+--& $0A
+--& nRst
+--& $02
+--& nF3
+--& $0A
+$C8BF: 	dc.b nRst, $04, nF3, $0A, nRst, $02, nF3, $0A
+--& nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nF3
+--& $04
+$C8C7: 	dc.b nRst, $02, nBb2, $04, nRst, $02, nF3, $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nEb3
+--& $04
+$C8CF: 	dc.b nRst, $08, nF3, $04, nRst, $08, nEb3, $04
+--& nRst
+--& $08
+--& nEb3
+--& $04
+--& nRst
+--& $0E
+--& nEb3
+--& $04
+$C8D7: 	dc.b nRst, $08, nEb3, $04, nRst, $0E, nEb3, $04
+--& nRst
+--& $02
+--& nEb3
+--& nRst
+--& $04
+--& nE3
+--& nRst
+--& $08
+$C8DF: 	dc.b nRst, $02, nEb3, nRst, $04, nE3, nRst, $08
+--& nE3
+--& $10
+--& nRst
+--& $02
+--& nE3
+--& $04
+--& nRst
+--& $08
+$C8E7: 	dc.b nE3, $10, nRst, $02, nE3, $04, nRst, $08
+--& nE3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $08
+$C8EF: 	dc.b nE3, $04, nRst, $08, nF3, $04, nRst, $08
+--& nF3
+--& $04
+--& nRst
+--& $0E
+--& nF3
+--& $04
+--& nRst
+--& $02
+$C8F7: 	dc.b nF3, $04, nRst, $0E, nF3, $04, nRst, $02
+--& nF3
+--& nRst
+--& $04
+--& nF3
+--& $0A
+--& nRst
+--& $02
+--& nF3
+$C8FF: 	dc.b nF3, nRst, $04, nF3, $0A, nRst, $02, nF3
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nF3
+$C907: 	dc.b $0A, nRst, $02, nBb2, $04, nRst, $02, nF3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nEb3
+$C90F: 	dc.b $04, nRst, $08, nF3, $04, nRst, $08, nEb3
+--& $04
+--& nRst
+--& $08
+--& nEb3
+--& $04
+--& nRst
+--& $0E
+--& nEb3
+$C917: 	dc.b $04, nRst, $08, nEb3, $04, nRst, $0E, nEb3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& nRst
+--& $04
+--& nE3
+--& nRst
+$C91F: 	dc.b $04, nRst, $02, nEb3, nRst, $04, nE3, nRst
+--& $08
+--& nE3
+--& $10
+--& nRst
+--& $02
+--& nE3
+--& $04
+--& nRst
+$C927: 	dc.b $08, nE3, $10, nRst, $02, nE3, $04, nRst
+--& $08
+--& nE3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+$C92F: 	dc.b $08, nE3, $04, nRst, $08, nF3, $04, nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $0E
+--& nF3
+--& $04
+--& nRst
+$C937: 	dc.b $08, nF3, $04, nRst, $0E, nF3, $04, nRst
+--& $02
+--& nF3
+--& nRst
+--& $04
+--& nF3
+--& $0A
+--& nRst
+--& $02
+$C93F: 	dc.b $02, nF3, nRst, $04, nF3, $0A, nRst, $02
+--& nF3
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+--& $02
+$C947: 	dc.b nF3, $0A, nRst, $02, nBb2, $04, nRst, $02
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $02
+$C94F: 	dc.b nF3, $04, nRst, $08, nF3, $04, nRst, $02
+--& nEb3
+--& $04
+--& nRst
+--& $08
+--& nC4
+--& $06
+--& nBb3
+--& nG3
+$C957: 	dc.b nEb3, $04, nRst, $08, nC4, $06, nBb3, nG3
+--& nF3
+--& $04
+--& nFs3
+--& nF3
+--& nEb3
+--& $06
+--& nC3
+--& nRst
+$C95F: 	dc.b nF3, $04, nFs3, nF3, nEb3, $06, nC3, nRst
+--& $12
+--& nF3
+--& $1E
+--& nEb3
+--& $0A
+--& nRst
+--& $02
+--& nD3
+$C967: 	dc.b $12, nF3, $1E, nEb3, $0A, nRst, $02, nD3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $0A
+--& nRst
+--& $02
+--& nD3
+$C96F: 	dc.b $04, nRst, $02, nEb3, $0A, nRst, $02, nD3
+--& $0A
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $0E
+--& nC4
+$C977: 	dc.b $0A, nRst, $02, nEb3, $04, nRst, $0E, nC4
+--& $04
+--& nRst
+--& $02
+--& nC4
+--& $04
+--& nRst
+--& $08
+--& nD4
+$C97F: 	dc.b $04, nRst, $02, nC4, $04, nRst, $08, nD4
+--& $02
+--& nRst
+--& $04
+--& nEb4
+--& $0A
+--& nRst
+--& $02
+--& nD3
+$C987: 	dc.b $02, nRst, $04, nEb4, $0A, nRst, $02, nD3
+--& $0A
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nD3
+$C98F: 	dc.b $0A, nRst, $02, nF3, $04, nRst, $02, nD3
+--& $0A
+--& nRst
+--& $02
+--& nF3
+--& $0A
+--& nRst
+--& $02
+--& nD3
+$C997: 	dc.b $0A, nRst, $02, nF3, $0A, nRst, $02, nD3
+--& $04
+--& nRst
+--& $0E
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+$C99F: 	dc.b $04, nRst, $0E, nBb3, $04, nRst, $02, nBb3
+--& $04
+--& nRst
+--& $08
+--& nC4
+--& $02
+--& nRst
+--& $04
+--& nD4
+$C9A7: 	dc.b $04, nRst, $08, nC4, $02, nRst, $04, nD4
+--& $0A
+--& nRst
+--& $02
+--& nD3
+--& $0A
+--& nRst
+--& $02
+--& nC3
+$C9AF: 	dc.b $0A, nRst, $02, nD3, $0A, nRst, $02, nC3
+--& $04
+--& nRst
+--& $02
+--& nD3
+--& $0A
+--& nRst
+--& $02
+--& nC3
+$C9B7: 	dc.b $04, nRst, $02, nD3, $0A, nRst, $02, nC3
+--& $0A
+--& nRst
+--& $02
+--& nD3
+--& $04
+--& nRst
+--& $0E
+--& nD4
+$C9BF: 	dc.b $0A, nRst, $02, nD3, $04, nRst, $0E, nD4
+--& $04
+--& nRst
+--& $02
+--& nD4
+--& $04
+--& nRst
+--& $08
+--& nEb4
+$C9C7: 	dc.b $04, nRst, $02, nD4, $04, nRst, $08, nEb4
+--& $02
+--& nRst
+--& $04
+--& nF4
+--& $0A
+--& nRst
+--& $08
+--& nBb3
+$C9CF: 	dc.b $02, nRst, $04, nF4, $0A, nRst, $08, nBb3
+--& $04
+--& nRst
+--& $0E
+--& nBb3
+--& $0A
+--& nRst
+--& $02
+--& nBb3
+$C9D7: 	dc.b $04, nRst, $0E, nBb3, $0A, nRst, $02, nBb3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $08
+--& nBb3
+$C9DF: 	dc.b $04, nRst, $02, nBb3, $04, nRst, $08, nBb3
+--& $10
+--& nRst
+--& $02
+--& nEb3
+--& $0A
+--& nRst
+--& $02
+--& nF3
+$C9E7: 	dc.b $10, nRst, $02, nEb3, $0A, nRst, $02, nF3
+--& $0A
+--& nRst
+--& $02
+--& nEb3
+--& $0A
+--& nRst
+--& $02
+--& nD3
+$C9EF: 	dc.b $0A, nRst, $02, nEb3, $0A, nRst, $02, nD3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $0A
+--& nRst
+--& $02
+--& nD3
+$C9F7: 	dc.b $04, nRst, $02, nEb3, $0A, nRst, $02, nD3
+--& $0A
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $0E
+--& nC4
+$C9FF: 	dc.b $0A, nRst, $02, nEb3, $04, nRst, $0E, nC4
+--& $04
+--& nRst
+--& $02
+--& nC4
+--& $04
+--& nRst
+--& $08
+--& nD4
+$CA07: 	dc.b $04, nRst, $02, nC4, $04, nRst, $08, nD4
+--& $02
+--& nRst
+--& $04
+--& nEb4
+--& $0A
+--& nRst
+--& $02
+--& nD3
+$CA0F: 	dc.b $02, nRst, $04, nEb4, $0A, nRst, $02, nD3
+--& $0A
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nD3
+$CA17: 	dc.b $0A, nRst, $02, nF3, $04, nRst, $02, nD3
+--& $0A
+--& nRst
+--& $02
+--& nF3
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+$CA1F: 	dc.b $0A, nRst, $02, nF3, $0A, nRst, $02, nBb2
+--& $04
+--& nRst
+--& $0E
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+$CA27: 	dc.b $04, nRst, $0E, nBb3, $04, nRst, $02, nBb3
+--& $04
+--& nRst
+--& $08
+--& nEb4
+--& $02
+--& nRst
+--& $04
+--& nG4
+$CA2F: 	dc.b $04, nRst, $08, nEb4, $02, nRst, $04, nG4
+--& $0A
+--& nRst
+--& $02
+--& nEb3
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+$CA37: 	dc.b $0A, nRst, $02, nEb3, $0A, nRst, $02, nBb2
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+$CA3F: 	dc.b $04, nRst, $02, nEb3, $0A, nRst, $02, nBb2
+--& $0A
+--& nRst
+--& $02
+--& nC3
+--& $04
+--& nRst
+--& $0E
+--& nA3
+$CA47: 	dc.b $0A, nRst, $02, nC3, $04, nRst, $0E, nA3
+--& $04
+--& nRst
+--& $02
+--& nA3
+--& $04
+--& nRst
+--& $08
+--& nC4
+$CA4F: 	dc.b $04, nRst, $02, nA3, $04, nRst, $08, nC4
+--& $02
+--& nRst
+--& $04
+--& nEb4
+--& $0A
+--& nRst
+--& $08
+--& nEb4
+$CA57: 	dc.b $02, nRst, $04, nEb4, $0A, nRst, $08, nEb4
+--& $04
+--& nRst
+--& $08
+--& nEb4
+--& $04
+--& nRst
+--& $08
+--& nEb4
+$CA5F: 	dc.b $04, nRst, $08, nEb4, $04, nRst, $08, nEb4
+--& $04
+--& nRst
+--& $02
+--& nEb4
+--& $0A
+--& nRst
+--& $02
+--& nB3
+$CA67: 	dc.b $04, nRst, $02, nEb4, $0A, nRst, $02, nB3
+--& $04
+--& nRst
+--& $02
+--& nB3
+--& $04
+--& nRst
+--& $08
+--& nB3
+$CA6F: 	dc.b $04, nRst, $02, nB3, $04, nRst, $08, nB3
+--& $04
+--& nRst
+--& $0E
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nF3
+$CA77: 	dc.b $04, nRst, $0E, nEb3, $04, nRst, $02, nF3
+--& $04
+--& nRst
+--& $08
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nF3
+$CA7F: 	dc.b $04, nRst, $08, nG3, $04, nRst, $02, nF3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $08
+--& nD3
+$CA87: 	dc.b $04, nRst, $02, nEb3, $04, nRst, $08, nD3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nC3
+$CA8F: 	dc.b $04, nRst, $02, nEb3, $04, nRst, $02, nC3
+--& $04
+--& nRst
+--& $08
+--& nBb3
+--& $10
+--& nRst
+--& $02
+--& nG3
+$CA97: 	dc.b $04, nRst, $08, nBb3, $10, nRst, $02, nG3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $0E
+--& nD4
+$CA9F: 	dc.b $04, nRst, $08, nF3, $04, nRst, $0E, nD4
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nG3
+$CAA7: 	dc.b $04, nRst, $02, nBb3, $04, nRst, $02, nG3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $10
+--& nRst
+--& $02
+--& nD3
+$CAAF: 	dc.b $04, nRst, $02, nEb3, $10, nRst, $02, nD3
+--& $34
+--& nRst
+--& $08
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nF3
+$CAB7: 	dc.b $34, nRst, $08, nG3, $04, nRst, $02, nF3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $08
+--& nD3
+$CABF: 	dc.b $04, nRst, $02, nEb3, $04, nRst, $08, nD3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nC3
+$CAC7: 	dc.b $04, nRst, $02, nEb3, $04, nRst, $02, nC3
+--& $04
+--& nRst
+--& $08
+--& nB3
+--& $10
+--& nRst
+--& $02
+--& nG3
+$CACF: 	dc.b $04, nRst, $08, nB3, $10, nRst, $02, nG3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nG3
+$CAD7: 	dc.b $04, nRst, $08, nF3, $04, nRst, $08, nG3
+--& $16
+--& nRst
+--& $02
+--& nBb3
+--& $10
+--& nRst
+--& $02
+--& nBb3
+$CADF: 	dc.b $16, nRst, $02, nBb3, $10, nRst, $02, nBb3
+--& $04
+--& nRst
+--& $08
+--& nAb3
+--& $10
+--& nRst
+--& $02
+--& nG3
+$CAE7: 	dc.b $04, nRst, $08, nAb3, $10, nRst, $02, nG3
+--& $16
+--& nRst
+--& $08
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nF3
+$CAEF: 	dc.b $16, nRst, $08, nG3, $04, nRst, $02, nF3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $08
+--& nD3
+$CAF7: 	dc.b $04, nRst, $02, nEb3, $04, nRst, $08, nD3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nC3
+$CAFF: 	dc.b $04, nRst, $02, nEb3, $04, nRst, $02, nC3
+--& $04
+--& nRst
+--& $08
+--& nBb3
+--& $10
+--& nRst
+--& $02
+--& nG3
+$CB07: 	dc.b $04, nRst, $08, nBb3, $10, nRst, $02, nG3
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $0E
+--& nD4
+$CB0F: 	dc.b $04, nRst, $08, nF3, $04, nRst, $0E, nD4
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nG3
+$CB17: 	dc.b $04, nRst, $02, nBb3, $04, nRst, $02, nG3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $10
+--& nRst
+--& $02
+--& nD3
+$CB1F: 	dc.b $04, nRst, $02, nEb3, $10, nRst, $02, nD3
+--& $34
+--& nRst
+--& $08
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nF3
+$CB27: 	dc.b $34, nRst, $08, nG3, $04, nRst, $02, nF3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $08
+--& nD3
+$CB2F: 	dc.b $04, nRst, $02, nEb3, $04, nRst, $08, nD3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nC3
+$CB37: 	dc.b $04, nRst, $02, nEb3, $04, nRst, $02, nC3
+--& $04
+--& nRst
+--& $08
+--& nEb2
+--& $04
+--& nRst
+--& $02
+--& nAb2
+$CB3F: 	dc.b $04, nRst, $08, nEb2, $04, nRst, $02, nAb2
+--& $04
+--& nRst
+--& $02
+--& nEb2
+--& $04
+--& nRst
+--& $02
+--& nEb3
+$CB47: 	dc.b $04, nRst, $02, nEb2, $04, nRst, $02, nEb3
+--& $0A
+--& nRst
+--& $02
+--& nAb3
+--& $0A
+--& nRst
+--& $08
+--& nG3
+$CB4F: 	dc.b $0A, nRst, $02, nAb3, $0A, nRst, $08, nG3
+--& $04
+--& nRst
+--& $08
+--& nG3
+--& $04
+--& nRst
+--& $08
+--& nG3
+$CB57: 	dc.b $04, nRst, $08, nG3, $04, nRst, $08, nG3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $0A
+--& nRst
+--& $02
+--& nG3
+$CB5F: 	dc.b $04, nRst, $02, nG3, $0A, nRst, $02, nG3
+--& $04
+--& nRst
+--& $2C
+$CB63: 	dc.b $04, nRst, $2C
+$CB63: 	sJump		Maniax_FM4
+$CB66: 	dc.
+--= $F2
+$CB67: 	dc.b $F2	; Unused
+$CB67: Maniax_FM5:
+$CB67: 	sPatFM		$06
+$CB69: 	ssDetune	$FF
+$CB6B: 	ssModZ80	$0A, $01, $03, $06
+$CB70: 	dc.	; Unused
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $0E
+$CB77: 	dc.b nBb2, $04, nRst, $08, nBb2, $04, nRst, $0E
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nBb2
+--& nRst
+--& $04
+--& nBb2
+$CB7F: 	dc.b nBb2, $04, nRst, $02, nBb2, nRst, $04, nBb2
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+--& nRst
+--& $08
+--& nBb2
+$CB87: 	dc.b $0A, nRst, $02, nBb2, $0A, nRst, $08, nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nA2
+$CB8F: 	dc.b $04, nRst, $08, nBb2, $04, nRst, $08, nA2
+--& $04
+--& nRst
+--& $08
+--& nA2
+--& $04
+--& nRst
+--& $0E
+--& nA2
+$CB97: 	dc.b $04, nRst, $08, nA2, $04, nRst, $0E, nA2
+--& $04
+--& nRst
+--& $02
+--& nA2
+--& nRst
+--& $04
+--& nBb2
+--& nRst
+$CB9F: 	dc.b $04, nRst, $02, nA2, nRst, $04, nBb2, nRst
+--& $08
+--& nBb2
+--& $10
+--& nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+$CBA7: 	dc.b $08, nBb2, $10, nRst, $02, nBb2, $04, nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+$CBAF: 	dc.b $08, nBb2, $04, nRst, $08, nBb2, $04, nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $0E
+--& nBb2
+--& $04
+--& nRst
+$CBB7: 	dc.b $08, nBb2, $04, nRst, $0E, nBb2, $04, nRst
+--& $02
+--& nBb2
+--& nRst
+--& $04
+--& nBb2
+--& $0A
+--& nRst
+--& $02
+$CBBF: 	dc.b $02, nBb2, nRst, $04, nBb2, $0A, nRst, $02
+--& nBb2
+--& $0A
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+$CBC7: 	dc.b nBb2, $0A, nRst, $08, nBb2, $04, nRst, $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nA2
+--& $04
+--& nRst
+--& $08
+$CBCF: 	dc.b nBb2, $04, nRst, $08, nA2, $04, nRst, $08
+--& nA2
+--& $04
+--& nRst
+--& $0E
+--& nA2
+--& $04
+--& nRst
+--& $02
+$CBD7: 	dc.b nA2, $04, nRst, $0E, nA2, $04, nRst, $02
+--& nA2
+--& nRst
+--& $04
+--& nBb2
+--& nRst
+--& $08
+--& nBb2
+--& $10
+$CBDF: 	dc.b nA2, nRst, $04, nBb2, nRst, $08, nBb2, $10
+--& nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+$CBE7: 	dc.b nRst, $02, nBb2, $04, nRst, $08, nBb2, $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+$CBEF: 	dc.b nRst, $08, nBb2, $04, nRst, $08, nBb2, $04
+--& nRst
+--& $0E
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nBb2
+--& nRst
+$CBF7: 	dc.b nRst, $0E, nBb2, $04, nRst, $02, nBb2, nRst
+--& $04
+--& nBb2
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+--& nRst
+$CBFF: 	dc.b $04, nBb2, $0A, nRst, $02, nBb2, $0A, nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+$CC07: 	dc.b $08, nBb2, $04, nRst, $08, nBb2, $04, nRst
+--& $08
+--& nA2
+--& $04
+--& nRst
+--& $08
+--& nA2
+--& $04
+--& nRst
+$CC0F: 	dc.b $08, nA2, $04, nRst, $08, nA2, $04, nRst
+--& $0E
+--& nA2
+--& $04
+--& nRst
+--& $02
+--& nA2
+--& nRst
+--& $04
+$CC17: 	dc.b $0E, nA2, $04, nRst, $02, nA2, nRst, $04
+--& nBb2
+--& nRst
+--& $08
+--& nBb2
+--& $10
+--& nRst
+--& $02
+--& nBb2
+$CC1F: 	dc.b nBb2, nRst, $08, nBb2, $10, nRst, $02, nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+$CC27: 	dc.b $04, nRst, $08, nBb2, $04, nRst, $08, nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $0E
+--& nBb2
+$CC2F: 	dc.b $04, nRst, $08, nBb2, $04, nRst, $0E, nBb2
+--& $04
+--& nRst
+--& $02
+--& nBb2
+--& nRst
+--& $04
+--& nBb2
+--& $0A
+$CC37: 	dc.b $04, nRst, $02, nBb2, nRst, $04, nBb2, $0A
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+--& nRst
+--& $08
+--& nBb2
+--& $04
+$CC3F: 	dc.b nRst, $02, nBb2, $0A, nRst, $08, nBb2, $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nA2
+--& $04
+$CC47: 	dc.b nRst, $08, nBb2, $04, nRst, $08, nA2, $04
+--& nRst
+--& $08
+--& nA2
+--& $04
+--& nRst
+--& $0E
+--& nA2
+--& $04
+$CC4F: 	dc.b nRst, $08, nA2, $04, nRst, $0E, nA2, $04
+--& nRst
+--& $02
+--& nA2
+--& nRst
+--& $04
+--& nBb2
+--& nRst
+--& $08
+$CC57: 	dc.b nRst, $02, nA2, nRst, $04, nBb2, nRst, $08
+--& nBb2
+--& $10
+--& nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+--& $08
+$CC5F: 	dc.b nBb2, $10, nRst, $02, nBb2, $04, nRst, $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+$CC67: 	dc.b nBb2, $04, nRst, $08, nBb2, $04, nRst, $08
+--& nBb2
+--& $04
+--& nRst
+--& $0E
+--& nBb2
+--& $04
+--& nRst
+--& $02
+$CC6F: 	dc.b nBb2, $04, nRst, $0E, nBb2, $04, nRst, $02
+--& nBb2
+--& nRst
+--& $04
+--& nBb2
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+$CC77: 	dc.b nBb2, nRst, $04, nBb2, $0A, nRst, $02, nBb2
+--& $0A
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+$CC7F: 	dc.b $0A, nRst, $08, nBb2, $04, nRst, $08, nBb2
+--& $04
+--& nRst
+--& $08
+--& nA2
+--& $04
+--& nRst
+--& $08
+--& nA2
+$CC87: 	dc.b $04, nRst, $08, nA2, $04, nRst, $08, nA2
+--& $04
+--& nRst
+--& $0E
+--& nA2
+--& $04
+--& nRst
+--& $02
+--& nA2
+$CC8F: 	dc.b $04, nRst, $0E, nA2, $04, nRst, $02, nA2
+--& nRst
+--& $04
+--& nBb2
+--& nRst
+--& $08
+--& nBb2
+--& $10
+--& nRst
+$CC97: 	dc.b nRst, $04, nBb2, nRst, $08, nBb2, $10, nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+$CC9F: 	dc.b $02, nBb2, $04, nRst, $08, nBb2, $04, nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+$CCA7: 	dc.b $08, nBb2, $04, nRst, $08, nBb2, $04, nRst
+--& $0E
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nBb2
+--& nRst
+--& $04
+$CCAF: 	dc.b $0E, nBb2, $04, nRst, $02, nBb2, nRst, $04
+--& nBb2
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+--& nRst
+--& $08
+$CCB7: 	dc.b nBb2, $0A, nRst, $02, nBb2, $0A, nRst, $08
+--& nBb2
+--& $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $02
+$CCBF: 	dc.b nBb2, $04, nRst, $08, nBb2, $04, nRst, $02
+--& nBb2
+--& $04
+--& nRst
+--& $44
+--& nB2
+--& $1E
+--& nC3
+--& $0A
+$CCC7: 	dc.b nBb2, $04, nRst, $44, nB2, $1E, nC3, $0A
+--& nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $0A
+$CCCF: 	dc.b nRst, $02, nBb2, $04, nRst, $02, nC3, $0A
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+--& nRst
+--& $02
+--& nC3
+--& $04
+$CCD7: 	dc.b nRst, $02, nBb2, $0A, nRst, $02, nC3, $04
+--& nRst
+--& $0E
+--& nAb3
+--& $04
+--& nRst
+--& $02
+--& nAb3
+--& $04
+$CCDF: 	dc.b nRst, $0E, nAb3, $04, nRst, $02, nAb3, $04
+--& nRst
+--& $08
+--& nBb3
+--& $02
+--& nRst
+--& $04
+--& nC4
+--& $0A
+$CCE7: 	dc.b nRst, $08, nBb3, $02, nRst, $04, nC4, $0A
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+--& nRst
+--& $02
+--& nD3
+--& $04
+$CCEF: 	dc.b nRst, $02, nBb2, $0A, nRst, $02, nD3, $04
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+--& nRst
+--& $02
+--& nD3
+--& $0A
+$CCF7: 	dc.b nRst, $02, nBb2, $0A, nRst, $02, nD3, $0A
+--& nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+--& $0E
+--& nG3
+--& $04
+$CCFF: 	dc.b nRst, $02, nBb2, $04, nRst, $0E, nG3, $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $08
+--& nAb3
+--& $02
+$CD07: 	dc.b nRst, $02, nG3, $04, nRst, $08, nAb3, $02
+--& nRst
+--& $04
+--& nBb3
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+$CD0F: 	dc.b nRst, $04, nBb3, $0A, nRst, $02, nBb2, $0A
+--& nRst
+--& $02
+--& nAb2
+--& $04
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+$CD17: 	dc.b nRst, $02, nAb2, $04, nRst, $02, nBb2, $0A
+--& nRst
+--& $02
+--& nAb2
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+--& $04
+$CD1F: 	dc.b nRst, $02, nAb2, $0A, nRst, $02, nBb2, $04
+--& nRst
+--& $0E
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+$CD27: 	dc.b nRst, $0E, nBb3, $04, nRst, $02, nBb3, $04
+--& nRst
+--& $08
+--& nC4
+--& $02
+--& nRst
+--& $04
+--& nD4
+--& $0A
+$CD2F: 	dc.b nRst, $08, nC4, $02, nRst, $04, nD4, $0A
+--& nRst
+--& $08
+--& nG3
+--& $04
+--& nRst
+--& $0E
+--& nF3
+--& $0A
+$CD37: 	dc.b nRst, $08, nG3, $04, nRst, $0E, nF3, $0A
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+$CD3F: 	dc.b nRst, $02, nF3, $04, nRst, $02, nG3, $04
+--& nRst
+--& $08
+--& nD3
+--& $10
+--& nRst
+--& $02
+--& nC3
+--& $0A
+$CD47: 	dc.b nRst, $08, nD3, $10, nRst, $02, nC3, $0A
+--& nRst
+--& $02
+--& nD3
+--& $0A
+--& nRst
+--& $02
+--& nC3
+--& $0A
+$CD4F: 	dc.b nRst, $02, nD3, $0A, nRst, $02, nC3, $0A
+--& nRst
+--& $02
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $0A
+$CD57: 	dc.b nRst, $02, nBb2, $04, nRst, $02, nC3, $0A
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+--& nRst
+--& $02
+--& nC3
+--& $04
+$CD5F: 	dc.b nRst, $02, nBb2, $0A, nRst, $02, nC3, $04
+--& nRst
+--& $0E
+--& nAb3
+--& $04
+--& nRst
+--& $02
+--& nAb3
+--& $04
+$CD67: 	dc.b nRst, $0E, nAb3, $04, nRst, $02, nAb3, $04
+--& nRst
+--& $08
+--& nBb3
+--& $02
+--& nRst
+--& $04
+--& nC4
+--& $0A
+$CD6F: 	dc.b nRst, $08, nBb3, $02, nRst, $04, nC4, $0A
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+--& nRst
+--& $02
+--& nD3
+--& $04
+$CD77: 	dc.b nRst, $02, nBb2, $0A, nRst, $02, nD3, $04
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+--& nRst
+--& $02
+--& nD3
+--& $0A
+$CD7F: 	dc.b nRst, $02, nBb2, $0A, nRst, $02, nD3, $0A
+--& nRst
+--& $02
+--& nG2
+--& $04
+--& nRst
+--& $0E
+--& nG3
+--& $04
+$CD87: 	dc.b nRst, $02, nG2, $04, nRst, $0E, nG3, $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $08
+--& nBb3
+--& $02
+$CD8F: 	dc.b nRst, $02, nG3, $04, nRst, $08, nBb3, $02
+--& nRst
+--& $04
+--& nEb4
+--& $0A
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+$CD97: 	dc.b nRst, $04, nEb4, $0A, nRst, $02, nBb2, $0A
+--& nRst
+--& $02
+--& nG2
+--& $04
+--& nRst
+--& $02
+--& nBb2
+--& $0A
+$CD9F: 	dc.b nRst, $02, nG2, $04, nRst, $02, nBb2, $0A
+--& nRst
+--& $02
+--& nG2
+--& $0A
+--& nRst
+--& $02
+--& nA2
+--& $04
+$CDA7: 	dc.b nRst, $02, nG2, $0A, nRst, $02, nA2, $04
+--& nRst
+--& $0E
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nF3
+--& $04
+$CDAF: 	dc.b nRst, $0E, nF3, $04, nRst, $02, nF3, $04
+--& nRst
+--& $08
+--& nA3
+--& $02
+--& nRst
+--& $04
+--& nC4
+--& $0A
+$CDB7: 	dc.b nRst, $08, nA3, $02, nRst, $04, nC4, $0A
+--& nRst
+--& $08
+--& nG3
+--& $04
+--& nRst
+--& $08
+--& nG3
+--& $04
+$CDBF: 	dc.b nRst, $08, nG3, $04, nRst, $08, nG3, $04
+--& nRst
+--& $08
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $0A
+$CDC7: 	dc.b nRst, $08, nG3, $04, nRst, $02, nG3, $0A
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nF3
+--& $04
+$CDCF: 	dc.b nRst, $02, nF3, $04, nRst, $02, nF3, $04
+--& nRst
+--& $08
+--& nF3
+--& $04
+--& nRst
+--& $0E
+--& nC3
+--& $04
+$CDD7: 	dc.b nRst, $08, nF3, $04, nRst, $0E, nC3, $04
+--& nRst
+--& $02
+--& nD3
+--& $04
+--& nRst
+--& $08
+--& nEb3
+--& $04
+$CDDF: 	dc.b nRst, $02, nD3, $04, nRst, $08, nEb3, $04
+--& nRst
+--& $02
+--& nD3
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $04
+$CDE7: 	dc.b nRst, $02, nD3, $04, nRst, $02, nC3, $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $04
+$CDEF: 	dc.b nRst, $08, nBb2, $04, nRst, $02, nC3, $04
+--& nRst
+--& $02
+--& nAb2
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $10
+$CDF7: 	dc.b nRst, $02, nAb2, $04, nRst, $08, nF3, $10
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $08
+--& nD3
+--& $04
+$CDFF: 	dc.b nRst, $02, nEb3, $04, nRst, $08, nD3, $04
+--& nRst
+--& $0E
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+$CE07: 	dc.b nRst, $0E, nBb3, $04, nRst, $02, nG3, $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $10
+$CE0F: 	dc.b nRst, $02, nEb3, $04, nRst, $02, nC3, $10
+--& nRst
+--& $02
+--& nF2
+--& $34
+--& nRst
+--& $08
+--& nEb3
+--& $04
+$CE17: 	dc.b nRst, $02, nF2, $34, nRst, $08, nEb3, $04
+--& nRst
+--& $02
+--& nD3
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $04
+$CE1F: 	dc.b nRst, $02, nD3, $04, nRst, $02, nC3, $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $04
+$CE27: 	dc.b nRst, $08, nBb2, $04, nRst, $02, nC3, $04
+--& nRst
+--& $02
+--& nAb2
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $10
+$CE2F: 	dc.b nRst, $02, nAb2, $04, nRst, $08, nF3, $10
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $08
+--& nD3
+--& $04
+$CE37: 	dc.b nRst, $02, nEb3, $04, nRst, $08, nD3, $04
+--& nRst
+--& $08
+--& nEb3
+--& $16
+--& nRst
+--& $02
+--& nF3
+--& $10
+$CE3F: 	dc.b nRst, $08, nEb3, $16, nRst, $02, nF3, $10
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+--& $08
+--& nEb3
+--& $10
+$CE47: 	dc.b nRst, $02, nF3, $04, nRst, $08, nEb3, $10
+--& nRst
+--& $02
+--& nD3
+--& $16
+--& nRst
+--& $08
+--& nEb3
+--& $04
+$CE4F: 	dc.b nRst, $02, nD3, $16, nRst, $08, nEb3, $04
+--& nRst
+--& $02
+--& nD3
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $04
+$CE57: 	dc.b nRst, $02, nD3, $04, nRst, $02, nC3, $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $04
+$CE5F: 	dc.b nRst, $08, nBb2, $04, nRst, $02, nC3, $04
+--& nRst
+--& $02
+--& nAb2
+--& $04
+--& nRst
+--& $08
+--& nF3
+--& $10
+$CE67: 	dc.b nRst, $02, nAb2, $04, nRst, $08, nF3, $10
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $08
+--& nD3
+--& $04
+$CE6F: 	dc.b nRst, $02, nEb3, $04, nRst, $08, nD3, $04
+--& nRst
+--& $0E
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+$CE77: 	dc.b nRst, $0E, nBb3, $04, nRst, $02, nG3, $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $10
+$CE7F: 	dc.b nRst, $02, nEb3, $04, nRst, $02, nC3, $10
+--& nRst
+--& $02
+--& nF2
+--& $34
+--& nRst
+--& $08
+--& nEb3
+--& $04
+$CE87: 	dc.b nRst, $02, nF2, $34, nRst, $08, nEb3, $04
+--& nRst
+--& $02
+--& nD3
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $04
+$CE8F: 	dc.b nRst, $02, nD3, $04, nRst, $02, nC3, $04
+--& nRst
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& $02
+--& nC3
+--& $04
+$CE97: 	dc.b nRst, $08, nBb2, $04, nRst, $02, nC3, $04
+--& nRst
+--& $02
+--& nAb2
+--& $04
+--& nRst
+--& $1A
+--& nC3
+--& $0A
+$CE9F: 	dc.b nRst, $02, nAb2, $04, nRst, $1A, nC3, $0A
+--& nRst
+--& $02
+--& nEb3
+--& $0A
+--& nRst
+--& $08
+--& nD3
+--& $04
+$CEA7: 	dc.b nRst, $02, nEb3, $0A, nRst, $08, nD3, $04
+--& nRst
+--& $08
+--& nD3
+--& $04
+--& nRst
+--& $08
+--& nD3
+--& $04
+$CEAF: 	dc.b nRst, $08, nD3, $04, nRst, $08, nD3, $04
+--& nRst
+--& $02
+--& nD3
+--& $0A
+--& nRst
+--& $02
+--& nD3
+--& $04
+$CEB7: 	dc.b nRst, $02, nD3, $0A, nRst, $02, nD3, $04
+--& nRst
+--& $2C
+$CEBA: 	dc.b nRst, $2C
+$CEBA: 	sJump		Maniax_FM5
+$CEBD: 	dc.
+--= $F2
+$CEBE: 	dc.b $F2	; Unused
+$CEBE: Maniax_PSG1:
+$CEBE: 	sVolEnvPSG	v0A
+$CEC0: Maniax_Jump2:
+$CEC0: 	dc.	; Unused
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+$CEC7: 	dc.b nC4, $04, nRst, $02, nG3, $04, nRst, $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $08
+$CECF: 	dc.b nBb3, $04, nRst, $02, nG3, $04, nRst, $08
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+$CED7: 	dc.b nG3, $04, nRst, $02, nBb3, $04, nRst, $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nC4
+--& $04
+--& nRst
+--& $02
+$CEDF: 	dc.b nG3, $04, nRst, $02, nC4, $04, nRst, $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+$CEE7: 	dc.b nG3, $04, nRst, $02, nBb3, $04, nRst, $02
+--& nG3
+--& $04
+--& nRst
+--& $60
+--& nRst
+--& $1A
+--& nC4
+--& $04
+$CEEF: 	dc.b nG3, $04, nRst, $60, nRst, $1A, nC4, $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+$CEF7: 	dc.b nRst, $02, nG3, $04, nRst, $02, nBb3, $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $08
+--& nG3
+--& $04
+$CEFF: 	dc.b nRst, $02, nG3, $04, nRst, $08, nG3, $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+$CF07: 	dc.b nRst, $02, nBb3, $04, nRst, $02, nG3, $04
+--& nRst
+--& $02
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+$CF0F: 	dc.b nRst, $02, nC4, $04, nRst, $02, nG3, $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+$CF17: 	dc.b nRst, $02, nBb3, $04, nRst, $02, nG3, $04
+--& nRst
+--& $60
+--& nRst
+--& nRst
+--& $38
+--& nF4
+--& $06
+--& nFs4
+$CF1F: 	dc.b nRst, $60, nRst, nRst, $38, nF4, $06, nFs4
+--& nG4
+--& nBb5
+--& nRst
+--& nC5
+--& nFs5
+--& $02
+--& nG5
+--& $12
+$CF27: 	dc.b nG4, nBb5, nRst, nC5, nFs5, $02, nG5, $12
+--& nRst
+--& $70
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nA4
+--& $04
+$CF2F: 	dc.b nRst, $70, nC4, $04, nRst, $02, nA4, $04
+--& nRst
+--& $02
+--& nG4
+--& $04
+--& nRst
+--& $08
+--& nF4
+--& $04
+$CF37: 	dc.b nRst, $02, nG4, $04, nRst, $08, nF4, $04
+--& nRst
+--& $02
+--& nFs4
+--& nG4
+--& $04
+--& nE4
+--& nRst
+--& $7F
+$CF3F: 	dc.b nRst, $02, nFs4, nG4, $04, nE4, nRst, $7F
+--& nRst
+--& $31
+--& nF4
+--& $06
+--& nFs4
+--& nG4
+--& nBb5
+--& nRst
+$CF47: 	dc.b nRst, $31, nF4, $06, nFs4, nG4, nBb5, nRst
+--& nC5
+--& nFs5
+--& $02
+--& nG5
+--& $12
+--& nRst
+--& $70
+--& nC5
+$CF4F: 	dc.b nC5, nFs5, $02, nG5, $12, nRst, $70, nC5
+--& $06
+--& nBb4
+--& nG4
+--& nF4
+--& $04
+--& nFs4
+--& nF4
+--& nEb4
+$CF57: 	dc.b $06, nBb4, nG4, nF4, $04, nFs4, nF4, nEb4
+--& $06
+--& nC4
+--& nRst
+--& $12
+--& nBb3
+--& $1E
+--& nRst
+--& $3C
+$CF5F: 	dc.b $06, nC4, nRst, $12, nBb3, $1E, nRst, $3C
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nC4
+--& $04
+--& nRst
+--& $08
+$CF67: 	dc.b nC4, $04, nRst, $02, nC4, $04, nRst, $08
+--& nD4
+--& $02
+--& nRst
+--& $04
+--& nEb4
+--& $0A
+--& nRst
+--& $3E
+$CF6F: 	dc.b nD4, $02, nRst, $04, nEb4, $0A, nRst, $3E
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $08
+$CF77: 	dc.b nBb3, $04, nRst, $02, nBb3, $04, nRst, $08
+--& nC4
+--& $02
+--& nRst
+--& $04
+--& nD4
+--& $0A
+--& nRst
+--& $3E
+$CF7F: 	dc.b nC4, $02, nRst, $04, nD4, $0A, nRst, $3E
+--& nD4
+--& $04
+--& nRst
+--& $02
+--& nD4
+--& $04
+--& nRst
+--& $08
+$CF87: 	dc.b nD4, $04, nRst, $02, nD4, $04, nRst, $08
+--& nEb4
+--& $02
+--& nRst
+--& $04
+--& nF4
+--& $0A
+--& nRst
+--& $08
+$CF8F: 	dc.b nEb4, $02, nRst, $04, nF4, $0A, nRst, $08
+--& nEb5
+--& $04
+--& nRst
+--& $0E
+--& nD5
+--& $0A
+--& nRst
+--& $02
+$CF97: 	dc.b nEb5, $04, nRst, $0E, nD5, $0A, nRst, $02
+--& nD5
+--& $04
+--& nRst
+--& $02
+--& nEb5
+--& $04
+--& nRst
+--& $08
+$CF9F: 	dc.b nD5, $04, nRst, $02, nEb5, $04, nRst, $08
+--& nD5
+--& $10
+--& nRst
+--& $02
+--& nEb5
+--& $0A
+--& nRst
+--& $02
+$CFA7: 	dc.b nD5, $10, nRst, $02, nEb5, $0A, nRst, $02
+--& nF5
+--& $0A
+--& nRst
+--& $3E
+--& nC4
+--& $04
+--& nRst
+--& $02
+$CFAF: 	dc.b nF5, $0A, nRst, $3E, nC4, $04, nRst, $02
+--& nC4
+--& $04
+--& nRst
+--& $08
+--& nD4
+--& $02
+--& nRst
+--& $04
+$CFB7: 	dc.b nC4, $04, nRst, $08, nD4, $02, nRst, $04
+--& nEb4
+--& $0A
+--& nRst
+--& $3E
+--& nBb3
+--& $04
+--& nRst
+--& $02
+$CFBF: 	dc.b nEb4, $0A, nRst, $3E, nBb3, $04, nRst, $02
+--& nBb3
+--& $04
+--& nRst
+--& $08
+--& nEb4
+--& $02
+--& nRst
+--& $04
+$CFC7: 	dc.b nBb3, $04, nRst, $08, nEb4, $02, nRst, $04
+--& nG4
+--& $0A
+--& nRst
+--& $3E
+--& nA3
+--& $04
+--& nRst
+--& $02
+$CFCF: 	dc.b nG4, $0A, nRst, $3E, nA3, $04, nRst, $02
+--& nA3
+--& $04
+--& nRst
+--& $08
+--& nC4
+--& $02
+--& nRst
+--& $04
+$CFD7: 	dc.b nA3, $04, nRst, $08, nC4, $02, nRst, $04
+--& nEb4
+--& $0A
+--& nRst
+--& $08
+--& nEb4
+--& $04
+--& nRst
+--& $02
+$CFDF: 	dc.b nEb4, $0A, nRst, $08, nEb4, $04, nRst, $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nEb4
+--& $04
+--& nRst
+--& $02
+$CFE7: 	dc.b nEb3, $04, nRst, $02, nEb4, $04, nRst, $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nEb4
+--& $04
+--& nRst
+--& $02
+$CFEF: 	dc.b nEb3, $04, nRst, $02, nEb4, $04, nRst, $02
+--& nEb4
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+$CFF7: 	dc.b nEb4, $04, nRst, $02, nEb3, $04, nRst, $02
+--& nD4
+--& $04
+--& nRst
+--& $02
+--& nD4
+--& $04
+--& nRst
+--& $08
+$CFFF: 	dc.b nD4, $04, nRst, $02, nD4, $04, nRst, $08
+--& nD4
+--& $04
+--& nRst
+--& $50
+--& nBb3
+--& $04
+--& nRst
+--& $02
+$D007: 	dc.b nD4, $04, nRst, $50, nBb3, $04, nRst, $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+$D00F: 	dc.b nG3, $04, nRst, $02, nBb3, $04, nRst, $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+$D017: 	dc.b nBb3, $04, nRst, $02, nBb3, $04, nRst, $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $38
+$D01F: 	dc.b nG3, $04, nRst, $02, nBb3, $04, nRst, $38
+--& nD4
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+$D027: 	dc.b nD4, $04, nRst, $02, nBb3, $04, nRst, $02
+--& nD4
+--& $04
+--& nRst
+--& $02
+--& nF4
+--& $04
+--& nRst
+--& $02
+$D02F: 	dc.b nD4, $04, nRst, $02, nF4, $04, nRst, $02
+--& nD4
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+$D037: 	dc.b nD4, $04, nRst, $02, nBb3, $04, nRst, $02
+--& nG3
+--& $04
+--& nRst
+--& $38
+--& nB3
+--& $04
+--& nRst
+--& $02
+$D03F: 	dc.b nG3, $04, nRst, $38, nB3, $04, nRst, $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nB3
+--& $04
+--& nRst
+--& $02
+$D047: 	dc.b nG3, $04, nRst, $02, nB3, $04, nRst, $02
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+$D04F: 	dc.b nF3, $04, nRst, $02, nG3, $04, nRst, $02
+--& nB3
+--& $04
+--& nRst
+--& $02
+--& nD4
+--& $04
+--& nRst
+--& $02
+$D057: 	dc.b nB3, $04, nRst, $02, nD4, $04, nRst, $02
+--& nC3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+$D05F: 	dc.b nC3, $04, nRst, $02, nEb3, $04, nRst, $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+$D067: 	dc.b nG3, $04, nRst, $02, nEb3, $04, nRst, $02
+--& nD3
+--& $04
+--& nRst
+--& $02
+--& nF3
+--& $04
+--& nRst
+--& $02
+$D06F: 	dc.b nD3, $04, nRst, $02, nF3, $04, nRst, $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nD3
+--& $04
+--& nRst
+--& $02
+$D077: 	dc.b nBb3, $04, nRst, $02, nD3, $04, nRst, $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nAb3
+--& $04
+--& nRst
+--& $02
+$D07F: 	dc.b nEb3, $04, nRst, $02, nAb3, $04, nRst, $02
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+$D087: 	dc.b nC4, $04, nRst, $02, nEb3, $04, nRst, $02
+--& nF3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+$D08F: 	dc.b nF3, $04, nRst, $02, nG3, $04, nRst, $02
+--& nD4
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $38
+$D097: 	dc.b nD4, $04, nRst, $02, nG3, $04, nRst, $38
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+$D09F: 	dc.b nBb3, $04, nRst, $02, nG3, $04, nRst, $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+$D0A7: 	dc.b nBb3, $04, nRst, $02, nBb3, $04, nRst, $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $02
+$D0AF: 	dc.b nBb3, $04, nRst, $02, nG3, $04, nRst, $02
+--& nBb3
+--& $04
+--& nRst
+--& $38
+--& nD4
+--& $04
+--& nRst
+--& $02
+$D0B7: 	dc.b nBb3, $04, nRst, $38, nD4, $04, nRst, $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nD4
+--& $04
+--& nRst
+--& $02
+$D0BF: 	dc.b nBb3, $04, nRst, $02, nD4, $04, nRst, $02
+--& nF4
+--& $04
+--& nRst
+--& $02
+--& nD4
+--& $04
+--& nRst
+--& $02
+$D0C7: 	dc.b nF4, $04, nRst, $02, nD4, $04, nRst, $02
+--& nBb3
+--& $04
+--& nRst
+--& $02
+--& nG3
+--& $04
+--& nRst
+--& $38
+$D0CF: 	dc.b nBb3, $04, nRst, $02, nG3, $04, nRst, $38
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nAb3
+--& $04
+--& nRst
+--& $02
+$D0D7: 	dc.b nEb3, $04, nRst, $02, nAb3, $04, nRst, $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+--& nEb3
+--& $04
+--& nRst
+--& $02
+$D0DF: 	dc.b nEb3, $04, nRst, $02, nEb3, $04, nRst, $02
+--& nC4
+--& $04
+--& nRst
+--& $02
+--& nAb3
+--& $04
+--& nRst
+--& $02
+$D0E7: 	dc.b nC4, $04, nRst, $02, nAb3, $04, nRst, $02
+--& nEb4
+--& $04
+--& nRst
+--& $08
+--& nEb5
+--& $04
+--& nRst
+--& $08
+$D0EF: 	dc.b nEb4, $04, nRst, $08, nEb5, $04, nRst, $08
+--& nEb5
+--& $04
+--& nRst
+--& $08
+--& nEb5
+--& $04
+--& nRst
+--& $02
+$D0F7: 	dc.b nEb5, $04, nRst, $08, nEb5, $04, nRst, $02
+--& nEb5
+--& $0A
+--& nRst
+--& $02
+--& nD5
+--& $04
+--& nRst
+--& $2C
+$D0FF: 	dc.b nEb5, $0A, nRst, $02, nD5, $04, nRst, $2C
+$D100: 	sJump		Maniax_Jump2
+$D103: 	dc.
+--= $F2
+$D104: 	dc.b $F2	; Unused
+$D104: Maniax_PSG2:
+$D104: 	sVolEnvPSG	v08
+$D106: 	dc.	; Unused
+--& nRst
+--& $01
+$D108: 	dc.b nRst, $01
+$D108: 	ssDetune	$01
+$D10A: 	sJump		Maniax_Jump2
+$D10D: 	dc.
+--= $F6
+--= $0A
+--= $D1
+--= $F2
+$D111: 	dc.b $F6, $0A, $D1, $F2	; Unused
+$D111: Maniax_PSG3:
+$D111: 	sVolEnvPSG	v02
+$D113: 	sNoisePSG	$E7
+$D115: Maniax_Jump3:
+$D115: 	dc.	; Unused
+--& nRst
+--& $18
+--& nRst
+--& $18
+--& nRst
+--& $18
+--& nRst
+--& $18
+$D11C: 	dc.b nRst, $18, nRst, $18, nRst, $18, nRst, $18
+--& nRst
+--& $18
+$D11F: 	dc.b nRst, $18
+$D11F: 	sVolEnvPSG	v01
+--& nBb6
+--& $04
+--& nBb6
+--& $04
+--& nBb6
+--& $04
+$D127: 	dc.b nBb6, $04, nBb6, $04, nBb6, $04
+$D127: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D12B: 	dc.b nBb6, $06
+$D12B: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& sHold
+--& $06
+$D131: 	dc.b nBb6, $06, sHold, $06
+$D131: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D135: 	dc.b nBb6, $06
+$D135: 	sVolEnvPSG	v01
+--& nBb6
+--& $0C
+--& sHold
+--& $18
+--& sHold
+--& $18
+--& sHold
+--& $18
+$D13E: 	dc.b nBb6, $0C, sHold, $18, sHold, $18, sHold, $18
+--& sHold
+--& $18
+--& sHold
+--& $18
+--& sHold
+--& $18
+--& nBb6
+--& $04
+$D146: 	dc.b sHold, $18, sHold, $18, sHold, $18, nBb6, $04
+--& nBb6
+--& $04
+--& nBb6
+--& $04
+$D14B: 	dc.b nBb6, $04, nBb6, $04
+$D14B: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D14F: 	dc.b nBb6, $06
+$D14F: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& sHold
+--& $06
+$D155: 	dc.b nBb6, $06, sHold, $06
+$D155: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D159: 	dc.b nBb6, $06
+$D159: 	sVolEnvPSG	v01
+--& nBb6
+--& $0C
+--& sHold
+--& $18
+$D15F: 	dc.b nBb6, $0C, sHold, $18
+$D15F: Maniax_Loop1:
+$D15F: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D165: 	dc.b nBb6, $06, nBb6, $06
+$D165: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D169: 	dc.b nBb6, $06
+$D169: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D16F: 	dc.b nBb6, $06, nBb6, $06
+$D16F: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D173: 	dc.b nBb6, $06
+$D173: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D17C: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D184: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D18C: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+$D18D: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D191: 	dc.b nBb6, $06
+$D191: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D197: 	dc.b nBb6, $06, nBb6, $06
+$D197: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D19B: 	dc.b nBb6, $06
+$D19B: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D1A4: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D1AC: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+$D1AD: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D1B1: 	dc.b nBb6, $06
+$D1B1: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+$D1B5: 	dc.b nBb6, $06
+$D1B5: 	sLoop		$01, $03, Maniax_Loop1
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D1BE: 	dc.b nBb6, $06, nBb6, $06
+$D1BE: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D1C2: 	dc.b nBb6, $06
+$D1C2: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D1C8: 	dc.b nBb6, $06, nBb6, $06
+$D1C8: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D1CC: 	dc.b nBb6, $06
+$D1CC: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D1D5: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D1DD: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& sHold
+--& $18
+--& sHold
+--& $18
+$D1E5: 	dc.b nBb6, $06, nBb6, $06, sHold, $18, sHold, $18
+--& sHold
+--& $18
+--& sHold
+--& $18
+$D1EA: 	dc.b sHold, $18, sHold, $18
+$D1EA: Maniax_Loop2:
+$D1EA: 	sVolEnvPSG	v01
+--& nBb6
+--& $0C
+$D1EE: 	dc.b nBb6, $0C
+$D1EE: 	sVolEnvPSG	v08
+--& nBb6
+--& $0C
+$D1F2: 	dc.b nBb6, $0C
+$D1F2: 	sVolEnvPSG	v01
+--& nBb6
+--& $0C
+$D1F6: 	dc.b nBb6, $0C
+$D1F6: 	sVolEnvPSG	v08
+--& nBb6
+--& $0C
+$D1FA: 	dc.b nBb6, $0C
+$D1FA: 	sVolEnvPSG	v01
+--& nBb6
+--& $0C
+$D1FE: 	dc.b nBb6, $0C
+$D1FE: 	sVolEnvPSG	v08
+--& nBb6
+--& $0C
+$D202: 	dc.b nBb6, $0C
+$D202: 	sVolEnvPSG	v01
+--& nBb6
+--& $0C
+$D206: 	dc.b nBb6, $0C
+$D206: 	sVolEnvPSG	v08
+--& nBb6
+--& $0C
+$D20A: 	dc.b nBb6, $0C
+$D20A: 	sLoop		$01, $03, Maniax_Loop2
+--& sHold
+--& $18
+--& sHold
+--& $18
+--& sHold
+--& $18
+--& sHold
+--& $18
+$D216: 	dc.b sHold, $18, sHold, $18, sHold, $18, sHold, $18
+$D217: Maniax_Loop3:
+$D217: 	sVolEnvPSG	v01
+--& nBb6
+--& $0C
+$D21B: 	dc.b nBb6, $0C
+$D21B: 	sVolEnvPSG	v08
+--& nBb6
+--& $0C
+$D21F: 	dc.b nBb6, $0C
+$D21F: 	sVolEnvPSG	v01
+--& nBb6
+--& $0C
+$D223: 	dc.b nBb6, $0C
+$D223: 	sVolEnvPSG	v08
+--& nBb6
+--& $0C
+$D227: 	dc.b nBb6, $0C
+$D227: 	sVolEnvPSG	v01
+--& nBb6
+--& $0C
+$D22B: 	dc.b nBb6, $0C
+$D22B: 	sVolEnvPSG	v08
+--& nBb6
+--& $0C
+$D22F: 	dc.b nBb6, $0C
+$D22F: 	sVolEnvPSG	v01
+--& nBb6
+--& $0C
+$D233: 	dc.b nBb6, $0C
+$D233: 	sVolEnvPSG	v08
+--& nBb6
+--& $0C
+$D237: 	dc.b nBb6, $0C
+$D237: 	sLoop		$01, $03, Maniax_Loop3
+--& sHold
+--& $18
+--& sHold
+--& $18
+--& sHold
+--& $18
+--& sHold
+--& $18
+$D243: 	dc.b sHold, $18, sHold, $18, sHold, $18, sHold, $18
+$D244: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D24A: 	dc.b nBb6, $06, nBb6, $06
+$D24A: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D24E: 	dc.b nBb6, $06
+$D24E: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D256: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D256: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D25A: 	dc.b nBb6, $06
+$D25A: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D263: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D26A: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D26A: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D26E: 	dc.b nBb6, $06
+$D26E: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D277: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D27F: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D287: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D28E: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D28E: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D292: 	dc.b nBb6, $06
+$D292: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D29A: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D29A: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D29E: 	dc.b nBb6, $06
+$D29E: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D2A6: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D2A6: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D2AA: 	dc.b nBb6, $06
+$D2AA: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D2B3: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D2BA: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D2BA: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D2BE: 	dc.b nBb6, $06
+$D2BE: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D2C7: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D2CF: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D2D7: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& sHold
+--& $18
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D2DF: 	dc.b nBb6, $06, sHold, $18, nBb6, $06, nBb6, $06
+$D2E0: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D2E4: 	dc.b nBb6, $06
+$D2E4: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D2EC: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D2EC: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D2F0: 	dc.b nBb6, $06
+$D2F0: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D2F9: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D300: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D300: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D304: 	dc.b nBb6, $06
+$D304: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D30D: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D315: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D31D: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D324: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D324: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D328: 	dc.b nBb6, $06
+$D328: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D330: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D330: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D334: 	dc.b nBb6, $06
+$D334: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D33C: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D33C: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D340: 	dc.b nBb6, $06
+$D340: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D349: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06, nBb6, $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+--& nBb6
+--& $06
+$D350: 	dc.b nBb6, $06, nBb6, $06, nBb6, $06
+$D350: 	sVolEnvPSG	v08
+--& nBb6
+--& $06
+$D354: 	dc.b nBb6, $06
+$D354: 	sVolEnvPSG	v01
+--& nBb6
+--& $06
+--& sHold
+--& $18
+--& sHold
+--& $18
+--& sHold
+--& $18
+$D35D: 	dc.b nBb6, $06, sHold, $18, sHold, $18, sHold, $18
+--& sHold
+--& $18
+$D360: 	dc.b sHold, $18
+$D360: 	sJump		Maniax_Jump3
+$D363: 	dc.
+--= $F2
+$D364: 	dc.b $F2	; Unused
+--------------------------------------------------------------------------------
+--; Time for Script 79 ms
+--; Time for Convert 481 ms
+--; Time for Save 297 ms
+--; Time for Total 857 ms

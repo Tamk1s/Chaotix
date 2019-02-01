@@ -1,0 +1,1 @@
+asmx -C 68K -b 0 -o new.skc compKC.asm > xm4smps_asm.log

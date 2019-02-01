@@ -1,0 +1,1043 @@
+--; args=[]
+--; filein=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\music\LevelClear.bin
+--; fileout=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\music\LevelClear.asm
+--; folder=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1
+--; script=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\SMPS\MegaPCM\smps2asm.smpss
+--; lable=Maniax
+--; type=
+--; Prepare script parse
+--------------------------------------------------------------------------------
+0000: =type ''
+0005: c ('\type\' != 'voice') && ('\type\' != 'sfx') && ('\type\' != '') && ('\type\' != 'music') {
+0006: 	+Available types: Music, SFX, Voice
+0007: 	$.cc
+0008: 	;
+0009: }
+0011: =endian 'big'
+0012: =offset 0
+0014: c '\type\' == 'voice' {
+0015: 	~£_Patches .of
+0016: 	/ >patch
+0017: 	;
+0018: }
+0020: c '\type\' == 'sfx' {
+0021: 	/ >headersfx
+0022: }{
+0023: 	/ >header
+0024: }
+0026: ?header {
+0027: 	! > sHeaderInit: {
+0028: 		~£_Header .of
+0029: 	}
+0031: 	! > sHeaderPatch: .dw{
+0032: 		~£_Patches :0
+0033: 	}
+0035: 	=FMnum .db
+0036: 	=PSGnum .nb
+0037: 	! > sHeaderCh: .lb, .db;
+0038: 	! > sHeaderTempo: .db, .db;
+0039: 	! > sHeaderDAC: .dw{
+0040: 		~£_DAC :0
+0041: 	}
+0043: 	$.sw
+0044: 	f \FMnum\ - 1 {
+0045: 		! > sHeaderFM: .dw, .db, .db{
+0046: 			~£_FM? :0
+0047: 		}
+0048: 	}
+0050: 	f \PSGnum\ {
+0051: 		! > sHeaderPSG: .dw, .db, .db, .db, .db{
+0052: 			~£_PSG? :0
+0053: 			:? 4 {
+0054: 				?volenv;
+0055: 			}
+0056: 		}
+0057: 	}
+0059: 	/£_FM? ?note ?comm
+0060: 	/£_PSG? ?note ?comm
+0061: 	/£_DAC ?DAC ?comm
+0062: 	/£_Patches >patch
+0063: }
+0065: ?headersfx {
+0066: 	! > sHeaderInit: {
+0067: 		~£_Header .of
+0068: 	}
+0069: 	! > sHeaderPatch: .dw{
+0070: 		~£_Patches :0
+0071: 	}
+0073: 	! > sHeaderTick: .db;
+0074: 	=CHnum .db
+0075: 	! > sHeaderCh: \CHnum\;
+0076: 	=trpd 0
+0077: 	=trpn 0
+0079: 	f \CHnum\ {
+0080: 		>f 1
+0081: 		=trpd .nb
+0082: 		>b 1
+0083: 		c (\trpd\ & 0x80) == 0 {
+0084: 			=trpn (\trpd\&3)+1
+0086: 			c (\trpd\ & 4) != 0 {
+0087: 				=trpn \trpn\+3
+0088: 			}
+0090: 			! > sHeaderSFX: .db, .db, .dw, .db, .db{
+0091: 				~£_FM\trpn\ :2
+0092: 			}
+0094: 		}{
+0095: 			=trpn ((\trpd\&0x60)>>5)+1
+0096: 			! > sHeaderSFX: .db, .db, .dw, .db, .db{
+0097: 				~£_PSG\trpn\ :2
+0098: 			}
+0099: 		}
+0101: 	}
+0103: 	/£_FM? ?note ?comm
+0104: 	/£_PSG? ?note ?comm
+0105: 	/£_Patches >patch
+0106: }
+0108: ?patch {
+0109: 	=num 0
+0110: 	=b1 0
+0111: 	=b2 0
+0112: 	=b3 0
+0113: 	=b4 0
+0114: 	f (.an-.pc)/25 {
+0115: 		%\n\t; Patch {$2!\num\}\r\n\t; {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}
+0116: 		>b 25
+0117: 		! > spAlgorithm: .nb&0x7;
+0118: 		! > spFeedback: (.db&0x38)>>3;
+0119: 		=b1 .db
+0120: 		=b3 .db
+0121: 		=b2 .db
+0122: 		=b4 .db
+0123: 		! > spDetune: (\b1\&0xF0)>>4, (\b2\&0xF0)>>4, (\b3\&0xF0)>>4, (\b4\&0xF0)>>4;
+0124: 		! > spMultiple: \b1\&0xF, \b2\&0xF, \b3\&0xF, \b4\&0xF;
+0125: 		=b1 .db
+0126: 		=b3 .db
+0127: 		=b2 .db
+0128: 		=b4 .db
+0129: 		! > spRateScale: (\b1\&0xC0)>>6, (\b2\&0xC0)>>6, (\b3\&0xC0)>>6, (\b4\&0xC0)>>6;
+0130: 		! > spAttackRt: \b1\&0x1F, \b2\&0x1F, \b3\&0x1F, \b4\&0x1F;
+0131: 		=b1 .db
+0132: 		=b3 .db
+0133: 		=b2 .db
+0134: 		=b4 .db
+0135: 		! > spAmpMod: (\b1\&0x80)>>7, (\b2\&0x80)>>7, (\b3\&0x80)>>7, (\b4\&0x80)>>7;
+0136: 		! > spSustainRt: \b1\&0x1F, \b2\&0x1F, \b3\&0x1F, \b4\&0x1F;
+0137: 		=d1 .db
+0138: 		=d3 .db
+0139: 		=d2 .db
+0140: 		=d4 .db
+0141: 		=b1 .db
+0142: 		=b3 .db
+0143: 		=b2 .db
+0144: 		=b4 .db
+0145: 		! > spSustainLv: (\b1\&0xF0)>>4, (\b2\&0xF0)>>4, (\b3\&0xF0)>>4, (\b4\&0xF0)>>4;
+0146: 		! > spDecayRt: \d1\, \d2\, \d3\, \d4\;
+0147: 		! > spReleaseRt: \b1\&0xF, \b2\&0xF, \b3\&0xF, \b4\&0xF;
+0148: 		=b1 .db
+0149: 		=b3 .db
+0150: 		=b2 .db
+0151: 		! > spTotalLv: \b1\&0x7F, \b2\&0x7F, \b3\&0x7F, .db&0x7F;
+0152: 		=num \num\+1
+0153: 	}
+0155: 	c (.an-.pc)==1 {
+0156: 		!0 > even: ;
+0157: 	}
+0158: }
+0160: ?volenv {
+0161: 	=v00 0
+0162: 	=v01 1
+0163: 	=v02 2
+0164: 	=v03 3
+0165: 	=v04 4
+0166: 	=v05 5
+0167: 	=v06 6
+0168: 	=v07 7
+0169: 	=v08 8
+0170: 	=v09 9
+0171: }
+0173: ?DAC {
+0174: 	=nRst 0x80
+0175: 	=dKick 0x81
+0176: 	=dSnare 0x82
+0177: 	=dTimpani 0x83
+0178: 	=dHiTimpani 0x88
+0179: 	=dMidTimpani 0x89
+0180: 	=dLowTimpani 0x8A
+0181: 	=dFloorTimpani 0x8B
+0182: }
+0184: --; macro: parse another file '..\SMPS\SMPS default notes.smpss' (102 lines)
+--------------------------------------------------------------------------------
+0005: ?note {
+0006: 	=nRst 0x80
+0007: 	=nC0 0x81
+0008: 	=nCs0 0x82
+0009: 	=nD0 0x83
+0010: 	=nEb0 0x84
+0011: 	=nE0 0x85
+0012: 	=nF0 0x86
+0013: 	=nFs0 0x87
+0014: 	=nG0 0x88
+0015: 	=nAb0 0x89
+0016: 	=nA0 0x8A
+0017: 	=nBb0 0x8B
+0018: 	=nB0 0x8C
+0019: 	=nC1 0x8D
+0020: 	=nCs1 0x8E
+0021: 	=nD1 0x8F
+0022: 	=nEb1 0x90
+0023: 	=nE1 0x91
+0024: 	=nF1 0x92
+0025: 	=nFs1 0x93
+0026: 	=nG1 0x94
+0027: 	=nAb1 0x95
+0028: 	=nA1 0x96
+0029: 	=nBb1 0x97
+0030: 	=nB1 0x98
+0031: 	=nC2 0x99
+0032: 	=nCs2 0x9A
+0033: 	=nD2 0x9B
+0034: 	=nEb2 0x9C
+0035: 	=nE2 0x9D
+0036: 	=nF2 0x9E
+0037: 	=nFs2 0x9F
+0038: 	=nG2 0xA0
+0039: 	=nAb2 0xA1
+0040: 	=nA2 0xA2
+0041: 	=nBb2 0xA3
+0042: 	=nB2 0xA4
+0043: 	=nC3 0xA5
+0044: 	=nCs3 0xA6
+0045: 	=nD3 0xA7
+0046: 	=nEb3 0xA8
+0047: 	=nE3 0xA9
+0048: 	=nF3 0xAA
+0049: 	=nFs3 0xAB
+0050: 	=nG3 0xAC
+0051: 	=nAb3 0xAD
+0052: 	=nA3 0xAE
+0053: 	=nBb3 0xAF
+0054: 	=nB3 0xB0
+0055: 	=nC4 0xB1
+0056: 	=nCs4 0xB2
+0057: 	=nD4 0xB3
+0058: 	=nEb4 0xB4
+0059: 	=nE4 0xB5
+0060: 	=nF4 0xB6
+0061: 	=nFs4 0xB7
+0062: 	=nG4 0xB8
+0063: 	=nAb4 0xB9
+0064: 	=nA4 0xBA
+0065: 	=nBb4 0xBB
+0066: 	=nB4 0xBC
+0067: 	=nC5 0xBD
+0068: 	=nCs5 0xBE
+0069: 	=nD5 0xBF
+0070: 	=nEb5 0xC0
+0071: 	=nE5 0xC1
+0072: 	=nF5 0xC2
+0073: 	=nFs5 0xC3
+0074: 	=nG5 0xC4
+0075: 	=nAb5 0xC5
+0076: 	=nA5 0xC6
+0077: 	=nBb5 0xC7
+0078: 	=nB5 0xC8
+0079: 	=nC6 0xC9
+0080: 	=nCs6 0xCA
+0081: 	=nD6 0xCB
+0082: 	=nEb6 0xCC
+0083: 	=nE6 0xCD
+0084: 	=nF6 0xCE
+0085: 	=nFs6 0xCF
+0086: 	=nG6 0xD0
+0087: 	=nAb6 0xD1
+0088: 	=nA6 0xD2
+0089: 	=nBb6 0xD3
+0090: 	=nB6 0xD4
+0091: 	=nC7 0xD5
+0092: 	=nCs7 0xD6
+0093: 	=nD7 0xD7
+0094: 	=nEb7 0xD8
+0095: 	=nE7 0xD9
+0096: 	=nF7 0xDA
+0097: 	=nFs7 0xDB
+0098: 	=nG7 0xDC
+0099: 	=nAb7 0xDD
+0100: 	=nA7 0xDE
+0101: 	=nBb7 0xDF
+0102: }
+--------------------------------------------------------------------------------
+0184: --; return to previous file
+0186: ?comm {
+0187: 	!0xE0 > sPan: .db & 0xC0, .lb & 0x3F{
+0188: 		:? 0 {
+0189: 			=spNone 0x00
+0190: 			=spRight 0x40
+0191: 			=spLeft 0x80
+0192: 			=spCenter 0xC0
+0193: 		}
+0195: 		c .n1 == 0 {
+0196: 			:- 1
+0197: 			}
+0198: 		}
+0199: 		!0xE1 > ssDetune: .db;
+0200: 		!0xE2 > sComm: .db;
+0201: 		!0xE3 > sRet: {
+0202: 			;
+0203: 		}
+0204: 		!0xE4 > sFade: {
+0205: 			;
+0206: 		}
+0207: 		!0xE5 > ssTickMulCh: .db;
+0208: 		!0xE6 > saVolFM: .db;
+0209: 		=sHold 0xE7
+0210: 		!0xE8 > sNoteTimeOut: .db;
+0211: 		!0xE9 > saTranspose: .db;
+0212: 		!0xEA > ssTempo: .db;
+0213: 		!0xEB > ssTickMul: .db;
+0214: 		!0xEC > saVolPSG: .db;
+0215: 		!0xED > sClrPush: ;
+0216: 		!0xEE > sStopSpecFM4: {
+0217: 			;
+0218: 		}
+0219: 		!0xEF > sPatFM: .db;
+0220: 		!0xF0 > ssMod68k: .db, .db, .db, .db;
+0221: 		!0xF1 > sModOn: ;
+0222: 		!0xF2 > sStop: {
+0223: 			;
+0224: 		}
+0225: 		!0xF3 > sNoisePSG: .db;
+0226: 		!0xF4 > sModOff: ;
+0227: 		!0xF5 > sVolEnvPSG: .db{
+0228: 			:? 0 {
+0229: 				?volenv;
+0230: 			}
+0231: 		}
+0232: 		!0xF6 > sJump: .ow{
+0233: 			~£_Jump? :0
+0234: 			;
+0235: 		}
+0236: 		!0xF7 > sLoop: .db, .db, .ow{
+0237: 			~£_Loop? :2
+0238: 		}
+0239: 		!0xF8 > sCall: .ow{
+0240: 			~£_Call? :0
+0241: 		}
+0242: 		!0xF9 > sMuteFM1: ;
+0243: 	}
+--------------------------------------------------------------------------------
+Prepare conversion
+--------------------------------------------------------------------------------
+--> Start conversion with subscript ''
+$0000 EQU0 0:   	=type '' 
+$0000 CON5 5:   	c ('\type\' != 'voice') && ('\type\' != 'sfx') && ('\type\' != '') && ('\type\' != 'music') (false)
+$0000 EQU11 11:   	=endian 'big' big
+$0000 EQU12 12:   	=offset 0 0
+$0000 CON14 14:   	c '\type\' == 'voice' (false)
+$0000 CON20 20:   	c '\type\' == 'sfx' (false)
+$0000 EXE23 23:   	/
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=False run=True
+$0000 MAC27 27:   	! > sHeaderInit
+$0000 LAC28 28:   	~Maniax_Header .of $0000
+$0000 MAC31 31:   	! > sHeaderPatch: $D8
+$0002 LAM32 32:   	~Maniax_Patches :0 $00D8
+$0003 EQU35 35:   	=FMnum .db 6
+$0003 EQU36 36:   	=PSGnum .nb 3
+$0003 MAC37 37:   	! > sHeaderCh: $06, $03
+$0004 MAC38 38:   	! > sHeaderTempo: $02, $03
+$0006 MAC39 39:   	! > sHeaderDAC: $BE
+$0008 LAM40 40:   	~Maniax_DAC :0 $00BE
+--! ERROR IN EXPRESSION: 
+--! INITIAL EXPRESSION: .sw
+--! System.ArgumentException: Expression can't be empty
+Parameter name: expression
+   at NCalc.Expression..ctor(String expression, EvaluateOptions options)
+   at SMPS2ASMv2.Parse.ParseNumber(String s, Nullable`1 lnun)
+$000A OPR43 43:   	$.sw 
+$000A REP44 44:   	f 5 {
+$000A MAC45 45:   	! > sHeaderFM: $30, $F4, $0A
+$000E LAM46 46:   	~Maniax_FM1 :0 $0030
+$000E MAC45 45:   	! > sHeaderFM: $4D, $DC, $0A
+$0012 LAM46 46:   	~Maniax_FM2 :0 $004D
+$0012 MAC45 45:   	! > sHeaderFM: $6F, $F4, $15
+$0016 LAM46 46:   	~Maniax_FM3 :0 $006F
+$0016 MAC45 45:   	! > sHeaderFM: $8B, $F4, $15
+$001A LAM46 46:   	~Maniax_FM4 :0 $008B
+$001A MAC45 45:   	! > sHeaderFM: $A7, $F4, $14
+$001E LAM46 46:   	~Maniax_FM5 :0 $00A7
+$001E REP50 50:   	f 3 {
+$001E MAC51 51:   	! > sHeaderPSG: $32, $D0, $05, $00, $05
+$0024 LAM52 52:   	~Maniax_PSG1 :0 $0032
+$0024 AGM53 53:   	:?4 $05 $0024
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 166:   	v05 $05
+$0024 MAC51 51:   	! > sHeaderPSG: $AE, $DC, $07, $00, $05
+$002A LAM52 52:   	~Maniax_PSG2 :0 $00AE
+$002A AGM53 53:   	:?4 $05 $002A
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 166:   	v05 $05
+$002A MAC51 51:   	! > sHeaderPSG: $BD, $DC, $00, $00, $04
+$0030 LAM52 52:   	~Maniax_PSG3 :0 $00BD
+$0030 AGM53 53:   	:?4 $04 $0030
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 165:   	v04 $04
+$0030 EXE59 59:   	/£_FM?
+--> InitConvertVars: endian=big offset=$0000
+--: Maniax_FM1 $0030 LUT=True run=True
+$0031 MAC219 219:   	!$EF > sPatFM: $00
+$0032 False 6:   	nRst $80
+$0034 False 62:   	nG4 $B8
+$0035 False 64:   	nA4 $BA
+$0036 False 66:   	nB4 $BC
+$0037 False 67:   	nC5 $BD
+$0038 False 69:   	nD5 $BF
+$0039 False 71:   	nE5 $C1
+$003A False 72:   	nF5 $C2
+$003B False 74:   	nG5 $C4
+$003D False 90:   	nB6 $D4
+$003F False 209:   	sHold $E7
+$0040 False 91:   	nC7 $D5
+$0042 False 90:   	nB6 $D4
+$0044 False 86:   	nG6 $D0
+$0046 MAC220 220:   	!$F0 > ssMod68k: $0C, $01, $08, $04
+$004A False 88:   	nA6 $D2
+$004D MAC222 222:   	!$F2 > sStop
+$004D STP223 223:   	;
+--: Maniax_FM2 $004D LUT=True run=True
+$004E MAC219 219:   	!$EF > sPatFM: $01
+$0050 MAC210 210:   	!$E8 > sNoteTimeOut: $0B
+$0052 MAC200 200:   	!$E2 > sComm: $01
+$0053 False 74:   	nG5 $C4
+$0055 False 74:   	nG5 $C4
+$0056 False 62:   	nG4 $B8
+$0058 False 62:   	nG4 $B8
+$0059 False 74:   	nG5 $C4
+$005B False 74:   	nG5 $C4
+$005C False 62:   	nG4 $B8
+$005E False 62:   	nG4 $B8
+$005F False 74:   	nG5 $C4
+$0061 False 74:   	nG5 $C4
+$0062 False 6:   	nRst $80
+$0064 False 6:   	nRst $80
+$0066 False 62:   	nG4 $B8
+$0069 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$006A False 64:   	nA4 $BA
+$006D MAC200 200:   	!$E2 > sComm: $01
+$006F MAC222 222:   	!$F2 > sStop
+$006F STP223 223:   	;
+--: Maniax_FM3 $006F LUT=True run=True
+$0070 MAC187 187:   	!$E0 > sPan: $80, $00
+$0070 AGM188 188:   	:?0 $80 $0070
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 191:   	spLeft $80
+$0071 CON195 195:   	c .n1 == 0 (true)
+$0071 AGR196 196:   	:-1 $00
+$0072 MAC219 219:   	!$EF > sPatFM: $02
+$0074 MAC210 210:   	!$E8 > sNoteTimeOut: $06
+$0075 False 79:   	nC6 $C9
+$0077 False 79:   	nC6 $C9
+$0078 False 6:   	nRst $80
+$007A False 79:   	nC6 $C9
+$007C False 79:   	nC6 $C9
+$007D False 6:   	nRst $80
+$007F False 79:   	nC6 $C9
+$0081 False 79:   	nC6 $C9
+$0082 False 6:   	nRst $80
+$0085 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$0086 False 79:   	nC6 $C9
+$0088 False 81:   	nD6 $CB
+$008B MAC222 222:   	!$F2 > sStop
+$008B STP223 223:   	;
+--: Maniax_FM4 $008B LUT=True run=True
+$008C MAC187 187:   	!$E0 > sPan: $40, $00
+$008C AGM188 188:   	:?0 $40 $008C
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 190:   	spRight $40
+$008D CON195 195:   	c .n1 == 0 (true)
+$008D AGR196 196:   	:-1 $00
+$008E MAC219 219:   	!$EF > sPatFM: $02
+$0090 MAC210 210:   	!$E8 > sNoteTimeOut: $06
+$0091 False 76:   	nA5 $C6
+$0093 False 76:   	nA5 $C6
+$0094 False 6:   	nRst $80
+$0096 False 76:   	nA5 $C6
+$0098 False 76:   	nA5 $C6
+$0099 False 6:   	nRst $80
+$009B False 76:   	nA5 $C6
+$009D False 76:   	nA5 $C6
+$009E False 6:   	nRst $80
+$00A1 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$00A2 False 76:   	nA5 $C6
+$00A4 False 78:   	nB5 $C8
+$00A7 MAC222 222:   	!$F2 > sStop
+$00A7 STP223 223:   	;
+--: Maniax_FM5 $00A7 LUT=True run=True
+$00A8 MAC219 219:   	!$EF > sPatFM: $03
+$00AA MAC220 220:   	!$F0 > ssMod68k: $0D, $01, $02, $05
+$00AE False 74:   	nG5 $C4
+$00B0 False 79:   	nC6 $C9
+$00B1 False 78:   	nB5 $C8
+$00B2 False 74:   	nG5 $C4
+$00B3 False 79:   	nC6 $C9
+$00B4 False 78:   	nB5 $C8
+$00B5 False 74:   	nG5 $C4
+$00B6 False 79:   	nC6 $C9
+$00B7 False 78:   	nB5 $C8
+$00B9 False 79:   	nC6 $C9
+$00BB False 78:   	nB5 $C8
+$00BE MAC222 222:   	!$F2 > sStop
+$00BE STP223 223:   	;
+$00BE EXE60 60:   	/£_PSG?
+--> InitConvertVars: endian=big offset=$0000
+--: Maniax_PSG1 $0032 LUT=True run=True
+$0032 False 6:   	nRst $80
+$0034 False 62:   	nG4 $B8
+$0035 False 64:   	nA4 $BA
+$0036 False 66:   	nB4 $BC
+$0037 False 67:   	nC5 $BD
+$0038 False 69:   	nD5 $BF
+$0039 False 71:   	nE5 $C1
+$003A False 72:   	nF5 $C2
+$003B False 74:   	nG5 $C4
+$003D False 90:   	nB6 $D4
+$003F False 209:   	sHold $E7
+$0040 False 91:   	nC7 $D5
+$0042 False 90:   	nB6 $D4
+$0044 False 86:   	nG6 $D0
+$0046 MAC220 220:   	!$F0 > ssMod68k: $0C, $01, $08, $04
+$004A False 88:   	nA6 $D2
+$004D MAC222 222:   	!$F2 > sStop
+$004D STP223 223:   	;
+--: Maniax_PSG2 $00AE LUT=True run=True
+$00AE False 74:   	nG5 $C4
+$00B0 False 79:   	nC6 $C9
+$00B1 False 78:   	nB5 $C8
+$00B2 False 74:   	nG5 $C4
+$00B3 False 79:   	nC6 $C9
+$00B4 False 78:   	nB5 $C8
+$00B5 False 74:   	nG5 $C4
+$00B6 False 79:   	nC6 $C9
+$00B7 False 78:   	nB5 $C8
+$00B9 False 79:   	nC6 $C9
+$00BB False 78:   	nB5 $C8
+$00BE MAC222 222:   	!$F2 > sStop
+$00BE STP223 223:   	;
+--: Maniax_PSG3 $00BD LUT=True run=True
+$00BE MAC222 222:   	!$F2 > sStop
+$00BE STP223 223:   	;
+$00BE EXE61 61:   	/£_DAC
+--> InitConvertVars: endian=big offset=$0000
+--: Maniax_DAC $00BE LUT=True run=True
+$00BE False 176:   	dSnare $82
+$00C0 False 176:   	dSnare $82
+$00C1 False 175:   	dKick $81
+$00C3 False 175:   	dKick $81
+$00C4 False 176:   	dSnare $82
+$00C6 False 176:   	dSnare $82
+$00C7 False 175:   	dKick $81
+$00C9 False 175:   	dKick $81
+$00CA False 176:   	dSnare $82
+$00CC False 176:   	dSnare $82
+$00CD False 178:   	dHiTimpani $88
+$00CE False 178:   	dHiTimpani $88
+$00CF False 181:   	dFloorTimpani $8B
+$00D0 False 181:   	dFloorTimpani $8B
+$00D2 False 181:   	dFloorTimpani $8B
+$00D3 False 181:   	dFloorTimpani $8B
+$00D4 False 176:   	dSnare $82
+$00D8 MAC222 222:   	!$F2 > sStop
+$00D8 STP223 223:   	;
+$00D8 EXE62 62:   	/£_Patches
+--> InitConvertVars: endian=big offset=$0000
+--: Maniax_Patches $00D8 LUT=False run=True
+$00D8 EQU109 109:   	=num 0 0
+$00D8 EQU110 110:   	=b1 0 0
+$00D8 EQU111 111:   	=b2 0 0
+$00D8 EQU112 112:   	=b3 0 0
+$00D8 EQU113 113:   	=b4 0 0
+$00D8 REP114 114:   	f 5 {
+$00F1 COM115 115:   	%\n\t; Patch $00\r\n\t; $3D\r\n\t; $01, $02, $00, $01,\t$1F, $0E, $0E, $0E\r\n\t; $07, $1F, $1F, $1F,\t$00, $00, $00, $00\r\n\t; $1F, $0F, $0F, $0F,\t$17, $8D, $8C, $8C
+$00F1 GOT116 116:   	>b 25 -> $00D8
+$00D8 MAC117 117:   	! > spAlgorithm: $05
+$00D8 MAC118 118:   	! > spFeedback: $07
+$00DA EQU119 119:   	=b1 .db 1
+$00DB EQU120 120:   	=b3 .db 2
+$00DC EQU121 121:   	=b2 .db 0
+$00DD EQU122 122:   	=b4 .db 1
+$00DD MAC123 123:   	! > spDetune: $00, $00, $00, $00
+$00DD MAC124 124:   	! > spMultiple: $01, $00, $02, $01
+$00DE EQU125 125:   	=b1 .db 31
+$00DF EQU126 126:   	=b3 .db 14
+$00E0 EQU127 127:   	=b2 .db 14
+$00E1 EQU128 128:   	=b4 .db 14
+$00E1 MAC129 129:   	! > spRateScale: $00, $00, $00, $00
+$00E1 MAC130 130:   	! > spAttackRt: $1F, $0E, $0E, $0E
+$00E2 EQU131 131:   	=b1 .db 7
+$00E3 EQU132 132:   	=b3 .db 31
+$00E4 EQU133 133:   	=b2 .db 31
+$00E5 EQU134 134:   	=b4 .db 31
+$00E5 MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$00E5 MAC136 136:   	! > spSustainRt: $07, $1F, $1F, $1F
+$00E6 EQU137 137:   	=d1 .db 0
+$00E7 EQU138 138:   	=d3 .db 0
+$00E8 EQU139 139:   	=d2 .db 0
+$00E9 EQU140 140:   	=d4 .db 0
+$00EA EQU141 141:   	=b1 .db 31
+$00EB EQU142 142:   	=b3 .db 15
+$00EC EQU143 143:   	=b2 .db 15
+$00ED EQU144 144:   	=b4 .db 15
+$00ED MAC145 145:   	! > spSustainLv: $01, $00, $00, $00
+$00ED MAC146 146:   	! > spDecayRt: $00, $00, $00, $00
+$00ED MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$00EE EQU148 148:   	=b1 .db 23
+$00EF EQU149 149:   	=b3 .db 141
+$00F0 EQU150 150:   	=b2 .db 140
+$00F0 MAC151 151:   	! > spTotalLv: $17, $0C, $0D, $0C
+$00F1 EQU152 152:   	=num \num\+1 1
+$010A COM115 115:   	%\n\t; Patch $01\r\n\t; $3A\r\n\t; $61, $3C, $14, $31,\t$9C, $DB, $9C, $DA\r\n\t; $04, $09, $04, $03,\t$03, $01, $03, $00\r\n\t; $1F, $0F, $0F, $0F,\t$21, $47, $31, $80
+$010A GOT116 116:   	>b 25 -> $00F1
+$00F1 MAC117 117:   	! > spAlgorithm: $02
+$00F1 MAC118 118:   	! > spFeedback: $07
+$00F3 EQU119 119:   	=b1 .db 97
+$00F4 EQU120 120:   	=b3 .db 60
+$00F5 EQU121 121:   	=b2 .db 20
+$00F6 EQU122 122:   	=b4 .db 49
+$00F6 MAC123 123:   	! > spDetune: $06, $01, $03, $03
+$00F6 MAC124 124:   	! > spMultiple: $01, $04, $0C, $01
+$00F7 EQU125 125:   	=b1 .db 156
+$00F8 EQU126 126:   	=b3 .db 219
+$00F9 EQU127 127:   	=b2 .db 156
+$00FA EQU128 128:   	=b4 .db 218
+$00FA MAC129 129:   	! > spRateScale: $02, $02, $03, $03
+$00FA MAC130 130:   	! > spAttackRt: $1C, $1C, $1B, $1A
+$00FB EQU131 131:   	=b1 .db 4
+$00FC EQU132 132:   	=b3 .db 9
+$00FD EQU133 133:   	=b2 .db 4
+$00FE EQU134 134:   	=b4 .db 3
+$00FE MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$00FE MAC136 136:   	! > spSustainRt: $04, $04, $09, $03
+$00FF EQU137 137:   	=d1 .db 3
+$0100 EQU138 138:   	=d3 .db 1
+$0101 EQU139 139:   	=d2 .db 3
+$0102 EQU140 140:   	=d4 .db 0
+$0103 EQU141 141:   	=b1 .db 31
+$0104 EQU142 142:   	=b3 .db 15
+$0105 EQU143 143:   	=b2 .db 15
+$0106 EQU144 144:   	=b4 .db 15
+$0106 MAC145 145:   	! > spSustainLv: $01, $00, $00, $00
+$0106 MAC146 146:   	! > spDecayRt: $03, $03, $01, $00
+$0106 MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$0107 EQU148 148:   	=b1 .db 33
+$0108 EQU149 149:   	=b3 .db 71
+$0109 EQU150 150:   	=b2 .db 49
+$0109 MAC151 151:   	! > spTotalLv: $21, $31, $47, $00
+$010A EQU152 152:   	=num \num\+1 2
+$0123 COM115 115:   	%\n\t; Patch $02\r\n\t; $3D\r\n\t; $01, $01, $01, $01,\t$8E, $52, $14, $4C\r\n\t; $08, $08, $0E, $03,\t$00, $00, $00, $00\r\n\t; $1F, $1F, $1F, $1F,\t$1B, $80, $80, $9B
+$0123 GOT116 116:   	>b 25 -> $010A
+$010A MAC117 117:   	! > spAlgorithm: $05
+$010A MAC118 118:   	! > spFeedback: $07
+$010C EQU119 119:   	=b1 .db 1
+$010D EQU120 120:   	=b3 .db 1
+$010E EQU121 121:   	=b2 .db 1
+$010F EQU122 122:   	=b4 .db 1
+$010F MAC123 123:   	! > spDetune: $00, $00, $00, $00
+$010F MAC124 124:   	! > spMultiple: $01, $01, $01, $01
+$0110 EQU125 125:   	=b1 .db 142
+$0111 EQU126 126:   	=b3 .db 82
+$0112 EQU127 127:   	=b2 .db 20
+$0113 EQU128 128:   	=b4 .db 76
+$0113 MAC129 129:   	! > spRateScale: $02, $00, $01, $01
+$0113 MAC130 130:   	! > spAttackRt: $0E, $14, $12, $0C
+$0114 EQU131 131:   	=b1 .db 8
+$0115 EQU132 132:   	=b3 .db 8
+$0116 EQU133 133:   	=b2 .db 14
+$0117 EQU134 134:   	=b4 .db 3
+$0117 MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$0117 MAC136 136:   	! > spSustainRt: $08, $0E, $08, $03
+$0118 EQU137 137:   	=d1 .db 0
+$0119 EQU138 138:   	=d3 .db 0
+$011A EQU139 139:   	=d2 .db 0
+$011B EQU140 140:   	=d4 .db 0
+$011C EQU141 141:   	=b1 .db 31
+$011D EQU142 142:   	=b3 .db 31
+$011E EQU143 143:   	=b2 .db 31
+$011F EQU144 144:   	=b4 .db 31
+$011F MAC145 145:   	! > spSustainLv: $01, $01, $01, $01
+$011F MAC146 146:   	! > spDecayRt: $00, $00, $00, $00
+$011F MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$0120 EQU148 148:   	=b1 .db 27
+$0121 EQU149 149:   	=b3 .db 128
+$0122 EQU150 150:   	=b2 .db 128
+$0122 MAC151 151:   	! > spTotalLv: $1B, $00, $00, $1B
+$0123 EQU152 152:   	=num \num\+1 3
+$013C COM115 115:   	%\n\t; Patch $03\r\n\t; $3D\r\n\t; $01, $01, $01, $01,\t$8E, $52, $14, $4C\r\n\t; $08, $08, $0E, $03,\t$00, $00, $00, $00\r\n\t; $1F, $1F, $1F, $1F,\t$1B, $80, $80, $9B
+$013C GOT116 116:   	>b 25 -> $0123
+$0123 MAC117 117:   	! > spAlgorithm: $05
+$0123 MAC118 118:   	! > spFeedback: $07
+$0125 EQU119 119:   	=b1 .db 1
+$0126 EQU120 120:   	=b3 .db 1
+$0127 EQU121 121:   	=b2 .db 1
+$0128 EQU122 122:   	=b4 .db 1
+$0128 MAC123 123:   	! > spDetune: $00, $00, $00, $00
+$0128 MAC124 124:   	! > spMultiple: $01, $01, $01, $01
+$0129 EQU125 125:   	=b1 .db 142
+$012A EQU126 126:   	=b3 .db 82
+$012B EQU127 127:   	=b2 .db 20
+$012C EQU128 128:   	=b4 .db 76
+$012C MAC129 129:   	! > spRateScale: $02, $00, $01, $01
+$012C MAC130 130:   	! > spAttackRt: $0E, $14, $12, $0C
+$012D EQU131 131:   	=b1 .db 8
+$012E EQU132 132:   	=b3 .db 8
+$012F EQU133 133:   	=b2 .db 14
+$0130 EQU134 134:   	=b4 .db 3
+$0130 MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$0130 MAC136 136:   	! > spSustainRt: $08, $0E, $08, $03
+$0131 EQU137 137:   	=d1 .db 0
+$0132 EQU138 138:   	=d3 .db 0
+$0133 EQU139 139:   	=d2 .db 0
+$0134 EQU140 140:   	=d4 .db 0
+$0135 EQU141 141:   	=b1 .db 31
+$0136 EQU142 142:   	=b3 .db 31
+$0137 EQU143 143:   	=b2 .db 31
+$0138 EQU144 144:   	=b4 .db 31
+$0138 MAC145 145:   	! > spSustainLv: $01, $01, $01, $01
+$0138 MAC146 146:   	! > spDecayRt: $00, $00, $00, $00
+$0138 MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$0139 EQU148 148:   	=b1 .db 27
+$013A EQU149 149:   	=b3 .db 128
+$013B EQU150 150:   	=b2 .db 128
+$013B MAC151 151:   	! > spTotalLv: $1B, $00, $00, $1B
+$013C EQU152 152:   	=num \num\+1 4
+$0155 COM115 115:   	%\n\t; Patch $04\r\n\t; $3D\r\n\t; $01, $02, $02, $02,\t$10, $50, $50, $50\r\n\t; $07, $08, $08, $08,\t$01, $00, $00, $00\r\n\t; $2F, $1F, $1F, $1F,\t$1C, $82, $82, $82
+$0155 GOT116 116:   	>b 25 -> $013C
+$013C MAC117 117:   	! > spAlgorithm: $05
+$013C MAC118 118:   	! > spFeedback: $07
+$013E EQU119 119:   	=b1 .db 1
+$013F EQU120 120:   	=b3 .db 2
+$0140 EQU121 121:   	=b2 .db 2
+$0141 EQU122 122:   	=b4 .db 2
+$0141 MAC123 123:   	! > spDetune: $00, $00, $00, $00
+$0141 MAC124 124:   	! > spMultiple: $01, $02, $02, $02
+$0142 EQU125 125:   	=b1 .db 16
+$0143 EQU126 126:   	=b3 .db 80
+$0144 EQU127 127:   	=b2 .db 80
+$0145 EQU128 128:   	=b4 .db 80
+$0145 MAC129 129:   	! > spRateScale: $00, $01, $01, $01
+$0145 MAC130 130:   	! > spAttackRt: $10, $10, $10, $10
+$0146 EQU131 131:   	=b1 .db 7
+$0147 EQU132 132:   	=b3 .db 8
+$0148 EQU133 133:   	=b2 .db 8
+$0149 EQU134 134:   	=b4 .db 8
+$0149 MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$0149 MAC136 136:   	! > spSustainRt: $07, $08, $08, $08
+$014A EQU137 137:   	=d1 .db 1
+$014B EQU138 138:   	=d3 .db 0
+$014C EQU139 139:   	=d2 .db 0
+$014D EQU140 140:   	=d4 .db 0
+$014E EQU141 141:   	=b1 .db 47
+$014F EQU142 142:   	=b3 .db 31
+$0150 EQU143 143:   	=b2 .db 31
+$0151 EQU144 144:   	=b4 .db 31
+$0151 MAC145 145:   	! > spSustainLv: $02, $01, $01, $01
+$0151 MAC146 146:   	! > spDecayRt: $01, $00, $00, $00
+$0151 MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$0152 EQU148 148:   	=b1 .db 28
+$0153 EQU149 149:   	=b3 .db 130
+$0154 EQU150 150:   	=b2 .db 130
+$0154 MAC151 151:   	! > spTotalLv: $1C, $02, $02, $02
+$0155 EQU152 152:   	=num \num\+1 5
+$0155 CON155 155:   	c (.an-.pc)==1 (true)
+$0156 MAC156 156:   	!$00 > even
+--------------------------------------------------------------------------------
+--; Prepare output to G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\music\LevelClear.asm
+--------------------------------------------------------------------------------
+$0000: Maniax_Header:
+$0000: 	sHeaderInit
+$0000: 	sHeaderPatch	Maniax_Patches
+$0003: 	sHeaderCh	$06, $03
+$0004: 	sHeaderTempo	$02, $03
+$0006: 	sHeaderDAC	Maniax_DAC
+$000A: 	sHeaderFM	Maniax_FM1, $F4, $0A
+$000E: 	sHeaderFM	Maniax_FM2, $DC, $0A
+$0012: 	sHeaderFM	Maniax_FM3, $F4, $15
+$0016: 	sHeaderFM	Maniax_FM4, $F4, $15
+$001A: 	sHeaderFM	Maniax_FM5, $F4, $14
+$001E: 	sHeaderPSG	Maniax_PSG1, $D0, $05, $00, v05
+$0024: 	sHeaderPSG	Maniax_PSG2, $DC, $07, $00, v05
+$002A: 	sHeaderPSG	Maniax_PSG3, $DC, $00, $00, v04
+$0030: Maniax_FM1:
+$0030: 	sPatFM		$00
+$0032: Maniax_PSG1:
+--& nRst
+--& $06
+--& nG4
+--& nA4
+--& nB4
+--& nC5
+--& nD5
+--& nE5
+$0039: 	dc.b nRst, $06, nG4, nA4, nB4, nC5, nD5, nE5
+--& nF5
+--& nG5
+--& $0C
+--& nB6
+--& $02
+--& sHold
+--& nC7
+--& $01
+$0041: 	dc.b nF5, nG5, $0C, nB6, $02, sHold, nC7, $01
+--& nB6
+--& $03
+--& nG6
+$0045: 	dc.b nB6, $03, nG6
+$0045: 	ssMod68k	$0C, $01, $08, $04
+--& nA6
+--& $33
+$004C: 	dc.b nA6, $33
+$004C: 	sStop
+$004D: Maniax_FM2:
+$004D: 	sPatFM		$01
+$004F: 	sNoteTimeOut	$0B
+$0051: 	sComm		$01
+--& nG5
+--& $03
+--& nG5
+--& nG4
+--& $06
+--& nG4
+--& nG5
+--& $03
+$005A: 	dc.b nG5, $03, nG5, nG4, $06, nG4, nG5, $03
+--& nG5
+--& nG4
+--& $06
+--& nG4
+--& nG5
+--& $03
+--& nG5
+--& nRst
+$0062: 	dc.b nG5, nG4, $06, nG4, nG5, $03, nG5, nRst
+--& $06
+--& nRst
+--& $0C
+--& nG4
+--& $09
+$0068: 	dc.b $06, nRst, $0C, nG4, $09
+$0068: 	sNoteTimeOut	$00
+--& nA4
+--& $33
+$006C: 	dc.b nA4, $33
+$006C: 	sComm		$01
+$006E: 	sStop
+$006F: Maniax_FM3:
+$006F: 	sPan		spLeft
+$0071: 	sPatFM		$02
+$0073: 	sNoteTimeOut	$06
+--& nC6
+--& $03
+--& nC6
+--& nRst
+--& $0C
+--& nC6
+--& $03
+--& nC6
+$007C: 	dc.b nC6, $03, nC6, nRst, $0C, nC6, $03, nC6
+--& nRst
+--& $0C
+--& nC6
+--& $03
+--& nC6
+--& nRst
+--& $12
+$0084: 	dc.b nRst, $0C, nC6, $03, nC6, nRst, $12
+$0084: 	sNoteTimeOut	$00
+--& nC6
+--& $09
+--& nD6
+--& $33
+$008A: 	dc.b nC6, $09, nD6, $33
+$008A: 	sStop
+$008B: Maniax_FM4:
+$008B: 	sPan		spRight
+$008D: 	sPatFM		$02
+$008F: 	sNoteTimeOut	$06
+--& nA5
+--& $03
+--& nA5
+--& nRst
+--& $0C
+--& nA5
+--& $03
+--& nA5
+$0098: 	dc.b nA5, $03, nA5, nRst, $0C, nA5, $03, nA5
+--& nRst
+--& $0C
+--& nA5
+--& $03
+--& nA5
+--& nRst
+--& $12
+$00A0: 	dc.b nRst, $0C, nA5, $03, nA5, nRst, $12
+$00A0: 	sNoteTimeOut	$00
+--& nA5
+--& $09
+--& nB5
+--& $33
+$00A6: 	dc.b nA5, $09, nB5, $33
+$00A6: 	sStop
+$00A7: Maniax_FM5:
+$00A7: 	sPatFM		$03
+$00A9: 	ssMod68k	$0D, $01, $02, $05
+$00AE: Maniax_PSG2:
+--& nG5
+--& $06
+--& nC6
+--& nB5
+--& nG5
+--& nC6
+--& nB5
+--& nG5
+$00B5: 	dc.b nG5, $06, nC6, nB5, nG5, nC6, nB5, nG5
+--& nC6
+--& nB5
+--& $0C
+--& nC6
+--& $09
+--& nB5
+--& $33
+$00BD: 	dc.b nC6, nB5, $0C, nC6, $09, nB5, $33
+$00BD: Maniax_PSG3:
+$00BD: 	sStop
+$00BE: Maniax_DAC:
+--& dSnare
+--& $03
+--& dSnare
+--& dKick
+--& $06
+--& dKick
+--& dSnare
+--& $03
+$00C5: 	dc.b dSnare, $03, dSnare, dKick, $06, dKick, dSnare, $03
+--& dSnare
+--& dKick
+--& $06
+--& dKick
+--& dSnare
+--& $03
+--& dSnare
+--& dHiTimpani
+$00CD: 	dc.b dSnare, dKick, $06, dKick, dSnare, $03, dSnare, dHiTimpani
+--& dHiTimpani
+--& dFloorTimpani
+--& dFloorTimpani
+--& $03
+--& dFloorTimpani
+--& dFloorTimpani
+--& dSnare
+--& $09
+$00D5: 	dc.b dHiTimpani, dFloorTimpani, dFloorTimpani, $03, dFloorTimpani, dFloorTimpani, dSnare, $09
+--& $33
+$00D7: 	dc.b $33
+$00D7: 	sStop
+$00D8: Maniax_Patches:
+$00D8: 
+	; Patch $00
+	; $3D
+	; $01, $02, $00, $01,	$1F, $0E, $0E, $0E
+	; $07, $1F, $1F, $1F,	$00, $00, $00, $00
+	; $1F, $0F, $0F, $0F,	$17, $8D, $8C, $8C
+$00D8: 	spAlgorithm	$05
+$00D8: 	spFeedback	$07
+$00DD: 	spDetune	$00, $00, $00, $00
+$00DD: 	spMultiple	$01, $00, $02, $01
+$00E1: 	spRateScale	$00, $00, $00, $00
+$00E1: 	spAttackRt	$1F, $0E, $0E, $0E
+$00E5: 	spAmpMod	$00, $00, $00, $00
+$00E5: 	spSustainRt	$07, $1F, $1F, $1F
+$00ED: 	spSustainLv	$01, $00, $00, $00
+$00ED: 	spDecayRt	$00, $00, $00, $00
+$00ED: 	spReleaseRt	$0F, $0F, $0F, $0F
+$00F0: 	spTotalLv	$17, $0C, $0D, $0C
+$00F1: 
+	; Patch $01
+	; $3A
+	; $61, $3C, $14, $31,	$9C, $DB, $9C, $DA
+	; $04, $09, $04, $03,	$03, $01, $03, $00
+	; $1F, $0F, $0F, $0F,	$21, $47, $31, $80
+$00F1: 	spAlgorithm	$02
+$00F1: 	spFeedback	$07
+$00F6: 	spDetune	$06, $01, $03, $03
+$00F6: 	spMultiple	$01, $04, $0C, $01
+$00FA: 	spRateScale	$02, $02, $03, $03
+$00FA: 	spAttackRt	$1C, $1C, $1B, $1A
+$00FE: 	spAmpMod	$00, $00, $00, $00
+$00FE: 	spSustainRt	$04, $04, $09, $03
+$0106: 	spSustainLv	$01, $00, $00, $00
+$0106: 	spDecayRt	$03, $03, $01, $00
+$0106: 	spReleaseRt	$0F, $0F, $0F, $0F
+$0109: 	spTotalLv	$21, $31, $47, $00
+$010A: 
+	; Patch $02
+	; $3D
+	; $01, $01, $01, $01,	$8E, $52, $14, $4C
+	; $08, $08, $0E, $03,	$00, $00, $00, $00
+	; $1F, $1F, $1F, $1F,	$1B, $80, $80, $9B
+$010A: 	spAlgorithm	$05
+$010A: 	spFeedback	$07
+$010F: 	spDetune	$00, $00, $00, $00
+$010F: 	spMultiple	$01, $01, $01, $01
+$0113: 	spRateScale	$02, $00, $01, $01
+$0113: 	spAttackRt	$0E, $14, $12, $0C
+$0117: 	spAmpMod	$00, $00, $00, $00
+$0117: 	spSustainRt	$08, $0E, $08, $03
+$011F: 	spSustainLv	$01, $01, $01, $01
+$011F: 	spDecayRt	$00, $00, $00, $00
+$011F: 	spReleaseRt	$0F, $0F, $0F, $0F
+$0122: 	spTotalLv	$1B, $00, $00, $1B
+$0123: 
+	; Patch $03
+	; $3D
+	; $01, $01, $01, $01,	$8E, $52, $14, $4C
+	; $08, $08, $0E, $03,	$00, $00, $00, $00
+	; $1F, $1F, $1F, $1F,	$1B, $80, $80, $9B
+$0123: 	spAlgorithm	$05
+$0123: 	spFeedback	$07
+$0128: 	spDetune	$00, $00, $00, $00
+$0128: 	spMultiple	$01, $01, $01, $01
+$012C: 	spRateScale	$02, $00, $01, $01
+$012C: 	spAttackRt	$0E, $14, $12, $0C
+$0130: 	spAmpMod	$00, $00, $00, $00
+$0130: 	spSustainRt	$08, $0E, $08, $03
+$0138: 	spSustainLv	$01, $01, $01, $01
+$0138: 	spDecayRt	$00, $00, $00, $00
+$0138: 	spReleaseRt	$0F, $0F, $0F, $0F
+$013B: 	spTotalLv	$1B, $00, $00, $1B
+$013C: 
+	; Patch $04
+	; $3D
+	; $01, $02, $02, $02,	$10, $50, $50, $50
+	; $07, $08, $08, $08,	$01, $00, $00, $00
+	; $2F, $1F, $1F, $1F,	$1C, $82, $82, $82
+$013C: 	spAlgorithm	$05
+$013C: 	spFeedback	$07
+$0141: 	spDetune	$00, $00, $00, $00
+$0141: 	spMultiple	$01, $02, $02, $02
+$0145: 	spRateScale	$00, $01, $01, $01
+$0145: 	spAttackRt	$10, $10, $10, $10
+$0149: 	spAmpMod	$00, $00, $00, $00
+$0149: 	spSustainRt	$07, $08, $08, $08
+$0151: 	spSustainLv	$02, $01, $01, $01
+$0151: 	spDecayRt	$01, $00, $00, $00
+$0151: 	spReleaseRt	$0F, $0F, $0F, $0F
+$0154: 	spTotalLv	$1C, $02, $02, $02
+$0155: 	even
+--------------------------------------------------------------------------------
+--; Time for Script 77 ms
+--; Time for Convert 392 ms
+--; Time for Save 42 ms
+--; Time for Total 511 ms

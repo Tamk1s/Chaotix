@@ -1,0 +1,71 @@
+ Volume in drive G is SEGA
+ Volume Serial Number is E6EA-CCA5
+
+ Directory of G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\SMPSPlay_2-11_bin\Data\Chaotix 32X
+
+12/23/18  11:51 PM    <DIR>          .
+12/23/18  11:51 PM    <DIR>          ..
+04/29/14  10:57 AM                30 PanAni.bin
+05/17/14  04:43 AM             1,024 PWMDrv.bin
+10/25/13  12:37 AM             5,060 Z80Drv.bin
+03/23/14  09:00 AM             1,174 DefCFlag.txt
+04/02/14  05:28 AM               136 DefDrum.txt
+04/05/15  02:16 AM             1,072 DefDrv.txt
+10/25/13  12:32 AM               109 PanAnim.txt
+06/12/14  12:21 PM             1,262 Pointers.txt
+11/27/14  05:16 AM               151 config.ini
+11/27/14  05:49 AM             1,661 PWM.ini
+07/03/14  01:03 AM                72 .gitignore
+03/08/14  10:51 AM               376 Modulat.lst
+10/25/13  04:47 AM               383 PSG.lst
+10/25/13  02:42 AM             3,425 01 Door Into Summer.skc
+10/25/13  02:42 AM             2,979 02 Electoria.skc
+10/25/13  02:42 AM             4,002 03 Speed Of Sound.skc
+10/25/13  02:42 AM             3,060 04 Seascape.skc
+10/25/13  02:42 AM             3,462 05 Midnight Greenhouse.skc
+10/25/13  02:42 AM             3,708 06 New Moon.skc
+10/25/13  02:42 AM               719 07 Labyrinth.skc
+10/25/13  02:42 AM             2,691 08 Trial And Error.skc
+10/25/13  02:42 AM               976 09 Walkin.skc
+10/25/13  02:42 AM             1,831 0A Hyper-Hyper.skc
+10/25/13  02:42 AM             1,795 0B Evening Star.skc
+10/25/13  02:42 AM             1,275 0C Moonrise.skc
+10/25/13  02:42 AM               781 0D Overture.skc
+10/25/13  02:42 AM             2,038 0E This Horizon.skc
+10/25/13  02:42 AM               874 0F Take Off.skc
+10/25/13  02:42 AM             1,743 10 Combination.skc
+10/25/13  02:42 AM               605 11 Take A Nap.skc
+10/25/13  02:42 AM             1,223 12 Surging Power.skc
+10/25/13  02:42 AM               960 13 Mechanical Dance.skc
+06/07/15  11:06 AM             2,707 14 Tube Panic [extra drums].skc
+10/25/13  02:42 AM             2,707 14 Tube Panic.skc
+10/25/13  02:42 AM             1,500 15 Crystal Nightmare.skc
+10/25/13  02:42 AM             1,712 16 Childs Song.skc
+10/25/13  02:42 AM             1,094 17 Soda Pop.skc
+10/25/13  02:42 AM             1,651 18 Pendulum.skc
+10/25/13  02:42 AM             1,290 19 Silver Screen.skc
+10/25/13  02:42 AM             2,127 1A Tachy Touch.skc
+10/25/13  02:42 AM             1,196 1B Chaotic World.skc
+10/25/13  02:42 AM             1,043 1C Surprise.skc
+10/25/13  02:42 AM               994 1D Nice Meeting You.skc
+10/25/13  02:42 AM               605 1E Have A Happy Day.skc
+10/25/13  02:42 AM               499 1F Reach The Goal.skc
+10/25/13  02:42 AM               315 20 High Five.skc
+10/25/13  02:42 AM               419 21 Decision.skc
+10/25/13  02:42 AM               471 22 From Party To Party.skc
+10/25/13  02:42 AM               589 23 Have Some Fun.skc
+10/25/13  02:42 AM             1,788 24 Oriental Legend.skc
+10/25/13  02:43 AM             1,215 25 Steel Heart.skc
+10/25/13  02:42 AM             2,476 26 Tribute.skc
+10/25/13  02:42 AM               702 27 Destructive Power.skc
+10/25/13  02:42 AM            13,217 28 Just Another Day.skc
+10/25/13  02:43 AM               387 29 Decision 2nd.skc
+07/06/15  07:24 AM    <DIR>          Beta_1994-12-07
+07/06/15  07:24 AM    <DIR>          PWM
+07/06/15  07:24 AM    <DIR>          SFX
+12/24/18  12:22 AM             2,476 TRI.skc
+12/24/18  12:22 AM                 0 Notes.txt
+12/24/18  01:13 AM            33,280 songs.xls
+12/24/18  01:16 AM                 0 info.txt
+              59 File(s)        127,117 bytes
+               5 Dir(s)   2,492,301,312 bytes free

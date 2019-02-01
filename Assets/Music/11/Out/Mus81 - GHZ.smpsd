@@ -1,0 +1,3644 @@
+--; args=[]
+--; filein=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\music\Mus81 - GHZ.bin
+--; fileout=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\music\Mus81 - GHZ.asm
+--; folder=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1
+--; script=G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\SMPS\MegaPCM\smps2asm.smpss
+--; lable=Maniax
+--; type=
+--; Prepare script parse
+--------------------------------------------------------------------------------
+0000: =type ''
+0005: c ('\type\' != 'voice') && ('\type\' != 'sfx') && ('\type\' != '') && ('\type\' != 'music') {
+0006: 	+Available types: Music, SFX, Voice
+0007: 	$.cc
+0008: 	;
+0009: }
+0011: =endian 'big'
+0012: =offset 0
+0014: c '\type\' == 'voice' {
+0015: 	~£_Patches .of
+0016: 	/ >patch
+0017: 	;
+0018: }
+0020: c '\type\' == 'sfx' {
+0021: 	/ >headersfx
+0022: }{
+0023: 	/ >header
+0024: }
+0026: ?header {
+0027: 	! > sHeaderInit: {
+0028: 		~£_Header .of
+0029: 	}
+0031: 	! > sHeaderPatch: .dw{
+0032: 		~£_Patches :0
+0033: 	}
+0035: 	=FMnum .db
+0036: 	=PSGnum .nb
+0037: 	! > sHeaderCh: .lb, .db;
+0038: 	! > sHeaderTempo: .db, .db;
+0039: 	! > sHeaderDAC: .dw{
+0040: 		~£_DAC :0
+0041: 	}
+0043: 	$.sw
+0044: 	f \FMnum\ - 1 {
+0045: 		! > sHeaderFM: .dw, .db, .db{
+0046: 			~£_FM? :0
+0047: 		}
+0048: 	}
+0050: 	f \PSGnum\ {
+0051: 		! > sHeaderPSG: .dw, .db, .db, .db, .db{
+0052: 			~£_PSG? :0
+0053: 			:? 4 {
+0054: 				?volenv;
+0055: 			}
+0056: 		}
+0057: 	}
+0059: 	/£_FM? ?note ?comm
+0060: 	/£_PSG? ?note ?comm
+0061: 	/£_DAC ?DAC ?comm
+0062: 	/£_Patches >patch
+0063: }
+0065: ?headersfx {
+0066: 	! > sHeaderInit: {
+0067: 		~£_Header .of
+0068: 	}
+0069: 	! > sHeaderPatch: .dw{
+0070: 		~£_Patches :0
+0071: 	}
+0073: 	! > sHeaderTick: .db;
+0074: 	=CHnum .db
+0075: 	! > sHeaderCh: \CHnum\;
+0076: 	=trpd 0
+0077: 	=trpn 0
+0079: 	f \CHnum\ {
+0080: 		>f 1
+0081: 		=trpd .nb
+0082: 		>b 1
+0083: 		c (\trpd\ & 0x80) == 0 {
+0084: 			=trpn (\trpd\&3)+1
+0086: 			c (\trpd\ & 4) != 0 {
+0087: 				=trpn \trpn\+3
+0088: 			}
+0090: 			! > sHeaderSFX: .db, .db, .dw, .db, .db{
+0091: 				~£_FM\trpn\ :2
+0092: 			}
+0094: 		}{
+0095: 			=trpn ((\trpd\&0x60)>>5)+1
+0096: 			! > sHeaderSFX: .db, .db, .dw, .db, .db{
+0097: 				~£_PSG\trpn\ :2
+0098: 			}
+0099: 		}
+0101: 	}
+0103: 	/£_FM? ?note ?comm
+0104: 	/£_PSG? ?note ?comm
+0105: 	/£_Patches >patch
+0106: }
+0108: ?patch {
+0109: 	=num 0
+0110: 	=b1 0
+0111: 	=b2 0
+0112: 	=b3 0
+0113: 	=b4 0
+0114: 	f (.an-.pc)/25 {
+0115: 		%\n\t; Patch {$2!\num\}\r\n\t; {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}
+0116: 		>b 25
+0117: 		! > spAlgorithm: .nb&0x7;
+0118: 		! > spFeedback: (.db&0x38)>>3;
+0119: 		=b1 .db
+0120: 		=b3 .db
+0121: 		=b2 .db
+0122: 		=b4 .db
+0123: 		! > spDetune: (\b1\&0xF0)>>4, (\b2\&0xF0)>>4, (\b3\&0xF0)>>4, (\b4\&0xF0)>>4;
+0124: 		! > spMultiple: \b1\&0xF, \b2\&0xF, \b3\&0xF, \b4\&0xF;
+0125: 		=b1 .db
+0126: 		=b3 .db
+0127: 		=b2 .db
+0128: 		=b4 .db
+0129: 		! > spRateScale: (\b1\&0xC0)>>6, (\b2\&0xC0)>>6, (\b3\&0xC0)>>6, (\b4\&0xC0)>>6;
+0130: 		! > spAttackRt: \b1\&0x1F, \b2\&0x1F, \b3\&0x1F, \b4\&0x1F;
+0131: 		=b1 .db
+0132: 		=b3 .db
+0133: 		=b2 .db
+0134: 		=b4 .db
+0135: 		! > spAmpMod: (\b1\&0x80)>>7, (\b2\&0x80)>>7, (\b3\&0x80)>>7, (\b4\&0x80)>>7;
+0136: 		! > spSustainRt: \b1\&0x1F, \b2\&0x1F, \b3\&0x1F, \b4\&0x1F;
+0137: 		=d1 .db
+0138: 		=d3 .db
+0139: 		=d2 .db
+0140: 		=d4 .db
+0141: 		=b1 .db
+0142: 		=b3 .db
+0143: 		=b2 .db
+0144: 		=b4 .db
+0145: 		! > spSustainLv: (\b1\&0xF0)>>4, (\b2\&0xF0)>>4, (\b3\&0xF0)>>4, (\b4\&0xF0)>>4;
+0146: 		! > spDecayRt: \d1\, \d2\, \d3\, \d4\;
+0147: 		! > spReleaseRt: \b1\&0xF, \b2\&0xF, \b3\&0xF, \b4\&0xF;
+0148: 		=b1 .db
+0149: 		=b3 .db
+0150: 		=b2 .db
+0151: 		! > spTotalLv: \b1\&0x7F, \b2\&0x7F, \b3\&0x7F, .db&0x7F;
+0152: 		=num \num\+1
+0153: 	}
+0155: 	c (.an-.pc)==1 {
+0156: 		!0 > even: ;
+0157: 	}
+0158: }
+0160: ?volenv {
+0161: 	=v00 0
+0162: 	=v01 1
+0163: 	=v02 2
+0164: 	=v03 3
+0165: 	=v04 4
+0166: 	=v05 5
+0167: 	=v06 6
+0168: 	=v07 7
+0169: 	=v08 8
+0170: 	=v09 9
+0171: }
+0173: ?DAC {
+0174: 	=nRst 0x80
+0175: 	=dKick 0x81
+0176: 	=dSnare 0x82
+0177: 	=dTimpani 0x83
+0178: 	=dHiTimpani 0x88
+0179: 	=dMidTimpani 0x89
+0180: 	=dLowTimpani 0x8A
+0181: 	=dFloorTimpani 0x8B
+0182: }
+0184: --; macro: parse another file '..\SMPS\SMPS default notes.smpss' (102 lines)
+--------------------------------------------------------------------------------
+0005: ?note {
+0006: 	=nRst 0x80
+0007: 	=nC0 0x81
+0008: 	=nCs0 0x82
+0009: 	=nD0 0x83
+0010: 	=nEb0 0x84
+0011: 	=nE0 0x85
+0012: 	=nF0 0x86
+0013: 	=nFs0 0x87
+0014: 	=nG0 0x88
+0015: 	=nAb0 0x89
+0016: 	=nA0 0x8A
+0017: 	=nBb0 0x8B
+0018: 	=nB0 0x8C
+0019: 	=nC1 0x8D
+0020: 	=nCs1 0x8E
+0021: 	=nD1 0x8F
+0022: 	=nEb1 0x90
+0023: 	=nE1 0x91
+0024: 	=nF1 0x92
+0025: 	=nFs1 0x93
+0026: 	=nG1 0x94
+0027: 	=nAb1 0x95
+0028: 	=nA1 0x96
+0029: 	=nBb1 0x97
+0030: 	=nB1 0x98
+0031: 	=nC2 0x99
+0032: 	=nCs2 0x9A
+0033: 	=nD2 0x9B
+0034: 	=nEb2 0x9C
+0035: 	=nE2 0x9D
+0036: 	=nF2 0x9E
+0037: 	=nFs2 0x9F
+0038: 	=nG2 0xA0
+0039: 	=nAb2 0xA1
+0040: 	=nA2 0xA2
+0041: 	=nBb2 0xA3
+0042: 	=nB2 0xA4
+0043: 	=nC3 0xA5
+0044: 	=nCs3 0xA6
+0045: 	=nD3 0xA7
+0046: 	=nEb3 0xA8
+0047: 	=nE3 0xA9
+0048: 	=nF3 0xAA
+0049: 	=nFs3 0xAB
+0050: 	=nG3 0xAC
+0051: 	=nAb3 0xAD
+0052: 	=nA3 0xAE
+0053: 	=nBb3 0xAF
+0054: 	=nB3 0xB0
+0055: 	=nC4 0xB1
+0056: 	=nCs4 0xB2
+0057: 	=nD4 0xB3
+0058: 	=nEb4 0xB4
+0059: 	=nE4 0xB5
+0060: 	=nF4 0xB6
+0061: 	=nFs4 0xB7
+0062: 	=nG4 0xB8
+0063: 	=nAb4 0xB9
+0064: 	=nA4 0xBA
+0065: 	=nBb4 0xBB
+0066: 	=nB4 0xBC
+0067: 	=nC5 0xBD
+0068: 	=nCs5 0xBE
+0069: 	=nD5 0xBF
+0070: 	=nEb5 0xC0
+0071: 	=nE5 0xC1
+0072: 	=nF5 0xC2
+0073: 	=nFs5 0xC3
+0074: 	=nG5 0xC4
+0075: 	=nAb5 0xC5
+0076: 	=nA5 0xC6
+0077: 	=nBb5 0xC7
+0078: 	=nB5 0xC8
+0079: 	=nC6 0xC9
+0080: 	=nCs6 0xCA
+0081: 	=nD6 0xCB
+0082: 	=nEb6 0xCC
+0083: 	=nE6 0xCD
+0084: 	=nF6 0xCE
+0085: 	=nFs6 0xCF
+0086: 	=nG6 0xD0
+0087: 	=nAb6 0xD1
+0088: 	=nA6 0xD2
+0089: 	=nBb6 0xD3
+0090: 	=nB6 0xD4
+0091: 	=nC7 0xD5
+0092: 	=nCs7 0xD6
+0093: 	=nD7 0xD7
+0094: 	=nEb7 0xD8
+0095: 	=nE7 0xD9
+0096: 	=nF7 0xDA
+0097: 	=nFs7 0xDB
+0098: 	=nG7 0xDC
+0099: 	=nAb7 0xDD
+0100: 	=nA7 0xDE
+0101: 	=nBb7 0xDF
+0102: }
+--------------------------------------------------------------------------------
+0184: --; return to previous file
+0186: ?comm {
+0187: 	!0xE0 > sPan: .db & 0xC0, .lb & 0x3F{
+0188: 		:? 0 {
+0189: 			=spNone 0x00
+0190: 			=spRight 0x40
+0191: 			=spLeft 0x80
+0192: 			=spCenter 0xC0
+0193: 		}
+0195: 		c .n1 == 0 {
+0196: 			:- 1
+0197: 			}
+0198: 		}
+0199: 		!0xE1 > ssDetune: .db;
+0200: 		!0xE2 > sComm: .db;
+0201: 		!0xE3 > sRet: {
+0202: 			;
+0203: 		}
+0204: 		!0xE4 > sFade: {
+0205: 			;
+0206: 		}
+0207: 		!0xE5 > ssTickMulCh: .db;
+0208: 		!0xE6 > saVolFM: .db;
+0209: 		=sHold 0xE7
+0210: 		!0xE8 > sNoteTimeOut: .db;
+0211: 		!0xE9 > saTranspose: .db;
+0212: 		!0xEA > ssTempo: .db;
+0213: 		!0xEB > ssTickMul: .db;
+0214: 		!0xEC > saVolPSG: .db;
+0215: 		!0xED > sClrPush: ;
+0216: 		!0xEE > sStopSpecFM4: {
+0217: 			;
+0218: 		}
+0219: 		!0xEF > sPatFM: .db;
+0220: 		!0xF0 > ssMod68k: .db, .db, .db, .db;
+0221: 		!0xF1 > sModOn: ;
+0222: 		!0xF2 > sStop: {
+0223: 			;
+0224: 		}
+0225: 		!0xF3 > sNoisePSG: .db;
+0226: 		!0xF4 > sModOff: ;
+0227: 		!0xF5 > sVolEnvPSG: .db{
+0228: 			:? 0 {
+0229: 				?volenv;
+0230: 			}
+0231: 		}
+0232: 		!0xF6 > sJump: .ow{
+0233: 			~£_Jump? :0
+0234: 			;
+0235: 		}
+0236: 		!0xF7 > sLoop: .db, .db, .ow{
+0237: 			~£_Loop? :2
+0238: 		}
+0239: 		!0xF8 > sCall: .ow{
+0240: 			~£_Call? :0
+0241: 		}
+0242: 		!0xF9 > sMuteFM1: ;
+0243: 	}
+--------------------------------------------------------------------------------
+Prepare conversion
+--------------------------------------------------------------------------------
+--> Start conversion with subscript ''
+$0000 EQU0 0:   	=type '' 
+$0000 CON5 5:   	c ('\type\' != 'voice') && ('\type\' != 'sfx') && ('\type\' != '') && ('\type\' != 'music') (false)
+$0000 EQU11 11:   	=endian 'big' big
+$0000 EQU12 12:   	=offset 0 0
+$0000 CON14 14:   	c '\type\' == 'voice' (false)
+$0000 CON20 20:   	c '\type\' == 'sfx' (false)
+$0000 EXE23 23:   	/
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=False run=True
+$0000 MAC27 27:   	! > sHeaderInit
+$0000 LAC28 28:   	~Maniax_Header .of $0000
+$0000 MAC31 31:   	! > sHeaderPatch: $687
+$0002 LAM32 32:   	~Maniax_Patches :0 $0687
+$0003 EQU35 35:   	=FMnum .db 6
+$0003 EQU36 36:   	=PSGnum .nb 3
+$0003 MAC37 37:   	! > sHeaderCh: $06, $03
+$0004 MAC38 38:   	! > sHeaderTempo: $01, $03
+$0006 MAC39 39:   	! > sHeaderDAC: $646
+$0008 LAM40 40:   	~Maniax_DAC :0 $0646
+--! ERROR IN EXPRESSION: 
+--! INITIAL EXPRESSION: .sw
+--! System.ArgumentException: Expression can't be empty
+Parameter name: expression
+   at NCalc.Expression..ctor(String expression, EvaluateOptions options)
+   at SMPS2ASMv2.Parse.ParseNumber(String s, Nullable`1 lnun)
+$000A OPR43 43:   	$.sw 
+$000A REP44 44:   	f 5 {
+$000A MAC45 45:   	! > sHeaderFM: $30, $F4, $12
+$000E LAM46 46:   	~Maniax_FM1 :0 $0030
+$000E MAC45 45:   	! > sHeaderFM: $FC, $00, $0B
+$0012 LAM46 46:   	~Maniax_FM2 :0 $00FC
+$0012 MAC45 45:   	! > sHeaderFM: $1E1, $F4, $14
+$0016 LAM46 46:   	~Maniax_FM3 :0 $01E1
+$0016 MAC45 45:   	! > sHeaderFM: $302, $F4, $08
+$001A LAM46 46:   	~Maniax_FM4 :0 $0302
+$001A MAC45 45:   	! > sHeaderFM: $413, $F4, $20
+$001E LAM46 46:   	~Maniax_FM5 :0 $0413
+$001E REP50 50:   	f 3 {
+$001E MAC51 51:   	! > sHeaderPSG: $532, $D0, $01, $00, $03
+$0024 LAM52 52:   	~Maniax_PSG1 :0 $0532
+$0024 AGM53 53:   	:?4 $03 $0024
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 164:   	v03 $03
+$0024 MAC51 51:   	! > sHeaderPSG: $5CD, $D0, $03, $00, $06
+$002A LAM52 52:   	~Maniax_PSG2 :0 $05CD
+$002A AGM53 53:   	:?4 $06 $002A
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 167:   	v06 $06
+$002A MAC51 51:   	! > sHeaderPSG: $63A, $00, $03, $00, $04
+$0030 LAM52 52:   	~Maniax_PSG3 :0 $063A
+$0030 AGM53 53:   	:?4 $04 $0030
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 165:   	v04 $04
+$0030 EXE59 59:   	/£_FM?
+--> InitConvertVars: endian=big offset=$0000
+--: Maniax_FM1 $0030 LUT=True run=True
+$0031 MAC219 219:   	!$EF > sPatFM: $02
+$0033 MAC187 187:   	!$E0 > sPan: $40, $00
+$0033 AGM188 188:   	:?0 $40 $0033
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 190:   	spRight $40
+$0034 CON195 195:   	c .n1 == 0 (true)
+$0034 AGR196 196:   	:-1 $00
+$0035 MAC239 239:   	!$F8 > sCall: $B1
+$0037 LAM240 240:   	~Maniax_Call1 :0 $00B1
+--: Maniax_Call1 $00B1 LUT=True run=True
+$00B1 False 88:   	nA6 $D2
+$00B3 False 84:   	nF6 $CE
+$00B4 False 88:   	nA6 $D2
+$00B5 False 84:   	nF6 $CE
+$00B6 False 90:   	nB6 $D4
+$00B7 False 86:   	nG6 $D0
+$00B8 False 90:   	nB6 $D4
+$00B9 False 86:   	nG6 $D0
+$00BA False 91:   	nC7 $D5
+$00BB False 88:   	nA6 $D2
+$00BC False 91:   	nC7 $D5
+$00BD False 88:   	nA6 $D2
+$00BE False 93:   	nD7 $D7
+$00BF False 90:   	nB6 $D4
+$00C0 False 93:   	nD7 $D7
+$00C1 False 90:   	nB6 $D4
+$00C3 MAC201 201:   	!$E3 > sRet
+$00C3 STP202 202:   	;
+$0038 MAC187 187:   	!$E0 > sPan: $C0, $00
+$0038 AGM188 188:   	:?0 $C0 $0038
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 192:   	spCenter $C0
+$0039 CON195 195:   	c .n1 == 0 (true)
+$0039 AGR196 196:   	:-1 $00
+$003A MAC187 187:   	!$E0 > sPan: $80, $00
+$003A AGM188 188:   	:?0 $80 $003A
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 191:   	spLeft $80
+$003B CON195 195:   	c .n1 == 0 (true)
+$003B AGR196 196:   	:-1 $00
+$003B False 95:   	nE7 $D9
+$003E MAC187 187:   	!$E0 > sPan: $40, $00
+$003E AGM188 188:   	:?0 $40 $003E
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 190:   	spRight $40
+$003F CON195 195:   	c .n1 == 0 (true)
+$003F AGR196 196:   	:-1 $00
+$003F False 91:   	nC7 $D5
+$0041 MAC208 208:   	!$E6 > saVolFM: $01
+$0043 MAC236 236:   	!$F7 > sLoop: $00, $0D, $39
+$0047 LAM237 237:   	~Maniax_Loop1 :2 $0039
+$0047 False 95:   	nE7 $D9
+$0049 False 6:   	nRst $80
+$004C MAC208 208:   	!$E6 > saVolFM: $EB
+$004E MAC187 187:   	!$E0 > sPan: $C0, $00
+$004E AGM188 188:   	:?0 $C0 $004E
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 192:   	spCenter $C0
+$004F CON195 195:   	c .n1 == 0 (true)
+$004F AGR196 196:   	:-1 $00
+$004F False 6:   	nRst $80
+$0051 False 6:   	nRst $80
+$0052 False 6:   	nRst $80
+$0053 False 6:   	nRst $80
+$0054 False 6:   	nRst $80
+$0055 False 6:   	nRst $80
+$0057 MAC219 219:   	!$EF > sPatFM: $06
+$0059 MAC220 220:   	!$F0 > ssMod68k: $0D, $01, $07, $04
+$005E MAC211 211:   	!$E9 > saTranspose: $F4
+$005F False 6:   	nRst $80
+$0062 MAC239 239:   	!$F8 > sCall: $C3
+$0064 LAM240 240:   	~Maniax_Call2 :0 $00C3
+--: Maniax_Call2 $00C3 LUT=True run=True
+$00C3 False 91:   	nC7 $D5
+$00C5 False 88:   	nA6 $D2
+$00C7 False 91:   	nC7 $D5
+$00C9 False 90:   	nB6 $D4
+$00CB False 91:   	nC7 $D5
+$00CD False 90:   	nB6 $D4
+$00CF False 86:   	nG6 $D0
+$00D1 False 88:   	nA6 $D2
+$00D3 False 95:   	nE7 $D9
+$00D4 False 93:   	nD7 $D7
+$00D6 False 91:   	nC7 $D5
+$00D8 False 90:   	nB6 $D4
+$00DA False 91:   	nC7 $D5
+$00DC False 90:   	nB6 $D4
+$00DE False 86:   	nG6 $D0
+$00E0 False 91:   	nC7 $D5
+$00E2 False 88:   	nA6 $D2
+$00E4 False 91:   	nC7 $D5
+$00E6 False 90:   	nB6 $D4
+$00E8 False 91:   	nC7 $D5
+$00EA False 90:   	nB6 $D4
+$00EC False 86:   	nG6 $D0
+$00EE False 88:   	nA6 $D2
+$00F1 False 84:   	nF6 $CE
+$00F3 False 88:   	nA6 $D2
+$00F5 False 86:   	nG6 $D0
+$00F7 False 88:   	nA6 $D2
+$00F9 False 86:   	nG6 $D0
+$00FC MAC201 201:   	!$E3 > sRet
+$00FC STP202 202:   	;
+$0064 False 79:   	nC6 $C9
+$0067 MAC239 239:   	!$F8 > sCall: $C3
+$0069 LAM240 240:   	~Maniax_Call2 :0 NULL
+$0069 False 79:   	nC6 $C9
+$006C False 83:   	nE6 $CD
+$006E MAC211 211:   	!$E9 > saTranspose: $0C
+$0070 MAC219 219:   	!$EF > sPatFM: $06
+$0072 MAC211 211:   	!$E9 > saTranspose: $F4
+$0073 False 81:   	nD6 $CB
+$0075 False 209:   	sHold $E7
+$0077 False 79:   	nC6 $C9
+$0079 False 81:   	nD6 $CB
+$007A False 83:   	nE6 $CD
+$007C False 209:   	sHold $E7
+$007E False 79:   	nC6 $C9
+$0080 False 79:   	nC6 $C9
+$0081 False 83:   	nE6 $CD
+$0082 False 82:   	nEb6 $CC
+$0084 False 209:   	sHold $E7
+$0086 False 79:   	nC6 $C9
+$0088 False 82:   	nEb6 $CC
+$0089 False 81:   	nD6 $CB
+$008B False 209:   	sHold $E7
+$008E MAC219 219:   	!$EF > sPatFM: $05
+$0090 MAC211 211:   	!$E9 > saTranspose: $F4
+$0092 MAC208 208:   	!$E6 > saVolFM: $0A
+$0093 False 6:   	nRst $80
+$0095 False 95:   	nE7 $D9
+$0097 False 6:   	nRst $80
+$009A MAC210 210:   	!$E8 > sNoteTimeOut: $0B
+$009B False 95:   	nE7 $D9
+$009D False 96:   	nF7 $DA
+$009E False 95:   	nE7 $D9
+$009F False 98:   	nG7 $DC
+$00A1 MAC210 210:   	!$E8 > sNoteTimeOut: $14
+$00A2 False 95:   	nE7 $D9
+$00A5 MAC210 210:   	!$E8 > sNoteTimeOut: $0B
+$00A6 False 91:   	nC7 $D5
+$00A9 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$00AB MAC208 208:   	!$E6 > saVolFM: $F6
+$00AD MAC211 211:   	!$E9 > saTranspose: $18
+$00AF MAC232 232:   	!$F6 > sJump: $56
+$00B1 LAM233 233:   	~Maniax_Jump1 :0 $0056
+$00B1 STP234 234:   	;
+--: Maniax_FM2 $00FC LUT=True run=True
+$00FD MAC219 219:   	!$EF > sPatFM: $00
+$00FF MAC200 200:   	!$E2 > sComm: $01
+$0100 False 6:   	nRst $80
+$0102 False 40:   	nA2 $A2
+$0103 False 52:   	nA3 $AE
+$0104 False 40:   	nA2 $A2
+$0105 False 41:   	nBb2 $A3
+$0106 False 53:   	nBb3 $AF
+$0107 False 42:   	nB2 $A4
+$0108 False 54:   	nB3 $B0
+$010A MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$010C MAC219 219:   	!$EF > sPatFM: $01
+$010D False 43:   	nC3 $A5
+$0110 MAC236 236:   	!$F7 > sLoop: $00, $18, $10D
+$0114 LAM237 237:   	~Maniax_Loop2 :2 $010D
+$0115 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$0116 False 43:   	nC3 $A5
+$0118 False 6:   	nRst $80
+$0119 False 43:   	nC3 $A5
+$011B False 40:   	nA2 $A2
+$011D False 6:   	nRst $80
+$011E False 40:   	nA2 $A2
+$0120 False 41:   	nBb2 $A3
+$0122 False 6:   	nRst $80
+$0123 False 41:   	nBb2 $A3
+$0125 False 42:   	nB2 $A4
+$0127 False 6:   	nRst $80
+$0128 False 42:   	nB2 $A4
+$012B MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$012C False 43:   	nC3 $A5
+$012F MAC236 236:   	!$F7 > sLoop: $00, $1D, $12C
+$0133 LAM237 237:   	~Maniax_Loop3 :2 $012C
+$0134 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$0135 False 43:   	nC3 $A5
+$0136 False 45:   	nD3 $A7
+$0137 False 47:   	nE3 $A9
+$0139 MAC219 219:   	!$EF > sPatFM: $01
+$013B MAC239 239:   	!$F8 > sCall: $183
+$013D LAM240 240:   	~Maniax_Call3 :0 $0183
+--: Maniax_Call3 $0183 LUT=True run=True
+$0184 MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$0185 False 48:   	nF3 $AA
+$0187 False 48:   	nF3 $AA
+$0188 False 48:   	nF3 $AA
+$0189 False 48:   	nF3 $AA
+$018A False 48:   	nF3 $AA
+$018B False 48:   	nF3 $AA
+$018C False 48:   	nF3 $AA
+$018E MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$018F False 48:   	nF3 $AA
+$0191 MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$0192 False 47:   	nE3 $A9
+$0193 False 47:   	nE3 $A9
+$0194 False 47:   	nE3 $A9
+$0195 False 47:   	nE3 $A9
+$0196 False 47:   	nE3 $A9
+$0198 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$0199 False 43:   	nC3 $A5
+$019A False 45:   	nD3 $A7
+$019B False 47:   	nE3 $A9
+$019D MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$019E False 48:   	nF3 $AA
+$019F False 48:   	nF3 $AA
+$01A0 False 48:   	nF3 $AA
+$01A1 False 48:   	nF3 $AA
+$01A2 False 48:   	nF3 $AA
+$01A3 False 48:   	nF3 $AA
+$01A4 False 48:   	nF3 $AA
+$01A6 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$01A7 False 48:   	nF3 $AA
+$01A9 MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$01AA False 47:   	nE3 $A9
+$01AB False 47:   	nE3 $A9
+$01AC False 47:   	nE3 $A9
+$01AD False 47:   	nE3 $A9
+$01AE False 47:   	nE3 $A9
+$01B0 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$01B1 False 43:   	nC3 $A5
+$01B2 False 45:   	nD3 $A7
+$01B3 False 47:   	nE3 $A9
+$01B5 MAC201 201:   	!$E3 > sRet
+$01B5 STP202 202:   	;
+$013E MAC239 239:   	!$F8 > sCall: $1B5
+$0140 LAM240 240:   	~Maniax_Call4 :0 $01B5
+--: Maniax_Call4 $01B5 LUT=True run=True
+$01B6 MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$01B7 False 48:   	nF3 $AA
+$01B8 False 48:   	nF3 $AA
+$01B9 False 48:   	nF3 $AA
+$01BA False 48:   	nF3 $AA
+$01BB False 48:   	nF3 $AA
+$01BC False 48:   	nF3 $AA
+$01BD False 48:   	nF3 $AA
+$01BF MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$01C0 False 48:   	nF3 $AA
+$01C2 MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$01C3 False 47:   	nE3 $A9
+$01C4 False 47:   	nE3 $A9
+$01C5 False 47:   	nE3 $A9
+$01C6 False 47:   	nE3 $A9
+$01C7 False 47:   	nE3 $A9
+$01C8 False 47:   	nE3 $A9
+$01C9 False 47:   	nE3 $A9
+$01CB MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$01CC False 47:   	nE3 $A9
+$01CE MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$01CF False 45:   	nD3 $A7
+$01D0 False 45:   	nD3 $A7
+$01D1 False 45:   	nD3 $A7
+$01D2 False 45:   	nD3 $A7
+$01D3 False 45:   	nD3 $A7
+$01D4 False 45:   	nD3 $A7
+$01D5 False 45:   	nD3 $A7
+$01D7 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$01D8 False 45:   	nD3 $A7
+$01DA MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$01DB False 43:   	nC3 $A5
+$01DC False 43:   	nC3 $A5
+$01DD False 43:   	nC3 $A5
+$01DE False 43:   	nC3 $A5
+$01DF False 43:   	nC3 $A5
+$01E1 MAC201 201:   	!$E3 > sRet
+$01E1 STP202 202:   	;
+$0141 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$0142 False 43:   	nC3 $A5
+$0143 False 45:   	nD3 $A7
+$0144 False 47:   	nE3 $A9
+$0146 MAC239 239:   	!$F8 > sCall: $183
+$0148 LAM240 240:   	~Maniax_Call3 :0 NULL
+$0149 MAC239 239:   	!$F8 > sCall: $1B5
+$014B LAM240 240:   	~Maniax_Call4 :0 NULL
+$014B False 43:   	nC3 $A5
+$014C False 43:   	nC3 $A5
+$014D False 43:   	nC3 $A5
+$014F MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$0151 MAC219 219:   	!$EF > sPatFM: $00
+$0152 False 41:   	nBb2 $A3
+$0154 False 40:   	nA2 $A2
+$0155 False 38:   	nG2 $A0
+$0156 False 36:   	nF2 $9E
+$0157 False 35:   	nE2 $9D
+$0159 False 6:   	nRst $80
+$015A False 33:   	nD2 $9B
+$015B False 6:   	nRst $80
+$015C False 40:   	nA2 $A2
+$015E False 42:   	nB2 $A4
+$015F False 43:   	nC3 $A5
+$0160 False 45:   	nD3 $A7
+$0161 False 47:   	nE3 $A9
+$0163 False 6:   	nRst $80
+$0164 False 52:   	nA3 $AE
+$0165 False 6:   	nRst $80
+$0166 False 51:   	nAb3 $AD
+$0168 False 50:   	nG3 $AC
+$0169 False 48:   	nF3 $AA
+$016A False 46:   	nEb3 $A8
+$016B False 45:   	nD3 $A7
+$016D False 6:   	nRst $80
+$016E False 43:   	nC3 $A5
+$016F False 6:   	nRst $80
+$0170 False 38:   	nG2 $A0
+$0172 False 45:   	nD3 $A7
+$0173 False 38:   	nG2 $A0
+$0174 False 50:   	nG3 $AC
+$0176 False 35:   	nE2 $9D
+$0177 False 47:   	nE3 $A9
+$0178 False 36:   	nF2 $9E
+$0179 False 48:   	nF3 $AA
+$017A False 38:   	nG2 $A0
+$017B False 50:   	nG3 $AC
+$017D MAC210 210:   	!$E8 > sNoteTimeOut: $04
+$017F MAC200 200:   	!$E2 > sComm: $01
+$0181 MAC232 232:   	!$F6 > sJump: $138
+$0183 LAM233 233:   	~Maniax_Jump2 :0 $0138
+$0183 STP234 234:   	;
+--: Maniax_FM3 $01E1 LUT=True run=True
+$01E2 MAC219 219:   	!$EF > sPatFM: $02
+$01E4 MAC187 187:   	!$E0 > sPan: $80, $00
+$01E4 AGM188 188:   	:?0 $80 $01E4
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 191:   	spLeft $80
+$01E5 CON195 195:   	c .n1 == 0 (true)
+$01E5 AGR196 196:   	:-1 $00
+$01E6 MAC239 239:   	!$F8 > sCall: $B1
+$01E8 LAM240 240:   	~Maniax_Call1 :0 NULL
+$01E9 MAC219 219:   	!$EF > sPatFM: $08
+$01EB MAC187 187:   	!$E0 > sPan: $C0, $00
+$01EB AGM188 188:   	:?0 $C0 $01EB
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 192:   	spCenter $C0
+$01EC CON195 195:   	c .n1 == 0 (true)
+$01EC AGR196 196:   	:-1 $00
+$01ED MAC211 211:   	!$E9 > saTranspose: $E8
+$01EF MAC208 208:   	!$E6 > saVolFM: $FE
+$01F0 False 6:   	nRst $80
+$01F2 False 79:   	nC6 $C9
+$01F4 False 209:   	sHold $E7
+$01F5 False 78:   	nB5 $C8
+$01F7 False 6:   	nRst $80
+$01F9 False 77:   	nBb5 $C7
+$01FB False 209:   	sHold $E7
+$01FC False 76:   	nA5 $C6
+$01FE False 6:   	nRst $80
+$0201 MAC236 236:   	!$F7 > sLoop: $00, $02, $1F2
+$0205 LAM237 237:   	~Maniax_Loop4 :2 $01F2
+$0205 False 79:   	nC6 $C9
+$0207 False 209:   	sHold $E7
+$0208 False 78:   	nB5 $C8
+$020A False 6:   	nRst $80
+$020C False 77:   	nBb5 $C7
+$020E False 209:   	sHold $E7
+$020F False 76:   	nA5 $C6
+$0211 False 6:   	nRst $80
+$0213 False 80:   	nCs6 $CA
+$0215 False 209:   	sHold $E7
+$0216 False 79:   	nC6 $C9
+$0218 False 6:   	nRst $80
+$021A False 79:   	nC6 $C9
+$021C False 209:   	sHold $E7
+$021D False 78:   	nB5 $C8
+$021F False 6:   	nRst $80
+$0221 False 77:   	nBb5 $C7
+$0223 False 209:   	sHold $E7
+$0224 False 76:   	nA5 $C6
+$0226 False 209:   	sHold $E7
+$0228 False 6:   	nRst $80
+$022A False 77:   	nBb5 $C7
+$022C False 209:   	sHold $E7
+$022D False 76:   	nA5 $C6
+$022F False 6:   	nRst $80
+$0231 False 79:   	nC6 $C9
+$0233 False 209:   	sHold $E7
+$0234 False 78:   	nB5 $C8
+$0236 False 6:   	nRst $80
+$0238 False 80:   	nCs6 $CA
+$023A False 209:   	sHold $E7
+$023B False 79:   	nC6 $C9
+$023D False 6:   	nRst $80
+$0240 MAC236 236:   	!$F7 > sLoop: $00, $02, $22A
+$0244 LAM237 237:   	~Maniax_Loop5 :2 $022A
+$0244 False 80:   	nCs6 $CA
+$0246 False 209:   	sHold $E7
+$0247 False 79:   	nC6 $C9
+$0249 False 6:   	nRst $80
+$024B False 79:   	nC6 $C9
+$024D False 209:   	sHold $E7
+$024E False 78:   	nB5 $C8
+$0250 False 209:   	sHold $E7
+$0253 MAC208 208:   	!$E6 > saVolFM: $02
+$0255 MAC211 211:   	!$E9 > saTranspose: $18
+$0257 MAC219 219:   	!$EF > sPatFM: $05
+$0259 MAC211 211:   	!$E9 > saTranspose: $E8
+$025B MAC239 239:   	!$F8 > sCall: $2E1
+$025D LAM240 240:   	~Maniax_Call5 :0 $02E1
+--: Maniax_Call5 $02E1 LUT=True run=True
+$02E1 False 6:   	nRst $80
+$02E3 False 6:   	nRst $80
+$02E4 False 86:   	nG6 $D0
+$02E6 False 88:   	nA6 $D2
+$02E7 False 91:   	nC7 $D5
+$02EA MAC201 201:   	!$E3 > sRet
+$02EA STP202 202:   	;
+$025D False 88:   	nA6 $D2
+$025F MAC239 239:   	!$F8 > sCall: $2E1
+$0261 LAM240 240:   	~Maniax_Call5 :0 NULL
+$0261 False 95:   	nE7 $D9
+$0263 MAC239 239:   	!$F8 > sCall: $2E1
+$0265 LAM240 240:   	~Maniax_Call5 :0 NULL
+$0265 False 88:   	nA6 $D2
+$0266 False 6:   	nRst $80
+$0268 False 6:   	nRst $80
+$0269 False 91:   	nC7 $D5
+$026B False 6:   	nRst $80
+$026D False 88:   	nA6 $D2
+$026F False 86:   	nG6 $D0
+$0271 False 6:   	nRst $80
+$0272 False 88:   	nA6 $D2
+$0273 False 6:   	nRst $80
+$0274 False 91:   	nC7 $D5
+$0275 False 6:   	nRst $80
+$0277 MAC226 226:   	!$F4 > sModOff
+$0278 MAC219 219:   	!$EF > sPatFM: $05
+$027A MAC239 239:   	!$F8 > sCall: $2EA
+$027C LAM240 240:   	~Maniax_Call6 :0 $02EA
+--: Maniax_Call6 $02EA LUT=True run=True
+$02EB MAC208 208:   	!$E6 > saVolFM: $06
+$02EC False 71:   	nE5 $C1
+$02EE False 67:   	nC5 $BD
+$02F0 False 6:   	nRst $80
+$02F2 False 6:   	nRst $80
+$02F3 False 71:   	nE5 $C1
+$02F5 False 67:   	nC5 $BD
+$02F7 False 6:   	nRst $80
+$02F8 False 69:   	nD5 $BF
+$02FA False 66:   	nB4 $BC
+$02FC False 6:   	nRst $80
+$02FE False 6:   	nRst $80
+$0300 MAC208 208:   	!$E6 > saVolFM: $FA
+$0302 MAC201 201:   	!$E3 > sRet
+$0302 STP202 202:   	;
+$027C False 86:   	nG6 $D0
+$027E False 88:   	nA6 $D2
+$027F False 91:   	nC7 $D5
+$0281 False 88:   	nA6 $D2
+$0283 MAC239 239:   	!$F8 > sCall: $2EA
+$0285 LAM240 240:   	~Maniax_Call6 :0 NULL
+$0285 False 86:   	nG6 $D0
+$0287 False 88:   	nA6 $D2
+$0288 False 91:   	nC7 $D5
+$028A False 95:   	nE7 $D9
+$028C MAC239 239:   	!$F8 > sCall: $2EA
+$028E LAM240 240:   	~Maniax_Call6 :0 NULL
+$028E False 86:   	nG6 $D0
+$0290 False 88:   	nA6 $D2
+$0291 False 91:   	nC7 $D5
+$0293 False 88:   	nA6 $D2
+$0295 MAC208 208:   	!$E6 > saVolFM: $06
+$0296 False 67:   	nC5 $BD
+$0297 False 64:   	nA4 $BA
+$0299 False 6:   	nRst $80
+$029B False 6:   	nRst $80
+$029D MAC208 208:   	!$E6 > saVolFM: $FA
+$029E False 95:   	nE7 $D9
+$02A0 False 6:   	nRst $80
+$02A1 False 91:   	nC7 $D5
+$02A2 False 6:   	nRst $80
+$02A3 False 88:   	nA6 $D2
+$02A4 False 88:   	nA6 $D2
+$02A5 False 88:   	nA6 $D2
+$02A7 False 6:   	nRst $80
+$02A8 False 91:   	nC7 $D5
+$02A9 False 6:   	nRst $80
+$02AA False 95:   	nE7 $D9
+$02AB False 6:   	nRst $80
+$02AD MAC211 211:   	!$E9 > saTranspose: $18
+$02AF MAC219 219:   	!$EF > sPatFM: $07
+$02B1 MAC187 187:   	!$E0 > sPan: $C0, $00
+$02B1 AGM188 188:   	:?0 $C0 $02B1
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 192:   	spCenter $C0
+$02B2 CON195 195:   	c .n1 == 0 (true)
+$02B2 AGR196 196:   	:-1 $00
+$02B3 MAC210 210:   	!$E8 > sNoteTimeOut: $1E
+$02B5 MAC208 208:   	!$E6 > saVolFM: $06
+$02B6 False 72:   	nF5 $C2
+$02BC False 6:   	nRst $80
+$02BD False 72:   	nF5 $C2
+$02BE False 6:   	nRst $80
+$02BF False 71:   	nE5 $C1
+$02C5 False 6:   	nRst $80
+$02C6 False 71:   	nE5 $C1
+$02C7 False 6:   	nRst $80
+$02C8 False 70:   	nEb5 $C0
+$02CE False 6:   	nRst $80
+$02CF False 70:   	nEb5 $C0
+$02D0 False 6:   	nRst $80
+$02D1 False 76:   	nA5 $C6
+$02D7 False 6:   	nRst $80
+$02D8 False 76:   	nA5 $C6
+$02D9 False 6:   	nRst $80
+$02DB MAC208 208:   	!$E6 > saVolFM: $FA
+$02DD MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$02DF MAC232 232:   	!$F6 > sJump: $256
+$02E1 LAM233 233:   	~Maniax_Jump3 :0 $0256
+$02E1 STP234 234:   	;
+--: Maniax_FM4 $0302 LUT=True run=True
+$0303 MAC219 219:   	!$EF > sPatFM: $08
+$0304 False 6:   	nRst $80
+$0306 False 6:   	nRst $80
+$0308 MAC187 187:   	!$E0 > sPan: $80, $00
+$0308 AGM188 188:   	:?0 $80 $0308
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 191:   	spLeft $80
+$0309 CON195 195:   	c .n1 == 0 (true)
+$0309 AGR196 196:   	:-1 $00
+$030A MAC211 211:   	!$E9 > saTranspose: $E8
+$030C MAC208 208:   	!$E6 > saVolFM: $0A
+$030D False 75:   	nAb5 $C5
+$030F False 209:   	sHold $E7
+$0310 False 74:   	nG5 $C4
+$0312 False 6:   	nRst $80
+$0314 False 73:   	nFs5 $C3
+$0316 False 209:   	sHold $E7
+$0317 False 72:   	nF5 $C2
+$0319 False 6:   	nRst $80
+$031C MAC236 236:   	!$F7 > sLoop: $00, $02, $30D
+$0320 LAM237 237:   	~Maniax_Loop6 :2 $030D
+$0320 False 75:   	nAb5 $C5
+$0322 False 209:   	sHold $E7
+$0323 False 74:   	nG5 $C4
+$0325 False 6:   	nRst $80
+$0327 False 73:   	nFs5 $C3
+$0329 False 209:   	sHold $E7
+$032A False 72:   	nF5 $C2
+$032C False 6:   	nRst $80
+$032E False 77:   	nBb5 $C7
+$0330 False 209:   	sHold $E7
+$0331 False 76:   	nA5 $C6
+$0333 False 6:   	nRst $80
+$0335 False 75:   	nAb5 $C5
+$0337 False 209:   	sHold $E7
+$0338 False 74:   	nG5 $C4
+$033A False 6:   	nRst $80
+$033C False 73:   	nFs5 $C3
+$033E False 209:   	sHold $E7
+$033F False 72:   	nF5 $C2
+$0341 False 209:   	sHold $E7
+$0343 False 6:   	nRst $80
+$0345 False 73:   	nFs5 $C3
+$0347 False 209:   	sHold $E7
+$0348 False 72:   	nF5 $C2
+$034A False 6:   	nRst $80
+$034C False 75:   	nAb5 $C5
+$034E False 209:   	sHold $E7
+$034F False 74:   	nG5 $C4
+$0351 False 6:   	nRst $80
+$0353 False 77:   	nBb5 $C7
+$0355 False 209:   	sHold $E7
+$0356 False 76:   	nA5 $C6
+$0358 False 6:   	nRst $80
+$035B MAC236 236:   	!$F7 > sLoop: $00, $02, $345
+$035F LAM237 237:   	~Maniax_Loop7 :2 $0345
+$035F False 77:   	nBb5 $C7
+$0361 False 209:   	sHold $E7
+$0362 False 76:   	nA5 $C6
+$0364 False 6:   	nRst $80
+$0366 False 75:   	nAb5 $C5
+$0368 False 209:   	sHold $E7
+$0369 False 74:   	nG5 $C4
+$036B False 209:   	sHold $E7
+$036E MAC208 208:   	!$E6 > saVolFM: $F6
+$0370 MAC211 211:   	!$E9 > saTranspose: $18
+$0372 MAC226 226:   	!$F4 > sModOff
+$0373 MAC219 219:   	!$EF > sPatFM: $05
+$0375 MAC211 211:   	!$E9 > saTranspose: $E8
+$0377 MAC208 208:   	!$E6 > saVolFM: $18
+$0379 MAC187 187:   	!$E0 > sPan: $80, $00
+$0379 AGM188 188:   	:?0 $80 $0379
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 191:   	spLeft $80
+$037A CON195 195:   	c .n1 == 0 (true)
+$037A AGR196 196:   	:-1 $00
+$037B MAC208 208:   	!$E6 > saVolFM: $FD
+$037D MAC239 239:   	!$F8 > sCall: $403
+$037F LAM240 240:   	~Maniax_Call7 :0 $0403
+--: Maniax_Call7 $0403 LUT=True run=True
+$0403 False 71:   	nE5 $C1
+$0405 False 71:   	nE5 $C1
+$0406 False 67:   	nC5 $BD
+$0407 False 67:   	nC5 $BD
+$0408 False 64:   	nA4 $BA
+$0409 False 64:   	nA4 $BA
+$040A False 60:   	nF4 $B6
+$040B False 60:   	nF4 $B6
+$040C False 69:   	nD5 $BF
+$040D False 69:   	nD5 $BF
+$040E False 66:   	nB4 $BC
+$040F False 66:   	nB4 $BC
+$0410 False 62:   	nG4 $B8
+$0411 False 62:   	nG4 $B8
+$0413 MAC201 201:   	!$E3 > sRet
+$0413 STP202 202:   	;
+$037F False 69:   	nD5 $BF
+$0380 False 69:   	nD5 $BF
+$0381 False 71:   	nE5 $C1
+$0382 False 71:   	nE5 $C1
+$0383 False 67:   	nC5 $BD
+$0384 False 67:   	nC5 $BD
+$0385 False 64:   	nA4 $BA
+$0386 False 64:   	nA4 $BA
+$0387 False 60:   	nF4 $B6
+$0388 False 60:   	nF4 $B6
+$0389 False 69:   	nD5 $BF
+$038A False 69:   	nD5 $BF
+$038B False 66:   	nB4 $BC
+$038C False 66:   	nB4 $BC
+$038D False 62:   	nG4 $B8
+$038E False 62:   	nG4 $B8
+$038F False 69:   	nD5 $BF
+$0390 False 69:   	nD5 $BF
+$0392 MAC239 239:   	!$F8 > sCall: $403
+$0394 LAM240 240:   	~Maniax_Call7 :0 NULL
+$0394 False 59:   	nE4 $B5
+$0395 False 59:   	nE4 $B5
+$0396 False 67:   	nC5 $BD
+$0397 False 67:   	nC5 $BD
+$0398 False 64:   	nA4 $BA
+$0399 False 64:   	nA4 $BA
+$039A False 60:   	nF4 $B6
+$039B False 60:   	nF4 $B6
+$039C False 57:   	nD4 $B3
+$039D False 57:   	nD4 $B3
+$039E False 66:   	nB4 $BC
+$039F False 66:   	nB4 $BC
+$03A1 MAC208 208:   	!$E6 > saVolFM: $03
+$03A3 MAC211 211:   	!$E9 > saTranspose: $18
+$03A5 MAC211 211:   	!$E9 > saTranspose: $F4
+$03A7 MAC219 219:   	!$EF > sPatFM: $04
+$03A8 False 86:   	nG6 $D0
+$03AA False 88:   	nA6 $D2
+$03AB False 90:   	nB6 $D4
+$03AD MAC208 208:   	!$E6 > saVolFM: $F9
+$03AE False 91:   	nC7 $D5
+$03B0 False 209:   	sHold $E7
+$03B2 False 93:   	nD7 $D7
+$03B4 False 90:   	nB6 $D4
+$03B5 False 86:   	nG6 $D0
+$03B6 False 91:   	nC7 $D5
+$03B8 False 209:   	sHold $E7
+$03BA False 90:   	nB6 $D4
+$03BC False 86:   	nG6 $D0
+$03BD False 90:   	nB6 $D4
+$03BE False 91:   	nC7 $D5
+$03C0 False 209:   	sHold $E7
+$03C2 False 93:   	nD7 $D7
+$03C4 False 90:   	nB6 $D4
+$03C5 False 86:   	nG6 $D0
+$03C6 False 91:   	nC7 $D5
+$03C8 False 209:   	sHold $E7
+$03CB MAC211 211:   	!$E9 > saTranspose: $0C
+$03CD MAC208 208:   	!$E6 > saVolFM: $07
+$03CF MAC208 208:   	!$E6 > saVolFM: $E8
+$03D1 MAC219 219:   	!$EF > sPatFM: $07
+$03D3 MAC210 210:   	!$E8 > sNoteTimeOut: $1E
+$03D5 MAC187 187:   	!$E0 > sPan: $C0, $00
+$03D5 AGM188 188:   	:?0 $C0 $03D5
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 192:   	spCenter $C0
+$03D6 CON195 195:   	c .n1 == 0 (true)
+$03D6 AGR196 196:   	:-1 $00
+$03D7 MAC208 208:   	!$E6 > saVolFM: $12
+$03D8 False 69:   	nD5 $BF
+$03DE False 6:   	nRst $80
+$03DF False 69:   	nD5 $BF
+$03E0 False 6:   	nRst $80
+$03E1 False 67:   	nC5 $BD
+$03E7 False 6:   	nRst $80
+$03E8 False 67:   	nC5 $BD
+$03E9 False 6:   	nRst $80
+$03EA False 67:   	nC5 $BD
+$03F0 False 6:   	nRst $80
+$03F1 False 67:   	nC5 $BD
+$03F2 False 6:   	nRst $80
+$03F3 False 72:   	nF5 $C2
+$03F9 False 6:   	nRst $80
+$03FA False 72:   	nF5 $C2
+$03FB False 6:   	nRst $80
+$03FD MAC208 208:   	!$E6 > saVolFM: $EE
+$03FF MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$0401 MAC232 232:   	!$F6 > sJump: $372
+$0403 LAM233 233:   	~Maniax_Jump4 :0 $0372
+$0403 STP234 234:   	;
+--: Maniax_FM5 $0413 LUT=True run=True
+$0414 MAC219 219:   	!$EF > sPatFM: $03
+$0415 False 6:   	nRst $80
+$0417 False 6:   	nRst $80
+$0419 MAC219 219:   	!$EF > sPatFM: $08
+$041B MAC187 187:   	!$E0 > sPan: $40, $00
+$041B AGM188 188:   	:?0 $40 $041B
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 190:   	spRight $40
+$041C CON195 195:   	c .n1 == 0 (true)
+$041C AGR196 196:   	:-1 $00
+$041D MAC211 211:   	!$E9 > saTranspose: $E8
+$041F MAC208 208:   	!$E6 > saVolFM: $F2
+$0420 False 72:   	nF5 $C2
+$0422 False 209:   	sHold $E7
+$0423 False 71:   	nE5 $C1
+$0425 False 6:   	nRst $80
+$0427 False 70:   	nEb5 $C0
+$0429 False 209:   	sHold $E7
+$042A False 69:   	nD5 $BF
+$042C False 6:   	nRst $80
+$042F MAC236 236:   	!$F7 > sLoop: $00, $02, $420
+$0433 LAM237 237:   	~Maniax_Loop8 :2 $0420
+$0433 False 72:   	nF5 $C2
+$0435 False 209:   	sHold $E7
+$0436 False 71:   	nE5 $C1
+$0438 False 6:   	nRst $80
+$043A False 70:   	nEb5 $C0
+$043C False 209:   	sHold $E7
+$043D False 69:   	nD5 $BF
+$043F False 6:   	nRst $80
+$0441 False 73:   	nFs5 $C3
+$0443 False 209:   	sHold $E7
+$0444 False 72:   	nF5 $C2
+$0446 False 6:   	nRst $80
+$0448 False 72:   	nF5 $C2
+$044A False 209:   	sHold $E7
+$044B False 71:   	nE5 $C1
+$044D False 6:   	nRst $80
+$044F False 70:   	nEb5 $C0
+$0451 False 209:   	sHold $E7
+$0452 False 69:   	nD5 $BF
+$0454 False 209:   	sHold $E7
+$0456 False 6:   	nRst $80
+$0458 False 70:   	nEb5 $C0
+$045A False 209:   	sHold $E7
+$045B False 69:   	nD5 $BF
+$045D False 6:   	nRst $80
+$045F False 72:   	nF5 $C2
+$0461 False 209:   	sHold $E7
+$0462 False 71:   	nE5 $C1
+$0464 False 6:   	nRst $80
+$0466 False 73:   	nFs5 $C3
+$0468 False 209:   	sHold $E7
+$0469 False 72:   	nF5 $C2
+$046B False 6:   	nRst $80
+$046E MAC236 236:   	!$F7 > sLoop: $00, $02, $458
+$0472 LAM237 237:   	~Maniax_Loop9 :2 $0458
+$0472 False 73:   	nFs5 $C3
+$0474 False 209:   	sHold $E7
+$0475 False 72:   	nF5 $C2
+$0477 False 6:   	nRst $80
+$0479 False 72:   	nF5 $C2
+$047B False 209:   	sHold $E7
+$047C False 71:   	nE5 $C1
+$047E False 209:   	sHold $E7
+$0481 MAC211 211:   	!$E9 > saTranspose: $18
+$0483 MAC208 208:   	!$E6 > saVolFM: $0E
+$0485 MAC219 219:   	!$EF > sPatFM: $05
+$0487 MAC211 211:   	!$E9 > saTranspose: $E8
+$0489 MAC187 187:   	!$E0 > sPan: $40, $00
+$0489 AGM188 188:   	:?0 $40 $0489
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 190:   	spRight $40
+$048A CON195 195:   	c .n1 == 0 (true)
+$048A AGR196 196:   	:-1 $00
+$048B MAC208 208:   	!$E6 > saVolFM: $FD
+$048D MAC239 239:   	!$F8 > sCall: $522
+$048F LAM240 240:   	~Maniax_Call8 :0 $0522
+--: Maniax_Call8 $0522 LUT=True run=True
+$0522 False 71:   	nE5 $C1
+$0524 False 71:   	nE5 $C1
+$0525 False 67:   	nC5 $BD
+$0526 False 67:   	nC5 $BD
+$0527 False 64:   	nA4 $BA
+$0528 False 64:   	nA4 $BA
+$0529 False 60:   	nF4 $B6
+$052A False 60:   	nF4 $B6
+$052B False 69:   	nD5 $BF
+$052C False 69:   	nD5 $BF
+$052D False 66:   	nB4 $BC
+$052E False 66:   	nB4 $BC
+$052F False 62:   	nG4 $B8
+$0530 False 62:   	nG4 $B8
+$0532 MAC201 201:   	!$E3 > sRet
+$0532 STP202 202:   	;
+$048F False 69:   	nD5 $BF
+$0490 False 69:   	nD5 $BF
+$0491 False 71:   	nE5 $C1
+$0492 False 71:   	nE5 $C1
+$0493 False 67:   	nC5 $BD
+$0494 False 67:   	nC5 $BD
+$0495 False 64:   	nA4 $BA
+$0496 False 64:   	nA4 $BA
+$0497 False 60:   	nF4 $B6
+$0498 False 60:   	nF4 $B6
+$0499 False 69:   	nD5 $BF
+$049A False 69:   	nD5 $BF
+$049B False 66:   	nB4 $BC
+$049C False 66:   	nB4 $BC
+$049D False 62:   	nG4 $B8
+$049E False 62:   	nG4 $B8
+$049F False 69:   	nD5 $BF
+$04A0 False 69:   	nD5 $BF
+$04A2 MAC239 239:   	!$F8 > sCall: $522
+$04A4 LAM240 240:   	~Maniax_Call8 :0 NULL
+$04A4 False 59:   	nE4 $B5
+$04A5 False 59:   	nE4 $B5
+$04A6 False 67:   	nC5 $BD
+$04A7 False 67:   	nC5 $BD
+$04A8 False 64:   	nA4 $BA
+$04A9 False 64:   	nA4 $BA
+$04AA False 60:   	nF4 $B6
+$04AB False 60:   	nF4 $B6
+$04AC False 57:   	nD4 $B3
+$04AD False 57:   	nD4 $B3
+$04AE False 66:   	nB4 $BC
+$04AF False 66:   	nB4 $BC
+$04B1 MAC211 211:   	!$E9 > saTranspose: $18
+$04B3 MAC208 208:   	!$E6 > saVolFM: $03
+$04B5 MAC211 211:   	!$E9 > saTranspose: $F4
+$04B7 MAC219 219:   	!$EF > sPatFM: $04
+$04B9 MAC199 199:   	!$E1 > ssDetune: $02
+$04BA False 86:   	nG6 $D0
+$04BC False 88:   	nA6 $D2
+$04BD False 90:   	nB6 $D4
+$04BF MAC208 208:   	!$E6 > saVolFM: $F9
+$04C0 False 91:   	nC7 $D5
+$04C2 False 209:   	sHold $E7
+$04C4 False 93:   	nD7 $D7
+$04C6 False 90:   	nB6 $D4
+$04C7 False 86:   	nG6 $D0
+$04C8 False 91:   	nC7 $D5
+$04CA False 209:   	sHold $E7
+$04CC False 90:   	nB6 $D4
+$04CE False 86:   	nG6 $D0
+$04CF False 90:   	nB6 $D4
+$04D0 False 91:   	nC7 $D5
+$04D2 False 209:   	sHold $E7
+$04D4 False 93:   	nD7 $D7
+$04D6 False 90:   	nB6 $D4
+$04D7 False 86:   	nG6 $D0
+$04D8 False 91:   	nC7 $D5
+$04DA False 209:   	sHold $E7
+$04DD MAC211 211:   	!$E9 > saTranspose: $0C
+$04DF MAC199 199:   	!$E1 > ssDetune: $00
+$04E1 MAC219 219:   	!$EF > sPatFM: $04
+$04E3 MAC211 211:   	!$E9 > saTranspose: $F4
+$04E5 MAC208 208:   	!$E6 > saVolFM: $FA
+$04E6 False 89:   	nBb6 $D3
+$04E8 False 84:   	nF6 $CE
+$04E9 False 93:   	nD7 $D7
+$04EA False 84:   	nF6 $CE
+$04EB False 89:   	nBb6 $D3
+$04EC False 84:   	nF6 $CE
+$04ED False 93:   	nD7 $D7
+$04EE False 84:   	nF6 $CE
+$04F0 MAC236 236:   	!$F7 > sLoop: $00, $02, $4E6
+$04F4 LAM237 237:   	~Maniax_Loop10 :2 $04E6
+$04F4 False 88:   	nA6 $D2
+$04F5 False 83:   	nE6 $CD
+$04F6 False 91:   	nC7 $D5
+$04F7 False 83:   	nE6 $CD
+$04F8 False 88:   	nA6 $D2
+$04F9 False 83:   	nE6 $CD
+$04FA False 91:   	nC7 $D5
+$04FB False 83:   	nE6 $CD
+$04FD MAC236 236:   	!$F7 > sLoop: $00, $02, $4F4
+$0501 LAM237 237:   	~Maniax_Loop11 :2 $04F4
+$0501 False 87:   	nAb6 $D1
+$0502 False 82:   	nEb6 $CC
+$0503 False 91:   	nC7 $D5
+$0504 False 82:   	nEb6 $CC
+$0505 False 87:   	nAb6 $D1
+$0506 False 82:   	nEb6 $CC
+$0507 False 91:   	nC7 $D5
+$0508 False 82:   	nEb6 $CC
+$050A MAC236 236:   	!$F7 > sLoop: $00, $02, $501
+$050E LAM237 237:   	~Maniax_Loop12 :2 $0501
+$050E False 91:   	nC7 $D5
+$050F False 88:   	nA6 $D2
+$0510 False 95:   	nE7 $D9
+$0511 False 88:   	nA6 $D2
+$0512 False 91:   	nC7 $D5
+$0513 False 88:   	nA6 $D2
+$0514 False 95:   	nE7 $D9
+$0515 False 88:   	nA6 $D2
+$0517 MAC236 236:   	!$F7 > sLoop: $00, $02, $50E
+$051B LAM237 237:   	~Maniax_Loop13 :2 $050E
+$051C MAC208 208:   	!$E6 > saVolFM: $0D
+$051E MAC211 211:   	!$E9 > saTranspose: $0C
+$0520 MAC232 232:   	!$F6 > sJump: $484
+$0522 LAM233 233:   	~Maniax_Jump5 :0 $0484
+$0522 STP234 234:   	;
+$0522 EXE60 60:   	/£_PSG?
+--> InitConvertVars: endian=big offset=$0000
+--: Maniax_PSG1 $0532 LUT=True run=True
+$0533 MAC227 227:   	!$F5 > sVolEnvPSG: $05
+$0534 AGM228 228:   	:?0 $05 $0534
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 166:   	v05 $05
+$0535 MAC220 220:   	!$F0 > ssMod68k: $0E, $01, $01, $03
+$0539 False 6:   	nRst $80
+$053C MAC210 210:   	!$E8 > sNoteTimeOut: $10
+$053D False 71:   	nE5 $C1
+$053F False 69:   	nD5 $BF
+$0540 False 71:   	nE5 $C1
+$0541 False 69:   	nD5 $BF
+$0542 False 71:   	nE5 $C1
+$0544 False 6:   	nRst $80
+$0545 False 69:   	nD5 $BF
+$0546 False 6:   	nRst $80
+$0547 False 72:   	nF5 $C2
+$0549 False 71:   	nE5 $C1
+$054B MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$054C False 69:   	nD5 $BF
+$054E False 209:   	sHold $E7
+$0551 MAC210 210:   	!$E8 > sNoteTimeOut: $10
+$0552 False 69:   	nD5 $BF
+$0554 False 71:   	nE5 $C1
+$0555 False 72:   	nF5 $C2
+$0557 False 69:   	nD5 $BF
+$0559 False 71:   	nE5 $C1
+$055A False 72:   	nF5 $C2
+$055E MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$055F False 71:   	nE5 $C1
+$0561 False 209:   	sHold $E7
+$0564 MAC226 226:   	!$F4 > sModOff
+$0565 MAC227 227:   	!$F5 > sVolEnvPSG: $01
+$0566 AGM228 228:   	:?0 $01 $0566
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 162:   	v01 $01
+$0566 False 6:   	nRst $80
+$0568 False 79:   	nC6 $C9
+$056A False 6:   	nRst $80
+$056C False 79:   	nC6 $C9
+$056E False 6:   	nRst $80
+$0570 False 78:   	nB5 $C8
+$0572 False 6:   	nRst $80
+$0574 False 78:   	nB5 $C8
+$0576 False 6:   	nRst $80
+$0579 MAC236 236:   	!$F7 > sLoop: $01, $03, $566
+$057D LAM237 237:   	~Maniax_Loop14 :2 $0566
+$057D False 6:   	nRst $80
+$057F False 76:   	nA5 $C6
+$0581 False 6:   	nRst $80
+$0583 False 76:   	nA5 $C6
+$0585 False 6:   	nRst $80
+$0587 False 74:   	nG5 $C4
+$0589 False 6:   	nRst $80
+$058B False 74:   	nG5 $C4
+$058D False 6:   	nRst $80
+$0590 MAC236 236:   	!$F7 > sLoop: $00, $02, $564
+$0594 LAM237 237:   	~Maniax_Loop15 :2 $0564
+$0595 MAC227 227:   	!$F5 > sVolEnvPSG: $05
+$0596 AGM228 228:   	:?0 $05 $0596
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 166:   	v05 $05
+$0596 False 89:   	nBb6 $D3
+$0598 False 88:   	nA6 $D2
+$0599 False 86:   	nG6 $D0
+$059A False 84:   	nF6 $CE
+$059B False 83:   	nE6 $CD
+$059D False 6:   	nRst $80
+$059E False 81:   	nD6 $CB
+$059F False 6:   	nRst $80
+$05A0 False 76:   	nA5 $C6
+$05A2 False 78:   	nB5 $C8
+$05A3 False 79:   	nC6 $C9
+$05A4 False 81:   	nD6 $CB
+$05A5 False 83:   	nE6 $CD
+$05A7 False 6:   	nRst $80
+$05A8 False 88:   	nA6 $D2
+$05A9 False 6:   	nRst $80
+$05AA False 87:   	nAb6 $D1
+$05AC False 86:   	nG6 $D0
+$05AD False 84:   	nF6 $CE
+$05AE False 82:   	nEb6 $CC
+$05AF False 81:   	nD6 $CB
+$05B1 False 79:   	nC6 $C9
+$05B3 False 6:   	nRst $80
+$05B4 False 6:   	nRst $80
+$05B6 False 86:   	nG6 $D0
+$05B7 False 88:   	nA6 $D2
+$05B8 False 86:   	nG6 $D0
+$05BB False 88:   	nA6 $D2
+$05BC False 6:   	nRst $80
+$05BF MAC214 214:   	!$EC > saVolPSG: $01
+$05C0 False 76:   	nA5 $C6
+$05C3 False 6:   	nRst $80
+$05C4 False 76:   	nA5 $C6
+$05C5 False 6:   	nRst $80
+$05C7 MAC214 214:   	!$EC > saVolPSG: $FF
+$05C9 MAC227 227:   	!$F5 > sVolEnvPSG: $03
+$05CA AGM228 228:   	:?0 $03 $05CA
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 164:   	v03 $03
+$05CB MAC232 232:   	!$F6 > sJump: $564
+$05CD LAM233 233:   	~Maniax_Loop15 :0 NULL
+$05CD STP234 234:   	;
+--: Maniax_PSG2 $05CD LUT=True run=True
+$05CD False 6:   	nRst $80
+$05D0 MAC214 214:   	!$EC > saVolPSG: $FE
+$05D2 MAC210 210:   	!$E8 > sNoteTimeOut: $06
+$05D3 False 91:   	nC7 $D5
+$05D5 False 90:   	nB6 $D4
+$05D6 False 88:   	nA6 $D2
+$05D7 False 86:   	nG6 $D0
+$05D8 False 91:   	nC7 $D5
+$05D9 False 90:   	nB6 $D4
+$05DA False 88:   	nA6 $D2
+$05DB False 86:   	nG6 $D0
+$05DD MAC236 236:   	!$F7 > sLoop: $00, $08, $5D1
+$05E1 LAM237 237:   	~Maniax_Loop16 :2 $05D1
+$05E2 MAC210 210:   	!$E8 > sNoteTimeOut: $00
+$05E4 MAC227 227:   	!$F5 > sVolEnvPSG: $01
+$05E5 AGM228 228:   	:?0 $01 $05E5
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 162:   	v01 $01
+$05E5 False 6:   	nRst $80
+$05E7 False 83:   	nE6 $CD
+$05E9 False 6:   	nRst $80
+$05EB False 83:   	nE6 $CD
+$05ED False 6:   	nRst $80
+$05EF False 81:   	nD6 $CB
+$05F1 False 6:   	nRst $80
+$05F3 False 81:   	nD6 $CB
+$05F5 False 6:   	nRst $80
+$05F8 MAC236 236:   	!$F7 > sLoop: $01, $03, $5E5
+$05FC LAM237 237:   	~Maniax_Loop17 :2 $05E5
+$05FC False 6:   	nRst $80
+$05FE False 79:   	nC6 $C9
+$0600 False 6:   	nRst $80
+$0602 False 79:   	nC6 $C9
+$0604 False 6:   	nRst $80
+$0606 False 78:   	nB5 $C8
+$0608 False 6:   	nRst $80
+$060A False 78:   	nB5 $C8
+$060C False 6:   	nRst $80
+$060F MAC236 236:   	!$F7 > sLoop: $00, $02, $5E3
+$0613 LAM237 237:   	~Maniax_Loop18 :2 $05E3
+$0613 False 81:   	nD6 $CB
+$0615 False 209:   	sHold $E7
+$0617 False 79:   	nC6 $C9
+$0619 False 81:   	nD6 $CB
+$061A False 83:   	nE6 $CD
+$061C False 209:   	sHold $E7
+$061E False 79:   	nC6 $C9
+$0620 False 79:   	nC6 $C9
+$0621 False 83:   	nE6 $CD
+$0622 False 82:   	nEb6 $CC
+$0624 False 209:   	sHold $E7
+$0626 False 79:   	nC6 $C9
+$0628 False 82:   	nEb6 $CC
+$0629 False 81:   	nD6 $CB
+$062B MAC227 227:   	!$F5 > sVolEnvPSG: $05
+$062C AGM228 228:   	:?0 $05 $062C
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 166:   	v05 $05
+$062C False 67:   	nC5 $BD
+$0632 False 6:   	nRst $80
+$0633 False 67:   	nC5 $BD
+$0634 False 6:   	nRst $80
+$0636 MAC227 227:   	!$F5 > sVolEnvPSG: $03
+$0637 AGM228 228:   	:?0 $03 $0637
+--> InitConvertVars: endian=big offset=$0000
+--:  $0000 LUT=True run=False
+$0000 True 164:   	v03 $03
+$0638 MAC232 232:   	!$F6 > sJump: $5E3
+$063A LAM233 233:   	~Maniax_Loop18 :0 NULL
+$063A STP234 234:   	;
+--: Maniax_PSG3 $063A LUT=True run=True
+$063B MAC225 225:   	!$F3 > sNoisePSG: $E7
+$063D MAC210 210:   	!$E8 > sNoteTimeOut: $06
+$063E False 76:   	nA5 $C6
+$0644 MAC232 232:   	!$F6 > sJump: $642
+$0646 LAM233 233:   	~Maniax_Jump6 :0 $0642
+$0646 STP234 234:   	;
+$0646 EXE61 61:   	/£_DAC
+--> InitConvertVars: endian=big offset=$0000
+--: Maniax_DAC $0646 LUT=True run=True
+$0646 False 174:   	nRst $80
+$0648 False 175:   	dKick $81
+$0649 False 176:   	dSnare $82
+$064A False 175:   	dKick $81
+$064B False 175:   	dKick $81
+$064C False 176:   	dSnare $82
+$064D False 176:   	dSnare $82
+$064E False 176:   	dSnare $82
+$064F False 175:   	dKick $81
+$0651 False 176:   	dSnare $82
+$0653 False 175:   	dKick $81
+$0656 False 176:   	dSnare $82
+$0659 MAC236 236:   	!$F7 > sLoop: $00, $07, $64F
+$065D LAM237 237:   	~Maniax_Loop19 :2 $064F
+$065D False 175:   	dKick $81
+$065F False 176:   	dSnare $82
+$0661 False 175:   	dKick $81
+$0663 False 176:   	dSnare $82
+$0667 False 175:   	dKick $81
+$0669 False 176:   	dSnare $82
+$066B False 175:   	dKick $81
+$066E False 176:   	dSnare $82
+$0671 MAC236 236:   	!$F7 > sLoop: $00, $07, $667
+$0675 LAM237 237:   	~Maniax_Loop20 :2 $0667
+$0675 False 175:   	dKick $81
+$0677 False 176:   	dSnare $82
+$0679 False 175:   	dKick $81
+$067B False 176:   	dSnare $82
+$0680 MAC236 236:   	!$F7 > sLoop: $01, $02, $667
+$0684 LAM237 237:   	~Maniax_Loop20 :2 NULL
+$0685 MAC232 232:   	!$F6 > sJump: $667
+$0687 LAM233 233:   	~Maniax_Loop20 :0 NULL
+$0687 STP234 234:   	;
+$0687 EXE62 62:   	/£_Patches
+--> InitConvertVars: endian=big offset=$0000
+--: Maniax_Patches $0687 LUT=False run=True
+$0687 EQU109 109:   	=num 0 0
+$0687 EQU110 110:   	=b1 0 0
+$0687 EQU111 111:   	=b2 0 0
+$0687 EQU112 112:   	=b3 0 0
+$0687 EQU113 113:   	=b4 0 0
+$0687 REP114 114:   	f 9 {
+$06A0 COM115 115:   	%\n\t; Patch $00\r\n\t; $08\r\n\t; $0A, $70, $30, $00,\t$1F, $1F, $5F, $5F\r\n\t; $12, $0E, $0A, $0A,\t$00, $04, $04, $03\r\n\t; $2F, $2F, $2F, $2F,\t$24, $2D, $13, $80
+$06A0 GOT116 116:   	>b 25 -> $0687
+$0687 MAC117 117:   	! > spAlgorithm: $00
+$0687 MAC118 118:   	! > spFeedback: $01
+$0689 EQU119 119:   	=b1 .db 10
+$068A EQU120 120:   	=b3 .db 112
+$068B EQU121 121:   	=b2 .db 48
+$068C EQU122 122:   	=b4 .db 0
+$068C MAC123 123:   	! > spDetune: $00, $03, $07, $00
+$068C MAC124 124:   	! > spMultiple: $0A, $00, $00, $00
+$068D EQU125 125:   	=b1 .db 31
+$068E EQU126 126:   	=b3 .db 31
+$068F EQU127 127:   	=b2 .db 95
+$0690 EQU128 128:   	=b4 .db 95
+$0690 MAC129 129:   	! > spRateScale: $00, $01, $00, $01
+$0690 MAC130 130:   	! > spAttackRt: $1F, $1F, $1F, $1F
+$0691 EQU131 131:   	=b1 .db 18
+$0692 EQU132 132:   	=b3 .db 14
+$0693 EQU133 133:   	=b2 .db 10
+$0694 EQU134 134:   	=b4 .db 10
+$0694 MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$0694 MAC136 136:   	! > spSustainRt: $12, $0A, $0E, $0A
+$0695 EQU137 137:   	=d1 .db 0
+$0696 EQU138 138:   	=d3 .db 4
+$0697 EQU139 139:   	=d2 .db 4
+$0698 EQU140 140:   	=d4 .db 3
+$0699 EQU141 141:   	=b1 .db 47
+$069A EQU142 142:   	=b3 .db 47
+$069B EQU143 143:   	=b2 .db 47
+$069C EQU144 144:   	=b4 .db 47
+$069C MAC145 145:   	! > spSustainLv: $02, $02, $02, $02
+$069C MAC146 146:   	! > spDecayRt: $00, $04, $04, $03
+$069C MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$069D EQU148 148:   	=b1 .db 36
+$069E EQU149 149:   	=b3 .db 45
+$069F EQU150 150:   	=b2 .db 19
+$069F MAC151 151:   	! > spTotalLv: $24, $13, $2D, $00
+$06A0 EQU152 152:   	=num \num\+1 1
+$06B9 COM115 115:   	%\n\t; Patch $01\r\n\t; $20\r\n\t; $36, $35, $30, $31,\t$DF, $DF, $9F, $9F\r\n\t; $07, $06, $09, $06,\t$07, $06, $06, $08\r\n\t; $20, $10, $10, $F8,\t$19, $37, $13, $80
+$06B9 GOT116 116:   	>b 25 -> $06A0
+$06A0 MAC117 117:   	! > spAlgorithm: $00
+$06A0 MAC118 118:   	! > spFeedback: $04
+$06A2 EQU119 119:   	=b1 .db 54
+$06A3 EQU120 120:   	=b3 .db 53
+$06A4 EQU121 121:   	=b2 .db 48
+$06A5 EQU122 122:   	=b4 .db 49
+$06A5 MAC123 123:   	! > spDetune: $03, $03, $03, $03
+$06A5 MAC124 124:   	! > spMultiple: $06, $00, $05, $01
+$06A6 EQU125 125:   	=b1 .db 223
+$06A7 EQU126 126:   	=b3 .db 223
+$06A8 EQU127 127:   	=b2 .db 159
+$06A9 EQU128 128:   	=b4 .db 159
+$06A9 MAC129 129:   	! > spRateScale: $03, $02, $03, $02
+$06A9 MAC130 130:   	! > spAttackRt: $1F, $1F, $1F, $1F
+$06AA EQU131 131:   	=b1 .db 7
+$06AB EQU132 132:   	=b3 .db 6
+$06AC EQU133 133:   	=b2 .db 9
+$06AD EQU134 134:   	=b4 .db 6
+$06AD MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$06AD MAC136 136:   	! > spSustainRt: $07, $09, $06, $06
+$06AE EQU137 137:   	=d1 .db 7
+$06AF EQU138 138:   	=d3 .db 6
+$06B0 EQU139 139:   	=d2 .db 6
+$06B1 EQU140 140:   	=d4 .db 8
+$06B2 EQU141 141:   	=b1 .db 32
+$06B3 EQU142 142:   	=b3 .db 16
+$06B4 EQU143 143:   	=b2 .db 16
+$06B5 EQU144 144:   	=b4 .db 248
+$06B5 MAC145 145:   	! > spSustainLv: $02, $01, $01, $0F
+$06B5 MAC146 146:   	! > spDecayRt: $07, $06, $06, $08
+$06B5 MAC147 147:   	! > spReleaseRt: $00, $00, $00, $08
+$06B6 EQU148 148:   	=b1 .db 25
+$06B7 EQU149 149:   	=b3 .db 55
+$06B8 EQU150 150:   	=b2 .db 19
+$06B8 MAC151 151:   	! > spTotalLv: $19, $13, $37, $00
+$06B9 EQU152 152:   	=num \num\+1 2
+$06D2 COM115 115:   	%\n\t; Patch $02\r\n\t; $36\r\n\t; $0F, $01, $01, $01,\t$1F, $1F, $1F, $1F\r\n\t; $12, $11, $0E, $00,\t$00, $0A, $07, $09\r\n\t; $FF, $0F, $1F, $0F,\t$18, $80, $80, $80
+$06D2 GOT116 116:   	>b 25 -> $06B9
+$06B9 MAC117 117:   	! > spAlgorithm: $06
+$06B9 MAC118 118:   	! > spFeedback: $06
+$06BB EQU119 119:   	=b1 .db 15
+$06BC EQU120 120:   	=b3 .db 1
+$06BD EQU121 121:   	=b2 .db 1
+$06BE EQU122 122:   	=b4 .db 1
+$06BE MAC123 123:   	! > spDetune: $00, $00, $00, $00
+$06BE MAC124 124:   	! > spMultiple: $0F, $01, $01, $01
+$06BF EQU125 125:   	=b1 .db 31
+$06C0 EQU126 126:   	=b3 .db 31
+$06C1 EQU127 127:   	=b2 .db 31
+$06C2 EQU128 128:   	=b4 .db 31
+$06C2 MAC129 129:   	! > spRateScale: $00, $00, $00, $00
+$06C2 MAC130 130:   	! > spAttackRt: $1F, $1F, $1F, $1F
+$06C3 EQU131 131:   	=b1 .db 18
+$06C4 EQU132 132:   	=b3 .db 17
+$06C5 EQU133 133:   	=b2 .db 14
+$06C6 EQU134 134:   	=b4 .db 0
+$06C6 MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$06C6 MAC136 136:   	! > spSustainRt: $12, $0E, $11, $00
+$06C7 EQU137 137:   	=d1 .db 0
+$06C8 EQU138 138:   	=d3 .db 10
+$06C9 EQU139 139:   	=d2 .db 7
+$06CA EQU140 140:   	=d4 .db 9
+$06CB EQU141 141:   	=b1 .db 255
+$06CC EQU142 142:   	=b3 .db 15
+$06CD EQU143 143:   	=b2 .db 31
+$06CE EQU144 144:   	=b4 .db 15
+$06CE MAC145 145:   	! > spSustainLv: $0F, $01, $00, $00
+$06CE MAC146 146:   	! > spDecayRt: $00, $07, $0A, $09
+$06CE MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$06CF EQU148 148:   	=b1 .db 24
+$06D0 EQU149 149:   	=b3 .db 128
+$06D1 EQU150 150:   	=b2 .db 128
+$06D1 MAC151 151:   	! > spTotalLv: $18, $00, $00, $00
+$06D2 EQU152 152:   	=num \num\+1 3
+$06EB COM115 115:   	%\n\t; Patch $03\r\n\t; $3D\r\n\t; $01, $02, $02, $02,\t$14, $0E, $8C, $0E\r\n\t; $08, $05, $02, $05,\t$00, $0D, $0D, $0D\r\n\t; $1F, $1F, $1F, $1F,\t$1A, $80, $80, $80
+$06EB GOT116 116:   	>b 25 -> $06D2
+$06D2 MAC117 117:   	! > spAlgorithm: $05
+$06D2 MAC118 118:   	! > spFeedback: $07
+$06D4 EQU119 119:   	=b1 .db 1
+$06D5 EQU120 120:   	=b3 .db 2
+$06D6 EQU121 121:   	=b2 .db 2
+$06D7 EQU122 122:   	=b4 .db 2
+$06D7 MAC123 123:   	! > spDetune: $00, $00, $00, $00
+$06D7 MAC124 124:   	! > spMultiple: $01, $02, $02, $02
+$06D8 EQU125 125:   	=b1 .db 20
+$06D9 EQU126 126:   	=b3 .db 14
+$06DA EQU127 127:   	=b2 .db 140
+$06DB EQU128 128:   	=b4 .db 14
+$06DB MAC129 129:   	! > spRateScale: $00, $02, $00, $00
+$06DB MAC130 130:   	! > spAttackRt: $14, $0C, $0E, $0E
+$06DC EQU131 131:   	=b1 .db 8
+$06DD EQU132 132:   	=b3 .db 5
+$06DE EQU133 133:   	=b2 .db 2
+$06DF EQU134 134:   	=b4 .db 5
+$06DF MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$06DF MAC136 136:   	! > spSustainRt: $08, $02, $05, $05
+$06E0 EQU137 137:   	=d1 .db 0
+$06E1 EQU138 138:   	=d3 .db 13
+$06E2 EQU139 139:   	=d2 .db 13
+$06E3 EQU140 140:   	=d4 .db 13
+$06E4 EQU141 141:   	=b1 .db 31
+$06E5 EQU142 142:   	=b3 .db 31
+$06E6 EQU143 143:   	=b2 .db 31
+$06E7 EQU144 144:   	=b4 .db 31
+$06E7 MAC145 145:   	! > spSustainLv: $01, $01, $01, $01
+$06E7 MAC146 146:   	! > spDecayRt: $00, $0D, $0D, $0D
+$06E7 MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$06E8 EQU148 148:   	=b1 .db 26
+$06E9 EQU149 149:   	=b3 .db 128
+$06EA EQU150 150:   	=b2 .db 128
+$06EA MAC151 151:   	! > spTotalLv: $1A, $00, $00, $00
+$06EB EQU152 152:   	=num \num\+1 4
+$0704 COM115 115:   	%\n\t; Patch $04\r\n\t; $2C\r\n\t; $72, $78, $34, $34,\t$1F, $12, $1F, $12\r\n\t; $00, $0A, $00, $0A,\t$00, $00, $00, $00\r\n\t; $0F, $1F, $0F, $1F,\t$16, $80, $17, $80
+$0704 GOT116 116:   	>b 25 -> $06EB
+$06EB MAC117 117:   	! > spAlgorithm: $04
+$06EB MAC118 118:   	! > spFeedback: $05
+$06ED EQU119 119:   	=b1 .db 114
+$06EE EQU120 120:   	=b3 .db 120
+$06EF EQU121 121:   	=b2 .db 52
+$06F0 EQU122 122:   	=b4 .db 52
+$06F0 MAC123 123:   	! > spDetune: $07, $03, $07, $03
+$06F0 MAC124 124:   	! > spMultiple: $02, $04, $08, $04
+$06F1 EQU125 125:   	=b1 .db 31
+$06F2 EQU126 126:   	=b3 .db 18
+$06F3 EQU127 127:   	=b2 .db 31
+$06F4 EQU128 128:   	=b4 .db 18
+$06F4 MAC129 129:   	! > spRateScale: $00, $00, $00, $00
+$06F4 MAC130 130:   	! > spAttackRt: $1F, $1F, $12, $12
+$06F5 EQU131 131:   	=b1 .db 0
+$06F6 EQU132 132:   	=b3 .db 10
+$06F7 EQU133 133:   	=b2 .db 0
+$06F8 EQU134 134:   	=b4 .db 10
+$06F8 MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$06F8 MAC136 136:   	! > spSustainRt: $00, $00, $0A, $0A
+$06F9 EQU137 137:   	=d1 .db 0
+$06FA EQU138 138:   	=d3 .db 0
+$06FB EQU139 139:   	=d2 .db 0
+$06FC EQU140 140:   	=d4 .db 0
+$06FD EQU141 141:   	=b1 .db 15
+$06FE EQU142 142:   	=b3 .db 31
+$06FF EQU143 143:   	=b2 .db 15
+$0700 EQU144 144:   	=b4 .db 31
+$0700 MAC145 145:   	! > spSustainLv: $00, $00, $01, $01
+$0700 MAC146 146:   	! > spDecayRt: $00, $00, $00, $00
+$0700 MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$0701 EQU148 148:   	=b1 .db 22
+$0702 EQU149 149:   	=b3 .db 128
+$0703 EQU150 150:   	=b2 .db 23
+$0703 MAC151 151:   	! > spTotalLv: $16, $17, $00, $00
+$0704 EQU152 152:   	=num \num\+1 5
+$071D COM115 115:   	%\n\t; Patch $05\r\n\t; $2C\r\n\t; $74, $74, $34, $34,\t$1F, $12, $1F, $1F\r\n\t; $00, $00, $00, $00,\t$00, $01, $00, $01\r\n\t; $0F, $3F, $0F, $3F,\t$16, $80, $17, $80
+$071D GOT116 116:   	>b 25 -> $0704
+$0704 MAC117 117:   	! > spAlgorithm: $04
+$0704 MAC118 118:   	! > spFeedback: $05
+$0706 EQU119 119:   	=b1 .db 116
+$0707 EQU120 120:   	=b3 .db 116
+$0708 EQU121 121:   	=b2 .db 52
+$0709 EQU122 122:   	=b4 .db 52
+$0709 MAC123 123:   	! > spDetune: $07, $03, $07, $03
+$0709 MAC124 124:   	! > spMultiple: $04, $04, $04, $04
+$070A EQU125 125:   	=b1 .db 31
+$070B EQU126 126:   	=b3 .db 18
+$070C EQU127 127:   	=b2 .db 31
+$070D EQU128 128:   	=b4 .db 31
+$070D MAC129 129:   	! > spRateScale: $00, $00, $00, $00
+$070D MAC130 130:   	! > spAttackRt: $1F, $1F, $12, $1F
+$070E EQU131 131:   	=b1 .db 0
+$070F EQU132 132:   	=b3 .db 0
+$0710 EQU133 133:   	=b2 .db 0
+$0711 EQU134 134:   	=b4 .db 0
+$0711 MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$0711 MAC136 136:   	! > spSustainRt: $00, $00, $00, $00
+$0712 EQU137 137:   	=d1 .db 0
+$0713 EQU138 138:   	=d3 .db 1
+$0714 EQU139 139:   	=d2 .db 0
+$0715 EQU140 140:   	=d4 .db 1
+$0716 EQU141 141:   	=b1 .db 15
+$0717 EQU142 142:   	=b3 .db 63
+$0718 EQU143 143:   	=b2 .db 15
+$0719 EQU144 144:   	=b4 .db 63
+$0719 MAC145 145:   	! > spSustainLv: $00, $00, $03, $03
+$0719 MAC146 146:   	! > spDecayRt: $00, $00, $01, $01
+$0719 MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$071A EQU148 148:   	=b1 .db 22
+$071B EQU149 149:   	=b3 .db 128
+$071C EQU150 150:   	=b2 .db 23
+$071C MAC151 151:   	! > spTotalLv: $16, $17, $00, $00
+$071D EQU152 152:   	=num \num\+1 6
+$0736 COM115 115:   	%\n\t; Patch $06\r\n\t; $04\r\n\t; $72, $42, $32, $32,\t$12, $12, $12, $12\r\n\t; $00, $08, $00, $08,\t$00, $08, $00, $08\r\n\t; $0F, $1F, $0F, $1F,\t$23, $80, $23, $80
+$0736 GOT116 116:   	>b 25 -> $071D
+$071D MAC117 117:   	! > spAlgorithm: $04
+$071D MAC118 118:   	! > spFeedback: $00
+$071F EQU119 119:   	=b1 .db 114
+$0720 EQU120 120:   	=b3 .db 66
+$0721 EQU121 121:   	=b2 .db 50
+$0722 EQU122 122:   	=b4 .db 50
+$0722 MAC123 123:   	! > spDetune: $07, $03, $04, $03
+$0722 MAC124 124:   	! > spMultiple: $02, $02, $02, $02
+$0723 EQU125 125:   	=b1 .db 18
+$0724 EQU126 126:   	=b3 .db 18
+$0725 EQU127 127:   	=b2 .db 18
+$0726 EQU128 128:   	=b4 .db 18
+$0726 MAC129 129:   	! > spRateScale: $00, $00, $00, $00
+$0726 MAC130 130:   	! > spAttackRt: $12, $12, $12, $12
+$0727 EQU131 131:   	=b1 .db 0
+$0728 EQU132 132:   	=b3 .db 8
+$0729 EQU133 133:   	=b2 .db 0
+$072A EQU134 134:   	=b4 .db 8
+$072A MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$072A MAC136 136:   	! > spSustainRt: $00, $00, $08, $08
+$072B EQU137 137:   	=d1 .db 0
+$072C EQU138 138:   	=d3 .db 8
+$072D EQU139 139:   	=d2 .db 0
+$072E EQU140 140:   	=d4 .db 8
+$072F EQU141 141:   	=b1 .db 15
+$0730 EQU142 142:   	=b3 .db 31
+$0731 EQU143 143:   	=b2 .db 15
+$0732 EQU144 144:   	=b4 .db 31
+$0732 MAC145 145:   	! > spSustainLv: $00, $00, $01, $01
+$0732 MAC146 146:   	! > spDecayRt: $00, $00, $08, $08
+$0732 MAC147 147:   	! > spReleaseRt: $0F, $0F, $0F, $0F
+$0733 EQU148 148:   	=b1 .db 35
+$0734 EQU149 149:   	=b3 .db 128
+$0735 EQU150 150:   	=b2 .db 35
+$0735 MAC151 151:   	! > spTotalLv: $23, $23, $00, $00
+$0736 EQU152 152:   	=num \num\+1 7
+$074F COM115 115:   	%\n\t; Patch $07\r\n\t; $3D\r\n\t; $01, $02, $02, $02,\t$10, $50, $50, $50\r\n\t; $07, $08, $08, $08,\t$01, $00, $00, $00\r\n\t; $20, $17, $17, $17,\t$1C, $80, $80, $80
+$074F GOT116 116:   	>b 25 -> $0736
+$0736 MAC117 117:   	! > spAlgorithm: $05
+$0736 MAC118 118:   	! > spFeedback: $07
+$0738 EQU119 119:   	=b1 .db 1
+$0739 EQU120 120:   	=b3 .db 2
+$073A EQU121 121:   	=b2 .db 2
+$073B EQU122 122:   	=b4 .db 2
+$073B MAC123 123:   	! > spDetune: $00, $00, $00, $00
+$073B MAC124 124:   	! > spMultiple: $01, $02, $02, $02
+$073C EQU125 125:   	=b1 .db 16
+$073D EQU126 126:   	=b3 .db 80
+$073E EQU127 127:   	=b2 .db 80
+$073F EQU128 128:   	=b4 .db 80
+$073F MAC129 129:   	! > spRateScale: $00, $01, $01, $01
+$073F MAC130 130:   	! > spAttackRt: $10, $10, $10, $10
+$0740 EQU131 131:   	=b1 .db 7
+$0741 EQU132 132:   	=b3 .db 8
+$0742 EQU133 133:   	=b2 .db 8
+$0743 EQU134 134:   	=b4 .db 8
+$0743 MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$0743 MAC136 136:   	! > spSustainRt: $07, $08, $08, $08
+$0744 EQU137 137:   	=d1 .db 1
+$0745 EQU138 138:   	=d3 .db 0
+$0746 EQU139 139:   	=d2 .db 0
+$0747 EQU140 140:   	=d4 .db 0
+$0748 EQU141 141:   	=b1 .db 32
+$0749 EQU142 142:   	=b3 .db 23
+$074A EQU143 143:   	=b2 .db 23
+$074B EQU144 144:   	=b4 .db 23
+$074B MAC145 145:   	! > spSustainLv: $02, $01, $01, $01
+$074B MAC146 146:   	! > spDecayRt: $01, $00, $00, $00
+$074B MAC147 147:   	! > spReleaseRt: $00, $07, $07, $07
+$074C EQU148 148:   	=b1 .db 28
+$074D EQU149 149:   	=b3 .db 128
+$074E EQU150 150:   	=b2 .db 128
+$074E MAC151 151:   	! > spTotalLv: $1C, $00, $00, $00
+$074F EQU152 152:   	=num \num\+1 8
+$0768 COM115 115:   	%\n\t; Patch $08\r\n\t; $2C\r\n\t; $74, $74, $34, $34,\t$1F, $12, $1F, $1F\r\n\t; $00, $07, $00, $07,\t$00, $07, $00, $07\r\n\t; $00, $38, $00, $38,\t$16, $80, $17, $80
+$0768 GOT116 116:   	>b 25 -> $074F
+$074F MAC117 117:   	! > spAlgorithm: $04
+$074F MAC118 118:   	! > spFeedback: $05
+$0751 EQU119 119:   	=b1 .db 116
+$0752 EQU120 120:   	=b3 .db 116
+$0753 EQU121 121:   	=b2 .db 52
+$0754 EQU122 122:   	=b4 .db 52
+$0754 MAC123 123:   	! > spDetune: $07, $03, $07, $03
+$0754 MAC124 124:   	! > spMultiple: $04, $04, $04, $04
+$0755 EQU125 125:   	=b1 .db 31
+$0756 EQU126 126:   	=b3 .db 18
+$0757 EQU127 127:   	=b2 .db 31
+$0758 EQU128 128:   	=b4 .db 31
+$0758 MAC129 129:   	! > spRateScale: $00, $00, $00, $00
+$0758 MAC130 130:   	! > spAttackRt: $1F, $1F, $12, $1F
+$0759 EQU131 131:   	=b1 .db 0
+$075A EQU132 132:   	=b3 .db 7
+$075B EQU133 133:   	=b2 .db 0
+$075C EQU134 134:   	=b4 .db 7
+$075C MAC135 135:   	! > spAmpMod: $00, $00, $00, $00
+$075C MAC136 136:   	! > spSustainRt: $00, $00, $07, $07
+$075D EQU137 137:   	=d1 .db 0
+$075E EQU138 138:   	=d3 .db 7
+$075F EQU139 139:   	=d2 .db 0
+$0760 EQU140 140:   	=d4 .db 7
+$0761 EQU141 141:   	=b1 .db 0
+$0762 EQU142 142:   	=b3 .db 56
+$0763 EQU143 143:   	=b2 .db 0
+$0764 EQU144 144:   	=b4 .db 56
+$0764 MAC145 145:   	! > spSustainLv: $00, $00, $03, $03
+$0764 MAC146 146:   	! > spDecayRt: $00, $00, $07, $07
+$0764 MAC147 147:   	! > spReleaseRt: $00, $00, $08, $08
+$0765 EQU148 148:   	=b1 .db 22
+$0766 EQU149 149:   	=b3 .db 128
+$0767 EQU150 150:   	=b2 .db 23
+$0767 MAC151 151:   	! > spTotalLv: $16, $17, $00, $00
+$0768 EQU152 152:   	=num \num\+1 9
+$0768 CON155 155:   	c (.an-.pc)==1 (false)
+--------------------------------------------------------------------------------
+--; Prepare output to G:\Hacking\Tools\16bit\Gens\Sonic\Music\Preview\MDMusicPlayer.1.1\music\Mus81 - GHZ.asm
+--------------------------------------------------------------------------------
+$0000: Maniax_Header:
+$0000: 	sHeaderInit
+$0000: 	sHeaderPatch	Maniax_Patches
+$0003: 	sHeaderCh	$06, $03
+$0004: 	sHeaderTempo	$01, $03
+$0006: 	sHeaderDAC	Maniax_DAC
+$000A: 	sHeaderFM	Maniax_FM1, $F4, $12
+$000E: 	sHeaderFM	Maniax_FM2, $00, $0B
+$0012: 	sHeaderFM	Maniax_FM3, $F4, $14
+$0016: 	sHeaderFM	Maniax_FM4, $F4, $08
+$001A: 	sHeaderFM	Maniax_FM5, $F4, $20
+$001E: 	sHeaderPSG	Maniax_PSG1, $D0, $01, $00, v03
+$0024: 	sHeaderPSG	Maniax_PSG2, $D0, $03, $00, v06
+$002A: 	sHeaderPSG	Maniax_PSG3, $00, $03, $00, v04
+$0030: Maniax_FM1:
+$0030: 	sPatFM		$02
+$0032: 	sPan		spRight
+$0034: 	sCall		Maniax_Call1
+$0037: 	sPan		spCenter
+$0039: Maniax_Loop1:
+$0039: 	sPan		spLeft
+--& nE7
+--& $04
+$003D: 	dc.b nE7, $04
+$003D: 	sPan		spRight
+--& nC7
+$0040: 	dc.b nC7
+$0040: 	saVolFM		$01
+$0042: 	sLoop		$00, $0D, Maniax_Loop1
+--& nE7
+--& $04
+--& nRst
+--& $14
+$004B: 	dc.b nE7, $04, nRst, $14
+$004B: 	saVolFM		$EB
+$004D: 	sPan		spCenter
+--& nRst
+--& $40
+--& nRst
+--& nRst
+--& nRst
+--& nRst
+--& nRst
+$0056: 	dc.b nRst, $40, nRst, nRst, nRst, nRst, nRst
+$0056: Maniax_Jump1:
+$0056: 	sPatFM		$06
+$0058: 	ssMod68k	$0D, $01, $07, $04
+$005D: 	saTranspose	$F4
+--& nRst
+--& $20
+$0061: 	dc.b nRst, $20
+$0061: 	sCall		Maniax_Call2
+--& nC6
+--& $38
+$0066: 	dc.b nC6, $38
+$0066: 	sCall		Maniax_Call2
+--& nC6
+--& $08
+--& $08
+--& nE6
+$006D: 	dc.b nC6, $08, $08, nE6
+$006D: 	saTranspose	$0C
+$006F: 	sPatFM		$06
+$0071: 	saTranspose	$F4
+--& nD6
+--& $34
+--& sHold
+--& $34
+--& nC6
+--& $08
+--& nD6
+--& nE6
+$007A: 	dc.b nD6, $34, sHold, $34, nC6, $08, nD6, nE6
+--& $38
+--& sHold
+--& $38
+--& nC6
+--& $08
+--& nC6
+--& nE6
+--& nEb6
+$0082: 	dc.b $38, sHold, $38, nC6, $08, nC6, nE6, nEb6
+--& $34
+--& sHold
+--& $34
+--& nC6
+--& $08
+--& nEb6
+--& nD6
+--& $1C
+$008A: 	dc.b $34, sHold, $34, nC6, $08, nEb6, nD6, $1C
+--& sHold
+--& $1C
+$008D: 	dc.b sHold, $1C
+$008D: 	sPatFM		$05
+$008F: 	saTranspose	$F4
+$0091: 	saVolFM		$0A
+--& nRst
+--& $08
+--& nE7
+--& $0C
+--& nRst
+--& $04
+$0099: 	dc.b nRst, $08, nE7, $0C, nRst, $04
+$0099: 	sNoteTimeOut	$0B
+--& nE7
+--& $08
+--& nF7
+--& nE7
+--& nG7
+$00A0: 	dc.b nE7, $08, nF7, nE7, nG7
+$00A0: 	sNoteTimeOut	$14
+--& nE7
+--& $10
+$00A4: 	dc.b nE7, $10
+$00A4: 	sNoteTimeOut	$0B
+--& nC7
+--& $08
+$00A8: 	dc.b nC7, $08
+$00A8: 	sNoteTimeOut	$00
+$00AA: 	saVolFM		$F6
+$00AC: 	saTranspose	$18
+$00AE: 	sJump		Maniax_Jump1
+$00B1: Maniax_Call1:
+--& nA6
+--& $04
+--& nF6
+--& nA6
+--& nF6
+--& nB6
+--& nG6
+--& nB6
+$00B8: 	dc.b nA6, $04, nF6, nA6, nF6, nB6, nG6, nB6
+--& nG6
+--& nC7
+--& nA6
+--& nC7
+--& nA6
+--& nD7
+--& nB6
+--& nD7
+$00C0: 	dc.b nG6, nC7, nA6, nC7, nA6, nD7, nB6, nD7
+--& nB6
+$00C2: 	dc.b nB6
+$00C2: 	sRet
+$00C3: Maniax_Call2:
+--& nC7
+--& $08
+--& nA6
+--& $10
+--& nC7
+--& $08
+--& nB6
+--& $10
+$00CA: 	dc.b nC7, $08, nA6, $10, nC7, $08, nB6, $10
+--& nC7
+--& $08
+--& nB6
+--& $10
+--& nG6
+--& $30
+--& nA6
+--& $08
+$00D2: 	dc.b nC7, $08, nB6, $10, nG6, $30, nA6, $08
+--& nE7
+--& nD7
+--& $10
+--& nC7
+--& $08
+--& nB6
+--& $10
+--& nC7
+$00DA: 	dc.b nE7, nD7, $10, nC7, $08, nB6, $10, nC7
+--& $08
+--& nB6
+--& $10
+--& nG6
+--& $38
+--& nC7
+--& $08
+--& nA6
+$00E2: 	dc.b $08, nB6, $10, nG6, $38, nC7, $08, nA6
+--& $10
+--& nC7
+--& $08
+--& nB6
+--& $10
+--& nC7
+--& $08
+--& nB6
+$00EA: 	dc.b $10, nC7, $08, nB6, $10, nC7, $08, nB6
+--& $10
+--& nG6
+--& $30
+--& nA6
+--& $08
+--& $08
+--& nF6
+--& $10
+$00F2: 	dc.b $10, nG6, $30, nA6, $08, $08, nF6, $10
+--& nA6
+--& $08
+--& nG6
+--& $10
+--& nA6
+--& $08
+--& nG6
+--& $10
+$00FA: 	dc.b nA6, $08, nG6, $10, nA6, $08, nG6, $10
+$00FB: 	sRet
+$00FC: Maniax_FM2:
+$00FC: 	sPatFM		$00
+$00FE: 	sComm		$01
+--& nRst
+--& $08
+--& nA2
+--& nA3
+--& nA2
+--& nBb2
+--& nBb3
+--& nB2
+$0107: 	dc.b nRst, $08, nA2, nA3, nA2, nBb2, nBb3, nB2
+--& nB3
+$0109: 	dc.b nB3
+$0109: 	sNoteTimeOut	$04
+$010B: 	sPatFM		$01
+$010D: Maniax_Loop2:
+--& nC3
+--& $08
+$010F: 	dc.b nC3, $08
+$010F: 	sLoop		$00, $18, Maniax_Loop2
+$0114: 	sNoteTimeOut	$00
+--& nC3
+--& $04
+--& nRst
+--& nC3
+--& $08
+--& nA2
+--& $04
+--& nRst
+$011D: 	dc.b nC3, $04, nRst, nC3, $08, nA2, $04, nRst
+--& nA2
+--& $08
+--& nBb2
+--& $04
+--& nRst
+--& nBb2
+--& $08
+--& nB2
+$0125: 	dc.b nA2, $08, nBb2, $04, nRst, nBb2, $08, nB2
+--& $04
+--& nRst
+--& nB2
+--& $08
+$012A: 	dc.b $04, nRst, nB2, $08
+$012A: 	sNoteTimeOut	$04
+$012C: Maniax_Loop3:
+--& nC3
+--& $08
+$012E: 	dc.b nC3, $08
+$012E: 	sLoop		$00, $1D, Maniax_Loop3
+$0133: 	sNoteTimeOut	$00
+--& nC3
+--& nD3
+--& nE3
+$0138: 	dc.b nC3, nD3, nE3
+$0138: Maniax_Jump2:
+$0138: 	sPatFM		$01
+$013A: 	sCall		Maniax_Call3
+$013D: 	sCall		Maniax_Call4
+$0140: 	sNoteTimeOut	$00
+--& nC3
+--& nD3
+--& nE3
+$0145: 	dc.b nC3, nD3, nE3
+$0145: 	sCall		Maniax_Call3
+$0148: 	sCall		Maniax_Call4
+--& nC3
+--& nC3
+--& nC3
+$014E: 	dc.b nC3, nC3, nC3
+$014E: 	sNoteTimeOut	$00
+$0150: 	sPatFM		$00
+--& nBb2
+--& $18
+--& nA2
+--& nG2
+--& nF2
+--& nE2
+--& $08
+--& nRst
+$0159: 	dc.b nBb2, $18, nA2, nG2, nF2, nE2, $08, nRst
+--& nD2
+--& nRst
+--& nA2
+--& $18
+--& nB2
+--& nC3
+--& nD3
+--& nE3
+$0161: 	dc.b nD2, nRst, nA2, $18, nB2, nC3, nD3, nE3
+--& $08
+--& nRst
+--& nA3
+--& nRst
+--& nAb3
+--& $18
+--& nG3
+--& nF3
+$0169: 	dc.b $08, nRst, nA3, nRst, nAb3, $18, nG3, nF3
+--& nEb3
+--& nD3
+--& $08
+--& nRst
+--& nC3
+--& nRst
+--& nG2
+--& $18
+$0171: 	dc.b nEb3, nD3, $08, nRst, nC3, nRst, nG2, $18
+--& nD3
+--& nG2
+--& nG3
+--& $08
+--& nE2
+--& nE3
+--& nF2
+--& nF3
+$0179: 	dc.b nD3, nG2, nG3, $08, nE2, nE3, nF2, nF3
+--& nG2
+--& nG3
+$017C: 	dc.b nG2, nG3
+$017C: 	sNoteTimeOut	$04
+$017E: 	sComm		$01
+$0180: 	sJump		Maniax_Jump2
+$0183: Maniax_Call3:
+$0183: 	sNoteTimeOut	$04
+--& nF3
+--& $08
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+$018C: 	dc.b nF3, $08, nF3, nF3, nF3, nF3, nF3, nF3
+$018D: 	sNoteTimeOut	$00
+--& nF3
+$0190: 	dc.b nF3
+$0190: 	sNoteTimeOut	$04
+--& nE3
+--& nE3
+--& nE3
+--& nE3
+--& nE3
+$0197: 	dc.b nE3, nE3, nE3, nE3, nE3
+$0197: 	sNoteTimeOut	$00
+--& nC3
+--& nD3
+--& nE3
+$019C: 	dc.b nC3, nD3, nE3
+$019C: 	sNoteTimeOut	$04
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+$01A5: 	dc.b nF3, nF3, nF3, nF3, nF3, nF3, nF3
+$01A5: 	sNoteTimeOut	$00
+--& nF3
+$01A8: 	dc.b nF3
+$01A8: 	sNoteTimeOut	$04
+--& nE3
+--& nE3
+--& nE3
+--& nE3
+--& nE3
+$01AF: 	dc.b nE3, nE3, nE3, nE3, nE3
+$01AF: 	sNoteTimeOut	$00
+--& nC3
+--& nD3
+--& nE3
+$01B4: 	dc.b nC3, nD3, nE3
+$01B4: 	sRet
+$01B5: Maniax_Call4:
+$01B5: 	sNoteTimeOut	$04
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+--& nF3
+$01BE: 	dc.b nF3, nF3, nF3, nF3, nF3, nF3, nF3
+$01BE: 	sNoteTimeOut	$00
+--& nF3
+$01C1: 	dc.b nF3
+$01C1: 	sNoteTimeOut	$04
+--& nE3
+--& nE3
+--& nE3
+--& nE3
+--& nE3
+--& nE3
+--& nE3
+$01CA: 	dc.b nE3, nE3, nE3, nE3, nE3, nE3, nE3
+$01CA: 	sNoteTimeOut	$00
+--& nE3
+$01CD: 	dc.b nE3
+$01CD: 	sNoteTimeOut	$04
+--& nD3
+--& nD3
+--& nD3
+--& nD3
+--& nD3
+--& nD3
+--& nD3
+$01D6: 	dc.b nD3, nD3, nD3, nD3, nD3, nD3, nD3
+$01D6: 	sNoteTimeOut	$00
+--& nD3
+$01D9: 	dc.b nD3
+$01D9: 	sNoteTimeOut	$04
+--& nC3
+--& nC3
+--& nC3
+--& nC3
+--& nC3
+$01E0: 	dc.b nC3, nC3, nC3, nC3, nC3
+$01E0: 	sRet
+$01E1: Maniax_FM3:
+$01E1: 	sPatFM		$02
+$01E3: 	sPan		spLeft
+$01E5: 	sCall		Maniax_Call1
+$01E8: 	sPatFM		$08
+$01EA: 	sPan		spCenter
+$01EC: 	saTranspose	$E8
+$01EE: 	saVolFM		$FE
+--& nRst
+--& $01
+$01F2: 	dc.b nRst, $01
+$01F2: Maniax_Loop4:
+--& nC6
+--& $01
+--& sHold
+--& nB5
+--& $0F
+--& nRst
+--& $08
+--& nBb5
+$01F9: 	dc.b nC6, $01, sHold, nB5, $0F, nRst, $08, nBb5
+--& $01
+--& sHold
+--& nA5
+--& $0F
+--& nRst
+--& $08
+$0200: 	dc.b $01, sHold, nA5, $0F, nRst, $08
+$0200: 	sLoop		$00, $02, Maniax_Loop4
+--& nC6
+--& $01
+--& sHold
+--& nB5
+--& $07
+--& nRst
+--& $08
+--& nBb5
+$020C: 	dc.b nC6, $01, sHold, nB5, $07, nRst, $08, nBb5
+--& $01
+--& sHold
+--& nA5
+--& $07
+--& nRst
+--& $08
+--& nCs6
+--& $01
+$0214: 	dc.b $01, sHold, nA5, $07, nRst, $08, nCs6, $01
+--& sHold
+--& nC6
+--& $0F
+--& nRst
+--& $08
+--& nC6
+--& $01
+--& sHold
+$021C: 	dc.b sHold, nC6, $0F, nRst, $08, nC6, $01, sHold
+--& nB5
+--& $0F
+--& nRst
+--& $08
+--& nBb5
+--& $01
+--& sHold
+--& nA5
+$0224: 	dc.b nB5, $0F, nRst, $08, nBb5, $01, sHold, nA5
+--& $10
+--& sHold
+--& $3B
+--& nRst
+--& $04
+$022A: 	dc.b $10, sHold, $3B, nRst, $04
+$022A: Maniax_Loop5:
+--& nBb5
+--& $01
+--& sHold
+--& nA5
+--& $0F
+--& nRst
+--& $08
+--& nC6
+$0231: 	dc.b nBb5, $01, sHold, nA5, $0F, nRst, $08, nC6
+--& $01
+--& sHold
+--& nB5
+--& $0F
+--& nRst
+--& $08
+--& nCs6
+--& $01
+$0239: 	dc.b $01, sHold, nB5, $0F, nRst, $08, nCs6, $01
+--& sHold
+--& nC6
+--& $07
+--& nRst
+--& $08
+$023F: 	dc.b sHold, nC6, $07, nRst, $08
+$023F: 	sLoop		$00, $02, Maniax_Loop5
+--& nCs6
+--& $01
+--& sHold
+--& nC6
+--& $0F
+--& nRst
+--& $08
+--& nC6
+$024B: 	dc.b nCs6, $01, sHold, nC6, $0F, nRst, $08, nC6
+--& $01
+--& sHold
+--& nB5
+--& $28
+--& sHold
+--& $3E
+$0252: 	dc.b $01, sHold, nB5, $28, sHold, $3E
+$0252: 	saVolFM		$02
+$0254: 	saTranspose	$18
+$0256: Maniax_Jump3:
+$0256: 	sPatFM		$05
+$0258: 	saTranspose	$E8
+$025A: 	sCall		Maniax_Call5
+--& nA6
+$025E: 	dc.b nA6
+$025E: 	sCall		Maniax_Call5
+--& nE7
+$0262: 	dc.b nE7
+$0262: 	sCall		Maniax_Call5
+--& nA6
+--& nRst
+--& $24
+--& nRst
+--& nC7
+--& $04
+--& nRst
+--& $0C
+$026C: 	dc.b nA6, nRst, $24, nRst, nC7, $04, nRst, $0C
+--& nA6
+--& $10
+--& nG6
+--& $04
+--& nRst
+--& nA6
+--& nRst
+--& nC7
+$0274: 	dc.b nA6, $10, nG6, $04, nRst, nA6, nRst, nC7
+--& nRst
+$0276: 	dc.b nRst
+$0276: 	sModOff
+$0277: 	sPatFM		$05
+$0279: 	sCall		Maniax_Call6
+--& nG6
+--& $04
+--& nA6
+--& nC7
+--& $08
+--& nA6
+$0282: 	dc.b nG6, $04, nA6, nC7, $08, nA6
+$0282: 	sCall		Maniax_Call6
+--& nG6
+--& $04
+--& nA6
+--& nC7
+--& $08
+--& nE7
+$028B: 	dc.b nG6, $04, nA6, nC7, $08, nE7
+$028B: 	sCall		Maniax_Call6
+--& nG6
+--& $04
+--& nA6
+--& nC7
+--& $08
+--& nA6
+$0294: 	dc.b nG6, $04, nA6, nC7, $08, nA6
+$0294: 	saVolFM		$06
+--& nC5
+--& nA4
+--& $04
+--& nRst
+--& $16
+--& nRst
+$029C: 	dc.b nC5, nA4, $04, nRst, $16, nRst
+$029C: 	saVolFM		$FA
+--& nE7
+--& $08
+--& nRst
+--& nC7
+--& nRst
+--& nA6
+--& nA6
+--& nA6
+$02A5: 	dc.b nE7, $08, nRst, nC7, nRst, nA6, nA6, nA6
+--& $04
+--& nRst
+--& nC7
+--& nRst
+--& nE7
+--& nRst
+$02AC: 	dc.b $04, nRst, nC7, nRst, nE7, nRst
+$02AC: 	saTranspose	$18
+$02AE: 	sPatFM		$07
+$02B0: 	sPan		spCenter
+$02B2: 	sNoteTimeOut	$1E
+$02B4: 	saVolFM		$06
+--& nF5
+--& $18
+--& $18
+--& $18
+--& $18
+--& $08
+--& nRst
+--& nF5
+$02BD: 	dc.b nF5, $18, $18, $18, $18, $08, nRst, nF5
+--& nRst
+--& nE5
+--& $18
+--& $18
+--& $18
+--& $18
+--& $08
+--& nRst
+$02C5: 	dc.b nRst, nE5, $18, $18, $18, $18, $08, nRst
+--& nE5
+--& nRst
+--& nEb5
+--& $18
+--& $18
+--& $18
+--& $18
+--& $08
+$02CD: 	dc.b nE5, nRst, nEb5, $18, $18, $18, $18, $08
+--& nRst
+--& nEb5
+--& nRst
+--& nA5
+--& $18
+--& $18
+--& $18
+--& $18
+$02D5: 	dc.b nRst, nEb5, nRst, nA5, $18, $18, $18, $18
+--& $08
+--& nRst
+--& nA5
+--& nRst
+$02DA: 	dc.b $08, nRst, nA5, nRst
+$02DA: 	saVolFM		$FA
+$02DC: 	sNoteTimeOut	$00
+$02DE: 	sJump		Maniax_Jump3
+$02E1: Maniax_Call5:
+--& nRst
+--& $34
+--& nRst
+--& nG6
+--& $04
+--& nA6
+--& nC7
+--& $08
+$02E8: 	dc.b nRst, $34, nRst, nG6, $04, nA6, nC7, $08
+$02E9: 	sRet
+$02EA: Maniax_Call6:
+$02EA: 	saVolFM		$06
+--& nE5
+--& $08
+--& nC5
+--& $04
+--& nRst
+--& $12
+--& nRst
+--& nE5
+$02F3: 	dc.b nE5, $08, nC5, $04, nRst, $12, nRst, nE5
+--& $08
+--& nC5
+--& $04
+--& nRst
+--& nD5
+--& $08
+--& nB4
+--& $04
+$02FB: 	dc.b $08, nC5, $04, nRst, nD5, $08, nB4, $04
+--& nRst
+--& $0E
+--& nRst
+$02FF: 	dc.b nRst, $0E, nRst
+$02FF: 	saVolFM		$FA
+$0301: 	sRet
+$0302: Maniax_FM4:
+$0302: 	sPatFM		$08
+--& nRst
+--& $20
+--& nRst
+$0307: 	dc.b nRst, $20, nRst
+$0307: 	sPan		spLeft
+$0309: 	saTranspose	$E8
+$030B: 	saVolFM		$0A
+$030D: Maniax_Loop6:
+--& nAb5
+--& $01
+--& sHold
+--& nG5
+--& $0F
+--& nRst
+--& $08
+--& nFs5
+$0314: 	dc.b nAb5, $01, sHold, nG5, $0F, nRst, $08, nFs5
+--& $01
+--& sHold
+--& nF5
+--& $0F
+--& nRst
+--& $08
+$031B: 	dc.b $01, sHold, nF5, $0F, nRst, $08
+$031B: 	sLoop		$00, $02, Maniax_Loop6
+--& nAb5
+--& $01
+--& sHold
+--& nG5
+--& $07
+--& nRst
+--& $08
+--& nFs5
+$0327: 	dc.b nAb5, $01, sHold, nG5, $07, nRst, $08, nFs5
+--& $01
+--& sHold
+--& nF5
+--& $07
+--& nRst
+--& $08
+--& nBb5
+--& $01
+$032F: 	dc.b $01, sHold, nF5, $07, nRst, $08, nBb5, $01
+--& sHold
+--& nA5
+--& $0F
+--& nRst
+--& $08
+--& nAb5
+--& $01
+--& sHold
+$0337: 	dc.b sHold, nA5, $0F, nRst, $08, nAb5, $01, sHold
+--& nG5
+--& $0F
+--& nRst
+--& $08
+--& nFs5
+--& $01
+--& sHold
+--& nF5
+$033F: 	dc.b nG5, $0F, nRst, $08, nFs5, $01, sHold, nF5
+--& $10
+--& sHold
+--& $3C
+--& nRst
+--& $04
+$0345: 	dc.b $10, sHold, $3C, nRst, $04
+$0345: Maniax_Loop7:
+--& nFs5
+--& $01
+--& sHold
+--& nF5
+--& $0F
+--& nRst
+--& $08
+--& nAb5
+$034C: 	dc.b nFs5, $01, sHold, nF5, $0F, nRst, $08, nAb5
+--& $01
+--& sHold
+--& nG5
+--& $0F
+--& nRst
+--& $08
+--& nBb5
+--& $01
+$0354: 	dc.b $01, sHold, nG5, $0F, nRst, $08, nBb5, $01
+--& sHold
+--& nA5
+--& $07
+--& nRst
+--& $08
+$035A: 	dc.b sHold, nA5, $07, nRst, $08
+$035A: 	sLoop		$00, $02, Maniax_Loop7
+--& nBb5
+--& $01
+--& sHold
+--& nA5
+--& $0F
+--& nRst
+--& $08
+--& nAb5
+$0366: 	dc.b nBb5, $01, sHold, nA5, $0F, nRst, $08, nAb5
+--& $01
+--& sHold
+--& nG5
+--& $28
+--& sHold
+--& $3F
+$036D: 	dc.b $01, sHold, nG5, $28, sHold, $3F
+$036D: 	saVolFM		$F6
+$036F: 	saTranspose	$18
+$0371: 	sModOff
+$0372: Maniax_Jump4:
+$0372: 	sPatFM		$05
+$0374: 	saTranspose	$E8
+$0376: 	saVolFM		$18
+$0378: 	sPan		spLeft
+$037A: 	saVolFM		$FD
+$037C: 	sCall		Maniax_Call7
+--& nD5
+--& nD5
+--& nE5
+--& nE5
+--& nC5
+--& nC5
+--& nA4
+--& nA4
+$0386: 	dc.b nD5, nD5, nE5, nE5, nC5, nC5, nA4, nA4
+--& nF4
+--& nF4
+--& nD5
+--& nD5
+--& nB4
+--& nB4
+--& nG4
+--& nG4
+$038E: 	dc.b nF4, nF4, nD5, nD5, nB4, nB4, nG4, nG4
+--& nD5
+--& nD5
+$0391: 	dc.b nD5, nD5
+$0391: 	sCall		Maniax_Call7
+--& nE4
+--& nE4
+--& nC5
+--& nC5
+--& nA4
+--& nA4
+--& nF4
+--& nF4
+$039B: 	dc.b nE4, nE4, nC5, nC5, nA4, nA4, nF4, nF4
+--& nD4
+--& nD4
+--& nB4
+--& nB4
+$03A0: 	dc.b nD4, nD4, nB4, nB4
+$03A0: 	saVolFM		$03
+$03A2: 	saTranspose	$18
+$03A4: 	saTranspose	$F4
+$03A6: 	sPatFM		$04
+--& nG6
+--& $10
+--& nA6
+--& nB6
+$03AC: 	dc.b nG6, $10, nA6, nB6
+$03AC: 	saVolFM		$F9
+--& nC7
+--& $28
+--& sHold
+--& $28
+--& nD7
+--& $10
+--& nB6
+--& nG6
+$03B5: 	dc.b nC7, $28, sHold, $28, nD7, $10, nB6, nG6
+--& nC7
+--& $28
+--& sHold
+--& $28
+--& nB6
+--& $10
+--& nG6
+--& nB6
+$03BD: 	dc.b nC7, $28, sHold, $28, nB6, $10, nG6, nB6
+--& nC7
+--& $28
+--& sHold
+--& $28
+--& nD7
+--& $10
+--& nB6
+--& nG6
+$03C5: 	dc.b nC7, $28, sHold, $28, nD7, $10, nB6, nG6
+--& nC7
+--& $40
+--& sHold
+--& $40
+$03CA: 	dc.b nC7, $40, sHold, $40
+$03CA: 	saTranspose	$0C
+$03CC: 	saVolFM		$07
+$03CE: 	saVolFM		$E8
+$03D0: 	sPatFM		$07
+$03D2: 	sNoteTimeOut	$1E
+$03D4: 	sPan		spCenter
+$03D6: 	saVolFM		$12
+--& nD5
+--& $18
+--& $18
+--& $18
+--& $18
+--& $08
+--& nRst
+--& nD5
+$03DF: 	dc.b nD5, $18, $18, $18, $18, $08, nRst, nD5
+--& nRst
+--& nC5
+--& $18
+--& $18
+--& $18
+--& $18
+--& $08
+--& nRst
+$03E7: 	dc.b nRst, nC5, $18, $18, $18, $18, $08, nRst
+--& nC5
+--& nRst
+--& nC5
+--& $18
+--& $18
+--& $18
+--& $18
+--& $08
+$03EF: 	dc.b nC5, nRst, nC5, $18, $18, $18, $18, $08
+--& nRst
+--& nC5
+--& nRst
+--& nF5
+--& $18
+--& $18
+--& $18
+--& $18
+$03F7: 	dc.b nRst, nC5, nRst, nF5, $18, $18, $18, $18
+--& $08
+--& nRst
+--& nF5
+--& nRst
+$03FC: 	dc.b $08, nRst, nF5, nRst
+$03FC: 	saVolFM		$EE
+$03FE: 	sNoteTimeOut	$00
+$0400: 	sJump		Maniax_Jump4
+$0403: Maniax_Call7:
+--& nE5
+--& $08
+--& nE5
+--& nC5
+--& nC5
+--& nA4
+--& nA4
+--& nF4
+$040A: 	dc.b nE5, $08, nE5, nC5, nC5, nA4, nA4, nF4
+--& nF4
+--& nD5
+--& nD5
+--& nB4
+--& nB4
+--& nG4
+--& nG4
+$0412: 	dc.b nF4, nD5, nD5, nB4, nB4, nG4, nG4
+$0412: 	sRet
+$0413: Maniax_FM5:
+$0413: 	sPatFM		$03
+--& nRst
+--& $20
+--& nRst
+$0418: 	dc.b nRst, $20, nRst
+$0418: 	sPatFM		$08
+$041A: 	sPan		spRight
+$041C: 	saTranspose	$E8
+$041E: 	saVolFM		$F2
+$0420: Maniax_Loop8:
+--& nF5
+--& $01
+--& sHold
+--& nE5
+--& $0F
+--& nRst
+--& $08
+--& nEb5
+$0427: 	dc.b nF5, $01, sHold, nE5, $0F, nRst, $08, nEb5
+--& $01
+--& sHold
+--& nD5
+--& $0F
+--& nRst
+--& $08
+$042E: 	dc.b $01, sHold, nD5, $0F, nRst, $08
+$042E: 	sLoop		$00, $02, Maniax_Loop8
+--& nF5
+--& $01
+--& sHold
+--& nE5
+--& $07
+--& nRst
+--& $08
+--& nEb5
+$043A: 	dc.b nF5, $01, sHold, nE5, $07, nRst, $08, nEb5
+--& $01
+--& sHold
+--& nD5
+--& $07
+--& nRst
+--& $08
+--& nFs5
+--& $01
+$0442: 	dc.b $01, sHold, nD5, $07, nRst, $08, nFs5, $01
+--& sHold
+--& nF5
+--& $0F
+--& nRst
+--& $08
+--& nF5
+--& $01
+--& sHold
+$044A: 	dc.b sHold, nF5, $0F, nRst, $08, nF5, $01, sHold
+--& nE5
+--& $0F
+--& nRst
+--& $08
+--& nEb5
+--& $01
+--& sHold
+--& nD5
+$0452: 	dc.b nE5, $0F, nRst, $08, nEb5, $01, sHold, nD5
+--& $10
+--& sHold
+--& $3C
+--& nRst
+--& $04
+$0458: 	dc.b $10, sHold, $3C, nRst, $04
+$0458: Maniax_Loop9:
+--& nEb5
+--& $01
+--& sHold
+--& nD5
+--& $0F
+--& nRst
+--& $08
+--& nF5
+$045F: 	dc.b nEb5, $01, sHold, nD5, $0F, nRst, $08, nF5
+--& $01
+--& sHold
+--& nE5
+--& $0F
+--& nRst
+--& $08
+--& nFs5
+--& $01
+$0467: 	dc.b $01, sHold, nE5, $0F, nRst, $08, nFs5, $01
+--& sHold
+--& nF5
+--& $07
+--& nRst
+--& $08
+$046D: 	dc.b sHold, nF5, $07, nRst, $08
+$046D: 	sLoop		$00, $02, Maniax_Loop9
+--& nFs5
+--& $01
+--& sHold
+--& nF5
+--& $0F
+--& nRst
+--& $08
+--& nF5
+$0479: 	dc.b nFs5, $01, sHold, nF5, $0F, nRst, $08, nF5
+--& $01
+--& sHold
+--& nE5
+--& $28
+--& sHold
+--& $3F
+$0480: 	dc.b $01, sHold, nE5, $28, sHold, $3F
+$0480: 	saTranspose	$18
+$0482: 	saVolFM		$0E
+$0484: Maniax_Jump5:
+$0484: 	sPatFM		$05
+$0486: 	saTranspose	$E8
+$0488: 	sPan		spRight
+$048A: 	saVolFM		$FD
+$048C: 	sCall		Maniax_Call8
+--& nD5
+--& nD5
+--& nE5
+--& nE5
+--& nC5
+--& nC5
+--& nA4
+--& nA4
+$0496: 	dc.b nD5, nD5, nE5, nE5, nC5, nC5, nA4, nA4
+--& nF4
+--& nF4
+--& nD5
+--& nD5
+--& nB4
+--& nB4
+--& nG4
+--& nG4
+$049E: 	dc.b nF4, nF4, nD5, nD5, nB4, nB4, nG4, nG4
+--& nD5
+--& nD5
+$04A1: 	dc.b nD5, nD5
+$04A1: 	sCall		Maniax_Call8
+--& nE4
+--& nE4
+--& nC5
+--& nC5
+--& nA4
+--& nA4
+--& nF4
+--& nF4
+$04AB: 	dc.b nE4, nE4, nC5, nC5, nA4, nA4, nF4, nF4
+--& nD4
+--& nD4
+--& nB4
+--& nB4
+$04B0: 	dc.b nD4, nD4, nB4, nB4
+$04B0: 	saTranspose	$18
+$04B2: 	saVolFM		$03
+$04B4: 	saTranspose	$F4
+$04B6: 	sPatFM		$04
+$04B8: 	ssDetune	$02
+--& nG6
+--& $10
+--& nA6
+--& nB6
+$04BE: 	dc.b nG6, $10, nA6, nB6
+$04BE: 	saVolFM		$F9
+--& nC7
+--& $28
+--& sHold
+--& $28
+--& nD7
+--& $10
+--& nB6
+--& nG6
+$04C7: 	dc.b nC7, $28, sHold, $28, nD7, $10, nB6, nG6
+--& nC7
+--& $28
+--& sHold
+--& $28
+--& nB6
+--& $10
+--& nG6
+--& nB6
+$04CF: 	dc.b nC7, $28, sHold, $28, nB6, $10, nG6, nB6
+--& nC7
+--& $28
+--& sHold
+--& $28
+--& nD7
+--& $10
+--& nB6
+--& nG6
+$04D7: 	dc.b nC7, $28, sHold, $28, nD7, $10, nB6, nG6
+--& nC7
+--& $40
+--& sHold
+--& $40
+$04DC: 	dc.b nC7, $40, sHold, $40
+$04DC: 	saTranspose	$0C
+$04DE: 	ssDetune	$00
+$04E0: 	sPatFM		$04
+$04E2: 	saTranspose	$F4
+$04E4: 	saVolFM		$FA
+$04E6: Maniax_Loop10:
+--& nBb6
+--& $08
+--& nF6
+--& nD7
+--& nF6
+--& nBb6
+--& nF6
+--& nD7
+$04ED: 	dc.b nBb6, $08, nF6, nD7, nF6, nBb6, nF6, nD7
+--& nF6
+$04EF: 	dc.b nF6
+$04EF: 	sLoop		$00, $02, Maniax_Loop10
+$04F4: Maniax_Loop11:
+--& nA6
+--& nE6
+--& nC7
+--& nE6
+--& nA6
+--& nE6
+--& nC7
+--& nE6
+$04FB: 	dc.b nA6, nE6, nC7, nE6, nA6, nE6, nC7, nE6
+$04FC: 	sLoop		$00, $02, Maniax_Loop11
+$0501: Maniax_Loop12:
+--& nAb6
+--& nEb6
+--& nC7
+--& nEb6
+--& nAb6
+--& nEb6
+--& nC7
+--& nEb6
+$0508: 	dc.b nAb6, nEb6, nC7, nEb6, nAb6, nEb6, nC7, nEb6
+$0509: 	sLoop		$00, $02, Maniax_Loop12
+$050E: Maniax_Loop13:
+--& nC7
+--& nA6
+--& nE7
+--& nA6
+--& nC7
+--& nA6
+--& nE7
+--& nA6
+$0515: 	dc.b nC7, nA6, nE7, nA6, nC7, nA6, nE7, nA6
+$0516: 	sLoop		$00, $02, Maniax_Loop13
+$051B: 	saVolFM		$0D
+$051D: 	saTranspose	$0C
+$051F: 	sJump		Maniax_Jump5
+$0522: Maniax_Call8:
+--& nE5
+--& $08
+--& nE5
+--& nC5
+--& nC5
+--& nA4
+--& nA4
+--& nF4
+$0529: 	dc.b nE5, $08, nE5, nC5, nC5, nA4, nA4, nF4
+--& nF4
+--& nD5
+--& nD5
+--& nB4
+--& nB4
+--& nG4
+--& nG4
+$0531: 	dc.b nF4, nD5, nD5, nB4, nB4, nG4, nG4
+$0531: 	sRet
+$0532: Maniax_PSG1:
+$0532: 	sVolEnvPSG	v05
+$0534: 	ssMod68k	$0E, $01, $01, $03
+--& nRst
+--& $40
+$053B: 	dc.b nRst, $40
+$053B: 	sNoteTimeOut	$10
+--& nE5
+--& $18
+--& nD5
+--& nE5
+--& nD5
+--& nE5
+--& $08
+--& nRst
+$0544: 	dc.b nE5, $18, nD5, nE5, nD5, nE5, $08, nRst
+--& nD5
+--& nRst
+--& nF5
+--& $18
+--& nE5
+$054A: 	dc.b nD5, nRst, nF5, $18, nE5
+$054A: 	sNoteTimeOut	$00
+--& nD5
+--& $28
+--& sHold
+--& $28
+$0550: 	dc.b nD5, $28, sHold, $28
+$0550: 	sNoteTimeOut	$10
+--& nD5
+--& $18
+--& nE5
+--& nF5
+--& $10
+--& nD5
+--& $18
+--& nE5
+$0559: 	dc.b nD5, $18, nE5, nF5, $10, nD5, $18, nE5
+--& nF5
+--& $10
+--& $18
+$055D: 	dc.b nF5, $10, $18
+$055D: 	sNoteTimeOut	$00
+--& nE5
+--& $34
+--& sHold
+--& $34
+$0563: 	dc.b nE5, $34, sHold, $34
+$0563: 	sModOff
+$0564: Maniax_Loop15:
+$0564: 	sVolEnvPSG	v01
+$0566: Maniax_Loop14:
+--& nRst
+--& $10
+--& nC6
+--& $04
+--& nRst
+--& $14
+--& nC6
+--& $08
+$056D: 	dc.b nRst, $10, nC6, $04, nRst, $14, nC6, $08
+--& nRst
+--& $20
+--& nB5
+--& $04
+--& nRst
+--& $14
+--& nB5
+--& $08
+$0575: 	dc.b nRst, $20, nB5, $04, nRst, $14, nB5, $08
+--& nRst
+--& $10
+$0578: 	dc.b nRst, $10
+$0578: 	sLoop		$01, $03, Maniax_Loop14
+--& nRst
+--& $10
+--& nA5
+--& $04
+--& nRst
+--& $14
+--& nA5
+--& $08
+$0584: 	dc.b nRst, $10, nA5, $04, nRst, $14, nA5, $08
+--& nRst
+--& $20
+--& nG5
+--& $04
+--& nRst
+--& $14
+--& nG5
+--& $08
+$058C: 	dc.b nRst, $20, nG5, $04, nRst, $14, nG5, $08
+--& nRst
+--& $10
+$058F: 	dc.b nRst, $10
+$058F: 	sLoop		$00, $02, Maniax_Loop15
+$0594: 	sVolEnvPSG	v05
+--& nBb6
+--& $18
+--& nA6
+--& nG6
+--& nF6
+--& nE6
+--& $08
+--& nRst
+$059D: 	dc.b nBb6, $18, nA6, nG6, nF6, nE6, $08, nRst
+--& nD6
+--& nRst
+--& nA5
+--& $18
+--& nB5
+--& nC6
+--& nD6
+--& nE6
+$05A5: 	dc.b nD6, nRst, nA5, $18, nB5, nC6, nD6, nE6
+--& $08
+--& nRst
+--& nA6
+--& nRst
+--& nAb6
+--& $18
+--& nG6
+--& nF6
+$05AD: 	dc.b $08, nRst, nA6, nRst, nAb6, $18, nG6, nF6
+--& nEb6
+--& nD6
+--& $10
+--& nC6
+--& $08
+--& nRst
+--& nRst
+--& $08
+$05B5: 	dc.b nEb6, nD6, $10, nC6, $08, nRst, nRst, $08
+--& nG6
+--& nA6
+--& nG6
+--& $10
+--& $08
+--& nA6
+--& nRst
+--& $10
+$05BD: 	dc.b nG6, nA6, nG6, $10, $08, nA6, nRst, $10
+$05BE: 	saVolPSG	$01
+--& nA5
+--& $18
+--& $08
+--& nRst
+--& nA5
+--& nRst
+$05C6: 	dc.b nA5, $18, $08, nRst, nA5, nRst
+$05C6: 	saVolPSG	$FF
+$05C8: 	sVolEnvPSG	v03
+$05CA: 	sJump		Maniax_Loop15
+$05CD: Maniax_PSG2:
+--& nRst
+--& $40
+$05CF: 	dc.b nRst, $40
+$05CF: 	saVolPSG	$FE
+$05D1: Maniax_Loop16:
+$05D1: 	sNoteTimeOut	$06
+--& nC7
+--& $08
+--& nB6
+--& nA6
+--& nG6
+--& nC7
+--& nB6
+--& nA6
+$05DA: 	dc.b nC7, $08, nB6, nA6, nG6, nC7, nB6, nA6
+--& nG6
+$05DC: 	dc.b nG6
+$05DC: 	sLoop		$00, $08, Maniax_Loop16
+$05E1: 	sNoteTimeOut	$00
+$05E3: Maniax_Loop18:
+$05E3: 	sVolEnvPSG	v01
+$05E5: Maniax_Loop17:
+--& nRst
+--& $10
+--& nE6
+--& $04
+--& nRst
+--& $14
+--& nE6
+--& $08
+$05EC: 	dc.b nRst, $10, nE6, $04, nRst, $14, nE6, $08
+--& nRst
+--& $20
+--& nD6
+--& $04
+--& nRst
+--& $14
+--& nD6
+--& $08
+$05F4: 	dc.b nRst, $20, nD6, $04, nRst, $14, nD6, $08
+--& nRst
+--& $10
+$05F7: 	dc.b nRst, $10
+$05F7: 	sLoop		$01, $03, Maniax_Loop17
+--& nRst
+--& $10
+--& nC6
+--& $04
+--& nRst
+--& $14
+--& nC6
+--& $08
+$0603: 	dc.b nRst, $10, nC6, $04, nRst, $14, nC6, $08
+--& nRst
+--& $20
+--& nB5
+--& $04
+--& nRst
+--& $14
+--& nB5
+--& $08
+$060B: 	dc.b nRst, $20, nB5, $04, nRst, $14, nB5, $08
+--& nRst
+--& $10
+$060E: 	dc.b nRst, $10
+$060E: 	sLoop		$00, $02, Maniax_Loop18
+--& nD6
+--& $34
+--& sHold
+--& $34
+--& nC6
+--& $08
+--& nD6
+--& nE6
+$061A: 	dc.b nD6, $34, sHold, $34, nC6, $08, nD6, nE6
+--& $38
+--& sHold
+--& $38
+--& nC6
+--& $08
+--& nC6
+--& nE6
+--& nEb6
+$0622: 	dc.b $38, sHold, $38, nC6, $08, nC6, nE6, nEb6
+--& $34
+--& sHold
+--& $34
+--& nC6
+--& $08
+--& nEb6
+--& nD6
+$062A: 	dc.b $34, sHold, $34, nC6, $08, nEb6, nD6
+$062A: 	sVolEnvPSG	v05
+--& nC5
+--& $18
+--& $18
+--& $18
+--& $18
+--& $08
+--& nRst
+--& nC5
+$0633: 	dc.b nC5, $18, $18, $18, $18, $08, nRst, nC5
+--& nRst
+$0635: 	dc.b nRst
+$0635: 	sVolEnvPSG	v03
+$0637: 	sJump		Maniax_Loop18
+$063A: Maniax_PSG3:
+$063A: 	sNoisePSG	$E7
+$063C: 	sNoteTimeOut	$06
+--& nA5
+--& $10
+--& $10
+--& $10
+$0642: 	dc.b nA5, $10, $10, $10
+$0642: Maniax_Jump6:
+--& $08
+$0643: 	dc.b $08
+$0643: 	sJump		Maniax_Jump6
+$0646: Maniax_DAC:
+--& nRst
+--& $08
+--& dKick
+--& dSnare
+--& dKick
+--& dKick
+--& dSnare
+--& dSnare
+$064D: 	dc.b nRst, $08, dKick, dSnare, dKick, dKick, dSnare, dSnare
+--& dSnare
+$064F: 	dc.b dSnare
+$064F: Maniax_Loop19:
+--& dKick
+--& $10
+--& dSnare
+--& $08
+--& dKick
+--& $10
+--& $08
+--& dSnare
+$0656: 	dc.b dKick, $10, dSnare, $08, dKick, $10, $08, dSnare
+--& $10
+$0658: 	dc.b $10
+$0658: 	sLoop		$00, $07, Maniax_Loop19
+--& dKick
+--& $10
+--& dSnare
+--& $08
+--& dKick
+--& $10
+--& dSnare
+--& $08
+$0664: 	dc.b dKick, $10, dSnare, $08, dKick, $10, dSnare, $08
+--& $08
+--& $08
+$0667: 	dc.b $08, $08
+$0667: Maniax_Loop20:
+--& dKick
+--& $10
+--& dSnare
+--& $08
+--& dKick
+--& $10
+--& $08
+--& dSnare
+$066E: 	dc.b dKick, $10, dSnare, $08, dKick, $10, $08, dSnare
+--& $10
+$0670: 	dc.b $10
+$0670: 	sLoop		$00, $07, Maniax_Loop20
+--& dKick
+--& $10
+--& dSnare
+--& $08
+--& dKick
+--& $10
+--& dSnare
+--& $08
+$067C: 	dc.b dKick, $10, dSnare, $08, dKick, $10, dSnare, $08
+--& $08
+--& $08
+$067F: 	dc.b $08, $08
+$067F: 	sLoop		$01, $02, Maniax_Loop20
+$0684: 	sJump		Maniax_Loop20
+$0687: Maniax_Patches:
+$0687: 
+	; Patch $00
+	; $08
+	; $0A, $70, $30, $00,	$1F, $1F, $5F, $5F
+	; $12, $0E, $0A, $0A,	$00, $04, $04, $03
+	; $2F, $2F, $2F, $2F,	$24, $2D, $13, $80
+$0687: 	spAlgorithm	$00
+$0687: 	spFeedback	$01
+$068C: 	spDetune	$00, $03, $07, $00
+$068C: 	spMultiple	$0A, $00, $00, $00
+$0690: 	spRateScale	$00, $01, $00, $01
+$0690: 	spAttackRt	$1F, $1F, $1F, $1F
+$0694: 	spAmpMod	$00, $00, $00, $00
+$0694: 	spSustainRt	$12, $0A, $0E, $0A
+$069C: 	spSustainLv	$02, $02, $02, $02
+$069C: 	spDecayRt	$00, $04, $04, $03
+$069C: 	spReleaseRt	$0F, $0F, $0F, $0F
+$069F: 	spTotalLv	$24, $13, $2D, $00
+$06A0: 
+	; Patch $01
+	; $20
+	; $36, $35, $30, $31,	$DF, $DF, $9F, $9F
+	; $07, $06, $09, $06,	$07, $06, $06, $08
+	; $20, $10, $10, $F8,	$19, $37, $13, $80
+$06A0: 	spAlgorithm	$00
+$06A0: 	spFeedback	$04
+$06A5: 	spDetune	$03, $03, $03, $03
+$06A5: 	spMultiple	$06, $00, $05, $01
+$06A9: 	spRateScale	$03, $02, $03, $02
+$06A9: 	spAttackRt	$1F, $1F, $1F, $1F
+$06AD: 	spAmpMod	$00, $00, $00, $00
+$06AD: 	spSustainRt	$07, $09, $06, $06
+$06B5: 	spSustainLv	$02, $01, $01, $0F
+$06B5: 	spDecayRt	$07, $06, $06, $08
+$06B5: 	spReleaseRt	$00, $00, $00, $08
+$06B8: 	spTotalLv	$19, $13, $37, $00
+$06B9: 
+	; Patch $02
+	; $36
+	; $0F, $01, $01, $01,	$1F, $1F, $1F, $1F
+	; $12, $11, $0E, $00,	$00, $0A, $07, $09
+	; $FF, $0F, $1F, $0F,	$18, $80, $80, $80
+$06B9: 	spAlgorithm	$06
+$06B9: 	spFeedback	$06
+$06BE: 	spDetune	$00, $00, $00, $00
+$06BE: 	spMultiple	$0F, $01, $01, $01
+$06C2: 	spRateScale	$00, $00, $00, $00
+$06C2: 	spAttackRt	$1F, $1F, $1F, $1F
+$06C6: 	spAmpMod	$00, $00, $00, $00
+$06C6: 	spSustainRt	$12, $0E, $11, $00
+$06CE: 	spSustainLv	$0F, $01, $00, $00
+$06CE: 	spDecayRt	$00, $07, $0A, $09
+$06CE: 	spReleaseRt	$0F, $0F, $0F, $0F
+$06D1: 	spTotalLv	$18, $00, $00, $00
+$06D2: 
+	; Patch $03
+	; $3D
+	; $01, $02, $02, $02,	$14, $0E, $8C, $0E
+	; $08, $05, $02, $05,	$00, $0D, $0D, $0D
+	; $1F, $1F, $1F, $1F,	$1A, $80, $80, $80
+$06D2: 	spAlgorithm	$05
+$06D2: 	spFeedback	$07
+$06D7: 	spDetune	$00, $00, $00, $00
+$06D7: 	spMultiple	$01, $02, $02, $02
+$06DB: 	spRateScale	$00, $02, $00, $00
+$06DB: 	spAttackRt	$14, $0C, $0E, $0E
+$06DF: 	spAmpMod	$00, $00, $00, $00
+$06DF: 	spSustainRt	$08, $02, $05, $05
+$06E7: 	spSustainLv	$01, $01, $01, $01
+$06E7: 	spDecayRt	$00, $0D, $0D, $0D
+$06E7: 	spReleaseRt	$0F, $0F, $0F, $0F
+$06EA: 	spTotalLv	$1A, $00, $00, $00
+$06EB: 
+	; Patch $04
+	; $2C
+	; $72, $78, $34, $34,	$1F, $12, $1F, $12
+	; $00, $0A, $00, $0A,	$00, $00, $00, $00
+	; $0F, $1F, $0F, $1F,	$16, $80, $17, $80
+$06EB: 	spAlgorithm	$04
+$06EB: 	spFeedback	$05
+$06F0: 	spDetune	$07, $03, $07, $03
+$06F0: 	spMultiple	$02, $04, $08, $04
+$06F4: 	spRateScale	$00, $00, $00, $00
+$06F4: 	spAttackRt	$1F, $1F, $12, $12
+$06F8: 	spAmpMod	$00, $00, $00, $00
+$06F8: 	spSustainRt	$00, $00, $0A, $0A
+$0700: 	spSustainLv	$00, $00, $01, $01
+$0700: 	spDecayRt	$00, $00, $00, $00
+$0700: 	spReleaseRt	$0F, $0F, $0F, $0F
+$0703: 	spTotalLv	$16, $17, $00, $00
+$0704: 
+	; Patch $05
+	; $2C
+	; $74, $74, $34, $34,	$1F, $12, $1F, $1F
+	; $00, $00, $00, $00,	$00, $01, $00, $01
+	; $0F, $3F, $0F, $3F,	$16, $80, $17, $80
+$0704: 	spAlgorithm	$04
+$0704: 	spFeedback	$05
+$0709: 	spDetune	$07, $03, $07, $03
+$0709: 	spMultiple	$04, $04, $04, $04
+$070D: 	spRateScale	$00, $00, $00, $00
+$070D: 	spAttackRt	$1F, $1F, $12, $1F
+$0711: 	spAmpMod	$00, $00, $00, $00
+$0711: 	spSustainRt	$00, $00, $00, $00
+$0719: 	spSustainLv	$00, $00, $03, $03
+$0719: 	spDecayRt	$00, $00, $01, $01
+$0719: 	spReleaseRt	$0F, $0F, $0F, $0F
+$071C: 	spTotalLv	$16, $17, $00, $00
+$071D: 
+	; Patch $06
+	; $04
+	; $72, $42, $32, $32,	$12, $12, $12, $12
+	; $00, $08, $00, $08,	$00, $08, $00, $08
+	; $0F, $1F, $0F, $1F,	$23, $80, $23, $80
+$071D: 	spAlgorithm	$04
+$071D: 	spFeedback	$00
+$0722: 	spDetune	$07, $03, $04, $03
+$0722: 	spMultiple	$02, $02, $02, $02
+$0726: 	spRateScale	$00, $00, $00, $00
+$0726: 	spAttackRt	$12, $12, $12, $12
+$072A: 	spAmpMod	$00, $00, $00, $00
+$072A: 	spSustainRt	$00, $00, $08, $08
+$0732: 	spSustainLv	$00, $00, $01, $01
+$0732: 	spDecayRt	$00, $00, $08, $08
+$0732: 	spReleaseRt	$0F, $0F, $0F, $0F
+$0735: 	spTotalLv	$23, $23, $00, $00
+$0736: 
+	; Patch $07
+	; $3D
+	; $01, $02, $02, $02,	$10, $50, $50, $50
+	; $07, $08, $08, $08,	$01, $00, $00, $00
+	; $20, $17, $17, $17,	$1C, $80, $80, $80
+$0736: 	spAlgorithm	$05
+$0736: 	spFeedback	$07
+$073B: 	spDetune	$00, $00, $00, $00
+$073B: 	spMultiple	$01, $02, $02, $02
+$073F: 	spRateScale	$00, $01, $01, $01
+$073F: 	spAttackRt	$10, $10, $10, $10
+$0743: 	spAmpMod	$00, $00, $00, $00
+$0743: 	spSustainRt	$07, $08, $08, $08
+$074B: 	spSustainLv	$02, $01, $01, $01
+$074B: 	spDecayRt	$01, $00, $00, $00
+$074B: 	spReleaseRt	$00, $07, $07, $07
+$074E: 	spTotalLv	$1C, $00, $00, $00
+$074F: 
+	; Patch $08
+	; $2C
+	; $74, $74, $34, $34,	$1F, $12, $1F, $1F
+	; $00, $07, $00, $07,	$00, $07, $00, $07
+	; $00, $38, $00, $38,	$16, $80, $17, $80
+$074F: 	spAlgorithm	$04
+$074F: 	spFeedback	$05
+$0754: 	spDetune	$07, $03, $07, $03
+$0754: 	spMultiple	$04, $04, $04, $04
+$0758: 	spRateScale	$00, $00, $00, $00
+$0758: 	spAttackRt	$1F, $1F, $12, $1F
+$075C: 	spAmpMod	$00, $00, $00, $00
+$075C: 	spSustainRt	$00, $00, $07, $07
+$0764: 	spSustainLv	$00, $00, $03, $03
+$0764: 	spDecayRt	$00, $00, $07, $07
+$0764: 	spReleaseRt	$00, $00, $08, $08
+$0767: 	spTotalLv	$16, $17, $00, $00
+--------------------------------------------------------------------------------
+--; Time for Script 58 ms
+--; Time for Convert 659 ms
+--; Time for Save 108 ms
+--; Time for Total 825 ms

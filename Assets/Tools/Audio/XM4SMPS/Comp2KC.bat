@@ -1,0 +1,1 @@
+asmx -e -w -l KC.lst -C 68K -b 0 -o KC.bin compKC.asm > xm4smps_asm.log
