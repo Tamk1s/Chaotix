@@ -1,4 +1,4 @@
-;Knuckles' Chaotix Object Listing File
+-  ;Knuckles' Chaotix Object Listing File
 
 ;Sprite Listing Loads all sprites used to represent objects in this game
 ;- Set codes are as follows-
@@ -43,7 +43,7 @@
                  Width:    28
                 Height:    28
 
- # of Sprites in set 1:    30
+ # of Sprites in set 1:    31
  ;"GLOBAL" SET
 
          ;RING
@@ -158,26 +158,26 @@
                  Width:    52
                 Height:    62
 
-        ;SPRING COIL
+        ;SPRING PAD BLUE VERTICAL
         Sprite 16 file:     1
-          xoff in file:     8
-          yoff in file:    87
-                 Width:    16
-                Height:     8
+          xoff in file:     0
+          yoff in file:    113
+                 Width:    32
+                Height:    16
 
-        ;SPRING PAD YELLOW
+        ;SPRING PAD YELLOW VERTICAL
         Sprite 17 file:     1
           xoff in file:     0
-          yoff in file:    79
+          yoff in file:    97
                  Width:    32
-                Height:     8
+                Height:    16
 
-        ;SPRING PAD RED
+        ;SPRING PAD RED VERTICAL
         Sprite 18 file:     1
           xoff in file:     0
-          yoff in file:    95
+          yoff in file:    81
                  Width:    32
-                Height:     8
+                Height:    16
 
         ;SPIKES VERTICAL
         Sprite 19 file:     1
@@ -193,52 +193,52 @@
                  Width:    32
                 Height:    32
 
-        ;SPRING COIL HORIZONTAL
+        ;SPRING PAD BLUE HORIZONTAL
         Sprite 21 file:     1
           xoff in file:    32
-          yoff in file:   119
-                 Width:     8
-                Height:    16
+          yoff in file:    81
+                 Width:    16
+                Height:    32
 
         ;SPRING PAD YELLOW HORIZONTAL
         Sprite 22 file:     1
-          xoff in file:    56
-          yoff in file:   111
-                 Width:     8
+          xoff in file:    48
+          yoff in file:    81
+                 Width:    16
                 Height:    32
 
         ;SPRING PAD RED HORIZONTAL
         Sprite 23 file:     1
-          xoff in file:    40
-          yoff in file:   111
-                 Width:     8
+          xoff in file:    64
+          yoff in file:    81
+                 Width:    16
                 Height:    32
 
-        ;SPRING PAD YELLOW HORIZONTAL
+        ;SPRING PAD BLUE DIAGONAL
         Sprite 24 file:     1
           xoff in file:     0
-          yoff in file:   111
+          yoff in file:   129
                  Width:    32
                 Height:    32
 
-        ;SPRING PAD RED HORIZONTAL
+        ;SPRING PAD YELLOW DIAGONAL
         Sprite 25 file:     1
-          xoff in file:     0
-          yoff in file:   143
+          xoff in file:    32
+          yoff in file:   129
                  Width:    32
                 Height:    32
 
-	;sWITCH VERT
+	;SWITCH VERT
         Sprite 26 file:    1
           xoff in file:    0
-          yoff in file:    159
+          yoff in file:    161
                  Width:    32
                 Height:    16
 
-	;sWITCH Horiz
+	;SWITCH Horiz
         Sprite 27 file:    1
           xoff in file:    32
-          yoff in file:    159
+          yoff in file:    161
                  Width:    16
                 Height:    32
 
@@ -255,6 +255,13 @@
           yoff in file:    28
                  Width:    16
                 Height:    14
+				
+	;SPRING PAD RED DIAGONAL
+        Sprite 30 file:     1
+          xoff in file:    64
+          yoff in file:   129
+                 Width:    32
+                Height:    32
 
  # of Sprites in set 2:    25
  ;ENEMY SET
@@ -10244,8 +10251,8 @@ Type 0    XMin: -8
   # of Sprites:   1
    Sprite 0 ID:  27
            Set:   1
-     Direction:   0
-          xoff: -8
+     Direction:   1
+          xoff: -16
           yoff: -16
 
      Object ID:  1D
@@ -11500,8 +11507,6 @@ Num Dependants:   0
           xoff: -16
           yoff: -32
 
-
-
      Object ID:  58
     # of Zones:   1
     Zone Entry:  FF
@@ -11518,14 +11523,371 @@ Num Dependants:   0
     # of Zones:   1
     Zone Entry:  FF
    Description: Spring
- Num Bitfields:   0
+ Num Bitfields:   2
+    BitField 0: 0000011100000000
+		Desc 0: Up
+		Desc 1: Down
+		Desc 2: Left
+		Desc 3: Right
+		Desc 4: Diagonal UL
+		Desc 5: Diagonal UR
+		Desc 6: Diagonal DL
+		Desc 7: Diagonal DR
+    BitField 1: 0001100000000000
+		Desc 0: Red
+		Desc 1: Yellow
+		Desc 2: Blue
+		Desc 3: Invalid
   DefaultParam:   0
    DefaultFlag:   0
     DefaultDir:   0
  DefltRemember:   0
-Num Dependants:   0
-     Num Types:   0
+Num Dependants:   2
+   Dependant 0:   0
+   Dependant 1:   1
+     Num Types:  24
+	 
+ ;Red Up
+ Type 0   Val0:   0
+          Val1:   0
+          XMin: -16
+          YMin:  -8
+          XMax:  16
+          YMax:   8
+  # of Sprites:   1
+   Sprite 0 ID:  18
+           Set:   1
+     Direction:   0
+          xoff: -16
+          yoff:  -16
+  
+ ;Red Down
+ Type 1   Val0:   1
+          Val1:   0
+          XMin: -16
+          YMin:  -8
+          XMax:  16
+          YMax:   8
+  # of Sprites:   1
+   Sprite 0 ID:  18
+           Set:   1
+     Direction:   2
+          xoff: -16
+          yoff:  0
+		  
+ ;Red Left
+ Type 2   Val0:   2
+          Val1:   0
+          XMin:  -8
+          YMin:  -16
+          XMax:   8
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  23
+           Set:   1
+     Direction:   1
+          xoff:  -16
+          yoff:  -16
 
+ ;Red Right
+ Type 3   Val0:   3
+          Val1:   0
+          XMin:  -8
+          YMin:  -16
+          XMax:   8
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  23
+           Set:   1
+     Direction:   0
+          xoff:  0
+          yoff:  -16
+		  
+ ;Red Diagonal UL
+ Type 4   Val0:   4
+          Val1:   0
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  30
+           Set:   1
+     Direction:   1
+          xoff: -16
+          yoff: -16
+		  
+  ;Red Diagonal UR
+ Type 5   Val0:   5
+          Val1:   0
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  30
+           Set:   1
+     Direction:   0
+          xoff: -16
+          yoff: -16
+		  
+  ;Red Diagonal DL
+  Type 6  Val0:   6
+          Val1:   0
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  30
+           Set:   1
+     Direction:   3
+          xoff: -16
+          yoff: -16
+		  
+  ;Red Diagonal DR
+  Type 7  Val0:   7
+          Val1:   0
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+		  
+  # of Sprites:   1
+   Sprite 0 ID:  30
+           Set:   1
+     Direction:   2
+          xoff: -16
+          yoff: -16
+		  
+ ;Yellow
+ 
+ ;Yellow Up
+ Type 8   Val0:   0
+          Val1:   1
+          XMin: -16
+          YMin:  -8
+          XMax:  16
+          YMax:   8
+  # of Sprites:   1
+   Sprite 0 ID:  17
+           Set:   1
+     Direction:   0
+          xoff: -16
+          yoff:  -16
+		  
+ ;Yellow Down
+ Type 9   Val0:   1
+          Val1:   1
+          XMin: -16
+          YMin:  -8
+          XMax:  16
+          YMax:   8
+  # of Sprites:   1
+   Sprite 0 ID:  17
+           Set:   1
+     Direction:   2
+          xoff: -16
+          yoff:  0
+		  
+ ;Yellow Left
+ Type 10  Val0:   2
+          Val1:   1
+          XMin: -16
+          YMin:  -8
+          XMax:  16
+          YMax:   8
+  # of Sprites:   1
+   Sprite 0 ID:  22
+           Set:   1
+     Direction:   1
+          xoff:  -16
+          yoff:  -16
+		  
+ ;Yellow Right		  
+ Type 11  Val0:   3
+          Val1:   1
+          XMin: -16
+          YMin:  -8
+          XMax:  16
+          YMax:   8
+  # of Sprites:   1
+   Sprite 0 ID:  22
+           Set:   1
+     Direction:   0
+          xoff:  0
+          yoff:  -16
+		  
+ ;Yellow Diagonal UL
+ Type 12  Val0:   4
+          Val1:   1
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  25
+           Set:   1
+     Direction:   1
+          xoff: -16
+          yoff: -16
+		  
+ ;Yellow Diagonal UR		  
+ Type 13  Val0:   5
+          Val1:   1
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  25
+           Set:   1
+     Direction:   0
+          xoff: -16
+          yoff: -16
+		  
+ ;Yellow Diagonal DL		  
+ Type 14  Val0:   6
+          Val1:   1
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  25
+           Set:   1
+     Direction:   3
+          xoff: -16
+          yoff: -16
+		  
+ ;Yellow Diagonal DR		  
+ Type 15  Val0:   7
+          Val1:   1
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  25
+           Set:   1
+     Direction:   2
+          xoff: -16
+          yoff: -16
+		  
+ ;Blue
+ 
+ ;Blue Up
+ Type 16  Val0:   0
+          Val1:   2
+          XMin: -16
+          YMin:  -8
+          XMax:  16
+          YMax:   8
+  # of Sprites:   1
+   Sprite 0 ID:  16
+           Set:   1
+     Direction:   0
+          xoff:  -16
+          yoff:  -16
+		  
+ ;Blue Down		  
+ Type 17  Val0:   1
+          Val1:   2
+          XMin: -16
+          YMin:  -8
+          XMax:  16
+          YMax:   8
+  # of Sprites:   1
+   Sprite 0 ID:  16
+           Set:   1
+     Direction:   2
+          xoff: -16
+          yoff:  0
+		  
+ ;Blue Left
+ Type 18  Val0:   2
+          Val1:   2
+          XMin: -16
+          YMin:  -8
+          XMax:  16
+          YMax:   8
+  # of Sprites:   1
+   Sprite 0 ID:  21
+           Set:   1
+     Direction:   1
+          xoff:  -16
+          yoff:  -16
+		  
+ ;Blue Right		  
+ Type 19  Val0:   3
+          Val1:   2
+          XMin: -16
+          YMin:  -8
+          XMax:  16
+          YMax:   8
+  # of Sprites:   1
+   Sprite 0 ID:  21
+           Set:   1
+     Direction:   0
+          xoff:  0
+          yoff:  -16
+		  
+ ;Blue Diagonal UL		  
+ Type 20  Val0:   4
+          Val1:   2
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  24
+           Set:   1
+     Direction:   1
+          xoff: -16
+          yoff: -16
+		  
+ ;Blue Diagonal UR		  
+ Type 21  Val0:   5
+          Val1:   2
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  24
+           Set:   1
+     Direction:   0
+          xoff: -16
+          yoff: -16
+		  
+ ;Blue Diagonal DL		  
+ Type 22  Val0:   6
+          Val1:   2
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  24
+           Set:   1
+     Direction:   3
+          xoff: -16
+          yoff: -16
+		  
+ ;Blue Diagonal DR		  
+ Type 23  Val0:   7
+          Val1:   2
+          XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:  24
+           Set:   1
+      Direction:  2
+          xoff: -16
+          yoff: -16
+		  
      Object ID:  5A
     # of Zones:   1
     Zone Entry:  FF

@@ -1,0 +1,22 @@
+2
+20
+00000	00FFE02C	d	h	0	v_objspace
+00001	00FFD460	d	h	0	Pal Cache $40w
+00002	00FFC1DE	w	h	0	HScroll FG Pos
+00003	00FFC1EE	w	h	0	VScroll FG Pos
+00004	00000000	S	S	0	----------------------------
+00005	00FFDFF2	w	h	0	v_zone
+00006	00FFDFF4	w	h	0	v_act
+00007	00FFDFF6	w	h	0	v_tod
+00008	00000000	S	S	0	----------------------------
+00009	00FFE008	w	h	0	v_rings
+0000A	00FFE00A	d	h	0	v_score
+0000B	00FFE01A	w	h	0	v_ChRings
+0000C	00000000	S	S	0	----------------------------
+0000D	00FFDFEC	w	h	0	v_screenposx
+0000E	00FFDFEE	w	h	0	v_screenposy
+0000F	00000000	S	S	0	----------------------------
+00010	00FFC1E8	w	h	0	v_limitleft1
+00011	00FFC1EA	w	h	0	v_limitbtm1
+00012	00FFC1EC	w	h	0	v_limittop1
+00013	00FFC1E6	w	h	0	v_limitright1

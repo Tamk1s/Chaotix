@@ -3373,19 +3373,24 @@ StartSeg LevSize_Data Big_Endian	;Level Size and other Setup Data
 				WORD 0
 				WORD $FFFF
 				WORD 0
-	LS_FG_TTZ06MN:		include "Levels/TTZ/FG/FGSt06MN.bin"
+	LS_FG_TTZ06MN:
+				include "Levels/TTZ/FG/FGSt06MN.bin"
 				include "Levels/TTZ/FG/Size06MN.bin"
-				WORD $EC0
-				WORD 0
-				WORD $F00
-				WORD 0
-	LS_BG_TTZ06MN:		WORD 0
-				WORD $25F
+				include "Levels/TTZ/FG/ScSize06MN.bin"
+				;WORD $EC0
+				;WORD 0
+				;WORD $F00
+				;WORD 0
+	LS_BG_TTZ06MN:
+				;WORD 0
+				;WORD $25F
+				include "Levels/TTZ/BG/BGSt06MN.bin"
 				include "Levels/TTZ/BG/Size06MN.bin"
-				WORD $C0
-				WORD 0
-				WORD $300
-				WORD 0
+				include "Levels/TTZ/BG/ScSize06MN.bin"
+				;WORD $C0
+				;WORD 0
+				;WORD $300
+				;WORD 0
 	LS_FG_MMZ01MN:		include "Levels/MMZ/FG/FGSt01MN.bin"
 				include "Levels/MMZ/FG/Size01MN.bin"
 				WORD $EC0
