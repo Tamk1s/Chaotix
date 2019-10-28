@@ -1,0 +1,74 @@
+SMPS Optimizer
+--------------
+
+FM/DAC Tracks: 7, PSG Tracks: 3
+
+Pointer List:
+Coord	PntFile	PntReal	Pos
+7F	1918	1918	0000
+00	1917	1917	0006
+01	0034	0034	000A/04E6
+02	04E8	04E8	000E/07CC
+03	07CE	07CE	0012/0AB4
+04	0AB6	0AB6	0016/0EE0
+05	0EE2	0EE2	001A/129C
+06	129E	129E	001E/13C5
+10	13C7	13C7	0022/1624
+11	1626	1626	0028/1883
+12	1885	1885	002E/1915
+
+
+Optimization missed 0x0 (likely unused) bytes:
+-
+
+Pass #1: 6649 bytes -> 4986 bytes (Ratio: 74.99 %)
+Pass #2: 4986 bytes -> 4983 bytes (Ratio: 99.94 %)
+Trk 1 - Loop #0 found: 004F-0054 x3 (til 005E)
+Trk 1 - Loop #0 found: 0077-007D x8 (til 00A7)
+Trk 1 - Loop #0 found: 00BA-00BF x3 (til 00C9)
+Trk 1 - Loop #0 found: 0122-0123 x8 (til 012A)
+Trk 1 - Loop #0 found: 01AD-01B3 x8 (til 01DD)
+Trk 1 - Loop #0 found: 01DE-01E3 x3 (til 01ED)
+Trk 1 - Loop #0 found: 0244-0245 x8 (til 024C)
+Trk 1 - Loop #0 found: 02BD-02BE x8 (til 02C5)
+Trk 1 - Loop #0 found: 02DD-02DE x8 (til 02E5)
+Trk 1 - Loop #0 found: 02E5-02E6 x8 (til 02ED)
+Trk 1 - Loop #0 found: 02ED-02EE x8 (til 02F5)
+Trk 1 - Loop #0 found: 02F5-02F6 x8 (til 02FD)
+Trk 2 - Loop #0 found: 042A-0434 x2 (til 043E)
+Trk 2 - Loop #0 found: 046F-0473 x8 (til 048F)
+Trk 2 - Loop #0 found: 0491-04AF x2 (til 04CD)
+Trk 2 - Loop #0 found: 0518-0522 x2 (til 052C)
+Trk 3 - Loop #0 found: 0679-0683 x2 (til 068D)
+Trk 3 - Loop #0 found: 06C2-06C6 x6 (til 06DA)
+Trk 3 - Loop #0 found: 06E0-06FE x2 (til 071C)
+Trk 3 - Loop #0 found: 0767-0771 x2 (til 077B)
+Trk 4 - Loop #0 found: 07E5-07EB x7 (til 080F)
+Trk 4 - Loop #0 found: 0908-090A x5 (til 0912)
+Trk 4 - Loop #0 found: 0918-091A x5 (til 0922)
+Trk 4 - Loop #0 found: 0938-093A x5 (til 0942)
+Trk 4 - Loop #0 found: 0948-094A x5 (til 0952)
+Trk 4 - Loop #0 found: 0958-095A x5 (til 0962)
+Trk 5 - Loop #0 found: 0ACB-0ACC x15 (til 0ADA)
+Trk 5 - Loop #0 found: 0BB5-0BB7 x5 (til 0BBF)
+Trk 5 - Loop #0 found: 0BC5-0BC7 x5 (til 0BCF)
+Trk 5 - Loop #0 found: 0BE5-0BE7 x5 (til 0BEF)
+Trk 5 - Loop #0 found: 0BF5-0BF7 x5 (til 0BFF)
+Trk 5 - Loop #0 found: 0C05-0C07 x5 (til 0C0F)
+Trk 5 - Loop #0 found: 0C25-0C27 x4 (til 0C2D)
+Trk 6 - Loop #0 found: 0D6A-0D6B x15 (til 0D79)
+Trk 6 - Loop #0 found: 0DA4-0DB2 x2 (til 0DC0)
+Trk 6 - Loop #0 found: 0DCD-0DCE x7 (til 0DD4)
+Trk 6 - Loop #0 found: 0E02-0E10 x2 (til 0E1E)
+Trk 6 - Loop #0 found: 0E37-0E45 x2 (til 0E53)
+Trk 7 - Loop #0 found: 0E71-0E8B x2 (til 0EA5)
+Trk 7 - Loop #0 found: 0EB9-0ED3 x2 (til 0EED)
+Trk 7 - Loop #0 found: 0F6F-0F89 x2 (til 0FA3)
+Trk 8 - Loop #0 found: 1045-105F x2 (til 1079)
+Trk 8 - Loop #0 found: 108D-10A7 x2 (til 10C1)
+Trk 8 - Loop #0 found: 1143-115D x2 (til 1177)
+Trk 9 - Loop #0 found: 1210-1211 x15 (til 121F)
+Trk 9 - Loop #0 found: 1241-1242 x18 (til 1253)
+Trk 9 - Loop #0 found: 128A-128B x8 (til 1292)
+Pass #3: 4983 bytes -> 4515 bytes (Ratio: 90.61 %)
+Total: 6649 bytes -> 4515 bytes (Ratio: 67.90 %, 3 passes)

@@ -3084,7 +3084,8 @@ StartSeg LevSize_Data Big_Endian	;Level Size and other Setup Data
 	LSPtr_BBZ56MN:		DWORD LS_FG_BBZ356MN
 				DWORD LS_BG_BBZ356MN
 				DWORD $FFFFFFFF
-	LSPtr_SSZ01MD:		DWORD LS_FG_SSZ01MN
+	LSPtr_SSZ01MD:
+				DWORD LS_FG_SSZ01MN
 				DWORD LS_BG_SSZ02MD
 				DWORD $FFFFFFFF
 	LSPtr_SSZ2MD:		DWORD LS_FG_SSZ2MN
@@ -3257,8 +3258,12 @@ StartSeg LevSize_Data Big_Endian	;Level Size and other Setup Data
 				WORD 0
 				WORD $180
 				WORD 0
-	LS_FG_SSZ01MN:		include "Levels/SSZ/FG/FGSt01MN.bin"
+				
+	;!@
+	LS_FG_SSZ01MN:
+				include "Levels/SSZ/FG/FGSt01MN.bin"
 				include "Levels/SSZ/FG/Size01MN.bin"
+				;!@ Horiz wrapping
 				WORD $1540
 				WORD 0
 				WORD $810
