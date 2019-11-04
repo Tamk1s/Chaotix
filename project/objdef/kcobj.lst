@@ -4,7 +4,17 @@
 ;- Set codes are as follows-
 ;  0 is stuff.pcx
 ;  1 is kcobj1.pcx	global
-;  2 is kcobj2.pcx	enemies
+;  2 is kcobj2.pcx	TTZ Enemies
+;  3 is kcobj3.pcx	AAZ objects
+;  4 is kcobj4.pcx	BBZ objects
+;  5 is kcobj5.pcx	MMZ objects
+;  6 is kcobj6.pcx	SSZ objects
+;  7 is kcobj7.pcx	TTZ objects
+;  8 is kcobj8.pcx	IIZ/Training/Tut objects
+;  9 is kcobj9.pcx	AAZ Enemies
+; 10 is kcobj10.pcx	BBZ Enemies
+; 11 is kcobj11.pcx	MMZ Enemies
+; 12 is kcobj12.pcx	SSZ Enemies
 
 ;  etc
 ;- xoff in file is the x position of the top-left corner of the sprite in
@@ -17,7 +27,7 @@
 ;during editing. "Ring" and "Question Icon" must always be the first two
 ;sprites that appear in this set.
 
-      # of sprite sets:     9
+      # of sprite sets:     12
 
  # of Sprites in set 0:     3
  ;"INVISIBLE" SET
@@ -43,7 +53,7 @@
                  Width:    28
                 Height:    28
 
- # of Sprites in set 1:    31
+ # of Sprites in set 1:    33
  ;"GLOBAL" SET
 
          ;RING
@@ -262,187 +272,61 @@
           yoff in file:   129
                  Width:    32
                 Height:    32
+				
+	     ;Vert path swapper
+         Sprite 31 file:    1
+          xoff in file:    92
+          yoff in file:    28
+                 Width:    16
+                Height:    16
 
- # of Sprites in set 2:    25
- ;ENEMY SET
+         ;Horiz Path swapper
+         Sprite 32 file:    1
+          xoff in file:    92
+          yoff in file:    45
+                 Width:    16
+                Height:    16
 
-         ;Bairu
-         Sprite 0 file:    2
-          xoff in file:    0
-          yoff in file:    0
-                 Width:    50
-                Height:    44
+ # of Sprites in set 2:    5
+ ;TTZ ENEMY SET
 
          ;Carry
-         Sprite 1 file:    2
+         Sprite 0 file:    2
           xoff in file:    51
           yoff in file:    0
                  Width:    34
                 Height:    64
 
-          ;AAZ Badnik #1
-         Sprite 2 file:    2
-          xoff in file:    86
-          yoff in file:    0
-                 Width:    41
-                Height:    64
-
-         ;AAZ Badnik #2
-         Sprite 3 file:    2
-          xoff in file:    128
-          yoff in file:    0
-                 Width:    42
-                Height:    49
-
-         ;Dribbler
-         Sprite 4 file:     2
-          xoff in file:    171
-          yoff in file:     0
-                 Width:    53
-                Height:    50
-
-         ;Gotch
-         Sprite 5 file:     2
-          xoff in file:    225
-          yoff in file:     0
-                 Width:    76
-                Height:    36
-
-         ;Happa
-         Sprite 6 file:     2
-          xoff in file:     0
-          yoff in file:    45
-                 Width:    48
-                Height:    47
-
-         ;Juppun
-         Sprite 7 file:     2
-          xoff in file:    128
-          yoff in file:    50
-                 Width:    40
-                Height:    42
-
-         ;Kameka
-         Sprite 8 file:     2
-          xoff in file:    49
-          yoff in file:    65
-                 Width:    39
-                Height:    24
-
-         ;BBZ Badnik #1
-         Sprite 9 file:     2
-          xoff in file:    88
-          yoff in file:    65
-                 Width:    40
-                Height:    42
-
-        ;BBZ Badnik #2
-        Sprite 10 file:     2
-          xoff in file:    258
-          yoff in file:    37
-                 Width:    63
-                Height:    21
-
-        ;BBZ Badnik #3
-        Sprite 11 file:     2
-          xoff in file:    169
-          yoff in file:    51
-                 Width:    60
-                Height:    52
-
-        ;MMZ Badnik #1
-        Sprite 12 file:     2
-          xoff in file:    230
-          yoff in file:    59
-                 Width:    56
-                Height:    20
-
-        ;MMZ Badnik #2
-        Sprite 13 file:     2
-          xoff in file:    230
-          yoff in file:    80
-                 Width:    70
-                Height:    28
-
-        ;MMZ Badnkik #3
-        Sprite 14 file:     2
-          xoff in file:     0
-          yoff in file:    93
-                 Width:    55
-                Height:    35
-
-        ;Patabata
-        Sprite 15 file:     2
-          xoff in file:    56
-          yoff in file:    108
-                 Width:    50
-                Height:    26
-
         ;TTZ Badnik #1
-        Sprite 16 file:     2
+        Sprite  1 file:     2
           xoff in file:     0
           yoff in file:    129
                  Width:    49
                 Height:    39
 
         ;TTZ Badnik #2
-        Sprite 17 file:     2
+        Sprite  2 file:     2
           xoff in file:    50
           yoff in file:    135
                  Width:    60
                 Height:    47
 
-        ;TTZ Badnkik #3
-        Sprite 18 file:     2
+        ;TTZ Badnik #3
+        Sprite  3 file:     2
           xoff in file:    107
           yoff in file:    108
                  Width:    42
                 Height:    44
 
-        ;Plat enemey
-        Sprite 19 file:     2
-          xoff in file:     0
-          yoff in file:    169
-                 Width:    48
-                Height:    24
-
-        ;Nishita (Ground)
-        Sprite 20 file:     2
-          xoff in file:   111
-          yoff in file:   153
-                 Width:    39
-                Height:    35
-
-        ;Nishita (Wall)
-        Sprite 21 file:     2
-          xoff in file:    150
-          yoff in file:    104
-                 Width:    35
-                Height:    39
-
-        ;Pirani
-        Sprite 22 file:     2
-          xoff in file:    150
-          yoff in file:    144
-                 Width:    45
-                Height:    34
-
         ;Uniformer
-        Sprite 23 file:     2
+        Sprite  4 file:     2
           xoff in file:    196
           yoff in file:    109
                  Width:    71
                 Height:    61
 
-        ;Zakku
-        Sprite 24 file:     2
-          xoff in file:    268
-          yoff in file:    109
-                 Width:    41
-                Height:    58
-
  # of Sprites in set 3:    16
- ;AAZ
+ ;AAZ objects
 
          ;UFO
          Sprite 0 file:    3
@@ -557,7 +441,7 @@
                 Height:    64
 
  # of Sprites in set 4:    10
- ;BBZ
+ ;BBZ objects
 
          ;Glyph Door piece
          Sprite 0 file:    4
@@ -630,7 +514,7 @@
                 Height:    35
 
  # of Sprites in set 5:     3
- ;MMZ
+ ;MMZ objects
 
          ;MMZ Door
          Sprite 0 file:     5
@@ -654,7 +538,7 @@
                 Height:    25
 
  # of Sprites in set 6:    12
- ;SSZ
+ ;SSZ objects
 
          ;Door projector
          Sprite 0 file:    6
@@ -741,7 +625,7 @@
                 Height:    95
 
  # of Sprites in set 7:    16
- ;AAZ
+ ;TTZ Objects
 
          ;Conveyor Switch
          Sprite 0 file:    7
@@ -762,7 +646,7 @@
           xoff in file:    216
           yoff in file:     72
                  Width:     32
-                Height:    128
+                Height:     64
 
          ;Growing/shrinking plat
          Sprite 3 file:     7
@@ -773,10 +657,10 @@
 
          ;Hoop
          Sprite 4 file:     7
-          xoff in file:    55
-          yoff in file:    56
-                 Width:    33
-                Height:    36
+          xoff in file:    215
+          yoff in file:    136
+                 Width:    68
+                Height:    64
 
          ;Drill Machine
          Sprite 5 file:     7
@@ -831,8 +715,8 @@
         Sprite 12 file:     7
           xoff in file:    249
           yoff in file:    72
-                 Width:    34
-                Height:    128
+                 Width:    32
+                Height:    64
 
         ;Parallax Palm Tree
         Sprite 13 file:     7
@@ -855,7 +739,7 @@
                  Width:    136
                 Height:    96
 
- # of Sprites in set 8:    9
+ # of Sprites in set 8:    7
  ;Intro/Training
 
          ;IT Collasping plat
@@ -879,7 +763,7 @@
                  Width:    40
                 Height:    16
 
-          ;Plat en
+          ;Platform enemy
          Sprite 3 file:     8
           xoff in file:    170
           yoff in file:     0
@@ -907,19 +791,149 @@
                  Width:    24
                 Height:    64
 
-         ;Vert path swapper
-         Sprite 7 file:     8
-          xoff in file:    24
-          yoff in file:    33
-                 Width:    16
-                Height:    16
+# of Sprites in set 9:    4
+;AAZ Enemies
 
-         ;Horiz Path swapper
-         Sprite 8 file:     8
-          xoff in file:    42
-          yoff in file:    33
-                 Width:    16
-                Height:    16
+         ;Bairu
+         Sprite 0 file:    9
+          xoff in file:    0
+          yoff in file:    0
+                 Width:    50
+                Height:    44
+
+          ;AAZ Badnik #1
+         Sprite 1 file:    9
+          xoff in file:    86
+          yoff in file:    0
+                 Width:    41
+                Height:    64
+
+         ;AAZ Badnik #2
+         Sprite 2 file:    9
+          xoff in file:    128
+          yoff in file:    0
+                 Width:    42
+                Height:    49
+				
+         ;Juppun
+         Sprite 3 file:    9
+          xoff in file:    128
+          yoff in file:    50
+                 Width:    40
+                Height:    42
+
+# of Sprites in set 10:    5
+;BBZ Enemies
+
+         ;Happa
+         Sprite 0 file:    10
+          xoff in file:     0
+          yoff in file:    45
+                 Width:    48
+                Height:    47
+				
+         ;BBZ Badnik #1
+         Sprite 1 file:    10
+          xoff in file:    88
+          yoff in file:    65
+                 Width:    40
+                Height:    42
+
+        ;BBZ Badnik #2
+        Sprite  2 file:    10
+          xoff in file:    258
+          yoff in file:    37
+                 Width:    63
+                Height:    21
+
+        ;BBZ Badnik #3
+        Sprite  3 file:    10
+          xoff in file:    169
+          yoff in file:    51
+                 Width:    60
+                Height:    52				
+
+        ;Zakku
+        Sprite  4 file:    10
+          xoff in file:    268
+          yoff in file:    109
+                 Width:    41
+                Height:    58
+
+# of Sprites in set 11:    6
+;MMZ Enemies
+
+        ;Nishita (Ground)
+        Sprite  0 file:    11
+          xoff in file:   111
+          yoff in file:   153
+                 Width:    39
+                Height:    35
+
+        ;Nishita (Wall)
+        Sprite  1 file:    11
+          xoff in file:    150
+          yoff in file:    104
+                 Width:    35
+                Height:    39
+
+        ;Pirani
+        Sprite  2 file:    11
+          xoff in file:    150
+          yoff in file:    144
+                 Width:    45
+                Height:    34
+
+        ;MMZ Badnik #1
+        Sprite  3 file:    11
+          xoff in file:    230
+          yoff in file:    59
+                 Width:    56
+                Height:    20
+
+        ;MMZ Badnik #2
+        Sprite  4 file:    11
+          xoff in file:    230
+          yoff in file:    80
+                 Width:    70
+                Height:    28
+
+        ;MMZ Badnik #3
+        Sprite  5 file:    11
+          xoff in file:     0
+          yoff in file:    93
+                 Width:    55
+                Height:    35
+
+;# of Sprites in set 12:    4
+;SSZ Enemies
+
+         ;Dribbler
+         ;Sprite 0 file:    12
+          ;xoff in file:    171
+          ;yoff in file:     0
+                 ;Width:    53
+
+         ;Gotch
+         ;Sprite 1 file:    12
+          ;xoff in file:    225
+          ;yoff in file:     0
+                 ;Width:    76
+                ;Height:    36
+
+         ;Kameka
+         ;Sprite 2 file:    12
+          ;xoff in file:    49
+          ;yoff in file:    65
+                 ;Width:    39
+                ;Height:    24
+				
+        ;Pata-bata
+        ;Sprite  3 file:    12
+          ;xoff in file:    56
+          ;yoff in file:    108
+                 ;Width:    50
+                ;Height:    26
 
 ;Object Listing gives identity to each of the objects listed
 ;- Object ID is the ID number of the object in the game (hex value)
@@ -10251,14 +10265,14 @@ Type 0    XMin: -8
   # of Sprites:   1
    Sprite 0 ID:  27
            Set:   1
-     Direction:   1
+     Direction:   0
           xoff: -16
           yoff: -16
 
      Object ID:  1D
     # of Zones:   1
     Zone Entry:  FF
-   Description: Horiz Path swapper (Training)
+   Description: Horiz Path swapper
  Num Bitfields:   0
   DefaultParam:   0
    DefaultFlag:   0
@@ -10271,8 +10285,8 @@ Type 0    XMin:  -8
           XMax:   8
           YMax:   8
   # of Sprites:   1
-   Sprite 0 ID:   8
-           Set:   8
+   Sprite 0 ID:  32
+           Set:   1
      Direction:   0
           xoff:  -8
           yoff:  -8
@@ -10280,7 +10294,7 @@ Type 0    XMin:  -8
      Object ID:  1E
     # of Zones:   1
     Zone Entry:  FF
-   Description: Vert Path swapper (Training)
+   Description: Vert Path swapper
  Num Bitfields:   0
   DefaultParam:   0
    DefaultFlag:   0
@@ -10293,8 +10307,8 @@ Type 0    XMin:  -8
           XMax:   8
           YMax:   8
   # of Sprites:   1
-   Sprite 0 ID:   7
-           Set:   8
+   Sprite 0 ID:  31
+           Set:   1
      Direction:   0
           xoff:  -8
           yoff:  -8
@@ -10369,15 +10383,15 @@ Num Dependants:   0
 Num Dependants:   0
      Num Types:   1
 Type 0    XMin: -16
-          YMin: -64
+          YMin: -32
           XMax:  16
-          YMax:  64
+          YMax:  32
   # of Sprites:   1
    Sprite 0 ID:   2
            Set:   7
      Direction:   0
           xoff: -16
-          yoff: -64
+          yoff: -32
 
      Object ID:  24
     # of Zones:   1
@@ -10391,15 +10405,15 @@ Type 0    XMin: -16
 Num Dependants:   0
      Num Types:   1
 Type 0    XMin: -16
-          YMin: -64
+          YMin: -32
           XMax:  16
-          YMax:  64
+          YMax:  32
   # of Sprites:   1
    Sprite 0 ID:   2
            Set:   7
      Direction:   2
           xoff: -16
-          yoff: -64
+          yoff: -32
 
      Object ID:  25
     # of Zones:   1
@@ -10497,8 +10511,8 @@ Type 0    XMin: -32
           XMax:  32
           YMax:  11
   # of Sprites:   1
-   Sprite 0 ID:  10
-           Set:   2
+   Sprite 0 ID:   2
+           Set:  10
      Direction:   1
           xoff: -32
           yoff: -11
@@ -10644,8 +10658,9 @@ Type 0    XMin: -20
           XMax:  20
           YMax:  12
   # of Sprites:   1
-   Sprite 0 ID:   8
-           Set:   2
+   Sprite 0 ID:   2
+           ;!@ Set:  12
+		   Set:  2
      Direction:   0
           xoff: -20
           yoff: -12
@@ -10736,8 +10751,8 @@ Num Dependants:   0
           XMax:  28
           YMax:  10
   # of Sprites:   1
-   Sprite 0 ID:  12
-           Set:   2
+   Sprite 0 ID:   3
+           Set:  11
      Direction:   0
           xoff: -28
           yoff: -10
@@ -10757,7 +10772,7 @@ Num Dependants:   0
      Object ID:  3A
     # of Zones:   1
     Zone Entry:  FF
-   Description: TTZ Badnkik #1 (TTZ)
+   Description: TTZ Badnik #1 (TTZ)
  Num Bitfields:   0
   DefaultParam:   0
    DefaultFlag:   0
@@ -10770,16 +10785,56 @@ Num Dependants:   0
           XMax:  25
           YMax:  20
   # of Sprites:   1
-   Sprite 0 ID:  16
+   Sprite 0 ID:   1
            Set:   2
      Direction:   0
           xoff: -25
           yoff: -20
 
      Object ID:  3B
-    # of Zones:   1
+    # of Zones:   4
     Zone Entry:  FF
-   Description: Char Switch A/Carry (Intro/TTZ)
+   Description: Char Switch A/Carry (Training/IIZ, TTZ)
+ Num Bitfields:   0
+  DefaultParam:   0
+   DefaultFlag:   0
+    DefaultDir:   0
+ DefltRemember:   0
+Num Dependants:   0
+     Num Types:   0	 	 
+	 
+	Zone Entry:   3
+   Description: Carry (TTZ)
+ Num Bitfields:   0
+  DefaultParam:   0
+   DefaultFlag:   0
+    DefaultDir:   0
+ DefltRemember:   0
+Num Dependants:   0
+     Num Types:   1
+ Type 0   XMin: -17
+          YMin: -32
+          XMax:  17
+          YMax:  32
+  # of Sprites:   1
+   Sprite 0 ID:   0
+           Set:   2
+     Direction:   0
+          xoff: -17
+          yoff: -32
+	 
+	Zone Entry:   5
+   Description: Char Switch A (IIZ)
+ Num Bitfields:   0
+  DefaultParam:   0
+   DefaultFlag:   0
+    DefaultDir:   0
+ DefltRemember:   0
+Num Dependants:   0
+     Num Types:   0
+	 
+	Zone Entry:  06
+   Description: Char Switch A (Training)
  Num Bitfields:   0
   DefaultParam:   0
    DefaultFlag:   0
@@ -11180,16 +11235,16 @@ Num Dependants:   0
  DefltRemember:   0
 Num Dependants:   0
      Num Types:   1
-Type 0    XMin: -33
-          YMin: -16
-          XMax:  33
-          YMax:  16
+Type 0    XMin: -34
+          YMin: -32
+          XMax:  34
+          YMax:  32
   # of Sprites:   1
    Sprite 0 ID:   4
            Set:   7
      Direction:   0
-          xoff: -33
-          yoff: -16
+          xoff: -34
+          yoff: -32
 
      Object ID:  49
     # of Zones:   1
@@ -11296,8 +11351,8 @@ Num Dependants:   0
           XMax:  21
           YMax:  29
   # of Sprites:   1
-   Sprite 0 ID:  24
-           Set:   2
+   Sprite 0 ID:   4
+           Set:  10
      Direction:   0
           xoff: -21
           yoff: -29
@@ -11479,8 +11534,9 @@ Num Dependants:   0
           XMax:  25
           YMax:  13
   # of Sprites:   1
-   Sprite 0 ID:  15
-           Set:   2
+   Sprite 0 ID:   3
+           ;!@ Set:  12
+		   Set:  2
      Direction:   0
           xoff: -25
           yoff: -13
@@ -12066,8 +12122,8 @@ Type 0    XMin: -20
           XMax:  20
           YMax:  21
   # of Sprites:   1
-   Sprite 0 ID:   9
-           Set:   2
+   Sprite 0 ID:   1
+           Set:  10
      Direction:   1
           xoff: -20
           yoff: -21
@@ -12159,8 +12215,8 @@ Type 0    XMin: -27
           XMax:  27
           YMax:  25
   # of Sprites:   1
-   Sprite 0 ID:   6
-           Set:   2
+   Sprite 0 ID:   0
+           Set:  10
      Direction:   0
           xoff: -27
           yoff: -25
@@ -12181,8 +12237,8 @@ Num Dependants:   0
           XMax:  23
           YMax:  17
   # of Sprites:   1
-   Sprite 0 ID:  22
-           Set:   2
+   Sprite 0 ID:   2
+           Set:  11
      Direction:   0
           xoff: -23
           yoff: -17
@@ -12227,8 +12283,8 @@ Num Dependants:   0
           XMax:  28
           YMax:  18
   # of Sprites:   1
-   Sprite 0 ID:  14
-           Set:   2
+   Sprite 0 ID:   5
+           Set:  11
      Direction:   0
           xoff: -28
           yoff: -18
@@ -12317,16 +12373,16 @@ Type 0    XMin: -38
  DefltRemember:   0
 Num Dependants:   0
      Num Types:   1
-Type 0    XMin: -17
-          YMin: -64
-          XMax:  17
-          YMax:  64
+Type 0    XMin: -16
+          YMin: -32
+          XMax:  16
+          YMax:  32
   # of Sprites:   1
    Sprite 0 ID:   12
            Set:   7
      Direction:   0
-          xoff: -17
-          yoff: -64
+          xoff: -16
+          yoff: -32
 
      Object ID:  75
     # of Zones:   1
@@ -12388,8 +12444,8 @@ Num Dependants:   0
           XMax:  35
           YMax:  14
   # of Sprites:   1
-   Sprite 0 ID:  13
-           Set:   2
+   Sprite 0 ID:   4
+           Set:  11
      Direction:   0
           xoff: -35
           yoff: -14
@@ -13016,8 +13072,8 @@ Num Dependants:   0
           XMax:  18
           YMax:  20
   # of Sprites:   1
-   Sprite 0 ID:  21
-           Set:   2
+   Sprite 0 ID:   1
+           Set:  11
      Direction:   0
           xoff: -18
           yoff: -20
@@ -13038,8 +13094,8 @@ Num Dependants:   0
           XMax:  20
           YMax:  18
   # of Sprites:   1
-   Sprite 0 ID:  20
-           Set:   2
+   Sprite 0 ID:   0
+           Set:  11
      Direction:   0
           xoff: -20
           yoff: -18
@@ -13060,8 +13116,8 @@ Num Dependants:   0
           XMax:  21
           YMax:  25
   # of Sprites:   1
-   Sprite 0 ID:   3
-           Set:   2
+   Sprite 0 ID:   2
+           Set:   9
      Direction:   0
           xoff: -21
           yoff: -25
@@ -13083,7 +13139,7 @@ Num Dependants:   0
           YMax:  22
   # of Sprites:   1
    Sprite 0 ID:   0
-           Set:   2
+           Set:   9
      Direction:   0
           xoff: -25
           yoff: -22
@@ -13091,7 +13147,7 @@ Num Dependants:   0
      Object ID:  A2
     # of Zones:   1
     Zone Entry:  FF
-   Description: BBZ Badnik #2 (BBZ)
+   Description: BBZ Badnik #3 (BBZ)
  Num Bitfields:   0
   DefaultParam:   0
    DefaultFlag:   0
@@ -13104,8 +13160,8 @@ Type 0    XMin: -30
           XMax:  30
           YMax:  26
   # of Sprites:   1
-   Sprite 0 ID:  10
-           Set:   2
+   Sprite 0 ID:   3
+           Set:  10
      Direction:   1
           xoff: -30
           yoff: -26
@@ -13127,8 +13183,8 @@ Type 0    XMin: -20
           XMax:  20
           YMax:  21
   # of Sprites:   1
-   Sprite 0 ID:   7
-           Set:   2
+   Sprite 0 ID:   3
+           Set:   9
      Direction:   0
           xoff: -20
           yoff: -21
@@ -13149,8 +13205,8 @@ Num Dependants:   0
           XMax:  21
           YMax:  32
   # of Sprites:   1
-   Sprite 0 ID:   2
-           Set:   2
+   Sprite 0 ID:   1
+           Set:   9
      Direction:   0
           xoff: -21
           yoff: -32
@@ -13180,7 +13236,7 @@ Type 0    XMin: -27
      Object ID:  A6
     # of Zones:   1
     Zone Entry:  FF
-   Description: TTz Badnik #3 (TTZ)
+   Description: TTZ Badnik #3 (TTZ)
  Num Bitfields:   0
   DefaultParam:   0
    DefaultFlag:   0
@@ -13193,7 +13249,7 @@ Num Dependants:   0
           XMax:  21
           YMax:  22
   # of Sprites:   1
-   Sprite 0 ID:  18
+   Sprite 0 ID:   3
            Set:   2
      Direction:   0
           xoff: -21
@@ -13251,7 +13307,7 @@ Num Dependants:   0
           XMax:  36
           YMax:  31
   # of Sprites:   1
-   Sprite 0 ID:  23
+   Sprite 0 ID:   4
            Set:   2
      Direction:   0
           xoff: -36
@@ -13285,7 +13341,7 @@ Num Dependants:   0
           XMax:  30
           YMax:  24
   # of Sprites:   1
-   Sprite 0 ID:  17
+   Sprite 0 ID:   2
            Set:   2
      Direction:   0
           xoff: -30
@@ -13354,8 +13410,9 @@ Type 0    XMin: -38
           XMax:  38
           YMax:  18
   # of Sprites:   1
-   Sprite 0 ID:   5
-           Set:   2
+   Sprite 0 ID:   1
+           ;!@ Set:  12
+		   Set:  2
      Direction:   1
           xoff: -38
           yoff: -18
@@ -13390,8 +13447,9 @@ Type 0    XMin: -27
           XMax:  27
           YMax:  25
   # of Sprites:   1
-   Sprite 0 ID:   4
-           Set:   2
+   Sprite 0 ID:   0
+           ;!@ Set:  12
+		   Set:  2
      Direction:   1
           xoff: -27
           yoff: -25

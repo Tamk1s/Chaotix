@@ -20,13 +20,94 @@ MaxSize	$400000				;Maximum Genesis ROM size
 ;Game Header Information
 ;;;
 
-StartSeg Big_Endian $000100 $8E
+StartSeg GameHeader Big_Endian $000100 $8E
 
 	String	"SEGA 32X        "					;Console Name
-	String	"(C)SEGA 1995.FEB"					;Copyright Date
-	String  "CHAOTIX                                         "	;Domestic Game Name
-	String  "CHAOTIX                                         "	;Foreign Game Name
+	String	"(C)SEGA 2019.DEC"					;Copyright Date
+	String  "KNUCKLES CLACKERS                               "	;Domestic Game Name
+	String  "KNUCKLES CLACKERS                               "	;Foreign Game Name
 	String	"GM MK-84503-00"					;Game Serial Number
+
+EndSeg
+
+
+;;;
+;!@ Level Select Strings
+;;;
+
+;Strings for various Level Select elements, see comments
+;All are C-string null-terminated ($00)
+
+;Acceptable ASCII chars:
+;!"#$%&'()*+,-./0123456789:;<=>? (C) space_char
+;ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_
+
+;$1B6 bytes available
+
+StartSeg LevelSel_Strings Big_Endian $07739E	$1B6
+	String	"BOTANIC BASE        "		;BBZ
+	BYTE	$00
+	String	"SPEED SLIDER        "		;SSZ
+	BYTE	$00
+	String	"AMAZING ARENA       "		;AAZ
+	BYTE	$00
+	String	"TECHNO TOWER        "		;TTZ
+	BYTE	$00
+	String	"MARINA MADNESS      "		;MMZ
+	BYTE	$00
+	String	"TRAINING            "		;Training
+	BYTE	$00
+	String	"INTRODUCTION        "		;Introduction
+	BYTE	$00
+	String	"WORLD ENTRANCE      "		;World Entrance (HUB)
+	BYTE	$00
+	String	"NOT USED            "		;Not used zone
+	BYTE	$00
+	String	"BONUS STAGE         "		;Bonus Stage
+	BYTE	$00
+	String	"SPECIAL STAGE       "		;Special Stage
+	BYTE	$00
+	String	"PLACE     "				;Place
+	BYTE	$00
+	String	"LEVEL     "				;Level
+	BYTE	$00
+	String	"AT-TIME   "				;At-time
+	BYTE	$00
+	String	"PLAYERS   "				;Players
+	BYTE	$00
+	String	"MORNING"					;Morning
+	BYTE	$00
+	String	"DAY    "					;Day
+	BYTE	$00
+	String	"SUNSET "					;Sunset
+	BYTE	$00
+	String	"NIGHT  "					;Night
+	WORD $00							;This is double-null terminated!
+
+	String	"PLAYER    "				;Player
+	BYTE	$00
+	String	"COMBI     "				;Combi player
+	BYTE	$00
+	String	"MIGHTY    "				;Mighty char
+	BYTE	$00
+	String	"**********"				;Glitch char
+	BYTE	$00
+	String	"KNUCKLES  "				;Knuckles char
+	BYTE	$00
+	String	"CHARMY BEE"				;Charmy Bee char
+	BYTE	$00
+	String	"VECTOR    "				;Vector
+	BYTE	$00
+	String	"BOMB      "				;Bomb char
+	BYTE	$00
+	String	"HEAVY     "				;Heavy char
+	BYTE	$00
+	String	"ESPIO     "				;Espio char
+	BYTE	$00
+	String	"1 PLAYER "					;1 player
+	BYTE	$00
+	String	"2 PLAYERS"					;2 players
+	BYTE	$00
 
 EndSeg
 
@@ -34,7 +115,7 @@ EndSeg
 ;Level Music Playlist
 ;;;
 
-StartSeg Big_Endian $076ED0 7
+StartSeg LevelPlaylist Big_Endian $076ED0 7
 
 	BYTE	$05	;BBZ
 	BYTE	$03	;SSZ
@@ -44,6 +125,165 @@ StartSeg Big_Endian $076ED0 7
 	BYTE	$01	;Intro/Training
 	BYTE	$11	;Tutorial
 
+EndSeg
+
+;;;
+;!@ Sound Test Names
+;;;
+
+;Sound test names:
+;These are null-terminated ($00) C-strings
+;$22A char bytes are available for the sound test string array
+
+;1st entry is always a string displayed when no music/sfx are selected, and displayed on first boot of sound test menu ("--- SOUND TEST ---")
+;Last entry is always a string indicating Sound Effects ("S.E. XX"), where XX is the $hex ID of current SFX programmatically added
+;All other entires in between are names for songs, aligned with the game's song slots
+
+;Acceptable standard ASCII chars in strings:
+;CAPS A-Z, 0-9, ,-.?!_ space char
+
+;Nonstandard:
+;Std ASCII Char = In-game char
+;( = Vertical Male Symbol (♂ but straight up)
+;) = Female Symbol (♀)
+;< = Left double quot (")
+;Equals sign ("=") = single apostrophe character (such as in "Walkin'")
+;> = Right double quot (")
+
+;All others are invalid and will display garbage character tiles
+
+StartSeg SoundTestSongNames Big_Endian $227338 $22A
+	String "--- SOUND  TEST ---"
+	BYTE	$00
+	String "DOOR INTO SUMMER"
+	BYTE	$00
+	String "ELECTORIA"
+	BYTE	$00
+	String "SPEED OF SOUND"
+	BYTE	$00
+	String "SEASCAPE"
+	BYTE	$00
+	String "MIDNIGHT GREENHOUSE"
+	BYTE	$00
+	String "NEW MOON"
+	BYTE	$00
+	String "LABYRINTH"
+	BYTE	$00
+	String "TRIAL AND ERROR"
+	BYTE	$00
+	String "WALKIN="
+	BYTE	$00
+	String "HYPER-HYPER"
+	BYTE	$00
+	String "EVENING STAR"
+	BYTE	$00
+	String "MOONRISE"
+	BYTE	$00
+	String "OVERTURE"
+	BYTE	$00
+	String "THIS HORIZON"
+	BYTE	$00
+	String "TAKE OFF"
+	BYTE	$00
+	String "COMBINATION"
+	BYTE	$00
+	String "TAKE A NAP"
+	BYTE	$00
+	String "SURGING POWER"
+	BYTE	$00
+	String "MECHANICAL DANCE"
+	BYTE	$00
+	String "TUBE PANIC"
+	BYTE	$00
+	String "CRYSTAL NIGHTMARE"
+	BYTE	$00
+	String "CHILD=S SONG"
+	BYTE	$00
+	String "SODA POP"
+	BYTE	$00
+	String "PENDULUM"
+	BYTE	$00
+	String "SILVER SCREEN"
+	BYTE	$00
+	String "TACHY TOUCH"
+	BYTE	$00
+	String "CHAOTIC WORLD"
+	BYTE	$00
+	String "SURPRISE!"
+	BYTE	$00
+	String "NICE MEETING YOU"
+	BYTE	$00
+	String "HAVE A HAPPY DAY"
+	BYTE	$00
+	String "REACH THE GOAL"
+	BYTE	$00
+	String "HIGH FIVE"
+	BYTE	$00
+	String "DECISION"
+	BYTE	$00
+	String "FROM PARTY TO PARTY"
+	BYTE	$00
+	String "HAVE SOME FUN"
+	BYTE	$00
+	String "ORIENTAL LEGEND"
+	BYTE	$00
+	String "STEEL HEART"
+	BYTE	$00
+	String "TRIBUTE"
+	BYTE	$00
+	String "DESTRUCTIVE POWER"
+	BYTE	$00
+	String "JUST ANOTHER DAY"
+	BYTE	$00
+	String "DECISION 2ND"
+	BYTE	$00
+	String "S.E."
+	BYTE	$00	
+EndSeg
+
+
+;;;
+;!@ Sound Test Stereo/Mono
+;;;
+
+;This segment allows you to change the string displayed
+;for song Mono/Stereo mode ("OUTPUT  STEREO")/("OUTPUT  MONO")
+;Displayed when presssing X btn on a 6-btn gamepad
+;Same ASCII rules as with Sound Test song names, 
+;but only $1D bytes available and strings are double-null terminated
+StartSeg aOutputMonoStereo	Big_Endian $0075D8 $1E
+	String	"OUTPUT  MONO"
+	WORD	$0000
+	String 	"OUTPUT  STEREO"
+	WORD	$0000
+EndSeg
+
+
+;;;
+;!@ Sound Test Speed
+;;;
+
+;This segment allows you to change the string displayed
+;for when changing song speed ("SPEED HH"), where HH=$HEX byte
+;Displayed when presssing Y btn on a 6-btn gamepad
+;Same ASCII rules as with Sound Test song names, 
+;but only $06 bytes available and strings are double-null terminated
+StartSeg aSpeed Big_Endian $007636 $08
+	String	"SPEED "
+	WORD	$0000
+EndSeg
+
+;;;
+;!@ 1st SFX ID
+;;;
+
+;These 2 segments allows you to define the 1st SFX ID in sound test, for displaying either a song name/"--- SOUND  TEST ---" string from above segement, or "S.E." string.
+;Both should be the same byte value
+StartSeg SFX1st_1 Big_Endian $007527 1
+	BYTE $2A
+EndSeg
+StartSeg SFX1st_2 Big_Endian $00752D 1
+	BYTE $2A
 EndSeg
 
 ;;;

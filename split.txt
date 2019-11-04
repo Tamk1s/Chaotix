@@ -2,6 +2,7 @@
 ; Knuckles' Chaotix (JU / 5) Batch Extraction File for ROMulan
 ;
 ; 2011-02-24 - Stealth - First Release
+; 2019-04-14 - Genesis Does - Improvements, AAZ Lit palettes, Sound Driver support
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -123,10 +124,25 @@ Extract $2B3B70  $80 "Levels/SSZ/Pal/12S.bin"
 Extract $2B3BF0  $80 "Levels/SSZ/Pal/35S.bin"
 Extract $2B3C70  $80 "Levels/SSZ/Pal/15N.bin"
 
+;AAZ Unlit
 Extract $2B3CF0  $80 "Levels/AAZ/Pal/12MD.bin"
 Extract $2B3D70  $80 "Levels/AAZ/Pal/12SN.bin"
 Extract $2B3DF0  $80 "Levels/AAZ/Pal/34MN.bin"
 Extract $2B3E70  $80 "Levels/AAZ/Pal/5MN.bin"
+
+;!@ AAZ Lit
+Extract $2B6232	 $80 "Levels/AAZ/Pal/12M_L.bin"
+Extract $2B62B2	 $80 "Levels/AAZ/Pal/34M_L.bin"
+Extract $2B6332	 $80 "Levels/AAZ/Pal/5M_L.bin"
+Extract $2B63B2	 $80 "Levels/AAZ/Pal/12D_L.bin"
+Extract $2B6432	 $80 "Levels/AAZ/Pal/34D_L.bin"
+Extract $2B64B2	 $80 "Levels/AAZ/Pal/5D_L.bin"
+Extract $2B6532	 $80 "Levels/AAZ/Pal/12S_L.bin"
+Extract $2B65B2	 $80 "Levels/AAZ/Pal/34S_L.bin"
+Extract $2B6632	 $80 "Levels/AAZ/Pal/5S_L.bin"
+Extract $2B66B2	 $80 "Levels/AAZ/Pal/12N_L.bin"
+Extract $2B6732	 $80 "Levels/AAZ/Pal/34N_L.bin"
+Extract $2B67B2	 $80 "Levels/AAZ/Pal/5N_L.bin"
 
 Extract $2B3EF0  $80 "Levels/TTZ/Pal/12M.bin"
 Extract $2B3F70  $80 "Levels/TTZ/Pal/34M.bin"
@@ -823,21 +839,149 @@ Extract $2AC1A0  $800 "Levels/Entrance/Collisn/01.bin"
 ; Sound Data Extract
 ;;;;;;;;;;;;;;;;;;;;
 
-Extract $058160  2168 "Sound/PWM/01.bin"
-Extract $0589D8  3584 "Sound/PWM/02.bin"
-Extract $0597D8 12736 "Sound/PWM/03.bin"
-Extract $05C998 12928 "Sound/PWM/04.bin"
-Extract $05FC18  7104 "Sound/PWM/05-07.bin"
-Extract $0617D8  3632 "Sound/PWM/08.bin"
-Extract $062608 21248 "Sound/PWM/09.bin"
-Extract $067908  2080 "Sound/PWM/0A.bin"
-Extract $068128  4992 "Sound/PWM/0B.bin"
-Extract $0694A8  5806 "Sound/PWM/0C.bin"
-Extract $06AB56  7856 "Sound/PWM/0D.bin"
-Extract $06CA06  3248 "Sound/PWM/0E.bin"
-Extract $06D6B6  4576 "Sound/PWM/0F.bin"
-Extract $06E896  3872 "Sound/PWM/10-11.bin"
-Extract $06F7B6  6368 "Sound/PWM/12-13.bin"
-Extract $071096 12016 "Sound/PWM/14-15.bin"
-Extract $073F86    64 "Sound/PWM/16.bin"
-Extract $073FC6    58 "Sound/PWM/Silence.bin"
+;-------------------
+;!@ BGM Data
+;-------------------
+
+;Bank 0
+Extract $40000	$D60	"Sound\Music\BIN\01 Door Into Summer.bin"
+Extract $40D61	$BA2	"Sound\Music\BIN\02 Electoria.bin"
+Extract $41904	$FA1	"Sound\Music\BIN\03 Speed Of Sound.bin"
+Extract $428A6	$BF3	"Sound\Music\BIN\04 Seascape.bin"
+Extract $4349A	$D85	"Sound\Music\BIN\05 Midnight Greenhouse.bin"
+Extract $44220	$E7B	"Sound\Music\BIN\06 New Moon.bin"
+Extract $4509C	$2CE	"Sound\Music\BIN\07 Labyrinth.bin"
+Extract $4536B	$A82	"Sound\Music\BIN\08 Trial And Error.bin"
+Extract $45DEE	$3BF	"Sound\Music\BIN\09 Walkin.bin"
+Extract $461BE	$726	"Sound\Music\BIN\0A Hyper-Hyper.bin"
+Extract $46800	$702	"Sound\Music\BIN\0B Evening Star.bin"
+Extract $46FE8	$4FA	"Sound\Music\BIN\0C Moonrise.bin"
+Extract $474E3	$30C	"Sound\Music\BIN\0D Overture.bin"
+Extract $477F0	$7F5	"Sound\Music\BIN\0E This Horizon.bin"
+
+;Bank 1
+Extract $48000	$369	"Sound\Music\BIN\0F Take Off.bin"
+Extract $4836A	$6CE	"Sound\Music\BIN\10 Combination.bin"
+Extract $48A39	$25C	"Sound\Music\BIN\11 Take A Nap.bin"
+Extract $48C96	$4C6	"Sound\Music\BIN\12 Surging Power.bin"
+Extract $4915D	$3BF	"Sound\Music\BIN\13 Mechanical Dance.bin"
+Extract $4951D	$A92	"Sound\Music\BIN\14 Tube Panic.bin"			;Full version, with the extra drums (duh). Game itself appears to disable a software PWM channel?
+Extract $49FB0	$5DB	"Sound\Music\BIN\15 Crystal Nightmare.bin"
+Extract $4A58C	$6AF	"Sound\Music\BIN\16 Childs Song.bin"
+Extract $4AC3C	$445	"Sound\Music\BIN\17 Soda Pop.bin"
+Extract $4B082	$672	"Sound\Music\BIN\18 Pendulum.bin"
+Extract $4B6F5	$509	"Sound\Music\BIN\19 Silver Screen.bin"
+Extract $4BBFF	$84E	"Sound\Music\BIN\1A Tachy Touch.bin"
+Extract $4C44E	$4AB	"Sound\Music\BIN\1B Chaotic World.bin"
+Extract $4C8FA	$412	"Sound\Music\BIN\1C Surprise.bin"
+Extract $4CD0D	$3E1	"Sound\Music\BIN\1D Nice Meeting You.bin"
+Extract $4D0EF	$25C	"Sound\Music\BIN\1E Have A Happy Day.bin"
+Extract $4D34C	$1F2	"Sound\Music\BIN\1F Reach The Goal.bin"
+Extract $4D53F	$13A	"Sound\Music\BIN\20 High Five.bin"
+Extract $4D67A	$1A2	"Sound\Music\BIN\21 Decision.bin"
+Extract $4D81D	$1D6	"Sound\Music\BIN\22 From Party to Party.bin"
+Extract $4D9F4	$24C	"Sound\Music\BIN\23 Have Some Fun.bin"
+Extract $4DC41	$6FB	"Sound\Music\BIN\24 Oriental Legend.bin"
+Extract $4E33D	$4BE	"Sound\Music\BIN\25 Steel Heart.bin"
+
+;Bank 2 (BGM)
+Extract $50000	$9AB	"Sound\Music\BIN\26 Tribute.bin"
+Extract $509AC	$2BD	"Sound\Music\BIN\27 Destructive Power.bin"
+Extract $50C6A	$33A0	"Sound\Music\BIN\28 Just Another Day.bin"
+Extract $5400B	$182	"Sound\Music\BIN\29 Decision 2nd.bin"
+
+;Bank 2 (SFX)
+Extract	$5E000	$28		"Sound\SFX\BIN\2A.bin"
+Extract	$5E028	$33		"Sound\SFX\BIN\2B.bin"
+Extract	$5E05B	$41		"Sound\SFX\BIN\2C.bin"
+Extract	$5E09C	$2E		"Sound\SFX\BIN\2D.bin"
+Extract	$5E0CA	$51		"Sound\SFX\BIN\2E.bin"
+Extract	$5E11B	$59		"Sound\SFX\BIN\2F.bin"
+Extract	$5E174	$2A		"Sound\SFX\BIN\30.bin"
+Extract	$5E19E	$63		"Sound\SFX\BIN\31.bin"
+Extract	$5E201	$38		"Sound\SFX\BIN\32.bin"
+Extract	$5E239	$7A		"Sound\SFX\BIN\33.bin"
+Extract	$5E2B3	$2C		"Sound\SFX\BIN\34.bin"
+Extract	$5E2DF	$38		"Sound\SFX\BIN\35.bin"
+Extract	$5E317	$3F		"Sound\SFX\BIN\36.bin"
+Extract	$5E356	$37		"Sound\SFX\BIN\37.bin"
+Extract	$5E38D	$1D		"Sound\SFX\BIN\38.bin"
+Extract	$5E3AA	$20		"Sound\SFX\BIN\39.bin"
+Extract	$5E3CA	$5B		"Sound\SFX\BIN\3A.bin"
+Extract	$5E425	$59		"Sound\SFX\BIN\3B.bin"
+Extract	$5E47E	$41		"Sound\SFX\BIN\3C.bin"
+Extract	$5E4BF	$39		"Sound\SFX\BIN\3D.bin"
+Extract	$5E4F8	$39		"Sound\SFX\BIN\3E.bin"
+Extract	$5E531	$3A		"Sound\SFX\BIN\3F.bin"
+Extract	$5E56B	$35		"Sound\SFX\BIN\40.bin"
+Extract	$5E5A0	$63		"Sound\SFX\BIN\41.bin"
+Extract	$5E603	$57		"Sound\SFX\BIN\42.bin"
+Extract	$5E65A	$31		"Sound\SFX\BIN\43.bin"
+Extract	$5E68B	$2A		"Sound\SFX\BIN\44.bin"
+Extract	$5E6B5	$2A		"Sound\SFX\BIN\45.bin"
+Extract	$5E6DF	$75		"Sound\SFX\BIN\46.bin"
+Extract	$5E754	$48		"Sound\SFX\BIN\47.bin"
+Extract	$5E79C	$61		"Sound\SFX\BIN\48.bin"
+Extract	$5E7FD	$30		"Sound\SFX\BIN\49.bin"
+Extract	$5E82D	$D		"Sound\SFX\BIN\4A.bin"
+Extract	$5E83A	$46		"Sound\SFX\BIN\4B.bin"
+Extract	$5E880	$2D		"Sound\SFX\BIN\4C.bin"
+Extract	$5E8AD	$43		"Sound\SFX\BIN\4D.bin"
+Extract	$5E8F0	$36		"Sound\SFX\BIN\4E.bin"
+Extract	$5E926	$5D		"Sound\SFX\BIN\4F.bin"
+Extract	$5E983	$2E		"Sound\SFX\BIN\50.bin"
+Extract	$5E9B1	$2E		"Sound\SFX\BIN\51.bin"
+Extract	$5E9DF	$43		"Sound\SFX\BIN\52.bin"
+Extract	$5EA22	$1E		"Sound\SFX\BIN\53.bin"
+Extract	$5EA40	$2D		"Sound\SFX\BIN\54.bin"
+Extract	$5EA6D	$3B		"Sound\SFX\BIN\55.bin"
+Extract	$5EAA8	$28		"Sound\SFX\BIN\56.bin"
+Extract	$5EAD0	$3E		"Sound\SFX\BIN\57.bin"
+Extract	$5EB0E	$32		"Sound\SFX\BIN\58.bin"
+Extract	$5EB40	$38		"Sound\SFX\BIN\59.bin"
+Extract	$5EB78	$38		"Sound\SFX\BIN\5A.bin"
+Extract	$5EBB0	$46		"Sound\SFX\BIN\5B.bin"
+Extract	$5EBF6	$4E		"Sound\SFX\BIN\5C.bin"
+Extract	$5EC44	$2A		"Sound\SFX\BIN\5D.bin"
+Extract	$5EC6E	$29		"Sound\SFX\BIN\5E.bin"
+Extract	$5EC97	$33		"Sound\SFX\BIN\5F.bin"
+Extract	$5ECCA	$7B		"Sound\SFX\BIN\60.bin"
+Extract	$5ED45	$34		"Sound\SFX\BIN\61.bin"
+Extract	$5ED79	$2D		"Sound\SFX\BIN\62.bin"
+Extract	$5EDA6	$32		"Sound\SFX\BIN\63.bin"
+Extract	$5EDD8	$40		"Sound\SFX\BIN\64.bin"
+Extract	$5EE18	$2D		"Sound\SFX\BIN\65.bin"
+Extract	$5EE45	$36		"Sound\SFX\BIN\66.bin"
+Extract	$5EE7B	$2D		"Sound\SFX\BIN\67.bin"
+Extract	$5EEA8	$43		"Sound\SFX\BIN\68.bin"
+Extract	$5EEEB	$15		"Sound\SFX\BIN\69.bin"
+Extract	$5EF00	$11		"Sound\SFX\BIN\6A.bin"
+Extract	$5EF11	$FF		"Sound\SFX\BIN\6B.bin"
+Extract	$5F010	$3E		"Sound\SFX\BIN\6C.bin"
+Extract	$5F04E	$2D		"Sound\SFX\BIN\6D.bin"
+Extract	$5F07B	$31		"Sound\SFX\BIN\6E.bin"
+
+;-------------------
+;PWM Data
+;-------------------
+
+;!@
+;https://info.sonicretro.org/SCHG:Music_Hacking/Voice_and_Note_Editing#Knuckles.27_Chaotix
+Extract $058160  2168 "Sound/PWM/81.bin"		;Electric Kick
+Extract $0589D8  3584 "Sound/PWM/82.bin"		;Electric Snare
+Extract $0597D8 12736 "Sound/PWM/83.bin"		;Splash Cymbal
+Extract $05C998 12928 "Sound/PWM/84.bin"		;Ride Bell
+Extract $05FC18  7104 "Sound/PWM/85-87.bin"		;Tom (High, Mid, Low)
+Extract $0617D8  3632 "Sound/PWM/88.bin"		;Electric Hi-Hat
+Extract $062608 21248 "Sound/PWM/89.bin"		;Crash Cymbal
+Extract $067908  2080 "Sound/PWM/8A.bin"		;Clap
+Extract $068128  4992 "Sound/PWM/8B.bin"		;Acoustic Kick
+Extract $0694A8  5806 "Sound/PWM/8C.bin"		;Acoustic Snare
+Extract $06AB56  7856 "Sound/PWM/8D.bin"		;Bell
+Extract $06CA06  3248 "Sound/PWM/8E.bin"		;Fingers Snapping
+Extract $06D6B6  4576 "Sound/PWM/8F.bin"		;Cowbell
+Extract $06E896  3872 "Sound/PWM/90-91.bin"		;High, Low Click
+Extract $06F7B6  6368 "Sound/PWM/92-93.bin"		;High, Low Bongo
+Extract $071096 12016 "Sound/PWM/94-95.bin"		;High, Low Timpani
+Extract $073F86    64 "Sound/PWM/96.bin"		;Silence
+Extract $073FC6    58 "Sound/PWM/Silence.bin"	;Silence

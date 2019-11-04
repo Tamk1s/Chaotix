@@ -19,6 +19,7 @@ Dispose				$22F1AC	$22F3B4		;Original solidity data pointers list
 Dispose				$22F3B4	$2B32B0		;Original level map, tile, and solidity data (83EEA)
 Dispose				$2B32B0	$2B4B74		;Original MD palette pointers and data
 Dispose				$2B4B74	$2B52B4		;Original Level Size Data Pointers and Data
+Dispose				$2B61FA $2B6832		;!@ Original MD palette AAZ Lit pointers and data
 Dispose				$2BDE18	$2BDE42		;Original Boss Level Size Data
 Dispose				$2DA05E	$2F83DA		;Original Sprite Placement Data
 Dispose				$2F83DA	$300000		;Original End-ROM padding
@@ -31,67 +32,81 @@ Translate			$200000	$300000	$900000	;32x shuffling of Genesis ROM address space
 ; General Reference Replacement Segments ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-StartSeg Big_Endian $4EBA			;Replace the reference to the sprite pointer listing within the sprite pointer load routine
+StartSeg Objlayout_Ptr Big_Endian $4EBA			;Replace the reference to the sprite pointer listing within the sprite pointer load routine
 
 		DWORD	Objlayout_Ptrs		;Point to the level object layout pointer segment
 
 EndSeg
 
-StartSeg Big_Endian $9482			;Replace the reference to the solidity index pointer listing within the solidity index pointer load routine
+StartSeg Solid_Index_Ptr Big_Endian $9482			;Replace the reference to the solidity index pointer listing within the solidity index pointer load routine
 
 		DWORD	Solid_Index		;Point to the solidity index pointer segment
 
 EndSeg
 
-StartSeg Big_Endian $939E			;Replace this reference to the level size setup data pointer listing
+StartSeg LevSize_Data_Ptr Big_Endian $939E			;Replace this reference to the level size setup data pointer listing
 
 		DWORD	LevSize_Data		;Point to the Level Size Setup segment
 
 EndSeg
 
-StartSeg Big_Endian $1369E			;Replace the reference to the level palette pointer listing
+StartSeg MD_Palette_Index_Ptr Big_Endian $1369E			;Replace the reference to the level palette pointer listing
 
 		DWORD	MD_Palette_Index	;Point to the level palette pointer/data segment
 
 EndSeg
 
-StartSeg Big_Endian $2F7EE			;Replace this reference to the level index listing
+;!@ AAZ Lit
+StartSeg MD_Palette_AAZLit_Index_Ptr Big_Endian $1FA76				;Replace the reference to the AAZ Lit palette pointer listing
+
+		DWORD	MD_Palette_AAZLit_Index	;Point to the level palette pointer/data segment
+
+EndSeg
+
+StartSeg Level_Index_Ptr Big_Endian $2F7EE			;Replace this reference to the level index listing
 
 		DWORD	Level_Index		;Point to the level index/data segment
 
 EndSeg
 
-StartSeg Big_Endian $2FB24			;Replace this reference to the level size setup data pointer listing
+StartSeg LevSize_Data_Ptr2 Big_Endian $2FB24			;Replace this reference to the level size setup data pointer listing
 
 		DWORD	LevSize_Data		;Point to the Level Size Setup segment
 
 EndSeg
 
-StartSeg Big_Endian $302C2			;Replace this reference to the level index listing
+StartSeg Level_Index_Ptr2 Big_Endian $302C2			;Replace this reference to the level index listing
 
 		DWORD	Level_Index		;Point to the level index/data segment
 
 EndSeg
 
-StartSeg Big_Endian $319C0			;Replace the reference to the level tiles pointer listing
+;!@ AAZ Lit
+StartSeg MD_Palette_AAZLit_Index_Ptr2 Big_Endian $3148A				;Replace the reference to the AAZ Lit palette pointer listing
+
+		DWORD	MD_Palette_AAZLit_Index	;Point to the level palette pointer/data segment
+
+EndSeg
+
+StartSeg LevelTile_Ptr Big_Endian $319C0			;Replace the reference to the level tiles pointer listing
 
 		DWORD	LevelTile_Ptrs		;Point to the level tile pointer segment
 
 EndSeg
 
-StartSeg Big_Endian $31ADA			;Replace the reference to the level index listing within the level layout load routine
+StartSeg Level_Index_Ptr3 Big_Endian $31ADA			;Replace the reference to the level index listing within the level layout load routine
 
 		DWORD	Level_Index		;Point to the level index/data segment
 
 EndSeg
 
-StartSeg Big_Endian $31F80			;Replace the reference to the level tiles pointer listing within the level tile pointer load routine
+StartSeg LevelTile_Ptr2 Big_Endian $31F80			;Replace the reference to the level tiles pointer listing within the level tile pointer load routine
 
 		DWORD	LevelTile_Ptrs		;Point to the level tile pointer segment
 
 EndSeg
 
-StartSeg Big_Endian $320C8			;Replace the reference to the level palette pointer listing
+StartSeg MD_Palette_Index_Ptr2 Big_Endian $320C8			;Replace the reference to the level palette pointer listing
 
 		DWORD	MD_Palette_Index	;Point to the level palette pointer/data segment
 
@@ -104,115 +119,115 @@ EndSeg
 ; not listed with the normal level data pointers   ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-StartSeg Big_Endian $2D6F2
+StartSeg SSZB_Pal_Ptr Big_Endian $2D6F2
 
 		DWORD	PalPtr_SSZBoss
 
 EndSeg
 
-StartSeg Big_Endian $2D88C
+StartSeg SSZB_FG_Tiles_Ptr Big_Endian $2D88C
 
 		DWORD	SSZB_FG_Tiles
 
 EndSeg
 
-StartSeg Big_Endian $2D8BA
+StartSeg SSZ45MD_BG_Tiles_Sec_Ptr Big_Endian $2D8BA
 
 		DWORD	SSZ45MD_BG_Tiles_Sec
 
 EndSeg
 
-StartSeg Big_Endian $2D8FC
+StartSeg SSZB_FG_Blocks_Ptr Big_Endian $2D8FC
 
 		DWORD	SSZB_FG_Blocks
 
 EndSeg
 
-StartSeg Big_Endian $2D918
+StartSeg SSZ45MD_BG_Blocks_Sec_Ptr Big_Endian $2D918
 
 		DWORD	SSZ45MD_BG_Blocks_Sec
 
 EndSeg
 
-StartSeg Big_Endian $2D930
+StartSeg SSZB_FG_Chunks_Ptr Big_Endian $2D930
 
 		DWORD	SSZB_FG_Chunks
 
 EndSeg
 
-StartSeg Big_Endian $2D948
+StartSeg SSZB_BG_Chunks_Ptr Big_Endian $2D948
 
 		DWORD	SSZB_BG_Chunks
 
 EndSeg
 
-StartSeg Big_Endian $2D960
+StartSeg SSZB_FG_Layout_Ptr Big_Endian $2D960
 
 		DWORD	SSZB_FG_Layout
 
 EndSeg
 
-StartSeg Big_Endian $2D978
+StartSeg SSZB_BG_Layout_Ptr Big_Endian $2D978
 
 		DWORD	SSZB_BG_Layout
 
 EndSeg
 
-StartSeg Big_Endian $2D988
+StartSeg SSZB_Solids_Ptr Big_Endian $2D988
 
 		DWORD	SSZB_Solids
 
 EndSeg
 
-StartSeg Big_Endian $2D9E8
+StartSeg SSZB_FG_LS_Ptr Big_Endian $2D9E8
 
 		DWORD	LS_FG_SSZBoss
 
 EndSeg
 
-StartSeg Big_Endian $2DA00
+StartSeg SSZB_BG_LS_Ptr Big_Endian $2DA00
 
 		DWORD	LS_BG_SSZBoss
 
 EndSeg
 
-StartSeg Big_Endian $2DFE0
+StartSeg TTZB_FG_Tiles_Ptr Big_Endian $2DFE0
 
 		DWORD	TTZB_FG_Tiles
 
 EndSeg
 
-StartSeg Big_Endian $2E018
+StartSeg TTZB_FG_Blocks_Ptr Big_Endian $2E018
 
 		DWORD	TTZB_FG_Blocks
 
 EndSeg
 
-StartSeg Big_Endian $2E030
+StartSeg TTZB_FG_Chunks_Ptr Big_Endian $2E030
 
 		DWORD	TTZB_FG_Chunks
 
 EndSeg
 
-StartSeg Big_Endian $2E04A
+StartSeg TTZB_FG_Layout_Ptr Big_Endian $2E04A
 
 		DWORD	TTZB_FG_Layout
 
 EndSeg
 
-StartSeg Big_Endian $2E05C
+StartSeg TTZB_Solids_Ptr Big_Endian $2E05C
 
 		DWORD	TTZB_Solids
 
 EndSeg
 
-StartSeg Big_Endian $2E0C2
+StartSeg TTZB_Pal_Ptr Big_Endian $2E0C2
 
 		DWORD	PalPtr_TTZBoss
 
 EndSeg
 
-StartSeg Big_Endian $2E138
+StartSeg TTZB_FG_LS_Ptr Big_Endian $2E138
 
 		DWORD	LS_FG_TTZBoss
 
@@ -222,19 +237,19 @@ EndSeg
 ; Fixed Data Segments ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-StartSeg Big_Endian $22D000		;Replace the normal-oriented Height Maps
+StartSeg HMaps Big_Endian $22D000		;Replace the normal-oriented Height Maps
 
 		include	"Collisn/HMaps.bin"
 
 EndSeg
 
-StartSeg Big_Endian $22C000		;Replace the rotated Height Maps
+StartSeg HMapsR Big_Endian $22C000		;Replace the rotated Height Maps
 
 		include	"Collisn/HMapsR.bin"
 
 EndSeg
 
-StartSeg Big_Endian $22E000		;Replace the Angle Array
+StartSeg Angles Big_Endian $22E000		;Replace the Angle Array
 
 		include	"Collisn/Angles.bin"
 
@@ -1108,6 +1123,64 @@ StartSeg MD_Palette_Index Big_Endian	;Megadrive format palette pointers and data
 	Pal_FinalBoss:	include	"Levels/Entrance/Pal/2MN.bin"
 
    Pal_NULL:		DWORD		$FFFFFFFF
+
+EndSeg
+
+;!@ AAZ Lit
+StartSeg MD_Palette_AAZLit_Index Big_Endian	;Megadrive format palette pointers and data Segment for AAZ Lit palettes
+	LPPtrAAZ0M_L:	WORD Pal_AAZ12M_L-LPPtrAAZ0M_L
+	LPPtrAAZ0D_L:	WORD Pal_AAZ12D_L-LPPtrAAZ0D_L
+	LPPtrAAZ0S_L:	WORD Pal_AAZ12S_L-LPPtrAAZ0S_L
+	LPPtrAAZ0N_L:	WORD Pal_AAZ12N_L-LPPtrAAZ0N_L
+	
+	LPPtrAAZ1M_L:	WORD Pal_AAZ12M_L-LPPtrAAZ1M_L
+	LPPtrAAZ1D_L:	WORD Pal_AAZ12D_L-LPPtrAAZ1D_L
+	LPPtrAAZ1S_L:	WORD Pal_AAZ12S_L-LPPtrAAZ1S_L
+	LPPtrAAZ1N_L:	WORD Pal_AAZ12N_L-LPPtrAAZ1N_L
+	
+	LPPtrAAZ2M_L:	WORD Pal_AAZ12M_L-LPPtrAAZ2M_L
+	LPPtrAAZ2D_L:	WORD Pal_AAZ12D_L-LPPtrAAZ2D_L
+	LPPtrAAZ2S_L:	WORD Pal_AAZ12S_L-LPPtrAAZ2S_L
+	LPPtrAAZ2N_L:	WORD Pal_AAZ12N_L-LPPtrAAZ2N_L
+	
+	
+	LPPtrAAZ3M_L:	WORD Pal_AAZ34M_L-LPPtrAAZ3M_L
+	LPPtrAAZ3D_L:	WORD Pal_AAZ34D_L-LPPtrAAZ3D_L
+	LPPtrAAZ3S_L:	WORD Pal_AAZ34S_L-LPPtrAAZ3S_L
+	LPPtrAAZ3N_L:	WORD Pal_AAZ34N_L-LPPtrAAZ3N_L
+	
+	LPPtrAAZ4M_L:	WORD Pal_AAZ34M_L-LPPtrAAZ4M_L
+	LPPtrAAZ4D_L:	WORD Pal_AAZ34D_L-LPPtrAAZ4D_L
+	LPPtrAAZ4S_L:	WORD Pal_AAZ34S_L-LPPtrAAZ4S_L
+	LPPtrAAZ4N_L:	WORD Pal_AAZ34N_L-LPPtrAAZ4N_L
+	
+	
+	LPPtrAAZ5M_L:	WORD Pal_AAZ5M_L-LPPtrAAZ5M_L
+	LPPtrAAZ5D_L:	WORD Pal_AAZ5D_L-LPPtrAAZ5D_L
+	LPPtrAAZ5S_L:	WORD Pal_AAZ5S_L-LPPtrAAZ5S_L
+	LPPtrAAZ5N_L:	WORD Pal_AAZ5N_L-LPPtrAAZ5N_L
+	
+	LPPtrAAZ6M_L:	WORD Pal_AAZ5M_L-LPPtrAAZ6M_L
+	LPPtrAAZ6D_L:	WORD Pal_AAZ5D_L-LPPtrAAZ6D_L
+	LPPtrAAZ6S_L:	WORD Pal_AAZ5S_L-LPPtrAAZ6S_L
+	LPPtrAAZ6N_L:	WORD Pal_AAZ5N_L-LPPtrAAZ6N_L
+	
+	;!@ AAZ Lit Pal files
+	Pal_AAZ12M_L:	include	"Levels/AAZ/Pal/12M_L.bin"
+	Pal_AAZ34M_L:	include	"Levels/AAZ/Pal/34M_L.bin"
+	Pal_AAZ5M_L:	include	"Levels/AAZ/Pal/5M_L.bin"
+
+	Pal_AAZ12D_L:	include	"Levels/AAZ/Pal/12D_L.bin"
+	Pal_AAZ34D_L:	include	"Levels/AAZ/Pal/34D_L.bin"
+	Pal_AAZ5D_L:	include	"Levels/AAZ/Pal/5D_L.bin"
+
+	Pal_AAZ12S_L:	include	"Levels/AAZ/Pal/12S_L.bin"
+	Pal_AAZ34S_L:	include	"Levels/AAZ/Pal/34S_L.bin"
+	Pal_AAZ5S_L:	include	"Levels/AAZ/Pal/5S_L.bin"
+
+	Pal_AAZ12N_L:	include	"Levels/AAZ/Pal/12N_L.bin"
+	Pal_AAZ34N_L:	include	"Levels/AAZ/Pal/34N_L.bin"
+	Pal_AAZ5N_L:	include	"Levels/AAZ/Pal/5N_L.bin"
 
 EndSeg
 
