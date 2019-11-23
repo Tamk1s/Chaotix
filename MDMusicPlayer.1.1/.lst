@@ -1,0 +1,472 @@
+00000000                            Maincode	section org(0)
+00000000                            	include "code/macro.asm"
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Assembler options
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            	opt ae+		; automatic even's
+00000000                            	opt l+		; . is local lable symbol
+00000000                            	opt w-		; don't print warnings
+00000000                            	opt op+		; optimize PC relative addressing
+00000000                            	opt os+		; optimize short branches
+00000000                            	opt ow+		; optimize absolute long addressing
+00000000                            	opt oz+		; optimize zero displacements
+00000000                            	opt oaq+	; optimize addq
+00000000                            	opt osq+	; optimize subq
+00000000                            	opt omq+	; optimize moveq
+00000000                            
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Macro for aligning code
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            align macro
+00000000                            	if narg>=2
+00000000                            		cnop \2,\1
+00000000                            	else
+00000000                            		cnop 0,\1
+00000000                            	endif
+00000000                            	endm
+00000000                            
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Macro for generating VDP commands
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            vdpComm		macro ins,addr,type,rwd,end,end2
+00000000                            	if narg=5
+00000000                            		\ins #(((\type&\rwd)&3)<<30)|((\addr&$3FFF)<<16)|(((\type&\rwd)&$FC)<<2)|((\addr&$C000)>>14), \end
+00000000                            
+00000000                            	elseif narg=6
+00000000                            		\ins #(((((\type&\rwd)&3)<<30)|((\addr&$3FFF)<<16)|(((\type&\rwd)&$FC)<<2)|((\addr&$C000)>>14))\end, \end2
+00000000                            
+00000000                            	else
+00000000                            		\ins (((\type&\rwd)&3)<<30)|((\addr&$3FFF)<<16)|(((\type&\rwd)&$FC)<<2)|((\addr&$C000)>>14)
+00000000                            	endif
+00000000                                endm
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Macro for generating VDP command according to coordinates
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            vdpCoord	macro base,x,y,rwd
+00000000                            .addr =		(\base+\x+\x+(\y*$40))
+00000000                            	dc.l (((VRAM&\rwd)&3)<<30)|((.addr&$3FFF)<<16)|(((VRAM&\rwd)&$FC)<<2)|((.addr&$C000)>>14)
+00000000                                endm
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Macro for generating property data
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            propdat		macro typ, base,x,y,rwd
+00000000                            	dc.w \typ
+00000000                            	vdpCoord \base, \x, \y, \rwd
+00000000                                endm
+00000000                            
+00000000                            ; ===========================================================================
+00000000                            ; Values for the type argument
+00000000 =00000021                  VRAM =  %100001
+00000000 =0000002B                  CRAM =  %101011
+00000000 =00000025                  VSRAM = %100101
+00000000                            
+00000000                            ; Values for the rwd argument
+00000000 =0000000C                  READ =  %001100
+00000000 =00000007                  WRITE = %000111
+00000000 =00000027                  DMA =   %100111
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Tells the VDP to copy a region of 68k memory to VRAM or CRAM or VSRAM
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            dma68kToVDP macro source,dest,length,type
+00000000                            		lea	VDP_control_port,a5
+00000000                            		move.l	#(($9400|((((length)>>1)&$FF00)>>8))<<16)|($9300|(((length)>>1)&$FF)),(a5)
+00000000                            		move.l	#(($9600|((((source)>>1)&$FF00)>>8))<<16)|($9500|(((source)>>1)&$FF)),(a5)
+00000000                            		move.w	#$9700|(((((source)>>1)&$FF0000)>>16)&$7F),(a5)
+00000000                            	vdpComm	move.l,\dest,\type,DMA,(a5)
+00000000                                endm
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Tells the VDP to fill a region of VRAM with a certain byte
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            dmaFillVRAM macro byte,addr,length,wait
+00000000                            	lea	VDP_control_port,a5
+00000000                            	move.w	#$8F01,(a5) ; VRAM pointer increment: $0001
+00000000                            	move.l	#(($9400|((((length)-1)&$FF00)>>8))<<16)|($9300|(((length)-1)&$FF)),(a5) ; DMA length ...
+00000000                            	move.w	#$9780,(a5) ; VRAM fill
+00000000                            	move.l	#$40000080|(((addr)&$3FFF)<<16)|(((addr)&$C000)>>14),(a5) ; Start at ...
+00000000                            	move.w	#(byte)<<8,(VDP_data_port).l ; Fill with byte
+00000000                            
+00000000                            	if narg<4
+00000000                            .loop\@		move.w	(a5),d1
+00000000                            		btst	#1,d1
+00000000                            		bne.s	.loop\@	; busy loop until the VDP is finished filling...
+00000000                            		move.w	#$8F02,(a5) ; VRAM pointer increment: $0002
+00000000                            	endif
+00000000                                endm
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Macro to declare string to be converted to character map or mappings
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            asc2	macro	or, str
+00000000                            	dc.w strlen(\str)-1
+00000000                            	asc	\or, \str
+00000000                                endm
+00000000                            
+00000000                            asc	macro	or, str
+00000000                            .lc = 0
+00000000                            	rept strlen(\str)
+00000000                            .cc		substr .lc+1,.lc+1,\str
+00000000                            
+00000000                            		if '\.cc'=' '
+00000000                            			dc.\0 0|or			; whitespace
+00000000                            
+00000000                            		elseif ('\.cc'>='0')&('\.cc'<='9')
+00000000                            			dc.\0 ('\.cc'-'0'+1)|or		; 0-9
+00000000                            
+00000000                            		elseif ('\.cc'>='a')&('\.cc'<='z')
+00000000                            			dc.\0 ('\.cc'-'a'+$2B)|or	; a-z
+00000000                            
+00000000                            		elseif ('\.cc'>='A')&('\.cc'<='Z')
+00000000                            			dc.\0 ('\.cc'-'A'+$B)|or	; A-Z
+00000000                            
+00000000                            		elseif '\.cc'='!'
+00000000                            			dc.\0 $25|or	; !
+00000000                            
+00000000                            		elseif '\.cc'='?'
+00000000                            			dc.\0 $26|or	; ?
+00000000                            
+00000000                            		elseif '\.cc'='.'
+00000000                            			dc.\0 $27|or	; .
+00000000                            
+00000000                            		elseif '\.cc'=','
+00000000                            			dc.\0 $28|or	; ,
+00000000                            
+00000000                            		elseif '\.cc'=':'
+00000000                            			dc.\0 $29|or	; :
+00000000                            
+00000000                            		elseif '\.cc'=';'
+00000000                            			dc.\0 $2A|or	; ;
+00000000                            
+00000000                            		elseif '\.cc'='^'
+00000000                            			dc.\0 $45|or	; ^
+00000000                            
+00000000                            		elseif '\.cc'='/'
+00000000                            			dc.\0 $46|or	; /
+00000000                            
+00000000                            		elseif '\.cc'='\\'
+00000000                            			dc.\0 $47|or	; \
+00000000                            
+00000000                            		elseif '\.cc'='*'
+00000000                            			dc.\0 $48|or	; *
+00000000                            
+00000000                            		elseif '\.cc'='-'
+00000000                            			dc.\0 $49|or	; -
+00000000                            
+00000000                            		elseif '\.cc'='|'
+00000000                            			dc.\0 $4A|or	; _ (wider)
+00000000                            
+00000000                            		elseif '\.cc'='$'
+00000000                            			dc.\0 $4B|or	; $
+00000000                            
+00000000                            		elseif '\.cc'='%'
+00000000                            			dc.\0 $4C|or	; %
+00000000                            
+00000000                            		elseif '\.cc'='#'
+00000000                            			dc.\0 $4D|or	; #
+00000000                            
+00000000                            		elseif '\.cc'='+'
+00000000                            			dc.\0 $4E|or	; +
+00000000                            
+00000000                            		elseif '\.cc'='}'
+00000000                            			dc.\0 $4F|or	; ->
+00000000                            
+00000000                            		elseif '\.cc'='{'
+00000000                            			dc.\0 $50|or	; <-
+00000000                            
+00000000                            		elseif '\.cc'='@'
+00000000                            			dc.\0 $51|or	; @
+00000000                            
+00000000                            		elseif '\.cc'='_'
+00000000                            			dc.\0 $52|or	; _
+00000000                            
+00000000                            		elseif '\.cc'='('
+00000000                            			dc.\0 $53|or	; (
+00000000                            
+00000000                            		elseif '\.cc'=')'
+00000000                            			dc.\0 $54|or	; )
+00000000                            
+00000000                            		elseif '\.cc'='['
+00000000                            			dc.\0 $55|or	; [
+00000000                            
+00000000                            		elseif '\.cc'=']'
+00000000                            			dc.\0 $56|or	; ]
+00000000                            
+00000000                            		elseif '\.cc'='>'
+00000000                            			dc.\0 $57|or	; >
+00000000                            
+00000000                            		elseif '\.cc'='<'
+00000000                            			dc.\0 $58|or	; <
+00000000                            
+00000000                            		elseif '\.cc'='&'
+00000000                            			dc.\0 $59|or	; &
+00000000                            
+00000000                            		elseif '\.cc'='~'
+00000000                            			dc.\0 $5A|or	; ~
+00000000                            
+00000000                            		elseif '\.cc'="'"
+00000000                            			dc.\0 $5B|or	; '
+00000000                            
+00000000                            		elseif '\.cc'='"'
+00000000                            			dc.\0 $5C|or	; "
+00000000                            
+00000000                            		elseif '\.cc'='='
+00000000                            			dc.\0 $5D|or	; =
+00000000                            
+00000000                            		elseif '\.cc'='`'
+00000000                            			dc.\0 $5E|or	; `
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"ASCII value failure: \.cc %d", .cc
+00000000                            		endif
+00000000                            
+00000000                            .lc =		.lc+1
+00000000                            	endr
+00000000                                endm
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Tells the Z80 to stop, and waits for it to finish stopping (acquire bus)
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            stopZ80 macro
+00000000                            		move.w	#$100,Z80_bus_request	; stop the Z80
+00000000                            .loop\@		btst	#0,Z80_bus_request
+00000000                            		bne.s	.loop\@			; loop until it says it's stopped
+00000000                                endm
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Tells the Z80 to start again
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            startZ80 macro
+00000000                            		move.w	#0,Z80_bus_request	; start the Z80
+00000000                                endm
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Waits for YM
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            waitYM        macro	reg
+00000000                            .wait\@:	move.b	(\reg),d2
+00000000                            		btst	#7,d2
+00000000                            		bne.s	.wait\@
+00000000                                    endm
+00000000                            ; ===========================================================================
+00000000                            
+00000000                            	rsreset		; set __rs to 0
+00000000 =00000000                  cmp_none	rs.l 1	; no data
+00000000 =00000004                  cmp_unc		rs.l 1	; uncompressed driver image
+00000000 =00000008                  cmp_kos		rs.l 1	; kosinski compressed driver image
+00000000 =0000000C                  cmp_comp	rs.l 1	; comper compressed driver image
+00000000 =00000010                  cmp_nem		rs.l 1	; nemesis compressed driver image
+00000000 =00000014                  cmp_eni		rs.l 1	; enigma compressed driver image
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Macro for including a sound driver
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            incdrv	macro	type, folder, comp
+00000000                            \folder	=	drvnum		; equate driver name with it's ID
+00000000                            Driver_Folder_\#drvnum	equs "\folder"; get the folder the driver is installed on
+00000000                            
+00000000                            	dc.l \folder\_dmaon
+00000000                            	dc.l \folder\_dmaoff
+00000000                            	dc.l \folder\_load
+00000000                            	dc.l \folder\_play
+00000000                            	dc.l \folder\_update
+00000000                            
+00000000                            Driver68k_\#drvnum:
+00000000                            	dc.w \comp		; set compression mode
+00000000                            
+00000000                            	if \comp<>cmp_none	; if compression is none, dont include any files
+00000000                            	if \comp=cmp_unc	; set size of the driver if uncompressed
+00000000                            		dc.w ((DriverZ80_\#drvnum-DriverZ80_End_\#drvnum-4)/4)-1
+00000000                            	else			; if not uncompressed, set a pointer to z80 driver
+00000000                            		dc.l DriverZ80_\#drvnum
+00000000                            	endif
+00000000                            	incbin	"\type\/\folder\/drv.68k"; include the actual driver code
+00000000                            Driver68k_End_\#drvnum:		; set ending point for the driver (uncompressed only)
+00000000                            
+00000000                            DriverZ80_\#drvnum:
+00000000                            	if \comp=cmp_unc	; set size of the driver if uncompressed
+00000000                            		dc.w ((DriverZ80_\#drvnum-DriverZ80_End_\#drvnum-4)/4)-1
+00000000                            	endif
+00000000                            	incbin	"\type\/\folder\/drv.z80"; include the actual driver code
+00000000                            DriverZ80_End_\#drvnum:		; set ending point for the driver (uncompressed only)
+00000000                            	endif
+00000000                            
+00000000                            	include	"\type\/\folder\/code.asm"; finally include play, load and update code
+00000000                            
+00000000                            drvnum	=	drvnum+4	; next driver ID
+00000000                                endm
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Macro for creating a list of sound driver
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            drvimg	macro
+00000000                            rvar	= 0			; reset driver ID
+00000000                            	rept	drvnum/4	; do for all installed drivers
+00000000                            		dc.l Driver68k_\#rvar; set pointer to driver data
+00000000                            
+00000000                            rvar	= rvar+4		; next driver
+00000000                            	endr
+00000000                                endm
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Driver type definition
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            		rsset 0
+00000000 =00000000                  TYPE_NULL	rs.w 1
+00000000 =00000002                  TYPE_SMPS	rs.w 1
+00000000 =00000004                  TYPE_GEMS	rs.w 1
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Z80 addresses
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000 =00A00000                  Z80_RAM =			$A00000 ; start of Z80 RAM
+00000000 =00A02000                  Z80_RAM_end =			$A02000 ; end of non-reserved Z80 RAM
+00000000 =00A11100                  Z80_bus_request =		$A11100
+00000000 =00A11200                  Z80_reset =			$A11200
+00000000                            
+00000000 =00A130F1                  SRAM_access =			$A130F1
+00000000 =00A14000                  Security_addr =			$A14000
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; I/O addresses
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000 =00A10001                  HW_Version =			$A10001
+00000000 =00A10003                  HW_Port_1_Data =		$A10003
+00000000 =00A10005                  HW_Port_2_Data =		$A10005
+00000000 =00A10007                  HW_Expansion_Data =		$A10007
+00000000 =00A10009                  HW_Port_1_Control =		$A10009
+00000000 =00A1000B                  HW_Port_2_Control =		$A1000B
+00000000 =00A1000D                  HW_Expansion_Control =		$A1000D
+00000000 =00A1000F                  HW_Port_1_TxData =		$A1000F
+00000000 =00A10011                  HW_Port_1_RxData =		$A10011
+00000000 =00A10013                  HW_Port_1_SCtrl =		$A10013
+00000000 =00A10015                  HW_Port_2_TxData =		$A10015
+00000000 =00A10017                  HW_Port_2_RxData =		$A10017
+00000000 =00A10019                  HW_Port_2_SCtrl =		$A10019
+00000000 =00A1001B                  HW_Expansion_TxData =		$A1001B
+00000000 =00A1001D                  HW_Expansion_RxData =		$A1001D
+00000000 =00A1001F                  HW_Expansion_SCtrl =		$A1001F
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; VDP addresses
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000 =00C00000                  VDP_data_port =			$C00000
+00000000 =00C00004                  VDP_control_port =		$C00004
+00000000 =00C00011                  PSG_input =			$C00011
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; RAM mappings
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000                            	rsset	$FFFF0000
+00000000 =FFFF0002                  Z80music	equ __rs+2	; if z80 driver, this is the address of the music file.
+00000000 =FFFF0000                  Driver68K	rs.b $8000	; 68k driver ROM. if Z80 driver, this is rte
+00000000 =FFFF8000                  Drv68Kmem	rs.b 0		; memory for the 68k driver.
+00000000 =FFFF8000                  NemDecBuffer	rs.b $1C00	; used when decompressing Nemesis format sound drivers
+00000000 =FFFF9C00                  HBlankRAM	rs.b $400	; code to run in HBlank. Can also be used as extra RAM for sound driver
+00000000                            		rs.l 3		; stack overflow area
+00000000 =FFFFA00C                  StackUflowRAM	rs.l 1		; stack overflow area
+00000000 =FFFFA010                  StackStart	rs.b $100	; 68k stack
+00000000 =FFFFA110                  Stack		rs.b 0		; 68k stack pointer
+00000000 =FFFFA110                  StackOflowRAM	rs.l 4		; stack underflow area
+00000000 =FFFFA120                  MainPalette	rs.b $80	; current palette of the program
+00000000 =FFFFA1A0                  VScrollRAM	rs.b 80		; Vertical scrolling RAM
+00000000 =FFFFA1F0                  ActiveChnLast	rs.w 1		; active sound channels for last frame
+00000000 =FFFFA1F2                  ActiveChn	rs.w 1		; currently active sound channels. Bits 0-5 = FM1-FM6, Bits 6-9 = PSG1-PSG3, Bit 10 = DAC
+00000000 =FFFFA1F4                  MusSelection	rs.w 1		; current song selection
+00000000 =FFFFA1F6                  MusPlaying	rs.w 1		; current song playing
+00000000 =FFFFA1F8                  DMAlen		rs.w 1		; current fake DMA mode
+00000000 =FFFFA1FA                  DisplayList	rs.l 1		; address of display data to load
+00000000 =FFFFA1FE                  LoadedDriver	rs.b 1		; currently loaded sound driver
+00000000 =FFFFA1FF                  DriverType	rs.b 1		; the type of the sound driver loaded
+00000000 =FFFFA200                  HWVersion	rs.b 1		; determines the region of the machine
+00000000 =FFFFA202                  VintTime	rs.w 1		; V-int timer in frames
+00000000 =FFFFA204                  Ctrl1Held	rs.b 1		; controller 1 held buttons
+00000000 =FFFFA205                  Ctrl1Press	rs.b 1		; controller 1 pressed buttons
+00000000 =FFFFA206                  Ctrl2Held	rs.b 1		; controller 2 held buttons
+00000000 =FFFFA207                  Ctrl2Press	rs.b 1		; controller 2 pressed buttons
+00000000 =FFFFA208                  Ctrl0Held	rs.b 1		; controller 0 held buttons
+00000000 =FFFFA209                  Ctrl0Press	rs.b 1		; controller 0 pressed buttons
+00000000 =FFFFA20A                  ChanDat		rs.b 8+(16*6)	; total amount of space for channel data
+00000000                            
+00000000                            ; SMPS Channel data
+00000000                            	rsset ChanDat
+00000000 =FFFFA20A                  sTempo		rs.b 1		; tempo of the driver
+00000000 =FFFFA20B                  sTickMul	rs.b 1		; tick multiplier of the driver
+00000000                            
+00000000                            ; format:
+00000000                            ; 0 - tick mul
+00000000                            ; 1 - instrument
+00000000                            ; 2 - volume
+00000000                            ; 3 - timeout
+00000000                            ; 4-5 - freq
+00000000                            ; 6-7 - freq + mod + det
+00000000                            
+00000000 =FFFFA20C                  sPSG3		rs.b 8
+00000000 =FFFFA214                  sPSG2		rs.b 8
+00000000 =FFFFA21C                  sPSG1		rs.b 8
+00000000 =FFFFA224                  sFM6		rs.b 8
+00000000 =FFFFA22C                  sFM5		rs.b 8
+00000000 =FFFFA234                  sFM4		rs.b 8
+00000000 =FFFFA23C                  sFM3		rs.b 8
+00000000 =FFFFA244                  sFM2		rs.b 8
+00000000 =FFFFA24C                  sFM1		rs.b 8
+00000000 =FFFFA254                  sDAC1		rs.b 8
+00000000 =FFFFA25C                  sDAC2		rs.b 8
+00000000                            
+00000000                            ; GEMS Channel data
+00000000                            	rsset ChanDat
+00000000 =FFFFA20A                  gTempo		rs.w 1		; current bpm
+00000000 =FFFFA20C                  gVolume		rs.b 1		; master volume
+00000000 =FFFFA20D                  gCurSeq		rs.b 1		; sequence number (used in GEMS manipulate mode!)
+00000000 =FFFFA20E                  gSeq		rs.b 1		; current sequence(!)
+00000000 =FFFFA20F                  gFlags		rs.b 1		; channel flags
+00000000 =FFFFA210                  gPrio		rs.b 1		; current priority
+00000000 =FFFFA211                  gPatch		rs.b 1		; current patch id
+00000000 =FFFFA212                  gVol		rs.b 1		; how loud the channel is
+00000000 =FFFFA214                  gTime		rs.w 1		; timer for next event
+00000000 =FFFFA216                  gNote		rs.b 1		; doesnt seem to be possible ;(
+00000000                            		rs.b 8*16	; do the same for the rest of the channels
+00000000                            
+00000000 =FFFFA298                  gMutedChs	rs.w 1		; muted channels list
+00000000 =FFFFA29A                  gSustain	rs.w 1		; sustained channels list
+00000000 =FFFFA29C                  gCursor		rs.b 1		; current cursor position for manipulate menu
+00000000                            ; ===========================================================================
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            ; Various flags
+00000000                            ; ---------------------------------------------------------------------------
+00000000                            
+00000000 =00000000                  pal60mod =	0	; Set to 1 if you want to enable 60hz PAL mode for all sound drivers (note; some may not correctly play music)
+00000000                            			; NOTE: Drivers are modified in order to support this feature.
+00000000 =00000000                  extremeDMA =	0	; set to 1 to unlock extreme ($4000 bytes!!!) DMA mode.
+00000000                            			; You must acknowledge however, that most drivers can not cope with this and it will cause all kinds of crazy glitches.
+00000000                            			; this is nonstandard and no driver is designed to be able to deal with this.
+00000000                            ; ===========================================================================
+00000000                            	include "code/smps2asm.asm"
+00000000                            	include "asmfile equ.asm"
+00000000                            drv EQUS "Chaotix" 
+00000000                            fl EQUS "09 Walkin.asm" 
+00000000                            	include	"smps/\drv\/smps2asm.asm"; include smps2asm macros
+00000000                            
+00000000                            	opt ae-
+00000000                            	include	"music/\fl\.asm"

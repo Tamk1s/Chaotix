@@ -1,10 +1,10 @@
-Target	EQU	$40000
 
-Title_Header:
+
+Target	EQU	$12345
 	smpsHeaderVoice	Title_Patches, Target
 	smpsHeaderChan	6,3
-	;sHeaderTempo	$02, $15
-	smpsHeaderTempo	$02, $12	
+	smpsHeaderTempoC	$02, $15
+	;smpsHeaderTempo	$02, $12	
 	smpsHeaderFM	Title_FM1, Target, $00, $0D
 	smpsHeaderFM	Title_FM2, Target, $00, $0A
 	smpsHeaderFM	Title_FM3, Target, $00, $19

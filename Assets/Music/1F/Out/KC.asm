@@ -1,10 +1,9 @@
-Target	EQU	$40000
 
-Maniax_Header:
+Target	EQU	$41904
 	smpsHeaderVoice	Maniax_Patches,Target
 	smpsHeaderChan	6,3
-	;smpsHeaderTempo	$02, $03	
-	smpsHeaderTempo	$02, $55
+	smpsHeaderTempoC	$02, $03	
+	;smpsHeaderTempo	$02, $55
 	smpsHeaderFM	Maniax_FM1, Target, $F4, $0A
 	smpsHeaderFM	Maniax_FM2, Target, $DC, $0A
 	smpsHeaderFM	Maniax_FM3, Target, $F4, $15

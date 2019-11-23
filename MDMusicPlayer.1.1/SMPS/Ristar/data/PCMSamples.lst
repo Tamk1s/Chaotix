@@ -1,0 +1,27 @@
+00000000                            	obj filesize("drivers/dual.unc")
+000002DC                            
+000002DC                            saminc		macro id
+000002DC                            	rept narg
+000002DC                            DAC\id		incbin "dac/dac_\id\.bin"
+000002DC                            DAC\id\_End
+000002DC                            	shift
+000002DC                            	endr
+000002DC                                endm
+000002DC                            
+000002DC                            dw	macro val
+000002DC                            	rept narg
+000002DC                            		dc.b ((\val)&$FF), ((\val)>>8&$FF)
+000002DC                            		shift
+000002DC                            	endr
+000002DC                                endm
+000002DC                            
+000002DC                            
+000002DC                            .sample	macro id
+000002DC                            	rept narg
+000002DC                            	dw DAC\id, DAC\id\_End-DAC\id, 0, 0
+000002DC                            	shift
+000002DC                            	endr
+000002DC                                endm
+000002DC                            
+000002DC 0000 0000 0000 0000 0000+  	.sample 81, 82, 83, 84, 85
+00000304                            	saminc 81, 82, 83, 84, 85

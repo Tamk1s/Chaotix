@@ -1,0 +1,356 @@
+### QUACKSHOT SMPS2ASM SCRIPT MADE BY NATSUMI 17/12/21
+sversion v1_1
+sdatamacro dc.b
+
+c ('\type\' != 'voice') && ('\type\' != 'sfx') && ('\type\' != '') && ('\type\' != 'music') {
+	+Available types: Music, SFX, Voice
+	$.cc
+	;
+}
+
+=endian 'little'
+
+c '\type\' == 'voice' {
+	=offset 0
+	~£_Patches .of
+	/ >patch
+	;
+}
+
+@offset 0 "Please specify offset of this song in Z80 bank"
+
+c '\type\' == 'sfx' {
+	/ >headersfx
+} {
+	/ >header
+}
+
+?header {
+	! > sHeaderInit: {
+		~£_Header .of
+		%; Z80 offset is {$4!\offset\}
+	}
+	c .nw == \upb\ {
+		! > sHeaderPatchUniv:;
+		$ .sw
+	} {
+		! > sHeaderPatch: .dw {
+			~£_Patches :0
+		}
+	}
+
+	=FMnum .db
+	=PSGnum .nb
+	! > sHeaderCh: .lb, .db;
+	! > sHeaderTempo: .db, .db;
+	! > sHeaderDAC: .dw {
+		~£_DAC :0
+	}
+	$ .sw
+	f \FMnum\ - 1 {
+		! > sHeaderFM: .dw, .db, .db {
+			~£_FM? :0
+		}
+	}
+
+	f \PSGnum\ {
+		! > sHeaderPSG: .dw, .db, .db, .db, .db {
+			~£_PSG? :0
+			:?4 {
+				?volenv;
+			}
+		}
+	}
+
+	/£_FM? ?note ?comm
+	/£_PSG? ?note ?comm
+	/£_DAC ?DAC ?comm
+	/£_Patches >patch
+}
+
+?headersfx {
+	! > sHeaderInit: {
+		~£_Header .of
+		%; Z80 offset is {$4!\offset\}
+	}
+	! > sHeaderPatch: .dw {
+		~£_Patches :0
+	}
+
+	! > sHeaderTick: .db;
+	=CHnum .db
+	! > sHeaderCh: \CHnum\;
+	=trpd 0
+	=trpn 0
+
+	f \CHnum\ {
+		>f 1
+		=trpd .nb
+		>b 1
+		c (\trpd\ & 0x80) == 0 {
+			=trpn (\trpd\&3)+1
+
+			c (\trpd\ & 4) != 0 {
+				=trpn \trpn\+3
+			}
+
+			! > sHeaderSFX: .db, .db, .dw, .db, .db {
+				~£_FM\trpn\ :2
+			}
+
+		} {
+			=trpn ((\trpd\&0x60)>>5)+1
+			! > sHeaderSFX: .db, .db, .dw, .db, .db {
+				~£_PSG\trpn\ :2
+			}
+		}
+
+	}
+
+	/£_FM? ?note ?comm
+	/£_PSG? ?note ?comm
+	/£_Patches >patch
+}
+
+?patch {
+	=num 0
+	=b1 0
+	=b2 0
+	=b3 0
+	=b4 0
+	f (.an-.pc)/25 {
+		%\n\t; Patch {$2!\num\}\r\n\t; {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}
+		>b 25
+		! > spAlgorithm: .nb&0x7;
+		! > spFeedback: (.db&0x38)>>3;
+		=b1 .db
+		=b3 .db
+		=b2 .db
+		=b4 .db
+		! > spDetune: (\b1\&0xF0)>>4, (\b2\&0xF0)>>4, (\b3\&0xF0)>>4, (\b4\&0xF0)>>4;
+		! > spMultiple: \b1\&0xF, \b2\&0xF, \b3\&0xF, \b4\&0xF;
+		=b1 .db
+		=b3 .db
+		=b2 .db
+		=b4 .db
+		! > spRateScale: (\b1\&0xC0)>>6, (\b2\&0xC0)>>6, (\b3\&0xC0)>>6, (\b4\&0xC0)>>6;
+		! > spAttackRt: \b1\&0x1F, \b2\&0x1F, \b3\&0x1F, \b4\&0x1F;
+		=b1 .db
+		=b3 .db
+		=b2 .db
+		=b4 .db
+		! > spAmpMod: (\b1\&0x80)>>7, (\b2\&0x80)>>7, (\b3\&0x80)>>7, (\b4\&0x80)>>7;
+		! > spSustainRt: \b1\&0x1F, \b2\&0x1F, \b3\&0x1F, \b4\&0x1F;
+		=d1 .db
+		=d3 .db
+		=d2 .db
+		=d4 .db
+		=b1 .db
+		=b3 .db
+		=b2 .db
+		=b4 .db
+		! > spSustainLv: (\b1\&0xF0)>>4, (\b2\&0xF0)>>4, (\b3\&0xF0)>>4, (\b4\&0xF0)>>4;
+		! > spDecayRt: \d1\, \d2\, \d3\, \d4\;
+		! > spReleaseRt: \b1\&0xF, \b2\&0xF, \b3\&0xF, \b4\&0xF;
+		=b1 .db
+		=b3 .db
+		=b2 .db
+		! > spTotalLv: \b1\&0x7F, \b2\&0x7F, \b3\&0x7F, .db&0x7F;
+		=num \num\+1
+	}
+}
+
+?volenv {
+	=v00 0
+}
+
+?modenv {
+	=m00 0
+}
+
+?DAC {
+	=nRst 0x61
+}
+
+?note {
+	=nRst 0x61
+	=nC0 0x62
+	=nCs0 0x63
+	=nD0 0x64
+	=nEb0 0x65
+	=nE0 0x66
+	=nF0 0x67
+	=nFs0 0x68
+	=nG0 0x69
+	=nAb0 0x6A
+	=nA0 0x6B
+	=nBb0 0x6C
+	=nB0 0x6D
+	=nC1 0x6E
+	=nCs1 0x6F
+	=nD1 0x70
+	=nEb1 0x71
+	=nE1 0x72
+	=nF1 0x73
+	=nFs1 0x74
+	=nG1 0x75
+	=nAb1 0x76
+	=nA1 0x77
+	=nBb1 0x78
+	=nB1 0x79
+	=nC2 0x7A
+	=nCs2 0x7B
+	=nD2 0x7C
+	=nEb2 0x7D
+	=nE2 0x7E
+	=nF2 0x7F
+	=nFs2 0x80
+	=nG2 0x81
+	=nAb2 0x82
+	=nA2 0x83
+	=nBb2 0x84
+	=nB2 0x85
+	=nC3 0x86
+	=nCs3 0x87
+	=nD3 0x88
+	=nEb3 0x89
+	=nE3 0x8A
+	=nF3 0x8B
+	=nFs3 0x8C
+	=nG3 0x8D
+	=nAb3 0x8E
+	=nA3 0x8F
+	=nBb3 0x90
+	=nB3 0x91
+	=nC4 0x92
+	=nCs4 0x93
+	=nD4 0x94
+	=nEb4 0x95
+	=nE4 0x96
+	=nF4 0x97
+	=nFs4 0x98
+	=nG4 0x99
+	=nAb4 0x9A
+	=nA4 0x9B
+	=nBb4 0x9C
+	=nB4 0x9D
+	=nC5 0x9E
+	=nCs5 0x9F
+	=nD5 0xA0
+	=nEb5 0xA1
+	=nE5 0xA2
+	=nF5 0xA3
+	=nFs5 0xA4
+	=nG5 0xA5
+	=nAb5 0xA6
+	=nA5 0xA7
+	=nBb5 0xA8
+	=nB5 0xA9
+	=nC6 0xAA
+	=nCs6 0xAB
+	=nD6 0xAC
+	=nEb6 0xAD
+	=nE6 0xAE
+	=nF6 0xAF
+	=nFs6 0xB0
+	=nG6 0xB1
+	=nAb6 0xB2
+	=nA6 0xB3
+	=nBb6 0xB4
+	=nB6 0xB5
+	=nC7 0xB6
+	=nCs7 0xB7
+	=nD7 0xB8
+	=nEb7 0xB9
+	=nE7 0xBA
+	=nF7 0xBB
+	=nFs7 0xBC
+	=nG7 0xBD
+	=nAb7 0xBE
+	=nA7 0xBF
+	=nBb7 0xC0
+	=nB8 0xC1
+	=nC8 0xC2
+	=nCs8 0xC3
+	=nBb6 0xC4
+	=nB6 0xC5
+	=nD8 0xC6
+	=nEb8 0xC7
+	=nE8 0xC8
+	=nF8 0xC9
+	=nFs8 0xCA
+	=nG8 0xCB
+	=nAb8 0xCC
+	=nA8 0xCD
+	=nBb8 0xCE
+	=nB9 0xCF
+}
+
+?comm {
+	!0xD0-0xDF > ssVolQuick: .lb&0xF;
+	!0xE0 > sPan: .db & 0xC0, .lb & 0x3F {
+		:?0 {
+			=spNone 0x00
+			=spRight 0x40
+			=spLeft 0x80
+			=spCenter 0xC0
+		}
+
+		c .n1 == 0 {
+			:-1
+		}
+	}
+	!0xE1 > ssDetune: .db;
+	!0xE2 > sFreFracP: .db;
+	!0xE3 > sFreFracN:  .db;
+	# seems like some flags are defined twice. Huh
+	!0xE4 > sHold:;
+	!0xE5 > ssModQu: .db, .db, .db, .db;
+	!0xE6 > saVolFM: .db;
+	=sHold 0xE7
+	!0xE8 > sNoteTimeOut: .db;
+	!0xE9 > ssLFO: .db, .db;
+	!0xEA > ssTimerAQu: .dw;
+	!0xEB > sNop: .db;
+	!0xEC > saVolPSG: .db;
+	# Same as E2 and E3, but also sets HOLD
+	!0xED > sHFreFracP: .db;
+	!0xEE > sHFreFracN:  .db;
+	!0xEF > sPatFM: .db;
+	!0xF0 > ssModQu: .db, .db, .db, .db;
+	!0xF1 > ssVolBase: .db;
+	!0xF2 > sStop:{
+		;
+	}
+	!0xF3 > sNoisePSG: .db;
+	!0xF4 > sModEnv: .db {
+		:?0 {
+			?modenv;
+		}
+	}
+	!0xF5 > sVolEnvPSG: .db {
+		:?0 {
+			?volenv;
+		}
+	}
+	!0xF6 > sJump: .dw {
+		~£_Jump? :0
+		;
+	}
+	!0xF7 > sLoop: .db, .db, .dw {
+		~£_Loop? :2
+	}
+	!0xF8 > sCall: .dw {
+		~£_Call? :0
+	}
+	!0xF9 > sRet: {
+		;
+	}
+	!0xFA > ssTranspose: .db;
+	!0xFB > saTranspose: .db;
+	!0xFC > sLoopExit: .db, .dw {
+		~£_LpExit? :1
+	}
+	!0xFD > ssTempo: .db;
+	!0xFE > sSpecFM3: .db, .db, .db, .db;
+}

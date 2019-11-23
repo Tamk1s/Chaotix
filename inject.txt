@@ -78,12 +78,18 @@ Extern "ObjYAdj" "1024" "Levels/Intro/Sprites/1MN.bin" "Levels/Intro/Sprites/Con
 ; Injector prompt and call ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+WorkPath "#Batch/Sound/Music/ASM"
+Extern "build.bat" "0"
+WorkPath "#Batch"
+
 ;GetFile "Please select the target Chaotix ROM file"
 ;LoadFile #Got
 LoadFile "kc.bin"
 
 LoadInject "#Batch/inmain.txt"
 AddInject  "#Batch/inopts.txt"
+;!@ New audio inection!
+AddInject  "#Batch/inaudio.txt"
 
 ;GetFile "Please name the output file"
 ;RunInject  #Got
@@ -96,3 +102,4 @@ RunInject  "inject.bin"
 
 ;Extern     "#Batch\\fixheadr" "#Got"
 Extern     "#Batch\\fixheadr" "inject.bin"
+

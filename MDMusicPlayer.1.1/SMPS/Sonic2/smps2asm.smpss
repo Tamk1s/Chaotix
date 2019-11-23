@@ -1,0 +1,250 @@
+### SONIC2 SMPS2ASM SCRIPT MADE BY NATSUMI 17/09/10
+sversion v1_1
+sdatamacro dc.b
+
+c ('\type\' != 'voice') && ('\type\' != 'sfx') && ('\type\' != '') && ('\type\' != 'music') {
+	+Available types: Music, SFX, Voice
+	$.cc
+	;
+}
+
+=endian 'little'
+
+c '\type\' == 'voice' {
+	=offset 0
+	~£_Patches .of
+	/ >patch
+	;
+}
+
+@offset 0 "Please specify offset of this song in Z80 bank"
+
+c '\type\' == 'sfx' {
+	/ >headersfx
+} {
+	/ >header
+}
+
+?header {
+	! > sHeaderInit: {
+		~£_Header .of
+		%; Z80 offset is {$4!\offset\}
+	}
+	! > sHeaderPatch: .dw {
+		~£_Patches :0
+	}
+
+	=FMnum .db
+	=PSGnum .nb
+	! > sHeaderCh: .lb, .db;
+	! > sHeaderTempo: .db, .db;
+	! > sHeaderDAC: .dw {
+		~£_DAC :0
+	}
+
+	$ .sw
+	f \FMnum\ - 1 {
+		! > sHeaderFM: .dw, .db, .db {
+			~£_FM? :0
+		}
+	}
+
+	f \PSGnum\ {
+		! > sHeaderPSG: .dw, .db, .db, .db, .db {
+			~£_PSG? :0
+			:?4 {
+				?volenv;
+			}
+		}
+	}
+
+	/£_FM? ?note ?comm
+	/£_PSG? ?note ?comm
+	/£_DAC ?DAC ?comm
+	/£_Patches >patch
+}
+
+?headersfx {
+	! > sHeaderInit: {
+		~£_Header .of
+		%; Z80 offset is {$4!\offset\}
+	}
+	! > sHeaderPatch: .dw {
+		~£_Patches :0
+	}
+
+	! > sHeaderTick: .db;
+	=CHnum .db
+	! > sHeaderCh: \CHnum\;
+	=trpd 0
+	=trpn 0
+
+	f \CHnum\ {
+		>f 1
+		=trpd .nb
+		>b 1
+		c (\trpd\ & 0x80) == 0 {
+			=trpn (\trpd\&3)+1
+
+			c (\trpd\ & 4) != 0 {
+				=trpn \trpn\+3
+			}
+
+			! > sHeaderSFX: .db, .db, .dw, .db, .db {
+				~£_FM\trpn\ :2
+			}
+
+		} {
+			=trpn ((\trpd\&0x60)>>5)+1
+			! > sHeaderSFX: .db, .db, .dw, .db, .db {
+				~£_PSG\trpn\ :2
+			}
+		}
+
+	}
+
+	/£_FM? ?note ?comm
+	/£_PSG? ?note ?comm
+	/£_Patches >patch
+}
+
+?patch {
+	=num 0
+	=b1 0
+	=b2 0
+	=b3 0
+	=b4 0
+	f (.an-.pc)/25 {
+		%\n\t; Patch {$2!\num\}\r\n\t; {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}\r\n\t; {$2!.db}, {$2!.db}, {$2!.db}, {$2!.db},\t{$2!.db}, {$2!.db}, {$2!.db}, {$2!.db}
+		>b 25
+		! > spAlgorithm: .nb&0x7;
+		! > spFeedback: (.db&0x38)>>3;
+		=b1 .db
+		=b2 .db
+		=b3 .db
+		=b4 .db
+		! > spDetune: (\b1\&0xF0)>>4, (\b2\&0xF0)>>4, (\b3\&0xF0)>>4, (\b4\&0xF0)>>4;
+		! > spMultiple: \b1\&0xF, \b2\&0xF, \b3\&0xF, \b4\&0xF;
+		=b1 .db
+		=b2 .db
+		=b3 .db
+		=b4 .db
+		! > spRateScale: (\b1\&0xC0)>>6, (\b2\&0xC0)>>6, (\b3\&0xC0)>>6, (\b4\&0xC0)>>6;
+		! > spAttackRt: \b1\&0x1F, \b2\&0x1F, \b3\&0x1F, \b4\&0x1F;
+		=b1 .db
+		=b2 .db
+		=b3 .db
+		=b4 .db
+		! > spAmpMod: (\b1\&0x80)>>7, (\b2\&0x80)>>7, (\b3\&0x80)>>7, (\b4\&0x80)>>7;
+		! > spSustainRt: \b1\&0x1F, \b2\&0x1F, \b3\&0x1F, \b4\&0x1F;
+		=d1 .db
+		=d2 .db
+		=d3 .db
+		=d4 .db
+		=b1 .db
+		=b2 .db
+		=b3 .db
+		=b4 .db
+		! > spDecayRt: \d1\, \d2\, \d3\, \d4\;
+		! > spSustainLv: (\b1\&0xF0)>>4, (\b2\&0xF0)>>4, (\b3\&0xF0)>>4, (\b4\&0xF0)>>4;
+		! > spReleaseRt: \b1\&0xF, \b2\&0xF, \b3\&0xF, \b4\&0xF;
+		! > spTotalLv: .db&0x7F, .db&0x7F, .db&0x7F, .db&0x7F;
+		=num \num\+1
+	}
+}
+
+?volenv {
+	=v00 0
+	=v01 1
+	=v02 2
+	=v03 3
+	=v04 4
+	=v05 5
+	=v06 6
+	=v07 7
+	=v08 8
+	=v09 9
+	=v0A 0x0A
+	=v0B 0x0B
+	=v0C 0x0C
+}
+
+?DAC {
+	=nRst 0x80
+	=dKick 0x81
+	=dSnare 0x82
+	=dClap 0x83
+	=dScratch 0x84
+	=dTimpani 0x85
+	=dHiTom 0x86
+	=dFloorSteelDrum 0x87
+	=dHiTimpani 0x88
+	=dMidTimpani 0x89
+	=dLowTimpani 0x8A
+	=dFloorTimpani 0x8B
+	=dMidTom 0x8C
+	=dLowTom 0x8D
+	=dFloorTom 0x8E
+	=dHiSteelDrum 0x8F
+	=dMidSteelDrum 0x90
+	=dLowSteelDrum 0x91
+}
+
+	sinc "..\SMPS\SMPS default notes.smpss"
+
+?comm {
+	!0xE0 > sPan: .db & 0xC0, .lb & 0x3F {
+		:?0 {
+			=spNone 0x00
+			=spRight 0x40
+			=spLeft 0x80
+			=spCenter 0xC0
+		}
+
+		c .n1 == 0 {
+			:-1
+		}
+	}
+	!0xE1 > ssDetune: .db;
+	!0xE2 > sComm: .db;
+	!0xE3 > sRet: {
+		;
+	}
+	!0xE4 > sFade: {
+		;
+	}
+	!0xE5 > ssTickMulCh: .db;
+	!0xE6 > saVolFM: .db;
+	=sHold 0xE7
+	!0xE8 > sNoteTimeOut: .db;
+	!0xE9 > saTranspose: .db;
+	!0xEA > ssTempo: .db;
+	!0xEB > ssTickMul: .db;
+	!0xEC > saVolPSG: .db;
+	!0xED > sNop:;
+	!0xEE > sNop: .db;
+	!0xEF > sPatFM: .db;
+	!0xF0 > ssMod68k: .db, .db, .db, .db;
+	!0xF1 > sModOn:;
+	!0xF2 > sStop:{
+		;
+	}
+	!0xF3 > sNoisePSG: .db;
+	!0xF4 > sModOff:;
+	!0xF5 > sVolEnvPSG: .db {
+		:?0 {
+			?volenv;
+		}
+	}
+	!0xF6 > sJump: .dw {
+		~£_Jump? :0
+		;
+	}
+	!0xF7 > sLoop: .db, .db, .dw {
+		~£_Loop? :2
+	}
+	!0xF8 > sCall: .dw {
+		~£_Call? :0
+	}
+	!0xF9 > sMuteFM1:;
+}

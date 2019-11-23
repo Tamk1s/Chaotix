@@ -1,0 +1,439 @@
+================================================================================
+SMPS2ASM/Nat documentation
+================================================================================
+This documentation details the usage for SMPS2ASM/Nat made by Natsumi.
+
+Contents:
+    * 1 - Commandline, basic usage & introduction.
+    * 2 - Scripting & mnemonics
+    * 3 - Inner functionality
+================================================================================
+
+*1 - Commandline, basic usage & introduction.*
+  *1.1 - Introduction*
+    SMPS2ASM/Nat is specifically tailored to go with the MDMusicPlayer, and
+    therefore may not be optimal outside of it. SMPS2ASM/Nat works using
+    scripting files to convert music. The advantage is that it can support
+    theoretically any SMPS format sound driver, or even similar formats.
+    Scripting is fairly easy, even if a little unintuitive for a first timer.
+    See chapter 2 and 3 for more info.
+
+  *1.2 - Basic usage*
+    To convert SMPS, put it into the Music folder, then go to exe and lauch
+    SMPS2ASM.exe. The application will ask you some necessary questions to
+    convert the file. Remember, the symbol for hex number is '0x'.
+
+    You may also drag a script file (extension MUST be smpss) into the program,
+    to run a script outside of the MDMusicPlayer environment.
+
+  *1.3 - Commandline*
+    The commandline for the program will be similar than what you would input
+    into the prompt itself. Do note, some scripts may require additional
+    parameters. You can put them right after the other parameters. Here is an
+    example:
+      "SMPS2ASM "S3K ICZ.bin" Sonic3K IceCap1 0x86AA"
+
+    If you need to specify a different type for your file, you may append a dot,
+    and the unique identifier for the type. For example, a script may allow you
+    to specify that your file is a SFX file. For example, with script
+    "MegaPCM/smps2asm.smpss", you would want to append ".SFX" to the folder
+    name, as follows:
+      "SMPS2ASM "S1 Jump.bin" MegaPCM.SFX Jump"
+
+    You can also run scripts on the spot to use SMPS2ASM outside of the
+    MDMusicPlayer environment. You simple have to specify, as the first
+    argument, the script file. The script MUST have extension smpss, or else it
+    will be treated as the input file. Here is an example:
+      "SMPS2ASM script.smpss "DyHe Izayoi.bin" Izayoi"
+
+  *1.4 - Special flags*
+    The commandline supports adding special flags to use different special
+    functions with SMPS2ASM/Nat. Currently the following flags are supported:
+      * -d - Print debug information. This information provides an insight to
+        what the interpreter sees during the whole execution. This file is
+        stored as .asm.log file and is viewable by any text editor. This can be
+        used to debugging possible issues with scripts or finding out what goes
+        wrong with song conversion.
+
+    More flags may be added in the future
+================================================================================
+
+*2 - Scripting & mnemonics*
+  *2.1 - Basic scripting*
+    Scripting in SMPS2ASM/Nat works based on functions; you define a function on
+    the main script, then the program evaluates if this function should be
+    executed. There also can be equates, which will be evaluated when they are
+    first found (That is, not at script parse time, but when the script at its
+    location is ran first). Scripts are split into subscripts, which are user
+    defined, in order to be ran or used by the code to aid in conversion
+    process.
+
+  *2.2 - Mnemonics*
+    *2.2.1 - Function types*
+      The very basic type of scripting, Function types, serves to tell to the
+      program what type of function we want to execute. This is the whole
+      backbone of the program, and determines what the rest of the line should
+      be. Here is the types:
+        * Equate - Equates a symbol or value to a lable. The symbol for this
+          function is '='
+
+        * Macro - Macros are used to print just that; macros. Macros allow to
+          define one, multiple, range of or no bytes that trigger the macro. The
+          macro is able to define arguments as well. The symbol for this
+          function is '!'
+
+        * Script block start - This is used to start a script block or
+          conditional script block, which may be used to run specific script
+          after a function. This may be used to modify the output of the
+          previous function or do something after it. The symbol is usually
+          used after the function line. The symbol for this function is '{'
+
+        * Script block end - Similar to script block start, but is used to end a
+          script block. Can only be placed in a separate line. The symbol for
+          this function is '}'
+
+        * Subscript - This function is much like 'Script block start', but it is
+          its own function, rather than an extension of existing function.
+          Mostly used to make a subscript of a specified type, which the
+          interpreter will use to define output file. You can also import a
+          subscript into another subscript or script block. The symbol for this
+          function is '?'
+
+        * Argument modifier - This function is used for modifying arguments of a
+          macro. You can modify the text representation of macro values, or
+          remove arguments completely. The symbol for this function is ':'
+
+        * If block - This function is used to run alternate code based on
+          condition. If blocks can also only contain the true condition. The
+          symbol for this function is 'c'
+
+        * Operation - This function allows you to fake operators without them
+          actually outputting anything to the output file. Most useful in
+          skipping bytes (for example, DAC pointers two unused bytes). The
+          symbol for this function is '$'
+
+        * For loop - This function can be used to loop for x amount of times.
+          Useful in defining FM and PSG headers with variable length. The
+          symbol for this function is 'f'
+
+        * While loop - This function can be used to loop until condition is
+          false. The condition will be evaluate each time script inside is
+          completed processing. The symbol for this function is 'w'
+
+        * Argument equate - This function will try to get an argument from the
+          commandline and equate it to a lable. If it can not find equate at the
+          requested offset, it will ask from the user with the given string.
+          Useful for getting the offset of the song in Z80 bank. The symbol for
+          this function is '@'
+
+        * Stop - This function is used to stop interpreting data at current
+          offset, and to return to the subscript which called this. If no caller
+          was present, parsing of the file will stop and final file will be
+          output. See further explanation in  chapter 3.3. The symbol for this
+          function is ';'
+
+        * Lable format - Is used to set the lable format usedto create a lable
+          or for defining a lable for macro argument. Useful for jumps, calls
+          and header. The symbol for this function is '~'
+
+        * Comment - Is used to set a note in the output file. Can also be used
+          to put custom text when necessary. You can use operators inside
+          comments and they are put on a new line. If placed inside a macro,
+          the comment will be appended after the macro itself. The symbol for
+          this function is '%'
+
+        * Print - This can be used in order to print text to the command window.
+          This works almost like a Comment function, but will not put anything
+          in the output file. The symbol for this function is '+'
+
+        * Go to - This operator is used to go to file position, or advance
+          specified amount of bytes forward or backward. Useful for writing
+          comments or with complex commands. You define absolute position
+          ("a"), backwards jump ("b"), or forwards jump ("f") right after the
+          function symbol. The symbol for this function is '>'
+
+        * Special - This operator is evaluated during script execution. It is
+          used for executing various macros. The symbol for this function is 's'
+
+    *2.2.2 - Operators*
+      There are some special operators that allow to better interact with
+      equates or bytes of the input file. The operator to interact with an
+      equate goes as follows: '\<str>\' where <str> is the name of the equate.
+      Other operators start with '.' and have 2-letter code;
+        * db - Data Byte; Reads a byte from the file on current cursor position,
+          and then increments the cursor position by 1.
+
+        * lb - Last Byte; Reads a byte from the file on current cursor position
+          minus 1.
+
+        * nb - Next Byte; Reads a byte from the file on current cursor
+          position.
+
+        * sb - Skip Byte; Increments the cursor position by 1, but does not
+          read a byte.
+
+        * dw - Data Word; Reads a word from the file on current cursor
+          position, and then increments the cursor position by 2.
+
+        * lw - Last Word; Reads a word from the ROM on current cursor position
+          minus 2.
+
+        * nw - Next Word; Reads a word from the ROM on current cursor position.
+
+        * sw - Skip Word; Increments the cursor position by 2, but does not
+          read a word.
+
+        * aw - Absolute Word; Reads a word from the file on current cursor
+          position, treats it as an absolute pointer (usually to Z80 bank).
+          Then the data at destination position will be interpreted.
+
+        * ow - Offset Word; Reads a word from the ROM on current cursor
+          position, treats it as an offset pointer on the cursor position. Then
+          the data at destination position will be interpreted.
+
+        * hw - Header offset Word; Reads a word from the ROM on current cursor
+          position, treats it as an offset pointer on the header position. Then
+          the data at destination position will be interpreted.
+
+        * dl - Data Long; Reads a long from the ROM on current cursor position,
+          and then increments the cursor position by 4.
+
+        * ll - Last Long; Reads a long from the ROM on current cursor position
+          minus 4.
+
+        * nl - Next Long; Reads a long from the ROM on current cursor position.
+
+        * sl - Skip Long; Increments the cursor position by 4, but does not
+          read a long.
+
+        * pc - PC: Gets the current cursor position as a word.
+
+        * of - Offset: The origin offset of the file will be returned.
+
+        * sz - Size: Returns the size of the file. To get the offset after last
+          byte in the file, add of to value returned by sz.
+
+        * an - Absolute Lable Next: Gets the next lable from the current cursor
+          position. If no lable was found, the offset of the last byte after
+          end of file is returned. It is equivalent of doing of+sz.
+
+        * al - Absolute Lable Last: Gets the last lable from the current cursor
+          position. If no lable was found, the offset of the file will be
+          returned.
+
+        * a0-a7 - Argument #: Returns the value for argument number # (0-index).
+          If no argument is defined for this offset, empty string is returned.
+
+        * n0-n7 - Argument #: Returns the value for argument number # (0-index),
+          converted into a number. If argument is not numeric, NaN is returned.
+          If no argument is defined for this offset, NaN is returned.
+
+      If there is an operator you want me to add, do tell me and I will consider
+      adding it.
+
+  *2.3 - Function format*
+    *2.3.0 - Format*
+      <format>
+      <example 1>
+      <example 2>
+        <text describing the examples>
+
+    *2.3.1 - Equates*
+      =<lable> <value>
+      =nRst 0x80
+      =endian 'little'
+        <lable> is the lable of the equate, used to identify it. Having multiple
+        equates with the same lable will likely break things. <value> is the
+        value or statement evaluated to the string. The first time the equate is
+        found on the script it will be evaluated and can not be evaluated again.
+
+    *2.3.2 - Macro*
+      !<flags> > <lable>: <arguments><end>
+      ! > sHeaderPatch: .aw;
+      !0xFF, 7 > sCondJmp: .rw {
+      !0xE8 > sNoteTimeOut: .db;
+        <flags> is none, one, or more bytes which define the data necessary to
+        trigger this macro, which are separated by ','. <lable> is the lable
+        used to identify this macro, and functions as the macro name. Having
+        multiple macros with the same lable will likely break things.
+        <arguments> define the arguments of the macro, separated by ','. These
+        will be evaluated when the macro is used. <end> will be ';' if you do
+        not need additional code block. If you do, you use '{' instead.
+
+    *2.3.3 - Argument modifier*
+      :<type><num> <end>
+      :?4 {
+      :-1
+        <num> is a 0-based offset of the argument that will be modified. The
+        command has few modes for manipulation: Modify mode ("?"), where you can
+        edit the argument <num> based on a list of equates inside another
+        subscript. Set mode ("=") allows you to set argument to a value. <end>
+        will contain the value to be set. Delete mode ("-") allows you to remove
+        argument <num> from the list completely.
+
+    *2.3.4 - If block*
+      c <condition> {
+      c .nw == 0x17D8 {
+      c false {
+        <condition> defines on what basis the if block will evaluate when to run
+        the true block (right after the line) or false block (after the first
+        '}' if '{' is provided in same line). The script will be evaluated once
+        the interpreter finds an if block.
+
+    *2.3.5 - Operation*
+      $ <operation>
+      $ .sb
+        <operation> says what the program will do, typically consisting of
+        operators only. The operation will be evaluated once the interpreter
+        sees it. The operation may only contain operators or statements, not
+        other functions. Operations are best used to skip bytes.
+
+    *2.3.6 - For loop*
+      f <times> {
+      f \FMnum\ - 1 {
+      f 0xA {
+        <times> defines the amount of times the code block will be ran, which
+        will be evaluated once the interpreter finds it. Most useful for
+        defining variable size header fields, such as FM and PSG headers.
+
+    *2.3.7 - While loop*
+      w <condition> {
+      w .nb != 0 {
+      w true {
+        <condition> defines calculation to determine if the code block will be
+        ran or not. After code block is ran, execution will return at the while.
+
+    *2.3.8 - Argument equate*
+      @<lable> <argument> <text>
+      @offset 0 "Please specify offset of this song in Z80 bank"
+        <lable> will be the lable applied to the final evaluated equate when the
+        interpreter finds it. <argument> is the argument offset from where it
+        attempts to get the value from. In commandline this will be the argument
+        3+<argument>. <text> will be shown on the screen if argument at
+        specified offset could not be found. The user will be promted with this
+        string to enter an input to evaluate the equate.
+
+    *2.3.9 - Lable format*
+      ~<string> <mode>
+      ~£_PSG? :0
+      ~£_DAC .of
+        <string> is a string representing what the format for lable names will
+        be. '£' is special character which will be replaced with the given name
+        of this project is. '?' is special character, which will be replaced
+        with the next available number, starting from 1. <mode> defines where
+        the label will be created at. It can be an operator, or it may also
+        refer to an argument much like an Argument modifier. Any lable created
+        by the interpreter will be in this format until it is changed by the
+        script. Most used to change lable names for jumps, calls, and channel
+        definitions, etc.
+
+      *2.3.10 - Subscript*
+        ?<lable> {
+        ?header {
+          <lable> is used to identify this subscript by. This is used especially
+          to hold functions needed more than once.
+
+        *2.3.10.1 - Subscript importing*
+          ?<lable>;
+          ?header;
+            <lable> is used to identify the subscript to import. This is used
+            to import functions or equates from another subscript.
+
+      *2.3.11 - Comment*
+        %<note>
+        %; This is a comment!
+        %; The actual value was {.lb}
+          <note> is the string you want to put inside output file. All the
+          functions you use must be between { and } tags.
+
+      *2.3.12 - Print*
+        +<note>
+        +Hello World!
+        +There is some error at {.pc}
+          <note> is the string you want to notify user with. All the functions
+          you use must be between { and } tags.
+
+      *2.3.13 - Go to*
+        ><type> <off>
+        >a <dw>
+        >b 10
+          <type> is the type of the operation. 'a' is absolute address´, 'f' is
+          forward via offset addition, 'b' is backward via offset substraction.
+          <off> is the offset, evaluated once the interpreter finds the Go to.
+
+      *2.3.14 - Special*
+        s<macro> <args>
+        sinc "file/p.ath"
+          <macro> defines one of the macros in the list below, and <args> will
+          be any arguments specific to <macro>:
+            * inc - Include another file at the end of the current script.
+              <args> will contain the file path of the included file.
+            * datamacro - Changes the data macro to different string. In the
+              past, SMPS2ASM would only support 'dc.b', but can now be made to
+              use anything. <args> will be a string containing the string to
+              use.
+            * version - Denotes SMPS2ASM/Nat script version. This may be used in
+              the future for backwards compatibility or letting you know you are
+              using an old version.
+================================================================================
+
+*3 - Inner functionality*
+  *3.1 - Script parsing*
+    Scripts are parsed line by line, tabs and carriage returns are ignored.
+    The first letter of a line determines what type of function the line is
+    assigned to do. Code blocks (including the entire script) is handle by a
+    stack of of ScriptArray elements, which are a list of generic script items.
+    The stack will get objects pushed into it and popped from it by code block
+    start and code block end respectively. If stack underflows, or other issues
+    are present, an error will be reported, the line number and error is shown
+    to the user and parsing will stop.
+
+  *3.2 - Subscripts*
+    The program flow consists of subscripts. The entire script is technically
+    inside a subscript with a blank name. Subscripts are a way to categorize
+    different components needed for the program flow. While it is not necessary
+    to use them, they are really handy for optimizing the script. Subscripts can
+    be called by a command, and you can choose whether to run a subscript
+    sequentially, or to optimize it into an array. For the latter case, the
+    program will check with each byte, if it can be used like a macro or like an
+    equate, rather than having to run through each macro or equate separately in
+    order to figure out what to do. This feature has allowed SMPS2ASM/Nat to
+    gain massive speed up since last release.
+
+  *3.3 - Subscript parsing*
+    Whenever a command to parse a subscript is called, the calling subscript
+    will be temporarily suspended, in order to allow the called subscript be
+    parsed. In the case of sequential parsing, the subscript will go from top to
+    bottom, until the last statement. After everything is done, control is
+    returned for the calling subscript. If there are any stop statements during
+    parsing, this will also terminate parsing process and return to calling
+    subscript.
+
+    In the case of optimized subscripts, subscripts are parsed until a stop
+    statement. The subcript will be stored as an array (and if any other
+    subscripts were invoked at the same time, the optimized arrays are merged),
+    and the script will go through each byte and check the array for
+    translation. If nothing is found, a byte value will be written instead. If
+    EOF is met, the program will crash.
+
+  *3.4 - Parsing expressions*
+    SMPS2ASM/Nat uses Ncalc for dealing with expressions. Along with some custom
+    code for formatting, variables, mnemonics and dealing with hex numbers,
+    Ncalc helps dealing with nearly any math experssion. I did not want to write
+    code for this myself and dealing with professionally made expression
+    calculator has allowed me to quickly write up the program and deal with
+    what's really the most important. You can see on their website more info
+    about how it all works. If you need any specific functionality, talk to me
+    about it and I will consider adding it.
+
+  *3.5 - Outputting to file*
+    After the input file is fully parsed, the data will be written line by line
+    to the output file. The loop will read each byte, and write any line on that
+    byte. If there is multiple lines for the same byte, then the program checks
+    if they are equivalent. If so, it ignores one of them, but if not, then it
+    will warn the user, but print both anyway. The loop will also check for any
+    lables at the current byte, and write them after the data. The loop will
+    also format raw data or equated bytes into same line (max 8 per line), and
+    check if any byte has not been found. There is a string with offset to
+    every skipped byte, so it knows which bytes not to flag as unused.
+================================================================================

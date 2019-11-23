@@ -1,0 +1,3415 @@
+00000000                            	include "..\..\code\LANG Z80.ASM"
+00000000                            ; MADE BY NATSUMI 2017
+00000000                            
+00000000                            ; DEFINE HELPERS
+00000000 =00000000                  z80prg =	0		; 0 IN 68K MODE, 1 IN Z80 MODE
+00000000 =00000000                  ztemp =		0		; TEMPORARY REGISTER
+00000000 =00000001                  zundoc =	1		; SET TO 0 TO USE UNDOCUMENTED OPCODES
+00000000 =00000001                  zchkoffs =	1		; SET TO 0 TO NOT CHECK IX/IY AND JR OFFSETS
+00000000                            z80regstr	EQUS "a b c d e h l bc de hl sp af ix iy i r ixh ixl iyh iyl (bc) (de) (hl) (sp) af' (ix) (iy)"
+00000000                            
+00000000                            ; EASILY MAKE SECTIONS
+00000000                            z80prog	macro obj
+00000000                            	if narg=0
+00000000                            		OBJEND
+00000000                            
+00000000                            	; magic function that fixes all the jr and djnz opcodes, along with offsets.
+00000000                            	; Used for detecting illegal forward jumps
+00000000                            		local lastpos
+00000000                            lastpos =	*
+00000000                            			local off, byte
+00000000                            		rept zfuturec
+00000000                            			popp off
+00000000                            			popp byte
+00000000                            			org zfuturepos-zfutureobj+off
+00000000                            			dc.b byte
+00000000                            		endr
+00000000                            
+00000000                            		org lastpos
+00000000                            
+00000000                            		POPO		; restore options
+00000000                            z80prg =	0
+00000000                            		MEXIT		; exit macro here
+00000000                            	endif
+00000000                            
+00000000                            	PUSHO			; push options
+00000000                            	OPT AE-			; automatic evens off
+00000000                            	OPT AN+			; allow use of 100H instead of $100
+00000000                            	OPT M-			; do not print better macro info. Comment out for large text dump.
+00000000                            	OPT D-			; make sure EQU/SET do not descope local lables
+00000000                            
+00000000                            zfutureobj =	\obj
+00000000                            zfuturepos =	*
+00000000                            zfuturec =	0
+00000000                            
+00000000                            	if narg=1
+00000000                            		OBJ \obj
+00000000                            z80prg =	1
+00000000                            	else
+00000000                            		inform 0,"Invalid num of args!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            ; CREATE A LITTLE-ENDIAN Z80 ABSOLUTE ADDRESS
+00000000                            z80word	macro word
+00000000                            	dc.b ((\word)&$FF), ((\word)>>8&$FF)
+00000000                                endm
+00000000                            
+00000000                            ; SAVES THE RÈGISTER ID TO ZTEMP
+00000000                            zgetreg	macro reg, err
+00000000                            	if strlen("\reg")=0
+00000000                            		inform \err,"The register must not be empty!"
+00000000                            		mexit
+00000000                            	endif
+00000000                            
+00000000                            ztemp = instr("\z80regstr", "\reg")
+00000000                            
+00000000                            	if (ztemp<>0)&(ztemp<55)
+00000000                            ztemp =		(z\reg)
+00000000                            
+00000000                            	elseif ztemp=56
+00000000                            ztemp =		zbcr
+00000000                            
+00000000                            	elseif ztemp=61
+00000000                            ztemp =		zder
+00000000                            
+00000000                            	elseif ztemp=66
+00000000                            ztemp =		zhlr
+00000000                            
+00000000                            	elseif ztemp=71
+00000000                            ztemp =		zspr
+00000000                            
+00000000                            	elseif ztemp=76
+00000000                            ztemp =		zaf2
+00000000                            
+00000000                            	elseif ztemp=79
+00000000                            ztemp =		zixr
+00000000                            
+00000000                            	elseif ztemp=85
+00000000                            ztemp =		ziyr
+00000000                            
+00000000                            	else
+00000000                            
+00000000                            		if instr("\reg", "(ix+")<>0|instr("\reg", "(ix-")<>0
+00000000                            ztemp =		zixp
+00000000                            
+00000000                            		elseif instr("\reg", "(iy+")<>0|instr("\reg", "(iy-")<>0
+00000000                            ztemp =		ziyp
+00000000                            
+00000000                            		else
+00000000                            ztemp =			-1
+00000000                            
+00000000                            			local a, cc, p
+00000000                            a =			0
+00000000                            p =			1
+00000000                            d =			0
+00000000                            			while a=0
+00000000                            				if p>strlen("\reg")
+00000000                            ztemp =					-2
+00000000                            a =					1
+00000000                            
+00000000                            				else
+00000000                            cc					substr p,p,"\reg"
+00000000                            					if '\cc'='('
+00000000                            d =						d+1
+00000000                            
+00000000                            					elseif '\cc'=')'
+00000000                            d =						d-1
+00000000                            
+00000000                            					elseif ('\cc'<>' ')&('\cc'<>'	')
+00000000                            						if d<1
+00000000                            a =							1
+00000000                            						endif
+00000000                            					endif
+00000000                            				endif
+00000000                            p =				p+1
+00000000                            			endw
+00000000                            		endif
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            ; PLACES THE SIGNED OFFSET INTO ROM, AND QUEUES A CHECK
+00000000                            zindoff	macro reg, byte
+00000000                            	local off
+00000000                            off	substr 4, strlen("\reg")-1, "\reg"
+00000000                            
+00000000                            	if zchkoffs
+00000000                            		dc.b -(off)-1, off
+00000000                            		zfuture \byte
+00000000                            
+00000000                            	else
+00000000                            		dc.b \byte, off
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            zjrfuture macro off, byte
+00000000                            	if zchkoffs
+00000000                            		dc.b -(off)-1, off
+00000000                            		zfuture \byte
+00000000                            
+00000000                            	else
+00000000                            		dc.b \byte, off
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            ; QUEUES SIGNED VALUES TO BE FIXED
+00000000                            zfuture	macro byte
+00000000                            zfuturec =	zfuturec+1
+00000000                            		local p,v
+00000000                            p =		*-2
+00000000                            v =		\byte
+00000000                            		pushp "\#v"
+00000000                            		pushp "\#p"
+00000000                                endm
+00000000                            
+00000000                            ; Define equates for registers
+00000000 =00000000                  zb = 	0
+00000000 =00000001                  zc =	1
+00000000 =00000002                  zd =	2
+00000000 =00000003                  ze =	3
+00000000 =00000004                  zh =	4
+00000000 =00000005                  zl =	5
+00000000 =00000007                  za =	7
+00000000 =00000008                  zbc =	8
+00000000 =00000009                  zde =	9
+00000000 =0000000A                  zhl =	$A
+00000000 =0000000B                  zsp =	$B
+00000000 =00000018                  zbcr =	$18
+00000000 =00000019                  zder =	$19
+00000000 =0000001A                  zhlr =	$1A
+00000000 =0000001B                  zspr =	$1B
+00000000 =00000020                  zix =	$20
+00000000 =00000021                  ziy =	$21
+00000000 =00000022                  zixr =	$22
+00000000 =00000023                  ziyr =	$23
+00000000 =00000024                  zixp =	$24
+00000000 =00000025                  ziyp =	$25
+00000000 =00000028                  zixh =	$28
+00000000 =00000029                  zixl =	$29
+00000000 =0000002A                  ziyh =	$2A
+00000000 =0000002B                  ziyl =	$2B
+00000000 =00000030                  zaf =	$30
+00000000 =00000031                  zaf2 =	$31
+00000000 =00000038                  zi =	$38
+00000000 =00000039                  zr =	$39
+00000000                            
+00000000                            
+00000000                            ; Define instructions
+00000000                            
+00000000                            db	macro val
+00000000                            	dc.b \_
+00000000                                endm
+00000000                            
+00000000                            dsb	macro num, val
+00000000                            	dcb.b \_
+00000000                                endm
+00000000                            
+00000000                            dw	macro val
+00000000                            	rept narg
+00000000                            		dc.b ((\val)&$FF), ((\val)>>8&$FF)
+00000000                            		shift
+00000000                            	endr
+00000000                                endm
+00000000                            
+00000000                            bw	macro val
+00000000                            	rept narg
+00000000                            		dc.b ((\val)>>8&$FF), ((\val)&$FF)
+00000000                            		shift
+00000000                            	endr
+00000000                                endm
+00000000                            
+00000000                            dsw	macro num, val
+00000000                            	rept \num
+00000000                            		dc.b ((\val)&$FF), ((\val)>>8&$FF)
+00000000                            		shift
+00000000                            	endr
+00000000                                endm
+00000000                            
+00000000                            bsw	macro num, val
+00000000                            	rept \num
+00000000                            		dc.b ((\val)>>8&$FF), ((\val)&$FF)
+00000000                            		shift
+00000000                            	endr
+00000000                                endm
+00000000                            
+00000000                            rlc	macro reg, reg2
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	if narg=2
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		if (ztemp=zixp)
+00000000                            			dc.b $DD
+00000000                            
+00000000                            		elseif (ztemp=ziyp)
+00000000                            			dc.b $FD
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            		zindoff \reg, $CD
+00000000                            		zgetreg \reg2, 0
+00000000                            
+00000000                            		if (ztemp>=0)&(ztemp<=za)
+00000000                            			dc.b $00+ztemp
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            		mexit
+00000000                            	endif
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $00+ztemp		; rlc a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $06			; rlc (hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; rlc (ix+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $06
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; rlc (iy+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $06
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            rrc	macro reg
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if narg=2
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		if (ztemp=zixp)
+00000000                            			dc.b $DD
+00000000                            
+00000000                            		elseif (ztemp=ziyp)
+00000000                            			dc.b $FD
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            		zindoff \reg, $CD
+00000000                            		zgetreg \reg2, 0
+00000000                            
+00000000                            		if (ztemp>=0)&(ztemp<=za)
+00000000                            			dc.b $08+ztemp
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            		mexit
+00000000                            	endif
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $08+ztemp		; rrc a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $0E			; rrc (hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; rrc (ix+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $0E
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; rrc (iy+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $0E
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            rl	macro reg
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if narg=2
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		if (ztemp=zixp)
+00000000                            			dc.b $DD
+00000000                            
+00000000                            		elseif (ztemp=ziyp)
+00000000                            			dc.b $FD
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            		zindoff \reg, $CD
+00000000                            		zgetreg \reg2, 0
+00000000                            
+00000000                            		if (ztemp>=0)&(ztemp<=za)
+00000000                            			dc.b $10+ztemp
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            		mexit
+00000000                            	endif
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $10+ztemp		; rl a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $16			; rl (hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; rl (ix+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $16
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; rl (iy+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $16
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            rr	macro reg
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if narg=2
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		if (ztemp=zixp)
+00000000                            			dc.b $DD
+00000000                            
+00000000                            		elseif (ztemp=ziyp)
+00000000                            			dc.b $FD
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            		zindoff \reg, $CD
+00000000                            		zgetreg \reg2, 0
+00000000                            
+00000000                            		if (ztemp>=0)&(ztemp<=za)
+00000000                            			dc.b $18+ztemp
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            		mexit
+00000000                            	endif
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $18+ztemp		; rr a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $1E			; rr (hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; rr (ix+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $1E
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; rr (iy+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $1E
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            sla	macro reg
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if narg=2
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		if (ztemp=zixp)
+00000000                            			dc.b $DD
+00000000                            
+00000000                            		elseif (ztemp=ziyp)
+00000000                            			dc.b $FD
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            		zindoff \reg, $CD
+00000000                            		zgetreg \reg2, 0
+00000000                            
+00000000                            		if (ztemp>=0)&(ztemp<=za)
+00000000                            			dc.b $20+ztemp
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            		mexit
+00000000                            	endif
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $20+ztemp		; sla a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $26			; sla (hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; sla (ix+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $26
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; sla (iy+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $26
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            sra	macro reg
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if narg=2
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		if (ztemp=zixp)
+00000000                            			dc.b $DD
+00000000                            
+00000000                            		elseif (ztemp=ziyp)
+00000000                            			dc.b $FD
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            		zindoff \reg, $CD
+00000000                            		zgetreg \reg2, 0
+00000000                            
+00000000                            		if (ztemp>=0)&(ztemp<=za)
+00000000                            			dc.b $28+ztemp
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            		mexit
+00000000                            	endif
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $28+ztemp		; sra a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $2E			; sra (hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; sra (ix+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $2E
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; sra (iy+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $2E
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            sll	macro reg
+00000000                            	if zundoc
+00000000                            		inform 2,"Undocumented opcodes are not enabled."
+00000000                            	endif
+00000000                            
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if narg=2
+00000000                            		if (ztemp=zixp)
+00000000                            			dc.b $DD
+00000000                            
+00000000                            		elseif (ztemp=ziyp)
+00000000                            			dc.b $FD
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            		zindoff \reg, $CD
+00000000                            		zgetreg \reg2, 0
+00000000                            
+00000000                            		if (ztemp>=0)&(ztemp<=za)
+00000000                            			dc.b $30+ztemp
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            		mexit
+00000000                            	endif
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $30+ztemp		; sll a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $36			; sll (hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; sll (ix+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $36
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; sll (iy+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $36
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            srl	macro reg
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if narg=2
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		if (ztemp=zixp)
+00000000                            			dc.b $DD
+00000000                            
+00000000                            		elseif (ztemp=ziyp)
+00000000                            			dc.b $FD
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            		zindoff \reg, $CD
+00000000                            		zgetreg \reg2, 0
+00000000                            
+00000000                            		if (ztemp>=0)&(ztemp<=za)
+00000000                            			dc.b $38+ztemp
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg' and '\reg2'!"
+00000000                            		endif
+00000000                            		mexit
+00000000                            	endif
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $38+ztemp		; sra a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $3E			; sra (hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; sra (ix+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $3E
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; sra (iy+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $3E
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            bit	macro bit, reg
+00000000                            	if narg<>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	if (\bit<0)|(\bit>7)
+00000000                            		inform 2,"Invalid bit '\bit'!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $40+ztemp+(\bit*$08)	; bit 0-7,a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $46+(\bit*$08)	; bit 0-7,(hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; bit 0-7,(ix+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $46+(\bit*$08)
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; bit 0-7,(iy+*)
+00000000                            		zindoff \reg, $CB
+00000000                            		dc.b $46+(\bit*$08)
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            res	macro bit, reg, reg2
+00000000                            	if narg>3
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	if (\bit<0)|(\bit>7)
+00000000                            		inform 2,"Invalid bit '\bit'!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $80+ztemp+(\bit*$08)	; res 0-7,a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $86+(\bit*$08)	; res 0-7,(hl)
+00000000                            
+00000000                            	elseif (ztemp=zixp)|(ztemp=ziyp)
+00000000                            		dc.b $DD+((ztemp-zixp)*$20)	; res 0-7,(ix/iy+*),  , a, b, c, d, e, h, l
+00000000                            		zindoff \reg, $CB
+00000000                            
+00000000                            		if narg=3
+00000000                            			if zundoc
+00000000                            				inform 2,"Undocumented opcodes are not enabled."
+00000000                            			endif
+00000000                            
+00000000                            			zgetreg \reg2, 0
+00000000                            			if (ztemp<0)|(ztemp>za)
+00000000                            				inform 2,"Invalid or unsupported register '\reg2'!"
+00000000                            			endif
+00000000                            		else
+00000000                            ztemp =			6
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $80+(\bit*$08)+ztemp
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            zset	macro bit, reg
+00000000                            	if narg>3
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	if (\bit<0)|(\bit>7)
+00000000                            		inform 2,"Invalid bit '\bit'!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if (ztemp>=0)&(ztemp<=za)
+00000000                            		dc.b $CB, $C0+ztemp+(\bit*$08)	; set 0-7,a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $CB, $C6+(\bit*$08)	; set 0-7,(hl)
+00000000                            
+00000000                            	elseif (ztemp=zixp)|(ztemp=ziyp)
+00000000                            		dc.b $DD+((ztemp-zixp)*$20)	; set 0-7,(ix/iy+*),  , a, b, c, d, e, h, l
+00000000                            		zindoff \reg, $CB
+00000000                            
+00000000                            		if narg=3
+00000000                            			if zundoc
+00000000                            				inform 2,"Undocumented opcodes are not enabled."
+00000000                            			endif
+00000000                            
+00000000                            			zgetreg \reg2, 0
+00000000                            			if (ztemp<0)|(ztemp>za)
+00000000                            				inform 2,"Invalid or unsupported register '\reg2'!"
+00000000                            			endif
+00000000                            		else
+00000000                            ztemp =			6
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $C0+(\bit*$08)+ztemp
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            im	macro im
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	if "\im"="0/1"
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $ED, $4E		; im 0/1
+00000000                            
+00000000                            	elseif (\im<0)|(\im>2)
+00000000                            		inform 2,"Interrupt mode must only be 0, 1 or 2!"
+00000000                            
+00000000                            	elseif \im=2
+00000000                            		dc.b $ED, $5E		; im 2
+00000000                            	else
+00000000                            		dc.b $ED, $46+(\im*$10); im 0 or 1
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            rst	macro addr
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	if type(\addr)&1
+00000000                            		if (\addr&7)=0
+00000000                            			if \addr>$48|\addr<0
+00000000                            				inform 2,"Invalid address! Must be at least 0 and at most $38!"
+00000000                            			endif
+00000000                            		else
+00000000                            			inform 2,"Address must be aligned by $8!"
+00000000                            		endif
+00000000                            	endif
+00000000                            		dc.b $C7+\addr	; RST *
+00000000                                endm
+00000000                            
+00000000                            inc	macro reg
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 2
+00000000                            
+00000000                            	if ztemp<=za
+00000000                            		dc.b $04+(ztemp*$08)		; inc a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $34			; inc (hl)
+00000000                            
+00000000                            	elseif (ztemp>=zbc)&(ztemp<=zsp)
+00000000                            		dc.b $03+((ztemp-zbc)*$10)	; inc bc, de, hl or sp
+00000000                            
+00000000                            	elseif ztemp=zix
+00000000                            		dc.b $DD, $23			; inc ix
+00000000                            
+00000000                            	elseif ztemp=ziy
+00000000                            		dc.b $FD, $23			; inc iy
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; inc ix+
+00000000                            		zindoff \reg, $34
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; inc iy+
+00000000                            		zindoff \reg, $34
+00000000                            
+00000000                            	elseif (ztemp>=zixh)&(ztemp<=ziyl)
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $DD+((ztemp&$02)*$10), $24+((ztemp&$01)*$08); inc ixh, ixl, iyh, iyl
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            dec	macro reg
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 2
+00000000                            
+00000000                            	if ztemp<=za
+00000000                            		dc.b $05+(ztemp*$08)		; dec a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $35			; dec (hl)
+00000000                            
+00000000                            	elseif (ztemp>=zbc)&(ztemp<=zsp)
+00000000                            		dc.b $0B+((ztemp-zbc)*$10)	; dec bc, de, hl or sp
+00000000                            
+00000000                            	elseif ztemp=zix
+00000000                            		dc.b $DD, $2B			; dec ix
+00000000                            
+00000000                            	elseif ztemp=ziy
+00000000                            		dc.b $FD, $2B			; dec iy
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; dec ix+
+00000000                            		zindoff \reg, $35
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; dec iy+
+00000000                            		zindoff \reg, $35
+00000000                            
+00000000                            	elseif (ztemp>=zixh)&(ztemp<=ziyl)
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $FD+((ztemp&$02)*$10), $24+((ztemp&$01)*$08); dec ixh, ixl, iyh, iyl
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            zsub	macro reg
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if ztemp=-1
+00000000                            		dc.b $D6			; sub a,*
+00000000                            		dc.b \reg
+00000000                            
+00000000                            	elseif ztemp<=za
+00000000                            		dc.b $90+ztemp			; sub a,a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $96			; sub a,(hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; sub a,(ix+*)
+00000000                            		zindoff \reg, $96
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; sub a,(iy+*)
+00000000                            		zindoff \reg, $96
+00000000                            
+00000000                            	elseif (ztemp>=zixh)&(ztemp<=ziyl)
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $DD+((ztemp&$02)*$10), $94+(ztemp&$01); sub a,ixh, ixl, iyh, iyl
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            zand	macro reg
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if ztemp=-1
+00000000                            		dc.b $E6			; and a,*
+00000000                            		dc.b \reg
+00000000                            
+00000000                            	elseif ztemp<=za
+00000000                            		dc.b $A0+ztemp			; and a,a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $A6			; and a,(hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; and a,(ix+*)
+00000000                            		zindoff \reg, $A6
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; and a,(iy+*)
+00000000                            		zindoff \reg, $A6
+00000000                            
+00000000                            	elseif (ztemp>=zixh)&(ztemp<=ziyl)
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $DD+((ztemp&$02)*$10), $A4+(ztemp&$01); and a,ixh, ixl, iyh, iyl
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            zor	macro reg
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if ztemp=-1
+00000000                            		dc.b $F6			; or a,*
+00000000                            		dc.b \reg
+00000000                            
+00000000                            	elseif ztemp<=za
+00000000                            		dc.b $B0+ztemp			; or a,a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $B6			; or a,(hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; or a,(ix+*)
+00000000                            		zindoff \reg, $B6
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; or a,(iy+*)
+00000000                            		zindoff \reg, $B6
+00000000                            
+00000000                            	elseif (ztemp>=zixh)&(ztemp<=ziyl)
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $DD+((ztemp&$02)*$10), $B4+(ztemp&$01); or a,ixh, ixl, iyh, iyl
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            xor	macro reg
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if ztemp=-1
+00000000                            		dc.b $EE			; xor a,*
+00000000                            		dc.b \reg
+00000000                            
+00000000                            	elseif ztemp<=za
+00000000                            		dc.b $A8+ztemp			; xor a,a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $B6			; xor a,(hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; xor a,(ix+*)
+00000000                            		zindoff \reg, $AE
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; xor a,(iy+*)
+00000000                            		zindoff \reg, $AE
+00000000                            
+00000000                            	elseif (ztemp>=zixh)&(ztemp<=ziyl)
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $DD+((ztemp&$02)*$10), $AC+(ztemp&$01); xor a,ixh, ixl, iyh, iyl
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            cp	macro reg
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if ztemp=-1
+00000000                            		dc.b $FE			; cp a,*
+00000000                            		dc.b \reg
+00000000                            
+00000000                            	elseif ztemp<=za
+00000000                            		dc.b $B8+ztemp			; cp a,a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif ztemp=zhlr
+00000000                            		dc.b $BE			; cp a,(hl)
+00000000                            
+00000000                            	elseif ztemp=zixp
+00000000                            		dc.b $DD			; cp a,(ix+*)
+00000000                            		zindoff \reg, $BE
+00000000                            
+00000000                            	elseif ztemp=ziyp
+00000000                            		dc.b $FD			; cp a,(iy+*)
+00000000                            		zindoff \reg, $BE
+00000000                            
+00000000                            	elseif (ztemp>=zixh)&(ztemp<=ziyl)
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $DD+((ztemp&$02)*$10), $BC+(ztemp&$01); cp a,ixh, ixl, iyh, iyl
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            zadd	macro reg1, reg2
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg1, 0
+00000000                            ztemp1 =	ztemp
+00000000                            
+00000000                            	if narg>1
+00000000                            		zgetreg \reg2, 0
+00000000                            	endif
+00000000                            
+00000000                            	if ((narg=1)&((ztemp<=za)|(ztemp=zhlr)|(ztemp=zixp)|(ztemp=ziyp)))|(ztemp1=za)|(ztemp1=zixp)|(ztemp1=ziyp); this complex piece of shit just checks if we omitted the a param
+00000000                            		if (ztemp1=zixp)|(ztemp=zixp)
+00000000                            			if ztemp1=za
+00000000                            				shift
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $DD		; add a,(ix+*)
+00000000                            			zindoff \reg1, $86
+00000000                            
+00000000                            		elseif (ztemp1=ziyp)|(ztemp=ziyp)
+00000000                            			if ztemp1=za
+00000000                            				shift
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $FD		; add a,(iy+*)
+00000000                            			zindoff \reg1, $86
+00000000                            
+00000000                            		elseif ztemp=zhlr
+00000000                            			dc.b $86		; add a,(hl)
+00000000                            
+00000000                            		elseif ztemp=-1
+00000000                            			if ztemp1=za
+00000000                            				shift
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $C6		; add a,*
+00000000                            			dc.b \reg1
+00000000                            
+00000000                            		elseif ztemp<=za
+00000000                            			dc.b $80+ztemp		; add a,a, b, c, d, e, h or l
+00000000                            
+00000000                            		elseif (ztemp>=zixh)&(ztemp<=ziyl)
+00000000                            			if zundoc
+00000000                            				inform 2,"Undocumented opcodes are not enabled."
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $DD+((ztemp&$02)*$10), $84+(ztemp&$01); add a,ixh, ixl, iyh, iyl
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination: a, \reg2!"
+00000000                            		endif
+00000000                            
+00000000                            	elseif ((narg=1)&(ztemp>=zbc)&(ztemp<=zsp))|(ztemp1=zhl)	; this piece of shit just checks if we omitted the hl param
+00000000                            		dc.b $09+((ztemp-zbc)*$10)	; add hl,bc, de, hl or sp
+00000000                            
+00000000                            	elseif ztemp1=zix
+00000000                            		dc.b $DD
+00000000                            
+00000000                            		if ztemp=zbc
+00000000                            			dc.b $09		; add ix,bc
+00000000                            
+00000000                            		elseif ztemp=zde
+00000000                            			dc.b $19		; add ix,de
+00000000                            
+00000000                            		elseif ztemp=zix
+00000000                            			dc.b $29		; add ix,ix
+00000000                            
+00000000                            		elseif ztemp=zsp
+00000000                            			dc.b $39		; add ix,sp
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination: ix, \reg2!"
+00000000                            		endif
+00000000                            
+00000000                            	elseif ztemp1=ziy
+00000000                            		dc.b $FD
+00000000                            
+00000000                            		if ztemp=zbc
+00000000                            			dc.b $09		; add iy,bc
+00000000                            
+00000000                            		elseif ztemp=zde
+00000000                            			dc.b $19		; add iy,de
+00000000                            
+00000000                            		elseif ztemp=ziy
+00000000                            			dc.b $29		; add iy,iy
+00000000                            
+00000000                            		elseif ztemp=zsp
+00000000                            			dc.b $39		; add iy,sp
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination: iy, \reg2!"
+00000000                            		endif
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg1'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            adc	macro reg1, reg2
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg1, 0
+00000000                            ztemp1 =	ztemp
+00000000                            
+00000000                            	if narg>1
+00000000                            		zgetreg \reg2, 0
+00000000                            	endif
+00000000                            
+00000000                            	if ((narg=1)&((ztemp<=za)|(ztemp=zhlr)|(ztemp=zixp)|(ztemp=ziyp)))|(ztemp1=za)|(ztemp1=zixp)|(ztemp1=ziyp); this complex piece of shit just checks if we omitted the a param
+00000000                            		if (ztemp1=zixp)|(ztemp=zixp)
+00000000                            			if ztemp1=za
+00000000                            				shift
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $DD		; adc a,(ix+*)
+00000000                            			zindoff \reg1, $8E
+00000000                            
+00000000                            		elseif (ztemp1=ziyp)|(ztemp=ziyp)
+00000000                            			if ztemp1=za
+00000000                            				shift
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $FD		; adc a,(iy+*)
+00000000                            			zindoff \reg1, $8E
+00000000                            
+00000000                            		elseif ztemp=zhlr
+00000000                            			dc.b $8E		; adc a,(hl)
+00000000                            
+00000000                            		elseif ztemp=-1
+00000000                            			if ztemp1=za
+00000000                            				shift
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $CE		; adc a,*
+00000000                            			dc.b \reg1
+00000000                            
+00000000                            		elseif ztemp<=za
+00000000                            			dc.b $88+ztemp		; adc a,a, b, c, d, e, h or l
+00000000                            
+00000000                            		elseif (ztemp>=zixh)&(ztemp<=ziyl)
+00000000                            			if zundoc
+00000000                            				inform 2,"Undocumented opcodes are not enabled."
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $DD+((ztemp&$02)*$10), $8C+(ztemp&$01); adc a,ixh, ixl, iyh, iyl
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination: a, \reg2!"
+00000000                            		endif
+00000000                            
+00000000                            	elseif ((narg=1)&(ztemp>=zbc)&(ztemp<=zsp))|(ztemp1=zhl)	; this piece of shit just checks if we omitted the hl param
+00000000                            		dc.b $ED, $4A+((ztemp-zbc)*$10)	; adc hl,bc, de, hl or sp
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg1'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            sbc	macro reg1, reg2
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg1, 0
+00000000                            ztemp1 =	ztemp
+00000000                            
+00000000                            	if narg>1
+00000000                            		zgetreg \reg2, 0
+00000000                            	endif
+00000000                            
+00000000                            	if ((narg=1)&((ztemp<=za)|(ztemp=zhlr)|(ztemp=zixp)|(ztemp=ziyp)))|(ztemp1=za)|(ztemp1=zixp)|(ztemp1=ziyp); this complex piece of shit just checks if we omitted the a param
+00000000                            		if (ztemp1=zixp)|(ztemp=zixp)
+00000000                            			if ztemp1=za
+00000000                            				shift
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $DD		; sbc a,(ix+*)
+00000000                            			zindoff \reg1, $9E
+00000000                            
+00000000                            		elseif (ztemp1=ziyp)|(ztemp=ziyp)
+00000000                            			if ztemp1=za
+00000000                            				shift
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $FD		; sbc a,(iy+*)
+00000000                            			zindoff \reg1, $9E
+00000000                            
+00000000                            		elseif ztemp=zhlr
+00000000                            			dc.b $9E		; sbc a,(hl)
+00000000                            
+00000000                            		elseif ztemp=-1
+00000000                            			if ztemp1=za
+00000000                            				shift
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $DE		; sbc a,*
+00000000                            			dc.b \reg1
+00000000                            
+00000000                            		elseif ztemp<=za
+00000000                            			dc.b $98+ztemp		; sbc a,a, b, c, d, e, h or l
+00000000                            
+00000000                            		elseif (ztemp>=zixh)&(ztemp<=ziyl)
+00000000                            			if zundoc
+00000000                            				inform 2,"Undocumented opcodes are not enabled."
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $DD+((ztemp&$02)*$10), $9C+(ztemp&$01); sbc a,ixh, ixl, iyh, iyl
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination: a, \reg2!"
+00000000                            		endif
+00000000                            
+00000000                            	elseif ((narg=1)&(ztemp>=zbc)&(ztemp<=zsp))|(ztemp1=zhl)	; this piece of shit just checks if we omitted the hl param
+00000000                            		dc.b $ED, $42+((ztemp-zbc)*$10)	; sbc hl,bc, de, hl or sp
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg1'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            pop	macro reg
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 2
+00000000                            
+00000000                            	if (ztemp>=zbc)&(ztemp<=zhl)
+00000000                            		dc.b $C1+((ztemp-zbc)*$10); pop bc, de or hl
+00000000                            
+00000000                            	elseif ztemp=zaf
+00000000                            		dc.b $F1		; pop af
+00000000                            	elseif ztemp=zix
+00000000                            		dc.b $DD, $E1		; pop ix
+00000000                            	elseif ztemp=ziy
+00000000                            		dc.b $FD, $E1		; pop iy
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            push	macro reg
+00000000                            	if narg<>1
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 2
+00000000                            
+00000000                            	if (ztemp>=zbc)&(ztemp<=zhl)
+00000000                            		dc.b $C5+((ztemp-zbc)*$10); pop bc, de or hl
+00000000                            
+00000000                            	elseif ztemp=zaf
+00000000                            		dc.b $F5		; pop af
+00000000                            	elseif ztemp=zix
+00000000                            		dc.b $DD, $E5		; pop ix
+00000000                            	elseif ztemp=ziy
+00000000                            		dc.b $FD, $E5		; pop iy
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            ex	macro reg1, reg2
+00000000                            	if narg<>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg1, 0
+00000000                            zreg1 =	ztemp
+00000000                            	zgetreg \reg2, 0
+00000000                            
+00000000                            	if ((zreg1=zaf)|(zreg1=zaf2))&((ztemp=zaf)|(ztemp=zaf2))
+00000000                            		dc.b $08			; ex af,af' & ex af',af & ex af,af
+00000000                            
+00000000                            	elseif ((zreg1=zde)|(zreg1=zhl))&((ztemp=zde)|(ztemp=zhl))
+00000000                            		dc.b $EB			; ex de,hl & ex hl,de
+00000000                            
+00000000                            	elseif ((zreg1=zspr)|(zreg1=zhl))&((ztemp=zspr)|(ztemp=zhl))
+00000000                            		dc.b $E3			; ex (sp),hl & ex hl,(sp)
+00000000                            
+00000000                            	elseif ((zreg1=zix)|(zreg1=zspr))&((ztemp=zix)|(ztemp=zspr))
+00000000                            		dc.b $DD,$E3			; ex (sp),ix & ex ix,(sp)
+00000000                            
+00000000                            	elseif ((zreg1=ziy)|(zreg1=zspr))&((ztemp=ziy)|(ztemp=zspr))
+00000000                            		dc.b $FD,$E3			; ex (sp),iy & ex iy,(sp)
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register combination '\reg1' and '\reg2'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            out	macro port, reg
+00000000                            	if narg<>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if instr("\port", "(c)")<>0
+00000000                            		if (ztemp=-1)&(instr("\port", "0")<>0)
+00000000                            			if zundoc
+00000000                            				inform 2,"Undocumented opcodes are not enabled."
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $ED, $71		; out (c),0
+00000000                            
+00000000                            		elseif ztemp<=za
+00000000                            			dc.b $ED, $41+(ztemp*$08)		; out (c),a, b, c, d, e, h or l
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            		endif
+00000000                            
+00000000                            	elseif ztemp=za
+00000000                            		dc.b $D3, \port		; out (*),a
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported port '\port'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            in	macro reg, port
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg, 0
+00000000                            
+00000000                            	if instr("\port", "(c)")<>0
+00000000                            		if narg=1
+00000000                            			if zundoc
+00000000                            				inform 2,"Undocumented opcodes are not enabled."
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $ED, $70		; in (c)
+00000000                            
+00000000                            		elseif ztemp<=za
+00000000                            			dc.b $ED, $40+(ztemp*$08)		; in a, b, c, d, e, h or l,(c)
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register '\reg'!"
+00000000                            		endif
+00000000                            
+00000000                            	elseif ztemp=za
+00000000                            		dc.b $D3, \port		; in a,(*)
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported port '\port'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            ld	macro reg1, reg2
+00000000                            	if narg>2
+00000000                            		inform 2,"Incorrect number of arguments!"
+00000000                            	endif
+00000000                            
+00000000                            	zgetreg \reg1, 0
+00000000                            zreg1 =	ztemp
+00000000                            	zgetreg \reg2, 0
+00000000                            zreg2 =	ztemp
+00000000                            
+00000000                            	if zreg1=-2
+00000000                            		if zreg2=za
+00000000                            			dc.b $32			; ld (**),a
+00000000                            			z80word \reg1
+00000000                            
+00000000                            		elseif zreg2=zhl
+00000000                            			dc.b $22			; ld (**),hl
+00000000                            			z80word \reg1
+00000000                            
+00000000                            		elseif (zreg2>=zbc)&(zreg2<=zsp)
+00000000                            			dc.b $ED, $43+((zreg2-zbc)*$10)	; ld (**),bc, de, sp
+00000000                            			z80word \reg1
+00000000                            
+00000000                            		elseif zreg2=zix
+00000000                            			dc.b $DD, $22			; ld (**),ix
+00000000                            			z80word \reg1
+00000000                            
+00000000                            		elseif zreg2=ziy
+00000000                            			dc.b $FD, $22			; ld (**),iy
+00000000                            			z80word \reg1
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg1' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            	elseif zreg2=-1
+00000000                            		if (zreg1<=za)
+00000000                            			dc.b $06+(zreg1*$08), \reg2	; ld a, b, c, d, e, h or l,*
+00000000                            
+00000000                            		elseif zreg1=zhlr
+00000000                            			dc.b $36, \reg2			; ld (hl),*
+00000000                            
+00000000                            		elseif (zreg1>=zbc)&(zreg1<=zsp)
+00000000                            			dc.b $01+((zreg1-zbc)*$10)	; ld bc, de, hl, sp,**
+00000000                            			z80word \reg2
+00000000                            
+00000000                            		elseif zreg1=zix
+00000000                            			dc.b $DD, $21			; ld ix,**
+00000000                            			z80word \reg2
+00000000                            
+00000000                            		elseif zreg1=ziy
+00000000                            			dc.b $FD, $21			; ld iy,**
+00000000                            			z80word \reg2
+00000000                            
+00000000                            		elseif zreg1=zixp
+00000000                            			dc.b $DD			; ld (ix+*),*
+00000000                            			zindoff \reg1, $36
+00000000                            			dc.b \reg2
+00000000                            
+00000000                            		elseif zreg1=ziyp
+00000000                            			dc.b $FD			; ld (iy+*),*
+00000000                            			zindoff \reg1, $36
+00000000                            			dc.b \reg2
+00000000                            
+00000000                            		elseif (zreg1>=zixh)&(zreg1<=ziyl)
+00000000                            			if zundoc
+00000000                            				inform 2,"Undocumented opcodes are not enabled."
+00000000                            			endif
+00000000                            
+00000000                            			dc.b $DD+((zreg1&$02)*$10), $26+((zreg1&$01)*$08), \reg2; ld ixh, ixl, iyh, iyl,*
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg1' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            	elseif zreg2=-2
+00000000                            		if (zreg1=za)
+00000000                            			dc.b $3A			; ld a,(**)
+00000000                            			z80word \reg2
+00000000                            
+00000000                            		elseif zreg1=zhl
+00000000                            			dc.b $2A			; ld hl,(**)
+00000000                            			z80word \reg2
+00000000                            
+00000000                            		elseif (zreg1>=zbc)&(zreg1<=zsp)
+00000000                            			dc.b $ED, $4B+((zreg1-zbc)*$10)	; ld bc, de, hl, sp,(**)
+00000000                            			z80word \reg2
+00000000                            
+00000000                            		elseif zreg1=zix
+00000000                            			dc.b $DD, $2A			; ld ix,(**)
+00000000                            			z80word \reg2
+00000000                            
+00000000                            		elseif zreg1=ziy
+00000000                            			dc.b $FD, $2A			; ld iy,(**)
+00000000                            			z80word \reg2
+00000000                            
+00000000                            		else
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg1' and '\reg2'!"
+00000000                            		endif
+00000000                            
+00000000                            	elseif (zreg1<=za)&(zreg2<=za)
+00000000                            		dc.b $40+(zreg1*$08)+zreg2		; ld a, b, c, d, e, h or l,a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif (zreg1=za)&(zreg2=zbcr)
+00000000                            		dc.b $0A				; ld a,(bc)
+00000000                            
+00000000                            	elseif (zreg1=za)&(zreg2=zder)
+00000000                            		dc.b $1A				; ld a,(de)
+00000000                            
+00000000                            	elseif (zreg1<=za)&(zreg2=zhlr)
+00000000                            		dc.b $46+(zreg1*$08)			; ld a, b, c, d, e, h or l,(hl)
+00000000                            
+00000000                            	elseif (zreg1=zhlr)&(zreg2<=za)
+00000000                            		dc.b $70+zreg2				; ld (hl),a, b, c, d, e, h or l
+00000000                            
+00000000                            	elseif (zreg1<=za)&(zreg2=zixp)
+00000000                            		dc.b $DD				; ld a, b, c, d, e, h or l,(ix+*)
+00000000                            		zindoff \reg2, $46+(zreg1*$08)
+00000000                            
+00000000                            	elseif (zreg1<=za)&(zreg2=ziyp)
+00000000                            		dc.b $FD				; ld a, b, c, d, e, h or l,(iy+*)
+00000000                            		zindoff \reg2, $46+(zreg1*$08)
+00000000                            
+00000000                            	elseif (zreg2<=za)&(zreg1=zixp)
+00000000                            		dc.b $DD				; ld (ix+*),a, b, c, d, e, h or l
+00000000                            		zindoff \reg1, $70+zreg2
+00000000                            
+00000000                            	elseif (zreg2<=za)&(zreg1=ziyp)
+00000000                            		dc.b $FD				; ld (iy+*),a, b, c, d, e, h or l
+00000000                            		zindoff \reg1, $70+zreg2
+00000000                            
+00000000                            	elseif (zreg1=zbcr)&(zreg2=za)
+00000000                            		dc.b $02				; ld (bc),a
+00000000                            
+00000000                            	elseif (zreg1=zder)&(zreg2=za)
+00000000                            		dc.b $12				; ld (de),a
+00000000                            
+00000000                            	elseif (zreg1=zsp)&(zreg2=zhl)
+00000000                            		dc.b $F9				; ld sp,hl
+00000000                            
+00000000                            	elseif (zreg1=zi)&(zreg2=za)
+00000000                            		dc.b $ED, $47				; ld i,a
+00000000                            
+00000000                            	elseif (zreg2=zi)&(zreg1=za)
+00000000                            		dc.b $ED, $57				; ld a,i
+00000000                            
+00000000                            	elseif (zreg1=zr)&(zreg2=za)
+00000000                            		dc.b $ED, $4F				; ld r,a
+00000000                            
+00000000                            	elseif (zreg2=zr)&(zreg1=za)
+00000000                            		dc.b $ED, $5F				; ld a,r
+00000000                            
+00000000                            	elseif (zreg1=zsp)&(zreg2=zix)
+00000000                            		dc.b $DD, $F9				; ld sp, ix
+00000000                            
+00000000                            	elseif (zreg1=zsp)&(zreg2=ziy)
+00000000                            		dc.b $FD, $F9				; ld sp, iy
+00000000                            
+00000000                            	elseif (zreg1>=zixh)&(zreg1<=ziyl)&((zreg2<=za)&(zreg2<>zh)&(zreg2<>zl))
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $DD+((zreg1&$02)*$10), $60+((zreg1&$01)*$08)+zreg2; ld ixh, ixl, iyh, iyl,a, b, c, d, e
+00000000                            
+00000000                            	elseif (zreg2>=zixh)&(zreg2>=ziyl)&((zreg1<=za)&(zreg1<>zh)&(zreg1<>zl))
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $DD+((zreg2&$02)*$10), $44+(zreg2&$01)+(zreg1*$08); ld a, b, c, d, e,ixh, ixl, iyh, iyl
+00000000                            
+00000000                            	elseif (zreg1>=zixh)&(zreg1<=ziyl)&(zreg2>=zixh)&(zreg2>=ziyl)
+00000000                            		if zundoc
+00000000                            			inform 2,"Undocumented opcodes are not enabled."
+00000000                            		endif
+00000000                            
+00000000                            		if ((zreg1&$02)<>(zreg2&$02))
+00000000                            			inform 2,"Invalid or unsupported register combination '\reg1' and '\reg2'!"
+00000000                            			mexit
+00000000                            		endif
+00000000                            
+00000000                            		dc.b $DD+((zreg1&$02)*$10), $60+((zreg1&$01)*$08)+(zreg2&$01); ld ixh, ixl, iyh, iyl,ixh, ixl, iyh, iyl
+00000000                            
+00000000                            	else
+00000000                            		inform 2,"Invalid or unsupported register combination '\reg1' and '\reg2'!"
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            djnz	macro addr
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	zjrfuture \addr-*-2, $10
+00000000                                endm
+00000000                            
+00000000                            jr	macro cond, off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	if narg=1
+00000000                            		zjrfuture \cond-*-2, $18
+00000000                            	else
+00000000                            		jr\cond \off
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            jrnz	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	zjrfuture \off-*-2, $20
+00000000                                endm
+00000000                            
+00000000                            jrnc	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	zjrfuture \off-*-2, $30
+00000000                                endm
+00000000                            
+00000000                            jrz	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	zjrfuture \off-*-2, $28
+00000000                                endm
+00000000                            
+00000000                            jrc	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	zjrfuture \off-*-2, $38
+00000000                                endm
+00000000                            
+00000000                            jp	macro cond, off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	if narg=1
+00000000                            		zgetreg \cond, 0
+00000000                            
+00000000                            		if ztemp=zhlr
+00000000                            			dc.b $E9		; jp (hl)
+00000000                            
+00000000                            		elseif ztemp=zixr
+00000000                            			dc.b $DD, $E9		; jp (ix)
+00000000                            
+00000000                            		elseif ztemp=ziyr
+00000000                            			dc.b $FD, $E9		; jp (iy)
+00000000                            
+00000000                            		else
+00000000                            			dc.b $C3		; jp **
+00000000                            			z80word \cond
+00000000                            		endif
+00000000                            	else
+00000000                            		jp\cond \off
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            jpnz	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $C2
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            jpnc	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $D2
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            jpz	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $CA
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            jpc	macro off
+00000000                            	dc.b $DA
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            jppo	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $E2
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            jpp	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $F2
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            jppe	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $EA
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            jpm	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $FA
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            call	macro cond, off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	if narg=1
+00000000                            		dc.b $CD
+00000000                            		z80word \cond
+00000000                            	else
+00000000                            		call\cond \off
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            callnz	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $C4
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            callz	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $CC
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            callnc	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $D4
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            callc	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $DC
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            callpo	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $E4
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            callpe	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $EC
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            callp	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $F4
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            callm	macro off
+00000000                            	if narg=0
+00000000                            		inform 2,"No jump address supplied!"
+00000000                            	endif
+00000000                            
+00000000                            	dc.b $FC
+00000000                            	z80word \off
+00000000                                endm
+00000000                            
+00000000                            ret	macro cond
+00000000                            	if narg=0
+00000000                            		dc.b $C9
+00000000                            	else
+00000000                            		ret\cond
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            retnz	macro
+00000000                            	dc.b $C0
+00000000                                endm
+00000000                            
+00000000                            retz	macro
+00000000                            	dc.b $C8
+00000000                                endm
+00000000                            
+00000000                            retnc	macro
+00000000                            	dc.b $D0
+00000000                                endm
+00000000                            
+00000000                            retc	macro
+00000000                            	dc.b $D8
+00000000                                endm
+00000000                            
+00000000                            retpo	macro
+00000000                            	dc.b $E0
+00000000                                endm
+00000000                            
+00000000                            retpe	macro
+00000000                            	dc.b $E8
+00000000                                endm
+00000000                            
+00000000                            retp	macro
+00000000                            	dc.b $F0
+00000000                                endm
+00000000                            
+00000000                            retm	macro
+00000000                            	dc.b $F8
+00000000                                endm
+00000000                            
+00000000                            di	macro
+00000000                            	if z80prg=0
+00000000                            		move	#$2700,sr	; THIS IS HERE, IF YOU WANNA USE DI IN 68K CODE ;)
+00000000                            	else
+00000000                            		dc.b $F3
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            ei	macro
+00000000                            	if z80prg=0
+00000000                            		move	#$2300,sr	; THIS IS HERE, IF YOU WANNA USE EI IN 68K CODE ;)
+00000000                            	else
+00000000                            		dc.b $FB
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            halt	macro
+00000000                            	if z80prg=0
+00000000                            		stop	#$2700		; THIS IS HERE, IF YOU WANNA USE HALT IN 68K CODE ;)
+00000000                            	else
+00000000                            		dc.b $76
+00000000                            	endif
+00000000                                endm
+00000000                            
+00000000                            znop	macro
+00000000                            	dc.b $00
+00000000                                endm
+00000000                            
+00000000                            rlca	macro
+00000000                            	dc.b $07
+00000000                                endm
+00000000                            
+00000000                            rla	macro
+00000000                            	dc.b $17
+00000000                                endm
+00000000                            
+00000000                            daa	macro
+00000000                            	dc.b $27
+00000000                                endm
+00000000                            
+00000000                            scf	macro
+00000000                            	dc.b $37
+00000000                                endm
+00000000                            
+00000000                            rrca	macro
+00000000                            	dc.b $0F
+00000000                                endm
+00000000                            
+00000000                            rra	macro
+00000000                            	dc.b $1F
+00000000                                endm
+00000000                            
+00000000                            cpl	macro
+00000000                            	dc.b $2F
+00000000                                endm
+00000000                            
+00000000                            ccf	macro
+00000000                            	dc.b $3F
+00000000                                endm
+00000000                            
+00000000                            exx	macro
+00000000                            	dc.b $D9
+00000000                                endm
+00000000                            
+00000000                            zneg	macro
+00000000                            	dc.b $ED, $44
+00000000                                endm
+00000000                            
+00000000                            retn	macro
+00000000                            	dc.b $ED, $45
+00000000                                endm
+00000000                            
+00000000                            reti	macro
+00000000                            	dc.b $ED, $4D
+00000000                                endm
+00000000                            
+00000000                            rrd	macro
+00000000                            	dc.b $ED, $67
+00000000                                endm
+00000000                            
+00000000                            rld	macro
+00000000                            	dc.b $ED, $6F
+00000000                                endm
+00000000                            
+00000000                            ldi	macro
+00000000                            	dc.b $ED, $A0
+00000000                                endm
+00000000                            
+00000000                            cpi	macro
+00000000                            	dc.b $ED, $A1
+00000000                                endm
+00000000                            
+00000000                            ini	macro
+00000000                            	dc.b $ED, $A2
+00000000                                endm
+00000000                            
+00000000                            outi	macro
+00000000                            	dc.b $ED, $A3
+00000000                                endm
+00000000                            
+00000000                            ldd	macro
+00000000                            	dc.b $ED, $A8
+00000000                                endm
+00000000                            
+00000000                            cpd	macro
+00000000                            	dc.b $ED, $A9
+00000000                                endm
+00000000                            
+00000000                            ind	macro
+00000000                            	dc.b $ED, $AA
+00000000                                endm
+00000000                            
+00000000                            outd	macro
+00000000                            	dc.b $ED, $AB
+00000000                                endm
+00000000                            
+00000000                            ldir	macro
+00000000                            	dc.b $ED, $B0
+00000000                                endm
+00000000                            
+00000000                            cpir	macro
+00000000                            	dc.b $ED, $B1
+00000000                                endm
+00000000                            
+00000000                            inir	macro
+00000000                            	dc.b $ED, $B2
+00000000                                endm
+00000000                            
+00000000                            otir	macro
+00000000                            	dc.b $ED, $B3
+00000000                                endm
+00000000                            
+00000000                            lddr	macro
+00000000                            	dc.b $ED, $B8
+00000000                                endm
+00000000                            
+00000000                            cpdr	macro
+00000000                            	dc.b $ED, $B9
+00000000                                endm
+00000000                            
+00000000                            indr	macro
+00000000                            	dc.b $ED, $BA
+00000000                                endm
+00000000                            
+00000000                            otdr	macro
+00000000                            	dc.b $ED, $BB
+00000000                                endm
+00000000                                endm
+00000000                            	org 0
+00000000                            
+00000000                            ; GEMS Driver - 2.5 5/21/92 (pz.s projector version 7)
+00000000                            ; Copyright (c) 1991,1992 SEGA
+00000000                            ; All Rights Reserved
+00000000                            ;Z80Code		proc	;export	; NAT: This is not needed anymore
+00000000                            ************************************* MACRO SECTION ******************************************
+00000000                            
+00000000                            ; NAT: There are some macros missing from the source. I took them from GEMSSCD.
+00000000                            ; Thanks to ValleyBell for linking this archive. Translated from SNASM68K (I am assuming)
+00000000                            
+00000000                            * Requires H = data, L = register number
+00000000                            FMwrgl	macro
+00000000                            	bit	7,(IY+0)	; test fm chip status
+00000000                            	jr	NZ,*-4		; wait for clear
+00000000                            	ld	A,L
+00000000                            	ld	(4000H),A	; write global register number
+00000000                            	ld	A,H
+00000000                            	ld	(4001H),A	; write data
+00000000                            	endm                    ; done
+00000000                            
+00000000                            FMwait	macro
+00000000                            	bit	7,(IY+0)	; test fm chip status
+00000000                            	jr	NZ,*-4		; wait for clear
+00000000                            	endm                    ; done
+00000000                            
+00000000                            * FMWrite and FMWrch expect IY to contain either 4000H or 4002H
+00000000                            * destroys A
+00000000                            FMWrite	macro reg, data
+00000000                            	ld	A,\data		; load data
+00000000                            	bit	7,(IY+0)	; test fm chip status
+00000000                            	jr	NZ,*-4		; wait for clear
+00000000                            	ld	(IY+0),\reg	; write register number
+00000000                            	ld	(IY+1),A	; write data
+00000000                            	endm			; done
+00000000                            
+00000000                            * destroys A
+00000000                            FMWrch	macro reg, ch, data
+00000000                            	bit	7,(IY+0)	; test fm chip status
+00000000                            	jr	NZ,*-4		; wait for clear
+00000000                            	ld	A,\ch		; load channel number
+00000000                            	zadd	A,\reg		; add register number
+00000000                            	ld	(IY+0),A	; write register number
+00000000                            	ld	A,\data		; load data
+00000000                            	ld	(IY+1),A	; write data
+00000000                            	endm			; done
+00000000                            
+00000000                            FMWr		macro reg, data
+00000000                            		ld	L,0		; point initially at status register
+00000000                            		ld	A,\reg		; get reg num for this channel
+00000000                            		zadd	A,E
+00000000                            		ld	B,A		; B <- register number (parameter) offset for this channel
+00000000                            		ld	C,\data
+00000000                            		ld	A,80H		; mask for busy bit
+00000000                            
+00000000                            		zand	(HL)		; test fm chip status
+00000000                            		jp	M,*-2		; still busy - wait for clear
+00000000                            
+00000000                            		ld	L,D		; point at appropriate bank
+00000000                            		ld	(HL),B		; write regnum
+00000000                            		inc	L		; point to data
+00000000                            		ld	(HL),C		; write data
+00000000                            
+00000000                            		endm			; done
+00000000                            
+00000000                            ************************************* RESET VECTOR *******************************************
+00000000                            
+00000000                            Z80CODEBASE
+00000009                            
+00000009                            *********************************** 60 Hz Interrupt ******************************************
+00000009                            
+00000009                            * but first, let's squeeze in a few variables...
+00000009                            
+00000009 0000 0000                  psgcom		db	00H,00H,00H,00H		;  0 command 1 = key on, 2 = key off, 4 = stop snd
+0000000D FFFF FFFF                  psglev		db	0ffH,0ffH,0ffH,0ffH	;  4 output level attenuation (4 bit)
+00000011 0000 0000                  psgatk		db	00H,00H,00H,00H		;  8 attack rate
+00000015 0000 0000                  psgdec		db	00H,00H,00H,00H		; 12 decay rate
+00000019 0000 0000                  psgslv		db	00H,00H,00H,00H		; 16 sustain level attenuation
+0000001D 0000 0000                  psgrrt		db	00H,00H,00H,00H		; 20 release rate
+00000021 0000 0000                  psgenv		db	00H,00H,00H,00H		; 24 envelope mode 0 = off, 1 = attack, 2 = decay, 3 = sustain, 4
+00000025 0000 0000                  psgdtl		db	00H,00H,00H,00H		; 28 tone bottom 4 bits, noise bits
+00000029 0000 0000                  psgdth		db      00H,00H,00H,00H		; 32 tone upper 6 bits
+0000002D 0000 0000                  psgalv		db      00H,00H,00H,00H		; 36 attack level attenuation
+00000031 0000 0000                  whdflg		db      00H,00H,00H,00H		; 40 flags to indicate hardware should be updated
+00000035                            
+00000035 00                         		db	0
+00000036                            
+00000036 00                         CMDWPTR		db	0			; cmd fifo wptr @ $36
+00000037 00                         CMDRPTR		db	0			; read pointer @ $37
+00000038                            
+00000038                            *** psg command processor/envelope emulator
+00000038                            
+00000038 =00000000                  COM		equ	0
+00000038 =00000004                  LEV		equ	4
+00000038 =00000008                  ATK		equ	8
+00000038 =0000000C                  DKY		equ	12
+00000038 =00000010                  SLV		equ	16
+00000038 =00000014                  RRT		equ	20
+00000038 =00000018                  MODE		equ	24
+00000038 =0000001C                  DTL		equ	28
+00000038 =00000020                  DTH		equ	32
+00000038 =00000024                  ALV		equ	36
+00000038 =00000028                  FLG		equ	40
+00000038                            
+00000038                            VBLINT
+0000003C ED4D                       		reti                    	; leave disabled - will be enabled by CHECKTICK
+0000003E                            
+0000003E 0000                       TICKFLG		dw	0			; (TICKFLG+1) set by ^^
+00000040 00                         TICKCNT		db	0			; tick accumulated by CHECKTICK
+00000041                            
+00000041                            CHECKTICK					; (if TICKFLG+1 is set, then ints are disabled!)
+0000004B                            
+0000004B                            						; at this point, can't reenable ints until we're
+0000004B                            						; sure VBL (64 uS) has gone away, so do some
+0000004B                            						; DACMEs and a delay (in case DACME is off)
+0000004B                            
+0000004F                            
+00000052                            
+0000005F                            
+00000062                            ctnotick
+00000066                            
+00000066                            DOPSGENV
+00000071                            
+0000007B                            
+00000098                            
+000000AB                            
+000000C9                            
+000000D8                            
+000000FE                            
+00000103                            
+00000132                            
+0000015C                            
+00000166                            
+00000169                            
+0000016D                            
+00000185                            
+0000019D                            
+000001B5                            
+000001CD                            
+000001D1                            
+000001D1                            
+000001D1                            ****************************** Command FIFO (from 68000) *************************************
+000001D1                            
+000001D1                            *
+000001D1                            *  GETCBYTE - returns the next command byte in the fifo from the 68k. will wait
+000001D1                            *    for one if the queue is empty when called.
+000001D1                            *
+000001D1                            *	parameters:	NONE
+000001D1                            *	returns:	A	byte from queue
+000001D1                            *
+000001D1                            
+000001D3                            
+000001D9                            
+000001E3                            
+000001E9                            
+000001EC                            
+000001F7                            
+000001F7                            **************************************  XFER68K  *****************************************
+000001F7                            
+000001F7                            *
+000001F7                            *  XFER68K - transfers 1 to 255 bytes from 68000 space to Z80. handles 32k block crossings.
+000001F7                            *
+000001F7                            *	parameters:		A	68k source address [23:16]
+000001F7                            *				HL	68k source address [15:0]
+000001F7                            *				DE	Z80 dest address
+000001F7                            *				C	byte count (0 is illegal!)
+000001F7                            *
+000001F7                            *	trashes:		B
+000001F7                            *
+000001F7                            
+000001F7 00                         x68ksrclsb	db	0			; for storing lsw of src addr
+000001F8 00                         x68ksrcmid	db	0
+000001F9                            
+000001F9                            XFER68K
+000001F9                            
+000001FC                            
+00000202                            
+0000020F                            
+00000214                            
+00000217                            
+0000021A                            
+0000021A                            x68kcrosses					; C = count-1, L=over-1
+00000223                            
+00000226                            
+00000237                            x68knocarry
+0000023A                            
+0000023D                            
+0000023D                            * xfer68kinner - inner loop of XFER68K
+0000023D                            *
+0000023D                            *	parameters:		B	68k source address [23:16]
+0000023D                            *				HL	68k source address [15:0]
+0000023D                            *				DE	Z80 dest address
+0000023D                            *				C	byte count (0 is illegal, as is any count which would
+0000023D                            *					  result in a 32k block crossing in 68k space
+0000023D                            *	trashes:		A
+0000023D                            
+0000023D                            xfer68ksafe
+0000023D                            xfer68kinner
+0000023D                            
+0000024A 1F                         		rra
+0000024C 1F                         		rra
+0000024E 1F                         		rra
+00000250 1F                         		rra
+00000252 1F                         		rra
+00000254 1F                         		rra
+00000256 1F                         		rra
+00000258                            
+0000025E                            
+00000261                            
+00000265                            
+00000267                            ;		zsub	13			; count > maxcnt ?
+00000269                            x68kloop
+0000026B                            ;		ld	C,12			; yes - xfer maxcnt bytes
+00000271                            x68klpcont
+00000271 EDB0                       		ldir
+00000273                            
+00000276                            
+00000278                            ;		zsub	12			; more than maxcnt left?
+0000027A                            x68klast
+0000027C                            ;		zadd	A,13			; last maxcnt or less - xfer them
+00000283                            x68klstcont
+00000283 EDB0                       		ldir
+00000285                            
+00000288                            
+0000028C                            
+0000028D                            
+0000028D                            x68klpwt
+00000291                            x68klpwtlp
+000002A0                            
+000002A0                            x68klstwt
+000002A4                            x68klstwtlp
+000002B3                            
+000002B3                            **************************************  DIGITAL STUFF  *************************************
+000002B3                            
+000002B3                            *
+000002B3                            *  DACME - do that DAC thing. assumes the the alternate registers are set up as follows
+000002B3                            *
+000002B3                            *			B	15H (reset cmd to timer) + CH3 mode bits
+000002B3                            *			C	control pattern for processing (compression, oversampling)
+000002B3                            *			DE	pointing into DACFIFO (1F00-1FFF)
+000002B3                            *			HL	4000H
+000002B3                            *
+000002B3                            
+000002B3 0000                       DACMEJRINST	dw	0			; for saving the DACME inst for slow sample rates
+000002B5 0000                       DACME4BINST	dw	0			; for saving the DACMEPROC inst for processing
+000002B7                            
+000002B9                            
+000002B9                            ;		ret				; change to EXX (0D9H) to enable this routine
+000002B9                            ;		ex	AF,AF			; switch register set
+000002B9                            
+000002BB                            dacmespin
+000002C0                            
+000002C4                            
+000002C4                            DACMEPROC
+000002C6                            ;		znop
+000002C6                            ;		znop
+000002C6                            
+000002C6 00                         		znop
+000002C8                            
+000002CE D9                         		exx
+000002D0                            						; for (slow sample rates)
+000002D0                            
+000002DF                            
+000002DF                            DACMEALT
+000002EC                            
+000002EC                            DACMEDSP
+000002F0                            
+000002F0 17                         		rla				; here for low nibble - 1st half
+000002F1 17                         		rla
+000002F2 17                         		rla
+000002F3 17                         		rla
+000002F4                            DACME4BMSK
+000002F8                            DACME4BHI					; here for hi nib - 2nd half - inc ptr
+000002FB                            
+000002FB                            
+000002FB                            *
+000002FB                            *  FILLDACFIFO - gets the next 128 bytes of sample from the 68000 into the DACFIFO
+000002FB                            *
+000002FB                            
+000002FB 00                         DACFIFOWPTR	db	0
+000002FC                            
+000002FC 0000 00                    SAMPLEPTR	db	0,0,0
+000002FF 0000                       SAMPLECTR	dw	0
+00000301 00                         FDFSTATE	db	0
+00000302                            
+00000302                            FILLDACFIFO
+00000307 D9                         		exx
+00000309 D9                         		exx
+0000030E                            
+00000310                            
+00000310                            FORCEFILLDF
+00000310                            
+00000313                            
+00000314                            
+00000314                            FDFneeded
+00000317                            
+0000031A                            
+00000322                            
+00000322                            FDF4N5N6					; states 4, 5, and 6
+00000328 37                         		scf
+00000329 3F                         		ccf
+0000032C                            
+00000330                            FDF4NORM
+00000333                            
+00000347                            
+0000035C                            FDF4DONE					; for now, loop back
+00000378                            
+00000378                            		; needs to xfer the next few if needed, for now, just loop back
+00000378                            
+00000380                            
+0000038E 37                         		scf
+0000038F 3F                         		ccf
+0000039E                            
+000003A6                            
+000003A9 37                         		scf
+000003AA 3F                         		ccf
+000003B0                            						; DE still hangin out where it left off
+000003BB                            
+000003CA                            
+000003CC                            
+000003CC                            FDF7						; state 7 - just off for now
+000003CC                            
+000003EA                            
+000003EA                            
+000003EA                            FDFreturn
+000003EE                            
+000003EF                            
+000003EF                            
+000003EF                            
+000003EF                            ************************************* SEQUENCER CODE ***************************************
+000003EF                            
+000003EF                            * CCB Entries:	2,1,0	tag addr of 1st byte in 32-byte channel buffer
+000003EF                            *		5,4,3	addr of next byte to fetch
+000003EF                            *				so: 0 <= addr-tag <= 31 means hit in buffer
+000003EF                            *		6	flags
+000003EF                            *		8,7	timer (contains 0-ticks to delay)
+000003EF                            *		10,9	delay
+000003EF                            *		12,11	duration
+000003EF                            
+000003EF =00000000                  CCBTAGL		equ	0	; lsb of addr of 1st byte in 32-byte sequence buffer
+000003EF =00000001                  CCBTAGM		equ	1	; mid of "
+000003EF =00000002                  CCBTAGH		equ	2	; msb of "
+000003EF =00000003                  CCBADDRL	equ	3	; lsb of addr of next byte to read from sequence
+000003EF =00000004                  CCBADDRM	equ	4	; mid of "
+000003EF =00000005                  CCBADDRH	equ	5	; msb of "
+000003EF =00000006                  CCBFLAGS	equ	6	; 80 = sustain
+000003EF                            				; 40 = env retrigger
+000003EF                            				; 20 = lock (for 68k based sfx)
+000003EF                            				; 10 = running (not paused)
+000003EF                            				; 08 = use sfx (150 bpm) timebase
+000003EF                            				; 02 = muted (running, but not executing note ons)
+000003EF                            				; 01 = in use
+000003EF =00000007                  CCBTIMERL	equ	7	; lsb of 2's comp, subbeat (1/24th) timer till next event
+000003EF =00000008                  CCBTIMERH	equ	8	; msb of "
+000003EF =00000009                  CCBDELL		equ	9	; lsb of registered subbeat delay value
+000003EF =0000000A                  CCBDELH		equ	10	; msb of "
+000003EF =0000000B                  CCBDURL		equ	11	; lsb of registered subbeat duration value
+000003EF =0000000C                  CCBDURH		equ	12	; msb of "
+000003EF =0000000D                  CCBPNUM		equ	13	; program number (patch)
+000003EF =0000000E                  CCBSNUM		equ	14	; sequence number (in sequence bank)
+000003EF =0000000F                  CCBVCHAN	equ	15	; MIDI channel number within sequence CCBSNUM
+000003EF =00000010                  CCBLOOP0	equ	16	; loop stack (counter, lsb of start addr, mid of start addr)
+000003EF =00000013                  CCBLOOP1	equ	19
+000003EF =00000016                  CCBLOOP2	equ	22
+000003EF =00000019                  CCBLOOP3	equ	25
+000003EF =0000001C                  CCBPRIO		equ	28	; priority (0 lowest, 127 highest)
+000003EF =0000001D                  CCBENV		equ	29	; envelope number
+000003EF =0000001E                  CCBATN		equ	30	; channel attenuation (0=loud, 127=quiet)
+000003EF =0000001F                  CCBy		equ	31
+000003EF                            
+000003EF                            *
+000003EF                            *  GETSBYTE - get the channel's sequence byte pointed to by the CCB
+000003EF                            *
+000003EF                            *	parameters:		IX		points to the current channel's CCB
+000003EF                            *				(CHBUFPTR)	points to the current channel's buffer
+000003EF                            *	returns:		A		data
+000003EF                            *
+000003EF                            
+000003EF                            ;BUFSIZE		equ	16
+000003EF                            
+000003EF                            GETSBYTE
+000003EF                            
+000003F2                            
+000003F4                            
+00000410                            gsbhit
+00000413                            
+0000041A                            
+00000427                            gsbincdone
+00000429                            
+0000042C                            
+0000042D                            gsbmiss
+0000042D                            
+00000430                            ;	call	FILLDACFIFO
+00000433                            ;	call	DACME
+00000433                            
+00000454                            
+00000454                            
+00000454                            *
+00000454                            *  UPDSEQ - go through the CCB's, updating any enabled channels
+00000454                            *
+00000454                            
+00000454 0000                       CHBUFPTR	dw	0			; pointer to current channel's sequence buffer
+00000456 0000                       CHPATPTR	dw	0			; pointer to current channel's patch buffer
+00000458                            
+00000472                            updseqloop
+0000048C                            updseqloop1
+0000049E                            updseqsfx
+000004A2                            
+000004A2                            updseqdoit
+000004A7                            
+000004AA                            
+000004AF                            updseqloop2
+000004B4                            
+000004B4                            *
+000004B4                            *  SEQUENCER - if the channel has timed out, then execute the next set of sequencer cmds
+000004B4                            *
+000004B4                            *	parameters:		IX	points to channel control block (CCB)
+000004B4                            *				B	channel
+000004B4                            *				C	timerbase flags ([0] = sfx, [1] = music)
+000004B4                            *
+000004B4                            
+000004B4                            SEQUENCER
+000004BC                            seqcmdloop0
+000004BF                            seqcmdloop
+000004C8                            seqdel						; process delay commands
+000004CD                            seqdelloop
+000004D8                            
+000004F6                            seqdeldone
+000004F8 2F                         		cpl
+000004FB 2F                         		cpl
+00000507                            seqdur						; process duration commands
+0000050C                            seqdurloop
+00000517                            
+00000535                            seqdurdone
+00000537 2F                         		cpl
+0000053A 2F                         		cpl
+00000547                            
+00000547                            seqnote						; process a note or command
+0000055B                            seqdelay
+0000055B                            
+0000055E                            
+00000570                            seqcmd
+000005BD                            
+000005BD                            
+000005BD                            *** THIS COULD USE SOME FANCY ERROR DETECTION RIGHT ABOUT NOW
+000005BD                            
+000005C0                            
+000005C0                            seqenv
+000005DD                            seqretrig
+000005EB                            seqrton
+000005F2                            seqsus
+000005FF                            seqsuson
+00000606                            seqeos
+00000613                            seqpchange
+00000621                            seqsloop
+0000062D                            seqsllp
+00000637                            seqslfound
+0000064C                            seqeloop
+00000658                            seqellp
+00000662                            seqelfound
+0000066D                            seqelgobk
+0000067F 37                         		scf
+00000680 3F                         		ccf
+00000688                            seqelnoc
+0000068B                            
+0000068B                            seqtempo
+00000696                            
+00000696                            seqmute
+000006A3                            seqmutelp
+000006B9                            seqmutenext					; try the next chan
+000006C1                            seqmuteit
+000006CC                            sequnmute
+000006D3                            
+000006D3                            seqprio
+000006DC                            
+000006EB                            
+000006EB                            seqpbend
+000006F4                            
+0000070C                            seqsfx
+00000713                            seqsamprate
+00000725                            seqgoto
+0000072D 17                         		rla
+00000733                            seqbranch					; jump to addr + 24 bit offset in DHL
+0000074B                            seqstore
+00000752                            seqif
+0000075C                            seqifne
+00000761                            seqif0
+00000764                            seqifgt
+00000769                            seqif1
+0000076C                            seqifgte
+00000773                            seqif2
+00000776                            seqiflt
+0000077D                            seqif3
+00000780                            seqiflte
+00000785                            seqifeq
+00000788                            seqifpunt
+00000792                            seqifdoit
+00000798                            
+00000798                            seqmboxstart
+000007A6                            
+000007A6                            seqseekrit					; extra functions (like a generic ctrllr)
+000007CE                            
+000007CE                            seqatten
+000007D5                            
+000007D5                            seqchatten
+000007DB                            
+000007DB                            seqstopseq
+000007E8                            
+000007E8                            seqpauseseq
+000007E9                            seqpausecom
+000007F5                            
+000007F5                            seqpauselmusic
+000007FA                            
+000007FA                            seqresume
+00000806                            
+00000806                            *
+00000806                            *  VTIMER - updates the voice timers - first note on and then release values
+00000806                            *
+00000806                            
+00000806                            VTIMER
+00000826                            vtimerloop0
+00000828                            vtimerloop
+0000083B                            vtimersfx
+0000083F                            vtimerdoit
+0000084F                            vtimerloop2
+00000860                            
+00000879                            vtnoteoff					; note off...
+0000087D                            
+0000088C                            vtnoteofffm
+000008A0                            vtnoteoffdig
+000008A5                            
+000008A5                            **************************************  MAIN LOOP  *****************************************
+000008A5                            
+000008A5                            *
+000008A5                            * GETCCBPTR - gets one byte from command queue for channel number, multiplies by 32,
+000008A5                            *	and returns pointer to that channel's CCB in IX, as well as the channel #
+000008A5                            *	in A
+000008A5                            * GETCCBPTR2 - alternate entry point to providing channel # in A (skips GETCBYTE)
+000008A5                            *
+000008A5                            *	trashes DE
+000008A5                            *
+000008A5                            
+000008A5                            GETCCBPTR
+000008A8                            GETCCBPTR2
+000008BE                            
+000008BE                            *
+000008BE                            *  main - initialize command fifo, dispatch on commands
+000008BE                            *
+000008BE                            
+000008BE CC00                       SBPT		dw	204			; sub beats per tick (8frac), default is 120bpm
+000008C0 0000                       SBPTACC		dw	0			; accumulates ^^ each tick to track sub beats
+000008C2 00                         TBASEFLAGS	db	0
+000008C3                            
+000008C3                            ; NAT: Was originally "main". Changed because ASM68K was being anal about it
+000008C3                            init						; ints are disabled upon entry here
+000008C3 D9                         		exx				; initialize alternate regs for DACME calls
+000008CB D9                         		exx
+000008CD                            
+000008D8                            
+000008E0                            pinitloop
+000008E6                            
+000008F2                            
+000008F7                            
+000008F7                            		;export	loop
+000008F7                            loop
+000008FA                            
+000008FD                            
+00000900                            
+00000903                            
+00000906                            
+00000908                            
+0000090F                            
+0000091A                            noticks
+0000091D                            
+00000924                            
+00000929                            nobeats
+00000930                            
+00000942                            neithertick
+00000945                            
+00000950                            
+00000958                            
+000009D6                            
+000009D6                            cmdnoteon
+000009E0                            
+000009EA                            
+000009EA                            cmdnoteoff
+000009F8                            
+000009F8                            cmdpchange
+000009FE                            
+000009FE                            cmdpupdate
+00000A07                            
+00000A07                            cmdpbend
+00000A10                            
+00000A10                            cmdpbendvch
+00000A1A                            
+00000A23                            pbvchloop
+00000A3C                            pbvchskip
+00000A4B                            
+00000A4B                            cmdtempo
+00000A54                            
+00000A54                            cmdenv
+00000A65                            
+00000A6D                            
+00000A6D                            cmdretrig
+00000A7D                            retrigclr
+00000A84                            
+00000A84                            cmdstartseq					; start a sequence
+00000A8D                            
+00000A8D                            cmdstopseq
+00000A96                            
+00000A96                            cmdgetptrs
+00000A9B                            getptrslp
+00000AA5                            
+00000AA5 0000 00                    PTBL68K		db	0,0,0			; 24-bit 68k space pointer to patch table
+00000AA8 0000 00                    ETBL68K		db	0,0,0			; 24-bit 68k space pointer to envelope table
+00000AAB 0000 00                    STBL68K		db	0,0,0			; 24-bit 68k space pointer to sequence table
+00000AAE 0000 00                    DTBL68K		db	0,0,0			; 24-bit 68k space pointer to digital sample table
+00000AB1                            
+00000AB1                            cmdpause					; pause all CCB's current running
+00000ABA                            cmdpsloop					; go through CCB's
+00000AC9                            
+00000AC9                            cmdresume
+00000ACF                            
+00000ACF                            cmdsussw					; set sustain flag for this channel
+00000ADF                            cmdsusoff
+00000AE6                            
+00000AE6                            cmdsetprio
+00000AF2                            
+00000AF2                            cmdstopall
+00000AFB                            stopallloop
+00000B12                            
+00000B12                            cmdmute
+00000B1E                            
+00000B27                            muteseqloop
+00000B43                            muteit
+00000B47                            muteseqskip
+00000B4F                            cmdsamprate
+00000B55                            
+00000B59                            
+00000B64                            cmdstore
+00000B75                            cmdlockch
+00000B7F                            cmdunlockch
+00000B89                            
+00000B89                            RESUMEALL					; resume all enabled CCB's
+00000B92                            cmdresloop					; go through CCB's
+00000BA2                            cmdresnext
+00000BA8                            
+00000BA8                            cmdvolume
+00000BB4                            
+00000BB4                            cmdmasteratn
+00000BBD                            
+00000BBD                            *
+00000BBD                            *  STARTSEQ - starts a multi channel sequence. a free CCB is allocated for each channel
+00000BBD                            *    in the sequence.
+00000BBD                            *
+00000BBD                            *	parameters		A	sequence number
+00000BBD                            *
+00000BBD                            *	trashes		everything!
+00000BBD                            *
+00000BBD                            
+00000BBD                            ;stseqx		ds.b	33			; 33 byte scratch area for starting a sequence
+00000BBD                            
+00000BBD 0000 0000 0000 0000        stseqx		db	0,0,0,0,0,0,0,0		; 33 byte scratch area for starting a sequence
+00000BC5 0000 0000 0000 0000        		db	0,0,0,0,0,0,0,0
+00000BCD 0000 0000 0000 0000        		db	0,0,0,0,0,0,0,0
+00000BD5 0000 0000 0000 0000        		db	0,0,0,0,0,0,0,0
+00000BDD 00                         		db	0
+00000BDE                            
+00000BDE 00                         stseqsnum	db	0
+00000BDF                            
+00000BDF                            STARTSEQ
+00000BF8                            
+00000C0D                            
+00000C0D                            *** this should probably be something different!
+00000C0D                            
+00000C12                            
+00000C24                            chkstseqloop
+00000C2F                            
+00000C37                            
+00000C3F                            
+00000C47                            
+00000C96                            stseqskipccb
+00000C9E                            
+00000C9E                            *
+00000C9E                            *  STOPSEQ - stops a multi channel sequence (actually, all occurances of it)
+00000C9E                            *
+00000C9E                            *	parameters		A	sequence number
+00000C9E                            *
+00000C9E                            *	trashes		everything!
+00000C9E                            *
+00000C9E                            
+00000C9E                            STOPSEQ
+00000CA7                            stopseqloop
+00000CBC                            stopseqstopit
+00000CC8                            stopseqskip
+00000CD1                            
+00000CD1                            *
+00000CD1                            *  PAUSESEQ - pause a multi channel sequence (actually, all occurances of it)
+00000CD1                            *
+00000CD1                            *	parameters		A	sequence number
+00000CD1                            *
+00000CD1                            *	trashes		everything!
+00000CD1                            *
+00000CD1                            
+00000CD1                            PAUSESEQ
+00000CDA                            pauseseqloop
+00000CEF                            pauseseqskip
+00000CF8                            
+00000CF8                            *
+00000CF8                            *  CLIPALL - called by STOPALL and PAUSEALL - cancels all envelopes, voices
+00000CF8                            *
+00000CF8                            *	scans voice tables, clipping off notes from inactive (not running channels)
+00000CF8                            *
+00000CF8                            
+00000CF8 00                         CLIPVNUM	db	0
+00000CF9                            
+00000CF9                            CLIPALL
+00000D14                            
+00000D18                            clipenvloop
+00000D42                            
+00000D42                            
+00000D42                            * IX <- voice table, E <- 0 for fm, 1 for psg
+00000D42                            
+00000D42                            CLIPLOOP
+00000D48                            
+00000D49                            
+00000D63                            
+00000D77                            
+00000D81                            
+00000D85                            clipdig
+00000D98                            clipfm
+00000DA2                            clpafm0
+00000DEF                            
+00000E04                            clipnxt
+00000E0C                            clippsg
+00000E1B                            
+00000E1B                            
+00000E1B                            *
+00000E1B                            *  SETTEMPO - sets the (1/24 beat) / (1/60 sec) ratio in SBPT (Sub Beat Per Tick)
+00000E1B                            *	SBPT is 16 bits, 8 of em fractional
+00000E1B                            *
+00000E1B                            *	parameters:		A	beats per minute
+00000E1B                            *
+00000E1B                            *	trashes:		DE,HL
+00000E1B                            *
+00000E1B                            
+00000E1B                            SETTEMPO
+00000E21                            
+00000E26 17                         		rla				; AH <- sbpt, 8 fracs
+00000E2D                            
+00000E2D                            *
+00000E2D                            *  TRIGENV - initialize an envelope
+00000E2D                            *
+00000E2D                            *	parameters:		C	envelope number
+00000E2D                            *				E	midi channel
+00000E2D                            *				IX	pointer to CCB
+00000E2D                            *
+00000E2D                            *	trashes:		everything
+00000E2D                            *
+00000E2D                            
+00000E2D                            TRIGENV
+00000E3C                            retrigloop
+00000E4A                            tryfree
+00000E4E                            trigloop					; then try to find a free ECB
+00000E5C                            trigger						; tigger envelope
+00000E62                            trigger1
+00000E69                            
+00000E7E                            
+00000E95                            
+00000E9A                            
+00000EA4                            
+00000EAA                            
+00000EAB                            
+00000EAB                            *
+00000EAB                            *  DOENVELOPE - update the pitch envelope processor
+00000EAB                            *
+00000EAB                            *		trashes:	everything
+00000EAB                            *
+00000EAB                            
+00000EAB                            		;export	ECB
+00000EAB                            
+00000EAB 4040 4040                  ECB		db	040H,040H,040H,040H	; 4 envelopes worth of control blocks (ECB's)
+00000EAF FF                         		db	0FFH
+00000EB0 0000 0000                  		db	0,0,0,0
+00000EB4 0000 0000                  		db	0,0,0,0
+00000EB8 0000 0000                  		db	0,0,0,0
+00000EBC 0000 0000                  		db	0,0,0,0
+00000EC0 0000 0000                  		db	0,0,0,0
+00000EC4 80A0 C0E0                  		db	80H,0A0H,0C0H,0E0H
+00000EC8                            
+00000EC8 =00000000                  ECBCHAN		equ	0			; offset to 4 envelopes' channel numbers and flags
+00000EC8                            						; [7]=eot, [6]=free, [5]=sfx tempo
+00000EC8 =00000005                  ECBPTRL		equ	5			;	"		 segment ptr LSBs
+00000EC8 =00000009                  ECBPTRH		equ	9			;	"		 segment ptr MSBs
+00000EC8 =0000000D                  ECBCTR		equ	13			; 	"		 segment ctrs
+00000EC8 =00000011                  ECBDELL		equ	17			;	"		 segment delta LSBs
+00000EC8 =00000015                  ECBDELH		equ	21			;	"		 segment delta MSBs
+00000EC8 =00000019                  ECBBUFP		equ	25			; LSB of pointer to 32 byte envelope buffer
+00000EC8                            
+00000EC8                            DOENVELOPE
+00000ECC                            envloop
+00000ED9                            envnext						; nope - loop
+00000EDD                            envactive					; check if this envelope's timebase has ticked
+00000EEA                            envsfx
+00000EEE                            envticked
+00000EF5                            envnextseg
+00000F14                            envseg						; process segment
+00000F33                            envneedupd
+00000F3E                            
+00000F3E                            envdone
+00000F56                            
+00000F56                            *
+00000F56                            *  DOPITCHBEND- updates the (pitchbend) value for the gems channel (= MIDI channel during perf
+00000F56                            *
+00000F56                            *	inputs:		A				CCB number (0-15)
+00000F56                            *			(next 2 bytes in cmd queue)	pbend value
+00000F56                            *
+00000F56                            
+00000F56                            DOPITCHBEND
+00000F75                            
+00000F75                            *
+00000F75                            *  APPLYBEND - if NEEDBEND is set, apply the pitch and envelope bends to all channels,
+00000F75                            *	and reset NEEDBEND
+00000F75                            *
+00000F75                            *	trashes:	everything
+00000F75                            *
+00000F75                            
+00000F75 00                         NEEDBEND	db	0			; set to 1 to trigger a need to bend
+00000F76                            
+00000F76 0000 0000 0000 0000 0000+  PBTBL		db	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; pitch bend LSB
+00000F86 0000 0000 0000 0000 0000+  		db	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; pitch bend MSB
+00000F96 0000 0000 0000 0000 0000+  		db	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; env bend LSB
+00000FA6 0000 0000 0000 0000 0000+  		db	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; env bend MSB
+00000FB6 0000 0000 0000 0000 0000+  		db	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; [0]=apply bend - set by pbend/mod,
+00000FC6                            							; cleared by applybend
+00000FC6                            
+00000FC6 =00000000                  PBPBL		equ	0			; offset in PBTBL to 16 channels' pitchbend LSB
+00000FC6 =00000010                  PBPBH		equ	16			; offset in PBTBL to 16 channels' pitchbend MSB
+00000FC6 =00000020                  PBEBL		equ	32			; offset in PBTBL to 16 channels' envelopebend LSB
+00000FC6 =00000030                  PBEBH		equ	48			; offset in PBTBL to 16 channels' envelopebend MSB
+00000FC6 =00000040                  PBRETRIG	equ	64			; offset in PBTBL to 16 channels' retrigger flag
+00000FC6                            
+00000FC6                            APPLYBEND
+00000FCF                            
+00000FD2                            
+00000FD6                            pbfmloop
+00000FEB                            
+00000FEB                            ;FOR TESTING ONLY
+00000FEB                            ;		jr	pbfmskip
+00000FEB                            
+00000FF9                            
+00001000                            
+0000100B                            pbfmbank0
+0000103C                            
+0000103C                            pbfmskip
+00001043                            
+00001043                            * New Register Usage ^^^
+00001043                            *   H <- 40H (MSB of FM chip register address)
+00001043                            *   D <- 0 for bank 0 (channels 0,1,2) or 2 for bank 1 (channels 3,4,5)
+00001043                            *   E <- channel within bank (0-2)
+00001043                            * FMWrch uses these plus A,B,C,L
+00001043                            *
+00001043                            
+00001043                            pbpsg
+00001047                            pbpsgloop
+0000105C                            
+0000105C                            ;FOR TESTING ONLY
+0000105C                            ;		jr	pbpsgskip
+0000105C                            
+0000106A                            
+0000106D                            
+00001070                            
+0000107C                            
+00001093                            pbpsgskip
+0000109A                            
+0000109A                            pbdone
+0000109F                            pbdoneloop
+000010A5                            
+000010A6                            
+000010A6                            *  GETFREQ - gets a frequency (for FM) or wavelength (for PSG) value from a note
+000010A6                            *	number and a channel # (for adding pitch and envelope bends)
+000010A6                            *
+000010A6                            *	parameters:	A	0 for FM, 1 for PSG
+000010A6                            *			C	note (0=C0, 95=B7)
+000010A6                            *			E	channel
+000010A6                            *			IX	pointer to this channel's PBTBL entry
+000010A6                            
+000010A6                            *	returns:	DE	freq or wavelength value
+000010A6                            *
+000010A6                            *	trashs:		A,IX
+000010A6                            
+000010A6 0000                       gfpbend		dw	0			; local pitch bend
+000010A8                            
+000010A8                            GETFREQ
+000010AA                            
+000010AD                            
+000010AE                            
+000010C0                            
+000010C3                            
+000010D4                            gftoohi
+000010DB                            gflookup
+000010E2                            gfllufm						; fm style lookup
+000010FC                            nobit0
+00001102                            gflupsg						; psg style lookup
+0000110B                            gflupsg1
+0000110F                            gfinterp					; interpolate up from value at (IX+0) by (gfpbend)
+0000110F 07                         		rlca
+00001115                            
+00001118                            
+00001126                            
+0000112C                            
+0000112F                            
+00001137                            gfnoextnd
+00001141                            
+00001145                            
+00001146 07                         		rlca
+00001147 07                         		rlca
+00001148 07                         		rlca
+0000114B                            gfdone
+00001151                            
+00001151                            
+00001151                            *
+00001151                            *  MULTIPLY - unsigned 8 x 16 multiply: HL <- A * DE
+00001151                            *	MULADD entry point: for preloading HL with an offset
+00001151                            *	GETPATPTR entry point: HL <- PATCHDATA + 39 * A
+00001151                            
+00001151                            
+00001151                            GETPATPTR
+00001159                            MULTIPLY
+0000115C                            MULADD
+00001161                            mulbitclr
+00001168                            
+00001168                            
+00001168                            *
+00001168                            *  NOTEON - note on (key on)
+00001168                            *
+00001168                            *	parameters:	B		midi channel
+00001168                            *			C		note number: 0..95 = C0..B7
+00001168                            *			IX		pointer to this channel's CCB
+00001168                            *			(CHPATPTR)	pointer to this channel's patch
+00001168                            *
+00001168                            *	trashes:	all registers
+00001168                            *
+00001168                            
+00001168                            * fmftbl contains a 16 bit freq number for each half step in a single octave (C-C)
+00001168                            
+00001168 8402 AA02 D302 FE02 2B03+  fmftbl		dw	644,682,723,766,811,859,910,965,1022,1083,1147,1215,1288
+00001182                            
+00001182                            * psgftbl contains the 16 bit wavelength numbers for the notes A2 thru B7 (33-95)
+00001182                            
+00001182 F903 C003 8A03             psgftbl		dw	       03F9H, 03C0H, 038AH	; A2 > B2
+00001188                            
+00001188 5703 2703 FA02 CF02        		dw	0357H, 0327H, 02FAH, 02CFH	; C3 > B3
+00001190 A702 8102 5D02 3B02        		dw	02A7H, 0281H, 025DH, 023BH
+00001198 1B02 FC01 E001 C501        		dw	021BH, 01FCH, 01E0H, 01C5H
+000011A0                            
+000011A0 AC01 9401 7D01 6801        		dw	01ACH, 0194H, 017DH, 0168H	; C4 > B4
+000011A8 5301 4001 2E01 1D01        		dw	0153H, 0140H, 012EH, 011DH
+000011B0 0D01 FE00 F000 E200        		dw	010DH, 00FEH, 00F0H, 00E2H
+000011B8                            
+000011B8 D600 CA00 BE00 B400        		dw	00D6H, 00CAH, 00BEH, 00B4H	; C5 > B5
+000011C0 AA00 A000 9700 8F00        		dw	00AAH, 00A0H, 0097H, 008FH
+000011C8 8700 7F00 7800 7100        		dw	0087H, 007FH, 0078H, 0071H
+000011D0                            
+000011D0 6B00 6500 5F00 5A00        		dw	006BH, 0065H, 005FH, 005AH	; C6 > B6
+000011D8 5500 5000 4C00 4700        		dw	0055H, 0050H, 004CH, 0047H
+000011E0 4300 4000 3C00 3900        		dw	0043H, 0040H, 003CH, 0039H
+000011E8                            
+000011E8 3500 3200 2F00 2D00        		dw	0035H, 0032H, 002FH, 002DH	; C7 > B7 (not very accurate!)
+000011F0 2A00 2800 2600 2300        		dw	002AH, 0028H, 0026H, 0023H
+000011F8 2100 2000 1E00 1C00        		dw	0021H, 0020H, 001EH, 001CH
+00001200                            
+00001200 1C00                       		dw	001CH				; extra value for interpolation of B7
+00001202                            
+00001202 00                         noteonnote	db	0			; note on note (keep these together - stored as BC)
+00001203 00                         noteonch	db	0			; note on channel
+00001204 00                         noteonvoice	db	0			; allocated voice
+00001205 00                         noteonatten	db	0			; attenuation for this voice
+00001206                            
+00001206                            NOTEON
+00001209                            
+00001209                            ;; LAST MINUTE FIX FOR TAZ LEVELS - down 7
+0000120C                            ;;		zadd	A,10
+00001214                            legalatten
+00001217                            
+0000121B                            
+00001221                            
+0000123A                            
+0000123A                            * here to allocate a voice for a PSG patch
+0000123A                            
+0000123A                            noteonnoise
+00001243                            noteontone
+0000124A                            noteoneither
+0000124D                            
+00001250                            						;   VoiceTable AND Envelope Trigger
+0000125E                            
+00001264                            
+00001270                            
+00001289                            
+00001290                            
+00001295                            
+00001295                            ; NAT: Was originally IX-1. For some reason, the instruction was assembled as if it was IX+0, even though here it clearly
+00001295                            ; says -1. This may be a bug!
+0000129E                            
+000012AB                            
+000012B9                            
+000012BE                            psgnoise
+000012C4                            
+000012F6                            
+000012F7                            
+000012F7                            * here for a digital patch note on
+000012F7                            
+000012F7                            noteondig
+00001301                            
+00001324                            noteondig2
+00001327                            						;   VoiceTable AND Envelope Trigger
+0000132C                            
+0000132C                            ; at this point, C is note number - C4 >> B7 equals samples  0 through 47 (for back compatibil
+0000132C                            ;				    C0 >> B3 equals samples 48 through 96
+0000132C                            ; trigger sample by reading sample bank table for header
+0000132C                            
+00001333                            noteondig21
+0000134E                            
+00001356                            
+00001364                            sampleok
+00001364                            
+00001364                            ; now check for sample playback rate override (2nd byte of patch != 4) - override rate in SAMP
+00001364                            
+00001377                            sampleok1
+00001377 D9                         		exx
+00001378                            
+0000137A                            
+00001382 ED44                       		zneg
+0000138A                            
+00001392 ED44                       		zneg
+00001398                            
+0000139E                            
+000013A3                            
+000013A3 D9                         		exx
+000013A4                            
+000013B7                            
+000013D4                            
+000013DA                            
+000013E2                            
+000013EC                            notlooped
+000013EF                            
+000013F2                            
+000013FC                            
+00001409                            useslowdacme
+0000140C                            
+00001416                            
+00001419 D9                         		exx
+0000141C D9                         		exx
+0000141D                            setprocinst
+00001421                            
+00001421                            
+00001421 00                         SAMPFLAGS	db	0
+00001422 0000 00                    SAMPPTR		db	0,0,0
+00001425 0000                       SAMPSKIP	db	0,0
+00001427 0000                       SAMPFIRST	db	0,0
+00001429 0000                       SAMPLOOP	db	0,0
+0000142B 0000                       SAMPEND		db	0,0
+0000142D                            
+0000142D                            * here to allocate a voice for an FM patch
+0000142D                            
+0000142D 0000                       noteonffreq	dw	0
+0000142F                            
+0000142F                            noteonfm
+00001436                            
+0000143F                            noteonfm1
+00001446                            noteonfm15
+00001446                            
+00001449                            
+0000144C                            
+00001465                            noteonfm2
+0000146A                            
+0000146E                            
+00001471                            
+00001480                            
+00001483                            
+00001483                            noteonfm3
+0000148D                            
+00001491                            
+0000149A D9                         		exx
+0000149C D9                         		exx
+0000149D                            
+000014B3                            
+000014B3                            noteonfm4
+000014BE                            fmbank0
+000014D6                            fmlfodis
+000014D7                            
+000014E7                            
+000014EF                            
+000014EF                            		;export FOO2
+000014EF                            FOO2
+000014EF                            
+000014EF                            
+00001522                            
+00001522                            fmc3on
+000015A6                            
+000015C5                            
+000015C6                            
+000015C6 08                         CARRIERTBL	db	08H		; alg 0, op 4 is carrier
+000015C7 08                         		db	08H		; alg 1, op 4 is carrier
+000015C8 08                         		db	08H		; alg 2, op 4 is carrier
+000015C9 08                         		db	08H		; alg 3, op 4 is carrier
+000015CA 0A                         		db	0AH		; alg 4, op 2 and 4 are carriers
+000015CB 0E                         		db	0EH		; alg 5, op 2 and 3 and 4 are carriers
+000015CC 0E                         		db	0EH		; alg 6, op 2 and 3 and 4 are carriers
+000015CD 0F                         		db	0FH		; alg 7, all ops carriers
+000015CE                            
+000015CE 00                         CARRIERS	db	0
+000015CF                            
+000015CF                            		;export	MASTERATN
+000015CF 00                         MASTERATN	db	0		; master attenuation is 7 frac bits (0 = full volume)
+000015D0                            
+000015D0                            *
+000015D0                            * WRITEFM - write a string of values to the FM chip. BC points to a null-terminated
+000015D0                            *   list of reg/data pairs, where data is an offset off of IX. if data is 0, the
+000015D0                            *   indirection is skipped and a 0 written (for the "proprietary register")
+000015D0                            *   H <- 40H (MSB of FM chip register address)
+000015D0                            *   D <- 0 for bank 0 (channels 0,1,2) or 2 for bank 1 (channels 3,4,5)
+000015D0                            *   E <- channel within bank (0-2)
+000015D0                            *
+000015D0                            		;export	WRITEFM
+000015D0                            WRITEFM
+000015D4                            
+000015DA                            
+000015E6                            
+00001610                            nottl0
+00001611                            nottl
+00001617                            
+0000161C                            
+0000161C                            FMADDRTBL
+0000161C B002                       		db	0B0H,2		; set feedback, algorithm
+0000161E B403                       		db	0B4H,3		; set output, ams, fms
+00001620 3004                       		db	30H,4		; operator 1 - set detune, mult
+00001622 4085                       		db	40H,133		;5+128	; set total level
+00001624 5006                       		db	50H,6		; set rate scaling, attack rate
+00001626 6007                       		db	60H,7		; set am enable, decay rate
+00001628 7008                       		db	70H,8		; set sustain decay rate
+0000162A 8009                       		db	80H,9		; set sustain level, release rate
+0000162C 9000                       		db	90H,0		; set proprietary register
+0000162E 3810                       		db	38H,16		; operator 2 - set detune, mult
+00001630 4891                       		db	48H,145		;17+128	; set total level
+00001632 5812                       		db	58H,18		; set rate scaling, attack rate
+00001634 6813                       		db	68H,19		; set am enable, decay rate
+00001636 7814                       		db	78H,20		; set sustain decay rate
+00001638 8815                       		db	88H,21		; set sustain level, release rate
+0000163A 9800                       		db	98H,0		; set proprietary register
+0000163C 340A                       		db	34H,10		; operator 3 - set detune, mult
+0000163E 448B                       		db	44H,139		;11+128	; set total level
+00001640 540C                       		db	54H,12		; set rate scaling, attack rate
+00001642 640D                       		db	64H,13		; set am enable, decay rate
+00001644 740E                       		db	74H,14		; set sustain decay rate
+00001646 840F                       		db	84H,15		; set sustain level, release rate
+00001648 9400                       		db	94H,0		; set proprietary register
+0000164A 3C16                       		db	3CH,22		; operator 4 - set detune, mult
+0000164C 4C97                       		db	4CH,151		;23+128	; set total level
+0000164E 5C18                       		db	5CH,24		; set rate scaling, attack rate
+00001650 6C19                       		db	6CH,25		; set am enable, decay rate
+00001652 7C1A                       		db	7CH,26		; set sustain decay rate
+00001654 8C1B                       		db	8CH,27		; set sustain level, release rate
+00001656 9C00                       		db	9CH,0			; set proprietary register
+00001658 00                         		db	0
+00001659                            
+00001659                            		;export	EOWRITEFM
+00001659                            EOWRITEFM
+00001659                            
+00001659                            *
+00001659                            *  VTANDET - code shared between FM and PSG note on routines for stuffing the
+00001659                            *    voice table entry and checking for envelope retrigger
+00001659                            *
+00001659                            
+00001659                            VTANDET
+0000165F                            
+0000166B                            noselftime
+00001673                            nosfxtempo
+00001687                            
+0000168A                            
+0000169C                            
+0000169C                            *
+0000169C                            *  NOTEOFF - note off (key off)
+0000169C                            *
+0000169C                            *	parameters:	B	midi channel
+0000169C                            *			C	note number: bits 6:4 = octave, bits 3:0 = note (0-11)
+0000169C                            *
+0000169C                            *	trashes:	all registers
+0000169C                            *
+0000169C                            
+0000169C 00                         noteoffnote	db	0
+0000169D 00                         noteoffch	db	0
+0000169E                            
+0000169E                            NOTEOFF
+000016A2                            
+000016AC                            
+000016CB                            digoff
+000016CF                            
+000016DD                            
+000016E1                            
+000016F1                            trynoise
+000016FF                            
+00001702                            
+00001712                            
+00001712                            NOTEOFFDIG
+00001720                            noteoffdig1
+00001722                            noteoffdig2
+00001726                            
+00001726                            *
+00001726                            *  PCHANGE - program change
+00001726                            *
+00001726                            *	trashes:	all registers
+00001726                            *
+00001726                            
+00001726 0000                       fpoffset	dw	0
+00001728                            
+00001728                            PCHANGE
+00001731                            
+00001737                            FETCHPATCH
+0000174F                            
+00001765                            
+00001766                            
+00001766                            PATCHLOAD
+00001773                            plloop
+0000177E                            plloop1
+00001790                            
+00001791                            
+00001791                            
+00001791                            ***************************  Dynamic Voice Allocation ***************************
+00001791                            
+00001791                            		;export	FMVTBL
+00001791                            		;export	PSGVTBL
+00001791                            
+00001791                            *  FMVTBL - contains (6) 7-byte entires, one per voice:
+00001791                            *    byte 0: FRLxxVVV	flag byte, where F=free, R=release phase, L=locked, VVV=voice num
+00001791                            *                       VVV is numbered (0,1,2,4,5,6) for writing directly to key on/off reg
+00001791                            *    byte 1: priority	only valid for in-use (F=0) voices
+00001791                            *    byte 2: notenum	    "
+00001791                            *    byte 3: channel	    "
+00001791                            *    byte 4: lsb of duration timer (for sequenced notes)
+00001791                            *    byte 5: msb of duration timer
+00001791                            *    byte 6: release timer
+00001791                            
+00001791                            
+00001791 8000 5000 0000 00          FMVTBL		db	080H,0,050H,0,0,0,0		; fm voice 0
+00001798 8100 5000 0000 00          		db	081H,0,050H,0,0,0,0		; fm voice 1
+0000179F 8400 5000 0000 00          		db	084H,0,050H,0,0,0,0		; fm voice 3
+000017A6 8500 5000 0000 00          		db	085H,0,050H,0,0,0,0		; fm voice 4
+000017AD 8600 5000 0000 00          FMVTBLCH6	db	086H,0,050H,0,0,0,0		; fm voice 5 (supports digital)
+000017B4 8200 5000 0000 00          FMVTBLCH3	db	082H,0,050H,0,0,0,0		; fm voice 2 (supports CH3 poly mode)
+000017BB FF                         		db	0FFH
+000017BC                            
+000017BC 8000 5000 0000 00          PSGVTBL		db	080H,0,050H,0,0,0,0		; normal type voice, number 0
+000017C3 8100 5000 0000 00          		db	081H,0,050H,0,0,0,0		; normal type voice, number 1
+000017CA 8200 5000 0000 00          PSGVTBLTG3	db	082H,0,050H,0,0,0,0		; normal type voice, number 2
+000017D1 FF                         		db	0FFH
+000017D2                            
+000017D2 8300 5000 0000 00          PSGVTBLNG	db	083H,0,050H,0,0,0,0		; noise type voice, number 3
+000017D9 FF                         		db	0FFH
+000017DA                            
+000017DA                            
+000017DA                            *  ALLOC     - dynamic voice allocation routine
+000017DA                            *  ALLOCSPEC - special entry point for only allocating or not the single voice at (IY)
+000017DA                            *
+000017DA                            *	parameters:	B	channel
+000017DA                            *			IX	pointer to this channel's CCB
+000017DA                            *			IY	first entry in appropriate voice table
+000017DA                            *
+000017DA                            *	uses:		?????
+000017DA                            *
+000017DA                            *	returns:	A	flags of voice allocated, or FF if none allocated
+000017DA                            *			HL	pointer to entry allocated
+000017DA                            
+000017DA 0000                       avlowestp	dw	0			; pointer to lowest priority
+000017DC 0000                       avfreestp	dw	0			; pointer to longest free
+000017DE                            
+000017DE =00000000                  VTBLFLAGS	equ	0
+000017DE =00000001                  VTBLPRIO	equ	1
+000017DE =00000003                  VTBLCH		equ	3
+000017DE =00000004                  VTBLDL		equ	4
+000017DE =00000005                  VTBLDH		equ	5
+000017DE =00000006                  VTBLRT		equ	6
+000017DE                            
+000017DE                            ALLOC
+000017DE                            
+000017DE                            ;	call	DACME
+000017DE                            ;	push	IY
+000017DE                            ;	pop	HL
+000017DE                            ;	ld	A,(HL)
+000017DE                            ;	ret
+000017DE                            
+000017EA                            avloop
+000017EC                            avstart
+000017EC                            
+000017EF                            
+000017FE                            
+0000180B                            avfree
+00001815                            
+0000181A                            avdiffch
+00001827                            aveot
+00001831                            avtakeused
+00001832                            avspecprio
+0000183C                            avtakeit
+00001841                            
+00001841                            ALLOCSPEC
+00001841                            
+00001844                            
+00001844                            ;	push	IY
+00001844                            ;	pop	HL
+00001844                            ;	ld	A,(HL)
+00001844                            ;	ret
+00001844                            
+0000184F                            avspecused
+00001858                            
+00001858                            
+00001858                            *  DEALLOC - deallocate a voice by searching for a match on notenum and channel.
+00001858                            *    for now - for digital do nuthing
+00001858                            *    if release timer (byte 6) is zero, then set free bit immediately, otherwise
+00001858                            *    set release bit (a 60 Hz routine will count this down and set free when its zero)
+00001858                            *
+00001858                            *	parameters:	B	channel
+00001858                            *			C	note
+00001858                            *			IX	top of voice table
+00001858                            *
+00001858                            *	uses:		D,E,H
+00001858                            *
+00001858                            *	returns:	A	flags byte of deallocated voice, or
+00001858                            *				  0FFH if note not found
+00001858                            
+00001858                            DEALLOC
+0000185D                            dvloop
+0000185F                            dvstart
+00001876                            
+0000187D                            
+00001881                            
+00001884                            
+00001884                            deallocdig
+00001886                            
+00001886                            
+00001886                            		;export	Z80End
+00001886                            Z80End
+00001886                            
+00001886                            **************************************  DATA AREA  ***************************************
+00001886                            
+00001886                            		;export	PATCHDATA
+00001886                            PATCHDATA
+00001886                            
+00001886                            
+00001886 =00001886                  EOPATCHDATA	equ	PATCHDATA + (39*16)
+00001886                            
+00001886                            ;STACKINIT-(patchdata=39*16) = $18B0
+00001886                            
+00001886 =00001B20                  STACKINIT	equ	$1B20			; inialize stack pointer right below here
+00001886 =00001B20                  MBOXES		equ	$1B20			; 32 bytes for mail boxes
+00001886 =00001B40                  CMDFIFO		equ	$1B40			; command fifo - 64 bytes
+00001886 =00001B80                  CCB		equ	$1B80			; CCB - 512 bytes
+00001886 =00001D80                  CH0BUF		equ	$1D80			; channel cache - 256 bytes
+00001886 =00001E80                  ENV0BUF		equ	$1E80			; envelope buffers - 128 bytes
+00001886 =00001F00                  DACFIFO		equ	$1F00			; DAC data FIFO - 256 bytes

@@ -1,0 +1,161 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Knuckles' Chaotix (JU / 5) Sound Driver data Injector File for ROMulan
+;
+; 2020-04-14 - GenesisDoes/Tamkis - First Release
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;
+; Setup Directives ;
+;;;;;;;;;;;;;;;;;;;;
+
+MaxSize	$400000								;Maximum Genesis ROM size
+
+Dispose				$040000	$058000			;Original Audio data (Banks 0-2, 2S)
+Dispose				$076AC0 $076AE9			;Table of bank IDs for each song ($18 = Bank 0, $19 = Bank 1, $1A = Bank 2). SFX appears to be hardcoded to Bank 2 (at $56000)
+Dispose				$076AE9	$076BC3			;Original Audio pointers (Banks 0-2 + 2_SFX)
+
+;;;;;;;;;;;;;;;;;;;;;;;
+; Fixed Data Segments ;
+;;;;;;;;;;;;;;;;;;;;;;;
+
+;Replace the Music Bank ID table
+StartSeg BankTbl Big_Endian $076AC0
+		include	"Sound/Music/BIN/BankList.bin"
+EndSeg
+
+;Replace the Music Ptr table
+StartSeg PtrTbl Big_Endian $076AE9
+		include	"Sound/Music/BIN/PtrList.bin"
+EndSeg
+
+;;;;;;;;;;;;;;;;;;;;;;
+; Dynamic fixed data ;
+;;;;;;;;;;;;;;;;;;;;;;
+
+;Audio data for Bank0
+StartSeg BankData0 Big_Endian $040000
+	include	"Sound/Music/BIN/01 Door Into Summer.bin"
+	include	"Sound/Music/BIN/02 Electoria.bin"
+	include	"Sound/Music/BIN/03 Speed Of Sound.bin"
+	include	"Sound/Music/BIN/04 Seascape.bin"
+	include	"Sound/Music/BIN/05 Midnight Greenhouse.bin"
+	include	"Sound/Music/BIN/06 New Moon.bin"
+	include	"Sound/Music/BIN/07 Labyrinth.bin"
+	include	"Sound/Music/BIN/08 Trial And Error.bin"
+	include	"Sound/Music/BIN/09 Walkin.bin"
+	include	"Sound/Music/BIN/0A Hyper-Hyper.bin"
+	include	"Sound/Music/BIN/0B Evening Star.bin"
+	include	"Sound/Music/BIN/0C Moonrise.bin"
+	include	"Sound/Music/BIN/0D Overture.bin"
+	include	"Sound/Music/BIN/0E This Horizon.bin"
+EndSeg
+
+;Audio data for Bank1
+StartSeg BankData1 Big_Endian $048000
+	include	"Sound/Music/BIN/0F Take Off.bin"
+	include	"Sound/Music/BIN/10 Combination.bin"
+	include	"Sound/Music/BIN/11 Take A Nap.bin"
+	include	"Sound/Music/BIN/12 Surging Power.bin"
+	include	"Sound/Music/BIN/13 Mechanical Dance.bin"
+	include	"Sound/Music/BIN/14 Tube Panic.bin"
+	include	"Sound/Music/BIN/15 Crystal Nightmare.bin"
+	include	"Sound/Music/BIN/16 Childs Song.bin"
+	include	"Sound/Music/BIN/17 Soda Pop.bin"
+	include	"Sound/Music/BIN/18 Pendulum.bin"
+	include	"Sound/Music/BIN/19 Silver Screen.bin"
+	include	"Sound/Music/BIN/1A Tachy Touch.bin"
+	include	"Sound/Music/BIN/1B Chaotic World.bin"
+	include	"Sound/Music/BIN/1C Surprise.bin"
+	include	"Sound/Music/BIN/1D Nice Meeting You.bin"
+	include	"Sound/Music/BIN/1E Have A Happy Day.bin"
+	include	"Sound/Music/BIN/1F Reach The Goal.bin"
+	include	"Sound/Music/BIN/20 High Five.bin"
+	include	"Sound/Music/BIN/21 Decision.bin"
+	include	"Sound/Music/BIN/22 From Party To Party.bin"
+	include	"Sound/Music/BIN/23 Have Some Fun.bin"
+	include	"Sound/Music/BIN/24 Oriental Legend.bin"
+	include	"Sound/Music/BIN/25 Steel Heart.bin"
+EndSeg
+
+;Audio data for Bank2
+StartSeg BankData2 Big_Endian $050000
+	include	"Sound/Music/BIN/26 Tribute.bin"
+	include	"Sound/Music/BIN/27 Destructive Power.bin"
+	include	"Sound/Music/BIN/28 Just Another Day.bin"
+	include	"Sound/Music/BIN/29 Decision 2nd.bin"
+EndSeg
+
+;Audio data for Bank2 SFX
+StartSeg BankData2S Big_Endian $056000
+	include	"Sound/Music/BIN/2A.bin"
+	include	"Sound/Music/BIN/2B.bin"
+	include	"Sound/Music/BIN/2C.bin"
+	include	"Sound/Music/BIN/2D.bin"
+	include	"Sound/Music/BIN/2E.bin"
+	include	"Sound/Music/BIN/2F.bin"
+	include	"Sound/Music/BIN/30.bin"
+	include	"Sound/Music/BIN/31.bin"
+	include	"Sound/Music/BIN/32.bin"
+	include	"Sound/Music/BIN/33.bin"
+	include	"Sound/Music/BIN/34.bin"
+	include	"Sound/Music/BIN/35.bin"
+	include	"Sound/Music/BIN/36.bin"
+	include	"Sound/Music/BIN/37.bin"
+	include	"Sound/Music/BIN/38.bin"
+	include	"Sound/Music/BIN/39.bin"
+	include	"Sound/Music/BIN/3A.bin"
+	include	"Sound/Music/BIN/3B.bin"
+	include	"Sound/Music/BIN/3C.bin"
+	include	"Sound/Music/BIN/3D.bin"
+	include	"Sound/Music/BIN/3E.bin"
+	include	"Sound/Music/BIN/3F.bin"
+	include	"Sound/Music/BIN/40.bin"
+	include	"Sound/Music/BIN/41.bin"
+	include	"Sound/Music/BIN/42.bin"
+	include	"Sound/Music/BIN/43.bin"
+	include	"Sound/Music/BIN/44.bin"
+	include	"Sound/Music/BIN/45.bin"
+	include	"Sound/Music/BIN/46.bin"
+	include	"Sound/Music/BIN/47.bin"
+	include	"Sound/Music/BIN/48.bin"
+	include	"Sound/Music/BIN/49.bin"
+	include	"Sound/Music/BIN/4A.bin"
+	include	"Sound/Music/BIN/4B.bin"
+	include	"Sound/Music/BIN/4C.bin"
+	include	"Sound/Music/BIN/4D.bin"
+	include	"Sound/Music/BIN/4E.bin"
+	include	"Sound/Music/BIN/4F.bin"
+	include	"Sound/Music/BIN/50.bin"
+	include	"Sound/Music/BIN/51.bin"
+	include	"Sound/Music/BIN/52.bin"
+	include	"Sound/Music/BIN/53.bin"
+	include	"Sound/Music/BIN/54.bin"
+	include	"Sound/Music/BIN/55.bin"
+	include	"Sound/Music/BIN/56.bin"
+	include	"Sound/Music/BIN/57.bin"
+	include	"Sound/Music/BIN/58.bin"
+	include	"Sound/Music/BIN/59.bin"
+	include	"Sound/Music/BIN/5A.bin"
+	include	"Sound/Music/BIN/5B.bin"
+	include	"Sound/Music/BIN/5C.bin"
+	include	"Sound/Music/BIN/5D.bin"
+	include	"Sound/Music/BIN/5E.bin"
+	include	"Sound/Music/BIN/5F.bin"
+	include	"Sound/Music/BIN/60.bin"
+	include	"Sound/Music/BIN/61.bin"
+	include	"Sound/Music/BIN/62.bin"
+	include	"Sound/Music/BIN/63.bin"
+	include	"Sound/Music/BIN/64.bin"
+	include	"Sound/Music/BIN/65.bin"
+	include	"Sound/Music/BIN/66.bin"
+	include	"Sound/Music/BIN/67.bin"
+	include	"Sound/Music/BIN/68.bin"
+	include	"Sound/Music/BIN/69.bin"
+	include	"Sound/Music/BIN/6A.bin"
+	include	"Sound/Music/BIN/6B.bin"
+	include	"Sound/Music/BIN/6C.bin"
+	include	"Sound/Music/BIN/6D.bin"
+	include	"Sound/Music/BIN/6E.bin"
+EndSeg
+
