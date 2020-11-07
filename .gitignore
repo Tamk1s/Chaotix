@@ -14,3 +14,9 @@ Assets/Tools/Audio/XM4SMPS/KC.lst
 Assets/Tools/Audio/XM4SMPS/KC.bin
 Assets/Tools/Audio/XM4SMPS/KC.asm
 Assets/Music/Preview/config.ini
+project/Training/sh000000.tga
+Report.txt
+Sound/Music/ASM/dum/*
+XM4SMPS/KC.asm
+XM4SMPS/KC.bin
+XM4SMPS/KC.lst

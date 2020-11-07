@@ -1,5 +1,5 @@
 2
-20
+23
 00000	00FFE02C	d	h	0	v_objspace
 00001	00FFD460	d	h	0	Pal Cache $40w
 00002	00FFC1DE	w	h	0	HScroll FG Pos
@@ -20,3 +20,6 @@
 00011	00FFC1EA	w	h	0	v_limitbtm1
 00012	00FFC1EC	w	h	0	v_limittop1
 00013	00FFC1E6	w	h	0	v_limitright1
+00014	00FFE200	d	h	0	NemDec_Target
+00015	00FFC032	d	h	0	AniArt_Target
+00016	00FFFCEA	w	h	0	Combi_Mode

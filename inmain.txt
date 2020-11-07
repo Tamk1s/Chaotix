@@ -19,8 +19,10 @@ Dispose				$22F1AC	$22F3B4		;Original solidity data pointers list
 Dispose				$22F3B4	$2B32B0		;Original level map, tile, and solidity data (83EEA)
 Dispose				$2B32B0	$2B4B74		;Original MD palette pointers and data
 Dispose				$2B4B74	$2B52B4		;Original Level Size Data Pointers and Data
+Dispose				$2B52B4 $2B54D8		;!@ Original Artnem AnimArt pointers and data
 Dispose				$2B61FA $2B6832		;!@ Original MD palette AAZ Lit pointers and data
 Dispose				$2BDE18	$2BDE42		;Original Boss Level Size Data
+;Dispose			$2BF854 $2BFF9A		;!@ Original AnimArtV script pointers and data
 Dispose				$2DA05E	$2F83DA		;Original Sprite Placement Data
 Dispose				$2F83DA	$300000		;Original End-ROM padding
 
@@ -46,7 +48,7 @@ EndSeg
 
 StartSeg LevSize_Data_Ptr Big_Endian $939E			;Replace this reference to the level size setup data pointer listing
 
-		DWORD	LevSize_Data		;Point to the Level Size Setup segment
+		DWORD	LevSize_Data						;Point to the Level Size Setup segment
 
 EndSeg
 
@@ -100,10 +102,20 @@ StartSeg Level_Index_Ptr3 Big_Endian $31ADA			;Replace the reference to the leve
 
 EndSeg
 
+;!@ AnimArtV Tbl
+;StartSeg AnimArtV_Index_Ptr1 Big_Endian $31D0A
+		;DWORD	AnimArtV_Ptrs							;Point to the AnimArtV Setup segment
+;EndSeg
+
 StartSeg LevelTile_Ptr2 Big_Endian $31F80			;Replace the reference to the level tiles pointer listing within the level tile pointer load routine
 
 		DWORD	LevelTile_Ptrs		;Point to the level tile pointer segment
 
+EndSeg
+
+;!@ AnimArtTbl
+StartSeg AnimArt_Index_Ptr1 Big_Endian $3203A			;Replace this reference to the AnimArt Table size setup data pointer listing
+		DWORD	AnimArt_Ptrs							;Point to the AnimArt Setup segment
 EndSeg
 
 StartSeg MD_Palette_Index_Ptr2 Big_Endian $320C8			;Replace the reference to the level palette pointer listing
@@ -809,6 +821,7 @@ StartSeg Objlayout_Ptrs Big_Endian	;Level Object Layout Pointers
 	SLPtrs_Intro6D:	DWORD ObjLoc_Intro1
 	SLPtrs_Intro6S:	DWORD ObjLoc_Intro1
 	SLPtrs_Intro6N:	DWORD ObjLoc_Intro1
+
 	SLPtrs_World0M:	DWORD ObjLoc_World
 	SLPtrs_World0D:	DWORD ObjLoc_World
 	SLPtrs_World0S:	DWORD ObjLoc_World
@@ -1127,7 +1140,8 @@ StartSeg MD_Palette_Index Big_Endian	;Megadrive format palette pointers and data
 EndSeg
 
 ;!@ AAZ Lit
-StartSeg MD_Palette_AAZLit_Index Big_Endian	;Megadrive format palette pointers and data Segment for AAZ Lit palettes
+;$2BF854
+StartSeg MD_Palette_AAZLit_Index Big_Endian	 ;Megadrive format palette pointers and data Segment for AAZ Lit palettes
 	LPPtrAAZ0M_L:	WORD Pal_AAZ12M_L-LPPtrAAZ0M_L
 	LPPtrAAZ0D_L:	WORD Pal_AAZ12D_L-LPPtrAAZ0D_L
 	LPPtrAAZ0S_L:	WORD Pal_AAZ12S_L-LPPtrAAZ0S_L
@@ -3685,6 +3699,759 @@ StartSeg LevSize_Data Big_Endian	;Level Size and other Setup Data
 				WORD 0
 				WORD $100
 				WORD 0
+EndSeg
+
+;!@ AnimArtV
+StartSeg AnimArtV_Ptrs Big_Endian $2BF854 $746
+	AniVPtrLst_BBZ0M:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ0M
+	AniVPtrLst_BBZ0D:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ0D
+	AniVPtrLst_BBZ0S:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ0S
+	AniVPtrLst_BBZ0N:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ0N	
+	AniVPtrLst_BBZ1M:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ1M
+	AniVPtrLst_BBZ1D:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ1D
+	AniVPtrLst_BBZ1S:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ1S
+	AniVPtrLst_BBZ1N:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ1N	
+	AniVPtrLst_BBZ2M:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ2M
+	AniVPtrLst_BBZ2D:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ2D
+	AniVPtrLst_BBZ2S:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ2S
+	AniVPtrLst_BBZ2N:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ2N	
+	AniVPtrLst_BBZ3M:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ3M
+	AniVPtrLst_BBZ3D:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ3D
+	AniVPtrLst_BBZ3S:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ3S
+	AniVPtrLst_BBZ3N:	WORD 	AnimVPtr_BBZ13MN-AniVPtrLst_BBZ3N	
+	AniVPtrLst_BBZ4M:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ4M
+	AniVPtrLst_BBZ4D:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ4D
+	AniVPtrLst_BBZ4S:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ4S
+	AniVPtrLst_BBZ4N:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ4N	
+	AniVPtrLst_BBZ5M:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ5M
+	AniVPtrLst_BBZ5D:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ5D
+	AniVPtrLst_BBZ5S:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ5S
+	AniVPtrLst_BBZ5N:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ5N	
+	AniVPtrLst_BBZ6M:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ6M
+	AniVPtrLst_BBZ6D:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ6D
+	AniVPtrLst_BBZ6S:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ6S
+	AniVPtrLst_BBZ6N:	WORD 	AnimVPtr_BBZ45MN-AniVPtrLst_BBZ6N
+
+	AniVPtrLst_SSZ0M:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ0M
+	AniVPtrLst_SSZ0D:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ0D
+	AniVPtrLst_SSZ0S:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ0S
+	AniVPtrLst_SSZ0N:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ0N
+	AniVPtrLst_SSZ1M:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ1M
+	AniVPtrLst_SSZ1D:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ1D
+	AniVPtrLst_SSZ1S:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ1S
+	AniVPtrLst_SSZ1N:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ1N	
+	AniVPtrLst_SSZ2M:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ2M
+	AniVPtrLst_SSZ2D:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ2D
+	AniVPtrLst_SSZ2S:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ2S
+	AniVPtrLst_SSZ2N:	WORD 	AnimVPtr_SSZ12MN-AniVPtrLst_SSZ2N	
+	AniVPtrLst_SSZ3M:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ3M
+	AniVPtrLst_SSZ3D:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ3D
+	AniVPtrLst_SSZ3S:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ3S
+	AniVPtrLst_SSZ3N:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ3N	
+	AniVPtrLst_SSZ4M:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ4M
+	AniVPtrLst_SSZ4D:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ4D
+	AniVPtrLst_SSZ4S:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ4S
+	AniVPtrLst_SSZ4N:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ4N	
+	AniVPtrLst_SSZ5M:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ5M
+	AniVPtrLst_SSZ5D:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ5D
+	AniVPtrLst_SSZ5S:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ5S
+	AniVPtrLst_SSZ5N:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ5N	
+	AniVPtrLst_SSZ6M:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ6M
+	AniVPtrLst_SSZ6D:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ6D
+	AniVPtrLst_SSZ6S:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ6S
+	AniVPtrLst_SSZ6N:	WORD 	AnimVPtr_SSZ35MN-AniVPtrLst_SSZ6N
+	
+	AniVPtrLst_AAZ0M:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ0M
+	AniVPtrLst_AAZ0D:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ0D
+	AniVPtrLst_AAZ0S:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ0S
+	AniVPtrLst_AAZ0N:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ0N	
+	AniVPtrLst_AAZ1M:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ1M
+	AniVPtrLst_AAZ1D:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ1D
+	AniVPtrLst_AAZ1S:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ1S
+	AniVPtrLst_AAZ1N:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ1N	
+	AniVPtrLst_AAZ2M:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ2M
+	AniVPtrLst_AAZ2D:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ2D
+	AniVPtrLst_AAZ2S:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ2S
+	AniVPtrLst_AAZ2N:	WORD 	AnimVPtr_AAZ12MN-AniVPtrLst_AAZ2N	
+	AniVPtrLst_AAZ3M:	WORD 	AnimVPtr_AAZ3MN-AniVPtrLst_AAZ3M
+	AniVPtrLst_AAZ3D:	WORD 	AnimVPtr_AAZ3MN-AniVPtrLst_AAZ3D
+	AniVPtrLst_AAZ3S:	WORD 	AnimVPtr_AAZ3MN-AniVPtrLst_AAZ3S
+	AniVPtrLst_AAZ3N:	WORD 	AnimVPtr_AAZ3MN-AniVPtrLst_AAZ3N		
+	AniVPtrLst_AAZ4M:	WORD 	AnimVPtr_AAZ4MN-AniVPtrLst_AAZ4M
+	AniVPtrLst_AAZ4D:	WORD 	AnimVPtr_AAZ4MN-AniVPtrLst_AAZ4D
+	AniVPtrLst_AAZ4S:	WORD 	AnimVPtr_AAZ4MN-AniVPtrLst_AAZ4S
+	AniVPtrLst_AAZ4N:	WORD 	AnimVPtr_AAZ4MN-AniVPtrLst_AAZ4N		
+	AniVPtrLst_AAZ5M:	WORD 	AnimVPtr_AAZ5MN-AniVPtrLst_AAZ5M
+	AniVPtrLst_AAZ5D:	WORD 	AnimVPtr_AAZ5MN-AniVPtrLst_AAZ5D
+	AniVPtrLst_AAZ5S:	WORD 	AnimVPtr_AAZ5MN-AniVPtrLst_AAZ5S
+	AniVPtrLst_AAZ5N:	WORD 	AnimVPtr_AAZ5MN-AniVPtrLst_AAZ5N		
+	AniVPtrLst_AAZ6M:	WORD 	AnimVPtr_AAZ5MN-AniVPtrLst_AAZ6M
+	AniVPtrLst_AAZ6D:	WORD 	AnimVPtr_AAZ5MN-AniVPtrLst_AAZ6D
+	AniVPtrLst_AAZ6S:	WORD 	AnimVPtr_AAZ5MN-AniVPtrLst_AAZ6S
+	AniVPtrLst_AAZ6N:	WORD 	AnimVPtr_AAZ5MN-AniVPtrLst_AAZ6N	
+	
+	AniVPtrLst_TTZ0M:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ0M
+	AniVPtrLst_TTZ0D:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ0D
+	AniVPtrLst_TTZ0S:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ0S
+	AniVPtrLst_TTZ0N:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ0N
+	AniVPtrLst_TTZ1M:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ1M
+	AniVPtrLst_TTZ1D:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ1D
+	AniVPtrLst_TTZ1S:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ1S
+	AniVPtrLst_TTZ1N:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ1N	
+	AniVPtrLst_TTZ2M:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ2M
+	AniVPtrLst_TTZ2D:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ2D
+	AniVPtrLst_TTZ2S:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ2S
+	AniVPtrLst_TTZ2N:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ2N
+	AniVPtrLst_TTZ3M:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ3M
+	AniVPtrLst_TTZ3D:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ3D
+	AniVPtrLst_TTZ3S:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ3S
+	AniVPtrLst_TTZ3N:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ3N
+	AniVPtrLst_TTZ4M:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ4M
+	AniVPtrLst_TTZ4D:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ4D
+	AniVPtrLst_TTZ4S:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ4S
+	AniVPtrLst_TTZ4N:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ4N
+	AniVPtrLst_TTZ5M:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ5M
+	AniVPtrLst_TTZ5D:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ5D
+	AniVPtrLst_TTZ5S:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ5S
+	AniVPtrLst_TTZ5N:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ5N
+	AniVPtrLst_TTZ6M:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ6M
+	AniVPtrLst_TTZ6D:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ6D
+	AniVPtrLst_TTZ6S:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ6S
+	AniVPtrLst_TTZ6N:	WORD 	AnimVPtr_TTZ15MN-AniVPtrLst_TTZ6N
+	
+	AniVPtrLst_MMZ0M:	WORD 	AnimVPtr_MMZ1MN-AniVPtrLst_MMZ0M
+	AniVPtrLst_MMZ0D:	WORD 	AnimVPtr_MMZ1MN-AniVPtrLst_MMZ0D
+	AniVPtrLst_MMZ0S:	WORD 	AnimVPtr_MMZ1MN-AniVPtrLst_MMZ0S
+	AniVPtrLst_MMZ0N:	WORD 	AnimVPtr_MMZ1MN-AniVPtrLst_MMZ0N
+	AniVPtrLst_MMZ1M:	WORD 	AnimVPtr_MMZ1MN-AniVPtrLst_MMZ1M
+	AniVPtrLst_MMZ1D:	WORD 	AnimVPtr_MMZ1MN-AniVPtrLst_MMZ1D
+	AniVPtrLst_MMZ1S:	WORD 	AnimVPtr_MMZ1MN-AniVPtrLst_MMZ1S
+	AniVPtrLst_MMZ1N:	WORD 	AnimVPtr_MMZ1MN-AniVPtrLst_MMZ1N	
+	AniVPtrLst_MMZ2M:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ2M
+	AniVPtrLst_MMZ2D:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ2D
+	AniVPtrLst_MMZ2S:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ2S
+	AniVPtrLst_MMZ2N:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ2N	
+	AniVPtrLst_MMZ3M:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ3M
+	AniVPtrLst_MMZ3D:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ3D
+	AniVPtrLst_MMZ3S:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ3S
+	AniVPtrLst_MMZ3N:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ3N	
+	AniVPtrLst_MMZ4M:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ4M
+	AniVPtrLst_MMZ4D:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ4D
+	AniVPtrLst_MMZ4S:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ4S
+	AniVPtrLst_MMZ4N:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ4N	
+	AniVPtrLst_MMZ5M:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ5M
+	AniVPtrLst_MMZ5D:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ5D
+	AniVPtrLst_MMZ5S:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ5S
+	AniVPtrLst_MMZ5N:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ5N	
+	AniVPtrLst_MMZ6M:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ6M
+	AniVPtrLst_MMZ6D:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ6D
+	AniVPtrLst_MMZ6S:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ6S
+	AniVPtrLst_MMZ6N:	WORD 	AnimVPtr_MMZ25MN-AniVPtrLst_MMZ6N
+	
+	AniVPtrLst_Train0M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train0M
+	AniVPtrLst_Train0D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train0D
+	AniVPtrLst_Train0S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train0S
+	AniVPtrLst_Train0N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train0N
+	AniVPtrLst_Train1M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train1M
+	AniVPtrLst_Train1D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train1D
+	AniVPtrLst_Train1S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train1S
+	AniVPtrLst_Train1N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train1N
+	AniVPtrLst_Train2M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train2M
+	AniVPtrLst_Train2D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train2D
+	AniVPtrLst_Train2S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train2S
+	AniVPtrLst_Train2N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train2N
+	AniVPtrLst_Train3M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train3M
+	AniVPtrLst_Train3D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train3D
+	AniVPtrLst_Train3S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train3S
+	AniVPtrLst_Train3N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train3N
+	AniVPtrLst_Train4M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train4M
+	AniVPtrLst_Train4D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train4D
+	AniVPtrLst_Train4S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train4S
+	AniVPtrLst_Train4N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train4N
+	AniVPtrLst_Train5M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train5M
+	AniVPtrLst_Train5D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train5D
+	AniVPtrLst_Train5S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train5S
+	AniVPtrLst_Train5N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train5N
+	AniVPtrLst_Train6M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train6M
+	AniVPtrLst_Train6D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train6D
+	AniVPtrLst_Train6S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train6S
+	AniVPtrLst_Train6N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Train6N
+	
+	AniVPtrLst_Intro0M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro0M
+	AniVPtrLst_Intro0D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro0D
+	AniVPtrLst_Intro0S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro0S
+	AniVPtrLst_Intro0N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro0N
+	AniVPtrLst_Intro1M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro1M
+	AniVPtrLst_Intro1D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro1D
+	AniVPtrLst_Intro1S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro1S
+	AniVPtrLst_Intro1N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro1N
+	AniVPtrLst_Intro2M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro2M
+	AniVPtrLst_Intro2D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro2D
+	AniVPtrLst_Intro2S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro2S
+	AniVPtrLst_Intro2N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro2N
+	AniVPtrLst_Intro3M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro3M
+	AniVPtrLst_Intro3D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro3D
+	AniVPtrLst_Intro3S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro3S
+	AniVPtrLst_Intro3N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro3N
+	AniVPtrLst_Intro4M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro4M
+	AniVPtrLst_Intro4D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro4D
+	AniVPtrLst_Intro4S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro4S
+	AniVPtrLst_Intro4N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro4N
+	AniVPtrLst_Intro5M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro5M
+	AniVPtrLst_Intro5D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro5D
+	AniVPtrLst_Intro5S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro5S
+	AniVPtrLst_Intro5N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro5N
+	AniVPtrLst_Intro6M:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro6M
+	AniVPtrLst_Intro6D:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro6D
+	AniVPtrLst_Intro6S:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro6S
+	AniVPtrLst_Intro6N:	WORD 	AnimVPtr_NULL-AniVPtrLst_Intro6N
+	
+	AniVPtrLst_World0M:	WORD 	AnimVPtr_NULL-AniVPtrLst_World0M
+	AniVPtrLst_World0D:	WORD 	AnimVPtr_NULL-AniVPtrLst_World0D
+	AniVPtrLst_World0S:	WORD 	AnimVPtr_NULL-AniVPtrLst_World0S
+	AniVPtrLst_World0N:	WORD 	AnimVPtr_NULL-AniVPtrLst_World0N
+	AniVPtrLst_World1M:	WORD 	AnimVPtr_NULL-AniVPtrLst_World1M
+	AniVPtrLst_World1D:	WORD 	AnimVPtr_NULL-AniVPtrLst_World1D
+	AniVPtrLst_World1S:	WORD 	AnimVPtr_NULL-AniVPtrLst_World1S
+	AniVPtrLst_World1N:	WORD 	AnimVPtr_NULL-AniVPtrLst_World1N
+	AniVPtrLst_World2M:	WORD 	AnimVPtr_NULL-AniVPtrLst_World2M
+	AniVPtrLst_World2D:	WORD 	AnimVPtr_NULL-AniVPtrLst_World2D
+	AniVPtrLst_World2S:	WORD 	AnimVPtr_NULL-AniVPtrLst_World2S
+	AniVPtrLst_World2N:	WORD 	AnimVPtr_NULL-AniVPtrLst_World2N
+	AniVPtrLst_World3M:	WORD 	AnimVPtr_NULL-AniVPtrLst_World3M
+	AniVPtrLst_World3D:	WORD 	AnimVPtr_NULL-AniVPtrLst_World3D
+	AniVPtrLst_World3S:	WORD 	AnimVPtr_NULL-AniVPtrLst_World3S
+	AniVPtrLst_World3N:	WORD 	AnimVPtr_NULL-AniVPtrLst_World3N
+	AniVPtrLst_World4M:	WORD 	AnimVPtr_NULL-AniVPtrLst_World4M
+	AniVPtrLst_World4D:	WORD 	AnimVPtr_NULL-AniVPtrLst_World4D
+	AniVPtrLst_World4S:	WORD 	AnimVPtr_NULL-AniVPtrLst_World4S
+	AniVPtrLst_World4N:	WORD 	AnimVPtr_NULL-AniVPtrLst_World4N
+	AniVPtrLst_World5M:	WORD 	AnimVPtr_NULL-AniVPtrLst_World5M
+	AniVPtrLst_World5D:	WORD 	AnimVPtr_NULL-AniVPtrLst_World5D
+	AniVPtrLst_World5S:	WORD 	AnimVPtr_NULL-AniVPtrLst_World5S
+	AniVPtrLst_World5N:	WORD 	AnimVPtr_NULL-AniVPtrLst_World5N
+	AniVPtrLst_World6M:	WORD 	AnimVPtr_NULL-AniVPtrLst_World6M
+	AniVPtrLst_World6D:	WORD 	AnimVPtr_NULL-AniVPtrLst_World6D
+	AniVPtrLst_World6S:	WORD 	AnimVPtr_NULL-AniVPtrLst_World6S
+	AniVPtrLst_World6N:	WORD 	AnimVPtr_NULL-AniVPtrLst_World6N	
+
+	
+	;Level Data
+		
+	;BBZ
+	AnimVPtr_BBZ13MN:
+		WORD	$0000
+		DWORD	AnimArtV_BBZ_1
+		DWORD	AnimArtV_BBZ_2
+		WORD	$0000
+		DWORD	AnimArtV_BBZ_3
+		DWORD	AnimArtV_BBZ_4
+		WORD	$0000
+		DWORD	AnimArtV_BBZ_5
+		DWORD	AnimArtV_BBZ_6
+		WORD	$0000
+		DWORD	AnimArtV_BBZ_7
+		DWORD	AnimArtV_BBZ_8
+		WORD	$FFFF
+		
+	AnimVPtr_BBZ45MN:
+		WORD	$0000
+		DWORD	AnimArtV_BBZ_3
+		DWORD	AnimArtV_BBZ_4
+		WORD	$0000
+		DWORD	AnimArtV_BBZ_5
+		DWORD	AnimArtV_BBZ_6
+		WORD	$0000
+		DWORD	AnimArtV_BBZ_7
+		DWORD	AnimArtV_BBZ_8
+		WORD	$FFFF
+
+
+	;SSZ		
+	AnimVPtr_SSZ12MN:
+		WORD	$0002
+		DWORD	AnimArtV_SSZ_1
+		DWORD	AnimArtV_SSZ_2
+		WORD	$0002
+		DWORD	AnimArtV_SSZ_3
+		DWORD	AnimArtV_SSZ_2
+		WORD	$0002
+		DWORD	AnimArtV_SSZ_4
+		DWORD	AnimArtV_SSZ_2
+		WORD	$0001
+		DWORD	AnimArtV_SSZ_4
+		DWORD	AnimArtV_SSZ_2
+		WORD	$FFFF
+		
+	AnimVPtr_SSZ35MN:
+		WORD	$0002
+		DWORD	AnimArtV_SSZ_1
+		DWORD	AnimArtV_SSZ_2
+		WORD	$0002
+		DWORD	AnimArtV_SSZ_3
+		DWORD	AnimArtV_SSZ_2
+		WORD	$0002
+		DWORD	AnimArtV_SSZ_4
+		DWORD	AnimArtV_SSZ_2
+		WORD	$0001
+		DWORD	AnimArtV_SSZ_4
+		DWORD	AnimArtV_SSZ_2
+		WORD	$0004
+		DWORD	AnimArtV_SSZ_4
+		DWORD	AnimArtV_SSZ_2
+		WORD	$FFFF
+		
+		
+	;AAZ
+		AnimVPtr_AAZ12MN:
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_1
+			DWORD	AnimArtV_AAZ_2
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_3
+			DWORD	AnimArtV_AAZ_4
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_5
+			DWORD	AnimArtV_AAZ_6
+			WORD	$FFFF
+			
+		AnimVPtr_AAZ3MN:
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_1
+			DWORD	AnimArtV_AAZ_2
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_7
+			DWORD	AnimArtV_AAZ_4
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_8
+			DWORD	AnimArtV_AAZ_6
+			WORD	$FFFF
+			
+		AnimVPtr_AAZ4MN:
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_1
+			DWORD	AnimArtV_AAZ_2
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_9
+			DWORD	AnimArtV_AAZ_4
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_8
+			DWORD	AnimArtV_AAZ_6
+			WORD	$FFFF
+			
+		AnimVPtr_AAZ5MN:
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_1
+			DWORD	AnimArtV_AAZ_2
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_10
+			DWORD	AnimArtV_AAZ_4
+			WORD	$0003
+			DWORD	AnimArtV_AAZ_11
+			DWORD	AnimArtV_AAZ_6
+			WORD	$FFFF
+			
+			
+	;TTZ
+		AnimVPtr_TTZ15MN:
+			WORD	$0002
+			DWORD	AnimArtV_TTZ_1
+			DWORD	AnimArtV_TTZ_2
+			WORD	$FFFF
+	
+	
+	;MMZ
+		AnimVPtr_MMZ1MN:
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_1
+			DWORD	AnimArtV_MMZ_2
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_3
+			DWORD	AnimArtV_MMZ_4
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_5
+			DWORD	AnimArtV_MMZ_6
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_7
+			DWORD	AnimArtV_MMZ_8
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_9
+			DWORD	AnimArtV_MMZ_4
+			WORD	$FFFF
+
+		AnimVPtr_MMZ25MN:
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_1
+			DWORD	AnimArtV_MMZ_2
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_3
+			DWORD	AnimArtV_MMZ_4
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_5
+			DWORD	AnimArtV_MMZ_6
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_7
+			DWORD	AnimArtV_MMZ_8
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_10
+			DWORD	AnimArtV_MMZ_11
+			WORD	$0000
+			DWORD	AnimArtV_MMZ_9
+			DWORD	AnimArtV_MMZ_4
+			WORD	$FFFF
+			
+			
+	;NULL entry (IIZ T/I, WE)
+		AnimVPtr_NULL:
+			WORD	$FFFF
+			
+			
+	;Binary include data
+	
+	;BBZ
+		AnimArtV_BBZ_1:	include	"Art/artnem/aniart/Data/BBZ1_Data.bin"
+		AnimArtV_BBZ_2:	include	"Art/artnem/aniart/Data/BBZ2_Data.bin"
+		AnimArtV_BBZ_3:	include	"Art/artnem/aniart/Data/BBZ3_Data.bin"
+		AnimArtV_BBZ_4:	include	"Art/artnem/aniart/Data/BBZ4_Data.bin"
+		AnimArtV_BBZ_5:	include	"Art/artnem/aniart/Data/BBZ5_Data.bin"
+		AnimArtV_BBZ_6:	include	"Art/artnem/aniart/Data/BBZ6_Data.bin"
+		AnimArtV_BBZ_7:	include	"Art/artnem/aniart/Data/BBZ7_Data.bin"
+		AnimArtV_BBZ_8:	include	"Art/artnem/aniart/Data/BBZ8_Data.bin"
+		
+	;SSZ	
+		AnimArtV_SSZ_1:	include	"Art/artnem/aniart/Data/SSZ1_Data.bin"		
+		AnimArtV_SSZ_3:	include	"Art/artnem/aniart/Data/SSZ3_Data.bin"
+		AnimArtV_SSZ_4:	include	"Art/artnem/aniart/Data/SSZ4_Data.bin"
+		AnimArtV_SSZ_2:	include	"Art/artnem/aniart/Data/SSZ2_Data.bin"
+		
+	;!@ Something is getting re-injected incorrectly here for AAZ; to fix!
+	;AAZ
+		AnimArtV_AAZ_1:		include	"Art/artnem/aniart/Data/AAZ01_Data.bin"
+		AnimArtV_AAZ_2:		include	"Art/artnem/aniart/Data/AAZ02_Data.bin"
+		AnimArtV_AAZ_3:		include	"Art/artnem/aniart/Data/AAZ03_Data.bin"
+		AnimArtV_AAZ_7:		include	"Art/artnem/aniart/Data/AAZ07_Data.bin"
+		AnimArtV_AAZ_9:		include	"Art/artnem/aniart/Data/AAZ09_Data.bin"
+		AnimArtV_AAZ_10:	include	"Art/artnem/aniart/Data/AAZ10_Data.bin"
+		AnimArtV_AAZ_4:		include	"Art/artnem/aniart/Data/AAZ04_Data.bin"
+		AnimArtV_AAZ_5:		include	"Art/artnem/aniart/Data/AAZ05_Data.bin"
+		AnimArtV_AAZ_8:		include	"Art/artnem/aniart/Data/AAZ08_Data.bin"
+		AnimArtV_AAZ_11:	include	"Art/artnem/aniart/Data/AAZ11_Data.bin"
+		AnimArtV_AAZ_6:		include	"Art/artnem/aniart/Data/AAZ06_Data.bin"
+		
+	;TTZ
+		AnimArtV_TTZ_1:	include	"Art/artnem/aniart/Data/TTZ1_Data.bin"
+		AnimArtV_TTZ_2:	include	"Art/artnem/aniart/Data/TTZ2_Data.bin"		
+
+	;MMZ
+		AnimArtV_MMZ_1:		include	"Art/artnem/aniart/Data/MMZ01_Data.bin"
+		AnimArtV_MMZ_2:		include	"Art/artnem/aniart/Data/MMZ02_Data.bin"
+		AnimArtV_MMZ_3:		include	"Art/artnem/aniart/Data/MMZ03_Data.bin"
+		AnimArtV_MMZ_4:		include	"Art/artnem/aniart/Data/MMZ04_Data.bin"
+		AnimArtV_MMZ_5:		include	"Art/artnem/aniart/Data/MMZ05_Data.bin"
+		AnimArtV_MMZ_6:		include	"Art/artnem/aniart/Data/MMZ06_Data.bin"
+		AnimArtV_MMZ_7:		include	"Art/artnem/aniart/Data/MMZ07_Data.bin"
+		AnimArtV_MMZ_8:		include	"Art/artnem/aniart/Data/MMZ08_Data.bin"
+		AnimArtV_MMZ_10:	include	"Art/artnem/aniart/Data/MMZ10_Data.bin"
+		AnimArtV_MMZ_11:	include	"Art/artnem/aniart/Data/MMZ11_Data.bin"
+		AnimArtV_MMZ_9:		include	"Art/artnem/aniart/Data/MMZ09_Data.bin"		
+		
+	;IIZ (T/I) and WE don't have aniart normally
+EndSeg
+	
+;!@ AnimArt
+StartSeg AnimArt_Ptrs Big_Endian
+	AniPtrLst_BBZ0M:	WORD 	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ0M
+	AniPtrLst_BBZ0D:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ0D
+	AniPtrLst_BBZ0S:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ0S
+	AniPtrLst_BBZ0N:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ0N
+	AniPtrLst_BBZ1M:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ1M
+	AniPtrLst_BBZ1D:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ1D
+	AniPtrLst_BBZ1S:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ1S
+	AniPtrLst_BBZ1N:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ1N
+	AniPtrLst_BBZ2M:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ2M
+	AniPtrLst_BBZ2S:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ2S
+	AniPtrLst_BBZ2D:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ2D
+	AniPtrLst_BBZ2N:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ2N
+	AniPtrLst_BBZ3M:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ3M
+	AniPtrLst_BBZ3D:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ3D
+	AniPtrLst_BBZ3S:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ3S
+	AniPtrLst_BBZ3N:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ3N
+	AniPtrLst_BBZ4M:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ4M
+	AniPtrLst_BBZ4D:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ4D
+	AniPtrLst_BBZ4S:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ4S
+	AniPtrLst_BBZ4N:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ4N
+	AniPtrLst_BBZ5M:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ5M
+	AniPtrLst_BBZ5D:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ5D
+	AniPtrLst_BBZ5S:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ5S
+	AniPtrLst_BBZ5N:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ5N
+	AniPtrLst_BBZ6M:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ6M
+	AniPtrLst_BBZ6D:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ6D
+	AniPtrLst_BBZ6S:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ6S
+	AniPtrLst_BBZ6N:	WORD	AnimArtPtr_BBZ06MN-AniPtrLst_BBZ6N
+
+	AniPtrLst_SSZ0M:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ0M
+	AniPtrLst_SSZ0D:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ0D
+	AniPtrLst_SSZ0S:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ0S
+	AniPtrLst_SSZ0N:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ0N
+	AniPtrLst_SSZ1M:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ1M
+	AniPtrLst_SSZ1D:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ1D
+	AniPtrLst_SSZ1S:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ1S
+	AniPtrLst_SSZ1N:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ1N
+	AniPtrLst_SSZ2M:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ2M
+	AniPtrLst_SSZ2D:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ2D
+	AniPtrLst_SSZ2S:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ2S
+	AniPtrLst_SSZ2N:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ2N
+	AniPtrLst_SSZ3M:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ3M
+	AniPtrLst_SSZ3D:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ3D
+	AniPtrLst_SSZ3S:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ3S
+	AniPtrLst_SSZ3N:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ3N
+	AniPtrLst_SSZ4M:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ4M
+	AniPtrLst_SSZ4D:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ4D
+	AniPtrLst_SSZ4S:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ4S
+	AniPtrLst_SSZ4N:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ4N
+	AniPtrLst_SSZ5M:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ5M
+	AniPtrLst_SSZ5D:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ5D
+	AniPtrLst_SSZ5S:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ5S
+	AniPtrLst_SSZ5N:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ5N
+	AniPtrLst_SSZ6M:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ6M
+	AniPtrLst_SSZ6D:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ6D
+	AniPtrLst_SSZ6S:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ6S
+	AniPtrLst_SSZ6N:	WORD	AnimArtPtr_SSZ06MN-AniPtrLst_SSZ6N		
+
+	AniPtrLst_AAZ0M:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ0M
+	AniPtrLst_AAZ0D:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ0D
+	AniPtrLst_AAZ0S:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ0S
+	AniPtrLst_AAZ0N:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ0N
+	AniPtrLst_AAZ1M:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ1M
+	AniPtrLst_AAZ1D:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ1D
+	AniPtrLst_AAZ1S:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ1S
+	AniPtrLst_AAZ1N:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ1N
+	AniPtrLst_AAZ2M:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ2M
+	AniPtrLst_AAZ2D:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ2D
+	AniPtrLst_AAZ2S:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ2S
+	AniPtrLst_AAZ2N:	WORD	AnimArtPtr_AAZ02MN-AniPtrLst_AAZ2N
+	AniPtrLst_AAZ3M:	WORD	AnimArtPtr_AAZ3MN-AniPtrLst_AAZ3M
+	AniPtrLst_AAZ3D:	WORD	AnimArtPtr_AAZ3MN-AniPtrLst_AAZ3D
+	AniPtrLst_AAZ3S:	WORD	AnimArtPtr_AAZ3MN-AniPtrLst_AAZ3S
+	AniPtrLst_AAZ3N:	WORD	AnimArtPtr_AAZ3MN-AniPtrLst_AAZ3N
+	AniPtrLst_AAZ4M:	WORD	AnimArtPtr_AAZ4MN-AniPtrLst_AAZ4M
+	AniPtrLst_AAZ4D:	WORD	AnimArtPtr_AAZ4MN-AniPtrLst_AAZ4D
+	AniPtrLst_AAZ4S:	WORD	AnimArtPtr_AAZ4MN-AniPtrLst_AAZ4S
+	AniPtrLst_AAZ4N:	WORD	AnimArtPtr_AAZ4MN-AniPtrLst_AAZ4N
+	AniPtrLst_AAZ5M:	WORD	AnimArtPtr_AAZ56MN-AniPtrLst_AAZ5M
+	AniPtrLst_AAZ5D:	WORD	AnimArtPtr_AAZ56MN-AniPtrLst_AAZ5D
+	AniPtrLst_AAZ5S:	WORD	AnimArtPtr_AAZ56MN-AniPtrLst_AAZ5S
+	AniPtrLst_AAZ5N:	WORD	AnimArtPtr_AAZ56MN-AniPtrLst_AAZ5N
+	AniPtrLst_AAZ6M:	WORD	AnimArtPtr_AAZ56MN-AniPtrLst_AAZ6M
+	AniPtrLst_AAZ6D:	WORD	AnimArtPtr_AAZ56MN-AniPtrLst_AAZ6D
+	AniPtrLst_AAZ6S:	WORD	AnimArtPtr_AAZ56MN-AniPtrLst_AAZ6S
+	AniPtrLst_AAZ6N:	WORD	AnimArtPtr_AAZ56MN-AniPtrLst_AAZ6N
+		
+	AniPtrLst_TTZ0M:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ0M
+	AniPtrLst_TTZ0D:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ0D
+	AniPtrLst_TTZ0S:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ0S
+	AniPtrLst_TTZ0N:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ0N
+	AniPtrLst_TTZ1M:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ1M
+	AniPtrLst_TTZ1D:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ1D
+	AniPtrLst_TTZ1S:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ1S
+	AniPtrLst_TTZ1N:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ1N
+	AniPtrLst_TTZ2M:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ2M
+	AniPtrLst_TTZ2D:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ2D
+	AniPtrLst_TTZ2S:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ2S
+	AniPtrLst_TTZ2N:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ2N
+	AniPtrLst_TTZ3M:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ3M
+	AniPtrLst_TTZ3D:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ3D
+	AniPtrLst_TTZ3S:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ3S
+	AniPtrLst_TTZ3N:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ3N
+	AniPtrLst_TTZ4M:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ4M
+	AniPtrLst_TTZ4D:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ4D
+	AniPtrLst_TTZ4S:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ4S
+	AniPtrLst_TTZ4N:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ4N
+	AniPtrLst_TTZ5M:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ5M
+	AniPtrLst_TTZ5D:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ5D
+	AniPtrLst_TTZ5S:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ5S
+	AniPtrLst_TTZ5N:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ5N
+	AniPtrLst_TTZ6M:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ6M
+	AniPtrLst_TTZ6D:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ6D
+	AniPtrLst_TTZ6S:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ6S
+	AniPtrLst_TTZ6N:	WORD	AnimArtPtr_TTZ06MN-AniPtrLst_TTZ6N
+	
+	AniPtrLst_MMZ0M:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ0M
+	AniPtrLst_MMZ0D:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ0D
+	AniPtrLst_MMZ0S:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ0S
+	AniPtrLst_MMZ0N:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ0N
+	AniPtrLst_MMZ1M:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ1M
+	AniPtrLst_MMZ1D:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ1D
+	AniPtrLst_MMZ1S:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ1S
+	AniPtrLst_MMZ1N:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ1N
+	AniPtrLst_MMZ2M:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ2M
+	AniPtrLst_MMZ2D:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ2D
+	AniPtrLst_MMZ2S:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ2S
+	AniPtrLst_MMZ2N:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ2N
+	AniPtrLst_MMZ3M:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ3M
+	AniPtrLst_MMZ3D:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ3D
+	AniPtrLst_MMZ3S:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ3S
+	AniPtrLst_MMZ3N:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ3N
+	AniPtrLst_MMZ4M:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ4M
+	AniPtrLst_MMZ4D:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ4D
+	AniPtrLst_MMZ4S:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ4S
+	AniPtrLst_MMZ4N:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ4N
+	AniPtrLst_MMZ5M:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ5M
+	AniPtrLst_MMZ5D:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ5D
+	AniPtrLst_MMZ5S:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ5S
+	AniPtrLst_MMZ5N:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ5N
+	AniPtrLst_MMZ6M:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ6M
+	AniPtrLst_MMZ6D:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ6D
+	AniPtrLst_MMZ6S:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ6S
+	AniPtrLst_MMZ6N:	WORD	AnimArtPtr_MMZ06MN-AniPtrLst_MMZ6N
+	
+	;Training (unused)	
+	AniPtrLst_Train0M:	WORD	AnimArtPtr_NULL-AniPtrLst_Train0M
+	AniPtrLst_Train0D:	WORD	AnimArtPtr_NULL-AniPtrLst_Train0D
+	AniPtrLst_Train0S:	WORD	AnimArtPtr_NULL-AniPtrLst_Train0S
+	AniPtrLst_Train0N:	WORD	AnimArtPtr_NULL-AniPtrLst_Train0N
+	AniPtrLst_Train1M:	WORD	AnimArtPtr_NULL-AniPtrLst_Train1M
+	AniPtrLst_Train1D:	WORD	AnimArtPtr_NULL-AniPtrLst_Train1D
+	AniPtrLst_Train1S:	WORD	AnimArtPtr_NULL-AniPtrLst_Train1S
+	AniPtrLst_Train1N:	WORD	AnimArtPtr_NULL-AniPtrLst_Train1N
+	AniPtrLst_Train2M:	WORD	AnimArtPtr_NULL-AniPtrLst_Train2M
+	AniPtrLst_Train2D:	WORD	AnimArtPtr_NULL-AniPtrLst_Train2D
+	AniPtrLst_Train2S:	WORD	AnimArtPtr_NULL-AniPtrLst_Train2S
+	AniPtrLst_Train2N:	WORD	AnimArtPtr_NULL-AniPtrLst_Train2N
+	AniPtrLst_Train3M:	WORD	AnimArtPtr_NULL-AniPtrLst_Train3M
+	AniPtrLst_Train3D:	WORD	AnimArtPtr_NULL-AniPtrLst_Train3D
+	AniPtrLst_Train3S:	WORD	AnimArtPtr_NULL-AniPtrLst_Train3S
+	AniPtrLst_Train3N:	WORD	AnimArtPtr_NULL-AniPtrLst_Train3N
+	AniPtrLst_Train4M:	WORD	AnimArtPtr_NULL-AniPtrLst_Train4M
+	AniPtrLst_Train4D:	WORD	AnimArtPtr_NULL-AniPtrLst_Train4D
+	AniPtrLst_Train4S:	WORD	AnimArtPtr_NULL-AniPtrLst_Train4S
+	AniPtrLst_Train4N:	WORD	AnimArtPtr_NULL-AniPtrLst_Train4N
+	AniPtrLst_Train5M:	WORD	AnimArtPtr_NULL-AniPtrLst_Train5M
+	AniPtrLst_Train5D:	WORD	AnimArtPtr_NULL-AniPtrLst_Train5D
+	AniPtrLst_Train5S:	WORD	AnimArtPtr_NULL-AniPtrLst_Train5S
+	AniPtrLst_Train5N:	WORD	AnimArtPtr_NULL-AniPtrLst_Train5N
+	AniPtrLst_Train6M:	WORD	AnimArtPtr_NULL-AniPtrLst_Train6M
+	AniPtrLst_Train6D:	WORD	AnimArtPtr_NULL-AniPtrLst_Train6D
+	AniPtrLst_Train6S:	WORD	AnimArtPtr_NULL-AniPtrLst_Train6S
+	AniPtrLst_Train6N:	WORD	AnimArtPtr_NULL-AniPtrLst_Train6M
+	
+	;Intro (unused)	
+	AniPtrLst_Intro0M:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro0M
+	AniPtrLst_Intro0D:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro0D
+	AniPtrLst_Intro0S:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro0S
+	AniPtrLst_Intro0N:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro0N
+	AniPtrLst_Intro1M:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro1M
+	AniPtrLst_Intro1D:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro1D
+	AniPtrLst_Intro1S:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro1S
+	AniPtrLst_Intro1N:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro1N
+	AniPtrLst_Intro2M:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro2M
+	AniPtrLst_Intro2D:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro2D
+	AniPtrLst_Intro2S:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro2S
+	AniPtrLst_Intro2N:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro2N
+	AniPtrLst_Intro3M:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro3M
+	AniPtrLst_Intro3D:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro3D
+	AniPtrLst_Intro3S:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro3S
+	AniPtrLst_Intro3N:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro3N
+	AniPtrLst_Intro4M:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro4M
+	AniPtrLst_Intro4D:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro4D
+	AniPtrLst_Intro4S:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro4S
+	AniPtrLst_Intro4N:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro4N
+	AniPtrLst_Intro5M:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro5M
+	AniPtrLst_Intro5D:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro5D
+	AniPtrLst_Intro5S:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro5S
+	AniPtrLst_Intro5N:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro5N
+	AniPtrLst_Intro6M:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro6M
+	AniPtrLst_Intro6D:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro6D
+	AniPtrLst_Intro6S:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro6S
+	AniPtrLst_Intro6N:	WORD	AnimArtPtr_NULL-AniPtrLst_Intro6N
+		
+	;World (unused)
+	AniPtrLst_World0M:	WORD	AnimArtPtr_NULL-AniPtrLst_World0M
+	AniPtrLst_World0D:	WORD	AnimArtPtr_NULL-AniPtrLst_World0D
+	AniPtrLst_World0S:	WORD	AnimArtPtr_NULL-AniPtrLst_World0S
+	AniPtrLst_World0N:	WORD	AnimArtPtr_NULL-AniPtrLst_World0N
+	AniPtrLst_World1M:	WORD	AnimArtPtr_NULL-AniPtrLst_World1M
+	AniPtrLst_World1D:	WORD	AnimArtPtr_NULL-AniPtrLst_World1D
+	AniPtrLst_World1S:	WORD	AnimArtPtr_NULL-AniPtrLst_World1S
+	AniPtrLst_World1N:	WORD	AnimArtPtr_NULL-AniPtrLst_World1N
+	AniPtrLst_World2M:	WORD	AnimArtPtr_NULL-AniPtrLst_World2M
+	AniPtrLst_World2D:	WORD	AnimArtPtr_NULL-AniPtrLst_World2D
+	AniPtrLst_World2S:	WORD	AnimArtPtr_NULL-AniPtrLst_World2S
+	AniPtrLst_World2N:	WORD	AnimArtPtr_NULL-AniPtrLst_World2N
+	AniPtrLst_World3M:	WORD	AnimArtPtr_NULL-AniPtrLst_World3M
+	AniPtrLst_World3D:	WORD	AnimArtPtr_NULL-AniPtrLst_World3D
+	AniPtrLst_World3S:	WORD	AnimArtPtr_NULL-AniPtrLst_World3S
+	AniPtrLst_World3N:	WORD	AnimArtPtr_NULL-AniPtrLst_World3N
+	AniPtrLst_World4M:	WORD	AnimArtPtr_NULL-AniPtrLst_World4M
+	AniPtrLst_World4D:	WORD	AnimArtPtr_NULL-AniPtrLst_World4D
+	AniPtrLst_World4S:	WORD	AnimArtPtr_NULL-AniPtrLst_World4S
+	AniPtrLst_World4N:	WORD	AnimArtPtr_NULL-AniPtrLst_World4N
+	AniPtrLst_World5M:	WORD	AnimArtPtr_NULL-AniPtrLst_World5M
+	AniPtrLst_World5D:	WORD	AnimArtPtr_NULL-AniPtrLst_World5D
+	AniPtrLst_World5S:	WORD	AnimArtPtr_NULL-AniPtrLst_World5S
+	AniPtrLst_World5N:	WORD	AnimArtPtr_NULL-AniPtrLst_World5N
+	AniPtrLst_World6M:	WORD	AnimArtPtr_NULL-AniPtrLst_World6M
+	AniPtrLst_World6D:	WORD	AnimArtPtr_NULL-AniPtrLst_World6D
+	AniPtrLst_World6S:	WORD	AnimArtPtr_NULL-AniPtrLst_World6S
+	AniPtrLst_World6N:	WORD	AnimArtPtr_NULL-AniPtrLst_World6N
+
+
+	;Level Data
+	AnimArtPtr_BBZ06MN:
+				DWORD AniArt_BBZ_1
+				DWORD $FFFFFFFF
+
+	AnimArtPtr_SSZ06MN:
+				DWORD AnimArt_SSZ_1
+				DWORD $FFFFFFFF
+
+	AnimArtPtr_AAZ02MN:
+				DWORD AnimArt_AAZ_1
+				DWORD AnimArt_AAZ_2
+				DWORD AnimArt_AAZ_3
+				DWORD $FFFFFFFF
+	AnimArtPtr_AAZ3MN:
+				DWORD AnimArt_AAZ_2
+				DWORD AnimArt_AAZ_4
+				DWORD AnimArt_AAZ_5
+				DWORD $FFFFFFFF
+	AnimArtPtr_AAZ4MN:
+				DWORD AnimArt_AAZ_2
+				DWORD AnimArt_AAZ_6
+				DWORD AnimArt_AAZ_5
+				DWORD $FFFFFFFF
+	AnimArtPtr_AAZ56MN:
+				DWORD AnimArt_AAZ_2
+				DWORD AnimArt_AAZ_7
+				DWORD AnimArt_AAZ_8
+				DWORD $FFFFFFFF
+
+	AnimArtPtr_TTZ06MN:
+				DWORD AnimArt_TTZ_1
+				DWORD $FFFFFFFF						
+	AnimArtPtr_MMZ06MN:
+				DWORD AnimArt_MMZ_1
+				DWORD $FFFFFFFF
+	AnimArtPtr_NULL:
+				DWORD $FFFFFFFF
+
+			
+	AniArt_BBZ_1:	include	"Art/artnem/aniart/BBZ.bin"
+
+	AnimArt_SSZ_1:	include	"Art/artnem/aniart/SSZ.bin"
+		
+	AnimArt_AAZ_1:	include	"Art/artnem/aniart/AAZ1.bin"
+	AnimArt_AAZ_2:	include	"Art/artnem/aniart/AAZ2.bin"
+	AnimArt_AAZ_3:	include	"Art/artnem/aniart/AAZ3.bin"
+	AnimArt_AAZ_4:	include	"Art/artnem/aniart/AAZ4.bin"
+	AnimArt_AAZ_5:	include	"Art/artnem/aniart/AAZ5.bin"
+	AnimArt_AAZ_6:	include	"Art/artnem/aniart/AAZ6.bin"
+	AnimArt_AAZ_7:	include	"Art/artnem/aniart/AAZ7.bin"
+	AnimArt_AAZ_8:	include	"Art/artnem/aniart/AAZ8.bin"
+
+	AnimArt_TTZ_1:	include	"Art/artnem/aniart/TTZ_Fans.bin"
+
+	AnimArt_MMZ_1:	include	"Art/artnem/aniart/MMZ.bin"
 
 EndSeg
 

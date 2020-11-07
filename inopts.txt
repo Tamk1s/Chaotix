@@ -2,6 +2,7 @@
 ; Knuckles' Chaotix (JU / 5) Options Injector File for ROMulan
 ;
 ; 2011-02-24 - Stealth - First Release
+; 2020-04-14 - GenesisDoes - Second Release, with updates for handling Sound Test/Level Select test, etc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

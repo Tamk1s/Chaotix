@@ -78,9 +78,13 @@ Extern "ObjYAdj" "1024" "Levels/Intro/Sprites/1MN.bin" "Levels/Intro/Sprites/Con
 ; Injector prompt and call ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-WorkPath "#Batch/Sound/Music/ASM"
-Extern "build.bat" "0"
+;!@  Rebuild modified sound driver (vanilla bank-sequential mode)
+;WorkPath "#Batch/Sound/Music/ASM"
+;Extern "build.bat" "0"
 WorkPath "#Batch"
+
+;!@ Prepatch OG ROM for lazy editing!
+Extern "prepatch.bat" "0"
 
 ;GetFile "Please select the target Chaotix ROM file"
 ;LoadFile #Got
@@ -89,7 +93,7 @@ LoadFile "kc.bin"
 LoadInject "#Batch/inmain.txt"
 AddInject  "#Batch/inopts.txt"
 ;!@ New audio inection!
-AddInject  "#Batch/inaudio.txt"
+;AddInject  "#Batch/inaudio.txt"
 
 ;GetFile "Please name the output file"
 ;RunInject  #Got

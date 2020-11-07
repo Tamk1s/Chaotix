@@ -1,5 +1,3 @@
-;https://www.dostips.com/forum/viewtopic.php?t=6044
-
 @if (@X)==(@Y) @end /* Harmless hybrid line that begins a JScript comment
 @goto :Batch
 

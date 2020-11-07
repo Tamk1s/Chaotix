@@ -2,7 +2,7 @@
 ; Knuckles' Chaotix (JU / 5) Batch Extraction File for ROMulan
 ;
 ; 2011-02-24 - Stealth - First Release
-; 2019-04-14 - Genesis Does - Improvements, AAZ Lit palettes, Sound Driver support
+; 2020-04-14 - Genesis Does - Improvements, AAZ Lit palettes, Sound Driver support
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -30,6 +30,12 @@ MakePath "Art"
 MakePath "Art/palettes"
 MakePath "Art/palettes/MD"
 MakePath "Art/palettes/Mars"
+
+;!@
+MakePath "Art/artnem"
+MakePath "Art/artnem/aniart"
+MakePath "Art/artnem/aniart/Data"
+
 MakePath "Levels"
 MakePath "Levels/BBZ"
 MakePath "Levels/BBZ/8x8"
@@ -521,6 +527,97 @@ Extract $2B3276    40 "Levels/Entrance/FG/2M.bin"
 
 Extract $2B329E    18 "Levels/Entrance/BG/2M.bin"
 
+;!@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Level Graphic Data script extract (Aniart VRAM addrs)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;IIZ T/I, WE = NULL = $FFFF
+;Extract $2BFBBA $02 "Art/artnem/aniart/Data/NULL_Data.bin"
+
+;BBZ 
+
+Extract $2BFBBC $1E "Art/artnem/aniart/Data/BBZ1_Data.bin"
+Extract $2BFBDA $08 "Art/artnem/aniart/Data/BBZ2_Data.bin"
+Extract $2BFBE2 $1E "Art/artnem/aniart/Data/BBZ3_Data.bin"
+Extract $2BFC00 $08 "Art/artnem/aniart/Data/BBZ4_Data.bin"
+Extract $2BFC08 $1E "Art/artnem/aniart/Data/BBZ5_Data.bin"
+Extract $2BFC26 $0A "Art/artnem/aniart/Data/BBZ6_Data.bin"
+Extract $2BFC30 $1E "Art/artnem/aniart/Data/BBZ7_Data.bin"
+Extract $2BFC4E $0A "Art/artnem/aniart/Data/BBZ8_Data.bin"
+
+;SSZ
+Extract $2BFC58 $14 "Art/artnem/aniart/Data/SSZ1_Data.bin"
+Extract $2BFC6C $14 "Art/artnem/aniart/Data/SSZ3_Data.bin"
+Extract $2BFC80 $14 "Art/artnem/aniart/Data/SSZ4_Data.bin"
+Extract $2BFC94 $06 "Art/artnem/aniart/Data/SSZ2_Data.bin"
+
+;AAZ
+;!@ Something is wrong here with extraction/reinjection for AAZ; to fix!
+Extract $2BFC9A $28 "Art/artnem/aniart/Data/AAZ01_Data.bin"
+Extract $2BFCC2 $0A "Art/artnem/aniart/Data/AAZ02_Data.bin"
+Extract $2BFCCC $28 "Art/artnem/aniart/Data/AAZ03_Data.bin"
+Extract $2BFCF4 $28 "Art/artnem/aniart/Data/AAZ07_Data.bin"
+Extract $2BFD1C $28 "Art/artnem/aniart/Data/AAZ09_Data.bin"
+Extract $2BFD44 $28 "Art/artnem/aniart/Data/AAZ10_Data.bin"
+Extract $2BFD6C $0A "Art/artnem/aniart/Data/AAZ04_Data.bin"
+Extract $2BFD76 $3C "Art/artnem/aniart/Data/AAZ05_Data.bin"
+Extract $2BFDB2 $3C "Art/artnem/aniart/Data/AAZ08_Data.bin"
+Extract $2BFDEE $3C "Art/artnem/aniart/Data/AAZ11_Data.bin"
+Extract $2BFE2A $0E "Art/artnem/aniart/Data/AAZ06_Data.bin"
+
+;TTZ
+Extract $2BFE38 $28 "Art/artnem/aniart/Data/TTZ1_Data.bin"
+Extract $2BFE60 $0A "Art/artnem/aniart/Data/TTZ2_Data.bin"
+
+;MMZ
+Extract $2BFE6A $3C "Art/artnem/aniart/Data/MMZ01_Data.bin"
+Extract $2BFEA6 $0E "Art/artnem/aniart/Data/MMZ02_Data.bin"
+Extract $2BFEB4 $1E "Art/artnem/aniart/Data/MMZ03_Data.bin"
+Extract $2BFED2 $08 "Art/artnem/aniart/Data/MMZ04_Data.bin"
+Extract $2BFEDA $1E "Art/artnem/aniart/Data/MMZ05_Data.bin"
+Extract $2BFEF8 $08 "Art/artnem/aniart/Data/MMZ06_Data.bin"
+Extract $2BFF00 $1E "Art/artnem/aniart/Data/MMZ07_Data.bin"
+Extract $2BFF1E $08 "Art/artnem/aniart/Data/MMZ08_Data.bin"
+Extract $2BFF26 $46 "Art/artnem/aniart/Data/MMZ10_Data.bin"
+Extract $2BFF6C $10 "Art/artnem/aniart/Data/MMZ11_Data.bin"
+Extract $2BFF7C $1E "Art/artnem/aniart/Data/MMZ09_Data.bin"
+
+;!@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Level Graphic Data Extract (Artnem aniart)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;BBZ
+Extract $2BFF9A $0778 "Art/artnem/aniart/BBZ.bin"
+;SSZ
+Extract $2C0712 $02E2 "Art/artnem/aniart/SSZ.bin"
+
+;AAZ Unique
+Extract $2C09F4 $00E6 "Art/artnem/aniart/AAZ1.bin"
+Extract $2C0ADA $025C "Art/artnem/aniart/AAZ2.bin"
+Extract $2C0D36 $0500 "Art/artnem/aniart/AAZ3.bin"
+Extract $2C0F60 $02D6 "Art/artnem/aniart/AAZ4.bin"
+Extract $2C1236 $02BA "Art/artnem/aniart/AAZ5.bin"
+Extract $2C14F0 $0314 "Art/artnem/aniart/AAZ6.bin"
+Extract $2C1804 $03C2 "Art/artnem/aniart/AAZ7.bin"
+Extract $2C1BC6 $03B2 "Art/artnem/aniart/AAZ8.bin"
+
+;TTZ
+; Fan animation = 4 sprite frames, each as a 4x4 tile sprite
+; For a single frame, sprite tile order is as such:
+;
+; AB EF
+; CD GH
+;
+; HI LM
+; JK NO
+Extract $2C1F78 $0468 "Art/artnem/aniart/TTZ_Fans.bin"		
+
+;MMZ
+Extract $2C23E0 $1064 "Art/artnem/aniart/MMZ.bin"
+
+;NULL = $FFFFFFFF
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Level Size Data Extract
@@ -997,6 +1094,7 @@ Extract $073F86    64 "Sound/PWM/96.bin"		;Silence
 Extract $073FC6    58 "Sound/PWM/Silence.bin"	;Silence
 
 ;-------------------
+;!@ 
 ;Convert all SMPS files to ASM
 ;HUGE thanks to Natsumi for creating MDMusicPlayer!
 ;-------------------
@@ -1113,6 +1211,7 @@ Copy	"Sound/Music/BIN/6C.bin"							"MDMusicPlayer.1.1/music/6C.bin"
 Copy	"Sound/Music/BIN/6D.bin"							"MDMusicPlayer.1.1/music/6D.bin"
 Copy	"Sound/Music/BIN/6E.bin"							"MDMusicPlayer.1.1/music/6E.bin"
 
+;!@
 ;Do the conversions!
 WorkPath "MDMusicPlayer.1.1/bin/"
 Extern "SMPS2ASM.exe"	"01_Door_Into_Summer.bin"		"Chaotix"	"DoorIntoSummer"	"0x8000"
