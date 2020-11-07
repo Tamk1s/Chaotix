@@ -34,8 +34,10 @@ REM bclr	#2, d0				;Clear bits for $05 (2nd bit)
 REM move.b	d0,($FFFFFCEA).w	;Restore d0 back into combi ring state
 REM rts
 
-bytepatch.exe -a 0x14B60 kc.bin 6000 00E8														REM Patch Large Hourglass monitor to goto new 0x14C48 code (its code got overwritten)
-bytepatch.exe -a 0x14C48 kc.bin 1D7C 0000 0028 1038 FCEA 0880 0000 0880 0002 11C0 FCEA 4E75		REM New Code bytepatch
+REM Patch Large Hourglass monitor to goto new 0x14C48 code (its code got overwritten)
+bytepatch.exe -a 0x14B60 kc.bin 6000 00E8
+REM New Code bytepatch
+bytepatch.exe -a 0x14C48 kc.bin 1D7C 0000 0028 1038 FCEA 0880 0000 0880 0002 11C0 FCEA 4E75
 
 
 REM Code Patch to change large hourglass monitor to attach combi ring
