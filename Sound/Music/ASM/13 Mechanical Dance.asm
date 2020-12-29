@@ -1,464 +1,151 @@
+Target	EQU	$49BCE
 
-Target	EQU	$4915D
-	smpsHeaderVoice	MechDance_Patches, Target
-	smpsHeaderChan	$06, $03
-	smpsHeaderTempo	$01, $3A
-	smpsHeaderFM	MechDance_FM1, Target, $00, $0D
-	smpsHeaderFM	MechDance_FM2, Target, $00, $0D
-	smpsHeaderFM	MechDance_FM3, Target, $00, $0D
-	smpsHeaderFM	MechDance_FM4, Target, $00, $0E
-	smpsHeaderFM	MechDance_FM5, Target, $00, $0E
-	smpsHeaderFM	MechDance_FM6, Target, $0C, $16
-	smpsHeaderPSG	MechDance_PSG1, Target, $E8, $02, $00, $0C
-	smpsHeaderPSG	MechDance_PSG2, Target, $E8, $02, $00, $0C
-	smpsHeaderPSG	MechDance_PSG3, Target, $23, $01, $00, $02
-	smpsHeaderPWM	MechDance_PWM1, Target, $00, $BB
-	smpsHeaderPWM	MechDance_PWM2, Target, $00, $CC
-	smpsHeaderPWM	MechDance_PWM3, Target, $00, $BB
-	smpsHeaderPWM	MechDance_PWM4, Target, $00, $A6
+Maniax_Header:
+	smpsHeaderVoice	Maniax_Patches,Target
+	smpsHeaderChan	6,3
+	smpsHeaderTempo	$02, $13	
+	smpsHeaderFM	Maniax_FM1, Target, $E8, $0A
+	smpsHeaderFM	Maniax_FM2, Target, $F4, $0F
+	smpsHeaderFM	Maniax_FM3, Target, $F4, $0F
+	smpsHeaderFM	Maniax_FM4, Target, $F4, $0D
+	smpsHeaderFM	Maniax_FM5, Target, $DC, $16
+	smpsHeaderFM	Maniax_PSG1, Target, $DC, $16
+	smpsHeaderPSG	Maniax_PSG1, Target, $D0, $03, $00, $05
+	smpsHeaderPSG	Maniax_PSG1, Target, $DC, $06, $00, $05
+	smpsHeaderPSG	Maniax_PSG1, Target, $DC, $00, $00, $04
+	smpsHeaderPWM	Maniax_PWM1, Target, $00,$AA
+	smpsHeaderPWM	Maniax_PSG1, Target, $00,$AA
+	smpsHeaderPWM	Maniax_PSG1, Target, $00,$AA
+	smpsHeaderPWM	Maniax_PSG1, Target, $00,$AA
 
-MechDance_FM1:
+Maniax_FM1:
 	smpsFMvoice		$00
-	dc.b	nRst, $60, nRst, $54, nCs1, $0C
+	smpsModSet	$20, $01, $04, $05
+	dc.b nRst, $0C, nCs6, $12, nRst, $06, nCs6, nRst
+	dc.b nD6, $12, nB5, $1E, nCs6, $06, nRst, nCs6
+	dc.b nRst, nCs6, nRst, nA5, nRst, nG5, $12, nB5
+	dc.b $0C, nRst, $12, nC6, $04, nRst, nC6, nB5
+	dc.b $06, nRst, nBb5, nRst, nA5, nRst
+	smpsModSet	$28, $01, $18, $05
+	dc.b nAb5, $60
+	smpsStop
 
-MechDance_Loop1:
-	dc.b	nEb1, $0C, nCs1, nEb1, nRst, $06, nEb1, nRst
-	dc.b	nEb1, $06, $0C, nFs1, nCs1
-	smpsLoop		$00, $04, MechDance_Loop1, Target
-	smpsJump		MechDance_Loop1, Target
-
-MechDance_FM2:
+Maniax_FM2:
 	smpsFMvoice		$01
-	smpsPan		panRight
-	smpsAlterNote	$03
-	smpsModSet	$01, $01, $02, $03
-	smpsAlterVol		$0F
-	smpsCall		MechDance_Call1, Target
-	smpsFMvoice		$03
-	smpsPan		panCenter
-	smpsAlterNote	$FD
-	smpsModSet	$00, $00, $00, $00
-	smpsAlterVol		$F1
-	smpsAlterPitch	$0C
+	dc.b nRst, $01, nE7, $06, nRst, nE7, nRst, nCs7
+	dc.b nRst, nCs7, nRst, nD7, $15, nD7, $1B, nE7
+	dc.b $06, nRst, nE7, nRst, nCs7, nRst, nCs7, nRst
+	dc.b nG7, $15, nG7, $1B
+	smpsStop
 
-MechDance_Jump1:
-	dc.b	nCs3, $0C, nEb3
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsFMvoice		$02
-	smpsPan		panRight
-	dc.b	nEb4, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst
-	smpsFMvoice		$03
-	smpsPan		panCenter
-	dc.b	nFs3, $0C, nEb3
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsFMvoice		$02
-	smpsPan		panRight
-	dc.b	nEb4, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst
-	smpsFMvoice		$03
-	smpsPan		panCenter
-	dc.b	nCs3, $0C, nEb3
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, nFs3, $0C
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, nAb3, $0C
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, nBb3, $0C, nCs3, $0C, nEb3
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsFMvoice		$02
-	smpsPan		panRight
-	dc.b	nEb4, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst
-	smpsFMvoice		$03
-	smpsPan		panCenter
-	dc.b	nFs3, $0C, nEb3
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsFMvoice		$02
-	smpsPan		panRight
-	dc.b	nEb4, $06
-	smpsFMvoice		$03
-	smpsPan		panCenter
-	dc.b	nA3, $0C, smpsNoAttack, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	$0C, nAb3, nFs3, $0C, smpsNoAttack, $0C, nBb2, nA2
-	dc.b	nAb2
-	smpsJump		MechDance_Jump1, Target
-
-MechDance_FM3:
+Maniax_FM3:
 	smpsFMvoice		$01
-	smpsPan		panLeft
-	smpsAlterNote	$03
-	smpsModSet	$01, $01, $02, $03
-	smpsAlterVol		$0F
-	smpsCall		MechDance_Call2, Target
-	smpsCall		MechDance_Call2, Target
-	smpsFMvoice		$03
-	smpsPan		panCenter
-	smpsAlterNote	$FD
-	smpsModSet	$00, $00, $00, $00
-	smpsAlterVol		$F1
-	smpsAlterPitch	$0C
+	dc.b nCs7, $0C, nCs7, nA6, nA6, nB6, $15, nB6
+	dc.b $1B, nCs7, $0C, nCs7, nA6, nA6, nD7, $15
+	dc.b nD7, $1B
+	smpsStop
 
-MechDance_Jump2:
-	dc.b	nCs2, $0C, nEb2
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
+Maniax_FM4:
 	smpsFMvoice		$02
-	smpsPan		panLeft
-	dc.b	nFs3, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst
+	smpsE2		$01
+	dc.b nA3, $06, nRst, nA3, nRst, nE3, nRst, nE3
+	dc.b nRst, nG3, $15, nFs3, $0C, nG3, $03, nFs3
+	dc.b $0C, nA3, $06, nRst, nA3, nRst, nE3, nRst
+	dc.b nE3, nRst, nD4, $15, nCs4, $0C, nD4, $03
+	dc.b nCs4, $0C, nA3, $04, nRst, nA3, nAb3, $06
+	dc.b nRst, nG3, nRst, nFs3, nRst, nFs3, $60
+	smpsE2		$01
+	smpsStop
+
+Maniax_FM5:
 	smpsFMvoice		$03
-	smpsPan		panCenter
-	dc.b	nFs2, $0C, nEb2
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsFMvoice		$02
-	smpsPan		panLeft
-	dc.b	nFs3, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst
-	smpsFMvoice		$03
-	smpsPan		panCenter
-	dc.b	nCs2, $0C, nEb2
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, nFs2, $0C
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, nAb2, $0C
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, nBb2, $0C, nCs2, $0C, nEb2
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsFMvoice		$02
-	smpsPan		panLeft
-	dc.b	nFs3, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst
-	smpsFMvoice		$03
-	smpsPan		panCenter
-	dc.b	nFs2, $0C, nEb2
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsFMvoice		$02
-	smpsPan		panLeft
-	dc.b	nFs3, $06
-	smpsFMvoice		$03
-	smpsPan		panCenter
-	dc.b	nA2, $0C, smpsNoAttack, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	$0C, nAb2, nFs2, $0C, smpsNoAttack, $0C, nBb1, nA1
-	dc.b	nAb1
-	smpsJump		MechDance_Jump2, Target
+	dc.b nRst, $30, nD7, $12, nRst, $03, nD7, $1B
+	dc.b nRst, $30, nG7, $12, nRst, $03, nG7, $1B
 
-MechDance_FM4:
-	smpsFMvoice		$01
-	smpsPan		panRight
-	smpsCall		MechDance_Call1, Target
+Maniax_PSG1:
+	smpsStop
 
-MechDance_Jump3:
-	smpsCall		MechDance_Call1, Target
-	smpsCall		MechDance_Call1, Target
-	smpsJump		MechDance_Jump3, Target
+Maniax_PWM1:
+	dc.b 		nRst, $18, dKick
+	smpsLoop		$00, $04, Maniax_PWM1,Target
+	smpsStop
 
-MechDance_Call1:
-	dc.b	nBb4, $06, nEb4, nFs4, nBb4
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, nRst, nCs5
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nCs5, nCs5
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, $18, nBb4, $06, nEb4, nFs4, nBb4
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, nRst, nCs5
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nBb4, nFs4, nEb4
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, $12
-	smpsReturn
+Maniax_Patches:
+	dc.b	$3A, $51, $08, $51, $02, $1E, $1E, $1E, $10, $1F, $1F, $1F, $0F, $00, $00, $00, $02, $0F, $0F, $0F, $1F, $18, $24, $22, $81
+	dc.b	$3C, $33, $30, $73, $70, $94, $9F, $96, $9F, $12, $00, $14, $0F, $04, $0A, $04, $0D, $2F, $0F, $4F, $2F, $33, $80, $1A, $80
+	dc.b	$3A, $01, $07, $01, $01, $8E, $8E, $8D, $53, $0E, $0E, $0E, $03, $00, $00, $00, $07, $1F, $FF, $1F, $0F, $1C, $28, $27, $80
+	dc.b	$1F, $66, $31, $53, $22, $1C, $98, $1F, $1F, $12, $0F, $0F, $0F, $00, $00, $00, $00, $FF, $0F, $0F, $0F, $8C, $8D, $8A, $8B
+	even
 
-MechDance_FM5:
-	smpsFMvoice		$01
-	smpsPan		panLeft
-	dc.b	nRst, $1E, nCs4, $06, nD4, nEb4
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nFs4, nEb4
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nCs4, nD4
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nEb4
-	smpsCall		MechDance_Call2, Target
+	; Patch $00
+	; $3A
+	; $51, $08, $51, $02,	$1E, $1E, $1E, $10
+	; $1F, $1F, $1F, $0F,	$00, $00, $00, $02
+	; $0F, $0F, $0F, $1F,	$18, $24, $22, $81
+	;spAlgorithm	$02
+	;spFeedback	$07
+	;spDetune	$05, $05, $00, $00
+	;spMultiple	$01, $01, $08, $02
+	;spRateScale	$00, $00, $00, $00
+	;spAttackRt	$1E, $1E, $1E, $10
+	;spAmpMod	$00, $00, $00, $00
+	;spSustainRt	$1F, $1F, $1F, $0F
+	;spSustainLv	$00, $00, $00, $01
+	;spDecayRt	$00, $00, $00, $02
+	;spReleaseRt	$0F, $0F, $0F, $0F
+	;spTotalLv	$18, $22, $24, $01
 
-MechDance_Loop2:
-	smpsCall		MechDance_Call2, Target
-	smpsLoop		$00, $04, MechDance_Loop2, Target
-	smpsJump		MechDance_Loop2, Target
+	; Patch $01
+	; $3C
+	; $33, $30, $73, $70,	$94, $9F, $96, $9F
+	; $12, $00, $14, $0F,	$04, $0A, $04, $0D
+	; $2F, $0F, $4F, $2F,	$33, $80, $1A, $80
+	;spAlgorithm	$04
+	;spFeedback	$07
+	;spDetune	$03, $07, $03, $07
+	;spMultiple	$03, $03, $00, $00
+	;spRateScale	$02, $02, $02, $02
+	;spAttackRt	$14, $16, $1F, $1F
+	;spAmpMod	$00, $00, $00, $00
+	;spSustainRt	$12, $14, $00, $0F
+	;spSustainLv	$02, $04, $00, $02
+	;spDecayRt	$04, $04, $0A, $0D
+	;spReleaseRt	$0F, $0F, $0F, $0F
+	;spTotalLv	$33, $1A, $00, $00
 
-MechDance_Call2:
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nRst, $18, nCs4, $06, nD4, nEb4
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nFs4, nEb4
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nCs4, nD4
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nEb4
-	smpsReturn
+	; Patch $02
+	; $3A
+	; $01, $07, $01, $01,	$8E, $8E, $8D, $53
+	; $0E, $0E, $0E, $03,	$00, $00, $00, $07
+	; $1F, $FF, $1F, $0F,	$1C, $28, $27, $80
+	;spAlgorithm	$02
+	;spFeedback	$07
+	;spDetune	$00, $00, $00, $00
+	;spMultiple	$01, $01, $07, $01
+	;spRateScale	$02, $02, $02, $01
+	;spAttackRt	$0E, $0D, $0E, $13
+	;spAmpMod	$00, $00, $00, $00
+	;spSustainRt	$0E, $0E, $0E, $03
+	;spSustainLv	$01, $01, $0F, $00
+	;spDecayRt	$00, $00, $00, $07
+	;spReleaseRt	$0F, $0F, $0F, $0F
+	;spTotalLv	$1C, $27, $28, $00
 
-MechDance_FM6:
-	smpsFMvoice		$03
-	dc.b	nRst, $60, nRst, nRst, $04
-	smpsAlterNote	$FE
-	smpsModSet	$01, $01, $02, $04
-	smpsPan		panLeft
-
-MechDance_Jump4:
-	dc.b	nCs3, $0C, nEb3, nRst, $18, nFs3, $0C, nEb3
-	dc.b	nRst, $18, nCs3, $0C, nEb3, nRst, nFs3, nRst
-	dc.b	nAb3, nRst, nBb3, nCs3, $0C, nEb3, nRst, $18
-	dc.b	nFs3, $0C, nEb3, nRst, nA3, smpsNoAttack, $06, nRst
-	dc.b	nA3, $0C, nAb3, nFs3, $18, nBb2, $0C, nA2
-	dc.b	nAb2
-	smpsJump		MechDance_Jump4, Target
-
-MechDance_PSG1:
-	smpsPSGvoice	$09
-	dc.b	nRst, $60, nRst
-	smpsModSet	$05, $01, $02, $05
-
-MechDance_Loop3:
-	dc.b	nBb3, $60, nCs4
-	smpsLoop		$00, $02, MechDance_Loop3, Target
-	smpsJump		MechDance_Loop3, Target
-
-MechDance_PSG2:
-	smpsPSGvoice	$09
-	dc.b	nRst, $60, nRst
-	smpsModSet	$05, $01, $02, $05
-
-MechDance_Loop4:
-	dc.b	nCs3, $60, nFs3
-	smpsLoop		$00, $02, MechDance_Loop4, Target
-	smpsJump		MechDance_Loop4, Target
-
-MechDance_PSG3:
-	smpsPSGform	$E7
-	smpsCall		MechDance_Call3, Target
-
-MechDance_Jump5:
-	smpsCall		MechDance_Call3, Target
-	smpsCall		MechDance_Call3, Target
-	smpsJump		MechDance_Jump5, Target
-
-MechDance_Call3:
-	smpsPSGvoice	$02
-	dc.b	nC4, $0C
-	smpsPSGvoice	$05
-	dc.b	$0C
-	smpsPSGvoice	$02
-	dc.b	$0C, $0C
-	smpsLoop		$00, $04, MechDance_Call3, Target
-	smpsReturn
-
-MechDance_PWM1:
-	dc.b	$81, $18, nRst, $12, $81, $06, nRst, $81
-	dc.b	$81, $0C, nRst, $18, $81, $18, nRst, $12
-	dc.b	$81, $06, nRst, $81, $81, $0C, nRst, $18
-
-MechDance_Loop5:
-	dc.b	$81, $18, nRst, $12, $81, $06, nRst, $81
-	dc.b	$81, $0C, nRst, $18
-	smpsLoop		$00, $08, MechDance_Loop5, Target
-	smpsJump		MechDance_Loop5, Target
-
-MechDance_PWM2:
-	dc.b	$96, $18, $82, nRst, $82, $12
-	smpsAlterVol		$BC
-	dc.b	$03
-	smpsAlterVol		$22
-	dc.b	$03
-	smpsAlterVol		$22
-	dc.b	nRst, $18, $82, nRst, $82
-
-MechDance_Loop6:
-	dc.b	nRst, $18, $82, nRst, $82, $12
-	smpsAlterVol		$BC
-	dc.b	$03
-	smpsAlterVol		$22
-	dc.b	$03
-	smpsAlterVol		$22
-	dc.b	nRst, $18, $82, nRst, $82
-	smpsLoop		$00, $04, MechDance_Loop6, Target
-	smpsJump		MechDance_Loop6, Target
-
-MechDance_PWM3:
-	smpsAlterVol		$FC
-	dc.b	$83, $60
-	smpsAlterVol		$04
-	dc.b	nRst
-
-MechDance_Loop7:
-	smpsAlterVol		$C0
-	dc.b	$89, $60
-	smpsAlterVol		$40
-	dc.b	nRst, nRst, nRst
-	smpsLoop		$00, $02, MechDance_Loop7, Target
-	smpsJump		MechDance_Loop7, Target
-
-MechDance_PWM4:
-	dc.b	$88, $06
-	smpsAlterVol		$CD
-	dc.b	$06, $06, $06
-	smpsAlterVol		$33
-	smpsLoop		$00, $08, MechDance_PWM4, Target
-
-MechDance_Loo$8:
-	dc.b	$88, $06
-	smpsAlterVol		$CD
-	dc.b	$06, $06, $06
-	smpsAlterVol		$33
-	smpsLoop		$00, $20, MechDance_Loo$8, Target
-	smpsJump		MechDance_Loo$8, Target
-
-MechDance_Patches:
-
-	
-	dc.b	$3B
-	dc.b	$53, $32, $03, $04,	$5F, $9F, $5F, $FF
-	dc.b	$14, $08, $0E, $07,	$1D, $1E, $1F, $0D
-	dc.b	$8F, $7F, $3F, $8F,	$08, $13, $18, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-	
-	dc.b	$3E
-	dc.b	$2F, $75, $50, $32,	$FF, $1F, $1F, $1F
-	dc.b	$12, $04, $5F, $0F,	$19, $00, $00, $00
-	dc.b	$4F, $0F, $0F, $0F,	$13, $80, $80, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-	
-	dc.b	$3D
-	dc.b	$02, $02, $01, $02,	$94, $19, $19, $19
-	dc.b	$0F, $0D, $0D, $0D,	$07, $04, $04, $04
-	dc.b	$25, $1A, $1A, $1A,	$14, $83, $83, $83
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-	
-	dc.b	$58
-	dc.b	$53, $10, $11, $00,	$1F, $12, $1F, $1F
-	dc.b	$06, $05, $06, $0C,	$02, $02, $02, $02
-	dc.b	$2F, $2F, $2F, $1F,	$22, $0F, $1A, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	; Patch $03
+	; $1F
+	; $66, $31, $53, $22,	$1C, $98, $1F, $1F
+	; $12, $0F, $0F, $0F,	$00, $00, $00, $00
+	; $FF, $0F, $0F, $0F,	$8C, $8D, $8A, $8B
+	;spAlgorithm	$07
+	;spFeedback	$03
+	;spDetune	$06, $05, $03, $02
+	;spMultiple	$06, $03, $01, $02
+	;spRateScale	$00, $00, $02, $00
+	;spAttackRt	$1C, $1F, $18, $1F
+	;spAmpMod	$00, $00, $00, $00
+	;spSustainRt	$12, $0F, $0F, $0F
+	;spSustainLv	$0F, $00, $00, $00
+	;spDecayRt	$00, $00, $00, $00
+	;spReleaseRt	$0F, $0F, $0F, $0F
+	;spTotalLv	$0C, $0A, $0D, $0B
+	even

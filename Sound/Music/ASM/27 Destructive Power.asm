@@ -1,5 +1,5 @@
 
-Target	EQU	$509AC
+Target	EQU	$50127
 	smpsHeaderVoice	DPower_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$02, $00

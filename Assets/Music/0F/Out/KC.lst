@@ -1,0 +1,2806 @@
+                        	LIST MACRO
+                        	LIST EXPAND
+000000                  	include _s1smps2asm_S1KC.asm
+                        ; Standard Octave Pitch Equates
+       = 000088         smpsPitch10lo		EQU	$88
+       = 000094         smpsPitch09lo		EQU	$94
+       = 0000A0         smpsPitch08lo		EQU	$A0
+       = 0000AC         smpsPitch07lo		EQU	$AC
+       = 0000B8         smpsPitch06lo		EQU	$B8
+       = 0000C4         smpsPitch05lo		EQU	$C4
+       = 0000D0         smpsPitch04lo		EQU	$D0
+       = 0000DC         smpsPitch03lo		EQU	$DC
+       = 0000E8         smpsPitch02lo		EQU	$E8
+       = 0000F4         smpsPitch01lo		EQU	$F4
+       = 000000         smpsPitch00		EQU	$00
+       = 00000C         smpsPitch01hi		EQU	$0C
+       = 000018         smpsPitch02hi		EQU	$18
+       = 000024         smpsPitch03hi		EQU	$24
+       = 000030         smpsPitch04hi		EQU	$30
+       = 00003C         smpsPitch05hi		EQU	$3C
+       = 000048         smpsPitch06hi		EQU	$48
+       = 000054         smpsPitch07hi		EQU	$54
+       = 000060         smpsPitch08hi		EQU	$60
+       = 00006C         smpsPitch09hi		EQU	$6C
+       = 000078         smpsPitch10hi		EQU	$78
+
+                        ; Note Equates
+       = 000080         nRst			EQU	$80
+       = 000081         nC0			EQU	$81
+       = 000082         nCs0			EQU	$82
+       = 000083         nD0			EQU	$83
+       = 000084         nEb0			EQU	$84
+       = 000085         nE0			EQU	$85
+       = 000086         nF0			EQU	$86
+       = 000087         nFs0			EQU	$87
+       = 000088         nG0			EQU	$88
+       = 000089         nAb0			EQU	$89
+       = 00008A         nA0			EQU	$8A
+       = 00008B         nBb0			EQU	$8B
+       = 00008C         nB0			EQU	$8C
+       = 00008D         nC1			EQU	$8D
+       = 00008E         nCs1			EQU	$8E
+       = 00008F         nD1			EQU	$8F
+       = 000090         nEb1			EQU	$90
+       = 000091         nE1			EQU	$91
+       = 000092         nF1			EQU	$92
+       = 000093         nFs1			EQU	$93
+       = 000094         nG1			EQU	$94
+       = 000095         nAb1			EQU	$95
+       = 000096         nA1			EQU	$96
+       = 000097         nBb1			EQU	$97
+       = 000098         nB1			EQU	$98
+       = 000099         nC2			EQU	$99
+       = 00009A         nCs2			EQU	$9A
+       = 00009B         nD2			EQU	$9B
+       = 00009C         nEb2			EQU	$9C
+       = 00009D         nE2			EQU	$9D
+       = 00009E         nF2			EQU	$9E
+       = 00009F         nFs2			EQU	$9F
+       = 0000A0         nG2			EQU	$A0
+       = 0000A1         nAb2			EQU	$A1
+       = 0000A2         nA2			EQU	$A2
+       = 0000A3         nBb2			EQU	$A3
+       = 0000A4         nB2			EQU	$A4
+       = 0000A5         nC3			EQU	$A5
+       = 0000A6         nCs3			EQU	$A6
+       = 0000A7         nD3			EQU	$A7
+       = 0000A8         nEb3			EQU	$A8
+       = 0000A9         nE3			EQU	$A9
+       = 0000AA         nF3			EQU	$AA
+       = 0000AB         nFs3			EQU	$AB
+       = 0000AC         nG3			EQU	$AC
+       = 0000AD         nAb3			EQU	$AD
+       = 0000AE         nA3			EQU	$AE
+       = 0000AF         nBb3			EQU	$AF
+       = 0000B0         nB3			EQU	$B0
+       = 0000B1         nC4			EQU	$B1
+       = 0000B2         nCs4			EQU	$B2
+       = 0000B3         nD4			EQU	$B3
+       = 0000B4         nEb4			EQU	$B4
+       = 0000B5         nE4			EQU	$B5
+       = 0000B6         nF4			EQU	$B6
+       = 0000B7         nFs4			EQU	$B7
+       = 0000B8         nG4			EQU	$B8
+       = 0000B9         nAb4			EQU	$B9
+       = 0000BA         nA4			EQU	$BA
+       = 0000BB         nBb4			EQU	$BB
+       = 0000BC         nB4			EQU	$BC
+       = 0000BD         nC5			EQU	$BD
+       = 0000BE         nCs5			EQU	$BE
+       = 0000BF         nD5			EQU	$BF
+       = 0000C0         nEb5			EQU	$C0
+       = 0000C1         nE5			EQU	$C1
+       = 0000C2         nF5			EQU	$C2
+       = 0000C3         nFs5			EQU	$C3
+       = 0000C4         nG5			EQU	$C4
+       = 0000C5         nAb5			EQU	$C5
+       = 0000C6         nA5			EQU	$C6
+       = 0000C7         nBb5			EQU	$C7
+       = 0000C8         nB5			EQU	$C8
+       = 0000C9         nC6			EQU	$C9
+       = 0000CA         nCs6			EQU	$CA
+       = 0000CB         nD6			EQU	$CB
+       = 0000CC         nEb6			EQU	$CC
+       = 0000CD         nE6			EQU	$CD
+       = 0000CE         nF6			EQU	$CE
+       = 0000CF         nFs6			EQU	$CF
+       = 0000D0         nG6			EQU	$D0
+       = 0000D1         nAb6			EQU	$D1
+       = 0000D2         nA6			EQU	$D2
+       = 0000D3         nBb6			EQU	$D3
+       = 0000D4         nB6			EQU	$D4
+       = 0000D5         nC7			EQU	$D5
+       = 0000D6         nCs7			EQU	$D6
+       = 0000D7         nD7			EQU	$D7
+       = 0000D8         nEb7			EQU	$D8
+       = 0000D9         nE7			EQU	$D9
+       = 0000DA         nF7			EQU	$DA
+       = 0000DB         nFs7			EQU	$DB
+       = 0000DC         nG7			EQU	$DC
+       = 0000DD         nAb7			EQU	$DD
+       = 0000DE         nA7			EQU	$DE
+       = 0000DF         nBb7			EQU	$DF
+
+                        ; DAC Equates
+       = 000081         dKick			EQU	$81
+       = 000082         dSnare			EQU	$82
+       = 000083         dTimpani		EQU	$83
+       = 000088         dHiTimpani		EQU	$88
+       = 000089         dMidTimpani		EQU	$89
+       = 00008A         dLowTimpani		EQU	$8A
+       = 00008B         dVLowTimpani	EQU	$8B
+       = 00008B         dFloorTimpani	EQU $8B
+
+                        ;!@ Convert ptrs to z80Ptr
+                        ; function to make a little-endian 16-bit pointer for the Z80 sound driver
+                        ;z80_ptr function x,y,((((x)|(y))<<8)&$FF00)|((((x)|(y))>>8)&$7F)|$80
+                        ;z80_ptr_neg function x,y,((((y)-(x))<<8)&$FF00)|((((y)-(x))>>8)&$7F)|$80
+
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        rom_ptr_z80 macro addr
+                        	;dc.w z80_ptr(ptr,addr)
+                        	dc.w  ((((addr)<<8)&$FF00)|(((addr)>>8)&$7F)|$80)
+                            endm
+                        	
+                        ;Funciton to convert S1 tempo to S2 and then S3+
+                        ;The conversion works for all values of main tempo other than 0 — this value cannot be converted exactly between the two drivers. The conversion of main tempos from Sonic 1 to Sonic 2 can be done (approximately) with the following formul
+                        ;S2 main tempo = floor{ [ (S1 main tempo-1) * 256 + floor(S1 main tempo/2) ] / S1 main tempo }			
+                        ;It is easy to convert between Sonic 2 and Sonic 3+ main tempo values:
+                        ;S2 main tempo = (256 - S3 main tempo) mod 256
+                        ;S3 main tempo = (256 - S2 main tempo) mod 256
+                        tempo_conv macro tempo
+                        		if tempo==0
+                        			dc.b	((256 - (((256-1)*256 + (256/2)) / 256)) % 256)
+                        		else
+                        			dc.b	((256 - ((((tempo)-1)*256 + ((tempo)/2)) / (tempo))) % 256)
+                        		endif
+                        	endm
+
+                        	
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        ;rom_ptr_z80_neg macro ptr,addr
+                        	;dc.w z80_ptr_neg(ptr,addr)
+                        	;dc.w	(((((addr)-(ptr))<<8)&$FF00)|((((addr)-(ptr))>>8)&$7F)|$80)
+                            ;endm
+
+                        ; Header Macros
+
+                        ;!@
+                        ; Header - Set up Voice Location
+                        ;smpsHeaderVoice macro loc
+                        smpsHeaderVoice macro loc,songstart
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+                        ; Header - Set up Channel Usage	
+                        smpsHeaderChan macro fm,psg
+                        	if \0==2
+                        		dc.b	fm,psg
+                        	else
+                        		dc.b	fm
+                        	endif	
+                        	endm	
+                        	
+
+                        	
+                        smpsHeaderTempo macro div,mod
+                        	dc.b	div,mod
+                        	endm
+
+                        ;!@
+                        ; Header - Set up Tempo. Mod is converted from S1 to S3 tempo
+                        smpsHeaderTempoC macro div,mod
+                        TempDiv set div
+                        	dc.b	div
+                        	tempo_conv(mod)
+000000                  	endm
+                        	
+                        ; Header - Set up DAC Channel
+                        smpsHeaderDAC macro loc
+                        	dc.w	loc-songStart
+                        	dc.w	$00
+                        	endm
+                        	
+                        ;!@
+                        ; Header - Set up FM Channel	
+                        ;smpsHeaderFM macro loc,pitch,vol
+                        smpsHeaderFM macro loc,songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	endm
+
+                        ;!@	
+                        ; Header - Set up PSG Channel
+                        ;smpsHeaderPSG macro loc,pitch,vol,voice
+                        smpsHeaderPSG macro loc,songstart,pitch,vol,null,voice
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	;dc.w	voice
+                        	dc.b	null,voice
+                        	endm
+
+                        ;!@
+                        ; Header - Set up SFX Channel
+                        ;sHeaderSFX	macro play,patch,loc,pitch,vol
+                        smpsHeaderSFX	macro play,patch,loc,pitch,vol,songstart
+                        	dc.b play,patch
+                        	;dc.w loc-sPointZero
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b pitch,vol
+                            endm
+
+                        ; Co-ord Flag Macros and Equates
+                        ; E0xx - Panning, AMS, FMS
+                        smpsPan macro direction,amsfms
+                        panNone set $00
+                        panRight set $40
+                        panLeft set $80
+                        panCentre set $C0
+                        panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if \0==2
+                        		dc.b $E0,direction|amsfms
+                        	else
+                        		dc.b $E0,direction
+                        	endif
+000000                  	endm
+                        	
+                        ; E1xx - Alter note values by xx
+                        smpsAlterNote macro val
+                        	dc.b	$E1,val
+                        	endm
+                        	
+                        ; E2xx - Unknown
+                        smpsE2 macro val
+                        	dc.b	$E2,val
+                        	endm
+
+                        ; E3 - Return (generally used after F8)
+                        ; F9 - Return (generally used after F8)
+                        smpsReturn macro val
+                        	;!@
+                        	;dc.b	$E3
+                        	dc.b	$F9
+                        	endm
+                        	
+                        ; E4 - Fade in previous song (ie. 1-Up)
+                        smpsFade macro val
+                        	dc.b	$E4
+                        	endm
+
+                        ;!@ Invalid for S3+!
+                        ; E5xx - Set channel tempo divider to xx
+                        smpsChanTempoDiv macro val
+                        	;Error No S3 equivalent for CF!
+                        	dc.b	$E5,val	
+                        	endm
+                        	
+                        ; E6xx - Alter Volume by xx
+                        smpsAlterVol macro val
+                        	dc.b	$E6,val
+                        	endm
+                        	
+                        ; E7 - Prevent attack of next note
+       = 0000E7         smpsNoAttack	EQU $E7
+
+                        ;!@ This may have problems, needs some convesion factor due to usage of mult by tempo div in S3+
+                        ; E8xx - Set note fill to xx
+                        smpsNoteFill macro val		
+                        	dc.b	$E8,(val/TempDiv)
+                        	endm
+                        	
+                        ;!@
+                        ; E9xx - Add xx to channel pitch
+                        ; FBxx - Add xx to channel pitch
+                        smpsAlterPitch macro val
+                        	;!@
+                        	;dc.b	$E9,val
+                        	dc.b	$FB,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3
+                        smpsSetTempoMod macro val
+                        	;dc.b	$EA,val
+                        	dc.b	$FF,$00,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3 (TEMPO - TEMPO_SET)
+                        smpsSetTempoModC macro val
+                        	;dc.b	$EA,val
+                        	dc.b $FF,$00
+                        	tempo_conv(val)
+                        	endm
+                        	
+                        ;!@
+                        ; EBxx - Set music tempo divider to xx
+                        ; FF04xx - Set global tick multiplier to xx (TICK_MULT - TMULT_ALL)
+                        smpsSetTempoDiv macro val
+                        	;dc.b	$EB,val
+                        TempDiv set val
+                        	dc.b $FF,$04,val
+000000                  	endm
+
+                        ;!@	
+                        ; ECxx - Add xx to PSG channel volume (VOLUME - VOL_NN_PSG)
+                        ;
+                        ; May need interpolation/conversion factor:
+                        ; Change volume attenuation of PSG track.
+                        ;The single parameter byte is added to track's current volume attenuation;
+                        ;anything greater than $0F (unsigned comparison) is set to $0F (silence). Also, the flutter index is reduced by 1.
+                        smpsSetVol macro val
+                        	dc.b	$EC,val
+                        	endm
+                        	
+                        ; ED - Unknown
+       = 0000ED         smpsED		EQU $ED
+                        	
+                        ;!@ S3K= send cmd to YM2612 port; unused in S1
+                        ; EE - Stops special SFX ($D0-$D4, S1 only) and restarts overridden music track
+       = 0000EE         smpsEE 		EQU $EE
+                        	
+                        ;!@
+                        ; EFxx - Set Voice of FM channel to xx
+                        ; EFxx[yy] - Set patch id of FM channel to xx. If xx bit7 set, read from another song instead
+                        ; (INSTRUMENT - INS_C_FMP)
+                        ;smpsFMvoice macro voice
+                        	;dc.b	$EF,voice
+                        smpsFMvoice macro pat, song		
+                        	;if song<>""
+                        	if \0==2
+                        		dc.b $EF,pat|$80,song+$81
+                        	else
+                        		dc.b $EF,pat
+                        	endif
+                            endm
+
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        smpsModSet macro wait,speed,change,step
+                        	dc.b	$F0,wait,speed,change,step
+                        	endm
+                        	
+
+                        ;!@ Used very differently in S3; don't use
+                        ; F1 - Turn on Modulation
+       = 0000F1         smpsModOn 	EQU $F1
+                        ; F4 - Turn off Modulation
+       = 0000F4         smpsModOff 	EQU $F4
+
+                        ; F2 - End of channel
+                        smpsStop macro
+                        	dc.b	$F2
+                        	endm
+                        	
+                        ;!@
+                        ; F3xx - PSG waveform to xx
+                        ; S3+ only: If parameter byte is zero, the channel is converted
+                        ; back into a normal PSG channel and the noise channel is silenced.
+                        ; Otherwise, sets the PSG track to noise and sets PSG noise to parameter byte, which should be from $E0 to $E7 (inclusive).
+                        smpsPSGform macro form
+                        	dc.b	$F3,form
+                        	endm
+                        	
+                        ; F5xx - PSG voice to xx
+                        smpsPSGvoice macro voice
+                        	dc.b	$F5,voice
+                        	endm
+                        	
+                        ;BAD Cmpr
+                        ;if (loc<*)
+                        	;rom_ptr_z80_neg(*-loc,songstart)
+                        ;else
+                        	;rom_ptr_z80(loc-*-1,songstart)
+                        ;endif
+
+                        ;!@
+                        ; F6xxxx - Jump to xxxx
+                        ;smpsJump macro loc
+                        smpsJump macro loc,songstart
+                        	dc.b	$F6
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F7xxyyzzzz - Loop back to zzzz yy times, xx being the loop index for loop recursion fixing
+                        ;smpsLoop macro index,loops,loc
+                        smpsLoop macro index,loops,loc,songstart
+                        	dc.b	$F7
+                        	dc.b	index,loops
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F8xxxx - Call pattern at xxxx, saving return point
+                        ;smpsCall macro loc
+                        smpsCall macro loc,songstart
+                        	dc.b	$F8
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+                        	
+                        ; F9 - Unknown
+       = 0000F9         smpsF9		EQU $F9
+
+                        ; Voices - Feedback
+                        smpsVcFeedback macro val
+                        vcFeedback set val
+000000                  	endm
+
+                        ; Voices - Algorithm
+                        smpsVcAlgorithm macro val
+                        vcAlgorithm set val
+000000                  	endm
+
+                        ; Voices - Detune
+                        smpsVcDetune macro op1,op2,op3,op4
+                        vcDT1 set op1
+                        vcDT2 set op2
+                        vcDT3 set op3
+                        vcDT4 set op4
+000000                  	endm
+
+                        ; Voices - Coarse-Frequency
+                        smpsVcCoarseFreq macro op1,op2,op3,op4
+                        vcCF1 set op1
+                        vcCF2 set op2
+                        vcCF3 set op3
+                        vcCF4 set op4
+000000                  	endm
+
+                        ; Voices - Rate Scale
+                        smpsVcRateScale macro op1,op2,op3,op4
+                        vcRS1 set op1
+                        vcRS2 set op2
+                        vcRS3 set op3
+                        vcRS4 set op4
+000000                  	endm
+
+                        ; Voices - Attack Rate
+                        smpsVcAttackRate macro op1,op2,op3,op4
+                        vcAR1 set op1
+                        vcAR2 set op2
+                        vcAR3 set op3
+                        vcAR4 set op4
+000000                  	endm
+
+                        ; Voices - Amplitude Modulation
+                        smpsVcAmpMod macro op1,op2,op3,op4
+                        vcAM1 set op1
+                        vcAM2 set op2
+                        vcAM3 set op3
+                        vcAM4 set op4
+000000                  	endm
+
+                        ; Voices - First Decay Rate
+                        smpsVcDecayRate1 macro op1,op2,op3,op4
+                        vcD1R1 set op1
+                        vcD1R2 set op2
+                        vcD1R3 set op3
+                        vcD1R4 set op4
+000000                  	endm
+
+                        ; Voices - Second Decay Rate
+                        smpsVcDecayRate2 macro op1,op2,op3,op4
+                        vcD2R1 set op1
+                        vcD2R2 set op2
+                        vcD2R3 set op3
+                        vcD2R4 set op4
+000000                  	endm
+
+                        ; Voices - Decay Level	
+                        smpsVcDecayLevel macro op1,op2,op3,op4
+                        vcDL1 set op1
+                        vcDL2 set op2
+                        vcDL3 set op3
+                        vcDL4 set op4
+000000                  	endm
+
+                        ; Voices - Release Rate
+                        smpsVcReleaseRate macro op1,op2,op3,op4
+                        vcRR1 set op1
+                        vcRR2 set op2
+                        vcRR3 set op3
+                        vcRR4 set op4
+000000                  	endm
+
+                        ; Voices - Total Level
+                        smpsVcTotalLevel macro op1,op2,op3,op4
+                        vcTL1 set op1
+                        vcTL2 set op2
+                        vcTL3 set op3
+                        vcTL4 set op4
+                        	dc.b	(vcFeedback<<3)+vcAlgorithm
+                        	dc.b	(vcDT4<<4)+vcCF4,(vcDT3<<4)+vcCF3,(vcDT2<<4)+vcCF2,(vcDT1<<4)+vcCF1
+                        	dc.b	(vcRS4<<6)+vcAR4,(vcRS3<<6)+vcAR3,(vcRS2<<6)+vcAR2,(vcRS1<<6)+vcAR1
+                        	dc.b	(vcAM4<<5)+vcD1R4,(vcAM3<<5)+vcD1R3,(vcAM2<<5)+vcD1R2,(vcAM1<<5)+vcD1R1
+                        	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
+                        	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
+                        	dc.b	vcTL4,vcTL3,vcTL2,vcTL1	
+000000                  	endm
+                        	
+                        	
+                        ;==============================================
+                        ;!@ The following CF flags/macros are KC-drive specific!
+                        ;Rest here mostly used  to compile KC/Nat ASM files for BC purposes...
+
+                        ;!@
+                        ; Header - Set up a secondary PWM Channel
+                        ;smpsHeaderPWM macro loc
+                        smpsHeaderPWM macro loc, songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)	
+                        	;!@
+                        	dc.b	pitch
+                        	dc.b	vol
+                        	endm
+                        	
+                        ;!@ Unused and unneeded; leftover Sonic 32x header stuff
+                        ; Header - Set up first PWM Channel
+                        ;smpsHeaderPWM1 macro loc,num
+                        	;dc.w	loc-songStart
+                        	;dc.b	num,0
+                        	;endm
+
+                        ;!@
+                        ; Header - Set up Tick Multiplier (for Sfx)
+                        ;sHeaderSFX
+                        smpsHeaderTick	macro tmul
+                        	dc.b tmul
+                            endm
+
+                        ;!@ KC Exclusives!
+                        ;# PAN_ANIM
+                        ;# pan animation has 2 modes; if first arg is 0, it will end it. Otherwise, more args will be used
+                        ;!0xE4, 0 > sPanAni:;								
+                        ;!0xE4, 1-0xFF > sPanAni: .lb, .db, .db, .db, .db;	
+                        KC_smpsPanAni macro val1,val2,val3,val4,val5
+                        	if val1==0
+                        		dc.b	$E4,$00
+                        	else
+                        		dc.b	$E4,val1,val2,val3,val4,val5
+                        	endif
+                        	endm
+
+
+                        ; Alter Volume
+                        ;!0xE5 > saVolFMP: .db, .db;								
+                        KC_smpsFMAlterVol macro val1,val2
+                        	dc.b	$E5,val1,val2
+                        	endm
+
+                        ;!@ KC Exclusive!	
+                        ;!0xE9 > ssLFO: .db, .db;									
+                        KC_smpsSetLFO macro enable,amsfms
+                        	dc.b	$E9,enable,amsfms
+                        	endm
+
+                        ;!0xEA > sPlayDAC: .db | 0x80;								
+                        KC_smpsPlayDACSample macro sample
+                        	dc.b	$EA,(sample&$7F)
+                        	endm
+
+                        ;!@ Songstart param added
+                        ;!0xEB > sLoopExit: .db, .dw {						
+                        ;smpsConditionalJump macro index,loc
+                        KC_smpsConditionalJump macro index,loc,songstart
+                        	dc.b	$EB
+                        	dc.b	index
+                        	;dc.w	z80_ptr(loc)
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+
+                        ;!@ Usage/naming is speculative. Called ssTransposeS3K in S3k/Nat driver...	
+                        ;!0xED > sYMcmd: .db, .db;							
+                        ; Set note values to xx-$40
+                        KC_smpsSetNote macro val
+                        	dc.b	$ED,val
+                        	endm
+
+                        ;!0xEE > sYM1cmd: .db, .db;							
+                        KC_smpsFMICommand macro reg,val
+                        	dc.b	$EE,reg,val
+                        	endm
+
+                        ;!0xF1 > sModEnv: .db, .db {							
+                        ; Set Modulation
+                        KC_smpsModChange2 macro fmmod,psgmod
+                        	dc.b	$F1,fmmod,psgmod
+                        	endm
+                        	
+                        ;!0xF4 > sModEnv: .db {
+                        ; Set Modulation
+                        KC_smpsModChange macro val
+                        	dc.b	$F4,val
+                        	endm
+
+                        ;!@ KC exclusive!
+                        ;!0xFC > sPitchSlide: .db;						
+                        KC_smpsPitchSlide macro enable
+                        	dc.b	$FC,enable
+                        	endm
+                        	
+                        ;!0xFD > sRawFreq: .db;							
+                        KC_smpsAlternateSMPS macro flag
+                        	dc.b	$FD,flag
+                        	endm
+
+                        ;!0xFE > sSpecFM3: .db, .db, .db, .db {			
+                        	;%; Broken?
+                        ;}
+                        KC_smpsFM3SpecialMode macro ind1,ind2,ind3,ind4
+                        	dc.b	$FE,ind1,ind2,ind3,ind4
+                        	Error Broken?
+                        	endm
+
+                        ;!0xFF, 1 > sPlaySound: .db;						
+                        KC_smpsPlaySound macro index
+                        	dc.b	$FF,$01,index
+                        	endm
+
+                        ;!0xFF, 2 > sMusPause: .db;						
+                        KC_smpsHaltMusic macro flag
+                        	dc.b	$FF,$02,flag
+                        	endm
+
+                        ;!@ Modified with SongStart	param
+                        ;!0xFF, 3 > sCopyMem: .dw, .db {					
+                        	;%; No song should ever use this command. It may good idea to remove it.
+                        ;}
+                        ;KC_smpsCopyData macro data,len
+                        KC_smpsCopyData macro data,len,songstart
+                        	Error Coord. Flag to copy data should not be used. Complain to GenesisDoes if any music uses it.
+                        	;Error No song should ever use this command. It may be a good idea to remove it.
+                        	dc.b	$FF,$03
+                        	;dc.w	little_endian(data)
+                        	rom_ptr_z80(data+songstart)
+                        	dc.b	len
+                        	endm
+
+                        ;!0xFF, 5 > sSSGEG: .db, .db, .db, .db {			
+                        	;=op2 .a2
+                        	;:=2 .a1
+                        	;:=1 \op2\
+                        ;}
+                        KC_smpsSSGEG macro op1,op2,op3,op4
+                        	dc.b	$FF,$05,op1,op3,op2,op4
+                        	endm
+                        	
+                        	
+                        ;!0xFF, 6 > sVolEnvFM: .db, .db {
+                        	;:?0 {
+                        		;?volenv;
+                        	;}
+                        ;}	
+                        KC_smpsFMVolEnv macro tone,mask
+                        	dc.b	$FF,$06,tone,mask
+                        	endm
+                        ;==============================================
+
+000000                  	include "KC.asm"
+       = 012345         Target	EQU	$12345
+000000                  	smpsHeaderVoice	SH_SystemMenu_Patches, Target
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+000000                  	rom_ptr_z80(SH_SystemMenu_Patches+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000000 3FB0             	dc.w  (((((SH_SystemMenu_Patches+Target))<<8)&$FF00)|((((SH_SystemMenu_Patches+Target))>>8)&$7F)|$80)
+000002                  	smpsHeaderChan	6,3
+                        	if 2==2
+000002 0603             		dc.b	6,3
+                        	else
+                        	endif	
+000004                  	smpsHeaderTempoC	$02, $0F
+       = 000002         TempDiv set $02
+000004 02               	dc.b	$02
+000005                  	tempo_conv($0F)
+                        		if ($0F)==0
+                        		else
+000005 11               			dc.b	((256 - ((((($0F))-1)*256 + ((($0F))/2)) / (($0F)))) % 256)
+                        		endif
+000006                  	smpsHeaderFM	SH_SystemMenu_FM1, Target, $00, $11
+                        	;dc.w	loc-songStart
+000006                  	rom_ptr_z80(SH_SystemMenu_FM1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000006 85A3             	dc.w  (((((SH_SystemMenu_FM1+Target))<<8)&$FF00)|((((SH_SystemMenu_FM1+Target))>>8)&$7F)|$80)
+000008 0011             	dc.b	$00,$11
+00000A                  	smpsHeaderFM	SH_SystemMenu_FM2, Target, $00, $23
+                        	;dc.w	loc-songStart
+00000A                  	rom_ptr_z80(SH_SystemMenu_FM2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000A 25A4             	dc.w  (((((SH_SystemMenu_FM2+Target))<<8)&$FF00)|((((SH_SystemMenu_FM2+Target))>>8)&$7F)|$80)
+00000C 0023             	dc.b	$00,$23
+00000E                  	smpsHeaderFM	SH_SystemMenu_FM3, Target, $00, $14
+                        	;dc.w	loc-songStart
+00000E                  	rom_ptr_z80(SH_SystemMenu_FM3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000E 3DA6             	dc.w  (((((SH_SystemMenu_FM3+Target))<<8)&$FF00)|((((SH_SystemMenu_FM3+Target))>>8)&$7F)|$80)
+000010 0014             	dc.b	$00,$14
+000012                  	smpsHeaderFM	SH_SystemMenu_FM4, Target, $00, $23
+                        	;dc.w	loc-songStart
+000012                  	rom_ptr_z80(SH_SystemMenu_FM4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000012 53A7             	dc.w  (((((SH_SystemMenu_FM4+Target))<<8)&$FF00)|((((SH_SystemMenu_FM4+Target))>>8)&$7F)|$80)
+000014 0023             	dc.b	$00,$23
+000016                  	smpsHeaderFM	SH_SystemMenu_FM5, Target, $00, $0F
+                        	;dc.w	loc-songStart
+000016                  	rom_ptr_z80(SH_SystemMenu_FM5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000016 48A8             	dc.w  (((((SH_SystemMenu_FM5+Target))<<8)&$FF00)|((((SH_SystemMenu_FM5+Target))>>8)&$7F)|$80)
+000018 000F             	dc.b	$00,$0F
+00001A                  	smpsHeaderFM	SH_SystemMenu_FM6, Target, $00, $21
+                        	;dc.w	loc-songStart
+00001A                  	rom_ptr_z80(SH_SystemMenu_FM6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001A 53A9             	dc.w  (((((SH_SystemMenu_FM6+Target))<<8)&$FF00)|((((SH_SystemMenu_FM6+Target))>>8)&$7F)|$80)
+00001C 0021             	dc.b	$00,$21
+00001E                  	smpsHeaderPSG	SH_SystemMenu_PSG1, Target, $00, $7F, $00, $01
+                        	;dc.w	loc-songStart
+00001E                  	rom_ptr_z80(SH_SystemMenu_PSG1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001E 4EAA             	dc.w  (((((SH_SystemMenu_PSG1+Target))<<8)&$FF00)|((((SH_SystemMenu_PSG1+Target))>>8)&$7F)|$80)
+000020 007F             	dc.b	$00,$7F
+                        	;dc.w	voice
+000022 0001             	dc.b	$00,$01
+000024                  	smpsHeaderPSG	SH_SystemMenu_PSG2, Target, $00, $7F, $00, $01
+                        	;dc.w	loc-songStart
+000024                  	rom_ptr_z80(SH_SystemMenu_PSG2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000024 FEAA             	dc.w  (((((SH_SystemMenu_PSG2+Target))<<8)&$FF00)|((((SH_SystemMenu_PSG2+Target))>>8)&$7F)|$80)
+000026 007F             	dc.b	$00,$7F
+                        	;dc.w	voice
+000028 0001             	dc.b	$00,$01
+00002A                  	smpsHeaderPSG	SH_SystemMenu_PSG3, Target, $00, $7F, $00, $04
+                        	;dc.w	loc-songStart
+00002A                  	rom_ptr_z80(SH_SystemMenu_PSG3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00002A F3AC             	dc.w  (((((SH_SystemMenu_PSG3+Target))<<8)&$FF00)|((((SH_SystemMenu_PSG3+Target))>>8)&$7F)|$80)
+00002C 007F             	dc.b	$00,$7F
+                        	;dc.w	voice
+00002E 0004             	dc.b	$00,$04
+000030                  	smpsHeaderPWM	SH_SystemMenu_PWM1, Target, $00, $7F
+                        	;dc.w	loc-songStart
+000030                  	rom_ptr_z80(SH_SystemMenu_PWM1+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000030 CFAD             	dc.w  (((((SH_SystemMenu_PWM1+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1+Target))>>8)&$7F)|$80)
+                        	;!@
+000032 00               	dc.b	$00
+000033 7F               	dc.b	$7F
+000034                  	smpsHeaderPWM	SH_SystemMenu_PWM2, Target, $00, $7F
+                        	;dc.w	loc-songStart
+000034                  	rom_ptr_z80(SH_SystemMenu_PWM2+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000034 3BAE             	dc.w  (((((SH_SystemMenu_PWM2+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM2+Target))>>8)&$7F)|$80)
+                        	;!@
+000036 00               	dc.b	$00
+000037 7F               	dc.b	$7F
+000038                  	smpsHeaderPWM	SH_SystemMenu_PWM3, Target, $00, $7F
+                        	;dc.w	loc-songStart
+000038                  	rom_ptr_z80(SH_SystemMenu_PWM3+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000038 EFAE             	dc.w  (((((SH_SystemMenu_PWM3+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM3+Target))>>8)&$7F)|$80)
+                        	;!@
+00003A 00               	dc.b	$00
+00003B 7F               	dc.b	$7F
+00003C                  	smpsHeaderPWM	SH_SystemMenu_PWM4, Target, $00, $7F
+                        	;dc.w	loc-songStart
+00003C                  	rom_ptr_z80(SH_SystemMenu_PWM4+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+00003C 9CAF             	dc.w  (((((SH_SystemMenu_PWM4+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM4+Target))>>8)&$7F)|$80)
+                        	;!@
+00003E 00               	dc.b	$00
+00003F 7F               	dc.b	$7F
+
+000040                  SH_SystemMenu_FM1:
+000040                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+000040 E0C0             		dc.b $E0,panCenter
+                        	endif
+000042                  	smpsFMvoice		$00
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000042 EF00             		dc.b $EF,$00
+                        	endif
+000044 8005             	dc.b	nRst, $05
+
+000046                  SH_SystemMenu_Loop2:
+000046 B8               	dc.b	nG4
+
+000047                  SH_SystemMenu_Loop1:
+000047 06BD0380C40C     	dc.b	$06, nC5, $03, nRst, nG5, $0C
+00004D                  	smpsLoop		$00, $02, SH_SystemMenu_Loop1, Target
+00004D F7               	dc.b	$F7
+00004E 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop1<*)
+000050                  		rom_ptr_z80(SH_SystemMenu_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000050 8CA3             	dc.w  (((((SH_SystemMenu_Loop1+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000052 B806BDBFB8B80380 	dc.b	nG4, $06, nC5, nD5, nG4, nG4, $03, nRst
+00005A B606B8188054     	dc.b	nF4, $06, nG4, $18, nRst, $54
+000060                  	smpsLoop		$01, $03, SH_SystemMenu_Loop2, Target
+000060 F7               	dc.b	$F7
+000061 0103             	dc.b	$01,$03
+                        	if (SH_SystemMenu_Loop2<*)
+000063                  		rom_ptr_z80(SH_SystemMenu_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000063 8BA3             	dc.w  (((((SH_SystemMenu_Loop2+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000065 B8               	dc.b	nG4
+
+000066                  SH_SystemMenu_Loop3:
+000066 06BD0380C40C     	dc.b	$06, nC5, $03, nRst, nG5, $0C
+00006C                  	smpsLoop		$00, $02, SH_SystemMenu_Loop3, Target
+00006C F7               	dc.b	$F7
+00006D 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop3<*)
+00006F                  		rom_ptr_z80(SH_SystemMenu_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00006F ABA3             	dc.w  (((((SH_SystemMenu_Loop3+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000071 B806BDBFB8B80380 	dc.b	nG4, $06, nC5, nD5, nG4, nG4, $03, nRst
+                        	;!@ dc.b	nF4, $06, nG4, $18, nRst, $7F, $77
+000079 B606B818807F8077 	dc.b	nF4, $06, nG4, $18, nRst, $7F, nRst, $77
+
+000081                  SH_SystemMenu_Loop4:
+000081 C403038006C40303 	dc.b	nG5, $03, $03, nRst, $06, nG5, $03, $03
+000089 804E             	dc.b	nRst, $4E
+00008B                  	smpsLoop		$00, $03, SH_SystemMenu_Loop4, Target
+00008B F7               	dc.b	$F7
+00008C 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_Loop4<*)
+00008E                  		rom_ptr_z80(SH_SystemMenu_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00008E C6A3             	dc.w  (((((SH_SystemMenu_Loop4+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000090 C403038006C40303 	dc.b	nG5, $03, $03, nRst, $06, nG5, $03, $03
+000098 807F53C60680C9C6 	dc.b	nRst, $7F, $53, nA5, $06, nRst, nC6, nA5
+0000A0 80C90CC606C9C6C9 	dc.b	nRst, nC6, $0C, nA5, $06, nC6, nA5, nC6
+0000A8 80C0BF038009C91E 	dc.b	nRst, nEb5, nD5, $03, nRst, $09, nC6, $1E
+0000B0 C006BF038009C90C 	dc.b	nEb5, $06, nD5, $03, nRst, $09, nC6, $0C
+0000B8 C506C90CCB0380CB 	dc.b	nAb5, $06, nC6, $0C, nD6, $03, nRst, nD6
+0000C0 8009C957804B     	dc.b	nRst, $09, nC6, $57, nRst, $4B
+
+0000C6                  SH_SystemMenu_Loop5:
+0000C6 C403038006C40303 	dc.b	nG5, $03, $03, nRst, $06, nG5, $03, $03
+0000CE 804E             	dc.b	nRst, $4E
+0000D0                  	smpsLoop		$00, $02, SH_SystemMenu_Loop5, Target
+0000D0 F7               	dc.b	$F7
+0000D1 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop5<*)
+0000D3                  		rom_ptr_z80(SH_SystemMenu_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000D3 0BA4             	dc.w  (((((SH_SystemMenu_Loop5+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0000D5 C403038006C40303 	dc.b	nG5, $03, $03, nRst, $06, nG5, $03, $03
+0000DD                  	smpsJump	SH_SystemMenu_FM1, Target
+0000DD F6               	dc.b	$F6
+                        	if (SH_SystemMenu_FM1<*)
+0000DE                  		rom_ptr_z80(SH_SystemMenu_FM1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000DE 85A3             	dc.w  (((((SH_SystemMenu_FM1+Target))<<8)&$FF00)|((((SH_SystemMenu_FM1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0000E0                  SH_SystemMenu_FM2:
+0000E0                  	smpsFMvoice		$01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0000E0 EF01             		dc.b $EF,$01
+                        	endif
+0000E2                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+0000E2 E0C0             		dc.b $E0,panCenter
+                        	endif
+0000E4 80               	dc.b	nRst
+
+0000E5                  SH_SystemMenu_Loop6:
+0000E5 55               	dc.b	$55
+0000E6                  	smpsLoop		$00, $08, SH_SystemMenu_Loop6, Target
+0000E6 F7               	dc.b	$F7
+0000E7 0008             	dc.b	$00,$08
+                        	if (SH_SystemMenu_Loop6<*)
+0000E9                  		rom_ptr_z80(SH_SystemMenu_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000E9 2AA4             	dc.w  (((((SH_SystemMenu_Loop6+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0000EB 57B803BA01       	dc.b	$57, nG4, $03, nA4, $01
+0000F0                  	smpsFMvoice		$01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0000F0 EF01             		dc.b $EF,$01
+                        	endif
+0000F2                  	smpsAlterVol		$EE
+0000F2 E6EE             	dc.b	$E6,$EE
+0000F4 E702BC03BDBABCBD 	dc.b	smpsNoAttack, $02, nB4, $03, nC5, nA4, nB4, nC5
+0000FC BFBCBDBFC1       	dc.b	nD5, nB4, nC5, nD5, nE5
+000101                  	smpsAlterVol		$01
+000101 E601             	dc.b	$E6,$01
+000103 BDBFC1C3BFC1C3C4 	dc.b	nC5, nD5, nE5, nFs5, nD5, nE5, nFs5, nG5
+00010B C1C3C4C6C3C4C6C8 	dc.b	nE5, nFs5, nG5, nA5, nFs5, nG5, nA5, nB5
+000113 C4C6C8C9C6C8C9   	dc.b	nG5, nA5, nB5, nC6, nA5, nB5, nC6
+00011A                  	smpsAlterVol		$02
+00011A E602             	dc.b	$E6,$02
+00011C CBC8C9CBCDC9CBCD 	dc.b	nD6, nB5, nC6, nD6, nE6, nC6, nD6, nE6
+000124 CFCBCDCFD0CDCFD0 	dc.b	nFs6, nD6, nE6, nFs6, nG6, nE6, nFs6, nG6
+00012C D2CFD0D2D4D0D2D4 	dc.b	nA6, nFs6, nG6, nA6, nB6, nG6, nA6, nB6
+000134 D5D2             	dc.b	nC7, nA6
+000136                  	smpsAlterVol		$01
+000136 E601             	dc.b	$E6,$01
+000138 D4D5D78006       	dc.b	nB6, nC7, nD7, nRst, $06
+00013D                  	smpsAlterVol		$F4
+00013D E6F4             	dc.b	$E6,$F4
+00013F AC01             	dc.b	nG3, $01
+000141                  	smpsFMvoice		$07
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000141 EF07             		dc.b $EF,$07
+                        	endif
+000143                  	smpsAlterVol		$26
+000143 E626             	dc.b	$E6,$26
+000145 E702AE03B1068003 	dc.b	smpsNoAttack, $02, nA3, $03, nC4, $06, nRst, $03
+00014D                  	smpsAlterVol		$01
+00014D E601             	dc.b	$E6,$01
+00014F B18006B5         	dc.b	nC4, nRst, $06, nE4
+000153                  	smpsAlterVol		$01
+000153 E601             	dc.b	$E6,$01
+000155 B103800FAC03     	dc.b	nC4, $03, nRst, $0F, nG3, $03
+00015B                  	smpsAlterVol		$01
+00015B E601             	dc.b	$E6,$01
+00015D AEB180B180B306AC 	dc.b	nA3, nC4, nRst, nC4, nRst, nD4, $06, nG3
+000165 03AEB180         	dc.b	$03, nA3, nC4, nRst
+000169                  	smpsAlterVol		$FF
+000169 E6FF             	dc.b	$E6,$FF
+00016B B380             	dc.b	nD4, nRst
+00016D                  	smpsAlterVol		$FF
+00016D E6FF             	dc.b	$E6,$FF
+00016F B4B5ACAEB1ACAEB1 	dc.b	nEb4, nE4, nG3, nA3, nC4, nG3, nA3, nC4
+000177 80B18006B403B580 	dc.b	nRst, nC4, nRst, $06, nEb4, $03, nE4, nRst
+00017F 0CB40380B480     	dc.b	$0C, nEb4, $03, nRst, nEb4, nRst
+000185                  	smpsAlterVol		$08
+000185 E608             	dc.b	$E6,$08
+000187 B480B5           	dc.b	nEb4, nRst, nE4
+00018A                  	smpsAlterVol		$F8
+00018A E6F8             	dc.b	$E6,$F8
+00018C 03               	dc.b	$03
+00018D                  	smpsAlterVol		$08
+00018D E608             	dc.b	$E6,$08
+00018F 03               	dc.b	$03
+000190                  	smpsAlterVol		$F8
+000190 E6F8             	dc.b	$E6,$F8
+000192 03               	dc.b	$03
+000193                  	smpsAlterVol		$0B
+000193 E60B             	dc.b	$E6,$0B
+000195 B1               	dc.b	nC4
+000196                  	smpsAlterVol		$F5
+000196 E6F5             	dc.b	$E6,$F5
+000198 03AEAC80         	dc.b	$03, nA3, nG3, nRst
+00019C                  	smpsAlterVol		$02
+00019C E602             	dc.b	$E6,$02
+00019E AAACAE           	dc.b	nF3, nG3, nA3
+0001A1                  	smpsAlterVol		$FF
+0001A1 E6FF             	dc.b	$E6,$FF
+0001A3 B180B180         	dc.b	nC4, nRst, nC4, nRst
+0001A7                  	smpsAlterVol		$FF
+0001A7 E6FF             	dc.b	$E6,$FF
+0001A9 B180             	dc.b	nC4, nRst
+0001AB                  	smpsAlterVol		$0B
+0001AB E60B             	dc.b	$E6,$0B
+0001AD B580             	dc.b	nE4, nRst
+0001AF                  	smpsAlterVol		$F5
+0001AF E6F5             	dc.b	$E6,$F5
+0001B1 B4               	dc.b	nEb4
+0001B2                  	smpsAlterVol		$0B
+0001B2 E60B             	dc.b	$E6,$0B
+0001B4 B506B10380       	dc.b	nE4, $06, nC4, $03, nRst
+0001B9                  	smpsAlterVol		$F6
+0001B9 E6F6             	dc.b	$E6,$F6
+0001BB B180             	dc.b	nC4, nRst
+0001BD                  	smpsAlterVol		$02
+0001BD E602             	dc.b	$E6,$02
+0001BF B1               	dc.b	nC4
+0001C0                  	smpsAlterVol		$FF
+0001C0 E6FF             	dc.b	$E6,$FF
+0001C2 0380B180         	dc.b	$03, nRst, nC4, nRst
+0001C6                  	smpsAlterVol		$09
+0001C6 E609             	dc.b	$E6,$09
+0001C8 AC               	dc.b	nG3
+0001C9                  	smpsAlterVol		$F7
+0001C9 E6F7             	dc.b	$E6,$F7
+0001CB AE               	dc.b	nA3
+0001CC                  	smpsAlterVol		$FF
+0001CC E6FF             	dc.b	$E6,$FF
+0001CE B180             	dc.b	nC4, nRst
+0001D0                  	smpsAlterVol		$0A
+0001D0 E60A             	dc.b	$E6,$0A
+0001D2 AC               	dc.b	nG3
+0001D3                  	smpsAlterVol		$F5
+0001D3 E6F5             	dc.b	$E6,$F5
+0001D5 AE               	dc.b	nA3
+0001D6                  	smpsAlterVol		$02
+0001D6 E602             	dc.b	$E6,$02
+0001D8 B1               	dc.b	nC4
+0001D9                  	smpsAlterVol		$FE
+0001D9 E6FE             	dc.b	$E6,$FE
+0001DB B38007           	dc.b	nD4, nRst, $07
+0001DE                  	smpsFMvoice		$08
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0001DE EF08             		dc.b $EF,$08
+                        	endif
+                        	;dc.b	$01
+0001E0 8001             	dc.b	nRst, $01
+0001E2                  	smpsAlterVol		$F6
+0001E2 E6F6             	dc.b	$E6,$F6
+0001E4 BC8002C3018002C9 	dc.b	nB4, nRst, $02, nFs5, $01, nRst, $02, nC6
+0001EC 018002D00180D580 	dc.b	$01, nRst, $02, nG6, $01, nRst, nC7, nRst
+0001F4 03D501D48003C901 	dc.b	$03, nC7, $01, nB6, nRst, $03, nC6, $01
+0001FC 80C6802F         	dc.b	nRst, nA5, nRst, $2F
+000200                  	smpsAlterVol		$08
+000200 E608             	dc.b	$E6,$08
+000202 C401             	dc.b	nG5, $01
+000204                  	smpsFMvoice		$01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000204 EF01             		dc.b $EF,$01
+                        	endif
+000206                  	smpsAlterVol		$E8
+000206 E6E8             	dc.b	$E6,$E8
+000208 E705C206C1BFBFC2 	dc.b	smpsNoAttack, $05, nF5, $06, nE5, nD5, nD5, nF5
+000210 C60CC206BFBC807F 	dc.b	nA5, $0C, nF5, $06, nD5, nB4, nRst, $7F
+                        	;!@ dc.b	$7F, $23
+000218 807F8023         	dc.b	nRst, $7F, nRst, $23
+00021C                  	smpsFMvoice		$08
+                        	;if song<>""
+                        	if 1==2
+                        	else
+00021C EF08             		dc.b $EF,$08
+                        	endif
+00021E 04               	dc.b	$04
+00021F                  	smpsAlterVol		$10
+00021F E610             	dc.b	$E6,$10
+000221 BC018002C3018002 	dc.b	nB4, $01, nRst, $02, nFs5, $01, nRst, $02
+000229 C9018002D00180D5 	dc.b	nC6, $01, nRst, $02, nG6, $01, nRst, nC7
+000231 8003D501D48003C9 	dc.b	nRst, $03, nC7, $01, nB6, nRst, $03, nC6
+000239 0180C68002BF0180 	dc.b	$01, nRst, nA5, nRst, $02, nD5, $01, nRst
+000241 02B80180B88002BF 	dc.b	$02, nG4, $01, nRst, nG4, nRst, $02, nD5
+                        	;!@ dc.b	$01, nRst, $02, nA5, $01, nRst, nRst, $04
+000249 018002C601800180 	dc.b	$01, nRst, $02, nA5, $01, nRst, $01, nRst, $04
+000251 04
+000252 D4018006         	dc.b	nB6, $01, nRst, $06
+000256                  	smpsAlterVol		$FA
+000256 E6FA             	dc.b	$E6,$FA
+000258 AC01             	dc.b	nG3, $01
+00025A                  	smpsFMvoice		$07
+                        	;if song<>""
+                        	if 1==2
+                        	else
+00025A EF07             		dc.b $EF,$07
+                        	endif
+00025C                  	smpsAlterVol		$0F
+00025C E60F             	dc.b	$E6,$0F
+00025E E702AE03B1068003 	dc.b	smpsNoAttack, $02, nA3, $03, nC4, $06, nRst, $03
+000266                  	smpsAlterVol		$01
+000266 E601             	dc.b	$E6,$01
+000268 B18006B5         	dc.b	nC4, nRst, $06, nE4
+00026C                  	smpsAlterVol		$01
+00026C E601             	dc.b	$E6,$01
+00026E B103800FAC03     	dc.b	nC4, $03, nRst, $0F, nG3, $03
+000274                  	smpsAlterVol		$01
+000274 E601             	dc.b	$E6,$01
+000276 AEB180B180B306AC 	dc.b	nA3, nC4, nRst, nC4, nRst, nD4, $06, nG3
+00027E 03AEB180         	dc.b	$03, nA3, nC4, nRst
+000282                  	smpsAlterVol		$FF
+000282 E6FF             	dc.b	$E6,$FF
+000284 B380             	dc.b	nD4, nRst
+000286                  	smpsAlterVol		$FF
+000286 E6FF             	dc.b	$E6,$FF
+000288 B4B5ACAEB1ACAEB1 	dc.b	nEb4, nE4, nG3, nA3, nC4, nG3, nA3, nC4
+000290 80B18006B403B580 	dc.b	nRst, nC4, nRst, $06, nEb4, $03, nE4, nRst
+000298 0CB40380B480     	dc.b	$0C, nEb4, $03, nRst, nEb4, nRst
+00029E                  	smpsAlterVol		$08
+00029E E608             	dc.b	$E6,$08
+0002A0 B480B5           	dc.b	nEb4, nRst, nE4
+0002A3                  	smpsAlterVol		$F8
+0002A3 E6F8             	dc.b	$E6,$F8
+0002A5 03               	dc.b	$03
+0002A6                  	smpsAlterVol		$08
+0002A6 E608             	dc.b	$E6,$08
+0002A8 03               	dc.b	$03
+0002A9                  	smpsAlterVol		$F8
+0002A9 E6F8             	dc.b	$E6,$F8
+0002AB 03               	dc.b	$03
+0002AC                  	smpsAlterVol		$0B
+0002AC E60B             	dc.b	$E6,$0B
+0002AE B1               	dc.b	nC4
+0002AF                  	smpsAlterVol		$F5
+0002AF E6F5             	dc.b	$E6,$F5
+0002B1 03AEAC80         	dc.b	$03, nA3, nG3, nRst
+0002B5                  	smpsAlterVol		$02
+0002B5 E602             	dc.b	$E6,$02
+0002B7 AAACAE           	dc.b	nF3, nG3, nA3
+0002BA                  	smpsAlterVol		$FF
+0002BA E6FF             	dc.b	$E6,$FF
+0002BC B180B180         	dc.b	nC4, nRst, nC4, nRst
+0002C0                  	smpsAlterVol		$FF
+0002C0 E6FF             	dc.b	$E6,$FF
+0002C2 B180             	dc.b	nC4, nRst
+0002C4                  	smpsAlterVol		$0B
+0002C4 E60B             	dc.b	$E6,$0B
+0002C6 B580             	dc.b	nE4, nRst
+0002C8                  	smpsAlterVol		$F5
+0002C8 E6F5             	dc.b	$E6,$F5
+0002CA B4               	dc.b	nEb4
+0002CB                  	smpsAlterVol		$0B
+0002CB E60B             	dc.b	$E6,$0B
+0002CD B506B10380       	dc.b	nE4, $06, nC4, $03, nRst
+0002D2                  	smpsAlterVol		$F6
+0002D2 E6F6             	dc.b	$E6,$F6
+0002D4 B180             	dc.b	nC4, nRst
+0002D6                  	smpsAlterVol		$02
+0002D6 E602             	dc.b	$E6,$02
+0002D8 B1               	dc.b	nC4
+0002D9                  	smpsAlterVol		$FF
+0002D9 E6FF             	dc.b	$E6,$FF
+0002DB 0380B180         	dc.b	$03, nRst, nC4, nRst
+0002DF                  	smpsAlterVol		$09
+0002DF E609             	dc.b	$E6,$09
+0002E1 AC               	dc.b	nG3
+0002E2                  	smpsAlterVol		$F7
+0002E2 E6F7             	dc.b	$E6,$F7
+0002E4 AE               	dc.b	nA3
+0002E5                  	smpsAlterVol		$FF
+0002E5 E6FF             	dc.b	$E6,$FF
+0002E7 B180             	dc.b	nC4, nRst
+0002E9                  	smpsAlterVol		$0A
+0002E9 E60A             	dc.b	$E6,$0A
+0002EB AC               	dc.b	nG3
+0002EC                  	smpsAlterVol		$F5
+0002EC E6F5             	dc.b	$E6,$F5
+0002EE AE               	dc.b	nA3
+0002EF                  	smpsAlterVol		$02
+0002EF E602             	dc.b	$E6,$02
+0002F1 B1               	dc.b	nC4
+0002F2                  	smpsAlterVol		$FE
+0002F2 E6FE             	dc.b	$E6,$FE
+0002F4 B3               	dc.b	nD4
+0002F5                  	smpsJump	SH_SystemMenu_FM2, Target
+0002F5 F6               	dc.b	$F6
+                        	if (SH_SystemMenu_FM2<*)
+0002F6                  		rom_ptr_z80(SH_SystemMenu_FM2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002F6 25A4             	dc.w  (((((SH_SystemMenu_FM2+Target))<<8)&$FF00)|((((SH_SystemMenu_FM2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002F8                  SH_SystemMenu_FM3:
+0002F8                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+0002F8 E0C0             		dc.b $E0,panCenter
+                        	endif
+0002FA                  	smpsFMvoice		$03
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0002FA EF03             		dc.b $EF,$03
+                        	endif
+0002FC B80B             	dc.b	nG4, $0B
+
+0002FE                  SH_SystemMenu_Loo$8:
+0002FE 8006B8800CB880B8 	dc.b	nRst, $06, nG4, nRst, $0C, nG4, nRst, nG4
+000306 06800CB806800CB8 	dc.b	$06, nRst, $0C, nG4, $06, nRst, $0C, nG4
+00030E 8006B8800CB880B8 	dc.b	nRst, $06, nG4, nRst, $0C, nG4, nRst, nG4
+000316 06800CB806       	dc.b	$06, nRst, $0C, nG4, $06
+
+00031B                  SH_SystemMenu_Loop7:
+00031B 800CB68006B6800C 	dc.b	nRst, $0C, nF4, nRst, $06, nF4, nRst, $0C
+000323 B680B606800CB606 	dc.b	nF4, nRst, nF4, $06, nRst, $0C, nF4, $06
+00032B                  	smpsLoop		$00, $02, SH_SystemMenu_Loop7, Target
+00032B F7               	dc.b	$F7
+00032C 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop7<*)
+00032E                  		rom_ptr_z80(SH_SystemMenu_Loop7+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00032E 60A6             	dc.w  (((((SH_SystemMenu_Loop7+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop7+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000330 800CB8           	dc.b	nRst, $0C, nG4
+000333                  	smpsLoop		$01, $02, SH_SystemMenu_Loo$8, Target
+000333 F7               	dc.b	$F7
+000334 0102             	dc.b	$01,$02
+                        	if (SH_SystemMenu_Loo$8<*)
+000336                  		rom_ptr_z80(SH_SystemMenu_Loo$8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000336 43A6             	dc.w  (((((SH_SystemMenu_Loo$8+Target))<<8)&$FF00)|((((SH_SystemMenu_Loo$8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000338 8006B8800CB880B8 	dc.b	nRst, $06, nG4, nRst, $0C, nG4, nRst, nG4
+000340 06800CB806800CB8 	dc.b	$06, nRst, $0C, nG4, $06, nRst, $0C, nG4
+000348 8006B8800CB880B8 	dc.b	nRst, $06, nG4, nRst, $0C, nG4, nRst, nG4
+000350 06800CB806800C   	dc.b	$06, nRst, $0C, nG4, $06, nRst, $0C
+000357                  	smpsAlterVol		$FA
+000357 E6FA             	dc.b	$E6,$FA
+000359 C101             	dc.b	nE5, $01
+00035B                  	smpsAlterVol		$11
+00035B E611             	dc.b	$E6,$11
+00035D                  	smpsFMvoice		$02
+                        	;if song<>""
+                        	if 1==2
+                        	else
+00035D EF02             		dc.b $EF,$02
+                        	endif
+00035F E7058006BD80BF80 	dc.b	smpsNoAttack, $05, nRst, $06, nC5, nRst, nD5, nRst
+000367 C480C2C1BFBDBF80 	dc.b	nG5, nRst, nF5, nE5, nD5, nC5, nD5, nRst
+00036F 12C10680BD80BF80 	dc.b	$12, nE5, $06, nRst, nC5, nRst, nD5, nRst
+000377 C480C2C1BDBAB880 	dc.b	nG5, nRst, nF5, nE5, nC5, nA4, nG4, nRst
+00037F 12C10680BD80BF80 	dc.b	$12, nE5, $06, nRst, nC5, nRst, nD5, nRst
+000387 C480C2C1BFBDBF80 	dc.b	nG5, nRst, nF5, nE5, nD5, nC5, nD5, nRst
+00038F 12               	dc.b	$12
+000390                  	smpsAlterVol		$06
+000390 E606             	dc.b	$E6,$06
+000392 C101             	dc.b	nE5, $01
+000394                  	smpsAlterVol		$F4
+000394 E6F4             	dc.b	$E6,$F4
+000396                  	smpsFMvoice		$03
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000396 EF03             		dc.b $EF,$03
+                        	endif
+000398 E70BC406C812C406 	dc.b	smpsNoAttack, $0B, nG5, $06, nB5, $12, nG5, $06
+0003A0 C1248012C20606C4 	dc.b	nE5, $24, nRst, $12, nF5, $06, $06, nG5
+0003A8 C60CBA06BDBCB8BC 	dc.b	nA5, $0C, nA4, $06, nC5, nB4, nG4, nB4
+0003B0 C4C8C4C1C4C62480 	dc.b	nG5, nB5, nG5, nE5, nG5, nA5, $24, nRst
+0003B8 4EB90CBDC006C4BF 	dc.b	$4E, nAb4, $0C, nC5, nEb5, $06, nG5, nD5
+0003C0 0CC206BFBB0CC406 	dc.b	$0C, nF5, $06, nD5, nBb4, $0C, nG5, $06
+0003C8 C2038009C1368024 	dc.b	nF5, $03, nRst, $09, nE5, $36, nRst, $24
+0003D0                  	smpsAlterVol		$FA
+0003D0 E6FA             	dc.b	$E6,$FA
+0003D2 C101             	dc.b	nE5, $01
+0003D4                  	smpsFMvoice		$02
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0003D4 EF02             		dc.b $EF,$02
+                        	endif
+0003D6                  	smpsAlterVol		$0C
+0003D6 E60C             	dc.b	$E6,$0C
+0003D8 E7058006BD80BF80 	dc.b	smpsNoAttack, $05, nRst, $06, nC5, nRst, nD5, nRst
+0003E0 C480C2C1BFBDBF80 	dc.b	nG5, nRst, nF5, nE5, nD5, nC5, nD5, nRst
+0003E8 12C10680BD80BF80 	dc.b	$12, nE5, $06, nRst, nC5, nRst, nD5, nRst
+0003F0 C480C2C1BDBAB880 	dc.b	nG5, nRst, nF5, nE5, nC5, nA4, nG4, nRst
+0003F8 12C10680BD80BF80 	dc.b	$12, nE5, $06, nRst, nC5, nRst, nD5, nRst
+000400 C480C2C1BFBDBF80 	dc.b	nG5, nRst, nF5, nE5, nD5, nC5, nD5, nRst
+000408 12               	dc.b	$12
+000409                  	smpsAlterVol		$06
+000409 E606             	dc.b	$E6,$06
+00040B                  	smpsJump	SH_SystemMenu_FM3, Target
+00040B F6               	dc.b	$F6
+                        	if (SH_SystemMenu_FM3<*)
+00040C                  		rom_ptr_z80(SH_SystemMenu_FM3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00040C 3DA6             	dc.w  (((((SH_SystemMenu_FM3+Target))<<8)&$FF00)|((((SH_SystemMenu_FM3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00040E                  SH_SystemMenu_FM4:
+00040E                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+00040E E0C0             		dc.b $E0,panCenter
+                        	endif
+000410                  	smpsFMvoice		$04
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000410 EF04             		dc.b $EF,$04
+                        	endif
+000412 806BC40C         	dc.b	nRst, $6B, nG5, $0C
+000416                  	smpsAlterVol		$02
+000416 E602             	dc.b	$E6,$02
+000418 C6               	dc.b	nA5
+000419                  	smpsAlterVol		$FE
+000419 E6FE             	dc.b	$E6,$FE
+00041B C4               	dc.b	nG5
+00041C                  	smpsAlterVol		$FE
+00041C E6FE             	dc.b	$E6,$FE
+00041E C212             	dc.b	nF5, $12
+000420                  	smpsAlterVol		$FB
+000420 E6FB             	dc.b	$E6,$FB
+000422 C1               	dc.b	nE5
+000423                  	smpsAlterVol		$FD
+000423 E6FD             	dc.b	$E6,$FD
+000425 C90C             	dc.b	nC6, $0C
+000427                  	smpsAlterVol		$03
+000427 E603             	dc.b	$E6,$03
+000429 BF24803C         	dc.b	nD5, $24, nRst, $3C
+00042D                  	smpsAlterVol		$03
+00042D E603             	dc.b	$E6,$03
+00042F C40CC2           	dc.b	nG5, $0C, nF5
+000432                  	smpsAlterVol		$FE
+000432 E6FE             	dc.b	$E6,$FE
+000434 C109C203         	dc.b	nE5, $09, nF5, $03
+000438                  	smpsAlterVol		$01
+000438 E601             	dc.b	$E6,$01
+00043A CE0CC40F09C6     	dc.b	nF6, $0C, nG5, $0F, $09, nA5
+000440                  	smpsAlterVol		$01
+000440 E601             	dc.b	$E6,$01
+000442 C9               	dc.b	nC6
+000443                  	smpsAlterVol		$01
+000443 E601             	dc.b	$E6,$01
+000445 C806             	dc.b	nB5, $06
+000447                  	smpsAlterVol		$FF
+000447 E6FF             	dc.b	$E6,$FF
+000449 C430803CC40CC6C4 	dc.b	nG5, $30, nRst, $3C, nG5, $0C, nA5, nG5
+000451 C212C1C90CBF2480 	dc.b	nF5, $12, nE5, nC6, $0C, nD5, $24, nRst
+000459 3C               	dc.b	$3C
+00045A                  	smpsAlterVol		$FD
+00045A E6FD             	dc.b	$E6,$FD
+00045C C40CC2C180       	dc.b	nG5, $0C, nF5, nE5, nRst
+000461                  	smpsAlterVol		$02
+000461 E602             	dc.b	$E6,$02
+000463 C40F09C6C9C806C4 	dc.b	nG5, $0F, $09, nA5, nC6, nB5, $06, nG5
+                        	;!@ dc.b	$30, nRst, $7F, $11, nG5, $42, nE5, $06
+00046B 30807F8011C442C1 	dc.b	$30, nRst, $7F, nRst, $11, nG5, $42, nE5, $06
+000473 06
+000474 C2C1             	dc.b	nF5, nE5
+000476                  	smpsAlterVol		$01
+000476 E601             	dc.b	$E6,$01
+000478 C9               	dc.b	nC6
+000479                  	smpsAlterVol		$01
+000479 E601             	dc.b	$E6,$01
+00047B C448             	dc.b	nG5, $48
+00047D                  	smpsAlterVol		$FF
+00047D E6FF             	dc.b	$E6,$FF
+00047F C606C9BFC1C2C448 	dc.b	nA5, $06, nC6, nD5, nE5, nF5, nG5, $48
+000487 8006C6           	dc.b	nRst, $06, nA5
+00048A                  	smpsAlterVol		$FF
+00048A E6FF             	dc.b	$E6,$FF
+00048C C9BF             	dc.b	nC6, nD5
+00048E                  	smpsAlterVol		$F9
+00048E E6F9             	dc.b	$E6,$F9
+000490 C10C             	dc.b	nE5, $0C
+000492                  	smpsAlterVol		$04
+000492 E604             	dc.b	$E6,$04
+000494 C406             	dc.b	nG5, $06
+000496                  	smpsAlterVol		$FF
+000496 E6FF             	dc.b	$E6,$FF
+000498 C812             	dc.b	nB5, $12
+00049A                  	smpsAlterVol		$01
+00049A E601             	dc.b	$E6,$01
+00049C D006             	dc.b	nG6, $06
+00049E                  	smpsAlterVol		$01
+00049E E601             	dc.b	$E6,$01
+0004A0 C1248012         	dc.b	nE5, $24, nRst, $12
+0004A4                  	smpsAlterVol		$07
+0004A4 E607             	dc.b	$E6,$07
+0004A6 C80606           	dc.b	nB5, $06, $06
+0004A9                  	smpsAlterVol		$FB
+0004A9 E6FB             	dc.b	$E6,$FB
+0004AB BFC20C06C6C4C1   	dc.b	nD5, nF5, $0C, $06, nA5, nG5, nE5
+0004B2                  	smpsAlterVol		$01
+0004B2 E601             	dc.b	$E6,$01
+0004B4 C4C8BF           	dc.b	nG5, nB5, nD5
+0004B7                  	smpsAlterVol		$FC
+0004B7 E6FC             	dc.b	$E6,$FC
+0004B9 C8               	dc.b	nB5
+0004BA                  	smpsAlterVol		$FE
+0004BA E6FE             	dc.b	$E6,$FE
+0004BC C4C8C97FE717     	dc.b	nG5, nB5, nC6, $7F, smpsNoAttack, $17
+0004C2                  	smpsAlterVol		$03
+0004C2 E603             	dc.b	$E6,$03
+0004C4 C70C0C0C         	dc.b	nBb5, $0C, $0C, $0C
+0004C8                  	smpsAlterVol		$02
+0004C8 E602             	dc.b	$E6,$02
+0004CA C406C20C         	dc.b	nG5, $06, nF5, $0C
+0004CE                  	smpsAlterVol		$01
+0004CE E601             	dc.b	$E6,$01
+0004D0 C95A             	dc.b	nC6, $5A
+0004D2                  	smpsAlterVol		$FE
+0004D2 E6FE             	dc.b	$E6,$FE
+0004D4 C442             	dc.b	nG5, $42
+0004D6                  	smpsAlterVol		$FF
+0004D6 E6FF             	dc.b	$E6,$FF
+0004D8 C106C2           	dc.b	nE5, $06, nF5
+0004DB                  	smpsAlterVol		$FE
+0004DB E6FE             	dc.b	$E6,$FE
+0004DD C1               	dc.b	nE5
+0004DE                  	smpsAlterVol		$FF
+0004DE E6FF             	dc.b	$E6,$FF
+0004E0 C9               	dc.b	nC6
+0004E1                  	smpsAlterVol		$01
+0004E1 E601             	dc.b	$E6,$01
+0004E3 C448             	dc.b	nG5, $48
+0004E5                  	smpsAlterVol		$02
+0004E5 E602             	dc.b	$E6,$02
+0004E7 C606C9           	dc.b	nA5, $06, nC6
+0004EA                  	smpsAlterVol		$FF
+0004EA E6FF             	dc.b	$E6,$FF
+0004EC BF               	dc.b	nD5
+0004ED                  	smpsAlterVol		$FA
+0004ED E6FA             	dc.b	$E6,$FA
+0004EF C1C2             	dc.b	nE5, nF5
+0004F1                  	smpsAlterVol		$FE
+0004F1 E6FE             	dc.b	$E6,$FE
+0004F3 C4488006         	dc.b	nG5, $48, nRst, $06
+0004F7                  	smpsAlterVol		$0B
+0004F7 E60B             	dc.b	$E6,$0B
+0004F9 C6               	dc.b	nA5
+0004FA                  	smpsAlterVol		$01
+0004FA E601             	dc.b	$E6,$01
+0004FC C9BF             	dc.b	nC6, nD5
+0004FE                  	smpsAlterVol		$01
+0004FE E601             	dc.b	$E6,$01
+000500                  	smpsJump	SH_SystemMenu_FM4, Target
+000500 F6               	dc.b	$F6
+                        	if (SH_SystemMenu_FM4<*)
+000501                  		rom_ptr_z80(SH_SystemMenu_FM4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000501 53A7             	dc.w  (((((SH_SystemMenu_FM4+Target))<<8)&$FF00)|((((SH_SystemMenu_FM4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000503                  SH_SystemMenu_FM5:
+000503                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+000503 E0C0             		dc.b $E0,panCenter
+                        	endif
+000505                  	smpsFMvoice		$05
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000505 EF05             		dc.b $EF,$05
+                        	endif
+000507 9408             	dc.b	nG1, $08
+
+000509                  SH_SystemMenu_Loo$9:
+000509 8F09940C8F06949B 	dc.b	nD1, $09, nG1, $0C, nD1, $06, nG1, nD2
+000511 9409             	dc.b	nG1, $09
+000513                  	smpsLoop		$00, $03, SH_SystemMenu_Loo$9, Target
+000513 F7               	dc.b	$F7
+000514 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_Loo$9<*)
+000516                  		rom_ptr_z80(SH_SystemMenu_Loo$9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000516 4EA8             	dc.w  (((((SH_SystemMenu_Loo$9+Target))<<8)&$FF00)|((((SH_SystemMenu_Loo$9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000518 8F940C8F06949B   	dc.b	nD1, nG1, $0C, nD1, $06, nG1, nD2
+
+00051F                  SH_SystemMenu_Loop10:
+00051F 92098D920C8D0692 	dc.b	nF1, $09, nC1, nF1, $0C, nC1, $06, nF1
+000527 99               	dc.b	nC2
+000528                  	smpsLoop		$00, $04, SH_SystemMenu_Loop10, Target
+000528 F7               	dc.b	$F7
+000529 0004             	dc.b	$00,$04
+                        	if (SH_SystemMenu_Loop10<*)
+00052B                  		rom_ptr_z80(SH_SystemMenu_Loop10+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00052B 64A8             	dc.w  (((((SH_SystemMenu_Loop10+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop10+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00052D 9409             	dc.b	nG1, $09
+00052F                  	smpsLoop		$01, $02, SH_SystemMenu_Loo$9, Target
+00052F F7               	dc.b	$F7
+000530 0102             	dc.b	$01,$02
+                        	if (SH_SystemMenu_Loo$9<*)
+000532                  		rom_ptr_z80(SH_SystemMenu_Loo$9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000532 4EA8             	dc.w  (((((SH_SystemMenu_Loo$9+Target))<<8)&$FF00)|((((SH_SystemMenu_Loo$9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000534                  SH_SystemMenu_Loop11:
+000534 8F940C8F06949B94 	dc.b	nD1, nG1, $0C, nD1, $06, nG1, nD2, nG1
+00053C 09               	dc.b	$09
+00053D                  	smpsLoop		$00, $03, SH_SystemMenu_Loop11, Target
+00053D F7               	dc.b	$F7
+00053E 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_Loop11<*)
+000540                  		rom_ptr_z80(SH_SystemMenu_Loop11+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000540 79A8             	dc.w  (((((SH_SystemMenu_Loop11+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop11+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000542 8F940C8F06949B   	dc.b	nD1, nG1, $0C, nD1, $06, nG1, nD2
+000549                  	smpsAlterVol		$06
+000549 E606             	dc.b	$E6,$06
+00054B 09969B0C96950694 	dc.b	$09, nA1, nD2, $0C, nA1, nAb1, $06, nG1
+000553 9B0CA09E0696949B 	dc.b	nD2, $0C, nG2, nF2, $06, nA1, nG1, nD2
+00055B 09969B0C96950694 	dc.b	$09, nA1, nD2, $0C, nA1, nAb1, $06, nG1
+000563 9BA10380A00C9E06 	dc.b	nD2, nAb2, $03, nRst, nG2, $0C, nF2, $06
+00056B 9B959B09969B0C96 	dc.b	nD2, nAb1, nD2, $09, nA1, nD2, $0C, nA1
+000573 9506949B0CA09E06 	dc.b	nAb1, $06, nG1, nD2, $0C, nG2, nF2, $06
+00057B 96949D80039D9806 	dc.b	nA1, nG1, nE2, nRst, $03, nE2, nB1, $06
+000583 9D0980039D06989D 	dc.b	nE2, $09, nRst, $03, nE2, $06, nB1, nE2
+00058B 9C0C979D989E0999 	dc.b	nEb2, $0C, nBb1, nE2, nB1, nF2, $09, nC2
+000593 921299069E988003 	dc.b	nF1, $12, nC2, $06, nF2, nB1, nRst, $03
+00059B 9880069112980694 	dc.b	nB1, nRst, $06, nE1, $12, nB1, $06, nG1
+0005A3 968003968006910C 	dc.b	nA1, nRst, $03, nA1, nRst, $06, nE1, $0C
+0005AB 06069495099C900C 	dc.b	$06, $06, nG1, nAb1, $09, nEb2, nEb1, $0C
+0005B3 060694950990950C 	dc.b	$06, $06, nG1, nAb1, $09, nEb1, nAb1, $0C
+0005BB 8006950380958097 	dc.b	nRst, $06, nAb1, $03, nRst, nAb1, nRst, nBb1
+0005C3 0C928B9706949980 	dc.b	$0C, nF1, nBb0, nBb1, $06, nG1, nC2, nRst
+0005CB 0399800699189406 	dc.b	$03, nC2, nRst, $06, nC2, $18, nG1, $06
+0005D3 9909948D1E9B0996 	dc.b	nC2, $09, nG1, nC1, $1E, nD2, $09, nA1
+0005DB 9B0C969506949B0C 	dc.b	nD2, $0C, nA1, nAb1, $06, nG1, nD2, $0C
+0005E3 A09E0696949B0996 	dc.b	nG2, nF2, $06, nA1, nG1, nD2, $09, nA1
+0005EB 9B0C969506949BA1 	dc.b	nD2, $0C, nA1, nAb1, $06, nG1, nD2, nAb2
+0005F3 0380A00C9E069B95 	dc.b	$03, nRst, nG2, $0C, nF2, $06, nD2, nAb1
+0005FB 9B09969B0C969506 	dc.b	nD2, $09, nA1, nD2, $0C, nA1, nAb1, $06
+000603 949B0CA09E069694 	dc.b	nG1, nD2, $0C, nG2, nF2, $06, nA1, nG1
+00060B                  	smpsJump	SH_SystemMenu_FM5, Target
+00060B F6               	dc.b	$F6
+                        	if (SH_SystemMenu_FM5<*)
+00060C                  		rom_ptr_z80(SH_SystemMenu_FM5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00060C 48A8             	dc.w  (((((SH_SystemMenu_FM5+Target))<<8)&$FF00)|((((SH_SystemMenu_FM5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00060E                  SH_SystemMenu_FM6:
+00060E                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+00060E E0C0             		dc.b $E0,panCenter
+                        	endif
+000610                  	smpsFMvoice		$06
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000610 EF06             		dc.b $EF,$06
+                        	endif
+000612 80               	dc.b	nRst
+
+000613                  SH_SystemMenu_Loop12:
+000613 57               	dc.b	$57
+000614                  	smpsLoop		$00, $0A, SH_SystemMenu_Loop12, Target
+000614 F7               	dc.b	$F7
+000615 000A             	dc.b	$00,$0A
+                        	if (SH_SystemMenu_Loop12<*)
+000617                  		rom_ptr_z80(SH_SystemMenu_Loop12+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000617 58A9             	dc.w  (((((SH_SystemMenu_Loop12+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop12+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000619 59B5038006B501   	dc.b	$59, nE4, $03, nRst, $06, nE4, $01
+000620                  	smpsAlterVol		$06
+000620 E606             	dc.b	$E6,$06
+000622                  	smpsFMvoice		$06
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000622 EF06             		dc.b $EF,$06
+                        	endif
+000624 E7028006B5038009 	dc.b	smpsNoAttack, $02, nRst, $06, nE4, $03, nRst, $09
+00062C B5038006B503BCB5 	dc.b	nE4, $03, nRst, $06, nE4, $03, nB4, nE4
+000634 B0068003B0       	dc.b	nB3, $06, nRst, $03, nB3
+
+000639                  SH_SystemMenu_Loop13:
+000639 8006B003         	dc.b	nRst, $06, nB3, $03
+00063D                  	smpsLoop		$00, $03, SH_SystemMenu_Loop13, Target
+00063D F7               	dc.b	$F7
+00063E 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_Loop13<*)
+000640                  		rom_ptr_z80(SH_SystemMenu_Loop13+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000640 7EA9             	dc.w  (((((SH_SystemMenu_Loop13+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop13+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000642 80B0B1B5068003B5 	dc.b	nRst, nB3, nC4, nE4, $06, nRst, $03, nE4
+00064A 8006B5038009B503 	dc.b	nRst, $06, nE4, $03, nRst, $09, nE4, $03
+000652 8006B58003B00680 	dc.b	nRst, $06, nE4, nRst, $03, nB3, $06, nRst
+00065A 03B08006B0038009 	dc.b	$03, nB3, nRst, $06, nB3, $03, nRst, $09
+000662 B00380B080B0B1B5 	dc.b	nB3, $03, nRst, nB3, nRst, nB3, nC4, nE4
+00066A 8006B5038006B503 	dc.b	nRst, $06, nE4, $03, nRst, $06, nE4, $03
+000672 8009B5038006B503 	dc.b	nRst, $09, nE4, $03, nRst, $06, nE4, $03
+00067A BCB5B0068003B0   	dc.b	nB4, nE4, nB3, $06, nRst, $03, nB3
+
+000681                  SH_SystemMenu_Loop14:
+000681 8006B003         	dc.b	nRst, $06, nB3, $03
+000685                  	smpsLoop		$00, $03, SH_SystemMenu_Loop14, Target
+000685 F7               	dc.b	$F7
+000686 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_Loop14<*)
+000688                  		rom_ptr_z80(SH_SystemMenu_Loop14+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000688 C6A9             	dc.w  (((((SH_SystemMenu_Loop14+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop14+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@ dc.b	nRst, nB3, nC4, nRst, $7F, $7F, $7F, $63
+00068A 80B0B1807F807F80 	dc.b	nRst, nB3, nC4, nRst, $7F, nRst, $7F, nRst, $7F, nRst, $63
+000692 7F8063
+000695 B5038006B501     	dc.b	nE4, $03, nRst, $06, nE4, $01
+00069B                  	smpsFMvoice		$06
+                        	;if song<>""
+                        	if 1==2
+                        	else
+00069B EF06             		dc.b $EF,$06
+                        	endif
+00069D E7028006B5038009 	dc.b	smpsNoAttack, $02, nRst, $06, nE4, $03, nRst, $09
+0006A5 B5038006B503BCB5 	dc.b	nE4, $03, nRst, $06, nE4, $03, nB4, nE4
+0006AD B0068003B0       	dc.b	nB3, $06, nRst, $03, nB3
+
+0006B2                  SH_SystemMenu_Loop15:
+0006B2 8006B003         	dc.b	nRst, $06, nB3, $03
+0006B6                  	smpsLoop		$00, $03, SH_SystemMenu_Loop15, Target
+0006B6 F7               	dc.b	$F7
+0006B7 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_Loop15<*)
+0006B9                  		rom_ptr_z80(SH_SystemMenu_Loop15+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006B9 F7A9             	dc.w  (((((SH_SystemMenu_Loop15+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop15+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0006BB 80B0B1B5068003B5 	dc.b	nRst, nB3, nC4, nE4, $06, nRst, $03, nE4
+0006C3 8006B5038009B503 	dc.b	nRst, $06, nE4, $03, nRst, $09, nE4, $03
+0006CB 8006B58003B00680 	dc.b	nRst, $06, nE4, nRst, $03, nB3, $06, nRst
+0006D3 03B08006B0038009 	dc.b	$03, nB3, nRst, $06, nB3, $03, nRst, $09
+0006DB B00380B080B0B1B5 	dc.b	nB3, $03, nRst, nB3, nRst, nB3, nC4, nE4
+0006E3 8006B5038006B503 	dc.b	nRst, $06, nE4, $03, nRst, $06, nE4, $03
+0006EB 8009B5038006B503 	dc.b	nRst, $09, nE4, $03, nRst, $06, nE4, $03
+0006F3 BCB5B0068003B0   	dc.b	nB4, nE4, nB3, $06, nRst, $03, nB3
+
+0006FA                  SH_SystemMenu_Loop16:
+0006FA 8006B003         	dc.b	nRst, $06, nB3, $03
+0006FE                  	smpsLoop		$00, $03, SH_SystemMenu_Loop16, Target
+0006FE F7               	dc.b	$F7
+0006FF 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_Loop16<*)
+000701                  		rom_ptr_z80(SH_SystemMenu_Loop16+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000701 3FAA             	dc.w  (((((SH_SystemMenu_Loop16+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop16+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000703 80B0B1           	dc.b	nRst, nB3, nC4
+000706                  	smpsJump	SH_SystemMenu_FM6, Target
+000706 F6               	dc.b	$F6
+                        	if (SH_SystemMenu_FM6<*)
+000707                  		rom_ptr_z80(SH_SystemMenu_FM6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000707 53A9             	dc.w  (((((SH_SystemMenu_FM6+Target))<<8)&$FF00)|((((SH_SystemMenu_FM6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000709                  SH_SystemMenu_PSG1:
+000709 8005             	dc.b	nRst, $05
+
+00070B                  SH_SystemMenu_Loop18:
+00070B 88               	dc.b	nG0
+
+00070C                  SH_SystemMenu_Loop17:
+00070C 068D0380940C     	dc.b	$06, nC1, $03, nRst, nG1, $0C
+000712                  	smpsLoop		$00, $02, SH_SystemMenu_Loop17, Target
+000712 F7               	dc.b	$F7
+000713 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop17<*)
+000715                  		rom_ptr_z80(SH_SystemMenu_Loop17+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000715 51AA             	dc.w  (((((SH_SystemMenu_Loop17+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop17+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000717 88068D8F88880380 	dc.b	nG0, $06, nC1, nD1, nG0, nG0, $03, nRst
+00071F 860688188054     	dc.b	nF0, $06, nG0, $18, nRst, $54
+000725                  	smpsLoop		$01, $03, SH_SystemMenu_Loop18, Target
+000725 F7               	dc.b	$F7
+000726 0103             	dc.b	$01,$03
+                        	if (SH_SystemMenu_Loop18<*)
+000728                  		rom_ptr_z80(SH_SystemMenu_Loop18+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000728 50AA             	dc.w  (((((SH_SystemMenu_Loop18+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop18+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00072A 88               	dc.b	nG0
+
+00072B                  SH_SystemMenu_Loop19:
+00072B 068D0380940C     	dc.b	$06, nC1, $03, nRst, nG1, $0C
+000731                  	smpsLoop		$00, $02, SH_SystemMenu_Loop19, Target
+000731 F7               	dc.b	$F7
+000732 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop19<*)
+000734                  		rom_ptr_z80(SH_SystemMenu_Loop19+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000734 70AA             	dc.w  (((((SH_SystemMenu_Loop19+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop19+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000736 88068D8F88880380 	dc.b	nG0, $06, nC1, nD1, nG0, nG0, $03, nRst
+                        	;!@ dc.b	nF0, $06, nG0, $18, nRst, $7F, $77, nG1
+00073E 86068818807F8077 	dc.b	nF0, $06, nG0, $18, nRst, $7F, nRst, $77, nG1
+000746 94
+000747 0303800694030380 	dc.b	$03, $03, nRst, $06, nG1, $03, $03, nRst
+00074F 4EAC03038006AC03 	dc.b	$4E, nG3, $03, $03, nRst, $06, nG3, $03
+
+000757                  SH_SystemMenu_Loop20:
+000757 03804E9403038006 	dc.b	$03, nRst, $4E, nG1, $03, $03, nRst, $06
+00075F 9403             	dc.b	nG1, $03
+000761                  	smpsLoop		$00, $02, SH_SystemMenu_Loop20, Target
+000761 F7               	dc.b	$F7
+000762 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop20<*)
+000764                  		rom_ptr_z80(SH_SystemMenu_Loop20+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000764 9CAA             	dc.w  (((((SH_SystemMenu_Loop20+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop20+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@ dc.b	$03, nRst, $7F, $53, nA1, $06, nRst, nC2
+000766 03807F8053960680 	dc.b	$03, nRst, $7F, nRst, $53, nA1, $06, nRst, nC2
+00076E 99
+00076F 9680990C96069996 	dc.b	nA1, nRst, nC2, $0C, nA1, $06, nC2, nA1
+000777 9980A8A703800999 	dc.b	nC2, nRst, nEb3, nD3, $03, nRst, $09, nC2
+00077F 1EA806A703800999 	dc.b	$1E, nEb3, $06, nD3, $03, nRst, $09, nC2
+000787 0C9506990CA806A7 	dc.b	$0C, nAb1, $06, nC2, $0C, nEb3, $06, nD3
+00078F 03804B           	dc.b	$03, nRst, $4B
+000792                  	smpsSetVol	$03
+000792 EC03             	dc.b	$EC,$03
+000794 AC03038009AC0380 	dc.b	nG3, $03, $03, nRst, $09, nG3, $03, nRst
+00079C 4E               	dc.b	$4E
+00079D                  	smpsSetVol	$FD
+00079D ECFD             	dc.b	$EC,$FD
+00079F AC03038006AC03   	dc.b	nG3, $03, $03, nRst, $06, nG3, $03
+
+0007A6                  SH_SystemMenu_Loop21:
+0007A6 03804E9403038006 	dc.b	$03, nRst, $4E, nG1, $03, $03, nRst, $06
+0007AE 9403             	dc.b	nG1, $03
+0007B0                  	smpsLoop		$00, $02, SH_SystemMenu_Loop21, Target
+0007B0 F7               	dc.b	$F7
+0007B1 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop21<*)
+0007B3                  		rom_ptr_z80(SH_SystemMenu_Loop21+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007B3 EBAA             	dc.w  (((((SH_SystemMenu_Loop21+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop21+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0007B5 03               	dc.b	$03
+0007B6                  	smpsJump	SH_SystemMenu_PSG1, Target
+0007B6 F6               	dc.b	$F6
+                        	if (SH_SystemMenu_PSG1<*)
+0007B7                  		rom_ptr_z80(SH_SystemMenu_PSG1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007B7 4EAA             	dc.w  (((((SH_SystemMenu_PSG1+Target))<<8)&$FF00)|((((SH_SystemMenu_PSG1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0007B9                  SH_SystemMenu_PSG2:
+0007B9 8D0B80068D800C8D 	dc.b	nC1, $0B, nRst, $06, nC1, nRst, $0C, nC1
+0007C1 808D06800C8D0680 	dc.b	nRst, nC1, $06, nRst, $0C, nC1, $06, nRst
+0007C9 0C8D80068D800C8D 	dc.b	$0C, nC1, nRst, $06, nC1, nRst, $0C, nC1
+0007D1 808D06800C8D0680 	dc.b	nRst, nC1, $06, nRst, $0C, nC1, $06, nRst
+0007D9 0C               	dc.b	$0C
+0007DA                  	smpsSetVol	$01
+0007DA EC01             	dc.b	$EC,$01
+
+0007DC                  SH_SystemMenu_Loop22:
+0007DC 8D80068D800C8D80 	dc.b	nC1, nRst, $06, nC1, nRst, $0C, nC1, nRst
+0007E4 8D06800C8D06800C 	dc.b	nC1, $06, nRst, $0C, nC1, $06, nRst, $0C
+0007EC                  	smpsLoop		$00, $02, SH_SystemMenu_Loop22, Target
+0007EC F7               	dc.b	$F7
+0007ED 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop22<*)
+0007EF                  		rom_ptr_z80(SH_SystemMenu_Loop22+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007EF 21AB             	dc.w  (((((SH_SystemMenu_Loop22+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop22+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0007F1                  	smpsSetVol	$FF
+0007F1 ECFF             	dc.b	$EC,$FF
+
+0007F3                  SH_SystemMenu_Loop23:
+0007F3 8D80068D800C8D80 	dc.b	nC1, nRst, $06, nC1, nRst, $0C, nC1, nRst
+0007FB 8D06800C8D06800C 	dc.b	nC1, $06, nRst, $0C, nC1, $06, nRst, $0C
+000803                  	smpsLoop		$00, $02, SH_SystemMenu_Loop23, Target
+000803 F7               	dc.b	$F7
+000804 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop23<*)
+000806                  		rom_ptr_z80(SH_SystemMenu_Loop23+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000806 38AB             	dc.w  (((((SH_SystemMenu_Loop23+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop23+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000808                  	smpsSetVol	$01
+000808 EC01             	dc.b	$EC,$01
+
+00080A                  SH_SystemMenu_Loop24:
+00080A 8D80068D800C8D80 	dc.b	nC1, nRst, $06, nC1, nRst, $0C, nC1, nRst
+000812 8D06800C8D06800C 	dc.b	nC1, $06, nRst, $0C, nC1, $06, nRst, $0C
+00081A                  	smpsLoop		$00, $02, SH_SystemMenu_Loop24, Target
+00081A F7               	dc.b	$F7
+00081B 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_Loop24<*)
+00081D                  		rom_ptr_z80(SH_SystemMenu_Loop24+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00081D 4FAB             	dc.w  (((((SH_SystemMenu_Loop24+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop24+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00081F                  	smpsSetVol	$FF
+00081F ECFF             	dc.b	$EC,$FF
+000821 8D04             	dc.b	nC1, $04
+000823                  	smpsSetVol	$F6
+000823 ECF6             	dc.b	$EC,$F6
+000825 E70880068D800C8D 	dc.b	smpsNoAttack, $08, nRst, $06, nC1, nRst, $0C, nC1
+00082D 808D06800C8D0680 	dc.b	nRst, nC1, $06, nRst, $0C, nC1, $06, nRst
+000835 0C8D80068D800C8D 	dc.b	$0C, nC1, nRst, $06, nC1, nRst, $0C, nC1
+00083D 808D06800C8D0680 	dc.b	nRst, nC1, $06, nRst, $0C, nC1, $06, nRst
+000845 0C               	dc.b	$0C
+000846                  	smpsSetVol	$03
+000846 EC03             	dc.b	$EC,$03
+000848 910380068A01     	dc.b	nE1, $03, nRst, $06, nA0, $01
+00084E                  	smpsPSGvoice	$04
+00084E F504             	dc.b	$F5,$04
+000850                  	smpsSetVol	$07
+000850 EC07             	dc.b	$EC,$07
+000852 E70280068A038009 	dc.b	smpsNoAttack, $02, nRst, $06, nA0, $03, nRst, $09
+00085A 8A0380068A03918A 	dc.b	nA0, $03, nRst, $06, nA0, $03, nE1, nA0
+000862 8506800385       	dc.b	nE0, $06, nRst, $03, nE0
+
+000867                  SH_SystemMenu_Loop25:
+000867 80068503         	dc.b	nRst, $06, nE0, $03
+00086B                  	smpsLoop		$00, $03, SH_SystemMenu_Loop25, Target
+00086B F7               	dc.b	$F7
+00086C 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_Loop25<*)
+00086E                  		rom_ptr_z80(SH_SystemMenu_Loop25+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00086E ACAB             	dc.w  (((((SH_SystemMenu_Loop25+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop25+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000870 8085868A0680038A 	dc.b	nRst, nE0, nF0, nA0, $06, nRst, $03, nA0
+000878 80068A0380098A03 	dc.b	nRst, $06, nA0, $03, nRst, $09, nA0, $03
+000880 80068A8003850680 	dc.b	nRst, $06, nA0, nRst, $03, nE0, $06, nRst
+000888 0385800685038009 	dc.b	$03, nE0, nRst, $06, nE0, $03, nRst, $09
+000890 8503808580858691 	dc.b	nE0, $03, nRst, nE0, nRst, nE0, nF0, nE1
+000898 80068A0380068A03 	dc.b	nRst, $06, nA0, $03, nRst, $06, nA0, $03
+0008A0 80098A0380068A03 	dc.b	nRst, $09, nA0, $03, nRst, $06, nA0, $03
+0008A8 918A850680038580 	dc.b	nE1, nA0, nE0, $06, nRst, $03, nE0, nRst
+0008B0 0685038006850380 	dc.b	$06, nE0, $03, nRst, $06, nE0, $03, nRst
+0008B8 068501           	dc.b	$06, nE0, $01
+0008BB                  	smpsPSGvoice	$04
+0008BB F504             	dc.b	$F5,$04
+0008BD                  	smpsSetVol	$01
+0008BD EC01             	dc.b	$EC,$01
+0008BF E702800385868001 	dc.b	smpsNoAttack, $02, nRst, $03, nE0, nF0, nRst, $01
+0008C7                  	smpsPSGvoice	$01
+0008C7 F501             	dc.b	$F5,$01
+0008C9 06               	dc.b	$06
+0008CA                  	smpsSetVol	$FE
+0008CA ECFE             	dc.b	$EC,$FE
+0008CC 960180029D018005 	dc.b	nA1, $01, nRst, $02, nE2, $01, nRst, $05
+0008D4 AB018004B5018007 	dc.b	nFs3, $01, nRst, $04, nE4, $01, nRst, $07
+                        	;!@ dc.b	nB2, $01, nRst, nRst, $05, nG3, $06, nE3
+0008DC A401800180018005 	dc.b	nB2, $01, nRst, $01, nRst, $01, nRst, $05, nG3, $06, nE3
+0008E4 AC06A9
+0008E7 24               	dc.b	$24
+0008E8                  	smpsSetVol	$03
+0008E8 EC03             	dc.b	$EC,$03
+0008EA AC01             	dc.b	nG3, $01
+0008EC                  	smpsSetVol	$F7
+0008EC ECF7             	dc.b	$EC,$F7
+0008EE                  	smpsPSGvoice	$01
+0008EE F501             	dc.b	$F5,$01
+0008F0 E705AA06A9       	dc.b	smpsNoAttack, $05, nF3, $06, nE3
+0008F5                  	smpsSetVol	$FD
+0008F5 ECFD             	dc.b	$EC,$FD
+                        	;!@ dc.b	nF2, nRst, $2A, $7F, $7F, $23
+0008F7 9E802A807F807F80 	dc.b	nF2, nRst, $2A, nRst, $7F, nRst, $7F, nRst, $23
+0008FF 23
+000900                  	smpsPSGvoice	$01
+000900 F501             	dc.b	$F5,$01
+                        	;!@ dc.b	$03
+000902 8003             	dc.b	nRst, $03
+000904                  	smpsPSGvoice	$01
+000904 F501             	dc.b	$F5,$01
+000906                  	smpsSetVol	$09
+000906 EC09             	dc.b	$EC,$09
+000908 960180029D018002 	dc.b	nA1, $01, nRst, $02, nE2, $01, nRst, $02
+000910 A4018002AB018004 	dc.b	nB2, $01, nRst, $02, nFs3, $01, nRst, $04
+                        	;!@ dc.b	nE4, $01, nRst, $07, nB2, $01, nRst, nRst
+000918 B5018007A4018001 	dc.b	nE4, $01, nRst, $07, nB2, $01, nRst, $01, nRst
+000920 80
+000921 0693019480998002 	dc.b	$06, nFs1, $01, nG1, nRst, nC2, nRst, $02
+000929 A00180A48003AE01 	dc.b	nG2, $01, nRst, nB2, nRst, $03, nA3, $01
+000931 80               	dc.b	nRst
+000932                  	smpsSetVol	$03
+000932 EC03             	dc.b	$EC,$03
+000934 910380068A01     	dc.b	nE1, $03, nRst, $06, nA0, $01
+00093A                  	smpsPSGvoice	$04
+00093A F504             	dc.b	$F5,$04
+00093C                  	smpsSetVol	$FE
+00093C ECFE             	dc.b	$EC,$FE
+00093E E70280068A038009 	dc.b	smpsNoAttack, $02, nRst, $06, nA0, $03, nRst, $09
+000946 8A0380068A03918A 	dc.b	nA0, $03, nRst, $06, nA0, $03, nE1, nA0
+00094E 8506800385       	dc.b	nE0, $06, nRst, $03, nE0
+
+000953                  SH_SystemMenu_Loop26:
+000953 80068503         	dc.b	nRst, $06, nE0, $03
+000957                  	smpsLoop		$00, $03, SH_SystemMenu_Loop26, Target
+000957 F7               	dc.b	$F7
+000958 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_Loop26<*)
+00095A                  		rom_ptr_z80(SH_SystemMenu_Loop26+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00095A 98AC             	dc.w  (((((SH_SystemMenu_Loop26+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop26+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00095C 8085868A0680038A 	dc.b	nRst, nE0, nF0, nA0, $06, nRst, $03, nA0
+000964 80068A0380098A03 	dc.b	nRst, $06, nA0, $03, nRst, $09, nA0, $03
+00096C 80068A8003850680 	dc.b	nRst, $06, nA0, nRst, $03, nE0, $06, nRst
+000974 0385800685038009 	dc.b	$03, nE0, nRst, $06, nE0, $03, nRst, $09
+00097C 8503808580858691 	dc.b	nE0, $03, nRst, nE0, nRst, nE0, nF0, nE1
+000984 80068A0380068A03 	dc.b	nRst, $06, nA0, $03, nRst, $06, nA0, $03
+00098C 80098A0380068A03 	dc.b	nRst, $09, nA0, $03, nRst, $06, nA0, $03
+000994 918A8506800385   	dc.b	nE1, nA0, nE0, $06, nRst, $03, nE0
+
+00099B                  SH_SystemMenu_Loop27:
+00099B 80068503         	dc.b	nRst, $06, nE0, $03
+00099F                  	smpsLoop		$00, $03, SH_SystemMenu_Loop27, Target
+00099F F7               	dc.b	$F7
+0009A0 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_Loop27<*)
+0009A2                  		rom_ptr_z80(SH_SystemMenu_Loop27+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009A2 E0AC             	dc.w  (((((SH_SystemMenu_Loop27+Target))<<8)&$FF00)|((((SH_SystemMenu_Loop27+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0009A4 808586           	dc.b	nRst, nE0, nF0
+0009A7                  	smpsPSGvoice	$04
+0009A7 F504             	dc.b	$F5,$04
+0009A9 8001             	dc.b	nRst, $01
+0009AB                  	smpsJump	SH_SystemMenu_PSG2, Target
+0009AB F6               	dc.b	$F6
+                        	if (SH_SystemMenu_PSG2<*)
+0009AC                  		rom_ptr_z80(SH_SystemMenu_PSG2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009AC FEAA             	dc.w  (((((SH_SystemMenu_PSG2+Target))<<8)&$FF00)|((((SH_SystemMenu_PSG2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0009AE                  SH_SystemMenu_PSG3:
+0009AE 806C9401         	dc.b	nRst, $6C, nG1, $01
+0009B2                  	smpsPSGvoice	$05
+0009B2 F505             	dc.b	$F5,$05
+0009B4 E70B             	dc.b	smpsNoAttack, $0B
+0009B6                  	smpsSetVol	$01
+0009B6 EC01             	dc.b	$EC,$01
+0009B8 960C             	dc.b	nA1, $0C
+0009BA                  	smpsSetVol	$FF
+0009BA ECFF             	dc.b	$EC,$FF
+0009BC AC               	dc.b	nG3
+0009BD                  	smpsSetVol	$FF
+0009BD ECFF             	dc.b	$EC,$FF
+0009BF AA12             	dc.b	nF3, $12
+0009C1                  	smpsSetVol	$FE
+0009C1 ECFE             	dc.b	$EC,$FE
+0009C3 A9               	dc.b	nE3
+0009C4                  	smpsSetVol	$FF
+0009C4 ECFF             	dc.b	$EC,$FF
+0009C6 990C             	dc.b	nC2, $0C
+0009C8                  	smpsSetVol	$01
+0009C8 EC01             	dc.b	$EC,$01
+0009CA A724803C         	dc.b	nD3, $24, nRst, $3C
+0009CE                  	smpsSetVol	$02
+0009CE EC02             	dc.b	$EC,$02
+0009D0 AC0CAA           	dc.b	nG3, $0C, nF3
+0009D3                  	smpsSetVol	$FF
+0009D3 ECFF             	dc.b	$EC,$FF
+0009D5 A980AC0F940996   	dc.b	nE3, nRst, nG3, $0F, nG1, $09, nA1
+0009DC                  	smpsSetVol	$01
+0009DC EC01             	dc.b	$EC,$01
+0009DE 9998069430803C94 	dc.b	nC2, nB1, $06, nG1, $30, nRst, $3C, nG1
+0009E6 0C               	dc.b	$0C
+0009E7                  	smpsSetVol	$FF
+0009E7 ECFF             	dc.b	$EC,$FF
+0009E9 96ACAA12A9990CA7 	dc.b	nA1, nG3, nF3, $12, nE3, nC2, $0C, nD3
+0009F1 24803C           	dc.b	$24, nRst, $3C
+0009F4                  	smpsSetVol	$FF
+0009F4 ECFF             	dc.b	$EC,$FF
+0009F6 AC0CAA           	dc.b	nG3, $0C, nF3
+0009F9                  	smpsSetVol	$01
+0009F9 EC01             	dc.b	$EC,$01
+0009FB A980AC0F94099699 	dc.b	nE3, nRst, nG3, $0F, nG1, $09, nA1, nC2
+                        	;!@ dc.b	nB1, $06, nG1, $30, nRst, $7F, $11, nG3
+000A03 98069430807F8011 	dc.b	nB1, $06, nG1, $30, nRst, $7F, nRst, $11, nG3
+000A0B AC
+000A0C 42A906AAA999     	dc.b	$42, nE3, $06, nF3, nE3, nC2
+000A12                  	smpsSetVol	$01
+000A12 EC01             	dc.b	$EC,$01
+000A14 9448960699A7A9AA 	dc.b	nG1, $48, nA1, $06, nC2, nD3, nE3, nF3
+000A1C AC488006         	dc.b	nG3, $48, nRst, $06
+000A20                  	smpsSetVol	$FF
+000A20 ECFF             	dc.b	$EC,$FF
+000A22 9699A7           	dc.b	nA1, nC2, nD3
+000A25                  	smpsSetVol	$FE
+000A25 ECFE             	dc.b	$EC,$FE
+000A27 A90C             	dc.b	nE3, $0C
+000A29                  	smpsSetVol	$01
+000A29 EC01             	dc.b	$EC,$01
+000A2B AC06B0128006     	dc.b	nG3, $06, nB3, $12, nRst, $06
+000A31                  	smpsSetVol	$01
+000A31 EC01             	dc.b	$EC,$01
+000A33 A9248012         	dc.b	nE3, $24, nRst, $12
+000A37                  	smpsSetVol	$02
+000A37 EC02             	dc.b	$EC,$02
+000A39 980606           	dc.b	nB1, $06, $06
+000A3C                  	smpsSetVol	$FE
+000A3C ECFE             	dc.b	$EC,$FE
+000A3E A7AA0C9206969491 	dc.b	nD3, nF3, $0C, nF1, $06, nA1, nG1, nE1
+000A46 9498A7           	dc.b	nG1, nB1, nD3
+000A49                  	smpsSetVol	$FF
+000A49 ECFF             	dc.b	$EC,$FF
+000A4B 98               	dc.b	nB1
+000A4C                  	smpsSetVol	$FF
+000A4C ECFF             	dc.b	$EC,$FF
+000A4E 9498997FE717     	dc.b	nG1, nB1, nC2, $7F, smpsNoAttack, $17
+000A54                  	smpsSetVol	$01
+000A54 EC01             	dc.b	$EC,$01
+000A56 9B0C97A8         	dc.b	nD2, $0C, nBb1, nEb3
+000A5A                  	smpsSetVol	$01
+000A5A EC01             	dc.b	$EC,$01
+000A5C 06A70CA95AAC42   	dc.b	$06, nD3, $0C, nE3, $5A, nG3, $42
+000A63                  	smpsSetVol	$FF
+000A63 ECFF             	dc.b	$EC,$FF
+000A65 A906AAA9         	dc.b	nE3, $06, nF3, nE3
+000A69                  	smpsSetVol	$FF
+000A69 ECFF             	dc.b	$EC,$FF
+000A6B 99               	dc.b	nC2
+000A6C                  	smpsSetVol	$01
+000A6C EC01             	dc.b	$EC,$01
+000A6E 9448             	dc.b	nG1, $48
+000A70                  	smpsSetVol	$01
+000A70 EC01             	dc.b	$EC,$01
+000A72 960699           	dc.b	nA1, $06, nC2
+000A75                  	smpsSetVol	$FF
+000A75 ECFF             	dc.b	$EC,$FF
+000A77 A7               	dc.b	nD3
+000A78                  	smpsSetVol	$FE
+000A78 ECFE             	dc.b	$EC,$FE
+000A7A A9AA             	dc.b	nE3, nF3
+000A7C                  	smpsSetVol	$FF
+000A7C ECFF             	dc.b	$EC,$FF
+000A7E AC488006         	dc.b	nG3, $48, nRst, $06
+000A82                  	smpsSetVol	$04
+000A82 EC04             	dc.b	$EC,$04
+000A84 9699A7           	dc.b	nA1, nC2, nD3
+000A87                  	smpsJump	SH_SystemMenu_PSG3, Target
+000A87 F6               	dc.b	$F6
+                        	if (SH_SystemMenu_PSG3<*)
+000A88                  		rom_ptr_z80(SH_SystemMenu_PSG3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A88 F3AC             	dc.w  (((((SH_SystemMenu_PSG3+Target))<<8)&$FF00)|((((SH_SystemMenu_PSG3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	
+000A8A                  SH_SystemMenu_PWM1:
+000A8A                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+000A8A E0C0             		dc.b $E0,panCenter
+                        	endif
+000A8C 8D02             	dc.b	$8D, $02
+
+000A8E                  SH_SystemMenu_PWM1_Loop1:
+000A8E 03               	dc.b	$03
+000A8F                  	smpsLoop		$00, $0D, SH_SystemMenu_PWM1_Loop1, Target
+000A8F F7               	dc.b	$F7
+000A90 000D             	dc.b	$00,$0D
+                        	if (SH_SystemMenu_PWM1_Loop1<*)
+000A92                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A92 D3AD             	dc.w  (((((SH_SystemMenu_PWM1_Loop1+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A94 918F8D           	dc.b	$91, $8F, $8D
+000A97                  	smpsLoop		$01, $03, SH_SystemMenu_PWM1_Loop1, Target
+000A97 F7               	dc.b	$F7
+000A98 0103             	dc.b	$01,$03
+                        	if (SH_SystemMenu_PWM1_Loop1<*)
+000A9A                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A9A D3AD             	dc.w  (((((SH_SystemMenu_PWM1_Loop1+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A9C 8D8D8D8D8D018002 	dc.b	$8D, $8D, $8D, $8D, $8D, $01, nRst, $02
+000AA4 8D               	dc.b	$8D
+
+000AA5                  SH_SystemMenu_PWM1_Loop2:
+000AA5 03               	dc.b	$03
+000AA6                  	smpsLoop		$00, $08, SH_SystemMenu_PWM1_Loop2, Target
+000AA6 F7               	dc.b	$F7
+000AA7 0008             	dc.b	$00,$08
+                        	if (SH_SystemMenu_PWM1_Loop2<*)
+000AA9                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AA9 EAAD             	dc.w  (((((SH_SystemMenu_PWM1_Loop2+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000AAB                  SH_SystemMenu_PWM1_Loop4:
+000AAB 918F             	dc.b	$91, $8F
+
+000AAD                  SH_SystemMenu_PWM1_Loop3:
+000AAD 8D               	dc.b	$8D
+000AAE                  	smpsLoop		$00, $0E, SH_SystemMenu_PWM1_Loop3, Target
+000AAE F7               	dc.b	$F7
+000AAF 000E             	dc.b	$00,$0E
+                        	if (SH_SystemMenu_PWM1_Loop3<*)
+000AB1                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AB1 F2AD             	dc.w  (((((SH_SystemMenu_PWM1_Loop3+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AB3                  	smpsLoop		$01, $0C, SH_SystemMenu_PWM1_Loop4, Target
+000AB3 F7               	dc.b	$F7
+000AB4 010C             	dc.b	$01,$0C
+                        	if (SH_SystemMenu_PWM1_Loop4<*)
+000AB6                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AB6 F0AD             	dc.w  (((((SH_SystemMenu_PWM1_Loop4+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AB8 918F             	dc.b	$91, $8F
+
+000ABA                  SH_SystemMenu_PWM1_Loop5:
+000ABA 8806848084888488 	dc.b	dHiTimpani, $06, $84, nRst, $84, dHiTimpani, $84, dHiTimpani
+000AC2 84               	dc.b	$84
+000AC3                  	smpsLoop		$00, $04, SH_SystemMenu_PWM1_Loop5, Target
+000AC3 F7               	dc.b	$F7
+000AC4 0004             	dc.b	$00,$04
+                        	if (SH_SystemMenu_PWM1_Loop5<*)
+000AC6                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AC6 FFAD             	dc.w  (((((SH_SystemMenu_PWM1_Loop5+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000AC8                  SH_SystemMenu_PWM1_Loop7:
+000AC8 8D               	dc.b	$8D
+
+000AC9                  SH_SystemMenu_PWM1_Loop6:
+000AC9 03               	dc.b	$03
+000ACA                  	smpsLoop		$00, $0E, SH_SystemMenu_PWM1_Loop6, Target
+000ACA F7               	dc.b	$F7
+000ACB 000E             	dc.b	$00,$0E
+                        	if (SH_SystemMenu_PWM1_Loop6<*)
+000ACD                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000ACD 0EAE             	dc.w  (((((SH_SystemMenu_PWM1_Loop6+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000ACF 918F             	dc.b	$91, $8F
+000AD1                  	smpsLoop		$01, $06, SH_SystemMenu_PWM1_Loop7, Target
+000AD1 F7               	dc.b	$F7
+000AD2 0106             	dc.b	$01,$06
+                        	if (SH_SystemMenu_PWM1_Loop7<*)
+000AD4                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loop7+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AD4 0DAE             	dc.w  (((((SH_SystemMenu_PWM1_Loop7+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loop7+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AD6 8D01             	dc.b	$8D, $01
+
+000AD8                  SH_SystemMenu_PWM1_Jump1:
+000AD8 80028D           	dc.b	nRst, $02, $8D
+
+000ADB                  SH_SystemMenu_PWM1_Loo$8:
+000ADB 03               	dc.b	$03
+000ADC                  	smpsLoop		$00, $0D, SH_SystemMenu_PWM1_Loo$8, Target
+000ADC F7               	dc.b	$F7
+000ADD 000D             	dc.b	$00,$0D
+                        	if (SH_SystemMenu_PWM1_Loo$8<*)
+000ADF                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loo$8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000ADF 20AE             	dc.w  (((((SH_SystemMenu_PWM1_Loo$8+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loo$8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AE1 918F8D           	dc.b	$91, $8F, $8D
+000AE4                  	smpsLoop		$01, $0F, SH_SystemMenu_PWM1_Loo$8, Target
+000AE4 F7               	dc.b	$F7
+000AE5 010F             	dc.b	$01,$0F
+                        	if (SH_SystemMenu_PWM1_Loo$8<*)
+000AE7                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loo$8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AE7 20AE             	dc.w  (((((SH_SystemMenu_PWM1_Loo$8+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loo$8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000AE9                  SH_SystemMenu_PWM1_Loo$9:
+000AE9 8D               	dc.b	$8D
+000AEA                  	smpsLoop		$00, $0D, SH_SystemMenu_PWM1_Loo$9, Target
+000AEA F7               	dc.b	$F7
+000AEB 000D             	dc.b	$00,$0D
+                        	if (SH_SystemMenu_PWM1_Loo$9<*)
+000AED                  		rom_ptr_z80(SH_SystemMenu_PWM1_Loo$9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AED 2EAE             	dc.w  (((((SH_SystemMenu_PWM1_Loo$9+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Loo$9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AEF 918F8D01         	dc.b	$91, $8F, $8D, $01
+000AF3                  	smpsJump		SH_SystemMenu_PWM1_Jump1, Target
+000AF3 F6               	dc.b	$F6
+                        	if (SH_SystemMenu_PWM1_Jump1<*)
+000AF4                  		rom_ptr_z80(SH_SystemMenu_PWM1_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AF4 1DAE             	dc.w  (((((SH_SystemMenu_PWM1_Jump1+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM1_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000AF6                  SH_SystemMenu_PWM2:
+000AF6 9102             	dc.b	$91, $02
+
+000AF8                  SH_SystemMenu_PWM2_Loop1:
+000AF8 03038F8291918F91 	dc.b	$03, $03, $8F, dSnare, $91, $91, $8F, $91
+000B00 92918F8291928D91 	dc.b	$92, $91, $8F, dSnare, $91, $92, $8D, $91
+000B08                  	smpsLoop		$00, $0F, SH_SystemMenu_PWM2_Loop1, Target
+000B08 F7               	dc.b	$F7
+000B09 000F             	dc.b	$00,$0F
+                        	if (SH_SystemMenu_PWM2_Loop1<*)
+000B0B                  		rom_ptr_z80(SH_SystemMenu_PWM2_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B0B 3DAE             	dc.w  (((((SH_SystemMenu_PWM2_Loop1+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM2_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B0D 91918F8291918F91 	dc.b	$91, $91, $8F, dSnare, $91, $91, $8F, $91
+000B15 92918F8291928D   	dc.b	$92, $91, $8F, dSnare, $91, $92, $8D
+
+000B1C                  SH_SystemMenu_PWM2_Loop3:
+000B1C 818491           	dc.b	dKick, $84, $91
+
+000B1F                  SH_SystemMenu_PWM2_Loop2:
+000B1F 9181069103       	dc.b	$91, dKick, $06, $91, $03
+000B24                  	smpsLoop		$00, $03, SH_SystemMenu_PWM2_Loop2, Target
+000B24 F7               	dc.b	$F7
+000B25 0003             	dc.b	$00,$03
+                        	if (SH_SystemMenu_PWM2_Loop2<*)
+000B27                  		rom_ptr_z80(SH_SystemMenu_PWM2_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B27 64AE             	dc.w  (((((SH_SystemMenu_PWM2_Loop2+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM2_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B29 03818491918A0691 	dc.b	$03, dKick, $84, $91, $91, dLowTimpani, $06, $91
+000B31 0303810691030381 	dc.b	$03, $03, dKick, $06, $91, $03, $03, dKick
+000B39 06910303         	dc.b	$06, $91, $03, $03
+000B3D                  	smpsLoop		$01, $02, SH_SystemMenu_PWM2_Loop3, Target
+000B3D F7               	dc.b	$F7
+000B3E 0102             	dc.b	$01,$02
+                        	if (SH_SystemMenu_PWM2_Loop3<*)
+000B40                  		rom_ptr_z80(SH_SystemMenu_PWM2_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B40 61AE             	dc.w  (((((SH_SystemMenu_PWM2_Loop3+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM2_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B42 03               	dc.b	$03
+
+000B43                  SH_SystemMenu_PWM2_Loop4:
+000B43 03038F8291918F91 	dc.b	$03, $03, $8F, dSnare, $91, $91, $8F, $91
+000B4B 92918F8291928D91 	dc.b	$92, $91, $8F, dSnare, $91, $92, $8D, $91
+000B53                  	smpsLoop		$00, $05, SH_SystemMenu_PWM2_Loop4, Target
+000B53 F7               	dc.b	$F7
+000B54 0005             	dc.b	$00,$05
+                        	if (SH_SystemMenu_PWM2_Loop4<*)
+000B56                  		rom_ptr_z80(SH_SystemMenu_PWM2_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B56 88AE             	dc.w  (((((SH_SystemMenu_PWM2_Loop4+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM2_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B58 91918F8291918F91 	dc.b	$91, $91, $8F, dSnare, $91, $91, $8F, $91
+000B60 92918F8291928D91 	dc.b	$92, $91, $8F, dSnare, $91, $92, $8D, $91
+000B68 01               	dc.b	$01
+
+000B69                  SH_SystemMenu_PWM2_Jump1:
+000B69 800291           	dc.b	nRst, $02, $91
+
+000B6C                  SH_SystemMenu_PWM2_Loop5:
+000B6C 03038F8291918F91 	dc.b	$03, $03, $8F, dSnare, $91, $91, $8F, $91
+000B74 92918F8291928D91 	dc.b	$92, $91, $8F, dSnare, $91, $92, $8D, $91
+000B7C                  	smpsLoop		$00, $09, SH_SystemMenu_PWM2_Loop5, Target
+000B7C F7               	dc.b	$F7
+000B7D 0009             	dc.b	$00,$09
+                        	if (SH_SystemMenu_PWM2_Loop5<*)
+000B7F                  		rom_ptr_z80(SH_SystemMenu_PWM2_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B7F B1AE             	dc.w  (((((SH_SystemMenu_PWM2_Loop5+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM2_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B81 91918F9191918F91 	dc.b	$91, $91, $8F, $91, $91, $91, $8F, $91
+000B89 92918F91         	dc.b	$92, $91, $8F, $91
+
+000B8D                  SH_SystemMenu_PWM2_Loop6:
+000B8D 91928D9191918F82 	dc.b	$91, $92, $8D, $91, $91, $91, $8F, dSnare
+000B95 91918F9192918F82 	dc.b	$91, $91, $8F, $91, $92, $91, $8F, dSnare
+000B9D                  	smpsLoop		$00, $06, SH_SystemMenu_PWM2_Loop6, Target
+000B9D F7               	dc.b	$F7
+000B9E 0006             	dc.b	$00,$06
+                        	if (SH_SystemMenu_PWM2_Loop6<*)
+000BA0                  		rom_ptr_z80(SH_SystemMenu_PWM2_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BA0 D2AE             	dc.w  (((((SH_SystemMenu_PWM2_Loop6+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM2_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000BA2 91928D9101       	dc.b	$91, $92, $8D, $91, $01
+000BA7                  	smpsJump		SH_SystemMenu_PWM2_Jump1, Target
+000BA7 F6               	dc.b	$F6
+                        	if (SH_SystemMenu_PWM2_Jump1<*)
+000BA8                  		rom_ptr_z80(SH_SystemMenu_PWM2_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BA8 AEAE             	dc.w  (((((SH_SystemMenu_PWM2_Jump1+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM2_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000BAA                  SH_SystemMenu_PWM3:
+000BAA 8102             	dc.b	dKick, $02
+
+000BAC                  SH_SystemMenu_PWM3_Loop1:
+000BAC 9203919191849291 	dc.b	$92, $03, $91, $91, $91, $84, $92, $91
+000BB4 810691030303848D 	dc.b	dKick, $06, $91, $03, $03, $03, $84, $8D
+000BBC 9181             	dc.b	$91, dKick
+000BBE                  	smpsLoop		$00, $0F, SH_SystemMenu_PWM3_Loop1, Target
+000BBE F7               	dc.b	$F7
+000BBF 000F             	dc.b	$00,$0F
+                        	if (SH_SystemMenu_PWM3_Loop1<*)
+000BC1                  		rom_ptr_z80(SH_SystemMenu_PWM3_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BC1 F1AE             	dc.w  (((((SH_SystemMenu_PWM3_Loop1+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM3_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000BC3 9291919184929181 	dc.b	$92, $91, $91, $91, $84, $92, $91, dKick
+000BCB 0691030303848D91 	dc.b	$06, $91, $03, $03, $03, $84, $8D, $91
+
+000BD3                  SH_SystemMenu_PWM3_Loop2:
+000BD3 9192918F9184928F 	dc.b	$91, $92, $91, $8F, $91, $84, $92, $8F
+000BDB 9184918F91848D8D 	dc.b	$91, $84, $91, $8F, $91, $84, $8D, $8D
+000BE3 9192918F81069203 	dc.b	$91, $92, $91, $8F, dKick, $06, $92, $03
+000BEB 8F9184918F91848D 	dc.b	$8F, $91, $84, $91, $8F, $91, $84, $8D
+000BF3 8D               	dc.b	$8D
+000BF4                  	smpsLoop		$00, $02, SH_SystemMenu_PWM3_Loop2, Target
+000BF4 F7               	dc.b	$F7
+000BF5 0002             	dc.b	$00,$02
+                        	if (SH_SystemMenu_PWM3_Loop2<*)
+000BF7                  		rom_ptr_z80(SH_SystemMenu_PWM3_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BF7 18AF             	dc.w  (((((SH_SystemMenu_PWM3_Loop2+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM3_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000BF9                  SH_SystemMenu_PWM3_Loop3:
+000BF9 8192919191849291 	dc.b	dKick, $92, $91, $91, $91, $84, $92, $91
+000C01 810691030303848D 	dc.b	dKick, $06, $91, $03, $03, $03, $84, $8D
+000C09 91               	dc.b	$91
+000C0A                  	smpsLoop		$00, $06, SH_SystemMenu_PWM3_Loop3, Target
+000C0A F7               	dc.b	$F7
+000C0B 0006             	dc.b	$00,$06
+                        	if (SH_SystemMenu_PWM3_Loop3<*)
+000C0D                  		rom_ptr_z80(SH_SystemMenu_PWM3_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C0D 3EAF             	dc.w  (((((SH_SystemMenu_PWM3_Loop3+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM3_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C0F 8101             	dc.b	dKick, $01
+
+000C11                  SH_SystemMenu_PWM3_Jump1:
+000C11 8002             	dc.b	nRst, $02
+
+000C13                  SH_SystemMenu_PWM3_Loop4:
+000C13 9203919191849291 	dc.b	$92, $03, $91, $91, $91, $84, $92, $91
+000C1B 810691030303848D 	dc.b	dKick, $06, $91, $03, $03, $03, $84, $8D
+000C23 9181             	dc.b	$91, dKick
+000C25                  	smpsLoop		$00, $09, SH_SystemMenu_PWM3_Loop4, Target
+000C25 F7               	dc.b	$F7
+000C26 0009             	dc.b	$00,$09
+                        	if (SH_SystemMenu_PWM3_Loop4<*)
+000C28                  		rom_ptr_z80(SH_SystemMenu_PWM3_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C28 58AF             	dc.w  (((((SH_SystemMenu_PWM3_Loop4+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM3_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C2A 9291918106920391 	dc.b	$92, $91, $91, dKick, $06, $92, $03, $91
+000C32 81069103038106   	dc.b	dKick, $06, $91, $03, $03, dKick, $06
+
+000C39                  SH_SystemMenu_PWM3_Loop5:
+000C39 8D03918192919191 	dc.b	$8D, $03, $91, dKick, $92, $91, $91, $91
+000C41 8492918106910303 	dc.b	$84, $92, $91, dKick, $06, $91, $03, $03
+000C49 0384             	dc.b	$03, $84
+000C4B                  	smpsLoop		$00, $06, SH_SystemMenu_PWM3_Loop5, Target
+000C4B F7               	dc.b	$F7
+000C4C 0006             	dc.b	$00,$06
+                        	if (SH_SystemMenu_PWM3_Loop5<*)
+000C4E                  		rom_ptr_z80(SH_SystemMenu_PWM3_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C4E 7EAF             	dc.w  (((((SH_SystemMenu_PWM3_Loop5+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM3_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C50 8D918101         	dc.b	$8D, $91, dKick, $01
+000C54                  	smpsJump		SH_SystemMenu_PWM3_Jump1, Target
+000C54 F6               	dc.b	$F6
+                        	if (SH_SystemMenu_PWM3_Jump1<*)
+000C55                  		rom_ptr_z80(SH_SystemMenu_PWM3_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C55 56AF             	dc.w  (((((SH_SystemMenu_PWM3_Jump1+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM3_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000C57                  SH_SystemMenu_PWM4:
+000C57 800284           	dc.b	nRst, $02, $84
+
+000C5A                  SH_SystemMenu_PWM4_Loop1:
+000C5A 098A068409918A06 	dc.b	$09, dLowTimpani, $06, $84, $09, $91, dLowTimpani, $06
+000C62 8409             	dc.b	$84, $09
+000C64                  	smpsLoop		$00, $0F, SH_SystemMenu_PWM4_Loop1, Target
+000C64 F7               	dc.b	$F7
+000C65 000F             	dc.b	$00,$0F
+                        	if (SH_SystemMenu_PWM4_Loop1<*)
+000C67                  		rom_ptr_z80(SH_SystemMenu_PWM4_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C67 9FAF             	dc.w  (((((SH_SystemMenu_PWM4_Loop1+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM4_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C69 098A068409918A06 	dc.b	$09, dLowTimpani, $06, $84, $09, $91, dLowTimpani, $06
+000C71 848A0982068D0309 	dc.b	$84, dLowTimpani, $09, dSnare, $06, $8D, $03, $09
+000C79 928A038D91098D82 	dc.b	$92, dLowTimpani, $03, $8D, $91, $09, $8D, dSnare
+000C81 03918D0992038A09 	dc.b	$03, $91, $8D, $09, $92, $03, dLowTimpani, $09
+000C89 8D0391068A82098D 	dc.b	$8D, $03, $91, $06, dLowTimpani, dSnare, $09, $8D
+000C91 0309920689038A8D 	dc.b	$03, $09, $92, $06, dMidTimpani, $03, dLowTimpani, $8D
+000C99 910684038D068F03 	dc.b	$91, $06, $84, $03, $8D, $06, $8F, $03
+000CA1 82918D068F03928A 	dc.b	dSnare, $91, $8D, $06, $8F, $03, $92, dLowTimpani
+000CA9 0684038D9109     	dc.b	$06, $84, $03, $8D, $91, $09
+
+000CAF                  SH_SystemMenu_PWM4_Loop2:
+000CAF 848A068409918A06 	dc.b	$84, dLowTimpani, $06, $84, $09, $91, dLowTimpani, $06
+000CB7 8409             	dc.b	$84, $09
+000CB9                  	smpsLoop		$00, $05, SH_SystemMenu_PWM4_Loop2, Target
+000CB9 F7               	dc.b	$F7
+000CBA 0005             	dc.b	$00,$05
+                        	if (SH_SystemMenu_PWM4_Loop2<*)
+000CBC                  		rom_ptr_z80(SH_SystemMenu_PWM4_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CBC F4AF             	dc.w  (((((SH_SystemMenu_PWM4_Loop2+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM4_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000CBE 098A068409918A06 	dc.b	$09, dLowTimpani, $06, $84, $09, $91, dLowTimpani, $06
+000CC6 8407             	dc.b	$84, $07
+
+000CC8                  SH_SystemMenu_PWM4_Jump1:
+000CC8 800284           	dc.b	nRst, $02, $84
+
+000CCB                  SH_SystemMenu_PWM4_Loop3:
+000CCB 098A068409918A06 	dc.b	$09, dLowTimpani, $06, $84, $09, $91, dLowTimpani, $06
+000CD3 8409             	dc.b	$84, $09
+000CD5                  	smpsLoop		$00, $09, SH_SystemMenu_PWM4_Loop3, Target
+000CD5 F7               	dc.b	$F7
+000CD6 0009             	dc.b	$00,$09
+                        	if (SH_SystemMenu_PWM4_Loop3<*)
+000CD8                  		rom_ptr_z80(SH_SystemMenu_PWM4_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CD8 10B0             	dc.w  (((((SH_SystemMenu_PWM4_Loop3+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM4_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000CDA 0382060684099103 	dc.b	$03, dSnare, $06, $06, $84, $09, $91, $03
+000CE2 82060384         	dc.b	dSnare, $06, $03, $84
+
+000CE6                  SH_SystemMenu_PWM4_Loop4:
+000CE6 8409098A06840991 	dc.b	$84, $09, $09, dLowTimpani, $06, $84, $09, $91
+000CEE 8A06             	dc.b	dLowTimpani, $06
+000CF0                  	smpsLoop		$00, $06, SH_SystemMenu_PWM4_Loop4, Target
+000CF0 F7               	dc.b	$F7
+000CF1 0006             	dc.b	$00,$06
+                        	if (SH_SystemMenu_PWM4_Loop4<*)
+000CF3                  		rom_ptr_z80(SH_SystemMenu_PWM4_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CF3 2BB0             	dc.w  (((((SH_SystemMenu_PWM4_Loop4+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM4_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000CF5 8407             	dc.b	$84, $07
+000CF7                  	smpsJump		SH_SystemMenu_PWM4_Jump1, Target
+000CF7 F6               	dc.b	$F6
+                        	if (SH_SystemMenu_PWM4_Jump1<*)
+000CF8                  		rom_ptr_z80(SH_SystemMenu_PWM4_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CF8 0DB0             	dc.w  (((((SH_SystemMenu_PWM4_Jump1+Target))<<8)&$FF00)|((((SH_SystemMenu_PWM4_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000CFA                  SH_SystemMenu_Patches:	
+000CFA 3A               	dc.b	$3A
+000CFB 020E02028E8F8D53 	dc.b	$02, $0E, $02, $02,	$8E, $8F, $8D, $53
+000D03 0E100E0D00000000 	dc.b	$0E, $10, $0E, $0D,	$00, $00, $00, $00
+000D0B 13681308192A2308 	dc.b	$13, $68, $13, $08,	$19, $2A, $23, $08
+                        	
+000D13 3B               	dc.b	$3B
+000D14 020204025959594C 	dc.b	$02, $02, $04, $02,	$59, $59, $59, $4C
+000D1C 0307030500000000 	dc.b	$03, $07, $03, $05,	$00, $00, $00, $00
+000D24 2222222740182408 	dc.b	$22, $22, $22, $27,	$40, $18, $24, $08
+                        	
+000D2C 05               	dc.b	$05
+000D2D 36327C721F5F1F1F 	dc.b	$36, $32, $7C, $72,	$1F, $5F, $1F, $1F
+000D35 070B0A0B00070707 	dc.b	$07, $0B, $0A, $0B,	$00, $07, $07, $07
+000D3D 594E594E23102308 	dc.b	$59, $4E, $59, $4E,	$23, $10, $23, $08
+                        	
+000D45 2C               	dc.b	$2C
+000D46 313171715F545F5F 	dc.b	$31, $31, $71, $71,	$5F, $54, $5F, $5F
+000D4E 050A030C00030303 	dc.b	$05, $0A, $03, $0C,	$00, $03, $03, $03
+000D56 008700A7170E1908 	dc.b	$00, $87, $00, $A7,	$17, $0E, $19, $08
+                        	
+000D5E 3A               	dc.b	$3A
+000D5F 3105710159595C4E 	dc.b	$31, $05, $71, $01,	$59, $59, $5C, $4E
+000D67 0A0B0D0401010101 	dc.b	$0A, $0B, $0D, $04,	$01, $01, $01, $01
+000D6F 15582616230D2D06 	dc.b	$15, $58, $26, $16,	$23, $0D, $2D, $06
+                        	
+000D77 3D               	dc.b	$3D
+000D78 003070001F1F1F11 	dc.b	$00, $30, $70, $00,	$1F, $1F, $1F, $11
+000D80 0B09001F00000000 	dc.b	$0B, $09, $00, $1F,	$00, $00, $00, $00
+000D88 FFF90F071E1F2D0A 	dc.b	$FF, $F9, $0F, $07,	$1E, $1F, $2D, $0A
+                        	
+000D90 07               	dc.b	$07
+000D91 01337408DFDFDFDF 	dc.b	$01, $33, $74, $08,	$DF, $DF, $DF, $DF
+000D99 0305050500000000 	dc.b	$03, $05, $05, $05,	$00, $00, $00, $00
+000DA1 2A2A2A2A0C181F0C 	dc.b	$2A, $2A, $2A, $2A,	$0C, $18, $1F, $0C
+                        	
+000DA9 3B               	dc.b	$3B
+000DAA 0D0100009F1F1F1F 	dc.b	$0D, $01, $00, $00,	$9F, $1F, $1F, $1F
+000DB2 0E0D090900000000 	dc.b	$0E, $0D, $09, $09,	$00, $00, $00, $00
+000DBA D6D6D6D733212206 	dc.b	$D6, $D6, $D6, $D7,	$33, $21, $22, $06
+                        	
+000DC2 3A               	dc.b	$3A
+000DC3 710633019C965D92 	dc.b	$71, $06, $33, $01,	$9C, $96, $5D, $92
+000DCB 0409040700010300 	dc.b	$04, $09, $04, $07,	$00, $01, $03, $00
+000DD3 151216B525342508 	dc.b	$15, $12, $16, $B5,	$25, $34, $25, $08
+
+00000 Total Error(s)
+
+DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK              00000081 E
+DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
+DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  NA0                0000008A E
+NA1                00000096 E  NA2                000000A2 E  NA3                000000AE E
+NA4                000000BA E  NA5                000000C6 E  NA6                000000D2 E
+NA7                000000DE E  NAB0               00000089 E  NAB1               00000095 E
+NAB2               000000A1 E  NAB3               000000AD E  NAB4               000000B9 E
+NAB5               000000C5 E  NAB6               000000D1 E  NAB7               000000DD E
+NB0                0000008C E  NB1                00000098 E  NB2                000000A4 E
+NB3                000000B0 E  NB4                000000BC E  NB5                000000C8 E
+NB6                000000D4 E  NBB0               0000008B E  NBB1               00000097 E
+NBB2               000000A3 E  NBB3               000000AF E  NBB4               000000BB E
+NBB5               000000C7 E  NBB6               000000D3 E  NBB7               000000DF E
+NC0                00000081 E  NC1                0000008D E  NC2                00000099 E
+NC3                000000A5 E  NC4                000000B1 E  NC5                000000BD E
+NC6                000000C9 E  NC7                000000D5 E  NCS0               00000082 E
+NCS1               0000008E E  NCS2               0000009A E  NCS3               000000A6 E
+NCS4               000000B2 E  NCS5               000000BE E  NCS6               000000CA E
+NCS7               000000D6 E  ND0                00000083 E  ND1                0000008F E
+ND2                0000009B E  ND3                000000A7 E  ND4                000000B3 E
+ND5                000000BF E  ND6                000000CB E  ND7                000000D7 E
+NE0                00000085 E  NE1                00000091 E  NE2                0000009D E
+NE3                000000A9 E  NE4                000000B5 E  NE5                000000C1 E
+NE6                000000CD E  NE7                000000D9 E  NEB0               00000084 E
+NEB1               00000090 E  NEB2               0000009C E  NEB3               000000A8 E
+NEB4               000000B4 E  NEB5               000000C0 E  NEB6               000000CC E
+NEB7               000000D8 E  NF0                00000086 E  NF1                00000092 E
+NF2                0000009E E  NF3                000000AA E  NF4                000000B6 E
+NF5                000000C2 E  NF6                000000CE E  NF7                000000DA E
+NFS0               00000087 E  NFS1               00000093 E  NFS2               0000009F E
+NFS3               000000AB E  NFS4               000000B7 E  NFS5               000000C3 E
+NFS6               000000CF E  NFS7               000000DB E  NG0                00000088 E
+NG1                00000094 E  NG2                000000A0 E  NG3                000000AC E
+NG4                000000B8 E  NG5                000000C4 E  NG6                000000D0 E
+NG7                000000DC E  NRST               00000080 E  PANCENTER          000000C0 S
+PANCENTRE          000000C0 S  PANLEFT            00000080 S  PANNONE            00000000 S
+PANRIGHT           00000040 S  SH_SYSTEMMENU_FM1  00000040    SH_SYSTEMMENU_FM2  000000E0
+SH_SYSTEMMENU_FM3  000002F8    SH_SYSTEMMENU_FM4  0000040E    SH_SYSTEMMENU_FM5  00000503
+SH_SYSTEMMENU_FM6  0000060E    SH_SYSTEMMENU_LOO$8                           000002FE
+SH_SYSTEMMENU_LOO$9                           00000509    
+SH_SYSTEMMENU_LOOP1                           00000047    
+SH_SYSTEMMENU_LOOP10                          0000051F    
+SH_SYSTEMMENU_LOOP11                          00000534    
+SH_SYSTEMMENU_LOOP12                          00000613    
+SH_SYSTEMMENU_LOOP13                          00000639    
+SH_SYSTEMMENU_LOOP14                          00000681    
+SH_SYSTEMMENU_LOOP15                          000006B2    
+SH_SYSTEMMENU_LOOP16                          000006FA    
+SH_SYSTEMMENU_LOOP17                          0000070C    
+SH_SYSTEMMENU_LOOP18                          0000070B    
+SH_SYSTEMMENU_LOOP19                          0000072B    
+SH_SYSTEMMENU_LOOP2                           00000046    
+SH_SYSTEMMENU_LOOP20                          00000757    
+SH_SYSTEMMENU_LOOP21                          000007A6    
+SH_SYSTEMMENU_LOOP22                          000007DC    
+SH_SYSTEMMENU_LOOP23                          000007F3    
+SH_SYSTEMMENU_LOOP24                          0000080A    
+SH_SYSTEMMENU_LOOP25                          00000867    
+SH_SYSTEMMENU_LOOP26                          00000953    
+SH_SYSTEMMENU_LOOP27                          0000099B    
+SH_SYSTEMMENU_LOOP3                           00000066    
+SH_SYSTEMMENU_LOOP4                           00000081    
+SH_SYSTEMMENU_LOOP5                           000000C6    
+SH_SYSTEMMENU_LOOP6                           000000E5    
+SH_SYSTEMMENU_LOOP7                           0000031B    
+SH_SYSTEMMENU_PATCHES                         00000CFA    SH_SYSTEMMENU_PSG1 00000709
+SH_SYSTEMMENU_PSG2 000007B9    SH_SYSTEMMENU_PSG3 000009AE    SH_SYSTEMMENU_PWM1 00000A8A
+SH_SYSTEMMENU_PWM1_JUMP1                      00000AD8    
+SH_SYSTEMMENU_PWM1_LOO$8                      00000ADB    
+SH_SYSTEMMENU_PWM1_LOO$9                      00000AE9    
+SH_SYSTEMMENU_PWM1_LOOP1                      00000A8E    
+SH_SYSTEMMENU_PWM1_LOOP2                      00000AA5    
+SH_SYSTEMMENU_PWM1_LOOP3                      00000AAD    
+SH_SYSTEMMENU_PWM1_LOOP4                      00000AAB    
+SH_SYSTEMMENU_PWM1_LOOP5                      00000ABA    
+SH_SYSTEMMENU_PWM1_LOOP6                      00000AC9    
+SH_SYSTEMMENU_PWM1_LOOP7                      00000AC8    SH_SYSTEMMENU_PWM2 00000AF6
+SH_SYSTEMMENU_PWM2_JUMP1                      00000B69    
+SH_SYSTEMMENU_PWM2_LOOP1                      00000AF8    
+SH_SYSTEMMENU_PWM2_LOOP2                      00000B1F    
+SH_SYSTEMMENU_PWM2_LOOP3                      00000B1C    
+SH_SYSTEMMENU_PWM2_LOOP4                      00000B43    
+SH_SYSTEMMENU_PWM2_LOOP5                      00000B6C    
+SH_SYSTEMMENU_PWM2_LOOP6                      00000B8D    SH_SYSTEMMENU_PWM3 00000BAA
+SH_SYSTEMMENU_PWM3_JUMP1                      00000C11    
+SH_SYSTEMMENU_PWM3_LOOP1                      00000BAC    
+SH_SYSTEMMENU_PWM3_LOOP2                      00000BD3    
+SH_SYSTEMMENU_PWM3_LOOP3                      00000BF9    
+SH_SYSTEMMENU_PWM3_LOOP4                      00000C13    
+SH_SYSTEMMENU_PWM3_LOOP5                      00000C39    SH_SYSTEMMENU_PWM4 00000C57
+SH_SYSTEMMENU_PWM4_JUMP1                      00000CC8    
+SH_SYSTEMMENU_PWM4_LOOP1                      00000C5A    
+SH_SYSTEMMENU_PWM4_LOOP2                      00000CAF    
+SH_SYSTEMMENU_PWM4_LOOP3                      00000CCB    
+SH_SYSTEMMENU_PWM4_LOOP4                      00000CE6    SMPSED             000000ED E
+SMPSEE             000000EE E  SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E
+SMPSMODON          000000F1 E  SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E
+SMPSPITCH01HI      0000000C E  SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E
+SMPSPITCH02LO      000000E8 E  SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E
+SMPSPITCH04HI      00000030 E  SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E
+SMPSPITCH05LO      000000C4 E  SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E
+SMPSPITCH07HI      00000054 E  SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E
+SMPSPITCH08LO      000000A0 E  SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E
+SMPSPITCH10HI      00000078 E  SMPSPITCH10LO      00000088 E  TARGET             00012345 E
+TEMPDIV            00000002 S

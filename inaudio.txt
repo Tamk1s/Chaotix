@@ -5,6 +5,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;Region @Setup
 ;;;;;;;;;;;;;;;;;;;;
 ; Setup Directives ;
 ;;;;;;;;;;;;;;;;;;;;
@@ -12,9 +13,12 @@
 MaxSize	$400000								;Maximum Genesis ROM size
 
 Dispose				$040000	$058000			;Original Audio data (Banks 0-2, 2S)
+Dispose				$058000 $074000			;PWM Table/data
 Dispose				$076AC0 $076AE9			;Table of bank IDs for each song ($18 = Bank 0, $19 = Bank 1, $1A = Bank 2). SFX appears to be hardcoded to Bank 2 (at $56000)
 Dispose				$076AE9	$076BC3			;Original Audio pointers (Banks 0-2 + 2_SFX)
+;endregion
 
+;Region @FixedData
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; Fixed Data Segments ;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -28,6 +32,9 @@ EndSeg
 StartSeg PtrTbl Big_Endian $076AE9
 		include	"Sound/Music/BIN/PtrList.bin"
 EndSeg
+;EndRegion
+
+;Region @DynamicData
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ; Dynamic fixed data ;
@@ -159,3 +166,33 @@ StartSeg BankData2S Big_Endian $056000
 	include	"Sound/Music/BIN/6E.bin"
 EndSeg
 
+;PWM data
+StartSeg PWMData Big_Endian $058000
+	include	"Sound/PWM/PWMTable.bin"
+	
+	;!@ Modify this as necessary for PWM duplicates
+	include	"Sound/PWM/81.bin"
+	include	"Sound/PWM/82.bin"
+	include	"Sound/PWM/83.bin"
+	include	"Sound/PWM/84.bin"
+	include	"Sound/PWM/85-87.bin"
+	include	"Sound/PWM/88.bin"
+	include	"Sound/PWM/89.bin"
+	include	"Sound/PWM/8A.bin"
+	include	"Sound/PWM/8B.bin"
+	include	"Sound/PWM/8C.bin"
+	include	"Sound/PWM/8D.bin"
+	include	"Sound/PWM/8E.bin"
+	include	"Sound/PWM/8F.bin"
+	include	"Sound/PWM/90-91.bin"
+	include	"Sound/PWM/92-93.bin"
+	include	"Sound/PWM/94-95.bin"
+	include	"Sound/PWM/96.bin"
+EndSeg
+
+;!@ NEW Data
+;Extra-large PWM samples (Sega chant). Padded to end of ROM
+StartSeg PWMDataX Big_Endian $2FE63C
+	include	"Sound/PWM/97.bin"
+EndSeg
+;endregion

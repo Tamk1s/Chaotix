@@ -1,5 +1,4 @@
-
-Target	EQU	$4C8FA
+Target	EQU	$4D107
 	smpsHeaderVoice	Surprise_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $00

@@ -1,5 +1,5 @@
 
-Target	EQU	$48C96
+Target	EQU	$49707
 	smpsHeaderVoice	SurgingPower_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $75

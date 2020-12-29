@@ -1,5 +1,5 @@
 
-Target	EQU	$4BBFF
+Target	EQU	$4C40C
 	smpsHeaderVoice	TachyT_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $55

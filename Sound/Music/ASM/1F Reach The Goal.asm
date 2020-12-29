@@ -1,217 +1,183 @@
 
-Target	EQU	$4D34C
-	smpsHeaderVoice	ReachGoal_Patches, Target
-	smpsHeaderChan	$06, $03
-	smpsHeaderTempo	$01, $3B
-	smpsHeaderFM	ReachGoal_FM1, Target, $00, $10
-	smpsHeaderFM	ReachGoal_FM2, Target, $00, $05
-	smpsHeaderFM	ReachGoal_FM3, Target, $00, $05
-	smpsHeaderFM	ReachGoal_FM4, Target, $00, $1C
-	smpsHeaderFM	ReachGoal_FM5, Target, $00, $1C
-	smpsHeaderFM	ReachGoal_FM6, Target, $0C, $12
-	smpsHeaderPSG	ReachGoal_PSG1, Target, $F4, $00, $00, $00
-	smpsHeaderPSG	ReachGoal_PSG2, Target, $F4, $00, $00, $00
-	smpsHeaderPSG	ReachGoal_PSG3, Target, $00, $00, $00, $00
-	smpsHeaderPWM	ReachGoal_PWM1, Target, $00, $FF
-	smpsHeaderPWM	ReachGoal_PWM2, Target, $00, $CC
-	smpsHeaderPWM	ReachGoal_PWM3, Target, $00, $AA
-	smpsHeaderPWM	ReachGoal_PWM4, Target, $00, $00
+Target	EQU	$4DB59
+	smpsHeaderVoice	Maniax_Patches,Target
+	smpsHeaderChan	6,3
+	smpsHeaderTempoC	$02, $03	
+	;smpsHeaderTempo	$02, $55
+	smpsHeaderFM	Maniax_FM1, Target, $F4, $0A
+	smpsHeaderFM	Maniax_FM2, Target, $DC, $0A
+	smpsHeaderFM	Maniax_FM3, Target, $F4, $15
+	smpsHeaderFM	Maniax_FM4, Target, $F4, $15
+	smpsHeaderFM	Maniax_FM5, Target, $F4, $14
+	smpsHeaderFM	Maniax_FM6, Target, $00, $00
+	smpsHeaderPSG	Maniax_PSG1, Target, $D0, $05, $00, $05
+	smpsHeaderPSG	Maniax_PSG2, Target, $DC, $07, $00, $05
+	smpsHeaderPSG	Maniax_PSG3, Target, $DC, $00, $00, $04
+	smpsHeaderPWM	Maniax_PWM1, Target, $00, $AA
+	smpsHeaderPWM	Maniax_PWM2, Target, $00, $AA
+	smpsHeaderPWM	Maniax_PWM3, Target, $00, $AA
+	smpsHeaderPWM	Maniax_PWM4, Target, $00, $AA
 
-ReachGoal_FM1:
+Maniax_FM1:
 	smpsFMvoice		$00
-	smpsPan		panCenter
-	dc.b	nF2, $03, nRst, nF2, $03, nRst, nRst, $18
-	dc.b	nF2, $06, nG2, nRst, $18, nF3, $06, nG2
-	dc.b	$0C, nRst, $06, nG2, nG1, $06, nRst, nA1
-	dc.b	$0C, smpsNoAttack, $48
+
+Maniax_PSG1:
+	dc.b nRst, $06, nG4, nA4, nB4, nC5, nD5, nE5
+	dc.b nF5, nG5, $0C, nB6, $02, smpsNoAttack, nC7, $01
+	dc.b nB6, $03, nG6
+	smpsModSet	$0C, $01, $08, $04
+	dc.b nA6, $33
 	smpsStop
 
-ReachGoal_FM2:
+Maniax_FM2:
 	smpsFMvoice		$01
-	smpsPan		panCenter
-	smpsCall		ReachGoal_Call1, Target
-
-ReachGoal_Call1:
-	dc.b	nE5, $06, nF5, $03, nRst, nE5, $06, nD5
-	dc.b	$03, nRst
-	smpsAlterVol		$07
-	dc.b	nD5, $03, nRst
-	smpsAlterVol		$F9
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$07
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$F9
-	dc.b	nB4, $03, nRst
-	smpsAlterVol		$07
-	dc.b	nB4, $03, nRst
-	smpsAlterVol		$F9
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$07
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$F9
-	dc.b	nD5, $03, nRst
-	smpsAlterVol		$07
-	dc.b	nD5, $03, nRst
-	smpsAlterVol		$F9
-	dc.b	nC5, $03, nRst, nB4, nRst, nC5, nRst, nG4
-	dc.b	$06
-	smpsAlterVol		$07
-	dc.b	nG4, $06
-	smpsAlterVol		$F9
-	dc.b	nA4, $54
+	smpsNoteFill	$0B
+	smpsE2		$01
+	dc.b nG5, $03, nG5, nG4, $06, nG4, nG5, $03
+	dc.b nG5, nG4, $06, nG4, nG5, $03, nG5, nRst
+	dc.b $06, nRst, $0C, nG4, $09
+	smpsNoteFill	$00
+	dc.b nA4, $33
+	smpsE2		$01
 	smpsStop
 
-ReachGoal_FM3:
-	smpsFMvoice		$01
-	smpsPan		panCenter
-	smpsCall		ReachGoal_Call2, Target
-
-ReachGoal_Call2:
-	smpsAlterPitch	$FB
-	dc.b	nE5, $06, nF5, $03, nRst, nE5, $06, nD5
-	dc.b	$03, nRst
-	smpsAlterVol		$07
-	dc.b	nD5, $03, nRst
-	smpsAlterVol		$F9
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$07
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$F9
-	dc.b	nB4, $03, nRst
-	smpsAlterVol		$07
-	dc.b	nB4, $03, nRst
-	smpsAlterVol		$F9
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$07
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$F9
-	dc.b	nD5, $03, nRst
-	smpsAlterVol		$07
-	dc.b	nD5, $03, nRst
-	smpsAlterVol		$F9
-	dc.b	nC5, $03, nRst, nB4, nRst, nC5, nRst
-	smpsAlterPitch	$05
-	dc.b	nD4, $06
-	smpsAlterVol		$07
-	dc.b	nD4, $06
-	smpsAlterVol		$F9
-	dc.b	nCs4, $54
-	smpsStop
-
-ReachGoal_FM4:
-	smpsFMvoice		$01
+Maniax_FM3:
 	smpsPan		panLeft
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $06
-	smpsCall		ReachGoal_Call1, Target
-	smpsStop
-
-ReachGoal_FM5:
-	smpsFMvoice		$01
-	smpsPan		panRight
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $06
-	smpsCall		ReachGoal_Call2, Target
-	smpsStop
-
-ReachGoal_FM6:
 	smpsFMvoice		$02
-	smpsPan		panCenter
-	dc.b	nE5, $06, nF5, $03, nRst, nE5, $06, nD5
-	dc.b	$03, nRst
-	smpsAlterVol		$0A
-	dc.b	nD5, $03, nRst
-	smpsAlterVol		$F6
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$0A
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$F6
-	dc.b	nB4, $03, nRst
-	smpsAlterVol		$0A
-	dc.b	nB4, $03, nRst
-	smpsAlterVol		$F6
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$0A
-	dc.b	nC5, $03, nRst
-	smpsAlterVol		$F6
-	dc.b	nD5, $03, nRst
-	smpsAlterVol		$0A
-	dc.b	nD5, $03, nRst
-	smpsAlterVol		$F6
-	dc.b	nC5, $03, nRst, nB4, nRst, nC5, nRst, nG4
-	dc.b	$06
-	smpsAlterVol		$0A
-	dc.b	nG4, $06
-	smpsAlterVol		$F6
-	dc.b	nA4, $0C
+	smpsNoteFill	$06
+	dc.b nC6, $03, nC6, nRst, $0C, nC6, $03, nC6
+	dc.b nRst, $0C, nC6, $03, nC6, nRst, $12
+	smpsNoteFill	$00
+	dc.b nC6, $09, nD6, $33
 	smpsStop
 
-ReachGoal_PSG1:
+Maniax_FM4:
+	smpsPan		panRight
+	smpsFMvoice		$02
+	smpsNoteFill	$06
+	dc.b nA5, $03, nA5, nRst, $0C, nA5, $03, nA5
+	dc.b nRst, $0C, nA5, $03, nA5, nRst, $12
+	smpsNoteFill	$00
+	dc.b nA5, $09, nB5, $33
 	smpsStop
 
-ReachGoal_PSG2:
+Maniax_FM5:
+	smpsFMvoice		$03
+	smpsModSet	$0D, $01, $02, $05
+
+Maniax_PSG2:
+	dc.b nG5, $06, nC6, nB5, nG5, nC6, nB5, nG5
+	dc.b nC6, nB5, $0C, nC6, $09, nB5, $33
+
+Maniax_FM6:
+Maniax_PSG3:
 	smpsStop
 
-ReachGoal_PSG3:
+Maniax_PWM1:
+	dc.b dSnare, $03, dSnare, dKick, $06, dKick, dSnare, $03
+	dc.b dSnare, dKick, $06, dKick, dSnare, $03, dSnare, dHiTimpani
+	dc.b dHiTimpani, dFloorTimpani, dFloorTimpani, $03, dFloorTimpani, dFloorTimpani, dSnare, $09
+	dc.b $33
 	smpsStop
-
-ReachGoal_PWM1:
-	dc.b	$8B, $06, $8B, nRst, $18, $8B, $06, $8B
-	dc.b	nRst, $18, $8B, $06, $0C, $06, $8B, $0C
-	dc.b	$0C
-	smpsStop
-
-ReachGoal_PWM2:
-	dc.b	$96, $18, $82, $06, $82, nRst, $0C, $18
-	dc.b	$82, $06, $82
-	smpsStop
-
-ReachGoal_PWM3:
-	dc.b	$89, $30, nRst, $0C, nRst, $06, $85, $03
-	dc.b	$03, $85, $06, $86, $87, $87, $89, $0C
-	dc.b	$0C
-	smpsStop
-
-ReachGoal_PWM4:
-	smpsStop
-
-ReachGoal_Patches:
-
 	
-	dc.b	$38
-	dc.b	$0A, $70, $30, $00,	$1F, $1F, $1F, $1F
-	dc.b	$12, $0E, $0A, $0A,	$00, $04, $04, $03
-	dc.b	$26, $26, $26, $28,	$24, $2D, $12, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+Maniax_PWM2:
+Maniax_PWM3:
+Maniax_PWM4:
+	smpsStop
 
-	
-	dc.b	$3A
-	dc.b	$01, $03, $02, $01,	$0F, $10, $11, $19
-	dc.b	$0A, $05, $0A, $05,	$02, $02, $02, $02
-	dc.b	$36, $36, $36, $58,	$19, $1E, $32, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	dc.b	$06, $05, $04, $10, $1F, $5F, $5F, $5F	; Unused
-	dc.b	$05, $07, $0C, $0C, $17, $17, $12, $18	; Unused
-	dc.b	$9F, $9C, $9C, $9C, $2D, $80, $80, $80	; Unused
+Maniax_Patches:
+	dc.b	$3D, $01, $02, $00, $01, $1F, $0E, $0E, $0E, $07, $1F, $1F, $1F, $00, $00, $00, $00, $1F, $0F, $0F, $0F, $17, $8D, $8C, $8C
+	dc.b	$3A, $61, $3C, $14, $31, $9C, $DB, $9C, $DA, $04, $09, $04, $03, $03, $01, $03, $00, $1F, $0F, $0F, $0F, $21, $47, $31, $80
+	dc.b	$3D, $01, $01, $01, $01, $8E, $52, $14, $4C, $08, $08, $0E, $03, $00, $00, $00, $00, $1F, $1F, $1F, $1F, $1B, $80, $80, $9B
+	dc.b	$3D, $01, $01, $01, $01, $8E, $52, $14, $4C, $08, $08, $0E, $03, $00, $00, $00, $00, $1F, $1F, $1F, $1F, $1B, $80, $80, $9B
+	dc.b	$3D, $01, $02, $02, $02, $10, $50, $50, $50, $07, $08, $08, $08, $01, $00, $00, $00, $2F, $1F, $1F, $1F, $1C, $82, $82, $82
+	even
+	; Patch $00
+	; $3D
+	; $01, $02, $00, $01,	$1F, $0E, $0E, $0E
+	; $07, $1F, $1F, $1F,	$00, $00, $00, $00
+	; $1F, $0F, $0F, $0F,	$17, $8D, $8C, $8C
+	;spAlgorithm	$05
+	;spFeedback	$07
+	;spDetune	$00, $00, $00, $00
+	;spMultiple	$01, $00, $02, $01
+	;spRateScale	$00, $00, $00, $00
+	;spAttackRt	$1F, $0E, $0E, $0E
+	;spAmpMod	$00, $00, $00, $00
+	;spSustainRt	$07, $1F, $1F, $1F
+	;spSustainLv	$01, $00, $00, $00
+	;spDecayRt	$00, $00, $00, $00
+	;spReleaseRt	$0F, $0F, $0F, $0F
+	;spTotalLv	$17, $0C, $0D, $0C
+
+	; Patch $01
+	; $3A
+	; $61, $3C, $14, $31,	$9C, $DB, $9C, $DA
+	; $04, $09, $04, $03,	$03, $01, $03, $00
+	; $1F, $0F, $0F, $0F,	$21, $47, $31, $80
+	;spAlgorithm	$02
+	;spFeedback	$07
+	;spDetune	$06, $01, $03, $03
+	;spMultiple	$01, $04, $0C, $01
+	;spRateScale	$02, $02, $03, $03
+	;spAttackRt	$1C, $1C, $1B, $1A
+	;spAmpMod	$00, $00, $00, $00
+	;spSustainRt	$04, $04, $09, $03
+	;spSustainLv	$01, $00, $00, $00
+	;spDecayRt	$03, $03, $01, $00
+	;spReleaseRt	$0F, $0F, $0F, $0F
+	;spTotalLv	$21, $31, $47, $00
+
+	; Patch $02
+	; $3D
+	; $01, $01, $01, $01,	$8E, $52, $14, $4C
+	; $08, $08, $0E, $03,	$00, $00, $00, $00
+	; $1F, $1F, $1F, $1F,	$1B, $80, $80, $9B
+	;spAlgorithm	$05
+	;spFeedback	$07
+	;spDetune	$00, $00, $00, $00
+	;spMultiple	$01, $01, $01, $01
+	;spRateScale	$02, $00, $01, $01
+	;spAttackRt	$0E, $14, $12, $0C
+	;spAmpMod	$00, $00, $00, $00
+	;spSustainRt	$08, $0E, $08, $03
+	;spSustainLv	$01, $01, $01, $01
+	;spDecayRt	$00, $00, $00, $00
+	;spReleaseRt	$0F, $0F, $0F, $0F
+	;spTotalLv	$1B, $00, $00, $1B
+
+	; Patch $03
+	; $3D
+	; $01, $01, $01, $01,	$8E, $52, $14, $4C
+	; $08, $08, $0E, $03,	$00, $00, $00, $00
+	; $1F, $1F, $1F, $1F,	$1B, $80, $80, $9B
+	;spAlgorithm	$05
+	;spFeedback	$07
+	;spDetune	$00, $00, $00, $00
+	;spMultiple	$01, $01, $01, $01
+	;spRateScale	$02, $00, $01, $01
+	;spAttackRt	$0E, $14, $12, $0C
+	;spAmpMod	$00, $00, $00, $00
+	;spSustainRt	$08, $0E, $08, $03
+	;spSustainLv	$01, $01, $01, $01
+	;spDecayRt	$00, $00, $00, $00
+	;spReleaseRt	$0F, $0F, $0F, $0F
+	;spTotalLv	$1B, $00, $00, $1B
+
+	; Patch $04
+	; $3D
+	; $01, $02, $02, $02,	$10, $50, $50, $50
+	; $07, $08, $08, $08,	$01, $00, $00, $00
+	; $2F, $1F, $1F, $1F,	$1C, $82, $82, $82
+	;spAlgorithm	$05
+	;spFeedback	$07
+	;spDetune	$00, $00, $00, $00
+	;spMultiple	$01, $02, $02, $02
+	;spRateScale	$00, $01, $01, $01
+	;spAttackRt	$10, $10, $10, $10
+	;spAmpMod	$00, $00, $00, $00
+	;spSustainRt	$07, $08, $08, $08
+	;spSustainLv	$02, $01, $01, $01
+	;spDecayRt	$01, $00, $00, $00
+	;spReleaseRt	$0F, $0F, $0F, $0F
+	;spTotalLv	$1C, $02, $02, $02

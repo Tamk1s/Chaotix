@@ -1,5 +1,5 @@
 
-Target	EQU	$4DC41
+Target	EQU	$4E3C1
 	smpsHeaderVoice	Olegend_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $00

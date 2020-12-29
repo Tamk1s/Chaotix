@@ -1,372 +1,964 @@
-
 Target	EQU	$48000
-	smpsHeaderVoice	TakeOff_Patches, Target
-	smpsHeaderChan	$06, $03
-	smpsHeaderTempo	$01, $02
-	smpsHeaderFM	TakeOff_FM1, Target, $00, $0C
-	smpsHeaderFM	TakeOff_FM2, Target, $00, $16
-	smpsHeaderFM	TakeOff_FM3, Target, $00, $13
-	smpsHeaderFM	TakeOff_FM4, Target, $00, $0B
-	smpsHeaderFM	TakeOff_FM5, Target, $00, $0A
-	smpsHeaderFM	TakeOff_FM6, Target, $00, $18
-	smpsHeaderPSG	TakeOff_PSG1, Target, $00, $01, $00, $0C
-	smpsHeaderPSG	TakeOff_PSG2, Target, $00, $04, $00, $0C
-	smpsHeaderPSG	TakeOff_PSG3, Target, $23, $02, $00, $02
-	smpsHeaderPWM	TakeOff_PWM1, Target, $00, $AA
-	smpsHeaderPWM	TakeOff_PWM2, Target, $00, $99
-	smpsHeaderPWM	TakeOff_PWM3, Target, $00, $AA
-	smpsHeaderPWM	TakeOff_PWM4, Target, $00, $77
+	smpsHeaderVoice	SH_SystemMenu_Patches, Target
+	smpsHeaderChan	6,3
+	smpsHeaderTempoC	$02, $0F
+	smpsHeaderFM	SH_SystemMenu_FM1, Target, $00, $11
+	smpsHeaderFM	SH_SystemMenu_FM2, Target, $00, $23
+	smpsHeaderFM	SH_SystemMenu_FM3, Target, $00, $14
+	smpsHeaderFM	SH_SystemMenu_FM4, Target, $00, $23
+	smpsHeaderFM	SH_SystemMenu_FM5, Target, $00, $0F
+	smpsHeaderFM	SH_SystemMenu_FM6, Target, $00, $21
+	smpsHeaderPSG	SH_SystemMenu_PSG1, Target, $00, $7F, $00, $01
+	smpsHeaderPSG	SH_SystemMenu_PSG2, Target, $00, $7F, $00, $01
+	smpsHeaderPSG	SH_SystemMenu_PSG3, Target, $00, $7F, $00, $04
+	smpsHeaderPWM	SH_SystemMenu_PWM1, Target, $00, $7F
+	smpsHeaderPWM	SH_SystemMenu_PWM2, Target, $00, $7F
+	smpsHeaderPWM	SH_SystemMenu_PWM3, Target, $00, $7F
+	smpsHeaderPWM	SH_SystemMenu_PWM4, Target, $00, $7F
 
-TakeOff_FM1:
+SH_SystemMenu_FM1:
+	smpsPan		panCenter
 	smpsFMvoice		$00
-	dc.b	nRst, $24
+	dc.b	nRst, $05
 
-TakeOff_Jump1:
-	dc.b	nD2, $0C, nRst, nD2, $18, nRst, nD2, nRst
-	dc.b	nD2, nRst, nD2, $06, nRst, nE2, $0C, smpsNoAttack
-	dc.b	$0C, nRst, nE2, $18, nRst, nE2, nRst, nE2
-	dc.b	nRst, nE2, $06, nRst, nD2, $0C, smpsNoAttack, $0C
-	dc.b	nRst, nD2, $18, nRst, nD2, nRst, nD2, nRst
-	dc.b	nD2, $06, nRst, nE2, $0C, smpsNoAttack, $0C, nRst
-	dc.b	nE2, $18, nRst, nE2, nRst, $0C, nE2, $06
-	dc.b	nRst, nE2, nRst, nE2, nRst, nE2, nE3, nE2
-	dc.b	nRst, nFs2, nFs3, nFs2, nRst
-	smpsJump		TakeOff_Jump1, Target
+SH_SystemMenu_Loop2:
+	dc.b	nG4
 
-TakeOff_FM2:
+SH_SystemMenu_Loop1:
+	dc.b	$06, nC5, $03, nRst, nG5, $0C
+	smpsLoop		$00, $02, SH_SystemMenu_Loop1, Target
+	dc.b	nG4, $06, nC5, nD5, nG4, nG4, $03, nRst
+	dc.b	nF4, $06, nG4, $18, nRst, $54
+	smpsLoop		$01, $03, SH_SystemMenu_Loop2, Target
+	dc.b	nG4
+
+SH_SystemMenu_Loop3:
+	dc.b	$06, nC5, $03, nRst, nG5, $0C
+	smpsLoop		$00, $02, SH_SystemMenu_Loop3, Target
+	dc.b	nG4, $06, nC5, nD5, nG4, nG4, $03, nRst
+	;!@ dc.b	nF4, $06, nG4, $18, nRst, $7F, $77
+	dc.b	nF4, $06, nG4, $18, nRst, $7F, nRst, $77
+
+SH_SystemMenu_Loop4:
+	dc.b	nG5, $03, $03, nRst, $06, nG5, $03, $03
+	dc.b	nRst, $4E
+	smpsLoop		$00, $03, SH_SystemMenu_Loop4, Target
+	dc.b	nG5, $03, $03, nRst, $06, nG5, $03, $03
+	dc.b	nRst, $7F, $53, nA5, $06, nRst, nC6, nA5
+	dc.b	nRst, nC6, $0C, nA5, $06, nC6, nA5, nC6
+	dc.b	nRst, nEb5, nD5, $03, nRst, $09, nC6, $1E
+	dc.b	nEb5, $06, nD5, $03, nRst, $09, nC6, $0C
+	dc.b	nAb5, $06, nC6, $0C, nD6, $03, nRst, nD6
+	dc.b	nRst, $09, nC6, $57, nRst, $4B
+
+SH_SystemMenu_Loop5:
+	dc.b	nG5, $03, $03, nRst, $06, nG5, $03, $03
+	dc.b	nRst, $4E
+	smpsLoop		$00, $02, SH_SystemMenu_Loop5, Target
+	dc.b	nG5, $03, $03, nRst, $06, nG5, $03, $03
+	smpsJump	SH_SystemMenu_FM1, Target
+
+SH_SystemMenu_FM2:
+	smpsFMvoice		$01
+	smpsPan		panCenter
+	dc.b	nRst
+
+SH_SystemMenu_Loop6:
+	dc.b	$55
+	smpsLoop		$00, $08, SH_SystemMenu_Loop6, Target
+	dc.b	$57, nG4, $03, nA4, $01
+	smpsFMvoice		$01
+	smpsAlterVol		$EE
+	dc.b	smpsNoAttack, $02, nB4, $03, nC5, nA4, nB4, nC5
+	dc.b	nD5, nB4, nC5, nD5, nE5
+	smpsAlterVol		$01
+	dc.b	nC5, nD5, nE5, nFs5, nD5, nE5, nFs5, nG5
+	dc.b	nE5, nFs5, nG5, nA5, nFs5, nG5, nA5, nB5
+	dc.b	nG5, nA5, nB5, nC6, nA5, nB5, nC6
+	smpsAlterVol		$02
+	dc.b	nD6, nB5, nC6, nD6, nE6, nC6, nD6, nE6
+	dc.b	nFs6, nD6, nE6, nFs6, nG6, nE6, nFs6, nG6
+	dc.b	nA6, nFs6, nG6, nA6, nB6, nG6, nA6, nB6
+	dc.b	nC7, nA6
+	smpsAlterVol		$01
+	dc.b	nB6, nC7, nD7, nRst, $06
+	smpsAlterVol		$F4
+	dc.b	nG3, $01
+	smpsFMvoice		$07
+	smpsAlterVol		$26
+	dc.b	smpsNoAttack, $02, nA3, $03, nC4, $06, nRst, $03
+	smpsAlterVol		$01
+	dc.b	nC4, nRst, $06, nE4
+	smpsAlterVol		$01
+	dc.b	nC4, $03, nRst, $0F, nG3, $03
+	smpsAlterVol		$01
+	dc.b	nA3, nC4, nRst, nC4, nRst, nD4, $06, nG3
+	dc.b	$03, nA3, nC4, nRst
+	smpsAlterVol		$FF
+	dc.b	nD4, nRst
+	smpsAlterVol		$FF
+	dc.b	nEb4, nE4, nG3, nA3, nC4, nG3, nA3, nC4
+	dc.b	nRst, nC4, nRst, $06, nEb4, $03, nE4, nRst
+	dc.b	$0C, nEb4, $03, nRst, nEb4, nRst
+	smpsAlterVol		$08
+	dc.b	nEb4, nRst, nE4
+	smpsAlterVol		$F8
+	dc.b	$03
+	smpsAlterVol		$08
+	dc.b	$03
+	smpsAlterVol		$F8
+	dc.b	$03
+	smpsAlterVol		$0B
+	dc.b	nC4
+	smpsAlterVol		$F5
+	dc.b	$03, nA3, nG3, nRst
+	smpsAlterVol		$02
+	dc.b	nF3, nG3, nA3
+	smpsAlterVol		$FF
+	dc.b	nC4, nRst, nC4, nRst
+	smpsAlterVol		$FF
+	dc.b	nC4, nRst
+	smpsAlterVol		$0B
+	dc.b	nE4, nRst
+	smpsAlterVol		$F5
+	dc.b	nEb4
+	smpsAlterVol		$0B
+	dc.b	nE4, $06, nC4, $03, nRst
+	smpsAlterVol		$F6
+	dc.b	nC4, nRst
+	smpsAlterVol		$02
+	dc.b	nC4
+	smpsAlterVol		$FF
+	dc.b	$03, nRst, nC4, nRst
+	smpsAlterVol		$09
+	dc.b	nG3
+	smpsAlterVol		$F7
+	dc.b	nA3
+	smpsAlterVol		$FF
+	dc.b	nC4, nRst
+	smpsAlterVol		$0A
+	dc.b	nG3
+	smpsAlterVol		$F5
+	dc.b	nA3
+	smpsAlterVol		$02
+	dc.b	nC4
+	smpsAlterVol		$FE
+	dc.b	nD4, nRst, $07
+	smpsFMvoice		$08
+	;dc.b	$01
+	dc.b	nRst, $01
+	smpsAlterVol		$F6
+	dc.b	nB4, nRst, $02, nFs5, $01, nRst, $02, nC6
+	dc.b	$01, nRst, $02, nG6, $01, nRst, nC7, nRst
+	dc.b	$03, nC7, $01, nB6, nRst, $03, nC6, $01
+	dc.b	nRst, nA5, nRst, $2F
+	smpsAlterVol		$08
+	dc.b	nG5, $01
+	smpsFMvoice		$01
+	smpsAlterVol		$E8
+	dc.b	smpsNoAttack, $05, nF5, $06, nE5, nD5, nD5, nF5
+	dc.b	nA5, $0C, nF5, $06, nD5, nB4, nRst, $7F
+	;!@ dc.b	$7F, $23
+	dc.b	nRst, $7F, nRst, $23
+	smpsFMvoice		$08
+	dc.b	$04
+	smpsAlterVol		$10
+	dc.b	nB4, $01, nRst, $02, nFs5, $01, nRst, $02
+	dc.b	nC6, $01, nRst, $02, nG6, $01, nRst, nC7
+	dc.b	nRst, $03, nC7, $01, nB6, nRst, $03, nC6
+	dc.b	$01, nRst, nA5, nRst, $02, nD5, $01, nRst
+	dc.b	$02, nG4, $01, nRst, nG4, nRst, $02, nD5
+	;!@ dc.b	$01, nRst, $02, nA5, $01, nRst, nRst, $04
+	dc.b	$01, nRst, $02, nA5, $01, nRst, $01, nRst, $04
+	dc.b	nB6, $01, nRst, $06
+	smpsAlterVol		$FA
+	dc.b	nG3, $01
+	smpsFMvoice		$07
+	smpsAlterVol		$0F
+	dc.b	smpsNoAttack, $02, nA3, $03, nC4, $06, nRst, $03
+	smpsAlterVol		$01
+	dc.b	nC4, nRst, $06, nE4
+	smpsAlterVol		$01
+	dc.b	nC4, $03, nRst, $0F, nG3, $03
+	smpsAlterVol		$01
+	dc.b	nA3, nC4, nRst, nC4, nRst, nD4, $06, nG3
+	dc.b	$03, nA3, nC4, nRst
+	smpsAlterVol		$FF
+	dc.b	nD4, nRst
+	smpsAlterVol		$FF
+	dc.b	nEb4, nE4, nG3, nA3, nC4, nG3, nA3, nC4
+	dc.b	nRst, nC4, nRst, $06, nEb4, $03, nE4, nRst
+	dc.b	$0C, nEb4, $03, nRst, nEb4, nRst
+	smpsAlterVol		$08
+	dc.b	nEb4, nRst, nE4
+	smpsAlterVol		$F8
+	dc.b	$03
+	smpsAlterVol		$08
+	dc.b	$03
+	smpsAlterVol		$F8
+	dc.b	$03
+	smpsAlterVol		$0B
+	dc.b	nC4
+	smpsAlterVol		$F5
+	dc.b	$03, nA3, nG3, nRst
+	smpsAlterVol		$02
+	dc.b	nF3, nG3, nA3
+	smpsAlterVol		$FF
+	dc.b	nC4, nRst, nC4, nRst
+	smpsAlterVol		$FF
+	dc.b	nC4, nRst
+	smpsAlterVol		$0B
+	dc.b	nE4, nRst
+	smpsAlterVol		$F5
+	dc.b	nEb4
+	smpsAlterVol		$0B
+	dc.b	nE4, $06, nC4, $03, nRst
+	smpsAlterVol		$F6
+	dc.b	nC4, nRst
+	smpsAlterVol		$02
+	dc.b	nC4
+	smpsAlterVol		$FF
+	dc.b	$03, nRst, nC4, nRst
+	smpsAlterVol		$09
+	dc.b	nG3
+	smpsAlterVol		$F7
+	dc.b	nA3
+	smpsAlterVol		$FF
+	dc.b	nC4, nRst
+	smpsAlterVol		$0A
+	dc.b	nG3
+	smpsAlterVol		$F5
+	dc.b	nA3
+	smpsAlterVol		$02
+	dc.b	nC4
+	smpsAlterVol		$FE
+	dc.b	nD4
+	smpsJump	SH_SystemMenu_FM2, Target
+
+SH_SystemMenu_FM3:
+	smpsPan		panCenter
 	smpsFMvoice		$03
-	dc.b	nRst, $24
+	dc.b	nG4, $0B
 
-TakeOff_Jump2:
-	smpsCall		TakeOff_Call1, Target
-	dc.b	smpsNoAttack, $5A
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsCall		TakeOff_Call1, Target
-	dc.b	smpsNoAttack, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nD4, $4E
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsCall		TakeOff_Call1, Target
-	dc.b	smpsNoAttack, $36
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nD3, $0C, nE3, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nG3, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nA3, $1E
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nB3, $3C, smpsNoAttack, $5A
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsJump		TakeOff_Jump2, Target
+SH_SystemMenu_Loo$8:
+	dc.b	nRst, $06, nG4, nRst, $0C, nG4, nRst, nG4
+	dc.b	$06, nRst, $0C, nG4, $06, nRst, $0C, nG4
+	dc.b	nRst, $06, nG4, nRst, $0C, nG4, nRst, nG4
+	dc.b	$06, nRst, $0C, nG4, $06
 
-TakeOff_Call1:
-	dc.b	nRst, $18, nA3, $1E
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nB3, $12
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nG3, $0C
-	smpsReturn
-
-TakeOff_FM3:
+SH_SystemMenu_Loop7:
+	dc.b	nRst, $0C, nF4, nRst, $06, nF4, nRst, $0C
+	dc.b	nF4, nRst, nF4, $06, nRst, $0C, nF4, $06
+	smpsLoop		$00, $02, SH_SystemMenu_Loop7, Target
+	dc.b	nRst, $0C, nG4
+	smpsLoop		$01, $02, SH_SystemMenu_Loo$8, Target
+	dc.b	nRst, $06, nG4, nRst, $0C, nG4, nRst, nG4
+	dc.b	$06, nRst, $0C, nG4, $06, nRst, $0C, nG4
+	dc.b	nRst, $06, nG4, nRst, $0C, nG4, nRst, nG4
+	dc.b	$06, nRst, $0C, nG4, $06, nRst, $0C
+	smpsAlterVol		$FA
+	dc.b	nE5, $01
+	smpsAlterVol		$11
 	smpsFMvoice		$02
-	dc.b	nRst, $24
-
-TakeOff_Loop1:
-	smpsPan		panLeft
-	dc.b	nRst, $0C, nD4, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nD5, $0C, nD4, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panRight
-	dc.b	nRst, $0C, nD4, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	dc.b	nD5, $0C, nD4, $06
-	smpsAlterVol		$0A
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsLoop		$00, $08, TakeOff_Loop1, Target
-	smpsJump		TakeOff_Loop1, Target
-
-TakeOff_FM4:
-	smpsFMvoice		$01
-	smpsModSet	$0F, $01, $01, $06
-	dc.b	nRst, $24
-
-TakeOff_Jump3:
-	dc.b	nG3, $60, smpsNoAttack, $4E
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nFs3, $0C, smpsNoAttack, $60, smpsNoAttack, $4E
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nG3, $0C, smpsNoAttack, $60, smpsNoAttack, $4E
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nFs3, $0C, smpsNoAttack, $60, smpsNoAttack, $60
-	smpsJump		TakeOff_Jump3, Target
-
-TakeOff_FM5:
-	smpsFMvoice		$01
-	smpsModSet	$0F, $01, $02, $04
-	dc.b	nRst, $24
-
-TakeOff_Jump4:
-	dc.b	nE3, $60, smpsNoAttack, $4E
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nD3, $0C, smpsNoAttack, $60, smpsNoAttack, $4E
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nE3, $0C, smpsNoAttack, $60, smpsNoAttack, $4E
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nD3, $0C, smpsNoAttack, $60, smpsNoAttack, $60
-	smpsJump		TakeOff_Jump4, Target
-
-TakeOff_FM6:
+	dc.b	smpsNoAttack, $05, nRst, $06, nC5, nRst, nD5, nRst
+	dc.b	nG5, nRst, nF5, nE5, nD5, nC5, nD5, nRst
+	dc.b	$12, nE5, $06, nRst, nC5, nRst, nD5, nRst
+	dc.b	nG5, nRst, nF5, nE5, nC5, nA4, nG4, nRst
+	dc.b	$12, nE5, $06, nRst, nC5, nRst, nD5, nRst
+	dc.b	nG5, nRst, nF5, nE5, nD5, nC5, nD5, nRst
+	dc.b	$12
+	smpsAlterVol		$06
+	dc.b	nE5, $01
+	smpsAlterVol		$F4
 	smpsFMvoice		$03
-	smpsPan		panLeft
-	smpsModSet	$05, $01, $04, $06
-	dc.b	nRst, $24, nRst, $0C
-	smpsJump		TakeOff_Jump2, Target
-	dc.b	$F6, $A6, $81	; Unused
+	dc.b	smpsNoAttack, $0B, nG5, $06, nB5, $12, nG5, $06
+	dc.b	nE5, $24, nRst, $12, nF5, $06, $06, nG5
+	dc.b	nA5, $0C, nA4, $06, nC5, nB4, nG4, nB4
+	dc.b	nG5, nB5, nG5, nE5, nG5, nA5, $24, nRst
+	dc.b	$4E, nAb4, $0C, nC5, nEb5, $06, nG5, nD5
+	dc.b	$0C, nF5, $06, nD5, nBb4, $0C, nG5, $06
+	dc.b	nF5, $03, nRst, $09, nE5, $36, nRst, $24
+	smpsAlterVol		$FA
+	dc.b	nE5, $01
+	smpsFMvoice		$02
+	smpsAlterVol		$0C
+	dc.b	smpsNoAttack, $05, nRst, $06, nC5, nRst, nD5, nRst
+	dc.b	nG5, nRst, nF5, nE5, nD5, nC5, nD5, nRst
+	dc.b	$12, nE5, $06, nRst, nC5, nRst, nD5, nRst
+	dc.b	nG5, nRst, nF5, nE5, nC5, nA4, nG4, nRst
+	dc.b	$12, nE5, $06, nRst, nC5, nRst, nD5, nRst
+	dc.b	nG5, nRst, nF5, nE5, nD5, nC5, nD5, nRst
+	dc.b	$12
+	smpsAlterVol		$06
+	smpsJump	SH_SystemMenu_FM3, Target
 
-TakeOff_PSG1:
-	smpsPSGvoice	$08
-	dc.b	nRst, $24
-
-TakeOff_Jump5:
-	dc.b	nRst, $60, nRst, $18, nA3, nRst, $0C, nB3
-	dc.b	nRst, nG3, smpsNoAttack, $18, nRst, $48, nRst, $24
-	dc.b	nA3, $0C, nB3, $06, nRst, nG3, nRst, nE3
-	dc.b	$0C, nD3, nRst, $60, nRst, $0C, nA3, nB3
-	dc.b	$06, nRst, nD4, $3C, nRst, $0C, nD4, nC4
-	dc.b	$06, nRst, nB3, nRst, nA3, $0C, nG3, $06
-	dc.b	nRst, nA3, $0C, nB3, $06, nRst, nG3, $0C
-	dc.b	nA3, $06, nRst, nB3, $0C, nG3, $06, nRst
-	dc.b	nB3, $12, nRst, $06, nA3, $12, nRst, $06
-	smpsJump		TakeOff_Jump5, Target
-
-TakeOff_PSG2:
-	smpsPSGvoice	$08
-	smpsModSet	$02, $01, $01, $03
-	dc.b	nRst, $24, nRst, $0C
-	smpsJump		TakeOff_Jump5, Target
-	dc.b	$F6, $06, $82	; Unused
-
-TakeOff_PSG3:
-	smpsPSGform	$E7
-	dc.b	nRst, $24
-
-TakeOff_Jump6:
-	smpsPSGvoice	$02
-	dc.b	nC4, $0C, $0C, $0C, $0C, $0C, $06, $06
-	dc.b	$0C, $0C, $0C, $0C, $0C, $0C, $0C
-	smpsPSGvoice	$05
-	dc.b	$0C
-	smpsPSGvoice	$02
-	dc.b	$0C, $0C
-
-TakeOff_Loop2:
-	dc.b	nRst, nC4, $0C, $0C, $0C, $0C, $06, $06
-	dc.b	$0C, $0C, $0C, $0C, $0C, $0C, $0C
-	smpsPSGvoice	$05
-	dc.b	$0C
-	smpsPSGvoice	$02
-	dc.b	$0C, $0C
-	smpsLoop		$00, $03, TakeOff_Loop2, Target
-	smpsJump		TakeOff_Jump6, Target
-
-TakeOff_PWM1:
-	dc.b	$81, $06, $81, $06, nRst, $18
-
-TakeOff_Jump7:
-	dc.b	$81, $30, $81, $81, $81, $24, $0C, nRst
-	dc.b	$30, $81, $81, $81, $24, $0C, nRst, $30
-	dc.b	$81, $81, $81, $24, $0C, nRst, $30, $81
-	dc.b	$81, $30, $81
-	smpsJump		TakeOff_Jump7, Target
-
-TakeOff_PWM2:
-	dc.b	$96, $0C, $8C, $18
-
-TakeOff_Loop3:
-	dc.b	nRst, $18, $86, nRst, $86
-	smpsLoop		$00, $07, TakeOff_Loop3, Target
-	dc.b	nRst, $0C, $8C, $8C, $86, $8C, $06, $8C
-	dc.b	$86, nRst, $86, $8C, $8C, $8C
-	smpsJump		TakeOff_Loop3, Target
-
-TakeOff_PWM3:
-	dc.b	$96, $0C
-	smpsAlterVol		$FC
-	dc.b	$83, $18
-	smpsAlterVol		$04
-
-TakeOff_Jum$8:
-	smpsAlterVol		$C0
-	dc.b	$89, $18
-	smpsAlterVol		$40
-	smpsAlterVol		$90
-	dc.b	$87, nRst, $87, nRst, $87, nRst, $87, $0C
-	smpsAlterVol		$70
-	smpsAlterVol		$FC
-	dc.b	$83
-	smpsAlterVol		$04
-	smpsAlterVol		$90
-	dc.b	nRst, $18, $87, nRst, $87, nRst, $87, nRst
-	dc.b	$87, $0C
-	smpsAlterVol		$70
-	smpsAlterVol		$C0
-	dc.b	$89
-	smpsAlterVol		$40
-	smpsAlterVol		$90
-	dc.b	nRst, $18, $87, nRst, $87, nRst, $87, nRst
-	dc.b	$87, $0C
-	smpsAlterVol		$70
-	smpsAlterVol		$FC
-	dc.b	$83
-	smpsAlterVol		$04
-	smpsAlterVol		$90
-	dc.b	nRst, $18, $87, nRst, $87
-	smpsAlterVol		$70
-	smpsAlterVol		$C0
-	dc.b	$89, $48
-	smpsAlterVol		$40
-	smpsAlterVol		$90
-	dc.b	$87, $18
-	smpsAlterVol		$70
-	smpsJump		TakeOff_Jum$8, Target
-
-TakeOff_PWM4:
-	dc.b	$96, $24
-
-TakeOff_Loop4:
-	dc.b	nRst, $0C
-	smpsAlterVol		$F9
-	dc.b	$88, $06, $06, $06, $12
-	smpsAlterVol		$07
-	dc.b	nRst, $0C
-	smpsAlterVol		$90
-	dc.b	$8A, $06, $06, $06, $12
-	smpsAlterVol		$70
-	smpsLoop		$00, $08, TakeOff_Loop4, Target
-	smpsJump		TakeOff_Loop4, Target
-
-TakeOff_Patches:
-
-	
-	dc.b	$4B
-	dc.b	$10, $11, $21, $62,	$3F, $9F, $9F, $9F
-	dc.b	$02, $0D, $13, $02,	$12, $0A, $05, $07
-	dc.b	$0F, $6F, $5F, $0F,	$24, $0D, $15, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-	
-	dc.b	$29
-	dc.b	$36, $74, $73, $31,	$5E, $5F, $5C, $5F
-	dc.b	$12, $0F, $10, $10,	$04, $07, $02, $01
-	dc.b	$3F, $4F, $0F, $0F,	$12, $11, $2D, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-	
+SH_SystemMenu_FM4:
+	smpsPan		panCenter
+	smpsFMvoice		$04
+	dc.b	nRst, $6B, nG5, $0C
+	smpsAlterVol		$02
+	dc.b	nA5
+	smpsAlterVol		$FE
+	dc.b	nG5
+	smpsAlterVol		$FE
+	dc.b	nF5, $12
+	smpsAlterVol		$FB
+	dc.b	nE5
+	smpsAlterVol		$FD
+	dc.b	nC6, $0C
+	smpsAlterVol		$03
+	dc.b	nD5, $24, nRst, $3C
+	smpsAlterVol		$03
+	dc.b	nG5, $0C, nF5
+	smpsAlterVol		$FE
+	dc.b	nE5, $09, nF5, $03
+	smpsAlterVol		$01
+	dc.b	nF6, $0C, nG5, $0F, $09, nA5
+	smpsAlterVol		$01
+	dc.b	nC6
+	smpsAlterVol		$01
+	dc.b	nB5, $06
+	smpsAlterVol		$FF
+	dc.b	nG5, $30, nRst, $3C, nG5, $0C, nA5, nG5
+	dc.b	nF5, $12, nE5, nC6, $0C, nD5, $24, nRst
 	dc.b	$3C
-	dc.b	$74, $72, $11, $11,	$19, $1E, $19, $1E
-	dc.b	$01, $01, $01, $01,	$00, $00, $00, $00
-	dc.b	$F7, $FC, $F7, $FC,	$18, $80, $0A, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	smpsAlterVol		$FD
+	dc.b	nG5, $0C, nF5, nE5, nRst
+	smpsAlterVol		$02
+	dc.b	nG5, $0F, $09, nA5, nC6, nB5, $06, nG5
+	;!@ dc.b	$30, nRst, $7F, $11, nG5, $42, nE5, $06
+	dc.b	$30, nRst, $7F, nRst, $11, nG5, $42, nE5, $06
+	dc.b	nF5, nE5
+	smpsAlterVol		$01
+	dc.b	nC6
+	smpsAlterVol		$01
+	dc.b	nG5, $48
+	smpsAlterVol		$FF
+	dc.b	nA5, $06, nC6, nD5, nE5, nF5, nG5, $48
+	dc.b	nRst, $06, nA5
+	smpsAlterVol		$FF
+	dc.b	nC6, nD5
+	smpsAlterVol		$F9
+	dc.b	nE5, $0C
+	smpsAlterVol		$04
+	dc.b	nG5, $06
+	smpsAlterVol		$FF
+	dc.b	nB5, $12
+	smpsAlterVol		$01
+	dc.b	nG6, $06
+	smpsAlterVol		$01
+	dc.b	nE5, $24, nRst, $12
+	smpsAlterVol		$07
+	dc.b	nB5, $06, $06
+	smpsAlterVol		$FB
+	dc.b	nD5, nF5, $0C, $06, nA5, nG5, nE5
+	smpsAlterVol		$01
+	dc.b	nG5, nB5, nD5
+	smpsAlterVol		$FC
+	dc.b	nB5
+	smpsAlterVol		$FE
+	dc.b	nG5, nB5, nC6, $7F, smpsNoAttack, $17
+	smpsAlterVol		$03
+	dc.b	nBb5, $0C, $0C, $0C
+	smpsAlterVol		$02
+	dc.b	nG5, $06, nF5, $0C
+	smpsAlterVol		$01
+	dc.b	nC6, $5A
+	smpsAlterVol		$FE
+	dc.b	nG5, $42
+	smpsAlterVol		$FF
+	dc.b	nE5, $06, nF5
+	smpsAlterVol		$FE
+	dc.b	nE5
+	smpsAlterVol		$FF
+	dc.b	nC6
+	smpsAlterVol		$01
+	dc.b	nG5, $48
+	smpsAlterVol		$02
+	dc.b	nA5, $06, nC6
+	smpsAlterVol		$FF
+	dc.b	nD5
+	smpsAlterVol		$FA
+	dc.b	nE5, nF5
+	smpsAlterVol		$FE
+	dc.b	nG5, $48, nRst, $06
+	smpsAlterVol		$0B
+	dc.b	nA5
+	smpsAlterVol		$01
+	dc.b	nC6, nD5
+	smpsAlterVol		$01
+	smpsJump	SH_SystemMenu_FM4, Target
 
+SH_SystemMenu_FM5:
+	smpsPan		panCenter
+	smpsFMvoice		$05
+	dc.b	nG1, $08
+
+SH_SystemMenu_Loo$9:
+	dc.b	nD1, $09, nG1, $0C, nD1, $06, nG1, nD2
+	dc.b	nG1, $09
+	smpsLoop		$00, $03, SH_SystemMenu_Loo$9, Target
+	dc.b	nD1, nG1, $0C, nD1, $06, nG1, nD2
+
+SH_SystemMenu_Loop10:
+	dc.b	nF1, $09, nC1, nF1, $0C, nC1, $06, nF1
+	dc.b	nC2
+	smpsLoop		$00, $04, SH_SystemMenu_Loop10, Target
+	dc.b	nG1, $09
+	smpsLoop		$01, $02, SH_SystemMenu_Loo$9, Target
+
+SH_SystemMenu_Loop11:
+	dc.b	nD1, nG1, $0C, nD1, $06, nG1, nD2, nG1
+	dc.b	$09
+	smpsLoop		$00, $03, SH_SystemMenu_Loop11, Target
+	dc.b	nD1, nG1, $0C, nD1, $06, nG1, nD2
+	smpsAlterVol		$06
+	dc.b	$09, nA1, nD2, $0C, nA1, nAb1, $06, nG1
+	dc.b	nD2, $0C, nG2, nF2, $06, nA1, nG1, nD2
+	dc.b	$09, nA1, nD2, $0C, nA1, nAb1, $06, nG1
+	dc.b	nD2, nAb2, $03, nRst, nG2, $0C, nF2, $06
+	dc.b	nD2, nAb1, nD2, $09, nA1, nD2, $0C, nA1
+	dc.b	nAb1, $06, nG1, nD2, $0C, nG2, nF2, $06
+	dc.b	nA1, nG1, nE2, nRst, $03, nE2, nB1, $06
+	dc.b	nE2, $09, nRst, $03, nE2, $06, nB1, nE2
+	dc.b	nEb2, $0C, nBb1, nE2, nB1, nF2, $09, nC2
+	dc.b	nF1, $12, nC2, $06, nF2, nB1, nRst, $03
+	dc.b	nB1, nRst, $06, nE1, $12, nB1, $06, nG1
+	dc.b	nA1, nRst, $03, nA1, nRst, $06, nE1, $0C
+	dc.b	$06, $06, nG1, nAb1, $09, nEb2, nEb1, $0C
+	dc.b	$06, $06, nG1, nAb1, $09, nEb1, nAb1, $0C
+	dc.b	nRst, $06, nAb1, $03, nRst, nAb1, nRst, nBb1
+	dc.b	$0C, nF1, nBb0, nBb1, $06, nG1, nC2, nRst
+	dc.b	$03, nC2, nRst, $06, nC2, $18, nG1, $06
+	dc.b	nC2, $09, nG1, nC1, $1E, nD2, $09, nA1
+	dc.b	nD2, $0C, nA1, nAb1, $06, nG1, nD2, $0C
+	dc.b	nG2, nF2, $06, nA1, nG1, nD2, $09, nA1
+	dc.b	nD2, $0C, nA1, nAb1, $06, nG1, nD2, nAb2
+	dc.b	$03, nRst, nG2, $0C, nF2, $06, nD2, nAb1
+	dc.b	nD2, $09, nA1, nD2, $0C, nA1, nAb1, $06
+	dc.b	nG1, nD2, $0C, nG2, nF2, $06, nA1, nG1
+	smpsJump	SH_SystemMenu_FM5, Target
+
+SH_SystemMenu_FM6:
+	smpsPan		panCenter
+	smpsFMvoice		$06
+	dc.b	nRst
+
+SH_SystemMenu_Loop12:
+	dc.b	$57
+	smpsLoop		$00, $0A, SH_SystemMenu_Loop12, Target
+	dc.b	$59, nE4, $03, nRst, $06, nE4, $01
+	smpsAlterVol		$06
+	smpsFMvoice		$06
+	dc.b	smpsNoAttack, $02, nRst, $06, nE4, $03, nRst, $09
+	dc.b	nE4, $03, nRst, $06, nE4, $03, nB4, nE4
+	dc.b	nB3, $06, nRst, $03, nB3
+
+SH_SystemMenu_Loop13:
+	dc.b	nRst, $06, nB3, $03
+	smpsLoop		$00, $03, SH_SystemMenu_Loop13, Target
+	dc.b	nRst, nB3, nC4, nE4, $06, nRst, $03, nE4
+	dc.b	nRst, $06, nE4, $03, nRst, $09, nE4, $03
+	dc.b	nRst, $06, nE4, nRst, $03, nB3, $06, nRst
+	dc.b	$03, nB3, nRst, $06, nB3, $03, nRst, $09
+	dc.b	nB3, $03, nRst, nB3, nRst, nB3, nC4, nE4
+	dc.b	nRst, $06, nE4, $03, nRst, $06, nE4, $03
+	dc.b	nRst, $09, nE4, $03, nRst, $06, nE4, $03
+	dc.b	nB4, nE4, nB3, $06, nRst, $03, nB3
+
+SH_SystemMenu_Loop14:
+	dc.b	nRst, $06, nB3, $03
+	smpsLoop		$00, $03, SH_SystemMenu_Loop14, Target
+	;!@ dc.b	nRst, nB3, nC4, nRst, $7F, $7F, $7F, $63
+	dc.b	nRst, nB3, nC4, nRst, $7F, nRst, $7F, nRst, $7F, nRst, $63
+	dc.b	nE4, $03, nRst, $06, nE4, $01
+	smpsFMvoice		$06
+	dc.b	smpsNoAttack, $02, nRst, $06, nE4, $03, nRst, $09
+	dc.b	nE4, $03, nRst, $06, nE4, $03, nB4, nE4
+	dc.b	nB3, $06, nRst, $03, nB3
+
+SH_SystemMenu_Loop15:
+	dc.b	nRst, $06, nB3, $03
+	smpsLoop		$00, $03, SH_SystemMenu_Loop15, Target
+	dc.b	nRst, nB3, nC4, nE4, $06, nRst, $03, nE4
+	dc.b	nRst, $06, nE4, $03, nRst, $09, nE4, $03
+	dc.b	nRst, $06, nE4, nRst, $03, nB3, $06, nRst
+	dc.b	$03, nB3, nRst, $06, nB3, $03, nRst, $09
+	dc.b	nB3, $03, nRst, nB3, nRst, nB3, nC4, nE4
+	dc.b	nRst, $06, nE4, $03, nRst, $06, nE4, $03
+	dc.b	nRst, $09, nE4, $03, nRst, $06, nE4, $03
+	dc.b	nB4, nE4, nB3, $06, nRst, $03, nB3
+
+SH_SystemMenu_Loop16:
+	dc.b	nRst, $06, nB3, $03
+	smpsLoop		$00, $03, SH_SystemMenu_Loop16, Target
+	dc.b	nRst, nB3, nC4
+	smpsJump	SH_SystemMenu_FM6, Target
+
+SH_SystemMenu_PSG1:
+	dc.b	nRst, $05
+
+SH_SystemMenu_Loop18:
+	dc.b	nG0
+
+SH_SystemMenu_Loop17:
+	dc.b	$06, nC1, $03, nRst, nG1, $0C
+	smpsLoop		$00, $02, SH_SystemMenu_Loop17, Target
+	dc.b	nG0, $06, nC1, nD1, nG0, nG0, $03, nRst
+	dc.b	nF0, $06, nG0, $18, nRst, $54
+	smpsLoop		$01, $03, SH_SystemMenu_Loop18, Target
+	dc.b	nG0
+
+SH_SystemMenu_Loop19:
+	dc.b	$06, nC1, $03, nRst, nG1, $0C
+	smpsLoop		$00, $02, SH_SystemMenu_Loop19, Target
+	dc.b	nG0, $06, nC1, nD1, nG0, nG0, $03, nRst
+	;!@ dc.b	nF0, $06, nG0, $18, nRst, $7F, $77, nG1
+	dc.b	nF0, $06, nG0, $18, nRst, $7F, nRst, $77, nG1
+	dc.b	$03, $03, nRst, $06, nG1, $03, $03, nRst
+	dc.b	$4E, nG3, $03, $03, nRst, $06, nG3, $03
+
+SH_SystemMenu_Loop20:
+	dc.b	$03, nRst, $4E, nG1, $03, $03, nRst, $06
+	dc.b	nG1, $03
+	smpsLoop		$00, $02, SH_SystemMenu_Loop20, Target
+	;!@ dc.b	$03, nRst, $7F, $53, nA1, $06, nRst, nC2
+	dc.b	$03, nRst, $7F, nRst, $53, nA1, $06, nRst, nC2
+	dc.b	nA1, nRst, nC2, $0C, nA1, $06, nC2, nA1
+	dc.b	nC2, nRst, nEb3, nD3, $03, nRst, $09, nC2
+	dc.b	$1E, nEb3, $06, nD3, $03, nRst, $09, nC2
+	dc.b	$0C, nAb1, $06, nC2, $0C, nEb3, $06, nD3
+	dc.b	$03, nRst, $4B
+	smpsSetVol	$03
+	dc.b	nG3, $03, $03, nRst, $09, nG3, $03, nRst
+	dc.b	$4E
+	smpsSetVol	$FD
+	dc.b	nG3, $03, $03, nRst, $06, nG3, $03
+
+SH_SystemMenu_Loop21:
+	dc.b	$03, nRst, $4E, nG1, $03, $03, nRst, $06
+	dc.b	nG1, $03
+	smpsLoop		$00, $02, SH_SystemMenu_Loop21, Target
+	dc.b	$03
+	smpsJump	SH_SystemMenu_PSG1, Target
+
+SH_SystemMenu_PSG2:
+	dc.b	nC1, $0B, nRst, $06, nC1, nRst, $0C, nC1
+	dc.b	nRst, nC1, $06, nRst, $0C, nC1, $06, nRst
+	dc.b	$0C, nC1, nRst, $06, nC1, nRst, $0C, nC1
+	dc.b	nRst, nC1, $06, nRst, $0C, nC1, $06, nRst
+	dc.b	$0C
+	smpsSetVol	$01
+
+SH_SystemMenu_Loop22:
+	dc.b	nC1, nRst, $06, nC1, nRst, $0C, nC1, nRst
+	dc.b	nC1, $06, nRst, $0C, nC1, $06, nRst, $0C
+	smpsLoop		$00, $02, SH_SystemMenu_Loop22, Target
+	smpsSetVol	$FF
+
+SH_SystemMenu_Loop23:
+	dc.b	nC1, nRst, $06, nC1, nRst, $0C, nC1, nRst
+	dc.b	nC1, $06, nRst, $0C, nC1, $06, nRst, $0C
+	smpsLoop		$00, $02, SH_SystemMenu_Loop23, Target
+	smpsSetVol	$01
+
+SH_SystemMenu_Loop24:
+	dc.b	nC1, nRst, $06, nC1, nRst, $0C, nC1, nRst
+	dc.b	nC1, $06, nRst, $0C, nC1, $06, nRst, $0C
+	smpsLoop		$00, $02, SH_SystemMenu_Loop24, Target
+	smpsSetVol	$FF
+	dc.b	nC1, $04
+	smpsSetVol	$F6
+	dc.b	smpsNoAttack, $08, nRst, $06, nC1, nRst, $0C, nC1
+	dc.b	nRst, nC1, $06, nRst, $0C, nC1, $06, nRst
+	dc.b	$0C, nC1, nRst, $06, nC1, nRst, $0C, nC1
+	dc.b	nRst, nC1, $06, nRst, $0C, nC1, $06, nRst
+	dc.b	$0C
+	smpsSetVol	$03
+	dc.b	nE1, $03, nRst, $06, nA0, $01
+	smpsPSGvoice	$04
+	smpsSetVol	$07
+	dc.b	smpsNoAttack, $02, nRst, $06, nA0, $03, nRst, $09
+	dc.b	nA0, $03, nRst, $06, nA0, $03, nE1, nA0
+	dc.b	nE0, $06, nRst, $03, nE0
+
+SH_SystemMenu_Loop25:
+	dc.b	nRst, $06, nE0, $03
+	smpsLoop		$00, $03, SH_SystemMenu_Loop25, Target
+	dc.b	nRst, nE0, nF0, nA0, $06, nRst, $03, nA0
+	dc.b	nRst, $06, nA0, $03, nRst, $09, nA0, $03
+	dc.b	nRst, $06, nA0, nRst, $03, nE0, $06, nRst
+	dc.b	$03, nE0, nRst, $06, nE0, $03, nRst, $09
+	dc.b	nE0, $03, nRst, nE0, nRst, nE0, nF0, nE1
+	dc.b	nRst, $06, nA0, $03, nRst, $06, nA0, $03
+	dc.b	nRst, $09, nA0, $03, nRst, $06, nA0, $03
+	dc.b	nE1, nA0, nE0, $06, nRst, $03, nE0, nRst
+	dc.b	$06, nE0, $03, nRst, $06, nE0, $03, nRst
+	dc.b	$06, nE0, $01
+	smpsPSGvoice	$04
+	smpsSetVol	$01
+	dc.b	smpsNoAttack, $02, nRst, $03, nE0, nF0, nRst, $01
+	smpsPSGvoice	$01
+	dc.b	$06
+	smpsSetVol	$FE
+	dc.b	nA1, $01, nRst, $02, nE2, $01, nRst, $05
+	dc.b	nFs3, $01, nRst, $04, nE4, $01, nRst, $07
+	;!@ dc.b	nB2, $01, nRst, nRst, $05, nG3, $06, nE3
+	dc.b	nB2, $01, nRst, $01, nRst, $01, nRst, $05, nG3, $06, nE3
+	dc.b	$24
+	smpsSetVol	$03
+	dc.b	nG3, $01
+	smpsSetVol	$F7
+	smpsPSGvoice	$01
+	dc.b	smpsNoAttack, $05, nF3, $06, nE3
+	smpsSetVol	$FD
+	;!@ dc.b	nF2, nRst, $2A, $7F, $7F, $23
+	dc.b	nF2, nRst, $2A, nRst, $7F, nRst, $7F, nRst, $23
+	smpsPSGvoice	$01
+	;!@ dc.b	$03
+	dc.b	nRst, $03
+	smpsPSGvoice	$01
+	smpsSetVol	$09
+	dc.b	nA1, $01, nRst, $02, nE2, $01, nRst, $02
+	dc.b	nB2, $01, nRst, $02, nFs3, $01, nRst, $04
+	;!@ dc.b	nE4, $01, nRst, $07, nB2, $01, nRst, nRst
+	dc.b	nE4, $01, nRst, $07, nB2, $01, nRst, $01, nRst
+	dc.b	$06, nFs1, $01, nG1, nRst, nC2, nRst, $02
+	dc.b	nG2, $01, nRst, nB2, nRst, $03, nA3, $01
+	dc.b	nRst
+	smpsSetVol	$03
+	dc.b	nE1, $03, nRst, $06, nA0, $01
+	smpsPSGvoice	$04
+	smpsSetVol	$FE
+	dc.b	smpsNoAttack, $02, nRst, $06, nA0, $03, nRst, $09
+	dc.b	nA0, $03, nRst, $06, nA0, $03, nE1, nA0
+	dc.b	nE0, $06, nRst, $03, nE0
+
+SH_SystemMenu_Loop26:
+	dc.b	nRst, $06, nE0, $03
+	smpsLoop		$00, $03, SH_SystemMenu_Loop26, Target
+	dc.b	nRst, nE0, nF0, nA0, $06, nRst, $03, nA0
+	dc.b	nRst, $06, nA0, $03, nRst, $09, nA0, $03
+	dc.b	nRst, $06, nA0, nRst, $03, nE0, $06, nRst
+	dc.b	$03, nE0, nRst, $06, nE0, $03, nRst, $09
+	dc.b	nE0, $03, nRst, nE0, nRst, nE0, nF0, nE1
+	dc.b	nRst, $06, nA0, $03, nRst, $06, nA0, $03
+	dc.b	nRst, $09, nA0, $03, nRst, $06, nA0, $03
+	dc.b	nE1, nA0, nE0, $06, nRst, $03, nE0
+
+SH_SystemMenu_Loop27:
+	dc.b	nRst, $06, nE0, $03
+	smpsLoop		$00, $03, SH_SystemMenu_Loop27, Target
+	dc.b	nRst, nE0, nF0
+	smpsPSGvoice	$04
+	dc.b	nRst, $01
+	smpsJump	SH_SystemMenu_PSG2, Target
+
+SH_SystemMenu_PSG3:
+	dc.b	nRst, $6C, nG1, $01
+	smpsPSGvoice	$05
+	dc.b	smpsNoAttack, $0B
+	smpsSetVol	$01
+	dc.b	nA1, $0C
+	smpsSetVol	$FF
+	dc.b	nG3
+	smpsSetVol	$FF
+	dc.b	nF3, $12
+	smpsSetVol	$FE
+	dc.b	nE3
+	smpsSetVol	$FF
+	dc.b	nC2, $0C
+	smpsSetVol	$01
+	dc.b	nD3, $24, nRst, $3C
+	smpsSetVol	$02
+	dc.b	nG3, $0C, nF3
+	smpsSetVol	$FF
+	dc.b	nE3, nRst, nG3, $0F, nG1, $09, nA1
+	smpsSetVol	$01
+	dc.b	nC2, nB1, $06, nG1, $30, nRst, $3C, nG1
+	dc.b	$0C
+	smpsSetVol	$FF
+	dc.b	nA1, nG3, nF3, $12, nE3, nC2, $0C, nD3
+	dc.b	$24, nRst, $3C
+	smpsSetVol	$FF
+	dc.b	nG3, $0C, nF3
+	smpsSetVol	$01
+	dc.b	nE3, nRst, nG3, $0F, nG1, $09, nA1, nC2
+	;!@ dc.b	nB1, $06, nG1, $30, nRst, $7F, $11, nG3
+	dc.b	nB1, $06, nG1, $30, nRst, $7F, nRst, $11, nG3
+	dc.b	$42, nE3, $06, nF3, nE3, nC2
+	smpsSetVol	$01
+	dc.b	nG1, $48, nA1, $06, nC2, nD3, nE3, nF3
+	dc.b	nG3, $48, nRst, $06
+	smpsSetVol	$FF
+	dc.b	nA1, nC2, nD3
+	smpsSetVol	$FE
+	dc.b	nE3, $0C
+	smpsSetVol	$01
+	dc.b	nG3, $06, nB3, $12, nRst, $06
+	smpsSetVol	$01
+	dc.b	nE3, $24, nRst, $12
+	smpsSetVol	$02
+	dc.b	nB1, $06, $06
+	smpsSetVol	$FE
+	dc.b	nD3, nF3, $0C, nF1, $06, nA1, nG1, nE1
+	dc.b	nG1, nB1, nD3
+	smpsSetVol	$FF
+	dc.b	nB1
+	smpsSetVol	$FF
+	dc.b	nG1, nB1, nC2, $7F, smpsNoAttack, $17
+	smpsSetVol	$01
+	dc.b	nD2, $0C, nBb1, nEb3
+	smpsSetVol	$01
+	dc.b	$06, nD3, $0C, nE3, $5A, nG3, $42
+	smpsSetVol	$FF
+	dc.b	nE3, $06, nF3, nE3
+	smpsSetVol	$FF
+	dc.b	nC2
+	smpsSetVol	$01
+	dc.b	nG1, $48
+	smpsSetVol	$01
+	dc.b	nA1, $06, nC2
+	smpsSetVol	$FF
+	dc.b	nD3
+	smpsSetVol	$FE
+	dc.b	nE3, nF3
+	smpsSetVol	$FF
+	dc.b	nG3, $48, nRst, $06
+	smpsSetVol	$04
+	dc.b	nA1, nC2, nD3
+	smpsJump	SH_SystemMenu_PSG3, Target
+	
+SH_SystemMenu_PWM1:
+	smpsPan		panCenter
+	dc.b	$8D, $02
+
+SH_SystemMenu_PWM1_Loop1:
+	dc.b	$03
+	smpsLoop		$00, $0D, SH_SystemMenu_PWM1_Loop1, Target
+	dc.b	$91, $8F, $8D
+	smpsLoop		$01, $03, SH_SystemMenu_PWM1_Loop1, Target
+	dc.b	$8D, $8D, $8D, $8D, $8D, $01, nRst, $02
+	dc.b	$8D
+
+SH_SystemMenu_PWM1_Loop2:
+	dc.b	$03
+	smpsLoop		$00, $08, SH_SystemMenu_PWM1_Loop2, Target
+
+SH_SystemMenu_PWM1_Loop4:
+	dc.b	$91, $8F
+
+SH_SystemMenu_PWM1_Loop3:
+	dc.b	$8D
+	smpsLoop		$00, $0E, SH_SystemMenu_PWM1_Loop3, Target
+	smpsLoop		$01, $0C, SH_SystemMenu_PWM1_Loop4, Target
+	dc.b	$91, $8F
+
+SH_SystemMenu_PWM1_Loop5:
+	dc.b	dHiTimpani, $06, $84, nRst, $84, dHiTimpani, $84, dHiTimpani
+	dc.b	$84
+	smpsLoop		$00, $04, SH_SystemMenu_PWM1_Loop5, Target
+
+SH_SystemMenu_PWM1_Loop7:
+	dc.b	$8D
+
+SH_SystemMenu_PWM1_Loop6:
+	dc.b	$03
+	smpsLoop		$00, $0E, SH_SystemMenu_PWM1_Loop6, Target
+	dc.b	$91, $8F
+	smpsLoop		$01, $06, SH_SystemMenu_PWM1_Loop7, Target
+	dc.b	$8D, $01
+
+SH_SystemMenu_PWM1_Jump1:
+	dc.b	nRst, $02, $8D
+
+SH_SystemMenu_PWM1_Loo$8:
+	dc.b	$03
+	smpsLoop		$00, $0D, SH_SystemMenu_PWM1_Loo$8, Target
+	dc.b	$91, $8F, $8D
+	smpsLoop		$01, $0F, SH_SystemMenu_PWM1_Loo$8, Target
+
+SH_SystemMenu_PWM1_Loo$9:
+	dc.b	$8D
+	smpsLoop		$00, $0D, SH_SystemMenu_PWM1_Loo$9, Target
+	dc.b	$91, $8F, $8D, $01
+	smpsJump		SH_SystemMenu_PWM1_Jump1, Target
+
+SH_SystemMenu_PWM2:
+	dc.b	$91, $02
+
+SH_SystemMenu_PWM2_Loop1:
+	dc.b	$03, $03, $8F, dSnare, $91, $91, $8F, $91
+	dc.b	$92, $91, $8F, dSnare, $91, $92, $8D, $91
+	smpsLoop		$00, $0F, SH_SystemMenu_PWM2_Loop1, Target
+	dc.b	$91, $91, $8F, dSnare, $91, $91, $8F, $91
+	dc.b	$92, $91, $8F, dSnare, $91, $92, $8D
+
+SH_SystemMenu_PWM2_Loop3:
+	dc.b	dKick, $84, $91
+
+SH_SystemMenu_PWM2_Loop2:
+	dc.b	$91, dKick, $06, $91, $03
+	smpsLoop		$00, $03, SH_SystemMenu_PWM2_Loop2, Target
+	dc.b	$03, dKick, $84, $91, $91, dLowTimpani, $06, $91
+	dc.b	$03, $03, dKick, $06, $91, $03, $03, dKick
+	dc.b	$06, $91, $03, $03
+	smpsLoop		$01, $02, SH_SystemMenu_PWM2_Loop3, Target
+	dc.b	$03
+
+SH_SystemMenu_PWM2_Loop4:
+	dc.b	$03, $03, $8F, dSnare, $91, $91, $8F, $91
+	dc.b	$92, $91, $8F, dSnare, $91, $92, $8D, $91
+	smpsLoop		$00, $05, SH_SystemMenu_PWM2_Loop4, Target
+	dc.b	$91, $91, $8F, dSnare, $91, $91, $8F, $91
+	dc.b	$92, $91, $8F, dSnare, $91, $92, $8D, $91
+	dc.b	$01
+
+SH_SystemMenu_PWM2_Jump1:
+	dc.b	nRst, $02, $91
+
+SH_SystemMenu_PWM2_Loop5:
+	dc.b	$03, $03, $8F, dSnare, $91, $91, $8F, $91
+	dc.b	$92, $91, $8F, dSnare, $91, $92, $8D, $91
+	smpsLoop		$00, $09, SH_SystemMenu_PWM2_Loop5, Target
+	dc.b	$91, $91, $8F, $91, $91, $91, $8F, $91
+	dc.b	$92, $91, $8F, $91
+
+SH_SystemMenu_PWM2_Loop6:
+	dc.b	$91, $92, $8D, $91, $91, $91, $8F, dSnare
+	dc.b	$91, $91, $8F, $91, $92, $91, $8F, dSnare
+	smpsLoop		$00, $06, SH_SystemMenu_PWM2_Loop6, Target
+	dc.b	$91, $92, $8D, $91, $01
+	smpsJump		SH_SystemMenu_PWM2_Jump1, Target
+
+SH_SystemMenu_PWM3:
+	dc.b	dKick, $02
+
+SH_SystemMenu_PWM3_Loop1:
+	dc.b	$92, $03, $91, $91, $91, $84, $92, $91
+	dc.b	dKick, $06, $91, $03, $03, $03, $84, $8D
+	dc.b	$91, dKick
+	smpsLoop		$00, $0F, SH_SystemMenu_PWM3_Loop1, Target
+	dc.b	$92, $91, $91, $91, $84, $92, $91, dKick
+	dc.b	$06, $91, $03, $03, $03, $84, $8D, $91
+
+SH_SystemMenu_PWM3_Loop2:
+	dc.b	$91, $92, $91, $8F, $91, $84, $92, $8F
+	dc.b	$91, $84, $91, $8F, $91, $84, $8D, $8D
+	dc.b	$91, $92, $91, $8F, dKick, $06, $92, $03
+	dc.b	$8F, $91, $84, $91, $8F, $91, $84, $8D
+	dc.b	$8D
+	smpsLoop		$00, $02, SH_SystemMenu_PWM3_Loop2, Target
+
+SH_SystemMenu_PWM3_Loop3:
+	dc.b	dKick, $92, $91, $91, $91, $84, $92, $91
+	dc.b	dKick, $06, $91, $03, $03, $03, $84, $8D
+	dc.b	$91
+	smpsLoop		$00, $06, SH_SystemMenu_PWM3_Loop3, Target
+	dc.b	dKick, $01
+
+SH_SystemMenu_PWM3_Jump1:
+	dc.b	nRst, $02
+
+SH_SystemMenu_PWM3_Loop4:
+	dc.b	$92, $03, $91, $91, $91, $84, $92, $91
+	dc.b	dKick, $06, $91, $03, $03, $03, $84, $8D
+	dc.b	$91, dKick
+	smpsLoop		$00, $09, SH_SystemMenu_PWM3_Loop4, Target
+	dc.b	$92, $91, $91, dKick, $06, $92, $03, $91
+	dc.b	dKick, $06, $91, $03, $03, dKick, $06
+
+SH_SystemMenu_PWM3_Loop5:
+	dc.b	$8D, $03, $91, dKick, $92, $91, $91, $91
+	dc.b	$84, $92, $91, dKick, $06, $91, $03, $03
+	dc.b	$03, $84
+	smpsLoop		$00, $06, SH_SystemMenu_PWM3_Loop5, Target
+	dc.b	$8D, $91, dKick, $01
+	smpsJump		SH_SystemMenu_PWM3_Jump1, Target
+
+SH_SystemMenu_PWM4:
+	dc.b	nRst, $02, $84
+
+SH_SystemMenu_PWM4_Loop1:
+	dc.b	$09, dLowTimpani, $06, $84, $09, $91, dLowTimpani, $06
+	dc.b	$84, $09
+	smpsLoop		$00, $0F, SH_SystemMenu_PWM4_Loop1, Target
+	dc.b	$09, dLowTimpani, $06, $84, $09, $91, dLowTimpani, $06
+	dc.b	$84, dLowTimpani, $09, dSnare, $06, $8D, $03, $09
+	dc.b	$92, dLowTimpani, $03, $8D, $91, $09, $8D, dSnare
+	dc.b	$03, $91, $8D, $09, $92, $03, dLowTimpani, $09
+	dc.b	$8D, $03, $91, $06, dLowTimpani, dSnare, $09, $8D
+	dc.b	$03, $09, $92, $06, dMidTimpani, $03, dLowTimpani, $8D
+	dc.b	$91, $06, $84, $03, $8D, $06, $8F, $03
+	dc.b	dSnare, $91, $8D, $06, $8F, $03, $92, dLowTimpani
+	dc.b	$06, $84, $03, $8D, $91, $09
+
+SH_SystemMenu_PWM4_Loop2:
+	dc.b	$84, dLowTimpani, $06, $84, $09, $91, dLowTimpani, $06
+	dc.b	$84, $09
+	smpsLoop		$00, $05, SH_SystemMenu_PWM4_Loop2, Target
+	dc.b	$09, dLowTimpani, $06, $84, $09, $91, dLowTimpani, $06
+	dc.b	$84, $07
+
+SH_SystemMenu_PWM4_Jump1:
+	dc.b	nRst, $02, $84
+
+SH_SystemMenu_PWM4_Loop3:
+	dc.b	$09, dLowTimpani, $06, $84, $09, $91, dLowTimpani, $06
+	dc.b	$84, $09
+	smpsLoop		$00, $09, SH_SystemMenu_PWM4_Loop3, Target
+	dc.b	$03, dSnare, $06, $06, $84, $09, $91, $03
+	dc.b	dSnare, $06, $03, $84
+
+SH_SystemMenu_PWM4_Loop4:
+	dc.b	$84, $09, $09, dLowTimpani, $06, $84, $09, $91
+	dc.b	dLowTimpani, $06
+	smpsLoop		$00, $06, SH_SystemMenu_PWM4_Loop4, Target
+	dc.b	$84, $07
+	smpsJump		SH_SystemMenu_PWM4_Jump1, Target
+
+SH_SystemMenu_Patches:	
+	dc.b	$3A
+	dc.b	$02, $0E, $02, $02,	$8E, $8F, $8D, $53
+	dc.b	$0E, $10, $0E, $0D,	$00, $00, $00, $00
+	dc.b	$13, $68, $13, $08,	$19, $2A, $23, $08
+	
+	dc.b	$3B
+	dc.b	$02, $02, $04, $02,	$59, $59, $59, $4C
+	dc.b	$03, $07, $03, $05,	$00, $00, $00, $00
+	dc.b	$22, $22, $22, $27,	$40, $18, $24, $08
+	
+	dc.b	$05
+	dc.b	$36, $32, $7C, $72,	$1F, $5F, $1F, $1F
+	dc.b	$07, $0B, $0A, $0B,	$00, $07, $07, $07
+	dc.b	$59, $4E, $59, $4E,	$23, $10, $23, $08
 	
 	dc.b	$2C
-	dc.b	$22, $04, $02, $14,	$51, $52, $50, $52
-	dc.b	$0D, $00, $06, $04,	$04, $05, $02, $00
-	dc.b	$1C, $1F, $2B, $1F,	$0E, $80, $13, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	dc.b	$31, $31, $71, $71,	$5F, $54, $5F, $5F
+	dc.b	$05, $0A, $03, $0C,	$00, $03, $03, $03
+	dc.b	$00, $87, $00, $A7,	$17, $0E, $19, $08
+	
+	dc.b	$3A
+	dc.b	$31, $05, $71, $01,	$59, $59, $5C, $4E
+	dc.b	$0A, $0B, $0D, $04,	$01, $01, $01, $01
+	dc.b	$15, $58, $26, $16,	$23, $0D, $2D, $06
+	
+	dc.b	$3D
+	dc.b	$00, $30, $70, $00,	$1F, $1F, $1F, $11
+	dc.b	$0B, $09, $00, $1F,	$00, $00, $00, $00
+	dc.b	$FF, $F9, $0F, $07,	$1E, $1F, $2D, $0A
+	
+	dc.b	$07
+	dc.b	$01, $33, $74, $08,	$DF, $DF, $DF, $DF
+	dc.b	$03, $05, $05, $05,	$00, $00, $00, $00
+	dc.b	$2A, $2A, $2A, $2A,	$0C, $18, $1F, $0C
+	
+	dc.b	$3B
+	dc.b	$0D, $01, $00, $00,	$9F, $1F, $1F, $1F
+	dc.b	$0E, $0D, $09, $09,	$00, $00, $00, $00
+	dc.b	$D6, $D6, $D6, $D7,	$33, $21, $22, $06
+	
+	dc.b	$3A
+	dc.b	$71, $06, $33, $01,	$9C, $96, $5D, $92
+	dc.b	$04, $09, $04, $07,	$00, $01, $03, $00
+	dc.b	$15, $12, $16, $B5,	$25, $34, $25, $08

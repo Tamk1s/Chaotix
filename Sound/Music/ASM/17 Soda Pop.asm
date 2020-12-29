@@ -1,5 +1,5 @@
 
-Target	EQU	$4AC3C
+Target	EQU	$4B449
 	smpsHeaderVoice	SodaPop_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $0A

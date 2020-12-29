@@ -1,5 +1,5 @@
 
-Target	EQU	$4D81D
+Target	EQU	$4DF9D
 	smpsHeaderVoice	Party2Party_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $00

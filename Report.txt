@@ -4,76 +4,134 @@ Fixed Segments:
 *Segment 001 - Solid_Index_Ptr: Offset $9482  Size $4
 *Segment 002 - LevSize_Data_Ptr: Offset $939E  Size $4
 *Segment 003 - MD_Palette_Index_Ptr: Offset $1369E  Size $4
-*Segment 004 - MD_Palette_AAZLit_Index_Ptr: Offset $1FA76  Size $4
-*Segment 005 - Level_Index_Ptr: Offset $2F7EE  Size $4
-*Segment 006 - LevSize_Data_Ptr2: Offset $2FB24  Size $4
-*Segment 007 - Level_Index_Ptr2: Offset $302C2  Size $4
-*Segment 008 - MD_Palette_AAZLit_Index_Ptr2: Offset $3148A  Size $4
-*Segment 009 - LevelTile_Ptr: Offset $319C0  Size $4
-*Segment 00A - Level_Index_Ptr3: Offset $31ADA  Size $4
-*Segment 00B - LevelTile_Ptr2: Offset $31F80  Size $4
-*Segment 00C - MD_Palette_Index_Ptr2: Offset $320C8  Size $4
-*Segment 00D - SSZB_Pal_Ptr: Offset $2D6F2  Size $4
-*Segment 00E - SSZB_FG_Tiles_Ptr: Offset $2D88C  Size $4
-*Segment 00F - SSZ45MD_BG_Tiles_Sec_Ptr: Offset $2D8BA  Size $4
-*Segment 010 - SSZB_FG_Blocks_Ptr: Offset $2D8FC  Size $4
-*Segment 011 - SSZ45MD_BG_Blocks_Sec_Ptr: Offset $2D918  Size $4
-*Segment 012 - SSZB_FG_Chunks_Ptr: Offset $2D930  Size $4
-*Segment 013 - SSZB_BG_Chunks_Ptr: Offset $2D948  Size $4
-*Segment 014 - SSZB_FG_Layout_Ptr: Offset $2D960  Size $4
-*Segment 015 - SSZB_BG_Layout_Ptr: Offset $2D978  Size $4
-*Segment 016 - SSZB_Solids_Ptr: Offset $2D988  Size $4
-*Segment 017 - SSZB_FG_LS_Ptr: Offset $2D9E8  Size $4
-*Segment 018 - SSZB_BG_LS_Ptr: Offset $2DA00  Size $4
-*Segment 019 - TTZB_FG_Tiles_Ptr: Offset $2DFE0  Size $4
-*Segment 01A - TTZB_FG_Blocks_Ptr: Offset $2E018  Size $4
-*Segment 01B - TTZB_FG_Chunks_Ptr: Offset $2E030  Size $4
-*Segment 01C - TTZB_FG_Layout_Ptr: Offset $2E04A  Size $4
-*Segment 01D - TTZB_Solids_Ptr: Offset $2E05C  Size $4
-*Segment 01E - TTZB_Pal_Ptr: Offset $2E0C2  Size $4
-*Segment 01F - TTZB_FG_LS_Ptr: Offset $2E138  Size $4
-*Segment 020 - HMaps: Offset $22D000  Size $1000
-*Segment 021 - HMapsR: Offset $22C000  Size $1000
-*Segment 022 - Angles: Offset $22E000  Size $100
-*Segment 02E - GameHeader: Offset $100  Size $8E
-*Segment 02F - LevelSel_Strings: Offset $7739E  Size $1B6
-*Segment 030 - LevelPlaylist: Offset $76ED0  Size $7
-*Segment 031 - SoundTestSongNames: Offset $227338  Size $22A
-*Segment 032 - aOutputMonoStereo: Offset $75D8  Size $1E
-*Segment 033 - aSpeed: Offset $7636  Size $8
-*Segment 034 - SFX1st_1: Offset $7527  Size $1
-*Segment 035 - SFX1st_2: Offset $752D  Size $1
-*Segment 036 - Code_LevelSelectDebug: Offset $7A6A  Size $4
-*Segment 037 - Code_AmyInSoundTest: Offset $7A7C  Size $4
+*Segment 004 - MD_PalCycle_Unk3_Data1_Ptr: Offset $31184  Size $4
+*Segment 005 - MD_PalCycle_Unk3_Data2_Ptr: Offset $311E2  Size $4
+*Segment 006 - MD_Palette_AAZLit_Index_Ptr: Offset $1FA76  Size $4
+*Segment 007 - MD_PalCycle_BBZ_Data1_Ptr: Offset $3107A  Size $4
+*Segment 008 - MD_PalCycle_BBZ_Data3_Ptr: Offset $3109C  Size $4
+*Segment 009 - MD_PalCycle_WE_Data1_Ptr: Offset $31348  Size $4
+*Segment 00A - MD_PalCycle_WE_Data3_Ptr: Offset $3136E  Size $4
+*Segment 00B - MD_PalCycle_WE_Data2_Ptr: Offset $31362  Size $4
+*Segment 00C - MD_PalCycle_BBZ_Data4_Ptr: Offset $310A6  Size $4
+*Segment 00D - MD_PalCycle_SSZ_Data3_Ptr: Offset $31146  Size $4
+*Segment 00E - MD_PalCycle_SSZ_Data2_Ptr: Offset $3112E  Size $4
+*Segment 00F - MD_PalCycle_AAZ_Lit_Data2_Ptr: Offset $312AE  Size $4
+*Segment 010 - MD_PalCycle_AAZ_Data_Ptr: Offset $3112E  Size $4
+*Segment 011 - MD_PalCycle_Unk1_Data1_Ptr: Offset $31502  Size $4
+*Segment 012 - MD_PalCycle_AAZ_Lit_Data3_Ptr: Offset $312E4  Size $4
+*Segment 013 - MD_PalCycle_Unk2_Data1_Ptr: Offset $31528  Size $4
+*Segment 014 - MD_PalCycle_Unk2_Data2_Ptr: Offset $31532  Size $4
+*Segment 015 - MD_PalCycle_TTZ_Data_Ptr: Offset $312FA  Size $4
+*Segment 016 - MD_PalCycle_MMZ_Data_Ptr: Offset $3130E  Size $4
+*Segment 017 - MD_PalCycle_IIZ_Data_Ptr: Offset $3132A  Size $4
+*Segment 018 - MD_PalCycle_WE_Data5_Ptr1: Offset $313B2  Size $4
+*Segment 019 - MD_PalCycle_WE_Data5_Ptr2: Offset $313DE  Size $4
+*Segment 01A - MD_PalCycle_WE_Data4_Ptr: Offset $313B2  Size $4
+*Segment 01B - MD_PalCycle_WE_Data6_Ptr: Offset $313CA  Size $4
+*Segment 01C - Level_Index_Ptr: Offset $2F7EE  Size $4
+*Segment 01D - LevSize_Data_Ptr2: Offset $2FB24  Size $4
+*Segment 01E - Level_Index_Ptr2: Offset $302C2  Size $4
+*Segment 01F - MD_Palette_AAZLit_Index_Ptr2: Offset $3148A  Size $4
+*Segment 020 - LevelTile_Ptr: Offset $319C0  Size $4
+*Segment 021 - Level_Index_Ptr3: Offset $31ADA  Size $4
+*Segment 022 - LevelTile_Ptr2: Offset $31F80  Size $4
+*Segment 023 - AnimArt_Index_Ptr1: Offset $3203A  Size $4
+*Segment 024 - MD_Palette_Index_Ptr2: Offset $320C8  Size $4
+*Segment 025 - SSZB_Pal_Ptr: Offset $2D6F2  Size $4
+*Segment 026 - SSZB_FG_Tiles_Ptr: Offset $2D88C  Size $4
+*Segment 027 - SSZ45MD_BG_Tiles_Sec_Ptr: Offset $2D8BA  Size $4
+*Segment 028 - SSZB_FG_Blocks_Ptr: Offset $2D8FC  Size $4
+*Segment 029 - SSZ45MD_BG_Blocks_Sec_Ptr: Offset $2D918  Size $4
+*Segment 02A - SSZB_FG_Chunks_Ptr: Offset $2D930  Size $4
+*Segment 02B - SSZB_BG_Chunks_Ptr: Offset $2D948  Size $4
+*Segment 02C - SSZB_FG_Layout_Ptr: Offset $2D960  Size $4
+*Segment 02D - SSZB_BG_Layout_Ptr: Offset $2D978  Size $4
+*Segment 02E - SSZB_Solids_Ptr: Offset $2D988  Size $4
+*Segment 02F - SSZB_FG_LS_Ptr: Offset $2D9E8  Size $4
+*Segment 030 - SSZB_BG_LS_Ptr: Offset $2DA00  Size $4
+*Segment 031 - TTZB_FG_Tiles_Ptr: Offset $2DFE0  Size $4
+*Segment 032 - TTZB_FG_Blocks_Ptr: Offset $2E018  Size $4
+*Segment 033 - TTZB_FG_Chunks_Ptr: Offset $2E030  Size $4
+*Segment 034 - TTZB_FG_Layout_Ptr: Offset $2E04A  Size $4
+*Segment 035 - TTZB_Solids_Ptr: Offset $2E05C  Size $4
+*Segment 036 - TTZB_Pal_Ptr: Offset $2E0C2  Size $4
+*Segment 037 - TTZB_FG_LS_Ptr: Offset $2E138  Size $4
+*Segment 038 - MD_PalCycle_Unk3_Data3_Ptr: Offset $311C6  Size $4
+*Segment 039 - MD_PalCycle_SSZ_Data1_Ptr: Offset $310FC  Size $4
+*Segment 03A - MD_PalCycle_AAZ_Lit_Data1_Ptr: Offset $31292  Size $4
+*Segment 03B - HMaps: Offset $22D000  Size $1000
+*Segment 03C - HMapsR: Offset $22C000  Size $1000
+*Segment 03D - Angles: Offset $22E000  Size $100
+*Segment 03E - Demo_Ptrs: Offset $2760E  Size $3E0
+*Segment 048 - MD_PalCycle_Set1: Offset $2B55E8  Size $C12
+*Segment 049 - MD_Palette_AAZLit_Index: Offset $2BF854  Size $638
+*Segment 04A - MD_PalCycle_Set2: Offset $2B6832  Size $3A42
+*Segment 04C - MD_PalCycle_Set3: Offset $2BE356  Size $110
+*Segment 04D - AnimArtV_Ptrs: Offset $2BF854  Size $500
+*Segment 04F - GameHeader: Offset $100  Size $8E
+*Segment 050 - LevelSel_Strings: Offset $7739E  Size $1B6
+*Segment 051 - LevelPlaylist: Offset $76ED0  Size $8
+*Segment 052 - LevelPlaylist: Offset $76EE4  Size $6
+*Segment 053 - SoundTestSongNames: Offset $227338  Size $22A
+*Segment 054 - CharSel_ID_Max1a: Offset $322B9  Size $1
+*Segment 055 - CharSel_ID_Max1b: Offset $3258B  Size $1
+*Segment 056 - CharSel_ID_Max1c: Offset $32597  Size $1
+*Segment 057 - CharSel_ID_Max2a: Offset $3245D  Size $1
+*Segment 058 - CharSel_ID_Max2b: Offset $32475  Size $1
+*Segment 059 - CharSel_ID_Max2c: Offset $32479  Size $1
+*Segment 05A - CharSel_IDs: Offset $323F2  Size $E
+*Segment 05B - CharSel_IDs: Offset $32518  Size $8
+*Segment 05C - CharSel_Names: Offset $32678  Size $11C
+*Segment 05D - aOutputMonoStereo: Offset $75D8  Size $1E
+*Segment 05E - aSpeed: Offset $7636  Size $8
+*Segment 05F - SFX1st_1: Offset $7527  Size $1
+*Segment 060 - SFX1st_2: Offset $752D  Size $1
+*Segment 061 - BGM_WE01_TOD: Offset $76EF5  Size $1
+*Segment 062 - Code_LevelSelectDebug: Offset $7A6A  Size $4
+*Segment 063 - Code_AmyInSoundTest: Offset $7A7C  Size $4
+*Segment 064 - BankTbl: Offset $76AC0  Size $29
+*Segment 065 - PtrTbl: Offset $76AE9  Size $DC
+*Segment 066 - BankData0: Offset $40000  Size $7FE6
+*Segment 067 - BankData1: Offset $48000  Size $6F7C
+*Segment 068 - BankData2: Offset $50000  Size $3909
+*Segment 069 - BankData2S: Offset $56000  Size $10AC
+*Segment 06A - PWMData: Offset $58000  Size $1B1D4
+*Segment 06B - PWMDataX: Offset $2FE63C  Size $18C4
 
 
 Floating Segments:
 
-*Dispose 000: Offset $22E974  End $2B52B4  Size $86940
- *Segment 023 - Objlayout_Ptrs: Offset $22E974  Size $800
- *Segment 024 - MD_Palette_Index: Offset $22F174  Size $18C4
- *Segment 025 - MD_Palette_AAZLit_Index: Offset $230A38  Size $638
- *Segment 026 - MD_Boss_Palette_Index: Offset $231070  Size $410
- *Segment 027 - LevelTile_Ptrs: Offset $231480  Size $3F0
- *Segment 028 - Level_Index: Offset $231870  Size $838
- *Segment 029 - Solid_Index: Offset $2320A8  Size $208
- *Segment 02B - LevSize_Data: Offset $2322B0  Size $740
- *Segment 02C - LevSize_Boss_Data: Offset $2329F0  Size $2A
- *Segment 02D - Objlayout_Data: Offset $232A1A  Size $1E274
- *Unused Space: Offset $250C8E  Size $64626
+*Dispose 000: Offset $22E974  End $2B54D8  Size $86B64
+ *Segment 03F - Objlayout_Ptrs: Offset $22E974  Size $800
+ *Segment 043 - Level_Index: Offset $22F174  Size $838
+ *Segment 044 - Solid_Index: Offset $22F9AC  Size $208
+ *Segment 045 - Level_Data: Offset $22FBB4  Size $8517C
+ *Segment 046 - LevSize_Data: Offset $2B4D30  Size $740
+ *Segment 04B - LevSize_Boss_Data: Offset $2B5470  Size $2A
+ *Unused Space: Offset $2B549A  Size $3E
 
-*Dispose 001: Offset $2B61FA  End $2B6832  Size $638
- *Unused Space: Offset $2B61FA  Size $638
-
-*Dispose 002: Offset $2BDE18  End $2BDE42  Size $2A
+*Dispose 001: Offset $2BDE18  End $2BDE42  Size $2A
  *Unused Space: Offset $2BDE18  Size $2A
 
+*Dispose 002: Offset $2BF854  End $2BFF9A  Size $746
+ *Segment 041 - MD_Boss_Palette_Index: Offset $2BF854  Size $410
+ *Unused Space: Offset $2BFC64  Size $336
+
 *Dispose 003: Offset $2DA05E  End $300000  Size $25FA2
- *Unused Space: Offset $2DA05E  Size $25FA2
+ *Segment 040 - MD_Palette_Index: Offset $2DA05E  Size $18C4
+ *Segment 042 - LevelTile_Ptrs: Offset $2DB922  Size $3F0
+ *Segment 047 - AnimArt_Ptrs: Offset $2DBD12  Size $1F44
+ *Segment 04E - Objlayout_Data: Offset $2DDC56  Size $1F33C
+ *Unused Space: Offset $2FCF92  Size $306E
+
+*Dispose 004: Offset $40000  End $74000  Size $34000
+ *Unused Space: Offset $40000  Size $34000
+
+*Dispose 005: Offset $76AC0  End $76BC3  Size $103
+ *Unused Space: Offset $76AC0  Size $103
 
 *File End: Offset $300000  Size $100000
- *Segment 02A - Level_Data: Offset $300000  Size $8C736
- *Remaining Available Space: Offset $38C736  Size $738CA
+ *Remaining Available Space: Offset $300000  Size $100000
 
 
 Segment\Label Placement
@@ -86,69 +144,130 @@ Segment\Label Placement
 
 *Segment 003 - MD_Palette_Index_Ptr: Offset $1369E  Size $4
 
-*Segment 004 - MD_Palette_AAZLit_Index_Ptr: Offset $1FA76  Size $4
+*Segment 004 - MD_PalCycle_Unk3_Data1_Ptr: Offset $31184  Size $4
 
-*Segment 005 - Level_Index_Ptr: Offset $2F7EE  Size $4
+*Segment 005 - MD_PalCycle_Unk3_Data2_Ptr: Offset $311E2  Size $4
 
-*Segment 006 - LevSize_Data_Ptr2: Offset $2FB24  Size $4
+*Segment 006 - MD_Palette_AAZLit_Index_Ptr: Offset $1FA76  Size $4
 
-*Segment 007 - Level_Index_Ptr2: Offset $302C2  Size $4
+*Segment 007 - MD_PalCycle_BBZ_Data1_Ptr: Offset $3107A  Size $4
 
-*Segment 008 - MD_Palette_AAZLit_Index_Ptr2: Offset $3148A  Size $4
+*Segment 008 - MD_PalCycle_BBZ_Data3_Ptr: Offset $3109C  Size $4
 
-*Segment 009 - LevelTile_Ptr: Offset $319C0  Size $4
+*Segment 009 - MD_PalCycle_WE_Data1_Ptr: Offset $31348  Size $4
 
-*Segment 00A - Level_Index_Ptr3: Offset $31ADA  Size $4
+*Segment 00A - MD_PalCycle_WE_Data3_Ptr: Offset $3136E  Size $4
 
-*Segment 00B - LevelTile_Ptr2: Offset $31F80  Size $4
+*Segment 00B - MD_PalCycle_WE_Data2_Ptr: Offset $31362  Size $4
 
-*Segment 00C - MD_Palette_Index_Ptr2: Offset $320C8  Size $4
+*Segment 00C - MD_PalCycle_BBZ_Data4_Ptr: Offset $310A6  Size $4
 
-*Segment 00D - SSZB_Pal_Ptr: Offset $2D6F2  Size $4
+*Segment 00D - MD_PalCycle_SSZ_Data3_Ptr: Offset $31146  Size $4
 
-*Segment 00E - SSZB_FG_Tiles_Ptr: Offset $2D88C  Size $4
+*Segment 00E - MD_PalCycle_SSZ_Data2_Ptr: Offset $3112E  Size $4
 
-*Segment 00F - SSZ45MD_BG_Tiles_Sec_Ptr: Offset $2D8BA  Size $4
+*Segment 00F - MD_PalCycle_AAZ_Lit_Data2_Ptr: Offset $312AE  Size $4
 
-*Segment 010 - SSZB_FG_Blocks_Ptr: Offset $2D8FC  Size $4
+*Segment 010 - MD_PalCycle_AAZ_Data_Ptr: Offset $3112E  Size $4
 
-*Segment 011 - SSZ45MD_BG_Blocks_Sec_Ptr: Offset $2D918  Size $4
+*Segment 011 - MD_PalCycle_Unk1_Data1_Ptr: Offset $31502  Size $4
 
-*Segment 012 - SSZB_FG_Chunks_Ptr: Offset $2D930  Size $4
+*Segment 012 - MD_PalCycle_AAZ_Lit_Data3_Ptr: Offset $312E4  Size $4
 
-*Segment 013 - SSZB_BG_Chunks_Ptr: Offset $2D948  Size $4
+*Segment 013 - MD_PalCycle_Unk2_Data1_Ptr: Offset $31528  Size $4
 
-*Segment 014 - SSZB_FG_Layout_Ptr: Offset $2D960  Size $4
+*Segment 014 - MD_PalCycle_Unk2_Data2_Ptr: Offset $31532  Size $4
 
-*Segment 015 - SSZB_BG_Layout_Ptr: Offset $2D978  Size $4
+*Segment 015 - MD_PalCycle_TTZ_Data_Ptr: Offset $312FA  Size $4
 
-*Segment 016 - SSZB_Solids_Ptr: Offset $2D988  Size $4
+*Segment 016 - MD_PalCycle_MMZ_Data_Ptr: Offset $3130E  Size $4
 
-*Segment 017 - SSZB_FG_LS_Ptr: Offset $2D9E8  Size $4
+*Segment 017 - MD_PalCycle_IIZ_Data_Ptr: Offset $3132A  Size $4
 
-*Segment 018 - SSZB_BG_LS_Ptr: Offset $2DA00  Size $4
+*Segment 018 - MD_PalCycle_WE_Data5_Ptr1: Offset $313B2  Size $4
 
-*Segment 019 - TTZB_FG_Tiles_Ptr: Offset $2DFE0  Size $4
+*Segment 019 - MD_PalCycle_WE_Data5_Ptr2: Offset $313DE  Size $4
 
-*Segment 01A - TTZB_FG_Blocks_Ptr: Offset $2E018  Size $4
+*Segment 01A - MD_PalCycle_WE_Data4_Ptr: Offset $313B2  Size $4
 
-*Segment 01B - TTZB_FG_Chunks_Ptr: Offset $2E030  Size $4
+*Segment 01B - MD_PalCycle_WE_Data6_Ptr: Offset $313CA  Size $4
 
-*Segment 01C - TTZB_FG_Layout_Ptr: Offset $2E04A  Size $4
+*Segment 01C - Level_Index_Ptr: Offset $2F7EE  Size $4
 
-*Segment 01D - TTZB_Solids_Ptr: Offset $2E05C  Size $4
+*Segment 01D - LevSize_Data_Ptr2: Offset $2FB24  Size $4
 
-*Segment 01E - TTZB_Pal_Ptr: Offset $2E0C2  Size $4
+*Segment 01E - Level_Index_Ptr2: Offset $302C2  Size $4
 
-*Segment 01F - TTZB_FG_LS_Ptr: Offset $2E138  Size $4
+*Segment 01F - MD_Palette_AAZLit_Index_Ptr2: Offset $3148A  Size $4
 
-*Segment 020 - HMaps: Offset $22D000  Size $1000
+*Segment 020 - LevelTile_Ptr: Offset $319C0  Size $4
 
-*Segment 021 - HMapsR: Offset $22C000  Size $1000
+*Segment 021 - Level_Index_Ptr3: Offset $31ADA  Size $4
 
-*Segment 022 - Angles: Offset $22E000  Size $100
+*Segment 022 - LevelTile_Ptr2: Offset $31F80  Size $4
 
-*Segment 023 - Objlayout_Ptrs: Offset $22E974  Size $800
+*Segment 023 - AnimArt_Index_Ptr1: Offset $3203A  Size $4
+
+*Segment 024 - MD_Palette_Index_Ptr2: Offset $320C8  Size $4
+
+*Segment 025 - SSZB_Pal_Ptr: Offset $2D6F2  Size $4
+
+*Segment 026 - SSZB_FG_Tiles_Ptr: Offset $2D88C  Size $4
+
+*Segment 027 - SSZ45MD_BG_Tiles_Sec_Ptr: Offset $2D8BA  Size $4
+
+*Segment 028 - SSZB_FG_Blocks_Ptr: Offset $2D8FC  Size $4
+
+*Segment 029 - SSZ45MD_BG_Blocks_Sec_Ptr: Offset $2D918  Size $4
+
+*Segment 02A - SSZB_FG_Chunks_Ptr: Offset $2D930  Size $4
+
+*Segment 02B - SSZB_BG_Chunks_Ptr: Offset $2D948  Size $4
+
+*Segment 02C - SSZB_FG_Layout_Ptr: Offset $2D960  Size $4
+
+*Segment 02D - SSZB_BG_Layout_Ptr: Offset $2D978  Size $4
+
+*Segment 02E - SSZB_Solids_Ptr: Offset $2D988  Size $4
+
+*Segment 02F - SSZB_FG_LS_Ptr: Offset $2D9E8  Size $4
+
+*Segment 030 - SSZB_BG_LS_Ptr: Offset $2DA00  Size $4
+
+*Segment 031 - TTZB_FG_Tiles_Ptr: Offset $2DFE0  Size $4
+
+*Segment 032 - TTZB_FG_Blocks_Ptr: Offset $2E018  Size $4
+
+*Segment 033 - TTZB_FG_Chunks_Ptr: Offset $2E030  Size $4
+
+*Segment 034 - TTZB_FG_Layout_Ptr: Offset $2E04A  Size $4
+
+*Segment 035 - TTZB_Solids_Ptr: Offset $2E05C  Size $4
+
+*Segment 036 - TTZB_Pal_Ptr: Offset $2E0C2  Size $4
+
+*Segment 037 - TTZB_FG_LS_Ptr: Offset $2E138  Size $4
+
+*Segment 038 - MD_PalCycle_Unk3_Data3_Ptr: Offset $311C6  Size $4
+
+*Segment 039 - MD_PalCycle_SSZ_Data1_Ptr: Offset $310FC  Size $4
+
+*Segment 03A - MD_PalCycle_AAZ_Lit_Data1_Ptr: Offset $31292  Size $4
+
+*Segment 03B - HMaps: Offset $22D000  Size $1000
+
+*Segment 03C - HMapsR: Offset $22C000  Size $1000
+
+*Segment 03D - Angles: Offset $22E000  Size $100
+
+*Segment 03E - Demo_Ptrs: Offset $2760E  Size $3E0
+ Demo_1: $27622
+ Demo_2: $276AA
+ Demo_3: $277E6
+ Demo_4: $2786C
+ Demo_5: $27930
+
+*Segment 03F - Objlayout_Ptrs: Offset $22E974  Size $800
  SLPtrs_BBZ: $22E994
  SLPtrs_SSZ: $22E9B0
  SLPtrs_AAZ: $22E9CC
@@ -438,1837 +557,2396 @@ Segment\Label Placement
  SLPtrs_World6S: $22F16C
  SLPtrs_World6N: $22F170
 
-*Segment 024 - MD_Palette_Index: Offset $22F174  Size $18C4
- LPPtrBBZ0M: $22F174
- LPPtrBBZ0D: $22F176
- LPPtrBBZ0S: $22F178
- LPPtrBBZ0N: $22F17A
- LPPtrBBZ1M: $22F17C
- LPPtrBBZ1D: $22F17E
- LPPtrBBZ1S: $22F180
- LPPtrBBZ1N: $22F182
- LPPtrBBZ2M: $22F184
- LPPtrBBZ2D: $22F186
- LPPtrBBZ2S: $22F188
- LPPtrBBZ2N: $22F18A
- LPPtrBBZ3M: $22F18C
- LPPtrBBZ3D: $22F18E
- LPPtrBBZ3S: $22F190
- LPPtrBBZ3N: $22F192
- LPPtrBBZ4M: $22F194
- LPPtrBBZ4D: $22F196
- LPPtrBBZ4S: $22F198
- LPPtrBBZ4N: $22F19A
- LPPtrBBZ5M: $22F19C
- LPPtrBBZ5D: $22F19E
- LPPtrBBZ5S: $22F1A0
- LPPtrBBZ5N: $22F1A2
- LPPtrBBZ6M: $22F1A4
- LPPtrBBZ6D: $22F1A6
- LPPtrBBZ6S: $22F1A8
- LPPtrBBZ6N: $22F1AA
- LPPtrSSZ0M: $22F1AC
- LPPtrSSZ0D: $22F1AE
- LPPtrSSZ0S: $22F1B0
- LPPtrSSZ0N: $22F1B2
- LPPtrSSZ1M: $22F1B4
- LPPtrSSZ1D: $22F1B6
- LPPtrSSZ1S: $22F1B8
- LPPtrSSZ1N: $22F1BA
- LPPtrSSZ2M: $22F1BC
- LPPtrSSZ2D: $22F1BE
- LPPtrSSZ2S: $22F1C0
- LPPtrSSZ2N: $22F1C2
- LPPtrSSZ3M: $22F1C4
- LPPtrSSZ3D: $22F1C6
- LPPtrSSZ3S: $22F1C8
- LPPtrSSZ3N: $22F1CA
- LPPtrSSZ4M: $22F1CC
- LPPtrSSZ4D: $22F1CE
- LPPtrSSZ4S: $22F1D0
- LPPtrSSZ4N: $22F1D2
- LPPtrSSZ5M: $22F1D4
- LPPtrSSZ5D: $22F1D6
- LPPtrSSZ5S: $22F1D8
- LPPtrSSZ5N: $22F1DA
- LPPtrSSZ6M: $22F1DC
- LPPtrSSZ6D: $22F1DE
- LPPtrSSZ6S: $22F1E0
- LPPtrSSZ6N: $22F1E2
- LPPtrAAZ0M: $22F1E4
- LPPtrAAZ0D: $22F1E6
- LPPtrAAZ0S: $22F1E8
- LPPtrAAZ0N: $22F1EA
- LPPtrAAZ1M: $22F1EC
- LPPtrAAZ1D: $22F1EE
- LPPtrAAZ1S: $22F1F0
- LPPtrAAZ1N: $22F1F2
- LPPtrAAZ2M: $22F1F4
- LPPtrAAZ2D: $22F1F6
- LPPtrAAZ2S: $22F1F8
- LPPtrAAZ2N: $22F1FA
- LPPtrAAZ3M: $22F1FC
- LPPtrAAZ3D: $22F1FE
- LPPtrAAZ3S: $22F200
- LPPtrAAZ3N: $22F202
- LPPtrAAZ4M: $22F204
- LPPtrAAZ4D: $22F206
- LPPtrAAZ4S: $22F208
- LPPtrAAZ4N: $22F20A
- LPPtrAAZ5M: $22F20C
- LPPtrAAZ5D: $22F20E
- LPPtrAAZ5S: $22F210
- LPPtrAAZ5N: $22F212
- LPPtrAAZ6M: $22F214
- LPPtrAAZ6D: $22F216
- LPPtrAAZ6S: $22F218
- LPPtrAAZ6N: $22F21A
- LPPtrTTZ0M: $22F21C
- LPPtrTTZ0D: $22F21E
- LPPtrTTZ0S: $22F220
- LPPtrTTZ0N: $22F222
- LPPtrTTZ1M: $22F224
- LPPtrTTZ1D: $22F226
- LPPtrTTZ1S: $22F228
- LPPtrTTZ1N: $22F22A
- LPPtrTTZ2M: $22F22C
- LPPtrTTZ2D: $22F22E
- LPPtrTTZ2S: $22F230
- LPPtrTTZ2N: $22F232
- LPPtrTTZ3M: $22F234
- LPPtrTTZ3D: $22F236
- LPPtrTTZ3S: $22F238
- LPPtrTTZ3N: $22F23A
- LPPtrTTZ4M: $22F23C
- LPPtrTTZ4D: $22F23E
- LPPtrTTZ4S: $22F240
- LPPtrTTZ4N: $22F242
- LPPtrTTZ5M: $22F244
- LPPtrTTZ5D: $22F246
- LPPtrTTZ5S: $22F248
- LPPtrTTZ5N: $22F24A
- LPPtrTTZ6M: $22F24C
- LPPtrTTZ6D: $22F24E
- LPPtrTTZ6S: $22F250
- LPPtrTTZ6N: $22F252
- LPPtrMMZ0M: $22F254
- LPPtrMMZ0D: $22F256
- LPPtrMMZ0S: $22F258
- LPPtrMMZ0N: $22F25A
- LPPtrMMZ1M: $22F25C
- LPPtrMMZ1D: $22F25E
- LPPtrMMZ1S: $22F260
- LPPtrMMZ1N: $22F262
- LPPtrMMZ2M: $22F264
- LPPtrMMZ2D: $22F266
- LPPtrMMZ2S: $22F268
- LPPtrMMZ2N: $22F26A
- LPPtrMMZ3M: $22F26C
- LPPtrMMZ3D: $22F26E
- LPPtrMMZ3S: $22F270
- LPPtrMMZ3N: $22F272
- LPPtrMMZ4M: $22F274
- LPPtrMMZ4D: $22F276
- LPPtrMMZ4S: $22F278
- LPPtrMMZ4N: $22F27A
- LPPtrMMZ5M: $22F27C
- LPPtrMMZ5D: $22F27E
- LPPtrMMZ5S: $22F280
- LPPtrMMZ5N: $22F282
- LPPtrMMZ6M: $22F284
- LPPtrMMZ6D: $22F286
- LPPtrMMZ6S: $22F288
- LPPtrMMZ6N: $22F28A
- LPPtrTrain0M: $22F28C
- LPPtrTrain0D: $22F28E
- LPPtrTrain0S: $22F290
- LPPtrTrain0N: $22F292
- LPPtrTrain1M: $22F294
- LPPtrTrain1D: $22F296
- LPPtrTrain1S: $22F298
- LPPtrTrain1N: $22F29A
- LPPtrTrain2M: $22F29C
- LPPtrTrain2D: $22F29E
- LPPtrTrain2S: $22F2A0
- LPPtrTrain2N: $22F2A2
- LPPtrTrain3M: $22F2A4
- LPPtrTrain3D: $22F2A6
- LPPtrTrain3S: $22F2A8
- LPPtrTrain3N: $22F2AA
- LPPtrTrain4M: $22F2AC
- LPPtrTrain4D: $22F2AE
- LPPtrTrain4S: $22F2B0
- LPPtrTrain4N: $22F2B2
- LPPtrTrain5M: $22F2B4
- LPPtrTrain5D: $22F2B6
- LPPtrTrain5S: $22F2B8
- LPPtrTrain5N: $22F2BA
- LPPtrTrain6M: $22F2BC
- LPPtrTrain6D: $22F2BE
- LPPtrTrain6S: $22F2C0
- LPPtrTrain6N: $22F2C2
- LPPtrIntro0M: $22F2C4
- LPPtrIntro0D: $22F2C6
- LPPtrIntro0S: $22F2C8
- LPPtrIntro0N: $22F2CA
- LPPtrIntro1M: $22F2CC
- LPPtrIntro1D: $22F2CE
- LPPtrIntro1S: $22F2D0
- LPPtrIntro1N: $22F2D2
- LPPtrIntro2M: $22F2D4
- LPPtrIntro2D: $22F2D6
- LPPtrIntro2S: $22F2D8
- LPPtrIntro2N: $22F2DA
- LPPtrIntro3M: $22F2DC
- LPPtrIntro3D: $22F2DE
- LPPtrIntro3S: $22F2E0
- LPPtrIntro3N: $22F2E2
- LPPtrIntro4M: $22F2E4
- LPPtrIntro4D: $22F2E6
- LPPtrIntro4S: $22F2E8
- LPPtrIntro4N: $22F2EA
- LPPtrIntro5M: $22F2EC
- LPPtrIntro5D: $22F2EE
- LPPtrIntro5S: $22F2F0
- LPPtrIntro5N: $22F2F2
- LPPtrIntro6M: $22F2F4
- LPPtrIntro6D: $22F2F6
- LPPtrIntro6S: $22F2F8
- LPPtrIntro6N: $22F2FA
- LPPtrWorld0M: $22F2FC
- LPPtrWorld0D: $22F2FE
- LPPtrWOrld0S: $22F300
- LPPtrWorld0N: $22F302
- LPPtrWorld1M: $22F304
- LPPtrWorld1D: $22F306
- LPPtrWorld1S: $22F308
- LPPtrWorld1N: $22F30A
- LPPtrWorld2M: $22F30C
- LPPtrWorld2D: $22F30E
- LPPtrWorld2S: $22F310
- LPPtrWorld2N: $22F312
- LPPtrWorld3M: $22F314
- LPPtrWorld3D: $22F316
- LPPtrWorld3S: $22F318
- LPPtrWorld3N: $22F31A
- LPPtrWorld4M: $22F31C
- LPPtrWorld4D: $22F31E
- LPPtrWorld4S: $22F320
- LPPtrWorld4N: $22F322
- LPPtrWorld5M: $22F324
- LPPtrWorld5D: $22F326
- LPPtrWorld5S: $22F328
- LPPtrWorld5N: $22F32A
- LPPtrWorld6M: $22F32C
- LPPtrWorld6D: $22F32E
- LPPtrWorld6S: $22F330
- LPPtrWorld6N: $22F332
- Pal_BBZ123M: $22F334
- Pal_BBZ123D: $22F3B4
- Pal_BBZ123S: $22F434
- Pal_BBZ123N: $22F4B4
- Pal_BBZ4M: $22F534
- Pal_BBZ4D: $22F5B4
- Pal_BBZ4S: $22F634
- Pal_BBZ4N: $22F6B4
- Pal_BBZ5M: $22F734
- Pal_BBZ5D: $22F7B4
- Pal_BBZ5S: $22F834
- Pal_BBZ5N: $22F8B4
- Pal_SSZM: $22F934
- Pal_SSZD: $22F9B4
- Pal_SSZ12S: $22FA34
- Pal_SSZ345S: $22FAB4
- Pal_SSZN: $22FB34
- Pal_AAZ12MD: $22FBB4
- Pal_AAZ12SN: $22FC34
- Pal_AAZ34: $22FCB4
- Pal_AAZ5: $22FD34
- Pal_TTZ12M: $22FDB4
- Pal_TTZ34M: $22FE34
- Pal_TTZ5M: $22FEB4
- Pal_TTZ12D: $22FF34
- Pal_TTZ34D: $22FFB4
- Pal_TTZ5D: $230034
- Pal_TTZ1234S: $2300B4
- Pal_TTZ5S: $230134
- Pal_TTZ12N: $2301B4
- Pal_TTZ34N: $230234
- Pal_TTZ5N: $2302B4
- Pal_MMZM: $230334
- Pal_MMZD: $2303B4
- Pal_MMZS: $230434
- Pal_MMZN: $2304B4
- Pal_TrainingM: $230534
- Pal_TrainingD: $2305B4
- Pal_TrainingS: $230634
- Pal_TrainingN: $2306B4
- Pal_Tutorial: $230734
- Pal_WorldEntM: $2307B4
- Pal_WorldEntD: $230834
- Pal_WorldEntS: $2308B4
- Pal_WorldEntN: $230934
- Pal_FinalBoss: $2309B4
- Pal_NULL: $230A34
+*Segment 040 - MD_Palette_Index: Offset $2DA05E  Size $18C4
+ LPPtrBBZ0M: $2DA05E
+ LPPtrBBZ0D: $2DA060
+ LPPtrBBZ0S: $2DA062
+ LPPtrBBZ0N: $2DA064
+ LPPtrBBZ1M: $2DA066
+ LPPtrBBZ1D: $2DA068
+ LPPtrBBZ1S: $2DA06A
+ LPPtrBBZ1N: $2DA06C
+ LPPtrBBZ2M: $2DA06E
+ LPPtrBBZ2D: $2DA070
+ LPPtrBBZ2S: $2DA072
+ LPPtrBBZ2N: $2DA074
+ LPPtrBBZ3M: $2DA076
+ LPPtrBBZ3D: $2DA078
+ LPPtrBBZ3S: $2DA07A
+ LPPtrBBZ3N: $2DA07C
+ LPPtrBBZ4M: $2DA07E
+ LPPtrBBZ4D: $2DA080
+ LPPtrBBZ4S: $2DA082
+ LPPtrBBZ4N: $2DA084
+ LPPtrBBZ5M: $2DA086
+ LPPtrBBZ5D: $2DA088
+ LPPtrBBZ5S: $2DA08A
+ LPPtrBBZ5N: $2DA08C
+ LPPtrBBZ6M: $2DA08E
+ LPPtrBBZ6D: $2DA090
+ LPPtrBBZ6S: $2DA092
+ LPPtrBBZ6N: $2DA094
+ LPPtrSSZ0M: $2DA096
+ LPPtrSSZ0D: $2DA098
+ LPPtrSSZ0S: $2DA09A
+ LPPtrSSZ0N: $2DA09C
+ LPPtrSSZ1M: $2DA09E
+ LPPtrSSZ1D: $2DA0A0
+ LPPtrSSZ1S: $2DA0A2
+ LPPtrSSZ1N: $2DA0A4
+ LPPtrSSZ2M: $2DA0A6
+ LPPtrSSZ2D: $2DA0A8
+ LPPtrSSZ2S: $2DA0AA
+ LPPtrSSZ2N: $2DA0AC
+ LPPtrSSZ3M: $2DA0AE
+ LPPtrSSZ3D: $2DA0B0
+ LPPtrSSZ3S: $2DA0B2
+ LPPtrSSZ3N: $2DA0B4
+ LPPtrSSZ4M: $2DA0B6
+ LPPtrSSZ4D: $2DA0B8
+ LPPtrSSZ4S: $2DA0BA
+ LPPtrSSZ4N: $2DA0BC
+ LPPtrSSZ5M: $2DA0BE
+ LPPtrSSZ5D: $2DA0C0
+ LPPtrSSZ5S: $2DA0C2
+ LPPtrSSZ5N: $2DA0C4
+ LPPtrSSZ6M: $2DA0C6
+ LPPtrSSZ6D: $2DA0C8
+ LPPtrSSZ6S: $2DA0CA
+ LPPtrSSZ6N: $2DA0CC
+ LPPtrAAZ0M: $2DA0CE
+ LPPtrAAZ0D: $2DA0D0
+ LPPtrAAZ0S: $2DA0D2
+ LPPtrAAZ0N: $2DA0D4
+ LPPtrAAZ1M: $2DA0D6
+ LPPtrAAZ1D: $2DA0D8
+ LPPtrAAZ1S: $2DA0DA
+ LPPtrAAZ1N: $2DA0DC
+ LPPtrAAZ2M: $2DA0DE
+ LPPtrAAZ2D: $2DA0E0
+ LPPtrAAZ2S: $2DA0E2
+ LPPtrAAZ2N: $2DA0E4
+ LPPtrAAZ3M: $2DA0E6
+ LPPtrAAZ3D: $2DA0E8
+ LPPtrAAZ3S: $2DA0EA
+ LPPtrAAZ3N: $2DA0EC
+ LPPtrAAZ4M: $2DA0EE
+ LPPtrAAZ4D: $2DA0F0
+ LPPtrAAZ4S: $2DA0F2
+ LPPtrAAZ4N: $2DA0F4
+ LPPtrAAZ5M: $2DA0F6
+ LPPtrAAZ5D: $2DA0F8
+ LPPtrAAZ5S: $2DA0FA
+ LPPtrAAZ5N: $2DA0FC
+ LPPtrAAZ6M: $2DA0FE
+ LPPtrAAZ6D: $2DA100
+ LPPtrAAZ6S: $2DA102
+ LPPtrAAZ6N: $2DA104
+ LPPtrTTZ0M: $2DA106
+ LPPtrTTZ0D: $2DA108
+ LPPtrTTZ0S: $2DA10A
+ LPPtrTTZ0N: $2DA10C
+ LPPtrTTZ1M: $2DA10E
+ LPPtrTTZ1D: $2DA110
+ LPPtrTTZ1S: $2DA112
+ LPPtrTTZ1N: $2DA114
+ LPPtrTTZ2M: $2DA116
+ LPPtrTTZ2D: $2DA118
+ LPPtrTTZ2S: $2DA11A
+ LPPtrTTZ2N: $2DA11C
+ LPPtrTTZ3M: $2DA11E
+ LPPtrTTZ3D: $2DA120
+ LPPtrTTZ3S: $2DA122
+ LPPtrTTZ3N: $2DA124
+ LPPtrTTZ4M: $2DA126
+ LPPtrTTZ4D: $2DA128
+ LPPtrTTZ4S: $2DA12A
+ LPPtrTTZ4N: $2DA12C
+ LPPtrTTZ5M: $2DA12E
+ LPPtrTTZ5D: $2DA130
+ LPPtrTTZ5S: $2DA132
+ LPPtrTTZ5N: $2DA134
+ LPPtrTTZ6M: $2DA136
+ LPPtrTTZ6D: $2DA138
+ LPPtrTTZ6S: $2DA13A
+ LPPtrTTZ6N: $2DA13C
+ LPPtrMMZ0M: $2DA13E
+ LPPtrMMZ0D: $2DA140
+ LPPtrMMZ0S: $2DA142
+ LPPtrMMZ0N: $2DA144
+ LPPtrMMZ1M: $2DA146
+ LPPtrMMZ1D: $2DA148
+ LPPtrMMZ1S: $2DA14A
+ LPPtrMMZ1N: $2DA14C
+ LPPtrMMZ2M: $2DA14E
+ LPPtrMMZ2D: $2DA150
+ LPPtrMMZ2S: $2DA152
+ LPPtrMMZ2N: $2DA154
+ LPPtrMMZ3M: $2DA156
+ LPPtrMMZ3D: $2DA158
+ LPPtrMMZ3S: $2DA15A
+ LPPtrMMZ3N: $2DA15C
+ LPPtrMMZ4M: $2DA15E
+ LPPtrMMZ4D: $2DA160
+ LPPtrMMZ4S: $2DA162
+ LPPtrMMZ4N: $2DA164
+ LPPtrMMZ5M: $2DA166
+ LPPtrMMZ5D: $2DA168
+ LPPtrMMZ5S: $2DA16A
+ LPPtrMMZ5N: $2DA16C
+ LPPtrMMZ6M: $2DA16E
+ LPPtrMMZ6D: $2DA170
+ LPPtrMMZ6S: $2DA172
+ LPPtrMMZ6N: $2DA174
+ LPPtrTrain0M: $2DA176
+ LPPtrTrain0D: $2DA178
+ LPPtrTrain0S: $2DA17A
+ LPPtrTrain0N: $2DA17C
+ LPPtrTrain1M: $2DA17E
+ LPPtrTrain1D: $2DA180
+ LPPtrTrain1S: $2DA182
+ LPPtrTrain1N: $2DA184
+ LPPtrTrain2M: $2DA186
+ LPPtrTrain2D: $2DA188
+ LPPtrTrain2S: $2DA18A
+ LPPtrTrain2N: $2DA18C
+ LPPtrTrain3M: $2DA18E
+ LPPtrTrain3D: $2DA190
+ LPPtrTrain3S: $2DA192
+ LPPtrTrain3N: $2DA194
+ LPPtrTrain4M: $2DA196
+ LPPtrTrain4D: $2DA198
+ LPPtrTrain4S: $2DA19A
+ LPPtrTrain4N: $2DA19C
+ LPPtrTrain5M: $2DA19E
+ LPPtrTrain5D: $2DA1A0
+ LPPtrTrain5S: $2DA1A2
+ LPPtrTrain5N: $2DA1A4
+ LPPtrTrain6M: $2DA1A6
+ LPPtrTrain6D: $2DA1A8
+ LPPtrTrain6S: $2DA1AA
+ LPPtrTrain6N: $2DA1AC
+ LPPtrIntro0M: $2DA1AE
+ LPPtrIntro0D: $2DA1B0
+ LPPtrIntro0S: $2DA1B2
+ LPPtrIntro0N: $2DA1B4
+ LPPtrIntro1M: $2DA1B6
+ LPPtrIntro1D: $2DA1B8
+ LPPtrIntro1S: $2DA1BA
+ LPPtrIntro1N: $2DA1BC
+ LPPtrIntro2M: $2DA1BE
+ LPPtrIntro2D: $2DA1C0
+ LPPtrIntro2S: $2DA1C2
+ LPPtrIntro2N: $2DA1C4
+ LPPtrIntro3M: $2DA1C6
+ LPPtrIntro3D: $2DA1C8
+ LPPtrIntro3S: $2DA1CA
+ LPPtrIntro3N: $2DA1CC
+ LPPtrIntro4M: $2DA1CE
+ LPPtrIntro4D: $2DA1D0
+ LPPtrIntro4S: $2DA1D2
+ LPPtrIntro4N: $2DA1D4
+ LPPtrIntro5M: $2DA1D6
+ LPPtrIntro5D: $2DA1D8
+ LPPtrIntro5S: $2DA1DA
+ LPPtrIntro5N: $2DA1DC
+ LPPtrIntro6M: $2DA1DE
+ LPPtrIntro6D: $2DA1E0
+ LPPtrIntro6S: $2DA1E2
+ LPPtrIntro6N: $2DA1E4
+ LPPtrWorld0M: $2DA1E6
+ LPPtrWorld0D: $2DA1E8
+ LPPtrWOrld0S: $2DA1EA
+ LPPtrWorld0N: $2DA1EC
+ LPPtrWorld1M: $2DA1EE
+ LPPtrWorld1D: $2DA1F0
+ LPPtrWorld1S: $2DA1F2
+ LPPtrWorld1N: $2DA1F4
+ LPPtrWorld2M: $2DA1F6
+ LPPtrWorld2D: $2DA1F8
+ LPPtrWorld2S: $2DA1FA
+ LPPtrWorld2N: $2DA1FC
+ LPPtrWorld3M: $2DA1FE
+ LPPtrWorld3D: $2DA200
+ LPPtrWorld3S: $2DA202
+ LPPtrWorld3N: $2DA204
+ LPPtrWorld4M: $2DA206
+ LPPtrWorld4D: $2DA208
+ LPPtrWorld4S: $2DA20A
+ LPPtrWorld4N: $2DA20C
+ LPPtrWorld5M: $2DA20E
+ LPPtrWorld5D: $2DA210
+ LPPtrWorld5S: $2DA212
+ LPPtrWorld5N: $2DA214
+ LPPtrWorld6M: $2DA216
+ LPPtrWorld6D: $2DA218
+ LPPtrWorld6S: $2DA21A
+ LPPtrWorld6N: $2DA21C
+ Pal_BBZ123M: $2DA21E
+ Pal_BBZ123D: $2DA29E
+ Pal_BBZ123S: $2DA31E
+ Pal_BBZ123N: $2DA39E
+ Pal_BBZ4M: $2DA41E
+ Pal_BBZ4D: $2DA49E
+ Pal_BBZ4S: $2DA51E
+ Pal_BBZ4N: $2DA59E
+ Pal_BBZ5M: $2DA61E
+ Pal_BBZ5D: $2DA69E
+ Pal_BBZ5S: $2DA71E
+ Pal_BBZ5N: $2DA79E
+ Pal_SSZM: $2DA81E
+ Pal_SSZD: $2DA89E
+ Pal_SSZ12S: $2DA91E
+ Pal_SSZ345S: $2DA99E
+ Pal_SSZN: $2DAA1E
+ Pal_AAZ12MD: $2DAA9E
+ Pal_AAZ12SN: $2DAB1E
+ Pal_AAZ34: $2DAB9E
+ Pal_AAZ5: $2DAC1E
+ Pal_TTZ12M: $2DAC9E
+ Pal_TTZ34M: $2DAD1E
+ Pal_TTZ5M: $2DAD9E
+ Pal_TTZ12D: $2DAE1E
+ Pal_TTZ34D: $2DAE9E
+ Pal_TTZ5D: $2DAF1E
+ Pal_TTZ1234S: $2DAF9E
+ Pal_TTZ5S: $2DB01E
+ Pal_TTZ12N: $2DB09E
+ Pal_TTZ34N: $2DB11E
+ Pal_TTZ5N: $2DB19E
+ Pal_MMZM: $2DB21E
+ Pal_MMZD: $2DB29E
+ Pal_MMZS: $2DB31E
+ Pal_MMZN: $2DB39E
+ Pal_TrainingM: $2DB41E
+ Pal_TrainingD: $2DB49E
+ Pal_TrainingS: $2DB51E
+ Pal_TrainingN: $2DB59E
+ Pal_Tutorial: $2DB61E
+ Pal_WorldEntM: $2DB69E
+ Pal_WorldEntD: $2DB71E
+ Pal_WorldEntS: $2DB79E
+ Pal_WorldEntN: $2DB81E
+ Pal_FinalBoss: $2DB89E
+ Pal_NULL: $2DB91E
 
-*Segment 025 - MD_Palette_AAZLit_Index: Offset $230A38  Size $638
- LPPtrAAZ0M_L: $230A38
- LPPtrAAZ0D_L: $230A3A
- LPPtrAAZ0S_L: $230A3C
- LPPtrAAZ0N_L: $230A3E
- LPPtrAAZ1M_L: $230A40
- LPPtrAAZ1D_L: $230A42
- LPPtrAAZ1S_L: $230A44
- LPPtrAAZ1N_L: $230A46
- LPPtrAAZ2M_L: $230A48
- LPPtrAAZ2D_L: $230A4A
- LPPtrAAZ2S_L: $230A4C
- LPPtrAAZ2N_L: $230A4E
- LPPtrAAZ3M_L: $230A50
- LPPtrAAZ3D_L: $230A52
- LPPtrAAZ3S_L: $230A54
- LPPtrAAZ3N_L: $230A56
- LPPtrAAZ4M_L: $230A58
- LPPtrAAZ4D_L: $230A5A
- LPPtrAAZ4S_L: $230A5C
- LPPtrAAZ4N_L: $230A5E
- LPPtrAAZ5M_L: $230A60
- LPPtrAAZ5D_L: $230A62
- LPPtrAAZ5S_L: $230A64
- LPPtrAAZ5N_L: $230A66
- LPPtrAAZ6M_L: $230A68
- LPPtrAAZ6D_L: $230A6A
- LPPtrAAZ6S_L: $230A6C
- LPPtrAAZ6N_L: $230A6E
- Pal_AAZ12M_L: $230A70
- Pal_AAZ34M_L: $230AF0
- Pal_AAZ5M_L: $230B70
- Pal_AAZ12D_L: $230BF0
- Pal_AAZ34D_L: $230C70
- Pal_AAZ5D_L: $230CF0
- Pal_AAZ12S_L: $230D70
- Pal_AAZ34S_L: $230DF0
- Pal_AAZ5S_L: $230E70
- Pal_AAZ12N_L: $230EF0
- Pal_AAZ34N_L: $230F70
- Pal_AAZ5N_L: $230FF0
+*Segment 041 - MD_Boss_Palette_Index: Offset $2BF854  Size $410
+ PalPtr_TTZBoss: $2BF854
+ Pal_TTZBossM: $2BF85C
+ Pal_TTZBossD: $2BF8DC
+ Pal_TTZBossS: $2BF95C
+ Pal_TTZBossN: $2BF9DC
+ PalPtr_SSZBoss: $2BFA5C
+ Pal_SSZBossM: $2BFA64
+ Pal_SSZBossD: $2BFAE4
+ Pal_SSZBossS: $2BFB64
+ Pal_SSZBossN: $2BFBE4
 
-*Segment 026 - MD_Boss_Palette_Index: Offset $231070  Size $410
- PalPtr_TTZBoss: $231070
- Pal_TTZBossM: $231078
- Pal_TTZBossD: $2310F8
- Pal_TTZBossS: $231178
- Pal_TTZBossN: $2311F8
- PalPtr_SSZBoss: $231278
- Pal_SSZBossM: $231280
- Pal_SSZBossD: $231300
- Pal_SSZBossS: $231380
- Pal_SSZBossN: $231400
+*Segment 042 - LevelTile_Ptrs: Offset $2DB922  Size $3F0
+ LTPtrBBZ0M: $2DB922
+ LTPtrBBZ0D: $2DB924
+ LTPtrBBZ0S: $2DB926
+ LTPtrBBZ0N: $2DB928
+ LTPtrBBZ1M: $2DB92A
+ LTPtrBBZ1D: $2DB92C
+ LTPtrBBZ1S: $2DB92E
+ LTPtrBBZ1N: $2DB930
+ LTPtrBBZ2M: $2DB932
+ LTPtrBBZ2D: $2DB934
+ LTPtrBBZ2S: $2DB936
+ LTPtrBBZ2N: $2DB938
+ LTPtrBBZ3M: $2DB93A
+ LTPtrBBZ3D: $2DB93C
+ LTPtrBBZ3S: $2DB93E
+ LTPtrBBZ3N: $2DB940
+ LTPtrBBZ4M: $2DB942
+ LTPtrBBZ4D: $2DB944
+ LTPtrBBZ4S: $2DB946
+ LTPtrBBZ4N: $2DB948
+ LTPtrBBZ5M: $2DB94A
+ LTPtrBBZ5D: $2DB94C
+ LTPtrBBZ5S: $2DB94E
+ LTPtrBBZ5N: $2DB950
+ LTPtrBBZ6M: $2DB952
+ LTPtrBBZ6D: $2DB954
+ LTPtrBBZ6S: $2DB956
+ LTPtrBBZ6N: $2DB958
+ LTPtrSSZ0M: $2DB95A
+ LTPtrSSZ0D: $2DB95C
+ LTPtrSSZ0S: $2DB95E
+ LTPtrSSZ0N: $2DB960
+ LTPtrSSZ1M: $2DB962
+ LTPtrSSZ1D: $2DB964
+ LTPtrSSZ1S: $2DB966
+ LTPtrSSZ1N: $2DB968
+ LTPtrSSZ2M: $2DB96A
+ LTPtrSSZ2D: $2DB96C
+ LTPtrSSZ2S: $2DB96E
+ LTPtrSSZ2N: $2DB970
+ LTPtrSSZ3M: $2DB972
+ LTPtrSSZ3D: $2DB974
+ LTPtrSSZ3S: $2DB976
+ LTPtrSSZ3N: $2DB978
+ LTPtrSSZ4M: $2DB97A
+ LTPtrSSZ4D: $2DB97C
+ LTPtrSSZ4S: $2DB97E
+ LTPtrSSZ4N: $2DB980
+ LTPtrSSZ5M: $2DB982
+ LTPtrSSZ5D: $2DB984
+ LTPtrSSZ5S: $2DB986
+ LTPtrSSZ5N: $2DB988
+ LTPtrSSZ6M: $2DB98A
+ LTPtrSSZ6D: $2DB98C
+ LTPtrSSZ6S: $2DB98E
+ LTPtrSSZ6N: $2DB990
+ LTPtrAAZ0M: $2DB992
+ LTPtrAAZ0D: $2DB994
+ LTPtrAAZ0S: $2DB996
+ LTPtrAAZ0N: $2DB998
+ LTPtrAAZ1M: $2DB99A
+ LTPtrAAZ1D: $2DB99C
+ LTPtrAAZ1S: $2DB99E
+ LTPtrAAZ1N: $2DB9A0
+ LTPtrAAZ2M: $2DB9A2
+ LTPtrAAZ2D: $2DB9A4
+ LTPtrAAZ2S: $2DB9A6
+ LTPtrAAZ2N: $2DB9A8
+ LTPtrAAZ3M: $2DB9AA
+ LTPtrAAZ3D: $2DB9AC
+ LTPtrAAZ3S: $2DB9AE
+ LTPtrAAZ3N: $2DB9B0
+ LTPtrAAZ4M: $2DB9B2
+ LTPtrAAZ4D: $2DB9B4
+ LTPtrAAZ4S: $2DB9B6
+ LTPtrAAZ4N: $2DB9B8
+ LTPtrAAZ5M: $2DB9BA
+ LTPtrAAZ5D: $2DB9BC
+ LTPtrAAZ5S: $2DB9BE
+ LTPtrAAZ5N: $2DB9C0
+ LTPtrAAZ6M: $2DB9C2
+ LTPtrAAZ6D: $2DB9C4
+ LTPtrAAZ6S: $2DB9C6
+ LTPtrAAZ6N: $2DB9C8
+ LTPtrTTZ0M: $2DB9CA
+ LTPtrTTZ0D: $2DB9CC
+ LTPtrTTZ0S: $2DB9CE
+ LTPtrTTZ0N: $2DB9D0
+ LTPtrTTZ1M: $2DB9D2
+ LTPtrTTZ1D: $2DB9D4
+ LTPtrTTZ1S: $2DB9D6
+ LTPtrTTZ1N: $2DB9D8
+ LTPtrTTZ2M: $2DB9DA
+ LTPtrTTZ2D: $2DB9DC
+ LTPtrTTZ2S: $2DB9DE
+ LTPtrTTZ2N: $2DB9E0
+ LTPtrTTZ3M: $2DB9E2
+ LTPtrTTZ3D: $2DB9E4
+ LTPtrTTZ3S: $2DB9E6
+ LTPtrTTZ3N: $2DB9E8
+ LTPtrTTZ4M: $2DB9EA
+ LTPtrTTZ4D: $2DB9EC
+ LTPtrTTZ4S: $2DB9EE
+ LTPtrTTZ4N: $2DB9F0
+ LTPtrTTZ5M: $2DB9F2
+ LTPtrTTZ5D: $2DB9F4
+ LTPtrTTZ5S: $2DB9F6
+ LTPtrTTZ5N: $2DB9F8
+ LTPtrTTZ6M: $2DB9FA
+ LTPtrTTZ6D: $2DB9FC
+ LTPtrTTZ6S: $2DB9FE
+ LTPtrTTZ6N: $2DBA00
+ LTPtrMMZ0M: $2DBA02
+ LTPtrMMZ0D: $2DBA04
+ LTPtrMMZ0S: $2DBA06
+ LTPtrMMZ0N: $2DBA08
+ LTPtrMMZ1M: $2DBA0A
+ LTPtrMMZ1D: $2DBA0C
+ LTPtrMMZ1S: $2DBA0E
+ LTPtrMMZ1N: $2DBA10
+ LTPtrMMZ2M: $2DBA12
+ LTPtrMMZ2D: $2DBA14
+ LTPtrMMZ2S: $2DBA16
+ LTPtrMMZ2N: $2DBA18
+ LTPtrMMZ3M: $2DBA1A
+ LTPtrMMZ3D: $2DBA1C
+ LTPtrMMZ3S: $2DBA1E
+ LTPtrMMZ3N: $2DBA20
+ LTPtrMMZ4M: $2DBA22
+ LTPtrMMZ4D: $2DBA24
+ LTPtrMMZ4S: $2DBA26
+ LTPtrMMZ4N: $2DBA28
+ LTPtrMMZ5M: $2DBA2A
+ LTPtrMMZ5S: $2DBA2C
+ LTPtrMMZ5D: $2DBA2E
+ LTPtrMMZ5N: $2DBA30
+ LTPtrMMZ6M: $2DBA32
+ LTPtrMMZ6D: $2DBA34
+ LTPtrMMZ6S: $2DBA36
+ LTPtrMMZ6N: $2DBA38
+ LTPtrTrain0M: $2DBA3A
+ LTPtrTrain0D: $2DBA3C
+ LTPtrTrain0S: $2DBA3E
+ LTPtrTrain0N: $2DBA40
+ LTPtrTrain1M: $2DBA42
+ LTPtrTrain1D: $2DBA44
+ LTPtrTrain1S: $2DBA46
+ LTPtrTrain1N: $2DBA48
+ LTPtrTrain2M: $2DBA4A
+ LTPtrTrain2D: $2DBA4C
+ LTPtrTrain2S: $2DBA4E
+ LTPtrTrain2N: $2DBA50
+ LTPtrTrain3M: $2DBA52
+ LTPtrTrain3D: $2DBA54
+ LTPtrTrain3S: $2DBA56
+ LTPtrTrain3N: $2DBA58
+ LTPtrTrain4M: $2DBA5A
+ LTPtrTrain4D: $2DBA5C
+ LTPtrTrain4S: $2DBA5E
+ LTPtrTrain4N: $2DBA60
+ LTPtrTrain5M: $2DBA62
+ LTPtrTrain5D: $2DBA64
+ LTPtrTrain5S: $2DBA66
+ LTPtrTrain5N: $2DBA68
+ LTPtrTrain6M: $2DBA6A
+ LTPtrTrain6D: $2DBA6C
+ LTPtrTrain6S: $2DBA6E
+ LTPtrTrain6N: $2DBA70
+ LTPtrIntro0M: $2DBA72
+ LTPtrIntro0D: $2DBA74
+ LTPtrIntro0S: $2DBA76
+ LTPtrIntro0N: $2DBA78
+ LTPtrIntro1M: $2DBA7A
+ LTPtrIntro1D: $2DBA7C
+ LTPtrIntro1S: $2DBA7E
+ LTPtrIntro1N: $2DBA80
+ LTPtrIntro2M: $2DBA82
+ LTPtrIntro2D: $2DBA84
+ LTPtrIntro2S: $2DBA86
+ LTPtrIntro2N: $2DBA88
+ LTPtrIntro3M: $2DBA8A
+ LTPtrIntro3D: $2DBA8C
+ LTPtrIntro3S: $2DBA8E
+ LTPtrIntro3N: $2DBA90
+ LTPtrIntro4M: $2DBA92
+ LTPtrIntro4D: $2DBA94
+ LTPtrIntro4S: $2DBA96
+ LTPtrIntro4N: $2DBA98
+ LTPtrIntro5M: $2DBA9A
+ LTPtrIntro5D: $2DBA9C
+ LTPtrIntro5S: $2DBA9E
+ LTPtrIntro5N: $2DBAA0
+ LTPtrIntro6M: $2DBAA2
+ LTPtrIntro6D: $2DBAA4
+ LTPtrIntro6S: $2DBAA6
+ LTPtrIntro6N: $2DBAA8
+ LTPtrWorld0M: $2DBAAA
+ LTPtrWorld0D: $2DBAAC
+ LTPtrWorld0S: $2DBAAE
+ LTPtrWorld0N: $2DBAB0
+ LTPtrWorld1M: $2DBAB2
+ LTPtrWorld1D: $2DBAB4
+ LTPtrWorld1S: $2DBAB6
+ LTPtrWorld1N: $2DBAB8
+ LTPtrWorld2M: $2DBABA
+ LTPtrWorld2D: $2DBABC
+ LTPtrWorld2S: $2DBABE
+ LTPtrWorld2N: $2DBAC0
+ LTPtrWorld3M: $2DBAC2
+ LTPtrWorld3D: $2DBAC4
+ LTPtrWorld3S: $2DBAC6
+ LTPtrWorld3N: $2DBAC8
+ LTPtrWorld4M: $2DBACA
+ LTPtrWorld4D: $2DBACC
+ LTPtrWorld4S: $2DBACE
+ LTPtrWorld4N: $2DBAD0
+ LTPtrWorld5M: $2DBAD2
+ LTPtrWorld5D: $2DBAD4
+ LTPtrWorld5S: $2DBAD6
+ LTPtrWorld5N: $2DBAD8
+ LTPtrWorld6M: $2DBADA
+ LTPtrWorld6D: $2DBADC
+ LTPtrWorld6S: $2DBADE
+ LTPtrWorld6N: $2DBAE0
+ BBZ12MDSN_TilePtr: $2DBAE2
+ BBZ3MDSN_TilePtr: $2DBAFA
+ BBZ4MDSN_TilePtr: $2DBB12
+ BBZ5MDSN_TilePtr: $2DBB2A
+ SSZ12MD_TilePtr: $2DBB42
+ SSZ12SN_TilePtr: $2DBB5A
+ SSZ3MD_TilePtr: $2DBB72
+ SSZ3SN_TilePtr: $2DBB8A
+ SSZ45MD_TilePtr: $2DBBA2
+ SSZ45SN_TilePtr: $2DBBBA
+ AAZ12MDSN_TilePtr: $2DBBD2
+ AAZ3MDSN_TilePtr: $2DBBEA
+ AAZ4MDSN_TilePtr: $2DBBFE
+ AAZ5MDSN_TilePtr: $2DBC12
+ TTZ12MDSN_TilePtr: $2DBC32
+ TTZ3MDSN_TilePtr: $2DBC46
+ TTZ4MDSN_TilePtr: $2DBC5E
+ TTZ5MDSN_TilePtr: $2DBC72
+ TTZBMDSN_TilePtr: $2DBC8A
+ MMZ1MDSN_TilePtr: $2DBC9E
+ MMZ2MDSN_TilePtr: $2DBCAA
+ MMZ3MDSN_TilePtr: $2DBCB2
+ MMZ4MDSN_TilePtr: $2DBCBE
+ MMZ5MDSN_TilePtr: $2DBCCA
+ Training_TilePtr: $2DBCD6
+ Tutorial_TilePtr: $2DBCE2
+ WorldEnt_TilePtr: $2DBCF6
+ FinalBoss_TilePtr: $2DBD06
+ NULL_TilePtr: $2DBD0E
 
-*Segment 027 - LevelTile_Ptrs: Offset $231480  Size $3F0
- LTPtrBBZ0M: $231480
- LTPtrBBZ0D: $231482
- LTPtrBBZ0S: $231484
- LTPtrBBZ0N: $231486
- LTPtrBBZ1M: $231488
- LTPtrBBZ1D: $23148A
- LTPtrBBZ1S: $23148C
- LTPtrBBZ1N: $23148E
- LTPtrBBZ2M: $231490
- LTPtrBBZ2D: $231492
- LTPtrBBZ2S: $231494
- LTPtrBBZ2N: $231496
- LTPtrBBZ3M: $231498
- LTPtrBBZ3D: $23149A
- LTPtrBBZ3S: $23149C
- LTPtrBBZ3N: $23149E
- LTPtrBBZ4M: $2314A0
- LTPtrBBZ4D: $2314A2
- LTPtrBBZ4S: $2314A4
- LTPtrBBZ4N: $2314A6
- LTPtrBBZ5M: $2314A8
- LTPtrBBZ5D: $2314AA
- LTPtrBBZ5S: $2314AC
- LTPtrBBZ5N: $2314AE
- LTPtrBBZ6M: $2314B0
- LTPtrBBZ6D: $2314B2
- LTPtrBBZ6S: $2314B4
- LTPtrBBZ6N: $2314B6
- LTPtrSSZ0M: $2314B8
- LTPtrSSZ0D: $2314BA
- LTPtrSSZ0S: $2314BC
- LTPtrSSZ0N: $2314BE
- LTPtrSSZ1M: $2314C0
- LTPtrSSZ1D: $2314C2
- LTPtrSSZ1S: $2314C4
- LTPtrSSZ1N: $2314C6
- LTPtrSSZ2M: $2314C8
- LTPtrSSZ2D: $2314CA
- LTPtrSSZ2S: $2314CC
- LTPtrSSZ2N: $2314CE
- LTPtrSSZ3M: $2314D0
- LTPtrSSZ3D: $2314D2
- LTPtrSSZ3S: $2314D4
- LTPtrSSZ3N: $2314D6
- LTPtrSSZ4M: $2314D8
- LTPtrSSZ4D: $2314DA
- LTPtrSSZ4S: $2314DC
- LTPtrSSZ4N: $2314DE
- LTPtrSSZ5M: $2314E0
- LTPtrSSZ5D: $2314E2
- LTPtrSSZ5S: $2314E4
- LTPtrSSZ5N: $2314E6
- LTPtrSSZ6M: $2314E8
- LTPtrSSZ6D: $2314EA
- LTPtrSSZ6S: $2314EC
- LTPtrSSZ6N: $2314EE
- LTPtrAAZ0M: $2314F0
- LTPtrAAZ0D: $2314F2
- LTPtrAAZ0S: $2314F4
- LTPtrAAZ0N: $2314F6
- LTPtrAAZ1M: $2314F8
- LTPtrAAZ1D: $2314FA
- LTPtrAAZ1S: $2314FC
- LTPtrAAZ1N: $2314FE
- LTPtrAAZ2M: $231500
- LTPtrAAZ2D: $231502
- LTPtrAAZ2S: $231504
- LTPtrAAZ2N: $231506
- LTPtrAAZ3M: $231508
- LTPtrAAZ3D: $23150A
- LTPtrAAZ3S: $23150C
- LTPtrAAZ3N: $23150E
- LTPtrAAZ4M: $231510
- LTPtrAAZ4D: $231512
- LTPtrAAZ4S: $231514
- LTPtrAAZ4N: $231516
- LTPtrAAZ5M: $231518
- LTPtrAAZ5D: $23151A
- LTPtrAAZ5S: $23151C
- LTPtrAAZ5N: $23151E
- LTPtrAAZ6M: $231520
- LTPtrAAZ6D: $231522
- LTPtrAAZ6S: $231524
- LTPtrAAZ6N: $231526
- LTPtrTTZ0M: $231528
- LTPtrTTZ0D: $23152A
- LTPtrTTZ0S: $23152C
- LTPtrTTZ0N: $23152E
- LTPtrTTZ1M: $231530
- LTPtrTTZ1D: $231532
- LTPtrTTZ1S: $231534
- LTPtrTTZ1N: $231536
- LTPtrTTZ2M: $231538
- LTPtrTTZ2D: $23153A
- LTPtrTTZ2S: $23153C
- LTPtrTTZ2N: $23153E
- LTPtrTTZ3M: $231540
- LTPtrTTZ3D: $231542
- LTPtrTTZ3S: $231544
- LTPtrTTZ3N: $231546
- LTPtrTTZ4M: $231548
- LTPtrTTZ4D: $23154A
- LTPtrTTZ4S: $23154C
- LTPtrTTZ4N: $23154E
- LTPtrTTZ5M: $231550
- LTPtrTTZ5D: $231552
- LTPtrTTZ5S: $231554
- LTPtrTTZ5N: $231556
- LTPtrTTZ6M: $231558
- LTPtrTTZ6D: $23155A
- LTPtrTTZ6S: $23155C
- LTPtrTTZ6N: $23155E
- LTPtrMMZ0M: $231560
- LTPtrMMZ0D: $231562
- LTPtrMMZ0S: $231564
- LTPtrMMZ0N: $231566
- LTPtrMMZ1M: $231568
- LTPtrMMZ1D: $23156A
- LTPtrMMZ1S: $23156C
- LTPtrMMZ1N: $23156E
- LTPtrMMZ2M: $231570
- LTPtrMMZ2D: $231572
- LTPtrMMZ2S: $231574
- LTPtrMMZ2N: $231576
- LTPtrMMZ3M: $231578
- LTPtrMMZ3D: $23157A
- LTPtrMMZ3S: $23157C
- LTPtrMMZ3N: $23157E
- LTPtrMMZ4M: $231580
- LTPtrMMZ4D: $231582
- LTPtrMMZ4S: $231584
- LTPtrMMZ4N: $231586
- LTPtrMMZ5M: $231588
- LTPtrMMZ5S: $23158A
- LTPtrMMZ5D: $23158C
- LTPtrMMZ5N: $23158E
- LTPtrMMZ6M: $231590
- LTPtrMMZ6D: $231592
- LTPtrMMZ6S: $231594
- LTPtrMMZ6N: $231596
- LTPtrTrain0M: $231598
- LTPtrTrain0D: $23159A
- LTPtrTrain0S: $23159C
- LTPtrTrain0N: $23159E
- LTPtrTrain1M: $2315A0
- LTPtrTrain1D: $2315A2
- LTPtrTrain1S: $2315A4
- LTPtrTrain1N: $2315A6
- LTPtrTrain2M: $2315A8
- LTPtrTrain2D: $2315AA
- LTPtrTrain2S: $2315AC
- LTPtrTrain2N: $2315AE
- LTPtrTrain3M: $2315B0
- LTPtrTrain3D: $2315B2
- LTPtrTrain3S: $2315B4
- LTPtrTrain3N: $2315B6
- LTPtrTrain4M: $2315B8
- LTPtrTrain4D: $2315BA
- LTPtrTrain4S: $2315BC
- LTPtrTrain4N: $2315BE
- LTPtrTrain5M: $2315C0
- LTPtrTrain5D: $2315C2
- LTPtrTrain5S: $2315C4
- LTPtrTrain5N: $2315C6
- LTPtrTrain6M: $2315C8
- LTPtrTrain6D: $2315CA
- LTPtrTrain6S: $2315CC
- LTPtrTrain6N: $2315CE
- LTPtrIntro0M: $2315D0
- LTPtrIntro0D: $2315D2
- LTPtrIntro0S: $2315D4
- LTPtrIntro0N: $2315D6
- LTPtrIntro1M: $2315D8
- LTPtrIntro1D: $2315DA
- LTPtrIntro1S: $2315DC
- LTPtrIntro1N: $2315DE
- LTPtrIntro2M: $2315E0
- LTPtrIntro2D: $2315E2
- LTPtrIntro2S: $2315E4
- LTPtrIntro2N: $2315E6
- LTPtrIntro3M: $2315E8
- LTPtrIntro3D: $2315EA
- LTPtrIntro3S: $2315EC
- LTPtrIntro3N: $2315EE
- LTPtrIntro4M: $2315F0
- LTPtrIntro4D: $2315F2
- LTPtrIntro4S: $2315F4
- LTPtrIntro4N: $2315F6
- LTPtrIntro5M: $2315F8
- LTPtrIntro5D: $2315FA
- LTPtrIntro5S: $2315FC
- LTPtrIntro5N: $2315FE
- LTPtrIntro6M: $231600
- LTPtrIntro6D: $231602
- LTPtrIntro6S: $231604
- LTPtrIntro6N: $231606
- LTPtrWorld0M: $231608
- LTPtrWorld0D: $23160A
- LTPtrWorld0S: $23160C
- LTPtrWorld0N: $23160E
- LTPtrWorld1M: $231610
- LTPtrWorld1D: $231612
- LTPtrWorld1S: $231614
- LTPtrWorld1N: $231616
- LTPtrWorld2M: $231618
- LTPtrWorld2D: $23161A
- LTPtrWorld2S: $23161C
- LTPtrWorld2N: $23161E
- LTPtrWorld3M: $231620
- LTPtrWorld3D: $231622
- LTPtrWorld3S: $231624
- LTPtrWorld3N: $231626
- LTPtrWorld4M: $231628
- LTPtrWorld4D: $23162A
- LTPtrWorld4S: $23162C
- LTPtrWorld4N: $23162E
- LTPtrWorld5M: $231630
- LTPtrWorld5D: $231632
- LTPtrWorld5S: $231634
- LTPtrWorld5N: $231636
- LTPtrWorld6M: $231638
- LTPtrWorld6D: $23163A
- LTPtrWorld6S: $23163C
- LTPtrWorld6N: $23163E
- BBZ12MDSN_TilePtr: $231640
- BBZ3MDSN_TilePtr: $231658
- BBZ4MDSN_TilePtr: $231670
- BBZ5MDSN_TilePtr: $231688
- SSZ12MD_TilePtr: $2316A0
- SSZ12SN_TilePtr: $2316B8
- SSZ3MD_TilePtr: $2316D0
- SSZ3SN_TilePtr: $2316E8
- SSZ45MD_TilePtr: $231700
- SSZ45SN_TilePtr: $231718
- AAZ12MDSN_TilePtr: $231730
- AAZ3MDSN_TilePtr: $231748
- AAZ4MDSN_TilePtr: $23175C
- AAZ5MDSN_TilePtr: $231770
- TTZ12MDSN_TilePtr: $231790
- TTZ3MDSN_TilePtr: $2317A4
- TTZ4MDSN_TilePtr: $2317BC
- TTZ5MDSN_TilePtr: $2317D0
- TTZBMDSN_TilePtr: $2317E8
- MMZ1MDSN_TilePtr: $2317FC
- MMZ2MDSN_TilePtr: $231808
- MMZ3MDSN_TilePtr: $231810
- MMZ4MDSN_TilePtr: $23181C
- MMZ5MDSN_TilePtr: $231828
- Training_TilePtr: $231834
- Tutorial_TilePtr: $231840
- WorldEnt_TilePtr: $231854
- FinalBoss_TilePtr: $231864
- NULL_TilePtr: $23186C
+*Segment 043 - Level_Index: Offset $22F174  Size $838
+ BPLPtrBBZ0M: $22F174
+ BPLPtrBBZ0D: $22F176
+ BPLPtrBBZ0S: $22F178
+ BPLPtrBBZ0N: $22F17A
+ BPLPtrBBZ1M: $22F17C
+ BPLPtrBBZ1D: $22F17E
+ BPLPtrBBZ1S: $22F180
+ BPLPtrBBZ1N: $22F182
+ BPLPtrBBZ2M: $22F184
+ BPLPtrBBZ2D: $22F186
+ BPLPtrBBZ2S: $22F188
+ BPLPtrBBZ2N: $22F18A
+ BPLPtrBBZ3M: $22F18C
+ BPLPtrBBZ3D: $22F18E
+ BPLPtrBBZ3S: $22F190
+ BPLPtrBBZ3N: $22F192
+ BPLPtrBBZ4M: $22F194
+ BPLPtrBBZ4D: $22F196
+ BPLPtrBBZ4S: $22F198
+ BPLPtrBBZ4N: $22F19A
+ BPLPtrBBZ5M: $22F19C
+ BPLPtrBBZ5D: $22F19E
+ BPLPtrBBZ5S: $22F1A0
+ BPLPtrBBZ5N: $22F1A2
+ BPLPtrBBZ6M: $22F1A4
+ BPLPtrBBZ6D: $22F1A6
+ BPLPtrBBZ6S: $22F1A8
+ BPLPtrBBZ6N: $22F1AA
+ BPLPtrSSZ0M: $22F1AC
+ BPLPtrSSZ0D: $22F1AE
+ BPLPtrSSZ0S: $22F1B0
+ BPLPtrSSZ0N: $22F1B2
+ BPLPtrSSZ1M: $22F1B4
+ BPLPtrSSZ1D: $22F1B6
+ BPLPtrSSZ1S: $22F1B8
+ BPLPtrSSZ1N: $22F1BA
+ BPLPtrSSZ2M: $22F1BC
+ BPLPtrSSZ2D: $22F1BE
+ BPLPtrSSZ2S: $22F1C0
+ BPLPtrSSZ2N: $22F1C2
+ BPLPtrSSZ3M: $22F1C4
+ BPLPtrSSZ3D: $22F1C6
+ BPLPtrSSZ3S: $22F1C8
+ BPLPtrSSZ3N: $22F1CA
+ BPLPtrSSZ4M: $22F1CC
+ BPLPtrSSZ4D: $22F1CE
+ BPLPtrSSZ4S: $22F1D0
+ BPLPtrSSZ4N: $22F1D2
+ BPLPtrSSZ5M: $22F1D4
+ BPLPtrSSZ5D: $22F1D6
+ BPLPtrSSZ5S: $22F1D8
+ BPLPtrSSZ5N: $22F1DA
+ BPLPtrSSZ6M: $22F1DC
+ BPLPtrSSZ6D: $22F1DE
+ BPLPtrSSZ6S: $22F1E0
+ BPLPtrSSZ6N: $22F1E2
+ BPLPtrAAZ0M: $22F1E4
+ BPLPtrAAZ0D: $22F1E6
+ BPLPtrAAZ0S: $22F1E8
+ BPLPtrAAZ0N: $22F1EA
+ BPLPtrAAZ1M: $22F1EC
+ BPLPtrAAZ1D: $22F1EE
+ BPLPtrAAZ1S: $22F1F0
+ BPLPtrAAZ1N: $22F1F2
+ BPLPtrAAZ2M: $22F1F4
+ BPLPtrAAZ2D: $22F1F6
+ BPLPtrAAZ2S: $22F1F8
+ BPLPtrAAZ2N: $22F1FA
+ BPLPtrAAZ3M: $22F1FC
+ BPLPtrAAZ3D: $22F1FE
+ BPLPtrAAZ3S: $22F200
+ BPLPtrAAZ3N: $22F202
+ BPLPtrAAZ4M: $22F204
+ BPLPtrAAZ4D: $22F206
+ BPLPtrAAZ4S: $22F208
+ BPLPtrAAZ4N: $22F20A
+ BPLPtrAAZ5M: $22F20C
+ BPLPtrAAZ5D: $22F20E
+ BPLPtrAAZ5S: $22F210
+ BPLPtrAAZ5N: $22F212
+ BPLPtrAAZ6M: $22F214
+ BPLPtrAAZ6D: $22F216
+ BPLPtrAAZ6S: $22F218
+ BPLPtrAAZ6N: $22F21A
+ BPLPtrTTZ0M: $22F21C
+ BPLPtrTTZ0D: $22F21E
+ BPLPtrTTZ0S: $22F220
+ BPLPtrTTZ0N: $22F222
+ BPLPtrTTZ1M: $22F224
+ BPLPtrTTZ1D: $22F226
+ BPLPtrTTZ1S: $22F228
+ BPLPtrTTZ1N: $22F22A
+ BPLPtrTTZ2M: $22F22C
+ BPLPtrTTZ2D: $22F22E
+ BPLPtrTTZ2S: $22F230
+ BPLPtrTTZ2N: $22F232
+ BPLPtrTTZ3M: $22F234
+ BPLPtrTTZ3D: $22F236
+ BPLPtrTTZ3S: $22F238
+ BPLPtrTTZ3N: $22F23A
+ BPLPtrTTZ4M: $22F23C
+ BPLPtrTTZ4D: $22F23E
+ BPLPtrTTZ4S: $22F240
+ BPLPtrTTZ4N: $22F242
+ BPLPtrTTZ5M: $22F244
+ BPLPtrTTZ5D: $22F246
+ BPLPtrTTZ5S: $22F248
+ BPLPtrTTZ5N: $22F24A
+ BPLPtrTTZ6M: $22F24C
+ BPLPtrTTZ6D: $22F24E
+ BPLPtrTTZ6S: $22F250
+ BPLPtrTTZ6N: $22F252
+ BPLPtrMMZ0M: $22F254
+ BPLPtrMMZ0D: $22F256
+ BPLPtrMMZ0S: $22F258
+ BPLPtrMMZ0N: $22F25A
+ BPLPtrMMZ1M: $22F25C
+ BPLPtrMMZ1D: $22F25E
+ BPLPtrMMZ1S: $22F260
+ BPLPtrMMZ1N: $22F262
+ BPLPtrMMZ2M: $22F264
+ BPLPtrMMZ2D: $22F266
+ BPLPtrMMZ2S: $22F268
+ BPLPtrMMZ2N: $22F26A
+ BPLPtrMMZ3M: $22F26C
+ BPLPtrMMZ3D: $22F26E
+ BPLPtrMMZ3S: $22F270
+ BPLPtrMMZ3N: $22F272
+ BPLPtrMMZ4M: $22F274
+ BPLPtrMMZ4D: $22F276
+ BPLPtrMMZ4S: $22F278
+ BPLPtrMMZ4N: $22F27A
+ BPLPtrMMZ5M: $22F27C
+ BPLPtrMMZ5D: $22F27E
+ BPLPtrMMZ5S: $22F280
+ BPLPtrMMZ5N: $22F282
+ BPLPtrMMZ6M: $22F284
+ BPLPtrMMZ6D: $22F286
+ BPLPtrMMZ6S: $22F288
+ BPLPtrMMZ6N: $22F28A
+ BPLPtrTrain0M: $22F28C
+ BPLPtrTrain0D: $22F28E
+ BPLPtrTrain0S: $22F290
+ BPLPtrTrain0N: $22F292
+ BPLPtrTrain1M: $22F294
+ BPLPtrTrain1D: $22F296
+ BPLPtrTrain1S: $22F298
+ BPLPtrTrain1N: $22F29A
+ BPLPtrTrain2M: $22F29C
+ BPLPtrTrain2D: $22F29E
+ BPLPtrTrain2S: $22F2A0
+ BPLPtrTrain2N: $22F2A2
+ BPLPtrTrain3M: $22F2A4
+ BPLPtrTrain3D: $22F2A6
+ BPLPtrTrain3S: $22F2A8
+ BPLPtrTrain3N: $22F2AA
+ BPLPtrTrain4M: $22F2AC
+ BPLPtrTrain4D: $22F2AE
+ BPLPtrTrain4S: $22F2B0
+ BPLPtrTrain4N: $22F2B2
+ BPLPtrTrain5M: $22F2B4
+ BPLPtrTrain5D: $22F2B6
+ BPLPtrTrain5S: $22F2B8
+ BPLPtrTrain5N: $22F2BA
+ BPLPtrTrain6M: $22F2BC
+ BPLPtrTrain6D: $22F2BE
+ BPLPtrTrain6S: $22F2C0
+ BPLPtrTrain6N: $22F2C2
+ BPLPtrIntro0M: $22F2C4
+ BPLPtrIntro0D: $22F2C6
+ BPLPtrIntro0S: $22F2C8
+ BPLPtrIntro0N: $22F2CA
+ BPLPtrIntro1M: $22F2CC
+ BPLPtrIntro1D: $22F2CE
+ BPLPtrIntro1S: $22F2D0
+ BPLPtrIntro1N: $22F2D2
+ BPLPtrIntro2M: $22F2D4
+ BPLPtrIntro2D: $22F2D6
+ BPLPtrIntro2S: $22F2D8
+ BPLPtrIntro2N: $22F2DA
+ BPLPtrIntro3M: $22F2DC
+ BPLPtrIntro3D: $22F2DE
+ BPLPtrIntro3S: $22F2E0
+ BPLPtrIntro3N: $22F2E2
+ BPLPtrIntro4M: $22F2E4
+ BPLPtrIntro4D: $22F2E6
+ BPLPtrIntro4S: $22F2E8
+ BPLPtrIntro4N: $22F2EA
+ BPLPtrIntro5M: $22F2EC
+ BPLPtrIntro5D: $22F2EE
+ BPLPtrIntro5S: $22F2F0
+ BPLPtrIntro5N: $22F2F2
+ BPLPtrIntro6M: $22F2F4
+ BPLPtrIntro6D: $22F2F6
+ BPLPtrIntro6S: $22F2F8
+ BPLPtrIntro6N: $22F2FA
+ BPLPtrWorld0M: $22F2FC
+ BPLPtrWorld0D: $22F2FE
+ BPLPtrWorld0S: $22F300
+ BPLPtrWorld0N: $22F302
+ BPLPtrWorld1M: $22F304
+ BPLPtrWorld1D: $22F306
+ BPLPtrWorld1S: $22F308
+ BPLPtrWorld1N: $22F30A
+ BPLPtrWorld2M: $22F30C
+ BPLPtrWorld2D: $22F30E
+ BPLPtrWorld2S: $22F310
+ BPLPtrWorld2N: $22F312
+ BPLPtrWorld3M: $22F314
+ BPLPtrWorld3D: $22F316
+ BPLPtrWorld3S: $22F318
+ BPLPtrWorld3N: $22F31A
+ BPLPtrWorld4M: $22F31C
+ BPLPtrWorld4D: $22F31E
+ BPLPtrWorld4S: $22F320
+ BPLPtrWorld4N: $22F322
+ BPLPtrWorld5M: $22F324
+ BPLPtrWorld5D: $22F326
+ BPLPtrWorld5S: $22F328
+ BPLPtrWorld5N: $22F32A
+ BPLPtrWorld6M: $22F32C
+ BPLPtrWorld6D: $22F32E
+ BPLPtrWorld6S: $22F330
+ BPLPtrWorld6N: $22F332
+ BBZ1_MapPtr: $22F334
+ BBZ2_MapPtr: $22F35C
+ BBZ3_MapPtr: $22F384
+ BBZ4_MapPtr: $22F3AC
+ BBZ5_MapPtr: $22F3D4
+ SSZ1MD_MapPtr: $22F3FC
+ SSZ1SN_MapPtr: $22F424
+ SSZ2MD_MapPtr: $22F44C
+ SSZ2SN_MapPtr: $22F474
+ SSZ3MD_MapPtr: $22F49C
+ SSZ3SN_MapPtr: $22F4C4
+ SSZ4MD_MapPtr: $22F4EC
+ SSZ4SN_MapPtr: $22F514
+ SSZ5MD_MapPtr: $22F53C
+ SSZ5SN_MapPtr: $22F564
+ AAZ1_MapPtr: $22F58C
+ AAZ2_MapPtr: $22F5B4
+ AAZ3_MapPtr: $22F5DC
+ AAZ4_MapPtr: $22F5FC
+ AAZ5_MapPtr: $22F61C
+ TTZ1MDS_MapPtr: $22F63C
+ TTZ1N_MapPtr: $22F660
+ TTZ2MDS_MapPtr: $22F684
+ TTZ2N_MapPtr: $22F6A8
+ TTZ3MDS_MapPtr: $22F6CC
+ TTZ3N_MapPtr: $22F6F4
+ TTZ4MDS_MapPtr: $22F71C
+ TTZ4N_MapPtr: $22F740
+ TTZ5_MDS_MapPtr: $22F764
+ TTZ5N_MapPtr: $22F78C
+ TTZNULL_MapPtr: $22F7B4
+ MMZ1_MapPtr: $22F7B8
+ MMZ2_MapPtr: $22F7D0
+ MMZ3_MapPtr: $22F7E4
+ MMZ4_MapPtr: $22F800
+ MMZ5_MapPtr: $22F820
+ Training1_MapPtr: $22F840
+ Training2_MapPtr: $22F850
+ Training3_MapPtr: $22F860
+ Training4_MapPtr: $22F870
+ TrainNULL_MapPtr: $22F880
+ Intro0_MapPtr: $22F884
+ Intro1_MapPtr: $22F894
+ Intro2_MapPtr: $22F8A4
+ Intro3_MapPtr: $22F8B4
+ Intro4_MapPtr: $22F8C4
+ Tut1_MapPtr: $22F8D4
+ Tut2_MapPtr: $22F8EC
+ Tut3_MapPtr: $22F904
+ Tut4_MapPtr: $22F91C
+ Tut5_MapPtr: $22F934
+ Tut6_MapPtr: $22F94C
+ Tut7_MapPtr: $22F964
+ TutNULL_MapPtr: $22F97C
+ WorldEnt_MapPtr: $22F980
+ FinalBoss_MapPtr: $22F998
+ NULL_MapPtr: $22F9A8
 
-*Segment 028 - Level_Index: Offset $231870  Size $838
- BPLPtrBBZ0M: $231870
- BPLPtrBBZ0D: $231872
- BPLPtrBBZ0S: $231874
- BPLPtrBBZ0N: $231876
- BPLPtrBBZ1M: $231878
- BPLPtrBBZ1D: $23187A
- BPLPtrBBZ1S: $23187C
- BPLPtrBBZ1N: $23187E
- BPLPtrBBZ2M: $231880
- BPLPtrBBZ2D: $231882
- BPLPtrBBZ2S: $231884
- BPLPtrBBZ2N: $231886
- BPLPtrBBZ3M: $231888
- BPLPtrBBZ3D: $23188A
- BPLPtrBBZ3S: $23188C
- BPLPtrBBZ3N: $23188E
- BPLPtrBBZ4M: $231890
- BPLPtrBBZ4D: $231892
- BPLPtrBBZ4S: $231894
- BPLPtrBBZ4N: $231896
- BPLPtrBBZ5M: $231898
- BPLPtrBBZ5D: $23189A
- BPLPtrBBZ5S: $23189C
- BPLPtrBBZ5N: $23189E
- BPLPtrBBZ6M: $2318A0
- BPLPtrBBZ6D: $2318A2
- BPLPtrBBZ6S: $2318A4
- BPLPtrBBZ6N: $2318A6
- BPLPtrSSZ0M: $2318A8
- BPLPtrSSZ0D: $2318AA
- BPLPtrSSZ0S: $2318AC
- BPLPtrSSZ0N: $2318AE
- BPLPtrSSZ1M: $2318B0
- BPLPtrSSZ1D: $2318B2
- BPLPtrSSZ1S: $2318B4
- BPLPtrSSZ1N: $2318B6
- BPLPtrSSZ2M: $2318B8
- BPLPtrSSZ2D: $2318BA
- BPLPtrSSZ2S: $2318BC
- BPLPtrSSZ2N: $2318BE
- BPLPtrSSZ3M: $2318C0
- BPLPtrSSZ3D: $2318C2
- BPLPtrSSZ3S: $2318C4
- BPLPtrSSZ3N: $2318C6
- BPLPtrSSZ4M: $2318C8
- BPLPtrSSZ4D: $2318CA
- BPLPtrSSZ4S: $2318CC
- BPLPtrSSZ4N: $2318CE
- BPLPtrSSZ5M: $2318D0
- BPLPtrSSZ5D: $2318D2
- BPLPtrSSZ5S: $2318D4
- BPLPtrSSZ5N: $2318D6
- BPLPtrSSZ6M: $2318D8
- BPLPtrSSZ6D: $2318DA
- BPLPtrSSZ6S: $2318DC
- BPLPtrSSZ6N: $2318DE
- BPLPtrAAZ0M: $2318E0
- BPLPtrAAZ0D: $2318E2
- BPLPtrAAZ0S: $2318E4
- BPLPtrAAZ0N: $2318E6
- BPLPtrAAZ1M: $2318E8
- BPLPtrAAZ1D: $2318EA
- BPLPtrAAZ1S: $2318EC
- BPLPtrAAZ1N: $2318EE
- BPLPtrAAZ2M: $2318F0
- BPLPtrAAZ2D: $2318F2
- BPLPtrAAZ2S: $2318F4
- BPLPtrAAZ2N: $2318F6
- BPLPtrAAZ3M: $2318F8
- BPLPtrAAZ3D: $2318FA
- BPLPtrAAZ3S: $2318FC
- BPLPtrAAZ3N: $2318FE
- BPLPtrAAZ4M: $231900
- BPLPtrAAZ4D: $231902
- BPLPtrAAZ4S: $231904
- BPLPtrAAZ4N: $231906
- BPLPtrAAZ5M: $231908
- BPLPtrAAZ5D: $23190A
- BPLPtrAAZ5S: $23190C
- BPLPtrAAZ5N: $23190E
- BPLPtrAAZ6M: $231910
- BPLPtrAAZ6D: $231912
- BPLPtrAAZ6S: $231914
- BPLPtrAAZ6N: $231916
- BPLPtrTTZ0M: $231918
- BPLPtrTTZ0D: $23191A
- BPLPtrTTZ0S: $23191C
- BPLPtrTTZ0N: $23191E
- BPLPtrTTZ1M: $231920
- BPLPtrTTZ1D: $231922
- BPLPtrTTZ1S: $231924
- BPLPtrTTZ1N: $231926
- BPLPtrTTZ2M: $231928
- BPLPtrTTZ2D: $23192A
- BPLPtrTTZ2S: $23192C
- BPLPtrTTZ2N: $23192E
- BPLPtrTTZ3M: $231930
- BPLPtrTTZ3D: $231932
- BPLPtrTTZ3S: $231934
- BPLPtrTTZ3N: $231936
- BPLPtrTTZ4M: $231938
- BPLPtrTTZ4D: $23193A
- BPLPtrTTZ4S: $23193C
- BPLPtrTTZ4N: $23193E
- BPLPtrTTZ5M: $231940
- BPLPtrTTZ5D: $231942
- BPLPtrTTZ5S: $231944
- BPLPtrTTZ5N: $231946
- BPLPtrTTZ6M: $231948
- BPLPtrTTZ6D: $23194A
- BPLPtrTTZ6S: $23194C
- BPLPtrTTZ6N: $23194E
- BPLPtrMMZ0M: $231950
- BPLPtrMMZ0D: $231952
- BPLPtrMMZ0S: $231954
- BPLPtrMMZ0N: $231956
- BPLPtrMMZ1M: $231958
- BPLPtrMMZ1D: $23195A
- BPLPtrMMZ1S: $23195C
- BPLPtrMMZ1N: $23195E
- BPLPtrMMZ2M: $231960
- BPLPtrMMZ2D: $231962
- BPLPtrMMZ2S: $231964
- BPLPtrMMZ2N: $231966
- BPLPtrMMZ3M: $231968
- BPLPtrMMZ3D: $23196A
- BPLPtrMMZ3S: $23196C
- BPLPtrMMZ3N: $23196E
- BPLPtrMMZ4M: $231970
- BPLPtrMMZ4D: $231972
- BPLPtrMMZ4S: $231974
- BPLPtrMMZ4N: $231976
- BPLPtrMMZ5M: $231978
- BPLPtrMMZ5D: $23197A
- BPLPtrMMZ5S: $23197C
- BPLPtrMMZ5N: $23197E
- BPLPtrMMZ6M: $231980
- BPLPtrMMZ6D: $231982
- BPLPtrMMZ6S: $231984
- BPLPtrMMZ6N: $231986
- BPLPtrTrain0M: $231988
- BPLPtrTrain0D: $23198A
- BPLPtrTrain0S: $23198C
- BPLPtrTrain0N: $23198E
- BPLPtrTrain1M: $231990
- BPLPtrTrain1D: $231992
- BPLPtrTrain1S: $231994
- BPLPtrTrain1N: $231996
- BPLPtrTrain2M: $231998
- BPLPtrTrain2D: $23199A
- BPLPtrTrain2S: $23199C
- BPLPtrTrain2N: $23199E
- BPLPtrTrain3M: $2319A0
- BPLPtrTrain3D: $2319A2
- BPLPtrTrain3S: $2319A4
- BPLPtrTrain3N: $2319A6
- BPLPtrTrain4M: $2319A8
- BPLPtrTrain4D: $2319AA
- BPLPtrTrain4S: $2319AC
- BPLPtrTrain4N: $2319AE
- BPLPtrTrain5M: $2319B0
- BPLPtrTrain5D: $2319B2
- BPLPtrTrain5S: $2319B4
- BPLPtrTrain5N: $2319B6
- BPLPtrTrain6M: $2319B8
- BPLPtrTrain6D: $2319BA
- BPLPtrTrain6S: $2319BC
- BPLPtrTrain6N: $2319BE
- BPLPtrIntro0M: $2319C0
- BPLPtrIntro0D: $2319C2
- BPLPtrIntro0S: $2319C4
- BPLPtrIntro0N: $2319C6
- BPLPtrIntro1M: $2319C8
- BPLPtrIntro1D: $2319CA
- BPLPtrIntro1S: $2319CC
- BPLPtrIntro1N: $2319CE
- BPLPtrIntro2M: $2319D0
- BPLPtrIntro2D: $2319D2
- BPLPtrIntro2S: $2319D4
- BPLPtrIntro2N: $2319D6
- BPLPtrIntro3M: $2319D8
- BPLPtrIntro3D: $2319DA
- BPLPtrIntro3S: $2319DC
- BPLPtrIntro3N: $2319DE
- BPLPtrIntro4M: $2319E0
- BPLPtrIntro4D: $2319E2
- BPLPtrIntro4S: $2319E4
- BPLPtrIntro4N: $2319E6
- BPLPtrIntro5M: $2319E8
- BPLPtrIntro5D: $2319EA
- BPLPtrIntro5S: $2319EC
- BPLPtrIntro5N: $2319EE
- BPLPtrIntro6M: $2319F0
- BPLPtrIntro6D: $2319F2
- BPLPtrIntro6S: $2319F4
- BPLPtrIntro6N: $2319F6
- BPLPtrWorld0M: $2319F8
- BPLPtrWorld0D: $2319FA
- BPLPtrWorld0S: $2319FC
- BPLPtrWorld0N: $2319FE
- BPLPtrWorld1M: $231A00
- BPLPtrWorld1D: $231A02
- BPLPtrWorld1S: $231A04
- BPLPtrWorld1N: $231A06
- BPLPtrWorld2M: $231A08
- BPLPtrWorld2D: $231A0A
- BPLPtrWorld2S: $231A0C
- BPLPtrWorld2N: $231A0E
- BPLPtrWorld3M: $231A10
- BPLPtrWorld3D: $231A12
- BPLPtrWorld3S: $231A14
- BPLPtrWorld3N: $231A16
- BPLPtrWorld4M: $231A18
- BPLPtrWorld4D: $231A1A
- BPLPtrWorld4S: $231A1C
- BPLPtrWorld4N: $231A1E
- BPLPtrWorld5M: $231A20
- BPLPtrWorld5D: $231A22
- BPLPtrWorld5S: $231A24
- BPLPtrWorld5N: $231A26
- BPLPtrWorld6M: $231A28
- BPLPtrWorld6D: $231A2A
- BPLPtrWorld6S: $231A2C
- BPLPtrWorld6N: $231A2E
- BBZ1_MapPtr: $231A30
- BBZ2_MapPtr: $231A58
- BBZ3_MapPtr: $231A80
- BBZ4_MapPtr: $231AA8
- BBZ5_MapPtr: $231AD0
- SSZ1MD_MapPtr: $231AF8
- SSZ1SN_MapPtr: $231B20
- SSZ2MD_MapPtr: $231B48
- SSZ2SN_MapPtr: $231B70
- SSZ3MD_MapPtr: $231B98
- SSZ3SN_MapPtr: $231BC0
- SSZ4MD_MapPtr: $231BE8
- SSZ4SN_MapPtr: $231C10
- SSZ5MD_MapPtr: $231C38
- SSZ5SN_MapPtr: $231C60
- AAZ1_MapPtr: $231C88
- AAZ2_MapPtr: $231CB0
- AAZ3_MapPtr: $231CD8
- AAZ4_MapPtr: $231CF8
- AAZ5_MapPtr: $231D18
- TTZ1MDS_MapPtr: $231D38
- TTZ1N_MapPtr: $231D5C
- TTZ2MDS_MapPtr: $231D80
- TTZ2N_MapPtr: $231DA4
- TTZ3MDS_MapPtr: $231DC8
- TTZ3N_MapPtr: $231DF0
- TTZ4MDS_MapPtr: $231E18
- TTZ4N_MapPtr: $231E3C
- TTZ5_MDS_MapPtr: $231E60
- TTZ5N_MapPtr: $231E88
- TTZNULL_MapPtr: $231EB0
- MMZ1_MapPtr: $231EB4
- MMZ2_MapPtr: $231ECC
- MMZ3_MapPtr: $231EE0
- MMZ4_MapPtr: $231EFC
- MMZ5_MapPtr: $231F1C
- Training1_MapPtr: $231F3C
- Training2_MapPtr: $231F4C
- Training3_MapPtr: $231F5C
- Training4_MapPtr: $231F6C
- TrainNULL_MapPtr: $231F7C
- Intro0_MapPtr: $231F80
- Intro1_MapPtr: $231F90
- Intro2_MapPtr: $231FA0
- Intro3_MapPtr: $231FB0
- Intro4_MapPtr: $231FC0
- Tut1_MapPtr: $231FD0
- Tut2_MapPtr: $231FE8
- Tut3_MapPtr: $232000
- Tut4_MapPtr: $232018
- Tut5_MapPtr: $232030
- Tut6_MapPtr: $232048
- Tut7_MapPtr: $232060
- TutNULL_MapPtr: $232078
- WorldEnt_MapPtr: $23207C
- FinalBoss_MapPtr: $232094
- NULL_MapPtr: $2320A4
+*Segment 044 - Solid_Index: Offset $22F9AC  Size $208
+ SIPtrBBZ0M: $22F9AC
+ SIPtrBBZ0D: $22F9AE
+ SIPtrBBZ0S: $22F9B0
+ SIPtrBBZ0N: $22F9B2
+ SIPtrBBZ1M: $22F9B4
+ SIPtrBBZ1D: $22F9B6
+ SIPtrBBZ1S: $22F9B8
+ SIPtrBBZ1N: $22F9BA
+ SIPtrBBZ2M: $22F9BC
+ SIPtrBBZ2D: $22F9BE
+ SIPtrBBZ2S: $22F9C0
+ SIPtrBBZ2N: $22F9C2
+ SIPtrBBZ3M: $22F9C4
+ SIPtrBBZ3D: $22F9C6
+ SIPtrBBZ3S: $22F9C8
+ SIPtrBBZ3N: $22F9CA
+ SIPtrBBZ4M: $22F9CC
+ SIPtrBBZ4D: $22F9CE
+ SIPtrBBZ4S: $22F9D0
+ SIPtrBBZ4N: $22F9D2
+ SIPtrBBZ5M: $22F9D4
+ SIPtrBBZ5D: $22F9D6
+ SIPtrBBZ5S: $22F9D8
+ SIPtrBBZ5N: $22F9DA
+ SIPtrBBZ6M: $22F9DC
+ SIPtrBBZ6D: $22F9DE
+ SIPtrBBZ6S: $22F9E0
+ SIPtrBBZ6N: $22F9E2
+ SIPtrSSZ0M: $22F9E4
+ SIPtrSSZ0D: $22F9E6
+ SIPtrSSZ0S: $22F9E8
+ SIPtrSSZ0N: $22F9EA
+ SIPtrSSZ1M: $22F9EC
+ SIPtrSSZ1D: $22F9EE
+ SIPtrSSZ1S: $22F9F0
+ SIPtrSSZ1N: $22F9F2
+ SIPtrSSZ2M: $22F9F4
+ SIPtrSSZ2D: $22F9F6
+ SIPtrSSZ2S: $22F9F8
+ SIPtrSSZ2N: $22F9FA
+ SIPtrSSZ3M: $22F9FC
+ SIPtrSSZ3D: $22F9FE
+ SIPtrSSZ3S: $22FA00
+ SIPtrSSZ3N: $22FA02
+ SIPtrSSZ4M: $22FA04
+ SIPtrSSZ4D: $22FA06
+ SIPtrSSZ4S: $22FA08
+ SIPtrSSZ4N: $22FA0A
+ SIPtrSSZ5M: $22FA0C
+ SIPtrSSZ5D: $22FA0E
+ SIPtrSSZ5S: $22FA10
+ SIPtrSSZ5N: $22FA12
+ SIPtrSSZ6M: $22FA14
+ SIPtrSSZ6D: $22FA16
+ SIPtrSSZ6S: $22FA18
+ SIPtrSSZ6N: $22FA1A
+ SIPtrAAZ0M: $22FA1C
+ SIPtrAAZ0D: $22FA1E
+ SIPtrAAZ0S: $22FA20
+ SIPtrAAZ0N: $22FA22
+ SIPtrAAZ1M: $22FA24
+ SIPtrAAZ1D: $22FA26
+ SIPtrAAZ1S: $22FA28
+ SIPtrAAZ1N: $22FA2A
+ SIPtrAAZ2M: $22FA2C
+ SIPtrAAZ2D: $22FA2E
+ SIPtrAAZ2S: $22FA30
+ SIPtrAAZ2N: $22FA32
+ SIPtrAAZ3M: $22FA34
+ SIPtrAAZ3D: $22FA36
+ SIPtrAAZ3S: $22FA38
+ SIPtrAAZ3N: $22FA3A
+ SIPtrAAZ4M: $22FA3C
+ SIPtrAAZ4D: $22FA3E
+ SIPtrAAZ4S: $22FA40
+ SIPtrAAZ4N: $22FA42
+ SIPtrAAZ5M: $22FA44
+ SIPtrAAZ5D: $22FA46
+ SIPtrAAZ5S: $22FA48
+ SIPtrAAZ5N: $22FA4A
+ SIPtrAAZ6M: $22FA4C
+ SIPtrAAZ6D: $22FA4E
+ SIPtrAAZ6S: $22FA50
+ SIPtrAAZ6N: $22FA52
+ SIPtrTTZ0M: $22FA54
+ SIPtrTTZ0D: $22FA56
+ SIPtrTTZ0S: $22FA58
+ SIPtrTTZ0N: $22FA5A
+ SIPtrTTZ1M: $22FA5C
+ SIPtrTTZ1D: $22FA5E
+ SIPtrTTZ1S: $22FA60
+ SIPtrTTZ1N: $22FA62
+ SIPtrTTZ2M: $22FA64
+ SIPtrTTZ2D: $22FA66
+ SIPtrTTZ2S: $22FA68
+ SIPtrTTZ2N: $22FA6A
+ SIPtrTTZ3M: $22FA6C
+ SIPtrTTZ3D: $22FA6E
+ SIPtrTTZ3S: $22FA70
+ SIPtrTTZ3N: $22FA72
+ SIPtrTTZ4M: $22FA74
+ SIPtrTTZ4D: $22FA76
+ SIPtrTTZ4S: $22FA78
+ SIPtrTTZ4N: $22FA7A
+ SIPtrTTZ5M: $22FA7C
+ SIPtrTTZ5D: $22FA7E
+ SIPtrTTZ5S: $22FA80
+ SIPtrTTZ5N: $22FA82
+ SIPtrTTZ6M: $22FA84
+ SIPtrTTZ6D: $22FA86
+ SIPtrTTZ6S: $22FA88
+ SIPtrTTZ6N: $22FA8A
+ SIPtrMMZ0M: $22FA8C
+ SIPtrMMZ0D: $22FA8E
+ SIPtrMMZ0S: $22FA90
+ SIPtrMMZ0N: $22FA92
+ SIPtrMMZ1M: $22FA94
+ SIPtrMMZ1D: $22FA96
+ SIPtrMMZ1S: $22FA98
+ SIPtrMMZ1N: $22FA9A
+ SIPtrMMZ2M: $22FA9C
+ SIPtrMMZ2D: $22FA9E
+ SIPtrMMZ2S: $22FAA0
+ SIPtrMMZ2N: $22FAA2
+ SIPtrMMZ3M: $22FAA4
+ SIPtrMMZ3D: $22FAA6
+ SIPtrMMZ3S: $22FAA8
+ SIPtrMMZ3N: $22FAAA
+ SIPtrMMZ4M: $22FAAC
+ SIPtrMMZ4D: $22FAAE
+ SIPtrMMZ4S: $22FAB0
+ SIPtrMMZ4N: $22FAB2
+ SIPtrMMZ5M: $22FAB4
+ SIPtrMMZ5D: $22FAB6
+ SIPtrMMZ5S: $22FAB8
+ SIPtrMMZ5N: $22FABA
+ SIPtrMMZ6M: $22FABC
+ SIPtrMMZ6D: $22FABE
+ SIPtrMMZ6S: $22FAC0
+ SIPtrMMZ6N: $22FAC2
+ SIPtrTrain0M: $22FAC4
+ SIPtrTrain0D: $22FAC6
+ SIPtrTrain0S: $22FAC8
+ SIPtrTrain0N: $22FACA
+ SIPtrTrain1M: $22FACC
+ SIPtrTrain1D: $22FACE
+ SIPtrTrain1S: $22FAD0
+ SIPtrTrain1N: $22FAD2
+ SIPtrTrain2M: $22FAD4
+ SIPtrTrain2D: $22FAD6
+ SIPtrTrain2S: $22FAD8
+ SIPtrTrain2N: $22FADA
+ SIPtrTrain3M: $22FADC
+ SIPtrTrain3D: $22FADE
+ SIPtrTrain3S: $22FAE0
+ SIPtrTrain3N: $22FAE2
+ SIPtrTrain4M: $22FAE4
+ SIPtrTrain4D: $22FAE6
+ SIPtrTrain4S: $22FAE8
+ SIPtrTrain4N: $22FAEA
+ SIPtrTrain5M: $22FAEC
+ SIPtrTrain5D: $22FAEE
+ SIPtrTrain5S: $22FAF0
+ SIPtrTrain5N: $22FAF2
+ SIPtrTrain6M: $22FAF4
+ SIPtrTrain6D: $22FAF6
+ SIPtrTrain6S: $22FAF8
+ SIPtrTrain6N: $22FAFA
+ SIPtrIntro0M: $22FAFC
+ SIPtrIntro0D: $22FAFE
+ SIPtrIntro0S: $22FB00
+ SIPtrIntro0N: $22FB02
+ SIPtrIntro1M: $22FB04
+ SIPtrIntro1D: $22FB06
+ SIPtrIntro1S: $22FB08
+ SIPtrIntro1N: $22FB0A
+ SIPtrIntro2M: $22FB0C
+ SIPtrIntro2D: $22FB0E
+ SIPtrIntro2S: $22FB10
+ SIPtrIntro2N: $22FB12
+ SIPtrIntro3M: $22FB14
+ SIPtrIntro3D: $22FB16
+ SIPtrIntro3S: $22FB18
+ SIPtrIntro3N: $22FB1A
+ SIPtrIntro4M: $22FB1C
+ SIPtrIntro4D: $22FB1E
+ SIPtrIntro4S: $22FB20
+ SIPtrIntro4N: $22FB22
+ SIPtrIntro5M: $22FB24
+ SIPtrIntro5D: $22FB26
+ SIPtrIntro5S: $22FB28
+ SIPtrIntro5N: $22FB2A
+ SIPtrIntro6M: $22FB2C
+ SIPtrIntro6D: $22FB2E
+ SIPtrIntro6S: $22FB30
+ SIPtrIntro6N: $22FB32
+ SIPtrWorld0M: $22FB34
+ SIPtrWorld0D: $22FB36
+ SIPtrWorld0S: $22FB38
+ SIPtrWorld0N: $22FB3A
+ SIPtrWorld1M: $22FB3C
+ SIPtrWorld1D: $22FB3E
+ SIPtrWorld1S: $22FB40
+ SIPtrWorld1N: $22FB42
+ SIPtrWorld2M: $22FB44
+ SIPtrWorld2D: $22FB46
+ SIPtrWorld2S: $22FB48
+ SIPtrWorld2N: $22FB4A
+ SIPtrWorld3M: $22FB4C
+ SIPtrWorld3D: $22FB4E
+ SIPtrWorld3S: $22FB50
+ SIPtrWorld3N: $22FB52
+ SIPtrWorld4M: $22FB54
+ SIPtrWorld4D: $22FB56
+ SIPtrWorld4S: $22FB58
+ SIPtrWorld4N: $22FB5A
+ SIPtrWorld5M: $22FB5C
+ SIPtrWorld5D: $22FB5E
+ SIPtrWorld5S: $22FB60
+ SIPtrWorld5N: $22FB62
+ SIPtrWorld6M: $22FB64
+ SIPtrWorld6D: $22FB66
+ SIPtrWorld6S: $22FB68
+ SIPtrWorld6N: $22FB6A
+ BBZ12_SolidPtr: $22FB6C
+ BBZ345_SolidPtr: $22FB70
+ SSZ12_SolidPtr: $22FB74
+ SSZ3_SolidPtr: $22FB78
+ SSZ_45_SolidPtr: $22FB7C
+ AAZ12_SolidPtr: $22FB80
+ AAZ34_SolidPtr: $22FB84
+ AAZ5_SolidPtr: $22FB88
+ TTZ12_SolidPtr: $22FB8C
+ TTZ3_SolidPtr: $22FB90
+ TTZ4_SolidPtr: $22FB94
+ TTZ5_SolidPtr: $22FB98
+ TTZB_SolidPtr: $22FB9C
+ MMZ_SolidPtr: $22FBA0
+ Training_SolidPtr: $22FBA4
+ Tutorial_SolidPtr: $22FBA8
+ WorldEnt_SolidPtr: $22FBAC
+ NULL_SolidPtr: $22FBB0
 
-*Segment 029 - Solid_Index: Offset $2320A8  Size $208
- SIPtrBBZ0M: $2320A8
- SIPtrBBZ0D: $2320AA
- SIPtrBBZ0S: $2320AC
- SIPtrBBZ0N: $2320AE
- SIPtrBBZ1M: $2320B0
- SIPtrBBZ1D: $2320B2
- SIPtrBBZ1S: $2320B4
- SIPtrBBZ1N: $2320B6
- SIPtrBBZ2M: $2320B8
- SIPtrBBZ2D: $2320BA
- SIPtrBBZ2S: $2320BC
- SIPtrBBZ2N: $2320BE
- SIPtrBBZ3M: $2320C0
- SIPtrBBZ3D: $2320C2
- SIPtrBBZ3S: $2320C4
- SIPtrBBZ3N: $2320C6
- SIPtrBBZ4M: $2320C8
- SIPtrBBZ4D: $2320CA
- SIPtrBBZ4S: $2320CC
- SIPtrBBZ4N: $2320CE
- SIPtrBBZ5M: $2320D0
- SIPtrBBZ5D: $2320D2
- SIPtrBBZ5S: $2320D4
- SIPtrBBZ5N: $2320D6
- SIPtrBBZ6M: $2320D8
- SIPtrBBZ6D: $2320DA
- SIPtrBBZ6S: $2320DC
- SIPtrBBZ6N: $2320DE
- SIPtrSSZ0M: $2320E0
- SIPtrSSZ0D: $2320E2
- SIPtrSSZ0S: $2320E4
- SIPtrSSZ0N: $2320E6
- SIPtrSSZ1M: $2320E8
- SIPtrSSZ1D: $2320EA
- SIPtrSSZ1S: $2320EC
- SIPtrSSZ1N: $2320EE
- SIPtrSSZ2M: $2320F0
- SIPtrSSZ2D: $2320F2
- SIPtrSSZ2S: $2320F4
- SIPtrSSZ2N: $2320F6
- SIPtrSSZ3M: $2320F8
- SIPtrSSZ3D: $2320FA
- SIPtrSSZ3S: $2320FC
- SIPtrSSZ3N: $2320FE
- SIPtrSSZ4M: $232100
- SIPtrSSZ4D: $232102
- SIPtrSSZ4S: $232104
- SIPtrSSZ4N: $232106
- SIPtrSSZ5M: $232108
- SIPtrSSZ5D: $23210A
- SIPtrSSZ5S: $23210C
- SIPtrSSZ5N: $23210E
- SIPtrSSZ6M: $232110
- SIPtrSSZ6D: $232112
- SIPtrSSZ6S: $232114
- SIPtrSSZ6N: $232116
- SIPtrAAZ0M: $232118
- SIPtrAAZ0D: $23211A
- SIPtrAAZ0S: $23211C
- SIPtrAAZ0N: $23211E
- SIPtrAAZ1M: $232120
- SIPtrAAZ1D: $232122
- SIPtrAAZ1S: $232124
- SIPtrAAZ1N: $232126
- SIPtrAAZ2M: $232128
- SIPtrAAZ2D: $23212A
- SIPtrAAZ2S: $23212C
- SIPtrAAZ2N: $23212E
- SIPtrAAZ3M: $232130
- SIPtrAAZ3D: $232132
- SIPtrAAZ3S: $232134
- SIPtrAAZ3N: $232136
- SIPtrAAZ4M: $232138
- SIPtrAAZ4D: $23213A
- SIPtrAAZ4S: $23213C
- SIPtrAAZ4N: $23213E
- SIPtrAAZ5M: $232140
- SIPtrAAZ5D: $232142
- SIPtrAAZ5S: $232144
- SIPtrAAZ5N: $232146
- SIPtrAAZ6M: $232148
- SIPtrAAZ6D: $23214A
- SIPtrAAZ6S: $23214C
- SIPtrAAZ6N: $23214E
- SIPtrTTZ0M: $232150
- SIPtrTTZ0D: $232152
- SIPtrTTZ0S: $232154
- SIPtrTTZ0N: $232156
- SIPtrTTZ1M: $232158
- SIPtrTTZ1D: $23215A
- SIPtrTTZ1S: $23215C
- SIPtrTTZ1N: $23215E
- SIPtrTTZ2M: $232160
- SIPtrTTZ2D: $232162
- SIPtrTTZ2S: $232164
- SIPtrTTZ2N: $232166
- SIPtrTTZ3M: $232168
- SIPtrTTZ3D: $23216A
- SIPtrTTZ3S: $23216C
- SIPtrTTZ3N: $23216E
- SIPtrTTZ4M: $232170
- SIPtrTTZ4D: $232172
- SIPtrTTZ4S: $232174
- SIPtrTTZ4N: $232176
- SIPtrTTZ5M: $232178
- SIPtrTTZ5D: $23217A
- SIPtrTTZ5S: $23217C
- SIPtrTTZ5N: $23217E
- SIPtrTTZ6M: $232180
- SIPtrTTZ6D: $232182
- SIPtrTTZ6S: $232184
- SIPtrTTZ6N: $232186
- SIPtrMMZ0M: $232188
- SIPtrMMZ0D: $23218A
- SIPtrMMZ0S: $23218C
- SIPtrMMZ0N: $23218E
- SIPtrMMZ1M: $232190
- SIPtrMMZ1D: $232192
- SIPtrMMZ1S: $232194
- SIPtrMMZ1N: $232196
- SIPtrMMZ2M: $232198
- SIPtrMMZ2D: $23219A
- SIPtrMMZ2S: $23219C
- SIPtrMMZ2N: $23219E
- SIPtrMMZ3M: $2321A0
- SIPtrMMZ3D: $2321A2
- SIPtrMMZ3S: $2321A4
- SIPtrMMZ3N: $2321A6
- SIPtrMMZ4M: $2321A8
- SIPtrMMZ4D: $2321AA
- SIPtrMMZ4S: $2321AC
- SIPtrMMZ4N: $2321AE
- SIPtrMMZ5M: $2321B0
- SIPtrMMZ5D: $2321B2
- SIPtrMMZ5S: $2321B4
- SIPtrMMZ5N: $2321B6
- SIPtrMMZ6M: $2321B8
- SIPtrMMZ6D: $2321BA
- SIPtrMMZ6S: $2321BC
- SIPtrMMZ6N: $2321BE
- SIPtrTrain0M: $2321C0
- SIPtrTrain0D: $2321C2
- SIPtrTrain0S: $2321C4
- SIPtrTrain0N: $2321C6
- SIPtrTrain1M: $2321C8
- SIPtrTrain1D: $2321CA
- SIPtrTrain1S: $2321CC
- SIPtrTrain1N: $2321CE
- SIPtrTrain2M: $2321D0
- SIPtrTrain2D: $2321D2
- SIPtrTrain2S: $2321D4
- SIPtrTrain2N: $2321D6
- SIPtrTrain3M: $2321D8
- SIPtrTrain3D: $2321DA
- SIPtrTrain3S: $2321DC
- SIPtrTrain3N: $2321DE
- SIPtrTrain4M: $2321E0
- SIPtrTrain4D: $2321E2
- SIPtrTrain4S: $2321E4
- SIPtrTrain4N: $2321E6
- SIPtrTrain5M: $2321E8
- SIPtrTrain5D: $2321EA
- SIPtrTrain5S: $2321EC
- SIPtrTrain5N: $2321EE
- SIPtrTrain6M: $2321F0
- SIPtrTrain6D: $2321F2
- SIPtrTrain6S: $2321F4
- SIPtrTrain6N: $2321F6
- SIPtrIntro0M: $2321F8
- SIPtrIntro0D: $2321FA
- SIPtrIntro0S: $2321FC
- SIPtrIntro0N: $2321FE
- SIPtrIntro1M: $232200
- SIPtrIntro1D: $232202
- SIPtrIntro1S: $232204
- SIPtrIntro1N: $232206
- SIPtrIntro2M: $232208
- SIPtrIntro2D: $23220A
- SIPtrIntro2S: $23220C
- SIPtrIntro2N: $23220E
- SIPtrIntro3M: $232210
- SIPtrIntro3D: $232212
- SIPtrIntro3S: $232214
- SIPtrIntro3N: $232216
- SIPtrIntro4M: $232218
- SIPtrIntro4D: $23221A
- SIPtrIntro4S: $23221C
- SIPtrIntro4N: $23221E
- SIPtrIntro5M: $232220
- SIPtrIntro5D: $232222
- SIPtrIntro5S: $232224
- SIPtrIntro5N: $232226
- SIPtrIntro6M: $232228
- SIPtrIntro6D: $23222A
- SIPtrIntro6S: $23222C
- SIPtrIntro6N: $23222E
- SIPtrWorld0M: $232230
- SIPtrWorld0D: $232232
- SIPtrWorld0S: $232234
- SIPtrWorld0N: $232236
- SIPtrWorld1M: $232238
- SIPtrWorld1D: $23223A
- SIPtrWorld1S: $23223C
- SIPtrWorld1N: $23223E
- SIPtrWorld2M: $232240
- SIPtrWorld2D: $232242
- SIPtrWorld2S: $232244
- SIPtrWorld2N: $232246
- SIPtrWorld3M: $232248
- SIPtrWorld3D: $23224A
- SIPtrWorld3S: $23224C
- SIPtrWorld3N: $23224E
- SIPtrWorld4M: $232250
- SIPtrWorld4D: $232252
- SIPtrWorld4S: $232254
- SIPtrWorld4N: $232256
- SIPtrWorld5M: $232258
- SIPtrWorld5D: $23225A
- SIPtrWorld5S: $23225C
- SIPtrWorld5N: $23225E
- SIPtrWorld6M: $232260
- SIPtrWorld6D: $232262
- SIPtrWorld6S: $232264
- SIPtrWorld6N: $232266
- BBZ12_SolidPtr: $232268
- BBZ345_SolidPtr: $23226C
- SSZ12_SolidPtr: $232270
- SSZ3_SolidPtr: $232274
- SSZ_45_SolidPtr: $232278
- AAZ12_SolidPtr: $23227C
- AAZ34_SolidPtr: $232280
- AAZ5_SolidPtr: $232284
- TTZ12_SolidPtr: $232288
- TTZ3_SolidPtr: $23228C
- TTZ4_SolidPtr: $232290
- TTZ5_SolidPtr: $232294
- TTZB_SolidPtr: $232298
- MMZ_SolidPtr: $23229C
- Training_SolidPtr: $2322A0
- Tutorial_SolidPtr: $2322A4
- WorldEnt_SolidPtr: $2322A8
- NULL_SolidPtr: $2322AC
+*Segment 045 - Level_Data: Offset $22FBB4  Size $8517C
+ BBZ_FG_Tiles_Pri: $22FBB4
+ BBZ12_FG_Tiles_Sec: $232F36
+ BBZ3_FG_Tiles_Sec: $233DE6
+ BBZ4_FG_Tiles_Sec: $234BD4
+ BBZ5_FG_Tiles_Sec: $235D82
+ BBZ_FG_Blocks_Pri: $236E08
+ BBZ12_FG_Blocks_Sec: $23796A
+ BBZ3_FG_Blocks_Sec: $237A02
+ BBZ4_FG_Blocks_Sec: $237B0A
+ BBZ5_FG_Blocks_Sec: $237D1A
+ BBZ_FG_Chunks_Pri: $237F30
+ BBZ1_FG_Chunks_Sec: $239BC8
+ BBZ2_FG_Chunks_Sec: $239F22
+ BBZ3_FG_Chunks_Sec: $23A72A
+ BBZ4_FG_Chunks_Sec: $23B8C2
+ BBZ5_FG_Chunks_Sec: $23CC22
+ BBZ1_FG_Layout: $23DFF4
+ BBZ2_FG_Layout: $23E262
+ BBZ3_FG_Layout: $23E552
+ BBZ4_FG_Layout: $23E988
+ BBZ5_FG_Layout: $23EDFA
+ BBZ_BG_Tiles_Pri: $23F274
+ BBZ12_BG_Tiles_Sec: $23FB6C
+ BBZ3_BG_Tiles_Sec: $2401FC
+ BBZ4_BG_Tiles_Sec: $240B6C
+ BBZ5_BG_Tiles_Sec: $2412FC
+ BBZ_BG_Blocks_Pri: $241D1C
+ BBZ12_BG_Blocks_Sec: $241E40
+ BBZ3_BG_Blocks_Sec: $241FA6
+ BBZ4_BG_Blocks_Sec: $2421AC
+ BBZ5_BG_Blocks_Sec: $242308
+ BBZ_BG_Chunks_Pri: $2424AC
+ BBZ12_BG_Chunks_Sec: $24262C
+ BBZ3_BG_Chunks_Sec: $242736
+ BBZ4_BG_Chunks_Sec: $24284A
+ BBZ5_BG_Chunks_Sec: $24295A
+ BBZ12_BG_Layout: $242A90
+ BBZ3_BG_Layout: $242AA2
+ BBZ4_BG_Layout: $242AB4
+ BBZ5_BG_Layout: $242AC6
+ SSZ_FG_Tiles_Pri: $242AD8
+ SSZ12_FG_Tiles_Sec: $2456E0
+ SSZ3_FG_Tiles_Sec: $2462D2
+ SSZ45_FG_Tiles_Sec: $2471E6
+ SSZB_FG_Tiles: $2484EE
+ SSZ_FG_Blocks_Pri: $24A054
+ SSZ12_FG_Blocks_Sec: $24AC26
+ SSZ3_FG_Blocks_Sec: $24B00E
+ SSZ45_FG_Blocks_Sec: $24B42E
+ SSZB_FG_Blocks: $24BA6E
+ SSZ_FG_Chunks_Pri: $24BE5C
+ SSZ12_FG_Chunks_Sec: $24ECDC
+ SSZ3_FG_Chunks_Sec: $24FC4A
+ SSZ45_FG_Chunks_Sec: $250DF0
+ SSZB_FG_Chunks: $25289A
+ SSZ1_FG_Layout: $252B54
+ SSZ2_FG_Layout: $252E8A
+ SSZ3_FG_Layout: $253228
+ SSZ4_FG_Layout: $2535EA
+ SSZ5_FG_Layout: $2539F0
+ SSZB_FG_Layout: $253EFC
+ SSZ_BG_Tiles_Pri: $253F0E
+ SSZ12MD_BG_Tiles_Sec: $2548B8
+ SSZ12SN_BG_Tiles_Sec: $255C5C
+ SSZ3MD_BG_Tiles_Sec: $256F68
+ SSZ3SN_BG_Tiles_Sec: $258836
+ SSZ45MD_BG_Tiles_Sec: $25A0D6
+ SSZ45SN_BG_Tiles_Sec: $25B840
+ SSZ_BG_Blocks_Pri: $25CF66
+ SSZ12MD_BG_Blocks_Sec: $25D058
+ SSZ12SN_BG_Blocks_Sec: $25D404
+ SSZ3MD_BG_Blocks_Sec: $25D756
+ SSZ3SN_BG_Blocks_Sec: $25DBFA
+ SSZ45MD_BG_Blocks_Sec: $25E050
+ SSZ45SN_BG_Blocks_Sec: $25E452
+ SSZ_BG_Chunks_Pri: $25E808
+ SSZ12MD_BG_Chunks_Sec: $25E8B6
+ SSZ12SN_BG_Chunks_Sec: $25EDD4
+ SSZ3MD_BG_Chunks_Sec: $25F408
+ SSZ3SN_BG_Chunks_Sec: $25F96A
+ SSZ45MD_BG_Chunks_Sec: $25FFAA
+ SSZ45SN_BG_Chunks_Sec: $2605B4
+ SSZB_BG_Chunks: $260BEE
+ SSZ12MD_BG_Layout: $260C74
+ SSZ12SN_BG_Layout: $260C92
+ SSZ3MD_BG_Layout: $260CB6
+ SSZ3SN_BG_Layout: $260CD4
+ SSZ45MD_BG_Layout: $260CFE
+ SSZ45SN_BG_Layout: $260D1E
+ SSZB_BG_Layout: $260D48
+ AAZ_FG_Tiles_Pri: $260D54
+ AAZ12_FG_Tiles_Sec: $26397E
+ AAZ3_FG_Tiles_Sec: $264198
+ AAZ4_FG_Tiles_Sec: $265484
+ AAZ5_FG_Tiles_Pri: $266862
+ AAZ_FG_Blocks_Pri: $26833C
+ AAZ12_FG_Blocks_Sec: $268D4E
+ AAZ3_FG_Blocks_Sec: $268E40
+ AAZ4_FG_Blocks_Sec: $269054
+ AAZ5_FG_Blocks_Sec: $269278
+ AAZ_FG_Chunks_Pri: $269420
+ AAZ12_FG_Chunks_Sec: $26AD60
+ AAZ3_FG_Chunks_Sec: $26C1EE
+ AAZ4_FG_Chunks_Sec: $26D7DA
+ AAZ5_FG_Chunks_Sec: $26EF16
+ AAZ1_FG_Layout: $2706FE
+ AAZ2_FG_Layout: $270A3A
+ AAZ3_FG_Layout: $270DA8
+ AAZ4_FG_Layout: $27128E
+ AAZ5_FG_Layout: $2715F0
+ AAZ12_BG_Tiles_Pri: $271AF0
+ AAZ12_BG_Tiles_Sec: $2722F2
+ AAZ34_BG_Tiles: $272408
+ AAZ5_BG_Tiles: $2732A6
+ AAZ12_BG_Blocks_Pri: $274114
+ AAZ12_BG_Blocks_Sec: $27446A
+ AAZ34_BG_Blocks: $274488
+ AAZ5_BG_Blocks: $2747DA
+ AAZ12_BG_Chunks_Pri: $274A28
+ AAZ12_BG_Chunks_Sec: $274D78
+ AAZ34_BG_Chunks: $274DCA
+ AAZ5_BG_Chunks: $27519C
+ AAZ12_BG_Layout: $275466
+ AAZ34_BG_Layout: $2754A0
+ AAZ5_BG_Layout: $2754DA
+ TTZ_FG_Tiles_Pri: $275512
+ TTZB_FG_Tiles: $27681E
+ TTZ3_FG_Tiles_Sec: $278524
+ TTZ5_FG_Tiles_Sec: $2785FA
+ TTZB_FG_Tiles: $278ADC
+ TTZ_FG_Blocks_Pri: $27A7E2
+ TTZ3_FG_Blocks_Sec: $27B85E
+ TTZ5_FG_Blocks_Sec: $27B87C
+ TTZB_FG_Blocks: $27B96E
+ TTZ_FG_Chunks_Pri: $27BEEE
+ TTZ1_FG_Chunks_Sec: $27F9D2
+ TTZ2_FG_Chunks_Sec: $27FC06
+ TTZ3_FG_Chunks_Sec: $27FC1E
+ TTZ4_FG_Chunks_Sec: $28013E
+ TTZ5_FG_Chunks_Sec: $280304
+ TTZB_FG_Chunks: $2809AE
+ TTZ1_FG_Layout: $280CEE
+ TTZ2_FG_Layout: $280F3C
+ TTZ3_FG_Layout: $2811DA
+ TTZ4_FG_Layout: $28145E
+ TTZ5_FG_Layout: $28173E
+ TTZB_FG_Layout: $281A3E
+ TTZ_BG_Tiles_Pri: $281A58
+ TTZ12_BG_Tiles_Sec: $282D0E
+ TTZ34_BG_Tiles_Sec: $282D30
+ TTZ5_BG_Tiles_Sec: $283FE2
+ TTZ_BG_Blocks_Pri: $2857AE
+ TTZ12_BG_Blocks_Sec: $286046
+ TTZ34_BG_Blocks_Sec: $28605E
+ TTZ5_BG_Blocks_Sec: $286174
+ TTZ_BG_Chunks_Pri: $28629C
+ TTZ12_BG_Chunks_Sec: $286EF0
+ TTZ34_BG_Chunks_Sec: $286F08
+ TTZ5_BG_Chunks_Sec: $286FD0
+ TTZ1234MDS_BG_Layout: $28711C
+ TTZ1234N_BG_Layout: $287294
+ TTZ5MDS_BG_Layout: $28740C
+ TTZ5N_BG_Layout: $28742A
+ MMZ_Tiles_Pri: $287444
+ MMZ1_Tiles_Sec: $28B3F0
+ MMZ3_Tiles_Sec: $28B51C
+ MMZ4_Tiles_Sec: $28BC32
+ MMZ5_Tiles_Sec: $28CEBA
+ MMZ_Blocks_Pri: $28E992
+ MMZ345_Blocks_Sec: $28F732
+ MMZ45_Blocks_Third: $28F786
+ MMZ1_Blocks_Sec: $28F7DA
+ MMZ3_Blocks_Third: $28F7F2
+ MMZ4_Blocks_Fourth: $28F866
+ MMZ5_Blocks_Fourth: $28FB24
+ MMZ_Chunks_Pri: $28FDC0
+ MMZ1_Chunks_Sec: $291B76
+ MMZ2_Chunks_Sec: $291DD0
+ MMZ3_Chunks_Sec: $291E12
+ MMZ4_Chunks_Sec: $2923B8
+ MMZ5_Chunks_Sec: $292A9E
+ MMZ1_FG_Layout: $2934D8
+ MMZ2_FG_Layout: $2936A4
+ MMZ3_FG_Layout: $293880
+ MMZ4_FG_Layout: $293A1C
+ MMZ5_FG_Layout: $293BF4
+ MMZ1_BG_Layout: $293DEC
+ MMZ2_BG_Layout: $293EE2
+ MMZ3_BG_Layout: $293FF4
+ MMZ4_BG_Layout: $294106
+ MMZ5_BG_Layout: $2941FC
+ Trainig_Tiles_Pri: $2942B8
+ Training_Tiles_Sec: $2963F8
+ Training_Blocks: $2984FE
+ Training_Chunks: $2996DC
+ Training1_FG_Layout: $29E14C
+ Training2_FG_Layout: $29E54A
+ Training3_FG_Layout: $29E970
+ Training4_FG_Layout: $29EA6E
+ Training_BG_Layout: $29EDA0
+ Intro01_FG_Layout: $29EDB4
+ Intro2_FG_Layout: $29EF48
+ Intro3_FG_Layout: $29F07C
+ Intro4_FG_Layout: $29F18A
+ Tutorial_FG_Tiles_Pri: $29F278
+ Tutorial_FG_Tiles_Sec: $29F830
+ Tutorial_BG_Tiles: $29FD86
+ Tutorial_FG_Blocks: $2A012A
+ Tutorial_BG_Blocks: $2A04E6
+ Tutorial_FG_Chunks: $2A0540
+ Tutorial_BG_Chunks: $2A14B4
+ Tutorial1_FG_Layout: $2A14EE
+ Tutorial2_FG_Layout: $2A1502
+ Tutorial3_FG_Layout: $2A1524
+ Tutorial45_FG_Layout: $2A1560
+ Tutorial67_FG_Layout: $2A1584
+ Tutorial_BG_Layout: $2A1598
+ WorldEnt_FG_Tiles: $2A15A4
+ WorldEnt_FG_Blocks: $2A44B0
+ WorldEnt_FG_Chunks: $2A510C
+ WorldEnt_FG_Layout: $2A5E20
+ WorldEnt_BG_Tiles: $2A5E82
+ WorldEnt_BG_Blocks: $2A7B84
+ WorldEnt_BG_Chunks: $2A8112
+ WorldEnt_BG_Layout: $2A83C6
+ FinalBoss_Tiles: $2A83E6
+ FinalBoss_Blocks: $2ABDA8
+ FinalBoss_Chunks: $2AC3B8
+ FinalBoss_FG_Layout: $2AC6F6
+ FinalBoss_BG_Layout: $2AC71E
+ BBZ12_Solids: $2AC730
+ BBZ345_Solids: $2ACF30
+ SSZ12_Solids: $2AD730
+ SSZ3_Solids: $2ADF30
+ SSZ45_Solids: $2AE730
+ SSZB_Solids: $2AEF30
+ AAZ12_Solids: $2AF730
+ AAZ34_Solids: $2AFF30
+ AAZ5_Solids: $2B0730
+ TTZ124_Solids: $2B0F30
+ TTZ3_Solids: $2B1530
+ TTZ5_Solids: $2B1D30
+ TTZB_Solids: $2B2530
+ MMZ_Solids: $2B2D30
+ Training_Solids: $2B3530
+ Training56_Solids: $2B3D30
+ WorldEnt_Solids: $2B4530
 
-*Segment 02A - Level_Data: Offset $300000  Size $8C736
- BBZ_FG_Tiles_Pri: $300000
- BBZ12_FG_Tiles_Sec: $3032D8
- BBZ3_FG_Tiles_Sec: $304162
- BBZ4_FG_Tiles_Sec: $304F50
- BBZ5_FG_Tiles_Sec: $3060FE
- BBZ_FG_Blocks_Pri: $307184
- BBZ12_FG_Blocks_Sec: $30806A
- BBZ3_FG_Blocks_Sec: $30813C
- BBZ4_FG_Blocks_Sec: $308244
- BBZ5_FG_Blocks_Sec: $308454
- BBZ_FG_Chunks_Pri: $30866A
- BBZ1_FG_Chunks_Sec: $30A208
- BBZ2_FG_Chunks_Sec: $30A5D0
- BBZ3_FG_Chunks_Sec: $30ADD8
- BBZ4_FG_Chunks_Sec: $30BF70
- BBZ5_FG_Chunks_Sec: $30D2D0
- BBZ1_FG_Layout: $30E6A2
- BBZ2_FG_Layout: $30F21E
- BBZ3_FG_Layout: $30F50E
- BBZ4_FG_Layout: $30F944
- BBZ5_FG_Layout: $30FDB6
- BBZ_BG_Tiles_Pri: $310230
- BBZ12_BG_Tiles_Sec: $310B16
- BBZ3_BG_Tiles_Sec: $311198
- BBZ4_BG_Tiles_Sec: $311B08
- BBZ5_BG_Tiles_Sec: $312298
- BBZ_BG_Blocks_Pri: $312CB8
- BBZ12_BG_Blocks_Sec: $312E1C
- BBZ3_BG_Blocks_Sec: $312FDA
- BBZ4_BG_Blocks_Sec: $3131E0
- BBZ5_BG_Blocks_Sec: $31333C
- BBZ_BG_Chunks_Pri: $3134E0
- BBZ12_BG_Chunks_Sec: $31373E
- BBZ3_BG_Chunks_Sec: $3138DE
- BBZ4_BG_Chunks_Sec: $3139F2
- BBZ5_BG_Chunks_Sec: $313B02
- BBZ12_BG_Layout: $313C38
- BBZ3_BG_Layout: $313C6C
- BBZ4_BG_Layout: $313C7E
- BBZ5_BG_Layout: $313C90
- SSZ_FG_Tiles_Pri: $313CA2
- SSZ12_FG_Tiles_Sec: $3171F8
- SSZ3_FG_Tiles_Sec: $317DEA
- SSZ45_FG_Tiles_Sec: $318CFE
- SSZB_FG_Tiles: $31A006
- SSZ_FG_Blocks_Pri: $31BB6C
- SSZ12_FG_Blocks_Sec: $31D390
- SSZ3_FG_Blocks_Sec: $31D778
- SSZ45_FG_Blocks_Sec: $31DB98
- SSZB_FG_Blocks: $31E1D8
- SSZ_FG_Chunks_Pri: $31E5C6
- SSZ12_FG_Chunks_Sec: $323A40
- SSZ3_FG_Chunks_Sec: $3249AE
- SSZ45_FG_Chunks_Sec: $325B54
- SSZB_FG_Chunks: $3275FE
- SSZ1_FG_Layout: $3278B8
- SSZ2_FG_Layout: $328FBA
- SSZ3_FG_Layout: $329358
- SSZ4_FG_Layout: $32971A
- SSZ5_FG_Layout: $329B20
- SSZB_FG_Layout: $32A02C
- SSZ_BG_Tiles_Pri: $32A03E
- SSZ12MD_BG_Tiles_Sec: $32AB06
- SSZ12SN_BG_Tiles_Sec: $32BEAA
- SSZ3MD_BG_Tiles_Sec: $32D1B6
- SSZ3SN_BG_Tiles_Sec: $32EA84
- SSZ45MD_BG_Tiles_Sec: $330324
- SSZ45SN_BG_Tiles_Sec: $331A8E
- SSZ_BG_Blocks_Pri: $3331B4
- SSZ12MD_BG_Blocks_Sec: $333318
- SSZ12SN_BG_Blocks_Sec: $3336C4
- SSZ3MD_BG_Blocks_Sec: $333A16
- SSZ3SN_BG_Blocks_Sec: $333EBA
- SSZ45MD_BG_Blocks_Sec: $334310
- SSZ45SN_BG_Blocks_Sec: $334712
- SSZ_BG_Chunks_Pri: $334AC8
- SSZ12MD_BG_Chunks_Sec: $334C80
- SSZ12SN_BG_Chunks_Sec: $33519E
- SSZ3MD_BG_Chunks_Sec: $3357D2
- SSZ3SN_BG_Chunks_Sec: $335D34
- SSZ45MD_BG_Chunks_Sec: $336374
- SSZ45SN_BG_Chunks_Sec: $33697E
- SSZB_BG_Chunks: $336FB8
- SSZ12MD_BG_Layout: $33703E
- SSZ12SN_BG_Layout: $337062
- SSZ3MD_BG_Layout: $337086
- SSZ3SN_BG_Layout: $3370A4
- SSZ45MD_BG_Layout: $3370CE
- SSZ45SN_BG_Layout: $3370EE
- SSZB_BG_Layout: $337118
- AAZ_FG_Tiles_Pri: $337124
- AAZ12_FG_Tiles_Sec: $339D4E
- AAZ3_FG_Tiles_Sec: $33A568
- AAZ4_FG_Tiles_Sec: $33B854
- AAZ5_FG_Tiles_Pri: $33CC32
- AAZ_FG_Blocks_Pri: $33E70C
- AAZ12_FG_Blocks_Sec: $33F11E
- AAZ3_FG_Blocks_Sec: $33F210
- AAZ4_FG_Blocks_Sec: $33F424
- AAZ5_FG_Blocks_Sec: $33F648
- AAZ_FG_Chunks_Pri: $33F7F0
- AAZ12_FG_Chunks_Sec: $341130
- AAZ3_FG_Chunks_Sec: $3425BE
- AAZ4_FG_Chunks_Sec: $343BAA
- AAZ5_FG_Chunks_Sec: $3452E6
- AAZ1_FG_Layout: $346ACE
- AAZ2_FG_Layout: $346E0A
- AAZ3_FG_Layout: $347178
- AAZ4_FG_Layout: $34765E
- AAZ5_FG_Layout: $3479C0
- AAZ12_BG_Tiles_Pri: $347EC0
- AAZ12_BG_Tiles_Sec: $3486C2
- AAZ34_BG_Tiles: $3487D8
- AAZ5_BG_Tiles: $349676
- AAZ12_BG_Blocks_Pri: $34A4E4
- AAZ12_BG_Blocks_Sec: $34A83A
- AAZ34_BG_Blocks: $34A858
- AAZ5_BG_Blocks: $34ABAA
- AAZ12_BG_Chunks_Pri: $34ADF8
- AAZ12_BG_Chunks_Sec: $34B148
- AAZ34_BG_Chunks: $34B19A
- AAZ5_BG_Chunks: $34B56C
- AAZ12_BG_Layout: $34B836
- AAZ34_BG_Layout: $34B870
- AAZ5_BG_Layout: $34B8AA
- TTZ_FG_Tiles_Pri: $34B8E2
- TTZB_FG_Tiles: $34CBEE
- TTZ3_FG_Tiles_Sec: $34E8F4
- TTZ5_FG_Tiles_Sec: $34E9CA
- TTZB_FG_Tiles: $34EEAC
- TTZ_FG_Blocks_Pri: $350BB2
- TTZ3_FG_Blocks_Sec: $351C2E
- TTZ5_FG_Blocks_Sec: $351C4C
- TTZB_FG_Blocks: $351D3E
- TTZ_FG_Chunks_Pri: $3522BE
- TTZ1_FG_Chunks_Sec: $355DB8
- TTZ2_FG_Chunks_Sec: $355FEC
- TTZ3_FG_Chunks_Sec: $356004
- TTZ4_FG_Chunks_Sec: $356524
- TTZ5_FG_Chunks_Sec: $3566EA
- TTZB_FG_Chunks: $356D94
- TTZ1_FG_Layout: $3570D4
- TTZ2_FG_Layout: $357322
- TTZ3_FG_Layout: $357574
- TTZ4_FG_Layout: $3577F8
- TTZ5_FG_Layout: $357AD8
- TTZB_FG_Layout: $357DD8
- TTZ_BG_Tiles_Pri: $357DF2
- TTZ12_BG_Tiles_Sec: $3590A8
- TTZ34_BG_Tiles_Sec: $3590CA
- TTZ5_BG_Tiles_Sec: $35A37C
- TTZ_BG_Blocks_Pri: $35BB48
- TTZ12_BG_Blocks_Sec: $35C3E0
- TTZ34_BG_Blocks_Sec: $35C3F8
- TTZ5_BG_Blocks_Sec: $35C50E
- TTZ_BG_Chunks_Pri: $35C636
- TTZ12_BG_Chunks_Sec: $35D28A
- TTZ34_BG_Chunks_Sec: $35D2A2
- TTZ5_BG_Chunks_Sec: $35D36A
- TTZ1234MDS_BG_Layout: $35D4B6
- TTZ1234N_BG_Layout: $35D62E
- TTZ5MDS_BG_Layout: $35D7A6
- TTZ5N_BG_Layout: $35D7C4
- MMZ_Tiles_Pri: $35D7DE
- MMZ1_Tiles_Sec: $36161C
- MMZ3_Tiles_Sec: $36174A
- MMZ4_Tiles_Sec: $361E60
- MMZ5_Tiles_Sec: $3630E8
- MMZ_Blocks_Pri: $364BC0
- MMZ345_Blocks_Sec: $365DC2
- MMZ45_Blocks_Third: $365E16
- MMZ1_Blocks_Sec: $365E6A
- MMZ3_Blocks_Third: $365E82
- MMZ4_Blocks_Fourth: $365EF6
- MMZ5_Blocks_Fourth: $3661B4
- MMZ_Chunks_Pri: $366450
- MMZ1_Chunks_Sec: $36933A
- MMZ2_Chunks_Sec: $369872
- MMZ3_Chunks_Sec: $3698B4
- MMZ4_Chunks_Sec: $369E5A
- MMZ5_Chunks_Sec: $36A540
- MMZ1_FG_Layout: $36AF7A
- MMZ2_FG_Layout: $36B1DA
- MMZ3_FG_Layout: $36B3B6
- MMZ4_FG_Layout: $36B552
- MMZ5_FG_Layout: $36B72A
- MMZ1_BG_Layout: $36B922
- MMZ2_BG_Layout: $36BEE8
- MMZ3_BG_Layout: $36BFFA
- MMZ4_BG_Layout: $36C10C
- MMZ5_BG_Layout: $36C202
- Trainig_Tiles_Pri: $36C2BE
- Training_Tiles_Sec: $36E3FE
- Training_Blocks: $370504
- Training_Chunks: $3716E2
- Training1_FG_Layout: $376152
- Training2_FG_Layout: $376550
- Training3_FG_Layout: $376976
- Training4_FG_Layout: $376A74
- Training_BG_Layout: $376DA6
- Intro01_FG_Layout: $376DBA
- Intro2_FG_Layout: $376F4E
- Intro3_FG_Layout: $377082
- Intro4_FG_Layout: $377190
- Tutorial_FG_Tiles_Pri: $37727E
- Tutorial_FG_Tiles_Sec: $377836
- Tutorial_BG_Tiles: $377D8C
- Tutorial_FG_Blocks: $378130
- Tutorial_BG_Blocks: $3784EC
- Tutorial_FG_Chunks: $378546
- Tutorial_BG_Chunks: $3794BA
- Tutorial1_FG_Layout: $3794F4
- Tutorial2_FG_Layout: $379508
- Tutorial3_FG_Layout: $37952A
- Tutorial45_FG_Layout: $379566
- Tutorial67_FG_Layout: $37958A
- Tutorial_BG_Layout: $37959E
- WorldEnt_FG_Tiles: $3795AA
- WorldEnt_FG_Blocks: $37C4B6
- WorldEnt_FG_Chunks: $37D112
- WorldEnt_FG_Layout: $37DE26
- WorldEnt_BG_Tiles: $37DE88
- WorldEnt_BG_Blocks: $37FB8A
- WorldEnt_BG_Chunks: $380118
- WorldEnt_BG_Layout: $3803CC
- FinalBoss_Tiles: $3803EC
- FinalBoss_Blocks: $383DAE
- FinalBoss_Chunks: $3843BE
- FinalBoss_FG_Layout: $3846FC
- FinalBoss_BG_Layout: $384724
- BBZ12_Solids: $384736
- BBZ345_Solids: $384D36
- SSZ12_Solids: $385536
- SSZ3_Solids: $385B36
- SSZ45_Solids: $386336
- SSZB_Solids: $386B36
- AAZ12_Solids: $387336
- AAZ34_Solids: $387B36
- AAZ5_Solids: $388336
- TTZ124_Solids: $388B36
- TTZ3_Solids: $389136
- TTZ5_Solids: $389936
- TTZB_Solids: $38A136
- MMZ_Solids: $38A936
- Training_Solids: $38AF36
- Training56_Solids: $38B736
- WorldEnt_Solids: $38BF36
+*Segment 046 - LevSize_Data: Offset $2B4D30  Size $740
+ LSPtrLst_BBZ0M: $2B4D30
+ LSPtrLst_BBZ0D: $2B4D32
+ LSPtrLst_BBZ0S: $2B4D34
+ LSPtrLst_BBZ0N: $2B4D36
+ LSPtrLst_BBZ1M: $2B4D38
+ LSPtrLst_BBZ1D: $2B4D3A
+ LSPtrLst_BBZ1S: $2B4D3C
+ LSPtrLst_BBZ1N: $2B4D3E
+ LSPtrLst_BBZ2M: $2B4D40
+ LSPtrLst_BBZ2D: $2B4D42
+ LSPtrLst_BBZ2S: $2B4D44
+ LSPtrLst_BBZ2N: $2B4D46
+ LSPtrLst_BBZ3M: $2B4D48
+ LSPtrLst_BBZ3D: $2B4D4A
+ LSPtrLst_BBZ3S: $2B4D4C
+ LSPtrLst_BBZ3N: $2B4D4E
+ LSPtrLst_BBZ4M: $2B4D50
+ LSPtrLst_BBZ4D: $2B4D52
+ LSPtrLst_BBZ4S: $2B4D54
+ LSPtrLst_BBZ4N: $2B4D56
+ LSPtrLst_BBZ5M: $2B4D58
+ LSPtrLst_BBZ5D: $2B4D5A
+ LSPtrLst_BBZ5S: $2B4D5C
+ LSPtrLst_BBZ5N: $2B4D5E
+ LSPtrLst_BBZ6M: $2B4D60
+ LSPtrLst_BBZ6D: $2B4D62
+ LSPtrLst_BBZ6S: $2B4D64
+ LSPtrLst_BBZ6N: $2B4D66
+ LSPtrLst_SSZ0M: $2B4D68
+ LSPtrLst_SSZ0D: $2B4D6A
+ LSPtrLst_SSZ0S: $2B4D6C
+ LSPtrLst_SSZ0N: $2B4D6E
+ LSPtrLst_SSZ1M: $2B4D70
+ LSPtrLst_SSZ1D: $2B4D72
+ LSPtrLst_SSZ1S: $2B4D74
+ LSPtrLst_SSZ1N: $2B4D76
+ LSPtrLst_SSZ2M: $2B4D78
+ LSPtrLst_SSZ2D: $2B4D7A
+ LSPtrLst_SSZ2S: $2B4D7C
+ LSPtrLst_SSZ2N: $2B4D7E
+ LSPtrLst_SSZ3M: $2B4D80
+ LSPtrLst_SSZ3D: $2B4D82
+ LSPtrLst_SSZ3S: $2B4D84
+ LSPtrLst_SSZ3N: $2B4D86
+ LSPtrLst_SSZ4M: $2B4D88
+ LSPtrLst_SSZ4D: $2B4D8A
+ LSPtrLst_SSZ4S: $2B4D8C
+ LSPtrLst_SSZ4N: $2B4D8E
+ LSPtrLst_SSZ5M: $2B4D90
+ LSPtrLst_SSZ5D: $2B4D92
+ LSPtrLst_SSZ5S: $2B4D94
+ LSPtrLst_SSZ5N: $2B4D96
+ LSPtrLst_SSZ6M: $2B4D98
+ LSPtrLst_SSZ6D: $2B4D9A
+ LSPtrLst_SSZ6S: $2B4D9C
+ LSPtrLst_SSZ6N: $2B4D9E
+ LSPtrLst_AAZ0M: $2B4DA0
+ LSPtrLst_AAZ0D: $2B4DA2
+ LSPtrLst_AAZ0S: $2B4DA4
+ LSPtrLst_AAZ0N: $2B4DA6
+ LSPtrLst_AAZ1M: $2B4DA8
+ LSPtrLst_AAZ1D: $2B4DAA
+ LSPtrLst_AAZ1S: $2B4DAC
+ LSPtrLst_AAZ1N: $2B4DAE
+ LSPtrLst_AAZ2M: $2B4DB0
+ LSPtrLst_AAZ2D: $2B4DB2
+ LSPtrLst_AAZ2S: $2B4DB4
+ LSPtrLst_AAZ2N: $2B4DB6
+ LSPtrLst_AAZ3M: $2B4DB8
+ LSPtrLst_AAZ3D: $2B4DBA
+ LSPtrLst_AAZ3S: $2B4DBC
+ LSPtrLst_AAZ3N: $2B4DBE
+ LSPtrLst_AAZ4M: $2B4DC0
+ LSPtrLst_AAZ4D: $2B4DC2
+ LSPtrLst_AAZ4S: $2B4DC4
+ LSPtrLst_AAZ4N: $2B4DC6
+ LSPtrLst_AAZ5M: $2B4DC8
+ LSPtrLst_AAZ5D: $2B4DCA
+ LSPtrLst_AAZ5S: $2B4DCC
+ LSPtrLst_AAZ5N: $2B4DCE
+ LSPtrLst_AAZ6M: $2B4DD0
+ LSPtrLst_AAZ6D: $2B4DD2
+ LSPtrLst_AAZ6S: $2B4DD4
+ LSPtrLst_AAZ6N: $2B4DD6
+ LSPtrLst_TTZ0M: $2B4DD8
+ LSPtrLst_TTZ0D: $2B4DDA
+ LSPtrLst_TTZ0S: $2B4DDC
+ LSPtrLst_TTZ0N: $2B4DDE
+ LSPtrLst_TTZ1M: $2B4DE0
+ LSPtrLst_TTZ1D: $2B4DE2
+ LSPtrLst_TTZ1S: $2B4DE4
+ LSPtrLst_TTZ1N: $2B4DE6
+ LSPtrLst_TTZ2M: $2B4DE8
+ LSPtrLst_TTZ2D: $2B4DEA
+ LSPtrLst_TTZ2S: $2B4DEC
+ LSPtrLst_TTZ2N: $2B4DEE
+ LSPtrLst_TTZ3M: $2B4DF0
+ LSPtrLst_TTZ3D: $2B4DF2
+ LSPtrLst_TTZ3S: $2B4DF4
+ LSPtrLst_TTZ3N: $2B4DF6
+ LSPtrLst_TTZ4M: $2B4DF8
+ LSPtrLst_TTZ4D: $2B4DFA
+ LSPtrLst_TTZ4S: $2B4DFC
+ LSPtrLst_TTZ4N: $2B4DFE
+ LSPtrLst_TTZ5M: $2B4E00
+ LSPtrLst_TTZ5D: $2B4E02
+ LSPtrLst_TTZ5S: $2B4E04
+ LSPtrLst_TTZ5N: $2B4E06
+ LSPtrLst_TTZ6M: $2B4E08
+ LSPtrLst_TTZ6D: $2B4E0A
+ LSPtrLst_TTZ6S: $2B4E0C
+ LSPtrLst_TTZ6N: $2B4E0E
+ LSPtrLst_MMZ0M: $2B4E10
+ LSPtrLst_MMZ0D: $2B4E12
+ LSPtrLst_MMZ0S: $2B4E14
+ LSPtrLst_MMZ0N: $2B4E16
+ LSPtrLst_MMZ1M: $2B4E18
+ LSPtrLst_MMZ1D: $2B4E1A
+ LSPtrLst_MMZ1S: $2B4E1C
+ LSPtrLst_MMZ1N: $2B4E1E
+ LSPtrLst_MMZ2M: $2B4E20
+ LSPtrLst_MMZ2D: $2B4E22
+ LSPtrLst_MMZ2S: $2B4E24
+ LSPtrLst_MMZ2N: $2B4E26
+ LSPtrLst_MMZ3M: $2B4E28
+ LSPtrLst_MMZ3D: $2B4E2A
+ LSPtrLst_MMZ3S: $2B4E2C
+ LSPtrLst_MMZ3N: $2B4E2E
+ LSPtrLst_MMZ4M: $2B4E30
+ LSPtrLst_MMZ4D: $2B4E32
+ LSPtrLst_MMZ4S: $2B4E34
+ LSPtrLst_MMZ4N: $2B4E36
+ LSPtrLst_MMZ5M: $2B4E38
+ LSPtrLst_MMZ5D: $2B4E3A
+ LSPtrLst_MMZ5S: $2B4E3C
+ LSPtrLst_MMZ5N: $2B4E3E
+ LSPtrLst_MMZ6M: $2B4E40
+ LSPtrLst_MMZ6D: $2B4E42
+ LSPtrLst_MMZ6S: $2B4E44
+ LSPtrLst_MMZ6N: $2B4E46
+ LSPtrLst_Train0M: $2B4E48
+ LSPtrLst_Train0D: $2B4E4A
+ LSPtrLst_Train0S: $2B4E4C
+ LSPtrLst_Train0N: $2B4E4E
+ LSPtrLst_Train1M: $2B4E50
+ LSPtrLst_Train1D: $2B4E52
+ LSPtrLst_Train1S: $2B4E54
+ LSPtrLst_Train1N: $2B4E56
+ LSPtrLst_Train2M: $2B4E58
+ LSPtrLst_Train2D: $2B4E5A
+ LSPtrLst_Train2S: $2B4E5C
+ LSPtrLst_Train2N: $2B4E5E
+ LSPtrLst_Train3M: $2B4E60
+ LSPtrLst_Train3D: $2B4E62
+ LSPtrLst_Train3S: $2B4E64
+ LSPtrLst_Train3N: $2B4E66
+ LSPtrLst_Train4M: $2B4E68
+ LSPtrLst_Train4D: $2B4E6A
+ LSPtrLst_Train4S: $2B4E6C
+ LSPtrLst_Train4N: $2B4E6E
+ LSPtrLst_Train5M: $2B4E70
+ LSPtrLst_Train5D: $2B4E72
+ LSPtrLst_Train5S: $2B4E74
+ LSPtrLst_Train5N: $2B4E76
+ LSPtrLst_Train6M: $2B4E78
+ LSPtrLst_Train6D: $2B4E7A
+ LSPtrLst_Train6S: $2B4E7C
+ LSPtrLst_Train6N: $2B4E7E
+ LSPtrLst_Intro0M: $2B4E80
+ LSPtrLst_Intro0D: $2B4E82
+ LSPtrLst_Intro0S: $2B4E84
+ LSPtrLst_Intro0N: $2B4E86
+ LSPtrLst_Intro1M: $2B4E88
+ LSPtrLst_Intro1D: $2B4E8A
+ LSPtrLst_Intro1S: $2B4E8C
+ LSPtrLst_Intro1N: $2B4E8E
+ LSPtrLst_Intro2M: $2B4E90
+ LSPtrLst_Intro2D: $2B4E92
+ LSPtrLst_Intro2S: $2B4E94
+ LSPtrLst_Intro2N: $2B4E96
+ LSPtrLst_Intro3M: $2B4E98
+ LSPtrLst_Intro3D: $2B4E9A
+ LSPtrLst_Intro3S: $2B4E9C
+ LSPtrLst_Intro3N: $2B4E9E
+ LSPtrLst_Intro4M: $2B4EA0
+ LSPtrLst_Intro4D: $2B4EA2
+ LSPtrLst_Intro4S: $2B4EA4
+ LSPtrLst_Intro4N: $2B4EA6
+ LSPtrLst_Intro5M: $2B4EA8
+ LSPtrLst_Intro5D: $2B4EAA
+ LSPtrLst_Intro5S: $2B4EAC
+ LSPtrLst_Intro5N: $2B4EAE
+ LSPtrLst_Intro6M: $2B4EB0
+ LSPtrLst_Intro6D: $2B4EB2
+ LSPtrLst_Intro6S: $2B4EB4
+ LSPtrLst_Intro6N: $2B4EB6
+ LSPtrLst_World0M: $2B4EB8
+ LSPtrLst_World0D: $2B4EBA
+ LSPtrLst_World0S: $2B4EBC
+ LSPtrLst_World0N: $2B4EBE
+ LSPtrLst_World1M: $2B4EC0
+ LSPtrLst_World1D: $2B4EC2
+ LSPtrLst_World1S: $2B4EC4
+ LSPtrLst_World1N: $2B4EC6
+ LSPtrLst_World2M: $2B4EC8
+ LSPtrLst_World2D: $2B4ECA
+ LSPtrLst_World2S: $2B4ECC
+ LSPtrLst_World2N: $2B4ECE
+ LSPtrLst_World3M: $2B4ED0
+ LSPtrLst_World3D: $2B4ED2
+ LSPtrLst_World3S: $2B4ED4
+ LSPtrLst_World3N: $2B4ED6
+ LSPtrLst_World4M: $2B4ED8
+ LSPtrLst_World4D: $2B4EDA
+ LSPtrLst_World4S: $2B4EDC
+ LSPtrLst_World4N: $2B4EDE
+ LSPtrLst_World5M: $2B4EE0
+ LSPtrLst_World5D: $2B4EE2
+ LSPtrLst_World5S: $2B4EE4
+ LSPtrLst_World5N: $2B4EE6
+ LSPtrLst_World6M: $2B4EE8
+ LSPtrLst_World6D: $2B4EEA
+ LSPtrLst_World6S: $2B4EEC
+ LSPtrLst_World6N: $2B4EEE
+ LSPtr_BBZ01MN: $2B4EF0
+ LSPtr_BBZ2MN: $2B4EFC
+ LSPtr_BBZ3MN: $2B4F08
+ LSPtr_BBZ4MN: $2B4F14
+ LSPtr_BBZ56MN: $2B4F20
+ LSPtr_SSZ01MD: $2B4F2C
+ LSPtr_SSZ2MD: $2B4F38
+ LSPtr_SSZ01SN: $2B4F44
+ LSPtr_SSZ2SN: $2B4F50
+ LSPtr_SSZ3MD: $2B4F5C
+ LSPtr_SSZ4MD: $2B4F68
+ LSPtr_SSZ3SN: $2B4F74
+ LSPtr_SSZ4SN: $2B4F80
+ LSPtr_SSZ5MD: $2B4F8C
+ LSPtr_SSZ5SN: $2B4F98
+ LSPtr_AAZ01MN: $2B4FA4
+ LSPtr_AAZ2MN: $2B4FB0
+ LSPtr_AAZ3MN: $2B4FBC
+ LSPtr_AAZ4MN: $2B4FC8
+ LSPtr_AAZ56MN: $2B4FD4
+ LSPtr_TTZ06MN: $2B4FE0
+ LSPtr_MMZ01MN: $2B4FEC
+ LSPtr_MMZ2MN: $2B4FF8
+ LSPtr_MMZ3MN: $2B5004
+ LSPtr_MMZ4MN: $2B5010
+ LSPtr_MMZ56MN: $2B501C
+ LSPtr_Train01MN: $2B5028
+ LSPtr_Train2MN: $2B5034
+ LSPtr_Train3MN: $2B5040
+ LSPtr_Train4MN: $2B504C
+ LSPtr_Train56MN: $2B5058
+ LSPtr_Intro0MN: $2B505C
+ LSPtr_Intro1MN: $2B5068
+ LSPtr_Intro2MN: $2B5074
+ LSPtr_Intro3MN: $2B5080
+ LSPtr_Intro4MN: $2B508C
+ LSPtr_Intro5M: $2B5098
+ LSPtr_Intro5D: $2B50A4
+ LSPtr_Intro5S: $2B50B0
+ LSPtr_Intro5N: $2B50BC
+ LSPtr_Intro6M: $2B50C8
+ LSPtr_Intro6D: $2B50D4
+ LSPtr_Intro6S: $2B50E0
+ LSPtr_Intro6N: $2B50EC
+ LSPtr_World01MN: $2B50F0
+ LSPtr_World2M: $2B50FC
+ LSPtr_World26MN: $2B5108
+ LS_FG_BBZ01MN: $2B510C
+ LS_BG_BBZ01MN: $2B511A
+ LS_FG_BBZ2MN: $2B5128
+ LS_BG_BBZ2MN: $2B5136
+ LS_FG_BBZ4MN: $2B5144
+ LS_BG_BBZ4MN: $2B5152
+ LS_FG_BBZ356MN: $2B5160
+ LS_BG_BBZ356MN: $2B516E
+ LS_FG_SSZ01MN: $2B517C
+ LS_FG_SSZ2MN: $2B518A
+ LS_FG_SSZ3MN: $2B5198
+ LS_FG_SSZ4MN: $2B51A6
+ LS_FG_SSZ5MN: $2B51B4
+ LS_BG_SSZ02MD: $2B51C2
+ LS_BG_SSZ02SN: $2B51D0
+ LS_BG_SSZ35MD: $2B51DE
+ LS_BG_SSZ35SN: $2B51EC
+ LS_FG_AAZ01MN: $2B51FA
+ LS_BG_AAZ01MN: $2B5208
+ LS_FG_AAZ2MN: $2B5216
+ LS_BG_AAZ2MN: $2B5224
+ LS_FG_AAZ3MN: $2B5232
+ LS_BG_AAZ34MN: $2B5240
+ LS_FG_AAZ4MN: $2B524E
+ LS_FG_AAZ56MN: $2B525C
+ LS_BG_AAZ56MN: $2B526A
+ LS_FG_TTZ06MN: $2B5278
+ LS_BG_TTZ06MN: $2B5286
+ LS_FG_MMZ01MN: $2B5294
+ LS_BG_MMZ01MN: $2B52A2
+ LS_FGBG_MMZ2MN: $2B52B0
+ LS_FGBG_MMZ3MN: $2B52BE
+ LS_FGBG_MMZ4MN: $2B52CC
+ LS_FGBG_MMZ56MN: $2B52DA
+ LS_FG_Train01MN: $2B52E8
+ LS_BG_Train01MN: $2B52F6
+ LS_FG_Train2MN: $2B5304
+ LS_BG_Train2MN: $2B5312
+ LS_FG_Train3MN: $2B5320
+ LS_BG_Train3MN: $2B532E
+ LS_FG_Train4MN: $2B533C
+ LS_BG_Train4MN: $2B534A
+ LS_FG_Intro0MN: $2B5358
+ LS_FG_Intro1MN: $2B5366
+ LS_FG_Intro2MN: $2B5374
+ LS_FG_Intro3MN: $2B5382
+ LS_FG_Intro4MN: $2B5390
+ LS_BG_Intro01MN: $2B539E
+ LS_BG_Intro2MN: $2B53AC
+ LS_BG_Intro3MN: $2B53BA
+ LS_BG_Intro4MN: $2B53C8
+ LS_FG_Intro5M: $2B53D6
+ LS_FG_Intro5D: $2B53E4
+ LS_FG_Intro4S: $2B53F2
+ LS_FG_Intro5N: $2B5400
+ LS_FG_Intro6M: $2B540E
+ LS_FG_Intro6S: $2B541C
+ LS_BG_Intro5MN: $2B542A
+ LS_FG_World01MN: $2B5438
+ LS_BG_World01MN: $2B5446
+ LS_FG_World2M: $2B5454
+ LS_BG_World2M: $2B5462
 
-*Segment 02B - LevSize_Data: Offset $2322B0  Size $740
- LSPtrLst_BBZ0M: $2322B0
- LSPtrLst_BBZ0D: $2322B2
- LSPtrLst_BBZ0S: $2322B4
- LSPtrLst_BBZ0N: $2322B6
- LSPtrLst_BBZ1M: $2322B8
- LSPtrLst_BBZ1D: $2322BA
- LSPtrLst_BBZ1S: $2322BC
- LSPtrLst_BBZ1N: $2322BE
- LSPtrLst_BBZ2M: $2322C0
- LSPtrLst_BBZ2D: $2322C2
- LSPtrLst_BBZ2S: $2322C4
- LSPtrLst_BBZ2N: $2322C6
- LSPtrLst_BBZ3M: $2322C8
- LSPtrLst_BBZ3D: $2322CA
- LSPtrLst_BBZ3S: $2322CC
- LSPtrLst_BBZ3N: $2322CE
- LSPtrLst_BBZ4M: $2322D0
- LSPtrLst_BBZ4D: $2322D2
- LSPtrLst_BBZ4S: $2322D4
- LSPtrLst_BBZ4N: $2322D6
- LSPtrLst_BBZ5M: $2322D8
- LSPtrLst_BBZ5D: $2322DA
- LSPtrLst_BBZ5S: $2322DC
- LSPtrLst_BBZ5N: $2322DE
- LSPtrLst_BBZ6M: $2322E0
- LSPtrLst_BBZ6D: $2322E2
- LSPtrLst_BBZ6S: $2322E4
- LSPtrLst_BBZ6N: $2322E6
- LSPtrLst_SSZ0M: $2322E8
- LSPtrLst_SSZ0D: $2322EA
- LSPtrLst_SSZ0S: $2322EC
- LSPtrLst_SSZ0N: $2322EE
- LSPtrLst_SSZ1M: $2322F0
- LSPtrLst_SSZ1D: $2322F2
- LSPtrLst_SSZ1S: $2322F4
- LSPtrLst_SSZ1N: $2322F6
- LSPtrLst_SSZ2M: $2322F8
- LSPtrLst_SSZ2D: $2322FA
- LSPtrLst_SSZ2S: $2322FC
- LSPtrLst_SSZ2N: $2322FE
- LSPtrLst_SSZ3M: $232300
- LSPtrLst_SSZ3D: $232302
- LSPtrLst_SSZ3S: $232304
- LSPtrLst_SSZ3N: $232306
- LSPtrLst_SSZ4M: $232308
- LSPtrLst_SSZ4D: $23230A
- LSPtrLst_SSZ4S: $23230C
- LSPtrLst_SSZ4N: $23230E
- LSPtrLst_SSZ5M: $232310
- LSPtrLst_SSZ5D: $232312
- LSPtrLst_SSZ5S: $232314
- LSPtrLst_SSZ5N: $232316
- LSPtrLst_SSZ6M: $232318
- LSPtrLst_SSZ6D: $23231A
- LSPtrLst_SSZ6S: $23231C
- LSPtrLst_SSZ6N: $23231E
- LSPtrLst_AAZ0M: $232320
- LSPtrLst_AAZ0D: $232322
- LSPtrLst_AAZ0S: $232324
- LSPtrLst_AAZ0N: $232326
- LSPtrLst_AAZ1M: $232328
- LSPtrLst_AAZ1D: $23232A
- LSPtrLst_AAZ1S: $23232C
- LSPtrLst_AAZ1N: $23232E
- LSPtrLst_AAZ2M: $232330
- LSPtrLst_AAZ2D: $232332
- LSPtrLst_AAZ2S: $232334
- LSPtrLst_AAZ2N: $232336
- LSPtrLst_AAZ3M: $232338
- LSPtrLst_AAZ3D: $23233A
- LSPtrLst_AAZ3S: $23233C
- LSPtrLst_AAZ3N: $23233E
- LSPtrLst_AAZ4M: $232340
- LSPtrLst_AAZ4D: $232342
- LSPtrLst_AAZ4S: $232344
- LSPtrLst_AAZ4N: $232346
- LSPtrLst_AAZ5M: $232348
- LSPtrLst_AAZ5D: $23234A
- LSPtrLst_AAZ5S: $23234C
- LSPtrLst_AAZ5N: $23234E
- LSPtrLst_AAZ6M: $232350
- LSPtrLst_AAZ6D: $232352
- LSPtrLst_AAZ6S: $232354
- LSPtrLst_AAZ6N: $232356
- LSPtrLst_TTZ0M: $232358
- LSPtrLst_TTZ0D: $23235A
- LSPtrLst_TTZ0S: $23235C
- LSPtrLst_TTZ0N: $23235E
- LSPtrLst_TTZ1M: $232360
- LSPtrLst_TTZ1D: $232362
- LSPtrLst_TTZ1S: $232364
- LSPtrLst_TTZ1N: $232366
- LSPtrLst_TTZ2M: $232368
- LSPtrLst_TTZ2D: $23236A
- LSPtrLst_TTZ2S: $23236C
- LSPtrLst_TTZ2N: $23236E
- LSPtrLst_TTZ3M: $232370
- LSPtrLst_TTZ3D: $232372
- LSPtrLst_TTZ3S: $232374
- LSPtrLst_TTZ3N: $232376
- LSPtrLst_TTZ4M: $232378
- LSPtrLst_TTZ4D: $23237A
- LSPtrLst_TTZ4S: $23237C
- LSPtrLst_TTZ4N: $23237E
- LSPtrLst_TTZ5M: $232380
- LSPtrLst_TTZ5D: $232382
- LSPtrLst_TTZ5S: $232384
- LSPtrLst_TTZ5N: $232386
- LSPtrLst_TTZ6M: $232388
- LSPtrLst_TTZ6D: $23238A
- LSPtrLst_TTZ6S: $23238C
- LSPtrLst_TTZ6N: $23238E
- LSPtrLst_MMZ0M: $232390
- LSPtrLst_MMZ0D: $232392
- LSPtrLst_MMZ0S: $232394
- LSPtrLst_MMZ0N: $232396
- LSPtrLst_MMZ1M: $232398
- LSPtrLst_MMZ1D: $23239A
- LSPtrLst_MMZ1S: $23239C
- LSPtrLst_MMZ1N: $23239E
- LSPtrLst_MMZ2M: $2323A0
- LSPtrLst_MMZ2D: $2323A2
- LSPtrLst_MMZ2S: $2323A4
- LSPtrLst_MMZ2N: $2323A6
- LSPtrLst_MMZ3M: $2323A8
- LSPtrLst_MMZ3D: $2323AA
- LSPtrLst_MMZ3S: $2323AC
- LSPtrLst_MMZ3N: $2323AE
- LSPtrLst_MMZ4M: $2323B0
- LSPtrLst_MMZ4D: $2323B2
- LSPtrLst_MMZ4S: $2323B4
- LSPtrLst_MMZ4N: $2323B6
- LSPtrLst_MMZ5M: $2323B8
- LSPtrLst_MMZ5D: $2323BA
- LSPtrLst_MMZ5S: $2323BC
- LSPtrLst_MMZ5N: $2323BE
- LSPtrLst_MMZ6M: $2323C0
- LSPtrLst_MMZ6D: $2323C2
- LSPtrLst_MMZ6S: $2323C4
- LSPtrLst_MMZ6N: $2323C6
- LSPtrLst_Train0M: $2323C8
- LSPtrLst_Train0D: $2323CA
- LSPtrLst_Train0S: $2323CC
- LSPtrLst_Train0N: $2323CE
- LSPtrLst_Train1M: $2323D0
- LSPtrLst_Train1D: $2323D2
- LSPtrLst_Train1S: $2323D4
- LSPtrLst_Train1N: $2323D6
- LSPtrLst_Train2M: $2323D8
- LSPtrLst_Train2D: $2323DA
- LSPtrLst_Train2S: $2323DC
- LSPtrLst_Train2N: $2323DE
- LSPtrLst_Train3M: $2323E0
- LSPtrLst_Train3D: $2323E2
- LSPtrLst_Train3S: $2323E4
- LSPtrLst_Train3N: $2323E6
- LSPtrLst_Train4M: $2323E8
- LSPtrLst_Train4D: $2323EA
- LSPtrLst_Train4S: $2323EC
- LSPtrLst_Train4N: $2323EE
- LSPtrLst_Train5M: $2323F0
- LSPtrLst_Train5D: $2323F2
- LSPtrLst_Train5S: $2323F4
- LSPtrLst_Train5N: $2323F6
- LSPtrLst_Train6M: $2323F8
- LSPtrLst_Train6D: $2323FA
- LSPtrLst_Train6S: $2323FC
- LSPtrLst_Train6N: $2323FE
- LSPtrLst_Intro0M: $232400
- LSPtrLst_Intro0D: $232402
- LSPtrLst_Intro0S: $232404
- LSPtrLst_Intro0N: $232406
- LSPtrLst_Intro1M: $232408
- LSPtrLst_Intro1D: $23240A
- LSPtrLst_Intro1S: $23240C
- LSPtrLst_Intro1N: $23240E
- LSPtrLst_Intro2M: $232410
- LSPtrLst_Intro2D: $232412
- LSPtrLst_Intro2S: $232414
- LSPtrLst_Intro2N: $232416
- LSPtrLst_Intro3M: $232418
- LSPtrLst_Intro3D: $23241A
- LSPtrLst_Intro3S: $23241C
- LSPtrLst_Intro3N: $23241E
- LSPtrLst_Intro4M: $232420
- LSPtrLst_Intro4D: $232422
- LSPtrLst_Intro4S: $232424
- LSPtrLst_Intro4N: $232426
- LSPtrLst_Intro5M: $232428
- LSPtrLst_Intro5D: $23242A
- LSPtrLst_Intro5S: $23242C
- LSPtrLst_Intro5N: $23242E
- LSPtrLst_Intro6M: $232430
- LSPtrLst_Intro6D: $232432
- LSPtrLst_Intro6S: $232434
- LSPtrLst_Intro6N: $232436
- LSPtrLst_World0M: $232438
- LSPtrLst_World0D: $23243A
- LSPtrLst_World0S: $23243C
- LSPtrLst_World0N: $23243E
- LSPtrLst_World1M: $232440
- LSPtrLst_World1D: $232442
- LSPtrLst_World1S: $232444
- LSPtrLst_World1N: $232446
- LSPtrLst_World2M: $232448
- LSPtrLst_World2D: $23244A
- LSPtrLst_World2S: $23244C
- LSPtrLst_World2N: $23244E
- LSPtrLst_World3M: $232450
- LSPtrLst_World3D: $232452
- LSPtrLst_World3S: $232454
- LSPtrLst_World3N: $232456
- LSPtrLst_World4M: $232458
- LSPtrLst_World4D: $23245A
- LSPtrLst_World4S: $23245C
- LSPtrLst_World4N: $23245E
- LSPtrLst_World5M: $232460
- LSPtrLst_World5D: $232462
- LSPtrLst_World5S: $232464
- LSPtrLst_World5N: $232466
- LSPtrLst_World6M: $232468
- LSPtrLst_World6D: $23246A
- LSPtrLst_World6S: $23246C
- LSPtrLst_World6N: $23246E
- LSPtr_BBZ01MN: $232470
- LSPtr_BBZ2MN: $23247C
- LSPtr_BBZ3MN: $232488
- LSPtr_BBZ4MN: $232494
- LSPtr_BBZ56MN: $2324A0
- LSPtr_SSZ01MD: $2324AC
- LSPtr_SSZ2MD: $2324B8
- LSPtr_SSZ01SN: $2324C4
- LSPtr_SSZ2SN: $2324D0
- LSPtr_SSZ3MD: $2324DC
- LSPtr_SSZ4MD: $2324E8
- LSPtr_SSZ3SN: $2324F4
- LSPtr_SSZ4SN: $232500
- LSPtr_SSZ5MD: $23250C
- LSPtr_SSZ5SN: $232518
- LSPtr_AAZ01MN: $232524
- LSPtr_AAZ2MN: $232530
- LSPtr_AAZ3MN: $23253C
- LSPtr_AAZ4MN: $232548
- LSPtr_AAZ56MN: $232554
- LSPtr_TTZ06MN: $232560
- LSPtr_MMZ01MN: $23256C
- LSPtr_MMZ2MN: $232578
- LSPtr_MMZ3MN: $232584
- LSPtr_MMZ4MN: $232590
- LSPtr_MMZ56MN: $23259C
- LSPtr_Train01MN: $2325A8
- LSPtr_Train2MN: $2325B4
- LSPtr_Train3MN: $2325C0
- LSPtr_Train4MN: $2325CC
- LSPtr_Train56MN: $2325D8
- LSPtr_Intro0MN: $2325DC
- LSPtr_Intro1MN: $2325E8
- LSPtr_Intro2MN: $2325F4
- LSPtr_Intro3MN: $232600
- LSPtr_Intro4MN: $23260C
- LSPtr_Intro5M: $232618
- LSPtr_Intro5D: $232624
- LSPtr_Intro5S: $232630
- LSPtr_Intro5N: $23263C
- LSPtr_Intro6M: $232648
- LSPtr_Intro6D: $232654
- LSPtr_Intro6S: $232660
- LSPtr_Intro6N: $23266C
- LSPtr_World01MN: $232670
- LSPtr_World2M: $23267C
- LSPtr_World26MN: $232688
- LS_FG_BBZ01MN: $23268C
- LS_BG_BBZ01MN: $23269A
- LS_FG_BBZ2MN: $2326A8
- LS_BG_BBZ2MN: $2326B6
- LS_FG_BBZ4MN: $2326C4
- LS_BG_BBZ4MN: $2326D2
- LS_FG_BBZ356MN: $2326E0
- LS_BG_BBZ356MN: $2326EE
- LS_FG_SSZ01MN: $2326FC
- LS_FG_SSZ2MN: $23270A
- LS_FG_SSZ3MN: $232718
- LS_FG_SSZ4MN: $232726
- LS_FG_SSZ5MN: $232734
- LS_BG_SSZ02MD: $232742
- LS_BG_SSZ02SN: $232750
- LS_BG_SSZ35MD: $23275E
- LS_BG_SSZ35SN: $23276C
- LS_FG_AAZ01MN: $23277A
- LS_BG_AAZ01MN: $232788
- LS_FG_AAZ2MN: $232796
- LS_BG_AAZ2MN: $2327A4
- LS_FG_AAZ3MN: $2327B2
- LS_BG_AAZ34MN: $2327C0
- LS_FG_AAZ4MN: $2327CE
- LS_FG_AAZ56MN: $2327DC
- LS_BG_AAZ56MN: $2327EA
- LS_FG_TTZ06MN: $2327F8
- LS_BG_TTZ06MN: $232806
- LS_FG_MMZ01MN: $232814
- LS_BG_MMZ01MN: $232822
- LS_FGBG_MMZ2MN: $232830
- LS_FGBG_MMZ3MN: $23283E
- LS_FGBG_MMZ4MN: $23284C
- LS_FGBG_MMZ56MN: $23285A
- LS_FG_Train01MN: $232868
- LS_BG_Train01MN: $232876
- LS_FG_Train2MN: $232884
- LS_BG_Train2MN: $232892
- LS_FG_Train3MN: $2328A0
- LS_BG_Train3MN: $2328AE
- LS_FG_Train4MN: $2328BC
- LS_BG_Train4MN: $2328CA
- LS_FG_Intro0MN: $2328D8
- LS_FG_Intro1MN: $2328E6
- LS_FG_Intro2MN: $2328F4
- LS_FG_Intro3MN: $232902
- LS_FG_Intro4MN: $232910
- LS_BG_Intro01MN: $23291E
- LS_BG_Intro2MN: $23292C
- LS_BG_Intro3MN: $23293A
- LS_BG_Intro4MN: $232948
- LS_FG_Intro5M: $232956
- LS_FG_Intro5D: $232964
- LS_FG_Intro4S: $232972
- LS_FG_Intro5N: $232980
- LS_FG_Intro6M: $23298E
- LS_FG_Intro6S: $23299C
- LS_BG_Intro5MN: $2329AA
- LS_FG_World01MN: $2329B8
- LS_BG_World01MN: $2329C6
- LS_FG_World2M: $2329D4
- LS_BG_World2M: $2329E2
+*Segment 047 - AnimArt_Ptrs: Offset $2DBD12  Size $1F44
+ AniPtrLst_BBZ0M: $2DBD12
+ AniPtrLst_BBZ0D: $2DBD14
+ AniPtrLst_BBZ0S: $2DBD16
+ AniPtrLst_BBZ0N: $2DBD18
+ AniPtrLst_BBZ1M: $2DBD1A
+ AniPtrLst_BBZ1D: $2DBD1C
+ AniPtrLst_BBZ1S: $2DBD1E
+ AniPtrLst_BBZ1N: $2DBD20
+ AniPtrLst_BBZ2M: $2DBD22
+ AniPtrLst_BBZ2S: $2DBD24
+ AniPtrLst_BBZ2D: $2DBD26
+ AniPtrLst_BBZ2N: $2DBD28
+ AniPtrLst_BBZ3M: $2DBD2A
+ AniPtrLst_BBZ3D: $2DBD2C
+ AniPtrLst_BBZ3S: $2DBD2E
+ AniPtrLst_BBZ3N: $2DBD30
+ AniPtrLst_BBZ4M: $2DBD32
+ AniPtrLst_BBZ4D: $2DBD34
+ AniPtrLst_BBZ4S: $2DBD36
+ AniPtrLst_BBZ4N: $2DBD38
+ AniPtrLst_BBZ5M: $2DBD3A
+ AniPtrLst_BBZ5D: $2DBD3C
+ AniPtrLst_BBZ5S: $2DBD3E
+ AniPtrLst_BBZ5N: $2DBD40
+ AniPtrLst_BBZ6M: $2DBD42
+ AniPtrLst_BBZ6D: $2DBD44
+ AniPtrLst_BBZ6S: $2DBD46
+ AniPtrLst_BBZ6N: $2DBD48
+ AniPtrLst_SSZ0M: $2DBD4A
+ AniPtrLst_SSZ0D: $2DBD4C
+ AniPtrLst_SSZ0S: $2DBD4E
+ AniPtrLst_SSZ0N: $2DBD50
+ AniPtrLst_SSZ1M: $2DBD52
+ AniPtrLst_SSZ1D: $2DBD54
+ AniPtrLst_SSZ1S: $2DBD56
+ AniPtrLst_SSZ1N: $2DBD58
+ AniPtrLst_SSZ2M: $2DBD5A
+ AniPtrLst_SSZ2D: $2DBD5C
+ AniPtrLst_SSZ2S: $2DBD5E
+ AniPtrLst_SSZ2N: $2DBD60
+ AniPtrLst_SSZ3M: $2DBD62
+ AniPtrLst_SSZ3D: $2DBD64
+ AniPtrLst_SSZ3S: $2DBD66
+ AniPtrLst_SSZ3N: $2DBD68
+ AniPtrLst_SSZ4M: $2DBD6A
+ AniPtrLst_SSZ4D: $2DBD6C
+ AniPtrLst_SSZ4S: $2DBD6E
+ AniPtrLst_SSZ4N: $2DBD70
+ AniPtrLst_SSZ5M: $2DBD72
+ AniPtrLst_SSZ5D: $2DBD74
+ AniPtrLst_SSZ5S: $2DBD76
+ AniPtrLst_SSZ5N: $2DBD78
+ AniPtrLst_SSZ6M: $2DBD7A
+ AniPtrLst_SSZ6D: $2DBD7C
+ AniPtrLst_SSZ6S: $2DBD7E
+ AniPtrLst_SSZ6N: $2DBD80
+ AniPtrLst_AAZ0M: $2DBD82
+ AniPtrLst_AAZ0D: $2DBD84
+ AniPtrLst_AAZ0S: $2DBD86
+ AniPtrLst_AAZ0N: $2DBD88
+ AniPtrLst_AAZ1M: $2DBD8A
+ AniPtrLst_AAZ1D: $2DBD8C
+ AniPtrLst_AAZ1S: $2DBD8E
+ AniPtrLst_AAZ1N: $2DBD90
+ AniPtrLst_AAZ2M: $2DBD92
+ AniPtrLst_AAZ2D: $2DBD94
+ AniPtrLst_AAZ2S: $2DBD96
+ AniPtrLst_AAZ2N: $2DBD98
+ AniPtrLst_AAZ3M: $2DBD9A
+ AniPtrLst_AAZ3D: $2DBD9C
+ AniPtrLst_AAZ3S: $2DBD9E
+ AniPtrLst_AAZ3N: $2DBDA0
+ AniPtrLst_AAZ4M: $2DBDA2
+ AniPtrLst_AAZ4D: $2DBDA4
+ AniPtrLst_AAZ4S: $2DBDA6
+ AniPtrLst_AAZ4N: $2DBDA8
+ AniPtrLst_AAZ5M: $2DBDAA
+ AniPtrLst_AAZ5D: $2DBDAC
+ AniPtrLst_AAZ5S: $2DBDAE
+ AniPtrLst_AAZ5N: $2DBDB0
+ AniPtrLst_AAZ6M: $2DBDB2
+ AniPtrLst_AAZ6D: $2DBDB4
+ AniPtrLst_AAZ6S: $2DBDB6
+ AniPtrLst_AAZ6N: $2DBDB8
+ AniPtrLst_TTZ0M: $2DBDBA
+ AniPtrLst_TTZ0D: $2DBDBC
+ AniPtrLst_TTZ0S: $2DBDBE
+ AniPtrLst_TTZ0N: $2DBDC0
+ AniPtrLst_TTZ1M: $2DBDC2
+ AniPtrLst_TTZ1D: $2DBDC4
+ AniPtrLst_TTZ1S: $2DBDC6
+ AniPtrLst_TTZ1N: $2DBDC8
+ AniPtrLst_TTZ2M: $2DBDCA
+ AniPtrLst_TTZ2D: $2DBDCC
+ AniPtrLst_TTZ2S: $2DBDCE
+ AniPtrLst_TTZ2N: $2DBDD0
+ AniPtrLst_TTZ3M: $2DBDD2
+ AniPtrLst_TTZ3D: $2DBDD4
+ AniPtrLst_TTZ3S: $2DBDD6
+ AniPtrLst_TTZ3N: $2DBDD8
+ AniPtrLst_TTZ4M: $2DBDDA
+ AniPtrLst_TTZ4D: $2DBDDC
+ AniPtrLst_TTZ4S: $2DBDDE
+ AniPtrLst_TTZ4N: $2DBDE0
+ AniPtrLst_TTZ5M: $2DBDE2
+ AniPtrLst_TTZ5D: $2DBDE4
+ AniPtrLst_TTZ5S: $2DBDE6
+ AniPtrLst_TTZ5N: $2DBDE8
+ AniPtrLst_TTZ6M: $2DBDEA
+ AniPtrLst_TTZ6D: $2DBDEC
+ AniPtrLst_TTZ6S: $2DBDEE
+ AniPtrLst_TTZ6N: $2DBDF0
+ AniPtrLst_MMZ0M: $2DBDF2
+ AniPtrLst_MMZ0D: $2DBDF4
+ AniPtrLst_MMZ0S: $2DBDF6
+ AniPtrLst_MMZ0N: $2DBDF8
+ AniPtrLst_MMZ1M: $2DBDFA
+ AniPtrLst_MMZ1D: $2DBDFC
+ AniPtrLst_MMZ1S: $2DBDFE
+ AniPtrLst_MMZ1N: $2DBE00
+ AniPtrLst_MMZ2M: $2DBE02
+ AniPtrLst_MMZ2D: $2DBE04
+ AniPtrLst_MMZ2S: $2DBE06
+ AniPtrLst_MMZ2N: $2DBE08
+ AniPtrLst_MMZ3M: $2DBE0A
+ AniPtrLst_MMZ3D: $2DBE0C
+ AniPtrLst_MMZ3S: $2DBE0E
+ AniPtrLst_MMZ3N: $2DBE10
+ AniPtrLst_MMZ4M: $2DBE12
+ AniPtrLst_MMZ4D: $2DBE14
+ AniPtrLst_MMZ4S: $2DBE16
+ AniPtrLst_MMZ4N: $2DBE18
+ AniPtrLst_MMZ5M: $2DBE1A
+ AniPtrLst_MMZ5D: $2DBE1C
+ AniPtrLst_MMZ5S: $2DBE1E
+ AniPtrLst_MMZ5N: $2DBE20
+ AniPtrLst_MMZ6M: $2DBE22
+ AniPtrLst_MMZ6D: $2DBE24
+ AniPtrLst_MMZ6S: $2DBE26
+ AniPtrLst_MMZ6N: $2DBE28
+ AniPtrLst_Train0M: $2DBE2A
+ AniPtrLst_Train0D: $2DBE2C
+ AniPtrLst_Train0S: $2DBE2E
+ AniPtrLst_Train0N: $2DBE30
+ AniPtrLst_Train1M: $2DBE32
+ AniPtrLst_Train1D: $2DBE34
+ AniPtrLst_Train1S: $2DBE36
+ AniPtrLst_Train1N: $2DBE38
+ AniPtrLst_Train2M: $2DBE3A
+ AniPtrLst_Train2D: $2DBE3C
+ AniPtrLst_Train2S: $2DBE3E
+ AniPtrLst_Train2N: $2DBE40
+ AniPtrLst_Train3M: $2DBE42
+ AniPtrLst_Train3D: $2DBE44
+ AniPtrLst_Train3S: $2DBE46
+ AniPtrLst_Train3N: $2DBE48
+ AniPtrLst_Train4M: $2DBE4A
+ AniPtrLst_Train4D: $2DBE4C
+ AniPtrLst_Train4S: $2DBE4E
+ AniPtrLst_Train4N: $2DBE50
+ AniPtrLst_Train5M: $2DBE52
+ AniPtrLst_Train5D: $2DBE54
+ AniPtrLst_Train5S: $2DBE56
+ AniPtrLst_Train5N: $2DBE58
+ AniPtrLst_Train6M: $2DBE5A
+ AniPtrLst_Train6D: $2DBE5C
+ AniPtrLst_Train6S: $2DBE5E
+ AniPtrLst_Train6N: $2DBE60
+ AniPtrLst_Intro0M: $2DBE62
+ AniPtrLst_Intro0D: $2DBE64
+ AniPtrLst_Intro0S: $2DBE66
+ AniPtrLst_Intro0N: $2DBE68
+ AniPtrLst_Intro1M: $2DBE6A
+ AniPtrLst_Intro1D: $2DBE6C
+ AniPtrLst_Intro1S: $2DBE6E
+ AniPtrLst_Intro1N: $2DBE70
+ AniPtrLst_Intro2M: $2DBE72
+ AniPtrLst_Intro2D: $2DBE74
+ AniPtrLst_Intro2S: $2DBE76
+ AniPtrLst_Intro2N: $2DBE78
+ AniPtrLst_Intro3M: $2DBE7A
+ AniPtrLst_Intro3D: $2DBE7C
+ AniPtrLst_Intro3S: $2DBE7E
+ AniPtrLst_Intro3N: $2DBE80
+ AniPtrLst_Intro4M: $2DBE82
+ AniPtrLst_Intro4D: $2DBE84
+ AniPtrLst_Intro4S: $2DBE86
+ AniPtrLst_Intro4N: $2DBE88
+ AniPtrLst_Intro5M: $2DBE8A
+ AniPtrLst_Intro5D: $2DBE8C
+ AniPtrLst_Intro5S: $2DBE8E
+ AniPtrLst_Intro5N: $2DBE90
+ AniPtrLst_Intro6M: $2DBE92
+ AniPtrLst_Intro6D: $2DBE94
+ AniPtrLst_Intro6S: $2DBE96
+ AniPtrLst_Intro6N: $2DBE98
+ AniPtrLst_World0M: $2DBE9A
+ AniPtrLst_World0D: $2DBE9C
+ AniPtrLst_World0S: $2DBE9E
+ AniPtrLst_World0N: $2DBEA0
+ AniPtrLst_World1M: $2DBEA2
+ AniPtrLst_World1D: $2DBEA4
+ AniPtrLst_World1S: $2DBEA6
+ AniPtrLst_World1N: $2DBEA8
+ AniPtrLst_World2M: $2DBEAA
+ AniPtrLst_World2D: $2DBEAC
+ AniPtrLst_World2S: $2DBEAE
+ AniPtrLst_World2N: $2DBEB0
+ AniPtrLst_World3M: $2DBEB2
+ AniPtrLst_World3D: $2DBEB4
+ AniPtrLst_World3S: $2DBEB6
+ AniPtrLst_World3N: $2DBEB8
+ AniPtrLst_World4M: $2DBEBA
+ AniPtrLst_World4D: $2DBEBC
+ AniPtrLst_World4S: $2DBEBE
+ AniPtrLst_World4N: $2DBEC0
+ AniPtrLst_World5M: $2DBEC2
+ AniPtrLst_World5D: $2DBEC4
+ AniPtrLst_World5S: $2DBEC6
+ AniPtrLst_World5N: $2DBEC8
+ AniPtrLst_World6M: $2DBECA
+ AniPtrLst_World6D: $2DBECC
+ AniPtrLst_World6S: $2DBECE
+ AniPtrLst_World6N: $2DBED0
+ AnimArtPtr_BBZ06MN: $2DBED2
+ AnimArtPtr_TTZ06MN: $2DBEDA
+ AnimArtPtr_MMZ06MN: $2DBEE2
+ AnimArtPtr_NULL: $2DBEEA
+ AniArt_BBZ_1: $2DBEEE
+ AnimArt_TTZ_1: $2DC666
+ AnimArt_MMZ_1: $2DCBF2
 
-*Segment 02C - LevSize_Boss_Data: Offset $2329F0  Size $2A
- LS_FG_SSZBoss: $2329F0
- LS_BG_SSZBoss: $2329FE
- LS_FG_TTZBoss: $232A0C
+*Segment 048 - MD_PalCycle_Set1: Offset $2B55E8  Size $C12
+ MD_PalCycle_Unk3_Data1: $2B55E8
+ MD_PalCycle_Unk3_Data2: $2B573A
 
-*Segment 02D - Objlayout_Data: Offset $232A1A  Size $1E274
- ObjLoc_BBZ1M: $232A1A
- ObjLoc_BBZ1D: $232DA4
- ObjLoc_BBZ1S: $233126
- ObjLoc_BBZ1N: $233498
- ObjLoc_BBZ2M: $23381A
- ObjLoc_BBZ2D: $233BEC
- ObjLoc_BBZ2S: $233FB6
- ObjLoc_BBZ2N: $234388
- ObjLoc_BBZ3M: $23476A
- ObjLoc_BBZ3D: $234BE4
- ObjLoc_BBZ3S: $235076
- ObjLoc_BBZ3N: $235538
- ObjLoc_BBZ4M: $235A12
- ObjLoc_BBZ4D: $235F84
- ObjLoc_BBZ4S: $2364EE
- ObjLoc_BBZ4N: $236A48
- ObjLoc_BBZ5M: $236F92
- ObjLoc_BBZ5D: $23753C
- ObjLoc_BBZ5S: $237A96
- ObjLoc_BBZ5N: $238038
- ObjLoc_SSZ1M: $23858E
- ObjLoc_SSZ1D: $2388B0
- ObjLoc_SSZ1S: $238C02
- ObjLoc_SSZ1N: $238F44
- ObjLoc_SSZ2M: $2392C6
- ObjLoc_SSZ2D: $239688
- ObjLoc_SSZ2S: $239A32
- ObjLoc_SSZ2N: $239DC4
- ObjLoc_SSZ3M: $23A146
- ObjLoc_SSZ3D: $23A450
- ObjLoc_SSZ3S: $23A7C2
- ObjLoc_SSZ3N: $23AACC
- ObjLoc_SSZ4M: $23AE46
- ObjLoc_SSZ4D: $23B180
- ObjLoc_SSZ4S: $23B4B2
- ObjLoc_SSZ4N: $23B7CC
- ObjLoc_SSZ5M: $23BB06
- ObjLoc_SSZ5D: $23BF80
- ObjLoc_SSZ5S: $23C422
- ObjLoc_SSZ5N: $23C88C
- ObjLoc_AAZ1M: $23CD02
- ObjLoc_AAZ1D: $23D274
- ObjLoc_AAZ1S: $23D7AE
- ObjLoc_AAZ1N: $23DC90
- ObjLoc_AAZ2M: $23E17A
- ObjLoc_AAZ2D: $23E5FC
- ObjLoc_AAZ2S: $23EA7E
- ObjLoc_AAZ2N: $23EF30
- ObjLoc_AAZ3M: $23F3D2
- ObjLoc_AAZ3D: $23F92C
- ObjLoc_AAZ3S: $23FE86
- ObjLoc_AAZ3N: $240428
- ObjLoc_AAZ4M: $2409BA
- ObjLoc_AAZ4D: $240EEC
- ObjLoc_AAZ4S: $2413BE
- ObjLoc_AAZ4N: $2418D8
- ObjLoc_AAZ5M: $241D92
- ObjLoc_AAZ5D: $242484
- ObjLoc_AAZ5S: $242B06
- ObjLoc_AAZ5N: $2431F8
- ObjLoc_AAZNULL: $24388A
- ObjLoc_TTZ1M: $24388C
- ObjLoc_TTZ1D: $243C36
- ObjLoc_TTZ1S: $244088
- ObjLoc_TTZ1N: $244402
- ObjLoc_TTZ2M: $24474C
- ObjLoc_TTZ2D: $244B9E
- ObjLoc_TTZ2S: $244BE0
- ObjLoc_TTZ2N: $24502A
- ObjLoc_TTZ3M: $2453C4
- ObjLoc_TTZ3D: $245856
- ObjLoc_TTZ3S: $245C50
- ObjLoc_TTZ3N: $2460B2
- ObjLoc_TTZ4M: $24647C
- ObjLoc_TTZ4D: $246926
- ObjLoc_TTZ4S: $246CF8
- ObjLoc_TTZ4N: $247132
- ObjLoc_TTZ5M: $24756C
- ObjLoc_TTZ5D: $247AA6
- ObjLoc_TTZ5S: $247FE0
- ObjLoc_TTZ5N: $248522
- ObjLoc_MMZ1M: $248A68
- ObjLoc_MMZ1D: $248EF2
- ObjLoc_MMZ1S: $24935C
- ObjLoc_MMZ1N: $249826
- ObjLoc_MMZ2M: $249CC8
- ObjLoc_MMZ2D: $24A232
- ObjLoc_MMZ2S: $24A78C
- ObjLoc_MMZ2N: $24AD1E
- ObjLoc_MMZ3M: $24B2A0
- ObjLoc_MMZ3D: $24B872
- ObjLoc_MMZ3S: $24BE5C
- ObjLoc_MMZ3N: $24C3E6
- ObjLoc_MMZ4M: $24C990
- ObjLoc_MMZ4D: $24CEFA
- ObjLoc_MMZ4S: $24D444
- ObjLoc_MMZ4N: $24DA26
- ObjLoc_MMZ5M: $24DFE8
- ObjLoc_MMZ5D: $24E59A
- ObjLoc_MMZ5S: $24EB4C
- ObjLoc_MMZ5N: $24F116
- ObjLoc_Train1: $24F6D4
- ObjLoc_Train2: $24FA3E
- ObjLoc_Train3: $24FFB0
- ObjLoc_Train4: $25015A
- ObjLoc_Train5: $250574
- ObjLoc_Intro0: $250576
- ObjLoc_Intro1: $250648
- ObjLoc_Intro2: $25071A
- ObjLoc_Intro3: $2507BC
- ObjLoc_Intro4: $2509BE
- ObjLoc_Tutorial: $250B38
- ObjLoc_World: $250B3A
- ObjLoc_WorldNULL: $250C8C
+*Segment 049 - MD_Palette_AAZLit_Index: Offset $2BF854  Size $638
+ LPPtrAAZ0M_L: $2BF854
+ LPPtrAAZ0D_L: $2BF856
+ LPPtrAAZ0S_L: $2BF858
+ LPPtrAAZ0N_L: $2BF85A
+ LPPtrAAZ1M_L: $2BF85C
+ LPPtrAAZ1D_L: $2BF85E
+ LPPtrAAZ1S_L: $2BF860
+ LPPtrAAZ1N_L: $2BF862
+ LPPtrAAZ2M_L: $2BF864
+ LPPtrAAZ2D_L: $2BF866
+ LPPtrAAZ2S_L: $2BF868
+ LPPtrAAZ2N_L: $2BF86A
+ LPPtrAAZ3M_L: $2BF86C
+ LPPtrAAZ3D_L: $2BF86E
+ LPPtrAAZ3S_L: $2BF870
+ LPPtrAAZ3N_L: $2BF872
+ LPPtrAAZ4M_L: $2BF874
+ LPPtrAAZ4D_L: $2BF876
+ LPPtrAAZ4S_L: $2BF878
+ LPPtrAAZ4N_L: $2BF87A
+ LPPtrAAZ5M_L: $2BF87C
+ LPPtrAAZ5D_L: $2BF87E
+ LPPtrAAZ5S_L: $2BF880
+ LPPtrAAZ5N_L: $2BF882
+ LPPtrAAZ6M_L: $2BF884
+ LPPtrAAZ6D_L: $2BF886
+ LPPtrAAZ6S_L: $2BF888
+ LPPtrAAZ6N_L: $2BF88A
+ Pal_AAZ12M_L: $2BF88C
+ Pal_AAZ34M_L: $2BF90C
+ Pal_AAZ5M_L: $2BF98C
+ Pal_AAZ12D_L: $2BFA0C
+ Pal_AAZ34D_L: $2BFA8C
+ Pal_AAZ5D_L: $2BFB0C
+ Pal_AAZ12S_L: $2BFB8C
+ Pal_AAZ34S_L: $2BFC0C
+ Pal_AAZ5S_L: $2BFC8C
+ Pal_AAZ12N_L: $2BFD0C
+ Pal_AAZ34N_L: $2BFD8C
+ Pal_AAZ5N_L: $2BFE0C
 
-*Segment 02E - GameHeader: Offset $100  Size $8E
+*Segment 04A - MD_PalCycle_Set2: Offset $2B6832  Size $3A42
+ MD_PalCycle_BBZ_Data1: $2B6832
+ MD_PalCycle_BBZ_Data3: $2B684C
+ MD_PalCycle_WE_Data1: $2B6914
+ MD_PalCycle_WE_Data3: $2B6956
+ MD_PalCycle_WE_Data2: $2B6A8E
+ MD_PalCycle_BBZ_Data4: $2B6B06
+ MD_PalCycle_SSZ_Data3: $2B6F6A
+ MD_PalCycle_SSZ_Data2: $2B70F0
+ MD_PalCycle_AAZ_Lit_Data2: $2B902C
+ MD_PalCycle_AAZ_Data: $2B911E
+ MD_PalCycle_Unk1_Data1: $2B917A
+ MD_PalCycle_AAZ_Lit_Data3: $2B91B6
+ MD_PalCycle_Unk2_Data1: $2B9A3C
+ MD_PalCycle_Unk2_Data2: $2B9A78
+ MD_PalCycle_TTZ_Data: $2B9AB8
+ MD_PalCycle_MMZ_Data: $2B9C42
+ MD_PalCycle_IIZ_Data: $2B9D2C
+ MD_PalCycle_WE_Data5: $2B9D9C
+ MD_PalCycle_WE_Data4: $2B9DE8
+ MD_PalCycle_WE_Data6: $2B9E36
 
-*Segment 02F - LevelSel_Strings: Offset $7739E  Size $1B6
+*Segment 04B - LevSize_Boss_Data: Offset $2B5470  Size $2A
+ LS_FG_SSZBoss: $2B5470
+ LS_BG_SSZBoss: $2B547E
+ LS_FG_TTZBoss: $2B548C
 
-*Segment 030 - LevelPlaylist: Offset $76ED0  Size $7
+*Segment 04C - MD_PalCycle_Set3: Offset $2BE356  Size $110
+ MD_PalCycle_Unk3_Data3: $2BE356
+ MD_PalCycle_SSZ_Data1: $2BE402
+ MD_PalCycle_AAZ_Lit_Data1: $2BE41A
 
-*Segment 031 - SoundTestSongNames: Offset $227338  Size $22A
+*Segment 04D - AnimArtV_Ptrs: Offset $2BF854  Size $500
+ AniVPtrLst_BBZ0M: $2BF854
+ AniVPtrLst_BBZ0D: $2BF856
+ AniVPtrLst_BBZ0S: $2BF858
+ AniVPtrLst_BBZ0N: $2BF85A
+ AniVPtrLst_BBZ1M: $2BF85C
+ AniVPtrLst_BBZ1D: $2BF85E
+ AniVPtrLst_BBZ1S: $2BF860
+ AniVPtrLst_BBZ1N: $2BF862
+ AniVPtrLst_BBZ2M: $2BF864
+ AniVPtrLst_BBZ2D: $2BF866
+ AniVPtrLst_BBZ2S: $2BF868
+ AniVPtrLst_BBZ2N: $2BF86A
+ AniVPtrLst_BBZ3M: $2BF86C
+ AniVPtrLst_BBZ3D: $2BF86E
+ AniVPtrLst_BBZ3S: $2BF870
+ AniVPtrLst_BBZ3N: $2BF872
+ AniVPtrLst_BBZ4M: $2BF874
+ AniVPtrLst_BBZ4D: $2BF876
+ AniVPtrLst_BBZ4S: $2BF878
+ AniVPtrLst_BBZ4N: $2BF87A
+ AniVPtrLst_BBZ5M: $2BF87C
+ AniVPtrLst_BBZ5D: $2BF87E
+ AniVPtrLst_BBZ5S: $2BF880
+ AniVPtrLst_BBZ5N: $2BF882
+ AniVPtrLst_BBZ6M: $2BF884
+ AniVPtrLst_BBZ6D: $2BF886
+ AniVPtrLst_BBZ6S: $2BF888
+ AniVPtrLst_BBZ6N: $2BF88A
+ AniVPtrLst_SSZ0M: $2BF88C
+ AniVPtrLst_SSZ0D: $2BF88E
+ AniVPtrLst_SSZ0S: $2BF890
+ AniVPtrLst_SSZ0N: $2BF892
+ AniVPtrLst_SSZ1M: $2BF894
+ AniVPtrLst_SSZ1D: $2BF896
+ AniVPtrLst_SSZ1S: $2BF898
+ AniVPtrLst_SSZ1N: $2BF89A
+ AniVPtrLst_SSZ2M: $2BF89C
+ AniVPtrLst_SSZ2D: $2BF89E
+ AniVPtrLst_SSZ2S: $2BF8A0
+ AniVPtrLst_SSZ2N: $2BF8A2
+ AniVPtrLst_SSZ3M: $2BF8A4
+ AniVPtrLst_SSZ3D: $2BF8A6
+ AniVPtrLst_SSZ3S: $2BF8A8
+ AniVPtrLst_SSZ3N: $2BF8AA
+ AniVPtrLst_SSZ4M: $2BF8AC
+ AniVPtrLst_SSZ4D: $2BF8AE
+ AniVPtrLst_SSZ4S: $2BF8B0
+ AniVPtrLst_SSZ4N: $2BF8B2
+ AniVPtrLst_SSZ5M: $2BF8B4
+ AniVPtrLst_SSZ5D: $2BF8B6
+ AniVPtrLst_SSZ5S: $2BF8B8
+ AniVPtrLst_SSZ5N: $2BF8BA
+ AniVPtrLst_SSZ6M: $2BF8BC
+ AniVPtrLst_SSZ6D: $2BF8BE
+ AniVPtrLst_SSZ6S: $2BF8C0
+ AniVPtrLst_SSZ6N: $2BF8C2
+ AniVPtrLst_AAZ0M: $2BF8C4
+ AniVPtrLst_AAZ0D: $2BF8C6
+ AniVPtrLst_AAZ0S: $2BF8C8
+ AniVPtrLst_AAZ0N: $2BF8CA
+ AniVPtrLst_AAZ1M: $2BF8CC
+ AniVPtrLst_AAZ1D: $2BF8CE
+ AniVPtrLst_AAZ1S: $2BF8D0
+ AniVPtrLst_AAZ1N: $2BF8D2
+ AniVPtrLst_AAZ2M: $2BF8D4
+ AniVPtrLst_AAZ2D: $2BF8D6
+ AniVPtrLst_AAZ2S: $2BF8D8
+ AniVPtrLst_AAZ2N: $2BF8DA
+ AniVPtrLst_AAZ3M: $2BF8DC
+ AniVPtrLst_AAZ3D: $2BF8DE
+ AniVPtrLst_AAZ3S: $2BF8E0
+ AniVPtrLst_AAZ3N: $2BF8E2
+ AniVPtrLst_AAZ4M: $2BF8E4
+ AniVPtrLst_AAZ4D: $2BF8E6
+ AniVPtrLst_AAZ4S: $2BF8E8
+ AniVPtrLst_AAZ4N: $2BF8EA
+ AniVPtrLst_AAZ5M: $2BF8EC
+ AniVPtrLst_AAZ5D: $2BF8EE
+ AniVPtrLst_AAZ5S: $2BF8F0
+ AniVPtrLst_AAZ5N: $2BF8F2
+ AniVPtrLst_AAZ6M: $2BF8F4
+ AniVPtrLst_AAZ6D: $2BF8F6
+ AniVPtrLst_AAZ6S: $2BF8F8
+ AniVPtrLst_AAZ6N: $2BF8FA
+ AniVPtrLst_TTZ0M: $2BF8FC
+ AniVPtrLst_TTZ0D: $2BF8FE
+ AniVPtrLst_TTZ0S: $2BF900
+ AniVPtrLst_TTZ0N: $2BF902
+ AniVPtrLst_TTZ1M: $2BF904
+ AniVPtrLst_TTZ1D: $2BF906
+ AniVPtrLst_TTZ1S: $2BF908
+ AniVPtrLst_TTZ1N: $2BF90A
+ AniVPtrLst_TTZ2M: $2BF90C
+ AniVPtrLst_TTZ2D: $2BF90E
+ AniVPtrLst_TTZ2S: $2BF910
+ AniVPtrLst_TTZ2N: $2BF912
+ AniVPtrLst_TTZ3M: $2BF914
+ AniVPtrLst_TTZ3D: $2BF916
+ AniVPtrLst_TTZ3S: $2BF918
+ AniVPtrLst_TTZ3N: $2BF91A
+ AniVPtrLst_TTZ4M: $2BF91C
+ AniVPtrLst_TTZ4D: $2BF91E
+ AniVPtrLst_TTZ4S: $2BF920
+ AniVPtrLst_TTZ4N: $2BF922
+ AniVPtrLst_TTZ5M: $2BF924
+ AniVPtrLst_TTZ5D: $2BF926
+ AniVPtrLst_TTZ5S: $2BF928
+ AniVPtrLst_TTZ5N: $2BF92A
+ AniVPtrLst_TTZ6M: $2BF92C
+ AniVPtrLst_TTZ6D: $2BF92E
+ AniVPtrLst_TTZ6S: $2BF930
+ AniVPtrLst_TTZ6N: $2BF932
+ AniVPtrLst_MMZ0M: $2BF934
+ AniVPtrLst_MMZ0D: $2BF936
+ AniVPtrLst_MMZ0S: $2BF938
+ AniVPtrLst_MMZ0N: $2BF93A
+ AniVPtrLst_MMZ1M: $2BF93C
+ AniVPtrLst_MMZ1D: $2BF93E
+ AniVPtrLst_MMZ1S: $2BF940
+ AniVPtrLst_MMZ1N: $2BF942
+ AniVPtrLst_MMZ2M: $2BF944
+ AniVPtrLst_MMZ2D: $2BF946
+ AniVPtrLst_MMZ2S: $2BF948
+ AniVPtrLst_MMZ2N: $2BF94A
+ AniVPtrLst_MMZ3M: $2BF94C
+ AniVPtrLst_MMZ3D: $2BF94E
+ AniVPtrLst_MMZ3S: $2BF950
+ AniVPtrLst_MMZ3N: $2BF952
+ AniVPtrLst_MMZ4M: $2BF954
+ AniVPtrLst_MMZ4D: $2BF956
+ AniVPtrLst_MMZ4S: $2BF958
+ AniVPtrLst_MMZ4N: $2BF95A
+ AniVPtrLst_MMZ5M: $2BF95C
+ AniVPtrLst_MMZ5D: $2BF95E
+ AniVPtrLst_MMZ5S: $2BF960
+ AniVPtrLst_MMZ5N: $2BF962
+ AniVPtrLst_MMZ6M: $2BF964
+ AniVPtrLst_MMZ6D: $2BF966
+ AniVPtrLst_MMZ6S: $2BF968
+ AniVPtrLst_MMZ6N: $2BF96A
+ AniVPtrLst_Train0M: $2BF96C
+ AniVPtrLst_Train0D: $2BF96E
+ AniVPtrLst_Train0S: $2BF970
+ AniVPtrLst_Train0N: $2BF972
+ AniVPtrLst_Train1M: $2BF974
+ AniVPtrLst_Train1D: $2BF976
+ AniVPtrLst_Train1S: $2BF978
+ AniVPtrLst_Train1N: $2BF97A
+ AniVPtrLst_Train2M: $2BF97C
+ AniVPtrLst_Train2D: $2BF97E
+ AniVPtrLst_Train2S: $2BF980
+ AniVPtrLst_Train2N: $2BF982
+ AniVPtrLst_Train3M: $2BF984
+ AniVPtrLst_Train3D: $2BF986
+ AniVPtrLst_Train3S: $2BF988
+ AniVPtrLst_Train3N: $2BF98A
+ AniVPtrLst_Train4M: $2BF98C
+ AniVPtrLst_Train4D: $2BF98E
+ AniVPtrLst_Train4S: $2BF990
+ AniVPtrLst_Train4N: $2BF992
+ AniVPtrLst_Train5M: $2BF994
+ AniVPtrLst_Train5D: $2BF996
+ AniVPtrLst_Train5S: $2BF998
+ AniVPtrLst_Train5N: $2BF99A
+ AniVPtrLst_Train6M: $2BF99C
+ AniVPtrLst_Train6D: $2BF99E
+ AniVPtrLst_Train6S: $2BF9A0
+ AniVPtrLst_Train6N: $2BF9A2
+ AniVPtrLst_Intro0M: $2BF9A4
+ AniVPtrLst_Intro0D: $2BF9A6
+ AniVPtrLst_Intro0S: $2BF9A8
+ AniVPtrLst_Intro0N: $2BF9AA
+ AniVPtrLst_Intro1M: $2BF9AC
+ AniVPtrLst_Intro1D: $2BF9AE
+ AniVPtrLst_Intro1S: $2BF9B0
+ AniVPtrLst_Intro1N: $2BF9B2
+ AniVPtrLst_Intro2M: $2BF9B4
+ AniVPtrLst_Intro2D: $2BF9B6
+ AniVPtrLst_Intro2S: $2BF9B8
+ AniVPtrLst_Intro2N: $2BF9BA
+ AniVPtrLst_Intro3M: $2BF9BC
+ AniVPtrLst_Intro3D: $2BF9BE
+ AniVPtrLst_Intro3S: $2BF9C0
+ AniVPtrLst_Intro3N: $2BF9C2
+ AniVPtrLst_Intro4M: $2BF9C4
+ AniVPtrLst_Intro4D: $2BF9C6
+ AniVPtrLst_Intro4S: $2BF9C8
+ AniVPtrLst_Intro4N: $2BF9CA
+ AniVPtrLst_Intro5M: $2BF9CC
+ AniVPtrLst_Intro5D: $2BF9CE
+ AniVPtrLst_Intro5S: $2BF9D0
+ AniVPtrLst_Intro5N: $2BF9D2
+ AniVPtrLst_Intro6M: $2BF9D4
+ AniVPtrLst_Intro6D: $2BF9D6
+ AniVPtrLst_Intro6S: $2BF9D8
+ AniVPtrLst_Intro6N: $2BF9DA
+ AniVPtrLst_World0M: $2BF9DC
+ AniVPtrLst_World0D: $2BF9DE
+ AniVPtrLst_World0S: $2BF9E0
+ AniVPtrLst_World0N: $2BF9E2
+ AniVPtrLst_World1M: $2BF9E4
+ AniVPtrLst_World1D: $2BF9E6
+ AniVPtrLst_World1S: $2BF9E8
+ AniVPtrLst_World1N: $2BF9EA
+ AniVPtrLst_World2M: $2BF9EC
+ AniVPtrLst_World2D: $2BF9EE
+ AniVPtrLst_World2S: $2BF9F0
+ AniVPtrLst_World2N: $2BF9F2
+ AniVPtrLst_World3M: $2BF9F4
+ AniVPtrLst_World3D: $2BF9F6
+ AniVPtrLst_World3S: $2BF9F8
+ AniVPtrLst_World3N: $2BF9FA
+ AniVPtrLst_World4M: $2BF9FC
+ AniVPtrLst_World4D: $2BF9FE
+ AniVPtrLst_World4S: $2BFA00
+ AniVPtrLst_World4N: $2BFA02
+ AniVPtrLst_World5M: $2BFA04
+ AniVPtrLst_World5D: $2BFA06
+ AniVPtrLst_World5S: $2BFA08
+ AniVPtrLst_World5N: $2BFA0A
+ AniVPtrLst_World6M: $2BFA0C
+ AniVPtrLst_World6D: $2BFA0E
+ AniVPtrLst_World6S: $2BFA10
+ AniVPtrLst_World6N: $2BFA12
+ AnimVPtr_BBZ13MN: $2BFA14
+ AnimVPtr_BBZ45MN: $2BFA3E
+ AnimVPtr_TTZ15MN: $2BFA5E
+ AnimVPtr_MMZ1MN: $2BFA7E
+ AnimVPtr_MMZ25MN: $2BFAB2
+ AnimVPtr_NULL: $2BFAF0
+ AnimArtV_BBZ_1: $2BFAF2
+ AnimArtV_BBZ_2: $2BFB10
+ AnimArtV_BBZ_3: $2BFB18
+ AnimArtV_BBZ_4: $2BFB36
+ AnimArtV_BBZ_5: $2BFB3E
+ AnimArtV_BBZ_6: $2BFB5C
+ AnimArtV_BBZ_7: $2BFB66
+ AnimArtV_BBZ_8: $2BFB84
+ AnimArtV_TTZ_1: $2BFB8E
+ AnimArtV_TTZ_2: $2BFBB6
+ AnimArtV_TTZ_3: $2BFBC0
+ AnimArtV_TTZ_4: $2BFBE8
+ AnimArtV_TTZ_5: $2BFBF2
+ AnimArtV_TTZ_6: $2BFC1A
+ AnimArtV_MMZ_1: $2BFC24
+ AnimArtV_MMZ_2: $2BFC60
+ AnimArtV_MMZ_3: $2BFC6E
+ AnimArtV_MMZ_4: $2BFC8C
+ AnimArtV_MMZ_5: $2BFC94
+ AnimArtV_MMZ_6: $2BFCB2
+ AnimArtV_MMZ_7: $2BFCBA
+ AnimArtV_MMZ_8: $2BFCD8
+ AnimArtV_MMZ_10: $2BFCE0
+ AnimArtV_MMZ_11: $2BFD26
+ AnimArtV_MMZ_9: $2BFD36
 
-*Segment 032 - aOutputMonoStereo: Offset $75D8  Size $1E
+*Segment 04E - Objlayout_Data: Offset $2DDC56  Size $1F33C
+ ObjLoc_BBZ1M: $2DDC56
+ ObjLoc_BBZ1D: $2DDFE0
+ ObjLoc_BBZ1S: $2DE362
+ ObjLoc_BBZ1N: $2DE6D4
+ ObjLoc_BBZ2M: $2DEA56
+ ObjLoc_BBZ2D: $2DEE28
+ ObjLoc_BBZ2S: $2DF1F2
+ ObjLoc_BBZ2N: $2DF5C4
+ ObjLoc_BBZ3M: $2DF9A6
+ ObjLoc_BBZ3D: $2DFE20
+ ObjLoc_BBZ3S: $2E02B2
+ ObjLoc_BBZ3N: $2E0774
+ ObjLoc_BBZ4M: $2E0C4E
+ ObjLoc_BBZ4D: $2E11C0
+ ObjLoc_BBZ4S: $2E172A
+ ObjLoc_BBZ4N: $2E1C84
+ ObjLoc_BBZ5M: $2E21CE
+ ObjLoc_BBZ5D: $2E2778
+ ObjLoc_BBZ5S: $2E2CD2
+ ObjLoc_BBZ5N: $2E3274
+ ObjLoc_SSZ1M: $2E37CA
+ ObjLoc_SSZ1D: $2E3AEC
+ ObjLoc_SSZ1S: $2E3E3E
+ ObjLoc_SSZ1N: $2E4180
+ ObjLoc_SSZ2M: $2E4502
+ ObjLoc_SSZ2D: $2E48C4
+ ObjLoc_SSZ2S: $2E4C6E
+ ObjLoc_SSZ2N: $2E5000
+ ObjLoc_SSZ3M: $2E5382
+ ObjLoc_SSZ3D: $2E568C
+ ObjLoc_SSZ3S: $2E59FE
+ ObjLoc_SSZ3N: $2E5D08
+ ObjLoc_SSZ4M: $2E6082
+ ObjLoc_SSZ4D: $2E63BC
+ ObjLoc_SSZ4S: $2E66EE
+ ObjLoc_SSZ4N: $2E6A08
+ ObjLoc_SSZ5M: $2E6D42
+ ObjLoc_SSZ5D: $2E71BC
+ ObjLoc_SSZ5S: $2E765E
+ ObjLoc_SSZ5N: $2E7AC8
+ ObjLoc_AAZ1M: $2E7F3E
+ ObjLoc_AAZ1D: $2E84B0
+ ObjLoc_AAZ1S: $2E89EA
+ ObjLoc_AAZ1N: $2E8ECC
+ ObjLoc_AAZ2M: $2E93B6
+ ObjLoc_AAZ2D: $2E9838
+ ObjLoc_AAZ2S: $2E9CBA
+ ObjLoc_AAZ2N: $2EA16C
+ ObjLoc_AAZ3M: $2EA60E
+ ObjLoc_AAZ3D: $2EAB68
+ ObjLoc_AAZ3S: $2EB0C2
+ ObjLoc_AAZ3N: $2EB664
+ ObjLoc_AAZ4M: $2EBBF6
+ ObjLoc_AAZ4D: $2EC128
+ ObjLoc_AAZ4S: $2EC5FA
+ ObjLoc_AAZ4N: $2ECB14
+ ObjLoc_AAZ5M: $2ECFCE
+ ObjLoc_AAZ5D: $2ED6C0
+ ObjLoc_AAZ5S: $2EDD42
+ ObjLoc_AAZ5N: $2EE434
+ ObjLoc_AAZNULL: $2EEAC6
+ ObjLoc_TTZ1M: $2EEAC8
+ ObjLoc_TTZ1D: $2EEE72
+ ObjLoc_TTZ1S: $2EF2C4
+ ObjLoc_TTZ1N: $2EF63E
+ ObjLoc_TTZ2M: $2EF988
+ ObjLoc_TTZ2D: $2F00D2
+ ObjLoc_TTZ2S: $2F093C
+ ObjLoc_TTZ2N: $2F10D6
+ ObjLoc_TTZ3M: $2F16C8
+ ObjLoc_TTZ3D: $2F1B5A
+ ObjLoc_TTZ3S: $2F1F54
+ ObjLoc_TTZ3N: $2F23B6
+ ObjLoc_TTZ4M: $2F2780
+ ObjLoc_TTZ4D: $2F2C2A
+ ObjLoc_TTZ4S: $2F2FFC
+ ObjLoc_TTZ4N: $2F3436
+ ObjLoc_TTZ5M: $2F3870
+ ObjLoc_TTZ5D: $2F3DAA
+ ObjLoc_TTZ5S: $2F42E4
+ ObjLoc_TTZ5N: $2F4826
+ ObjLoc_MMZ1M: $2F4D6C
+ ObjLoc_MMZ1D: $2F51F6
+ ObjLoc_MMZ1S: $2F5660
+ ObjLoc_MMZ1N: $2F5B2A
+ ObjLoc_MMZ2M: $2F5FCC
+ ObjLoc_MMZ2D: $2F6536
+ ObjLoc_MMZ2S: $2F6A90
+ ObjLoc_MMZ2N: $2F7022
+ ObjLoc_MMZ3M: $2F75A4
+ ObjLoc_MMZ3D: $2F7B76
+ ObjLoc_MMZ3S: $2F8160
+ ObjLoc_MMZ3N: $2F86EA
+ ObjLoc_MMZ4M: $2F8C94
+ ObjLoc_MMZ4D: $2F91FE
+ ObjLoc_MMZ4S: $2F9748
+ ObjLoc_MMZ4N: $2F9D2A
+ ObjLoc_MMZ5M: $2FA2EC
+ ObjLoc_MMZ5D: $2FA89E
+ ObjLoc_MMZ5S: $2FAE50
+ ObjLoc_MMZ5N: $2FB41A
+ ObjLoc_Train1: $2FB9D8
+ ObjLoc_Train2: $2FBD42
+ ObjLoc_Train3: $2FC2B4
+ ObjLoc_Train4: $2FC45E
+ ObjLoc_Train5: $2FC878
+ ObjLoc_Intro0: $2FC87A
+ ObjLoc_Intro1: $2FC94C
+ ObjLoc_Intro2: $2FCA1E
+ ObjLoc_Intro3: $2FCAC0
+ ObjLoc_Intro4: $2FCCC2
+ ObjLoc_Tutorial: $2FCE3C
+ ObjLoc_World: $2FCE3E
+ ObjLoc_WorldNULL: $2FCF90
 
-*Segment 033 - aSpeed: Offset $7636  Size $8
+*Segment 04F - GameHeader: Offset $100  Size $8E
 
-*Segment 034 - SFX1st_1: Offset $7527  Size $1
+*Segment 050 - LevelSel_Strings: Offset $7739E  Size $1B6
 
-*Segment 035 - SFX1st_2: Offset $752D  Size $1
+*Segment 051 - LevelPlaylist: Offset $76ED0  Size $8
 
-*Segment 036 - Code_LevelSelectDebug: Offset $7A6A  Size $4
+*Segment 052 - LevelPlaylist: Offset $76EE4  Size $6
 
-*Segment 037 - Code_AmyInSoundTest: Offset $7A7C  Size $4
+*Segment 053 - SoundTestSongNames: Offset $227338  Size $22A
+
+*Segment 054 - CharSel_ID_Max1a: Offset $322B9  Size $1
+
+*Segment 055 - CharSel_ID_Max1b: Offset $3258B  Size $1
+
+*Segment 056 - CharSel_ID_Max1c: Offset $32597  Size $1
+
+*Segment 057 - CharSel_ID_Max2a: Offset $3245D  Size $1
+
+*Segment 058 - CharSel_ID_Max2b: Offset $32475  Size $1
+
+*Segment 059 - CharSel_ID_Max2c: Offset $32479  Size $1
+
+*Segment 05A - CharSel_IDs: Offset $323F2  Size $E
+
+*Segment 05B - CharSel_IDs: Offset $32518  Size $8
+
+*Segment 05C - CharSel_Names: Offset $32678  Size $11C
+
+*Segment 05D - aOutputMonoStereo: Offset $75D8  Size $1E
+
+*Segment 05E - aSpeed: Offset $7636  Size $8
+
+*Segment 05F - SFX1st_1: Offset $7527  Size $1
+
+*Segment 060 - SFX1st_2: Offset $752D  Size $1
+
+*Segment 061 - BGM_WE01_TOD: Offset $76EF5  Size $1
+
+*Segment 062 - Code_LevelSelectDebug: Offset $7A6A  Size $4
+
+*Segment 063 - Code_AmyInSoundTest: Offset $7A7C  Size $4
+
+*Segment 064 - BankTbl: Offset $76AC0  Size $29
+
+*Segment 065 - PtrTbl: Offset $76AE9  Size $DC
+
+*Segment 066 - BankData0: Offset $40000  Size $7FE6
+
+*Segment 067 - BankData1: Offset $48000  Size $6F7C
+
+*Segment 068 - BankData2: Offset $50000  Size $3909
+
+*Segment 069 - BankData2S: Offset $56000  Size $10AC
+
+*Segment 06A - PWMData: Offset $58000  Size $1B1D4
+
+*Segment 06B - PWMDataX: Offset $2FE63C  Size $18C4
 

@@ -1,5 +1,5 @@
 
-Target	EQU	$4C44E
+Target	EQU	$4CC5B
 	smpsHeaderVoice	CWorld_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $16

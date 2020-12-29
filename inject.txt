@@ -79,8 +79,11 @@ Extern "ObjYAdj" "1024" "Levels/Intro/Sprites/1MN.bin" "Levels/Intro/Sprites/Con
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;!@  Rebuild modified sound driver (vanilla bank-sequential mode)
-;WorkPath "#Batch/Sound/Music/ASM"
-;Extern "build.bat" "0"
+WorkPath "#Batch/Sound/Music/ASM"
+Extern "build.bat" "0"
+;WorkPath "#Batch/Assets/Music/PWM"
+;Extern "PWM.bat" "0"
+
 WorkPath "#Batch"
 
 ;!@ Prepatch OG ROM for lazy editing!
@@ -93,7 +96,7 @@ LoadFile "kc.bin"
 LoadInject "#Batch/inmain.txt"
 AddInject  "#Batch/inopts.txt"
 ;!@ New audio inection!
-;AddInject  "#Batch/inaudio.txt"
+AddInject  "#Batch/inaudio.txt"
 
 ;GetFile "Please name the output file"
 ;RunInject  #Got
@@ -105,5 +108,8 @@ RunInject  "inject.bin"
 ;;;;;;;;;;;;;;;
 
 ;Extern     "#Batch\\fixheadr" "#Got"
-Extern     "#Batch\\fixheadr" "inject.bin"
-
+;Extern     "#Batch\\fixheadr" "inject.bin"
+WorkPath "#Batch"
+Extern     "fixheadr" "inject.bin"
+;
+;EOF

@@ -24,7 +24,7 @@ MaxSize	$400000				;Maximum Genesis ROM size
 StartSeg GameHeader Big_Endian $000100 $8E
 
 	String	"SEGA 32X        "					;Console Name
-	String	"(C)SEGA 2019.DEC"					;Copyright Date
+	String	"(C)SEGA 2020.DEC"					;Copyright Date
 	String  "KNUCKLES CLACKERS                               "	;Domestic Game Name
 	String  "KNUCKLES CLACKERS                               "	;Foreign Game Name
 	String	"GM MK-84503-00"					;Game Serial Number
@@ -36,12 +36,80 @@ EndSeg
 ;!@ Level Select Strings
 ;;;
 
+;
 ;Strings for various Level Select elements, see comments
 ;All are C-string null-terminated ($00)
-
+;
 ;Acceptable ASCII chars:
 ;!"#$%&'()*+,-./0123456789:;<=>? (C) space_char
 ;ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_
+;
+;https://web.archive.org/web/20190910020457/http://stephenuk.hacking-cult.org/SCHG/Chaotix/TextEditing/TextEditing.htm
+;Most other text (aside from ending cedits and HUD) can be found using this table (thanks Dinner Sonic):
+;00=
+;01=!
+;02="
+;03=#
+;04=$
+;05=%
+;06=&
+;07='
+;08=(
+;09=)
+;0A=*
+;0B=+
+;0C=,
+;0D=-
+;0E=.
+;0F=/
+;10=0
+;11=1
+;12=2
+;13=3
+;14=4
+;15=5
+;16=6
+;17=7
+;18=8
+;19=9
+;1A=:
+;1B=;
+;1C=<
+;1D==
+;1E=>
+;1F=?
+;20=©
+;21=A
+;22=B
+;23=C
+;24=D
+;25=E
+;26=F
+;27=G
+;28=H
+;29=I
+;2A=J
+;2B=K
+;2C=L
+;2D=M
+;2E=N
+;2F=O
+;30=P
+;31=Q
+;32=R
+;33=S
+;34=T
+;35=U
+;36=V
+;37=W
+;38=X
+;39=Y
+;3A=Z
+;3B=[
+;3C=\
+;3D=]
+;3E=^
+;3F=_ 
 
 ;$1B6 bytes available
 
@@ -52,7 +120,9 @@ StartSeg LevelSel_Strings Big_Endian $07739E	$1B6
 	BYTE	$00
 	String	"AMAZING ARENA       "		;AAZ
 	BYTE	$00
-	String	"TECHNO TOWER        "		;TTZ
+	
+	;!@ NEW DATA
+	String	"TECHNO TOWER CLASSIC"		;TTZ
 	BYTE	$00
 	String	"MARINA MADNESS      "		;MMZ
 	BYTE	$00
@@ -91,7 +161,9 @@ StartSeg LevelSel_Strings Big_Endian $07739E	$1B6
 	BYTE	$00
 	String	"MIGHTY    "				;Mighty char
 	BYTE	$00
-	String	"**********"				;Glitch char
+	;!@ NEW Data
+	;String	"**********"				;Glitch char
+	String	"WECHNIA   "
 	BYTE	$00
 	String	"KNUCKLES  "				;Knuckles char
 	BYTE	$00
@@ -116,8 +188,9 @@ EndSeg
 ;Level Music Playlist
 ;;;
 
-StartSeg LevelPlaylist Big_Endian $076ED0 7
-
+;!@
+;StartSeg LevelPlaylist Big_Endian $076ED0 7
+StartSeg LevelPlaylist Big_Endian $076ED0 8
 	BYTE	$05	;BBZ
 	BYTE	$03	;SSZ
 	BYTE	$07	;AAZ
@@ -125,7 +198,19 @@ StartSeg LevelPlaylist Big_Endian $076ED0 7
 	BYTE	$04	;MMZ
 	BYTE	$01	;Intro/Training
 	BYTE	$11	;Tutorial
+	BYTE	$00	;World Entrance (Null, normally unused)
+EndSeg
 
+;;;
+;!@ World Entrance Act Song playlis 
+;;;
+StartSeg LevelPlaylist Big_Endian $076EE4 6
+	BYTE	$1B	;Act 1 (unused). WE Roulette
+	BYTE	$24 ;Act 2 (Metal Sonic Kai Final Boss)
+	BYTE	$1A ;Act 3 (unused). Bonus Stage
+	BYTE	$14 ;Act 4 (unused). Special Stage
+	BYTE	$F1 ;Act 5 (unused). SMPS Stop
+	BYTE	$F1 ;Act 6 (unused). SMPS Stop
 EndSeg
 
 ;;;
@@ -184,7 +269,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	String "THIS HORIZON"
 	BYTE	$00
-	String "TAKE OFF"
+	;!@ NEW DATA
+	;String "TAKE OFF"
+	String "SYS MENU"
 	BYTE	$00
 	String "COMBINATION"
 	BYTE	$00
@@ -192,7 +279,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	String "SURGING POWER"
 	BYTE	$00
-	String "MECHANICAL DANCE"
+	;!@ NEW DATA
+	;String "MECHANICAL DANCE"
+	String "GAMEOVER        "	
 	BYTE	$00
 	String "TUBE PANIC"
 	BYTE	$00
@@ -216,7 +305,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	String "HAVE A HAPPY DAY"
 	BYTE	$00
-	String "REACH THE GOAL"
+	;!@ New Data
+	;String "REACH THE GOAL"
+	String "SONIC 1 GOAL  "
 	BYTE	$00
 	String "HIGH FIVE"
 	BYTE	$00
@@ -230,7 +321,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	String "STEEL HEART"
 	BYTE	$00
-	String "TRIBUTE"
+	;!@ New Data
+	;String "TRIBUTE"
+	String "SEGA CH"
 	BYTE	$00
 	String "DESTRUCTIVE POWER"
 	BYTE	$00
@@ -242,6 +335,93 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00	
 EndSeg
 
+;Region @CharSel_Stuff
+
+;Region @CharSel_MaxSlot
+;Max CharSel slot IDs for the LUTs below. Extend to $06 to re-enable beta Heavy/Bomb support
+StartSeg CharSel_ID_Max1a Big_Endian $0322B9
+	;!@
+	;BYTE	$04
+	BYTE	$06
+EndSeg
+StartSeg CharSel_ID_Max1b Big_Endian $03258B
+	;!@
+	;BYTE	$04
+	BYTE	$06
+EndSeg
+StartSeg CharSel_ID_Max1c Big_Endian $032597
+	;!@
+	;BYTE	$04
+	BYTE	$06
+EndSeg
+
+;Max CharSel slot IDs for menu navigation
+StartSeg CharSel_ID_Max2a Big_Endian $03245D
+	;!@
+	;BYTE	$04
+	BYTE	$06
+EndSeg
+StartSeg CharSel_ID_Max2b Big_Endian $032475
+	;!@
+	;BYTE	$04
+	BYTE	$06
+EndSeg
+;This one is Max ID-1, to push back to last entry if OOB on dpad scroll down
+StartSeg CharSel_ID_Max2c Big_Endian $032479
+	;!@
+	;BYTE	$03
+	BYTE	$05
+EndSeg
+;EndRegion
+
+;Region @LUTs
+;Character IDs for the CharSel Gfx
+StartSeg CharSel_IDs Big_Endian $0323F2 $E
+	WORD	$0008	;Knuckles
+	WORD	$0000	;Mighty
+	WORD	$001C	;Espio
+	WORD	$000C	;Charmy
+	WORD	$0010	;Vector
+	WORD	$0014	;Bomb
+	WORD	$0018	;Heavy
+EndSeg
+
+;Character IDs for the 0-based selection for the CharSel menu
+StartSeg CharSel_IDs Big_Endian $032518 $8
+	BYTE	$08		;Knuckles
+	BYTE	$00		;Mighty
+	BYTE	$1C		;Espio
+	BYTE	$0C		;Charmy
+	BYTE	$10		;Vector
+	BYTE	$14		;Bomb
+	BYTE	$18		;Heavy
+	BYTE	$00		;Mighty2 (Wechidna?)
+EndSeg
+
+;Corresponding Names and x-axis offsets (signed, negative words to center text within oval) for the CharSel ID LUT above
+StartSeg CharSel_Names Big_Endian $32678 $11C
+	WORD 	$FFB0
+	String 	'KNUCKLES THE ECHIDNA          '	;Knuckles
+	WORD	$FFB0
+	String 	'MIGHTY THE ARMADILLO          '	;Mighty
+	WORD 	$FFB4
+	String 	'ESPIO THE CHAMELEON           '	;Espio
+	WORD 	$FFD8
+	String 	'CHARMY BEE                    '	;Charmy
+	WORD 	$FFB0
+	String 	'VECTOR THE CROCODILE          '	;Vector
+	WORD 	$FFBC
+	String 	'BOMB THE MECHANIC             ' ; !@ Bomb (Unused)
+	WORD 	$FFB8
+	String 	'HEAVY THE MECHANIC            ' ; !@ Heavy (Unused)
+	;Missing: Extra Mighty (probably meant for Wechidna)
+	
+	;CharSel menu headers
+	String 	'         PLAYER  SELECT       ' ;1P (Player Select)
+	String 	'          COMBI SELECT        ' ;2P (Combi Select)
+EndSeg
+;EndRegion
+;EndRegion
 
 ;;;
 ;!@ Sound Test Stereo/Mono
@@ -274,6 +454,7 @@ StartSeg aSpeed Big_Endian $007636 $08
 	WORD	$0000
 EndSeg
 
+;Region @1stSFX
 ;;;
 ;!@ 1st SFX ID
 ;;;
@@ -286,7 +467,18 @@ EndSeg
 StartSeg SFX1st_2 Big_Endian $00752D 1
 	BYTE $2A
 EndSeg
+;EndRegion
 
+;;;
+;!@ WE Acts 0/1 Base BGM ID for TOD
+;;;
+
+;Base BGM ID for WE Acts 0/1
+StartSeg BGM_WE01_TOD Big_Endian $0076EF5 1
+	BYTE $09
+EndSeg
+
+;Region @Cheats
 ;;;
 ;Cheat Codes
 ;;;
@@ -302,4 +494,5 @@ StartSeg Code_AmyInSoundTest Big_Endian $007A7C 4
 	DWORD	$19710117
 
 EndSeg
+;EndRegion
 

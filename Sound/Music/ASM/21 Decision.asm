@@ -1,5 +1,5 @@
 
-Target	EQU	$4D67A
+Target	EQU	$4DDFA
 	smpsHeaderVoice	Decision_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $44

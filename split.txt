@@ -1,21 +1,27 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+3;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Knuckles' Chaotix (JU / 5) Batch Extraction File for ROMulan
 ;
 ; 2011-02-24 - Stealth - First Release
 ; 2020-04-14 - Genesis Does - Improvements, AAZ Lit palettes, Sound Driver support
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+;Region @FolderSetup
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; File and folder setup
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 ;GetFile "Please select a clean, binary Chaotix (5) ROM file"
 ;LoadFile #got
-LoadFile kc.bin
+LoadFile orig.bin
 
 ;GetPath "Please select the destination folder for the data"
 ;DestPath c:\dev\soned2\bin\Chaotix
 ; #Got
+
+;!@ Demo Data
+MakePath "Misc"
+MakePath "Misc/Demos"
 
 MakePath "Sound"
 MakePath "Sound/Music"
@@ -29,6 +35,7 @@ MakePath "Sound/PWM"
 MakePath "Art"
 MakePath "Art/palettes"
 MakePath "Art/palettes/MD"
+MakePath "Art/palettes/MD/Palcycles"	;!@
 MakePath "Art/palettes/Mars"
 
 ;!@
@@ -111,9 +118,24 @@ MakePath "Levels/Entrance/Collisn"
 MakePath "Levels/Entrance/Pal"
 MakePath "Levels/Entrance/Sprites"
 MakePath "Collisn"
+;endregion
 
+;Region @X_MiscData
+;Misc data
+
+;Region @Demos
+Extract $02760E  $088 	"Misc/Demos/Demo1.bin"	;MMZ1N, Charmy/Heavy
+Extract $027696  $13C 	"Misc/Demos/Demo2.bin"	;TTZ2S, Vector/Bomb
+Extract $0277D2  $086 	"Misc/Demos/Demo3.bin"	;BBZ3D, Knuckles/Mighty
+Extract $027858  $0C4 	"Misc/Demos/Demo4.bin"	;IIZ (intro) 3M, Espio/Knuckles
+Extract $02791C  $0BE 	"Misc/Demos/Demo5.bin"	;AAZ1D, Mighty/Espio
+;EndRegion
+;EndRegion
+
+;Region @X_LevelData
+;Region @X_PalData
 ;;;;;;;;;;;;;;;;;;;;;;
-; Palette Data Extract
+; Palette Data Extract (Genesis)
 ;;;;;;;;;;;;;;;;;;;;;;
 
 Extract $2B3470  $80 "Levels/BBZ/Pal/13M.bin"
@@ -179,32 +201,91 @@ Extract $2B47F0  $80 "Levels/Intro/Pal/15N.bin"
 
 Extract $2B4870  $80 "Levels/Tutorial/Pal/15M.bin"
 
-Extract $2B48F0  $80 "Levels/Entrance/Pal/15M.bin"
-Extract $2B4970  $80 "Levels/Entrance/Pal/15D.bin"
-Extract $2B49F0  $80 "Levels/Entrance/Pal/15S.bin"
-Extract $2B4A70  $80 "Levels/Entrance/Pal/15N.bin"
+Extract $2B48F0  $080 "Levels/Entrance/Pal/15M.bin"
+Extract $2B4970  $080 "Levels/Entrance/Pal/15D.bin"
+Extract $2B49F0  $080 "Levels/Entrance/Pal/15S.bin"
+Extract $2B4A70  $080 "Levels/Entrance/Pal/15N.bin"
+Extract $2B4AF0  $080 "Levels/Entrance/Pal/2MN.bin"
+Extract $2BA764  $1A8 "Levels/Entrance/Pal/15MN_PalSwap.bin"	;!@ PalSwap for inside of WE
 
-Extract $2B4AF0  $80 "Levels/Entrance/Pal/2MN.bin"
-
+;Extract	$2BA354	 $08 "Levels/TTZ/Pal/BossHdr.bin"	;!@
 Extract $2BA35C  $80 "Levels/TTZ/Pal/BossM.bin"
 Extract $2BA3DC  $80 "Levels/TTZ/Pal/BossD.bin"
 Extract $2BA45C  $80 "Levels/TTZ/Pal/BossS.bin"
 Extract $2BA4DC  $80 "Levels/TTZ/Pal/BossN.bin"
 
+;Extract $2BA55C  $08 "Levels/SSZ/Pal/BossHdr.bin"	;!@
 Extract $2BA564  $80 "Levels/SSZ/Pal/BossM.bin"
 Extract $2BA5E4  $80 "Levels/SSZ/Pal/BossD.bin"
 Extract $2BA664  $80 "Levels/SSZ/Pal/BossS.bin"
 Extract $2BA6E4  $80 "Levels/SSZ/Pal/BossN.bin"
+;endregion
+
+;Region @X_PalcData
+;;;;;;;;;;;;;;;;;;;;;;
+;!@ Palcycle data
+;;;;;;;;;;;;;;;;;;;;;;
+
+;BBZ
+Extract $2B6832  $001A "Art/palettes/MD/Palcycles/BBZ01_Data.bin"
+Extract $2B684C  $0158 "Art/palettes/MD/Palcycles/BBZ02_Data.bin"
+Extract $2B68A4  $00C8 "Art/palettes/MD/Palcycles/BBZ03_Data.bin"
+Extract $2B6C5E  $0464 "Art/palettes/MD/Palcycles/BBZ04_Data.bin"
+
+;SSZ
+Extract $2BE402  $0018 "Art/palettes/MD/Palcycles/SSZ01_Data.bin"	
+Extract $2B7248  $1F3C "Art/palettes/MD/Palcycles/SSZ02_Data.bin"
+Extract $2B70C2  $0186 "Art/palettes/MD/Palcycles/SSZ03_Data.bin"
+
+;AAZ
+Extract $2B9276  $005C "Art/palettes/MD/Palcycles/AAZ01_Data.bin"
+
+;TTZ
+Extract $2B9C14  $010E "Art/palettes/MD/Palcycles/TTZ01_Data.bin"
+
+;MMZ
+Extract $2B9D22  $00EA "Art/palettes/MD/Palcycles/MMZ01_Data.bin"
+
+;IIZ (Both Tutorial/Introduction)
+Extract $2B9E0C  $0070 "Art/palettes/MD/Palcycles/IIZ01_Data.bin"
+
+;WE
+Extract $2B6A6C  $0042 "Art/palettes/MD/Palcycles/WE01_Data.bin"
+Extract $2B6BE6  $0078 "Art/palettes/MD/Palcycles/WE02_Data.bin"	
+Extract $2B6AAE  $0138 "Art/palettes/MD/Palcycles/WE03_Data.bin"
+Extract $2B9EC8  $004E "Art/palettes/MD/Palcycles/WE04_Data.bin"
+Extract $2B9E7C  $004C "Art/palettes/MD/Palcycles/WE05_Data.bin"
+Extract $2B9F16  $043E "Art/palettes/MD/Palcycles/WE06_Data.bin"
+
+;AAZ Lit
+Extract $2BE41A  $004C "Art/palettes/MD/Palcycles/AAZ_Lit01_Data.bin"
+Extract $2B9184  $00F2 "Art/palettes/MD/Palcycles/AAZ_Lit02_Data.bin"
+Extract $2B930E  $0886 "Art/palettes/MD/Palcycles/AAZ_Lit03_Data.bin"
+
+;Unknown palcycle data (SSZ/AAZ Lit maybe?)
+;Unk1
+Extract $2B92D2  $003C "Art/palettes/MD/Palcycles/Unk1_01_Data.bin"
+
+;Unk2
+Extract $2B9B94  $003C "Art/palettes/MD/Palcycles/Unk2_01_Data.bin"
+Extract $2B9BD4  $0040 "Art/palettes/MD/Palcycles/Unk2_02_Data.bin"
+
+;Unk3
+Extract $2B55E8  $0152 "Art/palettes/MD/Palcycles/Unk3_01_Data.bin"
+Extract $2B573A  $0AC0 "Art/palettes/MD/Palcycles/Unk3_02_Data.bin"
+Extract $2BE356  $00AC "Art/palettes/MD/Palcycles/Unk3_03_Data.bin"
+;endregion
 
 
+;Region @x_LvlGfx
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Level Graphic Data Extract
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;Region @x_LG_BBZ
 ;;;;
 ;Botanic Base Zone
 ;;;;
-
 Extract $22F3B4 13186 "Levels/BBZ/8x8/0_15MN.bin"
 Extract $232736  3760 "Levels/BBZ/8x8/1_12MN.bin"
 Extract $2335E6  3566 "Levels/BBZ/8x8/1_3MN.bin"
@@ -252,7 +333,9 @@ Extract $243290    18 "Levels/BBZ/BG/12MN.bin"
 Extract $2432A2    18 "Levels/BBZ/BG/3MN.bin"
 Extract $2432B4    18 "Levels/BBZ/BG/4MN.bin"
 Extract $2432C6    18 "Levels/BBZ/BG/5MN.bin"
+;endregion
 
+;Region @X_LG_SSZ
 ;;;;
 ;Speed Slider Zone
 ;;;;
@@ -314,7 +397,9 @@ Extract $2634D4    42 "Levels/SSZ/BG/3SN.bin"
 Extract $2634FE    32 "Levels/SSZ/BG/45MD.bin"
 Extract $26351E    42 "Levels/SSZ/BG/45SN.bin"
 Extract $263548    12 "Levels/SSZ/BG/Boss.bin"
+;endregion
 
+;Region @X_LG_AAZ
 ;;;;
 ;Amazing Arena Zone
 ;;;;
@@ -361,7 +446,9 @@ Extract $27919C   714 "Levels/AAZ/128x128/2_5MN.bin"
 Extract $279466    58 "Levels/AAZ/BG/12MN.bin"
 Extract $2794A0    58 "Levels/AAZ/BG/34MN.bin"
 Extract $2794DA    56 "Levels/AAZ/BG/5MN.bin"
+;endregion
 
+;Region @X_LG_TTZ
 ;;;;
 ;Techno Tower Zone
 ;;;;
@@ -410,7 +497,9 @@ Extract $28BF54    30 "Levels/TTZ/BG/14MS.bin"
 Extract $28BF72    26 "Levels/TTZ/BG/14N.bin"
 Extract $28BF8C    30 "Levels/TTZ/BG/5MS.bin"
 Extract $28BFAA    26 "Levels/TTZ/BG/5N.bin"
+;endregion
 
+;Region @X_LG_MMZ
 ;;;;
 ;Marina Madness Zone
 ;;;;
@@ -447,7 +536,9 @@ Extract $299262   274 "Levels/MMZ/BG/2MN.bin"
 Extract $299374   274 "Levels/MMZ/BG/3MN.bin"
 Extract $299486   246 "Levels/MMZ/BG/4MN.bin"
 Extract $29957C   188 "Levels/MMZ/BG/5MN.bin"
+;endregion
 
+;Region @X_LG_Training
 ;;;;
 ;Training Levels
 ;;;;
@@ -465,7 +556,9 @@ Extract $2A3CCC   254 "Levels/Intro/FG/3MN.bin"
 Extract $2A45EE   818 "Levels/Intro/FG/4MN.bin"
 
 Extract $2A4920    20 "Levels/Intro/BG/15MN.bin"
+;endregion
 
+;Region @X_LG_IIZ
 ;;;;
 ;Intro and Tutorial Levels
 ;;;;
@@ -494,7 +587,9 @@ Extract $2A78E0    36 "Levels/Tutorial/FG/5N6M.bin"
 Extract $2A7904    20 "Levels/Tutorial/FG/6DS.bin"
 
 Extract $2A7918    12 "Levels/Tutorial/BG/56MN.bin"
+;endregion
 
+;Region @X_LG_WE
 ;;;;
 ;World Entrance and Final Boss Levels
 ;;;;
@@ -526,7 +621,11 @@ Extract $2B2F38   830 "Levels/Entrance/128x128/0_2M.bin"
 Extract $2B3276    40 "Levels/Entrance/FG/2M.bin"
 
 Extract $2B329E    18 "Levels/Entrance/BG/2M.bin"
+;endregion
+;endregion
 
+
+;Region @X_LG_AnimArt
 ;!@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Level Graphic Data script extract (Aniart VRAM addrs)
@@ -935,20 +1034,26 @@ Extract $2A34CC  $800 "Levels/Intro/Collisn/15.bin"
 Extract $2A706E  $800 "Levels/Tutorial/Collisn/56.bin"
 
 Extract $2AC1A0  $800 "Levels/Entrance/Collisn/01.bin"
+;endregion
+;endregion
 
-
+;Region @X_Sound
 ;;;;;;;;;;;;;;;;;;;;
 ; Sound Data Extract
 ;;;;;;;;;;;;;;;;;;;;
 
+;Region @X_BGM
 ;-------------------
 ;!@ BGM Data
 ;-------------------
 
+;Region @X_SoundSetup
 ;Bank ID and Music Pointer Tables
 Extract $076AC0  $29 	"Sound/Music/BIN/BankList.bin"
 Extract $076AE9  $DD 	"Sound/Music/BIN/PtrList.bin"
+;endregion
 
+;Region @X_BGM_Bank0
 ;Bank 0
 Extract $40000	$D61	"Sound/Music/BIN/01 Door Into Summer.bin"
 Extract $40D61	$BA3	"Sound/Music/BIN/02 Electoria.bin"
@@ -964,7 +1069,9 @@ Extract $468E5	$703	"Sound/Music/BIN/0B Evening Star.bin"
 Extract $46FE8	$4FB	"Sound/Music/BIN/0C Moonrise.bin"
 Extract $474E3	$30D	"Sound/Music/BIN/0D Overture.bin"
 Extract $477F0	$7F6	"Sound/Music/BIN/0E This Horizon.bin"
+;endregion
 
+;Region @X_BGM_Bank1
 ;Bank 1
 Extract $48000	$36A	"Sound/Music/BIN/0F Take Off.bin"
 Extract $4836A	$6CF	"Sound/Music/BIN/10 Combination.bin"
@@ -989,13 +1096,17 @@ Extract $4D81D	$1D7	"Sound/Music/BIN/22 From Party to Party.bin"
 Extract $4D9F4	$24D	"Sound/Music/BIN/23 Have Some Fun.bin"
 Extract $4DC41	$6FC	"Sound/Music/BIN/24 Oriental Legend.bin"
 Extract $4E33D	$4BF	"Sound/Music/BIN/25 Steel Heart.bin"
+;endregion
 
+;Region @X_BGM_Bank2
 ;Bank 2 (BGM)
 Extract $50000	$9AC	"Sound/Music/BIN/26 Tribute.bin"
 Extract $509AC	$2BE	"Sound/Music/BIN/27 Destructive Power.bin"
 Extract $50C6A	$33A1	"Sound/Music/BIN/28 Just Another Day.bin"
 Extract $5400B	$183	"Sound/Music/BIN/29 Decision 2nd.bin"
+;endregion
 
+;Region @X_SFX_Bank2
 ;Bank 2 (SFX)
 Extract	$56000	$28	"Sound/Music/BIN/2A.bin"
 Extract	$56028	$33	"Sound/Music/BIN/2B.bin"
@@ -1066,14 +1177,20 @@ Extract	$56F11	$FF	"Sound/Music/BIN/6B.bin"
 Extract	$57010	$3E	"Sound/Music/BIN/6C.bin"
 Extract	$5704E	$2D	"Sound/Music/BIN/6D.bin"
 Extract	$5707B	$31	"Sound/Music/BIN/6E.bin"
+;endregion
+;endregion
 
-
+;Region @X_PWM
 ;-------------------
 ;PWM Data
 ;-------------------
 
 ;!@
-;https://info.sonicretro.org/SCHG:Music_Hacking/Voice_and_Note_Editing#Knuckles.27_Chaotix
+;PWM Table location: https://info.sonicretro.org/SCHG:Music_Hacking/Other_Games_and_Data_Locations#Knuckles.27_Chaotix
+;PWM Table format https://info.sonicretro.org/SCHG:Music_Hacking/DAC_Samples,_Coordination_Flags,_Game_Specifics,_and_Real-Time_Music_Editing#32X_SMPS_-_PWM
+Extract $058000	 $160 "Sound/PWM/PWMTable.bin"	;PWM Table
+
+;PWM Samples: https://info.sonicretro.org/SCHG:Music_Hacking/Voice_and_Note_Editing#Knuckles.27_Chaotix
 Extract $058160  2168 "Sound/PWM/81.bin"		;Electric Kick
 Extract $0589D8  3584 "Sound/PWM/82.bin"		;Electric Snare
 Extract $0597D8 12736 "Sound/PWM/83.bin"		;Splash Cymbal
@@ -1092,13 +1209,17 @@ Extract $06F7B6  6368 "Sound/PWM/92-93.bin"		;High, Low Bongo
 Extract $071096 12016 "Sound/PWM/94-95.bin"		;High, Low Timpani
 Extract $073F86    64 "Sound/PWM/96.bin"		;Silence
 Extract $073FC6    58 "Sound/PWM/Silence.bin"	;Silence
+;endregion
+;endregion
 
+;Region @SoundProcessing
+
+;Region @SMPS2ASM
 ;-------------------
 ;!@ 
 ;Convert all SMPS files to ASM
 ;HUGE thanks to Natsumi for creating MDMusicPlayer!
 ;-------------------
-
 ;Copy all BIN files to MDMusicPlayer's music folder, for conversion
 Copy	"Sound/Music/BIN/01 Door Into Summer.bin"		"MDMusicPlayer.1.1/music/01_Door_Into_Summer.bin"
 Copy	"Sound/Music/BIN/02 Electoria.bin"				"MDMusicPlayer.1.1/music/02_Electoria.bin"
@@ -1210,7 +1331,9 @@ Copy	"Sound/Music/BIN/6B.bin"							"MDMusicPlayer.1.1/music/6B.bin"
 Copy	"Sound/Music/BIN/6C.bin"							"MDMusicPlayer.1.1/music/6C.bin"
 Copy	"Sound/Music/BIN/6D.bin"							"MDMusicPlayer.1.1/music/6D.bin"
 Copy	"Sound/Music/BIN/6E.bin"							"MDMusicPlayer.1.1/music/6E.bin"
+;endregion
 
+;Region @AsmConv
 ;!@
 ;Do the conversions!
 WorkPath "MDMusicPlayer.1.1/bin/"
@@ -1324,7 +1447,9 @@ Extern "SMPS2ASM.exe"	"6B.bin"						"Chaotix.SFX"	"SFX_6B"		"0xEF11"
 Extern "SMPS2ASM.exe"	"6C.bin"						"Chaotix.SFX"	"SFX_6C"		"0xF010"
 Extern "SMPS2ASM.exe"	"6D.bin"						"Chaotix.SFX"	"SFX_6D"		"0xF04E"
 Extern "SMPS2ASM.exe"	"6E.bin"						"Chaotix.SFX"	"SFX_6E"		"0xF07B"
+;endregion
 
+;Region @AsmMove
 ;Copy the resulting ASM files to the Sound/Music ASM folders
 WorkPath	"../../"
 Copy	"MDMusicPlayer.1.1/music/01_Door_Into_Summer.asm"		"Sound/Music/ASM/01 Door Into Summer.asm"
@@ -1437,13 +1562,17 @@ Copy	"MDMusicPlayer.1.1/music/6B.asm"						"Sound/Music/ASM/6B.asm"
 Copy	"MDMusicPlayer.1.1/music/6C.asm"						"Sound/Music/ASM/6C.asm"
 Copy	"MDMusicPlayer.1.1/music/6D.asm"						"Sound/Music/ASM/6D.asm"
 Copy	"MDMusicPlayer.1.1/music/6E.asm"						"Sound/Music/ASM/6E.asm"
+;endregion
 
+;Region @ASM_PostProcessing
 ;Call split_SMPS2ASM_cleanup.bat in order to cleanup the leftover data in MDMusicPlayer folder
 Extern 	"split_SMPS2ASM_cleanup.bat"
 
 ; Convert all of those Music ASM files into S1KC ASM format
 WorkPath "Sound/Music/ASM/"
 Extern "split_conv.bat"
+;endregion
 
 ;Done with sound driver split!
-
+;endregion
+;endregion

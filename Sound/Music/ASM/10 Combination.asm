@@ -1,5 +1,5 @@
 
-Target	EQU	$4836A
+Target	EQU	$48DDB
 	smpsHeaderVoice	Combi_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $43

@@ -1,25 +1,45 @@
 2
-23
+43
 00000	00FFE02C	d	h	0	v_objspace
-00001	00FFD460	d	h	0	Pal Cache $40w
-00002	00FFC1DE	w	h	0	HScroll FG Pos
-00003	00FFC1EE	w	h	0	VScroll FG Pos
-00004	00000000	S	S	0	----------------------------
-00005	00FFDFF2	w	h	0	v_zone
-00006	00FFDFF4	w	h	0	v_act
-00007	00FFDFF6	w	h	0	v_tod
-00008	00000000	S	S	0	----------------------------
-00009	00FFE008	w	h	0	v_rings
-0000A	00FFE00A	d	h	0	v_score
-0000B	00FFE01A	w	h	0	v_ChRings
-0000C	00000000	S	S	0	----------------------------
-0000D	00FFDFEC	w	h	0	v_screenposx
-0000E	00FFDFEE	w	h	0	v_screenposy
-0000F	00000000	S	S	0	----------------------------
-00010	00FFC1E8	w	h	0	v_limitleft1
-00011	00FFC1EA	w	h	0	v_limitbtm1
-00012	00FFC1EC	w	h	0	v_limittop1
-00013	00FFC1E6	w	h	0	v_limitright1
-00014	00FFE200	d	h	0	NemDec_Target
-00015	00FFC032	d	h	0	AniArt_Target
-00016	00FFFCEA	w	h	0	Combi_Mode
+00001	00FFD460	d	h	0	v_pal_buffer
+00002	00FFD560	d	h	0	v_pal_buffer2
+00003	00000000	S	S	0	----------------------------
+00004	00FFDFDE	w	h	0	v_gamemode
+00005	00FFDFE0	w	h	0	v_gamesubmode
+00006	00FFDFF2	w	h	0	v_zone
+00007	00FFDFF4	w	h	0	v_act
+00008	00FFDFF6	w	h	0	v_tod
+00009	00000000	S	S	0	----------------------------
+0000A	00FFC138	b	h	0	JPad1Type
+0000B	00FFC13B	b	h	0	v_JpadData1ax
+0000C	00FFC13C	w	h	0	v_JpadData1a
+0000D	00FFC13E	w	h	0	v_JpadData1b
+0000E	00FFC148	b	h	0	JPad2Type
+0000F	00FFC14C	w	h	0	v_JPadData2
+00010	00FFC14B	b	h	0	v_JpadData2x
+00011	00FFE038	w	h	0	v_player1
+00012	00FFE03A	w	h	0	v_player2
+00013	00000000	S	S	0	----------------------------
+00014	00FFFCEA	w	h	0	v_rubberband
+00015	00FFE00A	d	h	0	v_score
+00016	00FFE008	w	h	0	v_rings
+00017	00FFE010	w	h	0	v_time
+00018	00FFE01A	w	h	0	v_ChRings
+00019	00000000	S	S	0	----------------------------
+0001A	00FFDFEC	w	h	0	v_playerPosX
+0001B	00FFDFEE	w	h	0	v_playerPosY
+0001C	00000000	S	S	0	----------------------------
+0001D	00FFC1DE	w	h	0	v_screenposx
+0001E	00FFC1EE	w	h	0	v_screenposy
+0001F	00FFDFE8	w	h	0	v_screenposx_target
+00020	00FFDFEA	w	h	0	v_screenposy_target
+00021	00FFC1E8	w	h	0	v_limitleft1
+00022	00FFC1EA	w	h	0	v_limitbtm1
+00023	00FFC1EC	w	h	0	v_limittop1
+00024	00FFC1E6	w	h	0	v_limitright1
+00025	00FFE200	d	h	0	NemDec_Target
+00026	00FFC032	d	h	0	AniArt_Target
+00027	00FFC21D	b	h	0	v_dle_routine
+00028	00000000	S	S	0	----------------------------
+00029	00FFFCFC	b	h	0	v_curSong
+0002A	00FFFFD0	b	h	0	v_demonum
