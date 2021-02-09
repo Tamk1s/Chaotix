@@ -1,5 +1,5 @@
 
-Target	EQU	$461BE
+Target	EQU	$4551B
 	smpsHeaderVoice	Hyper_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $26
@@ -408,7 +408,7 @@ Hyper_FM6:
 	smpsFMvoice		$04
 	dc.b	nRst, $60, nRst, nRst, nRst, nRst, nRst
 	smpsJump		Hyper_Jump4, Target
-	dc.b	$F2	; Unused
+	;dc.b	$F2	; Unused
 
 Hyper_PSG1:
 	smpsPSGvoice	$08

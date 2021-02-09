@@ -1,6 +1,10 @@
 cls
 copy /Y orig.bin kc.bin
 
+REM Change Sega GM to Title
+REM bytepatch.exe -a 0x003270 kc.bin 31FC 0008 DFDE 4E71
+
+
 REM EXPERIMENTS
 
 REM Patch out jumps to various routines, to remove DLE for SSZ Pal cycles
@@ -30,7 +34,7 @@ REM bytepatch.exe -a 0x07565E kc.bin 4E75
 REM bytepatch.exe -a 0x0091C6 kc.bin 4E75
 
 REM NOP out SSZ BG DLEs
-bytepatch.exe -a 0x0083E2 kc.bin 4E75 4E75 4E75
+REM bytepatch.exe -a 0x0083E2 kc.bin 4E75 4E75 4E75
 
 REM bytepatch.exe -a 0x0322B8 kc.bin 7E08
 REM bytepatch.exe -a 0x03245D kc.bin 0C41 0008
@@ -159,6 +163,12 @@ REM dc.w	$6EFA
 REM	rts
 bytepatch.exe -a 0x0036EC kc.bin 4EB9 008F 7584
 bytepatch.exe -a 0x077584 kc.bin 4EB9 008F 454A 5278 E004 4EB9 008F 6EFA 4E75
+
+
+
+REM Secret gamemodes
+REM bytepatch.exe -a 0x0032D0 kc.bin 4EF9 0088 32F6
+REM bytepatch.exe -a 0x0036AA kc.bin 31FC 0078 DFDE
 
 REM
 REM EOF

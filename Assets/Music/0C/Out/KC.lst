@@ -1,0 +1,3187 @@
+                        	LIST MACRO
+                        	LIST EXPAND
+000000                  	include _s1smps2asm_S1KC.asm
+                        ; Standard Octave Pitch Equates
+       = 000088         smpsPitch10lo		EQU	$88
+       = 000094         smpsPitch09lo		EQU	$94
+       = 0000A0         smpsPitch08lo		EQU	$A0
+       = 0000AC         smpsPitch07lo		EQU	$AC
+       = 0000B8         smpsPitch06lo		EQU	$B8
+       = 0000C4         smpsPitch05lo		EQU	$C4
+       = 0000D0         smpsPitch04lo		EQU	$D0
+       = 0000DC         smpsPitch03lo		EQU	$DC
+       = 0000E8         smpsPitch02lo		EQU	$E8
+       = 0000F4         smpsPitch01lo		EQU	$F4
+       = 000000         smpsPitch00		EQU	$00
+       = 00000C         smpsPitch01hi		EQU	$0C
+       = 000018         smpsPitch02hi		EQU	$18
+       = 000024         smpsPitch03hi		EQU	$24
+       = 000030         smpsPitch04hi		EQU	$30
+       = 00003C         smpsPitch05hi		EQU	$3C
+       = 000048         smpsPitch06hi		EQU	$48
+       = 000054         smpsPitch07hi		EQU	$54
+       = 000060         smpsPitch08hi		EQU	$60
+       = 00006C         smpsPitch09hi		EQU	$6C
+       = 000078         smpsPitch10hi		EQU	$78
+
+                        ; Note Equates
+       = 000080         nRst			EQU	$80
+       = 000081         nC0			EQU	$81
+       = 000082         nCs0			EQU	$82
+       = 000083         nD0			EQU	$83
+       = 000084         nEb0			EQU	$84
+       = 000085         nE0			EQU	$85
+       = 000086         nF0			EQU	$86
+       = 000087         nFs0			EQU	$87
+       = 000088         nG0			EQU	$88
+       = 000089         nAb0			EQU	$89
+       = 00008A         nA0			EQU	$8A
+       = 00008B         nBb0			EQU	$8B
+       = 00008C         nB0			EQU	$8C
+       = 00008D         nC1			EQU	$8D
+       = 00008E         nCs1			EQU	$8E
+       = 00008F         nD1			EQU	$8F
+       = 000090         nEb1			EQU	$90
+       = 000091         nE1			EQU	$91
+       = 000092         nF1			EQU	$92
+       = 000093         nFs1			EQU	$93
+       = 000094         nG1			EQU	$94
+       = 000095         nAb1			EQU	$95
+       = 000096         nA1			EQU	$96
+       = 000097         nBb1			EQU	$97
+       = 000098         nB1			EQU	$98
+       = 000099         nC2			EQU	$99
+       = 00009A         nCs2			EQU	$9A
+       = 00009B         nD2			EQU	$9B
+       = 00009C         nEb2			EQU	$9C
+       = 00009D         nE2			EQU	$9D
+       = 00009E         nF2			EQU	$9E
+       = 00009F         nFs2			EQU	$9F
+       = 0000A0         nG2			EQU	$A0
+       = 0000A1         nAb2			EQU	$A1
+       = 0000A2         nA2			EQU	$A2
+       = 0000A3         nBb2			EQU	$A3
+       = 0000A4         nB2			EQU	$A4
+       = 0000A5         nC3			EQU	$A5
+       = 0000A6         nCs3			EQU	$A6
+       = 0000A7         nD3			EQU	$A7
+       = 0000A8         nEb3			EQU	$A8
+       = 0000A9         nE3			EQU	$A9
+       = 0000AA         nF3			EQU	$AA
+       = 0000AB         nFs3			EQU	$AB
+       = 0000AC         nG3			EQU	$AC
+       = 0000AD         nAb3			EQU	$AD
+       = 0000AE         nA3			EQU	$AE
+       = 0000AF         nBb3			EQU	$AF
+       = 0000B0         nB3			EQU	$B0
+       = 0000B1         nC4			EQU	$B1
+       = 0000B2         nCs4			EQU	$B2
+       = 0000B3         nD4			EQU	$B3
+       = 0000B4         nEb4			EQU	$B4
+       = 0000B5         nE4			EQU	$B5
+       = 0000B6         nF4			EQU	$B6
+       = 0000B7         nFs4			EQU	$B7
+       = 0000B8         nG4			EQU	$B8
+       = 0000B9         nAb4			EQU	$B9
+       = 0000BA         nA4			EQU	$BA
+       = 0000BB         nBb4			EQU	$BB
+       = 0000BC         nB4			EQU	$BC
+       = 0000BD         nC5			EQU	$BD
+       = 0000BE         nCs5			EQU	$BE
+       = 0000BF         nD5			EQU	$BF
+       = 0000C0         nEb5			EQU	$C0
+       = 0000C1         nE5			EQU	$C1
+       = 0000C2         nF5			EQU	$C2
+       = 0000C3         nFs5			EQU	$C3
+       = 0000C4         nG5			EQU	$C4
+       = 0000C5         nAb5			EQU	$C5
+       = 0000C6         nA5			EQU	$C6
+       = 0000C7         nBb5			EQU	$C7
+       = 0000C8         nB5			EQU	$C8
+       = 0000C9         nC6			EQU	$C9
+       = 0000CA         nCs6			EQU	$CA
+       = 0000CB         nD6			EQU	$CB
+       = 0000CC         nEb6			EQU	$CC
+       = 0000CD         nE6			EQU	$CD
+       = 0000CE         nF6			EQU	$CE
+       = 0000CF         nFs6			EQU	$CF
+       = 0000D0         nG6			EQU	$D0
+       = 0000D1         nAb6			EQU	$D1
+       = 0000D2         nA6			EQU	$D2
+       = 0000D3         nBb6			EQU	$D3
+       = 0000D4         nB6			EQU	$D4
+       = 0000D5         nC7			EQU	$D5
+       = 0000D6         nCs7			EQU	$D6
+       = 0000D7         nD7			EQU	$D7
+       = 0000D8         nEb7			EQU	$D8
+       = 0000D9         nE7			EQU	$D9
+       = 0000DA         nF7			EQU	$DA
+       = 0000DB         nFs7			EQU	$DB
+       = 0000DC         nG7			EQU	$DC
+       = 0000DD         nAb7			EQU	$DD
+       = 0000DE         nA7			EQU	$DE
+       = 0000DF         nBb7			EQU	$DF
+
+                        ; DAC Equates (S1)
+       = 000081         dKick			EQU	$81
+       = 000082         dSnare			EQU	$82
+       = 000083         dTimpani		EQU	$83
+       = 000088         dHiTimpani		EQU	$88
+       = 000089         dMidTimpani		EQU	$89
+       = 00008A         dLowTimpani		EQU	$8A
+       = 00008B         dVLowTimpani	EQU	$8B
+       = 00008B         dFloorTimpani	EQU $8B
+
+                        ; PWM Equates (KC)
+       = 000081         pEKick		EQU	$81
+       = 000082         pESnare		EQU	$82
+       = 000083         pSplashCymb	EQU	$83
+       = 000084         pRideBell	EQU $84
+       = 000085         pTomHi		EQU	$85
+       = 000086         pTomMid		EQU	$86
+       = 000087         pTomLow		EQU	$87
+       = 000088         pEHiHat		EQU	$88
+       = 000089         pCrashCymb	EQU $89
+       = 00008A         pClap		EQU $8A
+       = 00008B         pAKick		EQU $8B
+       = 00008C         pASnare		EQU	$8C
+       = 00008D         pBell		EQU $8D
+       = 00008E         pFingSnap	EQU	$8E
+       = 00008F         pCowbell	EQU	$8F
+       = 000090         pClickHi	EQU	$90
+       = 000091         pClickLo	EQU	$91
+       = 000092         pBongoHi	EQU	$92
+       = 000093         pBongoLo	EQU	$93
+       = 000094         pTimpaniHi	EQU	$94
+       = 000095         pTimpaniLo	EQU	$95
+       = 000096         pSilence	EQU $96
+                        ;!@ NEW DATA
+       = 000097         pSega		EQU $97
+       = 000098         pClosedHH	EQU $98
+       = 000099         pOpenHH		EQU $99
+
+                        ;!@ Convert ptrs to z80Ptr
+                        ; function to make a little-endian 16-bit pointer for the Z80 sound driver
+                        ;z80_ptr function x,y,((((x)|(y))<<8)&$FF00)|((((x)|(y))>>8)&$7F)|$80
+                        ;z80_ptr_neg function x,y,((((y)-(x))<<8)&$FF00)|((((y)-(x))>>8)&$7F)|$80
+
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        rom_ptr_z80 macro addr
+                        	;dc.w z80_ptr(ptr,addr)
+                        	dc.w  ((((addr)<<8)&$FF00)|(((addr)>>8)&$7F)|$80)
+                            endm
+                        	
+                        ;Funciton to convert S1 tempo to S2 and then S3+
+                        ;The conversion works for all values of main tempo other than 0 — this value cannot be converted exactly between the two drivers. The conversion of main tempos from Sonic 1 to Sonic 2 can be done (approximately) with the following formul
+                        ;S2 main tempo = floor{ [ (S1 main tempo-1) * 256 + floor(S1 main tempo/2) ] / S1 main tempo }			
+                        ;It is easy to convert between Sonic 2 and Sonic 3+ main tempo values:
+                        ;S2 main tempo = (256 - S3 main tempo) mod 256
+                        ;S3 main tempo = (256 - S2 main tempo) mod 256
+                        tempo_conv macro tempo
+                        		if tempo==0
+                        			dc.b	((256 - (((256-1)*256 + (256/2)) / 256)) % 256)
+                        		else
+                        			dc.b	((256 - ((((tempo)-1)*256 + ((tempo)/2)) / (tempo))) % 256)
+                        		endif
+                        	endm
+
+                        	
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        ;rom_ptr_z80_neg macro ptr,addr
+                        	;dc.w z80_ptr_neg(ptr,addr)
+                        	;dc.w	(((((addr)-(ptr))<<8)&$FF00)|((((addr)-(ptr))>>8)&$7F)|$80)
+                            ;endm
+
+                        ; Header Macros
+
+                        ;!@
+                        ; Header - Set up Voice Location
+                        ;smpsHeaderVoice macro loc
+                        smpsHeaderVoice macro loc,songstart
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+                        ; Header - Set up Channel Usage	
+                        smpsHeaderChan macro fm,psg
+                        	if \0==2
+                        		dc.b	fm,psg
+                        	else
+                        		dc.b	fm
+                        	endif	
+                        	endm	
+                        	
+
+                        	
+                        smpsHeaderTempo macro div,mod
+                        	dc.b	div,mod
+                        	endm
+
+                        ;!@
+                        ; Header - Set up Tempo. Mod is converted from S1 to S3 tempo
+                        smpsHeaderTempoC macro div,mod
+                        TempDiv set div
+                        	dc.b	div
+                        	tempo_conv(mod)
+000000                  	endm
+                        	
+                        ; Header - Set up DAC Channel
+                        smpsHeaderDAC macro loc
+                        	dc.w	loc-songStart
+                        	dc.w	$00
+                        	endm
+                        	
+                        ;!@
+                        ; Header - Set up FM Channel	
+                        ;smpsHeaderFM macro loc,pitch,vol
+                        smpsHeaderFM macro loc,songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	endm
+
+                        ;!@	
+                        ; Header - Set up PSG Channel
+                        ;smpsHeaderPSG macro loc,pitch,vol,voice
+                        smpsHeaderPSG macro loc,songstart,pitch,vol,null,voice
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	;dc.w	voice
+                        	dc.b	null,voice
+                        	endm
+
+                        ;!@
+                        ; Header - Set up SFX Channel
+                        ;sHeaderSFX	macro play,patch,loc,pitch,vol
+                        smpsHeaderSFX	macro play,patch,loc,pitch,vol,songstart
+                        	dc.b play,patch
+                        	;dc.w loc-sPointZero
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b pitch,vol
+                            endm
+
+                        ; Co-ord Flag Macros and Equates
+                        ; E0xx - Panning, AMS, FMS
+                        smpsPan macro direction,amsfms
+                        panNone set $00
+                        panRight set $40
+                        panLeft set $80
+                        panCentre set $C0
+                        panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if \0==2
+                        		dc.b $E0,direction|amsfms
+                        	else
+                        		dc.b $E0,direction
+                        	endif
+000000                  	endm
+                        	
+                        ; E1xx - Alter note values by xx
+                        smpsAlterNote macro val
+                        	dc.b	$E1,val
+                        	endm
+                        	
+                        ; E2xx - Unknown
+                        smpsE2 macro val
+                        	dc.b	$E2,val
+                        	endm
+
+                        ; E3 - Return (generally used after F8)
+                        ; F9 - Return (generally used after F8)
+                        smpsReturn macro val
+                        	;!@
+                        	;dc.b	$E3
+                        	dc.b	$F9
+                        	endm
+                        	
+                        ; E4 - Fade in previous song (ie. 1-Up)
+                        smpsFade macro val
+                        	dc.b	$E4
+                        	endm
+
+                        ;!@ Invalid for S3+!
+                        ; E5xx - Set channel tempo divider to xx
+                        smpsChanTempoDiv macro val
+                        	;Error No S3 equivalent for CF!
+                        	dc.b	$E5,val	
+                        	endm
+                        	
+                        ; E6xx - Alter Volume by xx
+                        smpsAlterVol macro val
+                        	dc.b	$E6,val
+                        	endm
+                        	
+                        ; E7 - Prevent attack of next note
+       = 0000E7         smpsNoAttack	EQU $E7
+
+                        ;!@ This may have problems, needs some convesion factor due to usage of mult by tempo div in S3+
+                        ; E8xx - Set note fill to xx
+                        smpsNoteFill macro val		
+                        	dc.b	$E8,(val/TempDiv)
+                        	endm
+                        	
+                        ;!@
+                        ; E9xx - Add xx to channel pitch
+                        ; FBxx - Add xx to channel pitch
+                        smpsAlterPitch macro val
+                        	;!@
+                        	;dc.b	$E9,val
+                        	dc.b	$FB,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3
+                        smpsSetTempoMod macro val
+                        	;dc.b	$EA,val
+                        	dc.b	$FF,$00,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3 (TEMPO - TEMPO_SET)
+                        smpsSetTempoModC macro val
+                        	;dc.b	$EA,val
+                        	dc.b $FF,$00
+                        	tempo_conv(val)
+                        	endm
+                        	
+                        ;!@
+                        ; EBxx - Set music tempo divider to xx
+                        ; FF04xx - Set global tick multiplier to xx (TICK_MULT - TMULT_ALL)
+                        smpsSetTempoDiv macro val
+                        	;dc.b	$EB,val
+                        TempDiv set val
+                        	dc.b $FF,$04,val
+000000                  	endm
+
+                        ;!@	
+                        ; ECxx - Add xx to PSG channel volume (VOLUME - VOL_NN_PSG)
+                        ;
+                        ; May need interpolation/conversion factor:
+                        ; Change volume attenuation of PSG track.
+                        ;The single parameter byte is added to track's current volume attenuation;
+                        ;anything greater than $0F (unsigned comparison) is set to $0F (silence). Also, the flutter index is reduced by 1.
+                        smpsSetVol macro val
+                        	dc.b	$EC,val
+                        	endm
+                        	
+                        ; ED - Unknown
+       = 0000ED         smpsED		EQU $ED
+                        	
+                        ;!@ S3K= send cmd to YM2612 port; unused in S1
+                        ; EE - Stops special SFX ($D0-$D4, S1 only) and restarts overridden music track
+       = 0000EE         smpsEE 		EQU $EE
+                        	
+                        ;!@
+                        ; EFxx - Set Voice of FM channel to xx
+                        ; EFxx[yy] - Set patch id of FM channel to xx. If xx bit7 set, read from another song instead
+                        ; (INSTRUMENT - INS_C_FMP)
+                        ;smpsFMvoice macro voice
+                        	;dc.b	$EF,voice
+                        smpsFMvoice macro pat, song		
+                        	;if song<>""
+                        	if \0==2
+                        		dc.b $EF,pat|$80,song+$81
+                        	else
+                        		dc.b $EF,pat
+                        	endif
+                            endm
+
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        smpsModSet macro wait,speed,change,step
+                        	dc.b	$F0,wait,speed,change,step
+                        	endm
+                        	
+
+                        ;!@ Used very differently in S3; don't use
+                        ; F1 - Turn on Modulation
+       = 0000F1         smpsModOn 	EQU $F1
+                        ; F4 - Turn off Modulation
+       = 0000F4         smpsModOff 	EQU $F4
+
+                        ; F2 - End of channel
+                        smpsStop macro
+                        	dc.b	$F2
+                        	endm
+                        	
+                        ;!@
+                        ; F3xx - PSG waveform to xx
+                        ; S3+ only: If parameter byte is zero, the channel is converted
+                        ; back into a normal PSG channel and the noise channel is silenced.
+                        ; Otherwise, sets the PSG track to noise and sets PSG noise to parameter byte, which should be from $E0 to $E7 (inclusive).
+                        smpsPSGform macro form
+                        	dc.b	$F3,form
+                        	endm
+                        	
+                        ; F5xx - PSG voice to xx
+                        smpsPSGvoice macro voice
+                        	dc.b	$F5,voice
+                        	endm
+                        	
+                        ;BAD Cmpr
+                        ;if (loc<*)
+                        	;rom_ptr_z80_neg(*-loc,songstart)
+                        ;else
+                        	;rom_ptr_z80(loc-*-1,songstart)
+                        ;endif
+
+                        ;!@
+                        ; F6xxxx - Jump to xxxx
+                        ;smpsJump macro loc
+                        smpsJump macro loc,songstart
+                        	dc.b	$F6
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F7xxyyzzzz - Loop back to zzzz yy times, xx being the loop index for loop recursion fixing
+                        ;smpsLoop macro index,loops,loc
+                        smpsLoop macro index,loops,loc,songstart
+                        	dc.b	$F7
+                        	dc.b	index,loops
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F8xxxx - Call pattern at xxxx, saving return point
+                        ;smpsCall macro loc
+                        smpsCall macro loc,songstart
+                        	dc.b	$F8
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+                        	
+                        ; F9 - Unknown
+       = 0000F9         smpsF9		EQU $F9
+
+                        ; Voices - Feedback
+                        smpsVcFeedback macro val
+                        vcFeedback set val
+000000                  	endm
+
+                        ; Voices - Algorithm
+                        smpsVcAlgorithm macro val
+                        vcAlgorithm set val
+000000                  	endm
+
+                        ; Voices - Detune
+                        smpsVcDetune macro op1,op2,op3,op4
+                        vcDT1 set op1
+                        vcDT2 set op2
+                        vcDT3 set op3
+                        vcDT4 set op4
+000000                  	endm
+
+                        ; Voices - Coarse-Frequency
+                        smpsVcCoarseFreq macro op1,op2,op3,op4
+                        vcCF1 set op1
+                        vcCF2 set op2
+                        vcCF3 set op3
+                        vcCF4 set op4
+000000                  	endm
+
+                        ; Voices - Rate Scale
+                        smpsVcRateScale macro op1,op2,op3,op4
+                        vcRS1 set op1
+                        vcRS2 set op2
+                        vcRS3 set op3
+                        vcRS4 set op4
+000000                  	endm
+
+                        ; Voices - Attack Rate
+                        smpsVcAttackRate macro op1,op2,op3,op4
+                        vcAR1 set op1
+                        vcAR2 set op2
+                        vcAR3 set op3
+                        vcAR4 set op4
+000000                  	endm
+
+                        ; Voices - Amplitude Modulation
+                        smpsVcAmpMod macro op1,op2,op3,op4
+                        vcAM1 set op1
+                        vcAM2 set op2
+                        vcAM3 set op3
+                        vcAM4 set op4
+000000                  	endm
+
+                        ; Voices - First Decay Rate
+                        smpsVcDecayRate1 macro op1,op2,op3,op4
+                        vcD1R1 set op1
+                        vcD1R2 set op2
+                        vcD1R3 set op3
+                        vcD1R4 set op4
+000000                  	endm
+
+                        ; Voices - Second Decay Rate
+                        smpsVcDecayRate2 macro op1,op2,op3,op4
+                        vcD2R1 set op1
+                        vcD2R2 set op2
+                        vcD2R3 set op3
+                        vcD2R4 set op4
+000000                  	endm
+
+                        ; Voices - Decay Level	
+                        smpsVcDecayLevel macro op1,op2,op3,op4
+                        vcDL1 set op1
+                        vcDL2 set op2
+                        vcDL3 set op3
+                        vcDL4 set op4
+000000                  	endm
+
+                        ; Voices - Release Rate
+                        smpsVcReleaseRate macro op1,op2,op3,op4
+                        vcRR1 set op1
+                        vcRR2 set op2
+                        vcRR3 set op3
+                        vcRR4 set op4
+000000                  	endm
+
+                        ; Voices - Total Level
+                        smpsVcTotalLevel macro op1,op2,op3,op4
+                        vcTL1 set op1
+                        vcTL2 set op2
+                        vcTL3 set op3
+                        vcTL4 set op4
+                        	dc.b	(vcFeedback<<3)+vcAlgorithm
+                        	dc.b	(vcDT4<<4)+vcCF4,(vcDT3<<4)+vcCF3,(vcDT2<<4)+vcCF2,(vcDT1<<4)+vcCF1
+                        	dc.b	(vcRS4<<6)+vcAR4,(vcRS3<<6)+vcAR3,(vcRS2<<6)+vcAR2,(vcRS1<<6)+vcAR1
+                        	dc.b	(vcAM4<<5)+vcD1R4,(vcAM3<<5)+vcD1R3,(vcAM2<<5)+vcD1R2,(vcAM1<<5)+vcD1R1
+                        	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
+                        	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
+                        	dc.b	vcTL4,vcTL3,vcTL2,vcTL1	
+000000                  	endm
+                        	
+                        	
+                        ;==============================================
+                        ;!@ The following CF flags/macros are KC-drive specific!
+                        ;Rest here mostly used  to compile KC/Nat ASM files for BC purposes...
+
+                        ;!@
+                        ; Header - Set up a secondary PWM Channel
+                        ;smpsHeaderPWM macro loc
+                        smpsHeaderPWM macro loc, songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)	
+                        	;!@
+                        	dc.b	pitch
+                        	dc.b	vol
+                        	endm
+                        	
+                        ;!@ Unused and unneeded; leftover Sonic 32x header stuff
+                        ; Header - Set up first PWM Channel
+                        ;smpsHeaderPWM1 macro loc,num
+                        	;dc.w	loc-songStart
+                        	;dc.b	num,0
+                        	;endm
+
+                        ;!@
+                        ; Header - Set up Tick Multiplier (for Sfx)
+                        ;sHeaderSFX
+                        smpsHeaderTick	macro tmul
+                        	dc.b tmul
+                            endm
+
+                        ;!@ KC Exclusives!
+                        ;# PAN_ANIM
+                        ;# pan animation has 2 modes; if first arg is 0, it will end it. Otherwise, more args will be used
+                        ;!0xE4, 0 > sPanAni:;								
+                        ;!0xE4, 1-0xFF > sPanAni: .lb, .db, .db, .db, .db;	
+                        KC_smpsPanAni macro val1,val2,val3,val4,val5
+                        	if val1==0
+                        		dc.b	$E4,$00
+                        	else
+                        		dc.b	$E4,val1,val2,val3,val4,val5
+                        	endif
+                        	endm
+
+
+                        ; Alter Volume
+                        ;!0xE5 > saVolFMP: .db, .db;								
+                        KC_smpsFMAlterVol macro val1,val2
+                        	dc.b	$E5,val1,val2
+                        	endm
+
+                        ;!@ KC Exclusive!	
+                        ;!0xE9 > ssLFO: .db, .db;									
+                        KC_smpsSetLFO macro enable,amsfms
+                        	dc.b	$E9,enable,amsfms
+                        	endm
+
+                        ;!0xEA > sPlayDAC: .db | 0x80;								
+                        KC_smpsPlayDACSample macro sample
+                        	dc.b	$EA,(sample&$7F)
+                        	endm
+
+                        ;!@ Songstart param added
+                        ;!0xEB > sLoopExit: .db, .dw {						
+                        ;smpsConditionalJump macro index,loc
+                        KC_smpsConditionalJump macro index,loc,songstart
+                        	dc.b	$EB
+                        	dc.b	index
+                        	;dc.w	z80_ptr(loc)
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+
+                        ;!@ Usage/naming is speculative. Called ssTransposeS3K in S3k/Nat driver...	
+                        ;!0xED > sYMcmd: .db, .db;							
+                        ; Set note values to xx-$40
+                        KC_smpsSetNote macro val
+                        	dc.b	$ED,val
+                        	endm
+
+                        ;!0xEE > sYM1cmd: .db, .db;							
+                        KC_smpsFMICommand macro reg,val
+                        	dc.b	$EE,reg,val
+                        	endm
+
+                        ;!0xF1 > sModEnv: .db, .db {							
+                        ; Set Modulation
+                        KC_smpsModChange2 macro fmmod,psgmod
+                        	dc.b	$F1,fmmod,psgmod
+                        	endm
+                        	
+                        ;!0xF4 > sModEnv: .db {
+                        ; Set Modulation
+                        KC_smpsModChange macro val
+                        	dc.b	$F4,val
+                        	endm
+
+                        ;!@ KC exclusive!
+                        ;!0xFC > sPitchSlide: .db;						
+                        KC_smpsPitchSlide macro enable
+                        	dc.b	$FC,enable
+                        	endm
+                        	
+                        ;!0xFD > sRawFreq: .db;							
+                        KC_smpsAlternateSMPS macro flag
+                        	dc.b	$FD,flag
+                        	endm
+
+                        ;!0xFE > sSpecFM3: .db, .db, .db, .db {			
+                        	;%; Broken?
+                        ;}
+                        KC_smpsFM3SpecialMode macro ind1,ind2,ind3,ind4
+                        	dc.b	$FE,ind1,ind2,ind3,ind4
+                        	Error Broken?
+                        	endm
+
+                        ;!0xFF, 1 > sPlaySound: .db;						
+                        KC_smpsPlaySound macro index
+                        	dc.b	$FF,$01,index
+                        	endm
+
+                        ;!0xFF, 2 > sMusPause: .db;						
+                        KC_smpsHaltMusic macro flag
+                        	dc.b	$FF,$02,flag
+                        	endm
+
+                        ;!@ Modified with SongStart	param
+                        ;!0xFF, 3 > sCopyMem: .dw, .db {					
+                        	;%; No song should ever use this command. It may good idea to remove it.
+                        ;}
+                        ;KC_smpsCopyData macro data,len
+                        KC_smpsCopyData macro data,len,songstart
+                        	Error Coord. Flag to copy data should not be used. Complain to GenesisDoes if any music uses it.
+                        	;Error No song should ever use this command. It may be a good idea to remove it.
+                        	dc.b	$FF,$03
+                        	;dc.w	little_endian(data)
+                        	rom_ptr_z80(data+songstart)
+                        	dc.b	len
+                        	endm
+
+                        ;!0xFF, 5 > sSSGEG: .db, .db, .db, .db {			
+                        	;=op2 .a2
+                        	;:=2 .a1
+                        	;:=1 \op2\
+                        ;}
+                        KC_smpsSSGEG macro op1,op2,op3,op4
+                        	dc.b	$FF,$05,op1,op3,op2,op4
+                        	endm
+                        	
+                        	
+                        ;!0xFF, 6 > sVolEnvFM: .db, .db {
+                        	;:?0 {
+                        		;?volenv;
+                        	;}
+                        ;}	
+                        KC_smpsFMVolEnv macro tone,mask
+                        	dc.b	$FF,$06,tone,mask
+                        	endm
+                        ;==============================================
+
+000000                  	include "KC.asm"
+       = 040000         Target	EQU	$40000
+000000                  	smpsHeaderVoice     SOTH_OVA_Dark_Voices, Target
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+000000                  	rom_ptr_z80(SOTH_OVA_Dark_Voices+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000000 6C89             	dc.w  (((((SOTH_OVA_Dark_Voices+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Voices+Target))>>8)&$7F)|$80)
+000002                  	smpsHeaderChan      $06, $03
+                        	if 2==2
+000002 0603             		dc.b	$06,$03
+                        	else
+                        	endif	
+000004                  	smpsHeaderTempoC    $02, $05
+       = 000002         TempDiv set $02
+000004 02               	dc.b	$02
+000005                  	tempo_conv($05)
+                        		if ($05)==0
+                        		else
+000005 33               			dc.b	((256 - ((((($05))-1)*256 + ((($05))/2)) / (($05)))) % 256)
+                        		endif
+000006                  	smpsHeaderFM        SOTH_OVA_Dark_FM1, Target,	$00, $0B
+                        	;dc.w	loc-songStart
+000006                  	rom_ptr_z80(SOTH_OVA_Dark_FM1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000006 4080             	dc.w  (((((SOTH_OVA_Dark_FM1+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_FM1+Target))>>8)&$7F)|$80)
+000008 000B             	dc.b	$00,$0B
+00000A                  	smpsHeaderFM        SOTH_OVA_Dark_FM2, Target,	$00, $13
+                        	;dc.w	loc-songStart
+00000A                  	rom_ptr_z80(SOTH_OVA_Dark_FM2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000A F680             	dc.w  (((((SOTH_OVA_Dark_FM2+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_FM2+Target))>>8)&$7F)|$80)
+00000C 0013             	dc.b	$00,$13
+00000E                  	smpsHeaderFM        SOTH_OVA_Dark_FM3, Target,	$00, $13
+                        	;dc.w	loc-songStart
+00000E                  	rom_ptr_z80(SOTH_OVA_Dark_FM3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000E 5181             	dc.w  (((((SOTH_OVA_Dark_FM3+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_FM3+Target))>>8)&$7F)|$80)
+000010 0013             	dc.b	$00,$13
+000012                  	smpsHeaderFM        SOTH_OVA_Dark_FM4, Target,	$00, $18
+                        	;dc.w	loc-songStart
+000012                  	rom_ptr_z80(SOTH_OVA_Dark_FM4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000012 D983             	dc.w  (((((SOTH_OVA_Dark_FM4+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_FM4+Target))>>8)&$7F)|$80)
+000014 0018             	dc.b	$00,$18
+000016                  	smpsHeaderFM        SOTH_OVA_Dark_FM5, Target,	$00, $13
+                        	;dc.w	loc-songStart
+000016                  	rom_ptr_z80(SOTH_OVA_Dark_FM5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000016 7C84             	dc.w  (((((SOTH_OVA_Dark_FM5+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_FM5+Target))>>8)&$7F)|$80)
+000018 0013             	dc.b	$00,$13
+00001A                  	smpsHeaderFM        SOTH_OVA_Dark_FM6, Target,	$00, $13
+                        	;dc.w	loc-songStart
+00001A                  	rom_ptr_z80(SOTH_OVA_Dark_FM6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001A D784             	dc.w  (((((SOTH_OVA_Dark_FM6+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_FM6+Target))>>8)&$7F)|$80)
+00001C 0013             	dc.b	$00,$13
+00001E                  	smpsHeaderPSG       SOTH_OVA_Dark_PSG1, Target,	$00, $06, $00, $00
+                        	;dc.w	loc-songStart
+00001E                  	rom_ptr_z80(SOTH_OVA_Dark_PSG1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001E 0885             	dc.w  (((((SOTH_OVA_Dark_PSG1+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_PSG1+Target))>>8)&$7F)|$80)
+000020 0006             	dc.b	$00,$06
+                        	;dc.w	voice
+000022 0000             	dc.b	$00,$00
+000024                  	smpsHeaderPSG       SOTH_OVA_Dark_PSG2, Target,	$00, $06, $00, $00
+                        	;dc.w	loc-songStart
+000024                  	rom_ptr_z80(SOTH_OVA_Dark_PSG2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000024 F485             	dc.w  (((((SOTH_OVA_Dark_PSG2+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_PSG2+Target))>>8)&$7F)|$80)
+000026 0006             	dc.b	$00,$06
+                        	;dc.w	voice
+000028 0000             	dc.b	$00,$00
+00002A                  	smpsHeaderPSG       SOTH_OVA_Dark_PSG3, Target,	$00, $06, $00, $00
+                        	;dc.w	loc-songStart
+00002A                  	rom_ptr_z80(SOTH_OVA_Dark_PSG3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00002A 7786             	dc.w  (((((SOTH_OVA_Dark_PSG3+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_PSG3+Target))>>8)&$7F)|$80)
+00002C 0006             	dc.b	$00,$06
+                        	;dc.w	voice
+00002E 0000             	dc.b	$00,$00
+000030                  	smpsHeaderPWM		PWM1, Target, $00, $7F
+                        	;dc.w	loc-songStart
+000030                  	rom_ptr_z80(PWM1+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000030 F686             	dc.w  (((((PWM1+Target))<<8)&$FF00)|((((PWM1+Target))>>8)&$7F)|$80)
+                        	;!@
+000032 00               	dc.b	$00
+000033 7F               	dc.b	$7F
+000034                  	smpsHeaderPWM		PWM2, Target, $00, $7F
+                        	;dc.w	loc-songStart
+000034                  	rom_ptr_z80(PWM2+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000034 ED87             	dc.w  (((((PWM2+Target))<<8)&$FF00)|((((PWM2+Target))>>8)&$7F)|$80)
+                        	;!@
+000036 00               	dc.b	$00
+000037 7F               	dc.b	$7F
+000038                  	smpsHeaderPWM		PWM3, Target, $00, $7F
+                        	;dc.w	loc-songStart
+000038                  	rom_ptr_z80(PWM3+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000038 F888             	dc.w  (((((PWM3+Target))<<8)&$FF00)|((((PWM3+Target))>>8)&$7F)|$80)
+                        	;!@
+00003A 00               	dc.b	$00
+00003B 7F               	dc.b	$7F
+00003C                  	smpsHeaderPWM		PWM4, Target, $00, $7F
+                        	;dc.w	loc-songStart
+00003C                  	rom_ptr_z80(PWM4+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+00003C 4889             	dc.w  (((((PWM4+Target))<<8)&$FF00)|((((PWM4+Target))>>8)&$7F)|$80)
+                        	;!@
+00003E 00               	dc.b	$00
+00003F 7F               	dc.b	$7F
+
+                        ; FM1 Data
+000040                  SOTH_OVA_Dark_FM1:
+000040                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+000040 E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+000042                  	smpsFMvoice        $00
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000042 EF00             		dc.b $EF,$00
+                        	endif
+000044 8001             	dc.b	nRst, $01
+000046                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+000046 E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+                        	;!@ dc.b	$01, $7F, $39
+000048 8001807F8039     	dc.b	nRst, $01, nRst, $7F, nRst, $39
+00004E                  	smpsAlterNote       $03
+00004E E103             	dc.b	$E1,$03
+000050 9901             	dc.b	nC2, $01
+000052                  	smpsAlterNote       $0B
+000052 E10B             	dc.b	$E1,$0B
+000054 E79D             	dc.b	smpsNoAttack, nE2
+000056                  	smpsAlterNote       $1F
+000056 E11F             	dc.b	$E1,$1F
+000058 E7A3             	dc.b	smpsNoAttack, nBb2
+00005A                  	smpsAlterNote       $01
+00005A E101             	dc.b	$E1,$01
+00005C E7A6             	dc.b	smpsNoAttack, nCs3
+00005E                  	smpsAlterNote       $0F
+00005E E10F             	dc.b	$E1,$0F
+000060 E7A4             	dc.b	smpsNoAttack, nB2
+000062                  	smpsAlterNote       $07
+000062 E107             	dc.b	$E1,$07
+000064 E7A2             	dc.b	smpsNoAttack, nA2
+000066                  	smpsAlterNote       $F4
+000066 E1F4             	dc.b	$E1,$F4
+000068 E7A0             	dc.b	smpsNoAttack, nG2
+00006A                  	smpsAlterNote       $11
+00006A E111             	dc.b	$E1,$11
+00006C E79E             	dc.b	smpsNoAttack, nF2
+00006E                  	smpsAlterNote       $00
+00006E E100             	dc.b	$E1,$00
+000070 E79C             	dc.b	smpsNoAttack, nEb2
+000072                  	smpsAlterNote       $F4
+000072 E1F4             	dc.b	$E1,$F4
+000074 E79A             	dc.b	smpsNoAttack, nCs2
+000076                  	smpsAlterNote       $03
+000076 E103             	dc.b	$E1,$03
+000078 E798             	dc.b	smpsNoAttack, nB1
+00007A                  	smpsAlterNote       $F2
+00007A E1F2             	dc.b	$E1,$F2
+00007C E796             	dc.b	smpsNoAttack, nA1
+00007E                  	smpsAlterNote       $19
+00007E E119             	dc.b	$E1,$19
+000080 E793             	dc.b	smpsNoAttack, nFs1
+000082                  	smpsAlterNote       $FA
+000082 E1FA             	dc.b	$E1,$FA
+000084 E792             	dc.b	smpsNoAttack, nF1
+000086                  	smpsAlterNote       $EC
+000086 E1EC             	dc.b	$E1,$EC
+000088 E790             	dc.b	smpsNoAttack, nEb1
+00008A                  	smpsAlterNote       $09
+00008A E109             	dc.b	$E1,$09
+00008C E78D             	dc.b	smpsNoAttack, nC1
+00008E                  	smpsAlterNote       $F3
+00008E E1F3             	dc.b	$E1,$F3
+000090 E78C             	dc.b	smpsNoAttack, nB0
+000092                  	smpsAlterNote       $13
+000092 E113             	dc.b	$E1,$13
+000094 E789             	dc.b	smpsNoAttack, nAb0
+
+000096                  SOTH_OVA_Dark_Jump04:
+000096                  	smpsAlterNote       $00
+000096 E100             	dc.b	$E1,$00
+
+000098                  SOTH_OVA_Dark_Loop23:
+000098 B109ACAF068003B1 	dc.b	nC4, $09, nG3, nBb3, $06, nRst, $03, nC4, $09, nG3, $06, nBb3
+0000A0 09AC06AF
+0000A4                  	smpsLoop            $00, $18, SOTH_OVA_Dark_Loop23, Target
+0000A4 F7               	dc.b	$F7
+0000A5 0018             	dc.b	$00,$18
+                        	if (SOTH_OVA_Dark_Loop23<*)
+0000A7                  		rom_ptr_z80(SOTH_OVA_Dark_Loop23+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000A7 9880             	dc.w  (((((SOTH_OVA_Dark_Loop23+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop23+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0000A9                  SOTH_OVA_Dark_Loop24:
+0000A9 B1               	dc.b	nC4
+0000AA                  	smpsAlterVol        $04
+0000AA E604             	dc.b	$E6,$04
+0000AC BD               	dc.b	nC5
+0000AD                  	smpsAlterVol        $04
+0000AD E604             	dc.b	$E6,$04
+0000AF B1               	dc.b	nC4
+0000B0                  	smpsAlterVol        $05
+0000B0 E605             	dc.b	$E6,$05
+0000B2 BD               	dc.b	nC5
+0000B3                  	smpsAlterVol        $07
+0000B3 E607             	dc.b	$E6,$07
+0000B5 B1               	dc.b	nC4
+0000B6                  	smpsAlterVol        $0A
+0000B6 E60A             	dc.b	$E6,$0A
+0000B8 BD               	dc.b	nC5
+0000B9                  	smpsAlterVol        $10
+0000B9 E610             	dc.b	$E6,$10
+0000BB BD80             	dc.b	nC5, nRst
+0000BD                  	smpsAlterVol        $D2
+0000BD E6D2             	dc.b	$E6,$D2
+0000BF                  	smpsLoop            $00, $03, SOTH_OVA_Dark_Loop24, Target
+0000BF F7               	dc.b	$F7
+0000C0 0003             	dc.b	$00,$03
+                        	if (SOTH_OVA_Dark_Loop24<*)
+0000C2                  		rom_ptr_z80(SOTH_OVA_Dark_Loop24+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000C2 A980             	dc.w  (((((SOTH_OVA_Dark_Loop24+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop24+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0000C4 B1               	dc.b	nC4
+0000C5                  	smpsAlterVol        $04
+0000C5 E604             	dc.b	$E6,$04
+0000C7 BD               	dc.b	nC5
+0000C8                  	smpsAlterVol        $04
+0000C8 E604             	dc.b	$E6,$04
+0000CA B1               	dc.b	nC4
+0000CB                  	smpsAlterVol        $05
+0000CB E605             	dc.b	$E6,$05
+0000CD BD               	dc.b	nC5
+0000CE                  	smpsAlterVol        $07
+0000CE E607             	dc.b	$E6,$07
+0000D0 B1               	dc.b	nC4
+0000D1                  	smpsAlterVol        $0A
+0000D1 E60A             	dc.b	$E6,$0A
+0000D3 BD               	dc.b	nC5
+0000D4                  	smpsAlterVol        $10
+0000D4 E610             	dc.b	$E6,$10
+0000D6 B180             	dc.b	nC4, nRst
+0000D8                  	smpsFMvoice        $04
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0000D8 EF04             		dc.b $EF,$04
+                        	endif
+0000DA 18               	dc.b	$18
+0000DB                  	smpsAlterVol        $D2
+0000DB E6D2             	dc.b	$E6,$D2
+0000DD C9               	dc.b	nC6
+0000DE                  	smpsFMvoice        $00
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0000DE EF00             		dc.b $EF,$00
+                        	endif
+
+0000E0                  SOTH_OVA_Dark_Loop25:
+0000E0 B109ACAF06800399 	dc.b	nC4, $09, nG3, nBb3, $06, nRst, $03, nC2, $09, nG1, $06, nBb3
+0000E8 099406AF
+0000EC                  	smpsLoop            $00, $10, SOTH_OVA_Dark_Loop25, Target
+0000EC F7               	dc.b	$F7
+0000ED 0010             	dc.b	$00,$10
+                        	if (SOTH_OVA_Dark_Loop25<*)
+0000EF                  		rom_ptr_z80(SOTH_OVA_Dark_Loop25+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000EF E080             	dc.w  (((((SOTH_OVA_Dark_Loop25+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop25+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0000F1 8001             	dc.b	nRst, $01
+0000F3                  	smpsJump            SOTH_OVA_Dark_Jump04, Target
+0000F3 F6               	dc.b	$F6
+                        	if (SOTH_OVA_Dark_Jump04<*)
+0000F4                  		rom_ptr_z80(SOTH_OVA_Dark_Jump04+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000F4 9680             	dc.w  (((((SOTH_OVA_Dark_Jump04+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Jump04+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+                        ; FM2 Data
+0000F6                  SOTH_OVA_Dark_FM2:
+0000F6                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+0000F6 E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+0000F8                  	smpsFMvoice        $01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0000F8 EF01             		dc.b $EF,$01
+                        	endif
+0000FA 8001             	dc.b	nRst, $01
+0000FC                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+0000FC E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+0000FE 0BB33080BA60     	dc.b	$0B, nD4, $30, nRst, nA4, $60
+
+000104                  SOTH_OVA_Dark_Jump03:
+000104 BF48BD0CC206C0BF 	dc.b	nD5, $48, nC5, $0C, nF5, $06, nEb5, nD5, $60, $48, nC5, $0C
+00010C 6048BD0C
+                        	;!@ dc.b	nF5, $06, nG5, nD5, $60, nRst, $7F, $7F, $7F, $03
+000110 C206C4BF60807F80 	dc.b	nF5, $06, nG5, nD5, $60, nRst, $7F, nRst, $7F, nRst, $7F, nRst, $03
+000118 7F807F8003
+00011D                  	smpsAlterVol        $05
+00011D E605             	dc.b	$E6,$05
+
+00011F                  SOTH_OVA_Dark_Loop21:
+00011F C25D8003C05D8003 	dc.b	nF5, $5D, nRst, $03, nEb5, $5D, nRst, $03
+000127                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop21, Target
+000127 F7               	dc.b	$F7
+000128 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop21<*)
+00012A                  		rom_ptr_z80(SOTH_OVA_Dark_Loop21+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00012A 1F81             	dc.w  (((((SOTH_OVA_Dark_Loop21+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop21+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00012C                  	smpsAlterVol        $07
+00012C E607             	dc.b	$E6,$07
+00012E CB7FE7418030     	dc.b	nD6, $7F, smpsNoAttack, $41, nRst, $30
+000134                  	smpsAlterVol        $F4
+000134 E6F4             	dc.b	$E6,$F4
+000136 BF               	dc.b	nD5
+
+000137                  SOTH_OVA_Dark_Loop22:
+000137 48BD0CC206C0BF60 	dc.b	$48, nC5, $0C, nF5, $06, nEb5, nD5, $60, $48, nC5, $0C, nF5
+00013F 48BD0CC2
+000143 06C4BF60         	dc.b	$06, nG5, nD5, $60
+000147                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop22, Target
+000147 F7               	dc.b	$F7
+000148 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop22<*)
+00014A                  		rom_ptr_z80(SOTH_OVA_Dark_Loop22+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00014A 3781             	dc.w  (((((SOTH_OVA_Dark_Loop22+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop22+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00014C 8001             	dc.b	nRst, $01
+00014E                  	smpsJump            SOTH_OVA_Dark_Jump03, Target
+00014E F6               	dc.b	$F6
+                        	if (SOTH_OVA_Dark_Jump03<*)
+00014F                  		rom_ptr_z80(SOTH_OVA_Dark_Jump03+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00014F 0481             	dc.w  (((((SOTH_OVA_Dark_Jump03+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Jump03+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+                        ; FM3 Data
+000151                  SOTH_OVA_Dark_FM3:
+000151                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+000151 E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+000153                  	smpsFMvoice        $02
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000153 EF02             		dc.b $EF,$02
+                        	endif
+000155 8001             	dc.b	nRst, $01
+000157                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+000157 E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+                        	;!@ dc.b	$01, $7F, $4B
+000159 8001807F804B     	dc.b	nRst, $01, nRst, $7F, nRst, $4B
+
+00015F                  SOTH_OVA_Dark_Loop08:
+00015F C90280           	dc.b	nC6, $02, nRst
+000162                  	smpsAlterVol        $0C
+000162 E60C             	dc.b	$E6,$0C
+000164 C9               	dc.b	nC6
+000165                  	smpsAlterVol        $F4
+000165 E6F4             	dc.b	$E6,$F4
+000167 D580             	dc.b	nC7, nRst
+000169                  	smpsAlterVol        $16
+000169 E616             	dc.b	$E6,$16
+00016B D5               	dc.b	nC7
+00016C                  	smpsAlterVol        $EA
+00016C E6EA             	dc.b	$E6,$EA
+00016E                  	smpsLoop            $00, $20, SOTH_OVA_Dark_Loop08, Target
+00016E F7               	dc.b	$F7
+00016F 0020             	dc.b	$00,$20
+                        	if (SOTH_OVA_Dark_Loop08<*)
+000171                  		rom_ptr_z80(SOTH_OVA_Dark_Loop08+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000171 5F81             	dc.w  (((((SOTH_OVA_Dark_Loop08+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop08+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000173                  SOTH_OVA_Dark_Loop09:
+000173 C980             	dc.b	nC6, nRst
+000175                  	smpsAlterVol        $16
+000175 E616             	dc.b	$E6,$16
+000177 C9               	dc.b	nC6
+000178                  	smpsAlterVol        $EA
+000178 E6EA             	dc.b	$E6,$EA
+00017A C780             	dc.b	nBb5, nRst
+00017C                  	smpsAlterVol        $16
+00017C E616             	dc.b	$E6,$16
+00017E C7               	dc.b	nBb5
+00017F                  	smpsAlterVol        $EA
+00017F E6EA             	dc.b	$E6,$EA
+000181 C480             	dc.b	nG5, nRst
+000183                  	smpsAlterVol        $16
+000183 E616             	dc.b	$E6,$16
+000185 C4               	dc.b	nG5
+000186                  	smpsAlterVol        $EA
+000186 E6EA             	dc.b	$E6,$EA
+000188                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop09, Target
+000188 F7               	dc.b	$F7
+000189 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop09<*)
+00018B                  		rom_ptr_z80(SOTH_OVA_Dark_Loop09+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00018B 7381             	dc.w  (((((SOTH_OVA_Dark_Loop09+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop09+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00018D                  SOTH_OVA_Dark_Loop0A:
+00018D C980             	dc.b	nC6, nRst
+00018F                  	smpsAlterVol        $16
+00018F E616             	dc.b	$E6,$16
+000191 C9               	dc.b	nC6
+000192                  	smpsAlterVol        $EA
+000192 E6EA             	dc.b	$E6,$EA
+000194 C780             	dc.b	nBb5, nRst
+000196                  	smpsAlterVol        $16
+000196 E616             	dc.b	$E6,$16
+000198 C7               	dc.b	nBb5
+000199                  	smpsAlterVol        $EA
+000199 E6EA             	dc.b	$E6,$EA
+00019B                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0A, Target
+00019B F7               	dc.b	$F7
+00019C 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop0A<*)
+00019E                  		rom_ptr_z80(SOTH_OVA_Dark_Loop0A+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00019E 8D81             	dc.w  (((((SOTH_OVA_Dark_Loop0A+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop0A+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0001A0                  SOTH_OVA_Dark_Loop0B:
+0001A0 C480             	dc.b	nG5, nRst
+0001A2                  	smpsAlterVol        $16
+0001A2 E616             	dc.b	$E6,$16
+0001A4 C4               	dc.b	nG5
+0001A5                  	smpsAlterVol        $EA
+0001A5 E6EA             	dc.b	$E6,$EA
+0001A7 C980             	dc.b	nC6, nRst
+0001A9                  	smpsAlterVol        $16
+0001A9 E616             	dc.b	$E6,$16
+0001AB C9               	dc.b	nC6
+0001AC                  	smpsAlterVol        $EA
+0001AC E6EA             	dc.b	$E6,$EA
+0001AE C780             	dc.b	nBb5, nRst
+0001B0                  	smpsAlterVol        $16
+0001B0 E616             	dc.b	$E6,$16
+0001B2 C7               	dc.b	nBb5
+0001B3                  	smpsAlterVol        $EA
+0001B3 E6EA             	dc.b	$E6,$EA
+0001B5                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0B, Target
+0001B5 F7               	dc.b	$F7
+0001B6 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop0B<*)
+0001B8                  		rom_ptr_z80(SOTH_OVA_Dark_Loop0B+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0001B8 A081             	dc.w  (((((SOTH_OVA_Dark_Loop0B+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop0B+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0001BA                  SOTH_OVA_Dark_Loop0C:
+0001BA C980             	dc.b	nC6, nRst
+0001BC                  	smpsAlterVol        $16
+0001BC E616             	dc.b	$E6,$16
+0001BE C9               	dc.b	nC6
+0001BF                  	smpsAlterVol        $EA
+0001BF E6EA             	dc.b	$E6,$EA
+0001C1 C780             	dc.b	nBb5, nRst
+0001C3                  	smpsAlterVol        $16
+0001C3 E616             	dc.b	$E6,$16
+0001C5 C7               	dc.b	nBb5
+0001C6                  	smpsAlterVol        $EA
+0001C6 E6EA             	dc.b	$E6,$EA
+0001C8 C480             	dc.b	nG5, nRst
+0001CA                  	smpsAlterVol        $16
+0001CA E616             	dc.b	$E6,$16
+0001CC C4               	dc.b	nG5
+0001CD                  	smpsAlterVol        $EA
+0001CD E6EA             	dc.b	$E6,$EA
+0001CF                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0C, Target
+0001CF F7               	dc.b	$F7
+0001D0 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop0C<*)
+0001D2                  		rom_ptr_z80(SOTH_OVA_Dark_Loop0C+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0001D2 BA81             	dc.w  (((((SOTH_OVA_Dark_Loop0C+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop0C+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0001D4                  SOTH_OVA_Dark_Loop0D:
+0001D4 C980             	dc.b	nC6, nRst
+0001D6                  	smpsAlterVol        $16
+0001D6 E616             	dc.b	$E6,$16
+0001D8 C9               	dc.b	nC6
+0001D9                  	smpsAlterVol        $EA
+0001D9 E6EA             	dc.b	$E6,$EA
+0001DB C780             	dc.b	nBb5, nRst
+0001DD                  	smpsAlterVol        $16
+0001DD E616             	dc.b	$E6,$16
+0001DF C7               	dc.b	nBb5
+0001E0                  	smpsAlterVol        $EA
+0001E0 E6EA             	dc.b	$E6,$EA
+0001E2                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0D, Target
+0001E2 F7               	dc.b	$F7
+0001E3 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop0D<*)
+0001E5                  		rom_ptr_z80(SOTH_OVA_Dark_Loop0D+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0001E5 D481             	dc.w  (((((SOTH_OVA_Dark_Loop0D+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop0D+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0001E7                  SOTH_OVA_Dark_Loop0E:
+0001E7 C480             	dc.b	nG5, nRst
+0001E9                  	smpsAlterVol        $16
+0001E9 E616             	dc.b	$E6,$16
+0001EB C4               	dc.b	nG5
+0001EC                  	smpsAlterVol        $EA
+0001EC E6EA             	dc.b	$E6,$EA
+0001EE C980             	dc.b	nC6, nRst
+0001F0                  	smpsAlterVol        $16
+0001F0 E616             	dc.b	$E6,$16
+0001F2 C9               	dc.b	nC6
+0001F3                  	smpsAlterVol        $EA
+0001F3 E6EA             	dc.b	$E6,$EA
+0001F5 C780             	dc.b	nBb5, nRst
+0001F7                  	smpsAlterVol        $16
+0001F7 E616             	dc.b	$E6,$16
+0001F9 C7               	dc.b	nBb5
+0001FA                  	smpsAlterVol        $EA
+0001FA E6EA             	dc.b	$E6,$EA
+0001FC                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0E, Target
+0001FC F7               	dc.b	$F7
+0001FD 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop0E<*)
+0001FF                  		rom_ptr_z80(SOTH_OVA_Dark_Loop0E+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0001FF E781             	dc.w  (((((SOTH_OVA_Dark_Loop0E+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop0E+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000201                  SOTH_OVA_Dark_Loop0F:
+000201 C980             	dc.b	nC6, nRst
+000203                  	smpsAlterVol        $16
+000203 E616             	dc.b	$E6,$16
+000205 C9               	dc.b	nC6
+000206                  	smpsAlterVol        $EA
+000206 E6EA             	dc.b	$E6,$EA
+000208 C780             	dc.b	nBb5, nRst
+00020A                  	smpsAlterVol        $16
+00020A E616             	dc.b	$E6,$16
+00020C C7               	dc.b	nBb5
+00020D                  	smpsAlterVol        $EA
+00020D E6EA             	dc.b	$E6,$EA
+00020F C480             	dc.b	nG5, nRst
+000211                  	smpsAlterVol        $16
+000211 E616             	dc.b	$E6,$16
+000213 C4               	dc.b	nG5
+000214                  	smpsAlterVol        $EA
+000214 E6EA             	dc.b	$E6,$EA
+000216                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0F, Target
+000216 F7               	dc.b	$F7
+000217 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop0F<*)
+000219                  		rom_ptr_z80(SOTH_OVA_Dark_Loop0F+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000219 0182             	dc.w  (((((SOTH_OVA_Dark_Loop0F+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop0F+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00021B                  SOTH_OVA_Dark_Loop10:
+00021B C980             	dc.b	nC6, nRst
+00021D                  	smpsAlterVol        $16
+00021D E616             	dc.b	$E6,$16
+00021F C9               	dc.b	nC6
+000220                  	smpsAlterVol        $EA
+000220 E6EA             	dc.b	$E6,$EA
+000222 C780             	dc.b	nBb5, nRst
+000224                  	smpsAlterVol        $16
+000224 E616             	dc.b	$E6,$16
+000226 C7               	dc.b	nBb5
+000227                  	smpsAlterVol        $EA
+000227 E6EA             	dc.b	$E6,$EA
+000229                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop10, Target
+000229 F7               	dc.b	$F7
+00022A 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop10<*)
+00022C                  		rom_ptr_z80(SOTH_OVA_Dark_Loop10+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00022C 1B82             	dc.w  (((((SOTH_OVA_Dark_Loop10+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop10+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00022E                  SOTH_OVA_Dark_Loop11:
+00022E C480             	dc.b	nG5, nRst
+000230                  	smpsAlterVol        $16
+000230 E616             	dc.b	$E6,$16
+000232 C4               	dc.b	nG5
+000233                  	smpsAlterVol        $EA
+000233 E6EA             	dc.b	$E6,$EA
+000235 C980             	dc.b	nC6, nRst
+000237                  	smpsAlterVol        $16
+000237 E616             	dc.b	$E6,$16
+000239 C9               	dc.b	nC6
+00023A                  	smpsAlterVol        $EA
+00023A E6EA             	dc.b	$E6,$EA
+00023C C780             	dc.b	nBb5, nRst
+00023E                  	smpsAlterVol        $16
+00023E E616             	dc.b	$E6,$16
+000240 C7               	dc.b	nBb5
+000241                  	smpsAlterVol        $EA
+000241 E6EA             	dc.b	$E6,$EA
+000243                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop11, Target
+000243 F7               	dc.b	$F7
+000244 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop11<*)
+000246                  		rom_ptr_z80(SOTH_OVA_Dark_Loop11+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000246 2E82             	dc.w  (((((SOTH_OVA_Dark_Loop11+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop11+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000248                  SOTH_OVA_Dark_Loop12:
+000248 C980             	dc.b	nC6, nRst
+00024A                  	smpsAlterVol        $16
+00024A E616             	dc.b	$E6,$16
+00024C C9               	dc.b	nC6
+00024D                  	smpsAlterVol        $EA
+00024D E6EA             	dc.b	$E6,$EA
+00024F C780             	dc.b	nBb5, nRst
+000251                  	smpsAlterVol        $16
+000251 E616             	dc.b	$E6,$16
+000253 C7               	dc.b	nBb5
+000254                  	smpsAlterVol        $EA
+000254 E6EA             	dc.b	$E6,$EA
+000256 C480             	dc.b	nG5, nRst
+000258                  	smpsAlterVol        $16
+000258 E616             	dc.b	$E6,$16
+00025A C4               	dc.b	nG5
+00025B                  	smpsAlterVol        $EA
+00025B E6EA             	dc.b	$E6,$EA
+00025D                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop12, Target
+00025D F7               	dc.b	$F7
+00025E 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop12<*)
+000260                  		rom_ptr_z80(SOTH_OVA_Dark_Loop12+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000260 4882             	dc.w  (((((SOTH_OVA_Dark_Loop12+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop12+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000262                  SOTH_OVA_Dark_Loop13:
+000262 C980             	dc.b	nC6, nRst
+000264                  	smpsAlterVol        $16
+000264 E616             	dc.b	$E6,$16
+000266 C9               	dc.b	nC6
+000267                  	smpsAlterVol        $EA
+000267 E6EA             	dc.b	$E6,$EA
+000269 C780             	dc.b	nBb5, nRst
+00026B                  	smpsAlterVol        $16
+00026B E616             	dc.b	$E6,$16
+00026D C7               	dc.b	nBb5
+00026E                  	smpsAlterVol        $EA
+00026E E6EA             	dc.b	$E6,$EA
+000270                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop13, Target
+000270 F7               	dc.b	$F7
+000271 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop13<*)
+000273                  		rom_ptr_z80(SOTH_OVA_Dark_Loop13+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000273 6282             	dc.w  (((((SOTH_OVA_Dark_Loop13+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop13+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000275                  SOTH_OVA_Dark_Loop14:
+000275 C480             	dc.b	nG5, nRst
+000277                  	smpsAlterVol        $16
+000277 E616             	dc.b	$E6,$16
+000279 C4               	dc.b	nG5
+00027A                  	smpsAlterVol        $EA
+00027A E6EA             	dc.b	$E6,$EA
+00027C C980             	dc.b	nC6, nRst
+00027E                  	smpsAlterVol        $16
+00027E E616             	dc.b	$E6,$16
+000280 C9               	dc.b	nC6
+000281                  	smpsAlterVol        $EA
+000281 E6EA             	dc.b	$E6,$EA
+000283 C780             	dc.b	nBb5, nRst
+000285                  	smpsAlterVol        $16
+000285 E616             	dc.b	$E6,$16
+000287 C7               	dc.b	nBb5
+000288                  	smpsAlterVol        $EA
+000288 E6EA             	dc.b	$E6,$EA
+00028A                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop14, Target
+00028A F7               	dc.b	$F7
+00028B 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop14<*)
+00028D                  		rom_ptr_z80(SOTH_OVA_Dark_Loop14+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00028D 7582             	dc.w  (((((SOTH_OVA_Dark_Loop14+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop14+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00028F                  SOTH_OVA_Dark_Loop15:
+00028F C980             	dc.b	nC6, nRst
+000291                  	smpsAlterVol        $16
+000291 E616             	dc.b	$E6,$16
+000293 C9               	dc.b	nC6
+000294                  	smpsAlterVol        $EA
+000294 E6EA             	dc.b	$E6,$EA
+000296 C780             	dc.b	nBb5, nRst
+000298                  	smpsAlterVol        $16
+000298 E616             	dc.b	$E6,$16
+00029A C7               	dc.b	nBb5
+00029B                  	smpsAlterVol        $EA
+00029B E6EA             	dc.b	$E6,$EA
+00029D C480             	dc.b	nG5, nRst
+00029F                  	smpsAlterVol        $16
+00029F E616             	dc.b	$E6,$16
+0002A1 C4               	dc.b	nG5
+0002A2                  	smpsAlterVol        $EA
+0002A2 E6EA             	dc.b	$E6,$EA
+0002A4                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop15, Target
+0002A4 F7               	dc.b	$F7
+0002A5 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop15<*)
+0002A7                  		rom_ptr_z80(SOTH_OVA_Dark_Loop15+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002A7 8F82             	dc.w  (((((SOTH_OVA_Dark_Loop15+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop15+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002A9                  SOTH_OVA_Dark_Loop16:
+0002A9 C980             	dc.b	nC6, nRst
+0002AB                  	smpsAlterVol        $16
+0002AB E616             	dc.b	$E6,$16
+0002AD C9               	dc.b	nC6
+0002AE                  	smpsAlterVol        $EA
+0002AE E6EA             	dc.b	$E6,$EA
+0002B0 C780             	dc.b	nBb5, nRst
+0002B2                  	smpsAlterVol        $16
+0002B2 E616             	dc.b	$E6,$16
+0002B4 C7               	dc.b	nBb5
+0002B5                  	smpsAlterVol        $EA
+0002B5 E6EA             	dc.b	$E6,$EA
+0002B7                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop16, Target
+0002B7 F7               	dc.b	$F7
+0002B8 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop16<*)
+0002BA                  		rom_ptr_z80(SOTH_OVA_Dark_Loop16+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002BA A982             	dc.w  (((((SOTH_OVA_Dark_Loop16+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop16+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002BC                  SOTH_OVA_Dark_Loop17:
+0002BC C480             	dc.b	nG5, nRst
+0002BE                  	smpsAlterVol        $16
+0002BE E616             	dc.b	$E6,$16
+0002C0 C4               	dc.b	nG5
+0002C1                  	smpsAlterVol        $EA
+0002C1 E6EA             	dc.b	$E6,$EA
+0002C3 C980             	dc.b	nC6, nRst
+0002C5                  	smpsAlterVol        $16
+0002C5 E616             	dc.b	$E6,$16
+0002C7 C9               	dc.b	nC6
+0002C8                  	smpsAlterVol        $EA
+0002C8 E6EA             	dc.b	$E6,$EA
+0002CA C780             	dc.b	nBb5, nRst
+0002CC                  	smpsAlterVol        $16
+0002CC E616             	dc.b	$E6,$16
+0002CE C7               	dc.b	nBb5
+0002CF                  	smpsAlterVol        $EA
+0002CF E6EA             	dc.b	$E6,$EA
+0002D1                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop17, Target
+0002D1 F7               	dc.b	$F7
+0002D2 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop17<*)
+0002D4                  		rom_ptr_z80(SOTH_OVA_Dark_Loop17+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002D4 BC82             	dc.w  (((((SOTH_OVA_Dark_Loop17+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop17+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002D6                  SOTH_OVA_Dark_Loop18:
+0002D6 C980             	dc.b	nC6, nRst
+0002D8                  	smpsAlterVol        $16
+0002D8 E616             	dc.b	$E6,$16
+0002DA C9               	dc.b	nC6
+0002DB                  	smpsAlterVol        $EA
+0002DB E6EA             	dc.b	$E6,$EA
+0002DD C780             	dc.b	nBb5, nRst
+0002DF                  	smpsAlterVol        $16
+0002DF E616             	dc.b	$E6,$16
+0002E1 C7               	dc.b	nBb5
+0002E2                  	smpsAlterVol        $EA
+0002E2 E6EA             	dc.b	$E6,$EA
+0002E4 C480             	dc.b	nG5, nRst
+0002E6                  	smpsAlterVol        $16
+0002E6 E616             	dc.b	$E6,$16
+0002E8 C4               	dc.b	nG5
+0002E9                  	smpsAlterVol        $EA
+0002E9 E6EA             	dc.b	$E6,$EA
+0002EB                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop18, Target
+0002EB F7               	dc.b	$F7
+0002EC 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop18<*)
+0002EE                  		rom_ptr_z80(SOTH_OVA_Dark_Loop18+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002EE D682             	dc.w  (((((SOTH_OVA_Dark_Loop18+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop18+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002F0                  SOTH_OVA_Dark_Loop19:
+0002F0 C980             	dc.b	nC6, nRst
+0002F2                  	smpsAlterVol        $16
+0002F2 E616             	dc.b	$E6,$16
+0002F4 C9               	dc.b	nC6
+0002F5                  	smpsAlterVol        $EA
+0002F5 E6EA             	dc.b	$E6,$EA
+0002F7 C780             	dc.b	nBb5, nRst
+0002F9                  	smpsAlterVol        $16
+0002F9 E616             	dc.b	$E6,$16
+0002FB C7               	dc.b	nBb5
+0002FC                  	smpsAlterVol        $EA
+0002FC E6EA             	dc.b	$E6,$EA
+0002FE                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop19, Target
+0002FE F7               	dc.b	$F7
+0002FF 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop19<*)
+000301                  		rom_ptr_z80(SOTH_OVA_Dark_Loop19+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000301 F082             	dc.w  (((((SOTH_OVA_Dark_Loop19+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop19+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000303                  SOTH_OVA_Dark_Loop1A:
+000303 C480             	dc.b	nG5, nRst
+000305                  	smpsAlterVol        $16
+000305 E616             	dc.b	$E6,$16
+000307 C4               	dc.b	nG5
+000308                  	smpsAlterVol        $EA
+000308 E6EA             	dc.b	$E6,$EA
+00030A C980             	dc.b	nC6, nRst
+00030C                  	smpsAlterVol        $16
+00030C E616             	dc.b	$E6,$16
+00030E C9               	dc.b	nC6
+00030F                  	smpsAlterVol        $EA
+00030F E6EA             	dc.b	$E6,$EA
+000311 C780             	dc.b	nBb5, nRst
+000313                  	smpsAlterVol        $16
+000313 E616             	dc.b	$E6,$16
+000315 C7               	dc.b	nBb5
+000316                  	smpsAlterVol        $EA
+000316 E6EA             	dc.b	$E6,$EA
+000318                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1A, Target
+000318 F7               	dc.b	$F7
+000319 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop1A<*)
+00031B                  		rom_ptr_z80(SOTH_OVA_Dark_Loop1A+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00031B 0383             	dc.w  (((((SOTH_OVA_Dark_Loop1A+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop1A+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00031D                  SOTH_OVA_Dark_Loop1B:
+00031D C980             	dc.b	nC6, nRst
+00031F                  	smpsAlterVol        $16
+00031F E616             	dc.b	$E6,$16
+000321 C9               	dc.b	nC6
+000322                  	smpsAlterVol        $EA
+000322 E6EA             	dc.b	$E6,$EA
+000324 C780             	dc.b	nBb5, nRst
+000326                  	smpsAlterVol        $16
+000326 E616             	dc.b	$E6,$16
+000328 C7               	dc.b	nBb5
+000329                  	smpsAlterVol        $EA
+000329 E6EA             	dc.b	$E6,$EA
+00032B C480             	dc.b	nG5, nRst
+00032D                  	smpsAlterVol        $16
+00032D E616             	dc.b	$E6,$16
+00032F C4               	dc.b	nG5
+000330                  	smpsAlterVol        $EA
+000330 E6EA             	dc.b	$E6,$EA
+000332                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1B, Target
+000332 F7               	dc.b	$F7
+000333 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop1B<*)
+000335                  		rom_ptr_z80(SOTH_OVA_Dark_Loop1B+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000335 1D83             	dc.w  (((((SOTH_OVA_Dark_Loop1B+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop1B+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000337                  SOTH_OVA_Dark_Loop1C:
+000337 C980             	dc.b	nC6, nRst
+000339                  	smpsAlterVol        $16
+000339 E616             	dc.b	$E6,$16
+00033B C9               	dc.b	nC6
+00033C                  	smpsAlterVol        $EA
+00033C E6EA             	dc.b	$E6,$EA
+00033E C780             	dc.b	nBb5, nRst
+000340                  	smpsAlterVol        $16
+000340 E616             	dc.b	$E6,$16
+000342 C7               	dc.b	nBb5
+000343                  	smpsAlterVol        $EA
+000343 E6EA             	dc.b	$E6,$EA
+000345                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1C, Target
+000345 F7               	dc.b	$F7
+000346 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop1C<*)
+000348                  		rom_ptr_z80(SOTH_OVA_Dark_Loop1C+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000348 3783             	dc.w  (((((SOTH_OVA_Dark_Loop1C+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop1C+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00034A                  SOTH_OVA_Dark_Loop1D:
+00034A C480             	dc.b	nG5, nRst
+00034C                  	smpsAlterVol        $16
+00034C E616             	dc.b	$E6,$16
+00034E C4               	dc.b	nG5
+00034F                  	smpsAlterVol        $EA
+00034F E6EA             	dc.b	$E6,$EA
+000351 C980             	dc.b	nC6, nRst
+000353                  	smpsAlterVol        $16
+000353 E616             	dc.b	$E6,$16
+000355 C9               	dc.b	nC6
+000356                  	smpsAlterVol        $EA
+000356 E6EA             	dc.b	$E6,$EA
+000358 C780             	dc.b	nBb5, nRst
+00035A                  	smpsAlterVol        $16
+00035A E616             	dc.b	$E6,$16
+00035C C7               	dc.b	nBb5
+00035D                  	smpsAlterVol        $EA
+00035D E6EA             	dc.b	$E6,$EA
+00035F                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1D, Target
+00035F F7               	dc.b	$F7
+000360 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop1D<*)
+000362                  		rom_ptr_z80(SOTH_OVA_Dark_Loop1D+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000362 4A83             	dc.w  (((((SOTH_OVA_Dark_Loop1D+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop1D+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000364                  SOTH_OVA_Dark_Loop1E:
+000364 C980             	dc.b	nC6, nRst
+000366                  	smpsAlterVol        $16
+000366 E616             	dc.b	$E6,$16
+000368 C9               	dc.b	nC6
+000369                  	smpsAlterVol        $EA
+000369 E6EA             	dc.b	$E6,$EA
+00036B C780             	dc.b	nBb5, nRst
+00036D                  	smpsAlterVol        $16
+00036D E616             	dc.b	$E6,$16
+00036F C7               	dc.b	nBb5
+000370                  	smpsAlterVol        $EA
+000370 E6EA             	dc.b	$E6,$EA
+000372 C480             	dc.b	nG5, nRst
+000374                  	smpsAlterVol        $16
+000374 E616             	dc.b	$E6,$16
+000376 C4               	dc.b	nG5
+000377                  	smpsAlterVol        $EA
+000377 E6EA             	dc.b	$E6,$EA
+000379                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1E, Target
+000379 F7               	dc.b	$F7
+00037A 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop1E<*)
+00037C                  		rom_ptr_z80(SOTH_OVA_Dark_Loop1E+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00037C 6483             	dc.w  (((((SOTH_OVA_Dark_Loop1E+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop1E+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00037E                  SOTH_OVA_Dark_Loop1F:
+00037E C980             	dc.b	nC6, nRst
+000380                  	smpsAlterVol        $16
+000380 E616             	dc.b	$E6,$16
+000382 C9               	dc.b	nC6
+000383                  	smpsAlterVol        $EA
+000383 E6EA             	dc.b	$E6,$EA
+000385 C780             	dc.b	nBb5, nRst
+000387                  	smpsAlterVol        $16
+000387 E616             	dc.b	$E6,$16
+000389 C7               	dc.b	nBb5
+00038A                  	smpsAlterVol        $EA
+00038A E6EA             	dc.b	$E6,$EA
+00038C                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1F, Target
+00038C F7               	dc.b	$F7
+00038D 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop1F<*)
+00038F                  		rom_ptr_z80(SOTH_OVA_Dark_Loop1F+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00038F 7E83             	dc.w  (((((SOTH_OVA_Dark_Loop1F+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop1F+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000391 C480             	dc.b	nG5, nRst
+000393                  	smpsAlterVol        $16
+000393 E616             	dc.b	$E6,$16
+000395 C4               	dc.b	nG5
+000396                  	smpsAlterVol        $EA
+000396 E6EA             	dc.b	$E6,$EA
+000398 C980             	dc.b	nC6, nRst
+00039A                  	smpsAlterVol        $16
+00039A E616             	dc.b	$E6,$16
+00039C C9               	dc.b	nC6
+00039D                  	smpsAlterVol        $EA
+00039D E6EA             	dc.b	$E6,$EA
+00039F C780             	dc.b	nBb5, nRst
+0003A1                  	smpsAlterVol        $16
+0003A1 E616             	dc.b	$E6,$16
+0003A3 C7               	dc.b	nBb5
+0003A4                  	smpsAlterVol        $EA
+0003A4 E6EA             	dc.b	$E6,$EA
+0003A6 C480             	dc.b	nG5, nRst
+0003A8                  	smpsAlterVol        $16
+0003A8 E616             	dc.b	$E6,$16
+0003AA C4               	dc.b	nG5
+0003AB                  	smpsAlterVol        $EA
+0003AB E6EA             	dc.b	$E6,$EA
+0003AD C980             	dc.b	nC6, nRst
+0003AF                  	smpsAlterVol        $16
+0003AF E616             	dc.b	$E6,$16
+0003B1 C9               	dc.b	nC6
+0003B2                  	smpsAlterVol        $EA
+0003B2 E6EA             	dc.b	$E6,$EA
+0003B4 C780             	dc.b	nBb5, nRst
+0003B6                  	smpsAlterVol        $16
+0003B6 E616             	dc.b	$E6,$16
+                        	;!@ dc.b	nBb5, nRst, $7F, $71
+0003B8 C702807F8071     	dc.b	nBb5, $02, nRst, $7F, nRst, $71
+
+0003BE                  SOTH_OVA_Dark_Loop20:
+0003BE                  	smpsAlterVol        $EA
+0003BE E6EA             	dc.b	$E6,$EA
+0003C0 C90280           	dc.b	nC6, $02, nRst
+0003C3                  	smpsAlterVol        $0C
+0003C3 E60C             	dc.b	$E6,$0C
+0003C5 C9               	dc.b	nC6
+0003C6                  	smpsAlterVol        $F4
+0003C6 E6F4             	dc.b	$E6,$F4
+0003C8 D580             	dc.b	nC7, nRst
+0003CA                  	smpsAlterVol        $16
+0003CA E616             	dc.b	$E6,$16
+0003CC D5               	dc.b	nC7
+0003CD                  	smpsLoop            $00, $40, SOTH_OVA_Dark_Loop20, Target
+0003CD F7               	dc.b	$F7
+0003CE 0040             	dc.b	$00,$40
+                        	if (SOTH_OVA_Dark_Loop20<*)
+0003D0                  		rom_ptr_z80(SOTH_OVA_Dark_Loop20+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0003D0 BE83             	dc.w  (((((SOTH_OVA_Dark_Loop20+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop20+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0003D2 8001             	dc.b	nRst, $01
+0003D4                  	smpsAlterVol        $EA
+0003D4 E6EA             	dc.b	$E6,$EA
+0003D6                  	smpsJump            SOTH_OVA_Dark_Loop08, Target
+0003D6 F6               	dc.b	$F6
+                        	if (SOTH_OVA_Dark_Loop08<*)
+0003D7                  		rom_ptr_z80(SOTH_OVA_Dark_Loop08+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0003D7 5F81             	dc.w  (((((SOTH_OVA_Dark_Loop08+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop08+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+                        ; FM4 Data
+0003D9                  SOTH_OVA_Dark_FM4:
+0003D9                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+0003D9 E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+0003DB                  	smpsFMvoice        $03
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0003DB EF03             		dc.b $EF,$03
+                        	endif
+0003DD 8001             	dc.b	nRst, $01
+0003DF                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+0003DF E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+                        	;!@ dc.b	$01, $7F, $4B
+0003E1 8001807F804B     	dc.b	nRst, $01, nRst, $7F, nRst, $4B
+
+0003E7                  SOTH_OVA_Dark_Jump02:
+0003E7 800C             	dc.b	nRst, $0C
+
+0003E9                  SOTH_OVA_Dark_Loop04:
+0003E9 B6068003B6028025 	dc.b	nF4, $06, nRst, $03, nF4, $02, nRst, $25
+0003F1                  	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop04, Target
+0003F1 F7               	dc.b	$F7
+0003F2 0007             	dc.b	$00,$07
+                        	if (SOTH_OVA_Dark_Loop04<*)
+0003F4                  		rom_ptr_z80(SOTH_OVA_Dark_Loop04+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0003F4 E983             	dc.w  (((((SOTH_OVA_Dark_Loop04+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop04+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@ dc.b	nF4, $06, nRst, $03, nF4, $02, nRst
+0003F6 B6068003B602     	dc.b	nF4, $06, nRst, $03, nF4, $02
+
+0003FC                  SOTH_OVA_Dark_Loop05:
+                        	;!@
+0003FC 8063             	dc.b	nRst, $63
+0003FE                  	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop05, Target
+0003FE F7               	dc.b	$F7
+0003FF 0007             	dc.b	$00,$07
+                        	if (SOTH_OVA_Dark_Loop05<*)
+000401                  		rom_ptr_z80(SOTH_OVA_Dark_Loop05+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000401 FC83             	dc.w  (((((SOTH_OVA_Dark_Loop05+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop05+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@
+000403 8064             	dc.b	nRst, $64
+000405                  	smpsAlterVol        $FD
+000405 E6FD             	dc.b	$E6,$FD
+
+000407                  SOTH_OVA_Dark_Loop06:
+000407 B606             	dc.b	nF4, $06
+000409                  	smpsAlterVol        $06
+000409 E606             	dc.b	$E6,$06
+00040B AF028004         	dc.b	nBb3, $02, nRst, $04
+00040F                  	smpsAlterVol        $FA
+00040F E6FA             	dc.b	$E6,$FA
+000411 B606             	dc.b	nF4, $06
+000413                  	smpsAlterVol        $06
+000413 E606             	dc.b	$E6,$06
+000415 AF028001         	dc.b	nBb3, $02, nRst, $01
+000419                  	smpsAlterVol        $FA
+000419 E6FA             	dc.b	$E6,$FA
+00041B B8048002         	dc.b	nG4, $04, nRst, $02
+00041F                  	smpsAlterVol        $06
+00041F E606             	dc.b	$E6,$06
+000421 B88001           	dc.b	nG4, nRst, $01
+000424                  	smpsAlterVol        $FA
+000424 E6FA             	dc.b	$E6,$FA
+000426 B8048002B6048002 	dc.b	nG4, $04, nRst, $02, nF4, $04, nRst, $02, nG4, $04, nRst, $02
+00042E B8048002
+000432                  	smpsLoop            $00, $03, SOTH_OVA_Dark_Loop06, Target
+000432 F7               	dc.b	$F7
+000433 0003             	dc.b	$00,$03
+                        	if (SOTH_OVA_Dark_Loop06<*)
+000435                  		rom_ptr_z80(SOTH_OVA_Dark_Loop06+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000435 0784             	dc.w  (((((SOTH_OVA_Dark_Loop06+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop06+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000437 B606             	dc.b	nF4, $06
+000439                  	smpsAlterVol        $06
+000439 E606             	dc.b	$E6,$06
+00043B AF028004         	dc.b	nBb3, $02, nRst, $04
+00043F                  	smpsAlterVol        $FA
+00043F E6FA             	dc.b	$E6,$FA
+000441 B606             	dc.b	nF4, $06
+000443                  	smpsAlterVol        $06
+000443 E606             	dc.b	$E6,$06
+000445 AF028001         	dc.b	nBb3, $02, nRst, $01
+000449                  	smpsAlterVol        $FA
+000449 E6FA             	dc.b	$E6,$FA
+00044B B8048002         	dc.b	nG4, $04, nRst, $02
+00044F                  	smpsAlterVol        $06
+00044F E606             	dc.b	$E6,$06
+000451 B88001           	dc.b	nG4, nRst, $01
+000454                  	smpsAlterVol        $FA
+000454 E6FA             	dc.b	$E6,$FA
+000456 B8048002B6048002 	dc.b	nG4, $04, nRst, $02, nF4, $04, nRst, $02, nG4, $04, nRst, $3E
+00045E B804803E
+000462                  	smpsAlterVol        $03
+000462 E603             	dc.b	$E6,$03
+
+000464                  SOTH_OVA_Dark_Loop07:
+000464 B6068003B6028025 	dc.b	nF4, $06, nRst, $03, nF4, $02, nRst, $25
+00046C                  	smpsLoop            $00, $0F, SOTH_OVA_Dark_Loop07, Target
+00046C F7               	dc.b	$F7
+00046D 000F             	dc.b	$00,$0F
+                        	if (SOTH_OVA_Dark_Loop07<*)
+00046F                  		rom_ptr_z80(SOTH_OVA_Dark_Loop07+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00046F 6484             	dc.w  (((((SOTH_OVA_Dark_Loop07+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop07+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000471 B6068003B602801A 	dc.b	nF4, $06, nRst, $03, nF4, $02, nRst, $1A
+000479                  	smpsJump            SOTH_OVA_Dark_Jump02, Target
+000479 F6               	dc.b	$F6
+                        	if (SOTH_OVA_Dark_Jump02<*)
+00047A                  		rom_ptr_z80(SOTH_OVA_Dark_Jump02+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00047A E783             	dc.w  (((((SOTH_OVA_Dark_Jump02+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Jump02+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+                        ; FM5 Data
+00047C                  SOTH_OVA_Dark_FM5:
+00047C                  	smpsFMvoice        $01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+00047C EF01             		dc.b $EF,$01
+                        	endif
+00047E                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+00047E E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+000480 8001             	dc.b	nRst, $01
+000482                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+000482 E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+000484 013AB17FE711     	dc.b	$01, $3A, nC4, $7F, smpsNoAttack, $11
+
+00048A                  SOTH_OVA_Dark_Jump01:
+00048A B348B10CB606B4B3 	dc.b	nD4, $48, nC4, $0C, nF4, $06, nEb4, nD4, $60, $48, nC4, $0C
+000492 6048B10C
+                        	;!@ dc.b	nF4, $06, nG4, nD4, $60, nRst, $7F, $7F, $7F, $03
+000496 B606B8B360807F80 	dc.b	nF4, $06, nG4, nD4, $60, nRst, $7F, nRst, $7F, nRst, $7F, nRst, $03
+00049E 7F807F8003
+0004A3                  	smpsAlterVol        $05
+0004A3 E605             	dc.b	$E6,$05
+
+0004A5                  SOTH_OVA_Dark_Loop02:
+0004A5 BF5D8003BD5D8003 	dc.b	nD5, $5D, nRst, $03, nC5, $5D, nRst, $03
+0004AD                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop02, Target
+0004AD F7               	dc.b	$F7
+0004AE 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop02<*)
+0004B0                  		rom_ptr_z80(SOTH_OVA_Dark_Loop02+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0004B0 A584             	dc.w  (((((SOTH_OVA_Dark_Loop02+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop02+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0004B2                  	smpsAlterVol        $0B
+0004B2 E60B             	dc.b	$E6,$0B
+0004B4 D77FE7418030     	dc.b	nD7, $7F, smpsNoAttack, $41, nRst, $30
+0004BA                  	smpsAlterVol        $F0
+0004BA E6F0             	dc.b	$E6,$F0
+0004BC B3               	dc.b	nD4
+
+0004BD                  SOTH_OVA_Dark_Loop03:
+0004BD 48B10CB606B4B360 	dc.b	$48, nC4, $0C, nF4, $06, nEb4, nD4, $60, $48, nC4, $0C, nF4
+0004C5 48B10CB6
+0004C9 06B8B360         	dc.b	$06, nG4, nD4, $60
+0004CD                  	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop03, Target
+0004CD F7               	dc.b	$F7
+0004CE 0002             	dc.b	$00,$02
+                        	if (SOTH_OVA_Dark_Loop03<*)
+0004D0                  		rom_ptr_z80(SOTH_OVA_Dark_Loop03+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0004D0 BD84             	dc.w  (((((SOTH_OVA_Dark_Loop03+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop03+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0004D2 8001             	dc.b	nRst, $01
+0004D4                  	smpsJump            SOTH_OVA_Dark_Jump01, Target
+0004D4 F6               	dc.b	$F6
+                        	if (SOTH_OVA_Dark_Jump01<*)
+0004D5                  		rom_ptr_z80(SOTH_OVA_Dark_Jump01+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0004D5 8A84             	dc.w  (((((SOTH_OVA_Dark_Jump01+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Jump01+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+                        ; FM6 Data
+0004D7                  SOTH_OVA_Dark_FM6:
+0004D7                  	smpsFMvoice        $01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0004D7 EF01             		dc.b $EF,$01
+                        	endif
+0004D9                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+0004D9 E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+0004DB 8001             	dc.b	nRst, $01
+0004DD                  	smpsPan             panCenter, $00
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 2==2
+0004DD E0C0             		dc.b $E0,panCenter|$00
+                        	else
+                        	endif
+                        	;!@ dc.b	$0B, nA3, $7F, smpsNoAttack, $41
+0004DF 800BAE7FE741     	dc.b	nRst, $0B, nA3, $7F, smpsNoAttack, $41
+
+0004E5                  SOTH_OVA_Dark_Jump00:
+                        	;!@
+                        	;dc.b	nRst
+
+0004E5                  SOTH_OVA_Dark_Loop00:
+                        	;!@
+0004E5 8060             	dc.b	nRst, $60
+0004E7                  	smpsLoop            $00, $08, SOTH_OVA_Dark_Loop00, Target
+0004E7 F7               	dc.b	$F7
+0004E8 0008             	dc.b	$00,$08
+                        	if (SOTH_OVA_Dark_Loop00<*)
+0004EA                  		rom_ptr_z80(SOTH_OVA_Dark_Loop00+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0004EA E584             	dc.w  (((((SOTH_OVA_Dark_Loop00+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop00+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0004EC                  	smpsAlterVol        $05
+0004EC E605             	dc.b	$E6,$05
+0004EE BB5D8003B95D8003 	dc.b	nBb4, $5D, nRst, $03, nAb4, $5D, nRst, $03, nBb4, $5D, nRst, $03
+0004F6 BB5D8003
+                        	;!@ dc.b	nAb4, $5D, nRst
+0004FA B95D             	dc.b	nAb4, $5D
+
+0004FC                  SOTH_OVA_Dark_Loop01:
+                        	;!@
+0004FC 805C             	dc.b	nRst, $5C
+0004FE                  	smpsLoop            $00, $0B, SOTH_OVA_Dark_Loop01, Target
+0004FE F7               	dc.b	$F7
+0004FF 000B             	dc.b	$00,$0B
+                        	if (SOTH_OVA_Dark_Loop01<*)
+000501                  		rom_ptr_z80(SOTH_OVA_Dark_Loop01+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000501 FC84             	dc.w  (((((SOTH_OVA_Dark_Loop01+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop01+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000503                  	smpsAlterVol        $FB
+000503 E6FB             	dc.b	$E6,$FB
+000505                  	smpsJump            SOTH_OVA_Dark_Jump00, Target
+000505 F6               	dc.b	$F6
+                        	if (SOTH_OVA_Dark_Jump00<*)
+000506                  		rom_ptr_z80(SOTH_OVA_Dark_Jump00+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000506 E584             	dc.w  (((((SOTH_OVA_Dark_Jump00+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Jump00+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+                        ; PSG1 Data
+000508                  SOTH_OVA_Dark_PSG1:
+                        	;!@ dc.b	nRst, $02, $7F, $4B
+000508 8002807F804B     	dc.b	nRst, $02, nRst, $7F, nRst, $4B
+
+00050E                  SOTH_OVA_Dark_Jump07:
+00050E 800C             	dc.b	nRst, $0C
+
+000510                  SOTH_OVA_Dark_Loop2E:
+000510 8F0680038F028025 	dc.b	nD1, $06, nRst, $03, nD1, $02, nRst, $25
+000518                  	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop2E, Target
+000518 F7               	dc.b	$F7
+000519 0007             	dc.b	$00,$07
+                        	if (SOTH_OVA_Dark_Loop2E<*)
+00051B                  		rom_ptr_z80(SOTH_OVA_Dark_Loop2E+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00051B 1085             	dc.w  (((((SOTH_OVA_Dark_Loop2E+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop2E+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@ dc.b	nD1, $06, nRst, $03, nD1, $02
+00051D 8F0680038F02     	dc.b	nD1, $06, nRst, $03, nD1, $02
+
+000523                  SOTH_OVA_Dark_Loop2F:
+                        	;!@
+000523 8063             	dc.b	nRst, $63
+000525                  	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop2F, Target
+000525 F7               	dc.b	$F7
+000526 0007             	dc.b	$00,$07
+                        	if (SOTH_OVA_Dark_Loop2F<*)
+000528                  		rom_ptr_z80(SOTH_OVA_Dark_Loop2F+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000528 2385             	dc.w  (((((SOTH_OVA_Dark_Loop2F+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop2F+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@
+00052A 8064             	dc.b	nRst, $64
+00052C                  	smpsSetVol     $FF
+00052C ECFF             	dc.b	$EC,$FF
+00052E 8F06             	dc.b	nD1, $06
+000530                  	smpsSetVol     $02
+000530 EC02             	dc.b	$EC,$02
+000532 86028004         	dc.b	nF0, $02, nRst, $04
+000536                  	smpsSetVol     $FE
+000536 ECFE             	dc.b	$EC,$FE
+000538 8F06             	dc.b	nD1, $06
+00053A                  	smpsSetVol     $02
+00053A EC02             	dc.b	$EC,$02
+00053C 86028001         	dc.b	nF0, $02, nRst, $01
+000540                  	smpsSetVol     $FE
+000540 ECFE             	dc.b	$EC,$FE
+000542 91048002         	dc.b	nE1, $04, nRst, $02
+000546                  	smpsSetVol     $02
+000546 EC02             	dc.b	$EC,$02
+000548 8D8001           	dc.b	nC1, nRst, $01
+00054B                  	smpsSetVol     $FE
+00054B ECFE             	dc.b	$EC,$FE
+00054D 8D0480028F048002 	dc.b	nC1, $04, nRst, $02, nD1, $04, nRst, $02, nE1, $04, nRst, $02
+000555 91048002
+000559 8F06             	dc.b	nD1, $06
+00055B                  	smpsSetVol     $02
+00055B EC02             	dc.b	$EC,$02
+00055D 86028004         	dc.b	nF0, $02, nRst, $04
+000561                  	smpsSetVol     $FE
+000561 ECFE             	dc.b	$EC,$FE
+000563 8F06             	dc.b	nD1, $06
+000565                  	smpsSetVol     $02
+000565 EC02             	dc.b	$EC,$02
+000567 86028001         	dc.b	nF0, $02, nRst, $01
+00056B                  	smpsSetVol     $FE
+00056B ECFE             	dc.b	$EC,$FE
+00056D 91048002         	dc.b	nE1, $04, nRst, $02
+000571                  	smpsSetVol     $02
+000571 EC02             	dc.b	$EC,$02
+000573 918001           	dc.b	nE1, nRst, $01
+000576                  	smpsSetVol     $FE
+000576 ECFE             	dc.b	$EC,$FE
+000578 910480028F048002 	dc.b	nE1, $04, nRst, $02, nD1, $04, nRst, $02, nE1, $04, nRst, $02
+000580 91048002
+000584 8F06             	dc.b	nD1, $06
+000586                  	smpsSetVol     $02
+000586 EC02             	dc.b	$EC,$02
+000588 86028004         	dc.b	nF0, $02, nRst, $04
+00058C                  	smpsSetVol     $FE
+00058C ECFE             	dc.b	$EC,$FE
+00058E 8F06             	dc.b	nD1, $06
+000590                  	smpsSetVol     $02
+000590 EC02             	dc.b	$EC,$02
+000592 86028001         	dc.b	nF0, $02, nRst, $01
+000596                  	smpsSetVol     $FE
+000596 ECFE             	dc.b	$EC,$FE
+000598 91048002         	dc.b	nE1, $04, nRst, $02
+00059C                  	smpsSetVol     $02
+00059C EC02             	dc.b	$EC,$02
+00059E 8D8001           	dc.b	nC1, nRst, $01
+0005A1                  	smpsSetVol     $FE
+0005A1 ECFE             	dc.b	$EC,$FE
+0005A3 8D0480028F048002 	dc.b	nC1, $04, nRst, $02, nD1, $04, nRst, $02, nE1, $04, nRst, $02
+0005AB 91048002
+0005AF 8F06             	dc.b	nD1, $06
+0005B1                  	smpsSetVol     $02
+0005B1 EC02             	dc.b	$EC,$02
+0005B3 86028004         	dc.b	nF0, $02, nRst, $04
+0005B7                  	smpsSetVol     $FE
+0005B7 ECFE             	dc.b	$EC,$FE
+0005B9 8F06             	dc.b	nD1, $06
+0005BB                  	smpsSetVol     $02
+0005BB EC02             	dc.b	$EC,$02
+0005BD 86028001         	dc.b	nF0, $02, nRst, $01
+0005C1                  	smpsSetVol     $FE
+0005C1 ECFE             	dc.b	$EC,$FE
+0005C3 91048002         	dc.b	nE1, $04, nRst, $02
+0005C7                  	smpsSetVol     $02
+0005C7 EC02             	dc.b	$EC,$02
+0005C9 918001           	dc.b	nE1, nRst, $01
+0005CC                  	smpsSetVol     $FE
+0005CC ECFE             	dc.b	$EC,$FE
+0005CE 910480028F048002 	dc.b	nE1, $04, nRst, $02, nD1, $04, nRst, $02, nE1, $04, nRst, $3E
+0005D6 9104803E
+0005DA                  	smpsSetVol     $01
+0005DA EC01             	dc.b	$EC,$01
+
+0005DC                  SOTH_OVA_Dark_Loop30:
+0005DC 8F0680038F028025 	dc.b	nD1, $06, nRst, $03, nD1, $02, nRst, $25
+0005E4                  	smpsLoop            $00, $0F, SOTH_OVA_Dark_Loop30, Target
+0005E4 F7               	dc.b	$F7
+0005E5 000F             	dc.b	$00,$0F
+                        	if (SOTH_OVA_Dark_Loop30<*)
+0005E7                  		rom_ptr_z80(SOTH_OVA_Dark_Loop30+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005E7 DC85             	dc.w  (((((SOTH_OVA_Dark_Loop30+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop30+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0005E9 8F0680038B02801A 	dc.b	nD1, $06, nRst, $03, nBb0, $02, nRst, $1A
+0005F1                  	smpsJump            SOTH_OVA_Dark_Jump07, Target
+0005F1 F6               	dc.b	$F6
+                        	if (SOTH_OVA_Dark_Jump07<*)
+0005F2                  		rom_ptr_z80(SOTH_OVA_Dark_Jump07+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005F2 0E85             	dc.w  (((((SOTH_OVA_Dark_Jump07+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Jump07+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+                        ; PSG2 Data
+0005F4                  SOTH_OVA_Dark_PSG2:
+                        	;!@
+                        	;dc.b	nRst, $02, $7F, $4B
+0005F4 8002807F804B     	dc.b	nRst, $02, nRst, $7F, nRst, $4B
+
+0005FA                  SOTH_OVA_Dark_Jump06:
+0005FA 800C             	dc.b	nRst, $0C
+
+0005FC                  SOTH_OVA_Dark_Loop2A:
+0005FC 8B0680038B028025 	dc.b	nBb0, $06, nRst, $03, nBb0, $02, nRst, $25
+000604                  	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop2A, Target
+000604 F7               	dc.b	$F7
+000605 0007             	dc.b	$00,$07
+                        	if (SOTH_OVA_Dark_Loop2A<*)
+000607                  		rom_ptr_z80(SOTH_OVA_Dark_Loop2A+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000607 FC85             	dc.w  (((((SOTH_OVA_Dark_Loop2A+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop2A+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@ dc.b	nBb0, $06, nRst, $03, nBb0, $02, nRst
+000609 8B0680038B02     	dc.b	nBb0, $06, nRst, $03, nBb0, $02
+
+00060F                  SOTH_OVA_Dark_Loop2B:
+                        	;!@
+00060F 8063             	dc.b	nRst, $63
+000611                  	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop2B, Target
+000611 F7               	dc.b	$F7
+000612 0007             	dc.b	$00,$07
+                        	if (SOTH_OVA_Dark_Loop2B<*)
+000614                  		rom_ptr_z80(SOTH_OVA_Dark_Loop2B+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000614 0F86             	dc.w  (((((SOTH_OVA_Dark_Loop2B+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop2B+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@
+000616 8064             	dc.b	nRst, $64
+000618                  	smpsSetVol     $FF
+000618 ECFF             	dc.b	$EC,$FF
+
+00061A                  SOTH_OVA_Dark_Loop2C:
+00061A 8B0480088B048005 	dc.b	nBb0, $04, nRst, $08, nBb0, $04, nRst, $05, nC1, $04, nRst, $02
+000622 8D048002
+000626                  	smpsSetVol     $02
+000626 EC02             	dc.b	$EC,$02
+000628 8D8001           	dc.b	nC1, nRst, $01
+00062B                  	smpsSetVol     $FE
+00062B ECFE             	dc.b	$EC,$FE
+00062D 8D0480028B048002 	dc.b	nC1, $04, nRst, $02, nBb0, $04, nRst, $02, nC1, $04, nRst, $02
+000635 8D048002
+000639                  	smpsLoop            $00, $03, SOTH_OVA_Dark_Loop2C, Target
+000639 F7               	dc.b	$F7
+00063A 0003             	dc.b	$00,$03
+                        	if (SOTH_OVA_Dark_Loop2C<*)
+00063C                  		rom_ptr_z80(SOTH_OVA_Dark_Loop2C+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00063C 1A86             	dc.w  (((((SOTH_OVA_Dark_Loop2C+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop2C+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00063E 8B0480088B048005 	dc.b	nBb0, $04, nRst, $08, nBb0, $04, nRst, $05, nC1, $04, nRst, $02
+000646 8D048002
+00064A                  	smpsSetVol     $02
+00064A EC02             	dc.b	$EC,$02
+00064C 8D8001           	dc.b	nC1, nRst, $01
+00064F                  	smpsSetVol     $FE
+00064F ECFE             	dc.b	$EC,$FE
+000651 8D0480028B048002 	dc.b	nC1, $04, nRst, $02, nBb0, $04, nRst, $02, nC1, $04, nRst, $3E
+000659 8D04803E
+00065D                  	smpsSetVol     $01
+00065D EC01             	dc.b	$EC,$01
+
+00065F                  SOTH_OVA_Dark_Loop2D:
+00065F 8B0680038B028025 	dc.b	nBb0, $06, nRst, $03, nBb0, $02, nRst, $25
+000667                  	smpsLoop            $00, $0F, SOTH_OVA_Dark_Loop2D, Target
+000667 F7               	dc.b	$F7
+000668 000F             	dc.b	$00,$0F
+                        	if (SOTH_OVA_Dark_Loop2D<*)
+00066A                  		rom_ptr_z80(SOTH_OVA_Dark_Loop2D+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00066A 5F86             	dc.w  (((((SOTH_OVA_Dark_Loop2D+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop2D+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00066C 8B0680038B02801A 	dc.b	nBb0, $06, nRst, $03, nBb0, $02, nRst, $1A
+000674                  	smpsJump            SOTH_OVA_Dark_Jump06, Target
+000674 F6               	dc.b	$F6
+                        	if (SOTH_OVA_Dark_Jump06<*)
+000675                  		rom_ptr_z80(SOTH_OVA_Dark_Jump06+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000675 FA85             	dc.w  (((((SOTH_OVA_Dark_Jump06+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Jump06+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+                        ; PSG3 Data
+000677                  SOTH_OVA_Dark_PSG3:
+                        	;!@
+                        	;dc.b	nRst, $02, $7F, $4B
+000677 8002807F804B     	dc.b	nRst, $02, nRst, $7F, nRst, $4B
+
+00067D                  SOTH_OVA_Dark_Jump05:
+00067D 800C             	dc.b	nRst, $0C
+
+00067F                  SOTH_OVA_Dark_Loop26:
+00067F 8606800386028025 	dc.b	nF0, $06, nRst, $03, nF0, $02, nRst, $25
+000687                  	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop26, Target
+000687 F7               	dc.b	$F7
+000688 0007             	dc.b	$00,$07
+                        	if (SOTH_OVA_Dark_Loop26<*)
+00068A                  		rom_ptr_z80(SOTH_OVA_Dark_Loop26+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00068A 7F86             	dc.w  (((((SOTH_OVA_Dark_Loop26+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop26+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@
+                        	;dc.b	nF0, $06, nRst, $03, nF0, $02, nRst
+00068C 860680038602     	dc.b	nF0, $06, nRst, $03, nF0, $02
+
+000692                  SOTH_OVA_Dark_Loop27:
+                        	;!@
+000692 8063             	dc.b	nRst, $63
+000694                  	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop27, Target
+000694 F7               	dc.b	$F7
+000695 0007             	dc.b	$00,$07
+                        	if (SOTH_OVA_Dark_Loop27<*)
+000697                  		rom_ptr_z80(SOTH_OVA_Dark_Loop27+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000697 9286             	dc.w  (((((SOTH_OVA_Dark_Loop27+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop27+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@
+000699 8064             	dc.b	nRst, $64
+00069B                  	smpsSetVol     $FF
+00069B ECFF             	dc.b	$EC,$FF
+
+00069D                  SOTH_OVA_Dark_Loop28:
+00069D 8604800886048005 	dc.b	nF0, $04, nRst, $08, nF0, $04, nRst, $05, nG0, $04, nRst, $02
+0006A5 88048002
+0006A9                  	smpsSetVol     $02
+0006A9 EC02             	dc.b	$EC,$02
+0006AB 888001           	dc.b	nG0, nRst, $01
+0006AE                  	smpsSetVol     $FE
+0006AE ECFE             	dc.b	$EC,$FE
+0006B0 8804800286048002 	dc.b	nG0, $04, nRst, $02, nF0, $04, nRst, $02, nG0, $04, nRst, $02
+0006B8 88048002
+0006BC                  	smpsLoop            $00, $03, SOTH_OVA_Dark_Loop28, Target
+0006BC F7               	dc.b	$F7
+0006BD 0003             	dc.b	$00,$03
+                        	if (SOTH_OVA_Dark_Loop28<*)
+0006BF                  		rom_ptr_z80(SOTH_OVA_Dark_Loop28+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006BF 9D86             	dc.w  (((((SOTH_OVA_Dark_Loop28+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop28+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0006C1 8604801188048002 	dc.b	nF0, $04, nRst, $11, nG0, $04, nRst, $02
+0006C9                  	smpsSetVol     $02
+0006C9 EC02             	dc.b	$EC,$02
+0006CB 888001           	dc.b	nG0, nRst, $01
+0006CE                  	smpsSetVol     $FE
+0006CE ECFE             	dc.b	$EC,$FE
+0006D0 8804800286048002 	dc.b	nG0, $04, nRst, $02, nF0, $04, nRst, $02, nG0, $04, nRst, $3E
+0006D8 8804803E
+0006DC                  	smpsSetVol     $01
+0006DC EC01             	dc.b	$EC,$01
+
+0006DE                  SOTH_OVA_Dark_Loop29:
+0006DE 8606800386028025 	dc.b	nF0, $06, nRst, $03, nF0, $02, nRst, $25
+0006E6                  	smpsLoop            $00, $0F, SOTH_OVA_Dark_Loop29, Target
+0006E6 F7               	dc.b	$F7
+0006E7 000F             	dc.b	$00,$0F
+                        	if (SOTH_OVA_Dark_Loop29<*)
+0006E9                  		rom_ptr_z80(SOTH_OVA_Dark_Loop29+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006E9 DE86             	dc.w  (((((SOTH_OVA_Dark_Loop29+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Loop29+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0006EB 860680038602801A 	dc.b	nF0, $06, nRst, $03, nF0, $02, nRst, $1A
+0006F3                  	smpsJump            SOTH_OVA_Dark_Jump05, Target
+0006F3 F6               	dc.b	$F6
+                        	if (SOTH_OVA_Dark_Jump05<*)
+0006F4                  		rom_ptr_z80(SOTH_OVA_Dark_Jump05+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006F4 7D86             	dc.w  (((((SOTH_OVA_Dark_Jump05+Target))<<8)&$FF00)|((((SOTH_OVA_Dark_Jump05+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+
+0006F6                  PWM1:
+0006F6                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+0006F6 E0C0             		dc.b $E0,panCenter
+                        	endif
+0006F8 8001             	dc.b	nRst, $01
+0006FA                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+0006FA E0C0             		dc.b $E0,panCenter
+                        	endif
+0006FC 0B980402         	dc.b	$0B, pClosedHH, $04, $02
+
+000700                  PWM1_Loop1:
+000700 99068A248B049802 	dc.b	pOpenHH, $06, pClap, $24, pAKick, $04, pClosedHH, $02
+000708                  	smpsLoop		$00, $02, PWM1_Loop1, Target
+000708 F7               	dc.b	$F7
+000709 0002             	dc.b	$00,$02
+                        	if (PWM1_Loop1<*)
+00070B                  		rom_ptr_z80(PWM1_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00070B 0087             	dc.w  (((((PWM1_Loop1+Target))<<8)&$FF00)|((((PWM1_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00070D 99068A2404060206 	dc.b	pOpenHH, $06, pClap, $24, $04, $06, $02, $06
+000715 040602060604     	dc.b	$04, $06, $02, $06, $06, $04
+
+00071B                  PWM1_Loop4:
+00071B 8B02             	dc.b	pAKick, $02
+
+00071D                  PWM1_Jump1:
+00071D 8B0498           	dc.b	pAKick, $04, pClosedHH
+
+000720                  PWM1_Loop2:
+000720 0299069804       	dc.b	$02, pOpenHH, $06, pClosedHH, $04
+000725                  	smpsLoop		$00, $03, PWM1_Loop2, Target
+000725 F7               	dc.b	$F7
+000726 0003             	dc.b	$00,$03
+                        	if (PWM1_Loop2<*)
+000728                  		rom_ptr_z80(PWM1_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000728 2087             	dc.w  (((((PWM1_Loop2+Target))<<8)&$FF00)|((((PWM1_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00072A 0299048A02       	dc.b	$02, pOpenHH, $04, pClap, $02
+
+00072F                  PWM1_Loop3:
+00072F 9804029906       	dc.b	pClosedHH, $04, $02, pOpenHH, $06
+000734                  	smpsLoop		$00, $03, PWM1_Loop3, Target
+000734 F7               	dc.b	$F7
+000735 0003             	dc.b	$00,$03
+                        	if (PWM1_Loop3<*)
+000737                  		rom_ptr_z80(PWM1_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000737 2F87             	dc.w  (((((PWM1_Loop3+Target))<<8)&$FF00)|((((PWM1_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000739 9804029904       	dc.b	pClosedHH, $04, $02, pOpenHH, $04
+00073E                  	smpsLoop		$01, $07, PWM1_Loop4, Target
+00073E F7               	dc.b	$F7
+00073F 0107             	dc.b	$01,$07
+                        	if (PWM1_Loop4<*)
+000741                  		rom_ptr_z80(PWM1_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000741 1B87             	dc.w  (((((PWM1_Loop4+Target))<<8)&$FF00)|((((PWM1_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000743 8B020498         	dc.b	pAKick, $02, $04, pClosedHH
+
+000747                  PWM1_Loop5:
+000747 0299069804       	dc.b	$02, pOpenHH, $06, pClosedHH, $04
+00074C                  	smpsLoop		$00, $03, PWM1_Loop5, Target
+00074C F7               	dc.b	$F7
+00074D 0003             	dc.b	$00,$03
+                        	if (PWM1_Loop5<*)
+00074F                  		rom_ptr_z80(PWM1_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00074F 4787             	dc.w  (((((PWM1_Loop5+Target))<<8)&$FF00)|((((PWM1_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000751                  PWM1_Loop6:
+000751 0299048A02980402 	dc.b	$02, pOpenHH, $04, pClap, $02, pClosedHH, $04, $02
+000759 99069804         	dc.b	pOpenHH, $06, pClosedHH, $04
+00075D                  	smpsLoop		$00, $02, PWM1_Loop6, Target
+00075D F7               	dc.b	$F7
+00075E 0002             	dc.b	$00,$02
+                        	if (PWM1_Loop6<*)
+000760                  		rom_ptr_z80(PWM1_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000760 5187             	dc.w  (((((PWM1_Loop6+Target))<<8)&$FF00)|((((PWM1_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000762 028A04           	dc.b	$02, pClap, $04
+
+000765                  PWM1_Loo$9:
+000765 8B020498         	dc.b	pAKick, $02, $04, pClosedHH
+
+000769                  PWM1_Loop7:
+000769 0299069804       	dc.b	$02, pOpenHH, $06, pClosedHH, $04
+00076E                  	smpsLoop		$00, $03, PWM1_Loop7, Target
+00076E F7               	dc.b	$F7
+00076F 0003             	dc.b	$00,$03
+                        	if (PWM1_Loop7<*)
+000771                  		rom_ptr_z80(PWM1_Loop7+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000771 6987             	dc.w  (((((PWM1_Loop7+Target))<<8)&$FF00)|((((PWM1_Loop7+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000773 0299048A02       	dc.b	$02, pOpenHH, $04, pClap, $02
+
+000778                  PWM1_Loo$8:
+000778 9804029906       	dc.b	pClosedHH, $04, $02, pOpenHH, $06
+00077D                  	smpsLoop		$00, $03, PWM1_Loo$8, Target
+00077D F7               	dc.b	$F7
+00077E 0003             	dc.b	$00,$03
+                        	if (PWM1_Loo$8<*)
+000780                  		rom_ptr_z80(PWM1_Loo$8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000780 7887             	dc.w  (((((PWM1_Loo$8+Target))<<8)&$FF00)|((((PWM1_Loo$8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000782 9804029904       	dc.b	pClosedHH, $04, $02, pOpenHH, $04
+000787                  	smpsLoop		$01, $04, PWM1_Loo$9, Target
+000787 F7               	dc.b	$F7
+000788 0104             	dc.b	$01,$04
+                        	if (PWM1_Loo$9<*)
+00078A                  		rom_ptr_z80(PWM1_Loo$9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00078A 6587             	dc.w  (((((PWM1_Loo$9+Target))<<8)&$FF00)|((((PWM1_Loo$9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00078C 8B02             	dc.b	pAKick, $02
+
+00078E                  PWM1_Loop10:
+00078E 9804029906       	dc.b	pClosedHH, $04, $02, pOpenHH, $06
+000793                  	smpsLoop		$00, $10, PWM1_Loop10, Target
+000793 F7               	dc.b	$F7
+000794 0010             	dc.b	$00,$10
+                        	if (PWM1_Loop10<*)
+000796                  		rom_ptr_z80(PWM1_Loop10+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000796 8E87             	dc.w  (((((PWM1_Loop10+Target))<<8)&$FF00)|((((PWM1_Loop10+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000798 8330             	dc.b	pSplashCymb, $30
+
+00079A                  PWM1_Loop11:
+00079A 980402           	dc.b	pClosedHH, $04, $02
+
+00079D                  PWM1_Loop13:
+00079D 9906             	dc.b	pOpenHH, $06
+00079F                  	smpsLoop		$00, $03, PWM1_Loop11, Target
+00079F F7               	dc.b	$F7
+0007A0 0003             	dc.b	$00,$03
+                        	if (PWM1_Loop11<*)
+0007A2                  		rom_ptr_z80(PWM1_Loop11+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007A2 9A87             	dc.w  (((((PWM1_Loop11+Target))<<8)&$FF00)|((((PWM1_Loop11+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0007A4 98040299048A02   	dc.b	pClosedHH, $04, $02, pOpenHH, $04, pClap, $02
+
+0007AB                  PWM1_Loop12:
+0007AB 9804029906       	dc.b	pClosedHH, $04, $02, pOpenHH, $06
+0007B0                  	smpsLoop		$00, $03, PWM1_Loop12, Target
+0007B0 F7               	dc.b	$F7
+0007B1 0003             	dc.b	$00,$03
+                        	if (PWM1_Loop12<*)
+0007B3                  		rom_ptr_z80(PWM1_Loop12+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007B3 AB87             	dc.w  (((((PWM1_Loop12+Target))<<8)&$FF00)|((((PWM1_Loop12+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0007B5 98040299048B0204 	dc.b	pClosedHH, $04, $02, pOpenHH, $04, pAKick, $02, $04
+0007BD 9802             	dc.b	pClosedHH, $02
+0007BF                  	smpsLoop		$01, $03, PWM1_Loop13, Target
+0007BF F7               	dc.b	$F7
+0007C0 0103             	dc.b	$01,$03
+                        	if (PWM1_Loop13<*)
+0007C2                  		rom_ptr_z80(PWM1_Loop13+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007C2 9D87             	dc.w  (((((PWM1_Loop13+Target))<<8)&$FF00)|((((PWM1_Loop13+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0007C4                  PWM1_Loop14:
+0007C4 9906980402       	dc.b	pOpenHH, $06, pClosedHH, $04, $02
+0007C9                  	smpsLoop		$00, $03, PWM1_Loop14, Target
+0007C9 F7               	dc.b	$F7
+0007CA 0003             	dc.b	$00,$03
+                        	if (PWM1_Loop14<*)
+0007CC                  		rom_ptr_z80(PWM1_Loop14+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007CC C487             	dc.w  (((((PWM1_Loop14+Target))<<8)&$FF00)|((((PWM1_Loop14+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0007CE                  PWM1_Loop15:
+0007CE 99048A0298040299 	dc.b	pOpenHH, $04, pClap, $02, pClosedHH, $04, $02, pOpenHH
+0007D6 06980402         	dc.b	$06, pClosedHH, $04, $02
+0007DA                  	smpsLoop		$00, $02, PWM1_Loop15, Target
+0007DA F7               	dc.b	$F7
+0007DB 0002             	dc.b	$00,$02
+                        	if (PWM1_Loop15<*)
+0007DD                  		rom_ptr_z80(PWM1_Loop15+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007DD CE87             	dc.w  (((((PWM1_Loop15+Target))<<8)&$FF00)|((((PWM1_Loop15+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0007DF 8A048B02         	dc.b	pClap, $04, pAKick, $02
+0007E3                  	smpsLoop		$02, $02, PWM1_Loop11, Target
+0007E3 F7               	dc.b	$F7
+0007E4 0202             	dc.b	$02,$02
+                        	if (PWM1_Loop11<*)
+0007E6                  		rom_ptr_z80(PWM1_Loop11+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007E6 9A87             	dc.w  (((((PWM1_Loop11+Target))<<8)&$FF00)|((((PWM1_Loop11+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0007E8 8301             	dc.b	pSplashCymb, $01
+0007EA                  	smpsJump		PWM1_Jump1, Target
+0007EA F6               	dc.b	$F6
+                        	if (PWM1_Jump1<*)
+0007EB                  		rom_ptr_z80(PWM1_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007EB 1D87             	dc.w  (((((PWM1_Jump1+Target))<<8)&$FF00)|((((PWM1_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	
+
+0007ED                  PWM2:
+0007ED 800C8B98240C240C 	dc.b	nRst, $0C, pAKick, pClosedHH, $24, $0C, $24, $0C
+0007F5 248B30           	dc.b	$24, pAKick, $30
+
+0007F8                  PWM2_Jump1:
+0007F8 8306             	dc.b	pSplashCymb, $06
+
+0007FA                  PWM2_Loop1:
+0007FA 848A848B848A8B8B 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+000802 848A848B848A8A98 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
+00080A                  	smpsLoop		$00, $03, PWM2_Loop1, Target
+00080A F7               	dc.b	$F7
+00080B 0003             	dc.b	$00,$03
+                        	if (PWM2_Loop1<*)
+00080D                  		rom_ptr_z80(PWM2_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00080D FA87             	dc.w  (((((PWM2_Loop1+Target))<<8)&$FF00)|((((PWM2_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00080F 848A848B848A8B8B 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+000817 848A848B848A8A83 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pSplashCymb
+
+00081F                  PWM2_Loop2:
+00081F 848A848B848A8B8B 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+000827 848A848B848A8A98 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
+00082F                  	smpsLoop		$00, $03, PWM2_Loop2, Target
+00082F F7               	dc.b	$F7
+000830 0003             	dc.b	$00,$03
+                        	if (PWM2_Loop2<*)
+000832                  		rom_ptr_z80(PWM2_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000832 1F88             	dc.w  (((((PWM2_Loop2+Target))<<8)&$FF00)|((((PWM2_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000834 848A848B848A8B8B 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+00083C 048A0284068A848B 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, pRideBell, pAKick
+000844 048A0284068A0486 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, $04, pTomMid
+00084C 0284049502       	dc.b	$02, pRideBell, $04, pTimpaniLo, $02
+
+000851                  PWM2_Loop3:
+000851 8306848A848B848A 	dc.b	pSplashCymb, $06, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
+000859 8B8B848A848B848A 	dc.b	pAKick, pAKick, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
+000861 8A98848A848B848A 	dc.b	pClap, pClosedHH, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
+000869 8B8B848A848B848A 	dc.b	pAKick, pAKick, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
+000871 8A               	dc.b	pClap
+000872                  	smpsLoop		$00, $02, PWM2_Loop3, Target
+000872 F7               	dc.b	$F7
+000873 0002             	dc.b	$00,$02
+                        	if (PWM2_Loop3<*)
+000875                  		rom_ptr_z80(PWM2_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000875 5188             	dc.w  (((((PWM2_Loop3+Target))<<8)&$FF00)|((((PWM2_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000877                  PWM2_Loop4:
+000877 8B84             	dc.b	pAKick, pRideBell
+000879                  	smpsLoop		$00, $0B, PWM2_Loop4, Target
+000879 F7               	dc.b	$F7
+00087A 000B             	dc.b	$00,$0B
+                        	if (PWM2_Loop4<*)
+00087C                  		rom_ptr_z80(PWM2_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00087C 7788             	dc.w  (((((PWM2_Loop4+Target))<<8)&$FF00)|((((PWM2_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00087E 8B84048A028B0684 	dc.b	pAKick, pRideBell, $04, pClap, $02, pAKick, $06, pRideBell
+000886 8B848B848B843683 	dc.b	pAKick, pRideBell, pAKick, pRideBell, pAKick, pRideBell, $36, pSplashCymb
+00088E 06               	dc.b	$06
+
+00088F                  PWM2_Loop5:
+00088F 848A848B848A8B8B 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+000897 848A848B848A8A98 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
+00089F                  	smpsLoop		$00, $03, PWM2_Loop5, Target
+00089F F7               	dc.b	$F7
+0008A0 0003             	dc.b	$00,$03
+                        	if (PWM2_Loop5<*)
+0008A2                  		rom_ptr_z80(PWM2_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008A2 8F88             	dc.w  (((((PWM2_Loop5+Target))<<8)&$FF00)|((((PWM2_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0008A4 848A848B848A8B8B 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+0008AC 048A0284068A848B 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, pRideBell, pAKick
+0008B4 048A0284068A0486 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, $04, pTomMid
+0008BC 02840495028306   	dc.b	$02, pRideBell, $04, pTimpaniLo, $02, pSplashCymb, $06
+
+0008C3                  PWM2_Loop6:
+0008C3 848A848B848A8B8B 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+0008CB 848A848B848A8A98 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
+0008D3                  	smpsLoop		$00, $03, PWM2_Loop6, Target
+0008D3 F7               	dc.b	$F7
+0008D4 0003             	dc.b	$00,$03
+                        	if (PWM2_Loop6<*)
+0008D6                  		rom_ptr_z80(PWM2_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008D6 C388             	dc.w  (((((PWM2_Loop6+Target))<<8)&$FF00)|((((PWM2_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0008D8 848A848B848A8B8B 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+0008E0 048A0284068A848B 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, pRideBell, pAKick
+0008E8 048A0284068A0486 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, $04, pTomMid
+0008F0 0284049503       	dc.b	$02, pRideBell, $04, pTimpaniLo, $03
+0008F5                  	smpsJump		PWM2_Jump1, Target
+0008F5 F6               	dc.b	$F6
+                        	if (PWM2_Jump1<*)
+0008F6                  		rom_ptr_z80(PWM2_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008F6 F887             	dc.w  (((((PWM2_Jump1+Target))<<8)&$FF00)|((((PWM2_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+
+0008F8                  PWM3:
+0008F8 807F4D           	dc.b	nRst, $7F, $4D
+
+0008FB                  PWM3_Jump1:
+0008FB 982A84           	dc.b	pClosedHH, $2A, pRideBell
+
+0008FE                  PWM3_Loop1:
+0008FE 30               	dc.b	$30
+0008FF                  	smpsLoop		$00, $07, PWM3_Loop1, Target
+0008FF F7               	dc.b	$F7
+000900 0007             	dc.b	$00,$07
+                        	if (PWM3_Loop1<*)
+000902                  		rom_ptr_z80(PWM3_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000902 FE88             	dc.w  (((((PWM3_Loop1+Target))<<8)&$FF00)|((((PWM3_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000904 06982A8430303030 	dc.b	$06, pClosedHH, $2A, pRideBell, $30, $30, $30, $30
+00090C 30300C8A18068599 	dc.b	$30, $30, $0C, pClap, $18, $06, pTomHi, pOpenHH
+000914 982A843030300698 	dc.b	pClosedHH, $2A, pRideBell, $30, $30, $30, $06, pClosedHH
+00091C 2A84303030308B8B 	dc.b	$2A, pRideBell, $30, $30, $30, $30, pAKick, pAKick
+000924 8B8B362A84303030 	dc.b	pAKick, pAKick, $36, $2A, pRideBell, $30, $30, $30
+00092C 3030300C8A180685 	dc.b	$30, $30, $30, $0C, pClap, $18, $06, pTomHi
+000934 998B2A8430303030 	dc.b	pOpenHH, pAKick, $2A, pRideBell, $30, $30, $30, $30
+00093C 30300C8A18068599 	dc.b	$30, $30, $0C, pClap, $18, $06, pTomHi, pOpenHH
+000944 07               	dc.b	$07
+000945                  	smpsJump		PWM3_Jump1, Target
+000945 F6               	dc.b	$F6
+                        	if (PWM3_Jump1<*)
+000946                  		rom_ptr_z80(PWM3_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000946 FB88             	dc.w  (((((PWM3_Jump1+Target))<<8)&$FF00)|((((PWM3_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+
+000948                  PWM4:
+000948 807F4D           	dc.b	nRst, $7F, $4D
+
+00094B                  PWM4_Jump1:
+00094B 807F7F7F7F7F7F87 	dc.b	nRst, $7F, $7F, $7F, $7F, $7F, $7F, pTomLow
+000953 808080758A181818 	dc.b	nRst, nRst, nRst, $75, pClap, $18, $18, $18
+00095B 067F80808033877F 	dc.b	$06, $7F, nRst, nRst, nRst, $33, pTomLow, $7F
+000963 808080038707     	dc.b	nRst, nRst, nRst, $03, pTomLow, $07
+000969                  	smpsJump		PWM4_Jump1, Target
+000969 F6               	dc.b	$F6
+                        	if (PWM4_Jump1<*)
+00096A                  		rom_ptr_z80(PWM4_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00096A 4B89             	dc.w  (((((PWM4_Jump1+Target))<<8)&$FF00)|((((PWM4_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00096C                  SOTH_OVA_Dark_Voices:
+                        	;dc.b		$3D
+                        	;dc.b		$00, $00, $01, $05, $5F, $5E, $5B, $5B, $05, $0C, $0E, $0E
+                        	;dc.b		$00, $04, $08, $07, $B0, $19, $39, $FC, $21, $0A, $09, $10
+
+                        	;dc.b		$3C
+                        	;dc.b		$33, $31, $51, $54, $1A, $0C, $1A, $0C, $05, $1F, $05, $1F
+                        	;dc.b		$00, $00, $00, $00, $11, $06, $11, $06, $1C, $0C, $15, $0C
+
+                        	;dc.b		$3C
+                        	;dc.b		$35, $71, $7A, $31, $1F, $1F, $18, $1F, $0E, $00, $14, $00
+                        	;dc.b		$08, $0C, $08, $0F, $28, $0A, $38, $0A, $19, $0A, $1E, $0A
+
+                        	;dc.b		$2C
+                        	;dc.b		$31, $31, $71, $71, $5F, $54, $5F, $5F, $05, $0A, $03, $0C
+                        	;dc.b		$00, $03, $03, $03, $00, $87, $00, $A7, $17, $07, $19, $06
+
+                        	;dc.b		$3D
+                        	;dc.b		$0F, $04, $00, $00, $08, $07, $46, $07, $00, $00, $12, $05
+                        	;dc.b		$00, $0F, $0F, $0F, $00, $0D, $47, $07, $00, $07, $07, $08
+                        	
+00096C 3D               	dc.b		$3D
+00096D 000001055F5E5B5B 	dc.b		$00, $00, $01, $05, $5F, $5E, $5B, $5B, $05, $0C, $0E, $0E
+000975 050C0E0E
+000979 00040807B01939FC 	dc.b		$00, $04, $08, $07, $B0, $19, $39, $FC, $24, $07, $06, $12
+000981 24070612
+                        	
+000985 3F               	dc.b		$3F
+000986 323151521A0C1A0C 	dc.b		$32, $31, $51, $52, $1A, $0C, $1A, $0C, $05, $1F, $05, $1F
+00098E 051F051F
+000992 0606060611061106 	dc.b		$06, $06, $06, $06, $11, $06, $11, $06, $18, $10, $10, $10
+00099A 18101010
+                        	
+00099E 3D               	dc.b		$3D
+00099F 020102011F1F1F1F 	dc.b		$02, $01, $02, $01, $1F, $1F, $1F, $1F, $00, $00, $00, $01
+0009A7 00000001
+0009AB 000000000F0F0F0F 	dc.b		$00, $00, $00, $00, $0F, $0F, $0F, $0F, $20, $18, $26, $24
+0009B3 20182624
+                        	
+0009B7 2C               	dc.b		$2C
+0009B8 313171715F545F5F 	dc.b		$31, $31, $71, $71, $5F, $54, $5F, $5F, $05, $0A, $03, $0C
+0009C0 050A030C
+0009C4 00030303008700A7 	dc.b		$00, $03, $03, $03, $00, $87, $00, $A7, $17, $0E, $19, $0F
+0009CC 170E190F
+                        	
+0009D0 3D               	dc.b		$3D
+0009D1 0F04000008074607 	dc.b		$0F, $04, $00, $00, $08, $07, $46, $07, $00, $00, $12, $05
+0009D9 00001205
+0009DD 000F0F0F000D4707 	dc.b		$00, $0F, $0F, $0F, $00, $0D, $47, $07, $00, $0F, $10, $0F
+0009E5 000F100F
+0009E9  (000001)        	even
+
+00000 Total Error(s)
+
+DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK              00000081 E
+DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
+DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  NA0                0000008A E
+NA1                00000096 E  NA2                000000A2 E  NA3                000000AE E
+NA4                000000BA E  NA5                000000C6 E  NA6                000000D2 E
+NA7                000000DE E  NAB0               00000089 E  NAB1               00000095 E
+NAB2               000000A1 E  NAB3               000000AD E  NAB4               000000B9 E
+NAB5               000000C5 E  NAB6               000000D1 E  NAB7               000000DD E
+NB0                0000008C E  NB1                00000098 E  NB2                000000A4 E
+NB3                000000B0 E  NB4                000000BC E  NB5                000000C8 E
+NB6                000000D4 E  NBB0               0000008B E  NBB1               00000097 E
+NBB2               000000A3 E  NBB3               000000AF E  NBB4               000000BB E
+NBB5               000000C7 E  NBB6               000000D3 E  NBB7               000000DF E
+NC0                00000081 E  NC1                0000008D E  NC2                00000099 E
+NC3                000000A5 E  NC4                000000B1 E  NC5                000000BD E
+NC6                000000C9 E  NC7                000000D5 E  NCS0               00000082 E
+NCS1               0000008E E  NCS2               0000009A E  NCS3               000000A6 E
+NCS4               000000B2 E  NCS5               000000BE E  NCS6               000000CA E
+NCS7               000000D6 E  ND0                00000083 E  ND1                0000008F E
+ND2                0000009B E  ND3                000000A7 E  ND4                000000B3 E
+ND5                000000BF E  ND6                000000CB E  ND7                000000D7 E
+NE0                00000085 E  NE1                00000091 E  NE2                0000009D E
+NE3                000000A9 E  NE4                000000B5 E  NE5                000000C1 E
+NE6                000000CD E  NE7                000000D9 E  NEB0               00000084 E
+NEB1               00000090 E  NEB2               0000009C E  NEB3               000000A8 E
+NEB4               000000B4 E  NEB5               000000C0 E  NEB6               000000CC E
+NEB7               000000D8 E  NF0                00000086 E  NF1                00000092 E
+NF2                0000009E E  NF3                000000AA E  NF4                000000B6 E
+NF5                000000C2 E  NF6                000000CE E  NF7                000000DA E
+NFS0               00000087 E  NFS1               00000093 E  NFS2               0000009F E
+NFS3               000000AB E  NFS4               000000B7 E  NFS5               000000C3 E
+NFS6               000000CF E  NFS7               000000DB E  NG0                00000088 E
+NG1                00000094 E  NG2                000000A0 E  NG3                000000AC E
+NG4                000000B8 E  NG5                000000C4 E  NG6                000000D0 E
+NG7                000000DC E  NRST               00000080 E  PAKICK             0000008B E
+PANCENTER          000000C0 S  PANCENTRE          000000C0 S  PANLEFT            00000080 S
+PANNONE            00000000 S  PANRIGHT           00000040 S  PASNARE            0000008C E
+PBELL              0000008D E  PBONGOHI           00000092 E  PBONGOLO           00000093 E
+PCLAP              0000008A E  PCLICKHI           00000090 E  PCLICKLO           00000091 E
+PCLOSEDHH          00000098 E  PCOWBELL           0000008F E  PCRASHCYMB         00000089 E
+PEHIHAT            00000088 E  PEKICK             00000081 E  PESNARE            00000082 E
+PFINGSNAP          0000008E E  POPENHH            00000099 E  PRIDEBELL          00000084 E
+PSEGA              00000097 E  PSILENCE           00000096 E  PSPLASHCYMB        00000083 E
+PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E  PTOMHI             00000085 E
+PTOMLOW            00000087 E  PTOMMID            00000086 E  PWM1               000006F6
+PWM1_JUMP1         0000071D    PWM1_LOO$8         00000778    PWM1_LOO$9         00000765
+PWM1_LOOP1         00000700    PWM1_LOOP10        0000078E    PWM1_LOOP11        0000079A
+PWM1_LOOP12        000007AB    PWM1_LOOP13        0000079D    PWM1_LOOP14        000007C4
+PWM1_LOOP15        000007CE    PWM1_LOOP2         00000720    PWM1_LOOP3         0000072F
+PWM1_LOOP4         0000071B    PWM1_LOOP5         00000747    PWM1_LOOP6         00000751
+PWM1_LOOP7         00000769    PWM2               000007ED    PWM2_JUMP1         000007F8
+PWM2_LOOP1         000007FA    PWM2_LOOP2         0000081F    PWM2_LOOP3         00000851
+PWM2_LOOP4         00000877    PWM2_LOOP5         0000088F    PWM2_LOOP6         000008C3
+PWM3               000008F8    PWM3_JUMP1         000008FB    PWM3_LOOP1         000008FE
+PWM4               00000948    PWM4_JUMP1         0000094B    SMPSED             000000ED E
+SMPSEE             000000EE E  SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E
+SMPSMODON          000000F1 E  SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E
+SMPSPITCH01HI      0000000C E  SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E
+SMPSPITCH02LO      000000E8 E  SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E
+SMPSPITCH04HI      00000030 E  SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E
+SMPSPITCH05LO      000000C4 E  SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E
+SMPSPITCH07HI      00000054 E  SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E
+SMPSPITCH08LO      000000A0 E  SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E
+SMPSPITCH10HI      00000078 E  SMPSPITCH10LO      00000088 E  SOTH_OVA_DARK_FM1  00000040
+SOTH_OVA_DARK_FM2  000000F6    SOTH_OVA_DARK_FM3  00000151    SOTH_OVA_DARK_FM4  000003D9
+SOTH_OVA_DARK_FM5  0000047C    SOTH_OVA_DARK_FM6  000004D7    
+SOTH_OVA_DARK_JUMP00                          000004E5    
+SOTH_OVA_DARK_JUMP01                          0000048A    
+SOTH_OVA_DARK_JUMP02                          000003E7    
+SOTH_OVA_DARK_JUMP03                          00000104    
+SOTH_OVA_DARK_JUMP04                          00000096    
+SOTH_OVA_DARK_JUMP05                          0000067D    
+SOTH_OVA_DARK_JUMP06                          000005FA    
+SOTH_OVA_DARK_JUMP07                          0000050E    
+SOTH_OVA_DARK_LOOP00                          000004E5    
+SOTH_OVA_DARK_LOOP01                          000004FC    
+SOTH_OVA_DARK_LOOP02                          000004A5    
+SOTH_OVA_DARK_LOOP03                          000004BD    
+SOTH_OVA_DARK_LOOP04                          000003E9    
+SOTH_OVA_DARK_LOOP05                          000003FC    
+SOTH_OVA_DARK_LOOP06                          00000407    
+SOTH_OVA_DARK_LOOP07                          00000464    
+SOTH_OVA_DARK_LOOP08                          0000015F    
+SOTH_OVA_DARK_LOOP09                          00000173    
+SOTH_OVA_DARK_LOOP0A                          0000018D    
+SOTH_OVA_DARK_LOOP0B                          000001A0    
+SOTH_OVA_DARK_LOOP0C                          000001BA    
+SOTH_OVA_DARK_LOOP0D                          000001D4    
+SOTH_OVA_DARK_LOOP0E                          000001E7    
+SOTH_OVA_DARK_LOOP0F                          00000201    
+SOTH_OVA_DARK_LOOP10                          0000021B    
+SOTH_OVA_DARK_LOOP11                          0000022E    
+SOTH_OVA_DARK_LOOP12                          00000248    
+SOTH_OVA_DARK_LOOP13                          00000262    
+SOTH_OVA_DARK_LOOP14                          00000275    
+SOTH_OVA_DARK_LOOP15                          0000028F    
+SOTH_OVA_DARK_LOOP16                          000002A9    
+SOTH_OVA_DARK_LOOP17                          000002BC    
+SOTH_OVA_DARK_LOOP18                          000002D6    
+SOTH_OVA_DARK_LOOP19                          000002F0    
+SOTH_OVA_DARK_LOOP1A                          00000303    
+SOTH_OVA_DARK_LOOP1B                          0000031D    
+SOTH_OVA_DARK_LOOP1C                          00000337    
+SOTH_OVA_DARK_LOOP1D                          0000034A    
+SOTH_OVA_DARK_LOOP1E                          00000364    
+SOTH_OVA_DARK_LOOP1F                          0000037E    
+SOTH_OVA_DARK_LOOP20                          000003BE    
+SOTH_OVA_DARK_LOOP21                          0000011F    
+SOTH_OVA_DARK_LOOP22                          00000137    
+SOTH_OVA_DARK_LOOP23                          00000098    
+SOTH_OVA_DARK_LOOP24                          000000A9    
+SOTH_OVA_DARK_LOOP25                          000000E0    
+SOTH_OVA_DARK_LOOP26                          0000067F    
+SOTH_OVA_DARK_LOOP27                          00000692    
+SOTH_OVA_DARK_LOOP28                          0000069D    
+SOTH_OVA_DARK_LOOP29                          000006DE    
+SOTH_OVA_DARK_LOOP2A                          000005FC    
+SOTH_OVA_DARK_LOOP2B                          0000060F    
+SOTH_OVA_DARK_LOOP2C                          0000061A    
+SOTH_OVA_DARK_LOOP2D                          0000065F    
+SOTH_OVA_DARK_LOOP2E                          00000510    
+SOTH_OVA_DARK_LOOP2F                          00000523    
+SOTH_OVA_DARK_LOOP30                          000005DC    SOTH_OVA_DARK_PSG1 00000508
+SOTH_OVA_DARK_PSG2 000005F4    SOTH_OVA_DARK_PSG3 00000677    
+SOTH_OVA_DARK_VOICES                          0000096C    TARGET             00040000 E
+TEMPDIV            00000002 S

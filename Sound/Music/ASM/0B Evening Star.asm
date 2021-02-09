@@ -1,5 +1,5 @@
 
-Target	EQU	$468E5
+Target	EQU	$45C41
 	smpsHeaderVoice	EveningStar_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $46

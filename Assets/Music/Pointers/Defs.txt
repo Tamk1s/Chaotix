@@ -1,0 +1,27 @@
+81 - Electric Kick
+82 - Electric Snare
+83 - Splash Cymbal
+84 - Ride Bell
+85 - High Tom
+86 - Mid Tom (use SMPS speed $F)
+87 - Low Tom (use SMPS speed $14)
+88 - Electric Hi-Hat
+89 - Crash Cymbal
+8A - Clap
+8B - Acoustic Kick
+8C - Acoustic Snare
+8D - Bell
+8E - Fingers Snapping
+8F - Cowbell
+90 - High Click
+91 - Low Click (use SMPS speed $10)
+92 - High Bongo
+93 - Low Bongo (use SMPS speed $10)
+94 - High Timpani
+95 - Low Timpani (use SMPS speed $10)
+96 - Silence
+
+Knux Clackers:
+97 - Sega
+98 - Closed Hi Hat
+99 - Open Hi Hat

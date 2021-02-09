@@ -1,0 +1,1 @@
+vbindiff.exe orig.bin inject.bin

@@ -1,5 +1,5 @@
 
-Target	EQU	$40D61
+Target	EQU	$400BE
 	smpsHeaderVoice	Electoria_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $19

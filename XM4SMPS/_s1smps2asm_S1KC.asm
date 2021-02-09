@@ -119,7 +119,7 @@ nAb7			EQU	$DD
 nA7			EQU	$DE
 nBb7			EQU	$DF
 
-; DAC Equates
+; DAC Equates (S1)
 dKick			EQU	$81
 dSnare			EQU	$82
 dTimpani		EQU	$83
@@ -128,6 +128,34 @@ dMidTimpani		EQU	$89
 dLowTimpani		EQU	$8A
 dVLowTimpani	EQU	$8B
 dFloorTimpani	EQU $8B
+
+; PWM Equates (KC)
+pEKick		EQU	$81
+pESnare		EQU	$82
+pSplashCymb	EQU	$83
+pRideBell	EQU $84
+pTomHi		EQU	$85
+pTomMid		EQU	$86
+pTomLow		EQU	$87
+pEHiHat		EQU	$88
+pCrashCymb	EQU $89
+pClap		EQU $8A
+pAKick		EQU $8B
+pASnare		EQU	$8C
+pBell		EQU $8D
+pFingSnap	EQU	$8E
+pCowbell	EQU	$8F
+pClickHi	EQU	$90
+pClickLo	EQU	$91
+pBongoHi	EQU	$92
+pBongoLo	EQU	$93
+pTimpaniHi	EQU	$94
+pTimpaniLo	EQU	$95
+pSilence	EQU $96
+;!@ NEW DATA
+pSega		EQU $97
+pClosedHH	EQU $98
+pOpenHH		EQU $99
 
 ;!@ Convert ptrs to z80Ptr
 ; function to make a little-endian 16-bit pointer for the Z80 sound driver

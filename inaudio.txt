@@ -191,8 +191,10 @@ StartSeg PWMData Big_Endian $058000
 EndSeg
 
 ;!@ NEW Data
-;Extra-large PWM samples (Sega chant). Padded to end of ROM
-StartSeg PWMDataX Big_Endian $2FE63C
+;Extra-large PWM samples. Padded to end of ROM
+StartSeg PWMDataX Big_Endian $2FDAC8
+	include	"Sound/PWM/98.bin"	
+	include	"Sound/PWM/99.bin"
 	include	"Sound/PWM/97.bin"
 EndSeg
 ;endregion

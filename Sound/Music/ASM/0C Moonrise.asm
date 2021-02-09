@@ -1,589 +1,1019 @@
+Target	EQU	$46344
+	smpsHeaderVoice     SOTH_OVA_Dark_Voices, Target
+	smpsHeaderChan      $06, $03
+	smpsHeaderTempoC    $02, $05
+	smpsHeaderFM        SOTH_OVA_Dark_FM1, Target,	$00, $0B
+	smpsHeaderFM        SOTH_OVA_Dark_FM2, Target,	$00, $13
+	smpsHeaderFM        SOTH_OVA_Dark_FM3, Target,	$00, $13
+	smpsHeaderFM        SOTH_OVA_Dark_FM4, Target,	$00, $18
+	smpsHeaderFM        SOTH_OVA_Dark_FM5, Target,	$00, $13
+	smpsHeaderFM        SOTH_OVA_Dark_FM6, Target,	$00, $13
+	smpsHeaderPSG       SOTH_OVA_Dark_PSG1, Target,	$00, $06, $00, $00
+	smpsHeaderPSG       SOTH_OVA_Dark_PSG2, Target,	$00, $06, $00, $00
+	smpsHeaderPSG       SOTH_OVA_Dark_PSG3, Target,	$00, $06, $00, $00
+	smpsHeaderPWM		PWM1, Target, $00, $7F
+	smpsHeaderPWM		PWM2, Target, $00, $7F
+	smpsHeaderPWM		PWM3, Target, $00, $7F
+	smpsHeaderPWM		PWM4, Target, $00, $7F
 
-Target	EQU	$46FE8
-	smpsHeaderVoice	Moonrise_Patches, Target
-	smpsHeaderChan	$06, $03
-	smpsHeaderTempo	$01, $25
-	smpsHeaderFM	Moonrise_FM1, Target, $00, $0D
-	smpsHeaderFM	Moonrise_FM2, Target, $00, $0C
-	smpsHeaderFM	Moonrise_FM3, Target, $00, $0C
-	smpsHeaderFM	Moonrise_FM4, Target, $00, $0C
-	smpsHeaderFM	Moonrise_FM5, Target, $00, $0C
-	smpsHeaderFM	Moonrise_FM6, Target, $0C, $15
-	smpsHeaderPSG	Moonrise_PSG1, Target, $00, $01, $00, $0C
-	smpsHeaderPSG	Moonrise_PSG2, Target, $00, $03, $00, $0C
-	smpsHeaderPSG	Moonrise_PSG3, Target, $23, $02, $00, $02
-	smpsHeaderPWM	Moonrise_PWM1, Target, $00, $AA
-	smpsHeaderPWM	Moonrise_PWM2, Target, $00, $BB
-	smpsHeaderPWM	Moonrise_PWM3, Target, $00, $99
-	smpsHeaderPWM	Moonrise_PWM4, Target, $00, $75
+; FM1 Data
+SOTH_OVA_Dark_FM1:
+	smpsPan             panCenter, $00
+	smpsFMvoice        $00
+	dc.b	nRst, $01
+	smpsPan             panCenter, $00
+	;!@ dc.b	$01, $7F, $39
+	dc.b	nRst, $01, nRst, $7F, nRst, $39
+	smpsAlterNote       $03
+	dc.b	nC2, $01
+	smpsAlterNote       $0B
+	dc.b	smpsNoAttack, nE2
+	smpsAlterNote       $1F
+	dc.b	smpsNoAttack, nBb2
+	smpsAlterNote       $01
+	dc.b	smpsNoAttack, nCs3
+	smpsAlterNote       $0F
+	dc.b	smpsNoAttack, nB2
+	smpsAlterNote       $07
+	dc.b	smpsNoAttack, nA2
+	smpsAlterNote       $F4
+	dc.b	smpsNoAttack, nG2
+	smpsAlterNote       $11
+	dc.b	smpsNoAttack, nF2
+	smpsAlterNote       $00
+	dc.b	smpsNoAttack, nEb2
+	smpsAlterNote       $F4
+	dc.b	smpsNoAttack, nCs2
+	smpsAlterNote       $03
+	dc.b	smpsNoAttack, nB1
+	smpsAlterNote       $F2
+	dc.b	smpsNoAttack, nA1
+	smpsAlterNote       $19
+	dc.b	smpsNoAttack, nFs1
+	smpsAlterNote       $FA
+	dc.b	smpsNoAttack, nF1
+	smpsAlterNote       $EC
+	dc.b	smpsNoAttack, nEb1
+	smpsAlterNote       $09
+	dc.b	smpsNoAttack, nC1
+	smpsAlterNote       $F3
+	dc.b	smpsNoAttack, nB0
+	smpsAlterNote       $13
+	dc.b	smpsNoAttack, nAb0
 
-Moonrise_FM1:
-	smpsFMvoice		$00
+SOTH_OVA_Dark_Jump04:
+	smpsAlterNote       $00
 
-Moonrise_Loop1:
-	smpsCall		Moonrise_Call1, Target
-	smpsLoop		$01, $02, Moonrise_Loop1, Target
+SOTH_OVA_Dark_Loop23:
+	dc.b	nC4, $09, nG3, nBb3, $06, nRst, $03, nC4, $09, nG3, $06, nBb3
+	smpsLoop            $00, $18, SOTH_OVA_Dark_Loop23, Target
 
-Moonrise_Loop2:
-	smpsCall		Moonrise_Call1, Target
-	smpsLoop		$01, $04, Moonrise_Loop2, Target
-	smpsJump		Moonrise_Loop2, Target
-
-Moonrise_Call1:
-	dc.b	nD2, $12, nD2, nC2, $0C
-	smpsLoop		$00, $03, Moonrise_Call1, Target
-	dc.b	nG2, $12, nF2, nC2, $0C
-	smpsReturn
-
-Moonrise_FM2:
-	smpsFMvoice		$01
-	smpsPan		panLeft
-	dc.b	nRst, $60, nRst, $54, nD3, $0C, smpsNoAttack, $60
-	smpsPan		panCenter
-	smpsFMvoice		$02
-	smpsAlterVol		$09
-	smpsAlterPitch	$0C
-	dc.b	nG4, $12
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nFs4, $12
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF4, $06, nC4, nD4
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF4, $0C, nD4, $06
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-
-Moonrise_Jump1:
-	dc.b	nF4, $12, nD4, $0C
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$0C
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, $06
-	smpsFMvoice		$01
-	smpsAlterVol		$F7
-	smpsAlterPitch	$F4
-
-Moonrise_Loop3:
-	smpsCall		Moonrise_Call2, Target
-	smpsLoop		$00, $06, Moonrise_Loop3, Target
-	smpsFMvoice		$02
-	smpsAlterVol		$09
-	smpsAlterPitch	$0C
-	dc.b	nRst, $06, nC4, nD4
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF4, $0C, nD4, $06
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF4, $12, nD4, $0C, nRst, $12
-	smpsPan		panCenter
-	smpsFMvoice		$01
-	smpsAlterVol		$F7
-	smpsAlterPitch	$F4
-	smpsCall		Moonrise_Call2, Target
-	smpsCall		Moonrise_Call2, Target
-	smpsCall		Moonrise_Call2, Target
-	smpsFMvoice		$02
-	smpsAlterVol		$09
-	smpsAlterPitch	$0C
-
-Moonrise_Loop4:
-	dc.b	nF4, $12
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	smpsLoop		$00, $06, Moonrise_Loop4, Target
-	dc.b	nF4, $06, nC4, nD4
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF4, $0C, nD4, $06
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	smpsJump		Moonrise_Jump1, Target
-
-Moonrise_Call2:
-	dc.b	nF3, $12, $06
-	smpsAlterVol		$0A
-	dc.b	nRst, $0C, nF3, $06, nRst
-	smpsAlterVol		$F6
-	smpsReturn
-
-Moonrise_FM3:
-	smpsFMvoice		$01
-	dc.b	nRst, $60, nRst, $58, nF3, $08, smpsNoAttack, $60
-	dc.b	smpsNoAttack, $60
-	smpsPan		panRight
-
-Moonrise_Loop5:
-	smpsCall		Moonrise_Call3, Target
-	smpsCall		Moonrise_Call3, Target
-	smpsCall		Moonrise_Call3, Target
-	smpsAlterPitch	$02
-	smpsCall		Moonrise_Call3, Target
-	smpsAlterPitch	$FE
-	smpsLoop		$00, $04, Moonrise_Loop5, Target
-	smpsJump		Moonrise_Loop5, Target
-
-Moonrise_Call3:
-	dc.b	nA3, $12, $06
-	smpsAlterVol		$0A
-	dc.b	nRst, $0C, nA3, $06, nRst
-	smpsAlterVol		$F6
-	smpsReturn
-
-Moonrise_FM4:
-	smpsFMvoice		$01
-	dc.b	nRst, $60, nRst, $5C, nA3, $04, smpsNoAttack, $60
-	dc.b	smpsNoAttack, $60
-	smpsPan		panLeft
-
-Moonrise_Loop6:
-	smpsCall		Moonrise_Call4, Target
-	smpsAlterPitch	$FF
-	smpsCall		Moonrise_Call4, Target
-	smpsAlterPitch	$01
-	smpsCall		Moonrise_Call4, Target
-	smpsAlterPitch	$02
-	smpsCall		Moonrise_Call4, Target
-	smpsAlterPitch	$FE
-	smpsLoop		$00, $04, Moonrise_Loop6, Target
-	smpsJump		Moonrise_Loop6, Target
-
-Moonrise_Call4:
-	dc.b	nC3, $12, $06
-	smpsAlterVol		$0A
-	dc.b	nRst, $0C, nC3, $06, nRst
-	smpsAlterVol		$F6
-	smpsReturn
-
-Moonrise_FM5:
-	smpsFMvoice		$01
-	smpsPan		panRight
-	dc.b	nRst, $60, nRst, nC4, smpsNoAttack, $30
-	smpsAlterVol		$0A
-	smpsCall		Moonrise_Call5, Target
-
-Moonrise_Loop7:
-	smpsCall		Moonrise_Call6, Target
-	smpsCall		Moonrise_Call7, Target
-	smpsCall		Moonrise_Call6, Target
-	smpsCall		Moonrise_Call8, Target
-	smpsCall		Moonrise_Call6, Target
-	smpsCall		Moonrise_Call7, Target
-	smpsCall		Moonrise_Call6, Target
-	smpsCall		Moonrise_Call5, Target
-	smpsLoop		$00, $02, Moonrise_Loop7, Target
-	smpsJump		Moonrise_Loop7, Target
-
-Moonrise_Call5:
-	smpsFMvoice		$03
-	smpsPan		panLeft
-	dc.b	nG5, $06, nF5, nD5, nG4
-	smpsPan		panRight
-	dc.b	nG5, nF5, nD5, nG4
-	smpsPan		panCenter
-	smpsFMvoice		$04
-	smpsReturn
-
-Moonrise_Call6:
-	dc.b	nG4, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nG4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF4, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nF4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nD4, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nA3, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nA3
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	smpsReturn
-
-Moonrise_Call7:
-	dc.b	nG4, $06, nF4
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nF4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nD4, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nA3, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nA3
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nA3
-	smpsReturn
-
-Moonrise_Call8:
-	dc.b	nG4, $06, nF4
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nF4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nD4, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nG3, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nG3
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nG3
-	smpsReturn
-
-Moonrise_FM6:
-	smpsFMvoice		$02
-	dc.b	nRst, $60, nRst, nRst, nD4, $12
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nD4, $12
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nC4, $06, nG3, nA3
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nA3
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nC4, $0C, nA3, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nA3
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-
-Moonrise_Jump2:
-	dc.b	nC4, $12, nA3, $0C
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$0C
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, $36, nRst, $60, nRst, nRst, $30, nRst
-	dc.b	$06, nG3, nA3
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nA3
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nC4, $0C, nA3, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nA3
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nC4, $12, nA3, $0C
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$0C
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, $06, nRst, $30, nRst, $60
-
-Moonrise_Loo$8:
-	dc.b	nF3, $12
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$06
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	smpsLoop		$00, $06, Moonrise_Loo$8, Target
-	dc.b	nC4, $06, nG3, nA3
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nC4, $0C, nA3, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	nD4
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	smpsJump		Moonrise_Jump2, Target
-
-Moonrise_PSG1:
-	smpsPSGvoice	$08
-	dc.b	nRst, $60, nRst, nRst, nRst, $30, nG4, $06
-	dc.b	nFs4, nF4, nD4, nC4, nA3, nG3, nD3
-
-Moonrise_Jump3:
-	smpsCall		Moonrise_Call9, Target
-	smpsJump		Moonrise_Jump3, Target
-
-Moonrise_Call9:
-	dc.b	nF3, $0C, nRst, nG3, nRst, nB3, $12, nG3
-	dc.b	$06, nRst, $0C, nC4, smpsNoAttack, $06, nRst, nB3
-	dc.b	nRst, nC4, nD4, nRst, nC4, $0C, nRst, $06
-	dc.b	nB3, $12, nRst, $06, nG3, $0C, nF3, $0C
-	dc.b	nRst, nG3, nRst, nB3, $12, nG3, $06, nRst
-	dc.b	$0C, nF4, smpsNoAttack, $06, nRst, nG4, nRst, nF4
-	dc.b	nE4, nRst, nD4, $36, nRst, $0C, nC4, $18
-	dc.b	nA3, $06, nRst, nD4, $12, nA3, $06, nRst
-	dc.b	$18, nRst, $0C, nC4, $18, nA3, $06, nRst
-	dc.b	nC4, $12, nD4, $06, nRst, $0C, nF4, $06
-	dc.b	nFs4, nG4, $60, smpsNoAttack, $24, nRst, $0C, nG4
-	dc.b	$06, nFs4, nF4, nD4, nC4, nA3, nG3, nD3
-	smpsReturn
-
-Moonrise_PSG2:
-	smpsModSet	$05, $02, $01, $04
-	smpsPSGvoice	$08
-	dc.b	nRst, $06, nRst, $60, nRst, nRst, nRst, $30
-	dc.b	nG4, $06, nFs4, nF4, nD4, nC4, nA3, nG3
-	dc.b	nD3
-
-Moonrise_Jump4:
-	smpsCall		Moonrise_Call9, Target
-	smpsJump		Moonrise_Jump4, Target
-
-Moonrise_PSG3:
-	smpsPSGform	$E7
-
-Moonrise_Loo$9:
-	smpsCall		Moonrise_Call10, Target
-	smpsLoop		$01, $04, Moonrise_Loo$9, Target
-
-Moonrise_Loop10:
-	smpsCall		Moonrise_Call10, Target
-	smpsLoop		$01, $08, Moonrise_Loop10, Target
-	smpsJump		Moonrise_Loop10, Target
-
-Moonrise_Call10:
-	smpsPSGvoice	$02
-	dc.b	nC4, $06
-	smpsLoop		$00, $0A, Moonrise_Call10, Target
-	smpsPSGvoice	$05
-	dc.b	$0C
-	smpsPSGvoice	$02
-	dc.b	$06, $06
-	smpsPSGvoice	$05
-	dc.b	$0C
-	smpsReturn
-
-Moonrise_PWM1:
-	dc.b	$8B, $30, $30, $30, $06, $0C, $06, nRst
+SOTH_OVA_Dark_Loop24:
+	dc.b	nC4
+	smpsAlterVol        $04
+	dc.b	nC5
+	smpsAlterVol        $04
+	dc.b	nC4
+	smpsAlterVol        $05
+	dc.b	nC5
+	smpsAlterVol        $07
+	dc.b	nC4
+	smpsAlterVol        $0A
+	dc.b	nC5
+	smpsAlterVol        $10
+	dc.b	nC5, nRst
+	smpsAlterVol        $D2
+	smpsLoop            $00, $03, SOTH_OVA_Dark_Loop24, Target
+	dc.b	nC4
+	smpsAlterVol        $04
+	dc.b	nC5
+	smpsAlterVol        $04
+	dc.b	nC4
+	smpsAlterVol        $05
+	dc.b	nC5
+	smpsAlterVol        $07
+	dc.b	nC4
+	smpsAlterVol        $0A
+	dc.b	nC5
+	smpsAlterVol        $10
+	dc.b	nC4, nRst
+	smpsFMvoice        $04
 	dc.b	$18
-	smpsLoop		$00, $02, Moonrise_PWM1, Target
+	smpsAlterVol        $D2
+	dc.b	nC6
+	smpsFMvoice        $00
 
-Moonrise_Loop11:
-	dc.b	$8B, $12, $06, nRst, $18
-	smpsLoop		$00, $03, Moonrise_Loop11, Target
-	dc.b	$8B, $06, $0C, $06, nRst, $18
-	smpsLoop		$01, $04, Moonrise_Loop11, Target
-	smpsJump		Moonrise_Loop11, Target
+SOTH_OVA_Dark_Loop25:
+	dc.b	nC4, $09, nG3, nBb3, $06, nRst, $03, nC2, $09, nG1, $06, nBb3
+	smpsLoop            $00, $10, SOTH_OVA_Dark_Loop25, Target
+	dc.b	nRst, $01
+	smpsJump            SOTH_OVA_Dark_Jump04, Target
 
-Moonrise_PWM2:
-	dc.b	$96, $60, nRst, $3C, $8C, $0C
-	smpsAlterVol		$F9
-	dc.b	$85, $06
-	smpsAlterVol		$07
-	dc.b	$86, $0C
-	smpsAlterVol		$90
-	dc.b	$87, $06
-	smpsAlterVol		$70
-	dc.b	nRst, $60, smpsNoAttack, $3C, $8C, $04, $04, $04
-	dc.b	$06, $06, $06, $06
+; FM2 Data
+SOTH_OVA_Dark_FM2:
+	smpsPan             panCenter, $00
+	smpsFMvoice        $01
+	dc.b	nRst, $01
+	smpsPan             panCenter, $00
+	dc.b	$0B, nD4, $30, nRst, nA4, $60
 
-Moonrise_Jump5:
-	dc.b	nRst, $18, $8C, nRst, $8C, nRst, $8C, nRst
-	dc.b	$8C, nRst, $8C, nRst, $8C, nRst, $8C, nRst
-	dc.b	$8C, $12, $06, nRst, $18, $8C, nRst, $8C
-	dc.b	nRst, $8C, nRst, $8C, nRst, $8C, nRst, $8C
-	dc.b	nRst, $8C, nRst, $0C, $8C, $04, $04, $04
-	dc.b	$06, $06, $06, $06
-	smpsJump		Moonrise_Jump5, Target
+SOTH_OVA_Dark_Jump03:
+	dc.b	nD5, $48, nC5, $0C, nF5, $06, nEb5, nD5, $60, $48, nC5, $0C
+	;!@ dc.b	nF5, $06, nG5, nD5, $60, nRst, $7F, $7F, $7F, $03
+	dc.b	nF5, $06, nG5, nD5, $60, nRst, $7F, nRst, $7F, nRst, $7F, nRst, $03
+	smpsAlterVol        $05
 
-Moonrise_PWM3:
-	smpsAlterVol		$C0
-	dc.b	$89, $60, nRst, $89
-	smpsAlterVol		$40
-	smpsAlterVol		$FC
-	dc.b	$83
-	smpsAlterVol		$04
+SOTH_OVA_Dark_Loop21:
+	dc.b	nF5, $5D, nRst, $03, nEb5, $5D, nRst, $03
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop21, Target
+	smpsAlterVol        $07
+	dc.b	nD6, $7F, smpsNoAttack, $41, nRst, $30
+	smpsAlterVol        $F4
+	dc.b	nD5
 
-Moonrise_Jump6:
-	smpsAlterVol		$C0
-	dc.b	$89, $60, nRst, nRst, nRst, $89
-	smpsAlterVol		$40
-	dc.b	nRst
-	smpsAlterVol		$FC
-	dc.b	$83
-	smpsAlterVol		$04
-	dc.b	nRst
-	smpsJump		Moonrise_Jump6, Target
+SOTH_OVA_Dark_Loop22:
+	dc.b	$48, nC5, $0C, nF5, $06, nEb5, nD5, $60, $48, nC5, $0C, nF5
+	dc.b	$06, nG5, nD5, $60
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop22, Target
+	dc.b	nRst, $01
+	smpsJump            SOTH_OVA_Dark_Jump03, Target
 
-Moonrise_PWM4:
-	smpsCall		Moonrise_Call11, Target
-	smpsLoop		$01, $04, Moonrise_PWM4, Target
+; FM3 Data
+SOTH_OVA_Dark_FM3:
+	smpsPan             panCenter, $00
+	smpsFMvoice        $02
+	dc.b	nRst, $01
+	smpsPan             panCenter, $00
+	;!@ dc.b	$01, $7F, $4B
+	dc.b	nRst, $01, nRst, $7F, nRst, $4B
 
-Moonrise_Loop12:
-	smpsCall		Moonrise_Call11, Target
-	smpsLoop		$01, $08, Moonrise_Loop12, Target
-	smpsJump		Moonrise_Loop12, Target
+SOTH_OVA_Dark_Loop08:
+	dc.b	nC6, $02, nRst
+	smpsAlterVol        $0C
+	dc.b	nC6
+	smpsAlterVol        $F4
+	dc.b	nC7, nRst
+	smpsAlterVol        $16
+	dc.b	nC7
+	smpsAlterVol        $EA
+	smpsLoop            $00, $20, SOTH_OVA_Dark_Loop08, Target
 
-Moonrise_Call11:
-	dc.b	$88, $06
-	smpsAlterVol		$AB
+SOTH_OVA_Dark_Loop09:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop09, Target
+
+SOTH_OVA_Dark_Loop0A:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0A, Target
+
+SOTH_OVA_Dark_Loop0B:
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0B, Target
+
+SOTH_OVA_Dark_Loop0C:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0C, Target
+
+SOTH_OVA_Dark_Loop0D:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0D, Target
+
+SOTH_OVA_Dark_Loop0E:
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0E, Target
+
+SOTH_OVA_Dark_Loop0F:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop0F, Target
+
+SOTH_OVA_Dark_Loop10:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop10, Target
+
+SOTH_OVA_Dark_Loop11:
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop11, Target
+
+SOTH_OVA_Dark_Loop12:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop12, Target
+
+SOTH_OVA_Dark_Loop13:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop13, Target
+
+SOTH_OVA_Dark_Loop14:
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop14, Target
+
+SOTH_OVA_Dark_Loop15:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop15, Target
+
+SOTH_OVA_Dark_Loop16:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop16, Target
+
+SOTH_OVA_Dark_Loop17:
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop17, Target
+
+SOTH_OVA_Dark_Loop18:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop18, Target
+
+SOTH_OVA_Dark_Loop19:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop19, Target
+
+SOTH_OVA_Dark_Loop1A:
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1A, Target
+
+SOTH_OVA_Dark_Loop1B:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1B, Target
+
+SOTH_OVA_Dark_Loop1C:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1C, Target
+
+SOTH_OVA_Dark_Loop1D:
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1D, Target
+
+SOTH_OVA_Dark_Loop1E:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1E, Target
+
+SOTH_OVA_Dark_Loop1F:
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop1F, Target
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	dc.b	nBb5
+	smpsAlterVol        $EA
+	dc.b	nG5, nRst
+	smpsAlterVol        $16
+	dc.b	nG5
+	smpsAlterVol        $EA
+	dc.b	nC6, nRst
+	smpsAlterVol        $16
+	dc.b	nC6
+	smpsAlterVol        $EA
+	dc.b	nBb5, nRst
+	smpsAlterVol        $16
+	;!@ dc.b	nBb5, nRst, $7F, $71
+	dc.b	nBb5, $02, nRst, $7F, nRst, $71
+
+SOTH_OVA_Dark_Loop20:
+	smpsAlterVol        $EA
+	dc.b	nC6, $02, nRst
+	smpsAlterVol        $0C
+	dc.b	nC6
+	smpsAlterVol        $F4
+	dc.b	nC7, nRst
+	smpsAlterVol        $16
+	dc.b	nC7
+	smpsLoop            $00, $40, SOTH_OVA_Dark_Loop20, Target
+	dc.b	nRst, $01
+	smpsAlterVol        $EA
+	smpsJump            SOTH_OVA_Dark_Loop08, Target
+
+; FM4 Data
+SOTH_OVA_Dark_FM4:
+	smpsPan             panCenter, $00
+	smpsFMvoice        $03
+	dc.b	nRst, $01
+	smpsPan             panCenter, $00
+	;!@ dc.b	$01, $7F, $4B
+	dc.b	nRst, $01, nRst, $7F, nRst, $4B
+
+SOTH_OVA_Dark_Jump02:
+	dc.b	nRst, $0C
+
+SOTH_OVA_Dark_Loop04:
+	dc.b	nF4, $06, nRst, $03, nF4, $02, nRst, $25
+	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop04, Target
+	;!@ dc.b	nF4, $06, nRst, $03, nF4, $02, nRst
+	dc.b	nF4, $06, nRst, $03, nF4, $02
+
+SOTH_OVA_Dark_Loop05:
+	;!@
+	dc.b	nRst, $63
+	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop05, Target
+	;!@
+	dc.b	nRst, $64
+	smpsAlterVol        $FD
+
+SOTH_OVA_Dark_Loop06:
+	dc.b	nF4, $06
+	smpsAlterVol        $06
+	dc.b	nBb3, $02, nRst, $04
+	smpsAlterVol        $FA
+	dc.b	nF4, $06
+	smpsAlterVol        $06
+	dc.b	nBb3, $02, nRst, $01
+	smpsAlterVol        $FA
+	dc.b	nG4, $04, nRst, $02
+	smpsAlterVol        $06
+	dc.b	nG4, nRst, $01
+	smpsAlterVol        $FA
+	dc.b	nG4, $04, nRst, $02, nF4, $04, nRst, $02, nG4, $04, nRst, $02
+	smpsLoop            $00, $03, SOTH_OVA_Dark_Loop06, Target
+	dc.b	nF4, $06
+	smpsAlterVol        $06
+	dc.b	nBb3, $02, nRst, $04
+	smpsAlterVol        $FA
+	dc.b	nF4, $06
+	smpsAlterVol        $06
+	dc.b	nBb3, $02, nRst, $01
+	smpsAlterVol        $FA
+	dc.b	nG4, $04, nRst, $02
+	smpsAlterVol        $06
+	dc.b	nG4, nRst, $01
+	smpsAlterVol        $FA
+	dc.b	nG4, $04, nRst, $02, nF4, $04, nRst, $02, nG4, $04, nRst, $3E
+	smpsAlterVol        $03
+
+SOTH_OVA_Dark_Loop07:
+	dc.b	nF4, $06, nRst, $03, nF4, $02, nRst, $25
+	smpsLoop            $00, $0F, SOTH_OVA_Dark_Loop07, Target
+	dc.b	nF4, $06, nRst, $03, nF4, $02, nRst, $1A
+	smpsJump            SOTH_OVA_Dark_Jump02, Target
+
+; FM5 Data
+SOTH_OVA_Dark_FM5:
+	smpsFMvoice        $01
+	smpsPan             panCenter, $00
+	dc.b	nRst, $01
+	smpsPan             panCenter, $00
+	dc.b	$01, $3A, nC4, $7F, smpsNoAttack, $11
+
+SOTH_OVA_Dark_Jump01:
+	dc.b	nD4, $48, nC4, $0C, nF4, $06, nEb4, nD4, $60, $48, nC4, $0C
+	;!@ dc.b	nF4, $06, nG4, nD4, $60, nRst, $7F, $7F, $7F, $03
+	dc.b	nF4, $06, nG4, nD4, $60, nRst, $7F, nRst, $7F, nRst, $7F, nRst, $03
+	smpsAlterVol        $05
+
+SOTH_OVA_Dark_Loop02:
+	dc.b	nD5, $5D, nRst, $03, nC5, $5D, nRst, $03
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop02, Target
+	smpsAlterVol        $0B
+	dc.b	nD7, $7F, smpsNoAttack, $41, nRst, $30
+	smpsAlterVol        $F0
+	dc.b	nD4
+
+SOTH_OVA_Dark_Loop03:
+	dc.b	$48, nC4, $0C, nF4, $06, nEb4, nD4, $60, $48, nC4, $0C, nF4
+	dc.b	$06, nG4, nD4, $60
+	smpsLoop            $00, $02, SOTH_OVA_Dark_Loop03, Target
+	dc.b	nRst, $01
+	smpsJump            SOTH_OVA_Dark_Jump01, Target
+
+; FM6 Data
+SOTH_OVA_Dark_FM6:
+	smpsFMvoice        $01
+	smpsPan             panCenter, $00
+	dc.b	nRst, $01
+	smpsPan             panCenter, $00
+	;!@ dc.b	$0B, nA3, $7F, smpsNoAttack, $41
+	dc.b	nRst, $0B, nA3, $7F, smpsNoAttack, $41
+
+SOTH_OVA_Dark_Jump00:
+	;!@ 
+	;dc.b	nRst
+
+SOTH_OVA_Dark_Loop00:
+	;!@
+	dc.b	nRst, $60
+	smpsLoop            $00, $08, SOTH_OVA_Dark_Loop00, Target
+	smpsAlterVol        $05
+	dc.b	nBb4, $5D, nRst, $03, nAb4, $5D, nRst, $03, nBb4, $5D, nRst, $03
+	;!@ dc.b	nAb4, $5D, nRst
+	dc.b	nAb4, $5D
+
+SOTH_OVA_Dark_Loop01:
+	;!@
+	dc.b	nRst, $5C
+	smpsLoop            $00, $0B, SOTH_OVA_Dark_Loop01, Target
+	smpsAlterVol        $FB
+	smpsJump            SOTH_OVA_Dark_Jump00, Target
+
+; PSG1 Data
+SOTH_OVA_Dark_PSG1:
+	;!@ dc.b	nRst, $02, $7F, $4B
+	dc.b	nRst, $02, nRst, $7F, nRst, $4B
+
+SOTH_OVA_Dark_Jump07:
+	dc.b	nRst, $0C
+
+SOTH_OVA_Dark_Loop2E:
+	dc.b	nD1, $06, nRst, $03, nD1, $02, nRst, $25
+	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop2E, Target
+	;!@ dc.b	nD1, $06, nRst, $03, nD1, $02
+	dc.b	nD1, $06, nRst, $03, nD1, $02
+
+SOTH_OVA_Dark_Loop2F:
+	;!@
+	dc.b	nRst, $63
+	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop2F, Target
+	;!@
+	dc.b	nRst, $64
+	smpsSetVol     $FF
+	dc.b	nD1, $06
+	smpsSetVol     $02
+	dc.b	nF0, $02, nRst, $04
+	smpsSetVol     $FE
+	dc.b	nD1, $06
+	smpsSetVol     $02
+	dc.b	nF0, $02, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nE1, $04, nRst, $02
+	smpsSetVol     $02
+	dc.b	nC1, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nC1, $04, nRst, $02, nD1, $04, nRst, $02, nE1, $04, nRst, $02
+	dc.b	nD1, $06
+	smpsSetVol     $02
+	dc.b	nF0, $02, nRst, $04
+	smpsSetVol     $FE
+	dc.b	nD1, $06
+	smpsSetVol     $02
+	dc.b	nF0, $02, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nE1, $04, nRst, $02
+	smpsSetVol     $02
+	dc.b	nE1, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nE1, $04, nRst, $02, nD1, $04, nRst, $02, nE1, $04, nRst, $02
+	dc.b	nD1, $06
+	smpsSetVol     $02
+	dc.b	nF0, $02, nRst, $04
+	smpsSetVol     $FE
+	dc.b	nD1, $06
+	smpsSetVol     $02
+	dc.b	nF0, $02, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nE1, $04, nRst, $02
+	smpsSetVol     $02
+	dc.b	nC1, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nC1, $04, nRst, $02, nD1, $04, nRst, $02, nE1, $04, nRst, $02
+	dc.b	nD1, $06
+	smpsSetVol     $02
+	dc.b	nF0, $02, nRst, $04
+	smpsSetVol     $FE
+	dc.b	nD1, $06
+	smpsSetVol     $02
+	dc.b	nF0, $02, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nE1, $04, nRst, $02
+	smpsSetVol     $02
+	dc.b	nE1, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nE1, $04, nRst, $02, nD1, $04, nRst, $02, nE1, $04, nRst, $3E
+	smpsSetVol     $01
+
+SOTH_OVA_Dark_Loop30:
+	dc.b	nD1, $06, nRst, $03, nD1, $02, nRst, $25
+	smpsLoop            $00, $0F, SOTH_OVA_Dark_Loop30, Target
+	dc.b	nD1, $06, nRst, $03, nBb0, $02, nRst, $1A
+	smpsJump            SOTH_OVA_Dark_Jump07, Target
+
+; PSG2 Data
+SOTH_OVA_Dark_PSG2:
+	;!@
+	;dc.b	nRst, $02, $7F, $4B
+	dc.b	nRst, $02, nRst, $7F, nRst, $4B
+
+SOTH_OVA_Dark_Jump06:
+	dc.b	nRst, $0C
+
+SOTH_OVA_Dark_Loop2A:
+	dc.b	nBb0, $06, nRst, $03, nBb0, $02, nRst, $25
+	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop2A, Target
+	;!@ dc.b	nBb0, $06, nRst, $03, nBb0, $02, nRst
+	dc.b	nBb0, $06, nRst, $03, nBb0, $02
+
+SOTH_OVA_Dark_Loop2B:
+	;!@
+	dc.b	nRst, $63
+	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop2B, Target
+	;!@
+	dc.b	nRst, $64
+	smpsSetVol     $FF
+
+SOTH_OVA_Dark_Loop2C:
+	dc.b	nBb0, $04, nRst, $08, nBb0, $04, nRst, $05, nC1, $04, nRst, $02
+	smpsSetVol     $02
+	dc.b	nC1, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nC1, $04, nRst, $02, nBb0, $04, nRst, $02, nC1, $04, nRst, $02
+	smpsLoop            $00, $03, SOTH_OVA_Dark_Loop2C, Target
+	dc.b	nBb0, $04, nRst, $08, nBb0, $04, nRst, $05, nC1, $04, nRst, $02
+	smpsSetVol     $02
+	dc.b	nC1, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nC1, $04, nRst, $02, nBb0, $04, nRst, $02, nC1, $04, nRst, $3E
+	smpsSetVol     $01
+
+SOTH_OVA_Dark_Loop2D:
+	dc.b	nBb0, $06, nRst, $03, nBb0, $02, nRst, $25
+	smpsLoop            $00, $0F, SOTH_OVA_Dark_Loop2D, Target
+	dc.b	nBb0, $06, nRst, $03, nBb0, $02, nRst, $1A
+	smpsJump            SOTH_OVA_Dark_Jump06, Target
+
+; PSG3 Data
+SOTH_OVA_Dark_PSG3:
+	;!@
+	;dc.b	nRst, $02, $7F, $4B
+	dc.b	nRst, $02, nRst, $7F, nRst, $4B
+
+SOTH_OVA_Dark_Jump05:
+	dc.b	nRst, $0C
+
+SOTH_OVA_Dark_Loop26:
+	dc.b	nF0, $06, nRst, $03, nF0, $02, nRst, $25
+	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop26, Target
+	;!@
+	;dc.b	nF0, $06, nRst, $03, nF0, $02, nRst
+	dc.b	nF0, $06, nRst, $03, nF0, $02
+
+SOTH_OVA_Dark_Loop27:
+	;!@
+	dc.b	nRst, $63
+	smpsLoop            $00, $07, SOTH_OVA_Dark_Loop27, Target
+	;!@
+	dc.b	nRst, $64
+	smpsSetVol     $FF
+
+SOTH_OVA_Dark_Loop28:
+	dc.b	nF0, $04, nRst, $08, nF0, $04, nRst, $05, nG0, $04, nRst, $02
+	smpsSetVol     $02
+	dc.b	nG0, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nG0, $04, nRst, $02, nF0, $04, nRst, $02, nG0, $04, nRst, $02
+	smpsLoop            $00, $03, SOTH_OVA_Dark_Loop28, Target
+	dc.b	nF0, $04, nRst, $11, nG0, $04, nRst, $02
+	smpsSetVol     $02
+	dc.b	nG0, nRst, $01
+	smpsSetVol     $FE
+	dc.b	nG0, $04, nRst, $02, nF0, $04, nRst, $02, nG0, $04, nRst, $3E
+	smpsSetVol     $01
+
+SOTH_OVA_Dark_Loop29:
+	dc.b	nF0, $06, nRst, $03, nF0, $02, nRst, $25
+	smpsLoop            $00, $0F, SOTH_OVA_Dark_Loop29, Target
+	dc.b	nF0, $06, nRst, $03, nF0, $02, nRst, $1A
+	smpsJump            SOTH_OVA_Dark_Jump05, Target
+
+
+PWM1:
+	smpsPan		panCenter
+	dc.b	nRst, $01
+	smpsPan		panCenter
+	dc.b	$0B, pClosedHH, $04, $02
+
+PWM1_Loop1:
+	dc.b	pOpenHH, $06, pClap, $24, pAKick, $04, pClosedHH, $02
+	smpsLoop		$00, $02, PWM1_Loop1, Target
+	dc.b	pOpenHH, $06, pClap, $24, $04, $06, $02, $06
+	dc.b	$04, $06, $02, $06, $06, $04
+
+PWM1_Loop4:
+	dc.b	pAKick, $02
+
+PWM1_Jump1:
+	dc.b	pAKick, $04, pClosedHH
+
+PWM1_Loop2:
+	dc.b	$02, pOpenHH, $06, pClosedHH, $04
+	smpsLoop		$00, $03, PWM1_Loop2, Target
+	dc.b	$02, pOpenHH, $04, pClap, $02
+
+PWM1_Loop3:
+	dc.b	pClosedHH, $04, $02, pOpenHH, $06
+	smpsLoop		$00, $03, PWM1_Loop3, Target
+	dc.b	pClosedHH, $04, $02, pOpenHH, $04
+	smpsLoop		$01, $07, PWM1_Loop4, Target
+	dc.b	pAKick, $02, $04, pClosedHH
+
+PWM1_Loop5:
+	dc.b	$02, pOpenHH, $06, pClosedHH, $04
+	smpsLoop		$00, $03, PWM1_Loop5, Target
+
+PWM1_Loop6:
+	dc.b	$02, pOpenHH, $04, pClap, $02, pClosedHH, $04, $02
+	dc.b	pOpenHH, $06, pClosedHH, $04
+	smpsLoop		$00, $02, PWM1_Loop6, Target
+	dc.b	$02, pClap, $04
+
+PWM1_Loo$9:
+	dc.b	pAKick, $02, $04, pClosedHH
+
+PWM1_Loop7:
+	dc.b	$02, pOpenHH, $06, pClosedHH, $04
+	smpsLoop		$00, $03, PWM1_Loop7, Target
+	dc.b	$02, pOpenHH, $04, pClap, $02
+
+PWM1_Loo$8:
+	dc.b	pClosedHH, $04, $02, pOpenHH, $06
+	smpsLoop		$00, $03, PWM1_Loo$8, Target
+	dc.b	pClosedHH, $04, $02, pOpenHH, $04
+	smpsLoop		$01, $04, PWM1_Loo$9, Target
+	dc.b	pAKick, $02
+
+PWM1_Loop10:
+	dc.b	pClosedHH, $04, $02, pOpenHH, $06
+	smpsLoop		$00, $10, PWM1_Loop10, Target
+	dc.b	pSplashCymb, $30
+
+PWM1_Loop11:
+	dc.b	pClosedHH, $04, $02
+
+PWM1_Loop13:
+	dc.b	pOpenHH, $06
+	smpsLoop		$00, $03, PWM1_Loop11, Target
+	dc.b	pClosedHH, $04, $02, pOpenHH, $04, pClap, $02
+
+PWM1_Loop12:
+	dc.b	pClosedHH, $04, $02, pOpenHH, $06
+	smpsLoop		$00, $03, PWM1_Loop12, Target
+	dc.b	pClosedHH, $04, $02, pOpenHH, $04, pAKick, $02, $04
+	dc.b	pClosedHH, $02
+	smpsLoop		$01, $03, PWM1_Loop13, Target
+
+PWM1_Loop14:
+	dc.b	pOpenHH, $06, pClosedHH, $04, $02
+	smpsLoop		$00, $03, PWM1_Loop14, Target
+
+PWM1_Loop15:
+	dc.b	pOpenHH, $04, pClap, $02, pClosedHH, $04, $02, pOpenHH
+	dc.b	$06, pClosedHH, $04, $02
+	smpsLoop		$00, $02, PWM1_Loop15, Target
+	dc.b	pClap, $04, pAKick, $02
+	smpsLoop		$02, $02, PWM1_Loop11, Target
+	dc.b	pSplashCymb, $01
+	smpsJump		PWM1_Jump1, Target
+	
+
+PWM2:
+	dc.b	nRst, $0C, pAKick, pClosedHH, $24, $0C, $24, $0C
+	dc.b	$24, pAKick, $30
+
+PWM2_Jump1:
+	dc.b	pSplashCymb, $06
+
+PWM2_Loop1:
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
+	smpsLoop		$00, $03, PWM2_Loop1, Target
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pSplashCymb
+
+PWM2_Loop2:
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
+	smpsLoop		$00, $03, PWM2_Loop2, Target
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+	dc.b	$04, pClap, $02, pRideBell, $06, pClap, pRideBell, pAKick
+	dc.b	$04, pClap, $02, pRideBell, $06, pClap, $04, pTomMid
+	dc.b	$02, pRideBell, $04, pTimpaniLo, $02
+
+PWM2_Loop3:
+	dc.b	pSplashCymb, $06, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
+	dc.b	pAKick, pAKick, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
+	dc.b	pClap, pClosedHH, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
+	dc.b	pAKick, pAKick, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
+	dc.b	pClap
+	smpsLoop		$00, $02, PWM2_Loop3, Target
+
+PWM2_Loop4:
+	dc.b	pAKick, pRideBell
+	smpsLoop		$00, $0B, PWM2_Loop4, Target
+	dc.b	pAKick, pRideBell, $04, pClap, $02, pAKick, $06, pRideBell
+	dc.b	pAKick, pRideBell, pAKick, pRideBell, pAKick, pRideBell, $36, pSplashCymb
 	dc.b	$06
-	smpsAlterVol		$22
-	dc.b	$06
-	smpsAlterVol		$DE
-	dc.b	$06
-	smpsAlterVol		$55
-	smpsLoop		$00, $04, Moonrise_Call11, Target
-	smpsReturn
 
-Moonrise_Patches:
+PWM2_Loop5:
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
+	smpsLoop		$00, $03, PWM2_Loop5, Target
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+	dc.b	$04, pClap, $02, pRideBell, $06, pClap, pRideBell, pAKick
+	dc.b	$04, pClap, $02, pRideBell, $06, pClap, $04, pTomMid
+	dc.b	$02, pRideBell, $04, pTimpaniLo, $02, pSplashCymb, $06
 
+PWM2_Loop6:
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
+	smpsLoop		$00, $03, PWM2_Loop6, Target
+	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
+	dc.b	$04, pClap, $02, pRideBell, $06, pClap, pRideBell, pAKick
+	dc.b	$04, pClap, $02, pRideBell, $06, pClap, $04, pTomMid
+	dc.b	$02, pRideBell, $04, pTimpaniLo, $03
+	smpsJump		PWM2_Jump1, Target
+
+
+PWM3:
+	dc.b	nRst, $7F, $4D
+
+PWM3_Jump1:
+	dc.b	pClosedHH, $2A, pRideBell
+
+PWM3_Loop1:
+	dc.b	$30
+	smpsLoop		$00, $07, PWM3_Loop1, Target
+	dc.b	$06, pClosedHH, $2A, pRideBell, $30, $30, $30, $30
+	dc.b	$30, $30, $0C, pClap, $18, $06, pTomHi, pOpenHH
+	dc.b	pClosedHH, $2A, pRideBell, $30, $30, $30, $06, pClosedHH
+	dc.b	$2A, pRideBell, $30, $30, $30, $30, pAKick, pAKick
+	dc.b	pAKick, pAKick, $36, $2A, pRideBell, $30, $30, $30
+	dc.b	$30, $30, $30, $0C, pClap, $18, $06, pTomHi
+	dc.b	pOpenHH, pAKick, $2A, pRideBell, $30, $30, $30, $30
+	dc.b	$30, $30, $0C, pClap, $18, $06, pTomHi, pOpenHH
+	dc.b	$07
+	smpsJump		PWM3_Jump1, Target
+
+
+PWM4:
+	dc.b	nRst, $7F, $4D
+
+PWM4_Jump1:
+	dc.b	nRst, $7F, $7F, $7F, $7F, $7F, $7F, pTomLow
+	dc.b	nRst, nRst, nRst, $75, pClap, $18, $18, $18
+	dc.b	$06, $7F, nRst, nRst, nRst, $33, pTomLow, $7F
+	dc.b	nRst, nRst, nRst, $03, pTomLow, $07
+	smpsJump		PWM4_Jump1, Target
+
+SOTH_OVA_Dark_Voices:
+	;dc.b		$3D
+	;dc.b		$00, $00, $01, $05, $5F, $5E, $5B, $5B, $05, $0C, $0E, $0E
+	;dc.b		$00, $04, $08, $07, $B0, $19, $39, $FC, $21, $0A, $09, $10
+
+	;dc.b		$3C
+	;dc.b		$33, $31, $51, $54, $1A, $0C, $1A, $0C, $05, $1F, $05, $1F
+	;dc.b		$00, $00, $00, $00, $11, $06, $11, $06, $1C, $0C, $15, $0C
+
+	;dc.b		$3C
+	;dc.b		$35, $71, $7A, $31, $1F, $1F, $18, $1F, $0E, $00, $14, $00
+	;dc.b		$08, $0C, $08, $0F, $28, $0A, $38, $0A, $19, $0A, $1E, $0A
+
+	;dc.b		$2C
+	;dc.b		$31, $31, $71, $71, $5F, $54, $5F, $5F, $05, $0A, $03, $0C
+	;dc.b		$00, $03, $03, $03, $00, $87, $00, $A7, $17, $07, $19, $06
+
+	;dc.b		$3D
+	;dc.b		$0F, $04, $00, $00, $08, $07, $46, $07, $00, $00, $12, $05
+	;dc.b		$00, $0F, $0F, $0F, $00, $0D, $47, $07, $00, $07, $07, $08
 	
-	dc.b	$3C
-	dc.b	$01, $00, $00, $00,	$1F, $1F, $15, $1F
-	dc.b	$11, $0D, $12, $05,	$07, $04, $09, $02
-	dc.b	$55, $3A, $25, $1A,	$1A, $80, $07, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
+	dc.b		$3D
+	dc.b		$00, $00, $01, $05, $5F, $5E, $5B, $5B, $05, $0C, $0E, $0E
+	dc.b		$00, $04, $08, $07, $B0, $19, $39, $FC, $24, $07, $06, $12
 	
-	dc.b	$84
-	dc.b	$3F, $01, $01, $01,	$1F, $1F, $5F, $5F
-	dc.b	$0E, $12, $0F, $12,	$0F, $06, $05, $06
-	dc.b	$2F, $1F, $1F, $1F,	$3F, $80, $12, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
+	dc.b		$3F
+	dc.b		$32, $31, $51, $52, $1A, $0C, $1A, $0C, $05, $1F, $05, $1F
+	dc.b		$06, $06, $06, $06, $11, $06, $11, $06, $18, $10, $10, $10
 	
-	dc.b	$3D
-	dc.b	$02, $02, $01, $02,	$94, $19, $19, $19
-	dc.b	$0F, $0D, $0D, $0D,	$07, $04, $04, $04
-	dc.b	$25, $1A, $1A, $1A,	$14, $80, $80, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
+	dc.b		$3D
+	dc.b		$02, $01, $02, $01, $1F, $1F, $1F, $1F, $00, $00, $00, $01
+	dc.b		$00, $00, $00, $00, $0F, $0F, $0F, $0F, $20, $18, $26, $24
 	
-	dc.b	$2D
-	dc.b	$77, $65, $05, $15,	$1F, $5F, $5F, $5F
-	dc.b	$00, $03, $03, $05,	$00, $01, $02, $01
-	dc.b	$0F, $1C, $1C, $1C,	$22, $83, $80, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
+	dc.b		$2C
+	dc.b		$31, $31, $71, $71, $5F, $54, $5F, $5F, $05, $0A, $03, $0C
+	dc.b		$00, $03, $03, $03, $00, $87, $00, $A7, $17, $0E, $19, $0F
 	
-	dc.b	$76
-	dc.b	$7A, $32, $51, $11,	$1F, $7F, $9F, $9D
-	dc.b	$0A, $0E, $0B, $0A,	$01, $02, $05, $02
-	dc.b	$AF, $8F, $9F, $8F,	$14, $80, $80, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	dc.b		$3D
+	dc.b		$0F, $04, $00, $00, $08, $07, $46, $07, $00, $00, $12, $05
+	dc.b		$00, $0F, $0F, $0F, $00, $0D, $47, $07, $00, $0F, $10, $0F
+	even

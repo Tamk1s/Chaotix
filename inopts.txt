@@ -241,7 +241,9 @@ EndSeg
 StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	String "--- SOUND  TEST ---"
 	BYTE	$00
-	String "DOOR INTO SUMMER"
+	;!@ New Data
+	;String "DOOR INTO SUMMER"
+	String  "SOUTH ISLAND"
 	BYTE	$00
 	String "ELECTORIA"
 	BYTE	$00
@@ -255,7 +257,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	String "LABYRINTH"
 	BYTE	$00
-	String "TRIAL AND ERROR"
+	;!@ NEW Data
+	;String "TRIAL AND ERROR"
+	String "TRIAL-ERROR"
 	BYTE	$00
 	String "WALKIN="
 	BYTE	$00
@@ -263,7 +267,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	String "EVENING STAR"
 	BYTE	$00
-	String "MOONRISE"
+	;!@ NEW Data
+	;String "MOONRISE"
+	String "LAND OF DARKNESS"
 	BYTE	$00
 	String "OVERTURE"
 	BYTE	$00

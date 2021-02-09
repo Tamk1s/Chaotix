@@ -9,12 +9,13 @@
 ; Setup Directives ;
 ;;;;;;;;;;;;;;;;;;;;
 
-Define	LastPage		$1000000		;This page of tiles/mappings is the last for this "layer" (FG/BG)
-Define	NoNewLayer		$2000000		;All tiles/mappings pages of this type are loaded for the same "layer"
+Define	LastPage			$1000000		;This page of tiles/mappings is the last for this "layer" (FG/BG)
+Define	NoNewLayer			$2000000		;All tiles/mappings pages of this type are loaded for the same "layer"
+Define	NullLPtr_Terminator $FFFFFFFF
 
 MaxSize				$400000				;Maximum Genesis ROM size
 
-;Dispose			$2275FA	$2279D9		;!@ Original Demo data
+;Dispose				$2275FA	$2279D9		;!@ Original Demo data
 Dispose				$22E974	$22F1AC		;Original level data pointers list
 Dispose				$22F1AC	$22F3B4		;Original solidity data pointers list
 Dispose				$22F3B4	$2B32B0		;Original level map, tile, and solidity data (83EEA)
@@ -40,6 +41,7 @@ Dispose				$2F83DA	$300000		;Original End-ROM padding
 
 Translate			$000000	$080000	$880000	;32x shuffling of Genesis ROM address space
 Translate			$200000	$300000	$900000	;32x shuffling of Genesis ROM address space
+
 ;endregion
 
 ;region @GenRefs
@@ -392,7 +394,6 @@ StartSeg Angles Big_Endian $22E000		;Replace the Angle Array
 		include	"Collisn/Angles.bin"
 
 EndSeg
-;endregion
 
 ;region @MoveableSegs
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -400,19 +401,19 @@ EndSeg
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;!@ Demo data
-StartSeg Demo_Ptrs Big_Endian $2760E $3EC
-		DWORD Demo_1
-		DWORD Demo_2
-		DWORD Demo_3
-		DWORD Demo_4
-		DWORD Demo_5
+;StartSeg Demo_Ptrs Big_Endian $2760E $3EC
+		;DWORD Demo_1
+		;DWORD Demo_2
+		;DWORD Demo_3
+		;DWORD Demo_4
+		;DWORD Demo_5
 		
-		Demo_1:	include	"Misc/Demos/Demo1.bin"	;MMZ1N, Charmy/Heavy
-		Demo_2:	include	"Misc/Demos/Demo2.bin"	;TTZ2S, Vector/Bomb
-		Demo_3:	include	"Misc/Demos/Demo3.bin"	;BBZ3D, Knuckles/Mighty
-		Demo_4:	include	"Misc/Demos/Demo4.bin"	;IIZ (intro) 3M, Espio/Knuckles
-		Demo_5:	include	"Misc/Demos/Demo5.bin"	;AAZ1D, Mighty/Espio
-EndSeg
+		;Demo_1:	include	"Misc/Demos/Demo1.bin"	;MMZ1N, Charmy/Heavy
+		;Demo_2:	include	"Misc/Demos/Demo2.bin"	;TTZ2S, Vector/Bomb
+		;Demo_3:	include	"Misc/Demos/Demo3.bin"	;BBZ3D, Knuckles/Mighty
+		;Demo_4:	include	"Misc/Demos/Demo4.bin"	;IIZ (intro) 3M, Espio/Knuckles
+		;Demo_5:	include	"Misc/Demos/Demo5.bin"	;AAZ1D, Mighty/Espio
+;EndSeg
 
 StartSeg Objlayout_Ptrs Big_Endian	;Level Object Layout Pointers
 
@@ -1278,7 +1279,7 @@ StartSeg MD_Palette_Index Big_Endian	;Megadrive format palette pointers and data
 
 	Pal_FinalBoss:	include	"Levels/Entrance/Pal/2MN.bin"
 
-   Pal_NULL:		DWORD		$FFFFFFFF
+   Pal_NULL:		DWORD	NullLPtr_Terminator
 
 EndSeg
 
@@ -1537,169 +1538,169 @@ StartSeg LevelTile_Ptrs Big_Endian	;Level tile data pointers
 		DWORD 0
 		DWORD BBZ_BG_Tiles_Pri
 		DWORD BBZ12_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	BBZ3MDSN_TilePtr:
 		DWORD BBZ_FG_Tiles_Pri
 		DWORD BBZ3_FG_Tiles_Sec
 		DWORD 0
 		DWORD BBZ_BG_Tiles_Pri
 		DWORD BBZ3_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	BBZ4MDSN_TilePtr:
 		DWORD BBZ_FG_Tiles_Pri
 		DWORD BBZ4_FG_Tiles_Sec
 		DWORD 0
 		DWORD BBZ_BG_Tiles_Pri
 		DWORD BBZ4_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	BBZ5MDSN_TilePtr:
 		DWORD BBZ_FG_Tiles_Pri
 		DWORD BBZ5_FG_Tiles_Sec
 		DWORD 0
 		DWORD BBZ_BG_Tiles_Pri
 		DWORD BBZ5_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	SSZ12MD_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ12_FG_Tiles_Sec
 		DWORD 0
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ12MD_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	SSZ12SN_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ12_FG_Tiles_Sec
 		DWORD 0
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ12SN_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	SSZ3MD_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ3_FG_Tiles_Sec
 		DWORD 0
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ3MD_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	SSZ3SN_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ3_FG_Tiles_Sec
 		DWORD 0
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ3SN_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	SSZ45MD_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ45_FG_Tiles_Sec
 		DWORD 0
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ45MD_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	SSZ45SN_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ45_FG_Tiles_Sec
 		DWORD 0
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ45SN_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	AAZ12MDSN_TilePtr:
 		DWORD AAZ_FG_Tiles_Pri
 		DWORD AAZ12_FG_Tiles_Sec
 		DWORD 0
 		DWORD AAZ12_BG_Tiles_Pri
 		DWORD AAZ12_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	AAZ3MDSN_TilePtr:
 		DWORD AAZ_FG_Tiles_Pri
 		DWORD AAZ3_FG_Tiles_Sec
 		DWORD 0
 		DWORD AAZ34_BG_Tiles
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	AAZ4MDSN_TilePtr:
 		DWORD AAZ_FG_Tiles_Pri
 		DWORD AAZ4_FG_Tiles_Sec
 		DWORD 0
 		DWORD AAZ34_BG_Tiles
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	AAZ5MDSN_TilePtr:
 		DWORD AAZ_FG_Tiles_Pri
 		DWORD AAZ5_FG_Tiles_Pri
 		DWORD 0
 		DWORD AAZ5_BG_Tiles
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ34_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	TTZ12MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
 		DWORD 0
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ12_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	TTZ3MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
 		DWORD TTZ3_FG_Tiles_Sec
 		DWORD 0
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ34_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	TTZ4MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
 		DWORD 0
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ34_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	TTZ5MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
 		DWORD TTZ5_FG_Tiles_Sec
 		DWORD 0
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ5_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	TTZBMDSN_TilePtr:
 		DWORD TTZB_FG_Tiles
 		DWORD 0
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ5_BG_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	MMZ1MDSN_TilePtr:
 		DWORD MMZ_Tiles_Pri
 		DWORD MMZ1_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	MMZ2MDSN_TilePtr:
 		DWORD MMZ_Tiles_Pri
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	MMZ3MDSN_TilePtr:
 		DWORD MMZ_Tiles_Pri
 		DWORD MMZ3_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	MMZ4MDSN_TilePtr:
 		DWORD MMZ_Tiles_Pri
 		DWORD MMZ4_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	MMZ5MDSN_TilePtr:
 		DWORD MMZ_Tiles_Pri
 		DWORD MMZ5_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	Training_TilePtr:
 		DWORD Trainig_Tiles_Pri
 		DWORD Training_Tiles_Sec
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	Tutorial_TilePtr:
 		DWORD Tutorial_FG_Tiles_Pri
 		DWORD Tutorial_FG_Tiles_Sec
 		DWORD 0
 		DWORD Tutorial_BG_Tiles
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	WorldEnt_TilePtr:
 		DWORD WorldEnt_FG_Tiles
 		DWORD 0
 		DWORD WorldEnt_BG_Tiles
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	FinalBoss_TilePtr:
 		DWORD FinalBoss_Tiles
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	NULL_TilePtr:
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 
 EndSeg
 
@@ -2249,7 +2250,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD TTZ5_FG_Layout
 		DWORD TTZ5N_BG_Layout
 	TTZNULL_MapPtr:
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	MMZ1_MapPtr:
 		DWORD MMZ_Blocks_Pri
 		DWORD MMZ1_Blocks_Sec+LastPage+NoNewLayer
@@ -2310,7 +2311,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD Training4_FG_Layout
 		DWORD Training_BG_Layout
 	TrainNULL_MapPtr:
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	Intro0_MapPtr:
 		DWORD Training_Blocks+LastPage+NoNewLayer
 		DWORD Training_Chunks+LastPage+NoNewLayer
@@ -2386,7 +2387,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD Tutorial67_FG_Layout
 		DWORD Tutorial_BG_Layout
 	TutNULL_MapPtr:
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 	WorldEnt_MapPtr:
 		DWORD WorldEnt_FG_Blocks+LastPage
 		DWORD WorldEnt_BG_Blocks+LastPage
@@ -2400,7 +2401,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD FinalBoss_FG_Layout
 		DWORD FinalBoss_BG_Layout
 	NULL_MapPtr:
-		DWORD $FFFFFFFF
+		DWORD NullLPtr_Terminator
 
 EndSeg
 
@@ -2648,7 +2649,7 @@ StartSeg Solid_Index Big_Endian	;Solidity index list pointers and data
 	Training_SolidPtr:	DWORD Training_Solids
 	Tutorial_SolidPtr:	DWORD Training56_Solids
 	WorldEnt_SolidPtr:	DWORD WorldEnt_Solids
-	NULL_SolidPtr:		DWORD $FFFFFFFF
+	NULL_SolidPtr:		DWORD NullLPtr_Terminator
 
 EndSeg
 
@@ -3242,140 +3243,140 @@ StartSeg LevSize_Data Big_Endian	;Level Size and other Setup Data
 
 	LSPtr_BBZ01MN:		DWORD LS_FG_BBZ01MN
 				DWORD LS_BG_BBZ01MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_BBZ2MN:		DWORD LS_FG_BBZ2MN
 				DWORD LS_BG_BBZ2MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_BBZ3MN:		DWORD LS_FG_BBZ356MN
 				DWORD LS_BG_BBZ356MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_BBZ4MN:		DWORD LS_FG_BBZ4MN
 				DWORD LS_BG_BBZ4MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_BBZ56MN:		DWORD LS_FG_BBZ356MN
 				DWORD LS_BG_BBZ356MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_SSZ01MD:
 				DWORD LS_FG_SSZ01MN
 				DWORD LS_BG_SSZ02MD
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_SSZ2MD:		DWORD LS_FG_SSZ2MN
 				DWORD LS_BG_SSZ02MD
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_SSZ01SN:		DWORD LS_FG_SSZ01MN
 				DWORD LS_BG_SSZ02SN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_SSZ2SN:		DWORD LS_FG_SSZ2MN
 				DWORD LS_BG_SSZ02SN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_SSZ3MD:		DWORD LS_FG_SSZ3MN
 				DWORD LS_BG_SSZ35MD
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_SSZ4MD:		DWORD LS_FG_SSZ4MN
 				DWORD LS_BG_SSZ35MD
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_SSZ3SN:		DWORD LS_FG_SSZ3MN
 				DWORD LS_BG_SSZ35SN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_SSZ4SN:		DWORD LS_FG_SSZ4MN
 				DWORD LS_BG_SSZ35SN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_SSZ5MD:		DWORD LS_FG_SSZ5MN
 				DWORD LS_BG_SSZ35MD
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_SSZ5SN:		DWORD LS_FG_SSZ5MN
 				DWORD LS_BG_SSZ35SN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_AAZ01MN:		DWORD LS_FG_AAZ01MN
 				DWORD LS_BG_AAZ01MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_AAZ2MN:		DWORD LS_FG_AAZ2MN
 				DWORD LS_BG_AAZ2MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_AAZ3MN:		DWORD LS_FG_AAZ3MN
 				DWORD LS_BG_AAZ34MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_AAZ4MN:		DWORD LS_FG_AAZ4MN
 				DWORD LS_BG_AAZ34MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_AAZ56MN:		DWORD LS_FG_AAZ56MN
 				DWORD LS_BG_AAZ56MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_TTZ06MN:		DWORD LS_FG_TTZ06MN
 				DWORD LS_BG_TTZ06MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_MMZ01MN:		DWORD LS_FG_MMZ01MN
 				DWORD LS_BG_MMZ01MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_MMZ2MN:		DWORD LS_FGBG_MMZ2MN
 				DWORD LS_FGBG_MMZ2MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_MMZ3MN:		DWORD LS_FGBG_MMZ3MN
 				DWORD LS_FGBG_MMZ3MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_MMZ4MN:		DWORD LS_FGBG_MMZ4MN
 				DWORD LS_FGBG_MMZ4MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_MMZ56MN:		DWORD LS_FGBG_MMZ56MN
 				DWORD LS_FGBG_MMZ56MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Train01MN:	DWORD LS_FG_Train01MN
 				DWORD LS_BG_Train01MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Train2MN:		DWORD LS_FG_Train2MN
 				DWORD LS_BG_Train2MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Train3MN:		DWORD LS_FG_Train3MN
 				DWORD LS_BG_Train3MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Train4MN:		DWORD LS_FG_Train4MN
 				DWORD LS_BG_Train4MN
-				DWORD $FFFFFFFF
-	LSPtr_Train56MN:	DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
+	LSPtr_Train56MN:	DWORD NullLPtr_Terminator
 	LSPtr_Intro0MN:		DWORD LS_FG_Intro0MN
 				DWORD LS_BG_Intro01MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro1MN:		DWORD LS_FG_Intro1MN
 				DWORD LS_BG_Intro01MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro2MN:		DWORD LS_FG_Intro2MN
 				DWORD LS_BG_Intro2MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro3MN:		DWORD LS_FG_Intro3MN
 				DWORD LS_BG_Intro3MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro4MN:		DWORD LS_FG_Intro4MN
 				DWORD LS_BG_Intro4MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro5M:		DWORD LS_FG_Intro5M
 				DWORD LS_BG_Intro5MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro5D:		DWORD LS_FG_Intro5D
 				DWORD LS_BG_Intro5MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro5S:		DWORD LS_FG_Intro4S
 				DWORD LS_BG_Intro5MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro5N:		DWORD LS_FG_Intro5N
 				DWORD LS_BG_Intro5MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro6M:		DWORD LS_FG_Intro6M
 				DWORD LS_BG_Intro5MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro6D:		DWORD LS_FG_Intro6S
 				DWORD LS_BG_Intro5MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_Intro6S:		DWORD LS_FG_Intro6S
 				DWORD LS_BG_Intro5MN
-				DWORD $FFFFFFFF
-	LSPtr_Intro6N:		DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
+	LSPtr_Intro6N:		DWORD NullLPtr_Terminator
 	LSPtr_World01MN:	DWORD LS_FG_World01MN
 				DWORD LS_BG_World01MN
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	LSPtr_World2M:		DWORD LS_FG_World2M
 				DWORD LS_BG_World2M
-				DWORD $FFFFFFFF
-	LSPtr_World26MN:	DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
+	LSPtr_World26MN:	DWORD NullLPtr_Terminator
 
 	LS_FG_BBZ01MN:		include "Levels/BBZ/FG/FGSt01MN.bin"   ;2-word data (Plane X Start (Player X Start - $A0), Plane Y Start (Player Y Start - $70))
 				include "Levels/BBZ/FG/Size01MN.bin"   ;2-byte data (Plane Width, Plane Height)
@@ -4084,43 +4085,43 @@ StartSeg AnimArt_Ptrs Big_Endian
 	;Level Data
 	AnimArtPtr_BBZ06MN:
 				DWORD AniArt_BBZ_1
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 
 	;!@ NEW DATA
 	;AnimArtPtr_SSZ06MN:				
 				;DWORD AnimArt_SSZ_1
-				;DWORD $FFFFFFFF
+				;DWORD NullLPtr_Terminator
 
 	;!@ NEW DATA
 	;AnimArtPtr_AAZ02MN:
 				;DWORD AnimArt_AAZ_1	
 				;DWORD AnimArt_AAZ_2
 				;DWORD AnimArt_AAZ_3
-				;DWORD $FFFFFFFF
+				;DWORD NullLPtr_Terminator
 	;AnimArtPtr_AAZ3MN:
 				;DWORD AnimArt_AAZ_2
 				;DWORD AnimArt_AAZ_4
 				;DWORD AnimArt_AAZ_5
-				;DWORD $FFFFFFFF
+				;DWORD NullLPtr_Terminator
 	;AnimArtPtr_AAZ4MN:
 				;DWORD AnimArt_AAZ_2
 				;DWORD AnimArt_AAZ_6
 				;DWORD AnimArt_AAZ_5
-				;DWORD $FFFFFFFF
+				;DWORD NullLPtr_Terminator
 	;AnimArtPtr_AAZ56MN:
 				;DWORD AnimArt_AAZ_2
 				;DWORD AnimArt_AAZ_7
 				;DWORD AnimArt_AAZ_8
-				;DWORD $FFFFFFFF
+				;DWORD NullLPtr_Terminator
 
 	AnimArtPtr_TTZ06MN:
 				DWORD AnimArt_TTZ_1
-				DWORD $FFFFFFFF						
+				DWORD NullLPtr_Terminator						
 	AnimArtPtr_MMZ06MN:
 				DWORD AnimArt_MMZ_1
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 	AnimArtPtr_NULL:
-				DWORD $FFFFFFFF
+				DWORD NullLPtr_Terminator
 
 			
 	AniArt_BBZ_1:	include	"Art/artnem/aniart/BBZ.bin"

@@ -1,5 +1,5 @@
 2
-43
+46
 00000	00FFE02C	d	h	0	v_objspace
 00001	00FFD460	d	h	0	v_pal_buffer
 00002	00FFD560	d	h	0	v_pal_buffer2
@@ -43,3 +43,6 @@
 00028	00000000	S	S	0	----------------------------
 00029	00FFFCFC	b	h	0	v_curSong
 0002A	00FFFFD0	b	h	0	v_demonum
+0002B	00FFFD28	w	h	0	Demo_BtnData
+0002C	00FFFD2A	d	h	0	v_demo_btnAddr
+0002D	00FFFCCC	d	h	0	DemoTrig
