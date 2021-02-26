@@ -25,3 +25,6 @@ Knux Clackers:
 97 - Sega
 98 - Closed Hi Hat
 99 - Open Hi Hat
+9A - Lower Tom 
+9B - Lowerer Tom
+9C - Lowest Tom

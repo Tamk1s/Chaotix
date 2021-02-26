@@ -1,0 +1,11 @@
+E3 Electric Snare -> $82 ESnare
+F#4 Tambourine -> $98 ClosedHH
+A4 Crash Cymbal2 -> $89 Crash Cymbal
+B4 Ride Cymbal2 -> $98 ClosedHH/$84 Ride Cymbal?
+
+D3 -> $9C Lowest Tom
+E3 -> $9B Lowerer Tom
+F#3 -> $9A Lower Tom
+G3 -> $87 Low tom
+G#3 -> $86 Mid Tom 
+Bf2 -> $85 High Tom 

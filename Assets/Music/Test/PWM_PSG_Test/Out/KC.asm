@@ -40,10 +40,8 @@ Test_PSG1:
 	dc.b nE2, nF2, nFs2, nG2, nAb2, nA2, nBb2, nB2
 	smpsPSGvoice	$02
 	dc.b nC1, nCs1, nD1, nEb1, nE1, nF1, nFs1, nG1
-	dc.b nAb1, nA1, nBb1, nB1, nC2, nCs2, nD2
-	smpsPSGvoice	$08
-	dc.b nEb2, nE2, nF2, nFs2, nG2, nAb2, nA2, nBb2
-	dc.b nB2
+	dc.b nAb1, nA1, nBb1, nB1, nC2, nCs2, nD2, nEb2
+	dc.b nE2, nF2, nFs2, nG2, nAb2, nA2, nBb2, nB2
 	smpsPSGvoice	$03
 	dc.b nC1, nCs1, nD1, nEb1, nE1, nF1, nFs1, nG1
 	dc.b nAb1, nA1, nBb1, nB1, nC2, nCs2, nD2, nEb2
@@ -63,12 +61,7 @@ Test_PSG1:
 	smpsPSGvoice	$07
 	dc.b nC1, nCs1, nD1, nEb1, nE1, nF1, nFs1, nG1
 	dc.b nAb1, nA1, nBb1, nB1, nC2, nCs2, nD2, nEb2
-	dc.b nE2, nF2, nFs2, nG2
-	smpsPSGvoice	$08
-	dc.b nC1, nCs1, nD1, nEb1, nE1, nF1, nFs1, nG1
-	dc.b nAb1, nA1, nBb1, nB1, nC2, nCs2, nD2, nEb2
 	dc.b nE2, nF2, nFs2, nG2, nAb2, nA2, nBb2, nB2
-	dc.b nAb2, nA2, nBb2, nB2
 	smpsPSGvoice	$08
 	dc.b nC1, nCs1, nD1, nEb1, nE1, nF1, nFs1, nG1
 	dc.b nAb1, nA1, nBb1, nB1, nC2, nCs2, nD2, nEb2
@@ -109,6 +102,7 @@ Test_PWM1:
 	dc.b $8C, $8D, $8E, $18, $8F, $0C, $90, $91
 	dc.b $24, $92, $0C, $93, $94, $18, $95, $24
 	dc.b $96, $0C, $97, $24, $98, $0C, $99, $18
+	dc.b $9A, $9B, $9C
 	smpsStop
 	;smpsJump	Test_PWM1,Target
 	
@@ -118,5 +112,4 @@ Test_PWM4:
 	smpsStop
 
 Test_Patches:
-	dc.b	$20, $60, $64, $60, $60, $DF, $DF, $9F, $9F, $1F, $0A, $1F, $0A, $1C, $0F, $09, $02, $25, $44, $15, $F5, $2A, $29, $15, $02
 	even

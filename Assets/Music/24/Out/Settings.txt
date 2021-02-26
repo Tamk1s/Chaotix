@@ -1,0 +1,23 @@
+Tempo:
+$0406
+
+FM Instrums:
+XM -> FM
+01 - $00
+02 - $00
+03 - $01
+04 - $02
+05 - $03
+
+PSG Instrums:
+XM -> PSG
+01 - $0A
+02 - $06
+03 - $00
+04 - $02
+05 - $06
+
+PWM Instrums:
+XM -> PWM
+06 - $8C
+07 - $98

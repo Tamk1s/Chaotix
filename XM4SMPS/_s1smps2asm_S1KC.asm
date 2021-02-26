@@ -9,7 +9,7 @@ smpsPitch04lo		EQU	$D0
 smpsPitch03lo		EQU	$DC
 smpsPitch02lo		EQU	$E8
 smpsPitch01lo		EQU	$F4
-smpsPitch00		EQU	$00
+smpsPitch00			EQU	$00
 smpsPitch01hi		EQU	$0C
 smpsPitch02hi		EQU	$18
 smpsPitch03hi		EQU	$24
@@ -156,6 +156,9 @@ pSilence	EQU $96
 pSega		EQU $97
 pClosedHH	EQU $98
 pOpenHH		EQU $99
+pTomLower		EQU	$9A
+pTomLowerer		EQU	$9B
+pTomLowerest	EQU	$9C
 
 ;!@ Convert ptrs to z80Ptr
 ; function to make a little-endian 16-bit pointer for the Z80 sound driver

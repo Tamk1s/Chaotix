@@ -12,7 +12,7 @@
        = 0000DC         smpsPitch03lo		EQU	$DC
        = 0000E8         smpsPitch02lo		EQU	$E8
        = 0000F4         smpsPitch01lo		EQU	$F4
-       = 000000         smpsPitch00		EQU	$00
+       = 000000         smpsPitch00			EQU	$00
        = 00000C         smpsPitch01hi		EQU	$0C
        = 000018         smpsPitch02hi		EQU	$18
        = 000024         smpsPitch03hi		EQU	$24
@@ -159,6 +159,9 @@
        = 000097         pSega		EQU $97
        = 000098         pClosedHH	EQU $98
        = 000099         pOpenHH		EQU $99
+       = 00009A         pTomLower		EQU	$9A
+       = 00009B         pTomLowerer		EQU	$9B
+       = 00009C         pTomLowerest	EQU	$9C
 
                         ;!@ Convert ptrs to z80Ptr
                         ; function to make a little-endian 16-bit pointer for the Z80 sound driver
@@ -3103,7 +3106,8 @@ PEHIHAT            00000088 E  PEKICK             00000081 E  PESNARE           
 PFINGSNAP          0000008E E  POPENHH            00000099 E  PRIDEBELL          00000084 E
 PSEGA              00000097 E  PSILENCE           00000096 E  PSPLASHCYMB        00000083 E
 PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E  PTOMHI             00000085 E
-PTOMLOW            00000087 E  PTOMMID            00000086 E  PWM1               000006F6
+PTOMLOW            00000087 E  PTOMLOWER          0000009A E  PTOMLOWERER        0000009B E
+PTOMLOWEREST       0000009C E  PTOMMID            00000086 E  PWM1               000006F6
 PWM1_JUMP1         0000071D    PWM1_LOO$8         00000778    PWM1_LOO$9         00000765
 PWM1_LOOP1         00000700    PWM1_LOOP10        0000078E    PWM1_LOOP11        0000079A
 PWM1_LOOP12        000007AB    PWM1_LOOP13        0000079D    PWM1_LOOP14        000007C4

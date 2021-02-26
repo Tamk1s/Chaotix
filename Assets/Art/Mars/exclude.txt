@@ -1,0 +1,4 @@
+.png
+.pal
+art.bat
+exclude.txt

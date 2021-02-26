@@ -27,6 +27,9 @@ MakePath "Art/palettes/MD/Palcycles"	;!@
 ;!@
 MakePath "Art/palettes/Mars"
 MakePath "Art/palettes/Mars/Global"
+MakePath "Art/palettes/Mars/Menus"
+MakePath "Art/palettes/Mars/Menus/TitleSpace"
+MakePath "Art/palettes/Mars/Menus/Grid"
 
 ;Region @ArtPaths
 MakePath "Art/Mars"						;!@

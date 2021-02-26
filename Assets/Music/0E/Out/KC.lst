@@ -122,7 +122,7 @@
        = 0000DE         nA7			EQU	$DE
        = 0000DF         nBb7			EQU	$DF
 
-                        ; DAC Equates
+                        ; DAC Equates (S1)
        = 000081         dKick			EQU	$81
        = 000082         dSnare			EQU	$82
        = 000083         dTimpani		EQU	$83
@@ -131,6 +131,34 @@
        = 00008A         dLowTimpani		EQU	$8A
        = 00008B         dVLowTimpani	EQU	$8B
        = 00008B         dFloorTimpani	EQU $8B
+
+                        ; PWM Equates (KC)
+       = 000081         pEKick		EQU	$81
+       = 000082         pESnare		EQU	$82
+       = 000083         pSplashCymb	EQU	$83
+       = 000084         pRideBell	EQU $84
+       = 000085         pTomHi		EQU	$85
+       = 000086         pTomMid		EQU	$86
+       = 000087         pTomLow		EQU	$87
+       = 000088         pEHiHat		EQU	$88
+       = 000089         pCrashCymb	EQU $89
+       = 00008A         pClap		EQU $8A
+       = 00008B         pAKick		EQU $8B
+       = 00008C         pASnare		EQU	$8C
+       = 00008D         pBell		EQU $8D
+       = 00008E         pFingSnap	EQU	$8E
+       = 00008F         pCowbell	EQU	$8F
+       = 000090         pClickHi	EQU	$90
+       = 000091         pClickLo	EQU	$91
+       = 000092         pBongoHi	EQU	$92
+       = 000093         pBongoLo	EQU	$93
+       = 000094         pTimpaniHi	EQU	$94
+       = 000095         pTimpaniLo	EQU	$95
+       = 000096         pSilence	EQU $96
+                        ;!@ NEW DATA
+       = 000097         pSega		EQU $97
+       = 000098         pClosedHH	EQU $98
+       = 000099         pOpenHH		EQU $99
 
                         ;!@ Convert ptrs to z80Ptr
                         ; function to make a little-endian 16-bit pointer for the Z80 sound driver
@@ -178,9 +206,14 @@
                         	endm
                         ; Header - Set up Channel Usage	
                         smpsHeaderChan macro fm,psg
-                        	dc.b	fm,psg
-                        	endm
+                        	if \0==2
+                        		dc.b	fm,psg
+                        	else
+                        		dc.b	fm
+                        	endif	
+                        	endm	
                         	
+
                         	
                         smpsHeaderTempo macro div,mod
                         	dc.b	div,mod
@@ -696,61 +729,70 @@
                         ;==============================================
 
 000000                  	include "KC.asm"
-       = 040000         Target	EQU	$40000
 
-000000                  Title_Header:
+
+       = 012345         Target	EQU	$12345
 000000                  	smpsHeaderVoice	Title_Patches, Target
                         ;songStart set *
                         	;dc.w	loc-songStart
 000000                  	rom_ptr_z80(Title_Patches+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000000 3F94             	dc.w  (((((Title_Patches+Target))<<8)&$FF00)|((((Title_Patches+Target))>>8)&$7F)|$80)
+000000 84B7             	dc.w  (((((Title_Patches+Target))<<8)&$FF00)|((((Title_Patches+Target))>>8)&$7F)|$80)
 000002                  	smpsHeaderChan	6,3
-000002 0603             	dc.b	6,3
-                        	;sHeaderTempo	$02, $15
-000004                  	smpsHeaderTempo	$02, $12	
-000004 0212             	dc.b	$02,$12
+                        	if 2==2
+000002 0603             		dc.b	6,3
+                        	else
+                        	endif	
+000004                  	smpsHeaderTempoC	$02, $15
+       = 000002         TempDiv set $02
+000004 02               	dc.b	$02
+000005                  	tempo_conv($15)
+                        		if ($15)==0
+                        		else
+000005 0C               			dc.b	((256 - ((((($15))-1)*256 + ((($15))/2)) / (($15)))) % 256)
+                        		endif
+                        	;smpsHeaderTempo	$02, $12	
 000006                  	smpsHeaderFM	Title_FM1, Target, $00, $0D
                         	;dc.w	loc-songStart
 000006                  	rom_ptr_z80(Title_FM1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000006 4080             	dc.w  (((((Title_FM1+Target))<<8)&$FF00)|((((Title_FM1+Target))>>8)&$7F)|$80)
+000006 85A3             	dc.w  (((((Title_FM1+Target))<<8)&$FF00)|((((Title_FM1+Target))>>8)&$7F)|$80)
 000008 000D             	dc.b	$00,$0D
 00000A                  	smpsHeaderFM	Title_FM2, Target, $00, $0A
                         	;dc.w	loc-songStart
 00000A                  	rom_ptr_z80(Title_FM2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00000A D382             	dc.w  (((((Title_FM2+Target))<<8)&$FF00)|((((Title_FM2+Target))>>8)&$7F)|$80)
+00000A 18A6             	dc.w  (((((Title_FM2+Target))<<8)&$FF00)|((((Title_FM2+Target))>>8)&$7F)|$80)
 00000C 000A             	dc.b	$00,$0A
 00000E                  	smpsHeaderFM	Title_FM3, Target, $00, $19
                         	;dc.w	loc-songStart
 00000E                  	rom_ptr_z80(Title_FM3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00000E E684             	dc.w  (((((Title_FM3+Target))<<8)&$FF00)|((((Title_FM3+Target))>>8)&$7F)|$80)
+00000E 2BA8             	dc.w  (((((Title_FM3+Target))<<8)&$FF00)|((((Title_FM3+Target))>>8)&$7F)|$80)
 000010 0019             	dc.b	$00,$19
 000012                  	smpsHeaderFM	Title_FM4, Target, $00, $0D
                         	;dc.w	loc-songStart
 000012                  	rom_ptr_z80(Title_FM4+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000012 0387             	dc.w  (((((Title_FM4+Target))<<8)&$FF00)|((((Title_FM4+Target))>>8)&$7F)|$80)
+000012 48AA             	dc.w  (((((Title_FM4+Target))<<8)&$FF00)|((((Title_FM4+Target))>>8)&$7F)|$80)
 000014 000D             	dc.b	$00,$0D
 000016                  	smpsHeaderFM	Title_FM5, Target, $00, $17
                         	;dc.w	loc-songStart
 000016                  	rom_ptr_z80(Title_FM5+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000016 D189             	dc.w  (((((Title_FM5+Target))<<8)&$FF00)|((((Title_FM5+Target))>>8)&$7F)|$80)
+000016 16AD             	dc.w  (((((Title_FM5+Target))<<8)&$FF00)|((((Title_FM5+Target))>>8)&$7F)|$80)
 000018 0017             	dc.b	$00,$17
 00001A                  	smpsHeaderFM	Title_FM6, Target, $00, $09
                         	;dc.w	loc-songStart
 00001A                  	rom_ptr_z80(Title_FM6+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00001A 578C             	dc.w  (((((Title_FM6+Target))<<8)&$FF00)|((((Title_FM6+Target))>>8)&$7F)|$80)
+00001A 9CAF             	dc.w  (((((Title_FM6+Target))<<8)&$FF00)|((((Title_FM6+Target))>>8)&$7F)|$80)
 00001C 0009             	dc.b	$00,$09
 00001E                  	smpsHeaderPSG	Title_PSG1, Target, $00, $02, $00, $00
                         	;dc.w	loc-songStart
 00001E                  	rom_ptr_z80(Title_PSG1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00001E 348D             	dc.w  (((((Title_PSG1+Target))<<8)&$FF00)|((((Title_PSG1+Target))>>8)&$7F)|$80)
+00001E 79B0             	dc.w  (((((Title_PSG1+Target))<<8)&$FF00)|((((Title_PSG1+Target))>>8)&$7F)|$80)
 000020 0002             	dc.b	$00,$02
                         	;dc.w	voice
 000022 0000             	dc.b	$00,$00
@@ -758,7 +800,7 @@
                         	;dc.w	loc-songStart
 000024                  	rom_ptr_z80(Title_PSG2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000024 C98E             	dc.w  (((((Title_PSG2+Target))<<8)&$FF00)|((((Title_PSG2+Target))>>8)&$7F)|$80)
+000024 0EB2             	dc.w  (((((Title_PSG2+Target))<<8)&$FF00)|((((Title_PSG2+Target))>>8)&$7F)|$80)
 000026 0008             	dc.b	$00,$08
                         	;dc.w	voice
 000028 0000             	dc.b	$00,$00
@@ -766,7 +808,7 @@
                         	;dc.w	loc-songStart
 00002A                  	rom_ptr_z80(Title_PSG3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00002A 5E90             	dc.w  (((((Title_PSG3+Target))<<8)&$FF00)|((((Title_PSG3+Target))>>8)&$7F)|$80)
+00002A A3B3             	dc.w  (((((Title_PSG3+Target))<<8)&$FF00)|((((Title_PSG3+Target))>>8)&$7F)|$80)
 00002C 0002             	dc.b	$00,$02
                         	;dc.w	voice
 00002E 0000             	dc.b	$00,$00
@@ -774,7 +816,7 @@
                         	;dc.w	loc-songStart
 000030                  	rom_ptr_z80(Title_PWM1+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-000030 CD90             	dc.w  (((((Title_PWM1+Target))<<8)&$FF00)|((((Title_PWM1+Target))>>8)&$7F)|$80)
+000030 12B4             	dc.w  (((((Title_PWM1+Target))<<8)&$FF00)|((((Title_PWM1+Target))>>8)&$7F)|$80)
                         	;!@
 000032 00               	dc.b	$00
 000033 FF               	dc.b	$FF
@@ -782,7 +824,7 @@
                         	;dc.w	loc-songStart
 000034                  	rom_ptr_z80(Title_PWM2+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-000034 C991             	dc.w  (((((Title_PWM2+Target))<<8)&$FF00)|((((Title_PWM2+Target))>>8)&$7F)|$80)
+000034 0EB5             	dc.w  (((((Title_PWM2+Target))<<8)&$FF00)|((((Title_PWM2+Target))>>8)&$7F)|$80)
                         	;!@
 000036 00               	dc.b	$00
 000037 FF               	dc.b	$FF
@@ -790,7 +832,7 @@
                         	;dc.w	loc-songStart
 000038                  	rom_ptr_z80(Title_PWM3+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-000038 3693             	dc.w  (((((Title_PWM3+Target))<<8)&$FF00)|((((Title_PWM3+Target))>>8)&$7F)|$80)
+000038 7BB6             	dc.w  (((((Title_PWM3+Target))<<8)&$FF00)|((((Title_PWM3+Target))>>8)&$7F)|$80)
                         	;!@
 00003A 00               	dc.b	$00
 00003B FF               	dc.b	$FF
@@ -798,7 +840,7 @@
                         	;dc.w	loc-songStart
 00003C                  	rom_ptr_z80(Title_PWM4+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-00003C D793             	dc.w  (((((Title_PWM4+Target))<<8)&$FF00)|((((Title_PWM4+Target))>>8)&$7F)|$80)
+00003C 1CB7             	dc.w  (((((Title_PWM4+Target))<<8)&$FF00)|((((Title_PWM4+Target))>>8)&$7F)|$80)
                         	;!@
 00003E 00               	dc.b	$00
 00003F FF               	dc.b	$FF
@@ -836,7 +878,7 @@
                         	if (Title_Loop1<*)
 000063                  		rom_ptr_z80(Title_Loop1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000063 5B80             	dc.w  (((((Title_Loop1+Target))<<8)&$FF00)|((((Title_Loop1+Target))>>8)&$7F)|$80)
+000063 A0A3             	dc.w  (((((Title_Loop1+Target))<<8)&$FF00)|((((Title_Loop1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -853,7 +895,7 @@
                         	if (Title_Loop2<*)
 000087                  		rom_ptr_z80(Title_Loop2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000087 7E80             	dc.w  (((((Title_Loop2+Target))<<8)&$FF00)|((((Title_Loop2+Target))>>8)&$7F)|$80)
+000087 C3A3             	dc.w  (((((Title_Loop2+Target))<<8)&$FF00)|((((Title_Loop2+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -869,7 +911,7 @@
                         	if (Title_Loop3<*)
 0000A4                  		rom_ptr_z80(Title_Loop3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0000A4 9C80             	dc.w  (((((Title_Loop3+Target))<<8)&$FF00)|((((Title_Loop3+Target))>>8)&$7F)|$80)
+0000A4 E1A3             	dc.w  (((((Title_Loop3+Target))<<8)&$FF00)|((((Title_Loop3+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -894,7 +936,7 @@
                         	if (Title_Loop4<*)
 000103                  		rom_ptr_z80(Title_Loop4+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000103 FF80             	dc.w  (((((Title_Loop4+Target))<<8)&$FF00)|((((Title_Loop4+Target))>>8)&$7F)|$80)
+000103 44A4             	dc.w  (((((Title_Loop4+Target))<<8)&$FF00)|((((Title_Loop4+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -937,7 +979,7 @@
                         	if (Title_Loop5<*)
 000191                  		rom_ptr_z80(Title_Loop5+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000191 8881             	dc.w  (((((Title_Loop5+Target))<<8)&$FF00)|((((Title_Loop5+Target))>>8)&$7F)|$80)
+000191 CDA4             	dc.w  (((((Title_Loop5+Target))<<8)&$FF00)|((((Title_Loop5+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -951,7 +993,7 @@
                         	if (Title_Loop6<*)
 00019C                  		rom_ptr_z80(Title_Loop6+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00019C 9481             	dc.w  (((((Title_Loop6+Target))<<8)&$FF00)|((((Title_Loop6+Target))>>8)&$7F)|$80)
+00019C D9A4             	dc.w  (((((Title_Loop6+Target))<<8)&$FF00)|((((Title_Loop6+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -975,7 +1017,7 @@
                         	if (Title_Loop7<*)
 0001F9                  		rom_ptr_z80(Title_Loop7+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0001F9 F581             	dc.w  (((((Title_Loop7+Target))<<8)&$FF00)|((((Title_Loop7+Target))>>8)&$7F)|$80)
+0001F9 3AA5             	dc.w  (((((Title_Loop7+Target))<<8)&$FF00)|((((Title_Loop7+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1016,7 +1058,7 @@
                         	if (Title_Loop8<*)
 000270                  		rom_ptr_z80(Title_Loop8+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000270 6C82             	dc.w  (((((Title_Loop8+Target))<<8)&$FF00)|((((Title_Loop8+Target))>>8)&$7F)|$80)
+000270 B1A5             	dc.w  (((((Title_Loop8+Target))<<8)&$FF00)|((((Title_Loop8+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1032,7 +1074,7 @@
                         	if (Title_Loop9<*)
 00028E                  		rom_ptr_z80(Title_Loop9+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00028E 8A82             	dc.w  (((((Title_Loop9+Target))<<8)&$FF00)|((((Title_Loop9+Target))>>8)&$7F)|$80)
+00028E CFA5             	dc.w  (((((Title_Loop9+Target))<<8)&$FF00)|((((Title_Loop9+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1045,7 +1087,7 @@
                         	if (Title_Loop10<*)
 000294                  		rom_ptr_z80(Title_Loop10+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000294 9082             	dc.w  (((((Title_Loop10+Target))<<8)&$FF00)|((((Title_Loop10+Target))>>8)&$7F)|$80)
+000294 D5A5             	dc.w  (((((Title_Loop10+Target))<<8)&$FF00)|((((Title_Loop10+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1058,7 +1100,7 @@
                         	if (Title_Loop11<*)
 00029A                  		rom_ptr_z80(Title_Loop11+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00029A 9682             	dc.w  (((((Title_Loop11+Target))<<8)&$FF00)|((((Title_Loop11+Target))>>8)&$7F)|$80)
+00029A DBA5             	dc.w  (((((Title_Loop11+Target))<<8)&$FF00)|((((Title_Loop11+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1071,7 +1113,7 @@
                         	if (Title_Loop12<*)
 0002A0                  		rom_ptr_z80(Title_Loop12+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0002A0 9C82             	dc.w  (((((Title_Loop12+Target))<<8)&$FF00)|((((Title_Loop12+Target))>>8)&$7F)|$80)
+0002A0 E1A5             	dc.w  (((((Title_Loop12+Target))<<8)&$FF00)|((((Title_Loop12+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1086,7 +1128,7 @@
                         	if (Title_FM1<*)
 0002D1                  		rom_ptr_z80(Title_FM1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0002D1 4080             	dc.w  (((((Title_FM1+Target))<<8)&$FF00)|((((Title_FM1+Target))>>8)&$7F)|$80)
+0002D1 85A3             	dc.w  (((((Title_FM1+Target))<<8)&$FF00)|((((Title_FM1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1157,7 +1199,7 @@
                         	if (Title_Loop13<*)
 0003DC                  		rom_ptr_z80(Title_Loop13+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0003DC CF83             	dc.w  (((((Title_Loop13+Target))<<8)&$FF00)|((((Title_Loop13+Target))>>8)&$7F)|$80)
+0003DC 14A7             	dc.w  (((((Title_Loop13+Target))<<8)&$FF00)|((((Title_Loop13+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1182,7 +1224,7 @@
                         	if (Title_Loop14<*)
 000416                  		rom_ptr_z80(Title_Loop14+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000416 0F84             	dc.w  (((((Title_Loop14+Target))<<8)&$FF00)|((((Title_Loop14+Target))>>8)&$7F)|$80)
+000416 54A7             	dc.w  (((((Title_Loop14+Target))<<8)&$FF00)|((((Title_Loop14+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1204,7 +1246,7 @@
                         	if (Title_Loop15<*)
 00043B                  		rom_ptr_z80(Title_Loop15+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00043B 1A84             	dc.w  (((((Title_Loop15+Target))<<8)&$FF00)|((((Title_Loop15+Target))>>8)&$7F)|$80)
+00043B 5FA7             	dc.w  (((((Title_Loop15+Target))<<8)&$FF00)|((((Title_Loop15+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1228,7 +1270,7 @@
                         	if (Title_Loop16<*)
 000495                  		rom_ptr_z80(Title_Loop16+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000495 8884             	dc.w  (((((Title_Loop16+Target))<<8)&$FF00)|((((Title_Loop16+Target))>>8)&$7F)|$80)
+000495 CDA7             	dc.w  (((((Title_Loop16+Target))<<8)&$FF00)|((((Title_Loop16+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1252,7 +1294,7 @@
                         	if (Title_FM2<*)
 0004E4                  		rom_ptr_z80(Title_FM2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0004E4 D382             	dc.w  (((((Title_FM2+Target))<<8)&$FF00)|((((Title_FM2+Target))>>8)&$7F)|$80)
+0004E4 18A6             	dc.w  (((((Title_FM2+Target))<<8)&$FF00)|((((Title_FM2+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1323,7 +1365,7 @@
                         	if (Title_Loop17<*)
 0005F1                  		rom_ptr_z80(Title_Loop17+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0005F1 E485             	dc.w  (((((Title_Loop17+Target))<<8)&$FF00)|((((Title_Loop17+Target))>>8)&$7F)|$80)
+0005F1 29A9             	dc.w  (((((Title_Loop17+Target))<<8)&$FF00)|((((Title_Loop17+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1349,7 +1391,7 @@
                         	if (Title_Loop18<*)
 00062F                  		rom_ptr_z80(Title_Loop18+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00062F 2886             	dc.w  (((((Title_Loop18+Target))<<8)&$FF00)|((((Title_Loop18+Target))>>8)&$7F)|$80)
+00062F 6DA9             	dc.w  (((((Title_Loop18+Target))<<8)&$FF00)|((((Title_Loop18+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1372,7 +1414,7 @@
                         	if (Title_Loop19<*)
 000658                  		rom_ptr_z80(Title_Loop19+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000658 3786             	dc.w  (((((Title_Loop19+Target))<<8)&$FF00)|((((Title_Loop19+Target))>>8)&$7F)|$80)
+000658 7CA9             	dc.w  (((((Title_Loop19+Target))<<8)&$FF00)|((((Title_Loop19+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1396,7 +1438,7 @@
                         	if (Title_Loop20<*)
 0006B2                  		rom_ptr_z80(Title_Loop20+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0006B2 A586             	dc.w  (((((Title_Loop20+Target))<<8)&$FF00)|((((Title_Loop20+Target))>>8)&$7F)|$80)
+0006B2 EAA9             	dc.w  (((((Title_Loop20+Target))<<8)&$FF00)|((((Title_Loop20+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1420,7 +1462,7 @@
                         	if (Title_FM3<*)
 000701                  		rom_ptr_z80(Title_FM3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000701 E684             	dc.w  (((((Title_FM3+Target))<<8)&$FF00)|((((Title_FM3+Target))>>8)&$7F)|$80)
+000701 2BA8             	dc.w  (((((Title_FM3+Target))<<8)&$FF00)|((((Title_FM3+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1463,7 +1505,7 @@
                         	if (Title_Loop21<*)
 000727                  		rom_ptr_z80(Title_Loop21+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000727 1E87             	dc.w  (((((Title_Loop21+Target))<<8)&$FF00)|((((Title_Loop21+Target))>>8)&$7F)|$80)
+000727 63AA             	dc.w  (((((Title_Loop21+Target))<<8)&$FF00)|((((Title_Loop21+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1560,7 +1602,7 @@
                         	if (Title_Loop22<*)
 000827                  		rom_ptr_z80(Title_Loop22+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000827 2288             	dc.w  (((((Title_Loop22+Target))<<8)&$FF00)|((((Title_Loop22+Target))>>8)&$7F)|$80)
+000827 67AB             	dc.w  (((((Title_Loop22+Target))<<8)&$FF00)|((((Title_Loop22+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1574,7 +1616,7 @@
                         	if (Title_Loop23<*)
 000834                  		rom_ptr_z80(Title_Loop23+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000834 2F88             	dc.w  (((((Title_Loop23+Target))<<8)&$FF00)|((((Title_Loop23+Target))>>8)&$7F)|$80)
+000834 74AB             	dc.w  (((((Title_Loop23+Target))<<8)&$FF00)|((((Title_Loop23+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1590,7 +1632,7 @@
                         	if (Title_Loop24<*)
 000851                  		rom_ptr_z80(Title_Loop24+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000851 4C88             	dc.w  (((((Title_Loop24+Target))<<8)&$FF00)|((((Title_Loop24+Target))>>8)&$7F)|$80)
+000851 91AB             	dc.w  (((((Title_Loop24+Target))<<8)&$FF00)|((((Title_Loop24+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1604,7 +1646,7 @@
                         	if (Title_Loop25<*)
 00085E                  		rom_ptr_z80(Title_Loop25+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00085E 5988             	dc.w  (((((Title_Loop25+Target))<<8)&$FF00)|((((Title_Loop25+Target))>>8)&$7F)|$80)
+00085E 9EAB             	dc.w  (((((Title_Loop25+Target))<<8)&$FF00)|((((Title_Loop25+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1618,7 +1660,7 @@
                         	if (Title_Loop26<*)
 00086B                  		rom_ptr_z80(Title_Loop26+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00086B 6688             	dc.w  (((((Title_Loop26+Target))<<8)&$FF00)|((((Title_Loop26+Target))>>8)&$7F)|$80)
+00086B ABAB             	dc.w  (((((Title_Loop26+Target))<<8)&$FF00)|((((Title_Loop26+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1789,7 +1831,7 @@
                         	if (Title_FM4<*)
 0009CF                  		rom_ptr_z80(Title_FM4+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0009CF 0387             	dc.w  (((((Title_FM4+Target))<<8)&$FF00)|((((Title_FM4+Target))>>8)&$7F)|$80)
+0009CF 48AA             	dc.w  (((((Title_FM4+Target))<<8)&$FF00)|((((Title_FM4+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1823,7 +1865,7 @@
                         	if (Title_Loop27<*)
 0009DA                  		rom_ptr_z80(Title_Loop27+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0009DA D689             	dc.w  (((((Title_Loop27+Target))<<8)&$FF00)|((((Title_Loop27+Target))>>8)&$7F)|$80)
+0009DA 1BAD             	dc.w  (((((Title_Loop27+Target))<<8)&$FF00)|((((Title_Loop27+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1894,7 +1936,7 @@
                         	if (Title_Loop28<*)
 000ABC                  		rom_ptr_z80(Title_Loop28+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000ABC B78A             	dc.w  (((((Title_Loop28+Target))<<8)&$FF00)|((((Title_Loop28+Target))>>8)&$7F)|$80)
+000ABC FCAD             	dc.w  (((((Title_Loop28+Target))<<8)&$FF00)|((((Title_Loop28+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1908,7 +1950,7 @@
                         	if (Title_Loop29<*)
 000AC9                  		rom_ptr_z80(Title_Loop29+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000AC9 C48A             	dc.w  (((((Title_Loop29+Target))<<8)&$FF00)|((((Title_Loop29+Target))>>8)&$7F)|$80)
+000AC9 09AE             	dc.w  (((((Title_Loop29+Target))<<8)&$FF00)|((((Title_Loop29+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1924,7 +1966,7 @@
                         	if (Title_Loop30<*)
 000AE6                  		rom_ptr_z80(Title_Loop30+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000AE6 E18A             	dc.w  (((((Title_Loop30+Target))<<8)&$FF00)|((((Title_Loop30+Target))>>8)&$7F)|$80)
+000AE6 26AE             	dc.w  (((((Title_Loop30+Target))<<8)&$FF00)|((((Title_Loop30+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1938,7 +1980,7 @@
                         	if (Title_Loop31<*)
 000AF3                  		rom_ptr_z80(Title_Loop31+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000AF3 EE8A             	dc.w  (((((Title_Loop31+Target))<<8)&$FF00)|((((Title_Loop31+Target))>>8)&$7F)|$80)
+000AF3 33AE             	dc.w  (((((Title_Loop31+Target))<<8)&$FF00)|((((Title_Loop31+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1952,7 +1994,7 @@
                         	if (Title_Loop32<*)
 000B00                  		rom_ptr_z80(Title_Loop32+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000B00 FB8A             	dc.w  (((((Title_Loop32+Target))<<8)&$FF00)|((((Title_Loop32+Target))>>8)&$7F)|$80)
+000B00 40AE             	dc.w  (((((Title_Loop32+Target))<<8)&$FF00)|((((Title_Loop32+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -1968,7 +2010,7 @@
                         	if (Title_Loop33<*)
 000B1D                  		rom_ptr_z80(Title_Loop33+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000B1D 188B             	dc.w  (((((Title_Loop33+Target))<<8)&$FF00)|((((Title_Loop33+Target))>>8)&$7F)|$80)
+000B1D 5DAE             	dc.w  (((((Title_Loop33+Target))<<8)&$FF00)|((((Title_Loop33+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2088,7 +2130,7 @@
                         	if (Title_FM5<*)
 000C55                  		rom_ptr_z80(Title_FM5+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C55 D189             	dc.w  (((((Title_FM5+Target))<<8)&$FF00)|((((Title_FM5+Target))>>8)&$7F)|$80)
+000C55 16AD             	dc.w  (((((Title_FM5+Target))<<8)&$FF00)|((((Title_FM5+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2122,7 +2164,7 @@
                         	if (Title_Loop34<*)
 000C60                  		rom_ptr_z80(Title_Loop34+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C60 5C8C             	dc.w  (((((Title_Loop34+Target))<<8)&$FF00)|((((Title_Loop34+Target))>>8)&$7F)|$80)
+000C60 A1AF             	dc.w  (((((Title_Loop34+Target))<<8)&$FF00)|((((Title_Loop34+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2142,7 +2184,7 @@
                         	if (Title_Loop35<*)
 000C9E                  		rom_ptr_z80(Title_Loop35+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C9E 8D8C             	dc.w  (((((Title_Loop35+Target))<<8)&$FF00)|((((Title_Loop35+Target))>>8)&$7F)|$80)
+000C9E D2AF             	dc.w  (((((Title_Loop35+Target))<<8)&$FF00)|((((Title_Loop35+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2157,7 +2199,7 @@
                         	if (Title_Loop36<*)
 000CB1                  		rom_ptr_z80(Title_Loop36+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000CB1 AD8C             	dc.w  (((((Title_Loop36+Target))<<8)&$FF00)|((((Title_Loop36+Target))>>8)&$7F)|$80)
+000CB1 F2AF             	dc.w  (((((Title_Loop36+Target))<<8)&$FF00)|((((Title_Loop36+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2177,7 +2219,7 @@
                         	if (Title_Loop37<*)
 000CF2                  		rom_ptr_z80(Title_Loop37+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000CF2 E18C             	dc.w  (((((Title_Loop37+Target))<<8)&$FF00)|((((Title_Loop37+Target))>>8)&$7F)|$80)
+000CF2 26B0             	dc.w  (((((Title_Loop37+Target))<<8)&$FF00)|((((Title_Loop37+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2195,7 +2237,7 @@
                         	if (Title_Loop38<*)
 000D1E                  		rom_ptr_z80(Title_Loop38+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000D1E 0D8D             	dc.w  (((((Title_Loop38+Target))<<8)&$FF00)|((((Title_Loop38+Target))>>8)&$7F)|$80)
+000D1E 52B0             	dc.w  (((((Title_Loop38+Target))<<8)&$FF00)|((((Title_Loop38+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2207,7 +2249,7 @@
                         	if (Title_FM6<*)
 000D32                  		rom_ptr_z80(Title_FM6+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000D32 578C             	dc.w  (((((Title_FM6+Target))<<8)&$FF00)|((((Title_FM6+Target))>>8)&$7F)|$80)
+000D32 9CAF             	dc.w  (((((Title_FM6+Target))<<8)&$FF00)|((((Title_FM6+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2227,7 +2269,7 @@
                         	if (Title_Loop39<*)
 000D5B                  		rom_ptr_z80(Title_Loop39+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000D5B 3E8D             	dc.w  (((((Title_Loop39+Target))<<8)&$FF00)|((((Title_Loop39+Target))>>8)&$7F)|$80)
+000D5B 83B0             	dc.w  (((((Title_Loop39+Target))<<8)&$FF00)|((((Title_Loop39+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2246,7 +2288,7 @@
                         	if (Title_Loop40<*)
 000D8E                  		rom_ptr_z80(Title_Loop40+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000D8E 718D             	dc.w  (((((Title_Loop40+Target))<<8)&$FF00)|((((Title_Loop40+Target))>>8)&$7F)|$80)
+000D8E B6B0             	dc.w  (((((Title_Loop40+Target))<<8)&$FF00)|((((Title_Loop40+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2284,7 +2326,7 @@
                         	if (Title_Loop41<*)
 000E2F                  		rom_ptr_z80(Title_Loop41+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000E2F 128E             	dc.w  (((((Title_Loop41+Target))<<8)&$FF00)|((((Title_Loop41+Target))>>8)&$7F)|$80)
+000E2F 57B1             	dc.w  (((((Title_Loop41+Target))<<8)&$FF00)|((((Title_Loop41+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2317,7 +2359,7 @@
                         	if (Title_PSG1<*)
 000EC7                  		rom_ptr_z80(Title_PSG1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000EC7 348D             	dc.w  (((((Title_PSG1+Target))<<8)&$FF00)|((((Title_PSG1+Target))>>8)&$7F)|$80)
+000EC7 79B0             	dc.w  (((((Title_PSG1+Target))<<8)&$FF00)|((((Title_PSG1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2337,7 +2379,7 @@
                         	if (Title_Loop42<*)
 000EF0                  		rom_ptr_z80(Title_Loop42+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000EF0 D38E             	dc.w  (((((Title_Loop42+Target))<<8)&$FF00)|((((Title_Loop42+Target))>>8)&$7F)|$80)
+000EF0 18B2             	dc.w  (((((Title_Loop42+Target))<<8)&$FF00)|((((Title_Loop42+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2356,7 +2398,7 @@
                         	if (Title_Loop43<*)
 000F23                  		rom_ptr_z80(Title_Loop43+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000F23 068F             	dc.w  (((((Title_Loop43+Target))<<8)&$FF00)|((((Title_Loop43+Target))>>8)&$7F)|$80)
+000F23 4BB2             	dc.w  (((((Title_Loop43+Target))<<8)&$FF00)|((((Title_Loop43+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2394,7 +2436,7 @@
                         	if (Title_Loop44<*)
 000FC4                  		rom_ptr_z80(Title_Loop44+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000FC4 A78F             	dc.w  (((((Title_Loop44+Target))<<8)&$FF00)|((((Title_Loop44+Target))>>8)&$7F)|$80)
+000FC4 ECB2             	dc.w  (((((Title_Loop44+Target))<<8)&$FF00)|((((Title_Loop44+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2427,7 +2469,7 @@
                         	if (Title_PSG2<*)
 00105C                  		rom_ptr_z80(Title_PSG2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00105C C98E             	dc.w  (((((Title_PSG2+Target))<<8)&$FF00)|((((Title_PSG2+Target))>>8)&$7F)|$80)
+00105C 0EB2             	dc.w  (((((Title_PSG2+Target))<<8)&$FF00)|((((Title_PSG2+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2443,7 +2485,7 @@
                         	if (Title_Loop45<*)
 001063                  		rom_ptr_z80(Title_Loop45+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001063 5F90             	dc.w  (((((Title_Loop45+Target))<<8)&$FF00)|((((Title_Loop45+Target))>>8)&$7F)|$80)
+001063 A4B3             	dc.w  (((((Title_Loop45+Target))<<8)&$FF00)|((((Title_Loop45+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2461,7 +2503,7 @@
                         	if (Title_Loop46<*)
 00108B                  		rom_ptr_z80(Title_Loop46+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00108B 8790             	dc.w  (((((Title_Loop46+Target))<<8)&$FF00)|((((Title_Loop46+Target))>>8)&$7F)|$80)
+00108B CCB3             	dc.w  (((((Title_Loop46+Target))<<8)&$FF00)|((((Title_Loop46+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2481,7 +2523,7 @@
                         	if (Title_Loop47<*)
 0010C8                  		rom_ptr_z80(Title_Loop47+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0010C8 C490             	dc.w  (((((Title_Loop47+Target))<<8)&$FF00)|((((Title_Loop47+Target))>>8)&$7F)|$80)
+0010C8 09B4             	dc.w  (((((Title_Loop47+Target))<<8)&$FF00)|((((Title_Loop47+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2490,7 +2532,7 @@
                         	if (Title_PSG3<*)
 0010CB                  		rom_ptr_z80(Title_PSG3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0010CB 5E90             	dc.w  (((((Title_PSG3+Target))<<8)&$FF00)|((((Title_PSG3+Target))>>8)&$7F)|$80)
+0010CB A3B3             	dc.w  (((((Title_PSG3+Target))<<8)&$FF00)|((((Title_PSG3+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2503,7 +2545,7 @@
                         	if (Title_PWM1<*)
 0010D5                  		rom_ptr_z80(Title_PWM1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0010D5 CD90             	dc.w  (((((Title_PWM1+Target))<<8)&$FF00)|((((Title_PWM1+Target))>>8)&$7F)|$80)
+0010D5 12B4             	dc.w  (((((Title_PWM1+Target))<<8)&$FF00)|((((Title_PWM1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2516,7 +2558,7 @@
                         	if (Title_PWM1_Loop1<*)
 0010E1                  		rom_ptr_z80(Title_PWM1_Loop1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0010E1 D790             	dc.w  (((((Title_PWM1_Loop1+Target))<<8)&$FF00)|((((Title_PWM1_Loop1+Target))>>8)&$7F)|$80)
+0010E1 1CB4             	dc.w  (((((Title_PWM1_Loop1+Target))<<8)&$FF00)|((((Title_PWM1_Loop1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2530,7 +2572,7 @@
                         	if (Title_PWM1_Loop2<*)
 0010EC                  		rom_ptr_z80(Title_PWM1_Loop2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0010EC E890             	dc.w  (((((Title_PWM1_Loop2+Target))<<8)&$FF00)|((((Title_PWM1_Loop2+Target))>>8)&$7F)|$80)
+0010EC 2DB4             	dc.w  (((((Title_PWM1_Loop2+Target))<<8)&$FF00)|((((Title_PWM1_Loop2+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2546,7 +2588,7 @@
                         	if (Title_PWM1_Loop3<*)
 0010F3                  		rom_ptr_z80(Title_PWM1_Loop3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0010F3 EF90             	dc.w  (((((Title_PWM1_Loop3+Target))<<8)&$FF00)|((((Title_PWM1_Loop3+Target))>>8)&$7F)|$80)
+0010F3 34B4             	dc.w  (((((Title_PWM1_Loop3+Target))<<8)&$FF00)|((((Title_PWM1_Loop3+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2556,7 +2598,7 @@
                         	if (Title_PWM1_Loop4<*)
 0010F8                  		rom_ptr_z80(Title_PWM1_Loop4+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0010F8 EE90             	dc.w  (((((Title_PWM1_Loop4+Target))<<8)&$FF00)|((((Title_PWM1_Loop4+Target))>>8)&$7F)|$80)
+0010F8 33B4             	dc.w  (((((Title_PWM1_Loop4+Target))<<8)&$FF00)|((((Title_PWM1_Loop4+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2570,7 +2612,7 @@
                         	if (Title_PWM1_Loop5<*)
 0010FF                  		rom_ptr_z80(Title_PWM1_Loop5+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0010FF FB90             	dc.w  (((((Title_PWM1_Loop5+Target))<<8)&$FF00)|((((Title_PWM1_Loop5+Target))>>8)&$7F)|$80)
+0010FF 40B4             	dc.w  (((((Title_PWM1_Loop5+Target))<<8)&$FF00)|((((Title_PWM1_Loop5+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2583,7 +2625,7 @@
                         	if (Title_PWM1_Loop6<*)
 00110B                  		rom_ptr_z80(Title_PWM1_Loop6+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00110B 0191             	dc.w  (((((Title_PWM1_Loop6+Target))<<8)&$FF00)|((((Title_PWM1_Loop6+Target))>>8)&$7F)|$80)
+00110B 46B4             	dc.w  (((((Title_PWM1_Loop6+Target))<<8)&$FF00)|((((Title_PWM1_Loop6+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2597,7 +2639,7 @@
                         	if (Title_PWM1_Loop7<*)
 001116                  		rom_ptr_z80(Title_PWM1_Loop7+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001116 1291             	dc.w  (((((Title_PWM1_Loop7+Target))<<8)&$FF00)|((((Title_PWM1_Loop7+Target))>>8)&$7F)|$80)
+001116 57B4             	dc.w  (((((Title_PWM1_Loop7+Target))<<8)&$FF00)|((((Title_PWM1_Loop7+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2613,7 +2655,7 @@
                         	if (Title_PWM1_Loop8<*)
 00111D                  		rom_ptr_z80(Title_PWM1_Loop8+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00111D 1991             	dc.w  (((((Title_PWM1_Loop8+Target))<<8)&$FF00)|((((Title_PWM1_Loop8+Target))>>8)&$7F)|$80)
+00111D 5EB4             	dc.w  (((((Title_PWM1_Loop8+Target))<<8)&$FF00)|((((Title_PWM1_Loop8+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2623,7 +2665,7 @@
                         	if (Title_PWM1_Loop9<*)
 001122                  		rom_ptr_z80(Title_PWM1_Loop9+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001122 1891             	dc.w  (((((Title_PWM1_Loop9+Target))<<8)&$FF00)|((((Title_PWM1_Loop9+Target))>>8)&$7F)|$80)
+001122 5DB4             	dc.w  (((((Title_PWM1_Loop9+Target))<<8)&$FF00)|((((Title_PWM1_Loop9+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2637,7 +2679,7 @@
                         	if (Title_PWM1_Loop10<*)
 001132                  		rom_ptr_z80(Title_PWM1_Loop10+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001132 2A91             	dc.w  (((((Title_PWM1_Loop10+Target))<<8)&$FF00)|((((Title_PWM1_Loop10+Target))>>8)&$7F)|$80)
+001132 6FB4             	dc.w  (((((Title_PWM1_Loop10+Target))<<8)&$FF00)|((((Title_PWM1_Loop10+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2650,7 +2692,7 @@
                         	if (Title_PWM1_Loop11<*)
 001139                  		rom_ptr_z80(Title_PWM1_Loop11+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001139 3491             	dc.w  (((((Title_PWM1_Loop11+Target))<<8)&$FF00)|((((Title_PWM1_Loop11+Target))>>8)&$7F)|$80)
+001139 79B4             	dc.w  (((((Title_PWM1_Loop11+Target))<<8)&$FF00)|((((Title_PWM1_Loop11+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2665,7 +2707,7 @@
                         	if (Title_PWM1_Loop12<*)
 00114F                  		rom_ptr_z80(Title_PWM1_Loop12+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00114F 4791             	dc.w  (((((Title_PWM1_Loop12+Target))<<8)&$FF00)|((((Title_PWM1_Loop12+Target))>>8)&$7F)|$80)
+00114F 8CB4             	dc.w  (((((Title_PWM1_Loop12+Target))<<8)&$FF00)|((((Title_PWM1_Loop12+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2681,7 +2723,7 @@
                         	if (Title_PWM1_Loop13<*)
 001169                  		rom_ptr_z80(Title_PWM1_Loop13+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001169 6591             	dc.w  (((((Title_PWM1_Loop13+Target))<<8)&$FF00)|((((Title_PWM1_Loop13+Target))>>8)&$7F)|$80)
+001169 AAB4             	dc.w  (((((Title_PWM1_Loop13+Target))<<8)&$FF00)|((((Title_PWM1_Loop13+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2697,7 +2739,7 @@
                         	if (Title_PWM1_Loop14<*)
 001170                  		rom_ptr_z80(Title_PWM1_Loop14+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001170 6C91             	dc.w  (((((Title_PWM1_Loop14+Target))<<8)&$FF00)|((((Title_PWM1_Loop14+Target))>>8)&$7F)|$80)
+001170 B1B4             	dc.w  (((((Title_PWM1_Loop14+Target))<<8)&$FF00)|((((Title_PWM1_Loop14+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2707,7 +2749,7 @@
                         	if (Title_PWM1_Loop15<*)
 001175                  		rom_ptr_z80(Title_PWM1_Loop15+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001175 6B91             	dc.w  (((((Title_PWM1_Loop15+Target))<<8)&$FF00)|((((Title_PWM1_Loop15+Target))>>8)&$7F)|$80)
+001175 B0B4             	dc.w  (((((Title_PWM1_Loop15+Target))<<8)&$FF00)|((((Title_PWM1_Loop15+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2721,7 +2763,7 @@
                         	if (Title_PWM1_Loop16<*)
 001184                  		rom_ptr_z80(Title_PWM1_Loop16+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001184 7C91             	dc.w  (((((Title_PWM1_Loop16+Target))<<8)&$FF00)|((((Title_PWM1_Loop16+Target))>>8)&$7F)|$80)
+001184 C1B4             	dc.w  (((((Title_PWM1_Loop16+Target))<<8)&$FF00)|((((Title_PWM1_Loop16+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2734,7 +2776,7 @@
                         	if (Title_PWM1_Loop17<*)
 00118B                  		rom_ptr_z80(Title_PWM1_Loop17+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00118B 8691             	dc.w  (((((Title_PWM1_Loop17+Target))<<8)&$FF00)|((((Title_PWM1_Loop17+Target))>>8)&$7F)|$80)
+00118B CBB4             	dc.w  (((((Title_PWM1_Loop17+Target))<<8)&$FF00)|((((Title_PWM1_Loop17+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2748,7 +2790,7 @@
                         	if (Title_PWM1_Loop18<*)
 001196                  		rom_ptr_z80(Title_PWM1_Loop18+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001196 9091             	dc.w  (((((Title_PWM1_Loop18+Target))<<8)&$FF00)|((((Title_PWM1_Loop18+Target))>>8)&$7F)|$80)
+001196 D5B4             	dc.w  (((((Title_PWM1_Loop18+Target))<<8)&$FF00)|((((Title_PWM1_Loop18+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2763,7 +2805,7 @@
                         	if (Title_PWM1_Loop19<*)
 0011AC                  		rom_ptr_z80(Title_PWM1_Loop19+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0011AC A491             	dc.w  (((((Title_PWM1_Loop19+Target))<<8)&$FF00)|((((Title_PWM1_Loop19+Target))>>8)&$7F)|$80)
+0011AC E9B4             	dc.w  (((((Title_PWM1_Loop19+Target))<<8)&$FF00)|((((Title_PWM1_Loop19+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2776,7 +2818,7 @@
                         	if (Title_PWM1_Loop20<*)
 0011B3                  		rom_ptr_z80(Title_PWM1_Loop20+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0011B3 AE91             	dc.w  (((((Title_PWM1_Loop20+Target))<<8)&$FF00)|((((Title_PWM1_Loop20+Target))>>8)&$7F)|$80)
+0011B3 F3B4             	dc.w  (((((Title_PWM1_Loop20+Target))<<8)&$FF00)|((((Title_PWM1_Loop20+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2788,7 +2830,7 @@
                         	if (Title_PWM1<*)
 0011C7                  		rom_ptr_z80(Title_PWM1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0011C7 CD90             	dc.w  (((((Title_PWM1+Target))<<8)&$FF00)|((((Title_PWM1+Target))>>8)&$7F)|$80)
+0011C7 12B4             	dc.w  (((((Title_PWM1+Target))<<8)&$FF00)|((((Title_PWM1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2804,7 +2846,7 @@
                         	if (Title_PWM2_Loop1<*)
 0011CE                  		rom_ptr_z80(Title_PWM2_Loop1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0011CE CA91             	dc.w  (((((Title_PWM2_Loop1+Target))<<8)&$FF00)|((((Title_PWM2_Loop1+Target))>>8)&$7F)|$80)
+0011CE 0FB5             	dc.w  (((((Title_PWM2_Loop1+Target))<<8)&$FF00)|((((Title_PWM2_Loop1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2818,7 +2860,7 @@
                         	if (Title_PWM2_Loop2<*)
 0011D9                  		rom_ptr_z80(Title_PWM2_Loop2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0011D9 D591             	dc.w  (((((Title_PWM2_Loop2+Target))<<8)&$FF00)|((((Title_PWM2_Loop2+Target))>>8)&$7F)|$80)
+0011D9 1AB5             	dc.w  (((((Title_PWM2_Loop2+Target))<<8)&$FF00)|((((Title_PWM2_Loop2+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2833,7 +2875,7 @@
                         	if (Title_PWM2_Loop3<*)
 0011F1                  		rom_ptr_z80(Title_PWM2_Loop3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0011F1 E691             	dc.w  (((((Title_PWM2_Loop3+Target))<<8)&$FF00)|((((Title_PWM2_Loop3+Target))>>8)&$7F)|$80)
+0011F1 2BB5             	dc.w  (((((Title_PWM2_Loop3+Target))<<8)&$FF00)|((((Title_PWM2_Loop3+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2848,7 +2890,7 @@
                         	if (Title_PWM2_Loop4<*)
 00120E                  		rom_ptr_z80(Title_PWM2_Loop4+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00120E 0392             	dc.w  (((((Title_PWM2_Loop4+Target))<<8)&$FF00)|((((Title_PWM2_Loop4+Target))>>8)&$7F)|$80)
+00120E 48B5             	dc.w  (((((Title_PWM2_Loop4+Target))<<8)&$FF00)|((((Title_PWM2_Loop4+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2862,7 +2904,7 @@
                         	if (Title_PWM2_Loop5<*)
 001223                  		rom_ptr_z80(Title_PWM2_Loop5+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001223 1892             	dc.w  (((((Title_PWM2_Loop5+Target))<<8)&$FF00)|((((Title_PWM2_Loop5+Target))>>8)&$7F)|$80)
+001223 5DB5             	dc.w  (((((Title_PWM2_Loop5+Target))<<8)&$FF00)|((((Title_PWM2_Loop5+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2879,7 +2921,7 @@
                         	if (Title_PWM2_Loop6<*)
 001246                  		rom_ptr_z80(Title_PWM2_Loop6+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001246 3192             	dc.w  (((((Title_PWM2_Loop6+Target))<<8)&$FF00)|((((Title_PWM2_Loop6+Target))>>8)&$7F)|$80)
+001246 76B5             	dc.w  (((((Title_PWM2_Loop6+Target))<<8)&$FF00)|((((Title_PWM2_Loop6+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2897,7 +2939,7 @@
                         	if (Title_PWM2_Loop7<*)
 001270                  		rom_ptr_z80(Title_PWM2_Loop7+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001270 6C92             	dc.w  (((((Title_PWM2_Loop7+Target))<<8)&$FF00)|((((Title_PWM2_Loop7+Target))>>8)&$7F)|$80)
+001270 B1B5             	dc.w  (((((Title_PWM2_Loop7+Target))<<8)&$FF00)|((((Title_PWM2_Loop7+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2911,7 +2953,7 @@
                         	if (Title_PWM2_Loop8<*)
 00127C                  		rom_ptr_z80(Title_PWM2_Loop8+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00127C 7892             	dc.w  (((((Title_PWM2_Loop8+Target))<<8)&$FF00)|((((Title_PWM2_Loop8+Target))>>8)&$7F)|$80)
+00127C BDB5             	dc.w  (((((Title_PWM2_Loop8+Target))<<8)&$FF00)|((((Title_PWM2_Loop8+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2927,7 +2969,7 @@
                         	if (Title_PWM2_Loop9<*)
 001293                  		rom_ptr_z80(Title_PWM2_Loop9+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001293 8792             	dc.w  (((((Title_PWM2_Loop9+Target))<<8)&$FF00)|((((Title_PWM2_Loop9+Target))>>8)&$7F)|$80)
+001293 CCB5             	dc.w  (((((Title_PWM2_Loop9+Target))<<8)&$FF00)|((((Title_PWM2_Loop9+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2941,7 +2983,7 @@
                         	if (Title_PWM2_Loop10<*)
 0012A1                  		rom_ptr_z80(Title_PWM2_Loop10+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0012A1 9692             	dc.w  (((((Title_PWM2_Loop10+Target))<<8)&$FF00)|((((Title_PWM2_Loop10+Target))>>8)&$7F)|$80)
+0012A1 DBB5             	dc.w  (((((Title_PWM2_Loop10+Target))<<8)&$FF00)|((((Title_PWM2_Loop10+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2955,7 +2997,7 @@
                         	if (Title_PWM2_Loop11<*)
 0012B6                  		rom_ptr_z80(Title_PWM2_Loop11+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0012B6 AB92             	dc.w  (((((Title_PWM2_Loop11+Target))<<8)&$FF00)|((((Title_PWM2_Loop11+Target))>>8)&$7F)|$80)
+0012B6 F0B5             	dc.w  (((((Title_PWM2_Loop11+Target))<<8)&$FF00)|((((Title_PWM2_Loop11+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2974,7 +3016,7 @@
                         	if (Title_PWM2_Loop12<*)
 0012EA                  		rom_ptr_z80(Title_PWM2_Loop12+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0012EA D692             	dc.w  (((((Title_PWM2_Loop12+Target))<<8)&$FF00)|((((Title_PWM2_Loop12+Target))>>8)&$7F)|$80)
+0012EA 1BB6             	dc.w  (((((Title_PWM2_Loop12+Target))<<8)&$FF00)|((((Title_PWM2_Loop12+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -2992,7 +3034,7 @@
                         	if (Title_PWM2_Loop13<*)
 001317                  		rom_ptr_z80(Title_PWM2_Loop13+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001317 0293             	dc.w  (((((Title_PWM2_Loop13+Target))<<8)&$FF00)|((((Title_PWM2_Loop13+Target))>>8)&$7F)|$80)
+001317 47B6             	dc.w  (((((Title_PWM2_Loop13+Target))<<8)&$FF00)|((((Title_PWM2_Loop13+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -3005,7 +3047,7 @@
                         	if (Title_PWM2<*)
 001334                  		rom_ptr_z80(Title_PWM2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001334 C991             	dc.w  (((((Title_PWM2+Target))<<8)&$FF00)|((((Title_PWM2+Target))>>8)&$7F)|$80)
+001334 0EB5             	dc.w  (((((Title_PWM2+Target))<<8)&$FF00)|((((Title_PWM2+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -3036,7 +3078,7 @@
                         	if (Title_PWM3<*)
 0013D5                  		rom_ptr_z80(Title_PWM3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0013D5 3693             	dc.w  (((((Title_PWM3+Target))<<8)&$FF00)|((((Title_PWM3+Target))>>8)&$7F)|$80)
+0013D5 7BB6             	dc.w  (((((Title_PWM3+Target))<<8)&$FF00)|((((Title_PWM3+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -3053,7 +3095,7 @@
                         	if (Title_PWM4_Loop1<*)
 0013E6                  		rom_ptr_z80(Title_PWM4_Loop1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0013E6 E193             	dc.w  (((((Title_PWM4_Loop1+Target))<<8)&$FF00)|((((Title_PWM4_Loop1+Target))>>8)&$7F)|$80)
+0013E6 26B7             	dc.w  (((((Title_PWM4_Loop1+Target))<<8)&$FF00)|((((Title_PWM4_Loop1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -3071,7 +3113,7 @@
                         	if (Title_PWM4_Loop2<*)
 001411                  		rom_ptr_z80(Title_PWM4_Loop2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001411 0C94             	dc.w  (((((Title_PWM4_Loop2+Target))<<8)&$FF00)|((((Title_PWM4_Loop2+Target))>>8)&$7F)|$80)
+001411 51B7             	dc.w  (((((Title_PWM4_Loop2+Target))<<8)&$FF00)|((((Title_PWM4_Loop2+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -3086,7 +3128,7 @@
                         	if (Title_PWM4_Loop3<*)
 001423                  		rom_ptr_z80(Title_PWM4_Loop3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001423 1F94             	dc.w  (((((Title_PWM4_Loop3+Target))<<8)&$FF00)|((((Title_PWM4_Loop3+Target))>>8)&$7F)|$80)
+001423 64B7             	dc.w  (((((Title_PWM4_Loop3+Target))<<8)&$FF00)|((((Title_PWM4_Loop3+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -3101,7 +3143,7 @@
                         	if (Title_PWM4_Loop4<*)
 001435                  		rom_ptr_z80(Title_PWM4_Loop4+Target)
                         	;dc.w z80_ptr(ptr,addr)
-001435 3194             	dc.w  (((((Title_PWM4_Loop4+Target))<<8)&$FF00)|((((Title_PWM4_Loop4+Target))>>8)&$7F)|$80)
+001435 76B7             	dc.w  (((((Title_PWM4_Loop4+Target))<<8)&$FF00)|((((Title_PWM4_Loop4+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -3111,7 +3153,7 @@
                         	if (Title_PWM4<*)
 00143D                  		rom_ptr_z80(Title_PWM4+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00143D D793             	dc.w  (((((Title_PWM4+Target))<<8)&$FF00)|((((Title_PWM4+Target))>>8)&$7F)|$80)
+00143D 1CB7             	dc.w  (((((Title_PWM4+Target))<<8)&$FF00)|((((Title_PWM4+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
@@ -3353,48 +3395,56 @@ NFS3               000000AB E  NFS4               000000B7 E  NFS5              
 NFS6               000000CF E  NFS7               000000DB E  NG0                00000088 E
 NG1                00000094 E  NG2                000000A0 E  NG3                000000AC E
 NG4                000000B8 E  NG5                000000C4 E  NG6                000000D0 E
-NG7                000000DC E  NRST               00000080 E  PANCENTER          000000C0 S
-PANCENTRE          000000C0 S  PANLEFT            00000080 S  PANNONE            00000000 S
-PANRIGHT           00000040 S  SMPSED             000000ED E  SMPSEE             000000EE E
-SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E
-SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E
-SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E  SMPSPITCH02LO      000000E8 E
-SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E  SMPSPITCH04HI      00000030 E
-SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E  SMPSPITCH05LO      000000C4 E
-SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E  SMPSPITCH07HI      00000054 E
-SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E  SMPSPITCH08LO      000000A0 E
-SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E  SMPSPITCH10HI      00000078 E
-SMPSPITCH10LO      00000088 E  TARGET             00040000 E  TITLE_FM1          00000040
-TITLE_FM2          000002D3    TITLE_FM3          000004E6    TITLE_FM4          00000703
-TITLE_FM5          000009D1    TITLE_FM6          00000C57    TITLE_HEADER       00000000
-TITLE_LOOP1        0000005B    TITLE_LOOP10       00000290    TITLE_LOOP11       00000296
-TITLE_LOOP12       0000029C    TITLE_LOOP13       000003CF    TITLE_LOOP14       0000040F
-TITLE_LOOP15       0000041A    TITLE_LOOP16       00000488    TITLE_LOOP17       000005E4
-TITLE_LOOP18       00000628    TITLE_LOOP19       00000637    TITLE_LOOP2        0000007E
-TITLE_LOOP20       000006A5    TITLE_LOOP21       0000071E    TITLE_LOOP22       00000822
-TITLE_LOOP23       0000082F    TITLE_LOOP24       0000084C    TITLE_LOOP25       00000859
-TITLE_LOOP26       00000866    TITLE_LOOP27       000009D6    TITLE_LOOP28       00000AB7
-TITLE_LOOP29       00000AC4    TITLE_LOOP3        0000009C    TITLE_LOOP30       00000AE1
-TITLE_LOOP31       00000AEE    TITLE_LOOP32       00000AFB    TITLE_LOOP33       00000B18
-TITLE_LOOP34       00000C5C    TITLE_LOOP35       00000C8D    TITLE_LOOP36       00000CAD
-TITLE_LOOP37       00000CE1    TITLE_LOOP38       00000D0D    TITLE_LOOP39       00000D3E
-TITLE_LOOP4        000000FF    TITLE_LOOP40       00000D71    TITLE_LOOP41       00000E12
-TITLE_LOOP42       00000ED3    TITLE_LOOP43       00000F06    TITLE_LOOP44       00000FA7
-TITLE_LOOP45       0000105F    TITLE_LOOP46       00001087    TITLE_LOOP47       000010C4
-TITLE_LOOP5        00000188    TITLE_LOOP6        00000194    TITLE_LOOP7        000001F5
-TITLE_LOOP8        0000026C    TITLE_LOOP9        0000028A    TITLE_PATCHES      0000143F
-TITLE_PSG1         00000D34    TITLE_PSG2         00000EC9    TITLE_PSG3         0000105E
-TITLE_PWM1         000010CD    TITLE_PWM1_LOOP1   000010D7    TITLE_PWM1_LOOP10  0000112A
-TITLE_PWM1_LOOP11  00001134    TITLE_PWM1_LOOP12  00001147    TITLE_PWM1_LOOP13  00001165
-TITLE_PWM1_LOOP14  0000116C    TITLE_PWM1_LOOP15  0000116B    TITLE_PWM1_LOOP16  0000117C
-TITLE_PWM1_LOOP17  00001186    TITLE_PWM1_LOOP18  00001190    TITLE_PWM1_LOOP19  000011A4
-TITLE_PWM1_LOOP2   000010E8    TITLE_PWM1_LOOP20  000011AE    TITLE_PWM1_LOOP3   000010EF
-TITLE_PWM1_LOOP4   000010EE    TITLE_PWM1_LOOP5   000010FB    TITLE_PWM1_LOOP6   00001101
-TITLE_PWM1_LOOP7   00001112    TITLE_PWM1_LOOP8   00001119    TITLE_PWM1_LOOP9   00001118
-TITLE_PWM2         000011C9    TITLE_PWM2_LOOP1   000011CA    TITLE_PWM2_LOOP10  00001296
-TITLE_PWM2_LOOP11  000012AB    TITLE_PWM2_LOOP12  000012D6    TITLE_PWM2_LOOP13  00001302
-TITLE_PWM2_LOOP2   000011D5    TITLE_PWM2_LOOP3   000011E6    TITLE_PWM2_LOOP4   00001203
-TITLE_PWM2_LOOP5   00001218    TITLE_PWM2_LOOP6   00001231    TITLE_PWM2_LOOP7   0000126C
-TITLE_PWM2_LOOP8   00001278    TITLE_PWM2_LOOP9   00001287    TITLE_PWM3         00001336
-TITLE_PWM4         000013D7    TITLE_PWM4_LOOP1   000013E1    TITLE_PWM4_LOOP2   0000140C
-TITLE_PWM4_LOOP3   0000141F    TITLE_PWM4_LOOP4   00001431
+NG7                000000DC E  NRST               00000080 E  PAKICK             0000008B E
+PANCENTER          000000C0 S  PANCENTRE          000000C0 S  PANLEFT            00000080 S
+PANNONE            00000000 S  PANRIGHT           00000040 S  PASNARE            0000008C E
+PBELL              0000008D E  PBONGOHI           00000092 E  PBONGOLO           00000093 E
+PCLAP              0000008A E  PCLICKHI           00000090 E  PCLICKLO           00000091 E
+PCLOSEDHH          00000098 E  PCOWBELL           0000008F E  PCRASHCYMB         00000089 E
+PEHIHAT            00000088 E  PEKICK             00000081 E  PESNARE            00000082 E
+PFINGSNAP          0000008E E  POPENHH            00000099 E  PRIDEBELL          00000084 E
+PSEGA              00000097 E  PSILENCE           00000096 E  PSPLASHCYMB        00000083 E
+PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E  PTOMHI             00000085 E
+PTOMLOW            00000087 E  PTOMMID            00000086 E  SMPSED             000000ED E
+SMPSEE             000000EE E  SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E
+SMPSMODON          000000F1 E  SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E
+SMPSPITCH01HI      0000000C E  SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E
+SMPSPITCH02LO      000000E8 E  SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E
+SMPSPITCH04HI      00000030 E  SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E
+SMPSPITCH05LO      000000C4 E  SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E
+SMPSPITCH07HI      00000054 E  SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E
+SMPSPITCH08LO      000000A0 E  SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E
+SMPSPITCH10HI      00000078 E  SMPSPITCH10LO      00000088 E  TARGET             00012345 E
+TEMPDIV            00000002 S  TITLE_FM1          00000040    TITLE_FM2          000002D3
+TITLE_FM3          000004E6    TITLE_FM4          00000703    TITLE_FM5          000009D1
+TITLE_FM6          00000C57    TITLE_LOOP1        0000005B    TITLE_LOOP10       00000290
+TITLE_LOOP11       00000296    TITLE_LOOP12       0000029C    TITLE_LOOP13       000003CF
+TITLE_LOOP14       0000040F    TITLE_LOOP15       0000041A    TITLE_LOOP16       00000488
+TITLE_LOOP17       000005E4    TITLE_LOOP18       00000628    TITLE_LOOP19       00000637
+TITLE_LOOP2        0000007E    TITLE_LOOP20       000006A5    TITLE_LOOP21       0000071E
+TITLE_LOOP22       00000822    TITLE_LOOP23       0000082F    TITLE_LOOP24       0000084C
+TITLE_LOOP25       00000859    TITLE_LOOP26       00000866    TITLE_LOOP27       000009D6
+TITLE_LOOP28       00000AB7    TITLE_LOOP29       00000AC4    TITLE_LOOP3        0000009C
+TITLE_LOOP30       00000AE1    TITLE_LOOP31       00000AEE    TITLE_LOOP32       00000AFB
+TITLE_LOOP33       00000B18    TITLE_LOOP34       00000C5C    TITLE_LOOP35       00000C8D
+TITLE_LOOP36       00000CAD    TITLE_LOOP37       00000CE1    TITLE_LOOP38       00000D0D
+TITLE_LOOP39       00000D3E    TITLE_LOOP4        000000FF    TITLE_LOOP40       00000D71
+TITLE_LOOP41       00000E12    TITLE_LOOP42       00000ED3    TITLE_LOOP43       00000F06
+TITLE_LOOP44       00000FA7    TITLE_LOOP45       0000105F    TITLE_LOOP46       00001087
+TITLE_LOOP47       000010C4    TITLE_LOOP5        00000188    TITLE_LOOP6        00000194
+TITLE_LOOP7        000001F5    TITLE_LOOP8        0000026C    TITLE_LOOP9        0000028A
+TITLE_PATCHES      0000143F    TITLE_PSG1         00000D34    TITLE_PSG2         00000EC9
+TITLE_PSG3         0000105E    TITLE_PWM1         000010CD    TITLE_PWM1_LOOP1   000010D7
+TITLE_PWM1_LOOP10  0000112A    TITLE_PWM1_LOOP11  00001134    TITLE_PWM1_LOOP12  00001147
+TITLE_PWM1_LOOP13  00001165    TITLE_PWM1_LOOP14  0000116C    TITLE_PWM1_LOOP15  0000116B
+TITLE_PWM1_LOOP16  0000117C    TITLE_PWM1_LOOP17  00001186    TITLE_PWM1_LOOP18  00001190
+TITLE_PWM1_LOOP19  000011A4    TITLE_PWM1_LOOP2   000010E8    TITLE_PWM1_LOOP20  000011AE
+TITLE_PWM1_LOOP3   000010EF    TITLE_PWM1_LOOP4   000010EE    TITLE_PWM1_LOOP5   000010FB
+TITLE_PWM1_LOOP6   00001101    TITLE_PWM1_LOOP7   00001112    TITLE_PWM1_LOOP8   00001119
+TITLE_PWM1_LOOP9   00001118    TITLE_PWM2         000011C9    TITLE_PWM2_LOOP1   000011CA
+TITLE_PWM2_LOOP10  00001296    TITLE_PWM2_LOOP11  000012AB    TITLE_PWM2_LOOP12  000012D6
+TITLE_PWM2_LOOP13  00001302    TITLE_PWM2_LOOP2   000011D5    TITLE_PWM2_LOOP3   000011E6
+TITLE_PWM2_LOOP4   00001203    TITLE_PWM2_LOOP5   00001218    TITLE_PWM2_LOOP6   00001231
+TITLE_PWM2_LOOP7   0000126C    TITLE_PWM2_LOOP8   00001278    TITLE_PWM2_LOOP9   00001287
+TITLE_PWM3         00001336    TITLE_PWM4         000013D7    TITLE_PWM4_LOOP1   000013E1
+TITLE_PWM4_LOOP2   0000140C    TITLE_PWM4_LOOP3   0000141F    TITLE_PWM4_LOOP4   00001431

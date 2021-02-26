@@ -1,734 +1,892 @@
+Target	EQU	$4DB0D
+FMVol_Half		EQU $40
+PSGVol_Max		EQU	$00
+PSGVol_Half		EQU	$03
+PSGVol_Qtr		EQU $07
+PSGVol_Silence	EQU $0F
 
-Target	EQU	$4E3C1
-	smpsHeaderVoice	Olegend_Patches, Target
-	smpsHeaderChan	$06, $03
-	smpsHeaderTempo	$01, $00
-	smpsHeaderFM	Olegend_FM1, Target, $00, $09
-	smpsHeaderFM	Olegend_FM2, Target, $00, $0D
-	smpsHeaderFM	Olegend_FM3, Target, $FA, $11
-	smpsHeaderFM	Olegend_FM4, Target, $0C, $1B
-	smpsHeaderFM	Olegend_FM5, Target, $F4, $13
-	smpsHeaderFM	Olegend_FM6, Target, $00, $16
-	smpsHeaderPSG	Olegend_PSG1, Target, $E8, $02, $00, $00
-	smpsHeaderPSG	Olegend_PSG2, Target, $E2, $03, $00, $00
-	smpsHeaderPSG	Olegend_PSG3, Target, $23, $02, $00, $00
-	smpsHeaderPWM	Olegend_PWM1, Target, $00, $CC
-	smpsHeaderPWM	Olegend_PWM2, Target, $00, $AA
-	smpsHeaderPWM	Olegend_PWM3, Target, $00, $AA
-	smpsHeaderPWM	Olegend_PWM4, Target, $00, $77
+	smpsHeaderVoice	ZVN_Patches, Target
+	smpsHeaderChan		$06, $03
+	smpsHeaderTempoC	$04, $06
+	smpsHeaderFM	ZVN_FM1, Target, $00, $10
+	smpsHeaderFM	ZVN_FM2, Target, $00, $10
+	smpsHeaderFM	ZVN_FM3, Target, $00, $10
+	smpsHeaderFM	ZVN_FM4, Target, $00, $10
+	smpsHeaderFM	ZVN_FM5, Target, $00, $10
+	smpsHeaderFM	ZVN_FM6, Target, $00, $10
+	smpsHeaderPSG	ZVN_PSG1, Target, $DC, $02, $00, $00
+	smpsHeaderPSG	ZVN_PSG2, Target, $DC, $02, $00, $00
+	smpsHeaderPSG	ZVN_PSG3, Target, $DC, $02, $00, $00
+	smpsHeaderPWM	ZVN_PWM1, Target, $00, $AF
+	smpsHeaderPWM	ZVN_PWM2, Target, $00, $AF
+	smpsHeaderPWM	ZVN_PWM3, Target, $00, $AF
+	smpsHeaderPWM	ZVN_PWM4, Target, $00, $AF
 
-Olegend_FM1:
+ZVN_FM1:	
+	smpsCall		ZVN_Call1, Target
+	smpsCall		ZVN_Call2, Target
+	smpsCall		ZVN_Call3, Target
+
+ZVN_Loop3:
+	smpsCall		ZVN_Call4, Target
+	smpsCall		ZVN_Call5, Target
+	smpsLoop		$00, $02, ZVN_Loop3, Target
+	smpsCall		ZVN_Call6, Target
+	smpsCall		ZVN_Call6, Target
+
+ZVN_Jump1:
+	smpsCall		ZVN_Call6, Target
+	smpsCall		ZVN_Call5, Target
+	smpsCall		ZVN_Call4, Target
+	smpsCall		ZVN_Call5, Target
+
+ZVN_Loop4:
+	smpsCall		ZVN_Call6, Target
+	smpsLoop		$00, $03, ZVN_Loop4, Target
+	smpsCall		ZVN_Call7, Target
+	smpsCall		ZVN_Call5, Target
+	smpsCall		ZVN_Call4, Target
+	smpsCall		ZVN_Call5, Target
+
+ZVN_Loop6:
+	smpsCall		ZVN_Call6, Target
+	smpsLoop		$00, $03, ZVN_Loop6, Target
+	smpsJump		ZVN_Jump1, Target
+
+ZVN_Call1:
+	smpsFMvoice		$02
+	dc.b	nEb4, $06
 	smpsFMvoice		$00
-	smpsPan		panCenter
-
-Olegend_Loop1:
-	smpsAlterVol		$FA
-	dc.b	nG2, $0C
-	smpsAlterVol		$06
-	dc.b	nG2, $06, nRst, nG2, nRst, nG2, nRst, nG2
-	dc.b	nRst, nG2, nRst, nG2, nRst, nG2, nRst, nG2
-	dc.b	$06, nRst, nG2, nRst, nG2, nRst, nG2, nRst
-	dc.b	nG2, nRst, nG2, nRst, nG2, nRst, nG2, nRst
-	smpsAlterPitch	$01
-	smpsLoop		$01, $04, Olegend_Loop1, Target
-	smpsAlterPitch	$FC
-
-Olegend_Jump1:
-	smpsCall		Olegend_Call1, Target
-	dc.b	nBb2, $60, smpsNoAttack, $30, nRst, $0C
-	smpsAlterVol		$FB
-	dc.b	nBb3, $0C
-	smpsAlterVol		$05
-	dc.b	nBb2, $18
-	smpsCall		Olegend_Call1, Target
-	dc.b	nBb2, $60
-	smpsAlterVol		$05
-	dc.b	nF2, $18
-	smpsAlterVol		$FF
-	dc.b	nG2
-	smpsAlterVol		$FE
-	dc.b	nAb2
-	smpsAlterVol		$FE
-	dc.b	nBb2
-	smpsJump		Olegend_Jump1, Target
-
-Olegend_Call1:
-	smpsAlterVol		$FC
-	dc.b	nC3, $12
-	smpsAlterVol		$04
-	dc.b	$06, nRst, $48, nC3, $12, $06, nRst, $0C
-	dc.b	nC3, $0C, nRst, $30
-	smpsAlterVol		$FC
-	dc.b	nC3, $12
-	smpsAlterVol		$04
-	dc.b	$06, nRst, $48, nC3, $12, $06, nRst, $36
-	dc.b	nG2, $12
-	smpsLoop		$00, $03, Olegend_Call1, Target
-	dc.b	nAb2, $60, smpsNoAttack, $60
+	dc.b	nC4, $02, $04, nC5, nBb3, $06, $02, $04
+	dc.b	nBb4, nF3, $06, $02, $04, nF4, nC4, $06
+	dc.b	$02, $04, nC5
 	smpsReturn
 
-Olegend_FM2:
-	smpsFMvoice		$04
-	smpsAlterVol		$FB
-
-Olegend_Loop2:
-	smpsPan		panCenter
-	dc.b	nG6, $18
-	smpsPan		panLeft
-	smpsAlterVol		$02
-	dc.b	nG6, $18, nRst, $30
-	smpsAlterVol		$FE
-	dc.b	nRst, $60
-	smpsAlterPitch	$01
-	smpsLoop		$00, $03, Olegend_Loop2, Target
-	smpsAlterVol		$05
-	smpsPan		panCenter
-	dc.b	nG6, $18
-	smpsPan		panLeft
-	dc.b	nG6, $18, nRst, $30
-	smpsAlterPitch	$FD
-	smpsFMvoice		$01
-	smpsPan		panCenter
-	dc.b	nBb4, $18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18
-	smpsAlterVol		$05
-
-Olegend_Jump2:
-	smpsCall		Olegend_Call2, Target
-	smpsAlterVol		$F8
-	dc.b	nF6, $03, nRst, nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $1E, nRst, $18
-	smpsAlterVol		$08
-	smpsCall		Olegend_Call2, Target
-	smpsAlterVol		$FB
-	dc.b	nF4, $12
-	smpsAlterVol		$0F
-	dc.b	nF4, $06
-	smpsAlterVol		$F1
-	dc.b	nG4, $12
-	smpsAlterVol		$0F
-	dc.b	nG4, $06
-	smpsAlterVol		$F1
-	dc.b	nAb4, $12
-	smpsAlterVol		$0F
-	dc.b	nAb4, $06
-	smpsAlterVol		$F1
-	dc.b	nBb4, $12
-	smpsAlterVol		$0F
-	dc.b	nBb4, $06
-	smpsAlterVol		$F1
-	smpsAlterVol		$05
-	smpsJump		Olegend_Jump2, Target
-
-Olegend_Call2:
-	smpsAlterVol		$FB
-	dc.b	nC5, $06
-	smpsAlterVol		$0F
-	dc.b	nC5, $06
-	smpsAlterVol		$F1
-	dc.b	nRst, $0C
-	smpsAlterVol		$05
-	dc.b	nG4, $06, nRst, nEb4, $0C, nRst, $0C, nG4
-	dc.b	$0C, nC5, $06, nRst, nB4, $0C, smpsNoAttack
-	smpsAlterVol		$07
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, nRst, $48, nRst, $60
-	smpsAlterVol		$05
-	smpsAlterVol		$FB
-	dc.b	nC5, $06
-	smpsAlterVol		$0A
-	dc.b	nC5, $06
-	smpsAlterVol		$F6
-	dc.b	nRst, $0C
-	smpsAlterVol		$05
-	dc.b	nG4, $06, nRst, nEb4, $0C, nRst, $0C, nG4
-	dc.b	$0C, nC5, $06, nRst, nG5, $0C, smpsNoAttack
-	smpsAlterVol		$07
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, nRst, $48, nRst, $60
-	smpsAlterVol		$05
-	dc.b	nRst, $0C, nF4, nFs4, $06, nRst, nF4, nRst
-	dc.b	nEb4, $0C, nC4, $06, nRst, nRst, $0C, nBb3
-	dc.b	$0C, nC4, $0C, nEb4, $06, nRst, nRst, $0C
-	dc.b	nF4, $0C, nRst, $06, nF4, $0C, nG4, $03
-	dc.b	nRst, nBb4, $06, nRst, nG4, nRst, nC5, $0C
-	dc.b	nG4, $03, nRst, nBb4, nRst, nRst, $06, nG4
-	dc.b	$03, nRst, nC5, $0C, nG4, $03, nRst, nBb4
-	dc.b	$06, nRst, nG4, $03, nRst, nC5, $0C, nG4
-	dc.b	$03, nRst, nBb4, nRst, nRst, $06, nG4, $03
-	dc.b	nRst, nC5, $0C, nG4, $03, nRst, nD5, $0C
-	dc.b	nG4, $03, nRst, nEb5, $0C, nG4, $03, nRst
-	dc.b	nF5, $06, nRst, nG4, $06, nG5, nRst, nBb5
-	dc.b	$0C, nRst, $06
-	smpsAlterVol		$FD
-	dc.b	nC6, $06, smpsNoAttack, $48, smpsNoAttack
-	smpsAlterVol		$03
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18
-	smpsAlterVol		$09
-	smpsAlterVol		$FD
-	dc.b	nD6, $18, smpsNoAttack
-	smpsAlterVol		$03
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FC
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FC
-	dc.b	$18
-	smpsAlterVol		$08
+ZVN_Call2:
+	dc.b	nC4, $06, $02, $04, nC5, nEb4, $06, $02
+	dc.b	$04, nEb5, nF3, $06, $02, $04, nF4, nBb3
+	dc.b	$06, $02, $04, nBb4
 	smpsReturn
 
-Olegend_FM3:
-	smpsFMvoice		$04
-	smpsModSet	$01, $01, $06, $08
-	dc.b	nRst, $0C
-	smpsAlterPitch	$06
-	smpsAlterVol		$03
+ZVN_Call3:
+	dc.b	nC4, $0C, $04, nEb4, $0C, $04, nF4, $0C
+	dc.b	$04, nBb3, $0C, $04
+	smpsReturn
 
-Olegend_Loop3:
-	smpsPan		panCenter
-	dc.b	nG6, $18
-	smpsPan		panRight
-	dc.b	nG6, $18, nRst, $30, nRst, $60
-	smpsAlterPitch	$01
-	smpsLoop		$01, $03, Olegend_Loop3, Target
-	smpsAlterVol		$05
-	smpsPan		panCenter
-	dc.b	nG6, $18
-	smpsPan		panRight
-	dc.b	nG6, $18, nRst, $24
-	smpsAlterPitch	$F7
-	smpsModSet	$00, $00, $00, $00
+ZVN_Call4:
 	smpsFMvoice		$01
-	smpsPan		panCenter
-	smpsAlterVol		$F8
-	dc.b	nBb4, $18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18, smpsNoAttack
-	smpsAlterVol		$FD
-	dc.b	$18
-	smpsAlterVol		$05
-	smpsAlterPitch	$01
-	smpsAlterVol		$0A
+	dc.b	nC5
 
-Olegend_Jump3:
-	smpsCall		Olegend_Call2, Target
-	smpsAlterVol		$F8
-	dc.b	nF6, $03, nRst, nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $1E, nRst, $18
-	smpsAlterVol		$08
-	smpsCall		Olegend_Call2, Target
-	smpsAlterVol		$FB
-	dc.b	nF4, $12
-	smpsAlterVol		$0F
-	dc.b	nF4, $06
-	smpsAlterVol		$F1
-	dc.b	nG4, $12
-	smpsAlterVol		$0F
-	dc.b	nG4, $06
-	smpsAlterVol		$F1
-	dc.b	nAb4, $12
-	smpsAlterVol		$0F
-	dc.b	nAb4, $06
-	smpsAlterVol		$F1
-	dc.b	nBb4, $12
-	smpsAlterVol		$0F
-	dc.b	nBb4, $06
-	smpsAlterVol		$F1
-	smpsAlterVol		$05
-	smpsJump		Olegend_Jump3, Target
+ZVN_Loop1:
+	dc.b	$01, nC5, nC4, nC5, nBb4, nAb4, nC4, nF4
+	dc.b	nC5, nC5, nC4, nC5, nBb4, nBb4, nC5, nEb4
+	dc.b	nBb4, nC5, nC4, nC5, nG4, nC5, nF4, nC5
+	dc.b	nC4, nC5, nF4, nC5, nG4, nC5, nC4, nC5
+	smpsLoop		$01, $02, ZVN_Loop1, Target
+	smpsReturn
 
-Olegend_FM4:
-	smpsFMvoice		$02
-	smpsPan		panCenter
-	smpsAlterVol		$03
+ZVN_Call5:
+	smpsFMvoice		$01
+	dc.b	nF4, $02, nG4, nC5, nBb4, nG5, nF5, nEb5
+	dc.b	nD5, nEb4, nF4, nG4, nAb4, nC5, nEb5, nD5
+	dc.b	nBb4
 
-Olegend_Loop4:
-	dc.b	nCs4, $60, smpsNoAttack, $60
-	smpsAlterPitch	$01
-	smpsLoop		$00, $04, Olegend_Loop4, Target
-	smpsAlterPitch	$FC
-	smpsFMvoice		$04
-	smpsPan		panCenter
-	smpsAlterVol		$F9
+ZVN_Loop2:
+	dc.b	nC4, nF4, nG4, nF4, nC5, nG4, nF4, nEb4
+	smpsLoop		$01, $02, ZVN_Loop2, Target
+	smpsReturn
 
-Olegend_Jump4:
-	smpsCall		Olegend_Call2, Target
-	dc.b	nF6, $03, nRst, nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $1E, nRst, $18
-	smpsCall		Olegend_Call2, Target
-	dc.b	nF4, $12
-	smpsAlterVol		$0F
-	dc.b	nF4, $06
-	smpsAlterVol		$F1
-	dc.b	nG4, $12
-	smpsAlterVol		$0F
-	dc.b	nG4, $06
-	smpsAlterVol		$F1
-	dc.b	nAb4, $12
-	smpsAlterVol		$0F
-	dc.b	nAb4, $06
-	smpsAlterVol		$F1
-	dc.b	nBb4, $12
-	smpsAlterVol		$0F
-	dc.b	nBb4, $06
-	smpsAlterVol		$F1
-	smpsJump		Olegend_Jump4, Target
+ZVN_Call6:
+	dc.b	nEb4, $02, nF4, nG4, nEb4, nBb4, nF4, nG4
+	dc.b	nEb4, nF4, nG4, nAb4, nG4, nC5, nAb4, nG4
+	dc.b	nF4, nC4, nD4, nEb4, nC4, nF4, nC4, nEb4
+	dc.b	nC4, nBb3, nC4, nEb4, nF4, nG4, nF4, nEb4
+	dc.b	nF4
+	smpsReturn
 
-Olegend_FM5:
-	smpsPan		panCenter
+ZVN_Call7:
 	smpsFMvoice		$02
 
-Olegend_Loop5:
-	dc.b	nG5, $60, smpsNoAttack, $60
-	smpsAlterPitch	$01
-	smpsLoop		$00, $04, Olegend_Loop5, Target
-	smpsAlterPitch	$FC
-	smpsAlterPitch	$0C
-	smpsPan		panCenter
-	smpsAlterVol		$0A
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $0C
+ZVN_Loop5:
+	dc.b	nC5, $02, nC4, nG5, nC4, nC6, nC4, nG5
+	dc.b	nC4, nD6, nC4, nG5, nC4, nC6, nC4, nG5
+	dc.b	nC4
+	smpsLoop		$00, $02, ZVN_Loop5, Target
+	smpsReturn
 
-Olegend_Jump5:
-	smpsCall		Olegend_Call2, Target
-	smpsAlterVol		$F8
-	dc.b	nF6, $03, nRst, nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$0D
-	dc.b	nF6, $03, nRst
-	smpsAlterVol		$F3
-	dc.b	nF6, $1E, nRst, $18
-	smpsAlterVol		$08
-	smpsCall		Olegend_Call2, Target
-	smpsAlterVol		$F8
-	dc.b	nF4, $12
-	smpsAlterVol		$0F
-	dc.b	nF4, $06
-	smpsAlterVol		$F1
-	dc.b	nG4, $12
-	smpsAlterVol		$0F
-	dc.b	nG4, $06
-	smpsAlterVol		$F1
-	dc.b	nAb4, $12
-	smpsAlterVol		$0F
-	dc.b	nAb4, $06
-	smpsAlterVol		$F1
-	dc.b	nBb4, $12
-	smpsAlterVol		$0F
-	dc.b	nBb4, $06
-	smpsAlterVol		$F1
-	smpsAlterVol		$08
-	smpsJump		Olegend_Jump5, Target
+ZVN_FM2:
+	smpsAlterVol	FMVol_Half
+	smpsCall		ZVN_Call8, Target
+	smpsCall		ZVN_Call9, Target
+	smpsCall		ZVN_Call10, Target
 
-Olegend_FM6:
+ZVN_Loop7:
+	smpsCall		ZVN_Call11, Target
+	smpsCall		ZVN_Call12, Target
+	smpsLoop		$00, $02, ZVN_Loop7, Target
+	smpsCall		ZVN_Call13, Target
+	smpsCall		ZVN_Call13, Target
+
+ZVN_Jump2:
+	smpsCall		ZVN_Call13, Target
+	smpsCall		ZVN_Call12, Target
+	smpsCall		ZVN_Call11, Target
+	smpsCall		ZVN_Call12, Target
+
+ZVN_Loo$8:
+	smpsCall		ZVN_Call13, Target
+	smpsLoop		$00, $03, ZVN_Loo$8, Target
+	smpsCall		ZVN_Call14, Target
+	smpsCall		ZVN_Call12, Target
+	smpsCall		ZVN_Call11, Target
+	smpsCall		ZVN_Call12, Target
+
+ZVN_Loo$9:
+	smpsCall		ZVN_Call13, Target
+	smpsLoop		$00, $03, ZVN_Loo$9, Target
+	smpsJump		ZVN_Jump2, Target
+
+ZVN_Call8:
+	dc.b	nRst, $06
+	smpsFMvoice		$00
+	dc.b	nC5, $01, nD5, nEb5, $04, nF5, nEb5, $08
+	dc.b	nC5, $06, nG4, $02, nAb4, $06, nC5, $02
+	dc.b	nBb4, $04, nAb4, nG4, $10
+	smpsReturn
+
+ZVN_Call9:
+	dc.b	nRst, $06, nC5, $01, nD5, nEb5, $04, nF5
+	dc.b	nG5, $08, nEb5, $06, nG4, $02, nAb4, $06
+	dc.b	nG4, $02, nF4, $04, nEb4, nBb4, $10
+	smpsReturn
+
+ZVN_Call10:
+	dc.b	nC4, $06, nEb4, $04, nF4, $06, nBb4, $0C
+	dc.b	nAb4, $02, nEb4, nF4, $0C, nG4, $02, nAb4
+	dc.b	nG4, $0C, nF4, $04
+	smpsReturn
+
+ZVN_Call11:
+	smpsFMvoice		$01
+	dc.b	nC4, $01, nC4, nC5, nC5, nC4, nC5, nBb4
+	dc.b	nAb4, nC4, nF4, nC5, nC5, nC4, nC5, nBb4
+	dc.b	nBb4, nC5, nEb4, nBb4, nC5, nC4, nC5, nG4
+	dc.b	nC5, nF4, nC5, nC4, nC5, nF4, nC5, nG4
+	dc.b	nC5, nC4, nC5, nC5, nC5, nC4, nC5, nBb4
+	dc.b	nAb4, nC4, nF4, nC5, nC5, nC4, nC5, nBb4
+	dc.b	nBb4, nC5, nEb4, nBb4, nC5, nC4, nC5, nG4
+	dc.b	nC5, nF4, nC5, nC4, nC5, nF4, nC5, nG4
+	dc.b	nC5
+	smpsReturn
+
+ZVN_Call12:
+	dc.b	nRst, $02
+	smpsFMvoice		$01
+	dc.b	nF4, nG4, nC5, nBb4, nG5, nF5, nEb5, nD5
+	dc.b	nEb4, nF4, nG4, nAb4, nC5, nEb5, nD5, nBb4
+	dc.b	nC4, nF4, nG4, nF4, nC5, nG4, nF4, nEb4
+	dc.b	nC4, nF4, nG4, nF4, nC5, nG4, nF4
+	smpsReturn
+
+ZVN_Call13:
+	dc.b	nRst, $02, nEb4, nF4, nG4, nEb4, nBb4, nF4
+	dc.b	nG4, nEb4, nF4, nG4, nAb4, nG4, nC5, nAb4
+	dc.b	nG4, nF4, nC4, nD4, nEb4, nC4, nF4, nC4
+	dc.b	nEb4, nC4, nBb3, nC4, nEb4, nF4, nG4, nF4
+	dc.b	nEb4
+	smpsReturn
+
+ZVN_Call14:
+	dc.b	nRst, $02
+	smpsFMvoice		$02
+	dc.b	nC5, nC4, nG5, nC4, nC6, nC4, nG5, nC4
+	dc.b	nD6, nC4, nG5, nC4, nC6, nC4, nG5, nC4
+	dc.b	nC5, nC4, nG5, nC4, nC6, nC4, nG5, nC4
+	dc.b	nD6, nC4, nG5, nC4, nC6, nC4, nG5
+	smpsReturn
+
+ZVN_FM3:
+	smpsCall		ZVN_Call15, Target
+	smpsCall		ZVN_Call16, Target
+	smpsCall		ZVN_Call16, Target
+
+ZVN_Loop10:
+	smpsCall		ZVN_Call17, Target
+	smpsCall		ZVN_Call18, Target
+	smpsLoop		$00, $02, ZVN_Loop10, Target
+	smpsCall		ZVN_Call19, Target
+	smpsCall		ZVN_Call20, Target
+
+ZVN_Jump3:
+	smpsCall		ZVN_Call20, Target
+	smpsCall		ZVN_Call18, Target
+	smpsCall		ZVN_Call17, Target
+	smpsCall		ZVN_Call18, Target
+	smpsCall		ZVN_Call19, Target
+	smpsCall		ZVN_Call20, Target
+	smpsCall		ZVN_Call20, Target
+	smpsCall		ZVN_Call21, Target
+	smpsCall		ZVN_Call18, Target
+	smpsCall		ZVN_Call17, Target
+	smpsCall		ZVN_Call18, Target
+	smpsCall		ZVN_Call19, Target
+	smpsCall		ZVN_Call20, Target
+	smpsCall		ZVN_Call20, Target
+	smpsJump		ZVN_Jump3, Target
+
+ZVN_Call15:
+	smpsFMvoice		$00
+	dc.b	nC4, $02, nG4, nC5, nG4, nD4, nG4, nC5
+	dc.b	nBb4, nBb3, nEb4, nBb4, nEb4, nBb3, nEb4, nBb4
+	dc.b	nEb4, nF4, nAb4, nF5, nAb4, nF4, nAb4, nF5
+	dc.b	nAb4, nC4, nG4, nC5, nG4, nC4, nG4, nC5
+	dc.b	nG4
+	smpsReturn
+
+ZVN_Call16:
+	dc.b	nC4, $02, nG4, nC5, nG4, nD4, nG4, nC5
+	dc.b	nBb4, nBb3, nEb4, nBb4, nEb4, nBb3, nEb4, nBb4
+	dc.b	nEb4, nF4, nAb4, nF5, nAb4, nF4, nAb4, nF5
+	dc.b	nAb4, nBb3, nF4, nBb4, nF4, nBb3, nF4, nBb4
+	dc.b	nF4
+	smpsReturn
+
+ZVN_Call17:
+	smpsFMvoice		$01
+	dc.b	nC5, $02, nF5, $01, nEb5, nD5, $08, nC5
+	dc.b	$02, nBb4, nEb5, $04, nC5, $01, nD5, nEb5
+	dc.b	nAb5, nG5, $08, nF5, $10, nEb5, $08, nG5
+	smpsReturn
+
+ZVN_Call18:
+	dc.b	nC6, $10, nBb5, $08, nAb5, nG5, $10, nRst
+	smpsReturn
+
+ZVN_Call19:
+	dc.b	nEb5, $01, nF5, nG5, $06, nBb5, $08, nAb5
+	dc.b	$04, nG5, $08, nF5, $06, nC5, $01, nD5
+	dc.b	nEb5, $0C, nF5, $08, nBb4, $06, nEb5, $01
+	dc.b	nF5
+	smpsReturn
+
+ZVN_Call20:
+	dc.b	nG5, $08, nBb5, nAb5, $04, nG5, $08, nF5
+	dc.b	$06, nC5, $01, nD5, nEb5, $08, nEb6, $04
+	dc.b	nD6, $08, nBb5
+	smpsReturn
+
+ZVN_Call21:
+	dc.b	nG5, $18, nEb5, $04, nD5, nEb5, $0A, nD5
+	dc.b	$01, nEb5, nF5, $0C, nEb5, $04, nD5
+	smpsReturn
+
+ZVN_FM4:
+	smpsCall		ZVN_Call22, Target
+	smpsCall		ZVN_Call23, Target
+	smpsCall		ZVN_Call24, Target
+
+ZVN_Loop13:
+	smpsCall		ZVN_Call25, Target
+	smpsCall		ZVN_Call26, Target
+	smpsLoop		$00, $02, ZVN_Loop13, Target
+	smpsCall		ZVN_Call27, Target
+	smpsCall		ZVN_Call27, Target
+
+ZVN_Jump4:
+	smpsCall		ZVN_Call27, Target
+	smpsCall		ZVN_Call26, Target
+	smpsCall		ZVN_Call25, Target
+	smpsCall		ZVN_Call26, Target
+
+ZVN_Loop14:
+	smpsCall		ZVN_Call27, Target
+	smpsLoop		$00, $03, ZVN_Loop14, Target
+	smpsCall		ZVN_Call28, Target
+	smpsCall		ZVN_Call26, Target
+	smpsCall		ZVN_Call25, Target
+	smpsCall		ZVN_Call26, Target
+
+ZVN_Loop16:
+	smpsCall		ZVN_Call27, Target
+	smpsLoop		$00, $03, ZVN_Loop16, Target
+	smpsJump		ZVN_Jump4, Target
+
+ZVN_Call22:
+	dc.b	nRst, $10, nRst, nRst, nRst
+	smpsReturn
+
+ZVN_Call23:
+	smpsFMvoice		$00
+	dc.b	nC3, $10, nEb3, nF3, nBb3
+	smpsReturn
+
+ZVN_Call24:
+	dc.b	nC3, $06, nC3, nC3, $04, nBb2, $06, nBb2
+	dc.b	nBb2, $04, nF3, $06, nF3, nF3, $04, nBb3
+	dc.b	$06, nBb3, nBb3, $04
+	smpsReturn
+
+ZVN_Call25:
 	smpsFMvoice		$03
-	smpsPan		panCenter
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $0C
 
-Olegend_Loop6:
-	dc.b	nG4, $08, nBb4, nCs5, nEb5, nFs5, nEb5, nCs5
-	dc.b	nBb4, nG4, nBb4, nCs5, nEb5, nFs5, nEb5, nCs5
-	dc.b	nBb4, nG4, nBb4, nCs5, nEb5, nFs5, nEb5, nCs5
-	dc.b	nBb4
-	smpsAlterPitch	$01
-	smpsLoop		$01, $03, Olegend_Loop6, Target
-	smpsAlterPitch	$FD
-	dc.b	nBb4, nCs5, nE5, nFs5, nA5, nFs5, nE5, nCs5
-	dc.b	nBb4, nCs5, nE5, nFs5, nA5, nFs5, nE5, nCs5
-	dc.b	nBb4, $04, nRst, $09, nBb4, $06, nCs5, nE5
-	dc.b	nFs5, nBb5, nCs6, nE6, nBb6
-
-Olegend_Jump6:
-	smpsCall		Olegend_Call3, Target
-	smpsJump		Olegend_Jump6, Target
-
-Olegend_PSG1:
-	smpsPSGvoice	$0C
-	smpsCall		Olegend_Call4, Target
-
-Olegend_Jump7:
-	smpsCall		Olegend_Call3, Target
-	smpsJump		Olegend_Jump7, Target
-
-Olegend_Call4:
-	smpsSetVol	$FF
-	dc.b	nG4, $08
-	smpsSetVol	$01
-	dc.b	nBb4, nCs5, nEb5, nFs5, nEb5, nCs5, nBb4, nG4
-	dc.b	nBb4, nCs5, nEb5
-	smpsSetVol	$FF
-	dc.b	nFs5
-	smpsSetVol	$01
-	dc.b	nEb5, nCs5, nBb4, nG4, nBb4, nCs5, nEb5, nFs5
-	dc.b	nEb5, nCs5, nBb4
-	smpsAlterPitch	$01
-	smpsLoop		$01, $03, Olegend_Call4, Target
-	smpsAlterPitch	$FD
-	smpsSetVol	$FF
-	dc.b	nBb4
-	smpsSetVol	$01
-	dc.b	nCs5, nE5, nFs5, nA5, nFs5, nE5, nCs5, nBb4
-	dc.b	nCs5, nE5, nFs5
-	smpsSetVol	$FF
-	dc.b	nA5
-	smpsSetVol	$01
-	dc.b	nFs5, nE5, nCs5, nBb4, nCs5, nBb4, $06, nCs5
-	dc.b	nE5, nFs5, nBb5, nCs6, nE6, nBb6
+ZVN_Loop11:
+	dc.b	nC5, $02, nC6, $04
+	smpsLoop		$01, $0A, ZVN_Loop11, Target
+	dc.b	nC5, $02, nC6
 	smpsReturn
 
-Olegend_Call3:
-	smpsSetVol	$FE
-	dc.b	nC4, $06
-	smpsSetVol	$02
-	dc.b	nC4, $0C, nF4, $06, nG4, nBb4, nC5, nEb5
-	dc.b	nG5, $0C, nBb4, nC5, $18
-	smpsSetVol	$FE
-	dc.b	nC4, $06
-	smpsSetVol	$02
-	dc.b	nC4, $0C, nF4, $06, nG4, nBb4, nRst, nD5
-	dc.b	nEb5, $0C, nA4, nBb4, $06, nE4, $12
-	smpsLoop		$00, $07, Olegend_Call3, Target
-	smpsSetVol	$FE
-	dc.b	nC4, $06
-	smpsSetVol	$02
-	dc.b	nC4, $0C, nF4, $06, nG4, nBb4, nC5, nEb5
-	dc.b	nG5, $0C, nBb4, nC5, $18
-	smpsAlterPitch	$FE
-	smpsSetVol	$FE
-	dc.b	nC4, $06
-	smpsSetVol	$02
-	dc.b	nC4, $0C, nF4, $06, nG4, nBb4, nRst, nD5
-	dc.b	nEb5, $0C, nA4, nBb4, $06, nE4, $12
-	smpsAlterPitch	$02
-	smpsLoop		$01, $02, Olegend_Call3, Target
+ZVN_Call26:
+	dc.b	nF5, $02, nF6, $04
+	smpsLoop		$01, $03, ZVN_Call26, Target
+	dc.b	nEb5, $02, nEb6, $04, nEb5, $02, nEb6, $04
+	dc.b	nEb5, $02
+
+ZVN_Loop12:
+	dc.b	nC6, $04, nC5, $02
+	smpsLoop		$01, $05, ZVN_Loop12, Target
+	dc.b	nC6
 	smpsReturn
 
-Olegend_PSG2:
-	smpsPSGvoice	$0C
-	smpsCall		Olegend_Call4, Target
-	smpsAlterPitch	$01
+ZVN_Call27:
+	dc.b	nEb5, $02, nEb6, $04
+	smpsLoop		$01, $03, ZVN_Call27, Target
+	dc.b	nF5, $02, nF6, $04, nF5, $02, nF6, $04
+	dc.b	nF5, $02, nC6, $04, nC5, $02, nC6, $04
+	dc.b	nC5, $02, nC6, $04, nBb4, $02, nBb5, $04
+	dc.b	nBb4, $02, nBb5, $04, nBb4, $02, nBb5
+	smpsReturn
 
-Olegend_Jum$8:
-	smpsCall		Olegend_Call3, Target
-	smpsJump		Olegend_Jum$8, Target
+ZVN_Call28:
+	dc.b	nC6
 
-Olegend_PSG3:
-	smpsPSGform	$E7
+ZVN_Loop15:
+	dc.b	$04, nC5, $02, nC6, $04, nC5, $02, nC6
+	dc.b	$04
+	smpsLoop		$00, $04, ZVN_Loop15, Target
+	smpsReturn
+
+ZVN_FM5:
+	smpsCall		ZVN_Call29, Target
+	smpsCall		ZVN_Call30, Target
+	smpsCall		ZVN_Call30, Target
+
+ZVN_Loop18:
+	smpsCall		ZVN_Call31, Target
+	smpsCall		ZVN_Call32, Target
+	smpsLoop		$00, $02, ZVN_Loop18, Target
+	smpsCall		ZVN_Call33, Target
+	smpsCall		ZVN_Call34, Target
+
+ZVN_Jump5:
+	smpsCall		ZVN_Call35, Target
+	smpsCall		ZVN_Call32, Target
+	smpsCall		ZVN_Call31, Target
+	smpsCall		ZVN_Call32, Target
+	smpsCall		ZVN_Call33, Target
+	smpsCall		ZVN_Call34, Target
+	smpsCall		ZVN_Call35, Target
+	smpsCall		ZVN_Call36, Target
+	smpsCall		ZVN_Call32, Target
+	smpsCall		ZVN_Call31, Target
+	smpsCall		ZVN_Call32, Target
+	smpsCall		ZVN_Call33, Target
+	smpsCall		ZVN_Call34, Target
+	smpsCall		ZVN_Call35, Target
+	smpsJump		ZVN_Jump5, Target
+
+ZVN_Call29:
+	dc.b	nRst, $10, nRst, nRst, nRst
+	smpsReturn
+
+ZVN_Call30:
+	dc.b	nRst, $10, nRst, nRst, nRst
+	smpsReturn
+
+ZVN_Call31:
+	dc.b	nRst, $10, nRst, nRst, nRst
+	smpsReturn
+
+ZVN_Call32:
+	smpsFMvoice		$00
+	dc.b	nF3, $02, nC4, nF4, nC4, nF3, nC4, nF4
+	dc.b	nC4, nEb3, nF3, nBb3, nF3, nEb3, nF3, nBb3
+	dc.b	nF3
+
+ZVN_Loop17:
+	dc.b	nC3, nG3, nC4, nG3, nD4, nG3, nEb4, nG3
+	smpsLoop		$01, $02, ZVN_Loop17, Target
+	smpsReturn
+
+ZVN_Call33:
+	dc.b	nRst, $10, nRst, nRst, nRst
+	smpsReturn
+
+ZVN_Call34:
+	dc.b	nRst, $10, nRst, nRst
+	smpsFMvoice		$01
+	dc.b	nC4, $02, nD4, nEb4, nD4, nEb4, nF4, nG4
+	dc.b	nBb4
+	smpsReturn
+
+ZVN_Call35:
+	dc.b	nEb4, $10, nF4, $08, nG4, nC4, $0C, nEb4
+	dc.b	$04, nBb4, $10
+	smpsReturn
+
+ZVN_Call36:
+	dc.b	nRst, $02, nG5, $18, nEb5, $04, nD5, nEb5
+	dc.b	$0A, nD5, $01, nEb5, nF5, $0C, nEb5, $06
+	smpsReturn
+
+ZVN_FM6:
+	smpsCall		ZVN_Call37, Target
+	smpsCall		ZVN_Call38, Target
+	smpsCall		ZVN_Call38, Target
+
+ZVN_Loop19:
+	smpsCall		ZVN_Call39, Target
+	smpsCall		ZVN_Call37, Target
+	smpsLoop		$00, $02, ZVN_Loop19, Target
+	smpsCall		ZVN_Call37, Target
+	smpsCall		ZVN_Call37, Target
+
+ZVN_Jump6:
+	smpsCall		ZVN_Call37, Target
+	smpsCall		ZVN_Call37, Target
+	smpsCall		ZVN_Call39, Target
+
+ZVN_Loop20:
+	smpsCall		ZVN_Call37, Target
+	smpsLoop		$00, $04, ZVN_Loop20, Target
+	smpsCall		ZVN_Call40, Target
+	smpsCall		ZVN_Call37, Target
+	smpsCall		ZVN_Call39, Target
+
+ZVN_Loop21:
+	smpsCall		ZVN_Call37, Target
+	smpsLoop		$00, $04, ZVN_Loop21, Target
+	smpsJump		ZVN_Jump6, Target
+
+ZVN_Call37:
+	dc.b	nRst, $10, nRst, nRst, nRst
+	smpsReturn
+
+ZVN_Call38:
+	dc.b	nRst, $10, nRst, nRst, nRst
+	smpsReturn
+
+ZVN_Call39:
+	dc.b	nRst, $10, nRst, nRst, nRst
+	smpsReturn
+
+ZVN_Call40:
+	dc.b	nRst, $10, nRst, nRst
+	smpsFMvoice		$01
+	dc.b	nC4, $02, nD4, nEb4, nD4, nEb4, nF4, nG4
+	dc.b	nBb4
+	smpsReturn
+
+ZVN_PSG1:
+	smpsSetVol		PSGVol_Half
+	smpsCall		ZVN_Call41, Target
+	smpsCall		ZVN_Call42, Target
+	smpsCall		ZVN_Call43, Target
+
+ZVN_Loop24:
+	smpsCall		ZVN_Call44, Target
+	smpsCall		ZVN_Call45, Target
+	smpsLoop		$00, $02, ZVN_Loop24, Target
+	smpsCall		ZVN_Call46, Target
+	smpsCall		ZVN_Call46, Target
+
+ZVN_Jump7:
+	smpsCall		ZVN_Call46, Target
+	smpsCall		ZVN_Call45, Target
+	smpsCall		ZVN_Call44, Target
+	smpsCall		ZVN_Call45, Target
+
+ZVN_Loop25:
+	smpsCall		ZVN_Call46, Target
+	smpsLoop		$00, $03, ZVN_Loop25, Target
+	smpsCall		ZVN_Call47, Target
+	smpsCall		ZVN_Call45, Target
+	smpsCall		ZVN_Call44, Target
+	smpsCall		ZVN_Call45, Target
+
+ZVN_Loop27:
+	smpsCall		ZVN_Call46, Target
+	smpsLoop		$00, $03, ZVN_Loop27, Target
+	smpsJump		ZVN_Jump7, Target
+
+ZVN_Call41:
+	smpsPSGvoice	$02
+	dc.b	nEb4, $06
+	smpsPSGvoice	$0A
+	dc.b	nC4, $02, $04, nC5, nBb3, $06, $02, $04
+	dc.b	nBb4, nF3, $06, $02, $04, nF4, nC4, $06
+	dc.b	$02, $04, nC5
+	smpsReturn
+
+ZVN_Call42:
+	dc.b	nC4, $06, $02, $04, nC5, nEb4, $06, $02
+	dc.b	$04, nEb5, nF3, $06, $02, $04, nF4, nBb3
+	dc.b	$06, $02, $04, nBb4
+	smpsReturn
+
+ZVN_Call43:
+	smpsPSGvoice	$06
+	dc.b	nC4, $0C, $04, nEb4, $0C, $04, nF4, $0C
+	dc.b	$04, nBb3, $0C, $04
+	smpsReturn
+
+ZVN_Call44:
+	smpsPSGvoice	$00
+	dc.b	nC5
+
+ZVN_Loop22:
+	dc.b	$01, nC5, nC4, nC5, nBb4, nAb4, nC4, nF4
+	dc.b	nC5, nC5, nC4, nC5, nBb4, nBb4, nC5, nEb4
+	dc.b	nBb4, nC5, nC4, nC5, nG4, nC5, nF4, nC5
+	dc.b	nC4, nC5, nF4, nC5, nG4, nC5, nC4, nC5
+	smpsLoop		$01, $02, ZVN_Loop22, Target
+	smpsReturn
+
+ZVN_Call45:
+	smpsPSGvoice	$00
+	dc.b	nF4, $02, nG4, nC5, nBb4, nG5, nF5, nEb5
+	dc.b	nD5, nEb4, nF4, nG4, nAb4, nC5, nEb5, nD5
+	dc.b	nBb4
+
+ZVN_Loop23:
+	dc.b	nC4, nF4, nG4, nF4, nC5, nG4, nF4, nEb4
+	smpsLoop		$01, $02, ZVN_Loop23, Target
+	smpsReturn
+
+ZVN_Call46:
+	dc.b	nEb4, $02, nF4, nG4, nEb4, nBb4, nF4, nG4
+	dc.b	nEb4, nF4, nG4, nAb4, nG4, nC5, nAb4, nG4
+	dc.b	nF4, nC4, nD4, nEb4, nC4, nF4, nC4, nEb4
+	dc.b	nC4, nBb3, nC4, nEb4, nF4, nG4, nF4, nEb4
+	dc.b	nF4
+	smpsReturn
+
+ZVN_Call47:
 	smpsPSGvoice	$02
 
-Olegend_Loop7:
-	dc.b	nC4, $0C
-	smpsSetVol	$04
+ZVN_Loop26:
+	dc.b	nC5, $02, nC4, nG5, nC4, nC6, nC4, nG5
+	dc.b	nC4, nD6, nC4, nG5, nC4, nC6, nC4, nG5
 	dc.b	nC4
-	smpsSetVol	$FE
-	dc.b	nC4
-	smpsSetVol	$02
-	dc.b	nC4
-	smpsSetVol	$FC
-	smpsLoop		$00, $0F, Olegend_Loop7, Target
-	dc.b	nC4, $06
-	smpsSetVol	$03
-	dc.b	nC4
-	smpsSetVol	$FE
-	dc.b	nC4
-	smpsSetVol	$02
-	dc.b	nC4
-	smpsSetVol	$FD
-	dc.b	nC4, $18
-	smpsSetVol	$FF
+	smpsLoop		$00, $02, ZVN_Loop26, Target
+	smpsReturn
 
-Olegend_Jum$9:
-	dc.b	nC4, $06
-	smpsSetVol	$04
-	dc.b	nC4
-	smpsSetVol	$FE
-	dc.b	nC4
-	smpsSetVol	$02
-	dc.b	nC4
-	smpsSetVol	$FC
-	smpsJump		Olegend_Jum$9, Target
+ZVN_PSG2:
+	smpsSetVol		PSGVol_Qtr
+	smpsCall		ZVN_Call48, Target
+	smpsCall		ZVN_Call49, Target
+	smpsCall		ZVN_Call50, Target
 
-Olegend_PWM1:
-	dc.b	$8B, $18, nRst, $3C, $8B, $0C, $8B, $18
-	dc.b	$8B, nRst, $18, $8B, $18
-	smpsLoop		$00, $04, Olegend_PWM1, Target
+ZVN_Loop28:
+	smpsCall		ZVN_Call51, Target
+	smpsCall		ZVN_Call52, Target
+	smpsLoop		$00, $02, ZVN_Loop28, Target
+	smpsCall		ZVN_Call53, Target
+	smpsCall		ZVN_Call53, Target
 
-Olegend_Loo$8:
-	dc.b	$8B, $12, $06, nRst, $18, $8B, $18, nRst
-	dc.b	$0C, $8B, $0C, $8B, $12, $06, nRst, $06
-	dc.b	$8B, $06, nRst, $24, $8B, $18, $8B, $12
-	dc.b	$06, nRst, $0C, $8B, $0C, nRst, $12, $8B
-	dc.b	$06, nRst, $18, $8B, $18, nRst, $0C, $8B
-	dc.b	$0C, $18, $18
-	smpsLoop		$00, $03, Olegend_Loo$8, Target
+ZVN_Jum$8:
+	smpsCall		ZVN_Call53, Target
+	smpsCall		ZVN_Call52, Target
+	smpsCall		ZVN_Call51, Target
+	smpsCall		ZVN_Call52, Target
 
-Olegend_Loo$9:
-	dc.b	$8B, $18, nRst, $12, $8B, $06, $0C, $0C
-	dc.b	nRst, $18
-	smpsLoop		$00, $04, Olegend_Loo$9, Target
-	smpsJump		Olegend_Loo$8, Target
+ZVN_Loop29:
+	smpsCall		ZVN_Call53, Target
+	smpsLoop		$00, $03, ZVN_Loop29, Target
+	smpsCall		ZVN_Call54, Target
+	smpsCall		ZVN_Call52, Target
+	smpsCall		ZVN_Call51, Target
+	smpsCall		ZVN_Call52, Target
 
-Olegend_PWM2:
-	dc.b	$96, $60, $96, $3C, $8C, $0C, nRst, $18
-	smpsLoop		$00, $03, Olegend_PWM2, Target
-	dc.b	nRst, $60, nRst, $30
-	smpsAlterVol		$22
-	dc.b	$8C, $06
-	smpsAlterVol		$BC
-	dc.b	$0C
-	smpsAlterVol		$11
-	dc.b	$06
-	smpsAlterVol		$22
-	dc.b	$0C, $0C
-	smpsAlterVol		$EF
+ZVN_Loop30:
+	smpsCall		ZVN_Call53, Target
+	smpsLoop		$00, $03, ZVN_Loop30, Target
+	smpsJump		ZVN_Jum$8, Target
 
-Olegend_Loop10:
-	dc.b	nRst, $18, $8C, $18, nRst, $8C, $18
-	smpsLoop		$00, $0C, Olegend_Loop10, Target
-	dc.b	nRst, $60, nRst, $54, $8C, $0C, nRst, $60
-	dc.b	nRst, $30, $8C, $06, $0C, $06, $0C, $0C
-	smpsJump		Olegend_Loop10, Target
+ZVN_Call48:
+	dc.b	nRst, $06
+	smpsPSGvoice	$0A
+	dc.b	nC5, $01, nD5, nEb5, $04, nF5, nEb5, $08
+	dc.b	nC5, $06, nG4, $02, nAb4, $06, nC5, $02
+	dc.b	nBb4, $04, nAb4, nG4, $10
+	smpsReturn
 
-Olegend_PWM3:
-	dc.b	$84, $60, nRst, $60
-	smpsLoop		$00, $03, Olegend_PWM3, Target
-	dc.b	$84, $60
-	smpsAlterVol		$AB
-	dc.b	$89, $18
-	smpsAlterVol		$11
-	dc.b	$89, $18
-	smpsAlterVol		$11
-	dc.b	$89, $18
-	smpsAlterVol		$11
-	dc.b	$89, $18
-	smpsAlterVol		$22
+ZVN_Call49:
+	dc.b	nRst, $06, nC5, $01, nD5, nEb5, $04, nF5
+	dc.b	nG5, $08, nEb5, $06, nG4, $02, nAb4, $06
+	dc.b	nG4, $02, nF4, $04, nEb4, nBb4, $10
+	smpsReturn
 
-Olegend_Jump10:
-	dc.b	$89, $60, nRst, $60, nRst, $60, nRst, $60
-	smpsJump		Olegend_Jump10, Target
+ZVN_Call50:
+	dc.b	nC4, $06, nEb4, $04, nF4, $06, nBb4, $0C
+	dc.b	nAb4, $02, nEb4, nF4, $0C, nG4, $02, nAb4
+	dc.b	nG4, $0C
+	smpsPSGvoice	$06
+	dc.b	nF4, $04
+	smpsReturn
 
-Olegend_PWM4:
-	dc.b	nRst, $60
-	smpsLoop		$00, $07, Olegend_PWM4, Target
-	dc.b	nRst, $30
-	smpsAlterVol		$FD
-	dc.b	$90, $06, $06, nRst, $90, $06, $06, $06
-	dc.b	$06, $06
+ZVN_Call51:
+	smpsPSGvoice	$00
+	dc.b	nC4, $01, nC4, nC5, nC5, nC4, nC5, nBb4
+	dc.b	nAb4, nC4, nF4, nC5, nC5, nC4, nC5, nBb4
+	dc.b	nBb4, nC5, nEb4, nBb4, nC5, nC4, nC5, nG4
+	dc.b	nC5, nF4, nC5, nC4, nC5, nF4, nC5, nG4
+	dc.b	nC5, nC4, nC5, nC5, nC5, nC4, nC5, nBb4
+	dc.b	nAb4, nC4, nF4, nC5, nC5, nC4, nC5, nBb4
+	dc.b	nBb4, nC5, nEb4, nBb4, nC5, nC4, nC5, nG4
+	dc.b	nC5, nF4, nC5, nC4, nC5, nF4, nC5, nG4
+	dc.b	nC5
+	smpsReturn
 
-Olegend_Loop11:
-	dc.b	$91, $06, $06, nRst
-	smpsAlterVol		$03
-	smpsAlterVol		$CE
-	smpsAlterVol		$DE
-	dc.b	$93
-	smpsAlterVol		$32
-	smpsAlterVol		$22
-	smpsAlterVol		$FD
-	dc.b	$91, $06, $06, nRst
-	smpsAlterVol		$03
-	smpsAlterVol		$CE
-	smpsAlterVol		$DE
-	dc.b	$93
-	smpsAlterVol		$32
-	smpsAlterVol		$22
-	smpsAlterVol		$FD
-	dc.b	$91, $0C, $0C, $06, $06
-	smpsAlterVol		$03
-	smpsAlterVol		$CE
-	smpsAlterVol		$DE
-	dc.b	$93
-	smpsAlterVol		$32
-	smpsAlterVol		$22
-	smpsAlterVol		$FD
-	dc.b	$91
-	smpsLoop		$00, $0B, Olegend_Loop11, Target
-	dc.b	$91, $06, $06, nRst
-	smpsAlterVol		$03
-	smpsAlterVol		$CE
-	smpsAlterVol		$DE
-	dc.b	$93
-	smpsAlterVol		$32
-	smpsAlterVol		$22
-	smpsAlterVol		$FD
-	dc.b	$91, $06, $06, nRst
-	smpsAlterVol		$03
-	smpsAlterVol		$CE
-	smpsAlterVol		$DE
-	dc.b	$93
-	smpsAlterVol		$32
-	smpsAlterVol		$22
-	smpsAlterVol		$FD
-	dc.b	$91, $0C, $0C, $06, $06, $06, $06
-	smpsAlterVol		$22
+ZVN_Call52:
+	dc.b	nRst, $02
+	smpsPSGvoice	$00
+	dc.b	nF4, nG4, nC5, nBb4, nG5, nF5, nEb5, nD5
+	dc.b	nEb4, nF4, nG4, nAb4, nC5, nEb5, nD5, nBb4
+	dc.b	nC4, nF4, nG4, nF4, nC5, nG4, nF4, nEb4
+	dc.b	nC4, nF4, nG4, nF4, nC5, nG4, nF4
+	smpsReturn
 
-Olegend_Loop13:
-	dc.b	$90, $04, $04, $04, $06, $06, $06, $06
-	dc.b	$06, $06, $0C, $0C, $06, $06, $06, $06
-	dc.b	nRst, $06, $90, nRst, $90, $90, $06, $03
-	dc.b	$03, $06, $06
+ZVN_Call53:
+	dc.b	nRst, $02, nEb4, nF4, nG4, nEb4, nBb4, nF4
+	dc.b	nG4, nEb4, nF4, nG4, nAb4, nG4, nC5, nAb4
+	dc.b	nG4, nF4, nC4, nD4, nEb4, nC4, nF4, nC4
+	dc.b	nEb4, nC4, nBb3, nC4, nEb4, nF4, nG4, nF4
+	dc.b	nEb4
+	smpsReturn
 
-Olegend_Loop12:
-	dc.b	nRst, $06, $91
-	smpsLoop		$00, $04, Olegend_Loop12, Target
-	smpsLoop		$01, $02, Olegend_Loop13, Target
-	smpsAlterVol		$DE
-	smpsJump		Olegend_Loop11, Target
+ZVN_Call54:
+	dc.b	nRst, $02
+	smpsPSGvoice	$02
+	dc.b	nC5, nC4, nG5, nC4, nC6, nC4, nG5, nC4
+	dc.b	nD6, nC4, nG5, nC4, nC6, nC4, nG5, nC4
+	dc.b	nC5, nC4, nG5, nC4, nC6, nC4, nG5, nC4
+	dc.b	nD6, nC4, nG5, nC4, nC6, nC4, nG5
+	smpsReturn
 
-Olegend_Patches:
+ZVN_PSG3:
+	smpsSetVol		PSGVol_Half
+	smpsCall		ZVN_Call55, Target
+	smpsCall		ZVN_Call56, Target
+	smpsCall		ZVN_Call56, Target
 
+ZVN_Loop33:
+	smpsCall		ZVN_Call57, Target
+	smpsCall		ZVN_Call58, Target
+	smpsLoop		$00, $02, ZVN_Loop33, Target
+	smpsCall		ZVN_Call59, Target
+	smpsCall		ZVN_Call59, Target
+
+ZVN_Jum$9:
+	smpsCall		ZVN_Call59, Target
+	smpsCall		ZVN_Call58, Target
+	smpsCall		ZVN_Call57, Target
+	smpsCall		ZVN_Call58, Target
+
+ZVN_Loop34:
+	smpsCall		ZVN_Call59, Target
+	smpsLoop		$00, $03, ZVN_Loop34, Target
+	smpsCall		ZVN_Call60, Target
+	smpsCall		ZVN_Call58, Target
+	smpsCall		ZVN_Call57, Target
+	smpsCall		ZVN_Call58, Target
+
+ZVN_Loop36:
+	smpsCall		ZVN_Call59, Target
+	smpsLoop		$00, $03, ZVN_Loop36, Target
+	smpsJump		ZVN_Jum$9, Target
+
+ZVN_Call55:
+	smpsPSGvoice	$0A
+	dc.b	nC4, $02, nG4, nC5, nG4, nD4, nG4, nC5
+	dc.b	nBb4, nBb3, nEb4, nBb4, nEb4, nBb3, nEb4, nBb4
+	dc.b	nEb4, nF4, nAb4, nF5, nAb4, nF4, nAb4, nF5
+	dc.b	nAb4, nC4, nG4, nC5, nG4, nC4, nG4, nC5
+	dc.b	nG4
+	smpsReturn
+
+ZVN_Call56:
+	dc.b	nC4, $02, nG4, nC5, nG4, nD4, nG4, nC5
+	dc.b	nBb4, nBb3, nEb4, nBb4, nEb4, nBb3, nEb4, nBb4
+	dc.b	nEb4, nF4, nAb4, nF5, nAb4, nF4, nAb4, nF5
+	dc.b	nAb4, nBb3, nF4, nBb4, nF4, nBb3, nF4, nBb4
+	dc.b	nF4
+	smpsReturn
+
+ZVN_Call57:
+	smpsPSGvoice	$06
+
+ZVN_Loop31:
+	dc.b	nC5, $02, nC6, $04
+	smpsLoop		$01, $0A, ZVN_Loop31, Target
+	dc.b	nC5, $02, nC6
+	smpsReturn
+
+ZVN_Call58:
+	dc.b	nF5, $02, nF6, $04
+	smpsLoop		$01, $03, ZVN_Call58, Target
+	dc.b	nEb5, $02, nEb6, $04, nEb5, $02, nEb6, $04
+	dc.b	nEb5, $02
+
+ZVN_Loop32:
+	dc.b	nC6, $04, nC5, $02
+	smpsLoop		$01, $05, ZVN_Loop32, Target
+	dc.b	nC6
+	smpsReturn
+
+ZVN_Call59:
+	dc.b	nEb5, $02, nEb6, $04
+	smpsLoop		$01, $03, ZVN_Call59, Target
+	dc.b	nF5, $02, nF6, $04, nF5, $02, nF6, $04
+	dc.b	nF5, $02, nC6, $04, nC5, $02, nC6, $04
+	dc.b	nC5, $02, nC6, $04, nBb4, $02, nBb5, $04
+	dc.b	nBb4, $02, nBb5, $04, nBb4, $02, nBb5
+	smpsReturn
+
+ZVN_Call60:
+	dc.b	nC6
+
+ZVN_Loop35:
+	dc.b	$04, nC5, $02, nC6, $04, nC5, $02, nC6
+	dc.b	$04
+	smpsLoop		$00, $04, ZVN_Loop35, Target
+	smpsReturn
 	
-	dc.b	$3A
-	dc.b	$20, $23, $60, $00,	$1E, $1F, $1F, $1F
-	dc.b	$0A, $0A, $0B, $09,	$05, $07, $0A, $00
-	dc.b	$A4, $85, $96, $D7,	$21, $25, $28, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+ZVN_PWM1:
+	smpsCall		ZVN_PWM1_Call1, Target
+	smpsLoop		$00, $03, ZVN_PWM1, Target
 
+ZVN_PWM1_Loop2:
+	smpsCall		ZVN_PWM1_Call2, Target
+	smpsCall		ZVN_PWM1_Call3, Target
+	smpsLoop		$00, $02, ZVN_PWM1_Loop2, Target
+	smpsCall		ZVN_PWM1_Call2, Target
+	smpsCall		ZVN_PWM1_Call2, Target
+
+ZVN_PWM1_Loop3:
+	smpsCall		ZVN_PWM1_Call2, Target
+	smpsCall		ZVN_PWM1_Call3, Target
+	smpsLoop		$00, $02, ZVN_PWM1_Loop3, Target
+
+ZVN_PWM1_Loop4:
+	smpsCall		ZVN_PWM1_Call2, Target
+	smpsLoop		$00, $03, ZVN_PWM1_Loop4, Target
+	smpsCall		ZVN_PWM1_Call1, Target
+
+ZVN_PWM1_Loop5:
+	smpsCall		ZVN_PWM1_Call3, Target
+	smpsCall		ZVN_PWM1_Call2, Target
+	smpsLoop		$00, $02, ZVN_PWM1_Loop5, Target
+	smpsCall		ZVN_PWM1_Call2, Target
+	smpsCall		ZVN_PWM1_Call4, Target
+	smpsJump		ZVN_PWM1_Loop3, Target
+
+ZVN_PWM1_Call1:
+	dc.b	nRst, $10, nRst, nRst, nRst
+	smpsReturn
+
+ZVN_PWM1_Call2:
+	dc.b	$98
+
+ZVN_PWM1_Loop1:
+	dc.b	$02, $98, $98, $98, $04, $02, $04, $98
+	dc.b	$98, $02, $04, $01, $98, $98, $04
+	smpsLoop		$01, $02, ZVN_PWM1_Loop1, Target
+	smpsReturn
+
+ZVN_PWM1_Call3:
+	dc.b	$98, $04, $06, $98, $98, $04, $02, $04
+	dc.b	$01, $98, $98, $04, $0A, $02, $04, $98
+	dc.b	$98, $02, $0A
+	smpsReturn
+
+ZVN_PWM1_Call4:
+	dc.b	$98
+
+ZVN_PWM1_Loop6:
+	dc.b	$02, $98, $98, $98, $04, $02, $04, $98
+	dc.b	$98, $02, $04, $01, $98, $98, $04
+	smpsLoop		$00, $02, ZVN_PWM1_Loop6, Target
+	smpsReturn
 	
-	dc.b	$3A
-	dc.b	$01, $03, $02, $01,	$0F, $10, $11, $19
-	dc.b	$0A, $05, $0A, $05,	$02, $02, $02, $02
-	dc.b	$36, $36, $36, $58,	$19, $1E, $32, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+ZVN_PWM2:
+	smpsCall		ZVN_PWM2_Call1, Target
+	smpsLoop		$00, $03, ZVN_PWM2, Target
 
+ZVN_PWM2_Loop1:
+	smpsCall		ZVN_PWM2_Call2, Target
+	smpsCall		ZVN_PWM2_Call3, Target
+	smpsLoop		$00, $02, ZVN_PWM2_Loop1, Target
+	smpsCall		ZVN_PWM2_Call4, Target
+	smpsCall		ZVN_PWM2_Call2, Target
+
+ZVN_PWM2_Loop2:
+	smpsCall		ZVN_PWM2_Call2, Target
+	smpsCall		ZVN_PWM2_Call3, Target
+	smpsLoop		$00, $02, ZVN_PWM2_Loop2, Target
+	smpsCall		ZVN_PWM2_Call4, Target
+	smpsCall		ZVN_PWM2_Call2, Target
+	smpsCall		ZVN_PWM2_Call2, Target
+	smpsCall		ZVN_PWM2_Call1, Target
+	smpsCall		ZVN_PWM2_Call3, Target
+	smpsCall		ZVN_PWM2_Call2, Target
+	smpsCall		ZVN_PWM2_Call3, Target
+	smpsCall		ZVN_PWM2_Call4, Target
+	smpsCall		ZVN_PWM2_Call2, Target
+	smpsCall		ZVN_PWM2_Call2, Target
+	smpsJump		ZVN_PWM2_Loop2, Target
+
+ZVN_PWM2_Call1:
+	dc.b	nRst, $10, nRst, nRst, nRst
+	smpsReturn
+
+ZVN_PWM2_Call2:
+	dc.b	nRst, $08, $8C, $06, $04, $06, $8C, $8C
+	dc.b	$0A, $06, $04, $06, $8C, $8C, $02
+	smpsReturn
+
+ZVN_PWM2_Call3:
+	dc.b	nRst, $02, $8C, $04, $06, $01, $8C, $8C
+	dc.b	$04, $06, $8C, $8C, $04, $02, $8C, $8C
+	dc.b	$8C, $06, $04, $06, $02, $01, $8C, $8C
+	dc.b	$02, $8C
+	smpsReturn
+
+ZVN_PWM2_Call4:
+	dc.b	nRst, $08, $8C, $06, $04, $06, $8C, $8C
+	dc.b	$0A, $06, $04, $06, $8C, $8C, $02
+	smpsReturn
+	
+ZVN_PWM3:
+ZVN_PWM4:
+	smpsStop
+
+ZVN_Patches:	
+	dc.b	$07
+	dc.b	$01, $33, $D4, $08,	$DF, $DF, $DF, $DF
+	dc.b	$03, $05, $05, $05,	$00, $00, $00, $00
+	dc.b	$2A, $2A, $2A, $2A,	$18, $18, $1F, $1F
+	
+	dc.b	$2E
+	dc.b	$D5, $32, $D3, $31,	$1C, $0A, $0F, $0F
+	dc.b	$02, $04, $02, $04,	$02, $04, $04, $04
+	dc.b	$06, $06, $06, $06,	$26, $14, $1A, $14
+	
+	dc.b	$1C
+	dc.b	$31, $37, $D1, $D1,	$16, $13, $17, $14
+	dc.b	$08, $08, $09, $08,	$0A, $0A, $0A, $0A
+	dc.b	$03, $13, $03, $13,	$20, $1A, $18, $1A
 	
 	dc.b	$3D
-	dc.b	$61, $34, $34, $72,	$14, $0B, $0B, $0B
-	dc.b	$08, $05, $05, $05,	$00, $00, $00, $00
-	dc.b	$12, $27, $27, $27,	$19, $99, $99, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-	
-	dc.b	$39
-	dc.b	$02, $01, $02, $01,	$5F, $5F, $1F, $1F
-	dc.b	$00, $00, $00, $00,	$00, $00, $0C, $0E
-	dc.b	$0F, $0F, $0F, $0F,	$1B, $32, $28, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-	
-	dc.b	$2C
-	dc.b	$35, $76, $35, $36,	$1F, $1D, $1F, $1C
-	dc.b	$03, $0A, $03, $0A,	$02, $02, $02, $02
-	dc.b	$A3, $77, $A3, $77,	$1E, $80, $28, $85
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	dc.b	$00, $30, $D0, $00,	$1F, $1F, $1F, $11
+	dc.b	$0B, $09, $00, $1F,	$00, $00, $00, $00
+	dc.b	$FF, $F9, $0F, $07,	$20, $12, $16, $20

@@ -1,6 +1,6 @@
 Target	EQU	$12345
-	smpsHeaderVoice	SH_SystemMenu_Patches, Target
-	smpsHeaderChan	6,3
+	smpsHeaderVoice		SH_SystemMenu_Patches, Target
+	smpsHeaderChan		6,3
 	smpsHeaderTempoC	$02, $0F
 	smpsHeaderFM	SH_SystemMenu_FM1, Target, $00, $11
 	smpsHeaderFM	SH_SystemMenu_FM2, Target, $00, $23
@@ -962,3 +962,4 @@ SH_SystemMenu_Patches:
 	dc.b	$71, $06, $33, $01,	$9C, $96, $5D, $92
 	dc.b	$04, $09, $04, $07,	$00, $01, $03, $00
 	dc.b	$15, $12, $16, $B5,	$25, $34, $25, $08
+	even

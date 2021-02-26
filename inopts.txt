@@ -239,7 +239,7 @@ EndSeg
 ;All others are invalid and will display garbage character tiles
 
 StartSeg SoundTestSongNames Big_Endian $227338 $22A
-	String "--- SOUND  TEST ---"
+	String "-SOUND TEST-"
 	BYTE	$00
 	;!@ New Data
 	;String "DOOR INTO SUMMER"
@@ -259,7 +259,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	;!@ NEW Data
 	;String "TRIAL AND ERROR"
-	String "TRIAL-ERROR"
+	String "TRIAL AND ERROR"
 	BYTE	$00
 	String "WALKIN="
 	BYTE	$00
@@ -277,7 +277,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	;!@ NEW DATA
 	;String "TAKE OFF"
-	String "SYS MENU"
+	String "SYSTEM MENU"
 	BYTE	$00
 	String "COMBINATION"
 	BYTE	$00
@@ -287,7 +287,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	;!@ NEW DATA
 	;String "MECHANICAL DANCE"
-	String "GAMEOVER        "	
+	String "GAMEOVER"	
 	BYTE	$00
 	String "TUBE PANIC"
 	BYTE	$00
@@ -301,11 +301,15 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	String "SILVER SCREEN"
 	BYTE	$00
-	String "TACHY TOUCH"
+	;!@ New Data
+	;String "TACHY TOUCH"
+	String "ELEGY - HDNV"
 	BYTE	$00
 	String "CHAOTIC WORLD"
 	BYTE	$00
-	String "SURPRISE!"
+	;!@ New Data
+	;String "SURPRISE!"
+	String "ENEMY ATTACK - FFX"
 	BYTE	$00
 	String "NICE MEETING YOU"
 	BYTE	$00
@@ -313,7 +317,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	;!@ New Data
 	;String "REACH THE GOAL"
-	String "SONIC 1 GOAL  "
+	String "SONIC 1 GOAL"
 	BYTE	$00
 	String "HIGH FIVE"
 	BYTE	$00
@@ -323,7 +327,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	$00
 	String "HAVE SOME FUN"
 	BYTE	$00
-	String "ORIENTAL LEGEND"
+	;!@ New Data
+	;String "ORIENTAL LEGEND"
+	String "ZELDA VS. NOMY"
 	BYTE	$00
 	String "STEEL HEART"
 	BYTE	$00

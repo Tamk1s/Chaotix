@@ -22,7 +22,6 @@ WorkPath "#Batch"
 ;GetFile "Please select the target Chaotix ROM file"
 ;LoadFile #Got
 LoadFile "temp.bin"
-
 LoadInject "#Batch/inart32x.txt"
 
 ;GetFile "Please name the output file"
@@ -36,6 +35,7 @@ RunInject  "inject.bin"
 ;Extern     "#Batch\\fixheadr" "#Got"
 ;Extern     "#Batch\\fixheadr" "inject.bin"
 WorkPath "#Batch"
-Extern     "fixheadr" "inject.bin"
+Extern "fixheadr" "inject.bin"
+Extern "fix.bat" "0"
 ;
 ;EOF

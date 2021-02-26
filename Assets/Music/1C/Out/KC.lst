@@ -1,0 +1,3875 @@
+                        	LIST MACRO
+                        	LIST EXPAND
+000000                  	include _s1smps2asm_S1KC.asm
+                        ; Standard Octave Pitch Equates
+       = 000088         smpsPitch10lo		EQU	$88
+       = 000094         smpsPitch09lo		EQU	$94
+       = 0000A0         smpsPitch08lo		EQU	$A0
+       = 0000AC         smpsPitch07lo		EQU	$AC
+       = 0000B8         smpsPitch06lo		EQU	$B8
+       = 0000C4         smpsPitch05lo		EQU	$C4
+       = 0000D0         smpsPitch04lo		EQU	$D0
+       = 0000DC         smpsPitch03lo		EQU	$DC
+       = 0000E8         smpsPitch02lo		EQU	$E8
+       = 0000F4         smpsPitch01lo		EQU	$F4
+       = 000000         smpsPitch00			EQU	$00
+       = 00000C         smpsPitch01hi		EQU	$0C
+       = 000018         smpsPitch02hi		EQU	$18
+       = 000024         smpsPitch03hi		EQU	$24
+       = 000030         smpsPitch04hi		EQU	$30
+       = 00003C         smpsPitch05hi		EQU	$3C
+       = 000048         smpsPitch06hi		EQU	$48
+       = 000054         smpsPitch07hi		EQU	$54
+       = 000060         smpsPitch08hi		EQU	$60
+       = 00006C         smpsPitch09hi		EQU	$6C
+       = 000078         smpsPitch10hi		EQU	$78
+
+                        ; Note Equates
+       = 000080         nRst			EQU	$80
+       = 000081         nC0			EQU	$81
+       = 000082         nCs0			EQU	$82
+       = 000083         nD0			EQU	$83
+       = 000084         nEb0			EQU	$84
+       = 000085         nE0			EQU	$85
+       = 000086         nF0			EQU	$86
+       = 000087         nFs0			EQU	$87
+       = 000088         nG0			EQU	$88
+       = 000089         nAb0			EQU	$89
+       = 00008A         nA0			EQU	$8A
+       = 00008B         nBb0			EQU	$8B
+       = 00008C         nB0			EQU	$8C
+       = 00008D         nC1			EQU	$8D
+       = 00008E         nCs1			EQU	$8E
+       = 00008F         nD1			EQU	$8F
+       = 000090         nEb1			EQU	$90
+       = 000091         nE1			EQU	$91
+       = 000092         nF1			EQU	$92
+       = 000093         nFs1			EQU	$93
+       = 000094         nG1			EQU	$94
+       = 000095         nAb1			EQU	$95
+       = 000096         nA1			EQU	$96
+       = 000097         nBb1			EQU	$97
+       = 000098         nB1			EQU	$98
+       = 000099         nC2			EQU	$99
+       = 00009A         nCs2			EQU	$9A
+       = 00009B         nD2			EQU	$9B
+       = 00009C         nEb2			EQU	$9C
+       = 00009D         nE2			EQU	$9D
+       = 00009E         nF2			EQU	$9E
+       = 00009F         nFs2			EQU	$9F
+       = 0000A0         nG2			EQU	$A0
+       = 0000A1         nAb2			EQU	$A1
+       = 0000A2         nA2			EQU	$A2
+       = 0000A3         nBb2			EQU	$A3
+       = 0000A4         nB2			EQU	$A4
+       = 0000A5         nC3			EQU	$A5
+       = 0000A6         nCs3			EQU	$A6
+       = 0000A7         nD3			EQU	$A7
+       = 0000A8         nEb3			EQU	$A8
+       = 0000A9         nE3			EQU	$A9
+       = 0000AA         nF3			EQU	$AA
+       = 0000AB         nFs3			EQU	$AB
+       = 0000AC         nG3			EQU	$AC
+       = 0000AD         nAb3			EQU	$AD
+       = 0000AE         nA3			EQU	$AE
+       = 0000AF         nBb3			EQU	$AF
+       = 0000B0         nB3			EQU	$B0
+       = 0000B1         nC4			EQU	$B1
+       = 0000B2         nCs4			EQU	$B2
+       = 0000B3         nD4			EQU	$B3
+       = 0000B4         nEb4			EQU	$B4
+       = 0000B5         nE4			EQU	$B5
+       = 0000B6         nF4			EQU	$B6
+       = 0000B7         nFs4			EQU	$B7
+       = 0000B8         nG4			EQU	$B8
+       = 0000B9         nAb4			EQU	$B9
+       = 0000BA         nA4			EQU	$BA
+       = 0000BB         nBb4			EQU	$BB
+       = 0000BC         nB4			EQU	$BC
+       = 0000BD         nC5			EQU	$BD
+       = 0000BE         nCs5			EQU	$BE
+       = 0000BF         nD5			EQU	$BF
+       = 0000C0         nEb5			EQU	$C0
+       = 0000C1         nE5			EQU	$C1
+       = 0000C2         nF5			EQU	$C2
+       = 0000C3         nFs5			EQU	$C3
+       = 0000C4         nG5			EQU	$C4
+       = 0000C5         nAb5			EQU	$C5
+       = 0000C6         nA5			EQU	$C6
+       = 0000C7         nBb5			EQU	$C7
+       = 0000C8         nB5			EQU	$C8
+       = 0000C9         nC6			EQU	$C9
+       = 0000CA         nCs6			EQU	$CA
+       = 0000CB         nD6			EQU	$CB
+       = 0000CC         nEb6			EQU	$CC
+       = 0000CD         nE6			EQU	$CD
+       = 0000CE         nF6			EQU	$CE
+       = 0000CF         nFs6			EQU	$CF
+       = 0000D0         nG6			EQU	$D0
+       = 0000D1         nAb6			EQU	$D1
+       = 0000D2         nA6			EQU	$D2
+       = 0000D3         nBb6			EQU	$D3
+       = 0000D4         nB6			EQU	$D4
+       = 0000D5         nC7			EQU	$D5
+       = 0000D6         nCs7			EQU	$D6
+       = 0000D7         nD7			EQU	$D7
+       = 0000D8         nEb7			EQU	$D8
+       = 0000D9         nE7			EQU	$D9
+       = 0000DA         nF7			EQU	$DA
+       = 0000DB         nFs7			EQU	$DB
+       = 0000DC         nG7			EQU	$DC
+       = 0000DD         nAb7			EQU	$DD
+       = 0000DE         nA7			EQU	$DE
+       = 0000DF         nBb7			EQU	$DF
+
+                        ; DAC Equates (S1)
+       = 000081         dKick			EQU	$81
+       = 000082         dSnare			EQU	$82
+       = 000083         dTimpani		EQU	$83
+       = 000088         dHiTimpani		EQU	$88
+       = 000089         dMidTimpani		EQU	$89
+       = 00008A         dLowTimpani		EQU	$8A
+       = 00008B         dVLowTimpani	EQU	$8B
+       = 00008B         dFloorTimpani	EQU $8B
+
+                        ; PWM Equates (KC)
+       = 000081         pEKick		EQU	$81
+       = 000082         pESnare		EQU	$82
+       = 000083         pSplashCymb	EQU	$83
+       = 000084         pRideBell	EQU $84
+       = 000085         pTomHi		EQU	$85
+       = 000086         pTomMid		EQU	$86
+       = 000087         pTomLow		EQU	$87
+       = 000088         pEHiHat		EQU	$88
+       = 000089         pCrashCymb	EQU $89
+       = 00008A         pClap		EQU $8A
+       = 00008B         pAKick		EQU $8B
+       = 00008C         pASnare		EQU	$8C
+       = 00008D         pBell		EQU $8D
+       = 00008E         pFingSnap	EQU	$8E
+       = 00008F         pCowbell	EQU	$8F
+       = 000090         pClickHi	EQU	$90
+       = 000091         pClickLo	EQU	$91
+       = 000092         pBongoHi	EQU	$92
+       = 000093         pBongoLo	EQU	$93
+       = 000094         pTimpaniHi	EQU	$94
+       = 000095         pTimpaniLo	EQU	$95
+       = 000096         pSilence	EQU $96
+                        ;!@ NEW DATA
+       = 000097         pSega		EQU $97
+       = 000098         pClosedHH	EQU $98
+       = 000099         pOpenHH		EQU $99
+       = 00009A         pTomLower		EQU	$9A
+       = 00009B         pTomLowerer		EQU	$9B
+       = 00009C         pTomLowerest	EQU	$9C
+
+                        ;!@ Convert ptrs to z80Ptr
+                        ; function to make a little-endian 16-bit pointer for the Z80 sound driver
+                        ;z80_ptr function x,y,((((x)|(y))<<8)&$FF00)|((((x)|(y))>>8)&$7F)|$80
+                        ;z80_ptr_neg function x,y,((((y)-(x))<<8)&$FF00)|((((y)-(x))>>8)&$7F)|$80
+
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        rom_ptr_z80 macro addr
+                        	;dc.w z80_ptr(ptr,addr)
+                        	dc.w  ((((addr)<<8)&$FF00)|(((addr)>>8)&$7F)|$80)
+                            endm
+                        	
+                        ;Funciton to convert S1 tempo to S2 and then S3+
+                        ;The conversion works for all values of main tempo other than 0 — this value cannot be converted exactly between the two drivers. The conversion of main tempos from Sonic 1 to Sonic 2 can be done (approximately) with the following formul
+                        ;S2 main tempo = floor{ [ (S1 main tempo-1) * 256 + floor(S1 main tempo/2) ] / S1 main tempo }			
+                        ;It is easy to convert between Sonic 2 and Sonic 3+ main tempo values:
+                        ;S2 main tempo = (256 - S3 main tempo) mod 256
+                        ;S3 main tempo = (256 - S2 main tempo) mod 256
+                        tempo_conv macro tempo
+                        		if tempo==0
+                        			dc.b	((256 - (((256-1)*256 + (256/2)) / 256)) % 256)
+                        		else
+                        			dc.b	((256 - ((((tempo)-1)*256 + ((tempo)/2)) / (tempo))) % 256)
+                        		endif
+                        	endm
+
+                        	
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        ;rom_ptr_z80_neg macro ptr,addr
+                        	;dc.w z80_ptr_neg(ptr,addr)
+                        	;dc.w	(((((addr)-(ptr))<<8)&$FF00)|((((addr)-(ptr))>>8)&$7F)|$80)
+                            ;endm
+
+                        ; Header Macros
+
+                        ;!@
+                        ; Header - Set up Voice Location
+                        ;smpsHeaderVoice macro loc
+                        smpsHeaderVoice macro loc,songstart
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+                        ; Header - Set up Channel Usage	
+                        smpsHeaderChan macro fm,psg
+                        	if \0==2
+                        		dc.b	fm,psg
+                        	else
+                        		dc.b	fm
+                        	endif	
+                        	endm	
+                        	
+
+                        	
+                        smpsHeaderTempo macro div,mod
+                        	dc.b	div,mod
+                        	endm
+
+                        ;!@
+                        ; Header - Set up Tempo. Mod is converted from S1 to S3 tempo
+                        smpsHeaderTempoC macro div,mod
+                        TempDiv set div
+                        	dc.b	div
+                        	tempo_conv(mod)
+000000                  	endm
+                        	
+                        ; Header - Set up DAC Channel
+                        smpsHeaderDAC macro loc
+                        	dc.w	loc-songStart
+                        	dc.w	$00
+                        	endm
+                        	
+                        ;!@
+                        ; Header - Set up FM Channel	
+                        ;smpsHeaderFM macro loc,pitch,vol
+                        smpsHeaderFM macro loc,songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	endm
+
+                        ;!@	
+                        ; Header - Set up PSG Channel
+                        ;smpsHeaderPSG macro loc,pitch,vol,voice
+                        smpsHeaderPSG macro loc,songstart,pitch,vol,null,voice
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	;dc.w	voice
+                        	dc.b	null,voice
+                        	endm
+
+                        ;!@
+                        ; Header - Set up SFX Channel
+                        ;sHeaderSFX	macro play,patch,loc,pitch,vol
+                        smpsHeaderSFX	macro play,patch,loc,pitch,vol,songstart
+                        	dc.b play,patch
+                        	;dc.w loc-sPointZero
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b pitch,vol
+                            endm
+
+                        ; Co-ord Flag Macros and Equates
+                        ; E0xx - Panning, AMS, FMS
+                        smpsPan macro direction,amsfms
+                        panNone set $00
+                        panRight set $40
+                        panLeft set $80
+                        panCentre set $C0
+                        panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if \0==2
+                        		dc.b $E0,direction|amsfms
+                        	else
+                        		dc.b $E0,direction
+                        	endif
+000000                  	endm
+                        	
+                        ; E1xx - Alter note values by xx
+                        smpsAlterNote macro val
+                        	dc.b	$E1,val
+                        	endm
+                        	
+                        ; E2xx - Unknown
+                        smpsE2 macro val
+                        	dc.b	$E2,val
+                        	endm
+
+                        ; E3 - Return (generally used after F8)
+                        ; F9 - Return (generally used after F8)
+                        smpsReturn macro val
+                        	;!@
+                        	;dc.b	$E3
+                        	dc.b	$F9
+                        	endm
+                        	
+                        ; E4 - Fade in previous song (ie. 1-Up)
+                        smpsFade macro val
+                        	dc.b	$E4
+                        	endm
+
+                        ;!@ Invalid for S3+!
+                        ; E5xx - Set channel tempo divider to xx
+                        smpsChanTempoDiv macro val
+                        	;Error No S3 equivalent for CF!
+                        	dc.b	$E5,val	
+                        	endm
+                        	
+                        ; E6xx - Alter Volume by xx
+                        smpsAlterVol macro val
+                        	dc.b	$E6,val
+                        	endm
+                        	
+                        ; E7 - Prevent attack of next note
+       = 0000E7         smpsNoAttack	EQU $E7
+
+                        ;!@ This may have problems, needs some convesion factor due to usage of mult by tempo div in S3+
+                        ; E8xx - Set note fill to xx
+                        smpsNoteFill macro val		
+                        	dc.b	$E8,(val/TempDiv)
+                        	endm
+                        	
+                        ;!@
+                        ; E9xx - Add xx to channel pitch
+                        ; FBxx - Add xx to channel pitch
+                        smpsAlterPitch macro val
+                        	;!@
+                        	;dc.b	$E9,val
+                        	dc.b	$FB,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3
+                        smpsSetTempoMod macro val
+                        	;dc.b	$EA,val
+                        	dc.b	$FF,$00,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3 (TEMPO - TEMPO_SET)
+                        smpsSetTempoModC macro val
+                        	;dc.b	$EA,val
+                        	dc.b $FF,$00
+                        	tempo_conv(val)
+                        	endm
+                        	
+                        ;!@
+                        ; EBxx - Set music tempo divider to xx
+                        ; FF04xx - Set global tick multiplier to xx (TICK_MULT - TMULT_ALL)
+                        smpsSetTempoDiv macro val
+                        	;dc.b	$EB,val
+                        TempDiv set val
+                        	dc.b $FF,$04,val
+000000                  	endm
+
+                        ;!@	
+                        ; ECxx - Add xx to PSG channel volume (VOLUME - VOL_NN_PSG)
+                        ;
+                        ; May need interpolation/conversion factor:
+                        ; Change volume attenuation of PSG track.
+                        ;The single parameter byte is added to track's current volume attenuation;
+                        ;anything greater than $0F (unsigned comparison) is set to $0F (silence). Also, the flutter index is reduced by 1.
+                        smpsSetVol macro val
+                        	dc.b	$EC,val
+                        	endm
+                        	
+                        ; ED - Unknown
+       = 0000ED         smpsED		EQU $ED
+                        	
+                        ;!@ S3K= send cmd to YM2612 port; unused in S1
+                        ; EE - Stops special SFX ($D0-$D4, S1 only) and restarts overridden music track
+       = 0000EE         smpsEE 		EQU $EE
+                        	
+                        ;!@
+                        ; EFxx - Set Voice of FM channel to xx
+                        ; EFxx[yy] - Set patch id of FM channel to xx. If xx bit7 set, read from another song instead
+                        ; (INSTRUMENT - INS_C_FMP)
+                        ;smpsFMvoice macro voice
+                        	;dc.b	$EF,voice
+                        smpsFMvoice macro pat, song		
+                        	;if song<>""
+                        	if \0==2
+                        		dc.b $EF,pat|$80,song+$81
+                        	else
+                        		dc.b $EF,pat
+                        	endif
+                            endm
+
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        smpsModSet macro wait,speed,change,step
+                        	dc.b	$F0,wait,speed,change,step
+                        	endm
+                        	
+
+                        ;!@ Used very differently in S3; don't use
+                        ; F1 - Turn on Modulation
+       = 0000F1         smpsModOn 	EQU $F1
+                        ; F4 - Turn off Modulation
+       = 0000F4         smpsModOff 	EQU $F4
+
+                        ; F2 - End of channel
+                        smpsStop macro
+                        	dc.b	$F2
+                        	endm
+                        	
+                        ;!@
+                        ; F3xx - PSG waveform to xx
+                        ; S3+ only: If parameter byte is zero, the channel is converted
+                        ; back into a normal PSG channel and the noise channel is silenced.
+                        ; Otherwise, sets the PSG track to noise and sets PSG noise to parameter byte, which should be from $E0 to $E7 (inclusive).
+                        smpsPSGform macro form
+                        	dc.b	$F3,form
+                        	endm
+                        	
+                        ; F5xx - PSG voice to xx
+                        smpsPSGvoice macro voice
+                        	dc.b	$F5,voice
+                        	endm
+                        	
+                        ;BAD Cmpr
+                        ;if (loc<*)
+                        	;rom_ptr_z80_neg(*-loc,songstart)
+                        ;else
+                        	;rom_ptr_z80(loc-*-1,songstart)
+                        ;endif
+
+                        ;!@
+                        ; F6xxxx - Jump to xxxx
+                        ;smpsJump macro loc
+                        smpsJump macro loc,songstart
+                        	dc.b	$F6
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F7xxyyzzzz - Loop back to zzzz yy times, xx being the loop index for loop recursion fixing
+                        ;smpsLoop macro index,loops,loc
+                        smpsLoop macro index,loops,loc,songstart
+                        	dc.b	$F7
+                        	dc.b	index,loops
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F8xxxx - Call pattern at xxxx, saving return point
+                        ;smpsCall macro loc
+                        smpsCall macro loc,songstart
+                        	dc.b	$F8
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+                        	
+                        ; F9 - Unknown
+       = 0000F9         smpsF9		EQU $F9
+
+                        ; Voices - Feedback
+                        smpsVcFeedback macro val
+                        vcFeedback set val
+000000                  	endm
+
+                        ; Voices - Algorithm
+                        smpsVcAlgorithm macro val
+                        vcAlgorithm set val
+000000                  	endm
+
+                        ; Voices - Detune
+                        smpsVcDetune macro op1,op2,op3,op4
+                        vcDT1 set op1
+                        vcDT2 set op2
+                        vcDT3 set op3
+                        vcDT4 set op4
+000000                  	endm
+
+                        ; Voices - Coarse-Frequency
+                        smpsVcCoarseFreq macro op1,op2,op3,op4
+                        vcCF1 set op1
+                        vcCF2 set op2
+                        vcCF3 set op3
+                        vcCF4 set op4
+000000                  	endm
+
+                        ; Voices - Rate Scale
+                        smpsVcRateScale macro op1,op2,op3,op4
+                        vcRS1 set op1
+                        vcRS2 set op2
+                        vcRS3 set op3
+                        vcRS4 set op4
+000000                  	endm
+
+                        ; Voices - Attack Rate
+                        smpsVcAttackRate macro op1,op2,op3,op4
+                        vcAR1 set op1
+                        vcAR2 set op2
+                        vcAR3 set op3
+                        vcAR4 set op4
+000000                  	endm
+
+                        ; Voices - Amplitude Modulation
+                        smpsVcAmpMod macro op1,op2,op3,op4
+                        vcAM1 set op1
+                        vcAM2 set op2
+                        vcAM3 set op3
+                        vcAM4 set op4
+000000                  	endm
+
+                        ; Voices - First Decay Rate
+                        smpsVcDecayRate1 macro op1,op2,op3,op4
+                        vcD1R1 set op1
+                        vcD1R2 set op2
+                        vcD1R3 set op3
+                        vcD1R4 set op4
+000000                  	endm
+
+                        ; Voices - Second Decay Rate
+                        smpsVcDecayRate2 macro op1,op2,op3,op4
+                        vcD2R1 set op1
+                        vcD2R2 set op2
+                        vcD2R3 set op3
+                        vcD2R4 set op4
+000000                  	endm
+
+                        ; Voices - Decay Level	
+                        smpsVcDecayLevel macro op1,op2,op3,op4
+                        vcDL1 set op1
+                        vcDL2 set op2
+                        vcDL3 set op3
+                        vcDL4 set op4
+000000                  	endm
+
+                        ; Voices - Release Rate
+                        smpsVcReleaseRate macro op1,op2,op3,op4
+                        vcRR1 set op1
+                        vcRR2 set op2
+                        vcRR3 set op3
+                        vcRR4 set op4
+000000                  	endm
+
+                        ; Voices - Total Level
+                        smpsVcTotalLevel macro op1,op2,op3,op4
+                        vcTL1 set op1
+                        vcTL2 set op2
+                        vcTL3 set op3
+                        vcTL4 set op4
+                        	dc.b	(vcFeedback<<3)+vcAlgorithm
+                        	dc.b	(vcDT4<<4)+vcCF4,(vcDT3<<4)+vcCF3,(vcDT2<<4)+vcCF2,(vcDT1<<4)+vcCF1
+                        	dc.b	(vcRS4<<6)+vcAR4,(vcRS3<<6)+vcAR3,(vcRS2<<6)+vcAR2,(vcRS1<<6)+vcAR1
+                        	dc.b	(vcAM4<<5)+vcD1R4,(vcAM3<<5)+vcD1R3,(vcAM2<<5)+vcD1R2,(vcAM1<<5)+vcD1R1
+                        	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
+                        	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
+                        	dc.b	vcTL4,vcTL3,vcTL2,vcTL1	
+000000                  	endm
+                        	
+                        	
+                        ;==============================================
+                        ;!@ The following CF flags/macros are KC-drive specific!
+                        ;Rest here mostly used  to compile KC/Nat ASM files for BC purposes...
+
+                        ;!@
+                        ; Header - Set up a secondary PWM Channel
+                        ;smpsHeaderPWM macro loc
+                        smpsHeaderPWM macro loc, songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)	
+                        	;!@
+                        	dc.b	pitch
+                        	dc.b	vol
+                        	endm
+                        	
+                        ;!@ Unused and unneeded; leftover Sonic 32x header stuff
+                        ; Header - Set up first PWM Channel
+                        ;smpsHeaderPWM1 macro loc,num
+                        	;dc.w	loc-songStart
+                        	;dc.b	num,0
+                        	;endm
+
+                        ;!@
+                        ; Header - Set up Tick Multiplier (for Sfx)
+                        ;sHeaderSFX
+                        smpsHeaderTick	macro tmul
+                        	dc.b tmul
+                            endm
+
+                        ;!@ KC Exclusives!
+                        ;# PAN_ANIM
+                        ;# pan animation has 2 modes; if first arg is 0, it will end it. Otherwise, more args will be used
+                        ;!0xE4, 0 > sPanAni:;								
+                        ;!0xE4, 1-0xFF > sPanAni: .lb, .db, .db, .db, .db;	
+                        KC_smpsPanAni macro val1,val2,val3,val4,val5
+                        	if val1==0
+                        		dc.b	$E4,$00
+                        	else
+                        		dc.b	$E4,val1,val2,val3,val4,val5
+                        	endif
+                        	endm
+
+
+                        ; Alter Volume
+                        ;!0xE5 > saVolFMP: .db, .db;								
+                        KC_smpsFMAlterVol macro val1,val2
+                        	dc.b	$E5,val1,val2
+                        	endm
+
+                        ;!@ KC Exclusive!	
+                        ;!0xE9 > ssLFO: .db, .db;									
+                        KC_smpsSetLFO macro enable,amsfms
+                        	dc.b	$E9,enable,amsfms
+                        	endm
+
+                        ;!0xEA > sPlayDAC: .db | 0x80;								
+                        KC_smpsPlayDACSample macro sample
+                        	dc.b	$EA,(sample&$7F)
+                        	endm
+
+                        ;!@ Songstart param added
+                        ;!0xEB > sLoopExit: .db, .dw {						
+                        ;smpsConditionalJump macro index,loc
+                        KC_smpsConditionalJump macro index,loc,songstart
+                        	dc.b	$EB
+                        	dc.b	index
+                        	;dc.w	z80_ptr(loc)
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+
+                        ;!@ Usage/naming is speculative. Called ssTransposeS3K in S3k/Nat driver...	
+                        ;!0xED > sYMcmd: .db, .db;							
+                        ; Set note values to xx-$40
+                        KC_smpsSetNote macro val
+                        	dc.b	$ED,val
+                        	endm
+
+                        ;!0xEE > sYM1cmd: .db, .db;							
+                        KC_smpsFMICommand macro reg,val
+                        	dc.b	$EE,reg,val
+                        	endm
+
+                        ;!0xF1 > sModEnv: .db, .db {							
+                        ; Set Modulation
+                        KC_smpsModChange2 macro fmmod,psgmod
+                        	dc.b	$F1,fmmod,psgmod
+                        	endm
+                        	
+                        ;!0xF4 > sModEnv: .db {
+                        ; Set Modulation
+                        KC_smpsModChange macro val
+                        	dc.b	$F4,val
+                        	endm
+
+                        ;!@ KC exclusive!
+                        ;!0xFC > sPitchSlide: .db;						
+                        KC_smpsPitchSlide macro enable
+                        	dc.b	$FC,enable
+                        	endm
+                        	
+                        ;!0xFD > sRawFreq: .db;							
+                        KC_smpsAlternateSMPS macro flag
+                        	dc.b	$FD,flag
+                        	endm
+
+                        ;!0xFE > sSpecFM3: .db, .db, .db, .db {			
+                        	;%; Broken?
+                        ;}
+                        KC_smpsFM3SpecialMode macro ind1,ind2,ind3,ind4
+                        	dc.b	$FE,ind1,ind2,ind3,ind4
+                        	Error Broken?
+                        	endm
+
+                        ;!0xFF, 1 > sPlaySound: .db;						
+                        KC_smpsPlaySound macro index
+                        	dc.b	$FF,$01,index
+                        	endm
+
+                        ;!0xFF, 2 > sMusPause: .db;						
+                        KC_smpsHaltMusic macro flag
+                        	dc.b	$FF,$02,flag
+                        	endm
+
+                        ;!@ Modified with SongStart	param
+                        ;!0xFF, 3 > sCopyMem: .dw, .db {					
+                        	;%; No song should ever use this command. It may good idea to remove it.
+                        ;}
+                        ;KC_smpsCopyData macro data,len
+                        KC_smpsCopyData macro data,len,songstart
+                        	Error Coord. Flag to copy data should not be used. Complain to GenesisDoes if any music uses it.
+                        	;Error No song should ever use this command. It may be a good idea to remove it.
+                        	dc.b	$FF,$03
+                        	;dc.w	little_endian(data)
+                        	rom_ptr_z80(data+songstart)
+                        	dc.b	len
+                        	endm
+
+                        ;!0xFF, 5 > sSSGEG: .db, .db, .db, .db {			
+                        	;=op2 .a2
+                        	;:=2 .a1
+                        	;:=1 \op2\
+                        ;}
+                        KC_smpsSSGEG macro op1,op2,op3,op4
+                        	dc.b	$FF,$05,op1,op3,op2,op4
+                        	endm
+                        	
+                        	
+                        ;!0xFF, 6 > sVolEnvFM: .db, .db {
+                        	;:?0 {
+                        		;?volenv;
+                        	;}
+                        ;}	
+                        KC_smpsFMVolEnv macro tone,mask
+                        	dc.b	$FF,$06,tone,mask
+                        	endm
+                        ;==============================================
+
+000000                  	include "KC.asm"
+       = 040000         Target	EQU	$40000
+000000                  	smpsHeaderVoice	FFX_EA_Patches, Target
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+000000                  	rom_ptr_z80(FFX_EA_Patches+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000000 908E             	dc.w  (((((FFX_EA_Patches+Target))<<8)&$FF00)|((((FFX_EA_Patches+Target))>>8)&$7F)|$80)
+000002                  	smpsHeaderChan	$06, $03
+                        	if 2==2
+000002 0603             		dc.b	$06,$03
+                        	else
+                        	endif	
+000004                  	smpsHeaderTempoC	$02, $03
+       = 000002         TempDiv set $02
+000004 02               	dc.b	$02
+000005                  	tempo_conv($03)
+                        		if ($03)==0
+                        		else
+000005 55               			dc.b	((256 - ((((($03))-1)*256 + ((($03))/2)) / (($03)))) % 256)
+                        		endif
+                        	;!@ smpsHeaderFM	FFX_EA_FM1, Target, $00, $00
+                        	;!@ smpsHeaderFM	FFX_EA_FM2, Target, $00, $00
+                        	;!@ smpsHeaderFM	FFX_EA_FM3, Target, $00, $08
+                        	;!@ smpsHeaderFM	FFX_EA_FM4, Target, $00, $22
+000006                  	smpsHeaderFM	FFX_EA_FM1, Target, $00, $0C
+                        	;dc.w	loc-songStart
+000006                  	rom_ptr_z80(FFX_EA_FM1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000006 4080             	dc.w  (((((FFX_EA_FM1+Target))<<8)&$FF00)|((((FFX_EA_FM1+Target))>>8)&$7F)|$80)
+000008 000C             	dc.b	$00,$0C
+00000A                  	smpsHeaderFM	FFX_EA_FM2, Target, $00, $10
+                        	;dc.w	loc-songStart
+00000A                  	rom_ptr_z80(FFX_EA_FM2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000A 0481             	dc.w  (((((FFX_EA_FM2+Target))<<8)&$FF00)|((((FFX_EA_FM2+Target))>>8)&$7F)|$80)
+00000C 0010             	dc.b	$00,$10
+00000E                  	smpsHeaderFM	FFX_EA_FM3, Target, $00, $14
+                        	;dc.w	loc-songStart
+00000E                  	rom_ptr_z80(FFX_EA_FM3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000E B181             	dc.w  (((((FFX_EA_FM3+Target))<<8)&$FF00)|((((FFX_EA_FM3+Target))>>8)&$7F)|$80)
+000010 0014             	dc.b	$00,$14
+000012                  	smpsHeaderFM	FFX_EA_FM4, Target, $00, $2B
+                        	;dc.w	loc-songStart
+000012                  	rom_ptr_z80(FFX_EA_FM4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000012 8284             	dc.w  (((((FFX_EA_FM4+Target))<<8)&$FF00)|((((FFX_EA_FM4+Target))>>8)&$7F)|$80)
+000014 002B             	dc.b	$00,$2B
+                        	;!@ smpsHeaderFM	FFX_EA_FM5, Target, $00, $00
+000016                  	smpsHeaderFM	FFX_EA_FM5, Target, $00, $10
+                        	;dc.w	loc-songStart
+000016                  	rom_ptr_z80(FFX_EA_FM5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000016 7386             	dc.w  (((((FFX_EA_FM5+Target))<<8)&$FF00)|((((FFX_EA_FM5+Target))>>8)&$7F)|$80)
+000018 0010             	dc.b	$00,$10
+00001A                  	smpsHeaderFM	FFX_EA_FM6, Target, $00, $10
+                        	;dc.w	loc-songStart
+00001A                  	rom_ptr_z80(FFX_EA_FM6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001A AB86             	dc.w  (((((FFX_EA_FM6+Target))<<8)&$FF00)|((((FFX_EA_FM6+Target))>>8)&$7F)|$80)
+00001C 0010             	dc.b	$00,$10
+                        	;!@ smpsHeaderPSG	FFX_EA_PSG1, Target, $00, $03, $00, $04
+                        	;!@ smpsHeaderPSG	FFX_EA_PSG2, Target, $00, $0D, $00, $00
+                        	;!@ smpsHeaderPSG	FFX_EA_PSG3, Target, $00, $08, $00, $00
+00001E                  	smpsHeaderPSG	FFX_EA_PSG1, Target, $0C, $04, $00, $04
+                        	;dc.w	loc-songStart
+00001E                  	rom_ptr_z80(FFX_EA_PSG1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001E F186             	dc.w  (((((FFX_EA_PSG1+Target))<<8)&$FF00)|((((FFX_EA_PSG1+Target))>>8)&$7F)|$80)
+000020 0C04             	dc.b	$0C,$04
+                        	;dc.w	voice
+000022 0004             	dc.b	$00,$04
+000024                  	smpsHeaderPSG	FFX_EA_PSG2, Target, $0C, $0D, $00, $00
+                        	;dc.w	loc-songStart
+000024                  	rom_ptr_z80(FFX_EA_PSG2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000024 A787             	dc.w  (((((FFX_EA_PSG2+Target))<<8)&$FF00)|((((FFX_EA_PSG2+Target))>>8)&$7F)|$80)
+000026 0C0D             	dc.b	$0C,$0D
+                        	;dc.w	voice
+000028 0000             	dc.b	$00,$00
+00002A                  	smpsHeaderPSG	FFX_EA_PSG3, Target, $0C, $08, $00, $00
+                        	;dc.w	loc-songStart
+00002A                  	rom_ptr_z80(FFX_EA_PSG3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00002A 1189             	dc.w  (((((FFX_EA_PSG3+Target))<<8)&$FF00)|((((FFX_EA_PSG3+Target))>>8)&$7F)|$80)
+00002C 0C08             	dc.b	$0C,$08
+                        	;dc.w	voice
+00002E 0000             	dc.b	$00,$00
+000030                  	smpsHeaderPWM	FFX_EA_PWM1, Target, $00, $8F
+                        	;dc.w	loc-songStart
+000030                  	rom_ptr_z80(FFX_EA_PWM1+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000030 4C89             	dc.w  (((((FFX_EA_PWM1+Target))<<8)&$FF00)|((((FFX_EA_PWM1+Target))>>8)&$7F)|$80)
+                        	;!@
+000032 00               	dc.b	$00
+000033 8F               	dc.b	$8F
+000034                  	smpsHeaderPWM	FFX_EA_PWM2, Target, $00, $8F
+                        	;dc.w	loc-songStart
+000034                  	rom_ptr_z80(FFX_EA_PWM2+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000034 CD8A             	dc.w  (((((FFX_EA_PWM2+Target))<<8)&$FF00)|((((FFX_EA_PWM2+Target))>>8)&$7F)|$80)
+                        	;!@
+000036 00               	dc.b	$00
+000037 8F               	dc.b	$8F
+000038                  	smpsHeaderPWM	FFX_EA_PWM3, Target, $00, $8F
+                        	;dc.w	loc-songStart
+000038                  	rom_ptr_z80(FFX_EA_PWM3+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000038 2C8B             	dc.w  (((((FFX_EA_PWM3+Target))<<8)&$FF00)|((((FFX_EA_PWM3+Target))>>8)&$7F)|$80)
+                        	;!@
+00003A 00               	dc.b	$00
+00003B 8F               	dc.b	$8F
+00003C                  	smpsHeaderPWM	FFX_EA_PWM4, Target, $00, $8F
+                        	;dc.w	loc-songStart
+00003C                  	rom_ptr_z80(FFX_EA_PWM4+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+00003C B58C             	dc.w  (((((FFX_EA_PWM4+Target))<<8)&$FF00)|((((FFX_EA_PWM4+Target))>>8)&$7F)|$80)
+                        	;!@
+00003E 00               	dc.b	$00
+00003F 8F               	dc.b	$8F
+
+000040                  FFX_EA_FM1:
+000040                  	smpsFMvoice		$00
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000040 EF00             		dc.b $EF,$00
+                        	endif
+
+000042                  FFX_EA_Loop1:
+000042 AC038001         	dc.b	nG3, $03, nRst, $01
+000046                  	smpsLoop		$00, $84, FFX_EA_Loop1, Target
+000046 F7               	dc.b	$F7
+000047 0084             	dc.b	$00,$84
+                        	if (FFX_EA_Loop1<*)
+000049                  		rom_ptr_z80(FFX_EA_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000049 4280             	dc.w  (((((FFX_EA_Loop1+Target))<<8)&$FF00)|((((FFX_EA_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00004B AF038001AF038001 	dc.b	nBb3, $03, nRst, $01, nBb3, $03, nRst, $01
+000053 B2038001B1088001 	dc.b	nCs4, $03, nRst, $01, nC4, $08, nRst, $01
+00005B AD03AF028016     	dc.b	nAb3, $03, nBb3, $02, nRst, $16
+
+000061                  FFX_EA_Loop2:
+000061 AF04B60280B780B4 	dc.b	nBb3, $04, nF4, $02, nRst, nFs4, nRst, nEb4
+000069 80B680B280B480AD 	dc.b	nRst, nF4, nRst, nCs4, nRst, nEb4, nRst, nAb3
+000071 80AF800E         	dc.b	nRst, nBb3, nRst, $0E
+000075                  	smpsLoop		$00, $03, FFX_EA_Loop2, Target
+000075 F7               	dc.b	$F7
+000076 0003             	dc.b	$00,$03
+                        	if (FFX_EA_Loop2<*)
+000078                  		rom_ptr_z80(FFX_EA_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000078 6180             	dc.w  (((((FFX_EA_Loop2+Target))<<8)&$FF00)|((((FFX_EA_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00007A B0038001B0038001 	dc.b	nB3, $03, nRst, $01, nB3, $03, nRst, $01
+000082 B3038001B2088001 	dc.b	nD4, $03, nRst, $01, nCs4, $08, nRst, $01
+00008A AE03B0028016B004 	dc.b	nA3, $03, nB3, $02, nRst, $16, nB3, $04
+000092 B70280B880B580B7 	dc.b	nFs4, $02, nRst, nG4, nRst, nE4, nRst, nFs4
+00009A 80B380B580AE80B0 	dc.b	nRst, nD4, nRst, nE4, nRst, nA3, nRst, nB3
+
+0000A2                  FFX_EA_Loop3:
+0000A2 800EAE04B50280B6 	dc.b	nRst, $0E, nA3, $04, nE4, $02, nRst, nF4
+0000AA 80B380B580B180B3 	dc.b	nRst, nD4, nRst, nE4, nRst, nC4, nRst, nD4
+0000B2 80AC80AE         	dc.b	nRst, nG3, nRst, nA3
+0000B6                  	smpsLoop		$00, $02, FFX_EA_Loop3, Target
+0000B6 F7               	dc.b	$F7
+0000B7 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop3<*)
+0000B9                  		rom_ptr_z80(FFX_EA_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000B9 A280             	dc.w  (((((FFX_EA_Loop3+Target))<<8)&$FF00)|((((FFX_EA_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0000BB 800E             	dc.b	nRst, $0E
+
+0000BD                  FFX_EA_Loop4:
+0000BD AB0280AB80A980AE 	dc.b	nFs3, $02, nRst, nFs3, nRst, nE3, nRst, nA3
+0000C5 80B080A980       	dc.b	nRst, nB3, nRst, nE3, nRst
+0000CA                  	smpsLoop		$00, $0A, FFX_EA_Loop4, Target
+0000CA F7               	dc.b	$F7
+0000CB 000A             	dc.b	$00,$0A
+                        	if (FFX_EA_Loop4<*)
+0000CD                  		rom_ptr_z80(FFX_EA_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000CD BD80             	dc.w  (((((FFX_EA_Loop4+Target))<<8)&$FF00)|((((FFX_EA_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0000CF                  FFX_EA_Loop5:
+0000CF BF80BF80C080BB80 	dc.b	nD5, nRst, nD5, nRst, nEb5, nRst, nBb4, nRst
+0000D7 BD80C28006BF0280 	dc.b	nC5, nRst, nF5, nRst, $06, nD5, $02, nRst
+0000DF C080BB80BD80C280 	dc.b	nEb5, nRst, nBb4, nRst, nC5, nRst, nF5, nRst
+0000E7                  	smpsLoop		$00, $04, FFX_EA_Loop5, Target
+0000E7 F7               	dc.b	$F7
+0000E8 0004             	dc.b	$00,$04
+                        	if (FFX_EA_Loop5<*)
+0000EA                  		rom_ptr_z80(FFX_EA_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000EA CF80             	dc.w  (((((FFX_EA_Loop5+Target))<<8)&$FF00)|((((FFX_EA_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0000EC                  FFX_EA_Loop6:
+0000EC B780             	dc.b	nFs4, nRst
+0000EE                  	smpsLoop		$00, $15, FFX_EA_Loop6, Target
+0000EE F7               	dc.b	$F7
+0000EF 0015             	dc.b	$00,$15
+                        	if (FFX_EA_Loop6<*)
+0000F1                  		rom_ptr_z80(FFX_EA_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000F1 EC80             	dc.w  (((((FFX_EA_Loop6+Target))<<8)&$FF00)|((((FFX_EA_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0000F3 D0018003C601C280 	dc.b	nG6, $01, nRst, $03, nA5, $01, nF5, nRst
+0000FB 04BB01BF800E     	dc.b	$04, nBb4, $01, nD5, nRst, $0E
+000101                  	smpsJump		FFX_EA_FM1, Target
+000101 F6               	dc.b	$F6
+                        	if (FFX_EA_FM1<*)
+000102                  		rom_ptr_z80(FFX_EA_FM1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000102 4080             	dc.w  (((((FFX_EA_FM1+Target))<<8)&$FF00)|((((FFX_EA_FM1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000104                  FFX_EA_FM2:
+000104                  	smpsFMvoice		$00
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000104 EF00             		dc.b $EF,$00
+                        	endif
+
+000106                  FFX_EA_Loop7:
+000106 A0038001         	dc.b	nG2, $03, nRst, $01
+00010A                  	smpsLoop		$00, $83, FFX_EA_Loop7, Target
+00010A F7               	dc.b	$F7
+00010B 0083             	dc.b	$00,$83
+                        	if (FFX_EA_Loop7<*)
+00010D                  		rom_ptr_z80(FFX_EA_Loop7+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00010D 0681             	dc.w  (((((FFX_EA_Loop7+Target))<<8)&$FF00)|((((FFX_EA_Loop7+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00010F A003803DAF02     	dc.b	nG2, $03, nRst, $3D, nBb3, $02
+
+000115                  FFX_EA_Loop8:
+000115 80B280AF80B180AA 	dc.b	nRst, nCs4, nRst, nBb3, nRst, nC4, nRst, nF3
+00011D 80AB800EA304B202 	dc.b	nRst, nFs3, nRst, $0E, nBb2, $04, nCs4, $02
+000125 80B480B1         	dc.b	nRst, nEb4, nRst, nC4
+000129                  	smpsLoop		$00, $02, FFX_EA_Loop8, Target
+000129 F7               	dc.b	$F7
+00012A 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop8<*)
+00012C                  		rom_ptr_z80(FFX_EA_Loop8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00012C 1581             	dc.w  (((((FFX_EA_Loop8+Target))<<8)&$FF00)|((((FFX_EA_Loop8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00012E 80B280AF80B180AA 	dc.b	nRst, nCs4, nRst, nBb3, nRst, nC4, nRst, nF3
+000136 80AB8042B30280B5 	dc.b	nRst, nFs3, nRst, $42, nD4, $02, nRst, nE4
+00013E 80B080B380B080B2 	dc.b	nRst, nB3, nRst, nD4, nRst, nB3, nRst, nCs4
+000146 80AB80AC         	dc.b	nRst, nFs3, nRst, nG3
+
+00014A                  FFX_EA_Loop9:
+00014A 800EA204B10280B3 	dc.b	nRst, $0E, nA2, $04, nC4, $02, nRst, nD4
+000152 80B080B180AE80B0 	dc.b	nRst, nB3, nRst, nC4, nRst, nA3, nRst, nB3
+00015A 80A980AA         	dc.b	nRst, nE3, nRst, nF3
+00015E                  	smpsLoop		$00, $02, FFX_EA_Loop9, Target
+00015E F7               	dc.b	$F7
+00015F 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop9<*)
+000161                  		rom_ptr_z80(FFX_EA_Loop9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000161 4A81             	dc.w  (((((FFX_EA_Loop9+Target))<<8)&$FF00)|((((FFX_EA_Loop9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000163 800E             	dc.b	nRst, $0E
+
+000165                  FFX_EA_Loop10:
+000165 A60280A680A480A9 	dc.b	nCs3, $02, nRst, nCs3, nRst, nB2, nRst, nE3
+00016D 80AB80A480       	dc.b	nRst, nFs3, nRst, nB2, nRst
+000172                  	smpsLoop		$00, $0A, FFX_EA_Loop10, Target
+000172 F7               	dc.b	$F7
+000173 000A             	dc.b	$00,$0A
+                        	if (FFX_EA_Loop10<*)
+000175                  		rom_ptr_z80(FFX_EA_Loop10+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000175 6581             	dc.w  (((((FFX_EA_Loop10+Target))<<8)&$FF00)|((((FFX_EA_Loop10+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000177                  FFX_EA_Loop11:
+000177 B880B880BB80B880 	dc.b	nG4, nRst, nG4, nRst, nBb4, nRst, nG4, nRst
+00017F BB80BB8006B80280 	dc.b	nBb4, nRst, nBb4, nRst, $06, nG4, $02, nRst
+000187 BA80B880B880BD80 	dc.b	nA4, nRst, nG4, nRst, nG4, nRst, nC5, nRst
+00018F                  	smpsLoop		$00, $04, FFX_EA_Loop11, Target
+00018F F7               	dc.b	$F7
+000190 0004             	dc.b	$00,$04
+                        	if (FFX_EA_Loop11<*)
+000192                  		rom_ptr_z80(FFX_EA_Loop11+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000192 7781             	dc.w  (((((FFX_EA_Loop11+Target))<<8)&$FF00)|((((FFX_EA_Loop11+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000194                  FFX_EA_Loop12:
+000194 AB80             	dc.b	nFs3, nRst
+000196                  	smpsLoop		$00, $14, FFX_EA_Loop12, Target
+000196 F7               	dc.b	$F7
+000197 0014             	dc.b	$00,$14
+                        	if (FFX_EA_Loop12<*)
+000199                  		rom_ptr_z80(FFX_EA_Loop12+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000199 9481             	dc.w  (((((FFX_EA_Loop12+Target))<<8)&$FF00)|((((FFX_EA_Loop12+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00019B AB8003CF018002C4 	dc.b	nFs3, nRst, $03, nFs6, $01, nRst, $02, nG5
+0001A3 0180BF8002B80180 	dc.b	$01, nRst, nD5, nRst, $02, nG4, $01, nRst
+0001AB BF800E           	dc.b	nD5, nRst, $0E
+0001AE                  	smpsJump		FFX_EA_FM2, Target
+0001AE F6               	dc.b	$F6
+                        	if (FFX_EA_FM2<*)
+0001AF                  		rom_ptr_z80(FFX_EA_FM2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0001AF 0481             	dc.w  (((((FFX_EA_FM2+Target))<<8)&$FF00)|((((FFX_EA_FM2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0001B1                  FFX_EA_FM3:
+0001B1                  	smpsFMvoice		$01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0001B1 EF01             		dc.b $EF,$01
+                        	endif
+0001B3 A0038001         	dc.b	nG2, $03, nRst, $01
+0001B7                  	smpsAlterVol		$06
+0001B7 E606             	dc.b	$E6,$06
+
+0001B9                  FFX_EA_Loop13:
+0001B9 A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+0001C1                  	smpsAlterVol		$FB
+0001C1 E6FB             	dc.b	$E6,$FB
+0001C3 A0038001         	dc.b	nG2, $03, nRst, $01
+0001C7                  	smpsAlterVol		$05
+0001C7 E605             	dc.b	$E6,$05
+0001C9                  	smpsLoop		$00, $02, FFX_EA_Loop13, Target
+0001C9 F7               	dc.b	$F7
+0001CA 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop13<*)
+0001CC                  		rom_ptr_z80(FFX_EA_Loop13+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0001CC B981             	dc.w  (((((FFX_EA_Loop13+Target))<<8)&$FF00)|((((FFX_EA_Loop13+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0001CE A0038001         	dc.b	nG2, $03, nRst, $01
+0001D2                  	smpsAlterVol		$FB
+0001D2 E6FB             	dc.b	$E6,$FB
+0001D4 A0038001         	dc.b	nG2, $03, nRst, $01
+0001D8                  	smpsAlterVol		$05
+0001D8 E605             	dc.b	$E6,$05
+
+0001DA                  FFX_EA_Loop14:
+0001DA A0038001         	dc.b	nG2, $03, nRst, $01
+0001DE                  	smpsAlterVol		$FA
+0001DE E6FA             	dc.b	$E6,$FA
+0001E0 A0038001         	dc.b	nG2, $03, nRst, $01
+0001E4                  	smpsAlterVol		$06
+0001E4 E606             	dc.b	$E6,$06
+0001E6                  	smpsLoop		$00, $02, FFX_EA_Loop14, Target
+0001E6 F7               	dc.b	$F7
+0001E7 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop14<*)
+0001E9                  		rom_ptr_z80(FFX_EA_Loop14+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0001E9 DA81             	dc.w  (((((FFX_EA_Loop14+Target))<<8)&$FF00)|((((FFX_EA_Loop14+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0001EB                  FFX_EA_Loop15:
+0001EB A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+0001F3                  	smpsAlterVol		$FB
+0001F3 E6FB             	dc.b	$E6,$FB
+0001F5 A0038001         	dc.b	nG2, $03, nRst, $01
+0001F9                  	smpsAlterVol		$05
+0001F9 E605             	dc.b	$E6,$05
+0001FB                  	smpsLoop		$00, $02, FFX_EA_Loop15, Target
+0001FB F7               	dc.b	$F7
+0001FC 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop15<*)
+0001FE                  		rom_ptr_z80(FFX_EA_Loop15+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0001FE EB81             	dc.w  (((((FFX_EA_Loop15+Target))<<8)&$FF00)|((((FFX_EA_Loop15+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000200 A0038001         	dc.b	nG2, $03, nRst, $01
+000204                  	smpsAlterVol		$FB
+000204 E6FB             	dc.b	$E6,$FB
+000206 A0038001         	dc.b	nG2, $03, nRst, $01
+00020A                  	smpsAlterVol		$05
+00020A E605             	dc.b	$E6,$05
+
+00020C                  FFX_EA_Loop16:
+00020C A0038001         	dc.b	nG2, $03, nRst, $01
+000210                  	smpsAlterVol		$FA
+000210 E6FA             	dc.b	$E6,$FA
+000212 A0038001         	dc.b	nG2, $03, nRst, $01
+000216                  	smpsAlterVol		$06
+000216 E606             	dc.b	$E6,$06
+000218                  	smpsLoop		$00, $02, FFX_EA_Loop16, Target
+000218 F7               	dc.b	$F7
+000219 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop16<*)
+00021B                  		rom_ptr_z80(FFX_EA_Loop16+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00021B 0C82             	dc.w  (((((FFX_EA_Loop16+Target))<<8)&$FF00)|((((FFX_EA_Loop16+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00021D                  FFX_EA_Loop17:
+00021D A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+000225                  	smpsAlterVol		$FB
+000225 E6FB             	dc.b	$E6,$FB
+000227 A0038001         	dc.b	nG2, $03, nRst, $01
+00022B                  	smpsAlterVol		$05
+00022B E605             	dc.b	$E6,$05
+00022D                  	smpsLoop		$00, $02, FFX_EA_Loop17, Target
+00022D F7               	dc.b	$F7
+00022E 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop17<*)
+000230                  		rom_ptr_z80(FFX_EA_Loop17+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000230 1D82             	dc.w  (((((FFX_EA_Loop17+Target))<<8)&$FF00)|((((FFX_EA_Loop17+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000232 A0038001         	dc.b	nG2, $03, nRst, $01
+000236                  	smpsAlterVol		$FB
+000236 E6FB             	dc.b	$E6,$FB
+000238 A0038001         	dc.b	nG2, $03, nRst, $01
+00023C                  	smpsAlterVol		$05
+00023C E605             	dc.b	$E6,$05
+
+00023E                  FFX_EA_Loop18:
+00023E A0038001         	dc.b	nG2, $03, nRst, $01
+000242                  	smpsAlterVol		$FA
+000242 E6FA             	dc.b	$E6,$FA
+000244 A0038001         	dc.b	nG2, $03, nRst, $01
+000248                  	smpsAlterVol		$06
+000248 E606             	dc.b	$E6,$06
+00024A                  	smpsLoop		$00, $02, FFX_EA_Loop18, Target
+00024A F7               	dc.b	$F7
+00024B 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop18<*)
+00024D                  		rom_ptr_z80(FFX_EA_Loop18+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00024D 3E82             	dc.w  (((((FFX_EA_Loop18+Target))<<8)&$FF00)|((((FFX_EA_Loop18+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00024F                  FFX_EA_Loop19:
+00024F A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+000257                  	smpsAlterVol		$FB
+000257 E6FB             	dc.b	$E6,$FB
+000259 A0038001         	dc.b	nG2, $03, nRst, $01
+00025D                  	smpsAlterVol		$05
+00025D E605             	dc.b	$E6,$05
+00025F                  	smpsLoop		$00, $02, FFX_EA_Loop19, Target
+00025F F7               	dc.b	$F7
+000260 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop19<*)
+000262                  		rom_ptr_z80(FFX_EA_Loop19+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000262 4F82             	dc.w  (((((FFX_EA_Loop19+Target))<<8)&$FF00)|((((FFX_EA_Loop19+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000264 A0038001         	dc.b	nG2, $03, nRst, $01
+000268                  	smpsAlterVol		$FB
+000268 E6FB             	dc.b	$E6,$FB
+00026A A0038001         	dc.b	nG2, $03, nRst, $01
+00026E                  	smpsAlterVol		$05
+00026E E605             	dc.b	$E6,$05
+
+000270                  FFX_EA_Loop20:
+000270 A0038001         	dc.b	nG2, $03, nRst, $01
+000274                  	smpsAlterVol		$FA
+000274 E6FA             	dc.b	$E6,$FA
+000276 A0038001         	dc.b	nG2, $03, nRst, $01
+00027A                  	smpsAlterVol		$06
+00027A E606             	dc.b	$E6,$06
+00027C                  	smpsLoop		$00, $02, FFX_EA_Loop20, Target
+00027C F7               	dc.b	$F7
+00027D 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop20<*)
+00027F                  		rom_ptr_z80(FFX_EA_Loop20+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00027F 7082             	dc.w  (((((FFX_EA_Loop20+Target))<<8)&$FF00)|((((FFX_EA_Loop20+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000281                  FFX_EA_Loop21:
+000281 A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+000289                  	smpsAlterVol		$FB
+000289 E6FB             	dc.b	$E6,$FB
+00028B A0038001         	dc.b	nG2, $03, nRst, $01
+00028F                  	smpsAlterVol		$05
+00028F E605             	dc.b	$E6,$05
+000291                  	smpsLoop		$00, $02, FFX_EA_Loop21, Target
+000291 F7               	dc.b	$F7
+000292 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop21<*)
+000294                  		rom_ptr_z80(FFX_EA_Loop21+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000294 8182             	dc.w  (((((FFX_EA_Loop21+Target))<<8)&$FF00)|((((FFX_EA_Loop21+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000296 A0038001         	dc.b	nG2, $03, nRst, $01
+00029A                  	smpsAlterVol		$FB
+00029A E6FB             	dc.b	$E6,$FB
+00029C A0038001         	dc.b	nG2, $03, nRst, $01
+0002A0                  	smpsAlterVol		$05
+0002A0 E605             	dc.b	$E6,$05
+
+0002A2                  FFX_EA_Loop22:
+0002A2 A0038001         	dc.b	nG2, $03, nRst, $01
+0002A6                  	smpsAlterVol		$FA
+0002A6 E6FA             	dc.b	$E6,$FA
+0002A8 A0038001         	dc.b	nG2, $03, nRst, $01
+0002AC                  	smpsAlterVol		$06
+0002AC E606             	dc.b	$E6,$06
+0002AE                  	smpsLoop		$00, $02, FFX_EA_Loop22, Target
+0002AE F7               	dc.b	$F7
+0002AF 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop22<*)
+0002B1                  		rom_ptr_z80(FFX_EA_Loop22+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002B1 A282             	dc.w  (((((FFX_EA_Loop22+Target))<<8)&$FF00)|((((FFX_EA_Loop22+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002B3                  FFX_EA_Loop23:
+0002B3 A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+0002BB                  	smpsAlterVol		$FB
+0002BB E6FB             	dc.b	$E6,$FB
+0002BD A0038001         	dc.b	nG2, $03, nRst, $01
+0002C1                  	smpsAlterVol		$05
+0002C1 E605             	dc.b	$E6,$05
+0002C3                  	smpsLoop		$00, $02, FFX_EA_Loop23, Target
+0002C3 F7               	dc.b	$F7
+0002C4 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop23<*)
+0002C6                  		rom_ptr_z80(FFX_EA_Loop23+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002C6 B382             	dc.w  (((((FFX_EA_Loop23+Target))<<8)&$FF00)|((((FFX_EA_Loop23+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0002C8 A0038001         	dc.b	nG2, $03, nRst, $01
+0002CC                  	smpsAlterVol		$FB
+0002CC E6FB             	dc.b	$E6,$FB
+0002CE A0038001         	dc.b	nG2, $03, nRst, $01
+0002D2                  	smpsAlterVol		$05
+0002D2 E605             	dc.b	$E6,$05
+
+0002D4                  FFX_EA_Loop24:
+0002D4 A0038001         	dc.b	nG2, $03, nRst, $01
+0002D8                  	smpsAlterVol		$FA
+0002D8 E6FA             	dc.b	$E6,$FA
+0002DA A0038001         	dc.b	nG2, $03, nRst, $01
+0002DE                  	smpsAlterVol		$06
+0002DE E606             	dc.b	$E6,$06
+0002E0                  	smpsLoop		$00, $02, FFX_EA_Loop24, Target
+0002E0 F7               	dc.b	$F7
+0002E1 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop24<*)
+0002E3                  		rom_ptr_z80(FFX_EA_Loop24+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002E3 D482             	dc.w  (((((FFX_EA_Loop24+Target))<<8)&$FF00)|((((FFX_EA_Loop24+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002E5                  FFX_EA_Loop25:
+0002E5 A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+0002ED                  	smpsAlterVol		$FB
+0002ED E6FB             	dc.b	$E6,$FB
+0002EF A0038001         	dc.b	nG2, $03, nRst, $01
+0002F3                  	smpsAlterVol		$05
+0002F3 E605             	dc.b	$E6,$05
+0002F5                  	smpsLoop		$00, $02, FFX_EA_Loop25, Target
+0002F5 F7               	dc.b	$F7
+0002F6 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop25<*)
+0002F8                  		rom_ptr_z80(FFX_EA_Loop25+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002F8 E582             	dc.w  (((((FFX_EA_Loop25+Target))<<8)&$FF00)|((((FFX_EA_Loop25+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0002FA A0038001         	dc.b	nG2, $03, nRst, $01
+0002FE                  	smpsAlterVol		$FB
+0002FE E6FB             	dc.b	$E6,$FB
+000300 A0038001         	dc.b	nG2, $03, nRst, $01
+000304                  	smpsAlterVol		$05
+000304 E605             	dc.b	$E6,$05
+
+000306                  FFX_EA_Loop26:
+000306 A0038001         	dc.b	nG2, $03, nRst, $01
+00030A                  	smpsAlterVol		$FA
+00030A E6FA             	dc.b	$E6,$FA
+00030C A0038001         	dc.b	nG2, $03, nRst, $01
+000310                  	smpsAlterVol		$06
+000310 E606             	dc.b	$E6,$06
+000312                  	smpsLoop		$00, $02, FFX_EA_Loop26, Target
+000312 F7               	dc.b	$F7
+000313 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop26<*)
+000315                  		rom_ptr_z80(FFX_EA_Loop26+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000315 0683             	dc.w  (((((FFX_EA_Loop26+Target))<<8)&$FF00)|((((FFX_EA_Loop26+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000317                  FFX_EA_Loop27:
+000317 A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+00031F                  	smpsAlterVol		$FB
+00031F E6FB             	dc.b	$E6,$FB
+000321 A0038001         	dc.b	nG2, $03, nRst, $01
+000325                  	smpsAlterVol		$05
+000325 E605             	dc.b	$E6,$05
+000327                  	smpsLoop		$00, $02, FFX_EA_Loop27, Target
+000327 F7               	dc.b	$F7
+000328 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop27<*)
+00032A                  		rom_ptr_z80(FFX_EA_Loop27+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00032A 1783             	dc.w  (((((FFX_EA_Loop27+Target))<<8)&$FF00)|((((FFX_EA_Loop27+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00032C A0038001         	dc.b	nG2, $03, nRst, $01
+000330                  	smpsAlterVol		$FB
+000330 E6FB             	dc.b	$E6,$FB
+000332 A0038001         	dc.b	nG2, $03, nRst, $01
+000336                  	smpsAlterVol		$05
+000336 E605             	dc.b	$E6,$05
+
+000338                  FFX_EA_Loop28:
+000338 A0038001         	dc.b	nG2, $03, nRst, $01
+00033C                  	smpsAlterVol		$FA
+00033C E6FA             	dc.b	$E6,$FA
+00033E A0038001         	dc.b	nG2, $03, nRst, $01
+000342                  	smpsAlterVol		$06
+000342 E606             	dc.b	$E6,$06
+000344                  	smpsLoop		$00, $02, FFX_EA_Loop28, Target
+000344 F7               	dc.b	$F7
+000345 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop28<*)
+000347                  		rom_ptr_z80(FFX_EA_Loop28+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000347 3883             	dc.w  (((((FFX_EA_Loop28+Target))<<8)&$FF00)|((((FFX_EA_Loop28+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000349                  FFX_EA_Loop29:
+000349 A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+000351                  	smpsAlterVol		$FB
+000351 E6FB             	dc.b	$E6,$FB
+000353 A0038001         	dc.b	nG2, $03, nRst, $01
+000357                  	smpsAlterVol		$05
+000357 E605             	dc.b	$E6,$05
+000359                  	smpsLoop		$00, $02, FFX_EA_Loop29, Target
+000359 F7               	dc.b	$F7
+00035A 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop29<*)
+00035C                  		rom_ptr_z80(FFX_EA_Loop29+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00035C 4983             	dc.w  (((((FFX_EA_Loop29+Target))<<8)&$FF00)|((((FFX_EA_Loop29+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00035E A0038001         	dc.b	nG2, $03, nRst, $01
+000362                  	smpsAlterVol		$FB
+000362 E6FB             	dc.b	$E6,$FB
+000364 A0038001         	dc.b	nG2, $03, nRst, $01
+000368                  	smpsAlterVol		$05
+000368 E605             	dc.b	$E6,$05
+
+00036A                  FFX_EA_Loop30:
+00036A A0038001         	dc.b	nG2, $03, nRst, $01
+00036E                  	smpsAlterVol		$FA
+00036E E6FA             	dc.b	$E6,$FA
+000370 A0038001         	dc.b	nG2, $03, nRst, $01
+000374                  	smpsAlterVol		$06
+000374 E606             	dc.b	$E6,$06
+000376                  	smpsLoop		$00, $02, FFX_EA_Loop30, Target
+000376 F7               	dc.b	$F7
+000377 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop30<*)
+000379                  		rom_ptr_z80(FFX_EA_Loop30+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000379 6A83             	dc.w  (((((FFX_EA_Loop30+Target))<<8)&$FF00)|((((FFX_EA_Loop30+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00037B                  FFX_EA_Loop31:
+00037B A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+000383                  	smpsAlterVol		$FB
+000383 E6FB             	dc.b	$E6,$FB
+000385 A0038001         	dc.b	nG2, $03, nRst, $01
+000389                  	smpsAlterVol		$05
+000389 E605             	dc.b	$E6,$05
+00038B                  	smpsLoop		$00, $02, FFX_EA_Loop31, Target
+00038B F7               	dc.b	$F7
+00038C 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop31<*)
+00038E                  		rom_ptr_z80(FFX_EA_Loop31+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00038E 7B83             	dc.w  (((((FFX_EA_Loop31+Target))<<8)&$FF00)|((((FFX_EA_Loop31+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000390 A0038001         	dc.b	nG2, $03, nRst, $01
+000394                  	smpsAlterVol		$FB
+000394 E6FB             	dc.b	$E6,$FB
+000396 A0038001         	dc.b	nG2, $03, nRst, $01
+00039A                  	smpsAlterVol		$05
+00039A E605             	dc.b	$E6,$05
+
+00039C                  FFX_EA_Loop32:
+00039C A0038001         	dc.b	nG2, $03, nRst, $01
+0003A0                  	smpsAlterVol		$FA
+0003A0 E6FA             	dc.b	$E6,$FA
+0003A2 A0038001         	dc.b	nG2, $03, nRst, $01
+0003A6                  	smpsAlterVol		$06
+0003A6 E606             	dc.b	$E6,$06
+0003A8                  	smpsLoop		$00, $02, FFX_EA_Loop32, Target
+0003A8 F7               	dc.b	$F7
+0003A9 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop32<*)
+0003AB                  		rom_ptr_z80(FFX_EA_Loop32+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0003AB 9C83             	dc.w  (((((FFX_EA_Loop32+Target))<<8)&$FF00)|((((FFX_EA_Loop32+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0003AD                  FFX_EA_Loop33:
+0003AD A0038001A0038001 	dc.b	nG2, $03, nRst, $01, nG2, $03, nRst, $01
+0003B5                  	smpsAlterVol		$FB
+0003B5 E6FB             	dc.b	$E6,$FB
+0003B7 A0038001         	dc.b	nG2, $03, nRst, $01
+0003BB                  	smpsAlterVol		$05
+0003BB E605             	dc.b	$E6,$05
+0003BD                  	smpsLoop		$00, $02, FFX_EA_Loop33, Target
+0003BD F7               	dc.b	$F7
+0003BE 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop33<*)
+0003C0                  		rom_ptr_z80(FFX_EA_Loop33+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0003C0 AD83             	dc.w  (((((FFX_EA_Loop33+Target))<<8)&$FF00)|((((FFX_EA_Loop33+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0003C2 A0038001         	dc.b	nG2, $03, nRst, $01
+0003C6                  	smpsAlterVol		$FB
+0003C6 E6FB             	dc.b	$E6,$FB
+0003C8 A0038001         	dc.b	nG2, $03, nRst, $01
+0003CC                  	smpsAlterVol		$05
+0003CC E605             	dc.b	$E6,$05
+0003CE A0038001         	dc.b	nG2, $03, nRst, $01
+0003D2                  	smpsAlterVol		$FA
+0003D2 E6FA             	dc.b	$E6,$FA
+0003D4 A0038001         	dc.b	nG2, $03, nRst, $01
+0003D8                  	smpsAlterVol		$06
+0003D8 E606             	dc.b	$E6,$06
+0003DA A0038001         	dc.b	nG2, $03, nRst, $01
+0003DE                  	smpsAlterVol		$FA
+0003DE E6FA             	dc.b	$E6,$FA
+0003E0 AF038001AF038001 	dc.b	nBb3, $03, nRst, $01, nBb3, $03, nRst, $01
+0003E8 B2038001B1088001 	dc.b	nCs4, $03, nRst, $01, nC4, $08, nRst, $01
+0003F0 AD028001AF028016 	dc.b	nAb3, $02, nRst, $01, nBb3, $02, nRst, $16
+0003F8                  	smpsAlterVol		$01
+0003F8 E601             	dc.b	$E6,$01
+0003FA AF08             	dc.b	nBb3, $08
+0003FC                  	smpsAlterVol		$FF
+0003FC E6FF             	dc.b	$E6,$FF
+0003FE AD04AF028022     	dc.b	nAb3, $04, nBb3, $02, nRst, $22
+000404                  	smpsAlterVol		$01
+000404 E601             	dc.b	$E6,$01
+000406 AF04802CAF04802C 	dc.b	nBb3, $04, nRst, $2C, nBb3, $04, nRst, $2C
+00040E                  	smpsAlterVol		$FF
+00040E E6FF             	dc.b	$E6,$FF
+000410 B0038001B0038001 	dc.b	nB3, $03, nRst, $01, nB3, $03, nRst, $01
+000418 B3038001B2088001 	dc.b	nD4, $03, nRst, $01, nCs4, $08, nRst, $01
+000420 AE028001B0028016 	dc.b	nA3, $02, nRst, $01, nB3, $02, nRst, $16
+000428                  	smpsAlterVol		$01
+000428 E601             	dc.b	$E6,$01
+00042A B008             	dc.b	nB3, $08
+00042C                  	smpsAlterVol		$FF
+00042C E6FF             	dc.b	$E6,$FF
+00042E AE04B0028022     	dc.b	nA3, $04, nB3, $02, nRst, $22
+000434                  	smpsAlterVol		$01
+000434 E601             	dc.b	$E6,$01
+000436 AE04802CAE04807F 	dc.b	nA3, $04, nRst, $2C, nA3, $04, nRst, $7F
+                        	;!@ dc.b	$7F, $1E
+00043E 807F801E         	dc.b	nRst, $7F, nRst, $1E
+
+                        ;!@
+000442                  FFX_EA_Loop34:
+000442 B30280           	dc.b	nD4, $02, nRst
+000445                  	smpsAlterVol		$FF
+000445 E6FF             	dc.b	$E6,$FF
+000447 B380B480AF80B180 	dc.b	nD4, nRst, nEb4, nRst, nBb3, nRst, nC4, nRst
+00044F B68006B30280B480 	dc.b	nF4, nRst, $06, nD4, $02, nRst, nEb4, nRst
+000457 AF80B180B680     	dc.b	nBb3, nRst, nC4, nRst, nF4, nRst
+00045D                  	smpsAlterVol		$01
+00045D E601             	dc.b	$E6,$01
+00045F                  	smpsLoop		$00, $03, FFX_EA_Loop34, Target
+00045F F7               	dc.b	$F7
+000460 0003             	dc.b	$00,$03
+                        	if (FFX_EA_Loop34<*)
+000462                  		rom_ptr_z80(FFX_EA_Loop34+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000462 4284             	dc.w  (((((FFX_EA_Loop34+Target))<<8)&$FF00)|((((FFX_EA_Loop34+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000464 B380             	dc.b	nD4, nRst
+000466                  	smpsAlterVol		$FF
+000466 E6FF             	dc.b	$E6,$FF
+000468 B380B480AF80B180 	dc.b	nD4, nRst, nEb4, nRst, nBb3, nRst, nC4, nRst
+000470 B68006B30280B480 	dc.b	nF4, nRst, $06, nD4, $02, nRst, nEb4, nRst
+000478 AF80B180B68070   	dc.b	nBb3, nRst, nC4, nRst, nF4, nRst, $70
+00047F                  	smpsJump		FFX_EA_FM3, Target
+00047F F6               	dc.b	$F6
+                        	if (FFX_EA_FM3<*)
+000480                  		rom_ptr_z80(FFX_EA_FM3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000480 B181             	dc.w  (((((FFX_EA_FM3+Target))<<8)&$FF00)|((((FFX_EA_FM3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000482                  FFX_EA_FM4:
+000482                  	smpsFMvoice		$02
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000482 EF02             		dc.b $EF,$02
+                        	endif
+                        	;!@ dc.b	nG6, $03, nRst, $7F, $7F, $07
+000484 8003807F807F8007 	dc.b	nRst, $03, nRst, $7F, nRst, $7F, nRst, $07
+00048C                  	smpsFMvoice		$02
+                        	;if song<>""
+                        	if 1==2
+                        	else
+00048C EF02             		dc.b $EF,$02
+                        	endif
+                        	;!@ dc.b	$06
+00048E 8006             	dc.b	nRst, $06
+                        	
+                        	;smpsAlterVol		$FB
+                        	;dc.b	nC6, $02, nRst, $01
+                        	;smpsAlterVol		$FC
+                        	;dc.b	nEb6, $02, nRst, $01
+                        	;smpsAlterVol		$FC
+                        	;dc.b	nG6, $02
+                        	;smpsAlterVol		$FE
+                        	;dc.b	nF6, $01, nRst, $03
+                        	;smpsAlterVol		$FE
+                        	;dc.b	nC6, $02, nRst, $01
+                        	;smpsAlterVol		$FF
+                        	;dc.b	nEb6, $02, nRst, $01
+                        	;smpsAlterVol		$FF
+                        	;;!@ dc.b	nG6, $02, nRst, $7F, $3F
+                        	;dc.b	nG6, $02, nRst, $7F, nRst, $3F
+                        	;smpsFMvoice		$02
+                        	;;!@ dc.b	$12
+                        	;dc.b	nRst, $12
+                        	;smpsAlterVol		$05
+                        	;dc.b	nC6, $02, nRst, $01, nEb6, $02, nRst, $01
+                        	;dc.b	nG6, $02, nF6, $01, nRst, $02, nF6, $01
+                        	;dc.b	nRst, $02, nC6, $01, nRst, $03, nA5, $02
+                        	;dc.b	nRst, $01, nC6, $02, nRst, $01, nEb6, $02
+                        	;dc.b	nRst, $01, nG6, $02, nA6, $01, nRst, $1C
+                        	
+000490                  	smpsAlterVol		$AB
+000490 E6AB             	dc.b	$E6,$AB
+000492 BD028001         	dc.b	nC5, $02, nRst, $01
+000496                  	smpsAlterVol		$AC
+000496 E6AC             	dc.b	$E6,$AC
+000498 C0028001         	dc.b	nEb5, $02, nRst, $01
+00049C                  	smpsAlterVol		$AC
+00049C E6AC             	dc.b	$E6,$AC
+00049E C402             	dc.b	nG5, $02
+0004A0                  	smpsAlterVol		$AE
+0004A0 E6AE             	dc.b	$E6,$AE
+0004A2 C2018003         	dc.b	nF5, $01, nRst, $03
+0004A6                  	smpsAlterVol		$AE
+0004A6 E6AE             	dc.b	$E6,$AE
+0004A8 BD028001         	dc.b	nC5, $02, nRst, $01
+0004AC                  	smpsAlterVol		$AF
+0004AC E6AF             	dc.b	$E6,$AF
+0004AE C0028001         	dc.b	nEb5, $02, nRst, $01
+0004B2                  	smpsAlterVol		$AF
+0004B2 E6AF             	dc.b	$E6,$AF
+                        	;!@ dc.b	nG5, $02, nRst, $7F, $3F
+0004B4 C402807F803F     	dc.b	nG5, $02, nRst, $7F, nRst, $3F
+0004BA                  	smpsFMvoice		$02
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0004BA EF02             		dc.b $EF,$02
+                        	endif
+                        	;!@ dc.b	$12
+0004BC 8012             	dc.b	nRst, $12
+0004BE                  	smpsAlterVol		$45
+0004BE E645             	dc.b	$E6,$45
+0004C0 BD028001C0028001 	dc.b	nC5, $02, nRst, $01, nEb5, $02, nRst, $01
+0004C8 C402C2018002C201 	dc.b	nG5, $02, nF5, $01, nRst, $02, nF5, $01
+0004D0 8002BD018003BA02 	dc.b	nRst, $02, nC5, $01, nRst, $03, nA4, $02
+0004D8 8001BD028001C002 	dc.b	nRst, $01, nC5, $02, nRst, $01, nEb5, $02
+0004E0 8001C402C601801C 	dc.b	nRst, $01, nG5, $02, nA5, $01, nRst, $1C
+                        	
+                        	
+0004E8                  	smpsAlterVol		$F9
+0004E8 E6F9             	dc.b	$E6,$F9
+0004EA BB02800ABB0280BB 	dc.b	nBb4, $02, nRst, $0A, nBb4, $02, nRst, nBb4
+0004F2 80BB80           	dc.b	nRst, nBb4, nRst
+0004F5                  	smpsAlterVol		$03
+0004F5 E603             	dc.b	$E6,$03
+0004F7 B680             	dc.b	nF4, nRst
+0004F9                  	smpsAlterVol		$01
+0004F9 E601             	dc.b	$E6,$01
+0004FB B780             	dc.b	nFs4, nRst
+0004FD                  	smpsAlterVol		$01
+0004FD E601             	dc.b	$E6,$01
+0004FF B480B680         	dc.b	nEb4, nRst, nF4, nRst
+000503                  	smpsAlterVol		$01
+000503 E601             	dc.b	$E6,$01
+000505 B280             	dc.b	nCs4, nRst
+000507                  	smpsAlterVol		$01
+000507 E601             	dc.b	$E6,$01
+000509 B480             	dc.b	nEb4, nRst
+00050B                  	smpsAlterVol		$01
+00050B E601             	dc.b	$E6,$01
+00050D AD80             	dc.b	nAb3, nRst
+00050F                  	smpsAlterVol		$01
+00050F E601             	dc.b	$E6,$01
+000511 AF8006           	dc.b	nBb3, nRst, $06
+000514                  	smpsAlterVol		$F8
+000514 E6F8             	dc.b	$E6,$F8
+000516 BB0280BB80       	dc.b	nBb4, $02, nRst, nBb4, nRst
+00051B                  	smpsAlterVol		$FA
+00051B E6FA             	dc.b	$E6,$FA
+00051D BB80             	dc.b	nBb4, nRst
+00051F                  	smpsAlterVol		$01
+00051F E601             	dc.b	$E6,$01
+000521 B680             	dc.b	nF4, nRst
+000523                  	smpsAlterVol		$01
+000523 E601             	dc.b	$E6,$01
+000525 B780             	dc.b	nFs4, nRst
+000527                  	smpsAlterVol		$01
+000527 E601             	dc.b	$E6,$01
+000529 B480             	dc.b	nEb4, nRst
+00052B                  	smpsAlterVol		$01
+00052B E601             	dc.b	$E6,$01
+00052D B680             	dc.b	nF4, nRst
+00052F                  	smpsAlterVol		$01
+00052F E601             	dc.b	$E6,$01
+000531 B280             	dc.b	nCs4, nRst
+000533                  	smpsAlterVol		$01
+000533 E601             	dc.b	$E6,$01
+000535 B480             	dc.b	nEb4, nRst
+000537                  	smpsAlterVol		$01
+000537 E601             	dc.b	$E6,$01
+000539 AD80             	dc.b	nAb3, nRst
+00053B                  	smpsAlterVol		$01
+00053B E601             	dc.b	$E6,$01
+00053D AF8006           	dc.b	nBb3, nRst, $06
+000540                  	smpsAlterVol		$FC
+000540 E6FC             	dc.b	$E6,$FC
+000542 BB0280           	dc.b	nBb4, $02, nRst
+000545                  	smpsAlterVol		$FE
+000545 E6FE             	dc.b	$E6,$FE
+000547 BB80             	dc.b	nBb4, nRst
+000549                  	smpsAlterVol		$FE
+000549 E6FE             	dc.b	$E6,$FE
+00054B BB80             	dc.b	nBb4, nRst
+00054D                  	smpsAlterVol		$01
+00054D E601             	dc.b	$E6,$01
+00054F B680             	dc.b	nF4, nRst
+000551                  	smpsAlterVol		$01
+000551 E601             	dc.b	$E6,$01
+000553 B780             	dc.b	nFs4, nRst
+000555                  	smpsAlterVol		$01
+000555 E601             	dc.b	$E6,$01
+000557 B480             	dc.b	nEb4, nRst
+000559                  	smpsAlterVol		$01
+000559 E601             	dc.b	$E6,$01
+00055B B680             	dc.b	nF4, nRst
+00055D                  	smpsAlterVol		$01
+00055D E601             	dc.b	$E6,$01
+00055F B280             	dc.b	nCs4, nRst
+000561                  	smpsAlterVol		$01
+000561 E601             	dc.b	$E6,$01
+000563 B480             	dc.b	nEb4, nRst
+000565                  	smpsAlterVol		$01
+000565 E601             	dc.b	$E6,$01
+000567 AD80             	dc.b	nAb3, nRst
+000569                  	smpsAlterVol		$01
+000569 E601             	dc.b	$E6,$01
+00056B AF8006           	dc.b	nBb3, nRst, $06
+00056E                  	smpsAlterVol		$FC
+00056E E6FC             	dc.b	$E6,$FC
+000570 BB0280           	dc.b	nBb4, $02, nRst
+000573                  	smpsAlterVol		$FE
+000573 E6FE             	dc.b	$E6,$FE
+000575 BB801E           	dc.b	nBb4, nRst, $1E
+000578                  	smpsAlterVol		$03
+000578 E603             	dc.b	$E6,$03
+00057A BC02800ABC0280BC 	dc.b	nB4, $02, nRst, $0A, nB4, $02, nRst, nB4
+000582 80BC80           	dc.b	nRst, nB4, nRst
+000585                  	smpsAlterVol		$03
+000585 E603             	dc.b	$E6,$03
+000587 B780             	dc.b	nFs4, nRst
+000589                  	smpsAlterVol		$01
+000589 E601             	dc.b	$E6,$01
+00058B B880             	dc.b	nG4, nRst
+00058D                  	smpsAlterVol		$01
+00058D E601             	dc.b	$E6,$01
+00058F B580B780         	dc.b	nE4, nRst, nFs4, nRst
+000593                  	smpsAlterVol		$01
+000593 E601             	dc.b	$E6,$01
+000595 B380             	dc.b	nD4, nRst
+000597                  	smpsAlterVol		$01
+000597 E601             	dc.b	$E6,$01
+000599 B580             	dc.b	nE4, nRst
+00059B                  	smpsAlterVol		$01
+00059B E601             	dc.b	$E6,$01
+00059D AE80             	dc.b	nA3, nRst
+00059F                  	smpsAlterVol		$01
+00059F E601             	dc.b	$E6,$01
+0005A1 B08006           	dc.b	nB3, nRst, $06
+0005A4                  	smpsAlterVol		$F8
+0005A4 E6F8             	dc.b	$E6,$F8
+0005A6 BC0280BC80       	dc.b	nB4, $02, nRst, nB4, nRst
+0005AB                  	smpsAlterVol		$FA
+0005AB E6FA             	dc.b	$E6,$FA
+0005AD BA80             	dc.b	nA4, nRst
+0005AF                  	smpsAlterVol		$01
+0005AF E601             	dc.b	$E6,$01
+0005B1 B580             	dc.b	nE4, nRst
+0005B3                  	smpsAlterVol		$01
+0005B3 E601             	dc.b	$E6,$01
+0005B5 B680             	dc.b	nF4, nRst
+0005B7                  	smpsAlterVol		$01
+0005B7 E601             	dc.b	$E6,$01
+0005B9 B380             	dc.b	nD4, nRst
+0005BB                  	smpsAlterVol		$01
+0005BB E601             	dc.b	$E6,$01
+0005BD B580             	dc.b	nE4, nRst
+0005BF                  	smpsAlterVol		$01
+0005BF E601             	dc.b	$E6,$01
+0005C1 B180             	dc.b	nC4, nRst
+0005C3                  	smpsAlterVol		$01
+0005C3 E601             	dc.b	$E6,$01
+0005C5 B380             	dc.b	nD4, nRst
+0005C7                  	smpsAlterVol		$01
+0005C7 E601             	dc.b	$E6,$01
+0005C9 AC80             	dc.b	nG3, nRst
+0005CB                  	smpsAlterVol		$01
+0005CB E601             	dc.b	$E6,$01
+0005CD AE8006           	dc.b	nA3, nRst, $06
+0005D0                  	smpsAlterVol		$FC
+0005D0 E6FC             	dc.b	$E6,$FC
+0005D2 BA0280           	dc.b	nA4, $02, nRst
+0005D5                  	smpsAlterVol		$FE
+0005D5 E6FE             	dc.b	$E6,$FE
+0005D7 BA80             	dc.b	nA4, nRst
+0005D9                  	smpsAlterVol		$FE
+0005D9 E6FE             	dc.b	$E6,$FE
+0005DB BA80             	dc.b	nA4, nRst
+0005DD                  	smpsAlterVol		$01
+0005DD E601             	dc.b	$E6,$01
+0005DF B580             	dc.b	nE4, nRst
+0005E1                  	smpsAlterVol		$01
+0005E1 E601             	dc.b	$E6,$01
+0005E3 B680             	dc.b	nF4, nRst
+0005E5                  	smpsAlterVol		$01
+0005E5 E601             	dc.b	$E6,$01
+0005E7 B380             	dc.b	nD4, nRst
+0005E9                  	smpsAlterVol		$01
+0005E9 E601             	dc.b	$E6,$01
+0005EB B580             	dc.b	nE4, nRst
+0005ED                  	smpsAlterVol		$01
+0005ED E601             	dc.b	$E6,$01
+0005EF B180             	dc.b	nC4, nRst
+0005F1                  	smpsAlterVol		$01
+0005F1 E601             	dc.b	$E6,$01
+0005F3 B380             	dc.b	nD4, nRst
+0005F5                  	smpsAlterVol		$01
+0005F5 E601             	dc.b	$E6,$01
+0005F7 AC80             	dc.b	nG3, nRst
+0005F9                  	smpsAlterVol		$01
+0005F9 E601             	dc.b	$E6,$01
+0005FB AE8006           	dc.b	nA3, nRst, $06
+0005FE                  	smpsAlterVol		$FC
+0005FE E6FC             	dc.b	$E6,$FC
+                        	;!@ dc.b	nA4, $02, nRst
+000600 BA028002         	dc.b	nA4, $02, nRst, $02
+000604                  	smpsAlterVol		$FE
+000604 E6FE             	dc.b	$E6,$FE
+                        	;!@ dc.b	nA4, nRst, $7F, $73
+000606 BA02807F8073     	dc.b	nA4, $02, nRst, $7F, nRst, $73
+00060C                  	smpsAlterVol		$FF
+00060C E6FF             	dc.b	$E6,$FF
+
+00060E                  FFX_EA_Loop35:
+00060E BF0280           	dc.b	nD5, $02, nRst
+000611                  	smpsAlterVol		$FF
+000611 E6FF             	dc.b	$E6,$FF
+000613 BF80C080BB80BD80 	dc.b	nD5, nRst, nEb5, nRst, nBb4, nRst, nC5, nRst
+00061B C28006BF0280C080 	dc.b	nF5, nRst, $06, nD5, $02, nRst, nEb5, nRst
+000623 BB80BD80C280     	dc.b	nBb4, nRst, nC5, nRst, nF5, nRst
+000629                  	smpsAlterVol		$01
+000629 E601             	dc.b	$E6,$01
+00062B                  	smpsLoop		$00, $03, FFX_EA_Loop35, Target
+00062B F7               	dc.b	$F7
+00062C 0003             	dc.b	$00,$03
+                        	if (FFX_EA_Loop35<*)
+00062E                  		rom_ptr_z80(FFX_EA_Loop35+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00062E 0E86             	dc.w  (((((FFX_EA_Loop35+Target))<<8)&$FF00)|((((FFX_EA_Loop35+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000630 BF80             	dc.b	nD5, nRst
+000632                  	smpsAlterVol		$FF
+000632 E6FF             	dc.b	$E6,$FF
+000634 BF80C080BB80BD80 	dc.b	nD5, nRst, nEb5, nRst, nBb4, nRst, nC5, nRst
+00063C C28006BF0280C080 	dc.b	nF5, nRst, $06, nD5, $02, nRst, nEb5, nRst
+000644 BB80BD80C280     	dc.b	nBb4, nRst, nC5, nRst, nF5, nRst
+00064A                  	smpsAlterVol		$0A
+00064A E60A             	dc.b	$E6,$0A
+00064C B780B780         	dc.b	nFs4, nRst, nFs4, nRst
+000650                  	smpsAlterVol		$01
+000650 E601             	dc.b	$E6,$01
+
+000652                  FFX_EA_Loop36:
+000652 B780             	dc.b	nFs4, nRst
+000654                  	smpsLoop		$00, $07, FFX_EA_Loop36, Target
+000654 F7               	dc.b	$F7
+000655 0007             	dc.b	$00,$07
+                        	if (FFX_EA_Loop36<*)
+000657                  		rom_ptr_z80(FFX_EA_Loop36+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000657 5286             	dc.w  (((((FFX_EA_Loop36+Target))<<8)&$FF00)|((((FFX_EA_Loop36+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000659                  	smpsAlterVol		$01
+000659 E601             	dc.b	$E6,$01
+
+00065B                  FFX_EA_Loop37:
+00065B B780             	dc.b	nFs4, nRst
+00065D                  	smpsLoop		$00, $06, FFX_EA_Loop37, Target
+00065D F7               	dc.b	$F7
+00065E 0006             	dc.b	$00,$06
+                        	if (FFX_EA_Loop37<*)
+000660                  		rom_ptr_z80(FFX_EA_Loop37+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000660 5B86             	dc.w  (((((FFX_EA_Loop37+Target))<<8)&$FF00)|((((FFX_EA_Loop37+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000662                  	smpsAlterVol		$01
+000662 E601             	dc.b	$E6,$01
+
+000664                  FFX_EA_Loop38:
+000664 B780             	dc.b	nFs4, nRst
+000666                  	smpsLoop		$00, $05, FFX_EA_Loop38, Target
+000666 F7               	dc.b	$F7
+000667 0005             	dc.b	$00,$05
+                        	if (FFX_EA_Loop38<*)
+000669                  		rom_ptr_z80(FFX_EA_Loop38+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000669 6486             	dc.w  (((((FFX_EA_Loop38+Target))<<8)&$FF00)|((((FFX_EA_Loop38+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00066B B7801C           	dc.b	nFs4, nRst, $1C
+00066E                  	smpsAlterVol		$0D
+00066E E60D             	dc.b	$E6,$0D
+000670                  	smpsJump		FFX_EA_FM4, Target
+000670 F6               	dc.b	$F6
+                        	if (FFX_EA_FM4<*)
+000671                  		rom_ptr_z80(FFX_EA_FM4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000671 8284             	dc.w  (((((FFX_EA_FM4+Target))<<8)&$FF00)|((((FFX_EA_FM4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000673                  FFX_EA_FM5:
+000673                  	smpsFMvoice		$03
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000673 EF03             		dc.b $EF,$03
+                        	endif
+000675 8060B648B318B454 	dc.b	nRst, $60, nF4, $48, nD4, $18, nEb4, $54
+00067D 800CB648B318B454 	dc.b	nRst, $0C, nF4, $48, nD4, $18, nEb4, $54
+000685 803CB97FE7118030 	dc.b	nRst, $3C, nAb4, $7F, smpsNoAttack, $11, nRst, $30
+                        	;!@ dc.b	nRst, $3C, nAb4, $7F, smpsNoAttack, nAb4, $11, nRst, $30
+00068D B0B2B108B0B1B3B1 	dc.b	nB3, nCs4, nC4, $08, nB3, nC4, nD4, nC4
+000695 B3B53080         	dc.b	nD4, nE4, $30, nRst
+000699                  	smpsFMvoice		$04
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000699 EF04             		dc.b $EF,$04
+                        	endif
+                        	;!@ dc.b	$24, nCs6, $1E, nRst, $4E, nCs6, $30, nRst
+                        	;!@ dc.b	$7F, $7F, $30
+00069B 24CA1E804ECA3080 	dc.b	$24, nCs6, $1E, nRst, $4E, nCs6, $30, nRst
+0006A3 7F807F8030       	dc.b	$7F, nRst, $7F, nRst, $30
+0006A8                  	smpsJump		FFX_EA_FM5, Target
+0006A8 F6               	dc.b	$F6
+                        	if (FFX_EA_FM5<*)
+0006A9                  		rom_ptr_z80(FFX_EA_FM5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006A9 7386             	dc.w  (((((FFX_EA_FM5+Target))<<8)&$FF00)|((((FFX_EA_FM5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0006AB                  FFX_EA_FM6:
+0006AB 8030             	dc.b	nRst, $30
+0006AD                  	smpsFMvoice		$03
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0006AD EF03             		dc.b $EF,$03
+                        	endif
+                        	;!@ dc.b	$30, nBb3, $48
+0006AF 8030AF48         	dc.b	nRst, $30, nBb3, $48
+0006B3                  	smpsAlterVol		$16
+0006B3 E616             	dc.b	$E6,$16
+0006B5 B018             	dc.b	nB3, $18
+0006B7                  	smpsAlterVol		$FD
+0006B7 E6FD             	dc.b	$E6,$FD
+0006B9 B154800CAF48     	dc.b	nC4, $54, nRst, $0C, nBb3, $48
+0006BF                  	smpsAlterVol		$0B
+0006BF E60B             	dc.b	$E6,$0B
+0006C1 B018             	dc.b	nB3, $18
+0006C3                  	smpsAlterVol		$F5
+0006C3 E6F5             	dc.b	$E6,$F5
+0006C5 B154803C         	dc.b	nC4, $54, nRst, $3C
+                        	;!@ smpsAlterVol		$06
+0006C9                  	smpsAlterVol		$16
+0006C9 E616             	dc.b	$E6,$16
+0006CB B27FE711         	dc.b	nCs4, $7F, smpsNoAttack, $11
+                        	;!@ dc.b	nCs4, $7F, smpsNoAttack, nCs4, $11
+0006CF                  	smpsFMvoice		$04
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0006CF EF04             		dc.b $EF,$04
+                        	endif
+0006D1 8030             	dc.b	nRst, $30
+0006D3                  	smpsAlterVol		$F4
+0006D3 E6F4             	dc.b	$E6,$F4
+0006D5 C360             	dc.b	nFs5, $60
+0006D7                  	smpsAlterVol		$FE
+0006D7 E6FE             	dc.b	$E6,$FE
+0006D9 C130C6           	dc.b	nE5, $30, nA5
+0006DC                  	smpsFMvoice		$05
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0006DC EF05             		dc.b $EF,$05
+                        	endif
+                        	;!@ smpsAlterVol		$07
+0006DE                  	smpsAlterVol		$6F
+0006DE E66F             	dc.b	$E6,$6F
+0006E0 B27FE771         	dc.b	nCs4, $7F, smpsNoAttack, $71
+                        	;!@ dc.b	nCs5, $7F, smpsNoAttack, nCs5, $71
+                        	;!@ smpsAlterVol		$FB
+0006E4                  	smpsAlterVol		$6F
+0006E4 E66F             	dc.b	$E6,$6F
+0006E6 AF7FE741806E     	dc.b	nBb3, $7F, smpsNoAttack, $41, nRst, $6E
+                        	;!@ dc.b	nBb4, $7F, smpsNoAttack, nBb4, $41, nRst, $6E
+                        	;!@ smpsAlterVol		$06
+0006EC                  	smpsAlterVol		$16
+0006EC E616             	dc.b	$E6,$16
+0006EE                  	smpsJump		FFX_EA_FM6, Target
+0006EE F6               	dc.b	$F6
+                        	if (FFX_EA_FM6<*)
+0006EF                  		rom_ptr_z80(FFX_EA_FM6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006EF AB86             	dc.w  (((((FFX_EA_FM6+Target))<<8)&$FF00)|((((FFX_EA_FM6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0006F1                  FFX_EA_PSG1:	
+                        	;!@dc.b	nRst, $58, $58, $58, $58, $58, $58, nC0
+0006F1 8058805880588058 	dc.b	nRst, $58, nRst, $58, nRst, $58, nRst, $58, nRst, $58, nRst, $58, nC0
+0006F9 8058805881
+0006FE 0380018103800182 	dc.b	$03, nRst, $01, nC0, $03, nRst, $01, nCs0
+000706 0380018108800181 	dc.b	$03, nRst, $01, nC0, $08, nRst, $01, nC0
+00070E 0280018102801681 	dc.b	$02, nRst, $01, nC0, $02, nRst, $16, nC0
+                        	;!@
+000716 0804028022810480 	dc.b	$08, $04, $02, nRst, $22, nC0, $04, nRst
+00071E 2C8104802C810380 	dc.b	$2C, nC0, $04, nRst, $2C, nC0, $03, nRst
+000726 0181038001830380 	dc.b	$01, nC0, $03, nRst, $01, nD0, $03, nRst
+00072E 0182088001810280 	dc.b	$01, nCs0, $08, nRst, $01, nC0, $02, nRst
+000736 0181028016810804 	dc.b	$01, nC0, $02, nRst, $16, nC0, $08, $04
+00073E 0280228104802C81 	dc.b	$02, nRst, $22, nC0, $04, nRst, $2C, nC0
+000746 048027           	dc.b	$04, nRst, $27
+000749                  	smpsPSGvoice	$00
+000749 F500             	dc.b	$F5,$00
+                        	;!@ dc.b	$05
+00074B 8005             	dc.b	nRst, $05
+00074D                  	smpsSetVol	$03
+00074D EC03             	dc.b	$EC,$03
+00074F 8E7FE771         	dc.b	nCs1, $7F, smpsNoAttack, $71
+                        	;!@ dc.b	nCs1, $7F, smpsNoAttack, nCs1, $71
+000753                  	smpsPSGvoice	$04
+000753 F504             	dc.b	$F5,$04
+000755                  	smpsSetVol	$FD
+000755 ECFD             	dc.b	$EC,$FD
+
+000757                  FFX_EA_Loop39:
+000757 88028088808B8088 	dc.b	nG0, $02, nRst, nG0, nRst, nBb0, nRst, nG0
+00075F 808B808B80068802 	dc.b	nRst, nBb0, nRst, nBb0, nRst, $06, nG0, $02
+000767 808A80888088808D 	dc.b	nRst, nA0, nRst, nG0, nRst, nG0, nRst, nC1
+00076F 80               	dc.b	nRst
+000770                  	smpsLoop		$00, $02, FFX_EA_Loop39, Target
+000770 F7               	dc.b	$F7
+000771 0002             	dc.b	$00,$02
+                        	if (FFX_EA_Loop39<*)
+000773                  		rom_ptr_z80(FFX_EA_Loop39+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000773 5787             	dc.w  (((((FFX_EA_Loop39+Target))<<8)&$FF00)|((((FFX_EA_Loop39+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000775 888088808B808880 	dc.b	nG0, nRst, nG0, nRst, nBb0, nRst, nG0, nRst
+00077D 8B808B8006880280 	dc.b	nBb0, nRst, nBb0, nRst, $06, nG0, $02, nRst
+000785 8A80888088800688 	dc.b	nA0, nRst, nG0, nRst, nG0, nRst, $06, nG0
+00078D 028088808B808880 	dc.b	$02, nRst, nG0, nRst, nBb0, nRst, nG0, nRst
+000795 8B808B8006880280 	dc.b	nBb0, nRst, nBb0, nRst, $06, nG0, $02, nRst
+00079D 8A808880888074   	dc.b	nA0, nRst, nG0, nRst, nG0, nRst, $74
+0007A4                  	smpsJump		FFX_EA_PSG1, Target
+0007A4 F6               	dc.b	$F6
+                        	if (FFX_EA_PSG1<*)
+0007A5                  		rom_ptr_z80(FFX_EA_PSG1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007A5 F186             	dc.w  (((((FFX_EA_PSG1+Target))<<8)&$FF00)|((((FFX_EA_PSG1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0007A7                  FFX_EA_PSG2:
+0007A7                  	smpsPSGvoice	$08
+0007A7 F508             	dc.b	$F5,$08
+                        	;!@ dc.b	nG3, $03, nRst, $7F, $7F, $0F
+0007A9 8003807F807F800F 	dc.b	nRst, $03, nRst, $7F, nRst, $7F, nRst, $0F
+0007B1                  	smpsSetVol	$FD
+0007B1 ECFD             	dc.b	$EC,$FD
+0007B3 A7018002         	dc.b	nD3, $01, nRst, $02
+0007B7                  	smpsSetVol	$FF
+0007B7 ECFF             	dc.b	$EC,$FF
+0007B9 AA018003         	dc.b	nF3, $01, nRst, $03
+0007BD                  	smpsSetVol	$FE
+0007BD ECFE             	dc.b	$EC,$FE
+0007BF A802             	dc.b	nEb3, $02
+0007C1                  	smpsSetVol	$FF
+0007C1 ECFF             	dc.b	$EC,$FF
+0007C3 AC018002A7018002 	dc.b	nG3, $01, nRst, $02, nD3, $01, nRst, $02
+                        	;!@ dc.b	nF3, $01, nRst, $7F, $55
+0007CB AA01807F8055     	dc.b	nF3, $01, nRst, $7F, nRst, $55
+0007D1                  	smpsSetVol	$02
+0007D1 EC02             	dc.b	$EC,$02
+0007D3 A7018002AA018003 	dc.b	nD3, $01, nRst, $02, nF3, $01, nRst, $03
+0007DB A8028001A7028001 	dc.b	nEb3, $02, nRst, $01, nD3, $02, nRst, $01
+0007E3 A302A0018002A301 	dc.b	nBb2, $02, nG2, $01, nRst, $02, nBb2, $01
+0007EB 8002A7018002AA01 	dc.b	nRst, $02, nD3, $01, nRst, $02, nF3, $01
+0007F3 801F             	dc.b	nRst, $1F
+0007F5                  	smpsSetVol	$FD
+0007F5 ECFD             	dc.b	$EC,$FD
+0007F7 9202800A92028092 	dc.b	nF1, $02, nRst, $0A, nF1, $02, nRst, nF1
+0007FF 809280           	dc.b	nRst, nF1, nRst
+000802                  	smpsSetVol	$01
+000802 EC01             	dc.b	$EC,$01
+000804 8E809080         	dc.b	nCs1, nRst, nEb1, nRst
+000808                  	smpsSetVol	$01
+000808 EC01             	dc.b	$EC,$01
+00080A 8D808E808B800A   	dc.b	nC1, nRst, nCs1, nRst, nBb0, nRst, $0A
+000811                  	smpsSetVol	$01
+000811 EC01             	dc.b	$EC,$01
+000813 87028006         	dc.b	nFs0, $02, nRst, $06
+000817                  	smpsSetVol	$FD
+000817 ECFD             	dc.b	$EC,$FD
+000819 92028092809280   	dc.b	nF1, $02, nRst, nF1, nRst, nF1, nRst
+000820                  	smpsSetVol	$FE
+000820 ECFE             	dc.b	$EC,$FE
+000822 8E80             	dc.b	nCs1, nRst
+000824                  	smpsSetVol	$01
+000824 EC01             	dc.b	$EC,$01
+000826 90808D808E808B80 	dc.b	nEb1, nRst, nC1, nRst, nCs1, nRst, nBb0, nRst
+00082E                  	smpsSetVol	$01
+00082E EC01             	dc.b	$EC,$01
+000830 8D80             	dc.b	nC1, nRst
+000832                  	smpsSetVol	$01
+000832 EC01             	dc.b	$EC,$01
+000834 8680878006       	dc.b	nF0, nRst, nFs0, nRst, $06
+000839                  	smpsSetVol	$FE
+000839 ECFE             	dc.b	$EC,$FE
+00083B 9202809280       	dc.b	nF1, $02, nRst, nF1, nRst
+000840                  	smpsSetVol	$01
+000840 EC01             	dc.b	$EC,$01
+000842 9280             	dc.b	nF1, nRst
+000844                  	smpsSetVol	$FE
+000844 ECFE             	dc.b	$EC,$FE
+000846 8E80             	dc.b	nCs1, nRst
+000848                  	smpsSetVol	$01
+000848 EC01             	dc.b	$EC,$01
+00084A 90808D808E808B80 	dc.b	nEb1, nRst, nC1, nRst, nCs1, nRst, nBb0, nRst
+000852                  	smpsSetVol	$01
+000852 EC01             	dc.b	$EC,$01
+000854 8D80             	dc.b	nC1, nRst
+000856                  	smpsSetVol	$01
+000856 EC01             	dc.b	$EC,$01
+000858 8680878006       	dc.b	nF0, nRst, nFs0, nRst, $06
+00085D                  	smpsSetVol	$FE
+00085D ECFE             	dc.b	$EC,$FE
+00085F 92028092801E     	dc.b	nF1, $02, nRst, nF1, nRst, $1E
+000865                  	smpsSetVol	$01
+000865 EC01             	dc.b	$EC,$01
+000867 9302800A93028093 	dc.b	nFs1, $02, nRst, $0A, nFs1, $02, nRst, nFs1
+00086F 809380           	dc.b	nRst, nFs1, nRst
+000872                  	smpsSetVol	$01
+000872 EC01             	dc.b	$EC,$01
+000874 8F809180         	dc.b	nD1, nRst, nE1, nRst
+000878                  	smpsSetVol	$01
+000878 EC01             	dc.b	$EC,$01
+00087A 8E808F808C80     	dc.b	nCs1, nRst, nD1, nRst, nB0, nRst
+000880                  	smpsSetVol	$01
+000880 EC01             	dc.b	$EC,$01
+000882 8E808780888006   	dc.b	nCs1, nRst, nFs0, nRst, nG0, nRst, $06
+000889                  	smpsSetVol	$FD
+000889 ECFD             	dc.b	$EC,$FD
+00088B 93028093809180   	dc.b	nFs1, $02, nRst, nFs1, nRst, nE1, nRst
+000892                  	smpsSetVol	$FE
+000892 ECFE             	dc.b	$EC,$FE
+000894 8D80             	dc.b	nC1, nRst
+000896                  	smpsSetVol	$01
+000896 EC01             	dc.b	$EC,$01
+000898 8F808C808D808A80 	dc.b	nD1, nRst, nB0, nRst, nC1, nRst, nA0, nRst
+0008A0                  	smpsSetVol	$01
+0008A0 EC01             	dc.b	$EC,$01
+0008A2 8C80             	dc.b	nB0, nRst
+0008A4                  	smpsSetVol	$01
+0008A4 EC01             	dc.b	$EC,$01
+0008A6 8580868006       	dc.b	nE0, nRst, nF0, nRst, $06
+0008AB                  	smpsSetVol	$FE
+0008AB ECFE             	dc.b	$EC,$FE
+0008AD 9102809180       	dc.b	nE1, $02, nRst, nE1, nRst
+0008B2                  	smpsSetVol	$01
+0008B2 EC01             	dc.b	$EC,$01
+0008B4 9180             	dc.b	nE1, nRst
+0008B6                  	smpsSetVol	$FE
+0008B6 ECFE             	dc.b	$EC,$FE
+0008B8 8D80             	dc.b	nC1, nRst
+0008BA                  	smpsSetVol	$01
+0008BA EC01             	dc.b	$EC,$01
+0008BC 8F808C808D808A80 	dc.b	nD1, nRst, nB0, nRst, nC1, nRst, nA0, nRst
+0008C4                  	smpsSetVol	$01
+0008C4 EC01             	dc.b	$EC,$01
+0008C6 8C80             	dc.b	nB0, nRst
+0008C8                  	smpsSetVol	$01
+0008C8 EC01             	dc.b	$EC,$01
+0008CA 8580868006       	dc.b	nE0, nRst, nF0, nRst, $06
+0008CF                  	smpsSetVol	$FE
+0008CF ECFE             	dc.b	$EC,$FE
+0008D1 9102809180       	dc.b	nE1, $02, nRst, nE1, nRst
+0008D6                  	smpsPSGvoice	$00
+0008D6 F500             	dc.b	$F5,$00
+0008D8                  	smpsSetVol	$FF
+0008D8 ECFF             	dc.b	$EC,$FF
+0008DA 9F30A1A2A4A2     	dc.b	nFs2, $30, nAb2, nA2, nB2, nA2
+0008E0                  	smpsPSGvoice	$08
+0008E0 F508             	dc.b	$F5,$08
+
+0008E2                  FFX_EA_Loop40:
+0008E2 9402809480978094 	dc.b	nG1, $02, nRst, nG1, nRst, nBb1, nRst, nG1
+0008EA 8097809780069402 	dc.b	nRst, nBb1, nRst, nBb1, nRst, $06, nG1, $02
+0008F2 8096809480948099 	dc.b	nRst, nA1, nRst, nG1, nRst, nG1, nRst, nC2
+0008FA 80               	dc.b	nRst
+0008FB                  	smpsLoop		$00, $04, FFX_EA_Loop40, Target
+0008FB F7               	dc.b	$F7
+0008FC 0004             	dc.b	$00,$04
+                        	if (FFX_EA_Loop40<*)
+0008FE                  		rom_ptr_z80(FFX_EA_Loop40+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008FE E288             	dc.w  (((((FFX_EA_Loop40+Target))<<8)&$FF00)|((((FFX_EA_Loop40+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000900                  	smpsSetVol	$04
+000900 EC04             	dc.b	$EC,$04
+
+000902                  FFX_EA_Loop41:
+000902 8780             	dc.b	nFs0, nRst
+000904                  	smpsLoop		$00, $14, FFX_EA_Loop41, Target
+000904 F7               	dc.b	$F7
+000905 0014             	dc.b	$00,$14
+                        	if (FFX_EA_Loop41<*)
+000907                  		rom_ptr_z80(FFX_EA_Loop41+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000907 0289             	dc.w  (((((FFX_EA_Loop41+Target))<<8)&$FF00)|((((FFX_EA_Loop41+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000909 87801C           	dc.b	nFs0, nRst, $1C
+00090C                  	smpsSetVol	$06
+00090C EC06             	dc.b	$EC,$06
+00090E                  	smpsJump		FFX_EA_PSG2, Target
+00090E F6               	dc.b	$F6
+                        	if (FFX_EA_PSG2<*)
+00090F                  		rom_ptr_z80(FFX_EA_PSG2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00090F A787             	dc.w  (((((FFX_EA_PSG2+Target))<<8)&$FF00)|((((FFX_EA_PSG2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000911                  FFX_EA_PSG3:
+000911                  	smpsPSGvoice	$00
+000911 F500             	dc.b	$F5,$00
+000913 806088488B18     	dc.b	nRst, $60, nG0, $48, nBb0, $18
+000919                  	smpsSetVol	$FE
+000919 ECFE             	dc.b	$EC,$FE
+00091B 8954800C         	dc.b	nAb0, $54, nRst, $0C
+00091F                  	smpsSetVol	$02
+00091F EC02             	dc.b	$EC,$02
+000921 88488B188854803C 	dc.b	nG0, $48, nBb0, $18, nG0, $54, nRst, $3C
+000929                  	smpsSetVol	$FE
+000929 ECFE             	dc.b	$EC,$FE
+                        	;!@ dc.b	nC1, $7F, smpsNoAttack, $11, nRst, $7F, $41
+00092B 8D7FE78D11807F80 	dc.b	nC1, $7F, smpsNoAttack, nC1, $11, nRst, $7F, nRst, $41
+000933 41
+000934                  	smpsPSGvoice	$00
+000934 F500             	dc.b	$F5,$00
+                        	;!@ dc.b	$30
+000936 8030             	dc.b	nRst, $30
+000938                  	smpsSetVol	$FE
+000938 ECFE             	dc.b	$EC,$FE
+00093A 9395969896       	dc.b	nFs1, nAb1, nA1, nB1, nA1
+00093F                  	smpsPSGvoice	$00
+00093F F500             	dc.b	$F5,$00
+000941 809B9C9E806E     	dc.b	nRst, nD2, nEb2, nF2, nRst, $6E
+000947                  	smpsSetVol	$04
+000947 EC04             	dc.b	$EC,$04
+000949                  	smpsJump		FFX_EA_PSG3, Target
+000949 F6               	dc.b	$F6
+                        	if (FFX_EA_PSG3<*)
+00094A                  		rom_ptr_z80(FFX_EA_PSG3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00094A 1189             	dc.w  (((((FFX_EA_PSG3+Target))<<8)&$FF00)|((((FFX_EA_PSG3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	
+00094C                  FFX_EA_PWM1:
+00094C 807F7F22         	dc.b	nRst, $7F, $7F, $22
+
+000950                  FFX_EA_PWM1_Loop1:
+000950 8204808282020202 	dc.b	pESnare, $04, nRst, pESnare, pESnare, $02, $02, $02
+000958 8006820480088204 	dc.b	nRst, $06, pESnare, $04, nRst, $08, pESnare, $04
+000960 8008             	dc.b	nRst, $08
+000962                  	smpsLoop		$00, $05, FFX_EA_PWM1_Loop1, Target
+000962 F7               	dc.b	$F7
+000963 0005             	dc.b	$00,$05
+                        	if (FFX_EA_PWM1_Loop1<*)
+000965                  		rom_ptr_z80(FFX_EA_PWM1_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000965 5089             	dc.w  (((((FFX_EA_PWM1_Loop1+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000967 8206800282       	dc.b	pESnare, $06, nRst, $02, pESnare
+
+00096C                  FFX_EA_PWM1_Loop2:
+00096C 80820380058202   	dc.b	nRst, pESnare, $03, nRst, $05, pESnare, $02
+000973                  	smpsLoop		$00, $02, FFX_EA_PWM1_Loop2, Target
+000973 F7               	dc.b	$F7
+000974 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM1_Loop2<*)
+000976                  		rom_ptr_z80(FFX_EA_PWM1_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000976 6C89             	dc.w  (((((FFX_EA_PWM1_Loop2+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000978 8082828008820680 	dc.b	nRst, pESnare, pESnare, nRst, $08, pESnare, $06, nRst
+000980 0282040380058204 	dc.b	$02, pESnare, $04, $03, nRst, $05, pESnare, $04
+000988 0380058204       	dc.b	$03, nRst, $05, pESnare, $04
+00098D                  	smpsAlterVol		$1A
+00098D E61A             	dc.b	$E6,$1A
+
+00098F                  FFX_EA_PWM1_Loop3:
+00098F 01               	dc.b	$01
+000990                  	smpsAlterVol		$FC
+000990 E6FC             	dc.b	$E6,$FC
+000992                  	smpsLoop		$00, $03, FFX_EA_PWM1_Loop3, Target
+000992 F7               	dc.b	$F7
+000993 0003             	dc.b	$00,$03
+                        	if (FFX_EA_PWM1_Loop3<*)
+000995                  		rom_ptr_z80(FFX_EA_PWM1_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000995 8F89             	dc.w  (((((FFX_EA_PWM1_Loop3+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000997                  FFX_EA_PWM1_Loop4:
+000997 01               	dc.b	$01
+000998                  	smpsAlterVol		$FE
+000998 E6FE             	dc.b	$E6,$FE
+00099A 01               	dc.b	$01
+00099B                  	smpsAlterVol		$FD
+00099B E6FD             	dc.b	$E6,$FD
+00099D                  	smpsLoop		$00, $02, FFX_EA_PWM1_Loop4, Target
+00099D F7               	dc.b	$F7
+00099E 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM1_Loop4<*)
+0009A0                  		rom_ptr_z80(FFX_EA_PWM1_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009A0 9789             	dc.w  (((((FFX_EA_PWM1_Loop4+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0009A2 01               	dc.b	$01
+0009A3                  	smpsAlterVol		$FF
+0009A3 E6FF             	dc.b	$E6,$FF
+0009A5 01               	dc.b	$01
+0009A6                  	smpsAlterVol		$FE
+0009A6 E6FE             	dc.b	$E6,$FE
+0009A8 01               	dc.b	$01
+0009A9                  	smpsAlterVol		$FE
+0009A9 E6FE             	dc.b	$E6,$FE
+0009AB 01               	dc.b	$01
+0009AC                  	smpsAlterVol		$FF
+0009AC E6FF             	dc.b	$E6,$FF
+0009AE 01               	dc.b	$01
+0009AF                  	smpsAlterVol		$02
+0009AF E602             	dc.b	$E6,$02
+0009B1 06800282         	dc.b	$06, nRst, $02, pESnare
+
+0009B5                  FFX_EA_PWM1_Loop5:
+0009B5 80820380058202   	dc.b	nRst, pESnare, $03, nRst, $05, pESnare, $02
+0009BC                  	smpsLoop		$00, $02, FFX_EA_PWM1_Loop5, Target
+0009BC F7               	dc.b	$F7
+0009BD 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM1_Loop5<*)
+0009BF                  		rom_ptr_z80(FFX_EA_PWM1_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009BF B589             	dc.w  (((((FFX_EA_PWM1_Loop5+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0009C1 8082828008820680 	dc.b	nRst, pESnare, pESnare, nRst, $08, pESnare, $06, nRst
+0009C9 0282040380058204 	dc.b	$02, pESnare, $04, $03, nRst, $05, pESnare, $04
+0009D1 0380058204       	dc.b	$03, nRst, $05, pESnare, $04
+0009D6                  	smpsAlterVol		$1A
+0009D6 E61A             	dc.b	$E6,$1A
+
+0009D8                  FFX_EA_PWM1_Loop6:
+0009D8 01               	dc.b	$01
+0009D9                  	smpsAlterVol		$FC
+0009D9 E6FC             	dc.b	$E6,$FC
+0009DB                  	smpsLoop		$00, $03, FFX_EA_PWM1_Loop6, Target
+0009DB F7               	dc.b	$F7
+0009DC 0003             	dc.b	$00,$03
+                        	if (FFX_EA_PWM1_Loop6<*)
+0009DE                  		rom_ptr_z80(FFX_EA_PWM1_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009DE D889             	dc.w  (((((FFX_EA_PWM1_Loop6+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0009E0                  FFX_EA_PWM1_Loop7:
+0009E0 01               	dc.b	$01
+0009E1                  	smpsAlterVol		$FE
+0009E1 E6FE             	dc.b	$E6,$FE
+0009E3 01               	dc.b	$01
+0009E4                  	smpsAlterVol		$FD
+0009E4 E6FD             	dc.b	$E6,$FD
+0009E6                  	smpsLoop		$00, $02, FFX_EA_PWM1_Loop7, Target
+0009E6 F7               	dc.b	$F7
+0009E7 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM1_Loop7<*)
+0009E9                  		rom_ptr_z80(FFX_EA_PWM1_Loop7+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009E9 E089             	dc.w  (((((FFX_EA_PWM1_Loop7+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop7+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0009EB 01               	dc.b	$01
+0009EC                  	smpsAlterVol		$FF
+0009EC E6FF             	dc.b	$E6,$FF
+0009EE 01               	dc.b	$01
+0009EF                  	smpsAlterVol		$FE
+0009EF E6FE             	dc.b	$E6,$FE
+0009F1 01               	dc.b	$01
+0009F2                  	smpsAlterVol		$FE
+0009F2 E6FE             	dc.b	$E6,$FE
+0009F4 01               	dc.b	$01
+0009F5                  	smpsAlterVol		$FF
+0009F5 E6FF             	dc.b	$E6,$FF
+0009F7 01               	dc.b	$01
+0009F8                  	smpsAlterVol		$02
+0009F8 E602             	dc.b	$E6,$02
+0009FA 06800282         	dc.b	$06, nRst, $02, pESnare
+
+0009FE                  FFX_EA_PWM1_Loop8:
+0009FE 80820380058202   	dc.b	nRst, pESnare, $03, nRst, $05, pESnare, $02
+000A05                  	smpsLoop		$00, $02, FFX_EA_PWM1_Loop8, Target
+000A05 F7               	dc.b	$F7
+000A06 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM1_Loop8<*)
+000A08                  		rom_ptr_z80(FFX_EA_PWM1_Loop8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A08 FE89             	dc.w  (((((FFX_EA_PWM1_Loop8+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A0A 8082828008820680 	dc.b	nRst, pESnare, pESnare, nRst, $08, pESnare, $06, nRst
+000A12 0282040380058204 	dc.b	$02, pESnare, $04, $03, nRst, $05, pESnare, $04
+000A1A 0380058204       	dc.b	$03, nRst, $05, pESnare, $04
+000A1F                  	smpsAlterVol		$1A
+000A1F E61A             	dc.b	$E6,$1A
+
+000A21                  FFX_EA_PWM1_Loop9:
+000A21 01               	dc.b	$01
+000A22                  	smpsAlterVol		$FC
+000A22 E6FC             	dc.b	$E6,$FC
+000A24                  	smpsLoop		$00, $03, FFX_EA_PWM1_Loop9, Target
+000A24 F7               	dc.b	$F7
+000A25 0003             	dc.b	$00,$03
+                        	if (FFX_EA_PWM1_Loop9<*)
+000A27                  		rom_ptr_z80(FFX_EA_PWM1_Loop9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A27 218A             	dc.w  (((((FFX_EA_PWM1_Loop9+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000A29                  FFX_EA_PWM1_Loop10:
+000A29 01               	dc.b	$01
+000A2A                  	smpsAlterVol		$FE
+000A2A E6FE             	dc.b	$E6,$FE
+000A2C 01               	dc.b	$01
+000A2D                  	smpsAlterVol		$FD
+000A2D E6FD             	dc.b	$E6,$FD
+000A2F                  	smpsLoop		$00, $02, FFX_EA_PWM1_Loop10, Target
+000A2F F7               	dc.b	$F7
+000A30 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM1_Loop10<*)
+000A32                  		rom_ptr_z80(FFX_EA_PWM1_Loop10+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A32 298A             	dc.w  (((((FFX_EA_PWM1_Loop10+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop10+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A34 01               	dc.b	$01
+000A35                  	smpsAlterVol		$FF
+000A35 E6FF             	dc.b	$E6,$FF
+000A37 01               	dc.b	$01
+000A38                  	smpsAlterVol		$FE
+000A38 E6FE             	dc.b	$E6,$FE
+000A3A 01               	dc.b	$01
+000A3B                  	smpsAlterVol		$FE
+000A3B E6FE             	dc.b	$E6,$FE
+000A3D 01               	dc.b	$01
+000A3E                  	smpsAlterVol		$FF
+000A3E E6FF             	dc.b	$E6,$FF
+000A40 01               	dc.b	$01
+000A41                  	smpsAlterVol		$02
+000A41 E602             	dc.b	$E6,$02
+000A43 06800282         	dc.b	$06, nRst, $02, pESnare
+
+000A47                  FFX_EA_PWM1_Loop11:
+000A47 80820380058202   	dc.b	nRst, pESnare, $03, nRst, $05, pESnare, $02
+000A4E                  	smpsLoop		$00, $02, FFX_EA_PWM1_Loop11, Target
+000A4E F7               	dc.b	$F7
+000A4F 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM1_Loop11<*)
+000A51                  		rom_ptr_z80(FFX_EA_PWM1_Loop11+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A51 478A             	dc.w  (((((FFX_EA_PWM1_Loop11+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop11+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A53 8082828008820680 	dc.b	nRst, pESnare, pESnare, nRst, $08, pESnare, $06, nRst
+000A5B 0282040380058204 	dc.b	$02, pESnare, $04, $03, nRst, $05, pESnare, $04
+000A63 0380058204       	dc.b	$03, nRst, $05, pESnare, $04
+000A68                  	smpsAlterVol		$1A
+000A68 E61A             	dc.b	$E6,$1A
+
+000A6A                  FFX_EA_PWM1_Loop12:
+000A6A 01               	dc.b	$01
+000A6B                  	smpsAlterVol		$FC
+000A6B E6FC             	dc.b	$E6,$FC
+000A6D                  	smpsLoop		$00, $03, FFX_EA_PWM1_Loop12, Target
+000A6D F7               	dc.b	$F7
+000A6E 0003             	dc.b	$00,$03
+                        	if (FFX_EA_PWM1_Loop12<*)
+000A70                  		rom_ptr_z80(FFX_EA_PWM1_Loop12+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A70 6A8A             	dc.w  (((((FFX_EA_PWM1_Loop12+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop12+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000A72                  FFX_EA_PWM1_Loop13:
+000A72 01               	dc.b	$01
+000A73                  	smpsAlterVol		$FE
+000A73 E6FE             	dc.b	$E6,$FE
+000A75 01               	dc.b	$01
+000A76                  	smpsAlterVol		$FD
+000A76 E6FD             	dc.b	$E6,$FD
+000A78                  	smpsLoop		$00, $02, FFX_EA_PWM1_Loop13, Target
+000A78 F7               	dc.b	$F7
+000A79 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM1_Loop13<*)
+000A7B                  		rom_ptr_z80(FFX_EA_PWM1_Loop13+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A7B 728A             	dc.w  (((((FFX_EA_PWM1_Loop13+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop13+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A7D 01               	dc.b	$01
+000A7E                  	smpsAlterVol		$FF
+000A7E E6FF             	dc.b	$E6,$FF
+000A80 01               	dc.b	$01
+000A81                  	smpsAlterVol		$FE
+000A81 E6FE             	dc.b	$E6,$FE
+000A83 01               	dc.b	$01
+000A84                  	smpsAlterVol		$FE
+000A84 E6FE             	dc.b	$E6,$FE
+000A86 01               	dc.b	$01
+000A87                  	smpsAlterVol		$FF
+000A87 E6FF             	dc.b	$E6,$FF
+000A89 018004           	dc.b	$01, nRst, $04
+000A8C                  	smpsAlterVol		$FE
+000A8C E6FE             	dc.b	$E6,$FE
+
+000A8E                  FFX_EA_PWM1_Loop14:
+000A8E 9A80             	dc.b	pTomLower, nRst
+000A90                  	smpsLoop		$00, $12, FFX_EA_PWM1_Loop14, Target
+000A90 F7               	dc.b	$F7
+000A91 0012             	dc.b	$00,$12
+                        	if (FFX_EA_PWM1_Loop14<*)
+000A93                  		rom_ptr_z80(FFX_EA_PWM1_Loop14+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A93 8E8A             	dc.w  (((((FFX_EA_PWM1_Loop14+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop14+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000A95                  FFX_EA_PWM1_Loop16:
+000A95 9A010180         	dc.b	pTomLower, $01, $01, nRst
+
+000A99                  FFX_EA_PWM1_Loop15:
+000A99 9A8004           	dc.b	pTomLower, nRst, $04
+000A9C                  	smpsLoop		$00, $06, FFX_EA_PWM1_Loop15, Target
+000A9C F7               	dc.b	$F7
+000A9D 0006             	dc.b	$00,$06
+                        	if (FFX_EA_PWM1_Loop15<*)
+000A9F                  		rom_ptr_z80(FFX_EA_PWM1_Loop15+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A9F 998A             	dc.w  (((((FFX_EA_PWM1_Loop15+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop15+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AA1                  	smpsLoop		$01, $02, FFX_EA_PWM1_Loop16, Target
+000AA1 F7               	dc.b	$F7
+000AA2 0102             	dc.b	$01,$02
+                        	if (FFX_EA_PWM1_Loop16<*)
+000AA4                  		rom_ptr_z80(FFX_EA_PWM1_Loop16+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AA4 958A             	dc.w  (((((FFX_EA_PWM1_Loop16+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop16+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000AA6                  FFX_EA_PWM1_Loop17:
+000AA6 9A80             	dc.b	pTomLower, nRst
+000AA8                  	smpsLoop		$00, $12, FFX_EA_PWM1_Loop17, Target
+000AA8 F7               	dc.b	$F7
+000AA9 0012             	dc.b	$00,$12
+                        	if (FFX_EA_PWM1_Loop17<*)
+000AAB                  		rom_ptr_z80(FFX_EA_PWM1_Loop17+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AAB A68A             	dc.w  (((((FFX_EA_PWM1_Loop17+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop17+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AAD 9A010180         	dc.b	pTomLower, $01, $01, nRst
+
+000AB1                  FFX_EA_PWM1_Loop18:
+000AB1 9A8004           	dc.b	pTomLower, nRst, $04
+000AB4                  	smpsLoop		$00, $05, FFX_EA_PWM1_Loop18, Target
+000AB4 F7               	dc.b	$F7
+000AB5 0005             	dc.b	$00,$05
+                        	if (FFX_EA_PWM1_Loop18<*)
+000AB7                  		rom_ptr_z80(FFX_EA_PWM1_Loop18+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AB7 B18A             	dc.w  (((((FFX_EA_PWM1_Loop18+Target))<<8)&$FF00)|((((FFX_EA_PWM1_Loop18+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AB9 9A               	dc.b	pTomLower
+000ABA                  	smpsAlterVol		$04
+000ABA E604             	dc.b	$E6,$04
+000ABC 820C0C0804808280 	dc.b	pESnare, $0C, $0C, $08, $04, nRst, pESnare, nRst
+000AC4 820C0C0C801A     	dc.b	pESnare, $0C, $0C, $0C, nRst, $1A
+000ACA                  	smpsJump		FFX_EA_PWM1, Target
+000ACA F6               	dc.b	$F6
+                        	if (FFX_EA_PWM1<*)
+000ACB                  		rom_ptr_z80(FFX_EA_PWM1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000ACB 4C89             	dc.w  (((((FFX_EA_PWM1+Target))<<8)&$FF00)|((((FFX_EA_PWM1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	
+000ACD                  FFX_EA_PWM2:
+000ACD 8704800887048008 	dc.b	pTomLow, $04, nRst, $08, pTomLow, $04, nRst, $08
+000AD5 87048085808580   	dc.b	pTomLow, $04, nRst, pTomHi, nRst, pTomHi, nRst
+000ADC                  	smpsLoop		$00, $0B, FFX_EA_PWM2, Target
+000ADC F7               	dc.b	$F7
+000ADD 000B             	dc.b	$00,$0B
+                        	if (FFX_EA_PWM2<*)
+000ADF                  		rom_ptr_z80(FFX_EA_PWM2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000ADF CD8A             	dc.w  (((((FFX_EA_PWM2+Target))<<8)&$FF00)|((((FFX_EA_PWM2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000AE1                  FFX_EA_PWM2_Loop2:
+000AE1 870C800885038005 	dc.b	pTomLow, $0C, nRst, $08, pTomHi, $03, nRst, $05
+000AE9 9B049C800C       	dc.b	pTomLowerer, $04, pTomLowerest, nRst, $0C
+000AEE                  	smpsLoop		$00, $08, FFX_EA_PWM2_Loop2, Target
+000AEE F7               	dc.b	$F7
+000AEF 0008             	dc.b	$00,$08
+                        	if (FFX_EA_PWM2_Loop2<*)
+000AF1                  		rom_ptr_z80(FFX_EA_PWM2_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AF1 E18A             	dc.w  (((((FFX_EA_PWM2_Loop2+Target))<<8)&$FF00)|((((FFX_EA_PWM2_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AF3                  	smpsAlterVol		$03
+000AF3 E603             	dc.b	$E6,$03
+000AF5 9A               	dc.b	pTomLower
+
+000AF6                  FFX_EA_PWM2_Loop3:
+000AF6 9A9A0808080C     	dc.b	pTomLower, pTomLower, $08, $08, $08, $0C
+000AFC                  	smpsLoop		$00, $04, FFX_EA_PWM2_Loop3, Target
+000AFC F7               	dc.b	$F7
+000AFD 0004             	dc.b	$00,$04
+                        	if (FFX_EA_PWM2_Loop3<*)
+000AFF                  		rom_ptr_z80(FFX_EA_PWM2_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AFF F68A             	dc.w  (((((FFX_EA_PWM2_Loop3+Target))<<8)&$FF00)|((((FFX_EA_PWM2_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B01 0C080808         	dc.b	$0C, $08, $08, $08
+000B05                  	smpsAlterVol		$FD
+000B05 E6FD             	dc.b	$E6,$FD
+
+000B07                  FFX_EA_PWM2_Loop4:
+000B07 870C800885038005 	dc.b	pTomLow, $0C, nRst, $08, pTomHi, $03, nRst, $05
+000B0F 9B049C800C       	dc.b	pTomLowerer, $04, pTomLowerest, nRst, $0C
+000B14                  	smpsLoop		$00, $04, FFX_EA_PWM2_Loop4, Target
+000B14 F7               	dc.b	$F7
+000B15 0004             	dc.b	$00,$04
+                        	if (FFX_EA_PWM2_Loop4<*)
+000B17                  		rom_ptr_z80(FFX_EA_PWM2_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B17 078B             	dc.w  (((((FFX_EA_PWM2_Loop4+Target))<<8)&$FF00)|((((FFX_EA_PWM2_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B19                  	smpsAlterVol		$03
+000B19 E603             	dc.b	$E6,$03
+000B1B 8686868086868680 	dc.b	pTomMid, pTomMid, pTomMid, nRst, pTomMid, pTomMid, pTomMid, nRst
+000B23 04               	dc.b	$04
+000B24                  	smpsAlterVol		$FD
+000B24 E6FD             	dc.b	$E6,$FD
+                        	;!@ dc.b	nF2, nRst, $12
+000B26 808012           	dc.b	nRst, nRst, $12
+000B29                  	smpsJump		FFX_EA_PWM2, Target
+000B29 F6               	dc.b	$F6
+                        	if (FFX_EA_PWM2<*)
+000B2A                  		rom_ptr_z80(FFX_EA_PWM2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B2A CD8A             	dc.w  (((((FFX_EA_PWM2+Target))<<8)&$FF00)|((((FFX_EA_PWM2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	
+000B2C                  FFX_EA_PWM3:
+000B2C 807F7F22980C8054 	dc.b	nRst, $7F, $7F, $22, pClosedHH, $0C, nRst, $54
+000B34 980C807F05890C80 	dc.b	pClosedHH, $0C, nRst, $7F, $05, pCrashCymb, $0C, nRst
+000B3C 24               	dc.b	$24
+000B3D                  	smpsAlterVol		$2B
+000B3D E62B             	dc.b	$E6,$2B
+000B3F 8902             	dc.b	pCrashCymb, $02
+000B41                  	smpsAlterVol		$FE
+000B41 E6FE             	dc.b	$E6,$FE
+000B43 01               	dc.b	$01
+000B44                  	smpsAlterVol		$FD
+000B44 E6FD             	dc.b	$E6,$FD
+000B46 02               	dc.b	$02
+000B47                  	smpsAlterVol		$FD
+000B47 E6FD             	dc.b	$E6,$FD
+000B49 01               	dc.b	$01
+000B4A                  	smpsAlterVol		$FD
+000B4A E6FD             	dc.b	$E6,$FD
+000B4C 02               	dc.b	$02
+000B4D                  	smpsAlterVol		$FF
+000B4D E6FF             	dc.b	$E6,$FF
+000B4F 01               	dc.b	$01
+000B50                  	smpsAlterVol		$FE
+000B50 E6FE             	dc.b	$E6,$FE
+000B52 02               	dc.b	$02
+000B53                  	smpsAlterVol		$FE
+000B53 E6FE             	dc.b	$E6,$FE
+000B55 01800C           	dc.b	$01, nRst, $0C
+000B58                  	smpsAlterVol		$F4
+000B58 E6F4             	dc.b	$E6,$F4
+000B5A 89               	dc.b	pCrashCymb
+
+000B5B                  FFX_EA_PWM3_Loop1:
+000B5B 02               	dc.b	$02
+000B5C                  	smpsAlterVol		$01
+000B5C E601             	dc.b	$E6,$01
+000B5E 01               	dc.b	$01
+000B5F                  	smpsAlterVol		$01
+000B5F E601             	dc.b	$E6,$01
+000B61                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loop1, Target
+000B61 F7               	dc.b	$F7
+000B62 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loop1<*)
+000B64                  		rom_ptr_z80(FFX_EA_PWM3_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B64 5B8B             	dc.w  (((((FFX_EA_PWM3_Loop1+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B66 02               	dc.b	$02
+000B67                  	smpsAlterVol		$01
+000B67 E601             	dc.b	$E6,$01
+000B69 01               	dc.b	$01
+000B6A                  	smpsAlterVol		$02
+000B6A E602             	dc.b	$E6,$02
+000B6C 02               	dc.b	$02
+000B6D                  	smpsAlterVol		$01
+000B6D E601             	dc.b	$E6,$01
+000B6F 01806C           	dc.b	$01, nRst, $6C
+000B72                  	smpsAlterVol		$E9
+000B72 E6E9             	dc.b	$E6,$E9
+000B74 980C807F35       	dc.b	pClosedHH, $0C, nRst, $7F, $35
+000B79                  	smpsAlterVol		$02
+000B79 E602             	dc.b	$E6,$02
+000B7B 980C8036         	dc.b	pClosedHH, $0C, nRst, $36
+000B7F                  	smpsAlterVol		$14
+000B7F E614             	dc.b	$E6,$14
+000B81 8902             	dc.b	pCrashCymb, $02
+000B83                  	smpsAlterVol		$FE
+000B83 E6FE             	dc.b	$E6,$FE
+000B85 01               	dc.b	$01
+000B86                  	smpsAlterVol		$FE
+000B86 E6FE             	dc.b	$E6,$FE
+
+000B88                  FFX_EA_PWM3_Loop2:
+000B88 02               	dc.b	$02
+000B89                  	smpsAlterVol		$FE
+000B89 E6FE             	dc.b	$E6,$FE
+000B8B 01               	dc.b	$01
+000B8C                  	smpsAlterVol		$FF
+000B8C E6FF             	dc.b	$E6,$FF
+000B8E                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loop2, Target
+000B8E F7               	dc.b	$F7
+000B8F 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loop2<*)
+000B91                  		rom_ptr_z80(FFX_EA_PWM3_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B91 888B             	dc.w  (((((FFX_EA_PWM3_Loop2+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B93 02               	dc.b	$02
+000B94                  	smpsAlterVol		$FF
+000B94 E6FF             	dc.b	$E6,$FF
+000B96 01               	dc.b	$01
+000B97                  	smpsAlterVol		$FE
+000B97 E6FE             	dc.b	$E6,$FE
+000B99 02               	dc.b	$02
+000B9A                  	smpsAlterVol		$FF
+000B9A E6FF             	dc.b	$E6,$FF
+000B9C 01               	dc.b	$01
+000B9D                  	smpsAlterVol		$FF
+000B9D E6FF             	dc.b	$E6,$FF
+000B9F 02               	dc.b	$02
+
+000BA0                  FFX_EA_PWM3_Loop3:
+000BA0 01               	dc.b	$01
+000BA1                  	smpsAlterVol		$02
+000BA1 E602             	dc.b	$E6,$02
+000BA3 02               	dc.b	$02
+000BA4                  	smpsAlterVol		$01
+000BA4 E601             	dc.b	$E6,$01
+000BA6                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loop3, Target
+000BA6 F7               	dc.b	$F7
+000BA7 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loop3<*)
+000BA9                  		rom_ptr_z80(FFX_EA_PWM3_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BA9 A08B             	dc.w  (((((FFX_EA_PWM3_Loop3+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000BAB 01               	dc.b	$01
+000BAC                  	smpsAlterVol		$02
+000BAC E602             	dc.b	$E6,$02
+000BAE 028046           	dc.b	$02, nRst, $46
+000BB1                  	smpsAlterVol		$07
+000BB1 E607             	dc.b	$E6,$07
+000BB3 8902             	dc.b	pCrashCymb, $02
+000BB5                  	smpsAlterVol		$FE
+000BB5 E6FE             	dc.b	$E6,$FE
+000BB7 01               	dc.b	$01
+000BB8                  	smpsAlterVol		$FE
+000BB8 E6FE             	dc.b	$E6,$FE
+
+000BBA                  FFX_EA_PWM3_Loop4:
+000BBA 02               	dc.b	$02
+000BBB                  	smpsAlterVol		$FE
+000BBB E6FE             	dc.b	$E6,$FE
+000BBD 01               	dc.b	$01
+000BBE                  	smpsAlterVol		$FF
+000BBE E6FF             	dc.b	$E6,$FF
+000BC0                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loop4, Target
+000BC0 F7               	dc.b	$F7
+000BC1 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loop4<*)
+000BC3                  		rom_ptr_z80(FFX_EA_PWM3_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BC3 BA8B             	dc.w  (((((FFX_EA_PWM3_Loop4+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000BC5 02               	dc.b	$02
+000BC6                  	smpsAlterVol		$FF
+000BC6 E6FF             	dc.b	$E6,$FF
+000BC8 01               	dc.b	$01
+000BC9                  	smpsAlterVol		$FE
+000BC9 E6FE             	dc.b	$E6,$FE
+000BCB 02               	dc.b	$02
+000BCC                  	smpsAlterVol		$FF
+000BCC E6FF             	dc.b	$E6,$FF
+000BCE 01               	dc.b	$01
+000BCF                  	smpsAlterVol		$FF
+000BCF E6FF             	dc.b	$E6,$FF
+000BD1 02               	dc.b	$02
+
+000BD2                  FFX_EA_PWM3_Loop5:
+000BD2 01               	dc.b	$01
+000BD3                  	smpsAlterVol		$02
+000BD3 E602             	dc.b	$E6,$02
+000BD5 02               	dc.b	$02
+000BD6                  	smpsAlterVol		$01
+000BD6 E601             	dc.b	$E6,$01
+000BD8                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loop5, Target
+000BD8 F7               	dc.b	$F7
+000BD9 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loop5<*)
+000BDB                  		rom_ptr_z80(FFX_EA_PWM3_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BDB D28B             	dc.w  (((((FFX_EA_PWM3_Loop5+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000BDD 01               	dc.b	$01
+000BDE                  	smpsAlterVol		$02
+000BDE E602             	dc.b	$E6,$02
+000BE0 028016           	dc.b	$02, nRst, $16
+000BE3                  	smpsAlterVol		$07
+000BE3 E607             	dc.b	$E6,$07
+000BE5 8902             	dc.b	pCrashCymb, $02
+000BE7                  	smpsAlterVol		$FE
+000BE7 E6FE             	dc.b	$E6,$FE
+000BE9 01               	dc.b	$01
+000BEA                  	smpsAlterVol		$FE
+000BEA E6FE             	dc.b	$E6,$FE
+
+000BEC                  FFX_EA_PWM3_Loop6:
+000BEC 02               	dc.b	$02
+000BED                  	smpsAlterVol		$FE
+000BED E6FE             	dc.b	$E6,$FE
+000BEF 01               	dc.b	$01
+000BF0                  	smpsAlterVol		$FF
+000BF0 E6FF             	dc.b	$E6,$FF
+000BF2                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loop6, Target
+000BF2 F7               	dc.b	$F7
+000BF3 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loop6<*)
+000BF5                  		rom_ptr_z80(FFX_EA_PWM3_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BF5 EC8B             	dc.w  (((((FFX_EA_PWM3_Loop6+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000BF7 02               	dc.b	$02
+000BF8                  	smpsAlterVol		$FF
+000BF8 E6FF             	dc.b	$E6,$FF
+000BFA 01               	dc.b	$01
+000BFB                  	smpsAlterVol		$FE
+000BFB E6FE             	dc.b	$E6,$FE
+000BFD 02               	dc.b	$02
+000BFE                  	smpsAlterVol		$FF
+000BFE E6FF             	dc.b	$E6,$FF
+000C00 01               	dc.b	$01
+000C01                  	smpsAlterVol		$FF
+000C01 E6FF             	dc.b	$E6,$FF
+000C03 02               	dc.b	$02
+
+000C04                  FFX_EA_PWM3_Loop7:
+000C04 01               	dc.b	$01
+000C05                  	smpsAlterVol		$02
+000C05 E602             	dc.b	$E6,$02
+000C07 02               	dc.b	$02
+000C08                  	smpsAlterVol		$01
+000C08 E601             	dc.b	$E6,$01
+000C0A                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loop7, Target
+000C0A F7               	dc.b	$F7
+000C0B 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loop7<*)
+000C0D                  		rom_ptr_z80(FFX_EA_PWM3_Loop7+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C0D 048C             	dc.w  (((((FFX_EA_PWM3_Loop7+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loop7+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C0F 01               	dc.b	$01
+000C10                  	smpsAlterVol		$02
+000C10 E602             	dc.b	$E6,$02
+000C12 028046           	dc.b	$02, nRst, $46
+000C15                  	smpsAlterVol		$33
+000C15 E633             	dc.b	$E6,$33
+000C17 8902             	dc.b	pCrashCymb, $02
+000C19                  	smpsAlterVol		$F0
+000C19 E6F0             	dc.b	$E6,$F0
+000C1B 01               	dc.b	$01
+000C1C                  	smpsAlterVol		$F8
+000C1C E6F8             	dc.b	$E6,$F8
+000C1E 02               	dc.b	$02
+000C1F                  	smpsAlterVol		$FA
+000C1F E6FA             	dc.b	$E6,$FA
+000C21 01               	dc.b	$01
+000C22                  	smpsAlterVol		$FB
+000C22 E6FB             	dc.b	$E6,$FB
+000C24 02               	dc.b	$02
+000C25                  	smpsAlterVol		$FC
+000C25 E6FC             	dc.b	$E6,$FC
+000C27 01               	dc.b	$01
+000C28                  	smpsAlterVol		$FC
+000C28 E6FC             	dc.b	$E6,$FC
+
+000C2A                  FFX_EA_PWM3_Loo$8:
+000C2A 02               	dc.b	$02
+000C2B                  	smpsAlterVol		$FD
+000C2B E6FD             	dc.b	$E6,$FD
+000C2D 01               	dc.b	$01
+000C2E                  	smpsAlterVol		$FE
+000C2E E6FE             	dc.b	$E6,$FE
+000C30                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loo$8, Target
+000C30 F7               	dc.b	$F7
+000C31 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loo$8<*)
+000C33                  		rom_ptr_z80(FFX_EA_PWM3_Loo$8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C33 2A8C             	dc.w  (((((FFX_EA_PWM3_Loo$8+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loo$8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C35 02               	dc.b	$02
+000C36                  	smpsAlterVol		$FE
+000C36 E6FE             	dc.b	$E6,$FE
+000C38 01               	dc.b	$01
+000C39                  	smpsAlterVol		$FE
+000C39 E6FE             	dc.b	$E6,$FE
+000C3B 02               	dc.b	$02
+000C3C                  	smpsAlterVol		$FE
+000C3C E6FE             	dc.b	$E6,$FE
+000C3E 01               	dc.b	$01
+000C3F                  	smpsAlterVol		$FF
+000C3F E6FF             	dc.b	$E6,$FF
+000C41 02               	dc.b	$02
+000C42                  	smpsAlterVol		$FF
+000C42 E6FF             	dc.b	$E6,$FF
+000C44 01               	dc.b	$01
+000C45                  	smpsAlterVol		$FE
+000C45 E6FE             	dc.b	$E6,$FE
+000C47 028046           	dc.b	$02, nRst, $46
+000C4A                  	smpsAlterVol		$43
+000C4A E643             	dc.b	$E6,$43
+000C4C 8902             	dc.b	pCrashCymb, $02
+000C4E                  	smpsAlterVol		$F0
+000C4E E6F0             	dc.b	$E6,$F0
+000C50 01               	dc.b	$01
+000C51                  	smpsAlterVol		$F5
+000C51 E6F5             	dc.b	$E6,$F5
+000C53 02               	dc.b	$02
+000C54                  	smpsAlterVol		$FA
+000C54 E6FA             	dc.b	$E6,$FA
+000C56 01               	dc.b	$01
+000C57                  	smpsAlterVol		$FA
+000C57 E6FA             	dc.b	$E6,$FA
+000C59 02               	dc.b	$02
+000C5A                  	smpsAlterVol		$FB
+000C5A E6FB             	dc.b	$E6,$FB
+000C5C 01               	dc.b	$01
+000C5D                  	smpsAlterVol		$FD
+000C5D E6FD             	dc.b	$E6,$FD
+000C5F 02               	dc.b	$02
+000C60                  	smpsAlterVol		$FD
+000C60 E6FD             	dc.b	$E6,$FD
+
+000C62                  FFX_EA_PWM3_Loo$9:
+000C62 01               	dc.b	$01
+000C63                  	smpsAlterVol		$FD
+000C63 E6FD             	dc.b	$E6,$FD
+000C65 02               	dc.b	$02
+000C66                  	smpsAlterVol		$FE
+000C66 E6FE             	dc.b	$E6,$FE
+000C68                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loo$9, Target
+000C68 F7               	dc.b	$F7
+000C69 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loo$9<*)
+000C6B                  		rom_ptr_z80(FFX_EA_PWM3_Loo$9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C6B 628C             	dc.w  (((((FFX_EA_PWM3_Loo$9+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loo$9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000C6D                  FFX_EA_PWM3_Loop10:
+000C6D 01               	dc.b	$01
+000C6E                  	smpsAlterVol		$FE
+000C6E E6FE             	dc.b	$E6,$FE
+000C70 02               	dc.b	$02
+000C71                  	smpsAlterVol		$FF
+000C71 E6FF             	dc.b	$E6,$FF
+000C73                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loop10, Target
+000C73 F7               	dc.b	$F7
+000C74 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loop10<*)
+000C76                  		rom_ptr_z80(FFX_EA_PWM3_Loop10+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C76 6D8C             	dc.w  (((((FFX_EA_PWM3_Loop10+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loop10+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C78 01               	dc.b	$01
+000C79                  	smpsAlterVol		$FE
+000C79 E6FE             	dc.b	$E6,$FE
+000C7B 02804C           	dc.b	$02, nRst, $4C
+000C7E                  	smpsAlterVol		$38
+000C7E E638             	dc.b	$E6,$38
+000C80 8902             	dc.b	pCrashCymb, $02
+000C82                  	smpsAlterVol		$F4
+000C82 E6F4             	dc.b	$E6,$F4
+000C84 01               	dc.b	$01
+000C85                  	smpsAlterVol		$F9
+000C85 E6F9             	dc.b	$E6,$F9
+000C87 02               	dc.b	$02
+000C88                  	smpsAlterVol		$F9
+000C88 E6F9             	dc.b	$E6,$F9
+000C8A 01               	dc.b	$01
+000C8B                  	smpsAlterVol		$FC
+000C8B E6FC             	dc.b	$E6,$FC
+000C8D 02               	dc.b	$02
+000C8E                  	smpsAlterVol		$FC
+000C8E E6FC             	dc.b	$E6,$FC
+000C90 01               	dc.b	$01
+000C91                  	smpsAlterVol		$FC
+000C91 E6FC             	dc.b	$E6,$FC
+
+000C93                  FFX_EA_PWM3_Loop11:
+000C93 02               	dc.b	$02
+000C94                  	smpsAlterVol		$FD
+000C94 E6FD             	dc.b	$E6,$FD
+000C96 01               	dc.b	$01
+000C97                  	smpsAlterVol		$FE
+000C97 E6FE             	dc.b	$E6,$FE
+000C99                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loop11, Target
+000C99 F7               	dc.b	$F7
+000C9A 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loop11<*)
+000C9C                  		rom_ptr_z80(FFX_EA_PWM3_Loop11+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C9C 938C             	dc.w  (((((FFX_EA_PWM3_Loop11+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loop11+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C9E 02               	dc.b	$02
+000C9F                  	smpsAlterVol		$FE
+000C9F E6FE             	dc.b	$E6,$FE
+
+000CA1                  FFX_EA_PWM3_Loop12:
+000CA1 01               	dc.b	$01
+000CA2                  	smpsAlterVol		$FE
+000CA2 E6FE             	dc.b	$E6,$FE
+000CA4 02               	dc.b	$02
+000CA5                  	smpsAlterVol		$FF
+000CA5 E6FF             	dc.b	$E6,$FF
+000CA7                  	smpsLoop		$00, $02, FFX_EA_PWM3_Loop12, Target
+000CA7 F7               	dc.b	$F7
+000CA8 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM3_Loop12<*)
+000CAA                  		rom_ptr_z80(FFX_EA_PWM3_Loop12+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CAA A18C             	dc.w  (((((FFX_EA_PWM3_Loop12+Target))<<8)&$FF00)|((((FFX_EA_PWM3_Loop12+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000CAC 01               	dc.b	$01
+000CAD                  	smpsAlterVol		$FE
+000CAD E6FE             	dc.b	$E6,$FE
+000CAF 02800C           	dc.b	$02, nRst, $0C
+000CB2                  	smpsJump		FFX_EA_PWM3, Target
+000CB2 F6               	dc.b	$F6
+                        	if (FFX_EA_PWM3<*)
+000CB3                  		rom_ptr_z80(FFX_EA_PWM3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CB3 2C8B             	dc.w  (((((FFX_EA_PWM3+Target))<<8)&$FF00)|((((FFX_EA_PWM3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	
+000CB5                  FFX_EA_PWM4:
+000CB5 890C807F7D       	dc.b	pCrashCymb, $0C, nRst, $7F, $7D
+000CBA                  	smpsAlterVol		$2D
+000CBA E62D             	dc.b	$E6,$2D
+000CBC 9802             	dc.b	pClosedHH, $02
+000CBE                  	smpsAlterVol		$FB
+000CBE E6FB             	dc.b	$E6,$FB
+000CC0 01               	dc.b	$01
+000CC1                  	smpsAlterVol		$FB
+000CC1 E6FB             	dc.b	$E6,$FB
+000CC3 02               	dc.b	$02
+000CC4                  	smpsAlterVol		$FC
+000CC4 E6FC             	dc.b	$E6,$FC
+
+000CC6                  FFX_EA_PWM4_Loop1:
+000CC6 01               	dc.b	$01
+000CC7                  	smpsAlterVol		$FD
+000CC7 E6FD             	dc.b	$E6,$FD
+000CC9 02               	dc.b	$02
+000CCA                  	smpsAlterVol		$FE
+000CCA E6FE             	dc.b	$E6,$FE
+000CCC                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loop1, Target
+000CCC F7               	dc.b	$F7
+000CCD 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loop1<*)
+000CCF                  		rom_ptr_z80(FFX_EA_PWM4_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CCF C68C             	dc.w  (((((FFX_EA_PWM4_Loop1+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000CD1                  FFX_EA_PWM4_Loop2:
+000CD1 01               	dc.b	$01
+000CD2                  	smpsAlterVol		$FE
+000CD2 E6FE             	dc.b	$E6,$FE
+000CD4 02               	dc.b	$02
+000CD5                  	smpsAlterVol		$FE
+000CD5 E6FE             	dc.b	$E6,$FE
+000CD7                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loop2, Target
+000CD7 F7               	dc.b	$F7
+000CD8 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loop2<*)
+000CDA                  		rom_ptr_z80(FFX_EA_PWM4_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CDA D18C             	dc.w  (((((FFX_EA_PWM4_Loop2+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000CDC 01               	dc.b	$01
+000CDD                  	smpsAlterVol		$FF
+000CDD E6FF             	dc.b	$E6,$FF
+000CDF 02               	dc.b	$02
+000CE0                  	smpsAlterVol		$FE
+000CE0 E6FE             	dc.b	$E6,$FE
+000CE2 01               	dc.b	$01
+000CE3                  	smpsAlterVol		$FF
+000CE3 E6FF             	dc.b	$E6,$FF
+000CE5 02               	dc.b	$02
+000CE6                  	smpsAlterVol		$FF
+000CE6 E6FF             	dc.b	$E6,$FF
+000CE8 01               	dc.b	$01
+000CE9                  	smpsAlterVol		$F9
+000CE9 E6F9             	dc.b	$E6,$F9
+000CEB 890C803C         	dc.b	pCrashCymb, $0C, nRst, $3C
+000CEF                  	smpsAlterVol		$2C
+000CEF E62C             	dc.b	$E6,$2C
+000CF1 9802             	dc.b	pClosedHH, $02
+000CF3                  	smpsAlterVol		$FB
+000CF3 E6FB             	dc.b	$E6,$FB
+000CF5 01               	dc.b	$01
+000CF6                  	smpsAlterVol		$FB
+000CF6 E6FB             	dc.b	$E6,$FB
+000CF8 02               	dc.b	$02
+000CF9                  	smpsAlterVol		$FC
+000CF9 E6FC             	dc.b	$E6,$FC
+
+000CFB                  FFX_EA_PWM4_Loop3:
+000CFB 01               	dc.b	$01
+000CFC                  	smpsAlterVol		$FD
+000CFC E6FD             	dc.b	$E6,$FD
+000CFE 02               	dc.b	$02
+000CFF                  	smpsAlterVol		$FE
+000CFF E6FE             	dc.b	$E6,$FE
+000D01                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loop3, Target
+000D01 F7               	dc.b	$F7
+000D02 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loop3<*)
+000D04                  		rom_ptr_z80(FFX_EA_PWM4_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D04 FB8C             	dc.w  (((((FFX_EA_PWM4_Loop3+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000D06                  FFX_EA_PWM4_Loop4:
+000D06 01               	dc.b	$01
+000D07                  	smpsAlterVol		$FE
+000D07 E6FE             	dc.b	$E6,$FE
+000D09 02               	dc.b	$02
+000D0A                  	smpsAlterVol		$FE
+000D0A E6FE             	dc.b	$E6,$FE
+000D0C                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loop4, Target
+000D0C F7               	dc.b	$F7
+000D0D 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loop4<*)
+000D0F                  		rom_ptr_z80(FFX_EA_PWM4_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D0F 068D             	dc.w  (((((FFX_EA_PWM4_Loop4+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000D11 01               	dc.b	$01
+000D12                  	smpsAlterVol		$FF
+000D12 E6FF             	dc.b	$E6,$FF
+000D14 02               	dc.b	$02
+000D15                  	smpsAlterVol		$FE
+000D15 E6FE             	dc.b	$E6,$FE
+000D17 01               	dc.b	$01
+000D18                  	smpsAlterVol		$FF
+000D18 E6FF             	dc.b	$E6,$FF
+000D1A 02               	dc.b	$02
+000D1B                  	smpsAlterVol		$FF
+000D1B E6FF             	dc.b	$E6,$FF
+000D1D 01               	dc.b	$01
+000D1E                  	smpsAlterVol		$F9
+000D1E E6F9             	dc.b	$E6,$F9
+000D20 890C803C         	dc.b	pCrashCymb, $0C, nRst, $3C
+000D24                  	smpsAlterVol		$2B
+000D24 E62B             	dc.b	$E6,$2B
+000D26 9802             	dc.b	pClosedHH, $02
+000D28                  	smpsAlterVol		$FE
+000D28 E6FE             	dc.b	$E6,$FE
+000D2A 01               	dc.b	$01
+000D2B                  	smpsAlterVol		$FD
+000D2B E6FD             	dc.b	$E6,$FD
+000D2D 02               	dc.b	$02
+000D2E                  	smpsAlterVol		$FD
+000D2E E6FD             	dc.b	$E6,$FD
+000D30 01               	dc.b	$01
+000D31                  	smpsAlterVol		$FD
+000D31 E6FD             	dc.b	$E6,$FD
+000D33 02               	dc.b	$02
+000D34                  	smpsAlterVol		$FF
+000D34 E6FF             	dc.b	$E6,$FF
+000D36 01               	dc.b	$01
+000D37                  	smpsAlterVol		$FE
+000D37 E6FE             	dc.b	$E6,$FE
+000D39 02               	dc.b	$02
+000D3A                  	smpsAlterVol		$FE
+000D3A E6FE             	dc.b	$E6,$FE
+000D3C 01               	dc.b	$01
+000D3D                  	smpsAlterVol		$FE
+000D3D E6FE             	dc.b	$E6,$FE
+
+000D3F                  FFX_EA_PWM4_Loop5:
+000D3F 02               	dc.b	$02
+000D40                  	smpsAlterVol		$FF
+000D40 E6FF             	dc.b	$E6,$FF
+000D42 01               	dc.b	$01
+000D43                  	smpsAlterVol		$FF
+000D43 E6FF             	dc.b	$E6,$FF
+000D45 02               	dc.b	$02
+000D46                  	smpsAlterVol		$FE
+000D46 E6FE             	dc.b	$E6,$FE
+000D48 01               	dc.b	$01
+000D49                  	smpsAlterVol		$FF
+000D49 E6FF             	dc.b	$E6,$FF
+000D4B                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loop5, Target
+000D4B F7               	dc.b	$F7
+000D4C 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loop5<*)
+000D4E                  		rom_ptr_z80(FFX_EA_PWM4_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D4E 3F8D             	dc.w  (((((FFX_EA_PWM4_Loop5+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000D50                  FFX_EA_PWM4_Loop6:
+000D50 02               	dc.b	$02
+000D51                  	smpsAlterVol		$01
+000D51 E601             	dc.b	$E6,$01
+000D53 01               	dc.b	$01
+000D54                  	smpsAlterVol		$01
+000D54 E601             	dc.b	$E6,$01
+000D56                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loop6, Target
+000D56 F7               	dc.b	$F7
+000D57 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loop6<*)
+000D59                  		rom_ptr_z80(FFX_EA_PWM4_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D59 508D             	dc.w  (((((FFX_EA_PWM4_Loop6+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000D5B 02               	dc.b	$02
+000D5C                  	smpsAlterVol		$01
+000D5C E601             	dc.b	$E6,$01
+000D5E 01               	dc.b	$01
+000D5F                  	smpsAlterVol		$02
+000D5F E602             	dc.b	$E6,$02
+000D61 02               	dc.b	$02
+000D62                  	smpsAlterVol		$01
+000D62 E601             	dc.b	$E6,$01
+000D64 01               	dc.b	$01
+000D65                  	smpsAlterVol		$01
+000D65 E601             	dc.b	$E6,$01
+000D67 02               	dc.b	$02
+000D68                  	smpsAlterVol		$01
+000D68 E601             	dc.b	$E6,$01
+000D6A 01               	dc.b	$01
+000D6B                  	smpsAlterVol		$02
+000D6B E602             	dc.b	$E6,$02
+000D6D 02               	dc.b	$02
+000D6E                  	smpsAlterVol		$02
+000D6E E602             	dc.b	$E6,$02
+000D70 01               	dc.b	$01
+000D71                  	smpsAlterVol		$01
+000D71 E601             	dc.b	$E6,$01
+000D73 02               	dc.b	$02
+000D74                  	smpsAlterVol		$02
+000D74 E602             	dc.b	$E6,$02
+000D76 01               	dc.b	$01
+000D77                  	smpsAlterVol		$02
+000D77 E602             	dc.b	$E6,$02
+000D79 02               	dc.b	$02
+000D7A                  	smpsAlterVol		$03
+000D7A E603             	dc.b	$E6,$03
+000D7C 01               	dc.b	$01
+000D7D                  	smpsAlterVol		$04
+000D7D E604             	dc.b	$E6,$04
+000D7F 02               	dc.b	$02
+000D80                  	smpsAlterVol		$FB
+000D80 E6FB             	dc.b	$E6,$FB
+000D82 01               	dc.b	$01
+000D83                  	smpsAlterVol		$FB
+000D83 E6FB             	dc.b	$E6,$FB
+000D85 02               	dc.b	$02
+000D86                  	smpsAlterVol		$FC
+000D86 E6FC             	dc.b	$E6,$FC
+000D88 01               	dc.b	$01
+000D89                  	smpsAlterVol		$FD
+000D89 E6FD             	dc.b	$E6,$FD
+000D8B 02               	dc.b	$02
+000D8C                  	smpsAlterVol		$FD
+000D8C E6FD             	dc.b	$E6,$FD
+000D8E 01               	dc.b	$01
+000D8F                  	smpsAlterVol		$FD
+000D8F E6FD             	dc.b	$E6,$FD
+
+000D91                  FFX_EA_PWM4_Loop7:
+000D91 02               	dc.b	$02
+000D92                  	smpsAlterVol		$FE
+000D92 E6FE             	dc.b	$E6,$FE
+000D94 01               	dc.b	$01
+000D95                  	smpsAlterVol		$FE
+000D95 E6FE             	dc.b	$E6,$FE
+000D97                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loop7, Target
+000D97 F7               	dc.b	$F7
+000D98 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loop7<*)
+000D9A                  		rom_ptr_z80(FFX_EA_PWM4_Loop7+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D9A 918D             	dc.w  (((((FFX_EA_PWM4_Loop7+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop7+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000D9C                  FFX_EA_PWM4_Loo$8:
+000D9C 02               	dc.b	$02
+000D9D                  	smpsAlterVol		$FE
+000D9D E6FE             	dc.b	$E6,$FE
+000D9F 01               	dc.b	$01
+000DA0                  	smpsAlterVol		$FF
+000DA0 E6FF             	dc.b	$E6,$FF
+000DA2                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loo$8, Target
+000DA2 F7               	dc.b	$F7
+000DA3 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loo$8<*)
+000DA5                  		rom_ptr_z80(FFX_EA_PWM4_Loo$8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000DA5 9C8D             	dc.w  (((((FFX_EA_PWM4_Loo$8+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loo$8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000DA7 02               	dc.b	$02
+000DA8                  	smpsAlterVol		$FF
+000DA8 E6FF             	dc.b	$E6,$FF
+000DAA 01               	dc.b	$01
+000DAB                  	smpsAlterVol		$FD
+000DAB E6FD             	dc.b	$E6,$FD
+000DAD 0C8024980C       	dc.b	$0C, nRst, $24, pClosedHH, $0C
+000DB2                  	smpsAlterVol		$19
+000DB2 E619             	dc.b	$E6,$19
+000DB4 8902             	dc.b	pCrashCymb, $02
+000DB6                  	smpsAlterVol		$FF
+000DB6 E6FF             	dc.b	$E6,$FF
+000DB8 01               	dc.b	$01
+000DB9                  	smpsAlterVol		$FF
+000DB9 E6FF             	dc.b	$E6,$FF
+000DBB 02               	dc.b	$02
+000DBC                  	smpsAlterVol		$FE
+000DBC E6FE             	dc.b	$E6,$FE
+000DBE 01               	dc.b	$01
+000DBF                  	smpsAlterVol		$FF
+000DBF E6FF             	dc.b	$E6,$FF
+000DC1 02               	dc.b	$02
+000DC2                  	smpsAlterVol		$FF
+000DC2 E6FF             	dc.b	$E6,$FF
+000DC4 01               	dc.b	$01
+000DC5                  	smpsAlterVol		$FF
+000DC5 E6FF             	dc.b	$E6,$FF
+000DC7 02               	dc.b	$02
+000DC8                  	smpsAlterVol		$FE
+000DC8 E6FE             	dc.b	$E6,$FE
+000DCA 01               	dc.b	$01
+000DCB                  	smpsAlterVol		$EF
+000DCB E6EF             	dc.b	$E6,$EF
+000DCD 980804           	dc.b	pClosedHH, $08, $04
+000DD0                  	smpsAlterVol		$19
+000DD0 E619             	dc.b	$E6,$19
+000DD2 8902             	dc.b	pCrashCymb, $02
+000DD4                  	smpsAlterVol		$01
+000DD4 E601             	dc.b	$E6,$01
+000DD6 01               	dc.b	$01
+000DD7                  	smpsAlterVol		$02
+000DD7 E602             	dc.b	$E6,$02
+000DD9 02               	dc.b	$02
+000DDA                  	smpsAlterVol		$02
+000DDA E602             	dc.b	$E6,$02
+000DDC 01               	dc.b	$01
+000DDD                  	smpsAlterVol		$01
+000DDD E601             	dc.b	$E6,$01
+000DDF 02               	dc.b	$02
+000DE0                  	smpsAlterVol		$02
+000DE0 E602             	dc.b	$E6,$02
+000DE2 01               	dc.b	$01
+000DE3                  	smpsAlterVol		$02
+000DE3 E602             	dc.b	$E6,$02
+000DE5 02               	dc.b	$02
+000DE6                  	smpsAlterVol		$03
+000DE6 E603             	dc.b	$E6,$03
+000DE8 01               	dc.b	$01
+000DE9                  	smpsAlterVol		$DB
+000DE9 E6DB             	dc.b	$E6,$DB
+000DEB 980C80           	dc.b	pClosedHH, $0C, nRst
+000DEE                  	smpsAlterVol		$FF
+000DEE E6FF             	dc.b	$E6,$FF
+000DF0 980804800C8980   	dc.b	pClosedHH, $08, $04, nRst, $0C, pCrashCymb, nRst
+000DF7                  	smpsAlterVol		$2D
+000DF7 E62D             	dc.b	$E6,$2D
+000DF9 9802             	dc.b	pClosedHH, $02
+000DFB                  	smpsAlterVol		$FB
+000DFB E6FB             	dc.b	$E6,$FB
+000DFD 01               	dc.b	$01
+000DFE                  	smpsAlterVol		$FB
+000DFE E6FB             	dc.b	$E6,$FB
+000E00 02               	dc.b	$02
+000E01                  	smpsAlterVol		$FC
+000E01 E6FC             	dc.b	$E6,$FC
+
+000E03                  FFX_EA_PWM4_Loo$9:
+000E03 01               	dc.b	$01
+000E04                  	smpsAlterVol		$FD
+000E04 E6FD             	dc.b	$E6,$FD
+000E06 02               	dc.b	$02
+000E07                  	smpsAlterVol		$FE
+000E07 E6FE             	dc.b	$E6,$FE
+000E09                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loo$9, Target
+000E09 F7               	dc.b	$F7
+000E0A 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loo$9<*)
+000E0C                  		rom_ptr_z80(FFX_EA_PWM4_Loo$9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000E0C 038E             	dc.w  (((((FFX_EA_PWM4_Loo$9+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loo$9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000E0E                  FFX_EA_PWM4_Loop10:
+000E0E 01               	dc.b	$01
+000E0F                  	smpsAlterVol		$FE
+000E0F E6FE             	dc.b	$E6,$FE
+000E11 02               	dc.b	$02
+000E12                  	smpsAlterVol		$FE
+000E12 E6FE             	dc.b	$E6,$FE
+000E14                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loop10, Target
+000E14 F7               	dc.b	$F7
+000E15 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loop10<*)
+000E17                  		rom_ptr_z80(FFX_EA_PWM4_Loop10+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000E17 0E8E             	dc.w  (((((FFX_EA_PWM4_Loop10+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop10+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000E19 01               	dc.b	$01
+000E1A                  	smpsAlterVol		$FF
+000E1A E6FF             	dc.b	$E6,$FF
+000E1C 02               	dc.b	$02
+000E1D                  	smpsAlterVol		$FE
+000E1D E6FE             	dc.b	$E6,$FE
+000E1F 01               	dc.b	$01
+000E20                  	smpsAlterVol		$FF
+000E20 E6FF             	dc.b	$E6,$FF
+000E22 02               	dc.b	$02
+000E23                  	smpsAlterVol		$FF
+000E23 E6FF             	dc.b	$E6,$FF
+000E25 01               	dc.b	$01
+000E26                  	smpsAlterVol		$F9
+000E26 E6F9             	dc.b	$E6,$F9
+000E28 890C8054         	dc.b	pCrashCymb, $0C, nRst, $54
+000E2C                  	smpsAlterVol		$FF
+000E2C E6FF             	dc.b	$E6,$FF
+000E2E 890C803C         	dc.b	pCrashCymb, $0C, nRst, $3C
+000E32                  	smpsAlterVol		$2D
+000E32 E62D             	dc.b	$E6,$2D
+000E34 9802             	dc.b	pClosedHH, $02
+000E36                  	smpsAlterVol		$FB
+000E36 E6FB             	dc.b	$E6,$FB
+000E38 01               	dc.b	$01
+000E39                  	smpsAlterVol		$FB
+000E39 E6FB             	dc.b	$E6,$FB
+000E3B 02               	dc.b	$02
+000E3C                  	smpsAlterVol		$FC
+000E3C E6FC             	dc.b	$E6,$FC
+
+000E3E                  FFX_EA_PWM4_Loop11:
+000E3E 01               	dc.b	$01
+000E3F                  	smpsAlterVol		$FD
+000E3F E6FD             	dc.b	$E6,$FD
+000E41 02               	dc.b	$02
+000E42                  	smpsAlterVol		$FE
+000E42 E6FE             	dc.b	$E6,$FE
+000E44                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loop11, Target
+000E44 F7               	dc.b	$F7
+000E45 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loop11<*)
+000E47                  		rom_ptr_z80(FFX_EA_PWM4_Loop11+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000E47 3E8E             	dc.w  (((((FFX_EA_PWM4_Loop11+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop11+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000E49                  FFX_EA_PWM4_Loop12:
+000E49 01               	dc.b	$01
+000E4A                  	smpsAlterVol		$FE
+000E4A E6FE             	dc.b	$E6,$FE
+000E4C 02               	dc.b	$02
+000E4D                  	smpsAlterVol		$FE
+000E4D E6FE             	dc.b	$E6,$FE
+000E4F                  	smpsLoop		$00, $02, FFX_EA_PWM4_Loop12, Target
+000E4F F7               	dc.b	$F7
+000E50 0002             	dc.b	$00,$02
+                        	if (FFX_EA_PWM4_Loop12<*)
+000E52                  		rom_ptr_z80(FFX_EA_PWM4_Loop12+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000E52 498E             	dc.w  (((((FFX_EA_PWM4_Loop12+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop12+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000E54 01               	dc.b	$01
+000E55                  	smpsAlterVol		$FF
+000E55 E6FF             	dc.b	$E6,$FF
+000E57 02               	dc.b	$02
+000E58                  	smpsAlterVol		$FE
+000E58 E6FE             	dc.b	$E6,$FE
+000E5A 01               	dc.b	$01
+000E5B                  	smpsAlterVol		$FF
+000E5B E6FF             	dc.b	$E6,$FF
+000E5D 02               	dc.b	$02
+000E5E                  	smpsAlterVol		$FF
+000E5E E6FF             	dc.b	$E6,$FF
+000E60 01               	dc.b	$01
+000E61                  	smpsAlterVol		$FB
+000E61 E6FB             	dc.b	$E6,$FB
+000E63 89               	dc.b	pCrashCymb
+
+000E64                  FFX_EA_PWM4_Loop13:
+000E64 0C0C080808       	dc.b	$0C, $0C, $08, $08, $08
+000E69                  	smpsLoop		$00, $05, FFX_EA_PWM4_Loop13, Target
+000E69 F7               	dc.b	$F7
+000E6A 0005             	dc.b	$00,$05
+                        	if (FFX_EA_PWM4_Loop13<*)
+000E6C                  		rom_ptr_z80(FFX_EA_PWM4_Loop13+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000E6C 648E             	dc.w  (((((FFX_EA_PWM4_Loop13+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop13+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000E6E 98               	dc.b	pClosedHH
+
+000E6F                  FFX_EA_PWM4_Loop14:
+000E6F 0C0C080808       	dc.b	$0C, $0C, $08, $08, $08
+000E74                  	smpsLoop		$00, $04, FFX_EA_PWM4_Loop14, Target
+000E74 F7               	dc.b	$F7
+000E75 0004             	dc.b	$00,$04
+                        	if (FFX_EA_PWM4_Loop14<*)
+000E77                  		rom_ptr_z80(FFX_EA_PWM4_Loop14+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000E77 6F8E             	dc.w  (((((FFX_EA_PWM4_Loop14+Target))<<8)&$FF00)|((((FFX_EA_PWM4_Loop14+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000E79 8048             	dc.b	nRst, $48
+000E7B                  	smpsAlterVol		$FE
+000E7B E6FE             	dc.b	$E6,$FE
+000E7D 98068002         	dc.b	pClosedHH, $06, nRst, $02
+000E81                  	smpsAlterVol		$02
+000E81 E602             	dc.b	$E6,$02
+000E83 980480           	dc.b	pClosedHH, $04, nRst
+000E86                  	smpsAlterVol		$04
+000E86 E604             	dc.b	$E6,$04
+000E88 988012           	dc.b	pClosedHH, nRst, $12
+000E8B                  	smpsAlterVol		$F9
+000E8B E6F9             	dc.b	$E6,$F9
+000E8D                  	smpsJump		FFX_EA_PWM4, Target
+000E8D F6               	dc.b	$F6
+                        	if (FFX_EA_PWM4<*)
+000E8E                  		rom_ptr_z80(FFX_EA_PWM4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000E8E B58C             	dc.w  (((((FFX_EA_PWM4+Target))<<8)&$FF00)|((((FFX_EA_PWM4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000E90                  FFX_EA_Patches:	
+000E90 3A               	dc.b	$3A
+000E91 1115010159595C4E 	dc.b	$11, $15, $01, $01,	$59, $59, $5C, $4E
+000E99 0A0B0D0400000000 	dc.b	$0A, $0B, $0D, $04,	$00, $00, $00, $00
+000EA1 155826061D142D0C 	dc.b	$15, $58, $26, $06,	$1D, $14, $2D, $0C
+                        	
+000EA9 02               	dc.b	$02
+000EAA 317501015554504E 	dc.b	$31, $75, $01, $01,	$55, $54, $50, $4E
+000EB2 070B080500000000 	dc.b	$07, $0B, $08, $05,	$00, $00, $00, $00
+000EBA 373C3C1C250F2D08 	dc.b	$37, $3C, $3C, $1C,	$25, $0F, $2D, $08
+                        	
+000EC2 39               	dc.b	$39
+000EC3 020204025959594C 	dc.b	$02, $02, $04, $02,	$59, $59, $59, $4C
+000ECB 0307030500000000 	dc.b	$03, $07, $03, $05,	$00, $00, $00, $00
+000ED3 2222222740182404 	dc.b	$22, $22, $22, $27,	$40, $18, $24, $04
+                        	
+000EDB 3C               	dc.b	$3C
+000EDC 323272720F0D0F0D 	dc.b	$32, $32, $72, $72,	$0F, $0D, $0F, $0D
+000EE4 0B0C0D0B02020502 	dc.b	$0B, $0C, $0D, $0B,	$02, $02, $05, $02
+000EEC 202F102F1714140F 	dc.b	$20, $2F, $10, $2F,	$17, $14, $14, $0F
+                        	
+000EF4 02               	dc.b	$02
+000EF5 317501015554504E 	dc.b	$31, $75, $01, $01,	$55, $54, $50, $4E
+000EFD 070B080500000000 	dc.b	$07, $0B, $08, $05,	$00, $00, $00, $00
+000F05 373C3C1C250F2D10 	dc.b	$37, $3C, $3C, $1C,	$25, $0F, $2D, $10
+                        	
+000F0D 34               	dc.b	$34
+000F0E 34347474550E550E 	dc.b	$34, $34, $74, $74,	$55, $0E, $55, $0E
+000F16 0008000801000000 	dc.b	$00, $08, $00, $08,	$01, $00, $00, $00
+000F1E 0B1D0A1D280C2512 	dc.b	$0B, $1D, $0A, $1D,	$28, $0C, $25, $12
+
+00000 Total Error(s)
+
+DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK              00000081 E
+DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
+DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  FFX_EA_FM1         00000040
+FFX_EA_FM2         00000104    FFX_EA_FM3         000001B1    FFX_EA_FM4         00000482
+FFX_EA_FM5         00000673    FFX_EA_FM6         000006AB    FFX_EA_LOOP1       00000042
+FFX_EA_LOOP10      00000165    FFX_EA_LOOP11      00000177    FFX_EA_LOOP12      00000194
+FFX_EA_LOOP13      000001B9    FFX_EA_LOOP14      000001DA    FFX_EA_LOOP15      000001EB
+FFX_EA_LOOP16      0000020C    FFX_EA_LOOP17      0000021D    FFX_EA_LOOP18      0000023E
+FFX_EA_LOOP19      0000024F    FFX_EA_LOOP2       00000061    FFX_EA_LOOP20      00000270
+FFX_EA_LOOP21      00000281    FFX_EA_LOOP22      000002A2    FFX_EA_LOOP23      000002B3
+FFX_EA_LOOP24      000002D4    FFX_EA_LOOP25      000002E5    FFX_EA_LOOP26      00000306
+FFX_EA_LOOP27      00000317    FFX_EA_LOOP28      00000338    FFX_EA_LOOP29      00000349
+FFX_EA_LOOP3       000000A2    FFX_EA_LOOP30      0000036A    FFX_EA_LOOP31      0000037B
+FFX_EA_LOOP32      0000039C    FFX_EA_LOOP33      000003AD    FFX_EA_LOOP34      00000442
+FFX_EA_LOOP35      0000060E    FFX_EA_LOOP36      00000652    FFX_EA_LOOP37      0000065B
+FFX_EA_LOOP38      00000664    FFX_EA_LOOP39      00000757    FFX_EA_LOOP4       000000BD
+FFX_EA_LOOP40      000008E2    FFX_EA_LOOP41      00000902    FFX_EA_LOOP5       000000CF
+FFX_EA_LOOP6       000000EC    FFX_EA_LOOP7       00000106    FFX_EA_LOOP8       00000115
+FFX_EA_LOOP9       0000014A    FFX_EA_PATCHES     00000E90    FFX_EA_PSG1        000006F1
+FFX_EA_PSG2        000007A7    FFX_EA_PSG3        00000911    FFX_EA_PWM1        0000094C
+FFX_EA_PWM1_LOOP1  00000950    FFX_EA_PWM1_LOOP10 00000A29    FFX_EA_PWM1_LOOP11 00000A47
+FFX_EA_PWM1_LOOP12 00000A6A    FFX_EA_PWM1_LOOP13 00000A72    FFX_EA_PWM1_LOOP14 00000A8E
+FFX_EA_PWM1_LOOP15 00000A99    FFX_EA_PWM1_LOOP16 00000A95    FFX_EA_PWM1_LOOP17 00000AA6
+FFX_EA_PWM1_LOOP18 00000AB1    FFX_EA_PWM1_LOOP2  0000096C    FFX_EA_PWM1_LOOP3  0000098F
+FFX_EA_PWM1_LOOP4  00000997    FFX_EA_PWM1_LOOP5  000009B5    FFX_EA_PWM1_LOOP6  000009D8
+FFX_EA_PWM1_LOOP7  000009E0    FFX_EA_PWM1_LOOP8  000009FE    FFX_EA_PWM1_LOOP9  00000A21
+FFX_EA_PWM2        00000ACD    FFX_EA_PWM2_LOOP2  00000AE1    FFX_EA_PWM2_LOOP3  00000AF6
+FFX_EA_PWM2_LOOP4  00000B07    FFX_EA_PWM3        00000B2C    FFX_EA_PWM3_LOO$8  00000C2A
+FFX_EA_PWM3_LOO$9  00000C62    FFX_EA_PWM3_LOOP1  00000B5B    FFX_EA_PWM3_LOOP10 00000C6D
+FFX_EA_PWM3_LOOP11 00000C93    FFX_EA_PWM3_LOOP12 00000CA1    FFX_EA_PWM3_LOOP2  00000B88
+FFX_EA_PWM3_LOOP3  00000BA0    FFX_EA_PWM3_LOOP4  00000BBA    FFX_EA_PWM3_LOOP5  00000BD2
+FFX_EA_PWM3_LOOP6  00000BEC    FFX_EA_PWM3_LOOP7  00000C04    FFX_EA_PWM4        00000CB5
+FFX_EA_PWM4_LOO$8  00000D9C    FFX_EA_PWM4_LOO$9  00000E03    FFX_EA_PWM4_LOOP1  00000CC6
+FFX_EA_PWM4_LOOP10 00000E0E    FFX_EA_PWM4_LOOP11 00000E3E    FFX_EA_PWM4_LOOP12 00000E49
+FFX_EA_PWM4_LOOP13 00000E64    FFX_EA_PWM4_LOOP14 00000E6F    FFX_EA_PWM4_LOOP2  00000CD1
+FFX_EA_PWM4_LOOP3  00000CFB    FFX_EA_PWM4_LOOP4  00000D06    FFX_EA_PWM4_LOOP5  00000D3F
+FFX_EA_PWM4_LOOP6  00000D50    FFX_EA_PWM4_LOOP7  00000D91    NA0                0000008A E
+NA1                00000096 E  NA2                000000A2 E  NA3                000000AE E
+NA4                000000BA E  NA5                000000C6 E  NA6                000000D2 E
+NA7                000000DE E  NAB0               00000089 E  NAB1               00000095 E
+NAB2               000000A1 E  NAB3               000000AD E  NAB4               000000B9 E
+NAB5               000000C5 E  NAB6               000000D1 E  NAB7               000000DD E
+NB0                0000008C E  NB1                00000098 E  NB2                000000A4 E
+NB3                000000B0 E  NB4                000000BC E  NB5                000000C8 E
+NB6                000000D4 E  NBB0               0000008B E  NBB1               00000097 E
+NBB2               000000A3 E  NBB3               000000AF E  NBB4               000000BB E
+NBB5               000000C7 E  NBB6               000000D3 E  NBB7               000000DF E
+NC0                00000081 E  NC1                0000008D E  NC2                00000099 E
+NC3                000000A5 E  NC4                000000B1 E  NC5                000000BD E
+NC6                000000C9 E  NC7                000000D5 E  NCS0               00000082 E
+NCS1               0000008E E  NCS2               0000009A E  NCS3               000000A6 E
+NCS4               000000B2 E  NCS5               000000BE E  NCS6               000000CA E
+NCS7               000000D6 E  ND0                00000083 E  ND1                0000008F E
+ND2                0000009B E  ND3                000000A7 E  ND4                000000B3 E
+ND5                000000BF E  ND6                000000CB E  ND7                000000D7 E
+NE0                00000085 E  NE1                00000091 E  NE2                0000009D E
+NE3                000000A9 E  NE4                000000B5 E  NE5                000000C1 E
+NE6                000000CD E  NE7                000000D9 E  NEB0               00000084 E
+NEB1               00000090 E  NEB2               0000009C E  NEB3               000000A8 E
+NEB4               000000B4 E  NEB5               000000C0 E  NEB6               000000CC E
+NEB7               000000D8 E  NF0                00000086 E  NF1                00000092 E
+NF2                0000009E E  NF3                000000AA E  NF4                000000B6 E
+NF5                000000C2 E  NF6                000000CE E  NF7                000000DA E
+NFS0               00000087 E  NFS1               00000093 E  NFS2               0000009F E
+NFS3               000000AB E  NFS4               000000B7 E  NFS5               000000C3 E
+NFS6               000000CF E  NFS7               000000DB E  NG0                00000088 E
+NG1                00000094 E  NG2                000000A0 E  NG3                000000AC E
+NG4                000000B8 E  NG5                000000C4 E  NG6                000000D0 E
+NG7                000000DC E  NRST               00000080 E  PAKICK             0000008B E
+PASNARE            0000008C E  PBELL              0000008D E  PBONGOHI           00000092 E
+PBONGOLO           00000093 E  PCLAP              0000008A E  PCLICKHI           00000090 E
+PCLICKLO           00000091 E  PCLOSEDHH          00000098 E  PCOWBELL           0000008F E
+PCRASHCYMB         00000089 E  PEHIHAT            00000088 E  PEKICK             00000081 E
+PESNARE            00000082 E  PFINGSNAP          0000008E E  POPENHH            00000099 E
+PRIDEBELL          00000084 E  PSEGA              00000097 E  PSILENCE           00000096 E
+PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E
+PTOMHI             00000085 E  PTOMLOW            00000087 E  PTOMLOWER          0000009A E
+PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E  PTOMMID            00000086 E
+SMPSED             000000ED E  SMPSEE             000000EE E  SMPSF9             000000F9 E
+SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E  SMPSNOATTACK       000000E7 E
+SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E  SMPSPITCH01LO      000000F4 E
+SMPSPITCH02HI      00000018 E  SMPSPITCH02LO      000000E8 E  SMPSPITCH03HI      00000024 E
+SMPSPITCH03LO      000000DC E  SMPSPITCH04HI      00000030 E  SMPSPITCH04LO      000000D0 E
+SMPSPITCH05HI      0000003C E  SMPSPITCH05LO      000000C4 E  SMPSPITCH06HI      00000048 E
+SMPSPITCH06LO      000000B8 E  SMPSPITCH07HI      00000054 E  SMPSPITCH07LO      000000AC E
+SMPSPITCH08HI      00000060 E  SMPSPITCH08LO      000000A0 E  SMPSPITCH09HI      0000006C E
+SMPSPITCH09LO      00000094 E  SMPSPITCH10HI      00000078 E  SMPSPITCH10LO      00000088 E
+TARGET             00040000 E  TEMPDIV            00000002 S

@@ -109,6 +109,7 @@ RunInject  "temp.bin"
 ;Extern     "#Batch\\fixheadr" "#Got"
 ;Extern     "#Batch\\fixheadr" "temp.bin"
 WorkPath "#Batch"
-Extern     "fixheadr" "temp.bin"
+Extern "fixheadr" "temp.bin"
+Extern "fix.bat" "0"
 ;
 ;EOF

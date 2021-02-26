@@ -118,7 +118,7 @@ SetLocal EnableDelayedExpansion
 REM Generate new PWM.ini for SMPSPlay, copy it over
 
 REM Length of struct array (0-based)
-SET LEN=24
+SET LEN=27
 
 REM Struct array elements:
 REM .file = Original wav file (for sampling)
@@ -156,6 +156,9 @@ REM !@ New Data
 SET PAR[22].file=97.wav
 SET PAR[23].file=98.wav
 SET PAR[24].file=99.wav
+SET PAR[25].file=85-87.wav
+SET PAR[26].file=85-87.wav
+SET PAR[27].file=85-87.wav
 
 SET PAR[0].dfile=PWM_00.bin
 SET PAR[1].dfile=PWM_01.bin
@@ -183,6 +186,9 @@ REM !@ New Data
 SET PAR[22].dfile=PWM_16.bin
 SET PAR[23].dfile=PWM_17.bin
 SET PAR[24].dfile=PWM_18.bin
+SET PAR[25].dfile=PWM_04.bin
+SET PAR[26].dfile=PWM_04.bin
+SET PAR[27].dfile=PWM_04.bin
 
 SET PAR[0].rate="s"
 SET PAR[1].rate="s"
@@ -210,6 +216,9 @@ REM !@ New Data
 SET PAR[22].rate="5514"
 SET PAR[23].rate="s"
 SET PAR[24].rate="5514"
+SET PAR[25].rate="5514"
+SET PAR[26].rate="4252"
+SET PAR[27].rate="3376"
 
 SET PAR[0].create="y"
 SET PAR[1].create="y"
@@ -237,6 +246,9 @@ REM !@ New Data
 SET PAR[22].create="y"
 SET PAR[23].create="y"
 SET PAR[24].create="y"
+SET PAR[25].create="n"
+SET PAR[26].create="n"
+SET PAR[27].create="n"
 
 SET PAR[0].addr=0
 SET PAR[1].addr=0
@@ -264,6 +276,9 @@ REM !@ New Data. Manually force this sample to addr of ROMEnd ($300000) - size a
 SET PAR[22].addr=222FE63C
 SET PAR[23].addr=222FDAC8
 SET PAR[24].addr=222FDD70
+SET PAR[25].addr=0
+SET PAR[26].addr=0
+SET PAR[27].addr=0
 
 REM Create header of SMPSPlay PWM.INI 
 call create_PWM_INI_Hdr.bat
@@ -319,6 +334,9 @@ REM !@ New Data
 SET PAR[22].dfile=97.bin
 SET PAR[23].dfile=98.bin
 SET PAR[24].dfile=99.bin
+SET PAR[25].dfile=85-87.bin
+SET PAR[26].dfile=85-87.bin
+SET PAR[27].dfile=85-87.bin
 
 REM Base SH-2 virtual addr for raw ROM addr ($580000)
 REM Offset from base for PWMTable.bin (array entries * 8 bc longwords)
