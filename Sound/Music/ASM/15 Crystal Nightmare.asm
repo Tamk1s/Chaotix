@@ -1,4 +1,4 @@
-Target	EQU	$4A7BD
+Target	EQU	$4B4CC
 	smpsHeaderVoice	CrystalN_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $25

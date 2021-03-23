@@ -1,5 +1,5 @@
 
-Target	EQU	$4D8C0
+Target	EQU	$4E5CF
 	smpsHeaderVoice	HaveFun_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $4D

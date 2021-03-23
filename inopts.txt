@@ -11,7 +11,8 @@
 ;;;;;;;;;;;;;;;;;;;;
 
 MaxSize	$400000				;Maximum Genesis ROM size
-
+Define CASC_NullTerm	$00
+Define CASC_NullTerm2	$0000
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Manual Settings Segments ;
@@ -115,72 +116,79 @@ EndSeg
 
 StartSeg LevelSel_Strings Big_Endian $07739E	$1B6
 	String	"BOTANIC BASE        "		;BBZ
-	BYTE	$00
-	String	"SPEED SLIDER        "		;SSZ
-	BYTE	$00
-	String	"AMAZING ARENA       "		;AAZ
-	BYTE	$00
-	
+	BYTE	CASC_NullTerm
 	;!@ NEW DATA
+	;String	"SPEED SLIDER        "		;SSZ
+	String	"SPEED SLIDER CLASSIC"		;SSZ
+	BYTE	CASC_NullTerm
+	String	"AMAZING ARENA       "		;AAZ
+	BYTE	CASC_NullTerm
+	
+	;!@ NEW DATA	
+	;String	"TECHNO TOWER        "		;TTZ
 	String	"TECHNO TOWER CLASSIC"		;TTZ
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"MARINA MADNESS      "		;MMZ
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"TRAINING            "		;Training
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"INTRODUCTION        "		;Introduction
-	BYTE	$00
-	String	"WORLD ENTRANCE      "		;World Entrance (HUB)
-	BYTE	$00
-	String	"NOT USED            "		;Not used zone
-	BYTE	$00
+	BYTE	CASC_NullTerm
+	;!@ NEW DATA
+	;String	"WORLD ENTRANCE      "		;World Entrance (HUB)
+	String	"NEWTROGIC HIGH ZONE "		;World Entrance (HUB)
+	BYTE	CASC_NullTerm
+	;!@ NEW DATA
+	;String	"NOT USED            "		;Not used zone
+	String	"ENDING              "		;Not used zone
+	BYTE	CASC_NullTerm
 	String	"BONUS STAGE         "		;Bonus Stage
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"SPECIAL STAGE       "		;Special Stage
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"PLACE     "				;Place
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"LEVEL     "				;Level
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"AT-TIME   "				;At-time
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"PLAYERS   "				;Players
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"MORNING"					;Morning
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"DAY    "					;Day
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"SUNSET "					;Sunset
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"NIGHT  "					;Night
-	WORD $00							;This is double-null terminated!
+	WORD 	CASC_NullTerm2				;This is double-null terminated!
 
 	String	"PLAYER    "				;Player
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"COMBI     "				;Combi player
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"MIGHTY    "				;Mighty char
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String	"**********"				;Glitch char
 	String	"WECHNIA   "
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"KNUCKLES  "				;Knuckles char
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"CHARMY BEE"				;Charmy Bee char
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"VECTOR    "				;Vector
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"BOMB      "				;Bomb char
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"HEAVY     "				;Heavy char
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"ESPIO     "				;Espio char
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"1 PLAYER "					;1 player
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String	"2 PLAYERS"					;2 players
-	BYTE	$00
+	BYTE	CASC_NullTerm
 
 EndSeg
 
@@ -240,111 +248,113 @@ EndSeg
 
 StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	String "-SOUND TEST-"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "DOOR INTO SUMMER"
 	String  "SOUTH ISLAND"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "ELECTORIA"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "SPEED OF SOUND"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "SEASCAPE"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "MIDNIGHT GREENHOUSE"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "NEW MOON"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "LABYRINTH"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "TRIAL AND ERROR"
 	String "TRIAL AND ERROR"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "WALKIN="
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "HYPER-HYPER"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "EVENING STAR"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "MOONRISE"
 	String "LAND OF DARKNESS"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "OVERTURE"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "THIS HORIZON"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "TAKE OFF"
 	String "SYSTEM MENU"
-	BYTE	$00
-	String "COMBINATION"
-	BYTE	$00
+	BYTE	CASC_NullTerm
+	;!@ NEW DATA
+	;String "COMBINATION"
+	 String "SONIC FACTORY-SA3"
+	BYTE	CASC_NullTerm
 	String "TAKE A NAP"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "SURGING POWER"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "MECHANICAL DANCE"
 	String "GAMEOVER"	
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "TUBE PANIC"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "CRYSTAL NIGHTMARE"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "CHILD=S SONG"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "SODA POP"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "PENDULUM"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "SILVER SCREEN"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "TACHY TOUCH"
-	String "ELEGY - HDNV"
-	BYTE	$00
+	String "ELEGY-HDNV"
+	BYTE	CASC_NullTerm
 	String "CHAOTIC WORLD"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "SURPRISE!"
-	String "ENEMY ATTACK - FFX"
-	BYTE	$00
+	String "ENEMY ATTACK-FFX"
+	BYTE	CASC_NullTerm
 	String "NICE MEETING YOU"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "HAVE A HAPPY DAY"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "REACH THE GOAL"
 	String "SONIC 1 GOAL"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "HIGH FIVE"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "DECISION"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "FROM PARTY TO PARTY"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "HAVE SOME FUN"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "ORIENTAL LEGEND"
-	String "ZELDA VS. NOMY"
-	BYTE	$00
+	String "ZELDA VS NOMY"
+	BYTE	CASC_NullTerm
 	String "STEEL HEART"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "TRIBUTE"
 	String "SEGA CH"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "DESTRUCTIVE POWER"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "JUST ANOTHER DAY"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "DECISION 2ND"
-	BYTE	$00
+	BYTE	CASC_NullTerm
 	String "S.E."
-	BYTE	$00	
+	BYTE	CASC_NullTerm	
 EndSeg
 
 ;Region @CharSel_Stuff
@@ -446,9 +456,9 @@ EndSeg
 ;but only $1D bytes available and strings are double-null terminated
 StartSeg aOutputMonoStereo	Big_Endian $0075D8 $1E
 	String	"OUTPUT  MONO"
-	WORD	$0000
+	WORD	CASC_NullTerm2
 	String 	"OUTPUT  STEREO"
-	WORD	$0000
+	WORD	CASC_NullTerm2
 EndSeg
 
 
@@ -463,7 +473,7 @@ EndSeg
 ;but only $06 bytes available and strings are double-null terminated
 StartSeg aSpeed Big_Endian $007636 $08
 	String	"SPEED "
-	WORD	$0000
+	WORD	CASC_NullTerm2
 EndSeg
 
 ;Region @1stSFX

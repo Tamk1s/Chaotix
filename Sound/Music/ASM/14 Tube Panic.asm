@@ -1,5 +1,5 @@
 
-Target	EQU	$49D2D
+Target	EQU	$4AA39
 	smpsHeaderVoice	TubePanic_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $0A
@@ -1213,7 +1213,7 @@ TubePanic_Call21:
 	smpsReturn
 
 TubePanic_PWM2:
-	;smpsStop
+	smpsStop
 	dc.b	$82, $06, $06, $80, $0C, $80, $12, $82	; Unused
 	dc.b	$06, $80, $30, $82, $18, $80, $12, $82	; Unused
 	dc.b	$06, $80, $2A, $82, $06, $18, $80, $12	; Unused
@@ -1227,7 +1227,7 @@ TubePanic_PWM2:
 	dc.b	$00, $03, $81, $9E, $F6, $81, $9E	; Unused
 
 TubePanic_PWM3:
-	;smpsStop
+	smpsStop
 	dc.b	$96, $18, $E6, $C0, $89, $60, $E6, $40	; Unused
 	dc.b	$80, $80, $80, $E6, $FC, $83, $60, $E6	; Unused
 	dc.b	$04, $80, $80, $80, $F7, $00, $02, $D6	; Unused
@@ -1238,7 +1238,7 @@ TubePanic_PWM3:
 	dc.b	$9E	; Unused
 
 TubePanic_PWM4:
-	;smpsStop
+	smpsStop
 	dc.b	$80, $18, $E6, $FA, $91, $12, $12, $E6	; Unused
 	dc.b	$06, $E6, $A0, $90, $0C, $E6, $60, $E6	; Unused
 	dc.b	$FA, $91, $06, $E6, $06, $E6, $A0, $90	; Unused

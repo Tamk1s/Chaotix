@@ -1,4 +1,4 @@
-Target	EQU	$49BCE
+Target	EQU	$4A8DA
 
 Maniax_Header:
 	smpsHeaderVoice	Maniax_Patches,Target

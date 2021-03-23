@@ -1,0 +1,33 @@
+xSynth Bass 1
+xBaritone Sax
+xOrchestral Strings
+xRock Organ
+xClav
+x Brass Section
+
+x P Lead 2 Sawtooth
+x P Lead 1 Square
+
+PSG:
+Rock Organ -> $00
+Orch Strings -> $03
+Brass Section -> $05
+Lead 2 Sawtooth -> $04
+Lead 1 Square -> $00
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+37	C3	Bass Drum	$81/Electric Kick
+38	D3	Accoustic Snare	$8C/Acoustic Snare
+40	E3	Electric Snare	$82/Electric Snare
+44	G#3	Pedal Hi Hat	$88/Electric Hi-Hat?
+42	F#3	Closed Hi Hat	$98/Closed Hi Hat
+
+27	E-2	Closed Hi Hat	$98/Closed Hi Hat
+28	E2	Paper Smack		$88/Electric Hi-Hat?
+
+46	B-3	Open Hi Hat		$99/Open Hi Hat
+
+
+MID2SMPS Tempo:
+06/02

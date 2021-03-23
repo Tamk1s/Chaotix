@@ -10,7 +10,7 @@
 ;;;;;;;;;;;;;;;;;;;;
 Define 	ArtPtr32X_Offset 	$2000000
 Define	NullLPtr_Terminator $FFFFFFFF
-MaxSize				$400000				;Maximum Genesis ROM size
+MaxSize	$400000				;Maximum Genesis ROM size
 
 ;Max size for 32x Art space (art banks) ($20A0000-$222438A)
 Define 	Max32xArtSize_Stock $18438A
@@ -26,7 +26,7 @@ Define 	Max32xArtSize_Full $187000
 ;Region @32xArt
 ;StartSeg ArtPtr32x Big_Endian $A0000 Max32xArtSize_Stock
 ;!@ 
-StartSeg ArtPtr32x Big_Endian $A0000 Max32xArtSize_Full
+StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
 		;Region @PtrTable
 		DWORD	ArtPtr32X_Mighty+ArtPtr32X_Offset
 		DWORD	ArtPtr32X_Wechnia+ArtPtr32X_Offset

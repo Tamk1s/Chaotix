@@ -18,11 +18,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 WorkPath "#Batch"
+WorkPath "Assets/Art/Mars"
+Extern 	 "art.bat" "0"
 
 ;GetFile "Please select the target Chaotix ROM file"
 ;LoadFile #Got
+WorkPath "#Batch"
 LoadFile "temp.bin"
-LoadInject "#Batch/inart32x.txt"
+LoadInject "inart32x.txt"
 
 ;GetFile "Please name the output file"
 ;RunInject  #Got

@@ -80,10 +80,10 @@ EndSeg
 ;region @PalCycle_Set1
 ;!@ PalCycle dataset 1 pointers:
 ;Unk3_Data1-Unk3_Data2
-StartSeg MD_PalCycle_Unk3_Data1_Ptr	Big_Endian $31184
+StartSeg MD_PalCycle_Unk3_Data1_Ptr	Big_Endian $031184
 		DWORD MD_PalCycle_Unk3_Data1
 EndSeg
-StartSeg MD_PalCycle_Unk3_Data2_Ptr	Big_Endian $311E2 
+StartSeg MD_PalCycle_Unk3_Data2_Ptr	Big_Endian $0311E2 
 		DWORD MD_PalCycle_Unk3_Data2
 EndSeg
 ;endregion
@@ -108,67 +108,67 @@ EndSeg
 ;MMZ_Data
 ;IIZ_Data
 ;WE_Data5 (x2), WE_Data4, WE_Data6
-StartSeg MD_PalCycle_BBZ_Data1_Ptr Big_Endian $3107A
+StartSeg MD_PalCycle_BBZ_Data1_Ptr Big_Endian $03107A
 		DWORD MD_PalCycle_BBZ_Data1
 EndSeg
-StartSeg MD_PalCycle_BBZ_Data3_Ptr Big_Endian $3109C
+StartSeg MD_PalCycle_BBZ_Data3_Ptr Big_Endian $03109C
 		DWORD MD_PalCycle_BBZ_Data3
 EndSeg
-StartSeg MD_PalCycle_WE_Data1_Ptr Big_Endian $31348
+StartSeg MD_PalCycle_WE_Data1_Ptr Big_Endian $031348
 		DWORD MD_PalCycle_WE_Data1
 EndSeg
-StartSeg MD_PalCycle_WE_Data3_Ptr Big_Endian $3136E
+StartSeg MD_PalCycle_WE_Data3_Ptr Big_Endian $03136E
 		DWORD MD_PalCycle_WE_Data3
 EndSeg
-StartSeg MD_PalCycle_WE_Data2_Ptr Big_Endian $31362
+StartSeg MD_PalCycle_WE_Data2_Ptr Big_Endian $031362
 		DWORD MD_PalCycle_WE_Data2
 EndSeg
-StartSeg MD_PalCycle_BBZ_Data4_Ptr Big_Endian $310A6
+StartSeg MD_PalCycle_BBZ_Data4_Ptr Big_Endian $0310A6
 		DWORD MD_PalCycle_BBZ_Data4
 EndSeg
-StartSeg MD_PalCycle_SSZ_Data3_Ptr Big_Endian $31146
+StartSeg MD_PalCycle_SSZ_Data3_Ptr Big_Endian $031146
 		DWORD MD_PalCycle_SSZ_Data3
 EndSeg
-StartSeg MD_PalCycle_SSZ_Data2_Ptr Big_Endian $3112E
+StartSeg MD_PalCycle_SSZ_Data2_Ptr Big_Endian $03112E
 		DWORD MD_PalCycle_SSZ_Data2
 EndSeg
-StartSeg MD_PalCycle_AAZ_Lit_Data2_Ptr Big_Endian $312AE
+StartSeg MD_PalCycle_AAZ_Lit_Data2_Ptr Big_Endian $0312AE
 		DWORD MD_PalCycle_AAZ_Lit_Data2
 EndSeg
-StartSeg MD_PalCycle_AAZ_Data_Ptr Big_Endian  $3112E
+StartSeg MD_PalCycle_AAZ_Data_Ptr Big_Endian  $03112E
 		DWORD MD_PalCycle_AAZ_Data
 EndSeg
-StartSeg MD_PalCycle_Unk1_Data1_Ptr Big_Endian $31502
+StartSeg MD_PalCycle_Unk1_Data1_Ptr Big_Endian $031502
 		DWORD MD_PalCycle_Unk1_Data1
 EndSeg
-StartSeg MD_PalCycle_AAZ_Lit_Data3_Ptr Big_Endian $312E4
+StartSeg MD_PalCycle_AAZ_Lit_Data3_Ptr Big_Endian $0312E4
 		DWORD MD_PalCycle_AAZ_Lit_Data3
 EndSeg
-StartSeg MD_PalCycle_Unk2_Data1_Ptr Big_Endian $31528
+StartSeg MD_PalCycle_Unk2_Data1_Ptr Big_Endian $031528
 		DWORD MD_PalCycle_Unk2_Data1
 EndSeg
-StartSeg MD_PalCycle_Unk2_Data2_Ptr Big_Endian $31532
+StartSeg MD_PalCycle_Unk2_Data2_Ptr Big_Endian $031532
 		DWORD MD_PalCycle_Unk2_Data2
 EndSeg
-StartSeg MD_PalCycle_TTZ_Data_Ptr Big_Endian $312FA
+StartSeg MD_PalCycle_TTZ_Data_Ptr Big_Endian $0312FA
 		DWORD MD_PalCycle_TTZ_Data
 EndSeg
-StartSeg MD_PalCycle_MMZ_Data_Ptr Big_Endian $3130E
+StartSeg MD_PalCycle_MMZ_Data_Ptr Big_Endian $03130E
 		DWORD MD_PalCycle_MMZ_Data
 EndSeg
-StartSeg MD_PalCycle_IIZ_Data_Ptr Big_Endian $3132A
+StartSeg MD_PalCycle_IIZ_Data_Ptr Big_Endian $03132A
 		DWORD MD_PalCycle_IIZ_Data
 EndSeg
-StartSeg MD_PalCycle_WE_Data5_Ptr1 Big_Endian $313B2
+StartSeg MD_PalCycle_WE_Data5_Ptr1 Big_Endian $0313B2
 		DWORD MD_PalCycle_WE_Data5
 EndSeg
-StartSeg MD_PalCycle_WE_Data5_Ptr2 Big_Endian $313DE
+StartSeg MD_PalCycle_WE_Data5_Ptr2 Big_Endian $0313DE
 		DWORD MD_PalCycle_WE_Data5
 EndSeg
-StartSeg MD_PalCycle_WE_Data4_Ptr Big_Endian $313B2
+StartSeg MD_PalCycle_WE_Data4_Ptr Big_Endian $0313B2
 		DWORD MD_PalCycle_WE_Data4
 EndSeg
-StartSeg MD_PalCycle_WE_Data6_Ptr Big_Endian $313CA
+StartSeg MD_PalCycle_WE_Data6_Ptr Big_Endian $0313CA
 		DWORD MD_PalCycle_WE_Data6
 EndSeg
 ;endregion
@@ -360,13 +360,13 @@ EndSeg
 ;Unk3_Data3
 ;SSZ_Data1
 ;AAZ_Lit_Data1
-StartSeg MD_PalCycle_Unk3_Data3_Ptr Big_Endian $311C6
+StartSeg MD_PalCycle_Unk3_Data3_Ptr Big_Endian $0311C6
 		DWORD MD_PalCycle_Unk3_Data3
 EndSeg
-StartSeg MD_PalCycle_SSZ_Data1_Ptr Big_Endian $310FC
+StartSeg MD_PalCycle_SSZ_Data1_Ptr Big_Endian $0310FC
 		DWORD MD_PalCycle_SSZ_Data1
 EndSeg
-StartSeg MD_PalCycle_AAZ_Lit_Data1_Ptr Big_Endian $31292
+StartSeg MD_PalCycle_AAZ_Lit_Data1_Ptr Big_Endian $031292
 		DWORD MD_PalCycle_AAZ_Lit_Data1
 EndSeg
 ;endregion
@@ -1304,6 +1304,138 @@ StartSeg MD_Boss_Palette_Index Big_Endian	;Megadrive format palette pointers and
 	Pal_SSZBossN:	include "Levels/SSZ/Pal/BossN.bin"
 
 EndSeg
+
+;!@
+;Region @Pal32xStuff
+;12
+;StartSeg PalSwap32x_TitleCards $2BA90C Big_Endian
+	;include	"Art/palettes/Mars/Global/TitleCards.bin"
+;EndSeg
+
+
+;Region @Pal32x_GoodEnding
+StartSeg Pal32x_SegaLogo_CodeL $003496 $0A Big_Endian
+	;lea     (Pal32x_SegaLogo).l,a1
+	WORD	$43F9
+	DWORD	_Pal32x_SegaLogo
+
+	;moveq   #$25,d7
+	BYTE	$7E
+	BYTE	$25
+
+	;moveq   #$25,d0	
+	BYTE	$70
+	BYTE	$25
+EndSeg
+
+StartSeg Pal32x_Title_CodeL1 $003CBA $0C Big_Endian
+	;lea     (Pal32x_Title).l,a0
+	WORD	$41F9
+	DWORD	_Pal32x_GoodEnding
+	
+	;moveq   #0,d0
+	BYTE	$70
+	BYTE	$00
+	
+	;move.w  #$FF,d1
+	WORD	$323C
+	WORD	$00FF
+EndSeg
+
+StartSeg Pal32x_Title_CodeL2 $0045B6 $12 Big_Endian
+	;lea     (Pal32x_Title).l,a1
+	WORD	$43F9
+	DWORD	_Pal32x_GoodEnding
+	
+	;lea     (_32x_CRAM).l,a2
+	WORD	$45F9
+	DWORD	$00A15200
+	
+	;moveq   #0,d0
+	BYTE	$70
+	BYTE	$00
+
+	;move.w  #$DF,d1
+	WORD	$323C
+	WORD	$00DF
+EndSeg
+
+StartSeg Pal32x_GoodEnding_CodeL $00641A $0C Big_Endian
+	;lea     (Pal32x_GoodEnding).l,a0
+	WORD	$41F9
+	DWORD	_Pal32x_GoodEnding+$0002
+	
+	;moveq   #1,d0
+	BYTE	$70
+	BYTE	$01
+	
+	;move.w  #$FE,d1
+	WORD	$323C
+	WORD	$00FE
+EndSeg
+
+StartSeg Pal32x_SpacePal_CodeL $02BF46 $0C Big_Endian
+	;lea     (Pal32x_Space).l,a1
+	WORD	$43F9
+	DWORD	_Pal32x_Space
+
+	;move.w  #$DA,d2
+	WORD	$343C
+	WORD	$00DA
+	
+	;moveq   #$1E,d3
+	BYTE	$76
+	BYTE	$1E
+EndSeg
+
+StartSeg Pal32x_GoodEnding $029802 $262 Big_Endian
+;StartSeg Pal32x_GoodEnding $077598 Big_Endian
+	_Pal32x_GoodEnding:	include	"Art/palettes/Mars/Menus/GoodEnding.bin"
+	_Pal32x_SegaLogo: 	include	"Art/palettes/Mars/Menus/SegaLogo.bin"
+	_Pal32x_Space: 		include	"Art/palettes/Mars/Menus/Space.bin"	
+EndSeg
+
+;Region @Pal32x_Grid
+StartSeg Pal32x_GridCodeL1 $007F48 $0A Big_Endian
+	;lea     (Pal32x_MenuGrid).l,a0;
+	WORD	$41F9	
+	DWORD	_Pal32x_Grid
+	
+	;moveq   #$60,d0	;CRAM offset
+	BYTE	$70
+	BYTE	$60
+	;moveq   #$37,d1	;CRAM entries
+	BYTE	$72
+	BYTE	$37
+EndSeg
+
+StartSeg Pal32x_GridCodeL2 $0321BC $0C Big_Endian
+	;lea     (Pal32x_MenuGrid).l,a0
+	WORD	$41F9
+	DWORD	_Pal32x_Grid
+	
+	;move.w  #$81,d0 ; 'ü'
+	WORD	$303C
+	BYTE	$00
+	BYTE	$81
+	
+	;moveq   #$37,d1 ; '7'
+	BYTE	$72
+	BYTE	$37
+EndSeg
+
+StartSeg Pal32x_Grid $0271A0 Big_Endian
+	_Pal32x_Grid:	include	"Art/palettes/Mars/Menus/Grid.bin"
+EndSeg
+;EndRegion
+
+
+;EndRegion
+
+;Endregion
+;EndRegion
+
+
 
 StartSeg LevelTile_Ptrs Big_Endian	;Level tile data pointers
 

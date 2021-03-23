@@ -41,9 +41,6 @@ MakePath "Art/palettes/MD/Palcycles"	;!@
 MakePath "Art/palettes/Mars"
 MakePath "Art/palettes/Mars/Global"
 MakePath "Art/palettes/Mars/Menus"
-MakePath "Art/palettes/Mars/Menus/SegaSpace"
-MakePath "Art/palettes/Mars/Menus/Title"
-MakePath "Art/palettes/Mars/Menus/Grid"
 
 ;Region @ArtPaths
 MakePath "Art/Mars"						;!@
@@ -3017,11 +3014,16 @@ Extract	$229342	$22 "Art/palettes/Mars/Global/unk_929342.bin"
 Extract	$229362	$24 "Art/palettes/Mars/Global/unk_929364.bin"
 Extract	$229388	$1C "Art/palettes/Mars/Global/unk_929388.bin"
 Extract	$2293C8	$24 "Art/palettes/Mars/Global/unk_9293C8.bin"
+
+Extract $2BA90C $48	"Art/palettes/Mars/Global/TitleCards.bin"
 ;EndRegion
 
 ;Region @X_Palmars_Menus
-Extract	$2299D6	$2A "Art/palettes/Mars/Menus/SegaSpace/SegaLogo.bin"
-Extract	$229A00	$40 "Art/palettes/Mars/Menus/SegaSpace/word_929A00.bin"
+Extract	$2271A0 $70 "Art/palettes/Mars/Menus/Grid.bin"
+
+Extract	$229802 $1D4 "Art/palettes/Mars/Menus/GoodEnding.bin"
+Extract	$2299D6	$02A "Art/palettes/Mars/Menus/SegaLogo.bin"
+Extract	$229A00	$03E "Art/palettes/Mars/Menus/Space.bin"
 ;EndRegion
 ;EndRegion
 

@@ -1,4 +1,4 @@
-Target	EQU	$4BD40
+Target	EQU	$4CA4F
 	smpsHeaderVoice	FFX_EA_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempoC	$02, $03

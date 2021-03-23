@@ -166,9 +166,11 @@ bytepatch.exe -a 0x077584 kc.bin 4EB9 008F 454A 5278 E004 4EB9 008F 6EFA 4E75
 
 
 
-REM Secret gamemodes
-REM bytepatch.exe -a 0x0032D0 kc.bin 4EF9 0088 32F6
-REM bytepatch.exe -a 0x0036AA kc.bin 31FC 0078 DFDE
+REM Patches to remove vflip from Space BG (Right side)
 
-REM
-REM EOF
+REM SegaScreen
+bytepatch.exe -a 0x0350A kc.bin 2D3C 0151 0001
+REM Gameover/neg rings 1
+REM Gameover/neg rings 2
+REM GotThrough 1
+REM GotThrough 2
