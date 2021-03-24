@@ -1,0 +1,4 @@
+
+SN 68k version 2.53
+
+G:\HACKING\TOOLS\16BIT\GENS\SONIC\EDITORS\LEVEL_EDS\SONED2\CHAOTIX\ASSETS\ART\PALETTES\MD\PALSWAPS\TUTORIAL_BG.ASM(1) : Error : Could not open file 'G:\Hacking\Tools\16bit\Gens\Sonic\Editors\Level_Eds\SonED2\Chaotix\Assets\Art\Palettes\MD\Palswaps\TUTORIAL_BG.ASM'

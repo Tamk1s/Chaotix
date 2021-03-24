@@ -36,6 +36,7 @@ MakePath "Art"
 MakePath "Art/palettes"
 MakePath "Art/palettes/MD"
 MakePath "Art/palettes/MD/Palcycles"	;!@
+MakePath "Art/palettes/MD/Palswaps"		;!@
 
 ;!@
 MakePath "Art/palettes/Mars"
@@ -2859,6 +2860,7 @@ Extract $02791C  $0BE 	"Misc/Demos/Demo5.bin"	;AAZ1D, Mighty/Espio
 ; Palette Data Extract (Genesis)
 ;;;;;;;;;;;;;;;;;;;;;;
 
+;Region @X_PalData_Levels
 Extract $2B3470  $80 "Levels/BBZ/Pal/13M.bin"
 Extract $2B34F0  $80 "Levels/BBZ/Pal/13D.bin"
 Extract $2B3570  $80 "Levels/BBZ/Pal/13S.bin"
@@ -2928,7 +2930,9 @@ Extract $2B49F0  $080 "Levels/Entrance/Pal/15S.bin"
 Extract $2B4A70  $080 "Levels/Entrance/Pal/15N.bin"
 Extract $2B4AF0  $080 "Levels/Entrance/Pal/2MN.bin"
 Extract $2BA764  $1A8 "Levels/Entrance/Pal/15MN_PalSwap.bin"	;!@ PalSwap for inside of WE
+;endregion
 
+;Region @PalBoss
 ;Extract	$2BA354	 $08 "Levels/TTZ/Pal/BossHdr.bin"	;!@
 Extract $2BA35C  $80 "Levels/TTZ/Pal/BossM.bin"
 Extract $2BA3DC  $80 "Levels/TTZ/Pal/BossD.bin"
@@ -2940,6 +2944,7 @@ Extract $2BA564  $80 "Levels/SSZ/Pal/BossM.bin"
 Extract $2BA5E4  $80 "Levels/SSZ/Pal/BossD.bin"
 Extract $2BA664  $80 "Levels/SSZ/Pal/BossS.bin"
 Extract $2BA6E4  $80 "Levels/SSZ/Pal/BossN.bin"
+;endregion
 ;endregion
 
 ;Region @X_PalcData_Gens
@@ -2996,6 +3001,11 @@ Extract $2B55E8  $0152 "Art/palettes/MD/Palcycles/Unk3_01_Data.bin"
 Extract $2B573A  $0AC0 "Art/palettes/MD/Palcycles/Unk3_02_Data.bin"
 Extract $2BE356  $00AC "Art/palettes/MD/Palcycles/Unk3_03_Data.bin"
 ;endregion
+
+;Region @X_PalsData_Gens
+Extract $2293EC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_FG.bin"
+Extract $2295CC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_BG.bin"
+;EndRegion
 
 ;Region @X_PalMars
 ;Region @X_PalmarsGlobal

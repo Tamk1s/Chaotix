@@ -1307,126 +1307,137 @@ EndSeg
 
 ;!@
 ;Region @Pal32xStuff
-;12
+
+;Region @Pal32xChars
+
+;EndRegion
+
+;Region @Pal_TutPalSwaps
+StartSeg Palswap_Tut $2293EC $3C0 Big_Endian
+	Palswap_Tut_FG:	include	"Art/palettes/MD/Palswaps/Tutorial_FG.bin"
+	Palswap_Tut_BG:	include	"Art/palettes/MD/Palswaps/Tutorial_BG.bin"
+EndSeg
+;EndRegion
+
 ;StartSeg PalSwap32x_TitleCards $2BA90C Big_Endian
 	;include	"Art/palettes/Mars/Global/TitleCards.bin"
 ;EndSeg
 
 
-;Region @Pal32x_GoodEnding
-StartSeg Pal32x_SegaLogo_CodeL $003496 $0A Big_Endian
-	;lea     (Pal32x_SegaLogo).l,a1
-	WORD	$43F9
-	DWORD	_Pal32x_SegaLogo
+; ;Region @Pal32x_GoodEnding
+; StartSeg Pal32x_SegaLogo_CodeL $003496 $0A Big_Endian
+	; ;lea     (Pal32x_SegaLogo).l,a1
+	; WORD	$43F9
+	; DWORD	_Pal32x_SegaLogo
 
-	;moveq   #$25,d7
-	BYTE	$7E
-	BYTE	$25
+	; ;moveq   #$25,d7
+	; BYTE	$7E
+	; BYTE	$25
 
-	;moveq   #$25,d0	
-	BYTE	$70
-	BYTE	$25
-EndSeg
+	; ;moveq   #$25,d0	
+	; BYTE	$70
+	; BYTE	$25
+; EndSeg
 
-StartSeg Pal32x_Title_CodeL1 $003CBA $0C Big_Endian
-	;lea     (Pal32x_Title).l,a0
-	WORD	$41F9
-	DWORD	_Pal32x_GoodEnding
+; StartSeg Pal32x_Title_CodeL1 $003CBA $0C Big_Endian
+	; ;lea     (Pal32x_Title).l,a0
+	; WORD	$41F9
+	; DWORD	_Pal32x_GoodEnding
 	
-	;moveq   #0,d0
-	BYTE	$70
-	BYTE	$00
+	; ;moveq   #0,d0
+	; BYTE	$70
+	; BYTE	$00
 	
-	;move.w  #$FF,d1
-	WORD	$323C
-	WORD	$00FF
-EndSeg
+	; ;move.w  #$FF,d1
+	; WORD	$323C
+	; WORD	$00FF
+; EndSeg
 
-StartSeg Pal32x_Title_CodeL2 $0045B6 $12 Big_Endian
-	;lea     (Pal32x_Title).l,a1
-	WORD	$43F9
-	DWORD	_Pal32x_GoodEnding
+; StartSeg Pal32x_Title_CodeL2 $0045B6 $12 Big_Endian
+	; ;lea     (Pal32x_Title).l,a1
+	; WORD	$43F9
+	; DWORD	_Pal32x_GoodEnding
 	
-	;lea     (_32x_CRAM).l,a2
-	WORD	$45F9
-	DWORD	$00A15200
+	; ;lea     (_32x_CRAM).l,a2
+	; WORD	$45F9
+	; DWORD	$00A15200
 	
-	;moveq   #0,d0
-	BYTE	$70
-	BYTE	$00
+	; ;moveq   #0,d0
+	; BYTE	$70
+	; BYTE	$00
 
-	;move.w  #$DF,d1
-	WORD	$323C
-	WORD	$00DF
-EndSeg
+	; ;move.w  #$DF,d1
+	; WORD	$323C
+	; WORD	$00DF
+; EndSeg
 
-StartSeg Pal32x_GoodEnding_CodeL $00641A $0C Big_Endian
-	;lea     (Pal32x_GoodEnding).l,a0
-	WORD	$41F9
-	DWORD	_Pal32x_GoodEnding+$0002
+; StartSeg Pal32x_GoodEnding_CodeL $00641A $0C Big_Endian
+	; ;lea     (Pal32x_GoodEnding).l,a0
+	; WORD	$41F9
+	; DWORD	_Pal32x_GoodEnding+$0002
 	
-	;moveq   #1,d0
-	BYTE	$70
-	BYTE	$01
+	; ;moveq   #1,d0
+	; BYTE	$70
+	; BYTE	$01
 	
-	;move.w  #$FE,d1
-	WORD	$323C
-	WORD	$00FE
-EndSeg
+	; ;move.w  #$FE,d1
+	; WORD	$323C
+	; WORD	$00FE
+; EndSeg
 
-StartSeg Pal32x_SpacePal_CodeL $02BF46 $0C Big_Endian
-	;lea     (Pal32x_Space).l,a1
-	WORD	$43F9
-	DWORD	_Pal32x_Space
+; StartSeg Pal32x_SpacePal_CodeL $02BF46 $0C Big_Endian
+	; ;lea     (Pal32x_Space).l,a1
+	; WORD	$43F9
+	; DWORD	_Pal32x_Space
 
-	;move.w  #$DA,d2
-	WORD	$343C
-	WORD	$00DA
+	; ;move.w  #$DA,d2
+	; WORD	$343C
+	; WORD	$00DA
 	
-	;moveq   #$1E,d3
-	BYTE	$76
-	BYTE	$1E
-EndSeg
+	; ;moveq   #$1E,d3
+	; BYTE	$76
+	; BYTE	$1E
+; EndSeg
 
-StartSeg Pal32x_GoodEnding $029802 $262 Big_Endian
-;StartSeg Pal32x_GoodEnding $077598 Big_Endian
-	_Pal32x_GoodEnding:	include	"Art/palettes/Mars/Menus/GoodEnding.bin"
-	_Pal32x_SegaLogo: 	include	"Art/palettes/Mars/Menus/SegaLogo.bin"
-	_Pal32x_Space: 		include	"Art/palettes/Mars/Menus/Space.bin"	
-EndSeg
+; StartSeg Pal32x_GoodEnding $029802 $262 Big_Endian
+; ;StartSeg Pal32x_GoodEnding $077598 Big_Endian
+	; _Pal32x_GoodEnding:	include	"Art/palettes/Mars/Menus/GoodEnding.bin"
+	; _Pal32x_SegaLogo: 	include	"Art/palettes/Mars/Menus/SegaLogo.bin"
+	; _Pal32x_Space: 		include	"Art/palettes/Mars/Menus/Space.bin"	
+; EndSeg
 
-;Region @Pal32x_Grid
-StartSeg Pal32x_GridCodeL1 $007F48 $0A Big_Endian
-	;lea     (Pal32x_MenuGrid).l,a0;
-	WORD	$41F9	
-	DWORD	_Pal32x_Grid
+; ;Region @Pal32x_Grid
+; StartSeg Pal32x_GridCodeL1 $007F48 $0A Big_Endian
+	; ;lea     (Pal32x_MenuGrid).l,a0;
+	; WORD	$41F9	
+	; DWORD	_Pal32x_Grid
 	
-	;moveq   #$60,d0	;CRAM offset
-	BYTE	$70
-	BYTE	$60
-	;moveq   #$37,d1	;CRAM entries
-	BYTE	$72
-	BYTE	$37
-EndSeg
+	; ;moveq   #$60,d0	;CRAM offset
+	; BYTE	$70
+	; BYTE	$60
+	; ;moveq   #$37,d1	;CRAM entries
+	; BYTE	$72
+	; BYTE	$37
+; EndSeg
 
-StartSeg Pal32x_GridCodeL2 $0321BC $0C Big_Endian
-	;lea     (Pal32x_MenuGrid).l,a0
-	WORD	$41F9
-	DWORD	_Pal32x_Grid
+; StartSeg Pal32x_GridCodeL2 $0321BC $0C Big_Endian
+	; ;lea     (Pal32x_MenuGrid).l,a0
+	; WORD	$41F9
+	; DWORD	_Pal32x_Grid
 	
-	;move.w  #$81,d0 ; 'ü'
-	WORD	$303C
-	BYTE	$00
-	BYTE	$81
+	; ;move.w  #$81,d0 ; 'ü'
+	; WORD	$303C
+	; BYTE	$00
+	; BYTE	$81
 	
-	;moveq   #$37,d1 ; '7'
-	BYTE	$72
-	BYTE	$37
-EndSeg
+	; ;moveq   #$37,d1 ; '7'
+	; BYTE	$72
+	; BYTE	$37
+; EndSeg
 
-StartSeg Pal32x_Grid $0271A0 Big_Endian
-	_Pal32x_Grid:	include	"Art/palettes/Mars/Menus/Grid.bin"
-EndSeg
+; StartSeg Pal32x_Grid $0271A0 Big_Endian
+	; _Pal32x_Grid:	include	"Art/palettes/Mars/Menus/Grid.bin"
+; EndSeg
 ;EndRegion
 
 

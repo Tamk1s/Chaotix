@@ -10,10 +10,9 @@ LoadFile orig.bin
 ;DestPath c:\dev\soned2\bin\Chaotix
 ; #Got
 
-MakePath "Art/palettes/Mars/Menus"
+MakePath "Art/palettes/MD/Palswaps"		;!@
 
-;Extract	$2271A0 $70 "Art/palettes/Mars/Menus/Grid.bin"
-
-Extract	$229802 $1D4 "Art/palettes/Mars/Menus/GoodEnding.bin"
-Extract	$2299D6	$02A "Art/palettes/Mars/Menus/SegaLogo.bin"
-;Extract	$229A00	$03E "Art/palettes/Mars/Menus/Space.bin"
+;Region @X_PalsData_Gens
+Extract $2293EC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_FG.bin"
+Extract $2295CC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_BG.bin"
+;EndRegion
