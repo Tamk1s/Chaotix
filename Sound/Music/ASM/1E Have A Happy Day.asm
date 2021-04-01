@@ -1,5 +1,5 @@
 
-Target	EQU	$4DD57
+Target	EQU	$4DC84
 	smpsHeaderVoice	HappyDay_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $1C

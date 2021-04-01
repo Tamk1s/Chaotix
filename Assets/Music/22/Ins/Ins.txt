@@ -1,0 +1,9 @@
+MIDI Tempo:
+110=06/05
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+35	B2	Akick		$8B/pAKick
+37	C3	Bass Drum	$81/pEKick
+41	E3	Acc Snare	$82/pESnare
+44	G#3	Pedal HH	$98/pClosedHH

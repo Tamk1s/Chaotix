@@ -1,622 +1,265 @@
-
 Target	EQU	$4A413
-	smpsHeaderVoice	SurgingPower_Patches, Target
-	smpsHeaderChan	$06, $03
-	smpsHeaderTempo	$01, $75
-	smpsHeaderFM	SurgingPower_FM1, Target, $00, $0D
-	smpsHeaderFM	SurgingPower_FM2, Target, $00, $11
-	smpsHeaderFM	SurgingPower_FM3, Target, $00, $11
-	smpsHeaderFM	SurgingPower_FM4, Target, $00, $16
-	smpsHeaderFM	SurgingPower_FM5, Target, $00, $16
-	smpsHeaderFM	SurgingPower_FM6, Target, $00, $16
-	smpsHeaderPSG	SurgingPower_PSG1, Target, $00, $05, $00, $0C
-	smpsHeaderPSG	SurgingPower_PSG2, Target, $F4, $04, $00, $0C
-	smpsHeaderPSG	SurgingPower_PSG3, Target, $23, $02, $00, $02
-	smpsHeaderPWM	SurgingPower_PWM1, Target, $00, $AA
-	smpsHeaderPWM	SurgingPower_PWM2, Target, $00, $BB
-	smpsHeaderPWM	SurgingPower_PWM3, Target, $00, $BB
-	smpsHeaderPWM	SurgingPower_PWM4, Target, $00, $88
+PSGVol	EQU	$03
+PSGv1	EQU	$00
+PSGv2	EQU	$00
+	smpsHeaderVoice	VOR_Patches, Target
+	smpsHeaderChan		$06, $03
+	smpsHeaderTempoC	$02, $0A
+	smpsHeaderFM	VOR_FM1, Target, $00, $0E
+	smpsHeaderFM	VOR_FM2, Target, $00, $0E
+	smpsHeaderFM	VOR_FM3, Target, $00, $0E
+	smpsHeaderFM	VOR_FM4, Target, $00, $0E
+	smpsHeaderFM	VOR_FM5, Target, $00, $10
+	smpsHeaderFM	VOR_NOP, Target, $00, $00
+	smpsHeaderPSG	VOR_PSG1, Target, $00, $02, $00, PSGv1
+	smpsHeaderPSG	VOR_PSG2, Target, $00, $02, $00, PSGv2
+	smpsHeaderPSG	VOR_NOP, Target, $02, $03, $00, PSGv2
+	smpsHeaderPWM	VOR_PWM1, Target, $00, $9F
+	smpsHeaderPWM	VOR_PWM2, Target, $00, $9F
+	smpsHeaderPWM	VOR_PWM3, Target, $00, $9F
+	smpsHeaderPWM	VOR_PWM4, Target, $00, $9F
 
-SurgingPower_FM1:
+VOR_FM1:	
+	smpsPan		panCenter
 	smpsFMvoice		$00
-	dc.b	nRst, $18
 
-SurgingPower_Jump1:
-	smpsCall		SurgingPower_Call1, Target
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$FF
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$05
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$FC
-	smpsCall		SurgingPower_Call1, Target
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$FF
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$01
-	dc.b	nRst, $12, nD3, $03, nRst
-	smpsCall		SurgingPower_Call1, Target
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$FF
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$05
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$FC
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$05
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$FD
-	smpsCall		SurgingPower_Call1, Target
-	smpsCall		SurgingPower_Call1, Target
-	smpsAlterPitch	$FE
-	smpsJump		SurgingPower_Jump1, Target
+VOR_Loop1:
+	dc.b	nD5, $03, nRst, $06, nC5, $03, nRst, $06
+	dc.b	nB4, $03, nRst, $06, nA4, $03, nRst, $06
+	dc.b	nB4, $03, nRst, nC5, nRst
+	smpsLoop		$00, $02, VOR_Loop1, Target
 
-SurgingPower_Call1:
-	dc.b	nBb1, $06, nBb2, $03, nRst, nBb1, $06, nBb2
-	dc.b	$03, nRst
-	smpsReturn
+VOR_Loop2:
+	dc.b	nEb5, nRst, $06, nCs5, $03, nRst, $06, nC5
+	dc.b	$03, nRst, $06, nBb4, $03, nRst, $06, nC5
+	dc.b	$03, nRst, nCs5, nRst
+	smpsLoop		$00, $02, VOR_Loop2, Target
+	smpsLoop		$01, $04, VOR_Loop1, Target
+	smpsJump		VOR_FM1, Target
 
-SurgingPower_FM2:
+VOR_FM2:
+	smpsPan		panCenter
+	smpsFMvoice		$01
+
+VOR_Loop3:
+	dc.b	nD4, $03, nRst, $06, nC4, $03, nRst, $06
+	dc.b	nB3, $03, nRst, $06, nA3, $03, nRst, $06
+	dc.b	nB3, $03, nRst, nC4, nRst
+	smpsLoop		$00, $02, VOR_Loop3, Target
+
+VOR_Loop4:
+	dc.b	nEb4, nRst, $06, nCs4, $03, nRst, $06, nC4
+	dc.b	$03, nRst, $06, nBb3, $03, nRst, $06, nC4
+	dc.b	$03, nRst, nCs4, nRst
+	smpsLoop		$00, $02, VOR_Loop4, Target
+	smpsLoop		$01, $04, VOR_Loop3, Target
+	smpsJump		VOR_FM2, Target
+
+VOR_FM3:
+	smpsPan		panCenter
 	smpsFMvoice		$02
-	dc.b	nRst, $18
 
-SurgingPower_Jump2:
-	smpsCall		SurgingPower_Call2, Target
-	dc.b	smpsNoAttack, $03
-	smpsAlterVol		$0A
-	smpsPan		panCenter
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	$03
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nA3, nG3
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF3, $06
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nD4, $06
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, nC4, $06, smpsNoAttack, $18
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, $15
-	smpsCall		SurgingPower_Call2, Target
-	dc.b	smpsNoAttack, $03
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nBb3
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nA3, nG3
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF3, $06
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nD3, $06
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, nF3, $06, smpsNoAttack, $06, nG3, $27
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	smpsJump		SurgingPower_Jump2, Target
+VOR_Loop5:
+	dc.b	nD3, $03, nRst, nC3, nRst, nD3, nC3, nRst
+	dc.b	nD3, nRst, nA3, nRst, nA3, nB3, nRst, nF3
+	dc.b	nRst
+	smpsLoop		$00, $02, VOR_Loop5, Target
 
-SurgingPower_Call2:
-	dc.b	nRst, $06, nA3, $03
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nG3, nA3
-	smpsAlterVol		$0A
-	smpsPan		panCenter
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nC4, $06, nA3, $03, nC4
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nD4, $06, nA3, $03
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nE4, $09, nF4, $03
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, nC4, $12
-	smpsAlterVol		$0A
-	smpsPan		panLeft
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, nBb3, $06
-	smpsReturn
+VOR_Loop6:
+	dc.b	nEb3, nRst, nEb4, nRst, nEb3, nCs3, nRst, nEb3
+	dc.b	nRst, nBb3, nRst, nBb3, nEb3, nRst, nFs3, nRst
+	smpsLoop		$00, $02, VOR_Loop6, Target
+	smpsLoop		$01, $04, VOR_Loop5, Target
+	smpsJump		VOR_FM3, Target
 
-SurgingPower_FM3:
+VOR_FM4:
 	smpsFMvoice		$02
-	dc.b	nRst, $18
-
-SurgingPower_Jump3:
-	smpsCall		SurgingPower_Call3, Target
-	dc.b	smpsNoAttack, $03
-	smpsAlterVol		$0A
 	smpsPan		panCenter
-	dc.b	$03
-	smpsAlterVol		$F6
+
+VOR_Loop7:
+	dc.b	nD4, $03, nRst, nD4, nRst, nD4, nRst, $06
+	dc.b	nD4, $03, nRst, nC3, nRst, nC3, nD3, nRst
+	dc.b	nC4, nRst
+	smpsLoop		$00, $02, VOR_Loop7, Target
+
+VOR_Loop8:
+	dc.b	nEb4, nRst, nCs3, nRst, nEb4, nRst, $06, nEb4
+	dc.b	$03, nRst, nCs3, nRst, nCs3, nC4, nRst, nCs4
+	dc.b	nRst
+	smpsLoop		$00, $02, VOR_Loop8, Target
+
+VOR_Loop9:
+	dc.b	nD4, nRst, nD4, nRst, nD4, nRst, $06, nD4
+	dc.b	$03, nRst, nC3, nRst, nC3, nD3, nRst, nC4
+	dc.b	nRst
+	smpsLoop		$00, $02, VOR_Loop9, Target
+	dc.b	nEb4, nRst, nCs3, nRst, nEb4, nRst, $06, nEb4
+	dc.b	$03, nRst, nCs3, nRst, nCs3, nC4, nRst, nCs4
+	dc.b	nRst, nEb4, nRst, nCs3, nRst, nEb4, nRst, $06
+	dc.b	nEb4, $03, nRst, $09, nCs3, $03, nC4, nRst
+	dc.b	nCs4
+
+VOR_Loop10:
+	dc.b	nRst, nD4, nRst, nD4, nRst, nD4, nRst, $06
+	dc.b	nD4, $03, nRst, nC3, nRst, nC3, nD3, nRst
+	dc.b	nC4
+	smpsLoop		$00, $02, VOR_Loop10, Target
+
+VOR_Loop11:
+	dc.b	nRst, nEb4, nRst, nCs3, nRst, nEb4, nRst, $06
+	dc.b	nEb4, $03, nRst, nCs3, nRst, nCs3, nC4, nRst
+	dc.b	nCs4
+	smpsLoop		$00, $02, VOR_Loop11, Target
+	smpsLoop		$01, $02, VOR_Loop10, Target
+	dc.b	nRst
+	smpsJump		VOR_FM4, Target
+
+VOR_FM5:
+	smpsFMvoice		$03
 	smpsPan		panCenter
-	dc.b	$03
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nE3, nD3
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nD3, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF3, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, nG3, $06, smpsNoAttack, $06, nA3, $12
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, $15
-	smpsCall		SurgingPower_Call3, Target
-	dc.b	smpsNoAttack, $03
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF3
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nE3, nD3
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nBb2, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nBb2, $06
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, nC3, $06, smpsNoAttack, $2D
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	smpsJump		SurgingPower_Jump3, Target
 
-SurgingPower_Call3:
-	dc.b	nRst, $06, nF3, $03
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nE3, nF3
-	smpsAlterVol		$0A
-	smpsPan		panCenter
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nF3, $06, nF3, $03, nF3
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nG3, $06, nE3, $03
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nG3, $09, $03
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, nA3, $12
-	smpsAlterVol		$0A
-	smpsPan		panRight
-	dc.b	$03
-	smpsAlterVol		$F6
-	smpsPan		panCenter
-	dc.b	nRst, nF3, $06
-	smpsReturn
+VOR_Loop12:
+	dc.b	nD3, $02, nRst, $01
+	smpsLoop		$00, $20, VOR_Loop12, Target
 
-SurgingPower_FM4:
-	smpsFMvoice		$01
-	dc.b	nRst, $18
+VOR_Loop13:
+	dc.b	nEb3, $02, nRst, $01
+	smpsLoop		$00, $20, VOR_Loop13, Target
+	smpsLoop		$01, $03, VOR_Loop12, Target
 
-SurgingPower_Loop1:
-	smpsCall		SurgingPower_Call4, Target
-	smpsLoop		$00, $08, SurgingPower_Loop1, Target
-	smpsJump		SurgingPower_Loop1, Target
+VOR_Loop14:
+	dc.b	nD3, $02, nRst, $01
+	smpsLoop		$00, $20, VOR_Loop14, Target
 
-SurgingPower_Call4:
-	dc.b	nRst, $06, nF4
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nE4, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nD4, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nC4, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nD4, $06
-	smpsReturn
+VOR_Loop15:
+	dc.b	nEb3, $02, nRst, $01
+	smpsLoop		$00, $1F, VOR_Loop15, Target
+	dc.b	nEb3, nRst, $02
+	smpsJump		VOR_FM5, Target
 
-SurgingPower_FM5:
-	smpsFMvoice		$01
-	smpsPan		panRight
-	dc.b	nRst, $18
+VOR_PSG1:
+	smpsPSGvoice	PSGv1
 
-SurgingPower_Loop2:
-	smpsCall		SurgingPower_Call5, Target
-	smpsLoop		$00, $06, SurgingPower_Loop2, Target
-	dc.b	nRst, $06, nD4
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nC4, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nBb3, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nA3, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nBb3, $06
-	smpsCall		SurgingPower_Call5, Target
-	smpsJump		SurgingPower_Loop2, Target
+VOR_Loop16:
+	dc.b	nA1, $03, nRst, $06, nG1, $03, nRst, $06
+	dc.b	nG1, $03, nRst, $06, nE1, $03, nRst, $06
+	dc.b	nG1, $03, nRst, nG1, nRst
+	smpsLoop		$00, $02, VOR_Loop16, Target
 
-SurgingPower_Call5:
-	dc.b	nRst, $06, nD4
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nC4, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nA3, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nA3, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nA3, $06
-	smpsReturn
+VOR_Loop17:
+	dc.b	nBb1, nRst, $06, nAb1, $03, nRst, $06, nAb1
+	dc.b	$03, nRst, $06, nF1, $03, nRst, $06, nAb1
+	dc.b	$03, nRst, nAb1, nRst
+	smpsLoop		$00, $02, VOR_Loop17, Target
+	smpsLoop		$01, $04, VOR_Loop16, Target
+	smpsJump		VOR_PSG1, Target
 
-SurgingPower_FM6:
-	smpsFMvoice		$01
-	smpsPan		panLeft
-	dc.b	nRst, $18
+VOR_PSG2:
+	smpsPSGvoice	PSGv2
 
-SurgingPower_Loop3:
-	smpsCall		SurgingPower_Call6, Target
-	smpsLoop		$00, $06, SurgingPower_Loop3, Target
-	dc.b	nRst, $06, nA3
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nG3, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nG3, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nF3, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nG3, $06
-	smpsCall		SurgingPower_Call6, Target
-	smpsJump		SurgingPower_Loop3, Target
+VOR_Loop18:
+	dc.b	nA1, $03, nRst, $06, nG1, $03, nRst, $06
+	dc.b	nG1, $03, nRst, $06, nE1, $03, nRst, $06
+	dc.b	nG1, $03, nRst, nG1, nRst
+	smpsLoop		$00, $02, VOR_Loop18, Target
 
-SurgingPower_Call6:
-	dc.b	nRst, $06, nA3
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nG3, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nF3, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nE3, $06
-	smpsAlterVol		$0A
-	dc.b	$03
-	smpsAlterVol		$F6
-	dc.b	nF3, $06
-	smpsReturn
+VOR_Loop19:
+	dc.b	nBb1, nRst, $06, nAb1, $03, nRst, $06, nAb1
+	dc.b	$03, nRst, $06, nF1, $03, nRst, $06, nAb1
+	dc.b	$03, nRst, nAb1, nRst
+	smpsLoop		$00, $02, VOR_Loop19, Target
+	smpsLoop		$01, $04, VOR_Loop18, Target
+	smpsJump		VOR_PSG2, Target
 
-SurgingPower_PSG1:
-	smpsPSGvoice	$02
-	dc.b	nRst, $18
+VOR_NOP:
+	smpsStop
 
-SurgingPower_Loop4:
-	smpsCall		SurgingPower_Call7, Target
-	smpsLoop		$00, $12, SurgingPower_Loop4, Target
-	dc.b	nF3, $03, nF3, nRst, $18
-
-SurgingPower_Loop5:
-	smpsCall		SurgingPower_Call7, Target
-	smpsLoop		$00, $15, SurgingPower_Loop5, Target
-	dc.b	nF3, $03
-	smpsJump		SurgingPower_Loop4, Target
-
-SurgingPower_Call7:
-	dc.b	nF3, $03, nF3, nF2
-	smpsReturn
-
-SurgingPower_PSG2:
-	smpsPSGvoice	$02
-	dc.b	nRst, $18
-
-SurgingPower_Loop6:
-	smpsCall		SurgingPower_Call7, Target
-	smpsLoop		$00, $12, SurgingPower_Loop6, Target
-	dc.b	nF3, $03, nF3, nRst, $18
-
-SurgingPower_Loop7:
-	smpsCall		SurgingPower_Call7, Target
-	smpsLoop		$00, $15, SurgingPower_Loop7, Target
-	dc.b	nF3, $03
-	smpsJump		SurgingPower_Loop6, Target
-
-SurgingPower_PSG3:
-	smpsPSGform	$E7
-	smpsCall		SurgingPower_Call8, Target
-
-SurgingPower_Loo$8:
-	smpsCall		SurgingPower_Call8, Target
-	smpsLoop		$01, $07, SurgingPower_Loo$8, Target
-	smpsPSGvoice	$02
-	dc.b	nC4, $03, nRst, $0F
-	smpsPSGvoice	$05
-	dc.b	$06
-
-SurgingPower_Loo$9:
-	smpsCall		SurgingPower_Call8, Target
-	smpsLoop		$01, $08, SurgingPower_Loo$9, Target
-	smpsJump		SurgingPower_Loo$8, Target
-
-SurgingPower_Call8:
-	smpsPSGvoice	$02
-	dc.b	nC4, $03, $03
-	smpsPSGvoice	$05
-	dc.b	$06
-	smpsLoop		$00, $02, SurgingPower_Call8, Target
-	smpsReturn
-
-SurgingPower_PWM1:
-	dc.b	$81, $15, $87, $03
-
-SurgingPower_Jump4:
-	dc.b	$81, $0C, $0C, $06, $0C, $06, $0C, $0C
-	dc.b	$06, $0C, $06, $0C, $0C, $06, $0C, $06
-	dc.b	$0C, $0C, $0C, $06, $06, $81, $0C, $0C
-	dc.b	$06, $0C, $06, $0C, $0C, $06, $0C, $06
-	dc.b	$0C, $0C, $06, $0C, $03, $03, $0C, $0C
-	dc.b	$06, $0C, $06
-	smpsJump		SurgingPower_Jump4, Target
-
-SurgingPower_PWM2:
-	dc.b	$96, $03
-	smpsAlterVol		$F9
-	dc.b	$85
-	smpsAlterVol		$07
-	dc.b	$86, $86
-	smpsAlterVol		$F9
-	dc.b	$85
-	smpsAlterVol		$07
-	smpsAlterVol		$90
-	dc.b	$87, $87
-	smpsAlterVol		$70
-	dc.b	$86
-
-SurgingPower_Jump5:
-	dc.b	nRst, $0C, $8C, nRst, $8C, nRst, $8C, nRst
-	dc.b	$8C, $09, $03, nRst, $0C, $8C, nRst, $8C
-	dc.b	nRst, $8C, nRst, $15, $8C, $03, nRst, $0C
-	dc.b	$8C, nRst, $8C, nRst, $8C, nRst, $8C, $09
-	dc.b	$03, nRst, $0C, $8C, nRst, $8C, nRst, $8C
-	dc.b	nRst, $8C, $09, $03
-	smpsJump		SurgingPower_Jump5, Target
-
-SurgingPower_PWM3:
-	smpsAlterVol		$FC
-	dc.b	$83, $18
-	smpsAlterVol		$04
-
-SurgingPower_Jump6:
-	smpsAlterVol		$C0
-	dc.b	$89, $30
-	smpsAlterVol		$40
-	dc.b	nRst, nRst, nRst
-	smpsAlterVol		$C0
-	dc.b	$89, $30
-	smpsAlterVol		$40
-	dc.b	nRst, nRst, nRst, $2A
-	smpsAlterVol		$FC
-	dc.b	$83, $06
-	smpsAlterVol		$04
-	smpsJump		SurgingPower_Jump6, Target
-
-SurgingPower_PWM4:
-	smpsCall		SurgingPower_Call9, Target
-
-SurgingPower_Loop10:
-	smpsCall		SurgingPower_Call9, Target
-	smpsLoop		$00, $07, SurgingPower_Loop10, Target
-	dc.b	$96, $0C, nRst, $06
-	smpsAlterVol		$90
-	dc.b	$88, $03, $03
-	smpsAlterVol		$70
-
-SurgingPower_Loop11:
-	smpsCall		SurgingPower_Call9, Target
-	smpsLoop		$00, $08, SurgingPower_Loop11, Target
-	smpsJump		SurgingPower_Loop10, Target
-
-SurgingPower_Call9:
-	dc.b	nRst, $06
-	smpsAlterVol		$F9
-	dc.b	$88, $03, $03
-	smpsAlterVol		$07
-	dc.b	nRst, $06
-	smpsAlterVol		$90
-	dc.b	$88, $03, $03
-	smpsAlterVol		$70
-	smpsReturn
-
-SurgingPower_Patches:
-
+VOR_PWM1:
+	dc.b	pAKick, $03, pClosedHH, pClosedHH, pClosedHH, pESnare, $09, pAKick
+	dc.b	$06, pClosedHH, $03, pAKick, $06, pESnare, pClosedHH, $03
+	dc.b	$03, pAKick, pClosedHH, pClosedHH, pClosedHH, pESnare, $09, $06
+	dc.b	$09, pAKick, $03, pClosedHH, pClosedHH, pClosedHH, pAKick, pClosedHH
+	dc.b	pClosedHH, pClosedHH, pESnare, $09, pAKick, $06, pClosedHH, $03
+	dc.b	pAKick, $06, pESnare, pClosedHH, $03, $03, pAKick, pClosedHH
+	dc.b	pClosedHH, pClosedHH, pESnare, $09, $06, $09, pAKick, $03
+	dc.b	pClosedHH, pESnare, pESnare
+	smpsLoop		$00, $03, VOR_PWM1, Target
+	dc.b	pAKick, pClosedHH, pClosedHH, pClosedHH, pESnare, $09, pAKick, $06
+	dc.b	pClosedHH, $03, pAKick, $06, pESnare, pClosedHH, $03, $03
+	dc.b	pAKick, pClosedHH, pClosedHH, pClosedHH, pESnare, $09, $06, $09
+	dc.b	pAKick, $03, pClosedHH, pClosedHH, pClosedHH, pAKick, pClosedHH, pClosedHH
+	dc.b	pClosedHH, pESnare, $09, pAKick, $06, pClosedHH, $03, pAKick
+	dc.b	$06, pESnare, pClosedHH, $03, $03, pAKick, pClosedHH, pClosedHH
+	dc.b	pClosedHH, pESnare, $09, $06, $09, pAKick, $03, pClosedHH
+	dc.b	pESnare
+	smpsJump		VOR_PWM1, Target
 	
-	dc.b	$3C
-	dc.b	$01, $03, $00, $00,	$1F, $1F, $15, $1F
-	dc.b	$11, $0D, $10, $05,	$07, $04, $09, $02
-	dc.b	$55, $1A, $55, $1A,	$0E, $80, $08, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
+VOR_PWM2:
+	dc.b	pClosedHH, $06, pRideBell, pAKick, pClosedHH, $03, pESnare, $06
+	dc.b	pBongoHi, $03, pClosedHH, pClosedHH, pAKick, pClosedHH, pRideBell, $06
+	dc.b	pClosedHH, pRideBell, pAKick, pClosedHH, $03, pAKick, $06, $06
+	dc.b	pClosedHH, $03, pESnare, $06, pRideBell, pClosedHH, pRideBell, pAKick
+	dc.b	pClosedHH, $03, pESnare, $06, pBongoHi, $03, pClosedHH, pClosedHH
+	dc.b	pAKick, pClosedHH, pRideBell, $06, pClosedHH, pRideBell, pAKick, pClosedHH
+	dc.b	$03, pAKick, $06, $06, pClosedHH, $03, pESnare, $06
+	dc.b	pAKick, $03, $03
+	smpsLoop		$00, $04, VOR_PWM2, Target
+	smpsJump		VOR_PWM2, Target
 	
-	dc.b	$33
-	dc.b	$11, $08, $11, $02,	$5F, $9F, $5F, $1F
-	dc.b	$0B, $0F, $02, $09,	$10, $13, $13, $10
-	dc.b	$05, $15, $25, $3A,	$0A, $1D, $09, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+VOR_PWM3:
+	dc.b	nRst, $0C
 
+VOR_PWM3_Loop1:
+	dc.b	pOpenHH, $09, pClosedHH, $03, $06, pBongoHi, pOpenHH, $18
+	dc.b	$09, pClosedHH, $03, $03, pASnare, $09, pOpenHH, $18
+	dc.b	$09, pClosedHH, $03, $06, pBongoHi, pOpenHH, $18, $09
+	dc.b	pClosedHH, $03, $03, pASnare, $09, pOpenHH, $06, pClosedHH
+	dc.b	$03, pASnare, $0F
+	smpsLoop		$00, $03, VOR_PWM3_Loop1, Target
+	dc.b	pOpenHH, $09, pClosedHH, $03, $06, pBongoHi, pOpenHH, $18
+	dc.b	$09, pClosedHH, $03, $03, pASnare, $09, pOpenHH, $18
+	dc.b	$09, pClosedHH, $03, $06, pBongoHi, pOpenHH, $18, $09
+	dc.b	pClosedHH, $03, $03, pASnare, $09, pOpenHH, $06, pClosedHH
+	dc.b	$03, pASnare
+	smpsJump		VOR_PWM3, Target
 	
-	dc.b	$3D
-	dc.b	$02, $02, $01, $02,	$94, $19, $19, $19
-	dc.b	$0F, $0D, $0D, $0D,	$07, $04, $04, $04
-	dc.b	$25, $1A, $1A, $1A,	$14, $80, $80, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+VOR_PWM4:
+	dc.b	pOpenHH, $0C, pClosedHH, $03, $03, pRideBell, pBongoHi, pBongoHi
+	dc.b	$06, pRideBell, pClosedHH, $03, pBongoLo, $09, pOpenHH, $0C
+	dc.b	pClosedHH, $03, $03, pRideBell, pBongoHi, pBongoHi, pClosedHH, pClosedHH
+	dc.b	$06, $03, pBongoLo, $09, pOpenHH, $0C, pClosedHH, $03
+	dc.b	$03, pRideBell, pBongoHi, pBongoHi, $06, pRideBell, pClosedHH, $03
+	dc.b	pBongoLo, $09, pOpenHH, $0C, pClosedHH, $03, $03, pRideBell
+	dc.b	pBongoHi, pBongoHi, pClosedHH, pClosedHH, $06, $03, pBongoLo, $06
+	dc.b	pClosedHH, $03
+	smpsLoop		$00, $04, VOR_PWM4, Target
+	smpsJump		VOR_PWM4, Target
+
+VOR_Patches:	
+	;Electric Guitar (Jazz)
+	dc.b	$10
+	dc.b	$35, $76, $70, $30,	$DF, $DF, $5F, $5F
+	dc.b	$06, $08, $09, $09,	$06, $03, $03, $01
+;!@ dc.b	$26, $16, $06, $26,	$21, $34, $19, $00
+	dc.b	$26, $16, $06, $26,	$21, $34, $19, $06
+	
+	;Electric Piano
+	dc.b	$04
+	dc.b	$71, $41, $31, $31,	$12, $12, $12, $12
+	dc.b	$00, $00, $00, $00,	$00, $00, $00, $00
+;!@ dc.b	$0F, $0F, $0F, $0F,	$23, $00, $23, $00
+	dc.b	$0F, $0F, $0F, $0F,	$28, $00, $28, $00
+	
+	;Synth Bass 1
+	dc.b	$2C
+	dc.b	$70, $40, $21, $60,	$9F, $1F, $1F, $5F
+	dc.b	$0C, $09, $0C, $15,	$04, $04, $06, $06
+;!@ dc.b	$56, $46, $46, $4F,	$0C, $00, $10, $00
+	dc.b	$56, $46, $46, $4F,	$0C, $08, $10, $08
+	
+	;Contrabass
+	dc.b	$38
+	dc.b	$0A, $08, $01, $02,	$14, $14, $10, $0E
+	dc.b	$05, $08, $02, $08,	$00, $00, $00, $00
+;!@ dc.b	$99, $09, $09, $19,	$28, $23, $24, $06
+	dc.b	$99, $09, $09, $19,	$28, $23, $24, $12

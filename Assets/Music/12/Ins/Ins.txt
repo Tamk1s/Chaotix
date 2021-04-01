@@ -1,0 +1,20 @@
+MID2SMPS Tempo:
+12/02
+
+FM:
+Instruments.gyb + Contrabass override
+
+PSG:
+$02 for ch 11
+$03 for ch 12
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+36	B2	Acc Bass Drum	$8B/pAKick
+39	D3	Acc Snare	$8C/pASnare
+41	E3	ESnare		$82/pESnare
+44	G#3	Pedal HH	$98/pClosedHH
+52	E-4	Ride cymbal	$99/pOpenHH
+53	F4	Ride Bell	$84/pRideBell
+63	D5	Mute Hi Congo	$92/pBongoHi
+86	D7	Bongo Drum?	$93/pBongoLo

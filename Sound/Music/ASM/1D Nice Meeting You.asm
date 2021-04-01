@@ -1,5 +1,5 @@
 
-Target	EQU	$4D975
+Target	EQU	$4D8A2
 	smpsHeaderVoice	NMeetingU_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $0F

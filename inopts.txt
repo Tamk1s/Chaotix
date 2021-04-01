@@ -293,7 +293,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	String "TAKE A NAP"
 	BYTE	CASC_NullTerm
-	String "SURGING POWER"
+	;!@ NEW DATA
+	;String "SURGING POWER"
+	String "RANKING-CTVO "
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "MECHANICAL DANCE"
@@ -333,7 +335,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	String "DECISION"
 	BYTE	CASC_NullTerm
-	String "FROM PARTY TO PARTY"
+	;!@ NEW Data
+	;String "FROM PARTY TO PARTY"
+	String "PATIENCE - CTVO"
 	BYTE	CASC_NullTerm
 	String "HAVE SOME FUN"
 	BYTE	CASC_NullTerm

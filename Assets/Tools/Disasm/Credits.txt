@@ -116,3 +116,7 @@ Music:
 LukeeGD
 - Elegy (HyperDimension Neptunia V)
 - Sonic Factory SMPS (SAdv3, RedHotSonic patches)
+
+ValleyBell
+- Technical Notes on Chaotix PWM driver SMPS CF features
+- Permission given to use instrument patches from Sonic 2 Recreation's Sonic Factory SMPS port (for my own SMPS32x conversion)

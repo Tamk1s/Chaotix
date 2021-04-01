@@ -1,5 +1,5 @@
 
-Target	EQU	$4DFB4
+Target	EQU	$4DEE1
 	smpsHeaderVoice	Maniax_Patches,Target
 	smpsHeaderChan	6,3
 	smpsHeaderTempoC	$02, $03	
