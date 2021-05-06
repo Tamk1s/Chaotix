@@ -1,0 +1,3290 @@
+                        	LIST MACRO
+                        	LIST EXPAND
+000000                  	include _s1smps2asm_S1KC.asm
+                        ; Standard Octave Pitch Equates
+       = 000088         smpsPitch10lo		EQU	$88
+       = 000094         smpsPitch09lo		EQU	$94
+       = 0000A0         smpsPitch08lo		EQU	$A0
+       = 0000AC         smpsPitch07lo		EQU	$AC
+       = 0000B8         smpsPitch06lo		EQU	$B8
+       = 0000C4         smpsPitch05lo		EQU	$C4
+       = 0000D0         smpsPitch04lo		EQU	$D0
+       = 0000DC         smpsPitch03lo		EQU	$DC
+       = 0000E8         smpsPitch02lo		EQU	$E8
+       = 0000F4         smpsPitch01lo		EQU	$F4
+       = 000000         smpsPitch00			EQU	$00
+       = 00000C         smpsPitch01hi		EQU	$0C
+       = 000018         smpsPitch02hi		EQU	$18
+       = 000024         smpsPitch03hi		EQU	$24
+       = 000030         smpsPitch04hi		EQU	$30
+       = 00003C         smpsPitch05hi		EQU	$3C
+       = 000048         smpsPitch06hi		EQU	$48
+       = 000054         smpsPitch07hi		EQU	$54
+       = 000060         smpsPitch08hi		EQU	$60
+       = 00006C         smpsPitch09hi		EQU	$6C
+       = 000078         smpsPitch10hi		EQU	$78
+
+                        ; Note Equates
+       = 000080         nRst			EQU	$80
+       = 000081         nC0			EQU	$81
+       = 000082         nCs0			EQU	$82
+       = 000083         nD0			EQU	$83
+       = 000084         nEb0			EQU	$84
+       = 000085         nE0			EQU	$85
+       = 000086         nF0			EQU	$86
+       = 000087         nFs0			EQU	$87
+       = 000088         nG0			EQU	$88
+       = 000089         nAb0			EQU	$89
+       = 00008A         nA0			EQU	$8A
+       = 00008B         nBb0			EQU	$8B
+       = 00008C         nB0			EQU	$8C
+       = 00008D         nC1			EQU	$8D
+       = 00008E         nCs1			EQU	$8E
+       = 00008F         nD1			EQU	$8F
+       = 000090         nEb1			EQU	$90
+       = 000091         nE1			EQU	$91
+       = 000092         nF1			EQU	$92
+       = 000093         nFs1			EQU	$93
+       = 000094         nG1			EQU	$94
+       = 000095         nAb1			EQU	$95
+       = 000096         nA1			EQU	$96
+       = 000097         nBb1			EQU	$97
+       = 000098         nB1			EQU	$98
+       = 000099         nC2			EQU	$99
+       = 00009A         nCs2			EQU	$9A
+       = 00009B         nD2			EQU	$9B
+       = 00009C         nEb2			EQU	$9C
+       = 00009D         nE2			EQU	$9D
+       = 00009E         nF2			EQU	$9E
+       = 00009F         nFs2			EQU	$9F
+       = 0000A0         nG2			EQU	$A0
+       = 0000A1         nAb2			EQU	$A1
+       = 0000A2         nA2			EQU	$A2
+       = 0000A3         nBb2			EQU	$A3
+       = 0000A4         nB2			EQU	$A4
+       = 0000A5         nC3			EQU	$A5
+       = 0000A6         nCs3			EQU	$A6
+       = 0000A7         nD3			EQU	$A7
+       = 0000A8         nEb3			EQU	$A8
+       = 0000A9         nE3			EQU	$A9
+       = 0000AA         nF3			EQU	$AA
+       = 0000AB         nFs3			EQU	$AB
+       = 0000AC         nG3			EQU	$AC
+       = 0000AD         nAb3			EQU	$AD
+       = 0000AE         nA3			EQU	$AE
+       = 0000AF         nBb3			EQU	$AF
+       = 0000B0         nB3			EQU	$B0
+       = 0000B1         nC4			EQU	$B1
+       = 0000B2         nCs4			EQU	$B2
+       = 0000B3         nD4			EQU	$B3
+       = 0000B4         nEb4			EQU	$B4
+       = 0000B5         nE4			EQU	$B5
+       = 0000B6         nF4			EQU	$B6
+       = 0000B7         nFs4			EQU	$B7
+       = 0000B8         nG4			EQU	$B8
+       = 0000B9         nAb4			EQU	$B9
+       = 0000BA         nA4			EQU	$BA
+       = 0000BB         nBb4			EQU	$BB
+       = 0000BC         nB4			EQU	$BC
+       = 0000BD         nC5			EQU	$BD
+       = 0000BE         nCs5			EQU	$BE
+       = 0000BF         nD5			EQU	$BF
+       = 0000C0         nEb5			EQU	$C0
+       = 0000C1         nE5			EQU	$C1
+       = 0000C2         nF5			EQU	$C2
+       = 0000C3         nFs5			EQU	$C3
+       = 0000C4         nG5			EQU	$C4
+       = 0000C5         nAb5			EQU	$C5
+       = 0000C6         nA5			EQU	$C6
+       = 0000C7         nBb5			EQU	$C7
+       = 0000C8         nB5			EQU	$C8
+       = 0000C9         nC6			EQU	$C9
+       = 0000CA         nCs6			EQU	$CA
+       = 0000CB         nD6			EQU	$CB
+       = 0000CC         nEb6			EQU	$CC
+       = 0000CD         nE6			EQU	$CD
+       = 0000CE         nF6			EQU	$CE
+       = 0000CF         nFs6			EQU	$CF
+       = 0000D0         nG6			EQU	$D0
+       = 0000D1         nAb6			EQU	$D1
+       = 0000D2         nA6			EQU	$D2
+       = 0000D3         nBb6			EQU	$D3
+       = 0000D4         nB6			EQU	$D4
+       = 0000D5         nC7			EQU	$D5
+       = 0000D6         nCs7			EQU	$D6
+       = 0000D7         nD7			EQU	$D7
+       = 0000D8         nEb7			EQU	$D8
+       = 0000D9         nE7			EQU	$D9
+       = 0000DA         nF7			EQU	$DA
+       = 0000DB         nFs7			EQU	$DB
+       = 0000DC         nG7			EQU	$DC
+       = 0000DD         nAb7			EQU	$DD
+       = 0000DE         nA7			EQU	$DE
+       = 0000DF         nBb7			EQU	$DF
+
+                        ; DAC Equates (S1)
+       = 000081         dKick			EQU	$81
+       = 000082         dSnare			EQU	$82
+       = 000083         dTimpani		EQU	$83
+       = 000088         dHiTimpani		EQU	$88
+       = 000089         dMidTimpani		EQU	$89
+       = 00008A         dLowTimpani		EQU	$8A
+       = 00008B         dVLowTimpani	EQU	$8B
+       = 00008B         dFloorTimpani	EQU $8B
+
+                        ; PWM Equates (KC)
+       = 000081         pEKick		EQU	$81
+       = 000082         pESnare		EQU	$82
+       = 000083         pSplashCymb	EQU	$83
+       = 000084         pRideBell	EQU $84
+       = 000085         pTomHi		EQU	$85
+       = 000086         pTomMid		EQU	$86
+       = 000087         pTomLow		EQU	$87
+       = 000088         pEHiHat		EQU	$88
+       = 000089         pCrashCymb	EQU $89
+       = 00008A         pClap		EQU $8A
+       = 00008B         pAKick		EQU $8B
+       = 00008C         pASnare		EQU	$8C
+       = 00008D         pBell		EQU $8D
+       = 00008E         pFingSnap	EQU	$8E
+       = 00008F         pCowbell	EQU	$8F
+       = 000090         pClickHi	EQU	$90
+       = 000091         pClickLo	EQU	$91
+       = 000092         pBongoHi	EQU	$92
+       = 000093         pBongoLo	EQU	$93
+       = 000094         pTimpaniHi	EQU	$94
+       = 000095         pTimpaniLo	EQU	$95
+       = 000096         pSilence	EQU $96
+                        ;!@ NEW DATA
+       = 000097         pSega		EQU $97
+       = 000098         pClosedHH	EQU $98
+       = 000099         pOpenHH		EQU $99
+       = 00009A         pTomLower		EQU	$9A
+       = 00009B         pTomLowerer		EQU	$9B
+       = 00009C         pTomLowerest	EQU	$9C
+
+                        ;!@ Convert ptrs to z80Ptr
+                        ; function to make a little-endian 16-bit pointer for the Z80 sound driver
+                        ;z80_ptr function x,y,((((x)|(y))<<8)&$FF00)|((((x)|(y))>>8)&$7F)|$80
+                        ;z80_ptr_neg function x,y,((((y)-(x))<<8)&$FF00)|((((y)-(x))>>8)&$7F)|$80
+
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        rom_ptr_z80 macro addr
+                        	;dc.w z80_ptr(ptr,addr)
+                        	dc.w  ((((addr)<<8)&$FF00)|(((addr)>>8)&$7F)|$80)
+                            endm
+                        	
+                        ;Funciton to convert S1 tempo to S2 and then S3+
+                        ;The conversion works for all values of main tempo other than 0 — this value cannot be converted exactly between the two drivers. The conversion of main tempos from Sonic 1 to Sonic 2 can be done (approximately) with the following formul
+                        ;S2 main tempo = floor{ [ (S1 main tempo-1) * 256 + floor(S1 main tempo/2) ] / S1 main tempo }			
+                        ;It is easy to convert between Sonic 2 and Sonic 3+ main tempo values:
+                        ;S2 main tempo = (256 - S3 main tempo) mod 256
+                        ;S3 main tempo = (256 - S2 main tempo) mod 256
+                        tempo_conv macro tempo
+                        		if tempo==0
+                        			dc.b	((256 - (((256-1)*256 + (256/2)) / 256)) % 256)
+                        		else
+                        			dc.b	((256 - ((((tempo)-1)*256 + ((tempo)/2)) / (tempo))) % 256)
+                        		endif
+                        	endm
+
+                        	
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        ;rom_ptr_z80_neg macro ptr,addr
+                        	;dc.w z80_ptr_neg(ptr,addr)
+                        	;dc.w	(((((addr)-(ptr))<<8)&$FF00)|((((addr)-(ptr))>>8)&$7F)|$80)
+                            ;endm
+
+                        ; Header Macros
+
+                        ;!@
+                        ; Header - Set up Voice Location
+                        ;smpsHeaderVoice macro loc
+                        smpsHeaderVoice macro loc,songstart
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+                        ; Header - Set up Channel Usage	
+                        smpsHeaderChan macro fm,psg
+                        	if \0==2
+                        		dc.b	fm,psg
+                        	else
+                        		dc.b	fm
+                        	endif	
+                        	endm	
+                        	
+
+                        	
+                        smpsHeaderTempo macro div,mod
+                        	dc.b	div,mod
+                        	endm
+
+                        ;!@
+                        ; Header - Set up Tempo. Mod is converted from S1 to S3 tempo
+                        smpsHeaderTempoC macro div,mod
+                        TempDiv set div
+                        	dc.b	div
+                        	tempo_conv(mod)
+000000                  	endm
+                        	
+                        ; Header - Set up DAC Channel
+                        smpsHeaderDAC macro loc
+                        	dc.w	loc-songStart
+                        	dc.w	$00
+                        	endm
+                        	
+                        ;!@
+                        ; Header - Set up FM Channel	
+                        ;smpsHeaderFM macro loc,pitch,vol
+                        smpsHeaderFM macro loc,songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	endm
+
+                        ;!@	
+                        ; Header - Set up PSG Channel
+                        ;smpsHeaderPSG macro loc,pitch,vol,voice
+                        smpsHeaderPSG macro loc,songstart,pitch,vol,null,voice
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	;dc.w	voice
+                        	dc.b	null,voice
+                        	endm
+
+                        ;!@
+                        ; Header - Set up SFX Channel
+                        ;sHeaderSFX	macro play,patch,loc,pitch,vol
+                        smpsHeaderSFX	macro play,patch,loc,pitch,vol,songstart
+                        	dc.b play,patch
+                        	;dc.w loc-sPointZero
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b pitch,vol
+                            endm
+
+                        ; Co-ord Flag Macros and Equates
+                        ; E0xx - Panning, AMS, FMS
+                        smpsPan macro direction,amsfms
+                        panNone set $00
+                        panRight set $40
+                        panLeft set $80
+                        panCentre set $C0
+                        panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if \0==2
+                        		dc.b $E0,direction|amsfms
+                        	else
+                        		dc.b $E0,direction
+                        	endif
+000000                  	endm
+                        	
+                        ; E1xx - Alter note values by xx
+                        smpsAlterNote macro val
+                        	dc.b	$E1,val
+                        	endm
+                        	
+                        ; E2xx - Unknown
+                        smpsE2 macro val
+                        	dc.b	$E2,val
+                        	endm
+
+                        ; E3 - Return (generally used after F8)
+                        ; F9 - Return (generally used after F8)
+                        smpsReturn macro val
+                        	;!@
+                        	;dc.b	$E3
+                        	dc.b	$F9
+                        	endm
+                        	
+                        ; E4 - Fade in previous song (ie. 1-Up)
+                        smpsFade macro val
+                        	dc.b	$E4
+                        	endm
+
+                        ;!@ Invalid for S3+!
+                        ; E5xx - Set channel tempo divider to xx
+                        smpsChanTempoDiv macro val
+                        	;Error No S3 equivalent for CF!
+                        	dc.b	$E5,val	
+                        	endm
+                        	
+                        ; E6xx - Alter Volume by xx
+                        smpsAlterVol macro val
+                        	dc.b	$E6,val
+                        	endm
+                        	
+                        ; E7 - Prevent attack of next note
+       = 0000E7         smpsNoAttack	EQU $E7
+
+                        ;!@ This may have problems, needs some convesion factor due to usage of mult by tempo div in S3+
+                        ; E8xx - Set note fill to xx
+                        smpsNoteFill macro val		
+                        	dc.b	$E8,(val/TempDiv)
+                        	endm
+                        	
+                        ;!@
+                        ; E9xx - Add xx to channel pitch
+                        ; FBxx - Add xx to channel pitch
+                        smpsAlterPitch macro val
+                        	;!@
+                        	;dc.b	$E9,val
+                        	dc.b	$FB,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3
+                        smpsSetTempoMod macro val
+                        	;dc.b	$EA,val
+                        	dc.b	$FF,$00,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3 (TEMPO - TEMPO_SET)
+                        smpsSetTempoModC macro val
+                        	;dc.b	$EA,val
+                        	dc.b $FF,$00
+                        	tempo_conv(val)
+                        	endm
+                        	
+                        ;!@
+                        ; EBxx - Set music tempo divider to xx
+                        ; FF04xx - Set global tick multiplier to xx (TICK_MULT - TMULT_ALL)
+                        smpsSetTempoDiv macro val
+                        	;dc.b	$EB,val
+                        TempDiv set val
+                        	dc.b $FF,$04,val
+000000                  	endm
+
+                        ;!@	
+                        ; ECxx - Add xx to PSG channel volume (VOLUME - VOL_NN_PSG)
+                        ;
+                        ; May need interpolation/conversion factor:
+                        ; Change volume attenuation of PSG track.
+                        ;The single parameter byte is added to track's current volume attenuation;
+                        ;anything greater than $0F (unsigned comparison) is set to $0F (silence). Also, the flutter index is reduced by 1.
+                        smpsSetVol macro val
+                        	dc.b	$EC,val
+                        	endm
+                        	
+                        ; ED - Unknown
+       = 0000ED         smpsED		EQU $ED
+                        	
+                        ;!@ S3K= send cmd to YM2612 port; unused in S1
+                        ; EE - Stops special SFX ($D0-$D4, S1 only) and restarts overridden music track
+       = 0000EE         smpsEE 		EQU $EE
+                        	
+                        ;!@
+                        ; EFxx - Set Voice of FM channel to xx
+                        ; EFxx[yy] - Set patch id of FM channel to xx. If xx bit7 set, read from another song instead
+                        ; (INSTRUMENT - INS_C_FMP)
+                        ;smpsFMvoice macro voice
+                        	;dc.b	$EF,voice
+                        smpsFMvoice macro pat, song		
+                        	;if song<>""
+                        	if \0==2
+                        		dc.b $EF,pat|$80,song+$81
+                        	else
+                        		dc.b $EF,pat
+                        	endif
+                            endm
+
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        smpsModSet macro wait,speed,change,step
+                        	dc.b	$F0,wait,speed,change,step
+                        	endm
+                        	
+
+                        ;!@ Used very differently in S3; don't use
+                        ; F1 - Turn on Modulation
+       = 0000F1         smpsModOn 	EQU $F1
+                        ; F4 - Turn off Modulation
+       = 0000F4         smpsModOff 	EQU $F4
+
+                        ; F2 - End of channel
+                        smpsStop macro
+                        	dc.b	$F2
+                        	endm
+                        	
+                        ;!@
+                        ; F3xx - PSG waveform to xx
+                        ; S3+ only: If parameter byte is zero, the channel is converted
+                        ; back into a normal PSG channel and the noise channel is silenced.
+                        ; Otherwise, sets the PSG track to noise and sets PSG noise to parameter byte, which should be from $E0 to $E7 (inclusive).
+                        smpsPSGform macro form
+                        	dc.b	$F3,form
+                        	endm
+                        	
+                        ; F5xx - PSG voice to xx
+                        smpsPSGvoice macro voice
+                        	dc.b	$F5,voice
+                        	endm
+                        	
+                        ;BAD Cmpr
+                        ;if (loc<*)
+                        	;rom_ptr_z80_neg(*-loc,songstart)
+                        ;else
+                        	;rom_ptr_z80(loc-*-1,songstart)
+                        ;endif
+
+                        ;!@
+                        ; F6xxxx - Jump to xxxx
+                        ;smpsJump macro loc
+                        smpsJump macro loc,songstart
+                        	dc.b	$F6
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F7xxyyzzzz - Loop back to zzzz yy times, xx being the loop index for loop recursion fixing
+                        ;smpsLoop macro index,loops,loc
+                        smpsLoop macro index,loops,loc,songstart
+                        	dc.b	$F7
+                        	dc.b	index,loops
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F8xxxx - Call pattern at xxxx, saving return point
+                        ;smpsCall macro loc
+                        smpsCall macro loc,songstart
+                        	dc.b	$F8
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+                        	
+                        ; F9 - Unknown
+       = 0000F9         smpsF9		EQU $F9
+
+                        ; Voices - Feedback
+                        smpsVcFeedback macro val
+                        vcFeedback set val
+000000                  	endm
+
+                        ; Voices - Algorithm
+                        smpsVcAlgorithm macro val
+                        vcAlgorithm set val
+000000                  	endm
+
+                        ; Voices - Detune
+                        smpsVcDetune macro op1,op2,op3,op4
+                        vcDT1 set op1
+                        vcDT2 set op2
+                        vcDT3 set op3
+                        vcDT4 set op4
+000000                  	endm
+
+                        ; Voices - Coarse-Frequency
+                        smpsVcCoarseFreq macro op1,op2,op3,op4
+                        vcCF1 set op1
+                        vcCF2 set op2
+                        vcCF3 set op3
+                        vcCF4 set op4
+000000                  	endm
+
+                        ; Voices - Rate Scale
+                        smpsVcRateScale macro op1,op2,op3,op4
+                        vcRS1 set op1
+                        vcRS2 set op2
+                        vcRS3 set op3
+                        vcRS4 set op4
+000000                  	endm
+
+                        ; Voices - Attack Rate
+                        smpsVcAttackRate macro op1,op2,op3,op4
+                        vcAR1 set op1
+                        vcAR2 set op2
+                        vcAR3 set op3
+                        vcAR4 set op4
+000000                  	endm
+
+                        ; Voices - Amplitude Modulation
+                        smpsVcAmpMod macro op1,op2,op3,op4
+                        vcAM1 set op1
+                        vcAM2 set op2
+                        vcAM3 set op3
+                        vcAM4 set op4
+000000                  	endm
+
+                        ; Voices - First Decay Rate
+                        smpsVcDecayRate1 macro op1,op2,op3,op4
+                        vcD1R1 set op1
+                        vcD1R2 set op2
+                        vcD1R3 set op3
+                        vcD1R4 set op4
+000000                  	endm
+
+                        ; Voices - Second Decay Rate
+                        smpsVcDecayRate2 macro op1,op2,op3,op4
+                        vcD2R1 set op1
+                        vcD2R2 set op2
+                        vcD2R3 set op3
+                        vcD2R4 set op4
+000000                  	endm
+
+                        ; Voices - Decay Level	
+                        smpsVcDecayLevel macro op1,op2,op3,op4
+                        vcDL1 set op1
+                        vcDL2 set op2
+                        vcDL3 set op3
+                        vcDL4 set op4
+000000                  	endm
+
+                        ; Voices - Release Rate
+                        smpsVcReleaseRate macro op1,op2,op3,op4
+                        vcRR1 set op1
+                        vcRR2 set op2
+                        vcRR3 set op3
+                        vcRR4 set op4
+000000                  	endm
+
+                        ; Voices - Total Level
+                        smpsVcTotalLevel macro op1,op2,op3,op4
+                        vcTL1 set op1
+                        vcTL2 set op2
+                        vcTL3 set op3
+                        vcTL4 set op4
+                        	dc.b	(vcFeedback<<3)+vcAlgorithm
+                        	dc.b	(vcDT4<<4)+vcCF4,(vcDT3<<4)+vcCF3,(vcDT2<<4)+vcCF2,(vcDT1<<4)+vcCF1
+                        	dc.b	(vcRS4<<6)+vcAR4,(vcRS3<<6)+vcAR3,(vcRS2<<6)+vcAR2,(vcRS1<<6)+vcAR1
+                        	dc.b	(vcAM4<<5)+vcD1R4,(vcAM3<<5)+vcD1R3,(vcAM2<<5)+vcD1R2,(vcAM1<<5)+vcD1R1
+                        	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
+                        	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
+                        	dc.b	vcTL4,vcTL3,vcTL2,vcTL1	
+000000                  	endm
+                        	
+                        	
+                        ;==============================================
+                        ;!@ The following CF flags/macros are KC-drive specific!
+                        ;Rest here mostly used  to compile KC/Nat ASM files for BC purposes...
+
+                        ;!@
+                        ; Header - Set up a secondary PWM Channel
+                        ;smpsHeaderPWM macro loc
+                        smpsHeaderPWM macro loc, songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)	
+                        	;!@
+                        	dc.b	pitch
+                        	dc.b	vol
+                        	endm
+                        	
+                        ;!@ Unused and unneeded; leftover Sonic 32x header stuff
+                        ; Header - Set up first PWM Channel
+                        ;smpsHeaderPWM1 macro loc,num
+                        	;dc.w	loc-songStart
+                        	;dc.b	num,0
+                        	;endm
+
+                        ;!@
+                        ; Header - Set up Tick Multiplier (for Sfx)
+                        ;sHeaderSFX
+                        smpsHeaderTick	macro tmul
+                        	dc.b tmul
+                            endm
+
+                        ;!@ KC Exclusives!
+                        ;# PAN_ANIM
+                        ;# pan animation has 2 modes; if first arg is 0, it will end it. Otherwise, more args will be used
+                        ;!0xE4, 0 > sPanAni:;								
+                        ;!0xE4, 1-0xFF > sPanAni: .lb, .db, .db, .db, .db;	
+                        KC_smpsPanAni macro val1,val2,val3,val4,val5
+                        	if val1==0
+                        		dc.b	$E4,$00
+                        	else
+                        		dc.b	$E4,val1,val2,val3,val4,val5
+                        	endif
+                        	endm
+
+
+                        ; Alter Volume
+                        ;!0xE5 > saVolFMP: .db, .db;								
+                        KC_smpsFMAlterVol macro val1,val2
+                        	dc.b	$E5,val1,val2
+                        	endm
+
+                        ;!@ KC Exclusive!	
+                        ;!0xE9 > ssLFO: .db, .db;									
+                        KC_smpsSetLFO macro enable,amsfms
+                        	dc.b	$E9,enable,amsfms
+                        	endm
+
+                        ;!0xEA > sPlayDAC: .db | 0x80;								
+                        KC_smpsPlayDACSample macro sample
+                        	dc.b	$EA,(sample&$7F)
+                        	endm
+
+                        ;!@ Songstart param added
+                        ;!0xEB > sLoopExit: .db, .dw {						
+                        ;smpsConditionalJump macro index,loc
+                        KC_smpsConditionalJump macro index,loc,songstart
+                        	dc.b	$EB
+                        	dc.b	index
+                        	;dc.w	z80_ptr(loc)
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+
+                        ;!@ Usage/naming is speculative. Called ssTransposeS3K in S3k/Nat driver...	
+                        ;!0xED > sYMcmd: .db, .db;							
+                        ; Set note values to xx-$40
+                        KC_smpsSetNote macro val
+                        	dc.b	$ED,val
+                        	endm
+
+                        ;!0xEE > sYM1cmd: .db, .db;							
+                        KC_smpsFMICommand macro reg,val
+                        	dc.b	$EE,reg,val
+                        	endm
+
+                        ;!0xF1 > sModEnv: .db, .db {							
+                        ; Set Modulation
+                        KC_smpsModChange2 macro fmmod,psgmod
+                        	dc.b	$F1,fmmod,psgmod
+                        	endm
+                        	
+                        ;!0xF4 > sModEnv: .db {
+                        ; Set Modulation
+                        KC_smpsModChange macro val
+                        	dc.b	$F4,val
+                        	endm
+
+                        ;!@ KC exclusive!
+                        ;!0xFC > sPitchSlide: .db;						
+                        KC_smpsPitchSlide macro enable
+                        	dc.b	$FC,enable
+                        	endm
+                        	
+                        ;!0xFD > sRawFreq: .db;							
+                        KC_smpsAlternateSMPS macro flag
+                        	dc.b	$FD,flag
+                        	endm
+
+                        ;!0xFE > sSpecFM3: .db, .db, .db, .db {			
+                        	;%; Broken?
+                        ;}
+                        KC_smpsFM3SpecialMode macro ind1,ind2,ind3,ind4
+                        	dc.b	$FE,ind1,ind2,ind3,ind4
+                        	Error Broken?
+                        	endm
+
+                        ;!0xFF, 1 > sPlaySound: .db;						
+                        KC_smpsPlaySound macro index
+                        	dc.b	$FF,$01,index
+                        	endm
+
+                        ;!0xFF, 2 > sMusPause: .db;						
+                        KC_smpsHaltMusic macro flag
+                        	dc.b	$FF,$02,flag
+                        	endm
+
+                        ;!@ Modified with SongStart	param
+                        ;!0xFF, 3 > sCopyMem: .dw, .db {					
+                        	;%; No song should ever use this command. It may good idea to remove it.
+                        ;}
+                        ;KC_smpsCopyData macro data,len
+                        KC_smpsCopyData macro data,len,songstart
+                        	Error Coord. Flag to copy data should not be used. Complain to GenesisDoes if any music uses it.
+                        	;Error No song should ever use this command. It may be a good idea to remove it.
+                        	dc.b	$FF,$03
+                        	;dc.w	little_endian(data)
+                        	rom_ptr_z80(data+songstart)
+                        	dc.b	len
+                        	endm
+
+                        ;!0xFF, 5 > sSSGEG: .db, .db, .db, .db {			
+                        	;=op2 .a2
+                        	;:=2 .a1
+                        	;:=1 \op2\
+                        ;}
+                        KC_smpsSSGEG macro op1,op2,op3,op4
+                        	dc.b	$FF,$05,op1,op3,op2,op4
+                        	endm
+                        	
+                        	
+                        ;!0xFF, 6 > sVolEnvFM: .db, .db {
+                        	;:?0 {
+                        		;?volenv;
+                        	;}
+                        ;}	
+                        KC_smpsFMVolEnv macro tone,mask
+                        	dc.b	$FF,$06,tone,mask
+                        	endm
+                        ;==============================================
+
+000000                  	include "KC.asm"
+       = 040000         Target	EQU	$40000
+
+       = 00007F         PWMVol	EQU	$7F
+       = 000000         PSGVoi0	EQU	$00
+       = 000000         PSGVoi1	EQU $00
+       = 000000         PSGVoi2	EQU	$00
+
+                        ;!@ PSGVol1	EQU	$07
+                        ;!@ PSGVol2	EQU	$0B
+                        ;!@ PSGVol3	EQU	$08
+       = 000003         PSGVol1	EQU	$03
+       = 000006         PSGVol2	EQU	$06
+       = 000004         PSGVol3	EQU	$04
+       = 00000C         PSGOff	EQU	$0C
+000000                  	smpsHeaderVoice	SAdv3_Options_Patches, Target
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+000000                  	rom_ptr_z80(SAdv3_Options_Patches+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000000 8A8D             	dc.w  (((((SAdv3_Options_Patches+Target))<<8)&$FF00)|((((SAdv3_Options_Patches+Target))>>8)&$7F)|$80)
+000002                  	smpsHeaderChan	$06, $03
+                        	if 2==2
+000002 0603             		dc.b	$06,$03
+                        	else
+                        	endif	
+000004                  	smpsHeaderTempoC	$03, $05
+       = 000003         TempDiv set $03
+000004 03               	dc.b	$03
+000005                  	tempo_conv($05)
+                        		if ($05)==0
+                        		else
+000005 33               			dc.b	((256 - ((((($05))-1)*256 + ((($05))/2)) / (($05)))) % 256)
+                        		endif
+000006                  	smpsHeaderFM	SAdv3_Options_FM1, Target, $00, $0E
+                        	;dc.w	loc-songStart
+000006                  	rom_ptr_z80(SAdv3_Options_FM1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000006 4080             	dc.w  (((((SAdv3_Options_FM1+Target))<<8)&$FF00)|((((SAdv3_Options_FM1+Target))>>8)&$7F)|$80)
+000008 000E             	dc.b	$00,$0E
+00000A                  	smpsHeaderFM	SAdv3_Options_FM2, Target, $00, $0E
+                        	;dc.w	loc-songStart
+00000A                  	rom_ptr_z80(SAdv3_Options_FM2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000A 3F81             	dc.w  (((((SAdv3_Options_FM2+Target))<<8)&$FF00)|((((SAdv3_Options_FM2+Target))>>8)&$7F)|$80)
+00000C 000E             	dc.b	$00,$0E
+00000E                  	smpsHeaderFM	SAdv3_Options_FM3, Target, $00, $18
+                        	;dc.w	loc-songStart
+00000E                  	rom_ptr_z80(SAdv3_Options_FM3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000E 3F82             	dc.w  (((((SAdv3_Options_FM3+Target))<<8)&$FF00)|((((SAdv3_Options_FM3+Target))>>8)&$7F)|$80)
+000010 0018             	dc.b	$00,$18
+000012                  	smpsHeaderFM	SAdv3_Options_FM4, Target, $00, $18
+                        	;dc.w	loc-songStart
+000012                  	rom_ptr_z80(SAdv3_Options_FM4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000012 E483             	dc.w  (((((SAdv3_Options_FM4+Target))<<8)&$FF00)|((((SAdv3_Options_FM4+Target))>>8)&$7F)|$80)
+000014 0018             	dc.b	$00,$18
+000016                  	smpsHeaderFM	SAdv3_Options_FM5, Target, $00, $18
+                        	;dc.w	loc-songStart
+000016                  	rom_ptr_z80(SAdv3_Options_FM5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000016 8985             	dc.w  (((((SAdv3_Options_FM5+Target))<<8)&$FF00)|((((SAdv3_Options_FM5+Target))>>8)&$7F)|$80)
+000018 0018             	dc.b	$00,$18
+00001A                  	smpsHeaderFM	SAdv3_Options_FM6, Target, $00, $18
+                        	;dc.w	loc-songStart
+00001A                  	rom_ptr_z80(SAdv3_Options_FM6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001A 2E87             	dc.w  (((((SAdv3_Options_FM6+Target))<<8)&$FF00)|((((SAdv3_Options_FM6+Target))>>8)&$7F)|$80)
+00001C 0018             	dc.b	$00,$18
+00001E                  	smpsHeaderPSG	SAdv3_Options_PSG1, Target, PSGOff, PSGVoi0, $00, PSGVol2
+                        	;dc.w	loc-songStart
+00001E                  	rom_ptr_z80(SAdv3_Options_PSG1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001E D488             	dc.w  (((((SAdv3_Options_PSG1+Target))<<8)&$FF00)|((((SAdv3_Options_PSG1+Target))>>8)&$7F)|$80)
+000020 0C00             	dc.b	PSGOff,PSGVoi0
+                        	;dc.w	voice
+000022 0006             	dc.b	$00,PSGVol2
+000024                  	smpsHeaderPSG	SAdv3_Options_PSG2, Target, PSGOff, PSGVoi0, $00, PSGVol2
+                        	;dc.w	loc-songStart
+000024                  	rom_ptr_z80(SAdv3_Options_PSG2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000024 D38A             	dc.w  (((((SAdv3_Options_PSG2+Target))<<8)&$FF00)|((((SAdv3_Options_PSG2+Target))>>8)&$7F)|$80)
+000026 0C00             	dc.b	PSGOff,PSGVoi0
+                        	;dc.w	voice
+000028 0006             	dc.b	$00,PSGVol2
+00002A                  	smpsHeaderPSG	SAdv3_Options_PSG3, Target, $00, PSGVoi2, $00, PSGVol2
+                        	;dc.w	loc-songStart
+00002A                  	rom_ptr_z80(SAdv3_Options_PSG3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00002A CF8C             	dc.w  (((((SAdv3_Options_PSG3+Target))<<8)&$FF00)|((((SAdv3_Options_PSG3+Target))>>8)&$7F)|$80)
+00002C 0000             	dc.b	$00,PSGVoi2
+                        	;dc.w	voice
+00002E 0006             	dc.b	$00,PSGVol2
+000030                  	smpsHeaderPWM	SAdv3_Options_PWM1, Target, $00, PWMVol
+                        	;dc.w	loc-songStart
+000030                  	rom_ptr_z80(SAdv3_Options_PWM1+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000030 308D             	dc.w  (((((SAdv3_Options_PWM1+Target))<<8)&$FF00)|((((SAdv3_Options_PWM1+Target))>>8)&$7F)|$80)
+                        	;!@
+000032 00               	dc.b	$00
+000033 7F               	dc.b	PWMVol
+000034                  	smpsHeaderPWM	SAdv3_Options_PWM2, Target, $00, PWMVol
+                        	;dc.w	loc-songStart
+000034                  	rom_ptr_z80(SAdv3_Options_PWM2+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000034 898D             	dc.w  (((((SAdv3_Options_PWM2+Target))<<8)&$FF00)|((((SAdv3_Options_PWM2+Target))>>8)&$7F)|$80)
+                        	;!@
+000036 00               	dc.b	$00
+000037 7F               	dc.b	PWMVol
+000038                  	smpsHeaderPWM	SAdv3_Options_PWM3, Target, $00, PWMVol
+                        	;dc.w	loc-songStart
+000038                  	rom_ptr_z80(SAdv3_Options_PWM3+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000038 898D             	dc.w  (((((SAdv3_Options_PWM3+Target))<<8)&$FF00)|((((SAdv3_Options_PWM3+Target))>>8)&$7F)|$80)
+                        	;!@
+00003A 00               	dc.b	$00
+00003B 7F               	dc.b	PWMVol
+00003C                  	smpsHeaderPWM	SAdv3_Options_PWM4, Target, $00, PWMVol
+                        	;dc.w	loc-songStart
+00003C                  	rom_ptr_z80(SAdv3_Options_PWM4+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+00003C 898D             	dc.w  (((((SAdv3_Options_PWM4+Target))<<8)&$FF00)|((((SAdv3_Options_PWM4+Target))>>8)&$7F)|$80)
+                        	;!@
+00003E 00               	dc.b	$00
+00003F 7F               	dc.b	PWMVol
+
+000040                  SAdv3_Options_FM1:
+000040                  	smpsPan		panLeft
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+000040 E080             		dc.b $E0,panLeft
+                        	endif
+000042                  	smpsFMvoice		$00
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000042 EF00             		dc.b $EF,$00
+                        	endif
+                        	;!@ dc.b	nRst, $01, nG4, nRst, $05, nG5, $01, nRst
+000044 8001B8018005C401 	dc.b	nRst, $01, nG4, $01, nRst, $05, nG5, $01, nRst
+00004C 80
+00004D 02C2018005C40180 	dc.b	$02, nF5, $01, nRst, $05, nG5, $01, nRst
+000055 20B8018005C40180 	dc.b	$20, nG4, $01, nRst, $05, nG5, $01, nRst
+00005D 02C2018005C20180 	dc.b	$02, nF5, $01, nRst, $05, nF5, $01, nRst
+000065 20B8018005C40180 	dc.b	$20, nG4, $01, nRst, $05, nG5, $01, nRst
+00006D 02C2018005C40180 	dc.b	$02, nF5, $01, nRst, $05, nG5, $01, nRst
+000075 20B8018005C40180 	dc.b	$20, nG4, $01, nRst, $05, nG5, $01, nRst
+00007D 02C2018005C70180 	dc.b	$02, nF5, $01, nRst, $05, nBb5, $01, nRst
+000085 20B8018005C40180 	dc.b	$20, nG4, $01, nRst, $05, nG5, $01, nRst
+00008D 02C2018026BF0180 	dc.b	$02, nF5, $01, nRst, $26, nD5, $01, nRst
+000095 02BF018005B80180 	dc.b	$02, nD5, $01, nRst, $05, nG4, $01, nRst
+00009D 26B8018005C40180 	dc.b	$26, nG4, $01, nRst, $05, nG5, $01, nRst
+0000A5 02C2018005C40180 	dc.b	$02, nF5, $01, nRst, $05, nG5, $01, nRst
+0000AD 20C2018008BF0180 	dc.b	$20, nF5, $01, nRst, $08, nD5, $01, nRst
+0000B5 02BF018005C70180 	dc.b	$02, nD5, $01, nRst, $05, nBb5, $01, nRst
+0000BD 1C               	dc.b	$1C
+
+0000BE                  SAdv3_Options_Jump1:
+0000BE 8001B8           	dc.b	nRst, $01, nG4
+
+0000C1                  SAdv3_Options_Loop1:
+0000C1 8005C4018002C201 	dc.b	nRst, $05, nG5, $01, nRst, $02, nF5, $01
+0000C9 8005C4018020B801 	dc.b	nRst, $05, nG5, $01, nRst, $20, nG4, $01
+0000D1 8005C4018002C201 	dc.b	nRst, $05, nG5, $01, nRst, $02, nF5, $01
+0000D9 8005C2018020B801 	dc.b	nRst, $05, nF5, $01, nRst, $20, nG4, $01
+0000E1 8005C4018002C201 	dc.b	nRst, $05, nG5, $01, nRst, $02, nF5, $01
+0000E9 8005C4018020B801 	dc.b	nRst, $05, nG5, $01, nRst, $20, nG4, $01
+0000F1 8005C4018002C201 	dc.b	nRst, $05, nG5, $01, nRst, $02, nF5, $01
+0000F9 8005C7018020B801 	dc.b	nRst, $05, nBb5, $01, nRst, $20, nG4, $01
+000101                  	smpsLoop		$00, $02, SAdv3_Options_Loop1, Target
+000101 F7               	dc.b	$F7
+000102 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop1<*)
+000104                  		rom_ptr_z80(SAdv3_Options_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000104 C180             	dc.w  (((((SAdv3_Options_Loop1+Target))<<8)&$FF00)|((((SAdv3_Options_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000106 8005C4018002C201 	dc.b	nRst, $05, nG5, $01, nRst, $02, nF5, $01
+00010E 8026BF018002BF01 	dc.b	nRst, $26, nD5, $01, nRst, $02, nD5, $01
+000116 8005B8018026B801 	dc.b	nRst, $05, nG4, $01, nRst, $26, nG4, $01
+00011E 8005C4018002C201 	dc.b	nRst, $05, nG5, $01, nRst, $02, nF5, $01
+000126 8005C4018020C201 	dc.b	nRst, $05, nG5, $01, nRst, $20, nF5, $01
+00012E 8008BF018002BF01 	dc.b	nRst, $08, nD5, $01, nRst, $02, nD5, $01
+000136 8005C701801C     	dc.b	nRst, $05, nBb5, $01, nRst, $1C
+00013C                  	smpsJump		SAdv3_Options_Jump1, Target
+00013C F6               	dc.b	$F6
+                        	if (SAdv3_Options_Jump1<*)
+00013D                  		rom_ptr_z80(SAdv3_Options_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00013D BE80             	dc.w  (((((SAdv3_Options_Jump1+Target))<<8)&$FF00)|((((SAdv3_Options_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00013F                  SAdv3_Options_FM2:
+00013F                  	smpsPan		panRight
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+00013F E040             		dc.b $E0,panRight
+                        	endif
+000141                  	smpsFMvoice		$00
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000141 EF00             		dc.b $EF,$00
+                        	endif
+000143 8001C4028004D002 	dc.b	nRst, $01, nG5, $02, nRst, $04, nG6, $02
+00014B 8001CE028004D002 	dc.b	nRst, $01, nF6, $02, nRst, $04, nG6, $02
+000153 801FC4028004D002 	dc.b	nRst, $1F, nG5, $02, nRst, $04, nG6, $02
+00015B 8001CE028004CE02 	dc.b	nRst, $01, nF6, $02, nRst, $04, nF6, $02
+000163 801FC4028004D002 	dc.b	nRst, $1F, nG5, $02, nRst, $04, nG6, $02
+00016B 8001CE028004D002 	dc.b	nRst, $01, nF6, $02, nRst, $04, nG6, $02
+000173 801FC4028004D002 	dc.b	nRst, $1F, nG5, $02, nRst, $04, nG6, $02
+00017B 8001CE028004D302 	dc.b	nRst, $01, nF6, $02, nRst, $04, nBb6, $02
+000183 801FC4028004D002 	dc.b	nRst, $1F, nG5, $02, nRst, $04, nG6, $02
+00018B 8001CE028025CB02 	dc.b	nRst, $01, nF6, $02, nRst, $25, nD6, $02
+000193 8001CB028004C402 	dc.b	nRst, $01, nD6, $02, nRst, $04, nG5, $02
+00019B 8025C4028004D002 	dc.b	nRst, $25, nG5, $02, nRst, $04, nG6, $02
+0001A3 8001CE028004D002 	dc.b	nRst, $01, nF6, $02, nRst, $04, nG6, $02
+0001AB 801FCE028007CB02 	dc.b	nRst, $1F, nF6, $02, nRst, $07, nD6, $02
+0001B3 8001CB028004D302 	dc.b	nRst, $01, nD6, $02, nRst, $04, nBb6, $02
+0001BB 801B             	dc.b	nRst, $1B
+
+0001BD                  SAdv3_Options_Jump2:
+0001BD 8001             	dc.b	nRst, $01
+
+0001BF                  SAdv3_Options_Loop2:
+0001BF C4028004D0028001 	dc.b	nG5, $02, nRst, $04, nG6, $02, nRst, $01
+0001C7 CE028004D002801F 	dc.b	nF6, $02, nRst, $04, nG6, $02, nRst, $1F
+0001CF C4028004D0028001 	dc.b	nG5, $02, nRst, $04, nG6, $02, nRst, $01
+0001D7 CE028004CE02801F 	dc.b	nF6, $02, nRst, $04, nF6, $02, nRst, $1F
+0001DF C4028004D0028001 	dc.b	nG5, $02, nRst, $04, nG6, $02, nRst, $01
+0001E7 CE028004D002801F 	dc.b	nF6, $02, nRst, $04, nG6, $02, nRst, $1F
+0001EF C4028004D0028001 	dc.b	nG5, $02, nRst, $04, nG6, $02, nRst, $01
+0001F7 CE028004D302801F 	dc.b	nF6, $02, nRst, $04, nBb6, $02, nRst, $1F
+0001FF                  	smpsLoop		$00, $02, SAdv3_Options_Loop2, Target
+0001FF F7               	dc.b	$F7
+000200 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop2<*)
+000202                  		rom_ptr_z80(SAdv3_Options_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000202 BF81             	dc.w  (((((SAdv3_Options_Loop2+Target))<<8)&$FF00)|((((SAdv3_Options_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000204 C4028004D0028001 	dc.b	nG5, $02, nRst, $04, nG6, $02, nRst, $01
+00020C CE028025CB028001 	dc.b	nF6, $02, nRst, $25, nD6, $02, nRst, $01
+000214 CB028004C4028025 	dc.b	nD6, $02, nRst, $04, nG5, $02, nRst, $25
+00021C C4028004D0028001 	dc.b	nG5, $02, nRst, $04, nG6, $02, nRst, $01
+000224 CE028004D002801F 	dc.b	nF6, $02, nRst, $04, nG6, $02, nRst, $1F
+00022C CE028007CB028001 	dc.b	nF6, $02, nRst, $07, nD6, $02, nRst, $01
+000234 CB028004D302801B 	dc.b	nD6, $02, nRst, $04, nBb6, $02, nRst, $1B
+00023C                  	smpsJump		SAdv3_Options_Jump2, Target
+00023C F6               	dc.b	$F6
+                        	if (SAdv3_Options_Jump2<*)
+00023D                  		rom_ptr_z80(SAdv3_Options_Jump2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00023D BD81             	dc.w  (((((SAdv3_Options_Jump2+Target))<<8)&$FF00)|((((SAdv3_Options_Jump2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00023F                  SAdv3_Options_FM3:
+00023F                  	smpsPan		panLeft
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+00023F E080             		dc.b $E0,panLeft
+                        	endif
+000241                  	smpsFMvoice		$01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000241 EF01             		dc.b $EF,$01
+                        	endif
+                        	;!@ dc.b	nRst, $01, nG4, nRst, $05, nG4, $01, nRst
+000243 8001B8018005B801 	dc.b	nRst, $01, nG4, $01, nRst, $05, nG4, $01, nRst
+00024B 80
+00024C 05B6018002B601   	dc.b	$05, nF4, $01, nRst, $02, nF4, $01
+
+000253                  SAdv3_Options_Loop3:
+000253 8005B801         	dc.b	nRst, $05, nG4, $01
+000257                  	smpsLoop		$00, $03, SAdv3_Options_Loop3, Target
+000257 F7               	dc.b	$F7
+000258 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop3<*)
+00025A                  		rom_ptr_z80(SAdv3_Options_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00025A 5382             	dc.w  (((((SAdv3_Options_Loop3+Target))<<8)&$FF00)|((((SAdv3_Options_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00025C 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+000264 8005B8018005B801 	dc.b	nRst, $05, nG4, $01, nRst, $05, nG4, $01
+00026C 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+000274                  SAdv3_Options_Loop4:
+000274 8005B801         	dc.b	nRst, $05, nG4, $01
+000278                  	smpsLoop		$00, $03, SAdv3_Options_Loop4, Target
+000278 F7               	dc.b	$F7
+000279 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop4<*)
+00027B                  		rom_ptr_z80(SAdv3_Options_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00027B 7482             	dc.w  (((((SAdv3_Options_Loop4+Target))<<8)&$FF00)|((((SAdv3_Options_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00027D 8002B6018005BB01 	dc.b	nRst, $02, nF4, $01, nRst, $05, nBb4, $01
+000285 8005B8018005B801 	dc.b	nRst, $05, nG4, $01, nRst, $05, nG4, $01
+00028D 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+000295                  SAdv3_Options_Loop5:
+000295 8005B801         	dc.b	nRst, $05, nG4, $01
+000299                  	smpsLoop		$00, $03, SAdv3_Options_Loop5, Target
+000299 F7               	dc.b	$F7
+00029A 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop5<*)
+00029C                  		rom_ptr_z80(SAdv3_Options_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00029C 9582             	dc.w  (((((SAdv3_Options_Loop5+Target))<<8)&$FF00)|((((SAdv3_Options_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00029E 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+0002A6 8005B8018005B801 	dc.b	nRst, $05, nG4, $01, nRst, $05, nG4, $01
+0002AE 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+0002B6                  SAdv3_Options_Loop6:
+0002B6 8005B801         	dc.b	nRst, $05, nG4, $01
+0002BA                  	smpsLoop		$00, $03, SAdv3_Options_Loop6, Target
+0002BA F7               	dc.b	$F7
+0002BB 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop6<*)
+0002BD                  		rom_ptr_z80(SAdv3_Options_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002BD B682             	dc.w  (((((SAdv3_Options_Loop6+Target))<<8)&$FF00)|((((SAdv3_Options_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0002BF 8002B6018005BB01 	dc.b	nRst, $02, nF4, $01, nRst, $05, nBb4, $01
+
+0002C7                  SAdv3_Options_Loop9:
+0002C7 8005B4018005B401 	dc.b	nRst, $05, nEb4, $01, nRst, $05, nEb4, $01
+0002CF 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+0002D7                  SAdv3_Options_Loop7:
+0002D7 8005B401         	dc.b	nRst, $05, nEb4, $01
+0002DB                  	smpsLoop		$00, $03, SAdv3_Options_Loop7, Target
+0002DB F7               	dc.b	$F7
+0002DC 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop7<*)
+0002DE                  		rom_ptr_z80(SAdv3_Options_Loop7+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002DE D782             	dc.w  (((((SAdv3_Options_Loop7+Target))<<8)&$FF00)|((((SAdv3_Options_Loop7+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0002E0 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+0002E8 8005B4018005B401 	dc.b	nRst, $05, nEb4, $01, nRst, $05, nEb4, $01
+0002F0 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+0002F8                  SAdv3_Options_Loop8:
+0002F8 8005B401         	dc.b	nRst, $05, nEb4, $01
+0002FC                  	smpsLoop		$00, $03, SAdv3_Options_Loop8, Target
+0002FC F7               	dc.b	$F7
+0002FD 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop8<*)
+0002FF                  		rom_ptr_z80(SAdv3_Options_Loop8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002FF F882             	dc.w  (((((SAdv3_Options_Loop8+Target))<<8)&$FF00)|((((SAdv3_Options_Loop8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000301 8002B8018005B801 	dc.b	nRst, $02, nG4, $01, nRst, $05, nG4, $01
+000309                  	smpsLoop		$01, $02, SAdv3_Options_Loop9, Target
+000309 F7               	dc.b	$F7
+00030A 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop9<*)
+00030C                  		rom_ptr_z80(SAdv3_Options_Loop9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00030C C782             	dc.w  (((((SAdv3_Options_Loop9+Target))<<8)&$FF00)|((((SAdv3_Options_Loop9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00030E 8004             	dc.b	nRst, $04
+
+000310                  SAdv3_Options_Jump3:
+000310 8001B8           	dc.b	nRst, $01, nG4
+
+000313                  SAdv3_Options_Loop12:
+000313 8005B8018005B601 	dc.b	nRst, $05, nG4, $01, nRst, $05, nF4, $01
+00031B 8002B601         	dc.b	nRst, $02, nF4, $01
+
+00031F                  SAdv3_Options_Loop10:
+00031F 8005B801         	dc.b	nRst, $05, nG4, $01
+000323                  	smpsLoop		$00, $03, SAdv3_Options_Loop10, Target
+000323 F7               	dc.b	$F7
+000324 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop10<*)
+000326                  		rom_ptr_z80(SAdv3_Options_Loop10+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000326 1F83             	dc.w  (((((SAdv3_Options_Loop10+Target))<<8)&$FF00)|((((SAdv3_Options_Loop10+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000328 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+000330 8005B8018005B801 	dc.b	nRst, $05, nG4, $01, nRst, $05, nG4, $01
+000338 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+000340                  SAdv3_Options_Loop11:
+000340 8005B801         	dc.b	nRst, $05, nG4, $01
+000344                  	smpsLoop		$00, $03, SAdv3_Options_Loop11, Target
+000344 F7               	dc.b	$F7
+000345 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop11<*)
+000347                  		rom_ptr_z80(SAdv3_Options_Loop11+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000347 4083             	dc.w  (((((SAdv3_Options_Loop11+Target))<<8)&$FF00)|((((SAdv3_Options_Loop11+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000349 8002B6018005BB01 	dc.b	nRst, $02, nF4, $01, nRst, $05, nBb4, $01
+000351 8005B801         	dc.b	nRst, $05, nG4, $01
+000355                  	smpsLoop		$01, $03, SAdv3_Options_Loop12, Target
+000355 F7               	dc.b	$F7
+000356 0103             	dc.b	$01,$03
+                        	if (SAdv3_Options_Loop12<*)
+000358                  		rom_ptr_z80(SAdv3_Options_Loop12+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000358 1383             	dc.w  (((((SAdv3_Options_Loop12+Target))<<8)&$FF00)|((((SAdv3_Options_Loop12+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00035A 8005B8018005B601 	dc.b	nRst, $05, nG4, $01, nRst, $05, nF4, $01
+000362 8002B601         	dc.b	nRst, $02, nF4, $01
+
+000366                  SAdv3_Options_Loop13:
+000366 8005B801         	dc.b	nRst, $05, nG4, $01
+00036A                  	smpsLoop		$00, $03, SAdv3_Options_Loop13, Target
+00036A F7               	dc.b	$F7
+00036B 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop13<*)
+00036D                  		rom_ptr_z80(SAdv3_Options_Loop13+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00036D 6683             	dc.w  (((((SAdv3_Options_Loop13+Target))<<8)&$FF00)|((((SAdv3_Options_Loop13+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00036F 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+000377 8005B8018005B801 	dc.b	nRst, $05, nG4, $01, nRst, $05, nG4, $01
+00037F 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+000387                  SAdv3_Options_Loop14:
+000387 8005B801         	dc.b	nRst, $05, nG4, $01
+00038B                  	smpsLoop		$00, $03, SAdv3_Options_Loop14, Target
+00038B F7               	dc.b	$F7
+00038C 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop14<*)
+00038E                  		rom_ptr_z80(SAdv3_Options_Loop14+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00038E 8783             	dc.w  (((((SAdv3_Options_Loop14+Target))<<8)&$FF00)|((((SAdv3_Options_Loop14+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000390 8002B6018005BB01 	dc.b	nRst, $02, nF4, $01, nRst, $05, nBb4, $01
+
+000398                  SAdv3_Options_Loop17:
+000398 8005B4018005B401 	dc.b	nRst, $05, nEb4, $01, nRst, $05, nEb4, $01
+0003A0 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+0003A8                  SAdv3_Options_Loop15:
+0003A8 8005B401         	dc.b	nRst, $05, nEb4, $01
+0003AC                  	smpsLoop		$00, $03, SAdv3_Options_Loop15, Target
+0003AC F7               	dc.b	$F7
+0003AD 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop15<*)
+0003AF                  		rom_ptr_z80(SAdv3_Options_Loop15+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0003AF A883             	dc.w  (((((SAdv3_Options_Loop15+Target))<<8)&$FF00)|((((SAdv3_Options_Loop15+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0003B1 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+0003B9 8005B4018005B401 	dc.b	nRst, $05, nEb4, $01, nRst, $05, nEb4, $01
+0003C1 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+0003C9                  SAdv3_Options_Loop16:
+0003C9 8005B401         	dc.b	nRst, $05, nEb4, $01
+0003CD                  	smpsLoop		$00, $03, SAdv3_Options_Loop16, Target
+0003CD F7               	dc.b	$F7
+0003CE 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop16<*)
+0003D0                  		rom_ptr_z80(SAdv3_Options_Loop16+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0003D0 C983             	dc.w  (((((SAdv3_Options_Loop16+Target))<<8)&$FF00)|((((SAdv3_Options_Loop16+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0003D2 8002B8018005B801 	dc.b	nRst, $02, nG4, $01, nRst, $05, nG4, $01
+0003DA                  	smpsLoop		$01, $02, SAdv3_Options_Loop17, Target
+0003DA F7               	dc.b	$F7
+0003DB 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop17<*)
+0003DD                  		rom_ptr_z80(SAdv3_Options_Loop17+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0003DD 9883             	dc.w  (((((SAdv3_Options_Loop17+Target))<<8)&$FF00)|((((SAdv3_Options_Loop17+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0003DF 8004             	dc.b	nRst, $04
+0003E1                  	smpsJump		SAdv3_Options_Jump3, Target
+0003E1 F6               	dc.b	$F6
+                        	if (SAdv3_Options_Jump3<*)
+0003E2                  		rom_ptr_z80(SAdv3_Options_Jump3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0003E2 1083             	dc.w  (((((SAdv3_Options_Jump3+Target))<<8)&$FF00)|((((SAdv3_Options_Jump3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0003E4                  SAdv3_Options_FM4:
+0003E4                  	smpsPan		panRight
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+0003E4 E040             		dc.b $E0,panRight
+                        	endif
+0003E6                  	smpsFMvoice		$01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0003E6 EF01             		dc.b $EF,$01
+                        	endif
+                        	;!@ dc.b	nRst, $01, nC4, nRst, $05, nC4, $01, nRst
+0003E8 8001B1018005B101 	dc.b	nRst, $01, nC4, $01, nRst, $05, nC4, $01, nRst
+0003F0 80
+0003F1 05AF018002AF01   	dc.b	$05, nBb3, $01, nRst, $02, nBb3, $01
+
+0003F8                  SAdv3_Options_Loop18:
+0003F8 8005B101         	dc.b	nRst, $05, nC4, $01
+0003FC                  	smpsLoop		$00, $03, SAdv3_Options_Loop18, Target
+0003FC F7               	dc.b	$F7
+0003FD 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop18<*)
+0003FF                  		rom_ptr_z80(SAdv3_Options_Loop18+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0003FF F883             	dc.w  (((((SAdv3_Options_Loop18+Target))<<8)&$FF00)|((((SAdv3_Options_Loop18+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000401 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+000409 8005B1018005B101 	dc.b	nRst, $05, nC4, $01, nRst, $05, nC4, $01
+000411 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+000419                  SAdv3_Options_Loop19:
+000419 8005B101         	dc.b	nRst, $05, nC4, $01
+00041D                  	smpsLoop		$00, $03, SAdv3_Options_Loop19, Target
+00041D F7               	dc.b	$F7
+00041E 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop19<*)
+000420                  		rom_ptr_z80(SAdv3_Options_Loop19+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000420 1984             	dc.w  (((((SAdv3_Options_Loop19+Target))<<8)&$FF00)|((((SAdv3_Options_Loop19+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000422 8002AF018005B401 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nEb4, $01
+00042A 8005B1018005B101 	dc.b	nRst, $05, nC4, $01, nRst, $05, nC4, $01
+000432 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+00043A                  SAdv3_Options_Loop20:
+00043A 8005B101         	dc.b	nRst, $05, nC4, $01
+00043E                  	smpsLoop		$00, $03, SAdv3_Options_Loop20, Target
+00043E F7               	dc.b	$F7
+00043F 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop20<*)
+000441                  		rom_ptr_z80(SAdv3_Options_Loop20+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000441 3A84             	dc.w  (((((SAdv3_Options_Loop20+Target))<<8)&$FF00)|((((SAdv3_Options_Loop20+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000443 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+00044B 8005B1018005B101 	dc.b	nRst, $05, nC4, $01, nRst, $05, nC4, $01
+000453 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+00045B                  SAdv3_Options_Loop21:
+00045B 8005B101         	dc.b	nRst, $05, nC4, $01
+00045F                  	smpsLoop		$00, $03, SAdv3_Options_Loop21, Target
+00045F F7               	dc.b	$F7
+000460 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop21<*)
+000462                  		rom_ptr_z80(SAdv3_Options_Loop21+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000462 5B84             	dc.w  (((((SAdv3_Options_Loop21+Target))<<8)&$FF00)|((((SAdv3_Options_Loop21+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000464 8002AF018005B401 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nEb4, $01
+
+00046C                  SAdv3_Options_Loop24:
+00046C 8005AD018005AD01 	dc.b	nRst, $05, nAb3, $01, nRst, $05, nAb3, $01
+000474 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+00047C                  SAdv3_Options_Loop22:
+00047C 8005AD01         	dc.b	nRst, $05, nAb3, $01
+000480                  	smpsLoop		$00, $03, SAdv3_Options_Loop22, Target
+000480 F7               	dc.b	$F7
+000481 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop22<*)
+000483                  		rom_ptr_z80(SAdv3_Options_Loop22+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000483 7C84             	dc.w  (((((SAdv3_Options_Loop22+Target))<<8)&$FF00)|((((SAdv3_Options_Loop22+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000485 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+00048D 8005AD018005AD01 	dc.b	nRst, $05, nAb3, $01, nRst, $05, nAb3, $01
+000495 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+00049D                  SAdv3_Options_Loop23:
+00049D 8005AD01         	dc.b	nRst, $05, nAb3, $01
+0004A1                  	smpsLoop		$00, $03, SAdv3_Options_Loop23, Target
+0004A1 F7               	dc.b	$F7
+0004A2 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop23<*)
+0004A4                  		rom_ptr_z80(SAdv3_Options_Loop23+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0004A4 9D84             	dc.w  (((((SAdv3_Options_Loop23+Target))<<8)&$FF00)|((((SAdv3_Options_Loop23+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0004A6 8002B1018005B101 	dc.b	nRst, $02, nC4, $01, nRst, $05, nC4, $01
+0004AE                  	smpsLoop		$01, $02, SAdv3_Options_Loop24, Target
+0004AE F7               	dc.b	$F7
+0004AF 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop24<*)
+0004B1                  		rom_ptr_z80(SAdv3_Options_Loop24+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0004B1 6C84             	dc.w  (((((SAdv3_Options_Loop24+Target))<<8)&$FF00)|((((SAdv3_Options_Loop24+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0004B3 8004             	dc.b	nRst, $04
+
+0004B5                  SAdv3_Options_Jump4:
+0004B5 8001B1           	dc.b	nRst, $01, nC4
+
+0004B8                  SAdv3_Options_Loop27:
+0004B8 8005B1018005AF01 	dc.b	nRst, $05, nC4, $01, nRst, $05, nBb3, $01
+0004C0 8002AF01         	dc.b	nRst, $02, nBb3, $01
+
+0004C4                  SAdv3_Options_Loop25:
+0004C4 8005B101         	dc.b	nRst, $05, nC4, $01
+0004C8                  	smpsLoop		$00, $03, SAdv3_Options_Loop25, Target
+0004C8 F7               	dc.b	$F7
+0004C9 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop25<*)
+0004CB                  		rom_ptr_z80(SAdv3_Options_Loop25+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0004CB C484             	dc.w  (((((SAdv3_Options_Loop25+Target))<<8)&$FF00)|((((SAdv3_Options_Loop25+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0004CD 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+0004D5 8005B1018005B101 	dc.b	nRst, $05, nC4, $01, nRst, $05, nC4, $01
+0004DD 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+0004E5                  SAdv3_Options_Loop26:
+0004E5 8005B101         	dc.b	nRst, $05, nC4, $01
+0004E9                  	smpsLoop		$00, $03, SAdv3_Options_Loop26, Target
+0004E9 F7               	dc.b	$F7
+0004EA 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop26<*)
+0004EC                  		rom_ptr_z80(SAdv3_Options_Loop26+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0004EC E584             	dc.w  (((((SAdv3_Options_Loop26+Target))<<8)&$FF00)|((((SAdv3_Options_Loop26+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0004EE 8002AF018005B401 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nEb4, $01
+0004F6 8005B101         	dc.b	nRst, $05, nC4, $01
+0004FA                  	smpsLoop		$01, $03, SAdv3_Options_Loop27, Target
+0004FA F7               	dc.b	$F7
+0004FB 0103             	dc.b	$01,$03
+                        	if (SAdv3_Options_Loop27<*)
+0004FD                  		rom_ptr_z80(SAdv3_Options_Loop27+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0004FD B884             	dc.w  (((((SAdv3_Options_Loop27+Target))<<8)&$FF00)|((((SAdv3_Options_Loop27+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0004FF 8005B1018005AF01 	dc.b	nRst, $05, nC4, $01, nRst, $05, nBb3, $01
+000507 8002AF01         	dc.b	nRst, $02, nBb3, $01
+
+00050B                  SAdv3_Options_Loop28:
+00050B 8005B101         	dc.b	nRst, $05, nC4, $01
+00050F                  	smpsLoop		$00, $03, SAdv3_Options_Loop28, Target
+00050F F7               	dc.b	$F7
+000510 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop28<*)
+000512                  		rom_ptr_z80(SAdv3_Options_Loop28+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000512 0B85             	dc.w  (((((SAdv3_Options_Loop28+Target))<<8)&$FF00)|((((SAdv3_Options_Loop28+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000514 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+00051C 8005B1018005B101 	dc.b	nRst, $05, nC4, $01, nRst, $05, nC4, $01
+000524 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+00052C                  SAdv3_Options_Loop29:
+00052C 8005B101         	dc.b	nRst, $05, nC4, $01
+000530                  	smpsLoop		$00, $03, SAdv3_Options_Loop29, Target
+000530 F7               	dc.b	$F7
+000531 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop29<*)
+000533                  		rom_ptr_z80(SAdv3_Options_Loop29+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000533 2C85             	dc.w  (((((SAdv3_Options_Loop29+Target))<<8)&$FF00)|((((SAdv3_Options_Loop29+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000535 8002AF018005B401 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nEb4, $01
+
+00053D                  SAdv3_Options_Loop32:
+00053D 8005AD018005AD01 	dc.b	nRst, $05, nAb3, $01, nRst, $05, nAb3, $01
+000545 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+00054D                  SAdv3_Options_Loop30:
+00054D 8005AD01         	dc.b	nRst, $05, nAb3, $01
+000551                  	smpsLoop		$00, $03, SAdv3_Options_Loop30, Target
+000551 F7               	dc.b	$F7
+000552 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop30<*)
+000554                  		rom_ptr_z80(SAdv3_Options_Loop30+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000554 4D85             	dc.w  (((((SAdv3_Options_Loop30+Target))<<8)&$FF00)|((((SAdv3_Options_Loop30+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000556 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+00055E 8005AD018005AD01 	dc.b	nRst, $05, nAb3, $01, nRst, $05, nAb3, $01
+000566 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+00056E                  SAdv3_Options_Loop31:
+00056E 8005AD01         	dc.b	nRst, $05, nAb3, $01
+000572                  	smpsLoop		$00, $03, SAdv3_Options_Loop31, Target
+000572 F7               	dc.b	$F7
+000573 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop31<*)
+000575                  		rom_ptr_z80(SAdv3_Options_Loop31+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000575 6E85             	dc.w  (((((SAdv3_Options_Loop31+Target))<<8)&$FF00)|((((SAdv3_Options_Loop31+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000577 8002B1018005B101 	dc.b	nRst, $02, nC4, $01, nRst, $05, nC4, $01
+00057F                  	smpsLoop		$01, $02, SAdv3_Options_Loop32, Target
+00057F F7               	dc.b	$F7
+000580 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop32<*)
+000582                  		rom_ptr_z80(SAdv3_Options_Loop32+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000582 3D85             	dc.w  (((((SAdv3_Options_Loop32+Target))<<8)&$FF00)|((((SAdv3_Options_Loop32+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000584 8004             	dc.b	nRst, $04
+000586                  	smpsJump		SAdv3_Options_Jump4, Target
+000586 F6               	dc.b	$F6
+                        	if (SAdv3_Options_Jump4<*)
+000587                  		rom_ptr_z80(SAdv3_Options_Jump4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000587 B584             	dc.w  (((((SAdv3_Options_Jump4+Target))<<8)&$FF00)|((((SAdv3_Options_Jump4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000589                  SAdv3_Options_FM5:
+000589                  	smpsPan		panLeft
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+000589 E080             		dc.b $E0,panLeft
+                        	endif
+00058B                  	smpsFMvoice		$02
+                        	;if song<>""
+                        	if 1==2
+                        	else
+00058B EF02             		dc.b $EF,$02
+                        	endif
+                        	;!@ dc.b	nRst, $01, nG4, nRst, $05, nG4, $01, nRst
+00058D 8001B8018005B801 	dc.b	nRst, $01, nG4, $01, nRst, $05, nG4, $01, nRst
+000595 80
+000596 05B6018002B601   	dc.b	$05, nF4, $01, nRst, $02, nF4, $01
+
+00059D                  SAdv3_Options_Loop33:
+00059D 8005B801         	dc.b	nRst, $05, nG4, $01
+0005A1                  	smpsLoop		$00, $03, SAdv3_Options_Loop33, Target
+0005A1 F7               	dc.b	$F7
+0005A2 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop33<*)
+0005A4                  		rom_ptr_z80(SAdv3_Options_Loop33+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005A4 9D85             	dc.w  (((((SAdv3_Options_Loop33+Target))<<8)&$FF00)|((((SAdv3_Options_Loop33+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0005A6 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+0005AE 8005B8018005B801 	dc.b	nRst, $05, nG4, $01, nRst, $05, nG4, $01
+0005B6 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+0005BE                  SAdv3_Options_Loop34:
+0005BE 8005B801         	dc.b	nRst, $05, nG4, $01
+0005C2                  	smpsLoop		$00, $03, SAdv3_Options_Loop34, Target
+0005C2 F7               	dc.b	$F7
+0005C3 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop34<*)
+0005C5                  		rom_ptr_z80(SAdv3_Options_Loop34+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005C5 BE85             	dc.w  (((((SAdv3_Options_Loop34+Target))<<8)&$FF00)|((((SAdv3_Options_Loop34+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0005C7 8002B6018005BB01 	dc.b	nRst, $02, nF4, $01, nRst, $05, nBb4, $01
+0005CF 8005B8018005B801 	dc.b	nRst, $05, nG4, $01, nRst, $05, nG4, $01
+0005D7 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+0005DF                  SAdv3_Options_Loop35:
+0005DF 8005B801         	dc.b	nRst, $05, nG4, $01
+0005E3                  	smpsLoop		$00, $03, SAdv3_Options_Loop35, Target
+0005E3 F7               	dc.b	$F7
+0005E4 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop35<*)
+0005E6                  		rom_ptr_z80(SAdv3_Options_Loop35+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005E6 DF85             	dc.w  (((((SAdv3_Options_Loop35+Target))<<8)&$FF00)|((((SAdv3_Options_Loop35+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0005E8 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+0005F0 8005B8018005B801 	dc.b	nRst, $05, nG4, $01, nRst, $05, nG4, $01
+0005F8 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+000600                  SAdv3_Options_Loop36:
+000600 8005B801         	dc.b	nRst, $05, nG4, $01
+000604                  	smpsLoop		$00, $03, SAdv3_Options_Loop36, Target
+000604 F7               	dc.b	$F7
+000605 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop36<*)
+000607                  		rom_ptr_z80(SAdv3_Options_Loop36+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000607 0086             	dc.w  (((((SAdv3_Options_Loop36+Target))<<8)&$FF00)|((((SAdv3_Options_Loop36+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000609 8002B6018005BB01 	dc.b	nRst, $02, nF4, $01, nRst, $05, nBb4, $01
+
+000611                  SAdv3_Options_Loop39:
+000611 8005B4018005B401 	dc.b	nRst, $05, nEb4, $01, nRst, $05, nEb4, $01
+000619 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+000621                  SAdv3_Options_Loop37:
+000621 8005B401         	dc.b	nRst, $05, nEb4, $01
+000625                  	smpsLoop		$00, $03, SAdv3_Options_Loop37, Target
+000625 F7               	dc.b	$F7
+000626 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop37<*)
+000628                  		rom_ptr_z80(SAdv3_Options_Loop37+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000628 2186             	dc.w  (((((SAdv3_Options_Loop37+Target))<<8)&$FF00)|((((SAdv3_Options_Loop37+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00062A 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+000632 8005B4018005B401 	dc.b	nRst, $05, nEb4, $01, nRst, $05, nEb4, $01
+00063A 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+000642                  SAdv3_Options_Loop38:
+000642 8005B401         	dc.b	nRst, $05, nEb4, $01
+000646                  	smpsLoop		$00, $03, SAdv3_Options_Loop38, Target
+000646 F7               	dc.b	$F7
+000647 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop38<*)
+000649                  		rom_ptr_z80(SAdv3_Options_Loop38+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000649 4286             	dc.w  (((((SAdv3_Options_Loop38+Target))<<8)&$FF00)|((((SAdv3_Options_Loop38+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00064B 8002B8018005B801 	dc.b	nRst, $02, nG4, $01, nRst, $05, nG4, $01
+000653                  	smpsLoop		$01, $02, SAdv3_Options_Loop39, Target
+000653 F7               	dc.b	$F7
+000654 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop39<*)
+000656                  		rom_ptr_z80(SAdv3_Options_Loop39+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000656 1186             	dc.w  (((((SAdv3_Options_Loop39+Target))<<8)&$FF00)|((((SAdv3_Options_Loop39+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000658 8004             	dc.b	nRst, $04
+
+00065A                  SAdv3_Options_Jump5:
+00065A 8001B8           	dc.b	nRst, $01, nG4
+
+00065D                  SAdv3_Options_Loop42:
+00065D 8005B8018005B601 	dc.b	nRst, $05, nG4, $01, nRst, $05, nF4, $01
+000665 8002B601         	dc.b	nRst, $02, nF4, $01
+
+000669                  SAdv3_Options_Loop40:
+000669 8005B801         	dc.b	nRst, $05, nG4, $01
+00066D                  	smpsLoop		$00, $03, SAdv3_Options_Loop40, Target
+00066D F7               	dc.b	$F7
+00066E 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop40<*)
+000670                  		rom_ptr_z80(SAdv3_Options_Loop40+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000670 6986             	dc.w  (((((SAdv3_Options_Loop40+Target))<<8)&$FF00)|((((SAdv3_Options_Loop40+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000672 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+00067A 8005B8018005B801 	dc.b	nRst, $05, nG4, $01, nRst, $05, nG4, $01
+000682 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+00068A                  SAdv3_Options_Loop41:
+00068A 8005B801         	dc.b	nRst, $05, nG4, $01
+00068E                  	smpsLoop		$00, $03, SAdv3_Options_Loop41, Target
+00068E F7               	dc.b	$F7
+00068F 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop41<*)
+000691                  		rom_ptr_z80(SAdv3_Options_Loop41+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000691 8A86             	dc.w  (((((SAdv3_Options_Loop41+Target))<<8)&$FF00)|((((SAdv3_Options_Loop41+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000693 8002B6018005BB01 	dc.b	nRst, $02, nF4, $01, nRst, $05, nBb4, $01
+00069B 8005B801         	dc.b	nRst, $05, nG4, $01
+00069F                  	smpsLoop		$01, $03, SAdv3_Options_Loop42, Target
+00069F F7               	dc.b	$F7
+0006A0 0103             	dc.b	$01,$03
+                        	if (SAdv3_Options_Loop42<*)
+0006A2                  		rom_ptr_z80(SAdv3_Options_Loop42+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006A2 5D86             	dc.w  (((((SAdv3_Options_Loop42+Target))<<8)&$FF00)|((((SAdv3_Options_Loop42+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0006A4 8005B8018005B601 	dc.b	nRst, $05, nG4, $01, nRst, $05, nF4, $01
+0006AC 8002B601         	dc.b	nRst, $02, nF4, $01
+
+0006B0                  SAdv3_Options_Loop43:
+0006B0 8005B801         	dc.b	nRst, $05, nG4, $01
+0006B4                  	smpsLoop		$00, $03, SAdv3_Options_Loop43, Target
+0006B4 F7               	dc.b	$F7
+0006B5 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop43<*)
+0006B7                  		rom_ptr_z80(SAdv3_Options_Loop43+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006B7 B086             	dc.w  (((((SAdv3_Options_Loop43+Target))<<8)&$FF00)|((((SAdv3_Options_Loop43+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0006B9 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+0006C1 8005B8018005B801 	dc.b	nRst, $05, nG4, $01, nRst, $05, nG4, $01
+0006C9 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+0006D1                  SAdv3_Options_Loop44:
+0006D1 8005B801         	dc.b	nRst, $05, nG4, $01
+0006D5                  	smpsLoop		$00, $03, SAdv3_Options_Loop44, Target
+0006D5 F7               	dc.b	$F7
+0006D6 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop44<*)
+0006D8                  		rom_ptr_z80(SAdv3_Options_Loop44+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006D8 D186             	dc.w  (((((SAdv3_Options_Loop44+Target))<<8)&$FF00)|((((SAdv3_Options_Loop44+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0006DA 8002B6018005BB01 	dc.b	nRst, $02, nF4, $01, nRst, $05, nBb4, $01
+
+0006E2                  SAdv3_Options_Loop47:
+0006E2 8005B4018005B401 	dc.b	nRst, $05, nEb4, $01, nRst, $05, nEb4, $01
+0006EA 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+0006F2                  SAdv3_Options_Loop45:
+0006F2 8005B401         	dc.b	nRst, $05, nEb4, $01
+0006F6                  	smpsLoop		$00, $03, SAdv3_Options_Loop45, Target
+0006F6 F7               	dc.b	$F7
+0006F7 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop45<*)
+0006F9                  		rom_ptr_z80(SAdv3_Options_Loop45+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006F9 F286             	dc.w  (((((SAdv3_Options_Loop45+Target))<<8)&$FF00)|((((SAdv3_Options_Loop45+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0006FB 8002B6018005B601 	dc.b	nRst, $02, nF4, $01, nRst, $05, nF4, $01
+000703 8005B4018005B401 	dc.b	nRst, $05, nEb4, $01, nRst, $05, nEb4, $01
+00070B 8005B6018002B601 	dc.b	nRst, $05, nF4, $01, nRst, $02, nF4, $01
+
+000713                  SAdv3_Options_Loop46:
+000713 8005B401         	dc.b	nRst, $05, nEb4, $01
+000717                  	smpsLoop		$00, $03, SAdv3_Options_Loop46, Target
+000717 F7               	dc.b	$F7
+000718 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop46<*)
+00071A                  		rom_ptr_z80(SAdv3_Options_Loop46+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00071A 1387             	dc.w  (((((SAdv3_Options_Loop46+Target))<<8)&$FF00)|((((SAdv3_Options_Loop46+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00071C 8002B8018005B801 	dc.b	nRst, $02, nG4, $01, nRst, $05, nG4, $01
+000724                  	smpsLoop		$01, $02, SAdv3_Options_Loop47, Target
+000724 F7               	dc.b	$F7
+000725 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop47<*)
+000727                  		rom_ptr_z80(SAdv3_Options_Loop47+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000727 E286             	dc.w  (((((SAdv3_Options_Loop47+Target))<<8)&$FF00)|((((SAdv3_Options_Loop47+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000729 8004             	dc.b	nRst, $04
+00072B                  	smpsJump		SAdv3_Options_Jump5, Target
+00072B F6               	dc.b	$F6
+                        	if (SAdv3_Options_Jump5<*)
+00072C                  		rom_ptr_z80(SAdv3_Options_Jump5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00072C 5A86             	dc.w  (((((SAdv3_Options_Jump5+Target))<<8)&$FF00)|((((SAdv3_Options_Jump5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00072E                  SAdv3_Options_FM6:
+00072E                  	smpsPan		panRight
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+00072E E040             		dc.b $E0,panRight
+                        	endif
+000730                  	smpsFMvoice		$02
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000730 EF02             		dc.b $EF,$02
+                        	endif
+                        	;!@ dc.b	nRst, $01, nC4, nRst, $05, nC4, $01, nRst
+000732 8001B1018005B101 	dc.b	nRst, $01, nC4, $01, nRst, $05, nC4, $01, nRst
+00073A 80
+00073B 05AF018002AF01   	dc.b	$05, nBb3, $01, nRst, $02, nBb3, $01
+
+000742                  SAdv3_Options_Loop48:
+000742 8005B101         	dc.b	nRst, $05, nC4, $01
+000746                  	smpsLoop		$00, $03, SAdv3_Options_Loop48, Target
+000746 F7               	dc.b	$F7
+000747 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop48<*)
+000749                  		rom_ptr_z80(SAdv3_Options_Loop48+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000749 4287             	dc.w  (((((SAdv3_Options_Loop48+Target))<<8)&$FF00)|((((SAdv3_Options_Loop48+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00074B 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+000753 8005B1018005B101 	dc.b	nRst, $05, nC4, $01, nRst, $05, nC4, $01
+00075B 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+000763                  SAdv3_Options_Loop49:
+000763 8005B101         	dc.b	nRst, $05, nC4, $01
+000767                  	smpsLoop		$00, $03, SAdv3_Options_Loop49, Target
+000767 F7               	dc.b	$F7
+000768 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop49<*)
+00076A                  		rom_ptr_z80(SAdv3_Options_Loop49+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00076A 6387             	dc.w  (((((SAdv3_Options_Loop49+Target))<<8)&$FF00)|((((SAdv3_Options_Loop49+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00076C 8002AF018005B401 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nEb4, $01
+000774 8005B1018005B101 	dc.b	nRst, $05, nC4, $01, nRst, $05, nC4, $01
+00077C 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+000784                  SAdv3_Options_Loop50:
+000784 8005B101         	dc.b	nRst, $05, nC4, $01
+000788                  	smpsLoop		$00, $03, SAdv3_Options_Loop50, Target
+000788 F7               	dc.b	$F7
+000789 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop50<*)
+00078B                  		rom_ptr_z80(SAdv3_Options_Loop50+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00078B 8487             	dc.w  (((((SAdv3_Options_Loop50+Target))<<8)&$FF00)|((((SAdv3_Options_Loop50+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00078D 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+000795 8005B1018005B101 	dc.b	nRst, $05, nC4, $01, nRst, $05, nC4, $01
+00079D 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+0007A5                  SAdv3_Options_Loop51:
+0007A5 8005B101         	dc.b	nRst, $05, nC4, $01
+0007A9                  	smpsLoop		$00, $03, SAdv3_Options_Loop51, Target
+0007A9 F7               	dc.b	$F7
+0007AA 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop51<*)
+0007AC                  		rom_ptr_z80(SAdv3_Options_Loop51+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007AC A587             	dc.w  (((((SAdv3_Options_Loop51+Target))<<8)&$FF00)|((((SAdv3_Options_Loop51+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0007AE 8002AF018005B401 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nEb4, $01
+
+0007B6                  SAdv3_Options_Loop54:
+0007B6 8005AD018005AD01 	dc.b	nRst, $05, nAb3, $01, nRst, $05, nAb3, $01
+0007BE 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+0007C6                  SAdv3_Options_Loop52:
+0007C6 8005AD01         	dc.b	nRst, $05, nAb3, $01
+0007CA                  	smpsLoop		$00, $03, SAdv3_Options_Loop52, Target
+0007CA F7               	dc.b	$F7
+0007CB 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop52<*)
+0007CD                  		rom_ptr_z80(SAdv3_Options_Loop52+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007CD C687             	dc.w  (((((SAdv3_Options_Loop52+Target))<<8)&$FF00)|((((SAdv3_Options_Loop52+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0007CF 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+0007D7 8005AD018005AD01 	dc.b	nRst, $05, nAb3, $01, nRst, $05, nAb3, $01
+0007DF 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+0007E7                  SAdv3_Options_Loop53:
+0007E7 8005AD01         	dc.b	nRst, $05, nAb3, $01
+0007EB                  	smpsLoop		$00, $03, SAdv3_Options_Loop53, Target
+0007EB F7               	dc.b	$F7
+0007EC 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop53<*)
+0007EE                  		rom_ptr_z80(SAdv3_Options_Loop53+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007EE E787             	dc.w  (((((SAdv3_Options_Loop53+Target))<<8)&$FF00)|((((SAdv3_Options_Loop53+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0007F0 8002B1018005B101 	dc.b	nRst, $02, nC4, $01, nRst, $05, nC4, $01
+0007F8                  	smpsLoop		$01, $02, SAdv3_Options_Loop54, Target
+0007F8 F7               	dc.b	$F7
+0007F9 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop54<*)
+0007FB                  		rom_ptr_z80(SAdv3_Options_Loop54+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007FB B687             	dc.w  (((((SAdv3_Options_Loop54+Target))<<8)&$FF00)|((((SAdv3_Options_Loop54+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0007FD 8004             	dc.b	nRst, $04
+
+0007FF                  SAdv3_Options_Jump6:
+                        	;!@ dc.b	nRst, $01, nC4
+0007FF 8001B101         	dc.b	nRst, $01, nC4, $01
+
+000803                  SAdv3_Options_Loop57:
+000803 8005B1018005AF01 	dc.b	nRst, $05, nC4, $01, nRst, $05, nBb3, $01
+00080B 8002AF01         	dc.b	nRst, $02, nBb3, $01
+
+00080F                  SAdv3_Options_Loop55:
+00080F 8005B101         	dc.b	nRst, $05, nC4, $01
+000813                  	smpsLoop		$00, $03, SAdv3_Options_Loop55, Target
+000813 F7               	dc.b	$F7
+000814 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop55<*)
+000816                  		rom_ptr_z80(SAdv3_Options_Loop55+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000816 0F88             	dc.w  (((((SAdv3_Options_Loop55+Target))<<8)&$FF00)|((((SAdv3_Options_Loop55+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000818 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+000820 8005B1018005B101 	dc.b	nRst, $05, nC4, $01, nRst, $05, nC4, $01
+000828 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+000830                  SAdv3_Options_Loop56:
+000830 8005B101         	dc.b	nRst, $05, nC4, $01
+000834                  	smpsLoop		$00, $03, SAdv3_Options_Loop56, Target
+000834 F7               	dc.b	$F7
+000835 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop56<*)
+000837                  		rom_ptr_z80(SAdv3_Options_Loop56+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000837 3088             	dc.w  (((((SAdv3_Options_Loop56+Target))<<8)&$FF00)|((((SAdv3_Options_Loop56+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000839 8002AF018005B401 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nEb4, $01
+000841 8005B101         	dc.b	nRst, $05, nC4, $01
+000845                  	smpsLoop		$01, $03, SAdv3_Options_Loop57, Target
+000845 F7               	dc.b	$F7
+000846 0103             	dc.b	$01,$03
+                        	if (SAdv3_Options_Loop57<*)
+000848                  		rom_ptr_z80(SAdv3_Options_Loop57+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000848 0388             	dc.w  (((((SAdv3_Options_Loop57+Target))<<8)&$FF00)|((((SAdv3_Options_Loop57+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00084A 8005B1018005AF01 	dc.b	nRst, $05, nC4, $01, nRst, $05, nBb3, $01
+000852 8002AF01         	dc.b	nRst, $02, nBb3, $01
+
+000856                  SAdv3_Options_Loop58:
+000856 8005B101         	dc.b	nRst, $05, nC4, $01
+00085A                  	smpsLoop		$00, $03, SAdv3_Options_Loop58, Target
+00085A F7               	dc.b	$F7
+00085B 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop58<*)
+00085D                  		rom_ptr_z80(SAdv3_Options_Loop58+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00085D 5688             	dc.w  (((((SAdv3_Options_Loop58+Target))<<8)&$FF00)|((((SAdv3_Options_Loop58+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00085F 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+000867 8005B1018005B101 	dc.b	nRst, $05, nC4, $01, nRst, $05, nC4, $01
+00086F 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+000877                  SAdv3_Options_Loop59:
+000877 8005B101         	dc.b	nRst, $05, nC4, $01
+00087B                  	smpsLoop		$00, $03, SAdv3_Options_Loop59, Target
+00087B F7               	dc.b	$F7
+00087C 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop59<*)
+00087E                  		rom_ptr_z80(SAdv3_Options_Loop59+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00087E 7788             	dc.w  (((((SAdv3_Options_Loop59+Target))<<8)&$FF00)|((((SAdv3_Options_Loop59+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000880 8002AF018005B401 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nEb4, $01
+
+000888                  SAdv3_Options_Loop62:
+000888 8005AD018005AD01 	dc.b	nRst, $05, nAb3, $01, nRst, $05, nAb3, $01
+000890 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+000898                  SAdv3_Options_Loop60:
+000898 8005AD01         	dc.b	nRst, $05, nAb3, $01
+00089C                  	smpsLoop		$00, $03, SAdv3_Options_Loop60, Target
+00089C F7               	dc.b	$F7
+00089D 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop60<*)
+00089F                  		rom_ptr_z80(SAdv3_Options_Loop60+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00089F 9888             	dc.w  (((((SAdv3_Options_Loop60+Target))<<8)&$FF00)|((((SAdv3_Options_Loop60+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0008A1 8002AF018005AF01 	dc.b	nRst, $02, nBb3, $01, nRst, $05, nBb3, $01
+0008A9 8005AD018005AD01 	dc.b	nRst, $05, nAb3, $01, nRst, $05, nAb3, $01
+0008B1 8005AF018002AF01 	dc.b	nRst, $05, nBb3, $01, nRst, $02, nBb3, $01
+
+0008B9                  SAdv3_Options_Loop61:
+0008B9 8005AD01         	dc.b	nRst, $05, nAb3, $01
+0008BD                  	smpsLoop		$00, $03, SAdv3_Options_Loop61, Target
+0008BD F7               	dc.b	$F7
+0008BE 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop61<*)
+0008C0                  		rom_ptr_z80(SAdv3_Options_Loop61+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008C0 B988             	dc.w  (((((SAdv3_Options_Loop61+Target))<<8)&$FF00)|((((SAdv3_Options_Loop61+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0008C2 8002B1018005B101 	dc.b	nRst, $02, nC4, $01, nRst, $05, nC4, $01
+0008CA                  	smpsLoop		$01, $02, SAdv3_Options_Loop62, Target
+0008CA F7               	dc.b	$F7
+0008CB 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop62<*)
+0008CD                  		rom_ptr_z80(SAdv3_Options_Loop62+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008CD 8888             	dc.w  (((((SAdv3_Options_Loop62+Target))<<8)&$FF00)|((((SAdv3_Options_Loop62+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0008CF 8004             	dc.b	nRst, $04
+0008D1                  	smpsJump		SAdv3_Options_Jump6, Target
+0008D1 F6               	dc.b	$F6
+                        	if (SAdv3_Options_Jump6<*)
+0008D2                  		rom_ptr_z80(SAdv3_Options_Jump6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008D2 FF87             	dc.w  (((((SAdv3_Options_Jump6+Target))<<8)&$FF00)|((((SAdv3_Options_Jump6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0008D4                  SAdv3_Options_PSG1:
+                        	;!@ dc.b	nRst, $01, nC0, nRst, $02
+0008D4 800181018002     	dc.b	nRst, $01, nC0, $01, nRst, $02
+
+0008DA                  SAdv3_Options_Loop64:
+0008DA 81018005         	dc.b	nC0, $01, nRst, $05
+
+0008DE                  SAdv3_Options_Loop63:
+0008DE 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+0008E6                  	smpsLoop		$00, $02, SAdv3_Options_Loop63, Target
+0008E6 F7               	dc.b	$F7
+0008E7 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop63<*)
+0008E9                  		rom_ptr_z80(SAdv3_Options_Loop63+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008E9 DE88             	dc.w  (((((SAdv3_Options_Loop63+Target))<<8)&$FF00)|((((SAdv3_Options_Loop63+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0008EB                  	smpsLoop		$01, $02, SAdv3_Options_Loop64, Target
+0008EB F7               	dc.b	$F7
+0008EC 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop64<*)
+0008EE                  		rom_ptr_z80(SAdv3_Options_Loop64+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008EE DA88             	dc.w  (((((SAdv3_Options_Loop64+Target))<<8)&$FF00)|((((SAdv3_Options_Loop64+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0008F0                  SAdv3_Options_Loop65:
+0008F0 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+0008F8                  	smpsLoop		$00, $02, SAdv3_Options_Loop65, Target
+0008F8 F7               	dc.b	$F7
+0008F9 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop65<*)
+0008FB                  		rom_ptr_z80(SAdv3_Options_Loop65+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008FB F088             	dc.w  (((((SAdv3_Options_Loop65+Target))<<8)&$FF00)|((((SAdv3_Options_Loop65+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0008FD 81018002         	dc.b	nC0, $01, nRst, $02
+
+000901                  SAdv3_Options_Loop66:
+000901 8101800281018005 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $05
+000909                  	smpsLoop		$00, $02, SAdv3_Options_Loop66, Target
+000909 F7               	dc.b	$F7
+00090A 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop66<*)
+00090C                  		rom_ptr_z80(SAdv3_Options_Loop66+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00090C 0189             	dc.w  (((((SAdv3_Options_Loop66+Target))<<8)&$FF00)|((((SAdv3_Options_Loop66+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00090E 81018002810180   	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst
+000915                  	smpsPSGvoice	PSGVoi0
+000915 F500             	dc.b	$F5,PSGVoi0
+000917 01               	dc.b	$01
+                        	;!@ smpsSetVol	$01
+                        	;!@ dc.b	nC3
+000918 A501             	dc.b	nC3, $01
+
+00091A                  SAdv3_Options_Loop67:
+00091A 8002A0018002A301 	dc.b	nRst, $02, nG2, $01, nRst, $02, nBb2, $01
+000922 80029E018002A501 	dc.b	nRst, $02, nF2, $01, nRst, $02, nC3, $01
+00092A                  	smpsLoop		$00, $07, SAdv3_Options_Loop67, Target
+00092A F7               	dc.b	$F7
+00092B 0007             	dc.b	$00,$07
+                        	if (SAdv3_Options_Loop67<*)
+00092D                  		rom_ptr_z80(SAdv3_Options_Loop67+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00092D 1A89             	dc.w  (((((SAdv3_Options_Loop67+Target))<<8)&$FF00)|((((SAdv3_Options_Loop67+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00092F 8002A0018002A301 	dc.b	nRst, $02, nG2, $01, nRst, $02, nBb2, $01
+000937 80029E0180       	dc.b	nRst, $02, nF2, $01, nRst
+00093C                  	smpsPSGvoice	PSGVoi1
+00093C F500             	dc.b	$F5,PSGVoi1
+00093E 01               	dc.b	$01
+                        	;!@ smpsSetVol	$FF
+                        	;!@ dc.b	nC0, nRst, $02
+00093F 81018002         	dc.b	nC0, $01, nRst, $02
+
+000943                  SAdv3_Options_Loop69:
+000943 81018005         	dc.b	nC0, $01, nRst, $05
+
+000947                  SAdv3_Options_Loop68:
+000947 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+00094F                  	smpsLoop		$00, $02, SAdv3_Options_Loop68, Target
+00094F F7               	dc.b	$F7
+000950 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop68<*)
+000952                  		rom_ptr_z80(SAdv3_Options_Loop68+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000952 4789             	dc.w  (((((SAdv3_Options_Loop68+Target))<<8)&$FF00)|((((SAdv3_Options_Loop68+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000954                  	smpsLoop		$01, $02, SAdv3_Options_Loop69, Target
+000954 F7               	dc.b	$F7
+000955 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop69<*)
+000957                  		rom_ptr_z80(SAdv3_Options_Loop69+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000957 4389             	dc.w  (((((SAdv3_Options_Loop69+Target))<<8)&$FF00)|((((SAdv3_Options_Loop69+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000959                  SAdv3_Options_Loop70:
+000959 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000961                  	smpsLoop		$00, $02, SAdv3_Options_Loop70, Target
+000961 F7               	dc.b	$F7
+000962 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop70<*)
+000964                  		rom_ptr_z80(SAdv3_Options_Loop70+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000964 5989             	dc.w  (((((SAdv3_Options_Loop70+Target))<<8)&$FF00)|((((SAdv3_Options_Loop70+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000966 8101800281018002 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $02
+00096E                  	smpsLoop		$01, $02, SAdv3_Options_Loop70, Target
+00096E F7               	dc.b	$F7
+00096F 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop70<*)
+000971                  		rom_ptr_z80(SAdv3_Options_Loop70+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000971 5989             	dc.w  (((((SAdv3_Options_Loop70+Target))<<8)&$FF00)|((((SAdv3_Options_Loop70+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000973                  SAdv3_Options_Loop72:
+000973 81018005         	dc.b	nC0, $01, nRst, $05
+
+000977                  SAdv3_Options_Loop71:
+000977 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+00097F                  	smpsLoop		$00, $02, SAdv3_Options_Loop71, Target
+00097F F7               	dc.b	$F7
+000980 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop71<*)
+000982                  		rom_ptr_z80(SAdv3_Options_Loop71+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000982 7789             	dc.w  (((((SAdv3_Options_Loop71+Target))<<8)&$FF00)|((((SAdv3_Options_Loop71+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000984                  	smpsLoop		$01, $02, SAdv3_Options_Loop72, Target
+000984 F7               	dc.b	$F7
+000985 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop72<*)
+000987                  		rom_ptr_z80(SAdv3_Options_Loop72+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000987 7389             	dc.w  (((((SAdv3_Options_Loop72+Target))<<8)&$FF00)|((((SAdv3_Options_Loop72+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000989                  SAdv3_Options_Loop73:
+000989 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000991                  	smpsLoop		$00, $02, SAdv3_Options_Loop73, Target
+000991 F7               	dc.b	$F7
+000992 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop73<*)
+000994                  		rom_ptr_z80(SAdv3_Options_Loop73+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000994 8989             	dc.w  (((((SAdv3_Options_Loop73+Target))<<8)&$FF00)|((((SAdv3_Options_Loop73+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000996 81018002         	dc.b	nC0, $01, nRst, $02
+
+00099A                  SAdv3_Options_Loop74:
+00099A 8101800281018005 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $05
+0009A2                  	smpsLoop		$00, $02, SAdv3_Options_Loop74, Target
+0009A2 F7               	dc.b	$F7
+0009A3 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop74<*)
+0009A5                  		rom_ptr_z80(SAdv3_Options_Loop74+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009A5 9A89             	dc.w  (((((SAdv3_Options_Loop74+Target))<<8)&$FF00)|((((SAdv3_Options_Loop74+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@ dc.b	nC0, $01, nRst, $02, nC0, $01, nRst
+0009A7 8101800281018001 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $01
+
+0009AF                  SAdv3_Options_Jump7:
+0009AF                  	smpsPSGvoice	PSGVoi2
+0009AF F500             	dc.b	$F5,PSGVoi2
+                        	;!@ smpsSetVol	$FF
+                        	;!@ Questionable
+0009B1 A80380A780A38004 	dc.b	nEb3, $03, nRst, nD3, nRst, nBb2, nRst, $04
+0009B9 A0149E028004A001 	dc.b	nG2, $14, nF2, $02, nRst, $04, nG2, $01
+0009C1 8003A5158003A315 	dc.b	nRst, $03, nC3, $15, nRst, $03, nBb2, $15
+0009C9 8002A80380A780A3 	dc.b	nRst, $02, nEb3, $03, nRst, nD3, nRst, nBb2
+0009D1 8004A0149E028004 	dc.b	nRst, $04, nG2, $14, nF2, $02, nRst, $04
+0009D9 A0018003A5158003 	dc.b	nG2, $01, nRst, $03, nC3, $15, nRst, $03
+                        	
+                        	;!@ Questionable
+0009E1 A702             	dc.b	nD3, $02
+0009E3                  	smpsPSGvoice	PSGVoi1
+0009E3 F500             	dc.b	$F5,PSGVoi1
+0009E5 E701             	dc.b	smpsNoAttack, $01
+                        	;!@ smpsSetVol	$01
+                        	;!@ dc.b	nC0
+0009E7 8101             	dc.b	nC0, $01
+
+0009E9                  SAdv3_Options_Loop75:
+0009E9 8005810180028101 	dc.b	nRst, $05, nC0, $01, nRst, $02, nC0, $01
+0009F1                  	smpsLoop		$00, $02, SAdv3_Options_Loop75, Target
+0009F1 F7               	dc.b	$F7
+0009F2 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop75<*)
+0009F4                  		rom_ptr_z80(SAdv3_Options_Loop75+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009F4 E989             	dc.w  (((((SAdv3_Options_Loop75+Target))<<8)&$FF00)|((((SAdv3_Options_Loop75+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0009F6 800281018002     	dc.b	nRst, $02, nC0, $01, nRst, $02
+
+0009FC                  SAdv3_Options_Loop77:
+0009FC 81018005         	dc.b	nC0, $01, nRst, $05
+
+000A00                  SAdv3_Options_Loop76:
+000A00 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000A08                  	smpsLoop		$00, $02, SAdv3_Options_Loop76, Target
+000A08 F7               	dc.b	$F7
+000A09 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop76<*)
+000A0B                  		rom_ptr_z80(SAdv3_Options_Loop76+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A0B 008A             	dc.w  (((((SAdv3_Options_Loop76+Target))<<8)&$FF00)|((((SAdv3_Options_Loop76+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A0D                  	smpsLoop		$01, $02, SAdv3_Options_Loop77, Target
+000A0D F7               	dc.b	$F7
+000A0E 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop77<*)
+000A10                  		rom_ptr_z80(SAdv3_Options_Loop77+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A10 FC89             	dc.w  (((((SAdv3_Options_Loop77+Target))<<8)&$FF00)|((((SAdv3_Options_Loop77+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000A12                  SAdv3_Options_Loop78:
+000A12 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000A1A                  	smpsLoop		$00, $02, SAdv3_Options_Loop78, Target
+000A1A F7               	dc.b	$F7
+000A1B 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop78<*)
+000A1D                  		rom_ptr_z80(SAdv3_Options_Loop78+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A1D 128A             	dc.w  (((((SAdv3_Options_Loop78+Target))<<8)&$FF00)|((((SAdv3_Options_Loop78+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A1F 81018002         	dc.b	nC0, $01, nRst, $02
+
+000A23                  SAdv3_Options_Loop79:
+000A23 8101800281018005 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $05
+000A2B                  	smpsLoop		$00, $02, SAdv3_Options_Loop79, Target
+000A2B F7               	dc.b	$F7
+000A2C 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop79<*)
+000A2E                  		rom_ptr_z80(SAdv3_Options_Loop79+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A2E 238A             	dc.w  (((((SAdv3_Options_Loop79+Target))<<8)&$FF00)|((((SAdv3_Options_Loop79+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A30 81018002810180   	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst
+000A37                  	smpsPSGvoice	PSGVoi0
+000A37 F500             	dc.b	$F5,PSGVoi0
+000A39 01               	dc.b	$01
+                        	;!@ smpsSetVol	$01
+000A3A A5               	dc.b	nC3
+
+000A3B                  SAdv3_Options_Loop80:
+000A3B 8002A0018002A301 	dc.b	nRst, $02, nG2, $01, nRst, $02, nBb2, $01
+000A43 80029E018002A501 	dc.b	nRst, $02, nF2, $01, nRst, $02, nC3, $01
+000A4B                  	smpsLoop		$00, $07, SAdv3_Options_Loop80, Target
+000A4B F7               	dc.b	$F7
+000A4C 0007             	dc.b	$00,$07
+                        	if (SAdv3_Options_Loop80<*)
+000A4E                  		rom_ptr_z80(SAdv3_Options_Loop80+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A4E 3B8A             	dc.w  (((((SAdv3_Options_Loop80+Target))<<8)&$FF00)|((((SAdv3_Options_Loop80+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A50 8002A0018002A301 	dc.b	nRst, $02, nG2, $01, nRst, $02, nBb2, $01
+000A58 80029E0180       	dc.b	nRst, $02, nF2, $01, nRst
+000A5D                  	smpsPSGvoice	PSGVoi1
+000A5D F500             	dc.b	$F5,PSGVoi1
+000A5F 01               	dc.b	$01
+                        	;!@ smpsSetVol	$FF
+                        	;!@ dc.b	nC0, nRst, $02
+000A60 81018002         	dc.b	nC0, $01, nRst, $02
+
+000A64                  SAdv3_Options_Loop82:
+000A64 81018005         	dc.b	nC0, $01, nRst, $05
+
+000A68                  SAdv3_Options_Loop81:
+000A68 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000A70                  	smpsLoop		$00, $02, SAdv3_Options_Loop81, Target
+000A70 F7               	dc.b	$F7
+000A71 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop81<*)
+000A73                  		rom_ptr_z80(SAdv3_Options_Loop81+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A73 688A             	dc.w  (((((SAdv3_Options_Loop81+Target))<<8)&$FF00)|((((SAdv3_Options_Loop81+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A75                  	smpsLoop		$01, $02, SAdv3_Options_Loop82, Target
+000A75 F7               	dc.b	$F7
+000A76 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop82<*)
+000A78                  		rom_ptr_z80(SAdv3_Options_Loop82+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A78 648A             	dc.w  (((((SAdv3_Options_Loop82+Target))<<8)&$FF00)|((((SAdv3_Options_Loop82+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000A7A                  SAdv3_Options_Loop83:
+000A7A 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000A82                  	smpsLoop		$00, $02, SAdv3_Options_Loop83, Target
+000A82 F7               	dc.b	$F7
+000A83 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop83<*)
+000A85                  		rom_ptr_z80(SAdv3_Options_Loop83+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A85 7A8A             	dc.w  (((((SAdv3_Options_Loop83+Target))<<8)&$FF00)|((((SAdv3_Options_Loop83+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000A87 8101800281018002 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $02
+000A8F                  	smpsLoop		$01, $02, SAdv3_Options_Loop83, Target
+000A8F F7               	dc.b	$F7
+000A90 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop83<*)
+000A92                  		rom_ptr_z80(SAdv3_Options_Loop83+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000A92 7A8A             	dc.w  (((((SAdv3_Options_Loop83+Target))<<8)&$FF00)|((((SAdv3_Options_Loop83+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000A94                  SAdv3_Options_Loop85:
+000A94 81018005         	dc.b	nC0, $01, nRst, $05
+
+000A98                  SAdv3_Options_Loop84:
+000A98 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000AA0                  	smpsLoop		$00, $02, SAdv3_Options_Loop84, Target
+000AA0 F7               	dc.b	$F7
+000AA1 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop84<*)
+000AA3                  		rom_ptr_z80(SAdv3_Options_Loop84+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AA3 988A             	dc.w  (((((SAdv3_Options_Loop84+Target))<<8)&$FF00)|((((SAdv3_Options_Loop84+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AA5                  	smpsLoop		$01, $02, SAdv3_Options_Loop85, Target
+000AA5 F7               	dc.b	$F7
+000AA6 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop85<*)
+000AA8                  		rom_ptr_z80(SAdv3_Options_Loop85+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AA8 948A             	dc.w  (((((SAdv3_Options_Loop85+Target))<<8)&$FF00)|((((SAdv3_Options_Loop85+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000AAA                  SAdv3_Options_Loop86:
+000AAA 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000AB2                  	smpsLoop		$00, $02, SAdv3_Options_Loop86, Target
+000AB2 F7               	dc.b	$F7
+000AB3 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop86<*)
+000AB5                  		rom_ptr_z80(SAdv3_Options_Loop86+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AB5 AA8A             	dc.w  (((((SAdv3_Options_Loop86+Target))<<8)&$FF00)|((((SAdv3_Options_Loop86+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AB7 81018002         	dc.b	nC0, $01, nRst, $02
+
+000ABB                  SAdv3_Options_Loop87:
+000ABB 8101800281018005 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $05
+000AC3                  	smpsLoop		$00, $02, SAdv3_Options_Loop87, Target
+000AC3 F7               	dc.b	$F7
+000AC4 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop87<*)
+000AC6                  		rom_ptr_z80(SAdv3_Options_Loop87+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AC6 BB8A             	dc.w  (((((SAdv3_Options_Loop87+Target))<<8)&$FF00)|((((SAdv3_Options_Loop87+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@ dc.b	nC0, $01, nRst, $02, nC0, $01, nRst
+000AC8 8101800281018001 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $01
+000AD0                  	smpsJump		SAdv3_Options_Jump7, Target
+000AD0 F6               	dc.b	$F6
+                        	if (SAdv3_Options_Jump7<*)
+000AD1                  		rom_ptr_z80(SAdv3_Options_Jump7+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AD1 AF89             	dc.w  (((((SAdv3_Options_Jump7+Target))<<8)&$FF00)|((((SAdv3_Options_Jump7+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000AD3                  SAdv3_Options_PSG2:
+                        	;!@ dc.b	nRst, $01, nC0, nRst, $02, nC0, $01, nRst
+000AD3 8001810180028101 	dc.b	nRst, $01, nC0, $01, nRst, $02, nC0, $01, nRst
+000ADB 80
+000ADC 02               	dc.b	$02
+
+000ADD                  SAdv3_Options_Loop89:
+000ADD 81018005         	dc.b	nC0, $01, nRst, $05
+
+000AE1                  SAdv3_Options_Loop88:
+000AE1 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000AE9                  	smpsLoop		$00, $02, SAdv3_Options_Loop88, Target
+000AE9 F7               	dc.b	$F7
+000AEA 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop88<*)
+000AEC                  		rom_ptr_z80(SAdv3_Options_Loop88+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AEC E18A             	dc.w  (((((SAdv3_Options_Loop88+Target))<<8)&$FF00)|((((SAdv3_Options_Loop88+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000AEE                  	smpsLoop		$01, $02, SAdv3_Options_Loop89, Target
+000AEE F7               	dc.b	$F7
+000AEF 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop89<*)
+000AF1                  		rom_ptr_z80(SAdv3_Options_Loop89+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AF1 DD8A             	dc.w  (((((SAdv3_Options_Loop89+Target))<<8)&$FF00)|((((SAdv3_Options_Loop89+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000AF3                  SAdv3_Options_Loop90:
+000AF3 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000AFB                  	smpsLoop		$00, $02, SAdv3_Options_Loop90, Target
+000AFB F7               	dc.b	$F7
+000AFC 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop90<*)
+000AFE                  		rom_ptr_z80(SAdv3_Options_Loop90+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000AFE F38A             	dc.w  (((((SAdv3_Options_Loop90+Target))<<8)&$FF00)|((((SAdv3_Options_Loop90+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B00 81018002         	dc.b	nC0, $01, nRst, $02
+
+000B04                  SAdv3_Options_Loop91:
+000B04 8101800281018005 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $05
+000B0C                  	smpsLoop		$00, $02, SAdv3_Options_Loop91, Target
+000B0C F7               	dc.b	$F7
+000B0D 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop91<*)
+000B0F                  		rom_ptr_z80(SAdv3_Options_Loop91+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B0F 048B             	dc.w  (((((SAdv3_Options_Loop91+Target))<<8)&$FF00)|((((SAdv3_Options_Loop91+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B11 810180           	dc.b	nC0, $01, nRst
+000B14                  	smpsPSGvoice	PSGVoi0
+000B14 F500             	dc.b	$F5,PSGVoi0
+000B16 02               	dc.b	$02
+                        	;!@ smpsSetVol	$02
+                        	;!@ dc.b	nC3
+000B17 A502             	dc.b	nC3, $02
+
+000B19                  SAdv3_Options_Loop92:
+000B19 8001A0028001A302 	dc.b	nRst, $01, nG2, $02, nRst, $01, nBb2, $02
+000B21 80019E028001A502 	dc.b	nRst, $01, nF2, $02, nRst, $01, nC3, $02
+000B29                  	smpsLoop		$00, $07, SAdv3_Options_Loop92, Target
+000B29 F7               	dc.b	$F7
+000B2A 0007             	dc.b	$00,$07
+                        	if (SAdv3_Options_Loop92<*)
+000B2C                  		rom_ptr_z80(SAdv3_Options_Loop92+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B2C 198B             	dc.w  (((((SAdv3_Options_Loop92+Target))<<8)&$FF00)|((((SAdv3_Options_Loop92+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B2E 8001A0028001A302 	dc.b	nRst, $01, nG2, $02, nRst, $01, nBb2, $02
+                        	;!@ dc.b	nRst, $01, nF2
+000B36 80019E01         	dc.b	nRst, $01, nF2, $01
+000B3A                  	smpsPSGvoice	PSGVoi1
+000B3A F500             	dc.b	$F5,PSGVoi1
+000B3C E701             	dc.b	smpsNoAttack, $01
+                        	;!@ smpsSetVol	$FE
+                        	;!@ dc.b	nC0, nRst, $02, nC0, $01, nRst, $02
+000B3E 8101800281018002 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $02
+
+000B46                  SAdv3_Options_Loop94:
+000B46 81018005         	dc.b	nC0, $01, nRst, $05
+
+000B4A                  SAdv3_Options_Loop93:
+000B4A 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000B52                  	smpsLoop		$00, $02, SAdv3_Options_Loop93, Target
+000B52 F7               	dc.b	$F7
+000B53 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop93<*)
+000B55                  		rom_ptr_z80(SAdv3_Options_Loop93+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B55 4A8B             	dc.w  (((((SAdv3_Options_Loop93+Target))<<8)&$FF00)|((((SAdv3_Options_Loop93+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B57                  	smpsLoop		$01, $02, SAdv3_Options_Loop94, Target
+000B57 F7               	dc.b	$F7
+000B58 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop94<*)
+000B5A                  		rom_ptr_z80(SAdv3_Options_Loop94+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B5A 468B             	dc.w  (((((SAdv3_Options_Loop94+Target))<<8)&$FF00)|((((SAdv3_Options_Loop94+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000B5C                  SAdv3_Options_Loop95:
+000B5C 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000B64                  	smpsLoop		$00, $02, SAdv3_Options_Loop95, Target
+000B64 F7               	dc.b	$F7
+000B65 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop95<*)
+000B67                  		rom_ptr_z80(SAdv3_Options_Loop95+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B67 5C8B             	dc.w  (((((SAdv3_Options_Loop95+Target))<<8)&$FF00)|((((SAdv3_Options_Loop95+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B69 8101800281018002 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $02
+000B71                  	smpsLoop		$01, $02, SAdv3_Options_Loop95, Target
+000B71 F7               	dc.b	$F7
+000B72 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop95<*)
+000B74                  		rom_ptr_z80(SAdv3_Options_Loop95+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B74 5C8B             	dc.w  (((((SAdv3_Options_Loop95+Target))<<8)&$FF00)|((((SAdv3_Options_Loop95+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000B76                  SAdv3_Options_Loop97:
+000B76 81018005         	dc.b	nC0, $01, nRst, $05
+
+000B7A                  SAdv3_Options_Loop96:
+000B7A 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000B82                  	smpsLoop		$00, $02, SAdv3_Options_Loop96, Target
+000B82 F7               	dc.b	$F7
+000B83 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop96<*)
+000B85                  		rom_ptr_z80(SAdv3_Options_Loop96+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B85 7A8B             	dc.w  (((((SAdv3_Options_Loop96+Target))<<8)&$FF00)|((((SAdv3_Options_Loop96+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B87                  	smpsLoop		$01, $02, SAdv3_Options_Loop97, Target
+000B87 F7               	dc.b	$F7
+000B88 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop97<*)
+000B8A                  		rom_ptr_z80(SAdv3_Options_Loop97+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B8A 768B             	dc.w  (((((SAdv3_Options_Loop97+Target))<<8)&$FF00)|((((SAdv3_Options_Loop97+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000B8C                  SAdv3_Options_Loop98:
+000B8C 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000B94                  	smpsLoop		$00, $02, SAdv3_Options_Loop98, Target
+000B94 F7               	dc.b	$F7
+000B95 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop98<*)
+000B97                  		rom_ptr_z80(SAdv3_Options_Loop98+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000B97 8C8B             	dc.w  (((((SAdv3_Options_Loop98+Target))<<8)&$FF00)|((((SAdv3_Options_Loop98+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000B99 81018002         	dc.b	nC0, $01, nRst, $02
+
+000B9D                  SAdv3_Options_Loop99:
+000B9D 8101800281018005 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $05
+000BA5                  	smpsLoop		$00, $02, SAdv3_Options_Loop99, Target
+000BA5 F7               	dc.b	$F7
+000BA6 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop99<*)
+000BA8                  		rom_ptr_z80(SAdv3_Options_Loop99+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BA8 9D8B             	dc.w  (((((SAdv3_Options_Loop99+Target))<<8)&$FF00)|((((SAdv3_Options_Loop99+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@ dc.b	nC0, $01, nRst
+000BAA 81018001         	dc.b	nC0, $01, nRst, $01
+
+000BAE                  SAdv3_Options_Jump8:
+000BAE                  	smpsPSGvoice	PSGVoi2
+000BAE F500             	dc.b	$F5,PSGVoi2
+                        	;!@ smpsSetVol	$FB
+                        	;!@ Questionable
+000BB0 A80380A780A38004 	dc.b	nEb3, $03, nRst, nD3, nRst, nBb2, nRst, $04
+000BB8 A0149E028004A001 	dc.b	nG2, $14, nF2, $02, nRst, $04, nG2, $01
+000BC0 8003A5158003A315 	dc.b	nRst, $03, nC3, $15, nRst, $03, nBb2, $15
+000BC8 8002A80380A780A3 	dc.b	nRst, $02, nEb3, $03, nRst, nD3, nRst, nBb2
+000BD0 8004A0149E028004 	dc.b	nRst, $04, nG2, $14, nF2, $02, nRst, $04
+000BD8 A0018003A5158003 	dc.b	nG2, $01, nRst, $03, nC3, $15, nRst, $03
+000BE0 A702             	dc.b	nD3, $02
+000BE2                  	smpsPSGvoice	PSGVoi1
+000BE2 F500             	dc.b	$F5,PSGVoi1
+000BE4 E701             	dc.b	smpsNoAttack, $01
+                        	;!@ smpsSetVol	$05
+                        	;!@ dc.b	nC0
+000BE6 8101             	dc.b	nC0, $01
+
+000BE8                  SAdv3_Options_Loop100:
+000BE8 8002810180058101 	dc.b	nRst, $02, nC0, $01, nRst, $05, nC0, $01
+000BF0                  	smpsLoop		$00, $02, SAdv3_Options_Loop100, Target
+000BF0 F7               	dc.b	$F7
+000BF1 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop100<*)
+000BF3                  		rom_ptr_z80(SAdv3_Options_Loop100+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BF3 E88B             	dc.w  (((((SAdv3_Options_Loop100+Target))<<8)&$FF00)|((((SAdv3_Options_Loop100+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000BF5                  SAdv3_Options_Loop101:
+000BF5 80028101         	dc.b	nRst, $02, nC0, $01
+000BF9                  	smpsLoop		$00, $03, SAdv3_Options_Loop101, Target
+000BF9 F7               	dc.b	$F7
+000BFA 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_Loop101<*)
+000BFC                  		rom_ptr_z80(SAdv3_Options_Loop101+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000BFC F58B             	dc.w  (((((SAdv3_Options_Loop101+Target))<<8)&$FF00)|((((SAdv3_Options_Loop101+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000BFE                  SAdv3_Options_Loop103:
+000BFE 8005             	dc.b	nRst, $05
+
+000C00                  SAdv3_Options_Loop102:
+000C00 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000C08                  	smpsLoop		$00, $02, SAdv3_Options_Loop102, Target
+000C08 F7               	dc.b	$F7
+000C09 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop102<*)
+000C0B                  		rom_ptr_z80(SAdv3_Options_Loop102+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C0B 008C             	dc.w  (((((SAdv3_Options_Loop102+Target))<<8)&$FF00)|((((SAdv3_Options_Loop102+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C0D 8101             	dc.b	nC0, $01
+000C0F                  	smpsLoop		$01, $02, SAdv3_Options_Loop103, Target
+000C0F F7               	dc.b	$F7
+000C10 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop103<*)
+000C12                  		rom_ptr_z80(SAdv3_Options_Loop103+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C12 FE8B             	dc.w  (((((SAdv3_Options_Loop103+Target))<<8)&$FF00)|((((SAdv3_Options_Loop103+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000C14                  SAdv3_Options_Loop104:
+000C14 8005810180028101 	dc.b	nRst, $05, nC0, $01, nRst, $02, nC0, $01
+000C1C                  	smpsLoop		$00, $02, SAdv3_Options_Loop104, Target
+000C1C F7               	dc.b	$F7
+000C1D 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop104<*)
+000C1F                  		rom_ptr_z80(SAdv3_Options_Loop104+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C1F 148C             	dc.w  (((((SAdv3_Options_Loop104+Target))<<8)&$FF00)|((((SAdv3_Options_Loop104+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C21 8002             	dc.b	nRst, $02
+
+000C23                  SAdv3_Options_Loop105:
+000C23 8101800281018005 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $05
+000C2B                  	smpsLoop		$00, $02, SAdv3_Options_Loop105, Target
+000C2B F7               	dc.b	$F7
+000C2C 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop105<*)
+000C2E                  		rom_ptr_z80(SAdv3_Options_Loop105+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C2E 238C             	dc.w  (((((SAdv3_Options_Loop105+Target))<<8)&$FF00)|((((SAdv3_Options_Loop105+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C30 810180           	dc.b	nC0, $01, nRst
+000C33                  	smpsPSGvoice	PSGVoi0
+000C33 F500             	dc.b	$F5,PSGVoi0
+000C35 02               	dc.b	$02
+                        	;!@ smpsSetVol	$02
+                        	;!@ dc.b	nC3
+000C36 A502             	dc.b	nC3, $02
+
+000C38                  SAdv3_Options_Loop106:
+000C38 8001A0028001A302 	dc.b	nRst, $01, nG2, $02, nRst, $01, nBb2, $02
+000C40 80019E028001A502 	dc.b	nRst, $01, nF2, $02, nRst, $01, nC3, $02
+000C48                  	smpsLoop		$00, $07, SAdv3_Options_Loop106, Target
+000C48 F7               	dc.b	$F7
+000C49 0007             	dc.b	$00,$07
+                        	if (SAdv3_Options_Loop106<*)
+000C4B                  		rom_ptr_z80(SAdv3_Options_Loop106+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C4B 388C             	dc.w  (((((SAdv3_Options_Loop106+Target))<<8)&$FF00)|((((SAdv3_Options_Loop106+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C4D 8001A0028001A302 	dc.b	nRst, $01, nG2, $02, nRst, $01, nBb2, $02
+000C55 80019E           	dc.b	nRst, $01, nF2
+000C58                  	smpsPSGvoice	PSGVoi1
+000C58 F500             	dc.b	$F5,PSGVoi1
+000C5A E701             	dc.b	smpsNoAttack, $01
+                        	;!@ smpsSetVol	$FE
+                        	;!@ dc.b	nC0, nRst, $02, nC0, $01, nRst, $02
+000C5C 8101800281018002 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $02
+
+000C64                  SAdv3_Options_Loop108:
+000C64 81018005         	dc.b	nC0, $01, nRst, $05
+
+000C68                  SAdv3_Options_Loop107:
+000C68 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000C70                  	smpsLoop		$00, $02, SAdv3_Options_Loop107, Target
+000C70 F7               	dc.b	$F7
+000C71 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop107<*)
+000C73                  		rom_ptr_z80(SAdv3_Options_Loop107+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C73 688C             	dc.w  (((((SAdv3_Options_Loop107+Target))<<8)&$FF00)|((((SAdv3_Options_Loop107+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C75                  	smpsLoop		$01, $02, SAdv3_Options_Loop108, Target
+000C75 F7               	dc.b	$F7
+000C76 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop108<*)
+000C78                  		rom_ptr_z80(SAdv3_Options_Loop108+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C78 648C             	dc.w  (((((SAdv3_Options_Loop108+Target))<<8)&$FF00)|((((SAdv3_Options_Loop108+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000C7A                  SAdv3_Options_Loop109:
+000C7A 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000C82                  	smpsLoop		$00, $02, SAdv3_Options_Loop109, Target
+000C82 F7               	dc.b	$F7
+000C83 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop109<*)
+000C85                  		rom_ptr_z80(SAdv3_Options_Loop109+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C85 7A8C             	dc.w  (((((SAdv3_Options_Loop109+Target))<<8)&$FF00)|((((SAdv3_Options_Loop109+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C87 8101800281018002 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $02
+000C8F                  	smpsLoop		$01, $02, SAdv3_Options_Loop109, Target
+000C8F F7               	dc.b	$F7
+000C90 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop109<*)
+000C92                  		rom_ptr_z80(SAdv3_Options_Loop109+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C92 7A8C             	dc.w  (((((SAdv3_Options_Loop109+Target))<<8)&$FF00)|((((SAdv3_Options_Loop109+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000C94                  SAdv3_Options_Loop111:
+000C94 81018005         	dc.b	nC0, $01, nRst, $05
+
+000C98                  SAdv3_Options_Loop110:
+000C98 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000CA0                  	smpsLoop		$00, $02, SAdv3_Options_Loop110, Target
+000CA0 F7               	dc.b	$F7
+000CA1 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop110<*)
+000CA3                  		rom_ptr_z80(SAdv3_Options_Loop110+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CA3 988C             	dc.w  (((((SAdv3_Options_Loop110+Target))<<8)&$FF00)|((((SAdv3_Options_Loop110+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000CA5                  	smpsLoop		$01, $02, SAdv3_Options_Loop111, Target
+000CA5 F7               	dc.b	$F7
+000CA6 0102             	dc.b	$01,$02
+                        	if (SAdv3_Options_Loop111<*)
+000CA8                  		rom_ptr_z80(SAdv3_Options_Loop111+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CA8 948C             	dc.w  (((((SAdv3_Options_Loop111+Target))<<8)&$FF00)|((((SAdv3_Options_Loop111+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000CAA                  SAdv3_Options_Loop112:
+000CAA 8101800581018002 	dc.b	nC0, $01, nRst, $05, nC0, $01, nRst, $02
+000CB2                  	smpsLoop		$00, $02, SAdv3_Options_Loop112, Target
+000CB2 F7               	dc.b	$F7
+000CB3 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop112<*)
+000CB5                  		rom_ptr_z80(SAdv3_Options_Loop112+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CB5 AA8C             	dc.w  (((((SAdv3_Options_Loop112+Target))<<8)&$FF00)|((((SAdv3_Options_Loop112+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000CB7 81018002         	dc.b	nC0, $01, nRst, $02
+
+000CBB                  SAdv3_Options_Loop113:
+000CBB 8101800281018005 	dc.b	nC0, $01, nRst, $02, nC0, $01, nRst, $05
+000CC3                  	smpsLoop		$00, $02, SAdv3_Options_Loop113, Target
+000CC3 F7               	dc.b	$F7
+000CC4 0002             	dc.b	$00,$02
+                        	if (SAdv3_Options_Loop113<*)
+000CC6                  		rom_ptr_z80(SAdv3_Options_Loop113+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CC6 BB8C             	dc.w  (((((SAdv3_Options_Loop113+Target))<<8)&$FF00)|((((SAdv3_Options_Loop113+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;!@ dc.b	nC0, $01, nRst
+000CC8 81018001         	dc.b	nC0, $01, nRst, $01
+000CCC                  	smpsJump		SAdv3_Options_Jump8, Target
+000CCC F6               	dc.b	$F6
+                        	if (SAdv3_Options_Jump8<*)
+000CCD                  		rom_ptr_z80(SAdv3_Options_Jump8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CCD AE8B             	dc.w  (((((SAdv3_Options_Jump8+Target))<<8)&$FF00)|((((SAdv3_Options_Jump8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000CCF                  SAdv3_Options_PSG3:
+                        	;!@ dc.b	nRst, $55, $0C
+000CCF 8055800C         	dc.b	nRst, $55, nRst, $0C
+
+000CD3                  SAdv3_Options_Loop114:
+000CD3 B1018002AC018002 	dc.b	nC4, $01, nRst, $02, nG3, $01, nRst, $02
+000CDB AF018002AA018002 	dc.b	nBb3, $01, nRst, $02, nF3, $01, nRst, $02
+000CE3                  	smpsLoop		$00, $07, SAdv3_Options_Loop114, Target
+000CE3 F7               	dc.b	$F7
+000CE4 0007             	dc.b	$00,$07
+                        	if (SAdv3_Options_Loop114<*)
+000CE6                  		rom_ptr_z80(SAdv3_Options_Loop114+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CE6 D38C             	dc.w  (((((SAdv3_Options_Loop114+Target))<<8)&$FF00)|((((SAdv3_Options_Loop114+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000CE8 B1018002AC018002 	dc.b	nC4, $01, nRst, $02, nG3, $01, nRst, $02
+000CF0 AF018002AA018055 	dc.b	nBb3, $01, nRst, $02, nF3, $01, nRst, $55
+                        	;!@ dc.b	$55, $17
+000CF8 80558017         	dc.b	nRst, $55, nRst, $17
+
+000CFC                  SAdv3_Options_Jump9:
+                        	;!@ dc.b	nRst, $55, $55, $55, $22
+000CFC 8055805580558022 	dc.b	nRst, $55, nRst, $55, nRst, $55, nRst, $22
+
+000D04                  SAdv3_Options_Loop115:
+000D04 B1018002AC018002 	dc.b	nC4, $01, nRst, $02, nG3, $01, nRst, $02
+000D0C AF018002AA018002 	dc.b	nBb3, $01, nRst, $02, nF3, $01, nRst, $02
+000D14                  	smpsLoop		$00, $07, SAdv3_Options_Loop115, Target
+000D14 F7               	dc.b	$F7
+000D15 0007             	dc.b	$00,$07
+                        	if (SAdv3_Options_Loop115<*)
+000D17                  		rom_ptr_z80(SAdv3_Options_Loop115+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D17 048D             	dc.w  (((((SAdv3_Options_Loop115+Target))<<8)&$FF00)|((((SAdv3_Options_Loop115+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000D19 B1018002AC018002 	dc.b	nC4, $01, nRst, $02, nG3, $01, nRst, $02
+000D21 AF018002AA018055 	dc.b	nBb3, $01, nRst, $02, nF3, $01, nRst, $55
+                        	;!@ dc.b	$55, $17
+000D29 80558017         	dc.b	nRst, $55, nRst, $17
+000D2D                  	smpsJump		SAdv3_Options_Jump9, Target
+000D2D F6               	dc.b	$F6
+                        	if (SAdv3_Options_Jump9<*)
+000D2E                  		rom_ptr_z80(SAdv3_Options_Jump9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D2E FC8C             	dc.w  (((((SAdv3_Options_Jump9+Target))<<8)&$FF00)|((((SAdv3_Options_Jump9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	
+000D30                  SAdv3_Options_PWM1:
+000D30 8001             	dc.b	nRst, $01
+
+000D32                  SAdv3_Options_PWM1_Loop1:
+000D32 8803989898       	dc.b	pEHiHat, $03, pClosedHH, pClosedHH, pClosedHH
+000D37                  	smpsLoop		$00, $03, SAdv3_Options_PWM1_Loop1, Target
+000D37 F7               	dc.b	$F7
+000D38 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_PWM1_Loop1<*)
+000D3A                  		rom_ptr_z80(SAdv3_Options_PWM1_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D3A 328D             	dc.w  (((((SAdv3_Options_PWM1_Loop1+Target))<<8)&$FF00)|((((SAdv3_Options_PWM1_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000D3C 8898010201020102 	dc.b	pEHiHat, pClosedHH, $01, $02, $01, $02, $01, $02
+000D44                  	smpsLoop		$01, $07, SAdv3_Options_PWM1_Loop1, Target
+000D44 F7               	dc.b	$F7
+000D45 0107             	dc.b	$01,$07
+                        	if (SAdv3_Options_PWM1_Loop1<*)
+000D47                  		rom_ptr_z80(SAdv3_Options_PWM1_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D47 328D             	dc.w  (((((SAdv3_Options_PWM1_Loop1+Target))<<8)&$FF00)|((((SAdv3_Options_PWM1_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000D49                  SAdv3_Options_PWM1_Loop2:
+000D49 8803989898       	dc.b	pEHiHat, $03, pClosedHH, pClosedHH, pClosedHH
+000D4E                  	smpsLoop		$00, $03, SAdv3_Options_PWM1_Loop2, Target
+000D4E F7               	dc.b	$F7
+000D4F 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_PWM1_Loop2<*)
+000D51                  		rom_ptr_z80(SAdv3_Options_PWM1_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D51 498D             	dc.w  (((((SAdv3_Options_PWM1_Loop2+Target))<<8)&$FF00)|((((SAdv3_Options_PWM1_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000D53 8898010201020101 	dc.b	pEHiHat, pClosedHH, $01, $02, $01, $02, $01, $01
+
+000D5B                  SAdv3_Options_PWM1_Jump1:
+000D5B 8001             	dc.b	nRst, $01
+
+000D5D                  SAdv3_Options_PWM1_Loop3:
+000D5D 8803989898       	dc.b	pEHiHat, $03, pClosedHH, pClosedHH, pClosedHH
+000D62                  	smpsLoop		$00, $03, SAdv3_Options_PWM1_Loop3, Target
+000D62 F7               	dc.b	$F7
+000D63 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_PWM1_Loop3<*)
+000D65                  		rom_ptr_z80(SAdv3_Options_PWM1_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D65 5D8D             	dc.w  (((((SAdv3_Options_PWM1_Loop3+Target))<<8)&$FF00)|((((SAdv3_Options_PWM1_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000D67 8898010201020102 	dc.b	pEHiHat, pClosedHH, $01, $02, $01, $02, $01, $02
+000D6F                  	smpsLoop		$01, $0B, SAdv3_Options_PWM1_Loop3, Target
+000D6F F7               	dc.b	$F7
+000D70 010B             	dc.b	$01,$0B
+                        	if (SAdv3_Options_PWM1_Loop3<*)
+000D72                  		rom_ptr_z80(SAdv3_Options_PWM1_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D72 5D8D             	dc.w  (((((SAdv3_Options_PWM1_Loop3+Target))<<8)&$FF00)|((((SAdv3_Options_PWM1_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000D74                  SAdv3_Options_PWM1_Loop4:
+000D74 8803989898       	dc.b	pEHiHat, $03, pClosedHH, pClosedHH, pClosedHH
+000D79                  	smpsLoop		$00, $03, SAdv3_Options_PWM1_Loop4, Target
+000D79 F7               	dc.b	$F7
+000D7A 0003             	dc.b	$00,$03
+                        	if (SAdv3_Options_PWM1_Loop4<*)
+000D7C                  		rom_ptr_z80(SAdv3_Options_PWM1_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D7C 748D             	dc.w  (((((SAdv3_Options_PWM1_Loop4+Target))<<8)&$FF00)|((((SAdv3_Options_PWM1_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000D7E 8898010201020101 	dc.b	pEHiHat, pClosedHH, $01, $02, $01, $02, $01, $01
+000D86                  	smpsJump		SAdv3_Options_PWM1_Jump1, Target
+000D86 F6               	dc.b	$F6
+                        	if (SAdv3_Options_PWM1_Jump1<*)
+000D87                  		rom_ptr_z80(SAdv3_Options_PWM1_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000D87 5B8D             	dc.w  (((((SAdv3_Options_PWM1_Jump1+Target))<<8)&$FF00)|((((SAdv3_Options_PWM1_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000D89                  SAdv3_Options_PWM2:
+000D89                  SAdv3_Options_PWM3:
+000D89                  SAdv3_Options_PWM4:
+000D89                  	smpsStop
+000D89 F2               	dc.b	$F2
+
+000D8A                  SAdv3_Options_Patches:
+000D8A 3D               	dc.b	$3D
+000D8B 020102011F1F1F1F 	dc.b	$02, $01, $02, $01,	$1F, $1F, $1F, $1F
+000D93 0000000100000000 	dc.b	$00, $00, $00, $01,	$00, $00, $00, $00
+000D9B 0F0F0F0F200A1816 	dc.b	$0F, $0F, $0F, $0F,	$20, $0A, $18, $16
+                        	
+000DA3 38               	dc.b	$38
+000DA4 72137111D1521414 	dc.b	$72, $13, $71, $11,	$D1, $52, $14, $14
+000DAC 0107010100000000 	dc.b	$01, $07, $01, $01,	$00, $00, $00, $00
+000DB4 FFFFFFFF1E1E1E00 	dc.b	$FF, $FF, $FF, $FF,	$1E, $1E, $1E, $00
+                        	
+000DBC 3B               	dc.b	$3B
+000DBD 517161415116181A 	dc.b	$51, $71, $61, $41,	$51, $16, $18, $1A
+000DC5 0501010009010101 	dc.b	$05, $01, $01, $00,	$09, $01, $01, $01
+000DCD 179727471C221500 	dc.b	$17, $97, $27, $47,	$1C, $22, $15, $00
+
+00000 Total Error(s)
+
+DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK              00000081 E
+DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
+DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  NA0                0000008A E
+NA1                00000096 E  NA2                000000A2 E  NA3                000000AE E
+NA4                000000BA E  NA5                000000C6 E  NA6                000000D2 E
+NA7                000000DE E  NAB0               00000089 E  NAB1               00000095 E
+NAB2               000000A1 E  NAB3               000000AD E  NAB4               000000B9 E
+NAB5               000000C5 E  NAB6               000000D1 E  NAB7               000000DD E
+NB0                0000008C E  NB1                00000098 E  NB2                000000A4 E
+NB3                000000B0 E  NB4                000000BC E  NB5                000000C8 E
+NB6                000000D4 E  NBB0               0000008B E  NBB1               00000097 E
+NBB2               000000A3 E  NBB3               000000AF E  NBB4               000000BB E
+NBB5               000000C7 E  NBB6               000000D3 E  NBB7               000000DF E
+NC0                00000081 E  NC1                0000008D E  NC2                00000099 E
+NC3                000000A5 E  NC4                000000B1 E  NC5                000000BD E
+NC6                000000C9 E  NC7                000000D5 E  NCS0               00000082 E
+NCS1               0000008E E  NCS2               0000009A E  NCS3               000000A6 E
+NCS4               000000B2 E  NCS5               000000BE E  NCS6               000000CA E
+NCS7               000000D6 E  ND0                00000083 E  ND1                0000008F E
+ND2                0000009B E  ND3                000000A7 E  ND4                000000B3 E
+ND5                000000BF E  ND6                000000CB E  ND7                000000D7 E
+NE0                00000085 E  NE1                00000091 E  NE2                0000009D E
+NE3                000000A9 E  NE4                000000B5 E  NE5                000000C1 E
+NE6                000000CD E  NE7                000000D9 E  NEB0               00000084 E
+NEB1               00000090 E  NEB2               0000009C E  NEB3               000000A8 E
+NEB4               000000B4 E  NEB5               000000C0 E  NEB6               000000CC E
+NEB7               000000D8 E  NF0                00000086 E  NF1                00000092 E
+NF2                0000009E E  NF3                000000AA E  NF4                000000B6 E
+NF5                000000C2 E  NF6                000000CE E  NF7                000000DA E
+NFS0               00000087 E  NFS1               00000093 E  NFS2               0000009F E
+NFS3               000000AB E  NFS4               000000B7 E  NFS5               000000C3 E
+NFS6               000000CF E  NFS7               000000DB E  NG0                00000088 E
+NG1                00000094 E  NG2                000000A0 E  NG3                000000AC E
+NG4                000000B8 E  NG5                000000C4 E  NG6                000000D0 E
+NG7                000000DC E  NRST               00000080 E  PAKICK             0000008B E
+PANCENTER          000000C0 S  PANCENTRE          000000C0 S  PANLEFT            00000080 S
+PANNONE            00000000 S  PANRIGHT           00000040 S  PASNARE            0000008C E
+PBELL              0000008D E  PBONGOHI           00000092 E  PBONGOLO           00000093 E
+PCLAP              0000008A E  PCLICKHI           00000090 E  PCLICKLO           00000091 E
+PCLOSEDHH          00000098 E  PCOWBELL           0000008F E  PCRASHCYMB         00000089 E
+PEHIHAT            00000088 E  PEKICK             00000081 E  PESNARE            00000082 E
+PFINGSNAP          0000008E E  POPENHH            00000099 E  PRIDEBELL          00000084 E
+PSEGA              00000097 E  PSGOFF             0000000C E  PSGVOI0            00000000 E
+PSGVOI1            00000000 E  PSGVOI2            00000000 E  PSGVOL1            00000003 E
+PSGVOL2            00000006 E  PSGVOL3            00000004 E  PSILENCE           00000096 E
+PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E
+PTOMHI             00000085 E  PTOMLOW            00000087 E  PTOMLOWER          0000009A E
+PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E  PTOMMID            00000086 E
+PWMVOL             0000007F E  SADV3_OPTIONS_FM1  00000040    SADV3_OPTIONS_FM2  0000013F
+SADV3_OPTIONS_FM3  0000023F    SADV3_OPTIONS_FM4  000003E4    SADV3_OPTIONS_FM5  00000589
+SADV3_OPTIONS_FM6  0000072E    SADV3_OPTIONS_JUMP1                           000000BE
+SADV3_OPTIONS_JUMP2                           000001BD    
+SADV3_OPTIONS_JUMP3                           00000310    
+SADV3_OPTIONS_JUMP4                           000004B5    
+SADV3_OPTIONS_JUMP5                           0000065A    
+SADV3_OPTIONS_JUMP6                           000007FF    
+SADV3_OPTIONS_JUMP7                           000009AF    
+SADV3_OPTIONS_JUMP8                           00000BAE    
+SADV3_OPTIONS_JUMP9                           00000CFC    
+SADV3_OPTIONS_LOOP1                           000000C1    
+SADV3_OPTIONS_LOOP10                          0000031F    
+SADV3_OPTIONS_LOOP100                         00000BE8    
+SADV3_OPTIONS_LOOP101                         00000BF5    
+SADV3_OPTIONS_LOOP102                         00000C00    
+SADV3_OPTIONS_LOOP103                         00000BFE    
+SADV3_OPTIONS_LOOP104                         00000C14    
+SADV3_OPTIONS_LOOP105                         00000C23    
+SADV3_OPTIONS_LOOP106                         00000C38    
+SADV3_OPTIONS_LOOP107                         00000C68    
+SADV3_OPTIONS_LOOP108                         00000C64    
+SADV3_OPTIONS_LOOP109                         00000C7A    
+SADV3_OPTIONS_LOOP11                          00000340    
+SADV3_OPTIONS_LOOP110                         00000C98    
+SADV3_OPTIONS_LOOP111                         00000C94    
+SADV3_OPTIONS_LOOP112                         00000CAA    
+SADV3_OPTIONS_LOOP113                         00000CBB    
+SADV3_OPTIONS_LOOP114                         00000CD3    
+SADV3_OPTIONS_LOOP115                         00000D04    
+SADV3_OPTIONS_LOOP12                          00000313    
+SADV3_OPTIONS_LOOP13                          00000366    
+SADV3_OPTIONS_LOOP14                          00000387    
+SADV3_OPTIONS_LOOP15                          000003A8    
+SADV3_OPTIONS_LOOP16                          000003C9    
+SADV3_OPTIONS_LOOP17                          00000398    
+SADV3_OPTIONS_LOOP18                          000003F8    
+SADV3_OPTIONS_LOOP19                          00000419    
+SADV3_OPTIONS_LOOP2                           000001BF    
+SADV3_OPTIONS_LOOP20                          0000043A    
+SADV3_OPTIONS_LOOP21                          0000045B    
+SADV3_OPTIONS_LOOP22                          0000047C    
+SADV3_OPTIONS_LOOP23                          0000049D    
+SADV3_OPTIONS_LOOP24                          0000046C    
+SADV3_OPTIONS_LOOP25                          000004C4    
+SADV3_OPTIONS_LOOP26                          000004E5    
+SADV3_OPTIONS_LOOP27                          000004B8    
+SADV3_OPTIONS_LOOP28                          0000050B    
+SADV3_OPTIONS_LOOP29                          0000052C    
+SADV3_OPTIONS_LOOP3                           00000253    
+SADV3_OPTIONS_LOOP30                          0000054D    
+SADV3_OPTIONS_LOOP31                          0000056E    
+SADV3_OPTIONS_LOOP32                          0000053D    
+SADV3_OPTIONS_LOOP33                          0000059D    
+SADV3_OPTIONS_LOOP34                          000005BE    
+SADV3_OPTIONS_LOOP35                          000005DF    
+SADV3_OPTIONS_LOOP36                          00000600    
+SADV3_OPTIONS_LOOP37                          00000621    
+SADV3_OPTIONS_LOOP38                          00000642    
+SADV3_OPTIONS_LOOP39                          00000611    
+SADV3_OPTIONS_LOOP4                           00000274    
+SADV3_OPTIONS_LOOP40                          00000669    
+SADV3_OPTIONS_LOOP41                          0000068A    
+SADV3_OPTIONS_LOOP42                          0000065D    
+SADV3_OPTIONS_LOOP43                          000006B0    
+SADV3_OPTIONS_LOOP44                          000006D1    
+SADV3_OPTIONS_LOOP45                          000006F2    
+SADV3_OPTIONS_LOOP46                          00000713    
+SADV3_OPTIONS_LOOP47                          000006E2    
+SADV3_OPTIONS_LOOP48                          00000742    
+SADV3_OPTIONS_LOOP49                          00000763    
+SADV3_OPTIONS_LOOP5                           00000295    
+SADV3_OPTIONS_LOOP50                          00000784    
+SADV3_OPTIONS_LOOP51                          000007A5    
+SADV3_OPTIONS_LOOP52                          000007C6    
+SADV3_OPTIONS_LOOP53                          000007E7    
+SADV3_OPTIONS_LOOP54                          000007B6    
+SADV3_OPTIONS_LOOP55                          0000080F    
+SADV3_OPTIONS_LOOP56                          00000830    
+SADV3_OPTIONS_LOOP57                          00000803    
+SADV3_OPTIONS_LOOP58                          00000856    
+SADV3_OPTIONS_LOOP59                          00000877    
+SADV3_OPTIONS_LOOP6                           000002B6    
+SADV3_OPTIONS_LOOP60                          00000898    
+SADV3_OPTIONS_LOOP61                          000008B9    
+SADV3_OPTIONS_LOOP62                          00000888    
+SADV3_OPTIONS_LOOP63                          000008DE    
+SADV3_OPTIONS_LOOP64                          000008DA    
+SADV3_OPTIONS_LOOP65                          000008F0    
+SADV3_OPTIONS_LOOP66                          00000901    
+SADV3_OPTIONS_LOOP67                          0000091A    
+SADV3_OPTIONS_LOOP68                          00000947    
+SADV3_OPTIONS_LOOP69                          00000943    
+SADV3_OPTIONS_LOOP7                           000002D7    
+SADV3_OPTIONS_LOOP70                          00000959    
+SADV3_OPTIONS_LOOP71                          00000977    
+SADV3_OPTIONS_LOOP72                          00000973    
+SADV3_OPTIONS_LOOP73                          00000989    
+SADV3_OPTIONS_LOOP74                          0000099A    
+SADV3_OPTIONS_LOOP75                          000009E9    
+SADV3_OPTIONS_LOOP76                          00000A00    
+SADV3_OPTIONS_LOOP77                          000009FC    
+SADV3_OPTIONS_LOOP78                          00000A12    
+SADV3_OPTIONS_LOOP79                          00000A23    
+SADV3_OPTIONS_LOOP8                           000002F8    
+SADV3_OPTIONS_LOOP80                          00000A3B    
+SADV3_OPTIONS_LOOP81                          00000A68    
+SADV3_OPTIONS_LOOP82                          00000A64    
+SADV3_OPTIONS_LOOP83                          00000A7A    
+SADV3_OPTIONS_LOOP84                          00000A98    
+SADV3_OPTIONS_LOOP85                          00000A94    
+SADV3_OPTIONS_LOOP86                          00000AAA    
+SADV3_OPTIONS_LOOP87                          00000ABB    
+SADV3_OPTIONS_LOOP88                          00000AE1    
+SADV3_OPTIONS_LOOP89                          00000ADD    
+SADV3_OPTIONS_LOOP9                           000002C7    
+SADV3_OPTIONS_LOOP90                          00000AF3    
+SADV3_OPTIONS_LOOP91                          00000B04    
+SADV3_OPTIONS_LOOP92                          00000B19    
+SADV3_OPTIONS_LOOP93                          00000B4A    
+SADV3_OPTIONS_LOOP94                          00000B46    
+SADV3_OPTIONS_LOOP95                          00000B5C    
+SADV3_OPTIONS_LOOP96                          00000B7A    
+SADV3_OPTIONS_LOOP97                          00000B76    
+SADV3_OPTIONS_LOOP98                          00000B8C    
+SADV3_OPTIONS_LOOP99                          00000B9D    
+SADV3_OPTIONS_PATCHES                         00000D8A    SADV3_OPTIONS_PSG1 000008D4
+SADV3_OPTIONS_PSG2 00000AD3    SADV3_OPTIONS_PSG3 00000CCF    SADV3_OPTIONS_PWM1 00000D30
+SADV3_OPTIONS_PWM1_JUMP1                      00000D5B    
+SADV3_OPTIONS_PWM1_LOOP1                      00000D32    
+SADV3_OPTIONS_PWM1_LOOP2                      00000D49    
+SADV3_OPTIONS_PWM1_LOOP3                      00000D5D    
+SADV3_OPTIONS_PWM1_LOOP4                      00000D74    SADV3_OPTIONS_PWM2 00000D89
+SADV3_OPTIONS_PWM3 00000D89    SADV3_OPTIONS_PWM4 00000D89    SMPSED             000000ED E
+SMPSEE             000000EE E  SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E
+SMPSMODON          000000F1 E  SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E
+SMPSPITCH01HI      0000000C E  SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E
+SMPSPITCH02LO      000000E8 E  SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E
+SMPSPITCH04HI      00000030 E  SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E
+SMPSPITCH05LO      000000C4 E  SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E
+SMPSPITCH07HI      00000054 E  SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E
+SMPSPITCH08LO      000000A0 E  SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E
+SMPSPITCH10HI      00000078 E  SMPSPITCH10LO      00000088 E  TARGET             00040000 E
+TEMPDIV            00000003 S
