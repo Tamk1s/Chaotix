@@ -1,3 +1,4 @@
+Chaotix (Stock)
 81 - Electric Kick
 82 - Electric Snare
 83 - Splash Cymbal
@@ -21,7 +22,7 @@
 95 - Low Timpani (use SMPS speed $10)
 96 - Silence
 
-Knux Clackers:
+Knux Clackers extended:
 97 - Sega
 98 - Closed Hi Hat
 99 - Open Hi Hat

@@ -25,7 +25,7 @@ Define CASC_NullTerm2	$0000
 StartSeg GameHeader Big_Endian $000100 $8E
 
 	String	"SEGA 32X        "					;Console Name
-	String	"(C)SEGA 2020.DEC"					;Copyright Date
+	String	"(C)SEGA 2021.APR"					;Copyright Date
 	String  "KNUCKLES CLACKERS                               "	;Domestic Game Name
 	String  "KNUCKLES CLACKERS                               "	;Foreign Game Name
 	String	"GM MK-84503-00"					;Game Serial Number
@@ -251,27 +251,39 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "DOOR INTO SUMMER"
-	String  "SOUTH ISLAND"
+	String  "NOP SOUTH ISLAND"
 	BYTE	CASC_NullTerm
 	String "ELECTORIA"
 	BYTE	CASC_NullTerm
 	String "SPEED OF SOUND"
 	BYTE	CASC_NullTerm
-	String "SEASCAPE"
+	;!@ New data
+	;String "SEASCAPE"
+	String	"NOP"
 	BYTE	CASC_NullTerm
-	String "MIDNIGHT GREENHOUSE"
+	;!@ New data
+	;String "MIDNIGHT GREENHOUSE"
+	String	"NOP"
 	BYTE	CASC_NullTerm
-	String "NEW MOON"
+	;!@ New data
+	;String "NEW MOON"
+	String	"NOP"
 	BYTE	CASC_NullTerm
-	String "LABYRINTH"
+	;!@ New data
+	;String "LABYRINTH"
+	String	"NOP"
 	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "TRIAL AND ERROR"
-	String "TRIAL AND ERROR"
+	;!@ New data
+	;String "TRIAL AND ERROR"
+	String	"NOP"
 	BYTE	CASC_NullTerm
 	String "WALKIN="
 	BYTE	CASC_NullTerm
-	String "HYPER-HYPER"
+	;!@ NEW Data
+	;String "HYPER-HYPER"
+	 String "MKWII MENU"
 	BYTE	CASC_NullTerm
 	String "EVENING STAR"
 	BYTE	CASC_NullTerm
@@ -285,73 +297,103 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "TAKE OFF"
-	String "SYSTEM MENU"
+	 String "SYSTEM MENU-SH"
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "COMBINATION"
 	 String "SONIC FACTORY-SA3"
 	BYTE	CASC_NullTerm
-	String "TAKE A NAP"
+	;!@ New data
+	;String "TAKE A NAP"
+	String	"NOP"
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "SURGING POWER"
-	String "RANKING-CTVO "
+	String "RANKING-CTVO"
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "MECHANICAL DANCE"
 	String "GAMEOVER"	
 	BYTE	CASC_NullTerm
-	String "TUBE PANIC"
+	;!@ New data
+	;String "TUBE PANIC"
+	String	"NOP"
 	BYTE	CASC_NullTerm
-	String "CRYSTAL NIGHTMARE"
+	;!@ NEW Data
+	;String "CRYSTAL NIGHTMARE"
+	String "SPLASH-HDNR1"
 	BYTE	CASC_NullTerm
-	String "CHILD=S SONG"
+	;!@ New data
+	;String "CHILD=S SONG"
+	String	"NOP ODD MARCH-BHGE"
 	BYTE	CASC_NullTerm
-	String "SODA POP"
+	;!@ New data
+	;String "SODA POP"
+	String	"NOP"
 	BYTE	CASC_NullTerm
-	String "PENDULUM"
+	;!@ New data
+	;String "PENDULUM"
+	String	"NOP"
 	BYTE	CASC_NullTerm
-	String "SILVER SCREEN"
+	;!@ New data
+	;String "SILVER SCREEN"
+	String	"NOP WIZARDS OF THE SONIC"
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "TACHY TOUCH"
 	String "ELEGY-HDNV"
 	BYTE	CASC_NullTerm
-	String "CHAOTIC WORLD"
+	;!@ New data
+	;String "CHAOTIC WORLD"
+	String	"NOP"
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "SURPRISE!"
 	String "ENEMY ATTACK-FFX"
 	BYTE	CASC_NullTerm
-	String "NICE MEETING YOU"
+	;!@ New data
+	;String "NICE MEETING YOU"
+	String	"NOP"
 	BYTE	CASC_NullTerm
-	String "HAVE A HAPPY DAY"
+	;!@ New data
+	;String "HAVE A HAPPY DAY"
+	String	"OPTIONS-SADV3"
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "REACH THE GOAL"
 	String "SONIC 1 GOAL"
 	BYTE	CASC_NullTerm
-	String "HIGH FIVE"
+	;!@ New data
+	;String "HIGH FIVE"
+	String	"NOP"
 	BYTE	CASC_NullTerm
-	String "DECISION"
+	;!@ New data
+	;String "DECISION"
+	String	"NOP"
 	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "FROM PARTY TO PARTY"
-	String "PATIENCE - CTVO"
+	String "PATIENCE-CTVO"
 	BYTE	CASC_NullTerm
-	String "HAVE SOME FUN"
+	;!@ NEW Data
+	;String "HAVE SOME FUN"
+	String "E.G.G.M.A.N."
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "ORIENTAL LEGEND"
 	String "ZELDA VS NOMY"
 	BYTE	CASC_NullTerm
-	String "STEEL HEART"
+	;!@ New data
+	;String "STEEL HEART"
+	String	"NOP"
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "TRIBUTE"
 	String "SEGA CH"
 	BYTE	CASC_NullTerm
-	String "DESTRUCTIVE POWER"
+	;!@ New Data
+	;String "DESTRUCTIVE POWER"
+	String "RUSH-DM-SFD"
 	BYTE	CASC_NullTerm
 	String "JUST ANOTHER DAY"
 	BYTE	CASC_NullTerm

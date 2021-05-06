@@ -1,278 +1,121 @@
+Target	EQU	$4E9B8
+PWMVol	EQU	$7F
+;!@ FMVol	EQU	$08
+FMVol	EQU	$04
+	smpsHeaderVoice	SA2_Eggman_Patches, Target
+	smpsHeaderChan		$06, $03
+	smpsHeaderTempoC	$03, $05
+	smpsHeaderFM	SA2_Eggman_FM1, Target, $00, FMVol
+	smpsHeaderFM	SA2_Eggman_FM2, Target, $00, FMVol+$01
+	smpsHeaderFM	SA2_Eggman_FM3, Target, $00, FMVol
+	smpsHeaderFM	SA2_Eggman_FM4, Target, $00, FMVol
+	smpsHeaderFM	SA2_Eggman_FM5, Target, $00, FMVol
+	smpsHeaderFM	SA2_Eggman_FM6, Target, $00, FMVol+$01
+	smpsHeaderPSG	SA2_Eggman_PSG1, Target, $00, $00, $00, $00
+	smpsHeaderPSG	SA2_Eggman_PSG2, Target, $00, $00, $00, $00
+	smpsHeaderPSG	SA2_Eggman_PSG3, Target, $00, $00, $00, $00
+	smpsHeaderPWM	SA2_Eggman_PWM1, Target, $00, PWMVol
+	smpsHeaderPWM	SA2_Eggman_PWM2, Target, $00, PWMVol
+	smpsHeaderPWM	SA2_Eggman_PWM3, Target, $00, PWMVol
+	smpsHeaderPWM	SA2_Eggman_PWM4, Target, $00, PWMVol
 
-Target	EQU	$4E445
-	smpsHeaderVoice	HaveFun_Patches, Target
-	smpsHeaderChan	$06, $03
-	smpsHeaderTempo	$01, $4D
-	smpsHeaderFM	HaveFun_FM1, Target, $00, $0A
-	smpsHeaderFM	HaveFun_FM2, Target, $00, $08
-	smpsHeaderFM	HaveFun_FM3, Target, $00, $0D
-	smpsHeaderFM	HaveFun_FM4, Target, $F4, $10
-	smpsHeaderFM	HaveFun_FM5, Target, $FB, $15
-	smpsHeaderFM	HaveFun_FM6, Target, $F4, $1C
-	smpsHeaderPSG	HaveFun_PSG1, Target, $F4, $00, $00, $00
-	smpsHeaderPSG	HaveFun_PSG2, Target, $F4, $03, $00, $00
-	smpsHeaderPSG	HaveFun_PSG3, Target, $23, $00, $00, $00
-	smpsHeaderPWM	HaveFun_PWM1, Target, $00, $FF
-	smpsHeaderPWM	HaveFun_PWM2, Target, $00, $AF
-	smpsHeaderPWM	HaveFun_PWM3, Target, $00, $FF
-	smpsHeaderPWM	HaveFun_PWM4, Target, $00, $88
-
-HaveFun_FM1:
+SA2_Eggman_FM1:
 	smpsFMvoice		$00
-	smpsPan		panCenter
-	dc.b	nA1, $30, nC2, nA1, nC2, nCs2, $06, nE2
-	dc.b	nG2, nBb2, nD3, nF3, nAb3, nB3, $36
+	smpsPan		panLeft
+	;!@ dc.b	nRst, $55, $02, nA2, $06, nB2, $03
+	dc.b	nRst, $55, nRst, $02, nA2, $06, nB2, $03
 	smpsStop
 
-HaveFun_FM2:
+SA2_Eggman_FM2:
+	smpsFMvoice		$01
+	smpsPan		panCenter
+	dc.b	nRst, $24, nD3, $06, nB1, nRst, $27, nA1
+	dc.b	$06, nB1, $03
+	smpsStop
+
+SA2_Eggman_FM3:
+	smpsPan		panCenter
 	smpsFMvoice		$02
-	smpsPan		panCenter
-	dc.b	nE6, $18
-	smpsAlterVol		$03
-	smpsPan		panRight
-	dc.b	nE7
-	smpsAlterVol		$FD
-	smpsPan		panCenter
-	dc.b	nEb6
-	smpsAlterVol		$03
-	smpsPan		panRight
-	dc.b	nEb7
-	smpsAlterVol		$FD
-	smpsPan		panCenter
-	dc.b	nD6
-	smpsAlterVol		$03
-	smpsPan		panRight
-	dc.b	nD7
-	smpsAlterVol		$FD
-	smpsPan		panCenter
-	dc.b	nE6
-	smpsAlterVol		$03
-	smpsPan		panRight
-	dc.b	nE7
-	smpsAlterVol		$FD
-	smpsPan		panCenter
-	dc.b	nG6, $30
-	smpsAlterVol		$03
-	smpsPan		panCenter, $1C
+	dc.b	nCs3, $03, nFs3, nAb3, nCs3, nB3, nCs4, nCs3
+	dc.b	nFs3, nAb3, nCs3, nD4, nCs4, nD3, $06, nB1
+
+SA2_Eggman_Loop1:
+	dc.b	nCs3, $03, nFs3, nAb3, nCs3, nB3, nCs4
+	smpsLoop		$00, $02, SA2_Eggman_Loop1, Target
+	;!@ dc.b	nRst, nA1, $06, nB1, $03, nCs3, nFs3, nAb3
+	dc.b	nRst, $03, nA1, $06, nB1, $03, nCs3, nFs3, nAb3
+	dc.b	nCs3, nB3, nCs4, nD4, nCs4
 	smpsStop
 
-HaveFun_FM3:
-	smpsFMvoice		$02
-	smpsPan		panCenter
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $09, nE6, $18
-	smpsAlterVol		$03
+SA2_Eggman_FM4:
+	smpsFMvoice		$00
 	smpsPan		panRight
-	dc.b	nE7
-	smpsAlterVol		$FD
-	smpsPan		panCenter
-	dc.b	nEb6
-	smpsAlterVol		$03
-	smpsPan		panRight
-	dc.b	nEb7
-	smpsAlterVol		$FD
-	smpsPan		panCenter
-	dc.b	nD6
-	smpsAlterVol		$03
-	smpsPan		panRight
-	dc.b	nD7
-	smpsAlterVol		$FD
-	smpsPan		panCenter
-	dc.b	nE6
-	smpsAlterVol		$03
-	smpsPan		panRight
-	dc.b	nE7, $0F
-	smpsAlterVol		$FD
-	smpsPan		panCenter
-	smpsAlterVol		$FB
-	dc.b	nCs5, $06, nE5, $03, nRst, nG5, $06, nBb5
-	dc.b	$03, nRst, nD6, $06, nF6, $03, nRst, nA6
-	dc.b	$06, nB6, $06
+	;!@ dc.b	nRst, $55, $02, nA2, $06, nB2, $03
+	dc.b	nRst, $55, nRst, $02, nA2, $06, nB2, $03
 	smpsStop
 
-HaveFun_FM4:
+SA2_Eggman_FM5:
+	smpsPan		panCenter
+	smpsFMvoice		$03
+	dc.b	nCs3, $0C, nE3, nCs3, $06, nG3, nD3, nB2
+	dc.b	nCs3, $0C, nE3, nCs3, $06, nFs3, $08, nRst
+	dc.b	$01, nA2, $06, nB2, $03, nCs3, $0C, nE3
+	dc.b	$06, nCs3
+	smpsStop
+
+SA2_Eggman_FM6:
 	smpsFMvoice		$01
 	smpsPan		panCenter
-	smpsCall		HaveFun_Call1, Target
+	dc.b	nRst, $24, nD2, $06, nB2, nRst, $27, nA2
+	dc.b	$06, nB2, $03
+SA2_Eggman_PSG1:
+SA2_Eggman_PSG2:
+SA2_Eggman_PSG3:
 	smpsStop
-
-HaveFun_Call1:
-	smpsAlterVol		$F6
-	dc.b	nA4, $06
-	smpsAlterVol		$0A
-	dc.b	nB4, $03, nRst, nC5, nRst, nA4, $06, nB4
-	dc.b	$03, nRst, nA4, nRst, nB4, nRst, nC5, $06
-	dc.b	nA4, $06, nE5, $03, nRst, nC5, nRst, nA4
-	dc.b	$06, nB4, $03, nRst, nA4, nRst, nB4, nRst
-	smpsAlterVol		$F6
-	dc.b	nC5, $06
-	smpsAlterVol		$0A
-	smpsLoop		$00, $02, HaveFun_Call1, Target
-	smpsAlterVol		$F6
-	dc.b	nCs5, $06
-	smpsAlterVol		$0A
-	dc.b	nE5, $03, nRst, nG5, $06, nBb5, $03, nRst
-	smpsAlterVol		$F6
-	dc.b	nD6, $06
-	smpsAlterVol		$0A
-	dc.b	nF6, $03, nRst, nA6, $06, nB6, $36
-	smpsReturn
-
-HaveFun_FM5:
-	smpsFMvoice		$01
-	smpsPan		panCenter
-	smpsCall		HaveFun_Call1, Target
-	smpsStop
-
-HaveFun_FM6:
-	smpsFMvoice		$01
-	smpsPan		panCenter
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $06
-	smpsCall		HaveFun_Call1, Target
-	smpsStop
-
-HaveFun_PSG1:
-	smpsPSGvoice	$02
-
-HaveFun_Loop1:
-	dc.b	nA4, $06, nA5
-	smpsSetVol	$07
-	dc.b	nA5, $06, nRst, $06
-	smpsSetVol	$F9
-	smpsLoop		$00, $08, HaveFun_Loop1, Target
-	dc.b	nRst, $60
-	smpsStop
-
-HaveFun_PSG2:
-	smpsPSGvoice	$02
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $0C, nA4, $06, nA5, $03, nRst, $03
-	smpsSetVol	$07
-	dc.b	nRst, $06, nRst, $06
-	smpsSetVol	$F9
-	smpsLoop		$00, $08, HaveFun_Loop1, Target
-	dc.b	nRst, $60
-	smpsStop
-
-HaveFun_PSG3:
-	smpsPSGform	$E7
-
-HaveFun_Loop2:
-	smpsPSGvoice	$02
-	dc.b	nC4, $0C
-	smpsSetVol	$03
-	dc.b	nC4, $0C, nC4, nC4, nC4, nC4, nC4, nC4
-	dc.b	$06
-	smpsPSGvoice	$05
-	dc.b	nC4, $06
-	smpsSetVol	$FD
-	smpsLoop		$00, $02, HaveFun_Loop2, Target
-	smpsPSGvoice	$02
-	dc.b	nC4, $0C, nC4
-	smpsPSGvoice	$05
-	dc.b	nC4, $06
-	smpsPSGvoice	$48
-	dc.b	nC4, $0C, nRst, $30
-	smpsStop
-
-HaveFun_PWM1:
-	dc.b	$8B, $18, nRst, $12, $8B, $06, $8B, $0C
-	dc.b	$8B, nRst, $18
-	smpsLoop		$00, $02, HaveFun_PWM1, Target
-	dc.b	$8B, $18, nRst, $48
-	smpsStop
-
-HaveFun_PWM2:
-	dc.b	$96, $60, $96, $30, $82, $12
-	smpsAlterVol		$A6
-	dc.b	$03, $03
-	smpsAlterVol		$11
-	dc.b	$82, $06
-	smpsAlterVol		$22
-	dc.b	$82
-	smpsAlterVol		$22
-	dc.b	$82
-	smpsAlterVol		$22
-	dc.b	$82
-	smpsAlterVol		$22
-	dc.b	$82, $18, nRst, $48
-	smpsStop
-
-HaveFun_PWM3:
-	dc.b	$96, $60, $96, $60, $96, $2A, $89, $06
-	dc.b	nRst, $30
-	smpsStop
-
-HaveFun_PWM4:
-	dc.b	$95, $30, nRst, $1E
-	smpsAlterVol		$11
-	dc.b	$94, $12, $95, $18, nRst, $18
-	smpsAlterVol		$78
-	dc.b	$95, $03, $95
-	smpsAlterVol		$11
-	dc.b	$95, $03, $95
-	smpsAlterVol		$11
-
-HaveFun_Loop3:
-	dc.b	$95, $03, $95
-	smpsAlterVol		$22
-	smpsLoop		$00, $06, HaveFun_Loop3, Target
-	dc.b	$94, $0C
-	smpsStop
-
-HaveFun_Patches:
-
 	
-	dc.b	$3D
-	dc.b	$01, $00, $01, $02,	$1F, $1F, $1F, $1F
-	dc.b	$0D, $0C, $0C, $0C,	$0D, $0A, $0A, $0A
-	dc.b	$F6, $97, $A7, $A7,	$1C, $80, $80, $85
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
+SA2_Eggman_PWM1:
+	dc.b	pAKick, $03, pClosedHH, pASnare, pClosedHH, $02, pAKick, $04
+	dc.b	$02, pClosedHH, $01, pASnare, $03, pClosedHH, $02, $03
+	dc.b	$01, $02, $03, $01, $02, pAKick, $04, $03
+	dc.b	pASnare, pAKick, pAKick, pClosedHH, pASnare, pClosedHH, pClosedHH, pClosedHH
+	dc.b	$02, $01, $03, $02, $03, $01, $02, $01
+	dc.b	$02, $01, $02, pAKick, $01, pClosedHH, $03, $03
+	dc.b	pASnare, pClosedHH, pCrashCymb, pClosedHH, pASnare, pClosedHH, pClosedHH, pClosedHH
+	dc.b	$02, $01, pASnare, $03, pClosedHH, $01
+	smpsStop
 	
-	dc.b	$3A
-	dc.b	$01, $0F, $01, $01,	$0F, $0F, $0F, $14
-	dc.b	$0A, $0A, $0A, $05,	$02, $02, $02, $08
-	dc.b	$56, $A6, $56, $17,	$19, $28, $28, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+SA2_Eggman_PWM2:
+	dc.b	pCrashCymb, $0C, pClosedHH, $03, $06, pAKick, $03, $06
+	dc.b	pASnare, $05, pClosedHH, $04, $03, $03, $03, pCrashCymb
+	dc.b	$0B, pAKick, $04, $03, pASnare, pAKick, pAKick, $06
+	dc.b	pASnare, $05, pClosedHH, $04, pAKick, $03, pClosedHH, pAKick
+	dc.b	pAKick, $0B, $04, $06, $02
+SA2_Eggman_PWM3:
+SA2_Eggman_PWM4:
+	smpsStop	
 
+SA2_Eggman_Patches:
+	;Slap Bass1
+	dc.b	$39
+	dc.b	$33, $01, $51, $01,	$5F, $5F, $5F, $5F
+	dc.b	$0F, $00, $00, $0D,	$01, $01, $01, $01
+	dc.b	$33, $1A, $1A, $17,	$1E, $19, $16, $11-$05
 	
-	dc.b	$2C
-	dc.b	$35, $76, $35, $36,	$1F, $1D, $1F, $1C
-	dc.b	$03, $0A, $03, $0A,	$02, $02, $02, $02
-	dc.b	$A3, $77, $A3, $77,	$1E, $80, $28, $85
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	;Overdrive Guitar
+	dc.b	$02
+	dc.b	$00, $00, $00, $00,	$0C, $0C, $16, $16
+	dc.b	$17, $17, $00, $00,	$09, $09, $09, $09
+	dc.b	$02, $02, $02, $02,	$21, $10, $12, $12-$06
+	
+	;Distortion Guitar (lead)
+	dc.b	$02
+	dc.b	$31, $34, $71, $71,	$16, $17, $17, $17
+	dc.b	$05, $05, $05, $05,	$07, $07, $07, $07
+	dc.b	$13, $13, $13, $13,	$1C, $1C, $1C, $14-$08
+	
+	;Fretless Bass (bass)
+	dc.b	$26
+	dc.b	$00, $00, $01, $02,	$9F, $1F, $9F, $1F
+	dc.b	$08, $01, $11, $14,	$0E, $02, $0E, $0A
+	dc.b	$D8, $48, $F8, $F8,	$14, $14, $12, $0E
+	even

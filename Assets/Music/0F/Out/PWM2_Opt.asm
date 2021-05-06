@@ -1,55 +1,46 @@
-SH_SystemMenu_PWM2_Header:
-	sHeaderInit
-	sHeaderPatch	SH_SystemMenu_PWM2_Patches
-	sHeaderCh	$01, $00
-	sHeaderTempo	$02, $0F
-	sHeaderDAC	SH_SystemMenu_PWM2_DAC
-
-SH_SystemMenu_PWM2_DAC:
-	dc.b $91, $02
+SH_SystemMenu_PWM2:
+	dc.b	pCowbell, $02
 
 SH_SystemMenu_PWM2_Loop1:
-	dc.b $03, $03, $8F, dSnare, $91, $91, $8F, $91
-	dc.b $92, $91, $8F, dSnare, $91, $92, $8D, $91
-	sLoop		$00, $0F, SH_SystemMenu_PWM2_Loop1
-	dc.b $91, $91, $8F, dSnare, $91, $91, $8F, $91
-	dc.b $92, $91, $8F, dSnare, $91, $92, $8D
+	dc.b	$03, pFingSnap, pClickHi, pESnare, pCowbell, pFingSnap, pClickHi, pCowbell
+	dc.b	pBongoHi, pFingSnap, pClickHi, pESnare, pCowbell, pBongoHi, pEHiHat, pCowbell
+	smpsLoop		$00, $0F, SH_SystemMenu_PWM2_Loop1, Target
+	dc.b	pCowbell, pFingSnap, pClickHi, pESnare, pCowbell, pFingSnap, pClickHi, pCowbell
+	dc.b	pBongoHi, pFingSnap, pClickHi, pESnare, pCowbell, pBongoHi, pEHiHat
 
 SH_SystemMenu_PWM2_Loop3:
-	dc.b dKick, $84, $91
+	dc.b	pAKick, pEHiHat, pCowbell
 
 SH_SystemMenu_PWM2_Loop2:
-	dc.b $91, dKick, $06, $91, $03
-	sLoop		$00, $03, SH_SystemMenu_PWM2_Loop2
-	dc.b $03, dKick, $84, $91, $91, dLowTimpani, $06, $91
-	dc.b $03, $03, dKick, $06, $91, $03, $03, dKick
-	dc.b $06, $91, $03, $03
-	sLoop		$01, $02, SH_SystemMenu_PWM2_Loop3
-	dc.b $03
+	dc.b	pCowbell, pAKick, $06, pCowbell, $03
+	smpsLoop		$00, $03, SH_SystemMenu_PWM2_Loop2, Target
+	dc.b	$03, pAKick, pEHiHat, pCowbell, pCowbell, pClap, $06, pCowbell
+	dc.b	$03, $03, pAKick, $06, pCowbell, $03, $03, pAKick
+	dc.b	$06, pCowbell, $03, $03
+	smpsLoop		$01, $02, SH_SystemMenu_PWM2_Loop3, Target
+	dc.b	$03
 
 SH_SystemMenu_PWM2_Loop4:
-	dc.b $03, $03, $8F, dSnare, $91, $91, $8F, $91
-	dc.b $92, $91, $8F, dSnare, $91, $92, $8D, $91
-	sLoop		$00, $05, SH_SystemMenu_PWM2_Loop4
-	dc.b $91, $91, $8F, dSnare, $91, $91, $8F, $91
-	dc.b $92, $91, $8F, dSnare, $91, $92, $8D, $91
-	dc.b $01
+	dc.b	$03, pFingSnap, pClickHi, pESnare, pCowbell, pFingSnap, pClickHi, pCowbell
+	dc.b	pBongoHi, pFingSnap, pClickHi, pESnare, pCowbell, pBongoHi, pEHiHat, pCowbell
+	smpsLoop		$00, $05, SH_SystemMenu_PWM2_Loop4, Target
+	dc.b	pCowbell, pFingSnap, pClickHi, pESnare, pCowbell, pFingSnap, pClickHi, pCowbell
+	dc.b	pBongoHi, pFingSnap, pClickHi, pESnare, pCowbell, pBongoHi, pEHiHat, pCowbell
+	dc.b	$01
 
 SH_SystemMenu_PWM2_Jump1:
-	dc.b nRst, $02, $91
+	dc.b	nRst, $02, pCowbell
 
 SH_SystemMenu_PWM2_Loop5:
-	dc.b $03, $03, $8F, dSnare, $91, $91, $8F, $91
-	dc.b $92, $91, $8F, dSnare, $91, $92, $8D, $91
-	sLoop		$00, $09, SH_SystemMenu_PWM2_Loop5
-	dc.b $91, $91, $8F, $91, $91, $91, $8F, $91
-	dc.b $92, $91, $8F, $91
+	dc.b	$03, pFingSnap, pClickHi, pESnare, pCowbell, pFingSnap, pClickHi, pCowbell
+	dc.b	pBongoHi, pFingSnap, pClickHi, pESnare, pCowbell, pBongoHi, pEHiHat, pCowbell
+	smpsLoop		$00, $09, SH_SystemMenu_PWM2_Loop5, Target
+	dc.b	pCowbell, pFingSnap, pClickHi, pCowbell, pCowbell, pFingSnap, pClickHi, pCowbell
+	dc.b	pBongoHi, pFingSnap, pClickHi, pCowbell
 
 SH_SystemMenu_PWM2_Loop6:
-	dc.b $91, $92, $8D, $91, $91, $91, $8F, dSnare
-	dc.b $91, $91, $8F, $91, $92, $91, $8F, dSnare
-	sLoop		$00, $06, SH_SystemMenu_PWM2_Loop6
-	dc.b $91, $92, $8D, $91, $01
-	sJump		SH_SystemMenu_PWM2_Jump1
-
-SH_SystemMenu_PWM2_Patches:
+	dc.b	pCowbell, pBongoHi, pEHiHat, pCowbell, pCowbell, pFingSnap, pClickHi, pESnare
+	dc.b	pCowbell, pFingSnap, pClickHi, pCowbell, pBongoHi, pFingSnap, pClickHi, pESnare
+	smpsLoop		$00, $06, SH_SystemMenu_PWM2_Loop6, Target
+	dc.b	pCowbell, pBongoHi, pEHiHat, pCowbell, $01
+	smpsJump		SH_SystemMenu_PWM2_Jump1, Target

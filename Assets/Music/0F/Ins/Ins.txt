@@ -1,0 +1,20 @@
+MIDI Tempo:
+140=12/02
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+36	B2	Accoustic Bass Drum	$8B/pAKick
+40	E-3	Hand Clap			$8A/pClap
+41	E3	Electric Snare		$82/pESnare
+43	F#3	Closed Hihat		$98/pClosedHH
+45	G#3	Pedal Hihat			$88/pEHiHat
+47	B#3	Open Hihat			$99/pOpenHH
+61	C5	High Bongo			$90/pClickHi
+63	D5	Mute High Congo		$92/pBongoHi 
+68	G5	High Agogo			$90/pClickHi?
+69	G#5	Low Agogo			$91/pClickLo?
+70	A5	Cabasa				$8F/pCowbell?
+71	B#5	Maracas				$8E/pFingSnap?
+72	B5	Short whistle		$8D/pBell?
+81	G#6	Mute Triangle		$88/pEHiHat?
+82	A6	Open Triangle		$84/pRideBell?

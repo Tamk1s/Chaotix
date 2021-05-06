@@ -1,0 +1,9 @@
+MIDI Tempo:
+160=06/03
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+36	Acoustic Bass Drum	$8B/pAKick
+39	Acoustic Snare		$8C/pASnare
+43	Closed Hi Hat		$98/pClosedHH
+50	Crash Cymbal		$89/pCrashCymb

@@ -1,63 +1,41 @@
-SH_SystemMenu_PWM1_Header:
-	sHeaderInit
-	sHeaderPatch	SH_SystemMenu_PWM1_Patches
-	sHeaderCh	$01, $00
-	sHeaderTempo	$02, $0F
-	sHeaderDAC	SH_SystemMenu_PWM1_DAC
-
-SH_SystemMenu_PWM1_DAC:
-	sPan		spCenter
-	dc.b $8D, $02
+SH_SystemMenu_PWM1:
+	smpsPan		panCenter
+	dc.b	pRideBell, $02
 
 SH_SystemMenu_PWM1_Loop1:
-	dc.b $03
-	sLoop		$00, $0D, SH_SystemMenu_PWM1_Loop1
-	dc.b $91, $8F, $8D
-	sLoop		$01, $03, SH_SystemMenu_PWM1_Loop1
-	dc.b $8D, $8D, $8D, $8D, $8D, $01, nRst, $02
-	dc.b $8D
+	dc.b	pEHiHat, $03, $03, pRideBell
+	smpsLoop		$00, $03, SH_SystemMenu_PWM1_Loop1, Target
+	dc.b	pEHiHat, pRideBell, pRideBell, pEHiHat, pFingSnap, pClickHi, pRideBell
+	smpsLoop		$01, $0F, SH_SystemMenu_PWM1_Loop1, Target
 
 SH_SystemMenu_PWM1_Loop2:
-	dc.b $03
-	sLoop		$00, $08, SH_SystemMenu_PWM1_Loop2
-
-SH_SystemMenu_PWM1_Loop4:
-	dc.b $91, $8F
+	dc.b	pEHiHat, pEHiHat, pRideBell
+	smpsLoop		$00, $03, SH_SystemMenu_PWM1_Loop2, Target
+	dc.b	pEHiHat, pRideBell, pRideBell, pEHiHat, pFingSnap, pClickHi
 
 SH_SystemMenu_PWM1_Loop3:
-	dc.b $8D
-	sLoop		$00, $0E, SH_SystemMenu_PWM1_Loop3
-	sLoop		$01, $0C, SH_SystemMenu_PWM1_Loop4
-	dc.b $91, $8F
+	dc.b	pClosedHH, $06, pOpenHH, nRst, pOpenHH, pClosedHH, pOpenHH, pClosedHH
+	dc.b	pOpenHH
+	smpsLoop		$00, $04, SH_SystemMenu_PWM1_Loop3, Target
 
-SH_SystemMenu_PWM1_Loop5:
-	dc.b dHiTimpani, $06, $84, nRst, $84, dHiTimpani, $84, dHiTimpani
-	dc.b $84
-	sLoop		$00, $04, SH_SystemMenu_PWM1_Loop5
-
-SH_SystemMenu_PWM1_Loop7:
-	dc.b $8D
-
-SH_SystemMenu_PWM1_Loop6:
-	dc.b $03
-	sLoop		$00, $0E, SH_SystemMenu_PWM1_Loop6
-	dc.b $91, $8F
-	sLoop		$01, $06, SH_SystemMenu_PWM1_Loop7
-	dc.b $8D, $01
+SH_SystemMenu_PWM1_Loop4:
+	dc.b	pRideBell, $03, pEHiHat, pEHiHat
+	smpsLoop		$00, $03, SH_SystemMenu_PWM1_Loop4, Target
+	dc.b	pRideBell, pEHiHat, pRideBell, pRideBell, pEHiHat, pFingSnap, pClickHi
+	smpsLoop		$01, $06, SH_SystemMenu_PWM1_Loop4, Target
+	dc.b	pRideBell, $01
 
 SH_SystemMenu_PWM1_Jump1:
-	dc.b nRst, $02, $8D
+	dc.b	nRst, $02
 
-SH_SystemMenu_PWM1_Loop8:
-	dc.b $03
-	sLoop		$00, $0D, SH_SystemMenu_PWM1_Loop8
-	dc.b $91, $8F, $8D
-	sLoop		$01, $0F, SH_SystemMenu_PWM1_Loop8
+SH_SystemMenu_PWM1_Loop5:
+	dc.b	pEHiHat, $03, $03, pRideBell
+	smpsLoop		$00, $03, SH_SystemMenu_PWM1_Loop5, Target
+	dc.b	pEHiHat, pRideBell, pRideBell, pEHiHat, pFingSnap, pClickHi, pRideBell
+	smpsLoop		$01, $0F, SH_SystemMenu_PWM1_Loop5, Target
 
-SH_SystemMenu_PWM1_Loop9:
-	dc.b $8D
-	sLoop		$00, $0D, SH_SystemMenu_PWM1_Loop9
-	dc.b $91, $8F, $8D, $01
-	sJump		SH_SystemMenu_PWM1_Jump1
-
-SH_SystemMenu_PWM1_Patches:
+SH_SystemMenu_PWM1_Loop6:
+	dc.b	pEHiHat, pEHiHat, pRideBell
+	smpsLoop		$00, $03, SH_SystemMenu_PWM1_Loop6, Target
+	dc.b	pEHiHat, pRideBell, pRideBell, pEHiHat, pFingSnap, pClickHi, pRideBell, $01
+	smpsJump		SH_SystemMenu_PWM1_Jump1, Target
