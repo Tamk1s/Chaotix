@@ -1,0 +1,34 @@
+MID2SMPS Tempo:
+12/03
+
+
+FM:
+Use MID2SMPS 0350's default voices, except override:
+*Lead 1 Square
+
+Defaults:
+*Lead 2 Sawtooth
+*Synth Strings 1
+
+
+PSG:
+MIDI INS -> PSG Voi
+$00 -> $00
+$00 -> $00
+$00 -> $00
+
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+37	C3	Bass Drum	$81/Electric Kick
+38	D3	Accoustic Snare	$8C/Acoustic Snare
+40	E3	Electric Snare	$82/Electric Snare
+44	G#3	Pedal Hi Hat	$88/Electric Hi-Hat?
+42	F#3	Closed Hi Hat	$98/Closed Hi Hat
+
+27	E-2	Closed Hi Hat	$98/Closed Hi Hat
+28	E2	Paper Smack		$88/Electric Hi-Hat?
+
+46	B-3	Open Hi Hat		$99/Open Hi Hat
+
+

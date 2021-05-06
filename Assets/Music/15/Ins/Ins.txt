@@ -1,0 +1,15 @@
+Tempo:
+MIDI 0603
+
+PSG:
+Voice # for all
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+35	B2	Accoustic BDrum	$81/pAKick
+37	C#3	SideKick		$8E/pFingSnap?
+38	D3	Accoustic Snare	$8C/pASnare
+40	E3	Electric Snare	$82/pESnare
+42	F#3	Closed Hi Hat	$98/pClosedHH
+49	C#4	Crash Cymbal	$89/pCrashCymb
+57	A4	Crash Cymbal2	$83/pSplashCymb
