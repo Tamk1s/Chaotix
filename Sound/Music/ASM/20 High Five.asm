@@ -1,5 +1,5 @@
 
-Target	EQU	$4E7E4
+Target	EQU	$4D7D9
 	smpsHeaderVoice	High5_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $30

@@ -1,5 +1,5 @@
 
-Target	EQU	$54EA7
+Target	EQU	$540C0
 	smpsHeaderVoice	Decision2_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $44

@@ -1,4 +1,4 @@
-Target	EQU	$4C929
+Target	EQU	$4ABA3
 PSGVoi	EQU $00
 	smpsHeaderVoice		Elegy_Patches, Target
 	smpsHeaderChan		$06, $03

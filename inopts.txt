@@ -393,7 +393,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "DESTRUCTIVE POWER"
-	String "RUSH-DM-SFD"
+	String "BLUE TWILIGHT-HDN"
 	BYTE	CASC_NullTerm
 	String "JUST ANOTHER DAY"
 	BYTE	CASC_NullTerm

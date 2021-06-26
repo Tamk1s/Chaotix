@@ -1,5 +1,5 @@
 
-Target	EQU	$4F545
+Target	EQU	$4E53A
 	smpsHeaderVoice	SteelHeart_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $20

@@ -1,5 +1,5 @@
 
-Target	EQU	$51B06
+Target	EQU	$50D1F
 	smpsHeaderVoice	JustDay_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $25

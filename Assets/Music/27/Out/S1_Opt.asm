@@ -1,1033 +1,456 @@
 
 	sHeaderInit
-	smpsHeaderVoice	DMR_Patches, Target
+	smpsHeaderVoice	HDN_BlueTwl_Patches, Target
 	smpsHeaderChan	$07, $03
-	smpsHeaderTempo	$05, $0F
-	sHeaderDAC	DMR_DAC
-	smpsHeaderFM	DMR_FM1, Target, $00, $0E
-	smpsHeaderFM	DMR_FM2, Target, $00, $0E
-	smpsHeaderFM	DMR_FM3, Target, $00, $0E
-	smpsHeaderFM	DMR_FM4, Target, $00, $0E
-	smpsHeaderFM	DMR_FM5, Target, $00, $0E
-	smpsHeaderFM	DMR_FM6, Target, $00, $0E
-	smpsHeaderPSG	DMR_PSG1, Target, $00, $02, $00, $00
-	smpsHeaderPSG	DMR_PSG2, Target, $00, $02, $00, $00
-	smpsHeaderPSG	DMR_PSG3, Target, $00, $05, $00, $12
+	smpsHeaderTempo	$02, $03
+	sHeaderDAC	HDN_BlueTwl_DAC
+	smpsHeaderFM	HDN_BlueTwl_FM1, Target, $00, $14
+	smpsHeaderFM	HDN_BlueTwl_FM2, Target, $00, $1F
+	smpsHeaderFM	HDN_BlueTwl_FM3, Target, $00, $0F
+	smpsHeaderFM	HDN_BlueTwl_FM4, Target, $00, $15
+	smpsHeaderFM	HDN_BlueTwl_FM5, Target, $00, $14
+	smpsHeaderFM	HDN_BlueTwl_FM6, Target, $00, $1F
+	smpsHeaderPSG	HDN_BlueTwl_PSG1, Target, $00, $0C, $00, $00
+	smpsHeaderPSG	HDN_BlueTwl_PSG2, Target, $00, $0A, $00, $00
+	smpsHeaderPSG	HDN_BlueTwl_PSG3, Target, $00, $0C, $00, $00
 
-DMR_FM1:
+HDN_BlueTwl_FM1:
+	smpsPan		panLeft
 	smpsFMvoice		$00
-	smpsPan		panCenter
-	dc.b	nC3
+	dc.b	nRst, $0C, nA3, $06, nE3, $1C, nRst, $0E
+	dc.b	nE3, $06, nG3, $1C, nRst, $0E, nC4, $08
+	dc.b	nB3, nA3, $13, nRst, $01, nF3, $17, nRst
+	dc.b	$25, nC3, $06, nF3, nE3, $17, nRst, $0D
+	dc.b	nG3, $0B, nRst, $01, nD3, $17, nRst, $0D
+	dc.b	nB2, $06, nC3, $0B, nRst, $01, nD3, $11
+	dc.b	nRst, $01, nA2, $17, nRst, $25, nE3, $11
+	dc.b	nRst, $01, nA3, $11, nRst, $01, nB3, $11
+	dc.b	nRst, $01, nD4, $11, nRst, $07, nD4, $03
+	dc.b	nCs4, nC4, $17, nRst, $19, nD4, $11, nRst
+	dc.b	$01, nC4, $11, nRst, $01, nA3, $0B, nRst
+	dc.b	$0D, nE3, $11, nRst, $01, nG3, $11, nRst
+	dc.b	$01, nA3, $22, nRst, $0B, nC4, $03, nB3
+	dc.b	$17, nRst, $19, nAb3, $09, nA3, nB3, $06
+	dc.b	nC4, $09, nD4, nE4, $06, nRst, $0C, nE3
+	dc.b	$11, nRst, $01, nA3, $11, nRst, $01, nB3
+	dc.b	$11, nRst, $01, nD4, $11, nRst, $07, nD4
+	dc.b	$03, nCs4, nC4, $17, nRst, $19, nD4, $11
+	dc.b	nRst, $01, nC4, $11, nRst, $01, nA3, $0B
+	dc.b	nRst, $0D, nE3, $11, nRst, $01, nG3, $11
+	dc.b	nRst, $01, nA3, $22, nRst, $0B, nC4, $03
+	dc.b	nAb3, $09, nB3, nD4, $06, nB3, $09, nD4
+	dc.b	nF4, $06, nA3, $22, nRst, $1A, nA3, $06
+	dc.b	nE3, $1C, nRst, $0E, nE3, $06, nG3, $1C
+	dc.b	nRst, $0E, nC4, $08, nB3, nA3, $13, nRst
+	dc.b	$01, nF3, $17, nRst, $25, nC3, $06, nF3
+	dc.b	nE3, $17, nRst, $0D, nG3, $0B, nRst, $01
+	dc.b	nD3, $17, nRst, $0D, nB2, $06, nC3, $0B
+	dc.b	nRst, $01, nD3, $11, nRst, $01, nA2, $17
+	dc.b	nRst, $0D, nG3, $06, nA3, nBb3, $17, nRst
+	dc.b	$0A, nAb3, $09, nG3, $0B, nRst, $01, nF3
+	dc.b	$1C, nRst, $0E, nEb3, $17, nRst, $0A, nEb3
+	dc.b	$09, nF3, $0B, nRst, $01, nG3, $1C, nRst
+	dc.b	$0E, nC3, $17, nRst, $0A, nD3, $09, nEb3
+	dc.b	$06, nF3, $22, nRst, $0E, nC3, $09, nEb3
+	dc.b	nF3, $06, nEb3, $09, nF3, nAb3, $06, nG3
+	dc.b	$22, nRst, $0E, nAb3, $17, nRst, $0A, nAb3
+	dc.b	$09, nBb3, $0B, nRst, $01, nBb3, $1C, nRst
+	dc.b	$0E, nB3, $17, nRst, $0A, nAb3, $09, nG3
+	dc.b	$06, nD3, $22, nRst, $0E, nC3, $17, nRst
+	dc.b	$0A, nD3, $09, nEb3, $06, nF3, $17, nRst
+	dc.b	$01, nBb2, $17, nRst, $01, nAb2, $03, nC3
+	dc.b	nBb2, nC3, nAb2, nC3, nBb2, nC3, nBb2, nD3
+	dc.b	nC3, nD3, nB2, nG2, nAb2, nBb2, nC3, $2E
+	dc.b	nRst, $09
+	smpsJump		HDN_BlueTwl_FM1, Target
 
-DMR_Loop1:
-	dc.b	$01, nRst, nB2
-	smpsLoop		$00, $03, DMR_Loop1, Target
-	dc.b	nRst, $02, nC3, $01, nRst, $02, nB1, $01
+HDN_BlueTwl_FM2:
+	smpsPan		panRight
+	smpsFMvoice		$00
+	dc.b	nRst, $0E, nA3, $05, nRst, $01, nE3, $1C
+	dc.b	nRst, $0E, nE3, $05, nRst, $01, nG3, $1C
+	dc.b	nRst, $0E, nC4, $07, nRst, $01, nB3, $07
+	dc.b	nRst, $01, nA3, $12, nRst, $02, nF3, $16
+	dc.b	nRst, $26, nC3, $05, nRst, $01, nF3, $05
+	dc.b	nRst, $01, nE3, $16, nRst, $0E, nG3, $0B
+	dc.b	nRst, $01, nD3, $16, nRst, $0E, nB2, $05
+	dc.b	nRst, $01, nC3, $0B, nRst, $01, nD3, $11
+	dc.b	nRst, $01, nA2, $16, nRst, $26, nE3, $11
+	dc.b	nRst, $01, nA3, $11, nRst, $01, nB3, $11
+	dc.b	nRst, $01, nD4, $11, nRst, $07, nD4, $02
+	dc.b	nRst, $01, nCs4, $02, nRst, $01, nC4, $16
+	dc.b	nRst, $1A, nD4, $11, nRst, $01, nC4, $11
+	dc.b	nRst, $01, nA3, $0B, nRst, $0D, nE3, $11
+	dc.b	nRst, $01, nG3, $11, nRst, $01, nA3, $22
+	dc.b	nRst, $0B, nC4, $02, nRst, $01, nB3, $16
+	dc.b	nRst, $1A, nAb3, $08, nRst, $01, nA3, $08
+	dc.b	nRst, $01, nB3, $05, nRst, $01, nC4, $08
+	dc.b	nRst, $01, nD4, $08, nRst, $01, nE4, $05
+	dc.b	nRst, $0D, nE3, $11, nRst, $01, nA3, $11
+	dc.b	nRst, $01, nB3, $11, nRst, $01, nD4, $11
+	dc.b	nRst, $07, nD4, $02, nRst, $01, nCs4, $02
+	dc.b	nRst, $01, nC4, $16, nRst, $1A, nD4, $11
+	dc.b	nRst, $01, nC4, $11, nRst, $01, nA3, $0B
+	dc.b	nRst, $0D, nE3, $11, nRst, $01, nG3, $11
+	dc.b	nRst, $01, nA3, $22, nRst, $0B, nC4, $02
+	dc.b	nRst, $01, nAb3, $08, nRst, $01, nB3, $08
+	dc.b	nRst, $01, nD4, $05, nRst, $01, nB3, $08
+	dc.b	nRst, $01, nD4, $08, nRst, $01, nF4, $05
+	dc.b	nRst, $01, nA3, $22, nRst, $1A, nA3, $05
+	dc.b	nRst, $01, nE3, $1C, nRst, $0E, nE3, $05
+	dc.b	nRst, $01, nG3, $1C, nRst, $0E, nC4, $07
+	dc.b	nRst, $01, nB3, $07, nRst, $01, nA3, $12
+	dc.b	nRst, $02, nF3, $16, nRst, $26, nC3, $05
+	dc.b	nRst, $01, nF3, $05, nRst, $01, nE3, $16
+	dc.b	nRst, $0E, nG3, $0B, nRst, $01, nD3, $16
+	dc.b	nRst, $0E, nB2, $05, nRst, $01, nC3, $0B
+	dc.b	nRst, $01, nD3, $11, nRst, $01, nA2, $16
+	dc.b	nRst, $0E, nG3, $05, nRst, $01, nA3, $05
+	dc.b	nRst, $01, nBb3, $16, nRst, $0B, nAb3, $08
+	dc.b	nRst, $01, nG3, $0B, nRst, $01, nF3, $1C
+	dc.b	nRst, $0E, nEb3, $16, nRst, $0B, nEb3, $08
+	dc.b	nRst, $01, nF3, $0B, nRst, $01, nG3, $1C
+	dc.b	nRst, $0E, nC3, $16, nRst, $0B, nD3, $08
+	dc.b	nRst, $01, nEb3, $05, nRst, $01, nF3, $22
+	dc.b	nRst, $0E, nC3, $08, nRst, $01, nEb3, $08
+	dc.b	nRst, $01, nF3, $05, nRst, $01, nEb3, $08
+	dc.b	nRst, $01, nF3, $08, nRst, $01, nAb3, $05
+	dc.b	nRst, $01, nG3, $22, nRst, $0E, nAb3, $16
+	dc.b	nRst, $0B, nAb3, $08, nRst, $01, nBb3, $0B
+	dc.b	nRst, $01, nBb3, $1C, nRst, $0E, nB3, $16
+	dc.b	nRst, $0B, nAb3, $08, nRst, $01, nG3, $05
+	dc.b	nRst, $01, nD3, $22, nRst, $0E, nC3, $16
+	dc.b	nRst, $0B, nD3, $08, nRst, $01, nEb3, $05
+	dc.b	nRst, $01, nF3, $16, nRst, $02, nBb2, $16
+	dc.b	nRst, $02, nAb2, nRst, $01, nC3, $02, nRst
+	dc.b	$01, nBb2, $02, nRst, $01, nC3, $02, nRst
+	dc.b	$01, nAb2, $02
 
-DMR_Loop2:
-	dc.b	$01, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $02, DMR_Loop2, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3, nC3, nRst, nB2, nB2, nRst, nB2, nB2
-	dc.b	nRst, nB2, nRst, $02, nC3, $01, nRst, $02
-	dc.b	nB1, $01, $01, nRst, nB2, nB2, nRst, nB2
-	dc.b	nRst, $02, nC3, $01, nRst, $02, nB2, $01
-	dc.b	$01, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nB1, $01, nRst, $02, nB2, $01, $01, nRst
-	dc.b	nG2, nG2, nRst, nE2, nE2, nRst, nE3, nC3
-	dc.b	nRst, nB2, nB2, nRst, nB2, nB2, nRst, nB2
-	dc.b	nRst, $02, nB2, $01, nRst, $02, nB2, $01
-	dc.b	$01, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nB2, $01, nRst, $02, nB1, $01, $01, nRst
-	dc.b	nB1, nB1, nRst, nB1, nRst, $02, nB2, $01
-	dc.b	nRst, $02, nB2, $01, $01, nRst, nG2, nG2
-	dc.b	nRst, nE2, nE2, nRst, nE3, nC3, nRst, nB2
+HDN_BlueTwl_Loop1:
+	dc.b	nRst, $01, nC3, $02, nRst, $01, nBb2, $02
+	smpsLoop		$00, $02, HDN_BlueTwl_Loop1, Target
+	dc.b	nRst, $01, nD3, $02, nRst, $01, nC3, $02
+	dc.b	nRst, $01, nD3, $02, nRst, $01, nB2, $02
+	dc.b	nRst, $01, nG2, $02, nRst, $01, nAb2, $02
+	dc.b	nRst, $01, nBb2, $02, nRst, $01, nC3, $2D
+	dc.b	nRst, $08
+	smpsJump		HDN_BlueTwl_FM2, Target
 
-DMR_Loop3:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nB2, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loop3, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3, nC3, nRst, nB2, nB2, nRst, nB2, nB2
-	dc.b	nRst, nB2, nRst, $02, nB2, $01, nRst, $02
-	dc.b	nB2, $01, $01, nRst, nB2, nB2, nRst, nB2
-	dc.b	nRst, $02, nB1, $01, nRst, $02, nB2, $01
-	dc.b	$01, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nB2, $01, nRst, $02, nB2, $01, $01, nRst
-	dc.b	nG2, nG2, nRst, nE2, nE2, nRst, nE3, nC3
-	dc.b	nRst, nB2
-
-DMR_Loop4:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loop4, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3, nC3, nRst, nB2, nB2, nRst, nB2, nB2
-	dc.b	nRst, nB2, nRst, $02, nC3, $01, nRst, $02
-	dc.b	nB2, $01, $01, nRst, nB2, nB2, nRst, nB2
-	dc.b	nRst, $02, nC3, $01, nRst, $02, nB1, $01
-	dc.b	$01, nRst, nB1, nB1, nRst, nB1, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01, $01, nRst
-	dc.b	nG2, nG2, nRst, nE2, nE2, nRst, nE3, nC3
-	dc.b	nRst, nB2
-
-DMR_Loop5:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loop5, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3
-
-DMR_Loop7:
-	dc.b	nF1, nRst, nE2
-
-DMR_Loop6:
-	dc.b	nE2, nRst, nE2, nE2, nRst, nE2, nRst, $02
-	dc.b	nF2, $01, nRst, $02, nE2, $01
-	smpsLoop		$00, $03, DMR_Loop6, Target
-	dc.b	$01, nRst, nC2, nC2, nRst, nA1, nA1, nRst
-	dc.b	nA2
-	smpsLoop		$01, $02, DMR_Loop7, Target
-	dc.b	nC3, nRst, nB2
-
-DMR_Loo$8:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loo$8, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3, nBb1, nRst, nA2, nA2, nRst, nA2, nA2
-	dc.b	nRst, nA2, nRst, $02, nA2, $01, nRst, $02
-	dc.b	nA2, $01, $01, nRst, nA2, nA2, nRst, nA2
-	dc.b	nRst, $02, nA2, $01, nRst, $02, nG2, $01
-	dc.b	$01, nRst, nG2, nG2, nRst, nG2, nRst, $02
-	dc.b	nG2, $01, nRst, $02, nG2, $01, $01, nRst
-	dc.b	nFs2, nFs2, nRst, nB1, nB1, nRst, nD3, nC3
-	dc.b	nRst, nB2
-
-DMR_Loo$9:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loo$9, Target
-
-DMR_Loop10:
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3, nC3, nRst, nB2, nB2, nRst, nB2, nB2
-	dc.b	nRst, nB2, nRst, $02, nC3, $01, nRst, $02
-	dc.b	nB2, $01, $01, nRst, nB2, nB2, nRst, nB2
-	dc.b	nRst, $02, nC3, $01, nRst, $02, nB1, $01
-	dc.b	$01, nRst, nB1, nB1, nRst, nB1, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loop10, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3, nC3, nRst, nB2, nB2, nRst, nB2, nB2
-	dc.b	nRst, nB2, nRst, $02, nB2, $01, nRst, $02
-	dc.b	nB2, $01, $01, nRst, nB2, nB2, nRst, nB2
-	dc.b	nRst, $02, nB1, $01, nRst, $02, nB2, $01
-	dc.b	$01, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nB2, $01, nRst, $02, nB2, $01, $01, nRst
-	dc.b	nG2, nG2, nRst, nE2, nE2, nRst, nE3, nC3
-	dc.b	nRst, nB2
-
-DMR_Loop11:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loop11, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3, nC3, nRst, nB2, nB2, nRst, nB2, nB2
-	dc.b	nRst, nB2, nRst, $02, nC3, $01, nRst, $02
-	dc.b	nB2, $01, $01, nRst, nB2, nB2, nRst, nB2
-	dc.b	nRst, $02, nC3, $01, nRst, $02, nB1, $01
-	dc.b	$01, nRst, nB1, nB1, nRst, nB1, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01, $01, nRst
-	dc.b	nG2, nG2, nRst, nE2, nE2, nRst, nE3, nC3
-	dc.b	nRst, nB2
-
-DMR_Loop12:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loop12, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3
-
-DMR_Loop14:
-	dc.b	nF1, nRst, nE2
-
-DMR_Loop13:
-	dc.b	nE2, nRst, nE2, nE2, nRst, nE2, nRst, $02
-	dc.b	nF2, $01, nRst, $02, nE2, $01
-	smpsLoop		$00, $03, DMR_Loop13, Target
-	dc.b	$01, nRst, nC2, nC2, nRst, nA1, nA1, nRst
-	dc.b	nA2
-	smpsLoop		$01, $02, DMR_Loop14, Target
-	dc.b	nC3, nRst, nB2
-
-DMR_Loop15:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loop15, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3, nBb1, nRst, nA2, nA2, nRst, nA2, nA2
-	dc.b	nRst, nA2, nRst, $02, nA2, $01, nRst, $02
-	dc.b	nA2, $01, $01, nRst, nA2, nA2, nRst, nA2
-	dc.b	nRst, $02, nA2, $01, nRst, $02, nG2, $01
-	dc.b	$01, nRst, nG2, nG2, nRst, nG2, nRst, $02
-	dc.b	nG2, $01, nRst, $02, nG2, $01, $01, nRst
-	dc.b	nFs2, nFs2, nRst, nB1, nB1, nRst, nD3
-
-DMR_Loop16:
-	dc.b	nC3, nRst, nB2, nB2, nRst, nB2, nB2, nRst
-	dc.b	nB2, nRst, $02, nC3, $01, nRst, $02, nB2
-	dc.b	$01, $01, nRst, nB2, nB2, nRst, nB2, nRst
-	dc.b	$02, nC3, $01, nRst, $02, nB1, $01, $01
-	dc.b	nRst, nB1, nB1, nRst, nB1, nRst, $02, nC3
-	dc.b	$01, nRst, $02, nB2, $01, $01, nRst, nG2
-	dc.b	nG2, nRst, nE2, nE2, nRst, nE3
-	smpsLoop		$00, $04, DMR_Loop16, Target
-	dc.b	nRst, $30, $30, $30, $30, $30, $30
-
-DMR_Loop17:
-	dc.b	nC3, $01, nRst, nB1, nB1, nRst, $02, nB1
-	dc.b	$01, nRst, $05, nB1, $01, nRst, $04, nE3
-	dc.b	$01, nC3, nRst, $02, nB1, $01, nRst, nB1
-	smpsLoop		$00, $04, DMR_Loop17, Target
-	dc.b	nRst, $30, nF1, $01, nRst, nE2, nE2, nRst
-	dc.b	$02, nE2, $01, nRst, $05, nE2, $01, nRst
-	dc.b	$04, nA2, $01, nF2, nRst, $02, nE2, $01
-	dc.b	nRst, nE2, nF2, nRst, nE2, nE2, nRst, $02
-	dc.b	nE2, $01, nRst, $04, nF2, $01, nRst, $02
-	dc.b	nE2, $01, nRst, $02, nC2, $01, nRst, $02
-	dc.b	nA1, $01, nRst, $02, nA2, $01, nF1, nRst
-	dc.b	nE2, nE2, nRst, $02, nE2, $01, nRst, $05
-	dc.b	nE2, $01, nRst, $04, nA2, $01, nF2, nRst
-	dc.b	$02, nE2, $01, nRst, nE2, nF2, nRst, nE2
-	dc.b	nE2, nRst, $02, nE2, $01, nRst, $05, nF2
-	dc.b	$01, nRst, nE2, nRst, $02, nC2, $01, nRst
-	dc.b	$02, nA1, $01, nRst, $02, nA2, $01, nC3
-	dc.b	nRst, nB2, nB2, nRst, $02, nB2, $01, nRst
-	dc.b	$05, nC3, $01, nRst, $04, nB2, $01, $01
-	dc.b	nRst, nB2, nRst, $03, nC3, $01, nRst, nB2
-	dc.b	nB2, nRst, $02, nB2, $01, nRst, $04, nC3
-	dc.b	$01, nRst, $02, nB2, $01, nRst, $02, nG2
-	dc.b	$01, nRst, $02, nE2, $01, nRst, $02, nE3
-	dc.b	$01, nBb1, nRst, nA2, nA2, nRst, $02, nA2
-	dc.b	$01, nRst, $04, nA2, $01, nRst, $02, nA2
-	dc.b	$01, $01, nRst, $02, nA2, $01, nRst, nA2
-	dc.b	nRst, $03, nBb1, $01, nRst, nA2, nA2, nRst
-	dc.b	$02, nA2, $01, nRst, $04, nA2, $01, nRst
-	dc.b	$02, nA2, $01, $01, nRst, $07, nA2, $01
-	dc.b	nG2, nRst, $02, nG2, $01, nRst, nG2
-
-DMR_Loop18:
-	dc.b	nRst, $02, nG2, $01
-	smpsLoop		$00, $03, DMR_Loop18, Target
-	dc.b	nRst, $21
-
-DMR_Loop20:
-	dc.b	nC3
-
-DMR_Loop19:
-	dc.b	$01, nRst, nB2
-	smpsLoop		$00, $03, DMR_Loop19, Target
-	dc.b	nRst, $02, nC3, $01, nRst, $02, nB2, $01
-	dc.b	$01, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB1, $01, $01, nRst
-	dc.b	nB1, nB1, nRst, nB1, nRst, $02, nC3, $01
-	dc.b	nRst, $02, nB2, $01, $01, nRst, nG2, nG2
-	dc.b	nRst, nE2, nE2, nRst, nE3
-	smpsLoop		$01, $04, DMR_Loop20, Target
-	dc.b	nB1, nRst, nA2, nA2, nRst, nA2, nA2, nRst
-	dc.b	nA2, nRst, $02, nB2, $01, nRst, $02, nA2
-	dc.b	$01, $01, nRst, nA2, nA2, nRst, nA2, nRst
-	dc.b	$02, nB1, $01, nRst, $02, nG1, $01, $01
-	dc.b	nRst, nG1, nG1, nRst, nG1, nRst, $02, nB2
-	dc.b	$01, nRst, $02, nG2, $01, $01, nRst, nFs2
-	dc.b	nFs2, nRst, nB1, nB1, nRst, nB2, nC3, nRst
-	dc.b	nB2
-
-DMR_Loop21:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loop21, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3, nC3, nRst, nB2, nB2, nRst, nB2, nB2
-	dc.b	nRst, nB2, nRst, $02, nC2, $01, nRst, $02
-	dc.b	nB2, $01, $01, nRst, nB2, nB2, nRst, nB2
-	dc.b	nRst, $02, nC3, $01, nRst, $02, nB2, $01
-	dc.b	$01, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nB1, $01, nRst, $02, nB2, $01, $01, nRst
-	dc.b	nG2, nG2, nRst, nE2, nE2, nRst, nE3, nC3
-	dc.b	nRst, nB2
-
-DMR_Loop22:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loop22, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3, nC3, nRst, nB2, nB2, nRst, nB2, nB2
-	dc.b	nRst, nB2, nRst, $05, nB2, $01, $01, nRst
-	dc.b	nB2, nB2, nRst, nB2, nRst, $02, nC3, $01
-	dc.b	nRst, $02, nB2, $01, $01, nRst, nB2, nB2
-	dc.b	nRst, nB2, nRst, $02, nB1, $01, nRst, $02
-	dc.b	nB2, $01, $01, nRst, nG2, nG2, nRst, nE2
-	dc.b	nE2, nRst, nE3, nB1, nRst, nA2, nA2, nRst
-	dc.b	nA2, nA2, nRst, nA2, nRst, $02, nB2, $01
-	dc.b	nRst, $02, nA2, $01, $01, nRst, nA2, nA2
-	dc.b	nRst, nA2, nRst, $02, nB1, $01, nRst, $02
-	dc.b	nG1, $01, $01, nRst, nG1, nG1, nRst, nG1
-	dc.b	nRst, $02, nB2, $01, nRst, $02, nG2, $01
-	dc.b	$01, nRst, nFs2, nFs2, nRst, nB1, nB1, nRst
-	dc.b	nB2
-
-DMR_Loop25:
-	dc.b	nC3
-
-DMR_Loop23:
-	dc.b	$01, nRst, nB2
-	smpsLoop		$00, $03, DMR_Loop23, Target
-	dc.b	nRst, $02, nC2, $01, nRst, $02, nB2, $01
-	dc.b	$01, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01, $01, nRst
-	dc.b	nB2, nB2, nRst, nB2, nRst, $02, nB1, $01
-	dc.b	nRst, $02, nB2, $01, $01, nRst, nG2, nG2
-	dc.b	nRst, nE2, nE2, nRst, nE3, nC3, nRst, nB2
-
-DMR_Loop24:
-	dc.b	nB2, nRst, nB2, nB2, nRst, nB2, nRst, $02
-	dc.b	nC3, $01, nRst, $02, nB2, $01
-	smpsLoop		$00, $03, DMR_Loop24, Target
-	dc.b	$01, nRst, nG2, nG2, nRst, nE2, nE2, nRst
-	dc.b	nE3
-	smpsLoop		$01, $02, DMR_Loop25, Target
-	dc.b	nC3, nRst, nB2, nB2, nRst, nB2, nB2, nRst
-	dc.b	nB2, nRst, $02, nC2, $01, nRst, $02, nB2
-	dc.b	$01, $01, nRst, nB2, nB2, nRst, nB2, nRst
-	dc.b	$02, nC3, $01, nRst, $02, nB2, $01, $01
-	dc.b	nRst, nB2, nB2, nRst, nB2, nRst, $02, nB1
-	dc.b	$01, nRst, $02, nB2, $01, $01, nRst, nG2
-	dc.b	nG2, nRst, nE2, nE2, nRst, nE3, nRst, $30
-	smpsJump		DMR_Loop25, Target
-
-DMR_FM2:
-	smpsPan		panCenter
+HDN_BlueTwl_FM3:
+	smpsPan		panLeft
 	smpsFMvoice		$01
-	dc.b	nRst, $33, $24
-	smpsAlterNote	$E3
-	dc.b	nBb4, $01
-	smpsAlterNote	$F3
-	dc.b	smpsNoAttack, nB4
-	smpsAlterNote	$19
-	dc.b	smpsNoAttack, nBb4
-	smpsAlterNote	$F2
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$FB
-	dc.b	smpsNoAttack, nB4
-	smpsAlterNote	$00
-	dc.b	smpsNoAttack, nBb4
-	smpsAlterNote	$DF
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$E7
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$00
-	dc.b	smpsNoAttack, nA4, nRst, $06, $33, $1E
-	smpsAlterNote	$13
-	dc.b	nA4, $01
-	smpsAlterNote	$F6
-	dc.b	smpsNoAttack, nB4
-	smpsAlterNote	$00
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$EC
-	dc.b	smpsNoAttack, nBb4
-	smpsAlterNote	$EA
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$FC
-	dc.b	smpsNoAttack, nB4
-	smpsAlterNote	$F9
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$11
-	dc.b	smpsNoAttack, nA4
-	smpsAlterNote	$02
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$00
-	dc.b	nRst, $33, $33, $33, $21, nE3, $06, nE4
-	dc.b	$18, nFs4, $09, nG4, nD5, nRst, $15, nFs4
-	dc.b	$09, nG4, nD5, $06, nB4, $18, nCs5, $09
-	dc.b	nD5, nE5, $06, nA4, $18, nG4, nRst, $33
-	dc.b	$33, $33, $1E, nA4, $01
-	smpsAlterNote	$FA
-	dc.b	smpsNoAttack, nB4
-	smpsAlterNote	$0A
-	dc.b	smpsNoAttack, nBb4
-	smpsAlterNote	$1D
-	dc.b	smpsNoAttack, nA4
-	smpsAlterNote	$E3
-	dc.b	smpsNoAttack, nBb4
-	smpsAlterNote	$EF
-	dc.b	smpsNoAttack, nB4
-	smpsAlterNote	$FB
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$0A
-	dc.b	smpsNoAttack, nBb4
-	smpsAlterNote	$FE
-	dc.b	smpsNoAttack, nA4
-	smpsAlterNote	$FC
-	dc.b	nRst, $15, nB4, $01, nRst, nFs4
+	dc.b	nA2, $06, nE3, nG3, nB3, nRst, $18, nG2
+	dc.b	$06, nE3, nG3, nB3, nRst, $18, nF2, $06
+	dc.b	nE3, nG3, nC4, nRst, $18, nB2, $06, nF3
+	dc.b	nA3, nB3, nRst, $18, nA2, $06, nE3, nG3
+	dc.b	nC4, nRst, $18, nG2, $06, nE3, nG3, nC4
+	dc.b	nRst, $18, nF2, $06, nC3, nF3, nF3
 
-DMR_Loop26:
-	dc.b	nG4, $03, nD5, $01, nRst, $2B, nFs4, $01
-	smpsLoop		$00, $03, DMR_Loop26, Target
-	dc.b	nG4, $03, nD5, $01, nRst, $14, nE4, $18
-	dc.b	nFs4, $09, nG4, nD5, nRst, $15, nFs4, $09
-	dc.b	nG4, nD5, $06, nB4, $18, nCs5, $09, nD5
-	dc.b	nE5, $06, nA4, $18, nG4, nRst, $33, $33
-	dc.b	$33, $1E
-	smpsAlterNote	$00
-	dc.b	nA4, $01
-	smpsAlterNote	$FA
-	dc.b	smpsNoAttack, nB4
-	smpsAlterNote	$0A
-	dc.b	smpsNoAttack, nBb4
-	smpsAlterNote	$1D
-	dc.b	smpsNoAttack, nA4
-	smpsAlterNote	$E3
-	dc.b	smpsNoAttack, nBb4
-	smpsAlterNote	$F4
-	dc.b	smpsNoAttack, nA4
-	smpsAlterNote	$0F
-	dc.b	smpsNoAttack, nAb4
-	smpsAlterNote	$F1
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$13
-	dc.b	smpsNoAttack, nG4
-	smpsAlterNote	$FC
-	dc.b	nRst
-	smpsAlterNote	$00
+HDN_BlueTwl_Loop2:
+	dc.b	nRst, $18, nA2, $06, nE3, nG3, nB3
+	smpsLoop		$00, $02, HDN_BlueTwl_Loop2, Target
+	dc.b	nRst, $18, nB2, $06, nF3, nA3, nD4, nRst
+	dc.b	$18, nG2, $06, nE3, nG3, nC4, nRst, $18
+	dc.b	nA2, $06, nF3, nA3, nD4, nRst, $18, nE2
+	dc.b	$06, nB2, nE3, nG3, nRst, $18, nF2, $06
+	dc.b	nC3, nF3, nA3, nRst, $18, nG2, $06, nD3
+	dc.b	nG3, nB3, nRst, $18, nE2, $06, nB2, nD3
+	dc.b	nAb3, nRst, $18, nA2, $06, nE3, nG3, nB3
+	dc.b	nRst, $18, nB2, $06, nF3, nA3, nD4, nRst
+	dc.b	$18, nG2, $06, nE3, nG3, nC4, nRst, $18
+	dc.b	nA2, $06, nF3, nA3, nD4, nRst, $18, nE2
+	dc.b	$06, nB2, nE3, nG3, nRst, $18, nF2, $06
+	dc.b	nC3, nF3, nA3, nRst, $18, nAb2, $06, nD3
+	dc.b	nF3
 
-DMR_Loop27:
-	dc.b	$2F
-	smpsLoop		$00, $09, DMR_Loop27, Target
-	dc.b	$05, nE3, $03, nE4, $18, nFs4, $09, nG4
-	dc.b	nD5, nRst, $15, nFs4, $09, nG4, nD5, $06
-	dc.b	nB4, $18, nCs5, $09, nD5, nE5, $06, nA4
-	dc.b	$30, nG4, $18, nRst
+HDN_BlueTwl_Loop3:
+	dc.b	nB3, nRst, $18, nA2, $06, nE3, nG3
+	smpsLoop		$00, $02, HDN_BlueTwl_Loop3, Target
+	dc.b	nB3, nRst, $18, nG2, $06, nE3, nG3, nB3
+	dc.b	nRst, $18, nF2, $06, nE3, nG3, nC4, nRst
+	dc.b	$18, nB2, $06, nF3, nA3, nB3, nRst, $18
+	dc.b	nA2, $06, nE3, nG3, nC4, nRst, $18, nG2
+	dc.b	$06, nE3, nG3, nC4, nRst, $18, nF2, $06
+	dc.b	nC3, nF3, nF3, nRst, $18, nA2, $06, nE3
+	dc.b	nG3, nB3, nRst, $18, nBb2, $06, nF3, nBb3
+	dc.b	nD4, nRst, $18, nAb2, $06, nF3, nAb3, nC4
+	dc.b	nRst, $18, nEb2, $06, nBb2, nEb3, nG3, nRst
+	dc.b	$18, nG2, $06, nB2, nD3, nF3, nRst, $18
+	dc.b	nC3, $06, nG2, nC3, nEb3, nRst, $18, nBb2
+	dc.b	$06, nF3, nBb3, nD4, nRst, $18, nAb2, $06
+	dc.b	nEb3, nAb3, nC4, nRst, $18, nG2, $06, nB2
+	dc.b	nD3, nF3, nRst, $18, nAb2, $06, nEb3, nAb3
+	dc.b	nC4, nRst, $18, nBb2, $06, nD3, nF3, nBb3
+	dc.b	nRst, $18, nB2, $06, nD3, nF3, nAb3, nRst
+	dc.b	$18, nC3, $06, nG2, nEb3, nG3, nRst, $18
+	dc.b	nF2, $06, nC3, nF3, nAb3, nRst, $18, nG2
+	dc.b	$06, nD3, nF3, nBb3, nRst, $18, nAb2, $06
+	dc.b	nC3, nEb3, nAb3, nBb2, nD3, nF3, nBb3, nC3
+	dc.b	nG2, nC3, nEb3, nRst, $1F
+	smpsJump		HDN_BlueTwl_FM3, Target
 
-DMR_Loop28:
-	dc.b	$2A
-	smpsLoop		$00, $0C, DMR_Loop28, Target
+HDN_BlueTwl_FM4:
+	smpsPan		panRight
+	smpsFMvoice		$01
+	dc.b	nA1, $06, nE2, nG2, nB2, nRst, $18, nG1
+	dc.b	$06, nE2, nG2, nB2, nRst, $18, nF1, $06
+	dc.b	nE2, nG2, nC3, nRst, $18, nB1, $06, nF2
+	dc.b	nA2, nB2, nRst, $18, nA1, $06, nE2, nG2
+	dc.b	nC3, nRst, $18, nG1, $06, nE2, nG2, nC3
+	dc.b	nRst, $18, nF1, $06, nC2, nF2, nF2
 
-DMR_Jump1:
-	dc.b	nB1
+HDN_BlueTwl_Loop4:
+	dc.b	nRst, $18, nA1, $06, nE2, nG2, nB2
+	smpsLoop		$00, $02, HDN_BlueTwl_Loop4, Target
+	dc.b	nRst, $18, nB1, $06, nF2, nA2, nD3, nRst
+	dc.b	$18, nG1, $06, nE2, nG2, nC3, nRst, $18
+	dc.b	nA1, $06, nF2, nA2, nD3, nRst, $18, nE1
+	dc.b	$06, nB1, nE2, nG2, nRst, $18, nF1, $06
+	dc.b	nC2, nF2, nA2, nRst, $18, nG1, $06, nD2
+	dc.b	nG2, nB2, nRst, $18, nE1, $06, nB1, nD2
+	dc.b	nAb2, nRst, $18, nA1, $06, nE2, nG2, nB2
+	dc.b	nRst, $18, nB1, $06, nF2, nA2, nD3, nRst
+	dc.b	$18, nG1, $06, nE2, nG2, nC3, nRst, $18
+	dc.b	nA1, $06, nF2, nA2, nD3, nRst, $18, nE1
+	dc.b	$06, nB1, nE2, nG2, nRst, $18, nF1, $06
+	dc.b	nC2, nF2, nA2, nRst, $18, nAb1, $06, nD2
+	dc.b	nF2
 
-DMR_Loop29:
-	dc.b	$0C
-	smpsLoop		$00, $10, DMR_Loop29, Target
+HDN_BlueTwl_Loop5:
+	dc.b	nB2, nRst, $18, nA1, $06, nE2, nG2
+	smpsLoop		$00, $02, HDN_BlueTwl_Loop5, Target
+	dc.b	nB2, nRst, $18, nG1, $06, nE2, nG2, nB2
+	dc.b	nRst, $18, nF1, $06, nE2, nG2, nC3, nRst
+	dc.b	$18, nB1, $06, nF2, nA2, nB2, nRst, $18
+	dc.b	nA1, $06, nE2, nG2, nC3, nRst, $18, nG1
+	dc.b	$06, nE2, nG2, nC3, nRst, $18, nF1, $06
+	dc.b	nC2, nF2, nF2, nRst, $18, nA1, $06, nE2
+	dc.b	nG2, nB2, nRst, $18, nBb1, $06, nF2, nBb2
+	dc.b	nD3, nRst, $18, nAb1, $06, nF2, nAb2, nC3
+	dc.b	nRst, $18, nEb1, $06, nBb1, nEb2, nG2, nRst
+	dc.b	$18, nG1, $06, nB1, nD2, nF2, nRst, $18
+	dc.b	nC2, $06, nG1, nC2, nEb2, nRst, $18, nBb1
+	dc.b	$06, nF2, nBb2, nD3, nRst, $18, nAb1, $06
+	dc.b	nEb2, nAb2, nC3, nRst, $18, nG1, $06, nB1
+	dc.b	nD2, nF2, nRst, $18, nAb1, $06, nEb2, nAb2
+	dc.b	nC3, nRst, $18, nBb1, $06, nD2, nF2, nBb2
+	dc.b	nRst, $18, nB1, $06, nD2, nF2, nAb2, nRst
+	dc.b	$18, nC2, $06, nG1, nEb2, nG2, nRst, $18
+	dc.b	nF1, $06, nC2, nF2, nAb2, nRst, $18, nG1
+	dc.b	$06, nD2, nF2, nBb2, nRst, $18, nAb1, $06
+	dc.b	nC2, nEb2, nAb2, nBb1, nD2, nF2, nBb2, nC2
+	dc.b	nG1, nC2, nEb2, nRst, $1F
+	smpsJump		HDN_BlueTwl_FM4, Target
 
-DMR_Loop30:
-	dc.b	$06
-	smpsLoop		$00, $10, DMR_Loop30, Target
-	smpsJump		DMR_Jump1, Target
-
-DMR_FM3:
-	smpsPan		panCenter
+HDN_BlueTwl_FM5:
+	smpsPan		panLeft
 	smpsFMvoice		$02
-	dc.b	nRst
+	dc.b	nA3, $2E, nRst, $02, nG3, $2E, nRst, $02
+	dc.b	nF3, $2E, nRst, $02, nB3, $2E, nRst, $02
+	dc.b	nA3, $2E, nRst, $02, nG3, $2E, nRst, $02
+	dc.b	nF3, $2E, nRst, $02, nE3, $2E, nRst, $02
+	dc.b	nE3, $2E, nRst, $02, nD3, $2E, nRst, $02
+	dc.b	nC3, $2E, nRst, $02, nD3, $2E, nRst, $02
+	dc.b	nG3, $2E, nRst, $02, nA3, $2E, nRst, $02
+	dc.b	nB3, $2E, nRst, $02, nAb3, $2E, nRst, $02
+	dc.b	nE3, $2E, nRst, $02, nD3, $2E, nRst, $02
+	dc.b	nC3, $2E, nRst, $02, nD3, $2E, nRst, $02
+	dc.b	nG3, $2E, nRst, $02, nA3, $2E, nRst, $02
+	dc.b	nAb3, $2E, nRst, $02, nA3, $2E, nRst, $02
+	dc.b	nA3, $2E, nRst, $02, nG3, $2E, nRst, $02
+	dc.b	nF3, $2E, nRst, $02, nB3, $2E, nRst, $02
+	dc.b	nA3, $2E, nRst, $02, nG3, $2E, nRst, $02
+	dc.b	nF3, $2E, nRst, $02, nE3, $2E, nRst, $02
+	dc.b	nBb3, $2E, nRst, $02, nF3, $2E, nRst, $02
+	dc.b	nEb3, $2E, nRst, $02, nG3, $2E, nRst, $02
+	dc.b	nC3, $2E, nRst, $02, nF3, $2E, nRst, $02
+	dc.b	nC3, $2E, nRst, $02, nB2, $2E, nRst, $02
+	dc.b	nAb3, $2E, nRst, $02, nBb3, $2E, nRst, $02
+	dc.b	nB3, $2E, nRst, $02, nC3, $2E, nRst, $02
+	dc.b	nC3, $2E, nRst, $02, nF3, $2E, nRst, $02
+	dc.b	nEb3, $06, nBb4, nAb4, nRst, nF3, $17, nRst
+	dc.b	$01, nC4, $2E, nRst, $09
+	smpsJump		HDN_BlueTwl_FM5, Target
 
-DMR_Loop31:
-	dc.b	$26
-	smpsLoop		$00, $0F, DMR_Loop31, Target
-	dc.b	nB3, $06, nFs4, nRst, $03, nB4, $06, nFs4
-	dc.b	nRst, $15, nB3, $06, nG4, nB4, nRst, $03
-	dc.b	nG4, $06, nRst, $15, nB4, $06, nA4, nRst
-	dc.b	nA4, nCs5, nRst, $12, nB3, $06, nG4, nB4
-	dc.b	nRst, $03, nG4, $06, nRst
+HDN_BlueTwl_FM6:
+	smpsPan		panRight
+	smpsFMvoice		$02
+	dc.b	nRst, $09, nA3, $2E, nRst, $02, nG3, $2E
+	dc.b	nRst, $02, nF3, $2E, nRst, $02, nB3, $2E
+	dc.b	nRst, $02, nA3, $2E, nRst, $02, nG3, $2E
+	dc.b	nRst, $02, nF3, $2E, nRst, $02, nE3, $2E
+	dc.b	nRst, $02, nE3, $2E, nRst, $02, nD3, $2E
+	dc.b	nRst, $02, nC3, $2E, nRst, $02, nD3, $2E
+	dc.b	nRst, $02, nG3, $2E, nRst, $02, nA3, $2E
+	dc.b	nRst, $02, nB3, $2E, nRst, $02, nAb3, $2E
+	dc.b	nRst, $02, nE3, $2E, nRst, $02, nD3, $2E
+	dc.b	nRst, $02, nC3, $2E, nRst, $02, nD3, $2E
+	dc.b	nRst, $02, nG3, $2E, nRst, $02, nA3, $2E
+	dc.b	nRst, $02, nAb3, $2E, nRst, $02, nA3, $2E
+	dc.b	nRst, $02, nA3, $2E, nRst, $02, nG3, $2E
+	dc.b	nRst, $02, nF3, $2E, nRst, $02, nB3, $2E
+	dc.b	nRst, $02, nA3, $2E, nRst, $02, nG3, $2E
+	dc.b	nRst, $02, nF3, $2E, nRst, $02, nE3, $2E
+	dc.b	nRst, $02, nBb3, $2E, nRst, $02, nF3, $2E
+	dc.b	nRst, $02, nEb3, $2E, nRst, $02, nG3, $2E
+	dc.b	nRst, $02, nC3, $2E, nRst, $02, nF3, $2E
+	dc.b	nRst, $02, nC3, $2E, nRst, $02, nB2, $2E
+	dc.b	nRst, $02, nAb3, $2E, nRst, $02, nBb3, $2E
+	dc.b	nRst, $02, nB3, $2E, nRst, $02, nC3, $2E
+	dc.b	nRst, $02, nC3, $2E, nRst, $02, nF3, $2E
+	dc.b	nRst, $02, nEb3, $06, nBb4, nAb4, nRst, nF3
+	dc.b	$17, nRst, $01, nC4, $2E
+	smpsJump		HDN_BlueTwl_FM6, Target
 
-DMR_Loop32:
-	dc.b	$2D
-	smpsLoop		$00, $09, DMR_Loop32, Target
-	dc.b	nB3, $06, nFs4, nRst, $03, nB4, $06, nFs4
-	dc.b	nRst, $15, nB3, $06, nG4, nB4, nRst, $03
-	dc.b	nG4, $06, nRst, $15, nB4, $06, nA4, nRst
-	dc.b	nA4, nCs5, nRst, $12, nB3, $06, nG4, nB4
-	dc.b	nRst, $03, nG4, $06, nRst
-
-DMR_Loop33:
-	dc.b	$21
-	smpsLoop		$00, $15, DMR_Loop33, Target
-	dc.b	nB3, $06, nFs4, nRst, $03, nB4, $06, nFs4
-	dc.b	nRst, $15, nB3, $06, nG4, nB4, nRst, $03
-	dc.b	nG4, $06, nRst, $15, nB4, $06, nA4, nRst
-	dc.b	nA4, nCs5, nRst, $12, nB3, $06, nG4, nB4
-	dc.b	nRst, $03, nG4, $06, nRst, $15, nB4, $06
-	dc.b	nA4, $03, nRst, $01, nFs4, $05, nB4, $03
-	dc.b	nA4, nB4, nCs5, nD5, $09, nRst, $0C, nB3
-	dc.b	$06, nFs4, nRst, $03, nB4, $06, nFs4, nRst
-	dc.b	$15, nB3, $06, nG4, nB4, nRst, $03, nG4
-	dc.b	$06, nRst, $15, nB4, $06, nA4, nRst, nA4
-	dc.b	nCs5, nRst, $12, nB3, $06, nG4, nB4, nRst
-	dc.b	$03, nG4, $06, nRst, $15, nB4, $06, nA4
-	dc.b	$03, nRst, $01, nFs4, $05, nB4, $03, nA4
-	dc.b	nB4, nCs5, nD5, $09, nRst, $12
-
-DMR_Loop34:
-	dc.b	nB3, $03, nFs4, nCs5, nD4, nG4, nD5, nRst
-	dc.b	$09, nA4, $03, nE5, nB3, nFs4, nCs5, nRst
-	dc.b	$06
-	smpsLoop		$00, $06, DMR_Loop34, Target
-	smpsJump		DMR_Loop34, Target
-
-DMR_FM4:
-	smpsPan		panCenter
-	smpsFMvoice		$03
-	dc.b	nRst, $24, $24, $24, $24, $24, $24
-	smpsAlterNote	$07
-	dc.b	nG2, $01
-	smpsAlterNote	$16
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$13
-	dc.b	smpsNoAttack, nAb2
-	smpsAlterNote	$F4
-	dc.b	smpsNoAttack, nA2
-	smpsAlterNote	$F8
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$09
-	dc.b	smpsNoAttack, nAb2
-	smpsAlterNote	$F1
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$E3
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$08
-	dc.b	smpsNoAttack, nG2
-	smpsAlterNote	$07
-	dc.b	smpsNoAttack, $03
-	smpsAlterNote	$00
-	dc.b	nRst, $24
-	smpsAlterNote	$0E
-	dc.b	nG2, $01
-	smpsAlterNote	$F7
-	dc.b	smpsNoAttack, nAb2
-	smpsAlterNote	$E3
-	dc.b	smpsNoAttack, nA2, $04
-	smpsAlterNote	$1A
-	dc.b	smpsNoAttack, nG2, $01
-	smpsAlterNote	$F6
-	dc.b	smpsNoAttack, nA2
-	smpsAlterNote	$E8
-	dc.b	smpsNoAttack, nAb2
-	smpsAlterNote	$FA
-	dc.b	smpsNoAttack, nG2, $03
-	smpsAlterNote	$00
-	dc.b	nRst, $24
-	smpsAlterNote	$04
-	dc.b	nAb2, $01
-	smpsAlterNote	$E1
-	dc.b	smpsNoAttack, nA2
-	smpsAlterNote	$EC
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$00
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$FC
-	dc.b	smpsNoAttack, nAb2
-	smpsAlterNote	$EF
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$16
-	dc.b	smpsNoAttack, nG2
-	smpsAlterNote	$11
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$0F
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$0E
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$0C
-	dc.b	smpsNoAttack, $02
-	smpsAlterNote	$00
-	dc.b	nRst, $24, nG2, $06
-	smpsAlterNote	$1A
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$F6
-	dc.b	smpsNoAttack, nA2
-	smpsAlterNote	$11
-	dc.b	smpsNoAttack, nG2
-	smpsAlterNote	$FA
-	dc.b	smpsNoAttack, $03
-	smpsAlterNote	$00
-	dc.b	nRst, $33, $33, $33, $03, nA1, $18, nG1
-	dc.b	nRst
-
-DMR_Loop35:
-	dc.b	$30
-	smpsLoop		$00, $08, DMR_Loop35, Target
-	dc.b	nE3, $18, nFs3, nG3, nB3, nRst, $30, nA1
-	dc.b	$18, nG1, nRst
-
-DMR_Loop36:
-	dc.b	$30
-	smpsLoop		$00, $12, DMR_Loop36, Target
-	dc.b	nFs4, nG4, nFs4, nG4, nFs4, $18, nG4, nFs4
-	dc.b	$30, nG4, nFs4, nG4, nFs4, $18, nG4
-
-DMR_Jump2:
-	dc.b	nRst, $30, $30, $30, $30, $30, $30
-	smpsJump		DMR_Jump2, Target
-
-DMR_FM5:
-	smpsFMvoice		$04
-	smpsPan		panCenter
-	dc.b	nRst
-
-DMR_Loop37:
-	dc.b	$30
-	smpsLoop		$00, $1C, DMR_Loop37, Target
-
-DMR_Loop38:
-	dc.b	nE2, $18, nC2, $0C, nD2
-	smpsLoop		$00, $04, DMR_Loop38, Target
-	dc.b	nG2, $18
-
-DMR_Loop39:
-	dc.b	nC2, $0C, nD2, nE2, $18
-	smpsLoop		$00, $06, DMR_Loop39, Target
-	dc.b	nB1, $0C, nD2, nB1, $18, nFs1, $0C, nG1
-	dc.b	nA1, $18, nFs1, $0C, nB1, nG1, $18, nRst
-
-DMR_Loop40:
-	dc.b	$2A
-	smpsLoop		$00, $0C, DMR_Loop40, Target
-
-DMR_Jump3:
-	dc.b	nRst, $30, $30, $30, $30, $30, $30
-	smpsJump		DMR_Jump3, Target
-
-DMR_FM6:
-	smpsFMvoice		$00
-	smpsPan		panCenter
-	dc.b	nC2, $01, nRst, $16, nC2, $01, nRst, $18
-	dc.b	nC2, $01, nRst, $22, nB1, $01, nRst, $0C
-	dc.b	nC2, $01, nRst, $16, nC2, $01, nRst, $02
-	dc.b	nB1, $01, $01, nRst, nB1, nB1, nRst, nB1
-	dc.b	nRst, $0F, nC2, $01, nRst, $2F, nC2, $01
-	dc.b	nRst, $16, nB1, $01, nRst, $18, nC2, $01
-	dc.b	nRst, $22, nC2, $01, nRst, $0C, nC2, $01
-	dc.b	nRst, $16, nC2, $01, nRst, $02, nB1, $01
-	dc.b	$01, nRst, nB1, nB1, nRst, nB1, nRst, $0F
-	dc.b	nC2, $01, nRst, $2F, nF1, $01, nRst, $2F
-	dc.b	nF1, $01, nRst, $2F, nC2, $01, nRst, $2F
-	dc.b	nG2, $01, nRst, $2F
-
-DMR_Loop41:
-	dc.b	nC2, $01, nRst, $16, nC2, $01, nRst, $02
-	dc.b	nB1, $01, $01, nRst, nB1, nB1, nRst, nB1
-	dc.b	nRst, $0F
-	smpsLoop		$00, $04, DMR_Loop41, Target
-	dc.b	nC2, $01, nRst, $16, nB1, $01, nRst, $18
-	dc.b	nC2, $01, nRst, $22, nC2, $01, nRst, $0C
-	dc.b	nC2, $01, nRst, $16, nC2, $01, nRst, $02
-	dc.b	nB1, $01, $01, nRst, nB1, nB1, nRst, nB1
-	dc.b	nRst, $0F, nC2, $01, nRst, $2F, nF1, $01
-	dc.b	nRst, $2F, nF1, $01, nRst, $2F, nC2, $01
-	dc.b	nRst, $2F, nG2, $01, nRst, $2F
-
-DMR_Loop42:
-	dc.b	nC2, $01, nRst, $16, nC2, $01, nRst, $02
-	dc.b	nB1, $01, $01, nRst, nB1, nB1, nRst, nB1
-	dc.b	nRst, $0F
-	smpsLoop		$00, $03, DMR_Loop42, Target
-	dc.b	nC2, $01, nRst, $16, nC2, $01, nRst, $02
-	dc.b	nB1, $01, $01, nRst, nB1, nB1, nRst, nB1
-	dc.b	nRst
-
-DMR_Loop43:
-	dc.b	$25
-	smpsLoop		$00, $0B, DMR_Loop43, Target
-	dc.b	$28, nF1, $01, nRst, $2F, nF1, $01, nRst
-	dc.b	$2F, nC2, $01, nRst, $2F, nG2, $01, nRst
-	dc.b	$17, nG2, $01, nRst, $33, $14
-
-DMR_Loop44:
-	dc.b	nC2, $01, nRst, $16, nC2, $01, nRst, $02
-	dc.b	nB1, $01, $01, nRst, nB1, nB1, nRst, nB1
-	dc.b	nRst, $0F
-	smpsLoop		$00, $04, DMR_Loop44, Target
-	dc.b	nB1, $01, nRst, $16, nB1, $01, nRst, $02
-	dc.b	nG1, $01, $01, nRst, nG1, nG1, nRst, nG1
-	dc.b	nRst, $0F
-
-DMR_Loop45:
-	dc.b	nC2, $01, nRst, $16, nC2, $01, nRst, $18
-	dc.b	nC2, $01, nRst, $22, nB1, $01, nRst, $0C
-	smpsLoop		$00, $02, DMR_Loop45, Target
-	dc.b	nB1, $01, nRst, $16, nB1, $01, nRst, $02
-	dc.b	nG1, $01, $01, nRst, nG1, nG1, nRst, nG1
-	dc.b	nRst, $0F
-
-DMR_Loop46:
-	dc.b	nC2, $01, nRst, $22, nB1, $01, nRst, $0C
-	dc.b	nC2, $01, nRst, $16, nC2, $01, nRst, $18
-	smpsLoop		$00, $02, DMR_Loop46, Target
-	dc.b	nC2, $01, nRst, $22, nB1, $01, nRst, $33
-	dc.b	$09
-	smpsJump		DMR_Loop46, Target
-
-DMR_PSG1:
-	dc.b	nRst, $33, $21
+HDN_BlueTwl_PSG1:
 	smpsPSGvoice	$00
+	dc.b	nRst, $0C, nA0, $06, nE0, $1C, nRst, $0E
+	dc.b	nE0, $06, nG0, $1C, nRst, $0E, nC1, $08
+	dc.b	nB0, nA0, $13, nRst, $01, nF0, $17, nRst
+	dc.b	$25, nC0, $06, nF0, nE0, $17, nRst, $0D
+	dc.b	nG0, $0B, nRst, $01, nD0, $17, nRst, $0D
+	dc.b	nC0, $06, $0B, nRst, $01, nD0, $11, nRst
+	dc.b	$01, nC0, $17, nRst, $25, nE0, $11, nRst
+	dc.b	$01, nA0, $11, nRst, $01, nB0, $11, nRst
+	dc.b	$01, nD1, $11, nRst, $07, nD1, $03, nCs1
+	dc.b	nC1, $17, nRst, $19, nD1, $11, nRst, $01
+	dc.b	nC1, $11, nRst, $01, nA0, $0B, nRst, $0D
+	dc.b	nE0, $11, nRst, $01, nG0, $11, nRst, $01
+	dc.b	nA0, $22, nRst, $0B, nC1, $03, nB0, $17
+	dc.b	nRst, $19, nAb0, $09, nA0, nB0, $06, nC1
+	dc.b	$09, nD1, nE1, $06, nRst, $0C, nE0, $11
+	dc.b	nRst, $01, nA0, $11, nRst, $01, nB0, $11
+	dc.b	nRst, $01, nD1, $11, nRst, $07, nD1, $03
+	dc.b	nCs1, nC1, $17, nRst, $19, nD1, $11, nRst
+	dc.b	$01, nC1, $11, nRst, $01, nA0, $0B, nRst
+	dc.b	$0D, nE0, $11, nRst, $01, nG0, $11, nRst
+	dc.b	$01, nA0, $22, nRst, $0B, nC1, $03, nAb0
+	dc.b	$09, nB0, nD1, $06, nB0, $09, nD1, nF1
+	dc.b	$06, nA0, $22, nRst, $1A, nA0, $06, nE0
+	dc.b	$1C, nRst, $0E, nE0, $06, nG0, $1C, nRst
+	dc.b	$0E, nC1, $08, nB0, nA0, $13, nRst, $01
+	dc.b	nF0, $17, nRst, $25, nC0, $06, nF0, nE0
+	dc.b	$17, nRst, $0D, nG0, $0B, nRst, $01, nD0
+	dc.b	$17, nRst, $0D, nC0, $06, $0B, nRst, $01
+	dc.b	nD0, $11, nRst, $01, nC0, $17, nRst, $0D
+	dc.b	nG0, $06, nA0, nBb0, $17, nRst, $0A, nAb0
+	dc.b	$09, nG0, $0B, nRst, $01, nF0, $1C, nRst
+	dc.b	$0E, nEb0, $17, nRst, $0A, nEb0, $09, nF0
+	dc.b	$0B, nRst, $01, nG0, $1C, nRst, $0E, nC0
+	dc.b	$17, nRst, $0A, nD0, $09, nEb0, $06, nF0
+	dc.b	$22, nRst, $0E, nC0, $09, nEb0, nF0, $06
+	dc.b	nEb0, $09, nF0, nAb0, $06, nG0, $22, nRst
+	dc.b	$0E, nAb0, $17, nRst, $0A, nAb0, $09, nBb0
+	dc.b	$0B, nRst, $01, nBb0, $1C, nRst, $0E, nB0
+	dc.b	$17, nRst, $0A, nAb0, $09, nG0, $06, nD0
+	dc.b	$22, nRst, $0E, nC0, $17, nRst, $0A, nD0
+	dc.b	$09, nEb0, $06, nF0, $17, nRst, $01, nC0
+	dc.b	$17, nRst, $01, nC0
+
+HDN_BlueTwl_Loop6:
 	dc.b	$03
-	smpsAlterNote	$06
-	dc.b	nBb1, $01
-	smpsAlterNote	$05
-	dc.b	smpsNoAttack, nB1
-	smpsAlterNote	$FB
-	dc.b	smpsNoAttack, nBb1
-	smpsAlterNote	$03
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$02
-	dc.b	smpsNoAttack, nB1
-	smpsAlterNote	$00
-	dc.b	smpsNoAttack, nBb1
-	smpsAlterNote	$07
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$05
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$00
-	dc.b	smpsNoAttack, nA1, nRst, $06, $33, $1E
-	smpsAlterNote	$FC
-	dc.b	nA1, $01
-	smpsAlterNote	$04
-	dc.b	smpsNoAttack, nB1
-	smpsAlterNote	$00
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$04
-	dc.b	smpsNoAttack, nBb1
-	smpsAlterNote	$05
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$02
-	dc.b	smpsNoAttack, nB1
-	smpsAlterNote	$03
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$FC
-	dc.b	smpsNoAttack, nA1
-	smpsAlterNote	$00
-	dc.b	smpsNoAttack, $01, nRst, $18
+	smpsLoop		$00, $09, HDN_BlueTwl_Loop6, Target
+	dc.b	nD0, nC0, nD0, nC0, nC0, nC0, nC0, nC0
+	dc.b	$2E, nRst, $09
+	smpsJump		HDN_BlueTwl_PSG1, Target
 
-DMR_Loop47:
-	smpsAlterNote	$7F
-	dc.b	$0C
-	smpsAlterNote	$00
-	dc.b	$24
-	smpsLoop		$00, $02, DMR_Loop47, Target
-	smpsAlterNote	$7F
-	dc.b	$03
-	smpsAlterNote	$00
-	dc.b	$01
-	smpsAlterNote	$7F
-	dc.b	$08
-	smpsAlterNote	$00
-	dc.b	$2A
-	smpsAlterNote	$7F
-	dc.b	$06
-	smpsAlterNote	$00
-	dc.b	$06, nC0, nE0, $18, nFs0, $09, nG0, nD1
-	dc.b	nRst, $15, nFs0, $09, nG0, nD1, $06, nB0
-	dc.b	$18, nCs1, $09, nD1, nE1, $06, nA0, $18
-	dc.b	nG0, nRst, $33, $33, $33, $1E, nA0, $01
-	smpsAlterNote	$04
-	dc.b	smpsNoAttack, nB0
-	smpsAlterNote	$FC
-	dc.b	smpsNoAttack, nBb0
-	smpsAlterNote	$F3
-	dc.b	smpsNoAttack, nA0
-	smpsAlterNote	$0C
-	dc.b	smpsNoAttack, nBb0, smpsNoAttack, nB0
-	smpsAlterNote	$03
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$FC
-	dc.b	smpsNoAttack, nBb0
-	smpsAlterNote	$01
-	dc.b	smpsNoAttack, nA0
-	smpsAlterNote	$02
-	dc.b	nRst, $15, nB0, $01, nRst, $33, $33, $33
-	dc.b	$0B, nC0, $06, nE0, $18, nFs0, $09, nG0
-	dc.b	nD1, nRst, $15, nC0, $09, nG0, nD1, $06
-	dc.b	nC0, $18, nCs1, $09, nD1, nE1, $06, nA0
-	dc.b	$18, nG0, nRst, $33, $33, $33, $1E
-	smpsAlterNote	$00
-	dc.b	nA0, $01
-	smpsAlterNote	$04
-	dc.b	smpsNoAttack, nB0
-	smpsAlterNote	$FC
-	dc.b	smpsNoAttack, nBb0
-	smpsAlterNote	$F3
-	dc.b	smpsNoAttack, nA0
-	smpsAlterNote	$0C
-	dc.b	smpsNoAttack, nBb0
-	smpsAlterNote	$06
-	dc.b	smpsNoAttack, nA0
-	smpsAlterNote	$F8
-	dc.b	smpsNoAttack, nAb0
-	smpsAlterNote	$08
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$F5
-	dc.b	smpsNoAttack, nG0
-	smpsAlterNote	$02
-	dc.b	nRst
-	smpsAlterNote	$00
-
-DMR_Loop48:
-	dc.b	$22
-	smpsLoop		$00, $0D, DMR_Loop48, Target
-	dc.b	$25, nE0, $18, nRst, $33, $15, nE1, $30
-	dc.b	nD1, nRst, $33, $15
-	smpsPSGvoice	$36
-	dc.b	$18, nB0, $30, $30, nA0, $18, nB0, nRst
-	dc.b	$01, nFs0, $2F, nRst, $01, nG0, $2F, nB0
-	dc.b	$30, $30, nA0, $18, nB0
-
-DMR_Jump4:
-	dc.b	nRst, $30, $30, $30, $30, $30, $30
-	smpsJump		DMR_Jump4, Target
-
-DMR_PSG2:
-	dc.b	nRst, $33, $24
-	smpsAlterNote	$7F
-	dc.b	$05
-	smpsAlterNote	$00
-	dc.b	$01
-	smpsAlterNote	$7F
-	dc.b	$02
-	smpsAlterNote	$00
-	dc.b	$07, $33, $1E
-	smpsAlterNote	$7F
-	dc.b	$02
-	smpsAlterNote	$00
-	dc.b	$01
-	smpsAlterNote	$7F
-	dc.b	$06
-	smpsAlterNote	$00
-	dc.b	$18
-
-DMR_Loop49:
-	smpsAlterNote	$7F
-	dc.b	$0C
-	smpsAlterNote	$00
-	dc.b	$24
-	smpsLoop		$00, $02, DMR_Loop49, Target
-	smpsAlterNote	$7F
-	dc.b	$03
-	smpsAlterNote	$00
-	dc.b	$01
-	smpsAlterNote	$7F
-	dc.b	$08
-	smpsAlterNote	$00
-	dc.b	$24
+HDN_BlueTwl_PSG2:
 	smpsPSGvoice	$00
-	dc.b	$06
-	smpsAlterNote	$7F
-	dc.b	$06
-	smpsAlterNote	$00
-	dc.b	$06, nC0, nC0, $18, $09, $09, nD0, $06
-	dc.b	nE0, $18, nC0, $09, $09, nD0, $06, nC0
-	dc.b	$18, nCs0, $09, nD0, nE0, $06, nC0, $18
-	dc.b	$18, nRst, $33, $33, $33, $1F
-	smpsAlterNote	$7F
-	dc.b	$08, $33, $33, $33, $21, nC0, $06, $18
-	dc.b	$09, $09, nD0, $06, nE0, $18, nC0, $09
-	dc.b	$09, nD0, $06, nC0, $18, nCs0, $09, nD0
-	dc.b	nE0, $06, nC0, $18, $18, nRst, $33, $33
-	dc.b	$33, $1E
-	smpsAlterNote	$00
-	dc.b	$01
-	smpsAlterNote	$04
-	dc.b	$01
-	smpsAlterNote	$FC
-	dc.b	$01
-	smpsAlterNote	$F3
-	dc.b	$01
-	smpsAlterNote	$0C
-	dc.b	$01
-	smpsAlterNote	$06
-	dc.b	$01
-	smpsAlterNote	$F8
-	dc.b	$01
-	smpsAlterNote	$08
-	dc.b	$01
-	smpsAlterNote	$F5
-	dc.b	$01
-	smpsAlterNote	$02
-	dc.b	$01
-	smpsAlterNote	$00
 
-DMR_Loop50:
-	dc.b	$29
-	smpsLoop		$00, $0D, DMR_Loop50, Target
-	dc.b	$2A, nA0, $30, nG0
-	smpsPSGvoice	$36
-	dc.b	nB0, nB0, nD1, nD1, nCs1, $18, nD1, nB0
-	dc.b	$30, $30, nD1, nD1, nCs1, $18, nD1
+HDN_BlueTwl_Loop7:
+	dc.b	nC0, $06, nE0, nG0, nB0, nRst, $18
+	smpsLoop		$00, $02, HDN_BlueTwl_Loop7, Target
+	dc.b	nC0, $06, nE0, nG0, nC1, nRst, $18, nC0
+	dc.b	$06, nF0, nA0, nB0
 
-DMR_Jump5:
-	smpsPSGvoice	$00
-	dc.b	nC0
+HDN_BlueTwl_Loo$8:
+	dc.b	nRst, $18, nC0, $06, nE0, nG0, nC1
+	smpsLoop		$00, $02, HDN_BlueTwl_Loo$8, Target
+	dc.b	nRst, $18, nC0, $06, $06, nF0, nF0
 
-DMR_Loop51:
-	dc.b	$0C
-	smpsLoop		$00, $10, DMR_Loop51, Target
+HDN_BlueTwl_Loo$9:
+	dc.b	nRst, $18, nC0, $06, nE0, nG0, nB0
+	smpsLoop		$00, $02, HDN_BlueTwl_Loo$9, Target
+	dc.b	nRst, $18, nC0, $06, nF0, nA0, nD1, nRst
+	dc.b	$18, nC0, $06, nE0, nG0, nC1, nRst, $18
+	dc.b	nC0, $06, nF0, nA0, nD1, nRst, $18, nC0
+	dc.b	$06, $06, nE0, nG0, nRst, $18, nC0, $06
+	dc.b	$06, nF0, nA0, nRst, $18, nC0, $06, nD0
+	dc.b	nG0, nB0, nRst, $18, nC0, $06, $06, nD0
+	dc.b	nAb0, nRst, $18, nC0, $06, nE0, nG0, nB0
+	dc.b	nRst, $18, nC0, $06, nF0, nA0, nD1, nRst
+	dc.b	$18, nC0, $06, nE0, nG0, nC1, nRst, $18
+	dc.b	nC0, $06, nF0, nA0, nD1, nRst, $18, nC0
+	dc.b	$06, $06, nE0, nG0, nRst, $18, nC0, $06
+	dc.b	$06, nF0, nA0, nRst, $18, nC0, $06, nD0
+	dc.b	nF0
 
-DMR_Loop52:
-	dc.b	$06
-	smpsLoop		$00, $10, DMR_Loop52, Target
-	smpsJump		DMR_Jump5, Target
+HDN_BlueTwl_Loop10:
+	dc.b	nB0, nRst, $18, nC0, $06, nE0, nG0
+	smpsLoop		$00, $04, HDN_BlueTwl_Loop10, Target
+	dc.b	nC1, nRst, $18, nC0, $06, nF0, nA0, nB0
 
-DMR_PSG3:
-	dc.b	nRst, $24, $24, $24, $24, $24, $24
-	smpsPSGvoice	$12
-	smpsAlterNote	$FC
-	dc.b	$01
-	smpsAlterNote	$F2
-	dc.b	$01
-	smpsAlterNote	$F6
-	dc.b	$01
-	smpsAlterNote	$06
-	dc.b	$01
-	smpsAlterNote	$04
-	dc.b	$01
-	smpsAlterNote	$FB
-	dc.b	$01
-	smpsAlterNote	$08
-	dc.b	$01
-	smpsAlterNote	$0F
-	dc.b	nAb0
-	smpsAlterNote	$FB
-	dc.b	smpsNoAttack, nG0
-	smpsAlterNote	$FC
-	dc.b	smpsNoAttack, $03
-	smpsAlterNote	$00
-	dc.b	nRst, $24
-	smpsAlterNote	$F8
-	dc.b	$01
-	smpsAlterNote	$05
-	dc.b	$01
-	smpsAlterNote	$0E
-	dc.b	$04
-	smpsAlterNote	$F0
-	dc.b	$01
-	smpsAlterNote	$05
-	dc.b	nA0
-	smpsAlterNote	$0C
-	dc.b	smpsNoAttack, nAb0
-	smpsAlterNote	$03
-	dc.b	smpsNoAttack, nG0, $03
-	smpsAlterNote	$00
-	dc.b	nRst, $24
-	smpsAlterNote	$FE
-	dc.b	$01
-	smpsAlterNote	$0F
-	dc.b	$01
-	smpsAlterNote	$0A
-	dc.b	$01
-	smpsAlterNote	$00
-	dc.b	$01
-	smpsAlterNote	$02
-	dc.b	$01
-	smpsAlterNote	$09
-	dc.b	$01
-	smpsAlterNote	$F2
-	dc.b	$01
-	smpsAlterNote	$F6
-	dc.b	nG0
-	smpsAlterNote	$F7
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$F8
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote	$F9
-	dc.b	smpsNoAttack, $02
-	smpsAlterNote	$00
-	dc.b	nRst, $2A
-	smpsAlterNote	$F0
-	dc.b	$01
-	smpsAlterNote	$05
-	dc.b	nA0
-	smpsAlterNote	$F6
-	dc.b	smpsNoAttack, nG0
-	smpsAlterNote	$03
-	dc.b	smpsNoAttack, $03
-	smpsAlterNote	$00
-	dc.b	nRst, $33, $33, $33, $03, nC0, $18, $18
-	smpsPSGvoice	$12
-	dc.b	nRst, $12, nCs2, $06, nRst, $21, nCs2, $06
-	dc.b	nRst, $03, nD2, $06, nRst, $1C, nFs1, $05
-	dc.b	nRst, $03, nA1, $06, nCs2, nRst, $12, nB0
-	dc.b	$06, nG1, nRst, $03, nCs2, $06, nRst, $03
-	dc.b	nD2, $06, nRst, $18
-	smpsPSGvoice	$12
-	dc.b	$33, $33, $33, $0F
-	smpsPSGvoice	$36
-	dc.b	$18, nC0, nC0, nC0, nE0, nD0, $30, nC0
-	dc.b	$18, $18
-	smpsPSGvoice	$12
-	dc.b	nFs0, $06, nRst, $03, nB0, $06, nFs0, $03
-	dc.b	nCs1, $06, nRst, $12, nC0, $06, nG0, nB0
-	dc.b	$03, nCs1, $06, nG0, $03, nD1, $06, nRst
-	dc.b	$12, nB0, $06, nRst, $04, nFs0, $05, nB0
-	dc.b	$06, nRst, $1B, nC0, $06, nG0, nB0, $03
-	dc.b	nCs1, $06, nG0, $03, nD1, $06, nRst
+HDN_BlueTwl_Loop11:
+	dc.b	nRst, $18, nC0, $06, nE0, nG0, nC1
+	smpsLoop		$00, $02, HDN_BlueTwl_Loop11, Target
+	dc.b	nRst, $18, nC0, $06, $06, nF0, nF0, nRst
+	dc.b	$18, nC0, $06, nE0, nG0, nB0, nRst, $18
+	dc.b	nC0, $06, nF0, nBb0, nD1, nRst, $18, nC0
+	dc.b	$06, nF0, nAb0, nC1, nRst, $18, nC0, $06
+	dc.b	$06, nEb0, nG0, nRst, $18, nC0, $06, $06
+	dc.b	nD0, nF0, nRst, $18, nC0, $06, $06, $06
+	dc.b	nEb0, nRst, $18, nC0, $06, nF0, nBb0, nD1
+	dc.b	nRst, $18, nC0, $06, nEb0, nAb0, nC1, nRst
+	dc.b	$18, nC0, $06, $06, nD0, nF0, nRst, $18
+	dc.b	nC0, $06, nEb0, nAb0, nC1, nRst, $18, nC0
+	dc.b	$06, nD0, nF0, nBb0, nRst, $18, nC0, $06
+	dc.b	nD0, nF0, nAb0, nRst, $18, nC0, $06, $06
+	dc.b	nEb0, nG0, nRst, $18, nC0, $06, $06, nF0
+	dc.b	nAb0, nRst, $18, nC0, $06, nD0, nF0, nBb0
+	dc.b	nRst, $18, nC0, $06, $06, nEb0, nAb0, nC0
+	dc.b	nD0, nF0, nBb0, nC0, nC0, nC0, nEb0, nRst
+	dc.b	$1F
+	smpsJump		HDN_BlueTwl_PSG2, Target
 
-DMR_Loop53:
-	dc.b	$30
-	smpsLoop		$00, $0B, DMR_Loop53, Target
-	smpsPSGvoice	$20
-	dc.b	$18, nC0, nC0, $0C, $0C, $18, $0C, $0C
-	dc.b	$18
-	smpsPSGvoice	$12
-	dc.b	nRst, $12, nC0, $06, nFs0, nRst, $03, nB0
-	dc.b	$06, nFs0, $03, nCs1, $06, nRst, $12, nC0
-	dc.b	$06, nG0, nB0, $03, nCs1, $06, nG0, $03
-	dc.b	nD1, $06, nRst, $12, nB0, $06, nRst, $04
-	dc.b	nFs0, $05, nB0, $06, nRst, $03, nCs1, $06
-	dc.b	nRst, $12, nC0, $06, nG0, nB0, $03, nCs1
-	dc.b	$06, nG0, $03, nD1, $06, nRst, $12, nB0
-	dc.b	$06, nA0, $03, nRst, $01, nFs0, $05, nB0
-	dc.b	$03, nA0, nB0, nCs1, nD1, $09, nRst, $0C
-	dc.b	nC0, $06, nFs0, nRst, $03, nB0, $06, nFs0
-	dc.b	$03, nCs1, $06, nRst, $12, nC0, $06, nG0
-	dc.b	nB0, $03, nCs1, $06, nG0, $03, nD1, $06
-	dc.b	nRst, $12, nB0, $06, nRst, $04, nFs0, $05
-	dc.b	nB0, $06, nRst, $03, nCs1, $06, nRst, $12
-	dc.b	nC0, $06, nG0, nB0, $03, nCs1, $06, nG0
-	dc.b	$03, nD1, $06, nRst, $12, nB0, $06, nA0
-	dc.b	$03, nRst, $01, nFs0, $05, nB0, $03, nA0
-	dc.b	nB0, nCs1, nD1, $09, nRst, $12
+HDN_BlueTwl_PSG3:
+	smpsPSGvoice	$01
+	dc.b	nA0, $2E, nRst, $02, nG0, $2E, nRst, $02
+	dc.b	nF0, $2E, nRst, $02, nB0, $2E, nRst, $02
+	dc.b	nA0, $2E, nRst, $02, nG0, $2E, nRst, $02
+	dc.b	nF0, $2E, nRst, $02, nE0, $2E, nRst, $02
+	dc.b	nE0, $2E, nRst, $02, nD0, $2E, nRst, $02
+	dc.b	nC0, $2E, nRst, $02, nD0, $2E, nRst, $02
+	dc.b	nG0, $2E, nRst, $02, nA0, $2E, nRst, $02
+	dc.b	nB0, $2E, nRst, $02, nAb0, $2E, nRst, $02
+	dc.b	nE0, $2E, nRst, $02, nD0, $2E, nRst, $02
+	dc.b	nC0, $2E, nRst, $02, nD0, $2E, nRst, $02
+	dc.b	nG0, $2E, nRst, $02, nA0, $2E, nRst, $02
+	dc.b	nAb0, $2E, nRst, $02, nA0, $2E, nRst, $02
+	dc.b	nA0, $2E, nRst, $02, nG0, $2E, nRst, $02
+	dc.b	nF0, $2E, nRst, $02, nB0, $2E, nRst, $02
+	dc.b	nA0, $2E, nRst, $02, nG0, $2E, nRst, $02
+	dc.b	nF0, $2E, nRst, $02, nE0, $2E, nRst, $02
+	dc.b	nBb0, $2E, nRst, $02, nF0, $2E, nRst, $02
+	dc.b	nEb0, $2E, nRst, $02, nG0, $2E, nRst, $02
+	dc.b	nC0, $2E, nRst, $02, nF0, $2E, nRst, $02
+	dc.b	nC0, $2E, nRst, $02, nC0, $2E, nRst, $02
+	dc.b	nAb0, $2E, nRst, $02, nBb0, $2E, nRst, $02
+	dc.b	nB0, $2E, nRst, $02, nC0, $2E, nRst, $02
+	dc.b	nC0, $2E, nRst, $02, nF0, $2E, nRst, $02
+	dc.b	nEb0, $06, nBb1, nAb1, nRst, nF0, $17, nRst
+	dc.b	$01, nC1, $2E, nRst, $09
+	smpsJump		HDN_BlueTwl_PSG3, Target
 
-DMR_Jump6:
-	dc.b	nRst, $30, $30, $30, $30, $30, $30
-	smpsJump		DMR_Jump6, Target
-
-DMR_DAC:
+HDN_BlueTwl_DAC:
 	smpsStop
 
-DMR_Patches:
+HDN_BlueTwl_Patches:
 
 	
-	dc.b	$3A
-	dc.b	$34, $75, $70, $30,	$5F, $97, $5F, $DF
-	dc.b	$0E, $10, $0E, $07,	$01, $01, $02, $04
-	dc.b	$22, $3C, $3B, $19,	$21, $12, $20, $03
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-	
-	dc.b	$3A
-	dc.b	$70, $02, $30, $70,	$1F, $0F, $16, $12
-	dc.b	$00, $00, $00, $00,	$02, $02, $02, $02
-	dc.b	$00, $01, $01, $04,	$20, $20, $18, $08
+	dc.b	$2C
+	dc.b	$3C, $74, $74, $34,	$58, $58, $5A, $9A
+	dc.b	$0E, $0A, $0E, $08,	$00, $00, $00, $00
+	dc.b	$F7, $F7, $F6, $F6,	$32, $08, $39, $04
 	 
 	 
 	 
@@ -1042,10 +465,10 @@ DMR_Patches:
 	 
 
 	
-	dc.b	$0A
-	dc.b	$70, $71, $71, $34,	$1F, $1F, $1F, $1E
-	dc.b	$10, $00, $10, $10,	$00, $00, $00, $00
-	dc.b	$0F, $0F, $1F, $1F,	$20, $18, $19, $06
+	dc.b	$39
+	dc.b	$0D, $02, $01, $01,	$9F, $1F, $1F, $5F
+	dc.b	$0A, $09, $09, $04,	$08, $07, $07, $07
+	dc.b	$24, $24, $24, $28,	$2A, $14, $26, $0C
 	 
 	 
 	 
@@ -1060,28 +483,10 @@ DMR_Patches:
 	 
 
 	
-	dc.b	$3E
-	dc.b	$32, $71, $33, $73,	$1F, $0A, $0A, $0A
-	dc.b	$00, $00, $00, $00,	$00, $00, $00, $00
-	dc.b	$04, $06, $06, $06,	$38, $0D, $0D, $0F
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-	
-	dc.b	$2B
-	dc.b	$20, $31, $61, $12,	$1F, $1F, $19, $18
-	dc.b	$10, $10, $10, $10,	$05, $07, $05, $09
-	dc.b	$0F, $0F, $1F, $1F,	$20, $20, $35, $02
+	dc.b	$34
+	dc.b	$73, $02, $01, $31,	$52, $5F, $5F, $1F
+	dc.b	$05, $05, $05, $0A,	$03, $04, $04, $04
+	dc.b	$21, $11, $23, $45,	$1E, $10, $23, $0C
 	 
 	 
 	 
