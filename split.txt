@@ -22,6 +22,7 @@ LoadFile orig.bin
 ;!@ Demo Data
 MakePath "Misc"
 MakePath "Misc/Demos"
+MakePath "Misc/CharStats"
 
 MakePath "Sound"
 MakePath "Sound/Music"
@@ -2844,6 +2845,16 @@ Extract $2242F6 $0094		"Art/Mars/Uncomp/InvinStars/InvinStars_Stars_03.bin"
 
 ;Region @X_MiscData
 ;Misc data
+
+;Region @CharStats
+Extract $00BE78	$4A	"Misc/CharStats/CT_Mighty.bin"
+Extract $00BEC2	$4A	"Misc/CharStats/CT_Knuckles.bin"
+Extract $00BF0C	$4A	"Misc/CharStats/CT_Vector.bin"
+Extract $00BF56	$4A	"Misc/CharStats/CT_Charmy.bin"
+Extract $00BFA0	$4A	"Misc/CharStats/CT_Heavy.bin"
+Extract $00BFEA	$4A	"Misc/CharStats/CT_Bomb.bin"
+Extract $00C034	$4A	"Misc/CharStats/CT_Espio.bin"
+;EndRegion
 
 ;Region @Demos
 Extract $02760E  $088 	"Misc/Demos/Demo1.bin"	;MMZ1N, Charmy/Heavy

@@ -10,9 +10,22 @@ LoadFile orig.bin
 ;DestPath c:\dev\soned2\bin\Chaotix
 ; #Got
 
-MakePath "Art/palettes/MD/Palswaps"		;!@
+
+;Region @CharStats
+MakePath "Misc/CharStats"
+Extract $00BE78	$4A	"Misc/CharStats/CT_Mighty.bin"
+Extract $00BEC2	$4A	"Misc/CharStats/CT_Knuckles.bin"
+Extract $00BF0C	$4A	"Misc/CharStats/CT_Vector.bin"
+Extract $00BF56	$4A	"Misc/CharStats/CT_Charmy.bin"
+Extract $00BFA0	$4A	"Misc/CharStats/CT_Heavy.bin"
+Extract $00BFEA	$4A	"Misc/CharStats/CT_Bomb.bin"
+Extract $00C034	$4A	"Misc/CharStats/CT_Espio.bin"
+;EndRegion
+
+
+;MakePath "Art/palettes/MD/Palswaps"		;!@
 
 ;Region @X_PalsData_Gens
-Extract $2293EC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_FG.bin"
-Extract $2295CC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_BG.bin"
+;Extract $2293EC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_FG.bin"
+;Extract $2295CC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_BG.bin"
 ;EndRegion

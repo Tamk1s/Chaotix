@@ -377,23 +377,49 @@ EndSeg
 ; Fixed Data Segments ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
+;Region @Collision
 StartSeg HMaps Big_Endian $22D000		;Replace the normal-oriented Height Maps
-
 		include	"Collisn/HMaps.bin"
-
 EndSeg
 
 StartSeg HMapsR Big_Endian $22C000		;Replace the rotated Height Maps
-
 		include	"Collisn/HMapsR.bin"
-
 EndSeg
 
 StartSeg Angles Big_Endian $22E000		;Replace the Angle Array
-
 		include	"Collisn/Angles.bin"
-
 EndSeg
+;EndRegion
+
+;!@ 
+;Region @CharStats
+StartSeg CharStats_Ptr1 Big_Endian $009D90
+		DWORD CharStats
+EndSeg
+StartSeg CharStats_Ptr1 Big_Endian $03003C
+		DWORD CharStats
+EndSeg
+
+StartSeg CharStats $00BE58 $0226 Big_Endian
+		DWORD	CT_Mighty
+		DWORD	CT_Mighty
+		DWORD	CT_Knuckles
+		DWORD	CT_Vector
+		DWORD	CT_Charmy
+		DWORD	CT_Bomb
+		DWORD	CT_Espio
+		
+		CT_Mighty: 		include		"Misc/CharStats/CT_Mighty.bin"
+		CT_Knuckles: 	include		"Misc/CharStats/CT_Knuckles.bin"
+		CT_Vector: 		include		"Misc/CharStats/CT_Vector.bin"
+		CT_Charmy: 		include		"Misc/CharStats/CT_Charmy.bin"
+		CT_Heavy: 		include		"Misc/CharStats/CT_Heavy.bin"
+		CT_Bomb: 		include		"Misc/CharStats/CT_Bomb.bin"
+		CT_Espio: 		include		"Misc/CharStats/CT_Espio.bin"
+EndSeg
+;EndRegion
+
+;EndRegion
 
 ;region @MoveableSegs
 ;;;;;;;;;;;;;;;;;;;;;;;;;;

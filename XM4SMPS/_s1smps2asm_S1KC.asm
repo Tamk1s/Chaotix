@@ -129,6 +129,9 @@ dLowTimpani		EQU	$8A
 dVLowTimpani	EQU	$8B
 dFloorTimpani	EQU $8B
 
+; !@ PSGDelta (S1->KC has 12 semitone increase between PSG)
+PSGDelta	EQU	$0C
+
 ; PWM Equates (KC)
 pEKick		EQU	$81
 pESnare		EQU	$82

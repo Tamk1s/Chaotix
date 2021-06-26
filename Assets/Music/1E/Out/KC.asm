@@ -1,29 +1,32 @@
 Target	EQU	$40000
 
-PWMVol	EQU	$7F
+PWMVol	EQU	$87
+FMVolChords1	EQU	$0E+$04
+FMVolChords2	EQU	$18+$0F
 PSGVoi0	EQU	$00
 PSGVoi1	EQU $00
 PSGVoi2	EQU	$00
 
+
 ;!@ PSGVol1	EQU	$07
 ;!@ PSGVol2	EQU	$0B
 ;!@ PSGVol3	EQU	$08
-PSGVol1	EQU	$03
+PSGVol1	EQU	$03+$03
 PSGVol2	EQU	$06
-PSGVol3	EQU	$04
+PSGVol3	EQU	$04+$01
 PSGOff	EQU	$0C
 	smpsHeaderVoice	SAdv3_Options_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempoC	$03, $05
-	smpsHeaderFM	SAdv3_Options_FM1, Target, $00, $0E
-	smpsHeaderFM	SAdv3_Options_FM2, Target, $00, $0E
-	smpsHeaderFM	SAdv3_Options_FM3, Target, $00, $18
-	smpsHeaderFM	SAdv3_Options_FM4, Target, $00, $18
-	smpsHeaderFM	SAdv3_Options_FM5, Target, $00, $18
-	smpsHeaderFM	SAdv3_Options_FM6, Target, $00, $18
-	smpsHeaderPSG	SAdv3_Options_PSG1, Target, PSGOff, PSGVoi0, $00, PSGVol2
+	smpsHeaderFM	SAdv3_Options_FM1, Target, $00, FMVolChords1
+	smpsHeaderFM	SAdv3_Options_FM2, Target, $00, FMVolChords1
+	smpsHeaderFM	SAdv3_Options_FM3, Target, $00, FMVolChords2
+	smpsHeaderFM	SAdv3_Options_FM4, Target, $00, FMVolChords2
+	smpsHeaderFM	SAdv3_Options_FM5, Target, $00, FMVolChords2
+	smpsHeaderFM	SAdv3_Options_FM6, Target, $00, FMVolChords2
+	smpsHeaderPSG	SAdv3_Options_PSG1, Target, PSGOff, PSGVoi0, $00, PSGVol1
 	smpsHeaderPSG	SAdv3_Options_PSG2, Target, PSGOff, PSGVoi0, $00, PSGVol2
-	smpsHeaderPSG	SAdv3_Options_PSG3, Target, $00, PSGVoi2, $00, PSGVol2
+	smpsHeaderPSG	SAdv3_Options_PSG3, Target, $00, PSGVoi2, $00, PSGVol3
 	smpsHeaderPWM	SAdv3_Options_PWM1, Target, $00, PWMVol
 	smpsHeaderPWM	SAdv3_Options_PWM2, Target, $00, PWMVol
 	smpsHeaderPWM	SAdv3_Options_PWM3, Target, $00, PWMVol
@@ -933,14 +936,14 @@ SAdv3_Options_Patches:
 	dc.b	$3D
 	dc.b	$02, $01, $02, $01,	$1F, $1F, $1F, $1F
 	dc.b	$00, $00, $00, $01,	$00, $00, $00, $00
-	dc.b	$0F, $0F, $0F, $0F,	$20, $0A, $18, $16
+	dc.b	$0F, $0F, $0F, $0F,	$20, $0A+$0A, $18+$0A, $16+$0A
 	
 	dc.b	$38
 	dc.b	$72, $13, $71, $11,	$D1, $52, $14, $14
 	dc.b	$01, $07, $01, $01,	$00, $00, $00, $00
-	dc.b	$FF, $FF, $FF, $FF,	$1E, $1E, $1E, $00
+	dc.b	$FF, $FF, $FF, $FF,	$1E, $1E, $1E, $00+$0C
 	
 	dc.b	$3B
 	dc.b	$51, $71, $61, $41,	$51, $16, $18, $1A
 	dc.b	$05, $01, $01, $00,	$09, $01, $01, $01
-	dc.b	$17, $97, $27, $47,	$1C, $22, $15, $00
+	dc.b	$17, $97, $27, $47,	$1C, $22, $15, $00+$0C

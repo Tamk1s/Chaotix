@@ -734,17 +734,20 @@
 000000                  	include "KC.asm"
        = 040000         Target	EQU	$40000
 
-       = 00007F         PWMVol	EQU	$7F
+       = 000087         PWMVol	EQU	$87
+       = 000012         FMVolChords1	EQU	$0E+$04
+       = 000027         FMVolChords2	EQU	$18+$0F
        = 000000         PSGVoi0	EQU	$00
        = 000000         PSGVoi1	EQU $00
        = 000000         PSGVoi2	EQU	$00
 
+
                         ;!@ PSGVol1	EQU	$07
                         ;!@ PSGVol2	EQU	$0B
                         ;!@ PSGVol3	EQU	$08
-       = 000003         PSGVol1	EQU	$03
+       = 000006         PSGVol1	EQU	$03+$03
        = 000006         PSGVol2	EQU	$06
-       = 000004         PSGVol3	EQU	$04
+       = 000005         PSGVol3	EQU	$04+$01
        = 00000C         PSGOff	EQU	$0C
 000000                  	smpsHeaderVoice	SAdv3_Options_Patches, Target
                         ;songStart set *
@@ -765,50 +768,50 @@
                         		else
 000005 33               			dc.b	((256 - ((((($05))-1)*256 + ((($05))/2)) / (($05)))) % 256)
                         		endif
-000006                  	smpsHeaderFM	SAdv3_Options_FM1, Target, $00, $0E
+000006                  	smpsHeaderFM	SAdv3_Options_FM1, Target, $00, FMVolChords1
                         	;dc.w	loc-songStart
 000006                  	rom_ptr_z80(SAdv3_Options_FM1+Target)
                         	;dc.w z80_ptr(ptr,addr)
 000006 4080             	dc.w  (((((SAdv3_Options_FM1+Target))<<8)&$FF00)|((((SAdv3_Options_FM1+Target))>>8)&$7F)|$80)
-000008 000E             	dc.b	$00,$0E
-00000A                  	smpsHeaderFM	SAdv3_Options_FM2, Target, $00, $0E
+000008 0012             	dc.b	$00,FMVolChords1
+00000A                  	smpsHeaderFM	SAdv3_Options_FM2, Target, $00, FMVolChords1
                         	;dc.w	loc-songStart
 00000A                  	rom_ptr_z80(SAdv3_Options_FM2+Target)
                         	;dc.w z80_ptr(ptr,addr)
 00000A 3F81             	dc.w  (((((SAdv3_Options_FM2+Target))<<8)&$FF00)|((((SAdv3_Options_FM2+Target))>>8)&$7F)|$80)
-00000C 000E             	dc.b	$00,$0E
-00000E                  	smpsHeaderFM	SAdv3_Options_FM3, Target, $00, $18
+00000C 0012             	dc.b	$00,FMVolChords1
+00000E                  	smpsHeaderFM	SAdv3_Options_FM3, Target, $00, FMVolChords2
                         	;dc.w	loc-songStart
 00000E                  	rom_ptr_z80(SAdv3_Options_FM3+Target)
                         	;dc.w z80_ptr(ptr,addr)
 00000E 3F82             	dc.w  (((((SAdv3_Options_FM3+Target))<<8)&$FF00)|((((SAdv3_Options_FM3+Target))>>8)&$7F)|$80)
-000010 0018             	dc.b	$00,$18
-000012                  	smpsHeaderFM	SAdv3_Options_FM4, Target, $00, $18
+000010 0027             	dc.b	$00,FMVolChords2
+000012                  	smpsHeaderFM	SAdv3_Options_FM4, Target, $00, FMVolChords2
                         	;dc.w	loc-songStart
 000012                  	rom_ptr_z80(SAdv3_Options_FM4+Target)
                         	;dc.w z80_ptr(ptr,addr)
 000012 E483             	dc.w  (((((SAdv3_Options_FM4+Target))<<8)&$FF00)|((((SAdv3_Options_FM4+Target))>>8)&$7F)|$80)
-000014 0018             	dc.b	$00,$18
-000016                  	smpsHeaderFM	SAdv3_Options_FM5, Target, $00, $18
+000014 0027             	dc.b	$00,FMVolChords2
+000016                  	smpsHeaderFM	SAdv3_Options_FM5, Target, $00, FMVolChords2
                         	;dc.w	loc-songStart
 000016                  	rom_ptr_z80(SAdv3_Options_FM5+Target)
                         	;dc.w z80_ptr(ptr,addr)
 000016 8985             	dc.w  (((((SAdv3_Options_FM5+Target))<<8)&$FF00)|((((SAdv3_Options_FM5+Target))>>8)&$7F)|$80)
-000018 0018             	dc.b	$00,$18
-00001A                  	smpsHeaderFM	SAdv3_Options_FM6, Target, $00, $18
+000018 0027             	dc.b	$00,FMVolChords2
+00001A                  	smpsHeaderFM	SAdv3_Options_FM6, Target, $00, FMVolChords2
                         	;dc.w	loc-songStart
 00001A                  	rom_ptr_z80(SAdv3_Options_FM6+Target)
                         	;dc.w z80_ptr(ptr,addr)
 00001A 2E87             	dc.w  (((((SAdv3_Options_FM6+Target))<<8)&$FF00)|((((SAdv3_Options_FM6+Target))>>8)&$7F)|$80)
-00001C 0018             	dc.b	$00,$18
-00001E                  	smpsHeaderPSG	SAdv3_Options_PSG1, Target, PSGOff, PSGVoi0, $00, PSGVol2
+00001C 0027             	dc.b	$00,FMVolChords2
+00001E                  	smpsHeaderPSG	SAdv3_Options_PSG1, Target, PSGOff, PSGVoi0, $00, PSGVol1
                         	;dc.w	loc-songStart
 00001E                  	rom_ptr_z80(SAdv3_Options_PSG1+Target)
                         	;dc.w z80_ptr(ptr,addr)
 00001E D488             	dc.w  (((((SAdv3_Options_PSG1+Target))<<8)&$FF00)|((((SAdv3_Options_PSG1+Target))>>8)&$7F)|$80)
 000020 0C00             	dc.b	PSGOff,PSGVoi0
                         	;dc.w	voice
-000022 0006             	dc.b	$00,PSGVol2
+000022 0006             	dc.b	$00,PSGVol1
 000024                  	smpsHeaderPSG	SAdv3_Options_PSG2, Target, PSGOff, PSGVoi0, $00, PSGVol2
                         	;dc.w	loc-songStart
 000024                  	rom_ptr_z80(SAdv3_Options_PSG2+Target)
@@ -817,14 +820,14 @@
 000026 0C00             	dc.b	PSGOff,PSGVoi0
                         	;dc.w	voice
 000028 0006             	dc.b	$00,PSGVol2
-00002A                  	smpsHeaderPSG	SAdv3_Options_PSG3, Target, $00, PSGVoi2, $00, PSGVol2
+00002A                  	smpsHeaderPSG	SAdv3_Options_PSG3, Target, $00, PSGVoi2, $00, PSGVol3
                         	;dc.w	loc-songStart
 00002A                  	rom_ptr_z80(SAdv3_Options_PSG3+Target)
                         	;dc.w z80_ptr(ptr,addr)
 00002A CF8C             	dc.w  (((((SAdv3_Options_PSG3+Target))<<8)&$FF00)|((((SAdv3_Options_PSG3+Target))>>8)&$7F)|$80)
 00002C 0000             	dc.b	$00,PSGVoi2
                         	;dc.w	voice
-00002E 0006             	dc.b	$00,PSGVol2
+00002E 0005             	dc.b	$00,PSGVol3
 000030                  	smpsHeaderPWM	SAdv3_Options_PWM1, Target, $00, PWMVol
                         	;dc.w	loc-songStart
 000030                  	rom_ptr_z80(SAdv3_Options_PWM1+Target)	
@@ -832,7 +835,7 @@
 000030 308D             	dc.w  (((((SAdv3_Options_PWM1+Target))<<8)&$FF00)|((((SAdv3_Options_PWM1+Target))>>8)&$7F)|$80)
                         	;!@
 000032 00               	dc.b	$00
-000033 7F               	dc.b	PWMVol
+000033 87               	dc.b	PWMVol
 000034                  	smpsHeaderPWM	SAdv3_Options_PWM2, Target, $00, PWMVol
                         	;dc.w	loc-songStart
 000034                  	rom_ptr_z80(SAdv3_Options_PWM2+Target)	
@@ -840,7 +843,7 @@
 000034 898D             	dc.w  (((((SAdv3_Options_PWM2+Target))<<8)&$FF00)|((((SAdv3_Options_PWM2+Target))>>8)&$7F)|$80)
                         	;!@
 000036 00               	dc.b	$00
-000037 7F               	dc.b	PWMVol
+000037 87               	dc.b	PWMVol
 000038                  	smpsHeaderPWM	SAdv3_Options_PWM3, Target, $00, PWMVol
                         	;dc.w	loc-songStart
 000038                  	rom_ptr_z80(SAdv3_Options_PWM3+Target)	
@@ -848,7 +851,7 @@
 000038 898D             	dc.w  (((((SAdv3_Options_PWM3+Target))<<8)&$FF00)|((((SAdv3_Options_PWM3+Target))>>8)&$7F)|$80)
                         	;!@
 00003A 00               	dc.b	$00
-00003B 7F               	dc.b	PWMVol
+00003B 87               	dc.b	PWMVol
 00003C                  	smpsHeaderPWM	SAdv3_Options_PWM4, Target, $00, PWMVol
                         	;dc.w	loc-songStart
 00003C                  	rom_ptr_z80(SAdv3_Options_PWM4+Target)	
@@ -856,7 +859,7 @@
 00003C 898D             	dc.w  (((((SAdv3_Options_PWM4+Target))<<8)&$FF00)|((((SAdv3_Options_PWM4+Target))>>8)&$7F)|$80)
                         	;!@
 00003E 00               	dc.b	$00
-00003F 7F               	dc.b	PWMVol
+00003F 87               	dc.b	PWMVol
 
 000040                  SAdv3_Options_FM1:
 000040                  	smpsPan		panLeft
@@ -3082,71 +3085,72 @@
 000D8A 3D               	dc.b	$3D
 000D8B 020102011F1F1F1F 	dc.b	$02, $01, $02, $01,	$1F, $1F, $1F, $1F
 000D93 0000000100000000 	dc.b	$00, $00, $00, $01,	$00, $00, $00, $00
-000D9B 0F0F0F0F200A1816 	dc.b	$0F, $0F, $0F, $0F,	$20, $0A, $18, $16
+000D9B 0F0F0F0F20142220 	dc.b	$0F, $0F, $0F, $0F,	$20, $0A+$0A, $18+$0A, $16+$0A
                         	
 000DA3 38               	dc.b	$38
 000DA4 72137111D1521414 	dc.b	$72, $13, $71, $11,	$D1, $52, $14, $14
 000DAC 0107010100000000 	dc.b	$01, $07, $01, $01,	$00, $00, $00, $00
-000DB4 FFFFFFFF1E1E1E00 	dc.b	$FF, $FF, $FF, $FF,	$1E, $1E, $1E, $00
+000DB4 FFFFFFFF1E1E1E0C 	dc.b	$FF, $FF, $FF, $FF,	$1E, $1E, $1E, $00+$0C
                         	
 000DBC 3B               	dc.b	$3B
 000DBD 517161415116181A 	dc.b	$51, $71, $61, $41,	$51, $16, $18, $1A
 000DC5 0501010009010101 	dc.b	$05, $01, $01, $00,	$09, $01, $01, $01
-000DCD 179727471C221500 	dc.b	$17, $97, $27, $47,	$1C, $22, $15, $00
+000DCD 179727471C22150C 	dc.b	$17, $97, $27, $47,	$1C, $22, $15, $00+$0C
 
 00000 Total Error(s)
 
 DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK              00000081 E
 DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
-DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  NA0                0000008A E
-NA1                00000096 E  NA2                000000A2 E  NA3                000000AE E
-NA4                000000BA E  NA5                000000C6 E  NA6                000000D2 E
-NA7                000000DE E  NAB0               00000089 E  NAB1               00000095 E
-NAB2               000000A1 E  NAB3               000000AD E  NAB4               000000B9 E
-NAB5               000000C5 E  NAB6               000000D1 E  NAB7               000000DD E
-NB0                0000008C E  NB1                00000098 E  NB2                000000A4 E
-NB3                000000B0 E  NB4                000000BC E  NB5                000000C8 E
-NB6                000000D4 E  NBB0               0000008B E  NBB1               00000097 E
-NBB2               000000A3 E  NBB3               000000AF E  NBB4               000000BB E
-NBB5               000000C7 E  NBB6               000000D3 E  NBB7               000000DF E
-NC0                00000081 E  NC1                0000008D E  NC2                00000099 E
-NC3                000000A5 E  NC4                000000B1 E  NC5                000000BD E
-NC6                000000C9 E  NC7                000000D5 E  NCS0               00000082 E
-NCS1               0000008E E  NCS2               0000009A E  NCS3               000000A6 E
-NCS4               000000B2 E  NCS5               000000BE E  NCS6               000000CA E
-NCS7               000000D6 E  ND0                00000083 E  ND1                0000008F E
-ND2                0000009B E  ND3                000000A7 E  ND4                000000B3 E
-ND5                000000BF E  ND6                000000CB E  ND7                000000D7 E
-NE0                00000085 E  NE1                00000091 E  NE2                0000009D E
-NE3                000000A9 E  NE4                000000B5 E  NE5                000000C1 E
-NE6                000000CD E  NE7                000000D9 E  NEB0               00000084 E
-NEB1               00000090 E  NEB2               0000009C E  NEB3               000000A8 E
-NEB4               000000B4 E  NEB5               000000C0 E  NEB6               000000CC E
-NEB7               000000D8 E  NF0                00000086 E  NF1                00000092 E
-NF2                0000009E E  NF3                000000AA E  NF4                000000B6 E
-NF5                000000C2 E  NF6                000000CE E  NF7                000000DA E
-NFS0               00000087 E  NFS1               00000093 E  NFS2               0000009F E
-NFS3               000000AB E  NFS4               000000B7 E  NFS5               000000C3 E
-NFS6               000000CF E  NFS7               000000DB E  NG0                00000088 E
-NG1                00000094 E  NG2                000000A0 E  NG3                000000AC E
-NG4                000000B8 E  NG5                000000C4 E  NG6                000000D0 E
-NG7                000000DC E  NRST               00000080 E  PAKICK             0000008B E
-PANCENTER          000000C0 S  PANCENTRE          000000C0 S  PANLEFT            00000080 S
-PANNONE            00000000 S  PANRIGHT           00000040 S  PASNARE            0000008C E
-PBELL              0000008D E  PBONGOHI           00000092 E  PBONGOLO           00000093 E
-PCLAP              0000008A E  PCLICKHI           00000090 E  PCLICKLO           00000091 E
-PCLOSEDHH          00000098 E  PCOWBELL           0000008F E  PCRASHCYMB         00000089 E
-PEHIHAT            00000088 E  PEKICK             00000081 E  PESNARE            00000082 E
-PFINGSNAP          0000008E E  POPENHH            00000099 E  PRIDEBELL          00000084 E
-PSEGA              00000097 E  PSGOFF             0000000C E  PSGVOI0            00000000 E
-PSGVOI1            00000000 E  PSGVOI2            00000000 E  PSGVOL1            00000003 E
-PSGVOL2            00000006 E  PSGVOL3            00000004 E  PSILENCE           00000096 E
-PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E
-PTOMHI             00000085 E  PTOMLOW            00000087 E  PTOMLOWER          0000009A E
-PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E  PTOMMID            00000086 E
-PWMVOL             0000007F E  SADV3_OPTIONS_FM1  00000040    SADV3_OPTIONS_FM2  0000013F
-SADV3_OPTIONS_FM3  0000023F    SADV3_OPTIONS_FM4  000003E4    SADV3_OPTIONS_FM5  00000589
-SADV3_OPTIONS_FM6  0000072E    SADV3_OPTIONS_JUMP1                           000000BE
+DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  FMVOLCHORDS1       00000012 E
+FMVOLCHORDS2       00000027 E  NA0                0000008A E  NA1                00000096 E
+NA2                000000A2 E  NA3                000000AE E  NA4                000000BA E
+NA5                000000C6 E  NA6                000000D2 E  NA7                000000DE E
+NAB0               00000089 E  NAB1               00000095 E  NAB2               000000A1 E
+NAB3               000000AD E  NAB4               000000B9 E  NAB5               000000C5 E
+NAB6               000000D1 E  NAB7               000000DD E  NB0                0000008C E
+NB1                00000098 E  NB2                000000A4 E  NB3                000000B0 E
+NB4                000000BC E  NB5                000000C8 E  NB6                000000D4 E
+NBB0               0000008B E  NBB1               00000097 E  NBB2               000000A3 E
+NBB3               000000AF E  NBB4               000000BB E  NBB5               000000C7 E
+NBB6               000000D3 E  NBB7               000000DF E  NC0                00000081 E
+NC1                0000008D E  NC2                00000099 E  NC3                000000A5 E
+NC4                000000B1 E  NC5                000000BD E  NC6                000000C9 E
+NC7                000000D5 E  NCS0               00000082 E  NCS1               0000008E E
+NCS2               0000009A E  NCS3               000000A6 E  NCS4               000000B2 E
+NCS5               000000BE E  NCS6               000000CA E  NCS7               000000D6 E
+ND0                00000083 E  ND1                0000008F E  ND2                0000009B E
+ND3                000000A7 E  ND4                000000B3 E  ND5                000000BF E
+ND6                000000CB E  ND7                000000D7 E  NE0                00000085 E
+NE1                00000091 E  NE2                0000009D E  NE3                000000A9 E
+NE4                000000B5 E  NE5                000000C1 E  NE6                000000CD E
+NE7                000000D9 E  NEB0               00000084 E  NEB1               00000090 E
+NEB2               0000009C E  NEB3               000000A8 E  NEB4               000000B4 E
+NEB5               000000C0 E  NEB6               000000CC E  NEB7               000000D8 E
+NF0                00000086 E  NF1                00000092 E  NF2                0000009E E
+NF3                000000AA E  NF4                000000B6 E  NF5                000000C2 E
+NF6                000000CE E  NF7                000000DA E  NFS0               00000087 E
+NFS1               00000093 E  NFS2               0000009F E  NFS3               000000AB E
+NFS4               000000B7 E  NFS5               000000C3 E  NFS6               000000CF E
+NFS7               000000DB E  NG0                00000088 E  NG1                00000094 E
+NG2                000000A0 E  NG3                000000AC E  NG4                000000B8 E
+NG5                000000C4 E  NG6                000000D0 E  NG7                000000DC E
+NRST               00000080 E  PAKICK             0000008B E  PANCENTER          000000C0 S
+PANCENTRE          000000C0 S  PANLEFT            00000080 S  PANNONE            00000000 S
+PANRIGHT           00000040 S  PASNARE            0000008C E  PBELL              0000008D E
+PBONGOHI           00000092 E  PBONGOLO           00000093 E  PCLAP              0000008A E
+PCLICKHI           00000090 E  PCLICKLO           00000091 E  PCLOSEDHH          00000098 E
+PCOWBELL           0000008F E  PCRASHCYMB         00000089 E  PEHIHAT            00000088 E
+PEKICK             00000081 E  PESNARE            00000082 E  PFINGSNAP          0000008E E
+POPENHH            00000099 E  PRIDEBELL          00000084 E  PSEGA              00000097 E
+PSGOFF             0000000C E  PSGVOI0            00000000 E  PSGVOI1            00000000 E
+PSGVOI2            00000000 E  PSGVOL1            00000006 E  PSGVOL2            00000006 E
+PSGVOL3            00000005 E  PSILENCE           00000096 E  PSPLASHCYMB        00000083 E
+PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E  PTOMHI             00000085 E
+PTOMLOW            00000087 E  PTOMLOWER          0000009A E  PTOMLOWERER        0000009B E
+PTOMLOWEREST       0000009C E  PTOMMID            00000086 E  PWMVOL             00000087 E
+SADV3_OPTIONS_FM1  00000040    SADV3_OPTIONS_FM2  0000013F    SADV3_OPTIONS_FM3  0000023F
+SADV3_OPTIONS_FM4  000003E4    SADV3_OPTIONS_FM5  00000589    SADV3_OPTIONS_FM6  0000072E
+SADV3_OPTIONS_JUMP1                           000000BE    
 SADV3_OPTIONS_JUMP2                           000001BD    
 SADV3_OPTIONS_JUMP3                           00000310    
 SADV3_OPTIONS_JUMP4                           000004B5    
