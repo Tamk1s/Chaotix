@@ -1,5 +1,5 @@
 
-Target	EQU	$40D9F
+Target	EQU	$40A96
 	smpsHeaderVoice	SpeedOfSound_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $4C

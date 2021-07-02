@@ -12,7 +12,7 @@
        = 0000DC         smpsPitch03lo		EQU	$DC
        = 0000E8         smpsPitch02lo		EQU	$E8
        = 0000F4         smpsPitch01lo		EQU	$F4
-       = 000000         smpsPitch00		EQU	$00
+       = 000000         smpsPitch00			EQU	$00
        = 00000C         smpsPitch01hi		EQU	$0C
        = 000018         smpsPitch02hi		EQU	$18
        = 000024         smpsPitch03hi		EQU	$24
@@ -132,6 +132,9 @@
        = 00008B         dVLowTimpani	EQU	$8B
        = 00008B         dFloorTimpani	EQU $8B
 
+                        ; !@ PSGDelta (S1->KC has 12 semitone increase between PSG)
+       = 00000C         PSGDelta	EQU	$0C
+
                         ; PWM Equates (KC)
        = 000081         pEKick		EQU	$81
        = 000082         pESnare		EQU	$82
@@ -155,10 +158,22 @@
        = 000094         pTimpaniHi	EQU	$94
        = 000095         pTimpaniLo	EQU	$95
        = 000096         pSilence	EQU $96
+
                         ;!@ NEW DATA
        = 000097         pSega		EQU $97
        = 000098         pClosedHH	EQU $98
        = 000099         pOpenHH		EQU $99
+       = 00009A         pTomLower		EQU	$9A
+       = 00009B         pTomLowerer		EQU	$9B
+       = 00009C         pTomLowerest	EQU	$9C
+
+                        ;!@ Crackers conversion enums. Knuckles Clackers equiv
+       = 000081         pCra_d81	EQU	pEKick
+       = 00008C         pCra_d82	EQU	pASnare
+       = 000085         pCra_d83	EQU	pTomHi
+       = 000086         pCra_d84	EQU	pTomMid
+       = 000087         pCra_d85	EQU	pTomLow
+
 
                         ;!@ Convert ptrs to z80Ptr
                         ; function to make a little-endian 16-bit pointer for the Z80 sound driver
@@ -1001,11 +1016,14 @@ NG7                000000DC E  NRST               00000080 E  PAKICK            
 PASNARE            0000008C E  PBELL              0000008D E  PBONGOHI           00000092 E
 PBONGOLO           00000093 E  PCLAP              0000008A E  PCLICKHI           00000090 E
 PCLICKLO           00000091 E  PCLOSEDHH          00000098 E  PCOWBELL           0000008F E
-PCRASHCYMB         00000089 E  PEHIHAT            00000088 E  PEKICK             00000081 E
-PESNARE            00000082 E  PFINGSNAP          0000008E E  POPENHH            00000099 E
-PRIDEBELL          00000084 E  PSEGA              00000097 E  PSILENCE           00000096 E
+PCRASHCYMB         00000089 E  PCRA_D81           00000081 E  PCRA_D82           0000008C E
+PCRA_D83           00000085 E  PCRA_D84           00000086 E  PCRA_D85           00000087 E
+PEHIHAT            00000088 E  PEKICK             00000081 E  PESNARE            00000082 E
+PFINGSNAP          0000008E E  POPENHH            00000099 E  PRIDEBELL          00000084 E
+PSEGA              00000097 E  PSGDELTA           0000000C E  PSILENCE           00000096 E
 PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E
-PTOMHI             00000085 E  PTOMLOW            00000087 E  PTOMMID            00000086 E
+PTOMHI             00000085 E  PTOMLOW            00000087 E  PTOMLOWER          0000009A E
+PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E  PTOMMID            00000086 E
 SMPSED             000000ED E  SMPSEE             000000EE E  SMPSF9             000000F9 E
 SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E  SMPSNOATTACK       000000E7 E
 SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E  SMPSPITCH01LO      000000F4 E

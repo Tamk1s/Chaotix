@@ -18,6 +18,15 @@ Test_Header:
 	smpsHeaderPWM	Test_PWM2, Target, $00, $1A	
 	smpsHeaderPWM	Test_PWM3, Target, $00, $1A	
 	smpsHeaderPWM	Test_PWM4, Target, $00, $1A	
+
+Test_FM1:
+Test_FM2:
+Test_FM3:
+Test_FM4:
+Test_FM5:
+Test_FM6:
+	smpsStop
+	;smpsJump	Test_FM1,Target
 	
 Test_PSG1:
 	smpsPSGvoice	$00
@@ -82,6 +91,10 @@ Test_PSG1:
 	dc.b nAb1, nA1, nBb1, nB1, nC2, nCs2, nD2, nEb2
 	dc.b nE2, nF2, nFs2, nG2, nAb2, nA2, nBb2, nB2
 	smpsJump		Test_PSG1,Target
+	
+Test_PSG2:
+Test_PSG3:
+	smpsStop
 
 Test_PWM1:
 	dc.b $80, $0C, $81, $82, $18, $83, $24, $84
@@ -89,18 +102,10 @@ Test_PWM1:
 	dc.b $8C, $8D, $8E, $18, $8F, $0C, $90, $91
 	dc.b $24, $92, $0C, $93, $94, $18, $95, $24
 	dc.b $96, $0C, $97, $24, $98, $0C, $99, $18
-	dc.b $9A, $9B, $9C, $9D, $72, $9E, $18, $9F
+	dc.b $9A, $9B, $9C
 	smpsStop
 	;smpsJump	Test_PWM1,Target
 	
-Test_FM1:
-Test_FM2:
-Test_FM3:
-Test_FM4:
-Test_FM5:
-Test_FM6:
-Test_PSG2:
-Test_PSG3:
 Test_PWM2:
 Test_PWM3:
 Test_PWM4:

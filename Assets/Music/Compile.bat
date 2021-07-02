@@ -6,7 +6,7 @@ REM SMPSOpt.exe S1 "81\Out\Mus81 - GHZ.bin" "81\Out\Mus81 - GHZ.bin"
 
 REM Moves all compiled songs from each folder into SMPSPlay
 REM Copy /y /b "01\Out\01 Door Into Summer.bin" "Preview\Data\Knuckles Maniax\01 Door Into Summer.skc"
-REM Copy /y /b "02\Out\02 Electoria.bin" "Preview\Data\Knuckles Maniax\02 Electoria.skc"
+Copy /y /b "02\Out\02 Electoria.bin" "Preview\Data\Knuckles Maniax\02 Electoria.skc"
 REM Copy /y /b "03\Out\03 Speed Of Sound.bin" "Preview\Data\Knuckles Maniax\03 Speed Of Sound.skc"
 REM Copy /y /b "04\Out\04 Seascape.bin" "Preview\Data\Knuckles Maniax\04 Seascape.skc"
 REM Copy /y /b "05\Out\05 Midnight Greenhouse.bin" "Preview\Data\Knuckles Maniax\05 Midnight Greenhouse.skc"
@@ -51,7 +51,7 @@ Copy /y /b "Test\PWM_PSG_Test\Out\Soundtest.bin" "Preview\Data\Knuckles Maniax\S
 
 REM Copies all finalized ASM files to working project dir for recompilation into driver
 REM Copy /Y "01\Out\KC.asm" "..\..\Sound\Music\ASM\01 Door Into Summer.asm"
-REM Copy /Y "02\Out\KC.asm" "..\..\Sound\Music\ASM\02 Electoria.asm"
+Copy /Y "02\Out\KC.asm" "..\..\Sound\Music\ASM\02 Electoria.asm"
 REM Copy /Y "03\Out\KC.asm" "..\..\Sound\Music\ASM\03 Speed Of Sound.asm"
 REM Copy /Y "04\Out\KC.asm" "..\..\Sound\Music\ASM\04 Seascape.asm"
 REM Copy /Y "05\Out\KC.asm" "..\..\Sound\Music\ASM\05 Midnight Greenhouse.asm"

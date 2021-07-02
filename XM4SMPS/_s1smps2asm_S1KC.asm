@@ -155,6 +155,8 @@ pBongoLo	EQU	$93
 pTimpaniHi	EQU	$94
 pTimpaniLo	EQU	$95
 pSilence	EQU $96
+
+
 ;!@ NEW DATA
 pSega		EQU $97
 pClosedHH	EQU $98
@@ -162,6 +164,13 @@ pOpenHH		EQU $99
 pTomLower		EQU	$9A
 pTomLowerer		EQU	$9B
 pTomLowerest	EQU	$9C
+
+;!@ Crackers conversion enums. Knuckles Clackers equiv
+pCra_d81	EQU	pEKick
+pCra_d82	EQU	pASnare
+pCra_d83	EQU	pTomHi
+pCra_d84	EQU	pTomMid
+pCra_d85	EQU	pTomLow
 
 ;!@ Convert ptrs to z80Ptr
 ; function to make a little-endian 16-bit pointer for the Z80 sound driver

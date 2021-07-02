@@ -1,4 +1,4 @@
-Target	EQU	$4414E
+Target	EQU	$43E45
 	smpsHeaderVoice     SOTH_OVA_Dark_Voices, Target
 	smpsHeaderChan      $06, $03
 	smpsHeaderTempoC    $02, $05

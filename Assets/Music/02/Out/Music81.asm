@@ -1,21 +1,16 @@
-Target	EQU	$401F9
-PWMVol	EQU	$7F
+Target	EQU	$40000
 	smpsHeaderVoice	SCra_Electoria_Patches, Target
-	smpsHeaderChan		$06, $03
-	smpsHeaderTempo		$01, $19	
+	smpsHeaderChan	$06, $03
+	smpsHeaderTempo	$01, $19
+	sHeaderDAC	SCra_Electoria_DAC
 	smpsHeaderFM	SCra_Electoria_FM1, Target, $00, $0E
 	smpsHeaderFM	SCra_Electoria_FM2, Target, $00, $18
 	smpsHeaderFM	SCra_Electoria_FM3, Target, $00, $18
 	smpsHeaderFM	SCra_Electoria_FM4, Target, $00, $18
 	smpsHeaderFM	SCra_Electoria_FM5, Target, $00, $18
-	smpsHeaderFM	SCra_Electoria_FM6, Target, $00, $18			;!@
 	smpsHeaderPSG	SCra_Electoria_PSG1, Target, $00, $04, $00, $0C
 	smpsHeaderPSG	SCra_Electoria_PSG2, Target, $F4, $04, $00, $0C
-	smpsHeaderPSG	SCra_Electoria_PSG3, Target, $23, $01, $00, $02		
-	smpsHeaderPWM	SCra_Electoria_PWM1, Target, $00, PWMVol
-	smpsHeaderPWM	SCra_Electoria_PWM2, Target, $00, PWMVol
-	smpsHeaderPWM	SCra_Electoria_PWM3, Target, $00, PWMVol
-	smpsHeaderPWM	SCra_Electoria_PWM4, Target, $00, PWMVol
+	smpsHeaderPSG	SCra_Electoria_PSG3, Target, $23, $01, $00, $02
 
 SCra_Electoria_FM1:
 	smpsFMvoice		$00
@@ -631,13 +626,6 @@ SCra_Electoria_Loop23:
 	smpsLoop		$00, $04, SCra_Electoria_Loop23, Target
 	smpsJump		SCra_Electoria_Loop19, Target
 
-;!@ FM6 NOP'd out due to Genesis FM6/DAC hardware "feature"	
-SCra_Electoria_FM6:
-SCra_Electoria_PWM2:
-SCra_Electoria_PWM3:
-SCra_Electoria_PWM4:
-	smpsStop
-
 SCra_Electoria_PSG1:
 	smpsPSGvoice	$0C
 	dc.b	nRst, $60
@@ -805,10 +793,10 @@ SCra_Electoria_Call16:
 	dc.b	$06, nRst, $30
 	smpsReturn
 
-SCra_Electoria_PWM1:
-	dc.b	pCra_d82, $06, nRst, pCra_d82, pCra_d82, nRst, pCra_d82, pCra_d82
-	dc.b	pCra_d81, pCra_d82, pCra_d83, pCra_d84, pCra_d82, pCra_d82, pCra_d84, pCra_d85
-	dc.b	pCra_d82
+SCra_Electoria_DAC:
+	dc.b	d82, $06, nRst, d82, d82, nRst, d82, d82
+	dc.b	d81, d82, d83, d84, d82, d82, d84, d85
+	dc.b	d82
 
 SCra_Electoria_Loop41:
 	smpsCall		SCra_Electoria_Call17, Target
@@ -829,8 +817,8 @@ SCra_Electoria_Loop43:
 	smpsCall		SCra_Electoria_Call18, Target
 	smpsLoop		$00, $03, SCra_Electoria_Loop43, Target
 	smpsCall		SCra_Electoria_Call17, Target
-	dc.b	pCra_d82, $04, pCra_d82, pCra_d82, pCra_d82, $06, pCra_d82, pCra_d82
-	dc.b	pCra_d82, pCra_d82, pCra_d82, nRst, $30
+	dc.b	d82, $04, d82, d82, d82, $06, d82, d82
+	dc.b	d82, d82, d82, nRst, $30
 
 SCra_Electoria_Loop44:
 	smpsCall		SCra_Electoria_Call17, Target
@@ -848,7 +836,7 @@ SCra_Electoria_Loop45:
 	smpsCall		SCra_Electoria_Call17, Target
 	smpsCall		SCra_Electoria_Call18, Target
 	smpsCall		SCra_Electoria_Call17, Target
-	dc.b	pCra_d81, $06, pCra_d82, $12, pCra_d82, pCra_d81, $06, nRst
+	dc.b	d81, $06, d82, $12, d82, d81, $06, nRst
 	dc.b	$30
 	smpsCall		SCra_Electoria_Call17, Target
 	smpsCall		SCra_Electoria_Call18, Target
@@ -857,47 +845,113 @@ SCra_Electoria_Loop45:
 	smpsJump		SCra_Electoria_Loop42, Target
 
 SCra_Electoria_Call17:
-	dc.b	pCra_d81, $0C, pCra_d81, pCra_d82, nRst, $06, pCra_d82, nRst
-	dc.b	pCra_d82, pCra_d81, nRst, pCra_d82, $18
+	dc.b	d81, $0C, d81, d82, nRst, $06, d82, nRst
+	dc.b	d82, d81, nRst, d82, $18
 	smpsReturn
 
 SCra_Electoria_Call18:
-	dc.b	pCra_d81, $06, pCra_d82, $12, pCra_d82, pCra_d81, $06, nRst
-	dc.b	pCra_d82, pCra_d81, nRst, pCra_d82, $18
+	dc.b	d81, $06, d82, $12, d82, d81, $06, nRst
+	dc.b	d82, d81, nRst, d82, $18
 	smpsReturn
 
 SCra_Electoria_Call19:
-	dc.b	pCra_d84, $0C, $0C, $0C, $06, $06, nRst, pCra_d84
-	dc.b	pCra_d84, $0C, pCra_d84, pCra_d84
+	dc.b	d84, $0C, $0C, $0C, $06, $06, nRst, d84
+	dc.b	d84, $0C, d84, d84
 	smpsReturn
 
 SCra_Electoria_Call20:
-	dc.b	nRst, $06, pCra_d82, $12, pCra_d82, $18, nRst, $06
-	dc.b	pCra_d82, $12, pCra_d82, $18
+	dc.b	nRst, $06, d82, $12, d82, $18, nRst, $06
+	dc.b	d82, $12, d82, $18
 	smpsReturn
 
-SCra_Electoria_Patches:	
+SCra_Electoria_Patches:
+
+	
 	dc.b	$3B
 	dc.b	$12, $11, $13, $01,	$1F, $1F, $1F, $1E
 	dc.b	$02, $0C, $13, $07,	$12, $0A, $05, $07
 	dc.b	$0F, $3F, $5F, $3F,	$16, $10, $15, $80
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 
+	
 	dc.b	$3C
 	dc.b	$01, $02, $0F, $04,	$8D, $52, $9F, $1F
 	dc.b	$09, $00, $00, $0D,	$00, $00, $00, $00
 	dc.b	$2F, $0F, $0F, $FF,	$17, $86, $1F, $86
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 
+	
 	dc.b	$2C
 	dc.b	$22, $04, $02, $14,	$51, $52, $50, $52
 	dc.b	$0D, $00, $06, $04,	$03, $05, $02, $00
 	dc.b	$16, $18, $26, $18,	$0F, $80, $12, $80
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 
+	
 	dc.b	$41
 	dc.b	$18, $12, $02, $12,	$5F, $5F, $5F, $5F
 	dc.b	$0C, $0B, $0B, $0B,	$09, $08, $10, $0A
 	dc.b	$AF, $FF, $FF, $FF,	$1D, $23, $1B, $80
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 
+	
 	dc.b	$3C
 	dc.b	$07, $01, $08, $04,	$5F, $9F, $9F, $5F
 	dc.b	$16, $1F, $16, $1F,	$09, $0F, $16, $11
 	dc.b	$6F, $0F, $AF, $0F,	$16, $80, $11, $80
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
