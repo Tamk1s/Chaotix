@@ -11,10 +11,10 @@ Target	EQU	$40000
 	smpsHeaderPSG       SOTH_OVA_Dark_PSG1, Target,	$00, $06, $00, $00
 	smpsHeaderPSG       SOTH_OVA_Dark_PSG2, Target,	$00, $06, $00, $00
 	smpsHeaderPSG       SOTH_OVA_Dark_PSG3, Target,	$00, $06, $00, $00
-	smpsHeaderPWM		PWM1, Target, $00, $7F
-	smpsHeaderPWM		PWM2, Target, $00, $7F
-	smpsHeaderPWM		PWM3, Target, $00, $7F
-	smpsHeaderPWM		PWM4, Target, $00, $7F
+	smpsHeaderPWM		SOTH_OVA_Dark_PWM1, Target, $00, $7F
+	smpsHeaderPWM		SOTH_OVA_Dark_PWM2, Target, $00, $7F
+	smpsHeaderPWM		SOTH_OVA_Dark_PWM3, Target, $00, $7F
+	smpsHeaderPWM		SOTH_OVA_Dark_PWM4, Target, $00, $7F
 
 ; FM1 Data
 SOTH_OVA_Dark_FM1:
@@ -798,162 +798,162 @@ SOTH_OVA_Dark_Loop29:
 	smpsJump            SOTH_OVA_Dark_Jump05, Target
 
 
-PWM1:
+SOTH_OVA_Dark_PWM1:
 	smpsPan		panCenter
 	dc.b	nRst, $01
 	smpsPan		panCenter
 	dc.b	$0B, pClosedHH, $04, $02
 
-PWM1_Loop1:
+SOTH_OVA_Dark_PWM1_Loop1:
 	dc.b	pOpenHH, $06, pClap, $24, pAKick, $04, pClosedHH, $02
-	smpsLoop		$00, $02, PWM1_Loop1, Target
+	smpsLoop		$00, $02, SOTH_OVA_Dark_PWM1_Loop1, Target
 	dc.b	pOpenHH, $06, pClap, $24, $04, $06, $02, $06
 	dc.b	$04, $06, $02, $06, $06, $04
 
-PWM1_Loop4:
+SOTH_OVA_Dark_PWM1_Loop4:
 	dc.b	pAKick, $02
 
-PWM1_Jump1:
+SOTH_OVA_Dark_PWM1_Jump1:
 	dc.b	pAKick, $04, pClosedHH
 
-PWM1_Loop2:
+SOTH_OVA_Dark_PWM1_Loop2:
 	dc.b	$02, pOpenHH, $06, pClosedHH, $04
-	smpsLoop		$00, $03, PWM1_Loop2, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM1_Loop2, Target
 	dc.b	$02, pOpenHH, $04, pClap, $02
 
-PWM1_Loop3:
+SOTH_OVA_Dark_PWM1_Loop3:
 	dc.b	pClosedHH, $04, $02, pOpenHH, $06
-	smpsLoop		$00, $03, PWM1_Loop3, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM1_Loop3, Target
 	dc.b	pClosedHH, $04, $02, pOpenHH, $04
-	smpsLoop		$01, $07, PWM1_Loop4, Target
+	smpsLoop		$01, $07, SOTH_OVA_Dark_PWM1_Loop4, Target
 	dc.b	pAKick, $02, $04, pClosedHH
 
-PWM1_Loop5:
+SOTH_OVA_Dark_PWM1_Loop5:
 	dc.b	$02, pOpenHH, $06, pClosedHH, $04
-	smpsLoop		$00, $03, PWM1_Loop5, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM1_Loop5, Target
 
-PWM1_Loop6:
+SOTH_OVA_Dark_PWM1_Loop6:
 	dc.b	$02, pOpenHH, $04, pClap, $02, pClosedHH, $04, $02
 	dc.b	pOpenHH, $06, pClosedHH, $04
-	smpsLoop		$00, $02, PWM1_Loop6, Target
+	smpsLoop		$00, $02, SOTH_OVA_Dark_PWM1_Loop6, Target
 	dc.b	$02, pClap, $04
 
-PWM1_Loo$9:
+SOTH_OVA_Dark_PWM1_Loo$9:
 	dc.b	pAKick, $02, $04, pClosedHH
 
-PWM1_Loop7:
+SOTH_OVA_Dark_PWM1_Loop7:
 	dc.b	$02, pOpenHH, $06, pClosedHH, $04
-	smpsLoop		$00, $03, PWM1_Loop7, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM1_Loop7, Target
 	dc.b	$02, pOpenHH, $04, pClap, $02
 
-PWM1_Loo$8:
+SOTH_OVA_Dark_PWM1_Loo$8:
 	dc.b	pClosedHH, $04, $02, pOpenHH, $06
-	smpsLoop		$00, $03, PWM1_Loo$8, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM1_Loo$8, Target
 	dc.b	pClosedHH, $04, $02, pOpenHH, $04
-	smpsLoop		$01, $04, PWM1_Loo$9, Target
+	smpsLoop		$01, $04, SOTH_OVA_Dark_PWM1_Loo$9, Target
 	dc.b	pAKick, $02
 
-PWM1_Loop10:
+SOTH_OVA_Dark_PWM1_Loop10:
 	dc.b	pClosedHH, $04, $02, pOpenHH, $06
-	smpsLoop		$00, $10, PWM1_Loop10, Target
+	smpsLoop		$00, $10, SOTH_OVA_Dark_PWM1_Loop10, Target
 	dc.b	pSplashCymb, $30
 
-PWM1_Loop11:
+SOTH_OVA_Dark_PWM1_Loop11:
 	dc.b	pClosedHH, $04, $02
 
-PWM1_Loop13:
+SOTH_OVA_Dark_PWM1_Loop13:
 	dc.b	pOpenHH, $06
-	smpsLoop		$00, $03, PWM1_Loop11, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM1_Loop11, Target
 	dc.b	pClosedHH, $04, $02, pOpenHH, $04, pClap, $02
 
-PWM1_Loop12:
+SOTH_OVA_Dark_PWM1_Loop12:
 	dc.b	pClosedHH, $04, $02, pOpenHH, $06
-	smpsLoop		$00, $03, PWM1_Loop12, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM1_Loop12, Target
 	dc.b	pClosedHH, $04, $02, pOpenHH, $04, pAKick, $02, $04
 	dc.b	pClosedHH, $02
-	smpsLoop		$01, $03, PWM1_Loop13, Target
+	smpsLoop		$01, $03, SOTH_OVA_Dark_PWM1_Loop13, Target
 
-PWM1_Loop14:
+SOTH_OVA_Dark_PWM1_Loop14:
 	dc.b	pOpenHH, $06, pClosedHH, $04, $02
-	smpsLoop		$00, $03, PWM1_Loop14, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM1_Loop14, Target
 
-PWM1_Loop15:
+SOTH_OVA_Dark_PWM1_Loop15:
 	dc.b	pOpenHH, $04, pClap, $02, pClosedHH, $04, $02, pOpenHH
 	dc.b	$06, pClosedHH, $04, $02
-	smpsLoop		$00, $02, PWM1_Loop15, Target
+	smpsLoop		$00, $02, SOTH_OVA_Dark_PWM1_Loop15, Target
 	dc.b	pClap, $04, pAKick, $02
-	smpsLoop		$02, $02, PWM1_Loop11, Target
+	smpsLoop		$02, $02, SOTH_OVA_Dark_PWM1_Loop11, Target
 	dc.b	pSplashCymb, $01
-	smpsJump		PWM1_Jump1, Target
+	smpsJump		SOTH_OVA_Dark_PWM1_Jump1, Target
 	
 
-PWM2:
+SOTH_OVA_Dark_PWM2:
 	dc.b	nRst, $0C, pAKick, pClosedHH, $24, $0C, $24, $0C
 	dc.b	$24, pAKick, $30
 
-PWM2_Jump1:
+SOTH_OVA_Dark_PWM2_Jump1:
 	dc.b	pSplashCymb, $06
 
-PWM2_Loop1:
+SOTH_OVA_Dark_PWM2_Loop1:
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
-	smpsLoop		$00, $03, PWM2_Loop1, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM2_Loop1, Target
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pSplashCymb
 
-PWM2_Loop2:
+SOTH_OVA_Dark_PWM2_Loop2:
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
-	smpsLoop		$00, $03, PWM2_Loop2, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM2_Loop2, Target
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, pRideBell, pAKick
 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, $04, pTomMid
 	dc.b	$02, pRideBell, $04, pTimpaniLo, $02
 
-PWM2_Loop3:
+SOTH_OVA_Dark_PWM2_Loop3:
 	dc.b	pSplashCymb, $06, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
 	dc.b	pAKick, pAKick, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
 	dc.b	pClap, pClosedHH, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
 	dc.b	pAKick, pAKick, pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap
 	dc.b	pClap
-	smpsLoop		$00, $02, PWM2_Loop3, Target
+	smpsLoop		$00, $02, SOTH_OVA_Dark_PWM2_Loop3, Target
 
-PWM2_Loop4:
+SOTH_OVA_Dark_PWM2_Loop4:
 	dc.b	pAKick, pRideBell
-	smpsLoop		$00, $0B, PWM2_Loop4, Target
+	smpsLoop		$00, $0B, SOTH_OVA_Dark_PWM2_Loop4, Target
 	dc.b	pAKick, pRideBell, $04, pClap, $02, pAKick, $06, pRideBell
 	dc.b	pAKick, pRideBell, pAKick, pRideBell, pAKick, pRideBell, $36, pSplashCymb
 	dc.b	$06
 
-PWM2_Loop5:
+SOTH_OVA_Dark_PWM2_Loop5:
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
-	smpsLoop		$00, $03, PWM2_Loop5, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM2_Loop5, Target
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, pRideBell, pAKick
 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, $04, pTomMid
 	dc.b	$02, pRideBell, $04, pTimpaniLo, $02, pSplashCymb, $06
 
-PWM2_Loop6:
+SOTH_OVA_Dark_PWM2_Loop6:
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pClap, pClosedHH
-	smpsLoop		$00, $03, PWM2_Loop6, Target
+	smpsLoop		$00, $03, SOTH_OVA_Dark_PWM2_Loop6, Target
 	dc.b	pRideBell, pClap, pRideBell, pAKick, pRideBell, pClap, pAKick, pAKick
 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, pRideBell, pAKick
 	dc.b	$04, pClap, $02, pRideBell, $06, pClap, $04, pTomMid
 	dc.b	$02, pRideBell, $04, pTimpaniLo, $03
-	smpsJump		PWM2_Jump1, Target
+	smpsJump		SOTH_OVA_Dark_PWM2_Jump1, Target
 
 
-PWM3:
+SOTH_OVA_Dark_PWM3:
 	dc.b	nRst, $7F, $4D
 
-PWM3_Jump1:
+SOTH_OVA_Dark_PWM3_Jump1:
 	dc.b	pClosedHH, $2A, pRideBell
 
-PWM3_Loop1:
+SOTH_OVA_Dark_PWM3_Loop1:
 	dc.b	$30
-	smpsLoop		$00, $07, PWM3_Loop1, Target
+	smpsLoop		$00, $07, SOTH_OVA_Dark_PWM3_Loop1, Target
 	dc.b	$06, pClosedHH, $2A, pRideBell, $30, $30, $30, $30
 	dc.b	$30, $30, $0C, pClap, $18, $06, pTomHi, pOpenHH
 	dc.b	pClosedHH, $2A, pRideBell, $30, $30, $30, $06, pClosedHH
@@ -963,18 +963,18 @@ PWM3_Loop1:
 	dc.b	pOpenHH, pAKick, $2A, pRideBell, $30, $30, $30, $30
 	dc.b	$30, $30, $0C, pClap, $18, $06, pTomHi, pOpenHH
 	dc.b	$07
-	smpsJump		PWM3_Jump1, Target
+	smpsJump		SOTH_OVA_Dark_PWM3_Jump1, Target
 
 
-PWM4:
+SOTH_OVA_Dark_PWM4:
 	dc.b	nRst, $7F, $4D
 
-PWM4_Jump1:
+SOTH_OVA_Dark_PWM4_Jump1:
 	dc.b	nRst, $7F, $7F, $7F, $7F, $7F, $7F, pTomLow
 	dc.b	nRst, nRst, nRst, $75, pClap, $18, $18, $18
 	dc.b	$06, $7F, nRst, nRst, nRst, $33, pTomLow, $7F
 	dc.b	nRst, nRst, nRst, $03, pTomLow, $07
-	smpsJump		PWM4_Jump1, Target
+	smpsJump		SOTH_OVA_Dark_PWM4_Jump1, Target
 
 SOTH_OVA_Dark_Voices:
 	;dc.b		$3D

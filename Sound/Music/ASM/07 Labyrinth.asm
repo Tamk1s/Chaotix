@@ -1,4 +1,4 @@
-Target	EQU	$41E56
+Target	EQU	$41F94
 	smpsHeaderVoice	Labyrinth_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $25

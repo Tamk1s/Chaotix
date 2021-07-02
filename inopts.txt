@@ -285,7 +285,8 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	;String "HYPER-HYPER"
 	 String "MKWII MENU"
 	BYTE	CASC_NullTerm
-	String "EVENING STAR"
+	;!@ String "EVENING STAR"
+	String "FRONTEND-BMO"
 	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "MOONRISE"

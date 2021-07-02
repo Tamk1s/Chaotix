@@ -1,5 +1,5 @@
 
-Target	EQU	$41F87
+Target	EQU	$420C5
 	smpsHeaderVoice	Walkin_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $35

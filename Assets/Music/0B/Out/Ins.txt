@@ -1,0 +1,20 @@
+MIDI Tempo:
+140=12/02
+
+PSG:
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+29	E2	Whip Slap		$91/pClickLo?	
+*36	B2	ABass Drum		$8B/pAKick
+37	C3	Bass Drum		$81/pEKick
+38	C#3	Sidekick		$8E/pFingSnap?
+39	D3	ASnare			$8C/pASnare
+40	E-3	Hand Clap		$8A/pClap
+41	E3	ESnare			$82/pESnare
+42	F3	Low Floor Tom	$87/pTomLow
+*43	F#3	ClosedHH		$98/pClosedHH
+*45	nAb2/G#3	PedalHH	$98/pClosedHH
+*47	B-3	OpenHH			$99/pOpenHH
+50	C#4	Crash Cymbal	$89/pCrashCymb
+55	F#4	Tambourine		$90/pClickHi
