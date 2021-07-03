@@ -7,21 +7,18 @@ Object Def: ..\objdef\kcobj
 Object Palette: ..\objdef\kcobj1.pcx
 
 8x8 Compression:      3
-Num 8x8 Pages:        4
+Num 8x8 Pages:        3
 8x8 Tiles Page 0:     ..\..\Levels\TTZ\8x8\0_15MN.bin
-8x8 Tiles Page 1:     ..\..\Levels\TTZ\8x8\1_3MN.bin
 8x8 Tiles Page 2:     ..\..\Levels\TTZ\8x8\2_15MN.bin
 8x8 Tiles Page 3:     ..\..\Levels\TTZ\8x8\3_34MN.bin
 
 16x16 Compression:    2
-Num 16x16 Pages:      4
+Num 16x16 Pages:      3
 Page0 8x8 Page:       0
 16x16 Tiles Page 0:   ..\..\Levels\TTZ\16x16\0_15MN.bin
-Page2 8x8 Page:       0
-16x16 Tiles Page 1:   ..\..\Levels\TTZ\16x16\1_3MN.bin
-Page2 8x8 Page:       2
+Page2 8x8 Page:       1
 16x16 Tiles Page 2:   ..\..\Levels\TTZ\16x16\2_15MN.bin
-Page3 8x8 Page:       2
+Page3 8x8 Page:       1
 16x16 Tiles Page 3:   ..\..\Levels\TTZ\16x16\3_34MN.bin
 
 Metatile Size:        128
@@ -31,9 +28,9 @@ Page0 16x16 Page:     0
 128x128 Tiles Page 0: ..\..\Levels\TTZ\128x128\0_15MN.bin
 Page1 16x16 Page:     0
 128x128 Tiles Page 1: ..\..\Levels\TTZ\128x128\1_3MN.bin
-Page2 16x16 Page:     2
+Page2 16x16 Page:     1
 128x128 Tiles Page 2: ..\..\Levels\TTZ\128x128\2_15MN.bin
-Page3 16x16 Page:     2
+Page3 16x16 Page:     1
 128x128 Tiles Page 3: ..\..\Levels\TTZ\128x128\3_34MN.bin
 
 Layout Format:        3

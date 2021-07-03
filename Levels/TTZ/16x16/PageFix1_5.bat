@@ -1,0 +1,1 @@
+copy /y "1_5MN.bin" "1_3MN.bin"

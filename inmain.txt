@@ -1796,8 +1796,8 @@ StartSeg LevelTile_Ptrs Big_Endian	;Level tile data pointers
 		DWORD 0
 		DWORD AAZ5_BG_Tiles
 		DWORD NullLPtr_Terminator
-		DWORD TTZ_BG_Tiles_Pri
-		DWORD TTZ34_BG_Tiles_Sec
+		DWORD TTZ_BG_Tiles_Pri			;!@ WTF? Unused clouds for AAZ5MN
+		DWORD TTZ34_BG_Tiles_Sec		;!@ WTF? Unused clouds for AAZ5MN
 		DWORD NullLPtr_Terminator
 	TTZ12MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
@@ -1807,7 +1807,7 @@ StartSeg LevelTile_Ptrs Big_Endian	;Level tile data pointers
 		DWORD NullLPtr_Terminator
 	TTZ3MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
-		DWORD TTZ3_FG_Tiles_Sec
+		;!@ DWORD TTZ3_FG_Tiles_Sec
 		DWORD 0
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ34_BG_Tiles_Sec
@@ -1820,7 +1820,7 @@ StartSeg LevelTile_Ptrs Big_Endian	;Level tile data pointers
 		DWORD NullLPtr_Terminator
 	TTZ5MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
-		DWORD TTZ5_FG_Tiles_Sec
+		;!@ DWORD TTZ5_FG_Tiles_Sec
 		DWORD 0
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ5_BG_Tiles_Sec
@@ -2355,8 +2355,9 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD TTZ2_FG_Layout
 		DWORD TTZ1234N_BG_Layout
 	TTZ3MDS_MapPtr:
-		DWORD TTZ_FG_Blocks_Pri
-		DWORD TTZ3_FG_Blocks_Sec+LastPage
+		;!@ DWORD TTZ_FG_Blocks_Pri
+		DWORD TTZ_FG_Blocks_Pri+LastPage
+		;!@ DWORD TTZ3_FG_Blocks_Sec+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ34_BG_Blocks_Sec+LastPage
 		DWORD TTZ_FG_Chunks_Pri
@@ -2366,8 +2367,9 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD TTZ3_FG_Layout
 		DWORD TTZ1234MDS_BG_Layout
 	TTZ3N_MapPtr:
-		DWORD TTZ_FG_Blocks_Pri
-		DWORD TTZ3_FG_Blocks_Sec+LastPage
+		;!@ DWORD TTZ_FG_Blocks_Pri
+		DWORD TTZ_FG_Blocks_Pri+LastPage
+		;!@ DWORD TTZ3_FG_Blocks_Sec+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ34_BG_Blocks_Sec+LastPage
 		DWORD TTZ_FG_Chunks_Pri
@@ -2397,8 +2399,9 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD TTZ4_FG_Layout
 		DWORD TTZ1234N_BG_Layout
 	TTZ5_MDS_MapPtr:
-		DWORD TTZ_FG_Blocks_Pri
-		DWORD TTZ5_FG_Blocks_Sec+LastPage
+		;!@ DWORD TTZ_FG_Blocks_Pri
+		DWORD TTZ_FG_Blocks_Pri+LastPage
+		;!@ DWORD TTZ5_FG_Blocks_Sec+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ5_BG_Blocks_Sec+LastPage
 		DWORD TTZ_FG_Chunks_Pri
@@ -2408,8 +2411,9 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD TTZ5_FG_Layout
 		DWORD TTZ5MDS_BG_Layout
 	TTZ5N_MapPtr:
-		DWORD TTZ_FG_Blocks_Pri
-		DWORD TTZ5_FG_Blocks_Sec+LastPage
+		;!@ DWORD TTZ_FG_Blocks_Pri
+		DWORD TTZ_FG_Blocks_Pri+LastPage
+		;!@ DWORD TTZ5_FG_Blocks_Sec+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ5_BG_Blocks_Sec+LastPage
 		DWORD TTZ_FG_Chunks_Pri
@@ -2809,11 +2813,13 @@ StartSeg Solid_Index Big_Endian	;Solidity index list pointers and data
 	AAZ12_SolidPtr:		DWORD AAZ12_Solids
 	AAZ34_SolidPtr:		DWORD AAZ34_Solids
 	AAZ5_SolidPtr:		DWORD AAZ5_Solids
-	TTZ12_SolidPtr:		DWORD TTZ124_Solids
+
+	TTZ12_SolidPtr:		DWORD TTZ124_Solids	
 	TTZ3_SolidPtr:		DWORD TTZ3_Solids
 	TTZ4_SolidPtr:		DWORD TTZ124_Solids
 	TTZ5_SolidPtr:		DWORD TTZ5_Solids
 	TTZB_SolidPtr:		DWORD TTZB_Solids
+	
 	MMZ_SolidPtr:		DWORD MMZ_Solids
 	Training_SolidPtr:	DWORD Training_Solids
 	Tutorial_SolidPtr:	DWORD Training56_Solids
