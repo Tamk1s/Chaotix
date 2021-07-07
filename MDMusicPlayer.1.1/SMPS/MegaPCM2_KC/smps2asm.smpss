@@ -200,6 +200,7 @@ c '\type\' == 'sfx' {
 	=pTomLower 0x9A
 	=pTomLowerer 0x9B
 	=pTomLowerest 0x9C
+	=ppNepDada 0x9D
 }
 
 	sinc "..\SMPS\SMPS default notes.smpss"

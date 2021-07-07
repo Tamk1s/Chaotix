@@ -1,4 +1,4 @@
-Target	EQU	$4A8AB
+Target	EQU	$4AAAE
 	smpsHeaderVoice	CSong_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $25

@@ -1,4 +1,4 @@
-Target	EQU	$43510
+Target	EQU	$43511
 
 PWMVol	EQU	$7F
 	smpsHeaderVoice	BMODC_FrontEnd_Patches, Target
@@ -391,13 +391,13 @@ BMODC_FrontEnd_PWM1:
 	smpsAlterVol		$07
 	dc.b	pEKick
 	smpsAlterVol		$F8
-	dc.b	pFingSnap, pFingSnap, pEKick, pFingSnap, pESnare, pEKick, pTomLow, nRst
+	dc.b	pFingSnap, pFingSnap, pEKick, pFingSnap, pESnare, pEKick, pTomHi, nRst
 	dc.b	pClickLo, nRst, pEKick, pEKick, pEKick, pEKick, pESnare, pESnare
 	dc.b	pEKick, pEKick, pEKick, pEKick
 	smpsAlterVol		$05
 	dc.b	pESnare, nRst
 	smpsAlterVol		$FB
-	dc.b	pTomLow, nRst
+	dc.b	pTomHi, nRst
 	smpsAlterVol		$FC
 	dc.b	pEKick, nRst
 	smpsAlterVol		$0C

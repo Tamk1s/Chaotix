@@ -1,0 +1,19 @@
+MIDI Tempo:
+145 BPM
+12 Ticks/Quarter
+02 Tick mult
+
+PSG:
+PSG1 = p0
+PSG2 = p0
+PSG3 = p2
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+37	C_Nat3	EKick	$81/pEKick
+39	D3		ASnare	$8C/pASnare
+47	B-3		OpenHH	$99/pOpenHH
+57	G#4		Cowbell	$9D/pNepDada	*Song-specific vocal sample
+
+Note: PWM1 needs to be treated as non-drum based channel due to PWM volume controls
+PWM2-3 can be handled as normal PWM channels

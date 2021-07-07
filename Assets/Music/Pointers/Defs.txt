@@ -1,3 +1,9 @@
+PSG:
+S1	->	KC
+
+
+PWM:
+
 Chaotix (Stock)
 81 - Electric Kick
 82 - Electric Snare
@@ -29,3 +35,4 @@ Knux Clackers extended:
 9A - Lower Tom 
 9B - Lowerer Tom
 9C - Lowest Tom
+9D - Nep Dada

@@ -6,6 +6,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;Region @Setup
 ;;;;;;;;;;;;;;;;;;;;
 ; Setup Directives ;
 ;;;;;;;;;;;;;;;;;;;;
@@ -31,8 +32,10 @@ StartSeg GameHeader Big_Endian $000100 $8E
 	String	"GM MK-84503-00"					;Game Serial Number
 
 EndSeg
+;EndRegion
 
 
+;Region @LvlSel_Strings
 ;;;
 ;!@ Level Select Strings
 ;;;
@@ -113,7 +116,6 @@ EndSeg
 ;3F=_ 
 
 ;$1B6 bytes available
-
 StartSeg LevelSel_Strings Big_Endian $07739E	$1B6
 	String	"BOTANIC BASE        "		;BBZ
 	BYTE	CASC_NullTerm
@@ -189,9 +191,10 @@ StartSeg LevelSel_Strings Big_Endian $07739E	$1B6
 	BYTE	CASC_NullTerm
 	String	"2 PLAYERS"					;2 players
 	BYTE	CASC_NullTerm
-
 EndSeg
+;EndRegion
 
+;Region @Music_Playlist_Stats
 ;;;
 ;Level Music Playlist
 ;;;
@@ -220,6 +223,23 @@ StartSeg LevelPlaylist Big_Endian $076EE4 6
 	BYTE	$F1 ;Act 5 (unused). SMPS Stop
 	BYTE	$F1 ;Act 6 (unused). SMPS Stop
 EndSeg
+
+;;;
+;!@ Timing stats for special event songs (NHZ CharGet etc)
+;;;
+
+;Region @BGS_HighFive
+;Hive Five song ID
+StartSeg Big_Endian $02997C 2
+	WORD	$0020
+EndSeg
+
+;High Five timing
+StartSeg Big_Endian $02998C 2
+	;!@ WORD	$0060
+	WORD	$00C6
+EndSeg
+;EndRegion
 
 ;;;
 ;!@ Sound Test Names
@@ -286,7 +306,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	 String "MKWII MENU"
 	BYTE	CASC_NullTerm
 	;!@ String "EVENING STAR"
-	String "FRONTEND-BMO"
+	String "FRONT END-BMO"
 	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "MOONRISE"
@@ -346,7 +366,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "CHAOTIC WORLD"
-	String	"NOP"
+	String	"SMB3 BONUS"
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "SURPRISE!"
@@ -366,11 +386,10 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "HIGH FIVE"
-	String	"NOP"
+	String	"FF1 VICTORY"
 	BYTE	CASC_NullTerm
 	;!@ New data
-	;String "DECISION"
-	String	"NOP"
+	String "DECISION"
 	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "FROM PARTY TO PARTY"
@@ -398,7 +417,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	String "JUST ANOTHER DAY"
 	BYTE	CASC_NullTerm
-	String "DECISION 2ND"
+	;!@ New Data
+	;String "DECISION 2ND"
+	String "3 CARDS-SMB3"
 	BYTE	CASC_NullTerm
 	String "S.E."
 	BYTE	CASC_NullTerm	

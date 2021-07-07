@@ -1,0 +1,20 @@
+MIDI Tempo:
+88 BPM
+12 Ticks/Quarter
+03 Tick mult
+
+PSG:
+PSG1 = p0
+PSG2 = p0
+PSG3 = p0
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+36	B2		Acc Drum	$8B/pAKick
+37	C-3		EKick		$81/pEKick
+39	D3		ASnare		$8C/pASnare
+41	E3		ESnare		$82/pESnare
+
+43	F#3		ClosedHH	$98/pClosedHH
+50	C#4		CrashCymb	$89/pCrashCymb
+54	G4		SplCymb		$83/pSplashCymb

@@ -1,5 +1,5 @@
 
-Target	EQU	$4482E
+Target	EQU	$4482F
 	smpsHeaderVoice	Overture_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $1E

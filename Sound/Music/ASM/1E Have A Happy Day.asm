@@ -1,4 +1,4 @@
-Target	EQU	$4C89E
+Target	EQU	$4CFA1
 
 PWMVol	EQU	$87
 FMVolChords1	EQU	$0E+$04

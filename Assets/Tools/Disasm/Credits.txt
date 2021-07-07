@@ -13,7 +13,7 @@ JJFTails
 - Chaotix Art Format notes
 
 Natsumi/Aurora Fields
-- MDMusicPlayer 1.1 (Chaotix music to ASM, Sonic 1 to ASM
+- MDMusicPlayer 1.1 (Chaotix music to ASM, Sonic 1 to ASM, Z80 Type 2 basic driver for Sonic Crackers)
 - ChaotixCompressor.exe
 
 MainMemory
@@ -35,7 +35,7 @@ ValleyBell
 - DPCM2PCM (PWM sample creation)
 
 MarkeyJester
-- Sonic Crackers disasm
+- Sonic Crackers disasm (game, z80 Sound Driver)
 
 AkumaYin
 - New Sonic crackers findings
@@ -110,12 +110,14 @@ Sega
 - S1
 - CD
 - Knuckles logo (S3K)
+- Crackers beta
 
 
 Music:
 LukeeGD
 - Elegy (HyperDimension Neptunia V)
 - Sonic Factory SMPS (SAdv3, RedHotSonic patches)
+- Various others
 
 ValleyBell
 - Technical Notes on Chaotix PWM driver SMPS CF features

@@ -164,6 +164,7 @@ pOpenHH		EQU $99
 pTomLower		EQU	$9A
 pTomLowerer		EQU	$9B
 pTomLowerest	EQU	$9C
+pNepDada		EQU	$9D
 
 ;!@ Crackers conversion enums. Knuckles Clackers equiv
 pCra_d81	EQU	pEKick
@@ -197,7 +198,6 @@ tempo_conv macro tempo
 			dc.b	((256 - ((((tempo)-1)*256 + ((tempo)/2)) / (tempo))) % 256)
 		endif
 	endm
-
 	
 ;!@
 ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
@@ -407,6 +407,29 @@ smpsFMvoice macro pat, song
 ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
 smpsModSet macro wait,speed,change,step
 	dc.b	$F0,wait,speed,change,step
+	endm
+	
+smpsModSet2	macro bytes
+	smpsModSet	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
+	endm
+	
+; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+;!@
+smpsModSetC macro wait,speed,change,step
+	dc.b	$F0
+	;if (SonicDriverVer>=3)&&(SourceDriver<3)
+		dc.b	wait+1,speed,change,(step*speed+1)&$FF
+	;elseif (SonicDriverVer<3)&&(SourceDriver>=3)
+		;dc.b	wait-1,speed,change,(((step==0)<<8)|step)/(((step==0)<<8)|step)-1		
+	;else
+		;dc.b	wait,speed,change,step
+	;endif
+	;dc.b	speed,change,step
+	endm
+
+;!@	
+smpsModSetC2 macro bytes
+	smpsModSetC	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
 	endm
 	
 

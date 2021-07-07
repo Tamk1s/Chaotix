@@ -37,6 +37,7 @@ REM !@ New Data (Sega, CloseHH, OpenHH)
 copy /y "Orig\97.wav" "97.wav"
 copy /y "Orig\98.wav" "98.wav"
 copy /y "Orig\99.wav" "99.wav"
+copy /y "Orig\9D.wav" "9D.wav"
 
 REM Remove RIFF headers
 Echo Strip off the RIFF headers
@@ -61,6 +62,7 @@ REM !@ New Data
 riffstrip.exe "97.wav"
 riffstrip.exe "98.wav"
 riffstrip.exe "99.wav"
+riffstrip.exe "9D.wav"
 
 REM Rename results from .wav.stripped to .bin . These are the raw LPCM samples (PWM Driver)
 Echo Rename stripped files
@@ -85,6 +87,7 @@ REM !@ New Data
 ren "97.wav.stripped" "97.bin"
 ren "98.wav.stripped" "98.bin"
 ren "99.wav.stripped" "99.bin"
+ren "9D.wav.stripped" "9D.bin"
 
 REM Copy all LPCM files, rename to PWM_XX (0-based naming for SMPSPlay)
 Echo Rename a copy of files for SMPSPlay
@@ -109,6 +112,7 @@ REM !@ New Data
 Copy /Y "97.bin" "PWM_16.bin"
 Copy /Y "98.bin" "PWM_17.bin"
 Copy /Y "99.bin" "PWM_18.bin"
+Copy /Y "9D.bin" "PWM_1C.bin"
 
 REM Copy all LPCM files to SMPSPlay
 Echo Copy all files to SMPSPlay
@@ -118,7 +122,7 @@ SetLocal EnableDelayedExpansion
 REM Generate new PWM.ini for SMPSPlay, copy it over
 
 REM Length of struct array (0-based)
-SET LEN=27
+SET LEN=28
 
 REM Struct array elements:
 REM .file = Original wav file (for sampling)
@@ -159,6 +163,7 @@ SET PAR[24].file=99.wav
 SET PAR[25].file=85-87.wav
 SET PAR[26].file=85-87.wav
 SET PAR[27].file=85-87.wav
+SET PAR[28].file=9D.wav
 
 SET PAR[0].dfile=PWM_00.bin
 SET PAR[1].dfile=PWM_01.bin
@@ -189,6 +194,7 @@ SET PAR[24].dfile=PWM_18.bin
 SET PAR[25].dfile=PWM_04.bin
 SET PAR[26].dfile=PWM_04.bin
 SET PAR[27].dfile=PWM_04.bin
+SET PAR[28].dfile=PWM_1C.bin
 
 SET PAR[0].rate="s"
 SET PAR[1].rate="s"
@@ -219,6 +225,7 @@ SET PAR[24].rate="5514"
 SET PAR[25].rate="5514"
 SET PAR[26].rate="4252"
 SET PAR[27].rate="3376"
+SET PAR[28].rate="5514"
 
 SET PAR[0].create="y"
 SET PAR[1].create="y"
@@ -249,6 +256,7 @@ SET PAR[24].create="y"
 SET PAR[25].create="n"
 SET PAR[26].create="n"
 SET PAR[27].create="n"
+SET PAR[28].create="y"
 
 SET PAR[0].addr=0
 SET PAR[1].addr=0
@@ -276,9 +284,12 @@ REM !@ New Data. Manually force this sample to addr of ROMEnd ($300000) - size a
 SET PAR[22].addr=222FE63C
 SET PAR[23].addr=222FDAC8
 SET PAR[24].addr=222FDD70
-SET PAR[25].addr=0
-SET PAR[26].addr=0
-SET PAR[27].addr=0
+REM !@ Manual override back to samples $85-87
+SET PAR[25].addr=2205F7B8
+SET PAR[26].addr=2205F7B8
+SET PAR[27].addr=2205F7B8
+REM !@ New sample (Neptune Dada)
+SET PAR[28].addr=222FA098
 
 REM Create header of SMPSPlay PWM.INI 
 call create_PWM_INI_Hdr.bat
@@ -337,6 +348,7 @@ SET PAR[24].dfile=99.bin
 SET PAR[25].dfile=85-87.bin
 SET PAR[26].dfile=85-87.bin
 SET PAR[27].dfile=85-87.bin
+SET PAR[28].dfile=9D.bin
 
 REM Base SH-2 virtual addr for raw ROM addr ($580000)
 REM Offset from base for PWMTable.bin (array entries * 8 bc longwords)

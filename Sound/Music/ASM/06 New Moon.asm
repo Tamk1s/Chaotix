@@ -1,4 +1,4 @@
-Target	EQU	$41B9B
+Target	EQU	$41B9C
 	smpsHeaderVoice	NewMoon_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $1C

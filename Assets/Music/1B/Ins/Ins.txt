@@ -1,0 +1,18 @@
+MIDI Tempo:
+100=
+12/02
+
+PSG:
+PSG1=p0
+PSG2=p0
+PSG3=p0
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+36	B2	Accoustic Bass Drum	$8B/pAKick
+37	C3	Bass Drum			$81/pEKick
+44	G3	High FlTom			$85/pTomHi
+45	G#3 PedalHH				$98/pClosedHH
+46	A3	Low Tom 			$87/pTomLow
+47	B-3	OpenHH 				$99/OpenHH
+58	A4	CrashCymb2			$89/pCrashCymb

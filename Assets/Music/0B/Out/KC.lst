@@ -158,6 +158,8 @@
        = 000094         pTimpaniHi	EQU	$94
        = 000095         pTimpaniLo	EQU	$95
        = 000096         pSilence	EQU $96
+
+
                         ;!@ NEW DATA
        = 000097         pSega		EQU $97
        = 000098         pClosedHH	EQU $98
@@ -165,6 +167,14 @@
        = 00009A         pTomLower		EQU	$9A
        = 00009B         pTomLowerer		EQU	$9B
        = 00009C         pTomLowerest	EQU	$9C
+       = 00009D         pNepDada		EQU	$9D
+
+                        ;!@ Crackers conversion enums. Knuckles Clackers equiv
+       = 000081         pCra_d81	EQU	pEKick
+       = 00008C         pCra_d82	EQU	pASnare
+       = 000085         pCra_d83	EQU	pTomHi
+       = 000086         pCra_d84	EQU	pTomMid
+       = 000087         pCra_d85	EQU	pTomLow
 
                         ;!@ Convert ptrs to z80Ptr
                         ; function to make a little-endian 16-bit pointer for the Z80 sound driver
@@ -191,7 +201,6 @@
                         			dc.b	((256 - ((((tempo)-1)*256 + ((tempo)/2)) / (tempo))) % 256)
                         		endif
                         	endm
-
                         	
                         ;!@
                         ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
@@ -401,6 +410,29 @@
                         ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
                         smpsModSet macro wait,speed,change,step
                         	dc.b	$F0,wait,speed,change,step
+                        	endm
+                        	
+                        smpsModSet2	macro bytes
+                        	smpsModSet	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
+                        	endm
+                        	
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        ;!@
+                        smpsModSetC macro wait,speed,change,step
+                        	dc.b	$F0
+                        	;if (SonicDriverVer>=3)&&(SourceDriver<3)
+                        		dc.b	wait+1,speed,change,(step*speed+1)&$FF
+                        	;elseif (SonicDriverVer<3)&&(SourceDriver>=3)
+                        		;dc.b	wait-1,speed,change,(((step==0)<<8)|step)/(((step==0)<<8)|step)-1		
+                        	;else
+                        		;dc.b	wait,speed,change,step
+                        	;endif
+                        	;dc.b	speed,change,step
+                        	endm
+
+                        ;!@	
+                        smpsModSetC2 macro bytes
+                        	smpsModSetC	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
                         	endm
                         	
 
@@ -1721,7 +1753,7 @@
 00060C 81               	dc.b	pEKick
 00060D                  	smpsAlterVol		$F8
 00060D E6F8             	dc.b	$E6,$F8
-00060F 8E8E818E82818780 	dc.b	pFingSnap, pFingSnap, pEKick, pFingSnap, pESnare, pEKick, pTomLow, nRst
+00060F 8E8E818E82818580 	dc.b	pFingSnap, pFingSnap, pEKick, pFingSnap, pESnare, pEKick, pTomHi, nRst
 000617 9180818181818282 	dc.b	pClickLo, nRst, pEKick, pEKick, pEKick, pEKick, pESnare, pESnare
 00061F 81818181         	dc.b	pEKick, pEKick, pEKick, pEKick
 000623                  	smpsAlterVol		$05
@@ -1729,7 +1761,7 @@
 000625 8280             	dc.b	pESnare, nRst
 000627                  	smpsAlterVol		$FB
 000627 E6FB             	dc.b	$E6,$FB
-000629 8780             	dc.b	pTomLow, nRst
+000629 8580             	dc.b	pTomHi, nRst
 00062B                  	smpsAlterVol		$FC
 00062B E6FC             	dc.b	$E6,$FC
 00062D 8180             	dc.b	pEKick, nRst
@@ -2452,8 +2484,10 @@ PANCENTRE          000000C0 S  PANLEFT            00000080 S  PANNONE           
 PANRIGHT           00000040 S  PASNARE            0000008C E  PBELL              0000008D E
 PBONGOHI           00000092 E  PBONGOLO           00000093 E  PCLAP              0000008A E
 PCLICKHI           00000090 E  PCLICKLO           00000091 E  PCLOSEDHH          00000098 E
-PCOWBELL           0000008F E  PCRASHCYMB         00000089 E  PEHIHAT            00000088 E
-PEKICK             00000081 E  PESNARE            00000082 E  PFINGSNAP          0000008E E
+PCOWBELL           0000008F E  PCRASHCYMB         00000089 E  PCRA_D81           00000081 E
+PCRA_D82           0000008C E  PCRA_D83           00000085 E  PCRA_D84           00000086 E
+PCRA_D85           00000087 E  PEHIHAT            00000088 E  PEKICK             00000081 E
+PESNARE            00000082 E  PFINGSNAP          0000008E E  PNEPDADA           0000009D E
 POPENHH            00000099 E  PRIDEBELL          00000084 E  PSEGA              00000097 E
 PSGDELTA           0000000C E  PSILENCE           00000096 E  PSPLASHCYMB        00000083 E
 PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E  PTOMHI             00000085 E
