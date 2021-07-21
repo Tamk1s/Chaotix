@@ -1,518 +1,353 @@
+Target	EQU	$4F249
+PWMVol 		EQU	$4F
+PWMPitch	EQU	$00
+PSGVol1		EQU	$04
+PSGVol2		EQU	PSGVol1+$02
+PSGVoi		EQU	$03
+	smpsHeaderVoice	XVSF_Breakout_Patches, Target
+	smpsHeaderChan		$06, $03
+	smpsHeaderTempoC	$02, $06
+	smpsHeaderFM	XVSF_Breakout_FM1, Target, $00, $08+$04
+	smpsHeaderFM	XVSF_Breakout_FM2, Target, $00, $14+$04
+	smpsHeaderFM	XVSF_Breakout_FM3, Target, $00, $08
+	smpsHeaderFM	XVSF_Breakout_FM4, Target, $00, $08+$0D
+	smpsHeaderFM	XVSF_Breakout_FM5, Target, $00, $08
+	smpsHeaderFM	XVSF_Breakout_FM6, Target, $00, $14
+	smpsHeaderPSG	XVSF_Breakout_PSG1, Target, PSGDelta, PSGVol1, $00, PSGVoi
+	smpsHeaderPSG	XVSF_Breakout_PSG2, Target, PSGDelta, PSGVol2, $00, PSGVoi
+	smpsHeaderPSG	XVSF_Breakout_PSG3, Target, PSGDelta, PSGVol2, $00, PSGVoi
+	smpsHeaderPWM	XVSF_Breakout_PWM1, Target, PWMPitch, PWMVol
+	smpsHeaderPWM	XVSF_Breakout_PWM2, Target, PWMPitch, PWMVol
+	smpsHeaderPWM	XVSF_Breakout_PWM3, Target, PWMPitch, PWMVol
+	smpsHeaderPWM	XVSF_Breakout_PWM4, Target, PWMPitch, PWMVol
 
-Target	EQU	$4EDA7
-	smpsHeaderVoice	SteelHeart_Patches, Target
-	smpsHeaderChan	$06, $03
-	smpsHeaderTempo	$01, $20
-	smpsHeaderFM	SteelHeart_FM1, Target, $00, $0D
-	smpsHeaderFM	SteelHeart_FM2, Target, $00, $0C
-	smpsHeaderFM	SteelHeart_FM3, Target, $00, $0F
-	smpsHeaderFM	SteelHeart_FM4, Target, $00, $1E
-	smpsHeaderFM	SteelHeart_FM5, Target, $00, $0F
-	smpsHeaderFM	SteelHeart_FM6, Target, $00, $20
-	smpsHeaderPSG	SteelHeart_PSG1, Target, $E8, $02, $00, $00
-	smpsHeaderPSG	SteelHeart_PSG2, Target, $E3, $06, $00, $00
-	smpsHeaderPSG	SteelHeart_PSG3, Target, $00, $00, $00, $00
-	smpsHeaderPWM	SteelHeart_PWM1, Target, $00, $BB
-	smpsHeaderPWM	SteelHeart_PWM2, Target, $00, $FF
-	smpsHeaderPWM	SteelHeart_PWM3, Target, $00, $AA
-	smpsHeaderPWM	SteelHeart_PWM4, Target, $00, $33
-
-SteelHeart_FM1:
+XVSF_Breakout_FM1:
+	smpsPan		panLeft
 	smpsFMvoice		$00
-	smpsPan		panCenter
-	smpsCall		SteelHeart_Call1, Target
-	smpsAlterVol		$F8
-	dc.b	nAb2, $08
-	smpsAlterVol		$08
-	dc.b	nG2, nCs2, smpsNoAttack, $18
-	smpsAlterVol		$F8
-	dc.b	nG2, $08
-	smpsAlterVol		$08
-	dc.b	nFs2, nC2, smpsNoAttack, $18, smpsNoAttack
+	dc.b	nA2, $03, nG2, nA2, nC3, nRst, $02
+	smpsAlterNote	$05
+	dc.b	$01
+	smpsAlterNote	$F1
+	dc.b	nA2
+	smpsAlterNote	$F8
+	dc.b	smpsNoAttack, $01
+	smpsAlterNote	$00
+	dc.b	smpsNoAttack, $04, nC3, $03, nD3, nRst, nC3, nRst
+	dc.b	nA2, nRst, nG2, nRst, nA2, nG2, nA2, nC3
+	dc.b	nRst, nA2, $06, nC3, $03, nD3, nRst, nEb3
+	dc.b	nRst, nE3
+	smpsAlterNote	$ED
+	dc.b	smpsNoAttack, $01
+	smpsAlterNote	$06
+	dc.b	smpsNoAttack, nEb3
+	smpsAlterNote	$F6
+	dc.b	smpsNoAttack, $01
+	smpsAlterNote	$00
+	dc.b	nRst, $06, nA2, $03, nG2, nA2, nC3, nRst
+	dc.b	nA2, $06, nC3, $03, nD3, nRst, nC3, nRst
+	dc.b	nA2, nRst, nG2, nRst, nA2, $06
+	smpsAlterNote	$E9
+	dc.b	smpsNoAttack, $01
+	smpsAlterNote	$10
+	dc.b	smpsNoAttack, nAb2, $02
+	smpsAlterNote	$EC
+	dc.b	nRst, $01
+	smpsAlterNote	$0A
+	;!@dc.b	$02
+	dc.b	nRst, $02
+	smpsAlterNote	$00
+	;!@ dc.b	$12, nE2, $03, $03, nE3, $01
+	dc.b	nRst, $12, nE2, $03, $03, nE3, $01
+	smpsAlterNote	$0F
+	dc.b	smpsNoAttack, nEb3
+	smpsAlterNote	$00
+	dc.b	smpsNoAttack, nE3, nE2, $06, nRst, $03
+	smpsJump		XVSF_Breakout_FM1, Target
 
-SteelHeart_Jump1:
-	smpsCall		SteelHeart_Call1, Target
-	smpsJump		SteelHeart_Jump1, Target
-
-SteelHeart_Call1:
-	smpsAlterVol		$F9
-	dc.b	nC2, $08
-	smpsAlterVol		$07
-	dc.b	nC3, nC2, nC3, nC2, nC3
-	smpsLoop		$00, $04, SteelHeart_Call1, Target
-	smpsReturn
-
-SteelHeart_FM2:
-	smpsFMvoice		$02
-	smpsPan		panCenter
-	dc.b	nRst, $60, nRst, $06, nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst, $12
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst, $0C
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	smpsAlterPitch	$04
-
-SteelHeart_Loop1:
-	smpsAlterVol		$FA
-	dc.b	nE4, $0C
-	smpsAlterVol		$06
-	dc.b	nF4, nFs4, nG4
-	smpsLoop		$00, $04, SteelHeart_Loop1, Target
-	smpsAlterVol		$FD
-	dc.b	nE4, $0C
-	smpsAlterVol		$03
-	dc.b	nF4
-	smpsAlterVol		$02
-	dc.b	nFs4
-	smpsAlterVol		$02
-	dc.b	nG4
-	smpsAlterVol		$02
-	smpsAlterVol		$FE
-	dc.b	nE4, $0C
-	smpsAlterVol		$02
-	dc.b	nF4
-	smpsAlterVol		$02
-	dc.b	nFs4
-	smpsAlterVol		$02
-	dc.b	nG4
-	smpsAlterVol		$F6
-	smpsAlterPitch	$FC
-
-SteelHeart_Jump2:
-	dc.b	nRst, $60, nRst, $08, nBb3, nEb4, $05, nRst
-	dc.b	$03
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nEb4, $0C, nRst, $06
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nF4, $06, nA4, $05, nRst, $03
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nA4, $08, nRst
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nC5, $08, nAb4, $05, nRst, $03
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nAb4, $08
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nRst, $60, nRst, $06, nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst, $12
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst, $0C
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	smpsJump		SteelHeart_Jump2, Target
-
-SteelHeart_FM3:
-	smpsFMvoice		$02
-	smpsPan		panCenter
-	dc.b	nRst, $60
-	smpsAlterPitch	$FA
-	dc.b	nRst, $06, nE4, $06, nRst
-	smpsAlterVol		$07
+XVSF_Breakout_FM2:
 	smpsPan		panRight
-	dc.b	nE4, $06, nRst, $12
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panRight
-	dc.b	nE4, $06, nRst, $0C
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panRight
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	smpsAlterPitch	$06
+	smpsFMvoice		$00
+	dc.b	nRst, $06, nA2, $03, nG2, nA2, nC3, nRst
+	dc.b	$02
+	smpsAlterNote	$05
+	dc.b	$01
+	smpsAlterNote	$F1
+	dc.b	nA2
+	smpsAlterNote	$F8
+	dc.b	smpsNoAttack, $01
+	smpsAlterNote	$00
+	dc.b	smpsNoAttack, $04, nC3, $03, nD3, nRst, nC3, nRst
+	dc.b	nA2, nRst, nG2, nRst, nA2, nG2, nA2, nC3
+	dc.b	nRst, nA2, $06, nC3, $03, nD3, nRst, nEb3
+	dc.b	nRst, nE3
+	smpsAlterNote	$ED
+	dc.b	smpsNoAttack, $01
+	smpsAlterNote	$06
+	dc.b	smpsNoAttack, nEb3
+	smpsAlterNote	$F6
+	dc.b	smpsNoAttack, $01
+	smpsAlterNote	$00
+	dc.b	nRst, $06, nA2, $03, nG2, nA2, nC3, nRst
+	dc.b	nA2, $06, nC3, $03, nD3, nRst, nC3, nRst
+	dc.b	nA2, nRst, nG2, nRst, nA2, $06
+	smpsAlterNote	$E9
+	dc.b	smpsNoAttack, $01
+	smpsAlterNote	$10
+	dc.b	smpsNoAttack, nAb2, $02
+	smpsAlterNote	$EC
+	dc.b	nRst, $01
+	smpsAlterNote	$0A
+	;!@ dc.b	$02
+	dc.b	nRst, $02
+	smpsAlterNote	$00
+	;!@ dc.b	$12, nE2, $03, $03, nE3, $01
+	dc.b	nRst, $12, nE2, $03, $03, nE3, $01
+	smpsAlterNote	$0F
+	dc.b	smpsNoAttack, nEb3
+	smpsAlterNote	$00
+	dc.b	smpsNoAttack, nE3, nRst, $03
+	smpsJump		XVSF_Breakout_FM2, Target
 
-SteelHeart_Loop2:
-	smpsAlterVol		$FA
-	dc.b	nE4, $0C
-	smpsAlterVol		$06
-	dc.b	nF4, nFs4, nG4
-	smpsLoop		$00, $04, SteelHeart_Loop2, Target
-	smpsAlterVol		$FD
-	dc.b	nE4, $0C
-	smpsAlterVol		$03
-	dc.b	nF4
-	smpsAlterVol		$02
-	dc.b	nFs4
-	smpsAlterVol		$02
-	dc.b	nG4
-	smpsAlterVol		$02
-	smpsAlterVol		$FE
-	dc.b	nE4, $0C
-	smpsAlterVol		$02
-	dc.b	nF4
-	smpsAlterVol		$02
-	dc.b	nFs4
-	smpsAlterVol		$02
-	dc.b	nG4
-	smpsAlterVol		$F6
-
-SteelHeart_Jump3:
-	dc.b	nRst, $60
-	smpsAlterVol		$0A
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $08, nRst, $08, nBb3, nEb4, $05, nRst
-	dc.b	$03
-	smpsAlterVol		$07
+XVSF_Breakout_FM3:
 	smpsPan		panLeft
-	dc.b	nEb4, $0C, nRst, $06
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nF4, $06, nA4, $05, nRst, $03
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nA4, $08, nRst
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nC5, $08, nAb4, $05, nRst, $03
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	smpsAlterVol		$F6
-	smpsModSet	$00, $00, $00, $00
-	dc.b	nRst, $60
-	smpsAlterPitch	$FA
-	dc.b	nRst, $06, nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panRight
-	dc.b	nE4, $06, nRst, $12
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panRight
-	dc.b	nE4, $06, nRst, $0C
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panRight
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	smpsAlterPitch	$06
-	smpsJump		SteelHeart_Jump3, Target
-
-SteelHeart_FM4:
-	smpsFMvoice		$02
-	smpsPan		panCenter
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $06
-	smpsAlterVol		$0A
-	dc.b	nRst, $60, nRst, $06, nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst, $12
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst, $0C
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06
-	smpsAlterVol		$EF
-	smpsPan		panCenter
-	smpsModSet	$00, $00, $00, $00
-	smpsAlterVol		$F9
-	dc.b	nAb4, $08
-	smpsAlterVol		$07
-	dc.b	nG4, nCs4, smpsNoAttack, $18
-	smpsAlterVol		$F9
-	dc.b	nG4, $08
-	smpsAlterVol		$07
-	dc.b	nFs4, nC4, smpsNoAttack, $18, smpsNoAttack, $60, nRst, $60
-	smpsAlterVol		$0A
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $08
-
-SteelHeart_Jump4:
-	dc.b	nRst, $60, nRst, $08, nBb3, nEb4, $05, nRst
-	dc.b	$03
-	smpsAlterVol		$07
-	smpsPan		panRight
-	dc.b	nEb4, $0C, nRst, $06
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nF4, $06, nA4, $05, nRst, $03
-	smpsAlterVol		$07
-	smpsPan		panRight
-	dc.b	nA4, $08, nRst
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nC5, $08, nAb4, $05, nRst, $03
-	smpsAlterVol		$07
-	smpsPan		panRight
-	dc.b	nAb4, $08
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nRst, $60, nRst, $06, nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst, $12
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst, $0C
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$07
-	smpsPan		panLeft
-	dc.b	nE4, $06, nRst
-	smpsAlterVol		$F9
-	smpsPan		panCenter
-	smpsJump		SteelHeart_Jump4, Target
-
-SteelHeart_FM5:
 	smpsFMvoice		$01
-	smpsPan		panCenter
-	smpsCall		SteelHeart_Call2, Target
-	dc.b	nRst, $60
+	dc.b	nA2, $03, nG2, nA2, nC3, nRst, nA2, $06
+	dc.b	nC3, $03, nD3, nRst, nC3, nRst, nA2, nRst
+	dc.b	nG2, nRst, nA2, nG2, nA2, nC3, nRst, nA2
+	dc.b	$06, nC3, $03, nD3, nRst, nEb3, nRst, nE3
+	smpsAlterNote	$04
+	dc.b	smpsNoAttack, nEb3, $01
+	smpsAlterNote	$EE
+	dc.b	smpsNoAttack, $01
+	smpsAlterNote	$11
+	dc.b	smpsNoAttack, nD3, nRst, $02
+	;!@ smpsAlterNote	$00
+	;!@ dc.b	$04, nA2, $03, nG2, nA2, nC3, nRst, nA2
+	dc.b	nRst, $04, nA2, $03, nG2, nA2, nC3, nRst, nA2
+	dc.b	$06, nC3, $03, nD3, nRst, nC3, nRst, nA2
+	dc.b	nRst, nG2, nRst, nA2, $06
+	smpsAlterNote	$14
+	dc.b	smpsNoAttack, nAb2, $02
+	smpsAlterNote	$F7
+	dc.b	smpsNoAttack, $01, nRst
+	;!@ smpsAlterNote	$00
+	;!@ dc.b	$14, nE2, $03, $03
+	dc.b	$14, nE2, $03, nE2, $03
+	smpsAlterNote	$01
+	dc.b	nEb3, $01
+	smpsAlterNote	$0C
+	;!@ dc.b	smpsNoAttack, $01
+	dc.b	smpsNoAttack, nEb3, $01
+	;!@ smpsAlterNote	$00
+	;!@ dc.b	smpsNoAttack, nE3, nE2, $06, nRst, $03
+	dc.b	smpsNoAttack, nE3, $01, nE2, $06, nRst, $03
+	smpsJump		XVSF_Breakout_FM3, Target
 
-SteelHeart_Jump5:
-	smpsCall		SteelHeart_Call2, Target
-	smpsJump		SteelHeart_Jump5, Target
+XVSF_Breakout_FM4:
+	smpsPan		panRight
+	smpsFMvoice		$02
+	dc.b	nA2, $03, nG2, nA2, nC3, nRst, nA2, $06
+	dc.b	nC3, $03, nD3, nRst, nC3, nRst, nA2, nRst
+	dc.b	nG2, nRst, nA2, nG2, nA2, nC3, nRst, nA2
+	dc.b	$06, nC3, $03, nD3, nRst, nEb3, nRst, nE3
+	smpsAlterNote	$04
+	dc.b	smpsNoAttack, nEb3, $01
+	smpsAlterNote	$EE
+	dc.b	smpsNoAttack, $01
+	smpsAlterNote	$11
+	dc.b	smpsNoAttack, nD3, nRst, $02
+	;!@ smpsAlterNote	$00
+	;!@ dc.b	$04, nA2, $03, nG2, nA2, nC3, nRst, nA2
+	dc.b	nRst, $04, nA2, $03, nG2, nA2, nC3, nRst, nA2
+	dc.b	$06, nC3, $03, nD3, nRst, nC3, nRst, nA2
+	dc.b	nRst, nG2, nRst, nA2, $06
+	smpsAlterNote	$14
+	dc.b	smpsNoAttack, nAb2, $02
+	smpsAlterNote	$F7
+	dc.b	smpsNoAttack, $01, nRst
+	;!@ smpsAlterNote	$00
+	;!@ dc.b	$14, nE2, $03, $03
+	dc.b	$14, nE2, $03, nE2, $03
+	smpsAlterNote	$01
+	dc.b	nEb3, $01
+	smpsAlterNote	$0C
+	dc.b	smpsNoAttack, $01
+	;!@ smpsAlterNote	$00
+	dc.b	smpsNoAttack, nE3, nE2, $06, nRst, $03
+	smpsJump		XVSF_Breakout_FM4, Target
 
-SteelHeart_Call2:
-	dc.b	nE2, $06, nRst, $18, nE2, $06, nRst, $0C
-	dc.b	nE2, $06, nRst, $12, nRst, $12, nE2, $03
-	dc.b	nRst, nE2, $06, nRst, $0C, nE2, $06, nRst
-	dc.b	$12, nE2, $06, nRst, $08, nE2, $04, nRst
-	dc.b	nE2, $04, nRst, nRst, $18
-	smpsReturn
-
-SteelHeart_FM6:
+XVSF_Breakout_FM5:
+	smpsPan		panLeft
 	smpsFMvoice		$03
+	dc.b	nRst, $0C
+
+XVSF_Breakout_Loop1:
+	dc.b	nA5, $02, nRst, $01
+	smpsLoop		$00, $04, XVSF_Breakout_Loop1, Target
+	smpsAlterVol		$05
+	dc.b	nA5, $02, nRst, $01
+	smpsAlterVol		$0E
+	dc.b	nA5, $02, nRst, $37
+	smpsAlterVol		$ED
+	dc.b	nB5, $03, nRst, $01
+	smpsAlterVol		$0B
+	dc.b	nB5, $03, nRst, $01
+	smpsAlterVol		$0A
+	dc.b	nB5, $03, nRst, $0D
+	smpsAlterVol		$EB
+
+XVSF_Breakout_Loop2:
+	dc.b	nA5, $02, nRst, $01
+	smpsLoop		$00, $04, XVSF_Breakout_Loop2, Target
+	smpsAlterVol		$05
+	dc.b	nA5, $02, nRst, $01
+	smpsAlterVol		$0E
+	dc.b	nA5, $02, nRst, $43
+	smpsAlterVol		$ED
+	smpsJump		XVSF_Breakout_FM5, Target
+
+XVSF_Breakout_FM6:
+	smpsPan		panRight
+	smpsFMvoice		$03
+	dc.b	nRst, $12
+
+XVSF_Breakout_Loop3:
+	dc.b	nA5, $02, nRst, $01
+	smpsLoop		$00, $04, XVSF_Breakout_Loop3, Target
+	smpsAlterVol		$09
+	dc.b	nA5, $02, nRst, $01
+	smpsAlterVol		$0E
+	dc.b	nA5, $02, nRst, $37
+	smpsAlterVol		$E9
+	dc.b	nB5, $03, nRst, $01
+	smpsAlterVol		$0F
+	dc.b	nB5, $03, nRst, $01
+	smpsAlterVol		$09
+	dc.b	nB5, $03, nRst, $0D
+	smpsAlterVol		$E8
+
+XVSF_Breakout_Loop4:
+	dc.b	nA5, $02, nRst, $01
+	smpsLoop		$00, $04, XVSF_Breakout_Loop4, Target
+	smpsAlterVol		$09
+	dc.b	nA5, $02, nRst, $01
+	smpsAlterVol		$0E
+	dc.b	nA5, $02, nRst, $3D
+	smpsAlterVol		$E9
+	smpsJump		XVSF_Breakout_FM6, Target
+
+XVSF_Breakout_PSG1:
+	smpsPSGvoice	PSGVoi
+	dc.b	nRst, $0C
+
+XVSF_Breakout_Loop5:
+	dc.b	nE2, $02, nRst, $01
+	smpsLoop		$00, $04, XVSF_Breakout_Loop5, Target
+	smpsSetVol	$03
+	dc.b	nE2, $02, nRst, $01
+	smpsSetVol	$06
+	dc.b	nE2, $02, nRst, $37
+	smpsSetVol	$F7
+	dc.b	nE3, $03, nRst, $01
+	smpsSetVol	$06
+	dc.b	nE3, $03, nRst, $01
+	smpsSetVol	$03
+	dc.b	nE3, $03, nRst, $0D
+	smpsSetVol	$F7
+
+XVSF_Breakout_Loop6:
+	dc.b	nE2, $02, nRst, $01
+	smpsLoop		$00, $04, XVSF_Breakout_Loop6, Target
+	smpsSetVol	$03
+	dc.b	nE2, $02, nRst, $01
+	smpsSetVol	$06
+	dc.b	nE2, $02, nRst, $43
+	smpsSetVol	$F7
+	smpsJump		XVSF_Breakout_PSG1, Target
+
+XVSF_Breakout_PSG2:
+	smpsPSGvoice	PSGVoi
+
+XVSF_Breakout_Jump1:
+	dc.b	nRst, $12
+
+XVSF_Breakout_Loop7:
+	dc.b	nE2, $02, nRst, $01
+	smpsLoop		$00, $04, XVSF_Breakout_Loop7, Target
+	smpsSetVol	$03
+	dc.b	nE2, $02, nRst, $01
+	smpsSetVol	$06
+	dc.b	nE2, $02, nRst, $37
+	smpsSetVol	$F7
+	dc.b	nE3, $03, nRst, $01
+	smpsSetVol	$05
+	dc.b	nE3, $03, nRst, $01
+	smpsSetVol	$04
+	dc.b	nE3, $03, nRst, $0D
+	smpsSetVol	$F7
+
+XVSF_Breakout_Loop8:
+	dc.b	nE2, $02, nRst, $01
+	smpsLoop		$00, $04, XVSF_Breakout_Loop8, Target
+	smpsSetVol	$03
+	dc.b	nE2, $02, nRst, $01
+	smpsSetVol	$06
+	dc.b	nE2, $02, nRst, $3D
+	smpsSetVol	$F7
+	smpsJump		XVSF_Breakout_Jump1, Target
+	
+XVSF_Breakout_PSG3:
+	smpsStop
+	
+XVSF_Breakout_PWM1:
 	smpsPan		panCenter
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $08
-	smpsCall		SteelHeart_Call3, Target
-	dc.b	nRst, $36, nC4, $03, nCs4, nD4, nEb4, nE4
-	dc.b	nF4, nFs4, nG4, nAb4, nA4, nBb4, nB4, nC5
-	dc.b	nCs5, nAb4, $08, nG4, nCs4, smpsNoAttack, $18, nG4
-	dc.b	$08, nFs4, nC4, smpsNoAttack, $18, smpsNoAttack, $60, nRst
-	dc.b	$60
 
-SteelHeart_Jump6:
-	smpsCall		SteelHeart_Call3, Target
-	dc.b	nRst, $60
-	smpsJump		SteelHeart_Jump6, Target
-
-SteelHeart_PSG1:
-	smpsPSGvoice	$0C
-	smpsCall		SteelHeart_Call3, Target
-	smpsPSGvoice	$08
-	dc.b	nRst, $36, nC4, $03, nCs4, nD4, nEb4, nE4
-	dc.b	nF4, nFs4, nG4, nAb4, nA4, nBb4, nB4, nC5
-	dc.b	nCs5
-	smpsSetVol	$FE
-	dc.b	nAb4, $08
-	smpsSetVol	$02
-	dc.b	nG4, nCs4, smpsNoAttack, $18
-	smpsSetVol	$FE
-	dc.b	nG4, $08
-	smpsSetVol	$02
-	dc.b	nFs4, nC4, smpsNoAttack, $18, smpsNoAttack, $60, nRst, $60
-	smpsPSGvoice	$0C
-
-SteelHeart_Jump7:
-	smpsCall		SteelHeart_Call3, Target
-	dc.b	nRst, $60
-	smpsJump		SteelHeart_Jump7, Target
-
-SteelHeart_Call3:
-	dc.b	nC6, $08, nEb6, nBb5, nD6, nA5, nCs6, nAb5
-	dc.b	nC6, nG5, nB5, nFs5, nBb5
-	smpsReturn
-
-SteelHeart_PSG2:
-	smpsPSGvoice	$0C
-	smpsCall		SteelHeart_Call3, Target
-	smpsPSGvoice	$08
-	dc.b	nRst, $36, nC4, $03, nCs4, nD4, nEb4, nE4
-	dc.b	nF4, nFs4, nG4, nAb4, nA4, nBb4, nB4, nC5
-	dc.b	nCs5
-	smpsSetVol	$FE
-	dc.b	nAb4, $08
-	smpsSetVol	$02
-	dc.b	nG4, nCs4, smpsNoAttack, $18
-	smpsSetVol	$FE
-	dc.b	nG4, $08
-	smpsSetVol	$02
-	dc.b	nFs4, nC4, smpsNoAttack, $18, smpsNoAttack, $60, nRst, $60
-	smpsPSGvoice	$0C
-
-SteelHeart_Jum$8:
-	smpsCall		SteelHeart_Call3, Target
-	dc.b	nRst, $60
-	smpsJump		SteelHeart_Jum$8, Target
-
-SteelHeart_PSG3:
-	smpsStop
-
-SteelHeart_PWM1:
-	dc.b	$8B, $18, nRst, $06, $8B, $12, $8B, $18
-	dc.b	nRst, $12, $8B, $06, $8B, $12, $06, nRst
-	dc.b	$12, $8B, $06, nRst, $08, $8B, $08, $8B
-	dc.b	nRst, $12, $8B, $06, nRst, $60
-
-SteelHeart_Jum$9:
-	dc.b	$8B, $18, nRst, $06, $8B, $12, $8B, $18
-	dc.b	nRst, $12, $8B, $06, $8B, $12, $06, nRst
-	dc.b	$12, $8B, $06, nRst, $08, $8B, $08, $8B
-	dc.b	nRst, $12, $8B, $06
-	smpsJump		SteelHeart_Jum$9, Target
-
-SteelHeart_PWM2:
-	dc.b	$96, $60, $96, $18
-	smpsAlterVol		$78
-	dc.b	$8C
-	smpsAlterVol		$44
-	dc.b	$8C
-	smpsAlterVol		$44
-	dc.b	$8C, nRst, $60
-
-SteelHeart_Jump10:
-	dc.b	nRst, $60, nRst, $48, $8C, $18
-	smpsJump		SteelHeart_Jump10, Target
-
-SteelHeart_PWM3:
-	dc.b	$96, $60, $96, $60, $89, $18, nRst
-	smpsAlterVol		$22
-	dc.b	$89
-	smpsStop
-
-SteelHeart_PWM4:
-	smpsAlterVol		$D0
-	dc.b	$93, $08
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$92, $92
-	smpsAlterVol		$03
-	smpsLoop		$00, $08, SteelHeart_PWM4, Target
-	dc.b	nRst, $60
-
-SteelHeart_Jump11:
-	smpsAlterVol		$D0
-	dc.b	$93, $08
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$92, $92
-	smpsAlterVol		$03
-	smpsJump		SteelHeart_Jump11, Target
-
-SteelHeart_Patches:
-
+XVSF_Breakout_PWM1_Loop1:
+	dc.b	pEKick, $06, pOpenHH, pESnare, pOpenHH
+	smpsLoop		$00, $03, XVSF_Breakout_PWM1_Loop1, Target
+	dc.b	pClosedHH, $03, pESnare, $06, pEKick, $03, pClosedHH, $06
+	dc.b	pOpenHH, pEKick, pOpenHH, pESnare, pOpenHH, pEKick, pOpenHH, pESnare
+	dc.b	pOpenHH, pESnare, $0C, pAKick, pAKick, $06, pESnare, pESnare
+	dc.b	$03, $09
+	smpsJump		XVSF_Breakout_PWM1, Target
 	
-	dc.b	$38
-	dc.b	$0A, $70, $30, $00,	$1F, $1F, $1F, $1F
-	dc.b	$12, $0E, $0A, $0A,	$00, $04, $04, $03
-	dc.b	$26, $26, $26, $28,	$24, $2D, $12, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
+XVSF_Breakout_PWM2:
+	dc.b	pCrashCymb, $18, pClosedHH, $0C, $0C, $0C, $0C, pEKick
+	dc.b	$06, pOpenHH, pESnare, pESnare, $03, $03, pCrashCymb, $18
+	dc.b	pClosedHH, $0C, $0C, pCrashCymb, $18, pOpenHH, $0C, $0C
+	smpsJump		XVSF_Breakout_PWM2, Target
 	
-	dc.b	$16
-	dc.b	$75, $73, $30, $31,	$5F, $5F, $5F, $5F
-	dc.b	$05, $08, $06, $08,	$05, $05, $07, $05
-	dc.b	$25, $F7, $57, $25,	$1E, $80, $80, $8A
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
+XVSF_Breakout_PWM3:
+	dc.b	pClosedHH, $0C, $54, $0C, $24, pAKick, $0C, pOpenHH
+	dc.b	$18, pCrashCymb, $0C
+	smpsJump		XVSF_Breakout_PWM3, Target
 	
-	dc.b	$3A
-	dc.b	$01, $03, $02, $01,	$0F, $10, $11, $19
-	dc.b	$0A, $05, $0A, $05,	$02, $02, $02, $02
-	dc.b	$36, $36, $36, $58,	$19, $1E, $32, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+XVSF_Breakout_PWM4:
+	;!@ dc.b	nRst, $7F, $11, pOpenHH, $30
+	dc.b	nRst, $7F, nRst, $11, pOpenHH, $30
+	smpsJump		XVSF_Breakout_PWM4, Target
 
-	
+XVSF_Breakout_Patches:	
+	;Distortion Guitar
 	dc.b	$39
-	dc.b	$02, $01, $02, $01,	$5F, $5F, $1F, $1F
-	dc.b	$00, $00, $00, $00,	$00, $00, $00, $00
-	dc.b	$0F, $0F, $0F, $0F,	$1B, $32, $28, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	dc.b	$03, $22, $61, $21,	$1F, $12, $1F, $1F
+	dc.b	$05, $05, $05, $0B,	$0E, $0C, $0C, $0C
+	dc.b	$16, $14, $14, $14,	$1E, $15, $1D, $0A+$06
+	
+	;Electric Bass (finger)
+	dc.b	$1D
+	dc.b	$00, $10, $21, $34,	$9F, $5F, $5F, $5F
+	dc.b	$00, $0F, $0F, $0F,	$09, $06, $06, $0A
+	dc.b	$0F, $1C, $1C, $2C,	$1E, $0C, $0C, $0C
+	
+	;Electric Bass (pick)
+	dc.b	$3D
+	dc.b	$00, $00, $01, $05,	$5F, $5E, $5B, $5B
+	dc.b	$0A, $0C, $0E, $0E,	$08, $0A, $08, $07
+	dc.b	$B4, $19, $39, $FC,	$21, $0C, $0C, $0C
+	
+	;Synth Brass 1
+	dc.b	$3A
+	dc.b	$51, $01, $11, $01,	$9F, $89, $5B, $50
+	dc.b	$09, $09, $1F, $03,	$0A, $00, $0A, $07
+	dc.b	$13, $F5, $06, $08,	$1D, $1F, $17, $04+$08

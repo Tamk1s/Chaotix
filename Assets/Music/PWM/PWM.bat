@@ -33,7 +33,7 @@ copy /y "Orig\90-91.wav" "90-91.wav"
 copy /y "Orig\92-93.wav" "92-93.wav"
 copy /y "Orig\94-95.wav" "94-95.wav"
 copy /y "Orig\96.wav" "96.wav"
-REM !@ New Data (Sega, CloseHH, OpenHH)
+REM !@ New Data (Sega, CloseHH, OpenHH, NepDada)
 copy /y "Orig\97.wav" "97.wav"
 copy /y "Orig\98.wav" "98.wav"
 copy /y "Orig\99.wav" "99.wav"
@@ -122,7 +122,7 @@ SetLocal EnableDelayedExpansion
 REM Generate new PWM.ini for SMPSPlay, copy it over
 
 REM Length of struct array (0-based)
-SET LEN=28
+SET LEN=29
 
 REM Struct array elements:
 REM .file = Original wav file (for sampling)
@@ -164,6 +164,7 @@ SET PAR[25].file=85-87.wav
 SET PAR[26].file=85-87.wav
 SET PAR[27].file=85-87.wav
 SET PAR[28].file=9D.wav
+SET PAR[29].file=8E.wav
 
 SET PAR[0].dfile=PWM_00.bin
 SET PAR[1].dfile=PWM_01.bin
@@ -195,6 +196,7 @@ SET PAR[25].dfile=PWM_04.bin
 SET PAR[26].dfile=PWM_04.bin
 SET PAR[27].dfile=PWM_04.bin
 SET PAR[28].dfile=PWM_1C.bin
+SET PAR[29].dfile=PWM_0D.bin
 
 SET PAR[0].rate="s"
 SET PAR[1].rate="s"
@@ -226,6 +228,7 @@ SET PAR[25].rate="5514"
 SET PAR[26].rate="4252"
 SET PAR[27].rate="3376"
 SET PAR[28].rate="5514"
+SET PAR[29].rate="8258"
 
 SET PAR[0].create="y"
 SET PAR[1].create="y"
@@ -257,6 +260,7 @@ SET PAR[25].create="n"
 SET PAR[26].create="n"
 SET PAR[27].create="n"
 SET PAR[28].create="y"
+SET PAR[29].create="n"
 
 SET PAR[0].addr=0
 SET PAR[1].addr=0
@@ -290,6 +294,8 @@ SET PAR[26].addr=2205F7B8
 SET PAR[27].addr=2205F7B8
 REM !@ New sample (Neptune Dada)
 SET PAR[28].addr=222FA098
+REM !@ Manual override back to sample $8E
+SET PAR[29].addr=2206BC74
 
 REM Create header of SMPSPlay PWM.INI 
 call create_PWM_INI_Hdr.bat
@@ -349,6 +355,7 @@ SET PAR[25].dfile=85-87.bin
 SET PAR[26].dfile=85-87.bin
 SET PAR[27].dfile=85-87.bin
 SET PAR[28].dfile=9D.bin
+SET PAR[29].dfile=8E.bin
 
 REM Base SH-2 virtual addr for raw ROM addr ($580000)
 REM Offset from base for PWMTable.bin (array entries * 8 bc longwords)

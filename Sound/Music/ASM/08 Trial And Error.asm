@@ -1,4 +1,4 @@
-Target	EQU	$41D18
+Target	EQU	$41D19
 	smpsHeaderVoice	TrialError_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $22

@@ -1,0 +1,14 @@
+MIDI Tempo:
+125=12/02
+
+PSG:
+PSG1/2 = PSG2
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+36	B2	Accoustic Bass Drum	$8B/pAKick
+37	C3	EDrum				$81/pEKick
+41	E3	Electric Snare		$82/pESnare
+43	F#3	Closed Hihat		$98/pClosedHH
+47	B#3	Open Hihat			$99/pOpenHH
+50	C#4	Crash Cymbal		$89/pCrashCymb

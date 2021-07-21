@@ -1,0 +1,17 @@
+MIDI Tempo:
+150=12/02
+
+PSG:
+PSG1= p0
+PSG2= p5
+PSG3= p5
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+37	C#3	Electric BDrum		$81/pEKick
+39	D3	ASnare				$8C/pASnare
+55	F#4	Tambourine			$98/pClosedHH
+63	D5	Mute High Congo		$92/pBongoHi
+64	E-5	Open High Congo		$93/pBongoLo
+77	F6	High Wood Block		$8E/pFingSnapHi
+78	E6	Low Wood Block		$9E/pFingSnapLo

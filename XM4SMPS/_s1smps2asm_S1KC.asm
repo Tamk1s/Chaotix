@@ -146,7 +146,11 @@ pClap		EQU $8A
 pAKick		EQU $8B
 pASnare		EQU	$8C
 pBell		EQU $8D
+
+;!@ Enum due to late PWM driver revision
 pFingSnap	EQU	$8E
+pFingSnapHi	EQU	$8E
+
 pCowbell	EQU	$8F
 pClickHi	EQU	$90
 pClickLo	EQU	$91
@@ -165,6 +169,7 @@ pTomLower		EQU	$9A
 pTomLowerer		EQU	$9B
 pTomLowerest	EQU	$9C
 pNepDada		EQU	$9D
+pFingSnapLo		EQU	$9E
 
 ;!@ Crackers conversion enums. Knuckles Clackers equiv
 pCra_d81	EQU	pEKick

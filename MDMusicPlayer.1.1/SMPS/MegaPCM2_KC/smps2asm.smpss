@@ -185,7 +185,7 @@ c '\type\' == 'sfx' {
 	=pAKick 0x8B
 	=pASnare 0x8C
 	=pBell 0x8D
-	=pFingSnap 0x8E
+	=pFingSnapHi 0x8E
 	=pCowbell 0x8F
 	=pClickHi 0x90
 	=pClickLo 0x91
@@ -200,7 +200,8 @@ c '\type\' == 'sfx' {
 	=pTomLower 0x9A
 	=pTomLowerer 0x9B
 	=pTomLowerest 0x9C
-	=ppNepDada 0x9D
+	=pNepDada 0x9D
+	=pFingSnapLo 0x9E
 }
 
 	sinc "..\SMPS\SMPS default notes.smpss"

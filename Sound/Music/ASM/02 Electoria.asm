@@ -1,4 +1,4 @@
-Target	EQU	$401FA
+Target	EQU	$401FB
 PWMVol	EQU	$7F
 	smpsHeaderVoice	SCra_Electoria_Patches, Target
 	smpsHeaderChan		$06, $03

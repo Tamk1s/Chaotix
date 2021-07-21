@@ -273,7 +273,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	;String "DOOR INTO SUMMER"
 	String  "NOP SOUTH ISLAND"
 	BYTE	CASC_NullTerm
-	String "ELECTORIA"
+	String "ELECTORIA BETA"
 	BYTE	CASC_NullTerm
 	String "SPEED OF SOUND"
 	BYTE	CASC_NullTerm
@@ -374,7 +374,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "NICE MEETING YOU"
-	String	"NOP"
+	String	"WAITING ROOM-SSBB"
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "HAVE A HAPPY DAY"
@@ -405,7 +405,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "STEEL HEART"
-	String	"NOP"
+	String	"BREAK OUT-XVSFA"
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "TRIBUTE"

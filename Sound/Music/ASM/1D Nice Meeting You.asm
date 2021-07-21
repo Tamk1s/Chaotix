@@ -1,357 +1,453 @@
-
 Target	EQU	$4CBBF
-	smpsHeaderVoice	NMeetingU_Patches, Target
-	smpsHeaderChan	$06, $03
-	smpsHeaderTempo	$01, $0F
-	smpsHeaderFM	NMeetingU_FM1, Target, $00, $09
-	smpsHeaderFM	NMeetingU_FM2, Target, $00, $0C
-	smpsHeaderFM	NMeetingU_FM3, Target, $FB, $15
-	smpsHeaderFM	NMeetingU_FM4, Target, $00, $1B
-	smpsHeaderFM	NMeetingU_FM5, Target, $FB, $1E
-	smpsHeaderFM	NMeetingU_FM6, Target, $0C, $1B
-	smpsHeaderPSG	NMeetingU_PSG1, Target, $F4, $00, $00, $00
-	smpsHeaderPSG	NMeetingU_PSG2, Target, $F4, $00, $00, $00
-	smpsHeaderPSG	NMeetingU_PSG3, Target, $23, $01, $00, $00
-	smpsHeaderPWM	NMeetingU_PWM1, Target, $00, $EE
-	smpsHeaderPWM	NMeetingU_PWM2, Target, $00, $ED
-	smpsHeaderPWM	NMeetingU_PWM3, Target, $00, $00
-	smpsHeaderPWM	NMeetingU_PWM4, Target, $00, $BB
 
-NMeetingU_FM1:
-	smpsFMvoice		$00
+FMVoi_SteelGit1	EQU	$00
+FMVoi_Bass		EQU	$01
+FMVoi_SteelGit2	EQU	$02
+
+PSGVol1	EQU	$06
+PSGVol2	EQU	PSGVol1+$03
+PSGVoi1	EQU	$00
+PSGVoi2	EQU	$05
+PWMVol 		EQU	$47
+PWMPitch	EQU	$00
+	smpsHeaderVoice	SSBB_WRoom_Patches, Target
+	smpsHeaderChan		$06, $03
+	smpsHeaderTempoC	$02, $00
+	smpsHeaderFM	SSBB_WRoom_FM1, Target, $00, $0E
+	smpsHeaderFM	SSBB_WRoom_FM2, Target, $00, $13
+	smpsHeaderFM	SSBB_WRoom_FM3, Target, $00, $1A
+	smpsHeaderFM	SSBB_WRoom_FM4, Target, $00, $1E+$08
+	smpsHeaderFM	SSBB_WRoom_FM5, Target, $00, $1E+$08
+	smpsHeaderFM	SSBB_WRoom_FM6, Target, $00, $1A+$0C
+	smpsHeaderPSG	SSBB_WRoom_PSG1, Target, PSGDelta, PSGVol1, $00, PSGVoi1
+	smpsHeaderPSG	SSBB_WRoom_PSG2, Target, PSGDelta, PSGVol2, $00, PSGVoi2
+	smpsHeaderPSG	SSBB_WRoom_PSG3, Target, PSGDelta, PSGVol2, $00, PSGVoi2
+	smpsHeaderPWM	SSBB_WRoom_PWM1, Target, PWMPitch, PWMVol
+	smpsHeaderPWM	SSBB_WRoom_PWM2, Target, PWMPitch, PWMVol
+	smpsHeaderPWM	SSBB_WRoom_PWM3, Target, PWMPitch, PWMVol
+	smpsHeaderPWM	SSBB_WRoom_PWM4, Target, PWMPitch, PWMVol
+
+SSBB_WRoom_FM1:
+	smpsFMvoice		FMVoi_SteelGit1
 	smpsPan		panCenter
-	dc.b	nRst, $3C, nC2, $0C, nB2, $03, nC3, $15
+	;!@ ssMod68k	$00, $01, $01, $04
+	;!@ sModOn
+	;!@ sModOn
+	dc.b	nB3, $01, nRst, nCs4, $0A, nB3, $06, nA3
 
-NMeetingU_Loop1:
-	dc.b	nF2, $0C, nF3, $06, nRst, nD2, $0C, nD3
-	dc.b	$06, nRst, nEb2, $0C, nEb3, $06, nRst, nE2
-	dc.b	$0C, nE3, $06, nRst
-	smpsLoop		$00, $04, NMeetingU_Loop1, Target
-	dc.b	nBb1, $0C, nBb2, $06, nRst, nG1, $0C, nG2
-	dc.b	$06, nRst, nAb1, $0C, nAb2, $06, nRst, nA1
-	dc.b	$0C, nA2, $06, nRst, nC3, $18, nC3, nRst
-	dc.b	$30, nF2, $0C, nF3, $06, nRst, nD2, $0C
-	dc.b	nD3, $06, nRst, nEb2, $0C, nEb3, $06, nRst
-	dc.b	nE2, $0C, nE3, $06, nRst, nF2, $0C, nFs2
-	dc.b	$06, nRst, nG2, $0C, nAb2, $06, nRst, nA2
-	dc.b	$0C, nBb2, $06, nRst, nB2, $0C, nC3, $06
-	dc.b	nRst
-	smpsJump		NMeetingU_Loop1, Target
+SSBB_WRoom_Loop1:
+	dc.b	nAb3, $30, nRst, $12, nE3, $01, nRst, nFs3
+	dc.b	$0A, nAb3, $06, nA3, nB3
+	smpsLoop		$00, $02, SSBB_WRoom_Loop1, Target
+	dc.b	nAb3, $30, nRst, $0C, nEb3, $06, nE3, nE3
+	dc.b	$01, nRst, nFs3, $0A, nE3, $06, nEb3, nCs3
+	dc.b	$0C, nFs3, $01, nRst, nAb3, $22, nRst, $18
+	dc.b	nB3, $01, nRst, nCs4, $0A, nB3, $06, nA3
 
-NMeetingU_FM2:
-	smpsFMvoice		$01
+SSBB_WRoom_Loop2:
+	dc.b	nAb3, $30, nRst, $12, nE3, $01, nRst, nFs3
+	;!@ dc.b	$0A, nAb3, $06, nA3, nB3
+	dc.b	$0A, nAb3, $06, nA3, $06, nB3, $06
+	smpsLoop		$00, $02, SSBB_WRoom_Loop2, Target
+	dc.b	nAb3, $30, nRst, $0C, nEb3, $06, nE3, nE3
+	dc.b	$01, nRst, nFs3, $0A, nE3, $06, nEb3, nD3
+	dc.b	$01, nRst, nE3, $0A, nCs3, $30, nRst, $0C
+	smpsFMvoice		FMVoi_SteelGit1
+	dc.b	nB3, $01, nRst, nCs4, $0A, nB3, $06, nA3
+	smpsAlterNote	$00
+	smpsJump		SSBB_WRoom_Loop1, Target
+
+SSBB_WRoom_FM2:
+	smpsFMvoice		FMVoi_Bass
 	smpsPan		panCenter
-	smpsCall		NMeetingU_Call1, Target
+	dc.b	nRst, $18
 
-NMeetingU_Call1:
-	dc.b	nRst, $60
+SSBB_WRoom_Loop3:
+	dc.b	nCs3, $0C, nAb2, nB2, nC3, nCs3, nAb2, nB2
+	dc.b	nFs2
+	smpsLoop		$00, $02, SSBB_WRoom_Loop3, Target
+	;!@ dc.b	nCs3, nAb2, nB2, nAb2, nFs2, nFs2, nAb2, nAb2
+	dc.b	nCs3, $0C, nAb2, nB2, nAb2, nFs2, nFs2, nAb2, nAb2
 
-NMeetingU_Loop2:
-	dc.b	nRst, $09, nD6, $03, nEb6, $18, nD6, $06
-	dc.b	nRst, nC6, $12, nA5, $06, nRst, $0C, nC6
-	dc.b	$06, nRst, nE5, $03, nF5, $09, $03, nRst
-	dc.b	$03, nE5, $03, nF5, $09, $03, nRst, $03
-	dc.b	nG5, $18, nA5, $06, nRst, $06, nBb5, $06
-	dc.b	nRst, $06, nC6, $06, nRst, $06
-	smpsLoop		$00, $02, NMeetingU_Loop2, Target
-	dc.b	nRst, $09, nD6, $03, nEb6, $18, nD6, $06
-	dc.b	nRst, nC6, $12, nA5, $06, nRst, $0C, nC6
-	dc.b	$06, nRst, nBb6, $06, nRst, $12, nB6, $03
-	dc.b	nC7, $2D, nRst, $18, nRst, $09, nD6, $03
-	dc.b	nEb6, $18, nD6, $06, nRst, nC6, $12, nA5
-	dc.b	$06, nRst, $0C, nC6, $0C, nF5, $0C, nFs5
-	dc.b	$06, nRst, nG5, $0C, nAb5, $06, nRst, nA5
-	dc.b	$0C, nBb5, $06, nRst, nB5, $0C, nC6, $06
-	dc.b	nRst
-	smpsJump		NMeetingU_Loop2, Target
+SSBB_WRoom_Loop4:
+	;!@ dc.b	nCs3, nAb2, nB2, nC3, nCs3, nAb2, nB2, nFs2
+	dc.b	nCs3, $0C, nAb2, nB2, nC3, nCs3, nAb2, nB2, nFs2
+	smpsLoop		$00, $02, SSBB_WRoom_Loop4, Target
+	;!@ dc.b	nCs3, nAb2, nB2, nC3, nCs3, nAb2, nB2, nAb2
+	dc.b	nCs3, $0C, nAb2, nB2, nC3, nCs3, nAb2, nB2, nAb2
+	dc.b	nCs3, nAb2, nB2, nAb2, nFs2, nFs2, nAb2, nAb2
+	dc.b	nCs3, $48
+	smpsFMvoice		FMVoi_Bass
+	dc.b	smpsNoAttack, $18
+	smpsAlterNote	$00
+	smpsJump		SSBB_WRoom_Loop3, Target
 
-NMeetingU_FM3:
-	smpsFMvoice		$01
+SSBB_WRoom_FM3:
+	smpsPan		panLeft
+	smpsFMvoice		FMVoi_SteelGit2
+	dc.b	nRst, $18
+
+SSBB_WRoom_Jump1:
+	dc.b	nAb3, $06, nRst, $03, nAb4, $06, nRst, $03
+	dc.b	nAb3, nRst, nAb4, $06, nRst, $03, nAb3, $06
+	dc.b	nRst, $03, nAb4, nRst, nAb3, $06, nRst, $03
+	dc.b	nAb4, $06, nRst, $03, nAb3, nRst, nFs4, $06
+	dc.b	nRst, $03, nFs3, $06, nRst, $03, nFs4, nRst
+	smpsAlterVol		$FF
+	dc.b	nAb3, $06, nRst, $03, nAb4, $06, nRst, $03
+	dc.b	nAb3, nRst, nAb4, $06, nRst, $03, nAb3, $06
+	dc.b	nRst, $03, nAb4, nRst, nAb3, $06, nRst, $03
+	dc.b	nAb4, $06, nRst, $03, nAb3, nRst, nFs4, $06
+	dc.b	nRst, $03, nFs3, $06, nRst, $03, nFs4, nRst
+	dc.b	nAb3, $06, nRst, $03, nAb4, $06, nRst, $03
+	dc.b	nAb3, nRst, nAb4, $06, nRst, $03, nAb3, $06
+	dc.b	nRst, $03, nAb4, nRst, nFs3, $06, nRst, $03
+	dc.b	nFs4, $06, nRst, $03, nFs3
+
+SSBB_WRoom_Loop5:
+	;!@ dc.b	nRst, nAb4, $06, nRst, $03, nAb3, $06, nRst
+	dc.b	nRst, $03, nAb4, $06, nRst, $03, nAb3, $06, nRst
+	dc.b	$03, nAb4, nRst, nAb3, $06, nRst, $03, nAb4
+	;!@ dc.b	$06, nRst, $03, nAb3
+	dc.b	$06, nRst, $03, nAb3, $03
+	smpsLoop		$00, $02, SSBB_WRoom_Loop5, Target
+	;!@ dc.b	nRst, nFs4, $06, nRst, $03, nFs3, $06, nRst
+	dc.b	nRst, $03, nFs4, $06, nRst, $03, nFs3, $06, nRst
+	dc.b	$03, nFs4, nRst, nAb3, $06, nRst, $03, nAb4
+	dc.b	$06, nRst, $03, nAb3, nRst, nAb4, $06, nRst
+	dc.b	$03, nAb3, $06, nRst, $03, nAb4, nRst, nAb3
+	dc.b	$06, nRst, $03, nAb4, $06, nRst, $03
+	smpsAlterVol		$FF
+	dc.b	nAb3, nRst, nFs4, $06, nRst, $03, nFs3, $06
+	dc.b	nRst, $03, nFs4, nRst, nAb3, $06, nRst, $03
+	dc.b	nAb4, $06, nRst, $03, nAb3, nRst, nAb4, $06
+	dc.b	nRst, $03, nAb3, $06, nRst, $03, nAb4, nRst
+	dc.b	nAb3, $06, nRst, $03, nAb4, $06, nRst, $03
+	dc.b	nAb3, nRst, nFs4, $06, nRst, $03, nFs3, $06
+	dc.b	nRst, $03, nFs4, nRst, nAb3, $06, nRst, $03
+	dc.b	nAb4, $06, nRst, $03, nAb3, nRst, nAb4, $06
+	dc.b	nRst, $03, nAb3, $06, nRst, $03, nAb4, nRst
+	dc.b	nFs3, $06, nRst, $03, nFs4, $06, nRst, $03
+	dc.b	nFs3, nRst
+	smpsAlterVol		$FE
+	dc.b	nAb4, $06, nRst, $03, nAb3, $06, nRst, $03
+	dc.b	nAb4, nRst, nAb3, $48
+	smpsFMvoice		FMVoi_SteelGit2
+	;!@ ?
+	dc.b	smpsNoAttack, $12, nRst, $04
+	smpsAlterNote	$00
+	;!@ dc.b	$02
+	dc.b	nRst, $02
+	smpsAlterVol		$04
+	smpsJump		SSBB_WRoom_Jump1, Target
+
+SSBB_WRoom_FM4:
+	smpsFMvoice		FMVoi_SteelGit2
+	dc.b	nRst, $18
+
+SSBB_WRoom_Jump2:
+	dc.b	nRst, $01, nCs4, $05, nRst, $04, nE4, $05
+	dc.b	nRst, $04, nCs4, $02, nRst, $04, nE4, $05
+	dc.b	nRst, $04, nCs4, $05, nRst, $04, nE4, $02
+	dc.b	nRst, $04, nCs4, $05, nRst, $04, nE4, $05
+	dc.b	nRst, $04, nCs4, $02, nRst, $04, nEb4, $05
+	dc.b	nRst, $04, nB3, $05, nRst, $04, nEb4, $02
+	dc.b	nRst, $04
+	smpsAlterVol		$FF
+	dc.b	nCs4, $05, nRst, $04, nE4, $05, nRst, $04
+	dc.b	nCs4, $02, nRst, $04, nE4, $05, nRst, $04
+	dc.b	nCs4, $05, nRst, $04, nE4, $02, nRst, $04
+	dc.b	nCs4, $05, nRst, $04, nE4, $05, nRst, $04
+	dc.b	nCs4, $02, nRst, $04, nEb4, $05, nRst, $04
+	dc.b	nB3, $05, nRst, $04, nEb4, $02, nRst, $04
+	dc.b	nCs4, $05, nRst, $04, nE4, $05, nRst, $04
+	dc.b	nCs4, $02, nRst, $04, nE4, $05, nRst, $04
+	dc.b	nCs4, $05, nRst, $04, nE4, $02, nRst, $04
+	dc.b	nA3, $05, nRst, $04, nCs4, $05, nRst, $04
+	dc.b	nA3, $02, nRst, $04, nEb4, $05, nRst, $04
+	dc.b	nC4, $05, nRst, $04, nEb4, $02, nRst, $04
+	dc.b	nCs4, $05, nRst, $04, nE4, $05, nRst, $04
+	dc.b	nCs4, $02, nRst, $04, nE4, $05, nRst, $04
+	dc.b	nCs4, $05, nRst, $04, nE4, $02, nRst, $04
+	dc.b	nCs4, $05, nRst, $04, nE4, $05, nRst, $04
+	dc.b	nCs4, $02, nRst, $04, nEb4, $05, nRst, $04
+	dc.b	nB3, $05, nRst, $04, nEb4, $02, nRst, $04
+	dc.b	nCs4, $05, nRst, $04, nE4, $05, nRst, $04
+	dc.b	nCs4, $02, nRst, $04, nE4, $05, nRst, $04
+	dc.b	nCs4, $05, nRst, $04, nE4, $02, nRst, $04
+	dc.b	nCs4, $05, nRst, $04
+	smpsAlterVol		$FF
+	dc.b	nE4, $05, nRst, $04, nCs4, $02, nRst, $04
+	dc.b	nEb4, $05, nRst, $04, nB3, $05, nRst, $04
+	dc.b	nEb4, $02, nRst, $04, nCs4, $05, nRst, $04
+	dc.b	nE4, $05, nRst, $04, nCs4, $02, nRst, $04
+	dc.b	nE4, $05, nRst, $04, nCs4, $05, nRst, $04
+	dc.b	nE4, $02, nRst, $04, nCs4, $05, nRst, $04
+	dc.b	nE4, $05, nRst, $04, nCs4, $02, nRst, $04
+	dc.b	nEb4, $05, nRst, $04, nB3, $05, nRst, $04
+	dc.b	nEb4, $02, nRst, $04, nCs4, $05, nRst, $04
+	dc.b	nE4, $05, nRst, $04, nCs4, $02, nRst, $04
+	dc.b	nE4, $05, nRst, $04, nCs4, $05, nRst, $04
+	dc.b	nE4, $02, nRst, $04, nA3, $05, nRst, $04
+	dc.b	nCs4, $05, nRst, $04, nA3, $02, nRst, $04
+	smpsAlterVol		$FE
+	dc.b	nEb4, $05, nRst, $04, nC4, $05, nRst, $04
+	dc.b	nEb4, $02, nRst, $05, nCs4, $5A, nRst, $04
+	smpsAlterVol		$04
+	smpsJump		SSBB_WRoom_Jump2, Target
+
+SSBB_WRoom_FM5:
+	smpsFMvoice		FMVoi_SteelGit2
+	dc.b	nRst, $18
+
+SSBB_WRoom_Jump3:
+	dc.b	nRst, $01, nE4, $06, nRst, $03, nCs4, $06
+	dc.b	nRst, $03, nE4, nRst, nCs4, $06, nRst, $03
+	dc.b	nE4, $06, nRst, $03, nCs4, nRst, nE4, $06
+	dc.b	nRst, $03, nCs4, $06, nRst, $03, nE4, nRst
+	dc.b	nB3, $06, nRst, $03, nEb4, $06, nRst, $03
+	dc.b	nB3, nRst
+	smpsAlterVol		$FF
+	dc.b	nE4, $06, nRst, $03, nCs4, $06, nRst, $03
+	dc.b	nE4, nRst, nCs4, $06, nRst, $03, nE4, $06
+	dc.b	nRst, $03, nCs4, nRst, nE4, $06, nRst, $03
+	dc.b	nCs4, $06, nRst, $03, nE4, nRst, nB3, $06
+	dc.b	nRst, $03, nEb4, $06, nRst, $03, nB3, nRst
+	dc.b	nE4, $06, nRst, $03, nCs4, $06, nRst, $03
+	dc.b	nE4, nRst, nCs4, $06, nRst, $03, nE4, $06
+	dc.b	nRst, $03, nCs4, nRst, nCs4, $06, nRst, $03
+	dc.b	nA3, $06, nRst, $03, nCs4, nRst, nC4, $06
+	dc.b	nRst, $03, nEb4, $06, nRst, $03, nC4, nRst
+	dc.b	nE4, $06, nRst, $03, nCs4, $06, nRst, $03
+	dc.b	nE4, nRst, nCs4, $06, nRst, $03, nE4, $06
+	dc.b	nRst, $03, nCs4, nRst, nE4, $06, nRst, $03
+	dc.b	nCs4, $06, nRst, $03, nE4, nRst, nB3, $06
+	dc.b	nRst, $03, nEb4, $06, nRst, $03, nB3, nRst
+	dc.b	nE4, $06, nRst, $03, nCs4, $06, nRst, $03
+	dc.b	nE4, nRst, nCs4, $06, nRst, $03, nE4, $06
+	dc.b	nRst, $03, nCs4, nRst, nE4, $06, nRst, $03
+	smpsAlterVol		$FF
+	dc.b	nCs4, $06, nRst, $03, nE4, nRst, nB3, $06
+	dc.b	nRst, $03, nEb4, $06, nRst, $03, nB3, nRst
+	dc.b	nE4, $06, nRst, $03, nCs4, $06, nRst, $03
+	dc.b	nE4, nRst, nCs4, $06, nRst, $03, nE4, $06
+	dc.b	nRst, $03, nCs4, nRst, nE4, $06, nRst, $03
+	dc.b	nCs4, $06, nRst, $03, nE4, nRst, nB3, $06
+	dc.b	nRst, $03, nEb4, $06, nRst, $03, nB3, nRst
+	dc.b	nE4, $06, nRst, $03, nCs4, $06, nRst, $03
+	dc.b	nE4, nRst, nCs4, $06, nRst, $03, nE4, $06
+	dc.b	nRst, $03, nCs4, nRst, nCs4, $06, nRst, $03
+	dc.b	nA3, $06, nRst, $03, nCs4, nRst
+	smpsAlterVol		$FE
+	dc.b	nC4, $06, nRst, $03, nEb4, $06, nRst, $03
+	dc.b	nC4, nRst, $06, nE4, $5A, nRst, $02
+	smpsAlterVol		$04
+	smpsJump		SSBB_WRoom_Jump3, Target
+
+SSBB_WRoom_FM6:
+	smpsPan		panRight
+	smpsFMvoice		FMVoi_SteelGit2
+	dc.b	nRst, $18
+
+SSBB_WRoom_Jump4:
+	dc.b	nRst, $02, nAb4, $06, nRst, $03, nAb3, $06
+	dc.b	nRst, $03, nAb4, nRst, nAb3, $06, nRst, $03
+	dc.b	nAb4, $06, nRst, $03, nAb3, nRst, nAb4, $06
+	dc.b	nRst, $03, nAb3, $06, nRst, $03, nAb4, nRst
+	dc.b	nFs3, $06, nRst, $03, nFs4, $06, nRst, $03
+	dc.b	nFs3, nRst
+	smpsAlterVol		$FF
+	dc.b	nAb4, $06, nRst, $03, nAb3, $06, nRst, $03
+	dc.b	nAb4, nRst, nAb3, $06, nRst, $03, nAb4, $06
+	dc.b	nRst, $03, nAb3, nRst, nAb4, $06, nRst, $03
+	dc.b	nAb3, $06, nRst, $03, nAb4, nRst, nFs3, $06
+	dc.b	nRst, $03, nFs4, $06, nRst, $03, nFs3, nRst
+	dc.b	nAb4, $06, nRst, $03, nAb3, $06, nRst, $03
+	dc.b	nAb4, nRst, nAb3, $06, nRst, $03, nAb4, $06
+	dc.b	nRst, $03, nAb3, nRst, nFs4, $06, nRst, $03
+	dc.b	nFs3, $06, nRst, $03, nFs4
+
+SSBB_WRoom_Loop6:
+	dc.b	nRst, nAb3, $06, nRst, $03, nAb4, $06, nRst
+	dc.b	$03, nAb3, nRst, nAb4, $06, nRst, $03, nAb3
+	dc.b	$06, nRst, $03, nAb4
+	smpsLoop		$00, $02, SSBB_WRoom_Loop6, Target
+	dc.b	nRst, nFs3, $06, nRst, $03, nFs4, $06, nRst
+	dc.b	$03, nFs3, nRst, nAb4, $06, nRst, $03, nAb3
+	dc.b	$06, nRst, $03, nAb4, nRst, nAb3, $06, nRst
+	dc.b	$03, nAb4, $06, nRst, $03, nAb3, nRst, nAb4
+	dc.b	$06, nRst, $03
+	smpsAlterVol		$FF
+	dc.b	nAb3, $06, nRst, $03, nAb4, nRst, nFs3, $06
+	dc.b	nRst, $03, nFs4, $06, nRst, $03, nFs3, nRst
+	dc.b	nAb4, $06, nRst, $03, nAb3, $06, nRst, $03
+	dc.b	nAb4, nRst, nAb3, $06, nRst, $03, nAb4, $06
+	dc.b	nRst, $03, nAb3, nRst, nAb4, $06, nRst, $03
+	dc.b	nAb3, $06, nRst, $03, nAb4, nRst, nFs3, $06
+	dc.b	nRst, $03, nFs4, $06, nRst, $03, nFs3, nRst
+	dc.b	nAb4, $06, nRst, $03, nAb3, $06, nRst, $03
+	dc.b	nAb4, nRst, nAb3, $06, nRst, $03, nAb4, $06
+	dc.b	nRst, $03, nAb3, nRst, nFs4, $06, nRst, $03
+	dc.b	nFs3, $06, nRst, $03, nFs4, nRst
+	smpsAlterVol		$FE
+	dc.b	nAb3, $06, nRst, $03, nAb4, $06, nRst, $03
+	dc.b	nAb3, nRst, $07, nAb4, $58, nRst, $02
+	smpsAlterVol		$04
+	smpsJump		SSBB_WRoom_Jump4, Target
+
+SSBB_WRoom_PSG1:
+	;!@ dc.b	nB0, $01, nRst, nCs1, $0A, nB0, $06, nA0
+	dc.b	nB0, $01, nRst, $01, nCs1, $0A, nB0, $06, nA0
+
+SSBB_WRoom_Loop7:
+	;!@ dc.b	nAb0, $30, nRst, $12, nE0, $01, nRst, nFs0
+	dc.b	nAb0, $30, nRst, $12, nE0, $01, nRst, $01, nFs0
+	dc.b	$0A, nAb0, $06, nA0, nB0
+	smpsLoop		$00, $02, SSBB_WRoom_Loop7, Target
+	dc.b	nAb0, $30, nRst, $0C, nEb0, $06, nE0, nE0
+	dc.b	$01, nRst, nFs0, $0A, nE0, $06, nEb0, nCs0
+	dc.b	$0C, nFs0, $01, nRst, nAb0, $22, nRst, $18
+	dc.b	nB0, $01, nRst, nCs1, $0A, nB0, $06, nA0
+
+SSBB_WRoom_Loo$8:
+	dc.b	nAb0, $30, nRst, $12, nE0, $01, nRst, nFs0
+	dc.b	$0A, nAb0, $06, nA0, nB0
+	smpsLoop		$00, $02, SSBB_WRoom_Loo$8, Target
+	dc.b	nAb0, $30, nRst, $0C, nEb0, $06, nE0, nE0
+	dc.b	$01, nRst, nFs0, $0A, nE0, $06, nEb0, nD0
+	dc.b	$01, nRst, nE0, $0A, nCs0, $30, nRst, $0C
+	dc.b	nB0, $01, nRst, nCs1, $0A, nB0, $06, nA0
+	smpsAlterNote	$00
+	smpsJump		SSBB_WRoom_Loop7, Target
+
+SSBB_WRoom_PSG2:
+	dc.b	nRst, $18
+
+SSBB_WRoom_Jump5:
+	dc.b	nRst, $01
+
+SSBB_WRoom_Loo$9:
+	dc.b	nCs1, $05, nRst, $04, nE1, $05, nRst, $04
+	dc.b	nCs1, $02, nRst, $04, nE1, $05, nRst, $04
+	dc.b	nCs1, $05, nRst, $04, nE1, $02, nRst, $04
+	dc.b	nCs1, $05, nRst, $04, nE1, $05, nRst, $04
+	dc.b	nCs1, $02, nRst, $04, nEb1, $05, nRst, $04
+	dc.b	nB0, $05, nRst, $04, nEb1, $02, nRst, $04
+	smpsLoop		$00, $02, SSBB_WRoom_Loo$9, Target
+	dc.b	nCs1, $05, nRst, $04, nE1, $05, nRst, $04
+	dc.b	nCs1, $02, nRst, $04, nE1, $05, nRst, $04
+	dc.b	nCs1, $05, nRst, $04, nE1, $02, nRst, $04
+	dc.b	nA0, $05, nRst, $04, nCs1, $05, nRst, $04
+	dc.b	nA0, $02, nRst, $04, nEb1, $05, nRst, $04
+	dc.b	nC1, $05
+
+SSBB_WRoom_Loop10:
+	dc.b	nRst, $04, nEb1, $02, nRst, $04, nCs1, $05
+	dc.b	nRst, $04, nE1, $05, nRst, $04, nCs1, $02
+	dc.b	nRst, $04, nE1, $05, nRst, $04, nCs1, $05
+	dc.b	nRst, $04, nE1, $02, nRst, $04, nCs1, $05
+	dc.b	nRst, $04, nE1, $05, nRst, $04, nCs1, $02
+	dc.b	nRst, $04, nEb1, $05, nRst, $04, nB0, $05
+	smpsLoop		$00, $03, SSBB_WRoom_Loop10, Target
+	dc.b	nRst, $04, nEb1, $02, nRst, $04, nCs1, $05
+	dc.b	nRst, $04, nE1, $05, nRst, $04, nCs1, $02
+	dc.b	nRst, $04, nE1, $05, nRst, $04, nCs1, $05
+	dc.b	nRst, $04, nE1, $02, nRst, $04, nA0, $05
+	dc.b	nRst, $04, nCs1, $05, nRst, $04, nA0, $02
+	dc.b	nRst, $04
+	smpsSetVol	$FF
+	dc.b	nEb1, $05, nRst, $04, nC1, $05, nRst, $04
+	dc.b	nEb1, $02, nRst, $05, nCs1, $5A, nRst, $04
+	smpsSetVol	$01
+	smpsJump		SSBB_WRoom_Jump5, Target
+
+SSBB_WRoom_PSG3:
+	dc.b	nRst, $18
+
+SSBB_WRoom_Jump6:
+	dc.b	nRst, $01
+
+SSBB_WRoom_Loop11:
+	dc.b	nE1, $06, nRst, $03, nCs1, $06, nRst, $03
+	dc.b	nE1, nRst, nCs1, $06, nRst, $03, nE1, $06
+	dc.b	nRst, $03, nCs1, nRst, nE1, $06, nRst, $03
+	dc.b	nCs1, $06, nRst, $03, nE1, nRst, nB0, $06
+	dc.b	nRst, $03, nEb1, $06, nRst, $03, nB0, nRst
+	smpsLoop		$00, $02, SSBB_WRoom_Loop11, Target
+	dc.b	nE1, $06, nRst, $03, nCs1, $06, nRst, $03
+	dc.b	nE1, nRst, nCs1, $06, nRst, $03, nE1, $06
+	dc.b	nRst, $03, nCs1, nRst, nCs1, $06, nRst, $03
+	dc.b	nA0, $06, nRst, $03, nCs1, nRst, nC1, $06
+	dc.b	nRst, $03, nEb1, $06, nRst, $03, nC1
+
+SSBB_WRoom_Loop12:
+	dc.b	nRst, nE1, $06, nRst, $03, nCs1, $06, nRst
+	dc.b	$03, nE1, nRst, nCs1, $06, nRst, $03, nE1
+	dc.b	$06, nRst, $03, nCs1, nRst, nE1, $06, nRst
+	dc.b	$03, nCs1, $06, nRst, $03, nE1, nRst, nB0
+	dc.b	$06, nRst, $03, nEb1, $06, nRst, $03, nB0
+	smpsLoop		$00, $03, SSBB_WRoom_Loop12, Target
+	dc.b	nRst, nE1, $06, nRst, $03, nCs1, $06, nRst
+	dc.b	$03, nE1, nRst, nCs1, $06, nRst, $03, nE1
+	dc.b	$06, nRst, $03, nCs1, nRst, nCs1, $06, nRst
+	dc.b	$03, nA0, $06, nRst, $03, nCs1, nRst
+	smpsSetVol	$FF
+	dc.b	nC1, $06, nRst, $03, nEb1, $06, nRst, $03
+	dc.b	nC1, nRst, $06, nE1, $5A, nRst, $02
+	smpsSetVol	$01
+	smpsJump		SSBB_WRoom_Jump6, Target
+	
+SSBB_WRoom_PWM1:
 	smpsPan		panCenter
-	smpsCall		NMeetingU_Call1, Target
+	dc.b	nRst, $18
 
-NMeetingU_FM4:
-	smpsFMvoice		$01
-	smpsPan		panCenter
-	smpsModSet	$01, $01, $04, $07
-	dc.b	nRst, $06
-	smpsCall		NMeetingU_Call1, Target
+SSBB_WRoom_PWM1_Loop1:
+	dc.b	pFingSnapLo, $09, pFingSnapHi, $03, pASnare, $06, pFingSnapHi
+	smpsLoop		$00, $1C, SSBB_WRoom_PWM1_Loop1, Target
+	dc.b	pFingSnapLo, $09, pFingSnapHi, pFingSnapLo, $0C, pFingSnapHi, $06, $0C
+	dc.b	pFingSnapLo, $09, pFingSnapHi, pFingSnapLo, $0C, pFingSnapHi, $06, $03
+	dc.b	nRst, $09
+	smpsJump		SSBB_WRoom_PWM1_Loop1, Target
+	
+SSBB_WRoom_PWM2:
+	dc.b	nRst, $18
 
-NMeetingU_FM5:
-	smpsFMvoice		$01
-	smpsPan		panCenter
-	smpsModSet	$01, $01, $04, $07
-	dc.b	nRst, $06
-	smpsCall		NMeetingU_Call1, Target
+SSBB_WRoom_PWM2_Loop1:
+	dc.b	pBongoLo, $09, pBongoHi, pBongoHi, $06
+	smpsLoop		$00, $1C, SSBB_WRoom_PWM2_Loop1, Target
 
-NMeetingU_FM6:
-	smpsFMvoice		$02
-	smpsPan		panCenter
-	smpsModSet	$01, $01, $04, $07
-	dc.b	nRst, $0C
-	smpsCall		NMeetingU_Call2, Target
+SSBB_WRoom_PWM2_Loop2:
+	dc.b	pBongoLo, $09, pBongoHi, pBongoLo, $0C, pBongoHi, $06, $0C
+	smpsLoop		$00, $02, SSBB_WRoom_PWM2_Loop2, Target
+	smpsJump		SSBB_WRoom_PWM2_Loop1, Target
+	
+SSBB_WRoom_PWM3:
+	dc.b	nRst, $18
 
-NMeetingU_PSG1:
-	smpsPSGvoice	$05
-	smpsCall		NMeetingU_Call2, Target
+SSBB_WRoom_PWM3_Loop1:
+	dc.b	pEKick, $09, pClosedHH, pClosedHH, $06
+	smpsLoop		$00, $1B, SSBB_WRoom_PWM3_Loop1, Target
+	dc.b	pEKick, $09, pClosedHH, pClosedHH, $66
+	smpsJump		SSBB_WRoom_PWM3_Loop1, Target
 
-NMeetingU_Call2:
-	dc.b	nRst, $60
-
-NMeetingU_Loop3:
-	dc.b	nRst, $0C, nEb4, $0C, nD4, $18, nC4, $12
-	dc.b	$06, nRst, $0C, nD4, $0C, nRst, $0C, nEb4
-	dc.b	$0C, nD4, $18, nC4, $06, $0C, nA3, $06
-	dc.b	nRst, $0C, nG3, $0C
-	smpsLoop		$00, $02, NMeetingU_Loop3, Target
-	dc.b	nRst, $0C, nAb4, $0C, nG4, $18, nF4, $12
-	dc.b	nG4, $06, nRst, $0C, nAb4, $0C, nBb4, $0C
-	dc.b	nRst, nC5, nRst, nRst, $30, nRst, $0C, nEb4
-	dc.b	$0C, nD4, $18, nC4, $12, $06, nRst, $0C
-	dc.b	nD4, $0C, nEb4, $0C, nE4, $06, nRst, nF4
-	dc.b	$0C, nFs4, $06, nRst, nG4, $0C, nAb4, $06
-	dc.b	nRst, nA4, $0C, nBb4, $06, nRst
-	smpsJump		NMeetingU_Loop3, Target
-
-NMeetingU_PSG2:
-	smpsPSGvoice	$05
-	dc.b	nRst, $60
-
-NMeetingU_Loop4:
-	dc.b	nRst, $0C, nBb3, $0C, nA3, $18, nG3, $12
-	dc.b	$06, nRst, $0C, nA3, $0C, nRst, $0C, nBb3
-	dc.b	$0C, nA3, $18, nG3, $06, $0C, nF3, $06
-	dc.b	nRst, $0C, nEb3, $0C
-	smpsLoop		$00, $02, NMeetingU_Loop4, Target
-	dc.b	nRst, $0C, nEb4, $0C, nD4, $18, nC4, $12
-	dc.b	nD4, $06, nRst, $0C, nEb4, $0C, nF4, $0C
-	dc.b	nRst, nG4, nRst, nRst, $30, nRst, $0C, nBb3
-	dc.b	$0C, nA3, $18, nG3, $12, $06, nRst, $0C
-	dc.b	nA3, $0C, nBb3, $0C, nB3, $06, nRst, nC4
-	dc.b	$0C, nCs4, $06, nRst, nD4, $0C, nEb4, $06
-	dc.b	nRst, nE4, $0C, nF4, $06, nRst
-	smpsJump		NMeetingU_Loop4, Target
-
-NMeetingU_PSG3:
-	smpsPSGvoice	$02
-	smpsPSGform	$E7
-	dc.b	nRst, $60
-
-NMeetingU_Loop5:
-	dc.b	nC4, $06
-	smpsSetVol	$03
-	dc.b	nC4, $06
-	smpsSetVol	$FE
-	dc.b	nC4, $06
-	smpsSetVol	$02
-	dc.b	nC4, $06
-	smpsSetVol	$FD
-	smpsLoop		$00, $14, NMeetingU_Loop5, Target
-	dc.b	nC4, $18, nC4, nRst, $30
-
-NMeetingU_Loop6:
-	dc.b	nC4, $06
-	smpsSetVol	$03
-	dc.b	nC4, $06
-	smpsSetVol	$FE
-	dc.b	nC4, $06
-	smpsSetVol	$02
-	dc.b	nC4, $06
-	smpsSetVol	$FD
-	smpsLoop		$00, $04, NMeetingU_Loop6, Target
-
-NMeetingU_Loop7:
-	dc.b	nC4, $0C
-	smpsSetVol	$03
-	dc.b	nC4, $0C
-	smpsSetVol	$FE
-	dc.b	nC4, $0C
-	smpsSetVol	$02
-	dc.b	nC4, $0C
-	smpsSetVol	$FD
-	smpsLoop		$00, $02, NMeetingU_Loop7, Target
-	smpsJump		NMeetingU_Loop5, Target
-
-NMeetingU_PWM1:
-	dc.b	$96, $60
-
-NMeetingU_Loo$8:
-	dc.b	$81, $18, $81, $81, $81
-	smpsLoop		$00, $05, NMeetingU_Loo$8, Target
-	dc.b	$81, $18, $81, nRst, $30, $81, $18, $81
-	dc.b	$81, $81, $81, $0C, $81, $81, $81, nRst
-	dc.b	$30
-	smpsJump		NMeetingU_Loo$8, Target
-
-NMeetingU_PWM2:
-	dc.b	$82, $18, $12, $06, $0C, $0C, $0C, $0C
-
-NMeetingU_Loo$9:
-	dc.b	nRst, $0C, $82
-	smpsLoop		$00, $10, NMeetingU_Loo$9, Target
-	dc.b	nRst, $0C, $82, nRst, $0C, $82, nRst, $0C
-	dc.b	$82, nRst, $06, $82, $82, $82, nRst, $3C
-	dc.b	$82, $0C, $82, $82, nRst, $0C, $82, nRst
-	dc.b	$0C, $82, nRst, $0C, $82, nRst, $0C, $82
-	dc.b	nRst, $30, $82, $0C, $82, $82, $82
-	smpsJump		NMeetingU_Loo$9, Target
-
-NMeetingU_PWM3:
+SSBB_WRoom_PWM4:
 	smpsStop
 
-NMeetingU_PWM4:
-	dc.b	$96, $60
-
-NMeetingU_Loop10:
-	smpsAlterVol		$FD
-	dc.b	$90, $0C
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90, $06
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91, $91, $0C, $12
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90, $06, $0C
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91, $0C
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90, $0C
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90, $06
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91, $91, $0C, $06, $06
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91, $06, nRst, $06, $91, $06
-	smpsAlterVol		$30
-	smpsLoop		$00, $02, NMeetingU_Loop10, Target
-	smpsAlterVol		$FD
-	dc.b	$90, $0C
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90, $06
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91, $91, $0C, $12
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90, $06, $0C
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91, $0C
-	smpsAlterVol		$30
-	smpsAlterVol		$D0
-	dc.b	$91, $18
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90
-	smpsAlterVol		$03
-	dc.b	nRst, $0C
-	smpsAlterVol		$D0
-	dc.b	$91, $0C, $0C, $0C
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90, $0C
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90, $06
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91, $91, $0C, $12
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90, $06, $0C
-	smpsAlterVol		$03
-	smpsAlterVol		$D0
-	dc.b	$91, $0C
-	smpsAlterVol		$30
-	smpsAlterVol		$D0
-	dc.b	$91, $0C, $0C, $0C, $0C
-	smpsAlterVol		$30
-	smpsAlterVol		$FD
-	dc.b	$90, $0C, $0C, $0C, $0C
-	smpsAlterVol		$03
-	smpsJump		NMeetingU_Loop10, Target
-
-NMeetingU_Patches:
-
+SSBB_WRoom_Patches:	
+	;Accoustic Guitar (Steel) 1
+	dc.b	$2B
+	dc.b	$36, $03, $00, $01,	$DF, $DC, $DD, $DF
+	dc.b	$06, $09, $02, $00,	$06, $04, $01, $04
+	dc.b	$23, $33, $13, $05,	$19, $20, $20, $08
 	
-	dc.b	$3D
-	dc.b	$01, $00, $01, $02,	$1F, $1F, $1F, $1F
-	dc.b	$0D, $0C, $0C, $0C,	$0D, $0A, $0A, $0A
-	dc.b	$F6, $97, $A7, $A7,	$1C, $80, $80, $85
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
+	;Accoustic Bass
+	dc.b	$06
+	dc.b	$00, $00, $01, $02,	$9F, $1F, $9F, $1F
+	dc.b	$04, $0A, $11, $14,	$0E, $01, $0E, $0E
+	dc.b	$F8, $48, $F8, $F8,	$17, $0A, $0A, $0A
 	
-	dc.b	$3D
-	dc.b	$01, $00, $01, $02,	$12, $1F, $1F, $14
-	dc.b	$07, $02, $02, $0A,	$05, $05, $05, $05
-	dc.b	$25, $27, $27, $A7,	$1C, $80, $82, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-	
-	dc.b	$39
-	dc.b	$02, $01, $02, $01,	$5F, $5F, $1F, $1F
-	dc.b	$00, $00, $00, $00,	$00, $00, $00, $00
-	dc.b	$0F, $0F, $0F, $0F,	$1B, $32, $28, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	;Accoustic Guitar (Steel) 2
+	dc.b	$2B
+	dc.b	$36, $03, $00, $01,	$DF, $DC, $DD, $DF
+	dc.b	$06, $09, $02, $00,	$06, $04, $01, $04
+	dc.b	$23, $33, $13, $05,	$19, $20, $20, $08+$12
