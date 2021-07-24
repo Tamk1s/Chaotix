@@ -1,22 +1,23 @@
 Target	EQU	$40000
 
-FMPitch		EQU $00
+FMPitch1	EQU $00
+FMPitch2	EQU $00
 PSGVol1		EQU	$03
 PSGVol2		EQU	$03
 PSGVoi1		EQU $0A
 PSGVoi2		EQU $00
-PWMVol1		EQU	$6F
-PWMVol2		EQU PWMVol1-$37
+PWMVol1		EQU	$77
+PWMVol2		EQU PWMVol1-$27
 PWMPitch	EQU	$00
 	smpsHeaderVoice	MTPO_ThemeR_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$03, $1A
-	smpsHeaderFM	MTPO_ThemeR_FM1, Target, FMPitch, $08
-	smpsHeaderFM	MTPO_ThemeR_FM2, Target, FMPitch, $08-$02
-	smpsHeaderFM	MTPO_ThemeR_FM3, Target, FMPitch, $08
-	smpsHeaderFM	MTPO_ThemeR_FM4, Target, FMPitch, $08
-	smpsHeaderFM	MTPO_ThemeR_FM5, Target, FMPitch, $08
-	smpsHeaderFM	MTPO_ThemeR_FM6, Target, FMPitch, $0E
+	smpsHeaderFM	MTPO_ThemeR_FM1, Target, FMPitch1, $08
+	smpsHeaderFM	MTPO_ThemeR_FM2, Target, FMPitch1, $08
+	smpsHeaderFM	MTPO_ThemeR_FM3, Target, FMPitch1, $08-$02
+	smpsHeaderFM	MTPO_ThemeR_FM4, Target, FMPitch2, $08-$01
+	smpsHeaderFM	MTPO_ThemeR_FM5, Target, FMPitch2, $08
+	smpsHeaderFM	MTPO_ThemeR_FM6, Target, FMPitch1, $0E-$02
 	smpsHeaderPSG	MTPO_ThemeR_PSG1, Target, PSGDelta, PSGVol1, $00, PSGVoi1
 	smpsHeaderPSG	MTPO_ThemeR_PSG2, Target, PSGDelta, PSGVol2, $00, PSGVoi2
 	smpsHeaderPSG	MTPO_ThemeR_PSG3, Target, PSGDelta, PSGVol2, $00, PSGVoi2
@@ -631,37 +632,61 @@ MTPO_ThemeR_PWM4:
 
 MTPO_ThemeR_Patches:
 	;Distotion Guitar
-	dc.b	$39
-	dc.b	$33, $01, $51, $01,	$5F, $5F, $5F, $5F
-	dc.b	$0F, $00, $00, $1F,	$01, $01, $01, $01
-	dc.b	$33, $1A, $1A, $17,	$1E, $19, $18, $88+$00
+	;dc.b	$39
+	;dc.b	$33, $01, $51, $01,	$5F, $5F, $5F, $5F
+	;dc.b	$0F, $00, $00, $1F,	$01, $01, $01, $01
+	;dc.b	$33, $1A, $1A, $17,	$1E, $19, $18, $88+$00
 	
 	;Electric Guitar (Clean)
-	dc.b	$02
-	dc.b	$00, $00, $00, $00,	$0C, $0C, $16, $16
-	dc.b	$17, $17, $00, $00,	$09, $09, $09, $09
-	dc.b	$02, $02, $02, $02,	$21, $10, $12, $8C+$00
+	;dc.b	$02
+	;dc.b	$00, $00, $00, $00,	$0C, $0C, $16, $16
+	;dc.b	$17, $17, $00, $00,	$09, $09, $09, $09
+	;dc.b	$02, $02, $02, $02,	$21, $10, $12, $8C+$00
+	
+	;Distotion Guitar
+	dc.b	$28
+	dc.b	$03, $0F, $15, $71, $1F, $12, $1F, $1F
+	dc.b	$04, $01, $04, $0C, $01, $04, $04, $04
+	dc.b	$00, $07, $00, $17, $0C, $22, $22+$06, $0A+$02
+	
+	;Electric Guitar (Clean)
+	dc.b	$00
+	dc.b	$00, $00, $00, $00, $0C, $0C, $16, $16
+	dc.b	$17, $17, $00, $00, $09, $09, $09, $09
+	dc.b	$02, $02, $02, $02, $21, $10, $12, $10
 	
 	;Electric Bass (Pick)
 	dc.b	$3D
 	dc.b	$00, $00, $01, $05,	$5F, $5E, $5B, $5B
 	dc.b	$05, $0C, $0E, $0E,	$00, $04, $08, $07
-	dc.b	$B0, $19, $39, $FC,	$21, $8A+$04, $8A+$02, $88+$02
+	dc.b	$B0, $19, $39, $FC,	$21, $8A+$02, $8A+$02, $88+$02
+	
+	;Overdrive Guitar
+	;dc.b	$39
+	;dc.b	$03, $22, $61, $21,	$1F, $12, $1F, $1F
+	;dc.b	$05, $05, $05, $0B,	$04, $04, $04, $04
+	;dc.b	$10, $18, $10, $18,	$1E, $15, $1D, $88+$00
+	
+	;Electric Guitar (Jazz)
+	;dc.b	$02
+	;dc.b	$01, $24, $61, $21,	$1F, $12, $1F, $1F
+	;dc.b	$05, $05, $05, $0B,	$04, $04, $04, $04
+	;dc.b	$10, $18, $10, $18,	$1C, $1C, $1C, $88+$00
 	
 	;Overdrive Guitar
 	dc.b	$39
-	dc.b	$03, $22, $61, $21,	$1F, $12, $1F, $1F
-	dc.b	$05, $05, $05, $0B,	$04, $04, $04, $04
-	dc.b	$10, $18, $10, $18,	$1E, $15, $1D, $88+$00
+	dc.b	$33, $01, $51, $01,	$5F, $5F, $5F, $5F
+	dc.b	$0F, $00, $00, $1F,	$01, $01, $01, $01
+	dc.b	$33, $1A, $1A, $17,	$1E, $19, $18, $88-$03
 	
 	;Electric Guitar (Jazz)
-	dc.b	$02
-	dc.b	$01, $24, $61, $21,	$1F, $12, $1F, $1F
-	dc.b	$05, $05, $05, $0B,	$04, $04, $04, $04
-	dc.b	$10, $18, $10, $18,	$1C, $1C, $1C, $88+$00
+	dc.b	$39
+	dc.b	$33, $01, $51, $01,	$5F, $5F, $5F, $5F
+	dc.b	$0F, $00, $00, $1F,	$01, $01, $01, $01
+	dc.b	$33, $1A, $1A, $17,	$1E, $19, $18, $88-$03
 	
 	;Electric Bass (Finger)
 	dc.b	$1D
 	dc.b	$00, $10, $21, $31,	$9F, $5F, $5F, $5F
 	dc.b	$00, $0F, $0F, $0F,	$09, $06, $06, $00
-	dc.b	$0F, $18, $18, $27,	$19, $88+$04, $88+$02, $88+$02
+	dc.b	$0F, $18, $18, $27,	$19, $88+$02, $88+$02, $88+$02

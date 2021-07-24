@@ -774,13 +774,14 @@
 000000                  	include "KC.asm"
        = 040000         Target	EQU	$40000
 
-       = 000000         FMPitch		EQU $00
+       = 000000         FMPitch1	EQU $00
+       = 000000         FMPitch2	EQU $00
        = 000003         PSGVol1		EQU	$03
        = 000003         PSGVol2		EQU	$03
        = 00000A         PSGVoi1		EQU $0A
        = 000000         PSGVoi2		EQU $00
-       = 00006F         PWMVol1		EQU	$6F
-       = 000038         PWMVol2		EQU PWMVol1-$37
+       = 000077         PWMVol1		EQU	$77
+       = 000050         PWMVol2		EQU PWMVol1-$27
        = 000000         PWMPitch	EQU	$00
 000000                  	smpsHeaderVoice	MTPO_ThemeR_Patches, Target
                         ;songStart set *
@@ -795,42 +796,42 @@
                         	endif	
 000004                  	smpsHeaderTempo	$03, $1A
 000004 031A             	dc.b	$03,$1A
-000006                  	smpsHeaderFM	MTPO_ThemeR_FM1, Target, FMPitch, $08
+000006                  	smpsHeaderFM	MTPO_ThemeR_FM1, Target, FMPitch1, $08
                         	;dc.w	loc-songStart
 000006                  	rom_ptr_z80(MTPO_ThemeR_FM1+Target)
                         	;dc.w z80_ptr(ptr,addr)
 000006 4080             	dc.w  (((((MTPO_ThemeR_FM1+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM1+Target))>>8)&$7F)|$80)
-000008 0008             	dc.b	FMPitch,$08
-00000A                  	smpsHeaderFM	MTPO_ThemeR_FM2, Target, FMPitch, $08-$02
+000008 0008             	dc.b	FMPitch1,$08
+00000A                  	smpsHeaderFM	MTPO_ThemeR_FM2, Target, FMPitch1, $08
                         	;dc.w	loc-songStart
 00000A                  	rom_ptr_z80(MTPO_ThemeR_FM2+Target)
                         	;dc.w z80_ptr(ptr,addr)
 00000A 7B81             	dc.w  (((((MTPO_ThemeR_FM2+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM2+Target))>>8)&$7F)|$80)
-00000C 0006             	dc.b	FMPitch,$08-$02
-00000E                  	smpsHeaderFM	MTPO_ThemeR_FM3, Target, FMPitch, $08
+00000C 0008             	dc.b	FMPitch1,$08
+00000E                  	smpsHeaderFM	MTPO_ThemeR_FM3, Target, FMPitch1, $08-$02
                         	;dc.w	loc-songStart
 00000E                  	rom_ptr_z80(MTPO_ThemeR_FM3+Target)
                         	;dc.w z80_ptr(ptr,addr)
 00000E B682             	dc.w  (((((MTPO_ThemeR_FM3+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM3+Target))>>8)&$7F)|$80)
-000010 0008             	dc.b	FMPitch,$08
-000012                  	smpsHeaderFM	MTPO_ThemeR_FM4, Target, FMPitch, $08
+000010 0006             	dc.b	FMPitch1,$08-$02
+000012                  	smpsHeaderFM	MTPO_ThemeR_FM4, Target, FMPitch2, $08-$01
                         	;dc.w	loc-songStart
 000012                  	rom_ptr_z80(MTPO_ThemeR_FM4+Target)
                         	;dc.w z80_ptr(ptr,addr)
 000012 4C83             	dc.w  (((((MTPO_ThemeR_FM4+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM4+Target))>>8)&$7F)|$80)
-000014 0008             	dc.b	FMPitch,$08
-000016                  	smpsHeaderFM	MTPO_ThemeR_FM5, Target, FMPitch, $08
+000014 0007             	dc.b	FMPitch2,$08-$01
+000016                  	smpsHeaderFM	MTPO_ThemeR_FM5, Target, FMPitch2, $08
                         	;dc.w	loc-songStart
 000016                  	rom_ptr_z80(MTPO_ThemeR_FM5+Target)
                         	;dc.w z80_ptr(ptr,addr)
 000016 4484             	dc.w  (((((MTPO_ThemeR_FM5+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM5+Target))>>8)&$7F)|$80)
-000018 0008             	dc.b	FMPitch,$08
-00001A                  	smpsHeaderFM	MTPO_ThemeR_FM6, Target, FMPitch, $0E
+000018 0008             	dc.b	FMPitch2,$08
+00001A                  	smpsHeaderFM	MTPO_ThemeR_FM6, Target, FMPitch1, $0E-$02
                         	;dc.w	loc-songStart
 00001A                  	rom_ptr_z80(MTPO_ThemeR_FM6+Target)
                         	;dc.w z80_ptr(ptr,addr)
 00001A 3485             	dc.w  (((((MTPO_ThemeR_FM6+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM6+Target))>>8)&$7F)|$80)
-00001C 000E             	dc.b	FMPitch,$0E
+00001C 000C             	dc.b	FMPitch1,$0E-$02
 00001E                  	smpsHeaderPSG	MTPO_ThemeR_PSG1, Target, PSGDelta, PSGVol1, $00, PSGVoi1
                         	;dc.w	loc-songStart
 00001E                  	rom_ptr_z80(MTPO_ThemeR_PSG1+Target)
@@ -862,7 +863,7 @@
 000030 E188             	dc.w  (((((MTPO_ThemeR_PWM1+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM1+Target))>>8)&$7F)|$80)
                         	;!@
 000032 00               	dc.b	PWMPitch
-000033 6F               	dc.b	PWMVol1
+000033 77               	dc.b	PWMVol1
 000034                  	smpsHeaderPWM	MTPO_ThemeR_PWM2, Target, PWMPitch, PWMVol2
                         	;dc.w	loc-songStart
 000034                  	rom_ptr_z80(MTPO_ThemeR_PWM2+Target)	
@@ -870,7 +871,7 @@
 000034 3F89             	dc.w  (((((MTPO_ThemeR_PWM2+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM2+Target))>>8)&$7F)|$80)
                         	;!@
 000036 00               	dc.b	PWMPitch
-000037 38               	dc.b	PWMVol2
+000037 50               	dc.b	PWMVol2
 000038                  	smpsHeaderPWM	MTPO_ThemeR_PWM3, Target, PWMPitch, PWMVol1
                         	;dc.w	loc-songStart
 000038                  	rom_ptr_z80(MTPO_ThemeR_PWM3+Target)	
@@ -878,7 +879,7 @@
 000038 7289             	dc.w  (((((MTPO_ThemeR_PWM3+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM3+Target))>>8)&$7F)|$80)
                         	;!@
 00003A 00               	dc.b	PWMPitch
-00003B 6F               	dc.b	PWMVol1
+00003B 77               	dc.b	PWMVol1
 00003C                  	smpsHeaderPWM	MTPO_ThemeR_PWM4, Target, PWMPitch, PWMVol1
                         	;dc.w	loc-songStart
 00003C                  	rom_ptr_z80(MTPO_ThemeR_PWM4+Target)	
@@ -886,7 +887,7 @@
 00003C ED89             	dc.w  (((((MTPO_ThemeR_PWM4+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM4+Target))>>8)&$7F)|$80)
                         	;!@
 00003E 00               	dc.b	PWMPitch
-00003F 6F               	dc.b	PWMVol1
+00003F 77               	dc.b	PWMVol1
 
 000040                  MTPO_ThemeR_FM1:
 000040                  	smpsPan		panLeft
@@ -2341,71 +2342,95 @@
 
 0009EE                  MTPO_ThemeR_Patches:
                         	;Distotion Guitar
-0009EE 39               	dc.b	$39
-0009EF 330151015F5F5F5F 	dc.b	$33, $01, $51, $01,	$5F, $5F, $5F, $5F
-0009F7 0F00001F01010101 	dc.b	$0F, $00, $00, $1F,	$01, $01, $01, $01
-0009FF 331A1A171E191888 	dc.b	$33, $1A, $1A, $17,	$1E, $19, $18, $88+$00
+                        	;dc.b	$39
+                        	;dc.b	$33, $01, $51, $01,	$5F, $5F, $5F, $5F
+                        	;dc.b	$0F, $00, $00, $1F,	$01, $01, $01, $01
+                        	;dc.b	$33, $1A, $1A, $17,	$1E, $19, $18, $88+$00
                         	
                         	;Electric Guitar (Clean)
-000A07 02               	dc.b	$02
-000A08 000000000C0C1616 	dc.b	$00, $00, $00, $00,	$0C, $0C, $16, $16
-000A10 1717000009090909 	dc.b	$17, $17, $00, $00,	$09, $09, $09, $09
-000A18 020202022110128C 	dc.b	$02, $02, $02, $02,	$21, $10, $12, $8C+$00
+                        	;dc.b	$02
+                        	;dc.b	$00, $00, $00, $00,	$0C, $0C, $16, $16
+                        	;dc.b	$17, $17, $00, $00,	$09, $09, $09, $09
+                        	;dc.b	$02, $02, $02, $02,	$21, $10, $12, $8C+$00
+                        	
+                        	;Distotion Guitar
+0009EE 28               	dc.b	$28
+0009EF 030F15711F121F1F 	dc.b	$03, $0F, $15, $71, $1F, $12, $1F, $1F
+0009F7 0401040C01040404 	dc.b	$04, $01, $04, $0C, $01, $04, $04, $04
+0009FF 000700170C22280C 	dc.b	$00, $07, $00, $17, $0C, $22, $22+$06, $0A+$02
+                        	
+                        	;Electric Guitar (Clean)
+000A07 00               	dc.b	$00
+000A08 000000000C0C1616 	dc.b	$00, $00, $00, $00, $0C, $0C, $16, $16
+000A10 1717000009090909 	dc.b	$17, $17, $00, $00, $09, $09, $09, $09
+000A18 0202020221101210 	dc.b	$02, $02, $02, $02, $21, $10, $12, $10
                         	
                         	;Electric Bass (Pick)
 000A20 3D               	dc.b	$3D
 000A21 000001055F5E5B5B 	dc.b	$00, $00, $01, $05,	$5F, $5E, $5B, $5B
 000A29 050C0E0E00040807 	dc.b	$05, $0C, $0E, $0E,	$00, $04, $08, $07
-000A31 B01939FC218E8C8A 	dc.b	$B0, $19, $39, $FC,	$21, $8A+$04, $8A+$02, $88+$02
+000A31 B01939FC218C8C8A 	dc.b	$B0, $19, $39, $FC,	$21, $8A+$02, $8A+$02, $88+$02
+                        	
+                        	;Overdrive Guitar
+                        	;dc.b	$39
+                        	;dc.b	$03, $22, $61, $21,	$1F, $12, $1F, $1F
+                        	;dc.b	$05, $05, $05, $0B,	$04, $04, $04, $04
+                        	;dc.b	$10, $18, $10, $18,	$1E, $15, $1D, $88+$00
+                        	
+                        	;Electric Guitar (Jazz)
+                        	;dc.b	$02
+                        	;dc.b	$01, $24, $61, $21,	$1F, $12, $1F, $1F
+                        	;dc.b	$05, $05, $05, $0B,	$04, $04, $04, $04
+                        	;dc.b	$10, $18, $10, $18,	$1C, $1C, $1C, $88+$00
                         	
                         	;Overdrive Guitar
 000A39 39               	dc.b	$39
-000A3A 032261211F121F1F 	dc.b	$03, $22, $61, $21,	$1F, $12, $1F, $1F
-000A42 0505050B04040404 	dc.b	$05, $05, $05, $0B,	$04, $04, $04, $04
-000A4A 101810181E151D88 	dc.b	$10, $18, $10, $18,	$1E, $15, $1D, $88+$00
+000A3A 330151015F5F5F5F 	dc.b	$33, $01, $51, $01,	$5F, $5F, $5F, $5F
+000A42 0F00001F01010101 	dc.b	$0F, $00, $00, $1F,	$01, $01, $01, $01
+000A4A 331A1A171E191885 	dc.b	$33, $1A, $1A, $17,	$1E, $19, $18, $88-$03
                         	
                         	;Electric Guitar (Jazz)
-000A52 02               	dc.b	$02
-000A53 012461211F121F1F 	dc.b	$01, $24, $61, $21,	$1F, $12, $1F, $1F
-000A5B 0505050B04040404 	dc.b	$05, $05, $05, $0B,	$04, $04, $04, $04
-000A63 101810181C1C1C88 	dc.b	$10, $18, $10, $18,	$1C, $1C, $1C, $88+$00
+000A52 39               	dc.b	$39
+000A53 330151015F5F5F5F 	dc.b	$33, $01, $51, $01,	$5F, $5F, $5F, $5F
+000A5B 0F00001F01010101 	dc.b	$0F, $00, $00, $1F,	$01, $01, $01, $01
+000A63 331A1A171E191885 	dc.b	$33, $1A, $1A, $17,	$1E, $19, $18, $88-$03
                         	
                         	;Electric Bass (Finger)
 000A6B 1D               	dc.b	$1D
 000A6C 001021319F5F5F5F 	dc.b	$00, $10, $21, $31,	$9F, $5F, $5F, $5F
 000A74 000F0F0F09060600 	dc.b	$00, $0F, $0F, $0F,	$09, $06, $06, $00
-000A7C 0F181827198C8A8A 	dc.b	$0F, $18, $18, $27,	$19, $88+$04, $88+$02, $88+$02
+000A7C 0F181827198A8A8A 	dc.b	$0F, $18, $18, $27,	$19, $88+$02, $88+$02, $88+$02
 
 00000 Total Error(s)
 
 DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK              00000081 E
 DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
-DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  FMPITCH            00000000 E
-MTPO_THEMER_FM1    00000040    MTPO_THEMER_FM2    0000017B    MTPO_THEMER_FM3    000002B6
-MTPO_THEMER_FM4    0000034C    MTPO_THEMER_FM5    00000444    MTPO_THEMER_FM6    00000534
-MTPO_THEMER_JUMP1  00000042    MTPO_THEMER_JUMP2  0000017D    MTPO_THEMER_JUMP3  000002B8
-MTPO_THEMER_JUMP4  00000446    MTPO_THEMER_JUMP5  00000538    MTPO_THEMER_LOOP1  0000004F
-MTPO_THEMER_LOOP10 000002A1    MTPO_THEMER_LOOP11 000002BB    MTPO_THEMER_LOOP12 000002C3
-MTPO_THEMER_LOOP13 000002C9    MTPO_THEMER_LOOP14 000002D1    MTPO_THEMER_LOOP15 000002DD
-MTPO_THEMER_LOOP16 000002E3    MTPO_THEMER_LOOP17 000002ED    MTPO_THEMER_LOOP18 000002F3
-MTPO_THEMER_LOOP19 000002FB    MTPO_THEMER_LOOP2  0000006D    MTPO_THEMER_LOOP20 00000301
-MTPO_THEMER_LOOP21 00000307    MTPO_THEMER_LOOP22 0000030D    MTPO_THEMER_LOOP23 00000313
-MTPO_THEMER_LOOP24 00000319    MTPO_THEMER_LOOP25 00000323    MTPO_THEMER_LOOP26 00000329
-MTPO_THEMER_LOOP27 00000331    MTPO_THEMER_LOOP28 00000337    MTPO_THEMER_LOOP29 0000033D
-MTPO_THEMER_LOOP3  000000E5    MTPO_THEMER_LOOP30 00000343    MTPO_THEMER_LOOP31 00000539
-MTPO_THEMER_LOOP32 00000541    MTPO_THEMER_LOOP33 00000547    MTPO_THEMER_LOOP34 0000054F
-MTPO_THEMER_LOOP35 0000055B    MTPO_THEMER_LOOP36 00000561    MTPO_THEMER_LOOP37 0000056B
-MTPO_THEMER_LOOP38 00000571    MTPO_THEMER_LOOP39 00000579    MTPO_THEMER_LOOP4  000000F6
-MTPO_THEMER_LOOP40 0000057F    MTPO_THEMER_LOOP41 00000585    MTPO_THEMER_LOOP42 0000058B
-MTPO_THEMER_LOOP43 00000591    MTPO_THEMER_LOOP44 00000597    MTPO_THEMER_LOOP45 000005A1
-MTPO_THEMER_LOOP46 000005A7    MTPO_THEMER_LOOP47 000005AF    MTPO_THEMER_LOOP48 000005B5
-MTPO_THEMER_LOOP49 000005BB    MTPO_THEMER_LOOP5  00000166    MTPO_THEMER_LOOP50 000005C1
-MTPO_THEMER_LOOP51 000005D5    MTPO_THEMER_LOOP52 000005F3    MTPO_THEMER_LOOP53 0000066B
-MTPO_THEMER_LOOP54 0000067C    MTPO_THEMER_LOOP55 000006EC    MTPO_THEMER_LOOP6  0000018A
-MTPO_THEMER_LOOP7  000001A8    MTPO_THEMER_LOOP8  00000220    MTPO_THEMER_LOOP9  00000231
-MTPO_THEMER_PATCHES                           000009EE    MTPO_THEMER_PSG1   000005CA
-MTPO_THEMER_PSG2   00000701    MTPO_THEMER_PSG3   000007F5    MTPO_THEMER_PWM1   000008E1
-MTPO_THEMER_PWM1_LOOP1                        000008EE    
+DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  FMPITCH1           00000000 E
+FMPITCH2           00000000 E  MTPO_THEMER_FM1    00000040    MTPO_THEMER_FM2    0000017B
+MTPO_THEMER_FM3    000002B6    MTPO_THEMER_FM4    0000034C    MTPO_THEMER_FM5    00000444
+MTPO_THEMER_FM6    00000534    MTPO_THEMER_JUMP1  00000042    MTPO_THEMER_JUMP2  0000017D
+MTPO_THEMER_JUMP3  000002B8    MTPO_THEMER_JUMP4  00000446    MTPO_THEMER_JUMP5  00000538
+MTPO_THEMER_LOOP1  0000004F    MTPO_THEMER_LOOP10 000002A1    MTPO_THEMER_LOOP11 000002BB
+MTPO_THEMER_LOOP12 000002C3    MTPO_THEMER_LOOP13 000002C9    MTPO_THEMER_LOOP14 000002D1
+MTPO_THEMER_LOOP15 000002DD    MTPO_THEMER_LOOP16 000002E3    MTPO_THEMER_LOOP17 000002ED
+MTPO_THEMER_LOOP18 000002F3    MTPO_THEMER_LOOP19 000002FB    MTPO_THEMER_LOOP2  0000006D
+MTPO_THEMER_LOOP20 00000301    MTPO_THEMER_LOOP21 00000307    MTPO_THEMER_LOOP22 0000030D
+MTPO_THEMER_LOOP23 00000313    MTPO_THEMER_LOOP24 00000319    MTPO_THEMER_LOOP25 00000323
+MTPO_THEMER_LOOP26 00000329    MTPO_THEMER_LOOP27 00000331    MTPO_THEMER_LOOP28 00000337
+MTPO_THEMER_LOOP29 0000033D    MTPO_THEMER_LOOP3  000000E5    MTPO_THEMER_LOOP30 00000343
+MTPO_THEMER_LOOP31 00000539    MTPO_THEMER_LOOP32 00000541    MTPO_THEMER_LOOP33 00000547
+MTPO_THEMER_LOOP34 0000054F    MTPO_THEMER_LOOP35 0000055B    MTPO_THEMER_LOOP36 00000561
+MTPO_THEMER_LOOP37 0000056B    MTPO_THEMER_LOOP38 00000571    MTPO_THEMER_LOOP39 00000579
+MTPO_THEMER_LOOP4  000000F6    MTPO_THEMER_LOOP40 0000057F    MTPO_THEMER_LOOP41 00000585
+MTPO_THEMER_LOOP42 0000058B    MTPO_THEMER_LOOP43 00000591    MTPO_THEMER_LOOP44 00000597
+MTPO_THEMER_LOOP45 000005A1    MTPO_THEMER_LOOP46 000005A7    MTPO_THEMER_LOOP47 000005AF
+MTPO_THEMER_LOOP48 000005B5    MTPO_THEMER_LOOP49 000005BB    MTPO_THEMER_LOOP5  00000166
+MTPO_THEMER_LOOP50 000005C1    MTPO_THEMER_LOOP51 000005D5    MTPO_THEMER_LOOP52 000005F3
+MTPO_THEMER_LOOP53 0000066B    MTPO_THEMER_LOOP54 0000067C    MTPO_THEMER_LOOP55 000006EC
+MTPO_THEMER_LOOP6  0000018A    MTPO_THEMER_LOOP7  000001A8    MTPO_THEMER_LOOP8  00000220
+MTPO_THEMER_LOOP9  00000231    MTPO_THEMER_PATCHES                           000009EE
+MTPO_THEMER_PSG1   000005CA    MTPO_THEMER_PSG2   00000701    MTPO_THEMER_PSG3   000007F5
+MTPO_THEMER_PWM1   000008E1    MTPO_THEMER_PWM1_LOOP1                        000008EE
 MTPO_THEMER_PWM1_LOOP2                        00000907    
 MTPO_THEMER_PWM1_LOOP3                        0000090F    
 MTPO_THEMER_PWM1_LOOP4                        00000922    MTPO_THEMER_PWM2   0000093F
@@ -2463,8 +2488,8 @@ PSGVOI2            00000000 E  PSGVOL1            00000003 E  PSGVOL2           
 PSILENCE           00000096 E  PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E
 PTIMPANILO         00000095 E  PTOMHI             00000085 E  PTOMLOW            00000087 E
 PTOMLOWER          0000009A E  PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E
-PTOMMID            00000086 E  PWMPITCH           00000000 E  PWMVOL1            0000006F E
-PWMVOL2            00000038 E  SMPSED             000000ED E  SMPSEE             000000EE E
+PTOMMID            00000086 E  PWMPITCH           00000000 E  PWMVOL1            00000077 E
+PWMVOL2            00000050 E  SMPSED             000000ED E  SMPSEE             000000EE E
 SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E
 SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E
 SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E  SMPSPITCH02LO      000000E8 E
