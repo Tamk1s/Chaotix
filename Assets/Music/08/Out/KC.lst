@@ -1,0 +1,2476 @@
+                        	LIST MACRO
+                        	LIST EXPAND
+000000                  	include _s1smps2asm_S1KC.asm
+                        ; Standard Octave Pitch Equates
+       = 000088         smpsPitch10lo		EQU	$88
+       = 000094         smpsPitch09lo		EQU	$94
+       = 0000A0         smpsPitch08lo		EQU	$A0
+       = 0000AC         smpsPitch07lo		EQU	$AC
+       = 0000B8         smpsPitch06lo		EQU	$B8
+       = 0000C4         smpsPitch05lo		EQU	$C4
+       = 0000D0         smpsPitch04lo		EQU	$D0
+       = 0000DC         smpsPitch03lo		EQU	$DC
+       = 0000E8         smpsPitch02lo		EQU	$E8
+       = 0000F4         smpsPitch01lo		EQU	$F4
+       = 000000         smpsPitch00			EQU	$00
+       = 00000C         smpsPitch01hi		EQU	$0C
+       = 000018         smpsPitch02hi		EQU	$18
+       = 000024         smpsPitch03hi		EQU	$24
+       = 000030         smpsPitch04hi		EQU	$30
+       = 00003C         smpsPitch05hi		EQU	$3C
+       = 000048         smpsPitch06hi		EQU	$48
+       = 000054         smpsPitch07hi		EQU	$54
+       = 000060         smpsPitch08hi		EQU	$60
+       = 00006C         smpsPitch09hi		EQU	$6C
+       = 000078         smpsPitch10hi		EQU	$78
+
+                        ; Note Equates
+       = 000080         nRst			EQU	$80
+       = 000081         nC0			EQU	$81
+       = 000082         nCs0			EQU	$82
+       = 000083         nD0			EQU	$83
+       = 000084         nEb0			EQU	$84
+       = 000085         nE0			EQU	$85
+       = 000086         nF0			EQU	$86
+       = 000087         nFs0			EQU	$87
+       = 000088         nG0			EQU	$88
+       = 000089         nAb0			EQU	$89
+       = 00008A         nA0			EQU	$8A
+       = 00008B         nBb0			EQU	$8B
+       = 00008C         nB0			EQU	$8C
+       = 00008D         nC1			EQU	$8D
+       = 00008E         nCs1			EQU	$8E
+       = 00008F         nD1			EQU	$8F
+       = 000090         nEb1			EQU	$90
+       = 000091         nE1			EQU	$91
+       = 000092         nF1			EQU	$92
+       = 000093         nFs1			EQU	$93
+       = 000094         nG1			EQU	$94
+       = 000095         nAb1			EQU	$95
+       = 000096         nA1			EQU	$96
+       = 000097         nBb1			EQU	$97
+       = 000098         nB1			EQU	$98
+       = 000099         nC2			EQU	$99
+       = 00009A         nCs2			EQU	$9A
+       = 00009B         nD2			EQU	$9B
+       = 00009C         nEb2			EQU	$9C
+       = 00009D         nE2			EQU	$9D
+       = 00009E         nF2			EQU	$9E
+       = 00009F         nFs2			EQU	$9F
+       = 0000A0         nG2			EQU	$A0
+       = 0000A1         nAb2			EQU	$A1
+       = 0000A2         nA2			EQU	$A2
+       = 0000A3         nBb2			EQU	$A3
+       = 0000A4         nB2			EQU	$A4
+       = 0000A5         nC3			EQU	$A5
+       = 0000A6         nCs3			EQU	$A6
+       = 0000A7         nD3			EQU	$A7
+       = 0000A8         nEb3			EQU	$A8
+       = 0000A9         nE3			EQU	$A9
+       = 0000AA         nF3			EQU	$AA
+       = 0000AB         nFs3			EQU	$AB
+       = 0000AC         nG3			EQU	$AC
+       = 0000AD         nAb3			EQU	$AD
+       = 0000AE         nA3			EQU	$AE
+       = 0000AF         nBb3			EQU	$AF
+       = 0000B0         nB3			EQU	$B0
+       = 0000B1         nC4			EQU	$B1
+       = 0000B2         nCs4			EQU	$B2
+       = 0000B3         nD4			EQU	$B3
+       = 0000B4         nEb4			EQU	$B4
+       = 0000B5         nE4			EQU	$B5
+       = 0000B6         nF4			EQU	$B6
+       = 0000B7         nFs4			EQU	$B7
+       = 0000B8         nG4			EQU	$B8
+       = 0000B9         nAb4			EQU	$B9
+       = 0000BA         nA4			EQU	$BA
+       = 0000BB         nBb4			EQU	$BB
+       = 0000BC         nB4			EQU	$BC
+       = 0000BD         nC5			EQU	$BD
+       = 0000BE         nCs5			EQU	$BE
+       = 0000BF         nD5			EQU	$BF
+       = 0000C0         nEb5			EQU	$C0
+       = 0000C1         nE5			EQU	$C1
+       = 0000C2         nF5			EQU	$C2
+       = 0000C3         nFs5			EQU	$C3
+       = 0000C4         nG5			EQU	$C4
+       = 0000C5         nAb5			EQU	$C5
+       = 0000C6         nA5			EQU	$C6
+       = 0000C7         nBb5			EQU	$C7
+       = 0000C8         nB5			EQU	$C8
+       = 0000C9         nC6			EQU	$C9
+       = 0000CA         nCs6			EQU	$CA
+       = 0000CB         nD6			EQU	$CB
+       = 0000CC         nEb6			EQU	$CC
+       = 0000CD         nE6			EQU	$CD
+       = 0000CE         nF6			EQU	$CE
+       = 0000CF         nFs6			EQU	$CF
+       = 0000D0         nG6			EQU	$D0
+       = 0000D1         nAb6			EQU	$D1
+       = 0000D2         nA6			EQU	$D2
+       = 0000D3         nBb6			EQU	$D3
+       = 0000D4         nB6			EQU	$D4
+       = 0000D5         nC7			EQU	$D5
+       = 0000D6         nCs7			EQU	$D6
+       = 0000D7         nD7			EQU	$D7
+       = 0000D8         nEb7			EQU	$D8
+       = 0000D9         nE7			EQU	$D9
+       = 0000DA         nF7			EQU	$DA
+       = 0000DB         nFs7			EQU	$DB
+       = 0000DC         nG7			EQU	$DC
+       = 0000DD         nAb7			EQU	$DD
+       = 0000DE         nA7			EQU	$DE
+       = 0000DF         nBb7			EQU	$DF
+
+                        ; DAC Equates (S1)
+       = 000081         dKick			EQU	$81
+       = 000082         dSnare			EQU	$82
+       = 000083         dTimpani		EQU	$83
+       = 000088         dHiTimpani		EQU	$88
+       = 000089         dMidTimpani		EQU	$89
+       = 00008A         dLowTimpani		EQU	$8A
+       = 00008B         dVLowTimpani	EQU	$8B
+       = 00008B         dFloorTimpani	EQU $8B
+
+                        ; !@ PSGDelta (S1->KC has 12 semitone increase between PSG)
+       = 00000C         PSGDelta	EQU	$0C
+
+                        ; PWM Equates (KC)
+       = 000081         pEKick		EQU	$81
+       = 000082         pESnare		EQU	$82
+       = 000083         pSplashCymb	EQU	$83
+       = 000084         pRideBell	EQU $84
+       = 000085         pTomHi		EQU	$85
+       = 000086         pTomMid		EQU	$86
+       = 000087         pTomLow		EQU	$87
+       = 000088         pEHiHat		EQU	$88
+       = 000089         pCrashCymb	EQU $89
+       = 00008A         pClap		EQU $8A
+       = 00008B         pAKick		EQU $8B
+       = 00008C         pASnare		EQU	$8C
+       = 00008D         pBell		EQU $8D
+
+                        ;!@ Enum due to late PWM driver revision
+       = 00008E         pFingSnap	EQU	$8E
+       = 00008E         pFingSnapHi	EQU	$8E
+
+       = 00008F         pCowbell	EQU	$8F
+       = 000090         pClickHi	EQU	$90
+       = 000091         pClickLo	EQU	$91
+       = 000092         pBongoHi	EQU	$92
+       = 000093         pBongoLo	EQU	$93
+       = 000094         pTimpaniHi	EQU	$94
+       = 000095         pTimpaniLo	EQU	$95
+       = 000096         pSilence	EQU $96
+
+
+                        ;!@ NEW DATA
+       = 000097         pSega		EQU $97
+       = 000098         pClosedHH	EQU $98
+       = 000099         pOpenHH		EQU $99
+       = 00009A         pTomLower		EQU	$9A
+       = 00009B         pTomLowerer		EQU	$9B
+       = 00009C         pTomLowerest	EQU	$9C
+       = 00009D         pNepDada		EQU	$9D
+       = 00009E         pFingSnapLo		EQU	$9E
+
+                        ;!@ Crackers conversion enums. Knuckles Clackers equiv
+       = 000081         pCra_d81	EQU	pEKick
+       = 00008C         pCra_d82	EQU	pASnare
+       = 000085         pCra_d83	EQU	pTomHi
+       = 000086         pCra_d84	EQU	pTomMid
+       = 000087         pCra_d85	EQU	pTomLow
+
+                        ;!@ Convert ptrs to z80Ptr
+                        ; function to make a little-endian 16-bit pointer for the Z80 sound driver
+                        ;z80_ptr function x,y,((((x)|(y))<<8)&$FF00)|((((x)|(y))>>8)&$7F)|$80
+                        ;z80_ptr_neg function x,y,((((y)-(x))<<8)&$FF00)|((((y)-(x))>>8)&$7F)|$80
+
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        rom_ptr_z80 macro addr
+                        	;dc.w z80_ptr(ptr,addr)
+                        	dc.w  ((((addr)<<8)&$FF00)|(((addr)>>8)&$7F)|$80)
+                            endm
+                        	
+                        ;Funciton to convert S1 tempo to S2 and then S3+
+                        ;The conversion works for all values of main tempo other than 0 — this value cannot be converted exactly between the two drivers. The conversion of main tempos from Sonic 1 to Sonic 2 can be done (approximately) with the following formul
+                        ;S2 main tempo = floor{ [ (S1 main tempo-1) * 256 + floor(S1 main tempo/2) ] / S1 main tempo }			
+                        ;It is easy to convert between Sonic 2 and Sonic 3+ main tempo values:
+                        ;S2 main tempo = (256 - S3 main tempo) mod 256
+                        ;S3 main tempo = (256 - S2 main tempo) mod 256
+                        tempo_conv macro tempo
+                        		if tempo==0
+                        			dc.b	((256 - (((256-1)*256 + (256/2)) / 256)) % 256)
+                        		else
+                        			dc.b	((256 - ((((tempo)-1)*256 + ((tempo)/2)) / (tempo))) % 256)
+                        		endif
+                        	endm
+                        	
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        ;rom_ptr_z80_neg macro ptr,addr
+                        	;dc.w z80_ptr_neg(ptr,addr)
+                        	;dc.w	(((((addr)-(ptr))<<8)&$FF00)|((((addr)-(ptr))>>8)&$7F)|$80)
+                            ;endm
+
+                        ; Header Macros
+
+                        ;!@
+                        ; Header - Set up Voice Location
+                        ;smpsHeaderVoice macro loc
+                        smpsHeaderVoice macro loc,songstart
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+                        ; Header - Set up Channel Usage	
+                        smpsHeaderChan macro fm,psg
+                        	if \0==2
+                        		dc.b	fm,psg
+                        	else
+                        		dc.b	fm
+                        	endif	
+                        	endm	
+                        	
+
+                        	
+                        smpsHeaderTempo macro div,mod
+                        	dc.b	div,mod
+                        	endm
+
+                        ;!@
+                        ; Header - Set up Tempo. Mod is converted from S1 to S3 tempo
+                        smpsHeaderTempoC macro div,mod
+                        TempDiv set div
+                        	dc.b	div
+                        	tempo_conv(mod)
+000000                  	endm
+                        	
+                        ; Header - Set up DAC Channel
+                        smpsHeaderDAC macro loc
+                        	dc.w	loc-songStart
+                        	dc.w	$00
+                        	endm
+                        	
+                        ;!@
+                        ; Header - Set up FM Channel	
+                        ;smpsHeaderFM macro loc,pitch,vol
+                        smpsHeaderFM macro loc,songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	endm
+
+                        ;!@	
+                        ; Header - Set up PSG Channel
+                        ;smpsHeaderPSG macro loc,pitch,vol,voice
+                        smpsHeaderPSG macro loc,songstart,pitch,vol,null,voice
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	;dc.w	voice
+                        	dc.b	null,voice
+                        	endm
+
+                        ;!@
+                        ; Header - Set up SFX Channel
+                        ;sHeaderSFX	macro play,patch,loc,pitch,vol
+                        smpsHeaderSFX	macro play,patch,loc,pitch,vol,songstart
+                        	dc.b play,patch
+                        	;dc.w loc-sPointZero
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b pitch,vol
+                            endm
+
+                        ; Co-ord Flag Macros and Equates
+                        ; E0xx - Panning, AMS, FMS
+                        smpsPan macro direction,amsfms
+                        panNone set $00
+                        panRight set $40
+                        panLeft set $80
+                        panCentre set $C0
+                        panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if \0==2
+                        		dc.b $E0,direction|amsfms
+                        	else
+                        		dc.b $E0,direction
+                        	endif
+000000                  	endm
+                        	
+                        ; E1xx - Alter note values by xx
+                        smpsAlterNote macro val
+                        	dc.b	$E1,val
+                        	endm
+                        	
+                        ; E2xx - Unknown
+                        smpsE2 macro val
+                        	dc.b	$E2,val
+                        	endm
+
+                        ; E3 - Return (generally used after F8)
+                        ; F9 - Return (generally used after F8)
+                        smpsReturn macro val
+                        	;!@
+                        	;dc.b	$E3
+                        	dc.b	$F9
+                        	endm
+                        	
+                        ; E4 - Fade in previous song (ie. 1-Up)
+                        smpsFade macro val
+                        	dc.b	$E4
+                        	endm
+
+                        ;!@ Invalid for S3+!
+                        ; E5xx - Set channel tempo divider to xx
+                        smpsChanTempoDiv macro val
+                        	;Error No S3 equivalent for CF!
+                        	dc.b	$E5,val	
+                        	endm
+                        	
+                        ; E6xx - Alter Volume by xx
+                        smpsAlterVol macro val
+                        	dc.b	$E6,val
+                        	endm
+                        	
+                        ; E7 - Prevent attack of next note
+       = 0000E7         smpsNoAttack	EQU $E7
+
+                        ;!@ This may have problems, needs some convesion factor due to usage of mult by tempo div in S3+
+                        ; E8xx - Set note fill to xx
+                        smpsNoteFill macro val		
+                        	dc.b	$E8,(val/TempDiv)
+                        	endm
+                        	
+                        ;!@
+                        ; E9xx - Add xx to channel pitch
+                        ; FBxx - Add xx to channel pitch
+                        smpsAlterPitch macro val
+                        	;!@
+                        	;dc.b	$E9,val
+                        	dc.b	$FB,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3
+                        smpsSetTempoMod macro val
+                        	;dc.b	$EA,val
+                        	dc.b	$FF,$00,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3 (TEMPO - TEMPO_SET)
+                        smpsSetTempoModC macro val
+                        	;dc.b	$EA,val
+                        	dc.b $FF,$00
+                        	tempo_conv(val)
+                        	endm
+                        	
+                        ;!@
+                        ; EBxx - Set music tempo divider to xx
+                        ; FF04xx - Set global tick multiplier to xx (TICK_MULT - TMULT_ALL)
+                        smpsSetTempoDiv macro val
+                        	;dc.b	$EB,val
+                        TempDiv set val
+                        	dc.b $FF,$04,val
+000000                  	endm
+
+                        ;!@	
+                        ; ECxx - Add xx to PSG channel volume (VOLUME - VOL_NN_PSG)
+                        ;
+                        ; May need interpolation/conversion factor:
+                        ; Change volume attenuation of PSG track.
+                        ;The single parameter byte is added to track's current volume attenuation;
+                        ;anything greater than $0F (unsigned comparison) is set to $0F (silence). Also, the flutter index is reduced by 1.
+                        smpsSetVol macro val
+                        	dc.b	$EC,val
+                        	endm
+                        	
+                        ; ED - Unknown
+       = 0000ED         smpsED		EQU $ED
+                        	
+                        ;!@ S3K= send cmd to YM2612 port; unused in S1
+                        ; EE - Stops special SFX ($D0-$D4, S1 only) and restarts overridden music track
+       = 0000EE         smpsEE 		EQU $EE
+                        	
+                        ;!@
+                        ; EFxx - Set Voice of FM channel to xx
+                        ; EFxx[yy] - Set patch id of FM channel to xx. If xx bit7 set, read from another song instead
+                        ; (INSTRUMENT - INS_C_FMP)
+                        ;smpsFMvoice macro voice
+                        	;dc.b	$EF,voice
+                        smpsFMvoice macro pat, song		
+                        	;if song<>""
+                        	if \0==2
+                        		dc.b $EF,pat|$80,song+$81
+                        	else
+                        		dc.b $EF,pat
+                        	endif
+                            endm
+
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        smpsModSet macro wait,speed,change,step
+                        	dc.b	$F0,wait,speed,change,step
+                        	endm
+                        	
+                        smpsModSet2	macro bytes
+                        	smpsModSet	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
+                        	endm
+                        	
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        ;!@
+                        smpsModSetC macro wait,speed,change,step
+                        	dc.b	$F0
+                        	;if (SonicDriverVer>=3)&&(SourceDriver<3)
+                        		dc.b	wait+1,speed,change,(step*speed+1)&$FF
+                        	;elseif (SonicDriverVer<3)&&(SourceDriver>=3)
+                        		;dc.b	wait-1,speed,change,(((step==0)<<8)|step)/(((step==0)<<8)|step)-1		
+                        	;else
+                        		;dc.b	wait,speed,change,step
+                        	;endif
+                        	;dc.b	speed,change,step
+                        	endm
+
+                        ;!@	
+                        smpsModSetC2 macro bytes
+                        	smpsModSetC	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
+                        	endm
+                        	
+
+                        ;!@ Used very differently in S3; don't use
+                        ; F1 - Turn on Modulation
+       = 0000F1         smpsModOn 	EQU $F1
+                        ; F4 - Turn off Modulation
+       = 0000F4         smpsModOff 	EQU $F4
+
+                        ; F2 - End of channel
+                        smpsStop macro
+                        	dc.b	$F2
+                        	endm
+                        	
+                        ;!@
+                        ; F3xx - PSG waveform to xx
+                        ; S3+ only: If parameter byte is zero, the channel is converted
+                        ; back into a normal PSG channel and the noise channel is silenced.
+                        ; Otherwise, sets the PSG track to noise and sets PSG noise to parameter byte, which should be from $E0 to $E7 (inclusive).
+                        smpsPSGform macro form
+                        	dc.b	$F3,form
+                        	endm
+                        	
+                        ; F5xx - PSG voice to xx
+                        smpsPSGvoice macro voice
+                        	dc.b	$F5,voice
+                        	endm
+                        	
+                        ;BAD Cmpr
+                        ;if (loc<*)
+                        	;rom_ptr_z80_neg(*-loc,songstart)
+                        ;else
+                        	;rom_ptr_z80(loc-*-1,songstart)
+                        ;endif
+
+                        ;!@
+                        ; F6xxxx - Jump to xxxx
+                        ;smpsJump macro loc
+                        smpsJump macro loc,songstart
+                        	dc.b	$F6
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F7xxyyzzzz - Loop back to zzzz yy times, xx being the loop index for loop recursion fixing
+                        ;smpsLoop macro index,loops,loc
+                        smpsLoop macro index,loops,loc,songstart
+                        	dc.b	$F7
+                        	dc.b	index,loops
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F8xxxx - Call pattern at xxxx, saving return point
+                        ;smpsCall macro loc
+                        smpsCall macro loc,songstart
+                        	dc.b	$F8
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+                        	
+                        ; F9 - Unknown
+       = 0000F9         smpsF9		EQU $F9
+
+                        ; Voices - Feedback
+                        smpsVcFeedback macro val
+                        vcFeedback set val
+000000                  	endm
+
+                        ; Voices - Algorithm
+                        smpsVcAlgorithm macro val
+                        vcAlgorithm set val
+000000                  	endm
+
+                        ; Voices - Detune
+                        smpsVcDetune macro op1,op2,op3,op4
+                        vcDT1 set op1
+                        vcDT2 set op2
+                        vcDT3 set op3
+                        vcDT4 set op4
+000000                  	endm
+
+                        ; Voices - Coarse-Frequency
+                        smpsVcCoarseFreq macro op1,op2,op3,op4
+                        vcCF1 set op1
+                        vcCF2 set op2
+                        vcCF3 set op3
+                        vcCF4 set op4
+000000                  	endm
+
+                        ; Voices - Rate Scale
+                        smpsVcRateScale macro op1,op2,op3,op4
+                        vcRS1 set op1
+                        vcRS2 set op2
+                        vcRS3 set op3
+                        vcRS4 set op4
+000000                  	endm
+
+                        ; Voices - Attack Rate
+                        smpsVcAttackRate macro op1,op2,op3,op4
+                        vcAR1 set op1
+                        vcAR2 set op2
+                        vcAR3 set op3
+                        vcAR4 set op4
+000000                  	endm
+
+                        ; Voices - Amplitude Modulation
+                        smpsVcAmpMod macro op1,op2,op3,op4
+                        vcAM1 set op1
+                        vcAM2 set op2
+                        vcAM3 set op3
+                        vcAM4 set op4
+000000                  	endm
+
+                        ; Voices - First Decay Rate
+                        smpsVcDecayRate1 macro op1,op2,op3,op4
+                        vcD1R1 set op1
+                        vcD1R2 set op2
+                        vcD1R3 set op3
+                        vcD1R4 set op4
+000000                  	endm
+
+                        ; Voices - Second Decay Rate
+                        smpsVcDecayRate2 macro op1,op2,op3,op4
+                        vcD2R1 set op1
+                        vcD2R2 set op2
+                        vcD2R3 set op3
+                        vcD2R4 set op4
+000000                  	endm
+
+                        ; Voices - Decay Level	
+                        smpsVcDecayLevel macro op1,op2,op3,op4
+                        vcDL1 set op1
+                        vcDL2 set op2
+                        vcDL3 set op3
+                        vcDL4 set op4
+000000                  	endm
+
+                        ; Voices - Release Rate
+                        smpsVcReleaseRate macro op1,op2,op3,op4
+                        vcRR1 set op1
+                        vcRR2 set op2
+                        vcRR3 set op3
+                        vcRR4 set op4
+000000                  	endm
+
+                        ; Voices - Total Level
+                        smpsVcTotalLevel macro op1,op2,op3,op4
+                        vcTL1 set op1
+                        vcTL2 set op2
+                        vcTL3 set op3
+                        vcTL4 set op4
+                        	dc.b	(vcFeedback<<3)+vcAlgorithm
+                        	dc.b	(vcDT4<<4)+vcCF4,(vcDT3<<4)+vcCF3,(vcDT2<<4)+vcCF2,(vcDT1<<4)+vcCF1
+                        	dc.b	(vcRS4<<6)+vcAR4,(vcRS3<<6)+vcAR3,(vcRS2<<6)+vcAR2,(vcRS1<<6)+vcAR1
+                        	dc.b	(vcAM4<<5)+vcD1R4,(vcAM3<<5)+vcD1R3,(vcAM2<<5)+vcD1R2,(vcAM1<<5)+vcD1R1
+                        	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
+                        	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
+                        	dc.b	vcTL4,vcTL3,vcTL2,vcTL1	
+000000                  	endm
+                        	
+                        	
+                        ;==============================================
+                        ;!@ The following CF flags/macros are KC-drive specific!
+                        ;Rest here mostly used  to compile KC/Nat ASM files for BC purposes...
+
+                        ;!@
+                        ; Header - Set up a secondary PWM Channel
+                        ;smpsHeaderPWM macro loc
+                        smpsHeaderPWM macro loc, songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)	
+                        	;!@
+                        	dc.b	pitch
+                        	dc.b	vol
+                        	endm
+                        	
+                        ;!@ Unused and unneeded; leftover Sonic 32x header stuff
+                        ; Header - Set up first PWM Channel
+                        ;smpsHeaderPWM1 macro loc,num
+                        	;dc.w	loc-songStart
+                        	;dc.b	num,0
+                        	;endm
+
+                        ;!@
+                        ; Header - Set up Tick Multiplier (for Sfx)
+                        ;sHeaderSFX
+                        smpsHeaderTick	macro tmul
+                        	dc.b tmul
+                            endm
+
+                        ;!@ KC Exclusives!
+                        ;# PAN_ANIM
+                        ;# pan animation has 2 modes; if first arg is 0, it will end it. Otherwise, more args will be used
+                        ;!0xE4, 0 > sPanAni:;								
+                        ;!0xE4, 1-0xFF > sPanAni: .lb, .db, .db, .db, .db;	
+                        KC_smpsPanAni macro val1,val2,val3,val4,val5
+                        	if val1==0
+                        		dc.b	$E4,$00
+                        	else
+                        		dc.b	$E4,val1,val2,val3,val4,val5
+                        	endif
+                        	endm
+
+
+                        ; Alter Volume
+                        ;!0xE5 > saVolFMP: .db, .db;								
+                        KC_smpsFMAlterVol macro val1,val2
+                        	dc.b	$E5,val1,val2
+                        	endm
+
+                        ;!@ KC Exclusive!	
+                        ;!0xE9 > ssLFO: .db, .db;									
+                        KC_smpsSetLFO macro enable,amsfms
+                        	dc.b	$E9,enable,amsfms
+                        	endm
+
+                        ;!0xEA > sPlayDAC: .db | 0x80;								
+                        KC_smpsPlayDACSample macro sample
+                        	dc.b	$EA,(sample&$7F)
+                        	endm
+
+                        ;!@ Songstart param added
+                        ;!0xEB > sLoopExit: .db, .dw {						
+                        ;smpsConditionalJump macro index,loc
+                        KC_smpsConditionalJump macro index,loc,songstart
+                        	dc.b	$EB
+                        	dc.b	index
+                        	;dc.w	z80_ptr(loc)
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+
+                        ;!@ Usage/naming is speculative. Called ssTransposeS3K in S3k/Nat driver...	
+                        ;!0xED > sYMcmd: .db, .db;							
+                        ; Set note values to xx-$40
+                        KC_smpsSetNote macro val
+                        	dc.b	$ED,val
+                        	endm
+
+                        ;!0xEE > sYM1cmd: .db, .db;							
+                        KC_smpsFMICommand macro reg,val
+                        	dc.b	$EE,reg,val
+                        	endm
+
+                        ;!0xF1 > sModEnv: .db, .db {							
+                        ; Set Modulation
+                        KC_smpsModChange2 macro fmmod,psgmod
+                        	dc.b	$F1,fmmod,psgmod
+                        	endm
+                        	
+                        ;!0xF4 > sModEnv: .db {
+                        ; Set Modulation
+                        KC_smpsModChange macro val
+                        	dc.b	$F4,val
+                        	endm
+
+                        ;!@ KC exclusive!
+                        ;!0xFC > sPitchSlide: .db;						
+                        KC_smpsPitchSlide macro enable
+                        	dc.b	$FC,enable
+                        	endm
+                        	
+                        ;!0xFD > sRawFreq: .db;							
+                        KC_smpsAlternateSMPS macro flag
+                        	dc.b	$FD,flag
+                        	endm
+
+                        ;!0xFE > sSpecFM3: .db, .db, .db, .db {			
+                        	;%; Broken?
+                        ;}
+                        KC_smpsFM3SpecialMode macro ind1,ind2,ind3,ind4
+                        	dc.b	$FE,ind1,ind2,ind3,ind4
+                        	Error Broken?
+                        	endm
+
+                        ;!0xFF, 1 > sPlaySound: .db;						
+                        KC_smpsPlaySound macro index
+                        	dc.b	$FF,$01,index
+                        	endm
+
+                        ;!0xFF, 2 > sMusPause: .db;						
+                        KC_smpsHaltMusic macro flag
+                        	dc.b	$FF,$02,flag
+                        	endm
+
+                        ;!@ Modified with SongStart	param
+                        ;!0xFF, 3 > sCopyMem: .dw, .db {					
+                        	;%; No song should ever use this command. It may good idea to remove it.
+                        ;}
+                        ;KC_smpsCopyData macro data,len
+                        KC_smpsCopyData macro data,len,songstart
+                        	Error Coord. Flag to copy data should not be used. Complain to GenesisDoes if any music uses it.
+                        	;Error No song should ever use this command. It may be a good idea to remove it.
+                        	dc.b	$FF,$03
+                        	;dc.w	little_endian(data)
+                        	rom_ptr_z80(data+songstart)
+                        	dc.b	len
+                        	endm
+
+                        ;!0xFF, 5 > sSSGEG: .db, .db, .db, .db {			
+                        	;=op2 .a2
+                        	;:=2 .a1
+                        	;:=1 \op2\
+                        ;}
+                        KC_smpsSSGEG macro op1,op2,op3,op4
+                        	dc.b	$FF,$05,op1,op3,op2,op4
+                        	endm
+                        	
+                        	
+                        ;!0xFF, 6 > sVolEnvFM: .db, .db {
+                        	;:?0 {
+                        		;?volenv;
+                        	;}
+                        ;}	
+                        KC_smpsFMVolEnv macro tone,mask
+                        	dc.b	$FF,$06,tone,mask
+                        	endm
+                        ;==============================================
+
+000000                  	include "KC.asm"
+       = 040000         Target	EQU	$40000
+
+       = 000000         FMPitch		EQU $00
+       = 000003         PSGVol1		EQU	$03
+       = 000003         PSGVol2		EQU	$03
+       = 00000A         PSGVoi1		EQU $0A
+       = 000000         PSGVoi2		EQU $00
+       = 00006F         PWMVol1		EQU	$6F
+       = 000038         PWMVol2		EQU PWMVol1-$37
+       = 000000         PWMPitch	EQU	$00
+000000                  	smpsHeaderVoice	MTPO_ThemeR_Patches, Target
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+000000                  	rom_ptr_z80(MTPO_ThemeR_Patches+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000000 EE89             	dc.w  (((((MTPO_ThemeR_Patches+Target))<<8)&$FF00)|((((MTPO_ThemeR_Patches+Target))>>8)&$7F)|$80)
+000002                  	smpsHeaderChan	$06, $03
+                        	if 2==2
+000002 0603             		dc.b	$06,$03
+                        	else
+                        	endif	
+000004                  	smpsHeaderTempo	$03, $1A
+000004 031A             	dc.b	$03,$1A
+000006                  	smpsHeaderFM	MTPO_ThemeR_FM1, Target, FMPitch, $08
+                        	;dc.w	loc-songStart
+000006                  	rom_ptr_z80(MTPO_ThemeR_FM1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000006 4080             	dc.w  (((((MTPO_ThemeR_FM1+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM1+Target))>>8)&$7F)|$80)
+000008 0008             	dc.b	FMPitch,$08
+00000A                  	smpsHeaderFM	MTPO_ThemeR_FM2, Target, FMPitch, $08-$02
+                        	;dc.w	loc-songStart
+00000A                  	rom_ptr_z80(MTPO_ThemeR_FM2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000A 7B81             	dc.w  (((((MTPO_ThemeR_FM2+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM2+Target))>>8)&$7F)|$80)
+00000C 0006             	dc.b	FMPitch,$08-$02
+00000E                  	smpsHeaderFM	MTPO_ThemeR_FM3, Target, FMPitch, $08
+                        	;dc.w	loc-songStart
+00000E                  	rom_ptr_z80(MTPO_ThemeR_FM3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000E B682             	dc.w  (((((MTPO_ThemeR_FM3+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM3+Target))>>8)&$7F)|$80)
+000010 0008             	dc.b	FMPitch,$08
+000012                  	smpsHeaderFM	MTPO_ThemeR_FM4, Target, FMPitch, $08
+                        	;dc.w	loc-songStart
+000012                  	rom_ptr_z80(MTPO_ThemeR_FM4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000012 4C83             	dc.w  (((((MTPO_ThemeR_FM4+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM4+Target))>>8)&$7F)|$80)
+000014 0008             	dc.b	FMPitch,$08
+000016                  	smpsHeaderFM	MTPO_ThemeR_FM5, Target, FMPitch, $08
+                        	;dc.w	loc-songStart
+000016                  	rom_ptr_z80(MTPO_ThemeR_FM5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000016 4484             	dc.w  (((((MTPO_ThemeR_FM5+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM5+Target))>>8)&$7F)|$80)
+000018 0008             	dc.b	FMPitch,$08
+00001A                  	smpsHeaderFM	MTPO_ThemeR_FM6, Target, FMPitch, $0E
+                        	;dc.w	loc-songStart
+00001A                  	rom_ptr_z80(MTPO_ThemeR_FM6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001A 3485             	dc.w  (((((MTPO_ThemeR_FM6+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM6+Target))>>8)&$7F)|$80)
+00001C 000E             	dc.b	FMPitch,$0E
+00001E                  	smpsHeaderPSG	MTPO_ThemeR_PSG1, Target, PSGDelta, PSGVol1, $00, PSGVoi1
+                        	;dc.w	loc-songStart
+00001E                  	rom_ptr_z80(MTPO_ThemeR_PSG1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001E CA85             	dc.w  (((((MTPO_ThemeR_PSG1+Target))<<8)&$FF00)|((((MTPO_ThemeR_PSG1+Target))>>8)&$7F)|$80)
+000020 0C03             	dc.b	PSGDelta,PSGVol1
+                        	;dc.w	voice
+000022 000A             	dc.b	$00,PSGVoi1
+000024                  	smpsHeaderPSG	MTPO_ThemeR_PSG2, Target, PSGDelta, PSGVol2, $00, PSGVoi2
+                        	;dc.w	loc-songStart
+000024                  	rom_ptr_z80(MTPO_ThemeR_PSG2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000024 0187             	dc.w  (((((MTPO_ThemeR_PSG2+Target))<<8)&$FF00)|((((MTPO_ThemeR_PSG2+Target))>>8)&$7F)|$80)
+000026 0C03             	dc.b	PSGDelta,PSGVol2
+                        	;dc.w	voice
+000028 0000             	dc.b	$00,PSGVoi2
+00002A                  	smpsHeaderPSG	MTPO_ThemeR_PSG3, Target, PSGDelta, PSGVol2, $00, PSGVoi2
+                        	;dc.w	loc-songStart
+00002A                  	rom_ptr_z80(MTPO_ThemeR_PSG3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00002A F587             	dc.w  (((((MTPO_ThemeR_PSG3+Target))<<8)&$FF00)|((((MTPO_ThemeR_PSG3+Target))>>8)&$7F)|$80)
+00002C 0C03             	dc.b	PSGDelta,PSGVol2
+                        	;dc.w	voice
+00002E 0000             	dc.b	$00,PSGVoi2
+000030                  	smpsHeaderPWM	MTPO_ThemeR_PWM1, Target, PWMPitch, PWMVol1
+                        	;dc.w	loc-songStart
+000030                  	rom_ptr_z80(MTPO_ThemeR_PWM1+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000030 E188             	dc.w  (((((MTPO_ThemeR_PWM1+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM1+Target))>>8)&$7F)|$80)
+                        	;!@
+000032 00               	dc.b	PWMPitch
+000033 6F               	dc.b	PWMVol1
+000034                  	smpsHeaderPWM	MTPO_ThemeR_PWM2, Target, PWMPitch, PWMVol2
+                        	;dc.w	loc-songStart
+000034                  	rom_ptr_z80(MTPO_ThemeR_PWM2+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000034 3F89             	dc.w  (((((MTPO_ThemeR_PWM2+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM2+Target))>>8)&$7F)|$80)
+                        	;!@
+000036 00               	dc.b	PWMPitch
+000037 38               	dc.b	PWMVol2
+000038                  	smpsHeaderPWM	MTPO_ThemeR_PWM3, Target, PWMPitch, PWMVol1
+                        	;dc.w	loc-songStart
+000038                  	rom_ptr_z80(MTPO_ThemeR_PWM3+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+000038 7289             	dc.w  (((((MTPO_ThemeR_PWM3+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM3+Target))>>8)&$7F)|$80)
+                        	;!@
+00003A 00               	dc.b	PWMPitch
+00003B 6F               	dc.b	PWMVol1
+00003C                  	smpsHeaderPWM	MTPO_ThemeR_PWM4, Target, PWMPitch, PWMVol1
+                        	;dc.w	loc-songStart
+00003C                  	rom_ptr_z80(MTPO_ThemeR_PWM4+Target)	
+                        	;dc.w z80_ptr(ptr,addr)
+00003C ED89             	dc.w  (((((MTPO_ThemeR_PWM4+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM4+Target))>>8)&$7F)|$80)
+                        	;!@
+00003E 00               	dc.b	PWMPitch
+00003F 6F               	dc.b	PWMVol1
+
+000040                  MTPO_ThemeR_FM1:
+000040                  	smpsPan		panLeft
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+000040 E080             		dc.b $E0,panLeft
+                        	endif
+
+000042                  MTPO_ThemeR_Jump1:
+000042                  	smpsFMvoice		$00
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000042 EF00             		dc.b $EF,$00
+                        	endif
+000044 A9039D9D9D9DA9A9 	dc.b	nE3, $03, nE2, nE2, nE2, nE2, nE3, nE3
+00004C A7069B           	dc.b	nD3, $06, nD2
+
+00004F                  MTPO_ThemeR_Loop1:
+00004F 03               	dc.b	$03
+000050                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop1, Target
+000050 F7               	dc.b	$F7
+000051 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop1<*)
+000053                  		rom_ptr_z80(MTPO_ThemeR_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000053 4F80             	dc.w  (((((MTPO_ThemeR_Loop1+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000055 A599999999A5A5A7 	dc.b	nC3, nC2, nC2, nC2, nC2, nC3, nC3, nD3
+00005D 069B030303030303 	dc.b	$06, nD2, $03, $03, $03, $03, $03, $03
+000065 A7A99D9DA99D9DA9 	dc.b	nD3, nE3, nE2, nE2, nE3, nE2, nE2, nE3
+
+00006D                  MTPO_ThemeR_Loop2:
+00006D 9DA99DA99D9D     	dc.b	nE2, nE3, nE2, nE3, nE2, nE2
+000073                  	smpsLoop		$00, $02, MTPO_ThemeR_Loop2, Target
+000073 F7               	dc.b	$F7
+000074 0002             	dc.b	$00,$02
+                        	if (MTPO_ThemeR_Loop2<*)
+000076                  		rom_ptr_z80(MTPO_ThemeR_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000076 6D80             	dc.w  (((((MTPO_ThemeR_Loop2+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000078 A99D9DA99DA99DA9 	dc.b	nE3, nE2, nE2, nE3, nE2, nE3, nE2, nE3
+000080 9D9D9DA99DA79B9B 	dc.b	nE2, nE2, nE2, nE3, nE2, nD3, nD2, nD2
+000088 A79B9BA79BA79BA7 	dc.b	nD3, nD2, nD2, nD3, nD2, nD3, nD2, nD3
+000090 9BAC06A7A9039D9D 	dc.b	nD2, nG3, $06, nD3, nE3, $03, nE2, nE2
+000098 A99D9DA99DA99DA9 	dc.b	nE3, nE2, nE2, nE3, nE2, nE3, nE2, nE3
+0000A0 9D9D9DA99DA49898 	dc.b	nE2, nE2, nE2, nE3, nE2, nB2, nB1, nB1
+0000A8 A49898A498A498A4 	dc.b	nB2, nB1, nB1, nB2, nB1, nB2, nB1, nB2
+0000B0 98A406A7A9039D9D 	dc.b	nB1, nB2, $06, nD3, nE3, $03, nE2, nE2
+0000B8 A99D9DA99DA99DA9 	dc.b	nE3, nE2, nE2, nE3, nE2, nE3, nE2, nE3
+0000C0 9D9D9DA99DA79B9B 	dc.b	nE2, nE2, nE2, nE3, nE2, nD3, nD2, nD2
+0000C8 A79B9BA79BA79BA7 	dc.b	nD3, nD2, nD2, nD3, nD2, nD3, nD2, nD3
+0000D0 9B9B9BA79BA59999 	dc.b	nD2, nD2, nD2, nD3, nD2, nC3, nC2, nC2
+0000D8 A59999A599A599A5 	dc.b	nC3, nC2, nC2, nC3, nC2, nC3, nC2, nC3
+0000E0 999999A599       	dc.b	nC2, nC2, nC2, nC3, nC2
+
+0000E5                  MTPO_ThemeR_Loop3:
+0000E5 A49898           	dc.b	nB2, nB1, nB1
+0000E8                  	smpsLoop		$00, $04, MTPO_ThemeR_Loop3, Target
+0000E8 F7               	dc.b	$F7
+0000E9 0004             	dc.b	$00,$04
+                        	if (MTPO_ThemeR_Loop3<*)
+0000EB                  		rom_ptr_z80(MTPO_ThemeR_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000EB E580             	dc.w  (((((MTPO_ThemeR_Loop3+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0000ED A402019803A40201 	dc.b	nB2, $02, $01, nB1, $03, nB2, $02, $01
+0000F5 98               	dc.b	nB1
+
+0000F6                  MTPO_ThemeR_Loop4:
+0000F6 03A99D           	dc.b	$03, nE3, nE2
+0000F9                  	smpsLoop		$00, $03, MTPO_ThemeR_Loop4, Target
+0000F9 F7               	dc.b	$F7
+0000FA 0003             	dc.b	$00,$03
+                        	if (MTPO_ThemeR_Loop4<*)
+0000FC                  		rom_ptr_z80(MTPO_ThemeR_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0000FC F680             	dc.w  (((((MTPO_ThemeR_Loop4+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0000FE A99DA99D9D9DA99D 	dc.b	nE3, nE2, nE3, nE2, nE2, nE2, nE3, nE2
+000106 A79B9BA79B9BA79B 	dc.b	nD3, nD2, nD2, nD3, nD2, nD2, nD3, nD2
+00010E A79BA79BAC06A7A9 	dc.b	nD3, nD2, nD3, nD2, nG3, $06, nD3, nE3
+000116 039D9DA99D9DA99D 	dc.b	$03, nE2, nE2, nE3, nE2, nE2, nE3, nE2
+00011E A99DA99D9D9DA99D 	dc.b	nE3, nE2, nE3, nE2, nE2, nE2, nE3, nE2
+000126 A49898A49898A498 	dc.b	nB2, nB1, nB1, nB2, nB1, nB1, nB2, nB1
+00012E A498A498A406A7A9 	dc.b	nB2, nB1, nB2, nB1, nB2, $06, nD3, nE3
+000136 039D9DA99D9DA99D 	dc.b	$03, nE2, nE2, nE3, nE2, nE2, nE3, nE2
+00013E A99DA99D9D9DA99D 	dc.b	nE3, nE2, nE3, nE2, nE2, nE2, nE3, nE2
+000146 A79B9BA79B9BA79B 	dc.b	nD3, nD2, nD2, nD3, nD2, nD2, nD3, nD2
+00014E A79BA79B9B9BA79B 	dc.b	nD3, nD2, nD3, nD2, nD2, nD2, nD3, nD2
+000156 A59999A59999A599 	dc.b	nC3, nC2, nC2, nC3, nC2, nC2, nC3, nC2
+00015E A599A5999999A599 	dc.b	nC3, nC2, nC3, nC2, nC2, nC2, nC3, nC2
+
+000166                  MTPO_ThemeR_Loop5:
+000166 A49898           	dc.b	nB2, nB1, nB1
+000169                  	smpsLoop		$00, $04, MTPO_ThemeR_Loop5, Target
+000169 F7               	dc.b	$F7
+00016A 0004             	dc.b	$00,$04
+                        	if (MTPO_ThemeR_Loop5<*)
+00016C                  		rom_ptr_z80(MTPO_ThemeR_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00016C 6681             	dc.w  (((((MTPO_ThemeR_Loop5+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00016E A402019803A40201 	dc.b	nB2, $02, $01, nB1, $03, nB2, $02, $01
+000176 9803             	dc.b	nB1, $03
+000178                  	smpsJump		MTPO_ThemeR_Jump1, Target
+000178 F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_Jump1<*)
+000179                  		rom_ptr_z80(MTPO_ThemeR_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000179 4280             	dc.w  (((((MTPO_ThemeR_Jump1+Target))<<8)&$FF00)|((((MTPO_ThemeR_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00017B                  MTPO_ThemeR_FM2:
+00017B                  	smpsFMvoice		$01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+00017B EF01             		dc.b $EF,$01
+                        	endif
+
+00017D                  MTPO_ThemeR_Jump2:
+00017D                  	smpsPan		panRight
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+00017D E040             		dc.b $E0,panRight
+                        	endif
+00017F AE03A2A2A2A2AEAE 	dc.b	nA3, $03, nA2, nA2, nA2, nA2, nA3, nA3
+000187 AC06A0           	dc.b	nG3, $06, nG2
+
+00018A                  MTPO_ThemeR_Loop6:
+00018A 03               	dc.b	$03
+00018B                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop6, Target
+00018B F7               	dc.b	$F7
+00018C 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop6<*)
+00018E                  		rom_ptr_z80(MTPO_ThemeR_Loop6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00018E 8A81             	dc.w  (((((MTPO_ThemeR_Loop6+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop6+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000190 AA9E9E9E9EAAAAAC 	dc.b	nF3, nF2, nF2, nF2, nF2, nF3, nF3, nG3
+000198 06A0030303030303 	dc.b	$06, nG2, $03, $03, $03, $03, $03, $03
+0001A0 ACAEA2A2AEA2A2AE 	dc.b	nG3, nA3, nA2, nA2, nA3, nA2, nA2, nA3
+
+0001A8                  MTPO_ThemeR_Loop7:
+0001A8 A2AEA2AEA2A2     	dc.b	nA2, nA3, nA2, nA3, nA2, nA2
+0001AE                  	smpsLoop		$00, $02, MTPO_ThemeR_Loop7, Target
+0001AE F7               	dc.b	$F7
+0001AF 0002             	dc.b	$00,$02
+                        	if (MTPO_ThemeR_Loop7<*)
+0001B1                  		rom_ptr_z80(MTPO_ThemeR_Loop7+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0001B1 A881             	dc.w  (((((MTPO_ThemeR_Loop7+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop7+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0001B3 AEA2A2AEA2AEA2AE 	dc.b	nA3, nA2, nA2, nA3, nA2, nA3, nA2, nA3
+0001BB A2A2A2AEA2ACA0A0 	dc.b	nA2, nA2, nA2, nA3, nA2, nG3, nG2, nG2
+0001C3 ACA0A0ACA0ACA0AC 	dc.b	nG3, nG2, nG2, nG3, nG2, nG3, nG2, nG3
+0001CB A0B106ACAE03A2A2 	dc.b	nG2, nC4, $06, nG3, nA3, $03, nA2, nA2
+0001D3 AEA2A2AEA2AEA2AE 	dc.b	nA3, nA2, nA2, nA3, nA2, nA3, nA2, nA3
+0001DB A2A2A2AEA2A99D9D 	dc.b	nA2, nA2, nA2, nA3, nA2, nE3, nE2, nE2
+0001E3 A99D9DA99DA99DA9 	dc.b	nE3, nE2, nE2, nE3, nE2, nE3, nE2, nE3
+0001EB 9DA906ACAE03A2A2 	dc.b	nE2, nE3, $06, nG3, nA3, $03, nA2, nA2
+0001F3 AEA2A2AEA2AEA2AE 	dc.b	nA3, nA2, nA2, nA3, nA2, nA3, nA2, nA3
+0001FB A2A2A2AEA2ACA0A0 	dc.b	nA2, nA2, nA2, nA3, nA2, nG3, nG2, nG2
+000203 ACA0A0ACA0ACA0AC 	dc.b	nG3, nG2, nG2, nG3, nG2, nG3, nG2, nG3
+00020B A0A0A0ACA0AA9E9E 	dc.b	nG2, nG2, nG2, nG3, nG2, nF3, nF2, nF2
+000213 AA9E9EAA9EAA9EAA 	dc.b	nF3, nF2, nF2, nF3, nF2, nF3, nF2, nF3
+00021B 9E9E9EAA9E       	dc.b	nF2, nF2, nF2, nF3, nF2
+
+000220                  MTPO_ThemeR_Loop8:
+000220 A99D9D           	dc.b	nE3, nE2, nE2
+000223                  	smpsLoop		$00, $04, MTPO_ThemeR_Loop8, Target
+000223 F7               	dc.b	$F7
+000224 0004             	dc.b	$00,$04
+                        	if (MTPO_ThemeR_Loop8<*)
+000226                  		rom_ptr_z80(MTPO_ThemeR_Loop8+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000226 2082             	dc.w  (((((MTPO_ThemeR_Loop8+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop8+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000228 A902019D03A90201 	dc.b	nE3, $02, $01, nE2, $03, nE3, $02, $01
+000230 9D               	dc.b	nE2
+
+000231                  MTPO_ThemeR_Loop9:
+000231 03AEA2           	dc.b	$03, nA3, nA2
+000234                  	smpsLoop		$00, $03, MTPO_ThemeR_Loop9, Target
+000234 F7               	dc.b	$F7
+000235 0003             	dc.b	$00,$03
+                        	if (MTPO_ThemeR_Loop9<*)
+000237                  		rom_ptr_z80(MTPO_ThemeR_Loop9+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000237 3182             	dc.w  (((((MTPO_ThemeR_Loop9+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop9+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000239 AEA2AEA2A2A2AEA2 	dc.b	nA3, nA2, nA3, nA2, nA2, nA2, nA3, nA2
+000241 ACA0A0ACA0A0ACA0 	dc.b	nG3, nG2, nG2, nG3, nG2, nG2, nG3, nG2
+000249 ACA0ACA0B106ACAE 	dc.b	nG3, nG2, nG3, nG2, nC4, $06, nG3, nA3
+000251 03A2A2AEA2A2AEA2 	dc.b	$03, nA2, nA2, nA3, nA2, nA2, nA3, nA2
+000259 AEA2AEA2A2A2AEA2 	dc.b	nA3, nA2, nA3, nA2, nA2, nA2, nA3, nA2
+000261 A99D9DA99D9DA99D 	dc.b	nE3, nE2, nE2, nE3, nE2, nE2, nE3, nE2
+000269 A99DA99DA906ACAE 	dc.b	nE3, nE2, nE3, nE2, nE3, $06, nG3, nA3
+000271 03A2A2AEA2A2AEA2 	dc.b	$03, nA2, nA2, nA3, nA2, nA2, nA3, nA2
+000279 AEA2AEA2A2A2AEA2 	dc.b	nA3, nA2, nA3, nA2, nA2, nA2, nA3, nA2
+000281 ACA0A0ACA0A0ACA0 	dc.b	nG3, nG2, nG2, nG3, nG2, nG2, nG3, nG2
+000289 ACA0ACA0A0A0ACA0 	dc.b	nG3, nG2, nG3, nG2, nG2, nG2, nG3, nG2
+000291 AA9E9EAA9E9EAA9E 	dc.b	nF3, nF2, nF2, nF3, nF2, nF2, nF3, nF2
+000299 AA9EAA9E9E9EAA9E 	dc.b	nF3, nF2, nF3, nF2, nF2, nF2, nF3, nF2
+
+0002A1                  MTPO_ThemeR_Loop10:
+0002A1 A99D9D           	dc.b	nE3, nE2, nE2
+0002A4                  	smpsLoop		$00, $04, MTPO_ThemeR_Loop10, Target
+0002A4 F7               	dc.b	$F7
+0002A5 0004             	dc.b	$00,$04
+                        	if (MTPO_ThemeR_Loop10<*)
+0002A7                  		rom_ptr_z80(MTPO_ThemeR_Loop10+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002A7 A182             	dc.w  (((((MTPO_ThemeR_Loop10+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop10+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0002A9 A902019D03A90201 	dc.b	nE3, $02, $01, nE2, $03, nE3, $02, $01
+0002B1 9D03             	dc.b	nE2, $03
+0002B3                  	smpsJump		MTPO_ThemeR_Jump2, Target
+0002B3 F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_Jump2<*)
+0002B4                  		rom_ptr_z80(MTPO_ThemeR_Jump2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002B4 7D81             	dc.w  (((((MTPO_ThemeR_Jump2+Target))<<8)&$FF00)|((((MTPO_ThemeR_Jump2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002B6                  MTPO_ThemeR_FM3:
+0002B6                  	smpsPan		panLeft
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+0002B6 E080             		dc.b $E0,panLeft
+                        	endif
+
+0002B8                  MTPO_ThemeR_Jump3:
+0002B8                  	smpsFMvoice		$02
+                        	;if song<>""
+                        	if 1==2
+                        	else
+0002B8 EF02             		dc.b $EF,$02
+                        	endif
+0002BA AE               	dc.b	nA3
+
+0002BB                  MTPO_ThemeR_Loop11:
+0002BB 03               	dc.b	$03
+0002BC                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop11, Target
+0002BC F7               	dc.b	$F7
+0002BD 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop11<*)
+0002BF                  		rom_ptr_z80(MTPO_ThemeR_Loop11+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002BF BB82             	dc.w  (((((MTPO_ThemeR_Loop11+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop11+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0002C1 AC06             	dc.b	nG3, $06
+
+0002C3                  MTPO_ThemeR_Loop12:
+0002C3 03               	dc.b	$03
+0002C4                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop12, Target
+0002C4 F7               	dc.b	$F7
+0002C5 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop12<*)
+0002C7                  		rom_ptr_z80(MTPO_ThemeR_Loop12+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002C7 C382             	dc.w  (((((MTPO_ThemeR_Loop12+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop12+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002C9                  MTPO_ThemeR_Loop13:
+0002C9 AA               	dc.b	nF3
+0002CA                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop13, Target
+0002CA F7               	dc.b	$F7
+0002CB 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop13<*)
+0002CD                  		rom_ptr_z80(MTPO_ThemeR_Loop13+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002CD C982             	dc.w  (((((MTPO_ThemeR_Loop13+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop13+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0002CF AC06             	dc.b	nG3, $06
+
+0002D1                  MTPO_ThemeR_Loop14:
+0002D1 03               	dc.b	$03
+0002D2                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop14, Target
+0002D2 F7               	dc.b	$F7
+0002D3 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop14<*)
+0002D5                  		rom_ptr_z80(MTPO_ThemeR_Loop14+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002D5 D182             	dc.w  (((((MTPO_ThemeR_Loop14+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop14+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0002D7 AE               	dc.b	nA3
+0002D8                  	smpsLoop		$01, $04, MTPO_ThemeR_Loop14, Target
+0002D8 F7               	dc.b	$F7
+0002D9 0104             	dc.b	$01,$04
+                        	if (MTPO_ThemeR_Loop14<*)
+0002DB                  		rom_ptr_z80(MTPO_ThemeR_Loop14+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002DB D182             	dc.w  (((((MTPO_ThemeR_Loop14+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop14+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002DD                  MTPO_ThemeR_Loop15:
+0002DD AE               	dc.b	nA3
+0002DE                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop15, Target
+0002DE F7               	dc.b	$F7
+0002DF 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop15<*)
+0002E1                  		rom_ptr_z80(MTPO_ThemeR_Loop15+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002E1 DD82             	dc.w  (((((MTPO_ThemeR_Loop15+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop15+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002E3                  MTPO_ThemeR_Loop16:
+0002E3 AC               	dc.b	nG3
+0002E4                  	smpsLoop		$00, $0C, MTPO_ThemeR_Loop16, Target
+0002E4 F7               	dc.b	$F7
+0002E5 000C             	dc.b	$00,$0C
+                        	if (MTPO_ThemeR_Loop16<*)
+0002E7                  		rom_ptr_z80(MTPO_ThemeR_Loop16+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002E7 E382             	dc.w  (((((MTPO_ThemeR_Loop16+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop16+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0002E9 B1B1ACAC         	dc.b	nC4, nC4, nG3, nG3
+
+0002ED                  MTPO_ThemeR_Loop17:
+0002ED AE               	dc.b	nA3
+0002EE                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop17, Target
+0002EE F7               	dc.b	$F7
+0002EF 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop17<*)
+0002F1                  		rom_ptr_z80(MTPO_ThemeR_Loop17+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002F1 ED82             	dc.w  (((((MTPO_ThemeR_Loop17+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop17+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0002F3                  MTPO_ThemeR_Loop18:
+0002F3 A9               	dc.b	nE3
+0002F4                  	smpsLoop		$00, $0E, MTPO_ThemeR_Loop18, Target
+0002F4 F7               	dc.b	$F7
+0002F5 000E             	dc.b	$00,$0E
+                        	if (MTPO_ThemeR_Loop18<*)
+0002F7                  		rom_ptr_z80(MTPO_ThemeR_Loop18+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002F7 F382             	dc.w  (((((MTPO_ThemeR_Loop18+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop18+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0002F9 ACAC             	dc.b	nG3, nG3
+
+0002FB                  MTPO_ThemeR_Loop19:
+0002FB AE               	dc.b	nA3
+0002FC                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop19, Target
+0002FC F7               	dc.b	$F7
+0002FD 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop19<*)
+0002FF                  		rom_ptr_z80(MTPO_ThemeR_Loop19+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0002FF FB82             	dc.w  (((((MTPO_ThemeR_Loop19+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop19+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000301                  MTPO_ThemeR_Loop20:
+000301 AC               	dc.b	nG3
+000302                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop20, Target
+000302 F7               	dc.b	$F7
+000303 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop20<*)
+000305                  		rom_ptr_z80(MTPO_ThemeR_Loop20+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000305 0183             	dc.w  (((((MTPO_ThemeR_Loop20+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop20+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000307                  MTPO_ThemeR_Loop21:
+000307 AA               	dc.b	nF3
+000308                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop21, Target
+000308 F7               	dc.b	$F7
+000309 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop21<*)
+00030B                  		rom_ptr_z80(MTPO_ThemeR_Loop21+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00030B 0783             	dc.w  (((((MTPO_ThemeR_Loop21+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop21+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00030D                  MTPO_ThemeR_Loop22:
+00030D A9               	dc.b	nE3
+00030E                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop22, Target
+00030E F7               	dc.b	$F7
+00030F 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop22<*)
+000311                  		rom_ptr_z80(MTPO_ThemeR_Loop22+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000311 0D83             	dc.w  (((((MTPO_ThemeR_Loop22+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop22+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000313                  MTPO_ThemeR_Loop23:
+000313 AE               	dc.b	nA3
+000314                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop23, Target
+000314 F7               	dc.b	$F7
+000315 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop23<*)
+000317                  		rom_ptr_z80(MTPO_ThemeR_Loop23+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000317 1383             	dc.w  (((((MTPO_ThemeR_Loop23+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop23+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000319                  MTPO_ThemeR_Loop24:
+000319 AC               	dc.b	nG3
+00031A                  	smpsLoop		$00, $0C, MTPO_ThemeR_Loop24, Target
+00031A F7               	dc.b	$F7
+00031B 000C             	dc.b	$00,$0C
+                        	if (MTPO_ThemeR_Loop24<*)
+00031D                  		rom_ptr_z80(MTPO_ThemeR_Loop24+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00031D 1983             	dc.w  (((((MTPO_ThemeR_Loop24+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop24+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00031F B1B1ACAC         	dc.b	nC4, nC4, nG3, nG3
+
+000323                  MTPO_ThemeR_Loop25:
+000323 AE               	dc.b	nA3
+000324                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop25, Target
+000324 F7               	dc.b	$F7
+000325 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop25<*)
+000327                  		rom_ptr_z80(MTPO_ThemeR_Loop25+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000327 2383             	dc.w  (((((MTPO_ThemeR_Loop25+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop25+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000329                  MTPO_ThemeR_Loop26:
+000329 A9               	dc.b	nE3
+00032A                  	smpsLoop		$00, $0E, MTPO_ThemeR_Loop26, Target
+00032A F7               	dc.b	$F7
+00032B 000E             	dc.b	$00,$0E
+                        	if (MTPO_ThemeR_Loop26<*)
+00032D                  		rom_ptr_z80(MTPO_ThemeR_Loop26+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00032D 2983             	dc.w  (((((MTPO_ThemeR_Loop26+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop26+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00032F ACAC             	dc.b	nG3, nG3
+
+000331                  MTPO_ThemeR_Loop27:
+000331 AE               	dc.b	nA3
+000332                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop27, Target
+000332 F7               	dc.b	$F7
+000333 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop27<*)
+000335                  		rom_ptr_z80(MTPO_ThemeR_Loop27+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000335 3183             	dc.w  (((((MTPO_ThemeR_Loop27+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop27+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000337                  MTPO_ThemeR_Loop28:
+000337 AC               	dc.b	nG3
+000338                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop28, Target
+000338 F7               	dc.b	$F7
+000339 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop28<*)
+00033B                  		rom_ptr_z80(MTPO_ThemeR_Loop28+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00033B 3783             	dc.w  (((((MTPO_ThemeR_Loop28+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop28+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00033D                  MTPO_ThemeR_Loop29:
+00033D AA               	dc.b	nF3
+00033E                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop29, Target
+00033E F7               	dc.b	$F7
+00033F 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop29<*)
+000341                  		rom_ptr_z80(MTPO_ThemeR_Loop29+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000341 3D83             	dc.w  (((((MTPO_ThemeR_Loop29+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop29+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000343                  MTPO_ThemeR_Loop30:
+000343 A9               	dc.b	nE3
+000344                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop30, Target
+000344 F7               	dc.b	$F7
+000345 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop30<*)
+000347                  		rom_ptr_z80(MTPO_ThemeR_Loop30+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000347 4383             	dc.w  (((((MTPO_ThemeR_Loop30+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop30+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000349                  	smpsJump		MTPO_ThemeR_Jump3, Target
+000349 F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_Jump3<*)
+00034A                  		rom_ptr_z80(MTPO_ThemeR_Jump3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00034A B882             	dc.w  (((((MTPO_ThemeR_Jump3+Target))<<8)&$FF00)|((((MTPO_ThemeR_Jump3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00034C                  MTPO_ThemeR_FM4:
+00034C                  	smpsPan		panLeft
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+00034C E080             		dc.b $E0,panLeft
+                        	endif
+00034E                  	smpsFMvoice		$03
+                        	;if song<>""
+                        	if 1==2
+                        	else
+00034E EF03             		dc.b $EF,$03
+                        	endif
+000350 B503800CB50303B3 	dc.b	nE4, $03, nRst, $0C, nE4, $03, $03, nD4
+000358 068015B103800CB1 	dc.b	$06, nRst, $15, nC4, $03, nRst, $0C, nC4
+000360 0303B3068012B303 	dc.b	$03, $03, nD4, $06, nRst, $12, nD4, $03
+000368 B5802DBA12BC0602 	dc.b	nE4, nRst, $2D, nA4, $12, nB4, $06, $02
+000370 BD0406BC03BA09B8 	dc.b	nC5, $04, $06, nB4, $03, nA4, $09, nG4
+000378 02BA07B80902BA07 	dc.b	$02, nA4, $07, nG4, $09, $02, nA4, $07
+000380 B809BC02BD04BC06 	dc.b	nG4, $09, nB4, $02, nC5, $04, nB4, $06
+000388 BA12BC0602BD0406 	dc.b	nA4, $12, nB4, $06, $02, nC5, $04, $06
+000390 BC03BD09BF02C107 	dc.b	nB4, $03, nC5, $09, nD5, $02, nE5, $07
+000398 BF0902C107BF0902 	dc.b	nD5, $09, $02, nE5, $07, nD5, $09, $02
+0003A0 C101BF0302C101BF 	dc.b	nE5, $01, nD5, $03, $02, nE5, $01, nD5
+0003A8 03BA12BC03BD06C6 	dc.b	$03, nA4, $12, nB4, $03, nC5, $06, nA5
+0003B0 C802C904C806C415 	dc.b	nB5, $02, nC6, $04, nB5, $06, nG5, $15
+0003B8 C603C80602C904C8 	dc.b	nA5, $03, nB5, $06, $02, nC6, $04, nB5
+0003C0 0602C901C803C215 	dc.b	$06, $02, nC6, $01, nB5, $03, nF5, $15
+0003C8 C403C6060603C802 	dc.b	nG5, $03, nA5, $06, $06, $03, nB5, $02
+0003D0 C901C809C130BA12 	dc.b	nC6, $01, nB5, $09, nE5, $30, nA4, $12
+0003D8 BC0602BD0406BC03 	dc.b	nB4, $06, $02, nC5, $04, $06, nB4, $03
+0003E0 BA09B802BA07B809 	dc.b	nA4, $09, nG4, $02, nA4, $07, nG4, $09
+0003E8 02BA07B809BC02BD 	dc.b	$02, nA4, $07, nG4, $09, nB4, $02, nC5
+0003F0 04BC06BA12BC0602 	dc.b	$04, nB4, $06, nA4, $12, nB4, $06, $02
+0003F8 BD0406BC03BD09BF 	dc.b	nC5, $04, $06, nB4, $03, nC5, $09, nD5
+000400 02C107BF0902C107 	dc.b	$02, nE5, $07, nD5, $09, $02, nE5, $07
+000408 BF0902C101BF0302 	dc.b	nD5, $09, $02, nE5, $01, nD5, $03, $02
+000410 C101BF03BA12BC03 	dc.b	nE5, $01, nD5, $03, nA4, $12, nB4, $03
+000418 BD06C6C802C904C8 	dc.b	nC5, $06, nA5, nB5, $02, nC6, $04, nB5
+000420 06C415C603C80602 	dc.b	$06, nG5, $15, nA5, $03, nB5, $06, $02
+000428 C904C80602C901C8 	dc.b	nC6, $04, nB5, $06, $02, nC6, $01, nB5
+000430 03C215C403C60606 	dc.b	$03, nF5, $15, nG5, $03, nA5, $06, $06
+000438 03C802C901C809CD 	dc.b	$03, nB5, $02, nC6, $01, nB5, $09, nE6
+000440 30               	dc.b	$30
+000441                  	smpsJump		MTPO_ThemeR_FM4, Target
+000441 F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_FM4<*)
+000442                  		rom_ptr_z80(MTPO_ThemeR_FM4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000442 4C83             	dc.w  (((((MTPO_ThemeR_FM4+Target))<<8)&$FF00)|((((MTPO_ThemeR_FM4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000444                  MTPO_ThemeR_FM5:
+000444                  	smpsFMvoice		$04
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000444 EF04             		dc.b $EF,$04
+                        	endif
+
+000446                  MTPO_ThemeR_Jump4:
+000446                  	smpsPan		panRight
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+000446 E040             		dc.b $E0,panRight
+                        	endif
+000448 B103800CB10303B0 	dc.b	nC4, $03, nRst, $0C, nC4, $03, $03, nB3
+000450 068015AE03800CAE 	dc.b	$06, nRst, $15, nA3, $03, nRst, $0C, nA3
+000458 0303B0068012B003 	dc.b	$03, $03, nB3, $06, nRst, $12, nB3, $03
+000460 B1802DB51206B802 	dc.b	nC4, nRst, $2D, nE4, $12, $06, nG4, $02
+000468 BA0406B50309B302 	dc.b	nA4, $04, $06, nE4, $03, $09, nD4, $02
+000470 B507B30902B507B3 	dc.b	nE4, $07, nD4, $09, $02, nE4, $07, nD4
+000478 09B602B804B306B5 	dc.b	$09, nF4, $02, nG4, $04, nD4, $06, nE4
+000480 1206B802BA0406B5 	dc.b	$12, $06, nG4, $02, nA4, $04, $06, nE4
+000488 03BA09BC02BD07BC 	dc.b	$03, nA4, $09, nB4, $02, nC5, $07, nB4
+000490 0902BD07BC0902BD 	dc.b	$09, $02, nC5, $07, nB4, $09, $02, nC5
+000498 01BC0302BD01BC03 	dc.b	$01, nB4, $03, $02, nC5, $01, nB4, $03
+0004A0 B51203BA06C1C402 	dc.b	nE4, $12, $03, nA4, $06, nE5, nG5, $02
+0004A8 C604C406BF1503C4 	dc.b	nA5, $04, nG5, $06, nD5, $15, $03, nG5
+0004B0 0602C604C40602C6 	dc.b	$06, $02, nA5, $04, nG5, $06, $02, nA5
+0004B8 01C403BD1503C206 	dc.b	$01, nG5, $03, nC5, $15, $03, nF5, $06
+0004C0 0603C402C601C409 	dc.b	$06, $03, nG5, $02, nA5, $01, nG5, $09
+0004C8 BC30B51206B802BA 	dc.b	nB4, $30, nE4, $12, $06, nG4, $02, nA4
+0004D0 0406B50309B302B5 	dc.b	$04, $06, nE4, $03, $09, nD4, $02, nE4
+0004D8 07B30902B507B309 	dc.b	$07, nD4, $09, $02, nE4, $07, nD4, $09
+0004E0 B602B804B306B512 	dc.b	nF4, $02, nG4, $04, nD4, $06, nE4, $12
+0004E8 06B802BA0406B503 	dc.b	$06, nG4, $02, nA4, $04, $06, nE4, $03
+0004F0 BA09BC02BD07BC09 	dc.b	nA4, $09, nB4, $02, nC5, $07, nB4, $09
+0004F8 02BD07BC0902BD01 	dc.b	$02, nC5, $07, nB4, $09, $02, nC5, $01
+000500 BC0302BD01BC03B5 	dc.b	nB4, $03, $02, nC5, $01, nB4, $03, nE4
+000508 1203BA06C1C402C6 	dc.b	$12, $03, nA4, $06, nE5, nG5, $02, nA5
+000510 04C406BF1503C406 	dc.b	$04, nG5, $06, nD5, $15, $03, nG5, $06
+000518 02C604C40602C601 	dc.b	$02, nA5, $04, nG5, $06, $02, nA5, $01
+000520 C403BD1503C20606 	dc.b	nG5, $03, nC5, $15, $03, nF5, $06, $06
+000528 03C402C601C409C8 	dc.b	$03, nG5, $02, nA5, $01, nG5, $09, nB5
+000530 30               	dc.b	$30
+000531                  	smpsJump		MTPO_ThemeR_Jump4, Target
+000531 F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_Jump4<*)
+000532                  		rom_ptr_z80(MTPO_ThemeR_Jump4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000532 4684             	dc.w  (((((MTPO_ThemeR_Jump4+Target))<<8)&$FF00)|((((MTPO_ThemeR_Jump4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000534                  MTPO_ThemeR_FM6:
+000534                  	smpsPan		panRight
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+000534 E040             		dc.b $E0,panRight
+                        	endif
+000536                  	smpsFMvoice		$05
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000536 EF05             		dc.b $EF,$05
+                        	endif
+
+000538                  MTPO_ThemeR_Jump5:
+000538 AE               	dc.b	nA3
+
+000539                  MTPO_ThemeR_Loop31:
+000539 03               	dc.b	$03
+00053A                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop31, Target
+00053A F7               	dc.b	$F7
+00053B 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop31<*)
+00053D                  		rom_ptr_z80(MTPO_ThemeR_Loop31+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00053D 3985             	dc.w  (((((MTPO_ThemeR_Loop31+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop31+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00053F AC06             	dc.b	nG3, $06
+
+000541                  MTPO_ThemeR_Loop32:
+000541 03               	dc.b	$03
+000542                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop32, Target
+000542 F7               	dc.b	$F7
+000543 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop32<*)
+000545                  		rom_ptr_z80(MTPO_ThemeR_Loop32+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000545 4185             	dc.w  (((((MTPO_ThemeR_Loop32+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop32+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000547                  MTPO_ThemeR_Loop33:
+000547 AA               	dc.b	nF3
+000548                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop33, Target
+000548 F7               	dc.b	$F7
+000549 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop33<*)
+00054B                  		rom_ptr_z80(MTPO_ThemeR_Loop33+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00054B 4785             	dc.w  (((((MTPO_ThemeR_Loop33+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop33+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00054D AC06             	dc.b	nG3, $06
+
+00054F                  MTPO_ThemeR_Loop34:
+00054F 03               	dc.b	$03
+000550                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop34, Target
+000550 F7               	dc.b	$F7
+000551 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop34<*)
+000553                  		rom_ptr_z80(MTPO_ThemeR_Loop34+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000553 4F85             	dc.w  (((((MTPO_ThemeR_Loop34+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop34+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000555 AE               	dc.b	nA3
+000556                  	smpsLoop		$01, $04, MTPO_ThemeR_Loop34, Target
+000556 F7               	dc.b	$F7
+000557 0104             	dc.b	$01,$04
+                        	if (MTPO_ThemeR_Loop34<*)
+000559                  		rom_ptr_z80(MTPO_ThemeR_Loop34+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000559 4F85             	dc.w  (((((MTPO_ThemeR_Loop34+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop34+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00055B                  MTPO_ThemeR_Loop35:
+00055B AE               	dc.b	nA3
+00055C                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop35, Target
+00055C F7               	dc.b	$F7
+00055D 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop35<*)
+00055F                  		rom_ptr_z80(MTPO_ThemeR_Loop35+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00055F 5B85             	dc.w  (((((MTPO_ThemeR_Loop35+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop35+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000561                  MTPO_ThemeR_Loop36:
+000561 AC               	dc.b	nG3
+000562                  	smpsLoop		$00, $0C, MTPO_ThemeR_Loop36, Target
+000562 F7               	dc.b	$F7
+000563 000C             	dc.b	$00,$0C
+                        	if (MTPO_ThemeR_Loop36<*)
+000565                  		rom_ptr_z80(MTPO_ThemeR_Loop36+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000565 6185             	dc.w  (((((MTPO_ThemeR_Loop36+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop36+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000567 B1B1ACAC         	dc.b	nC4, nC4, nG3, nG3
+
+00056B                  MTPO_ThemeR_Loop37:
+00056B AE               	dc.b	nA3
+00056C                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop37, Target
+00056C F7               	dc.b	$F7
+00056D 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop37<*)
+00056F                  		rom_ptr_z80(MTPO_ThemeR_Loop37+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00056F 6B85             	dc.w  (((((MTPO_ThemeR_Loop37+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop37+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000571                  MTPO_ThemeR_Loop38:
+000571 A9               	dc.b	nE3
+000572                  	smpsLoop		$00, $0E, MTPO_ThemeR_Loop38, Target
+000572 F7               	dc.b	$F7
+000573 000E             	dc.b	$00,$0E
+                        	if (MTPO_ThemeR_Loop38<*)
+000575                  		rom_ptr_z80(MTPO_ThemeR_Loop38+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000575 7185             	dc.w  (((((MTPO_ThemeR_Loop38+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop38+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000577 ACAC             	dc.b	nG3, nG3
+
+000579                  MTPO_ThemeR_Loop39:
+000579 AE               	dc.b	nA3
+00057A                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop39, Target
+00057A F7               	dc.b	$F7
+00057B 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop39<*)
+00057D                  		rom_ptr_z80(MTPO_ThemeR_Loop39+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00057D 7985             	dc.w  (((((MTPO_ThemeR_Loop39+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop39+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00057F                  MTPO_ThemeR_Loop40:
+00057F AC               	dc.b	nG3
+000580                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop40, Target
+000580 F7               	dc.b	$F7
+000581 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop40<*)
+000583                  		rom_ptr_z80(MTPO_ThemeR_Loop40+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000583 7F85             	dc.w  (((((MTPO_ThemeR_Loop40+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop40+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000585                  MTPO_ThemeR_Loop41:
+000585 AA               	dc.b	nF3
+000586                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop41, Target
+000586 F7               	dc.b	$F7
+000587 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop41<*)
+000589                  		rom_ptr_z80(MTPO_ThemeR_Loop41+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000589 8585             	dc.w  (((((MTPO_ThemeR_Loop41+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop41+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+00058B                  MTPO_ThemeR_Loop42:
+00058B A9               	dc.b	nE3
+00058C                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop42, Target
+00058C F7               	dc.b	$F7
+00058D 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop42<*)
+00058F                  		rom_ptr_z80(MTPO_ThemeR_Loop42+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00058F 8B85             	dc.w  (((((MTPO_ThemeR_Loop42+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop42+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000591                  MTPO_ThemeR_Loop43:
+000591 AE               	dc.b	nA3
+000592                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop43, Target
+000592 F7               	dc.b	$F7
+000593 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop43<*)
+000595                  		rom_ptr_z80(MTPO_ThemeR_Loop43+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000595 9185             	dc.w  (((((MTPO_ThemeR_Loop43+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop43+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000597                  MTPO_ThemeR_Loop44:
+000597 AC               	dc.b	nG3
+000598                  	smpsLoop		$00, $0C, MTPO_ThemeR_Loop44, Target
+000598 F7               	dc.b	$F7
+000599 000C             	dc.b	$00,$0C
+                        	if (MTPO_ThemeR_Loop44<*)
+00059B                  		rom_ptr_z80(MTPO_ThemeR_Loop44+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00059B 9785             	dc.w  (((((MTPO_ThemeR_Loop44+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop44+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00059D B1B1ACAC         	dc.b	nC4, nC4, nG3, nG3
+
+0005A1                  MTPO_ThemeR_Loop45:
+0005A1 AE               	dc.b	nA3
+0005A2                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop45, Target
+0005A2 F7               	dc.b	$F7
+0005A3 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop45<*)
+0005A5                  		rom_ptr_z80(MTPO_ThemeR_Loop45+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005A5 A185             	dc.w  (((((MTPO_ThemeR_Loop45+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop45+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0005A7                  MTPO_ThemeR_Loop46:
+0005A7 A9               	dc.b	nE3
+0005A8                  	smpsLoop		$00, $0E, MTPO_ThemeR_Loop46, Target
+0005A8 F7               	dc.b	$F7
+0005A9 000E             	dc.b	$00,$0E
+                        	if (MTPO_ThemeR_Loop46<*)
+0005AB                  		rom_ptr_z80(MTPO_ThemeR_Loop46+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005AB A785             	dc.w  (((((MTPO_ThemeR_Loop46+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop46+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0005AD ACAC             	dc.b	nG3, nG3
+
+0005AF                  MTPO_ThemeR_Loop47:
+0005AF AE               	dc.b	nA3
+0005B0                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop47, Target
+0005B0 F7               	dc.b	$F7
+0005B1 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop47<*)
+0005B3                  		rom_ptr_z80(MTPO_ThemeR_Loop47+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005B3 AF85             	dc.w  (((((MTPO_ThemeR_Loop47+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop47+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0005B5                  MTPO_ThemeR_Loop48:
+0005B5 AC               	dc.b	nG3
+0005B6                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop48, Target
+0005B6 F7               	dc.b	$F7
+0005B7 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop48<*)
+0005B9                  		rom_ptr_z80(MTPO_ThemeR_Loop48+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005B9 B585             	dc.w  (((((MTPO_ThemeR_Loop48+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop48+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0005BB                  MTPO_ThemeR_Loop49:
+0005BB AA               	dc.b	nF3
+0005BC                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop49, Target
+0005BC F7               	dc.b	$F7
+0005BD 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop49<*)
+0005BF                  		rom_ptr_z80(MTPO_ThemeR_Loop49+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005BF BB85             	dc.w  (((((MTPO_ThemeR_Loop49+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop49+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0005C1                  MTPO_ThemeR_Loop50:
+0005C1 A9               	dc.b	nE3
+0005C2                  	smpsLoop		$00, $10, MTPO_ThemeR_Loop50, Target
+0005C2 F7               	dc.b	$F7
+0005C3 0010             	dc.b	$00,$10
+                        	if (MTPO_ThemeR_Loop50<*)
+0005C5                  		rom_ptr_z80(MTPO_ThemeR_Loop50+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005C5 C185             	dc.w  (((((MTPO_ThemeR_Loop50+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop50+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0005C7                  	smpsJump		MTPO_ThemeR_Jump5, Target
+0005C7 F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_Jump5<*)
+0005C8                  		rom_ptr_z80(MTPO_ThemeR_Jump5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005C8 3885             	dc.w  (((((MTPO_ThemeR_Jump5+Target))<<8)&$FF00)|((((MTPO_ThemeR_Jump5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0005CA                  MTPO_ThemeR_PSG1:
+0005CA 96038A8A8A8A9696 	dc.b	nA1, $03, nA0, nA0, nA0, nA0, nA1, nA1
+0005D2 940688           	dc.b	nG1, $06, nG0
+
+0005D5                  MTPO_ThemeR_Loop51:
+0005D5 03               	dc.b	$03
+0005D6                  	smpsLoop		$00, $07, MTPO_ThemeR_Loop51, Target
+0005D6 F7               	dc.b	$F7
+0005D7 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_Loop51<*)
+0005D9                  		rom_ptr_z80(MTPO_ThemeR_Loop51+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005D9 D585             	dc.w  (((((MTPO_ThemeR_Loop51+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop51+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0005DB 9286868686929294 	dc.b	nF1, nF0, nF0, nF0, nF0, nF1, nF1, nG1
+0005E3 0688030303030303 	dc.b	$06, nG0, $03, $03, $03, $03, $03, $03
+0005EB 94968A8A968A8A96 	dc.b	nG1, nA1, nA0, nA0, nA1, nA0, nA0, nA1
+
+0005F3                  MTPO_ThemeR_Loop52:
+0005F3 8A968A968A8A     	dc.b	nA0, nA1, nA0, nA1, nA0, nA0
+0005F9                  	smpsLoop		$00, $02, MTPO_ThemeR_Loop52, Target
+0005F9 F7               	dc.b	$F7
+0005FA 0002             	dc.b	$00,$02
+                        	if (MTPO_ThemeR_Loop52<*)
+0005FC                  		rom_ptr_z80(MTPO_ThemeR_Loop52+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0005FC F385             	dc.w  (((((MTPO_ThemeR_Loop52+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop52+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0005FE 968A8A968A968A96 	dc.b	nA1, nA0, nA0, nA1, nA0, nA1, nA0, nA1
+000606 8A8A8A968A948888 	dc.b	nA0, nA0, nA0, nA1, nA0, nG1, nG0, nG0
+00060E 9488889488948894 	dc.b	nG1, nG0, nG0, nG1, nG0, nG1, nG0, nG1
+000616 8899069496038A8A 	dc.b	nG0, nC2, $06, nG1, nA1, $03, nA0, nA0
+00061E 968A8A968A968A96 	dc.b	nA1, nA0, nA0, nA1, nA0, nA1, nA0, nA1
+000626 8A8A8A968A918585 	dc.b	nA0, nA0, nA0, nA1, nA0, nE1, nE0, nE0
+00062E 9185859185918591 	dc.b	nE1, nE0, nE0, nE1, nE0, nE1, nE0, nE1
+000636 8591069496038A8A 	dc.b	nE0, nE1, $06, nG1, nA1, $03, nA0, nA0
+00063E 968A8A968A968A96 	dc.b	nA1, nA0, nA0, nA1, nA0, nA1, nA0, nA1
+000646 8A8A8A968A948888 	dc.b	nA0, nA0, nA0, nA1, nA0, nG1, nG0, nG0
+00064E 9488889488948894 	dc.b	nG1, nG0, nG0, nG1, nG0, nG1, nG0, nG1
+000656 8888889488928686 	dc.b	nG0, nG0, nG0, nG1, nG0, nF1, nF0, nF0
+00065E 9286869286928692 	dc.b	nF1, nF0, nF0, nF1, nF0, nF1, nF0, nF1
+000666 8686869286       	dc.b	nF0, nF0, nF0, nF1, nF0
+
+00066B                  MTPO_ThemeR_Loop53:
+00066B 918585           	dc.b	nE1, nE0, nE0
+00066E                  	smpsLoop		$00, $04, MTPO_ThemeR_Loop53, Target
+00066E F7               	dc.b	$F7
+00066F 0004             	dc.b	$00,$04
+                        	if (MTPO_ThemeR_Loop53<*)
+000671                  		rom_ptr_z80(MTPO_ThemeR_Loop53+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000671 6B86             	dc.w  (((((MTPO_ThemeR_Loop53+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop53+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000673 9102018503910201 	dc.b	nE1, $02, $01, nE0, $03, nE1, $02, $01
+00067B 85               	dc.b	nE0
+
+00067C                  MTPO_ThemeR_Loop54:
+00067C 03968A           	dc.b	$03, nA1, nA0
+00067F                  	smpsLoop		$00, $03, MTPO_ThemeR_Loop54, Target
+00067F F7               	dc.b	$F7
+000680 0003             	dc.b	$00,$03
+                        	if (MTPO_ThemeR_Loop54<*)
+000682                  		rom_ptr_z80(MTPO_ThemeR_Loop54+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000682 7C86             	dc.w  (((((MTPO_ThemeR_Loop54+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop54+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000684 968A968A8A8A968A 	dc.b	nA1, nA0, nA1, nA0, nA0, nA0, nA1, nA0
+00068C 9488889488889488 	dc.b	nG1, nG0, nG0, nG1, nG0, nG0, nG1, nG0
+000694 9488948899069496 	dc.b	nG1, nG0, nG1, nG0, nC2, $06, nG1, nA1
+00069C 038A8A968A8A968A 	dc.b	$03, nA0, nA0, nA1, nA0, nA0, nA1, nA0
+0006A4 968A968A8A8A968A 	dc.b	nA1, nA0, nA1, nA0, nA0, nA0, nA1, nA0
+0006AC 9185859185859185 	dc.b	nE1, nE0, nE0, nE1, nE0, nE0, nE1, nE0
+0006B4 9185918591069496 	dc.b	nE1, nE0, nE1, nE0, nE1, $06, nG1, nA1
+0006BC 038A8A968A8A968A 	dc.b	$03, nA0, nA0, nA1, nA0, nA0, nA1, nA0
+0006C4 968A968A8A8A968A 	dc.b	nA1, nA0, nA1, nA0, nA0, nA0, nA1, nA0
+0006CC 9488889488889488 	dc.b	nG1, nG0, nG0, nG1, nG0, nG0, nG1, nG0
+0006D4 9488948888889488 	dc.b	nG1, nG0, nG1, nG0, nG0, nG0, nG1, nG0
+0006DC 9286869286869286 	dc.b	nF1, nF0, nF0, nF1, nF0, nF0, nF1, nF0
+0006E4 9286928686869286 	dc.b	nF1, nF0, nF1, nF0, nF0, nF0, nF1, nF0
+
+0006EC                  MTPO_ThemeR_Loop55:
+0006EC 918585           	dc.b	nE1, nE0, nE0
+0006EF                  	smpsLoop		$00, $04, MTPO_ThemeR_Loop55, Target
+0006EF F7               	dc.b	$F7
+0006F0 0004             	dc.b	$00,$04
+                        	if (MTPO_ThemeR_Loop55<*)
+0006F2                  		rom_ptr_z80(MTPO_ThemeR_Loop55+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006F2 EC86             	dc.w  (((((MTPO_ThemeR_Loop55+Target))<<8)&$FF00)|((((MTPO_ThemeR_Loop55+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0006F4 9102018503910201 	dc.b	nE1, $02, $01, nE0, $03, nE1, $02, $01
+0006FC 8503             	dc.b	nE0, $03
+0006FE                  	smpsJump		MTPO_ThemeR_PSG1, Target
+0006FE F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_PSG1<*)
+0006FF                  		rom_ptr_z80(MTPO_ThemeR_PSG1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0006FF CA85             	dc.w  (((((MTPO_ThemeR_PSG1+Target))<<8)&$FF00)|((((MTPO_ThemeR_PSG1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000701                  MTPO_ThemeR_PSG2:
+000701 9103800C9103038F 	dc.b	nE1, $03, nRst, $0C, nE1, $03, $03, nD1
+000709 0680158D03800C8D 	dc.b	$06, nRst, $15, nC1, $03, nRst, $0C, nC1
+000711 03038F0680128F03 	dc.b	$03, $03, nD1, $06, nRst, $12, nD1, $03
+000719 91802D9612980602 	dc.b	nE1, nRst, $2D, nA1, $12, nB1, $06, $02
+000721 9904069803960994 	dc.b	nC2, $04, $06, nB1, $03, nA1, $09, nG1
+000729 0296079409029607 	dc.b	$02, nA1, $07, nG1, $09, $02, nA1, $07
+000731 9409980299049806 	dc.b	nG1, $09, nB1, $02, nC2, $04, nB1, $06
+000739 9612980602990406 	dc.b	nA1, $12, nB1, $06, $02, nC2, $04, $06
+000741 980399099B029D07 	dc.b	nB1, $03, nC2, $09, nD2, $02, nE2, $07
+000749 9B09029D079B0902 	dc.b	nD2, $09, $02, nE2, $07, nD2, $09, $02
+000751 9D019B03029D019B 	dc.b	nE2, $01, nD2, $03, $02, nE2, $01, nD2
+000759 03961298039906A2 	dc.b	$03, nA1, $12, nB1, $03, nC2, $06, nA2
+000761 A402A504A406A015 	dc.b	nB2, $02, nC3, $04, nB2, $06, nG2, $15
+000769 A203A40602A504A4 	dc.b	nA2, $03, nB2, $06, $02, nC3, $04, nB2
+000771 0602A501A4039E15 	dc.b	$06, $02, nC3, $01, nB2, $03, nF2, $15
+000779 A003A2060603A402 	dc.b	nG2, $03, nA2, $06, $06, $03, nB2, $02
+000781 A501A4099D309612 	dc.b	nC3, $01, nB2, $09, nE2, $30, nA1, $12
+000789 9806029904069803 	dc.b	nB1, $06, $02, nC2, $04, $06, nB1, $03
+000791 9609940296079409 	dc.b	nA1, $09, nG1, $02, nA1, $07, nG1, $09
+000799 0296079409980299 	dc.b	$02, nA1, $07, nG1, $09, nB1, $02, nC2
+0007A1 0498069612980602 	dc.b	$04, nB1, $06, nA1, $12, nB1, $06, $02
+0007A9 990406980399099B 	dc.b	nC2, $04, $06, nB1, $03, nC2, $09, nD2
+0007B1 029D079B09029D07 	dc.b	$02, nE2, $07, nD2, $09, $02, nE2, $07
+0007B9 9B09029D019B0302 	dc.b	nD2, $09, $02, nE2, $01, nD2, $03, $02
+0007C1 9D019B0396129803 	dc.b	nE2, $01, nD2, $03, nA1, $12, nB1, $03
+0007C9 9906A2A402A504A4 	dc.b	nC2, $06, nA2, nB2, $02, nC3, $04, nB2
+0007D1 06A015A203A40602 	dc.b	$06, nG2, $15, nA2, $03, nB2, $06, $02
+0007D9 A504A40602A501A4 	dc.b	nC3, $04, nB2, $06, $02, nC3, $01, nB2
+0007E1 039E15A003A20606 	dc.b	$03, nF2, $15, nG2, $03, nA2, $06, $06
+0007E9 03A402A501A409A9 	dc.b	$03, nB2, $02, nC3, $01, nB2, $09, nE3
+0007F1 30               	dc.b	$30
+0007F2                  	smpsJump		MTPO_ThemeR_PSG2, Target
+0007F2 F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_PSG2<*)
+0007F3                  		rom_ptr_z80(MTPO_ThemeR_PSG2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0007F3 0187             	dc.w  (((((MTPO_ThemeR_PSG2+Target))<<8)&$FF00)|((((MTPO_ThemeR_PSG2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0007F5                  MTPO_ThemeR_PSG3:
+0007F5 8D03800C8D03038C 	dc.b	nC1, $03, nRst, $0C, nC1, $03, $03, nB0
+0007FD 0680158A03800C8A 	dc.b	$06, nRst, $15, nA0, $03, nRst, $0C, nA0
+000805 03038C0680128C03 	dc.b	$03, $03, nB0, $06, nRst, $12, nB0, $03
+00080D 8D802D9112069402 	dc.b	nC1, nRst, $2D, nE1, $12, $06, nG1, $02
+000815 9604069103098F02 	dc.b	nA1, $04, $06, nE1, $03, $09, nD1, $02
+00081D 91078F090291078F 	dc.b	nE1, $07, nD1, $09, $02, nE1, $07, nD1
+000825 09920294048F0691 	dc.b	$09, nF1, $02, nG1, $04, nD1, $06, nE1
+00082D 1206940296040691 	dc.b	$12, $06, nG1, $02, nA1, $04, $06, nE1
+000835 0396099802990798 	dc.b	$03, nA1, $09, nB1, $02, nC2, $07, nB1
+00083D 0902990798090299 	dc.b	$09, $02, nC2, $07, nB1, $09, $02, nC2
+000845 0198030299019803 	dc.b	$01, nB1, $03, $02, nC2, $01, nB1, $03
+00084D 91120396069DA002 	dc.b	nE1, $12, $03, nA1, $06, nE2, nG2, $02
+000855 A204A0069B1503A0 	dc.b	nA2, $04, nG2, $06, nD2, $15, $03, nG2
+00085D 0602A204A00602A2 	dc.b	$06, $02, nA2, $04, nG2, $06, $02, nA2
+000865 01A0039915039E06 	dc.b	$01, nG2, $03, nC2, $15, $03, nF2, $06
+00086D 0603A002A201A009 	dc.b	$06, $03, nG2, $02, nA2, $01, nG2, $09
+000875 9830911206940296 	dc.b	nB1, $30, nE1, $12, $06, nG1, $02, nA1
+00087D 04069103098F0291 	dc.b	$04, $06, nE1, $03, $09, nD1, $02, nE1
+000885 078F090291078F09 	dc.b	$07, nD1, $09, $02, nE1, $07, nD1, $09
+00088D 920294048F069112 	dc.b	nF1, $02, nG1, $04, nD1, $06, nE1, $12
+000895 0694029604069103 	dc.b	$06, nG1, $02, nA1, $04, $06, nE1, $03
+00089D 9609980299079809 	dc.b	nA1, $09, nB1, $02, nC2, $07, nB1, $09
+0008A5 0299079809029901 	dc.b	$02, nC2, $07, nB1, $09, $02, nC2, $01
+0008AD 9803029901980391 	dc.b	nB1, $03, $02, nC2, $01, nB1, $03, nE1
+0008B5 120396069DA002A2 	dc.b	$12, $03, nA1, $06, nE2, nG2, $02, nA2
+0008BD 04A0069B1503A006 	dc.b	$04, nG2, $06, nD2, $15, $03, nG2, $06
+0008C5 02A204A00602A201 	dc.b	$02, nA2, $04, nG2, $06, $02, nA2, $01
+0008CD A0039915039E0606 	dc.b	nG2, $03, nC2, $15, $03, nF2, $06, $06
+0008D5 03A002A201A009A4 	dc.b	$03, nG2, $02, nA2, $01, nG2, $09, nB2
+0008DD 30               	dc.b	$30
+0008DE                  	smpsJump		MTPO_ThemeR_PSG3, Target
+0008DE F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_PSG3<*)
+0008DF                  		rom_ptr_z80(MTPO_ThemeR_PSG3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008DF F587             	dc.w  (((((MTPO_ThemeR_PSG3+Target))<<8)&$FF00)|((((MTPO_ThemeR_PSG3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+0008E1                  MTPO_ThemeR_PWM1:
+0008E1                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+0008E1 E0C0             		dc.b $E0,panCenter
+                        	endif
+0008E3 8906980303038383 	dc.b	pCrashCymb, $06, pClosedHH, $03, $03, $03, pSplashCymb, pSplashCymb
+0008EB 890698           	dc.b	pCrashCymb, $06, pClosedHH
+
+0008EE                  MTPO_ThemeR_PWM1_Loop1:
+0008EE 03               	dc.b	$03
+0008EF                  	smpsLoop		$00, $07, MTPO_ThemeR_PWM1_Loop1, Target
+0008EF F7               	dc.b	$F7
+0008F0 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_PWM1_Loop1<*)
+0008F2                  		rom_ptr_z80(MTPO_ThemeR_PWM1_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0008F2 EE88             	dc.w  (((((MTPO_ThemeR_PWM1_Loop1+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM1_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0008F4 8906980303038383 	dc.b	pCrashCymb, $06, pClosedHH, $03, $03, $03, pSplashCymb, pSplashCymb
+0008FC 8906980303030303 	dc.b	pCrashCymb, $06, pClosedHH, $03, $03, $03, $03, $03
+000904 038989           	dc.b	$03, pCrashCymb, pCrashCymb
+
+000907                  MTPO_ThemeR_PWM1_Loop2:
+000907 98               	dc.b	pClosedHH
+000908                  	smpsLoop		$00, $0D, MTPO_ThemeR_PWM1_Loop2, Target
+000908 F7               	dc.b	$F7
+000909 000D             	dc.b	$00,$0D
+                        	if (MTPO_ThemeR_PWM1_Loop2<*)
+00090B                  		rom_ptr_z80(MTPO_ThemeR_PWM1_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00090B 0789             	dc.w  (((((MTPO_ThemeR_PWM1_Loop2+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM1_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00090D 9998             	dc.b	pOpenHH, pClosedHH
+
+00090F                  MTPO_ThemeR_PWM1_Loop3:
+00090F 8906990C0C0C0C0C 	dc.b	pCrashCymb, $06, pOpenHH, $0C, $0C, $0C, $0C, $0C
+000917 0C068383         	dc.b	$0C, $06, pSplashCymb, pSplashCymb
+00091B                  	smpsLoop		$00, $02, MTPO_ThemeR_PWM1_Loop3, Target
+00091B F7               	dc.b	$F7
+00091C 0002             	dc.b	$00,$02
+                        	if (MTPO_ThemeR_PWM1_Loop3<*)
+00091E                  		rom_ptr_z80(MTPO_ThemeR_PWM1_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00091E 0F89             	dc.w  (((((MTPO_ThemeR_PWM1_Loop3+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM1_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000920 8999             	dc.b	pCrashCymb, pOpenHH
+
+000922                  MTPO_ThemeR_PWM1_Loop4:
+000922 0C               	dc.b	$0C
+000923                  	smpsLoop		$00, $07, MTPO_ThemeR_PWM1_Loop4, Target
+000923 F7               	dc.b	$F7
+000924 0007             	dc.b	$00,$07
+                        	if (MTPO_ThemeR_PWM1_Loop4<*)
+000926                  		rom_ptr_z80(MTPO_ThemeR_PWM1_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000926 2289             	dc.w  (((((MTPO_ThemeR_PWM1_Loop4+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM1_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000928 0689990C0C0C0683 	dc.b	$06, pCrashCymb, pOpenHH, $0C, $0C, $0C, $06, pSplashCymb
+000930 09898389830606   	dc.b	$09, pCrashCymb, pSplashCymb, pCrashCymb, pSplashCymb, $06, $06
+000937                  	smpsLoop		$01, $02, MTPO_ThemeR_PWM1_Loop3, Target
+000937 F7               	dc.b	$F7
+000938 0102             	dc.b	$01,$02
+                        	if (MTPO_ThemeR_PWM1_Loop3<*)
+00093A                  		rom_ptr_z80(MTPO_ThemeR_PWM1_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00093A 0F89             	dc.w  (((((MTPO_ThemeR_PWM1_Loop3+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM1_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+00093C                  	smpsJump		MTPO_ThemeR_PWM1, Target
+00093C F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_PWM1<*)
+00093D                  		rom_ptr_z80(MTPO_ThemeR_PWM1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00093D E188             	dc.w  (((((MTPO_ThemeR_PWM1+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	
+00093F                  MTPO_ThemeR_PWM2:
+00093F                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+00093F E0C0             		dc.b $E0,panCenter
+                        	endif
+000941 80554799         	dc.b	nRst, $55, $47, pOpenHH
+
+000945                  MTPO_ThemeR_PWM2_Loop1:
+000945 0C0C0C0C0C24     	dc.b	$0C, $0C, $0C, $0C, $0C, $24
+00094B                  	smpsLoop		$00, $02, MTPO_ThemeR_PWM2_Loop1, Target
+00094B F7               	dc.b	$F7
+00094C 0002             	dc.b	$00,$02
+                        	if (MTPO_ThemeR_PWM2_Loop1<*)
+00094E                  		rom_ptr_z80(MTPO_ThemeR_PWM2_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00094E 4589             	dc.w  (((((MTPO_ThemeR_PWM2_Loop1+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM2_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000950 0C0C0C0C0C0C180C 	dc.b	$0C, $0C, $0C, $0C, $0C, $0C, $18, $0C
+000958 0C48             	dc.b	$0C, $48
+
+00095A                  MTPO_ThemeR_PWM2_Loop2:
+00095A 0C0C0C0C0C24     	dc.b	$0C, $0C, $0C, $0C, $0C, $24
+000960                  	smpsLoop		$00, $02, MTPO_ThemeR_PWM2_Loop2, Target
+000960 F7               	dc.b	$F7
+000961 0002             	dc.b	$00,$02
+                        	if (MTPO_ThemeR_PWM2_Loop2<*)
+000963                  		rom_ptr_z80(MTPO_ThemeR_PWM2_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000963 5A89             	dc.w  (((((MTPO_ThemeR_PWM2_Loop2+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM2_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000965 0C0C0C0C0C0C180C 	dc.b	$0C, $0C, $0C, $0C, $0C, $0C, $18, $0C
+00096D 0C3C             	dc.b	$0C, $3C
+00096F                  	smpsJump		MTPO_ThemeR_PWM2, Target
+00096F F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_PWM2<*)
+000970                  		rom_ptr_z80(MTPO_ThemeR_PWM2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000970 3F89             	dc.w  (((((MTPO_ThemeR_PWM2+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	
+000972                  MTPO_ThemeR_PWM3:
+000972                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+000972 E0C0             		dc.b $E0,panCenter
+                        	endif
+000974 8C068181038C8C8C 	dc.b	pASnare, $06, pEKick, pEKick, $03, pASnare, pASnare, pASnare
+00097C 09810606068C8181 	dc.b	$09, pEKick, $06, $06, $06, pASnare, pEKick, pEKick
+000984 038C8C8C09810606 	dc.b	$03, pASnare, pASnare, pASnare, $09, pEKick, $06, $06
+00098C 038C8C0681818181 	dc.b	$03, pASnare, pASnare, $06, pEKick, pEKick, pEKick, pEKick
+000994 818103           	dc.b	pEKick, pEKick, $03
+
+000997                  MTPO_ThemeR_PWM3_Loop1:
+000997 038C8181         	dc.b	$03, pASnare, pEKick, pEKick
+
+00099B                  MTPO_ThemeR_PWM3_Loop5:
+00099B 068C038106       	dc.b	$06, pASnare, $03, pEKick, $06
+0009A0                  	smpsLoop		$00, $03, MTPO_ThemeR_PWM3_Loop1, Target
+0009A0 F7               	dc.b	$F7
+0009A1 0003             	dc.b	$00,$03
+                        	if (MTPO_ThemeR_PWM3_Loop1<*)
+0009A3                  		rom_ptr_z80(MTPO_ThemeR_PWM3_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009A3 9789             	dc.w  (((((MTPO_ThemeR_PWM3_Loop1+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM3_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0009A5 038C8181068C0381 	dc.b	$03, pASnare, pEKick, pEKick, $06, pASnare, $03, pEKick
+0009AD 8C060681         	dc.b	pASnare, $06, $06, pEKick
+
+0009B1                  MTPO_ThemeR_PWM3_Loop2:
+0009B1 8C038106038C8181 	dc.b	pASnare, $03, pEKick, $06, $03, pASnare, pEKick, pEKick
+0009B9 06               	dc.b	$06
+0009BA                  	smpsLoop		$00, $03, MTPO_ThemeR_PWM3_Loop2, Target
+0009BA F7               	dc.b	$F7
+0009BB 0003             	dc.b	$00,$03
+                        	if (MTPO_ThemeR_PWM3_Loop2<*)
+0009BD                  		rom_ptr_z80(MTPO_ThemeR_PWM3_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009BD B189             	dc.w  (((((MTPO_ThemeR_PWM3_Loop2+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM3_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0009BF 8C03818C818C0201 	dc.b	pASnare, $03, pEKick, pASnare, pEKick, pASnare, $02, $01
+
+0009C7                  MTPO_ThemeR_PWM3_Loop3:
+0009C7 8103068C03810603 	dc.b	pEKick, $03, $06, pASnare, $03, pEKick, $06, $03
+0009CF 8C               	dc.b	pASnare
+0009D0                  	smpsLoop		$00, $06, MTPO_ThemeR_PWM3_Loop3, Target
+0009D0 F7               	dc.b	$F7
+0009D1 0006             	dc.b	$00,$06
+                        	if (MTPO_ThemeR_PWM3_Loop3<*)
+0009D3                  		rom_ptr_z80(MTPO_ThemeR_PWM3_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009D3 C789             	dc.w  (((((MTPO_ThemeR_PWM3_Loop3+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM3_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0009D5 81               	dc.b	pEKick
+
+0009D6                  MTPO_ThemeR_PWM3_Loop4:
+0009D6 8C818B           	dc.b	pASnare, pEKick, pAKick
+0009D9                  	smpsLoop		$00, $04, MTPO_ThemeR_PWM3_Loop4, Target
+0009D9 F7               	dc.b	$F7
+0009DA 0004             	dc.b	$00,$04
+                        	if (MTPO_ThemeR_PWM3_Loop4<*)
+0009DC                  		rom_ptr_z80(MTPO_ThemeR_PWM3_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009DC D689             	dc.w  (((((MTPO_ThemeR_PWM3_Loop4+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM3_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0009DE 8C818C02018103   	dc.b	pASnare, pEKick, pASnare, $02, $01, pEKick, $03
+0009E5                  	smpsLoop		$01, $02, MTPO_ThemeR_PWM3_Loop5, Target
+0009E5 F7               	dc.b	$F7
+0009E6 0102             	dc.b	$01,$02
+                        	if (MTPO_ThemeR_PWM3_Loop5<*)
+0009E8                  		rom_ptr_z80(MTPO_ThemeR_PWM3_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009E8 9B89             	dc.w  (((((MTPO_ThemeR_PWM3_Loop5+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM3_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+0009EA                  	smpsJump		MTPO_ThemeR_PWM3, Target
+0009EA F6               	dc.b	$F6
+                        	if (MTPO_ThemeR_PWM3<*)
+0009EB                  		rom_ptr_z80(MTPO_ThemeR_PWM3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+0009EB 7289             	dc.w  (((((MTPO_ThemeR_PWM3+Target))<<8)&$FF00)|((((MTPO_ThemeR_PWM3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	
+0009ED                  MTPO_ThemeR_PWM4:
+0009ED                  	smpsStop
+0009ED F2               	dc.b	$F2
+
+0009EE                  MTPO_ThemeR_Patches:
+                        	;Distotion Guitar
+0009EE 39               	dc.b	$39
+0009EF 330151015F5F5F5F 	dc.b	$33, $01, $51, $01,	$5F, $5F, $5F, $5F
+0009F7 0F00001F01010101 	dc.b	$0F, $00, $00, $1F,	$01, $01, $01, $01
+0009FF 331A1A171E191888 	dc.b	$33, $1A, $1A, $17,	$1E, $19, $18, $88+$00
+                        	
+                        	;Electric Guitar (Clean)
+000A07 02               	dc.b	$02
+000A08 000000000C0C1616 	dc.b	$00, $00, $00, $00,	$0C, $0C, $16, $16
+000A10 1717000009090909 	dc.b	$17, $17, $00, $00,	$09, $09, $09, $09
+000A18 020202022110128C 	dc.b	$02, $02, $02, $02,	$21, $10, $12, $8C+$00
+                        	
+                        	;Electric Bass (Pick)
+000A20 3D               	dc.b	$3D
+000A21 000001055F5E5B5B 	dc.b	$00, $00, $01, $05,	$5F, $5E, $5B, $5B
+000A29 050C0E0E00040807 	dc.b	$05, $0C, $0E, $0E,	$00, $04, $08, $07
+000A31 B01939FC218E8C8A 	dc.b	$B0, $19, $39, $FC,	$21, $8A+$04, $8A+$02, $88+$02
+                        	
+                        	;Overdrive Guitar
+000A39 39               	dc.b	$39
+000A3A 032261211F121F1F 	dc.b	$03, $22, $61, $21,	$1F, $12, $1F, $1F
+000A42 0505050B04040404 	dc.b	$05, $05, $05, $0B,	$04, $04, $04, $04
+000A4A 101810181E151D88 	dc.b	$10, $18, $10, $18,	$1E, $15, $1D, $88+$00
+                        	
+                        	;Electric Guitar (Jazz)
+000A52 02               	dc.b	$02
+000A53 012461211F121F1F 	dc.b	$01, $24, $61, $21,	$1F, $12, $1F, $1F
+000A5B 0505050B04040404 	dc.b	$05, $05, $05, $0B,	$04, $04, $04, $04
+000A63 101810181C1C1C88 	dc.b	$10, $18, $10, $18,	$1C, $1C, $1C, $88+$00
+                        	
+                        	;Electric Bass (Finger)
+000A6B 1D               	dc.b	$1D
+000A6C 001021319F5F5F5F 	dc.b	$00, $10, $21, $31,	$9F, $5F, $5F, $5F
+000A74 000F0F0F09060600 	dc.b	$00, $0F, $0F, $0F,	$09, $06, $06, $00
+000A7C 0F181827198C8A8A 	dc.b	$0F, $18, $18, $27,	$19, $88+$04, $88+$02, $88+$02
+
+00000 Total Error(s)
+
+DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK              00000081 E
+DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
+DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  FMPITCH            00000000 E
+MTPO_THEMER_FM1    00000040    MTPO_THEMER_FM2    0000017B    MTPO_THEMER_FM3    000002B6
+MTPO_THEMER_FM4    0000034C    MTPO_THEMER_FM5    00000444    MTPO_THEMER_FM6    00000534
+MTPO_THEMER_JUMP1  00000042    MTPO_THEMER_JUMP2  0000017D    MTPO_THEMER_JUMP3  000002B8
+MTPO_THEMER_JUMP4  00000446    MTPO_THEMER_JUMP5  00000538    MTPO_THEMER_LOOP1  0000004F
+MTPO_THEMER_LOOP10 000002A1    MTPO_THEMER_LOOP11 000002BB    MTPO_THEMER_LOOP12 000002C3
+MTPO_THEMER_LOOP13 000002C9    MTPO_THEMER_LOOP14 000002D1    MTPO_THEMER_LOOP15 000002DD
+MTPO_THEMER_LOOP16 000002E3    MTPO_THEMER_LOOP17 000002ED    MTPO_THEMER_LOOP18 000002F3
+MTPO_THEMER_LOOP19 000002FB    MTPO_THEMER_LOOP2  0000006D    MTPO_THEMER_LOOP20 00000301
+MTPO_THEMER_LOOP21 00000307    MTPO_THEMER_LOOP22 0000030D    MTPO_THEMER_LOOP23 00000313
+MTPO_THEMER_LOOP24 00000319    MTPO_THEMER_LOOP25 00000323    MTPO_THEMER_LOOP26 00000329
+MTPO_THEMER_LOOP27 00000331    MTPO_THEMER_LOOP28 00000337    MTPO_THEMER_LOOP29 0000033D
+MTPO_THEMER_LOOP3  000000E5    MTPO_THEMER_LOOP30 00000343    MTPO_THEMER_LOOP31 00000539
+MTPO_THEMER_LOOP32 00000541    MTPO_THEMER_LOOP33 00000547    MTPO_THEMER_LOOP34 0000054F
+MTPO_THEMER_LOOP35 0000055B    MTPO_THEMER_LOOP36 00000561    MTPO_THEMER_LOOP37 0000056B
+MTPO_THEMER_LOOP38 00000571    MTPO_THEMER_LOOP39 00000579    MTPO_THEMER_LOOP4  000000F6
+MTPO_THEMER_LOOP40 0000057F    MTPO_THEMER_LOOP41 00000585    MTPO_THEMER_LOOP42 0000058B
+MTPO_THEMER_LOOP43 00000591    MTPO_THEMER_LOOP44 00000597    MTPO_THEMER_LOOP45 000005A1
+MTPO_THEMER_LOOP46 000005A7    MTPO_THEMER_LOOP47 000005AF    MTPO_THEMER_LOOP48 000005B5
+MTPO_THEMER_LOOP49 000005BB    MTPO_THEMER_LOOP5  00000166    MTPO_THEMER_LOOP50 000005C1
+MTPO_THEMER_LOOP51 000005D5    MTPO_THEMER_LOOP52 000005F3    MTPO_THEMER_LOOP53 0000066B
+MTPO_THEMER_LOOP54 0000067C    MTPO_THEMER_LOOP55 000006EC    MTPO_THEMER_LOOP6  0000018A
+MTPO_THEMER_LOOP7  000001A8    MTPO_THEMER_LOOP8  00000220    MTPO_THEMER_LOOP9  00000231
+MTPO_THEMER_PATCHES                           000009EE    MTPO_THEMER_PSG1   000005CA
+MTPO_THEMER_PSG2   00000701    MTPO_THEMER_PSG3   000007F5    MTPO_THEMER_PWM1   000008E1
+MTPO_THEMER_PWM1_LOOP1                        000008EE    
+MTPO_THEMER_PWM1_LOOP2                        00000907    
+MTPO_THEMER_PWM1_LOOP3                        0000090F    
+MTPO_THEMER_PWM1_LOOP4                        00000922    MTPO_THEMER_PWM2   0000093F
+MTPO_THEMER_PWM2_LOOP1                        00000945    
+MTPO_THEMER_PWM2_LOOP2                        0000095A    MTPO_THEMER_PWM3   00000972
+MTPO_THEMER_PWM3_LOOP1                        00000997    
+MTPO_THEMER_PWM3_LOOP2                        000009B1    
+MTPO_THEMER_PWM3_LOOP3                        000009C7    
+MTPO_THEMER_PWM3_LOOP4                        000009D6    
+MTPO_THEMER_PWM3_LOOP5                        0000099B    MTPO_THEMER_PWM4   000009ED
+NA0                0000008A E  NA1                00000096 E  NA2                000000A2 E
+NA3                000000AE E  NA4                000000BA E  NA5                000000C6 E
+NA6                000000D2 E  NA7                000000DE E  NAB0               00000089 E
+NAB1               00000095 E  NAB2               000000A1 E  NAB3               000000AD E
+NAB4               000000B9 E  NAB5               000000C5 E  NAB6               000000D1 E
+NAB7               000000DD E  NB0                0000008C E  NB1                00000098 E
+NB2                000000A4 E  NB3                000000B0 E  NB4                000000BC E
+NB5                000000C8 E  NB6                000000D4 E  NBB0               0000008B E
+NBB1               00000097 E  NBB2               000000A3 E  NBB3               000000AF E
+NBB4               000000BB E  NBB5               000000C7 E  NBB6               000000D3 E
+NBB7               000000DF E  NC0                00000081 E  NC1                0000008D E
+NC2                00000099 E  NC3                000000A5 E  NC4                000000B1 E
+NC5                000000BD E  NC6                000000C9 E  NC7                000000D5 E
+NCS0               00000082 E  NCS1               0000008E E  NCS2               0000009A E
+NCS3               000000A6 E  NCS4               000000B2 E  NCS5               000000BE E
+NCS6               000000CA E  NCS7               000000D6 E  ND0                00000083 E
+ND1                0000008F E  ND2                0000009B E  ND3                000000A7 E
+ND4                000000B3 E  ND5                000000BF E  ND6                000000CB E
+ND7                000000D7 E  NE0                00000085 E  NE1                00000091 E
+NE2                0000009D E  NE3                000000A9 E  NE4                000000B5 E
+NE5                000000C1 E  NE6                000000CD E  NE7                000000D9 E
+NEB0               00000084 E  NEB1               00000090 E  NEB2               0000009C E
+NEB3               000000A8 E  NEB4               000000B4 E  NEB5               000000C0 E
+NEB6               000000CC E  NEB7               000000D8 E  NF0                00000086 E
+NF1                00000092 E  NF2                0000009E E  NF3                000000AA E
+NF4                000000B6 E  NF5                000000C2 E  NF6                000000CE E
+NF7                000000DA E  NFS0               00000087 E  NFS1               00000093 E
+NFS2               0000009F E  NFS3               000000AB E  NFS4               000000B7 E
+NFS5               000000C3 E  NFS6               000000CF E  NFS7               000000DB E
+NG0                00000088 E  NG1                00000094 E  NG2                000000A0 E
+NG3                000000AC E  NG4                000000B8 E  NG5                000000C4 E
+NG6                000000D0 E  NG7                000000DC E  NRST               00000080 E
+PAKICK             0000008B E  PANCENTER          000000C0 S  PANCENTRE          000000C0 S
+PANLEFT            00000080 S  PANNONE            00000000 S  PANRIGHT           00000040 S
+PASNARE            0000008C E  PBELL              0000008D E  PBONGOHI           00000092 E
+PBONGOLO           00000093 E  PCLAP              0000008A E  PCLICKHI           00000090 E
+PCLICKLO           00000091 E  PCLOSEDHH          00000098 E  PCOWBELL           0000008F E
+PCRASHCYMB         00000089 E  PCRA_D81           00000081 E  PCRA_D82           0000008C E
+PCRA_D83           00000085 E  PCRA_D84           00000086 E  PCRA_D85           00000087 E
+PEHIHAT            00000088 E  PEKICK             00000081 E  PESNARE            00000082 E
+PFINGSNAP          0000008E E  PFINGSNAPHI        0000008E E  PFINGSNAPLO        0000009E E
+PNEPDADA           0000009D E  POPENHH            00000099 E  PRIDEBELL          00000084 E
+PSEGA              00000097 E  PSGDELTA           0000000C E  PSGVOI1            0000000A E
+PSGVOI2            00000000 E  PSGVOL1            00000003 E  PSGVOL2            00000003 E
+PSILENCE           00000096 E  PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E
+PTIMPANILO         00000095 E  PTOMHI             00000085 E  PTOMLOW            00000087 E
+PTOMLOWER          0000009A E  PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E
+PTOMMID            00000086 E  PWMPITCH           00000000 E  PWMVOL1            0000006F E
+PWMVOL2            00000038 E  SMPSED             000000ED E  SMPSEE             000000EE E
+SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E
+SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E
+SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E  SMPSPITCH02LO      000000E8 E
+SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E  SMPSPITCH04HI      00000030 E
+SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E  SMPSPITCH05LO      000000C4 E
+SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E  SMPSPITCH07HI      00000054 E
+SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E  SMPSPITCH08LO      000000A0 E
+SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E  SMPSPITCH10HI      00000078 E
+SMPSPITCH10LO      00000088 E  TARGET             00040000 E

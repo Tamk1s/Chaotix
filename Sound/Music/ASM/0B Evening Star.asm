@@ -1,4 +1,4 @@
-Target	EQU	$43512
+Target	EQU	$40000
 
 PWMVol	EQU	$7F
 	smpsHeaderVoice	BMODC_FrontEnd_Patches, Target

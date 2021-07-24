@@ -1,4 +1,4 @@
-Target	EQU	$4CBBF
+Target	EQU	$40000
 
 FMVoi_SteelGit1	EQU	$00
 FMVoi_Bass		EQU	$01

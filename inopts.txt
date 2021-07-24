@@ -295,9 +295,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "TRIAL AND ERROR"
-	;!@ New data
-	;String "TRIAL AND ERROR"
-	String	"NOP"
+	String	"PUNCHOUT THEME ROCK"
 	BYTE	CASC_NullTerm
 	String "WALKIN="
 	BYTE	CASC_NullTerm

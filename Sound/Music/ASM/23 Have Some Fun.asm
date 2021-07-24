@@ -1,4 +1,4 @@
-Target	EQU	$4E6BC
+Target	EQU	$40000
 PWMVol	EQU	$7F
 ;!@ FMVol	EQU	$08
 FMVol	EQU	$04

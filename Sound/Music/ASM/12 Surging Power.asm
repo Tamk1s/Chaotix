@@ -1,4 +1,4 @@
-Target	EQU	$4A443
+Target	EQU	$40000
 PSGVol	EQU	$03
 PSGv1	EQU	$00
 PSGv2	EQU	$00

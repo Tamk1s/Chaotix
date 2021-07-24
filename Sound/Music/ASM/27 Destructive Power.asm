@@ -1,4 +1,4 @@
-Target	EQU	$50127
+Target	EQU	$40000
 PWMVol1	EQU	$7F
 PWMVol2	EQU	PWMVol1-$0F
 PWMPitch	EQU	$00

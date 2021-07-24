@@ -1,4 +1,4 @@
-Target	EQU	$48E0B
+Target	EQU	$40000
 	smpsHeaderVoice	SA3_Factory_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempoC	$02, $06

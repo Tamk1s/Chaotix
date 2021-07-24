@@ -1,4 +1,4 @@
-Target	EQU	$4BAC7
+Target	EQU	$40000
 
 PSGVoi	EQU $02
 PSGPitch1	EQU	PSGDelta

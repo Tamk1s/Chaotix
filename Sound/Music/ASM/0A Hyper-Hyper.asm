@@ -1,4 +1,4 @@
-Target	EQU	$4218E
+Target	EQU	$40000
 PSGVoi1	EQU	$00
 PSGVoi2	EQU	$00
 PSGVoi3	EQU	$00

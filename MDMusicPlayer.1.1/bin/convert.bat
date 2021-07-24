@@ -1,7 +1,7 @@
 cls
-SMPS2ASM.exe S1_Opt.bin MegaPCM2_KC HDN_BlueTwl
-SMPS2ASM.exe PWM1_Opt.bin MegaPCM2_KC HDN_BlueTwl_PWM1
-SMPS2ASM.exe PWM2_Opt.bin MegaPCM2_KC HDN_BlueTwl_PWM2
-SMPS2ASM.exe PWM3_Opt.bin MegaPCM2_KC HDN_BlueTwl_PWM3
-SMPS2ASM.exe PWM4_Opt.bin MegaPCM2_KC HDN_BlueTwl_PWM4
+SMPS2ASM.exe S1_Opt.bin MegaPCM2_KC MTPO_ThemeR
+SMPS2ASM.exe PWM1_Opt.bin MegaPCM2_KC MTPO_ThemeR_PWM1
+SMPS2ASM.exe PWM2_Opt.bin MegaPCM2_KC MTPO_ThemeR_PWM2
+SMPS2ASM.exe PWM3_Opt.bin MegaPCM2_KC MTPO_ThemeR_PWM3
+SMPS2ASM.exe PWM4_Opt.bin MegaPCM2_KC MTPO_ThemeR_PWM4
 pause
