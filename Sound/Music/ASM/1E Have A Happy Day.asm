@@ -1,4 +1,4 @@
-Target	EQU	$40000
+Target	EQU	$4D443
 
 PWMVol	EQU	$87
 FMVolChords1	EQU	$0E+$04

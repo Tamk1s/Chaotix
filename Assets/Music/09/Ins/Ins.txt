@@ -1,0 +1,20 @@
+MID2SMPS Tempo:
+12/02
+
+FM:
+Use default MID2SMPS 0.350 INS Library!
+
+PSG:
+Use defaults on instrums channels
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+Treat all channels as melodic notes for conversion,
+due to PWM volume ctrl needed!
+
+29	E2	Paper Smack		$88/pEHiHat
+37	C3	Bass Drum		$81/pEKick
+40	E-3	Hand Clap		$8A/pClap
+41	E3	Electric Snare	$82/pESnare
+45	G#3	Pedal Hi Hat	$98/pClosedHH
+46	B-3	Open Hi Hat		$99/pOpenHH

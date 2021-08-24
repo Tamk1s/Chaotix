@@ -1,4 +1,4 @@
-Target	EQU	$40000
+Target	EQU	$4A837
 
 Maniax_Header:
 	smpsHeaderVoice	Maniax_Patches,Target

@@ -118,6 +118,9 @@ REM bclr	#2, d0				;Clear bits for $05 (2nd bit)
 REM move.b	d0,($FFFFFCEA).w	;Restore d0 back into combi ring state
 REM rts
 
+REM Patch Shield monitor to play sphere get sfx
+bytepatch.exe -a 0x101D0 kc.bin 705E
+
 REM Patch Large Hourglass monitor to goto new 0x14C48 code (its code got overwritten)
 bytepatch.exe -a 0x14B60 kc.bin 6000 00E8
 REM New Code bytepatch
@@ -174,3 +177,32 @@ REM Gameover/neg rings 1
 REM Gameover/neg rings 2
 REM GotThrough 1
 REM GotThrough 2
+
+
+REM Loop Chunk experiemnt (spike modification)
+
+
+REM Change SST $22
+REM bytepatch.exe -a 0x023BC0 kc.bin 1D7C 6010 0022
+
+REM Change art bank to $00
+REM bytepatch.exe -a 0x023BCA kc.bin 0011
+REM Change art frames to $11 (Red ball, overriden to loop chunk art)
+REM bytepatch.exe -a 0x023C82 kc.bin 1100 1100 1100 1100
+REM Enable high 32x sprite prio
+REM bytepatch.exe -a 0x023BD0 kc.bin 1080
+REM Enable spritemasking ability
+REM bytepatch.exe -a 0x023BD4 kc.bin 1D7C 0003 0012 1D7C 005F 0013
+REM Disable physical collision
+REM bytepatch.exe -a 0x023C0E kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 
+REM Disable pain response
+REM bytepatch.exe -a 0x023C9B kc.bin 7000					
+
+
+REM Change Artbank to $11 (Global)
+REM bytepatch.exe -a 0x01D2D2 kc.bin 3D7C 0011 0010
+REM bytepatch.exe -a 0x01D2D8 kc.bin 1D7C 0011 0012 1D7C 0011 0013
+REM bytepatch.exe -a 0x01D2E4 kc.bin 3D7C 0011 0020
+
+REM Disable weird object
+REM bytepatch.exe -a 0x11E82 kc.bin  0089 4786 

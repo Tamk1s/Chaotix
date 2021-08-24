@@ -2213,7 +2213,12 @@ StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
 			DWORD	AP3_LvlGbl_SpringB_YD+ArtPtr32X_Offset
 			DWORD	AP3_LvlGbl_SpikeV+ArtPtr32X_Offset
 			DWORD	AP3_LvlGbl_SpikeH+ArtPtr32X_Offset
-			DWORD	AP3_LvlGbl_BallR_00+ArtPtr32X_Offset
+			
+			;Loop chunk override!
+			;!@DWORD	AP3_LvlGbl_BallR_00+ArtPtr32X_Offset
+			DWORD	AP3_SSZEns_UnkLoopChkMask+ArtPtr32X_Offset
+			
+			
 			DWORD	AP3_LvlGbl_BallR_01+ArtPtr32X_Offset
 			DWORD	AP3_LvlGbl_BallR_02+ArtPtr32X_Offset
 			DWORD	AP3_LvlGbl_BallR_03+ArtPtr32X_Offset
@@ -2857,14 +2862,25 @@ StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
 			DWORD	AP3_MiscGlbl_SignPost+ArtPtr32X_Offset
 			DWORD	AP3_MiscGlbl_SignFront+ArtPtr32X_Offset
 			DWORD	AP3_MiscGlbl_SignSide+ArtPtr32X_Offset
-			DWORD	AP3_MiscGlbl_InvinStar_00+ArtPtr32X_Offset
-			DWORD	AP3_MiscGlbl_InvinStar_01+ArtPtr32X_Offset
-			DWORD	AP3_MiscGlbl_InvinStar_02+ArtPtr32X_Offset
-			DWORD	AP3_MiscGlbl_InvinStar_03+ArtPtr32X_Offset
+			
+			;!@ Art mod reroute
+			;DWORD	AP3_MiscGlbl_InvinStar_00+ArtPtr32X_Offset
+			;DWORD	AP3_MiscGlbl_InvinStar_01+ArtPtr32X_Offset
+			;DWORD	AP3_MiscGlbl_InvinStar_02+ArtPtr32X_Offset
+			;DWORD	AP3_MiscGlbl_InvinStar_03+ArtPtr32X_Offset
+			;DWORD	AP3_MiscGlbl_UnkStar_00+ArtPtr32X_Offset
+			;DWORD	AP3_MiscGlbl_UnkStar_01+ArtPtr32X_Offset
+			;DWORD	AP3_MiscGlbl_UnkStar_02+ArtPtr32X_Offset
+			;DWORD	AP3_MiscGlbl_UnkStar_03+ArtPtr32X_Offset
 			DWORD	AP3_MiscGlbl_UnkStar_00+ArtPtr32X_Offset
 			DWORD	AP3_MiscGlbl_UnkStar_01+ArtPtr32X_Offset
 			DWORD	AP3_MiscGlbl_UnkStar_02+ArtPtr32X_Offset
 			DWORD	AP3_MiscGlbl_UnkStar_03+ArtPtr32X_Offset
+			DWORD	NullLPtr_Terminator
+			DWORD	NullLPtr_Terminator
+			DWORD	NullLPtr_Terminator
+			DWORD	NullLPtr_Terminator
+			
 			DWORD	AP3_MiscGlbl_Bubble+ArtPtr32X_Offset
 			DWORD	AP3_MiscGlbl_WaterSpl_00+ArtPtr32X_Offset
 			DWORD	AP3_MiscGlbl_WaterSpl_01+ArtPtr32X_Offset

@@ -43,6 +43,7 @@ MakePath "Art/palettes/MD/Palswaps"		;!@
 MakePath "Art/palettes/Mars"
 MakePath "Art/palettes/Mars/Global"
 MakePath "Art/palettes/Mars/Menus"
+MakePath "Art/palettes/Mars/SS"
 
 ;Region @ArtPaths
 MakePath "Art/Mars"						;!@
@@ -3019,6 +3020,20 @@ Extract $2295CC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_BG.bin"
 ;EndRegion
 
 ;Region @X_PalMars
+;Region @X_PalMars_SS
+Extract	$07F648 $22 "Art/palettes/Mars/SS/SS_Glbl.bin"
+Extract	$07F66A $9A "Art/palettes/Mars/SS/SS_Objs.bin"
+Extract	$07F704 $C0 "Art/palettes/Mars/SS/SS_Palc.bin"
+Extract	$07F7C4 $1E "Art/palettes/Mars/SS/SS_Mighty.bin"
+Extract	$07F7E2 $24 "Art/palettes/Mars/SS/SS_Knuckles.bin"
+Extract	$07F806 $24 "Art/palettes/Mars/SS/SS_Charmy.bin"
+Extract	$07F82A $22 "Art/palettes/Mars/SS/SS_Vector.bin"
+Extract	$07F84C $1C "Art/palettes/Mars/SS/SS_Bomb.bin"
+Extract	$07F868 $24 "Art/palettes/Mars/SS/SS_Heavy.bin"
+Extract	$07F88C $1C "Art/palettes/Mars/SS/SS_Espio.bin"
+;EndRegion
+
+
 ;Region @X_PalmarsGlobal
 Extract	$001924 $24 "Art/palettes/Mars/Global/HUD.bin"
 Extract	$22921A	$24	"Art/palettes/Mars/Global/Mighty.bin"

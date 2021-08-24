@@ -5,6 +5,8 @@ REM Optimize all MIDI Songs
 REM SMPSOpt.exe S1 "81\Out\Mus81 - GHZ.bin" "81\Out\Mus81 - GHZ.bin"
 
 REM Moves all compiled songs from each folder into SMPSPlay
+REM Music
+
 REM Copy /y /b "01\Out\01 Door Into Summer.bin" "Preview\Data\Knuckles Maniax\01 Door Into Summer.skc"
 Copy /y /b "02\Out\02 Electoria.bin" "Preview\Data\Knuckles Maniax\02 Electoria.skc"
 REM Copy /y /b "03\Out\03 Speed Of Sound.bin" "Preview\Data\Knuckles Maniax\03 Speed Of Sound.skc"
@@ -13,7 +15,7 @@ REM Copy /y /b "05\Out\05 Midnight Greenhouse.bin" "Preview\Data\Knuckles Maniax
 REM Copy /y /b "06\Out\06 New Moon.bin" "Preview\Data\Knuckles Maniax\06 New Moon.skc"
 REM Copy /y /b "07\Out\07 Labyrinth.bin" "Preview\Data\Knuckles Maniax\07 Labyrinth.skc"
 Copy /y /b "08\Out\08 Trial And Error.bin" "Preview\Data\Knuckles Maniax\08 Trial And Error.skc"
-REM Copy /y /b "09\Out\09 Walkin.bin" "Preview\Data\Knuckles Maniax\09 Walkin.skc"
+Copy /y /b "09\Out\09 Walkin.bin" "Preview\Data\Knuckles Maniax\09 Walkin.skc"
 Copy /y /b "0A\Out\0A Hyper-Hyper.bin" "Preview\Data\Knuckles Maniax\0A Hyper-Hyper.skc"
 Copy /y /b "0B\Out\0B Evening Star.bin" "Preview\Data\Knuckles Maniax\0B Evening Star.skc"
 Copy /y /b "0C\Out\0C Moonrise.bin" "Preview\Data\Knuckles Maniax\0C Moonrise.skc"
@@ -49,7 +51,13 @@ REM Copy /y /b "28\Out\28 Just Another Day.bin" "Preview\Data\Knuckles Maniax\28
 Copy /y /b "29\Out\29 Decision 2nd.bin" "Preview\Data\Knuckles Maniax\29 Decision 2nd.skc"
 Copy /y /b "Test\PWM_PSG_Test\Out\Soundtest.bin" "Preview\Data\Knuckles Maniax\Soundtest.skc"
 
+REM SFX
+REM Copy /y /b "5F\Out\5F.bin" "Preview\Data\Knuckles Maniax\SFX\5F.sf3"
+
+
 REM Copies all finalized ASM files to working project dir for recompilation into driver
+REM Music
+
 REM Copy /Y "01\Out\KC.asm" "..\..\Sound\Music\ASM\01 Door Into Summer.asm"
 Copy /Y "02\Out\KC.asm" "..\..\Sound\Music\ASM\02 Electoria.asm"
 REM Copy /Y "03\Out\KC.asm" "..\..\Sound\Music\ASM\03 Speed Of Sound.asm"
@@ -58,7 +66,7 @@ REM Copy /Y "05\Out\KC.asm" "..\..\Sound\Music\ASM\05 Midnight Greenhouse.asm"
 REM Copy /Y "06\Out\KC.asm" "..\..\Sound\Music\ASM\06 New Moon.asm"
 REM Copy /Y "07\Out\KC.asm" "..\..\Sound\Music\ASM\07 Labyrinth.asm"
 Copy /Y "08\Out\KC.asm" "..\..\Sound\Music\ASM\08 Trial And Error.asm"
-REM Copy /Y "09\Out\KC.asm" "..\..\Sound\Music\ASM\09 Walkin.asm"
+Copy /Y "09\Out\KC.asm" "..\..\Sound\Music\ASM\09 Walkin.asm"
 Copy /Y "0A\Out\KC.asm" "..\..\Sound\Music\ASM\0A Hyper-Hyper.asm"
 Copy /Y "0B\Out\KC.asm" "..\..\Sound\Music\ASM\0B Evening Star.asm"
 Copy /Y "0C\Out\KC.asm" "..\..\Sound\Music\ASM\0C Moonrise.asm"
@@ -91,4 +99,7 @@ Copy /Y "26\Out\KC.asm" "..\..\Sound\Music\ASM\26 Tribute.asm"
 Copy /Y "27\Out\KC.asm" "..\..\Sound\Music\ASM\27 Destructive Power.asm"
 REM Copy /Y "28\Out\KC.asm" "..\..\Sound\Music\ASM\28 Just Another Day.asm"
 Copy /Y "29\Out\KC.asm" "..\..\Sound\Music\ASM\29 Decision 2nd.asm"
+
+REM SFX
+REM Copy /Y "5F\Out\5F.asm" "..\..\Sound\Music\ASM\5F.asm"
 pause

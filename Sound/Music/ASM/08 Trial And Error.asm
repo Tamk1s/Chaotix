@@ -1,4 +1,4 @@
-Target	EQU	$40000
+Target	EQU	$41D19
 
 FMPitch1	EQU $00
 FMPitch2	EQU $00

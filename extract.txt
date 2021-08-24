@@ -22,6 +22,20 @@ Extract $00BFEA	$4A	"Misc/CharStats/CT_Bomb.bin"
 Extract $00C034	$4A	"Misc/CharStats/CT_Espio.bin"
 ;EndRegion
 
+;Region @X_PalMars_SS
+MakePath "Art/palettes/Mars/SS"
+Extract	$07F648 $22 "Art/palettes/Mars/SS/SS_Glbl.bin"
+Extract	$07F66A $9A "Art/palettes/Mars/SS/SS_Objs.bin"
+Extract	$07F704 $C0 "Art/palettes/Mars/SS/SS_Palc.bin"
+Extract	$07F7C4 $1E "Art/palettes/Mars/SS/SS_Mighty.bin"
+Extract	$07F7E2 $24 "Art/palettes/Mars/SS/SS_Knuckles.bin"
+Extract	$07F806 $24 "Art/palettes/Mars/SS/SS_Charmy.bin"
+Extract	$07F82A $22 "Art/palettes/Mars/SS/SS_Vector.bin"
+Extract	$07F84C $1C "Art/palettes/Mars/SS/SS_Bomb.bin"
+Extract	$07F868 $24 "Art/palettes/Mars/SS/SS_Heavy.bin"
+Extract	$07F88C $1C "Art/palettes/Mars/SS/SS_Espio.bin"
+;EndRegion
+
 
 ;MakePath "Art/palettes/MD/Palswaps"		;!@
 
