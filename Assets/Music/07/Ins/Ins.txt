@@ -1,0 +1,31 @@
+MID2SMPS Tempo:
+12/03=90 BPM
+
+FM:
+Use provided Bank2.gyb, derived from Default instruments
+from MID2SMPS 0.350 default library
+MusicBox -> MusicBox2.vgi
+String Ensemble 1 -> Modified Strings 2 default
+FX4 Atmos use -> Modified Synth 2 default (remapped!)
+
+PSG:
+Use PSG10 on all 3 channels
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+
+35	B2	Accoustic Drum	$8B/pAKick
+37	C3	Bass Drum		$81/pEKick
+38	D3	ASnare			$8C/pASnare
+41	E3	Electric Snare	$82/pESnare
+42  F#3	ClosedHH		$98/pClosedHH
+46	A3	LowTom			$9A/pTomLower
+47	B-3	OpenHH			$99/pOpenHH
+48	B3	Low Mid-Tom		$87/pTomLow
+49	C4	High Mid-Tom	$86/pTomMid
+50	C#4	Crash Cymbal	$89/pCrashCymb
+51	D4	High Tom		$85/pTomHi
+
+54	F4	Ride Bell		$84/pRideBell
+56	G4	Splash Cymbal	$83/pSplashCymb
+57	G#4	Cowbell			$97/pSega

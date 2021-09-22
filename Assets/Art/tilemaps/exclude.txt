@@ -1,0 +1,11 @@
+32x_PalTemplate.bin
+.bmp
+.dat
+.jpg
+.png
+.pal
+.log
+.7z
+.txt
+nem.bat
+exclude.txt

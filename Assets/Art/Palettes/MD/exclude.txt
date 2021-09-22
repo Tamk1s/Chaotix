@@ -1,0 +1,9 @@
+.bmp
+.dat
+.jpg
+.png
+.pal
+.log
+.7z
+pal.bat
+exclude.txt

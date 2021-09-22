@@ -1,4 +1,4 @@
-3;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Knuckles' Chaotix (JU / 5) Batch Extraction File for ROMulan
 ;
 ; 2011-02-24 - Stealth - First Release
@@ -36,8 +36,10 @@ MakePath "Sound/PWM"
 MakePath "Art"
 MakePath "Art/palettes"
 MakePath "Art/palettes/MD"
+MakePath "Art/palettes/MD/Menus"		;!@
 MakePath "Art/palettes/MD/Palcycles"	;!@
 MakePath "Art/palettes/MD/Palswaps"		;!@
+
 
 ;!@
 MakePath "Art/palettes/Mars"
@@ -170,6 +172,12 @@ MakePath "Art/Mars/Uncomp/InvinStars"
 MakePath "Art/artnem"
 MakePath "Art/artnem/aniart"
 MakePath "Art/artnem/aniart/Data"
+MakePath "Art/artnem/Menus"
+MakePath "Art/artnem/Menus/Soundtest"
+
+;!@
+MakePath "Art/tilemaps"
+MakePath "Art/tilemaps/Menus"
 
 MakePath "Levels"
 MakePath "Levels/BBZ"
@@ -180,6 +188,7 @@ MakePath "Levels/BBZ/FG"
 MakePath "Levels/BBZ/BG"
 MakePath "Levels/BBZ/Collisn"
 MakePath "Levels/BBZ/Pal"
+MakePath "Levels/BBZ/Pal32x"		;!@
 MakePath "Levels/BBZ/Sprites"
 MakePath "Levels/SSZ"
 MakePath "Levels/SSZ/8x8"
@@ -189,6 +198,7 @@ MakePath "Levels/SSZ/FG"
 MakePath "Levels/SSZ/BG"
 MakePath "Levels/SSZ/Collisn"
 MakePath "Levels/SSZ/Pal"
+MakePath "Levels/SSZ/Pal32x"		;!@
 MakePath "Levels/SSZ/Sprites"
 MakePath "Levels/AAZ"
 MakePath "Levels/AAZ/8x8"
@@ -198,6 +208,7 @@ MakePath "Levels/AAZ/FG"
 MakePath "Levels/AAZ/BG"
 MakePath "Levels/AAZ/Collisn"
 MakePath "Levels/AAZ/Pal"
+MakePath "Levels/AAZ/Pal32x"		;!@
 MakePath "Levels/AAZ/Sprites"
 MakePath "Levels/TTZ"
 MakePath "Levels/TTZ/8x8"
@@ -207,6 +218,7 @@ MakePath "Levels/TTZ/FG"
 MakePath "Levels/TTZ/BG"
 MakePath "Levels/TTZ/Collisn"
 MakePath "Levels/TTZ/Pal"
+MakePath "Levels/TTZ/Pal32x"		;!@
 MakePath "Levels/TTZ/Sprites"
 MakePath "Levels/MMZ"
 MakePath "Levels/MMZ/8x8"
@@ -216,6 +228,7 @@ MakePath "Levels/MMZ/FG"
 MakePath "Levels/MMZ/BG"
 MakePath "Levels/MMZ/Collisn"
 MakePath "Levels/MMZ/Pal"
+MakePath "Levels/MMZ/Pal32x"		;!@
 MakePath "Levels/MMZ/Sprites"
 MakePath "Levels/Intro"
 MakePath "Levels/Intro/8x8"
@@ -225,6 +238,7 @@ MakePath "Levels/Intro/FG"
 MakePath "Levels/Intro/BG"
 MakePath "Levels/Intro/Collisn"
 MakePath "Levels/Intro/Pal"
+MakePath "Levels/Intro/Pal32x"		;!@
 MakePath "Levels/Intro/Sprites"
 MakePath "Levels/Intro/Sprites/Conv"
 MakePath "Levels/Tutorial"
@@ -235,6 +249,7 @@ MakePath "Levels/Tutorial/FG"
 MakePath "Levels/Tutorial/BG"
 MakePath "Levels/Tutorial/Collisn"
 MakePath "Levels/Tutorial/Pal"
+MakePath "Levels/Tutorial/Pal32x"	;!@
 MakePath "Levels/Tutorial/Sprites"
 MakePath "Levels/Entrance"
 MakePath "Levels/Entrance/8x8"
@@ -244,6 +259,7 @@ MakePath "Levels/Entrance/FG"
 MakePath "Levels/Entrance/BG"
 MakePath "Levels/Entrance/Collisn"
 MakePath "Levels/Entrance/Pal"
+MakePath "Levels/Entrance/Pal32x"	;!@
 MakePath "Levels/Entrance/Sprites"
 MakePath "Collisn"
 ;endregion
@@ -2959,6 +2975,14 @@ Extract $2BA6E4  $80 "Levels/SSZ/Pal/BossN.bin"
 ;endregion
 ;endregion
 
+;Region @X_PalData_Gens
+;;;;;;;;;;;;;;;;;;;;;;
+;Other non-level palette Data
+;;;;;;;;;;;;;;;;;;;;;;
+Extract	$006E18	$080 "Art/palettes/MD/Menus/Soundtest.bin"
+Extract	$006E98	$020 "Art/palettes/MD/Menus/Soundtest_Amy.bin"
+;EndRegion
+
 ;Region @X_PalcData_Gens
 ;;;;;;;;;;;;;;;;;;;;;;
 ;!@ Palcycle data
@@ -3019,7 +3043,64 @@ Extract $2293EC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_FG.bin"
 Extract $2295CC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_BG.bin"
 ;EndRegion
 
+
 ;Region @X_PalMars
+
+;Region @X_PalmarsLevel
+Extract	$001924 $24 "Art/palettes/Mars/Global/HUD.bin"
+
+;Region @X_Secondary
+Extract $001A40	$40 "Levels/BBZ/Pal32x/S_15D.bin"
+Extract $001A80	$5E "Levels/BBZ/Pal32x/S_15N.bin"
+Extract $001ADE	$40 "Levels/BBZ/Pal32x/S_13S.bin"
+Extract $001B1E	$40 "Levels/BBZ/Pal32x/S_14M.bin"
+Extract $001B5E	$40 "Levels/BBZ/Pal32x/S_45S.bin"
+Extract $001B9E	$40 "Levels/BBZ/Pal32x/S_5M.bin"
+
+Extract $001BDE	$40 "Levels/MMZ/Pal32x/S_15M.bin"
+Extract $001C1E	$40 "Levels/MMZ/Pal32x/S_15D.bin"
+Extract $001C5E	$40 "Levels/MMZ/Pal32x/S_15S.bin"
+Extract $001C9E	$40 "Levels/MMZ/Pal32x/S_15N.bin"
+
+Extract $001CDE	$40 "Levels/AAZ/Pal32x/S_15D_Lit.bin"
+Extract $001D1E	$40 "Levels/AAZ/Pal32x/S_15D.bin"
+Extract $001D5E	$40 "Levels/AAZ/Pal32x/S_15M_Lit.bin"
+Extract $001D9E	$40 "Levels/AAZ/Pal32x/S_15M.bin"
+Extract $001DDE	$40 "Levels/AAZ/Pal32x/S_15S_Lit.bin"
+Extract $001E1E	$40 "Levels/AAZ/Pal32x/S_15S.bin"
+Extract $001E5E	$40 "Levels/AAZ/Pal32x/S_15N_Lit.bin"
+Extract $001E9E	$40 "Levels/AAZ/Pal32x/S_15N.bin"
+
+Extract $001EDE	$40 "Levels/TTZ/Pal32x/S_15M.bin"
+Extract $001F1E	$40 "Levels/TTZ/Pal32x/S_15D.bin"
+Extract $001F5E	$40 "Levels/TTZ/Pal32x/S_15S.bin"
+Extract $001F9E	$40 "Levels/TTZ/Pal32x/S_15N.bin"
+
+Extract $001F9E	$4E "Levels/SSZ/Pal32x/S_15D.bin"
+Extract $00202C	$4E "Levels/SSZ/Pal32x/S_15M.bin"
+Extract $00207A	$4E "Levels/SSZ/Pal32x/S_15S.bin"
+Extract $0020C8	$4E "Levels/SSZ/Pal32x/S_15N.bin"
+;EndRegion
+
+;Region @Primary
+Extract $012C66	$48 "Levels/BBZ/Pal32x/P_15MN.bin"
+Extract $012CAE	$48 "Levels/SSZ/Pal32x/P_15MN.bin"
+Extract $012CF6	$40 "Levels/AAZ/Pal32x/P_15MN.bin"
+Extract $012D36	$48 "Levels/TTZ/Pal32x/P_15MN.bin"
+Extract $012D7E	$48 "Levels/MMZ/Pal32x/P_15MN.bin"
+
+Extract $012DC6	$40 "Levels/Intro/Pal32x/P_IIZD.bin"
+Extract $012E06	$40 "Levels/Intro/Pal32x/P_IIZM.bin"
+Extract $012E46	$40 "Levels/Intro/Pal32x/P_IIZS.bin"
+Extract $012E86	$40 "Levels/Intro/Pal32x/P_IIZN.bin"
+;EndRegion
+
+;Region @Mixed
+Extract $2BC110	$40 "Levels/Entrance/Pal32x/P_0MN.bin"
+Extract $2BC150	$40 "Levels/Entrance/Pal32x/S_0MN.bin"
+;EndRegion
+;EndRegion
+
 ;Region @X_PalMars_SS
 Extract	$07F648 $22 "Art/palettes/Mars/SS/SS_Glbl.bin"
 Extract	$07F66A $9A "Art/palettes/Mars/SS/SS_Objs.bin"
@@ -3035,7 +3116,8 @@ Extract	$07F88C $1C "Art/palettes/Mars/SS/SS_Espio.bin"
 
 
 ;Region @X_PalmarsGlobal
-Extract	$001924 $24 "Art/palettes/Mars/Global/HUD.bin"
+Extract	$2271A0 $70 "Art/palettes/Mars/Menus/Grid.bin"
+
 Extract	$22921A	$24	"Art/palettes/Mars/Global/Mighty.bin"
 Extract	$22923E	$1E	"Art/palettes/Mars/Global/Knuckles.bin"
 Extract	$22925C	$22 "Art/palettes/Mars/Global/Charmy.bin"
@@ -3044,23 +3126,21 @@ Extract	$2292A0	$1E "Art/palettes/Mars/Global/Heavy.bin"
 Extract	$2292BE	$1E "Art/palettes/Mars/Global/Bomb.bin"
 Extract	$2292DC	$1E "Art/palettes/Mars/Global/Espio.bin"
 
-Extract	$229300	$1E "Art/palettes/Mars/Global/unk_929300.bin"
-Extract	$22931E	$24 "Art/palettes/Mars/Global/unk_92931E.bin"
-Extract	$229342	$22 "Art/palettes/Mars/Global/unk_929342.bin"
-Extract	$229362	$24 "Art/palettes/Mars/Global/unk_929364.bin"
-Extract	$229388	$1C "Art/palettes/Mars/Global/unk_929388.bin"
-Extract	$2293C8	$24 "Art/palettes/Mars/Global/unk_9293C8.bin"
-
-Extract $2BA90C $48	"Art/palettes/Mars/Global/TitleCards.bin"
-;EndRegion
-
-;Region @X_Palmars_Menus
-Extract	$2271A0 $70 "Art/palettes/Mars/Menus/Grid.bin"
+Extract	$229300	$1E "Art/palettes/Mars/Global/Mighty_CS.bin"
+Extract	$22931E	$24 "Art/palettes/Mars/Global/Knuckles_CS.bin"
+Extract	$229342	$22 "Art/palettes/Mars/Global/Charmy_CS.bin"
+Extract	$229362	$24 "Art/palettes/Mars/Global/Vector_CS.bin"
+Extract	$229388	$1C "Art/palettes/Mars/Global/Heavy_CS.bin"
+Extract	$2293A4	$24 "Art/palettes/Mars/Global/Bomb_CS.bin"
+Extract	$2293C8	$24 "Art/palettes/Mars/Global/Espio_CS.bin"
 
 Extract	$229802 $1D4 "Art/palettes/Mars/Menus/GoodEnding.bin"
 Extract	$2299D6	$02A "Art/palettes/Mars/Menus/SegaLogo.bin"
 Extract	$229A00	$03E "Art/palettes/Mars/Menus/Space.bin"
+
+Extract $2BA90C $48	"Art/palettes/Mars/Global/TitleCards.bin"
 ;EndRegion
+
 ;EndRegion
 
 ;Region @x_LvlGfx
@@ -3503,6 +3583,18 @@ Extract $2C1F78 $0468 "Art/artnem/aniart/TTZ_Fans.bin"
 Extract $2C23E0 $1064 "Art/artnem/aniart/MMZ.bin"
 
 ;NULL = $FFFFFFFF
+;EndRegion
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+; Artnem, sprite/plane tilemaps
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;Region @X_ArtNem
+Extract $2C2DC8 $046E "Art/artnem/Menus/Soundtest/Amy.bin"
+Extract $2C4B20 $047A "Art/artnem/Menus/Soundtest/Font.bin"
+Extract $2C7818 $0802 "Art/artnem/Menus/Soundtest/Menu.bin"
+Extract $2C801A	$015E "Art/tilemaps/Menus/Soundtest.bin"
+;Endregion
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Level Size Data Extract

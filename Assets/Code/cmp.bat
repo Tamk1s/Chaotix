@@ -1,0 +1,1 @@
+asmx -e -w -l LoopChunk.lst -C 68K -b 0x8F7596 -o LoopChunk.bin cLoopChunk.asm > LoopChunk.log

@@ -10,6 +10,82 @@ LoadFile orig.bin
 ;DestPath c:\dev\soned2\bin\Chaotix
 ; #Got
 
+Extract	$2293A4	$24 "Art/palettes/Mars/Global/unk_9293A4.bin"
+
+;Region @ArtNem
+MakePath "Art/artnem/Menus"
+MakePath "Art/artnem/Menus/Soundtest"
+MakePath "Art/tilemaps"
+MakePath "Art/tilemaps/Menus"
+Extract $2C2DC8 $046E "Art/artnem/Menus/Soundtest/Amy.bin"
+Extract $2C4B20 $047A "Art/artnem/Menus/Soundtest/Font.bin"
+Extract $2C7818 $0802 "Art/artnem/Menus/Soundtest/Menu.bin"
+Extract $2C801A	$015E "Art/tilemaps/Menus/Soundtest.bin"
+;EndRegion
+;EndRegion
+
+;Region @X_PalMars_Levels
+MakePath "Levels/BBZ/Pal32x"		;!@
+MakePath "Levels/SSZ/Pal32x"		;!@
+MakePath "Levels/AAZ/Pal32x"		;!@
+MakePath "Levels/TTZ/Pal32x"		;!@
+MakePath "Levels/MMZ/Pal32x"		;!@
+MakePath "Levels/Intro/Pal32x"		;!@
+MakePath "Levels/Tutorial/Pal32x"	;!@
+MakePath "Levels/Entrance/Pal32x"	;!@
+
+;Region @X_Secondary
+Extract $001A40	$40 "Levels/BBZ/Pal32x/S_15D.bin"
+Extract $001A80	$5E "Levels/BBZ/Pal32x/S_15N.bin"
+Extract $001ADE	$40 "Levels/BBZ/Pal32x/S_13S.bin"
+Extract $001B1E	$40 "Levels/BBZ/Pal32x/S_14M.bin"
+Extract $001B5E	$40 "Levels/BBZ/Pal32x/S_45S.bin"
+Extract $001B9E	$40 "Levels/BBZ/Pal32x/S_5M.bin"
+
+Extract $001BDE	$40 "Levels/MMZ/Pal32x/S_15M.bin"
+Extract $001C1E	$40 "Levels/MMZ/Pal32x/S_15D.bin"
+Extract $001C5E	$40 "Levels/MMZ/Pal32x/S_15S.bin"
+Extract $001C9E	$40 "Levels/MMZ/Pal32x/S_15N.bin"
+
+Extract $001CDE	$40 "Levels/AAZ/Pal32x/S_15D_Lit.bin"
+Extract $001D1E	$40 "Levels/AAZ/Pal32x/S_15D.bin"
+Extract $001D5E	$40 "Levels/AAZ/Pal32x/S_15M_Lit.bin"
+Extract $001D9E	$40 "Levels/AAZ/Pal32x/S_15M.bin"
+Extract $001DDE	$40 "Levels/AAZ/Pal32x/S_15S_Lit.bin"
+Extract $001E1E	$40 "Levels/AAZ/Pal32x/S_15S.bin"
+Extract $001E5E	$40 "Levels/AAZ/Pal32x/S_15N_Lit.bin"
+Extract $001E9E	$40 "Levels/AAZ/Pal32x/S_15N.bin"
+
+Extract $001EDE	$40 "Levels/TTZ/Pal32x/S_15M.bin"
+Extract $001F1E	$40 "Levels/TTZ/Pal32x/S_15D.bin"
+Extract $001F5E	$40 "Levels/TTZ/Pal32x/S_15S.bin"
+Extract $001F9E	$40 "Levels/TTZ/Pal32x/S_15N.bin"
+
+Extract $001F9E	$4E "Levels/SSZ/Pal32x/S_15D.bin"
+Extract $00202C	$4E "Levels/SSZ/Pal32x/S_15M.bin"
+Extract $00207A	$4E "Levels/SSZ/Pal32x/S_15S.bin"
+Extract $0020C8	$4E "Levels/SSZ/Pal32x/S_15N.bin"
+;EndRegion
+
+;Region @Primary
+Extract $012C66	$48 "Levels/BBZ/Pal32x/P_15MN.bin"
+Extract $012CAE	$48 "Levels/SSZ/Pal32x/P_15MN.bin"
+Extract $012CF6	$40 "Levels/AAZ/Pal32x/P_15MN.bin"
+Extract $012D36	$48 "Levels/TTZ/Pal32x/P_15MN.bin"
+Extract $012D7E	$48 "Levels/MMZ/Pal32x/P_15MN.bin"
+
+Extract $012DC6	$40 "Levels/Intro/Pal32x/P_IIZD.bin"
+Extract $012E06	$40 "Levels/Intro/Pal32x/P_IIZM.bin"
+Extract $012E46	$40 "Levels/Intro/Pal32x/P_IIZS.bin"
+Extract $012E86	$40 "Levels/Intro/Pal32x/P_IIZN.bin"
+;EndRegion
+
+;Region @Mixed
+Extract $2BC110	$40 "Levels/Entrance/Pal32x/P_0MN.bin"
+Extract $2BC150	$40 "Levels/Entrance/Pal32x/S_0MN.bin"
+;EndRegion
+;EndRegion
+
 
 ;Region @CharStats
 MakePath "Misc/CharStats"
@@ -36,10 +112,11 @@ Extract	$07F868 $24 "Art/palettes/Mars/SS/SS_Heavy.bin"
 Extract	$07F88C $1C "Art/palettes/Mars/SS/SS_Espio.bin"
 ;EndRegion
 
-
-;MakePath "Art/palettes/MD/Palswaps"		;!@
-
 ;Region @X_PalsData_Gens
+;MakePath "Art/palettes/MD/Palswaps"		;!@
 ;Extract $2293EC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_FG.bin"
 ;Extract $2295CC	$1E0 "Art/palettes/MD/Palswaps/Tutorial_BG.bin"
+MakePath "Art/palettes/MD/Menus"		;!@
+Extract	$006E18	$080 "Art/palettes/MD/Menus/Soundtest.bin"
+Extract	$006E98	$020 "Art/palettes/MD/Menus/Soundtest_Amy.bin"
 ;EndRegion

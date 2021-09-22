@@ -10,6 +10,8 @@
 ;;;;;;;;;;;;;;;;;;;;
 Define 	ArtPtr32X_Offset 	$2000000
 Define	NullLPtr_Terminator $FFFFFFFF
+Define	Entry_MasterSH2		$6000000		;Logical ROM offset addr for SH2 (Master)
+Define	Offset_MasterSH2	$0077800		;Offset for calculating between raw ROM and SH2 area
 MaxSize	$400000				;Maximum Genesis ROM size
 
 ;Max size for 32x Art space (art banks) ($20A0000-$222438A)
@@ -5229,4 +5231,44 @@ StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
 		;EndRegion
 EndSeg
 ;endregion
+
+;Region @Pal32x_SS
+ StartSeg Pal32X_SSPalc_Ptr $07D5F4 Big_Endian
+	 DWORD	(Pal32X_SSPalc-Offset_MasterSH2)+Entry_MasterSH2
+ EndSeg
+
+ StartSeg Pal32X_SSGlbl_Ptr $07D608 Big_Endian
+	 DWORD	(Pal32X_SSGlbl-Offset_MasterSH2)+Entry_MasterSH2
+ EndSeg
+
+ StartSeg Pal32X_SS_Ptr $07D60C Big_Endian
+	 DWORD	(Pal32X_SS-Offset_MasterSH2)+Entry_MasterSH2
+ EndSeg
+
+ StartSeg Pal32X_SSObjs_Ptr $07F170 Big_Endian
+	 DWORD	(Pal32X_SSObjs-0077800)+6000000
+ EndSeg
+
+StartSeg Pal32X_SS $07F638 $0280 Big_Endian
+	WORD	Pal32X_SSMighty-Pal32X_SS
+	WORD	Pal32X_SSMighty-Pal32X_SS
+	WORD	Pal32X_SSKnuckles-Pal32X_SS
+	WORD	Pal32X_SSCharmy-Pal32X_SS
+	WORD	Pal32X_SSVector-Pal32X_SS
+	WORD	Pal32X_SSBomb-Pal32X_SS
+	WORD	Pal32X_SSHeavy-Pal32X_SS
+	WORD	Pal32X_SSEspio-Pal32X_SS
+	
+	Pal32X_SSGlbl:		include	"Art/palettes/Mars/SS/SS_Glbl.bin"
+	Pal32X_SSObjs:		include	"Art/palettes/Mars/SS/SS_Objs.bin"
+	Pal32X_SSPalc:		include	"Art/palettes/Mars/SS/SS_Palc.bin"
+	Pal32X_SSMighty:	include	"Art/palettes/Mars/SS/SS_Mighty.bin"
+	Pal32X_SSKnuckles:	include	"Art/palettes/Mars/SS/SS_Knuckles.bin"
+	Pal32X_SSCharmy:	include	"Art/palettes/Mars/SS/SS_Charmy.bin"
+	Pal32X_SSVector:	include	"Art/palettes/Mars/SS/SS_Vector.bin"
+	Pal32X_SSBomb:		include	"Art/palettes/Mars/SS/SS_Bomb.bin"
+	Pal32X_SSHeavy:		include	"Art/palettes/Mars/SS/SS_Heavy.bin"
+	Pal32X_SSEspio:		include	"Art/palettes/Mars/SS/SS_Espio.bin"
+EndSeg
+;EndRegion
 ;endregion

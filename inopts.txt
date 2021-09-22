@@ -26,7 +26,7 @@ Define CASC_NullTerm2	$0000
 StartSeg GameHeader Big_Endian $000100 $8E
 
 	String	"SEGA 32X        "					;Console Name
-	String	"(C)SEGA 2021.APR"					;Copyright Date
+	String	"(C)SEGA 2021.DEC"					;Copyright Date
 	String  "KNUCKLES CLACKERS                               "	;Domestic Game Name
 	String  "KNUCKLES CLACKERS                               "	;Foreign Game Name
 	String	"GM MK-84503-00"					;Game Serial Number
@@ -291,7 +291,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "LABYRINTH"
-	String	"BLUE MOON"
+	String	"BLUE MOON - MDNV2"
 	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "TRIAL AND ERROR"
@@ -574,14 +574,16 @@ EndSeg
 ;;;
 
 StartSeg Code_LevelSelectDebug Big_Endian $007A6A 4
-
-	DWORD	$19711004
+	;$06 0C 15
+	;$01 01 01
+	DWORD	$19950421
 
 EndSeg
 
 StartSeg Code_AmyInSoundTest Big_Endian $007A7C 4
-
-	DWORD	$19710117
+	;$06 0C 14
+	;$04 09 01
+	DWORD	$19940421
 
 EndSeg
 ;EndRegion

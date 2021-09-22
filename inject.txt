@@ -79,6 +79,10 @@ Extern "ObjYAdj" "1024" "Levels/Intro/Sprites/1MN.bin" "Levels/Intro/Sprites/Con
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;!@  Rebuild modified sound driver (vanilla bank-sequential mode)
+
+;!@ Cleanup old lst/log files
+WorkPath "#Batch/Sound/Music/BIN"
+Extern "cleanup.bat" "0"
 ;WorkPath "#Batch/Sound/Music/ASM"
 ;Extern "build.bat" "0"
 ;WorkPath "#Batch/Assets/Music/PWM"
@@ -86,7 +90,18 @@ Extern "ObjYAdj" "1024" "Levels/Intro/Sprites/1MN.bin" "Levels/Intro/Sprites/Con
 
 WorkPath "#Batch"
 
+;!@ Update ArtNem, Pal(32x) cycles and swaps, Map_Eni and MD Map/Ani_Sprite
+WorkPath "#Batch/Assets/Art/artnem"
+Extern "nem.bat" "0"
+WorkPath "#Batch/Assets/Art/tilemaps"
+Extern "map.bat" "0"
+WorkPath "#Batch/Assets/Art/Palettes/Mars"
+Extern "pal32x.bat" "0"
+WorkPath "#Batch/Assets/Art/Palettes/MD"
+Extern "pal.bat" "0"
+
 ;!@ Prepatch OG ROM for lazy editing!
+WorkPath "#Batch"
 Extern "prepatch.bat" "0"
 
 ;GetFile "Please select the target Chaotix ROM file"
@@ -95,6 +110,7 @@ LoadFile "kc.bin"
 
 LoadInject "#Batch/inmain.txt"
 AddInject  "#Batch/inopts.txt"
+
 ;!@ New audio inection!
 AddInject  "#Batch/inaudio.txt"
 

@@ -618,12 +618,16 @@ vcTL4 set op4
 ;!@
 ; Header - Set up a secondary PWM Channel
 ;smpsHeaderPWM macro loc
-smpsHeaderPWM macro loc, songstart,pitch,vol
+smpsHeaderPWM macro loc, songstart,pitch,volL,volR
 	;dc.w	loc-songStart
 	rom_ptr_z80(loc+songstart)	
 	;!@
 	dc.b	pitch
-	dc.b	vol
+	if \0==4
+		dc.b	volL
+	else
+		dc.b	(volL<<4)+volR
+	endif	
 	endm
 	
 ;!@ Unused and unneeded; leftover Sonic 32x header stuff
