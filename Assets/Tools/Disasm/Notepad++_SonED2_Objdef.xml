@@ -1,0 +1,64 @@
+<NotepadPlus>
+    <UserLang name="SonED2_Objdef" ext="lst LST" udlVersion="2.1">
+        <Settings>
+            <Global caseIgnored="yes" allowFoldOfComments="yes" foldCompact="no" forcePureLC="0" decimalSeparator="0" />
+            <Prefix Keywords1="no" Keywords2="no" Keywords3="no" Keywords4="yes" Keywords5="yes" Keywords6="no" Keywords7="no" Keywords8="no" />
+        </Settings>
+        <KeywordLists>
+            <Keywords name="Comments">00; 01 02 03 04</Keywords>
+            <Keywords name="Numbers, prefix1"></Keywords>
+            <Keywords name="Numbers, prefix2"></Keywords>
+            <Keywords name="Numbers, extras1"></Keywords>
+            <Keywords name="Numbers, extras2"></Keywords>
+            <Keywords name="Numbers, suffix1"></Keywords>
+            <Keywords name="Numbers, suffix2"></Keywords>
+            <Keywords name="Numbers, range">0-9</Keywords>
+            <Keywords name="Operators1"></Keywords>
+            <Keywords name="Operators2"></Keywords>
+            <Keywords name="Folders in code1, open"></Keywords>
+            <Keywords name="Folders in code1, middle"></Keywords>
+            <Keywords name="Folders in code1, close"></Keywords>
+            <Keywords name="Folders in code2, open"></Keywords>
+            <Keywords name="Folders in code2, middle"></Keywords>
+            <Keywords name="Folders in code2, close"></Keywords>
+            <Keywords name="Folders in comment, open">region</Keywords>
+            <Keywords name="Folders in comment, middle"></Keywords>
+            <Keywords name="Folders in comment, close">endregion</Keywords>
+            <Keywords name="Keywords1">&quot;# of sprite sets:&quot;&#x000D;&#x000A;&quot;# of Sprites in set &quot;&#x000D;&#x000A;sprite&#x000D;&#x000A;file&#x000D;&#x000A;&#x000D;&#x000A;&quot;Num of objects:&quot;&#x000D;&#x000A;&quot;Object ID:&quot;&#x000D;&#x000A;&quot;# of Zones:&quot;&#x000D;&#x000A;&quot;Zone Entry:&quot;&#x000D;&#x000A;ID:</Keywords>
+            <Keywords name="Keywords2">&quot;xoff in file:&quot;&#x000D;&#x000A;&quot;yoff in file:&quot;&#x000D;&#x000A;&#x000D;&#x000A;&quot;Num Bitfields:&quot;&#x000D;&#x000A;BitField&#x000D;&#x000A;&#x000D;&#x000A;DefaultParam:&#x000D;&#x000A;DefaultFlag:&#x000D;&#x000A;DefaultDir:&#x000D;&#x000A;DefltRemember:&#x000D;&#x000A;&quot;Num Dependants:&quot;&#x000D;&#x000A;&#x000D;&#x000A;&quot;Num Types:&quot;</Keywords>
+            <Keywords name="Keywords3">Width:&#x000D;&#x000A;Height:&#x000D;&#x000A;&#x000D;&#x000A;Description:&#x000D;&#x000A;Desc  &#x000D;&#x000A;Dependant &#x000D;&#x000A;&#x000D;&#x000A;&#x000D;&#x000A;XMin:&#x000D;&#x000A;YMin:&#x000D;&#x000A;XMax:&#x000D;&#x000A;YMax:&#x000D;&#x000A;&#x000D;&#x000A;&quot;# of Sprites:&quot;&#x000D;&#x000A;Set:&#x000D;&#x000A;Direction:&#x000D;&#x000A;xoff:&#x000D;&#x000A;yoff:</Keywords>
+            <Keywords name="Keywords4">Type&#x000D;&#x000A;Val</Keywords>
+            <Keywords name="Keywords5">@</Keywords>
+            <Keywords name="Keywords6"></Keywords>
+            <Keywords name="Keywords7"></Keywords>
+            <Keywords name="Keywords8"></Keywords>
+            <Keywords name="Delimiters"></Keywords>
+        </KeywordLists>
+        <Styles>
+            <WordsStyle name="DEFAULT" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="COMMENTS" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="LINE COMMENTS" fgColor="008000" bgColor="FFFFFF" fontStyle="2" nesting="16384" />
+            <WordsStyle name="NUMBERS" fgColor="FF8000" bgColor="FFFFFF" fontStyle="1" nesting="0" />
+            <WordsStyle name="KEYWORDS1" fgColor="FF0000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS2" fgColor="0000FF" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS3" fgColor="10C010" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS4" fgColor="10C010" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS5" fgColor="FF80FF" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS6" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS7" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS8" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="OPERATORS" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="FOLDER IN CODE1" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="FOLDER IN CODE2" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="FOLDER IN COMMENT" fgColor="008000" bgColor="FFFFFF" fontStyle="1" nesting="0" />
+            <WordsStyle name="DELIMITERS1" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS2" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS3" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS4" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS5" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS6" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS7" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS8" fgColor="000000" bgColor="FFFFFF" fontStyle="0" nesting="0" />
+        </Styles>
+    </UserLang>
+</NotepadPlus>

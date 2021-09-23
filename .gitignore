@@ -21,3 +21,5 @@ XM4SMPS/KC.asm
 XM4SMPS/KC.bin
 XM4SMPS/KC.lst
 Assets/Art/Levels/Tutorial/TutorialArtwork.7z
+Assets/Code/*.lst
+Assets/Code/*.log

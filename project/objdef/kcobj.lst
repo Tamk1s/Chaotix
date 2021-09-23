@@ -1,3 +1,4 @@
+;Region @Comentary
 -  ;Knuckles' Chaotix Object Listing File
 
 ;Sprite Listing Loads all sprites used to represent objects in this game
@@ -26,7 +27,9 @@
 ;Set 0 is reserved for "invisible" objects, objects that can only be seen
 ;during editing. "Ring" and "Question Icon" must always be the first two
 ;sprites that appear in this set.
+;EndRegion
 
+;Region @Spritesheet_setup
       # of sprite sets:     12
 
  # of Sprites in set 0:     3
@@ -53,7 +56,7 @@
                  Width:    28
                 Height:    28
 
- # of Sprites in set 1:    33
+ # of Sprites in set 1:    34
  ;"GLOBAL" SET
 
          ;RING
@@ -286,6 +289,13 @@
           yoff in file:    45
                  Width:    16
                 Height:    16
+				
+         ;!@ Loop Chunk spritemasker
+         Sprite 33 file:    1
+          xoff in file:    192
+          yoff in file:    104
+                 Width:    128
+                Height:    96
 
  # of Sprites in set 2:    5
  ;TTZ ENEMY SET
@@ -934,6 +944,9 @@
           ;yoff in file:    108
                  ;Width:    50
                 ;Height:    26
+;EndRegion
+
+;Region @ObjDef
 
 ;Object Listing gives identity to each of the objects listed
 ;- Object ID is the ID number of the object in the game (hex value)
@@ -10609,14 +10622,76 @@ Type 0    XMin: -64
      Object ID:  2F
     # of Zones:   1
     Zone Entry:  FF
-   Description: Unknown
- Num Bitfields:   0
+   Description: Loop Chunk Spritemasker
+	Num Bitfields:   1
+    BitField 0: 00001111
+       Desc  0: Bottom Right
+       Desc  1: Invalid
+       Desc  2: Invalid
+       Desc  3: Invalid
+       Desc  4: Top Right
+       Desc  5: Invalid
+       Desc  6: Invalid
+       Desc  7: Invalid
+       Desc  8: Bottom Left
+       Desc  9: Invalid
+       Desc  A: Invalid
+       Desc  B: Invalid
+       Desc  C: Top Left
+       Desc  D: Invalid
+       Desc  E: Invalid
+       Desc  F: Invalid
   DefaultParam:   0
    DefaultFlag:   0
     DefaultDir:   0
  DefltRemember:   0
-Num Dependants:   0
-     Num Types:   0
+Num Dependants:   1
+   Dependant 0:   0
+     Num Types:   4
+Type 0    Val0:	  0
+		  XMin: -64
+          YMin: -48
+          XMax:  64
+          YMax:  48
+  # of Sprites:   1
+   Sprite 0 ID:   33
+           Set:   1
+     Direction:   0
+          xoff: -56
+          yoff: -48
+Type 1    Val0:	  4
+		  XMin: -64
+          YMin: -48
+          XMax:  64
+          YMax:  48
+  # of Sprites:   1
+   Sprite 0 ID:   33
+           Set:   1
+     Direction:   2
+          xoff: -56
+          yoff: -48
+Type 2    Val0:	  8
+		  XMin: -64
+          YMin: -48
+          XMax:  64
+          YMax:  48
+  # of Sprites:   1
+   Sprite 0 ID:   33
+           Set:   1
+     Direction:   1
+          xoff: -72
+          yoff: -48		  
+Type 3    Val0:	  C
+		  XMin: -64
+          YMin: -48
+          XMax:  64
+          YMax:  48
+  # of Sprites:   1
+   Sprite 0 ID:   33
+           Set:   1
+     Direction:   3
+          xoff: -72
+          yoff: -48
 
      Object ID:  30
     # of Zones:   1
@@ -13773,3 +13848,4 @@ Num Dependants:   0
 Num Dependants:   0
      Num Types:   0
 
+;EndRegion 

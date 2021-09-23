@@ -1,5 +1,5 @@
 <NotepadPlus>
-    <UserLang name="ROMulan" ext="txt Txt" udlVersion="2.1">
+    <UserLang name="ROMulan" ext="txt TXT" udlVersion="2.1">
         <Settings>
             <Global caseIgnored="yes" allowFoldOfComments="yes" foldCompact="no" forcePureLC="0" decimalSeparator="0" />
             <Prefix Keywords1="yes" Keywords2="yes" Keywords3="yes" Keywords4="yes" Keywords5="no" Keywords6="no" Keywords7="no" Keywords8="no" />
