@@ -582,7 +582,7 @@ EndSeg
 
 StartSeg Code_AmyInSoundTest Big_Endian $007A7C 4
 	;$06 0C 14
-	;$04 09 01
+	;$01 01 01
 	DWORD	$19940421
 
 EndSeg
