@@ -26,11 +26,38 @@ Define CASC_NullTerm2	$0000
 StartSeg GameHeader Big_Endian $000100 $8E
 
 	String	"SEGA 32X        "					;Console Name
-	String	"(C)SEGA 2021.DEC"					;Copyright Date
-	String  "KNUCKLES CLACKERS                               "	;Domestic Game Name
-	String  "KNUCKLES CLACKERS                               "	;Foreign Game Name
-	String	"GM MK-84503-00"					;Game Serial Number
+	String	"(C)GENESISDOES 2021.OCT"					;Copyright Date
+	String  "KNUCKLES CLACKERS V0.1A DEMO                "	;Domestic Game Name
+	String  "KNUCKLES CLACKERS V0.1A DEMO                 "	;Foreign Game Name
+	String	"GM MK-84503-01"					;Game Serial Number
+EndSeg
+;EndRegion
 
+;Region @Exit_Strings
+StartSeg ExitScreen_Strings Big_Endian $03FDEA $80
+	;!@ New Data
+	;String 	'EXIT     WORLD          SCREEN'
+	;BYTE 	CASC_NullTerm
+	;String 	'          SAVE     GAME       '
+	;BYTE 	CASC_NullTerm
+	;WORD 	CASC_NullTerm2
+	;String 	'     THE       ENTRANCE       '
+	;BYTE 	CASC_NullTerm
+	;String 	'       TO      THE            '
+	;BYTE 	CASC_NullTerm
+	;WORD 	CASC_NullTerm2
+	
+	;'TAKE NEWTROGIC HIGH ZONE EXIT ',0	
+	String 	'TAKE           HIGH      EXIT '
+	BYTE 	CASC_NullTerm
+	String 	'          SAVE     GAME       '
+	BYTE 	CASC_NullTerm
+	WORD 	CASC_NullTerm2
+	String	'     NEWTROGIC      ZONE      '
+	BYTE 	CASC_NullTerm
+	String 	'       TO      THE            '
+	BYTE 	CASC_NullTerm
+	WORD 	CASC_NullTerm2
 EndSeg
 ;EndRegion
 
@@ -269,13 +296,12 @@ EndSeg
 StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	String "-SOUND TEST-"
 	BYTE	CASC_NullTerm
-	;!@ New Data
-	;String "DOOR INTO SUMMER"
-	String  "NOP SOUTH ISLAND"
+	String "DOOR INTO SUMMER"
 	BYTE	CASC_NullTerm
 	String "ELECTORIA BETA"
 	BYTE	CASC_NullTerm
-	String "SPEED OF SOUND"
+	;!@ String "SPEED OF SOUND"
+	String "PSG-PWM TEST"
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "SEASCAPE"
@@ -324,9 +350,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	;String "COMBINATION"
 	 String "SONIC FACTORY-SA3"
 	BYTE	CASC_NullTerm
-	;!@ New data
-	;String "TAKE A NAP"
-	String	"NOP"
+	String "TAKE A NAP"
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "SURGING POWER"
