@@ -7,6 +7,7 @@ call cleanup.bat
 call cmp.bat
 cd ../../
 
+
 REM EXPERIMENTS
 
 REM Patch out jumps to various routines, to remove DLE for SSZ Pal cycles
@@ -102,17 +103,28 @@ bytepatch.exe -a 0x005DA8 kc.bin 7021
 bytepatch.exe -a 0x003446 kc.bin 4EB9 008F 7574
 bytepatch.exe -a 0x077574 kc.bin -f "Assets\Code\Sega_Jingle1.bin"
 
-REM Patch jsr ReadControllers in SegaScreen_Vint with jsr to new routine at $077584/$8F7584:
+REM Patch jsr ReadControllers in SegaScreen_Vint with jsr to new routine at $077594/$8F7594:
 REM New code for PWM issues request for Sega Screen
-bytepatch.exe -a 0x0036EC kc.bin 4EB9 008F 7584
-bytepatch.exe -a 0x077584 kc.bin -f "Assets\Code\Sega_Jingle2.bin"
-
+bytepatch.exe -a 0x0036EC kc.bin 4EB9 008F 7594
+bytepatch.exe -a 0x077594 kc.bin -f "Assets\Code\Sega_Jingle2.bin"
 
 REM Custom Loop Chunk object ($00BC/SonED2 $2F)
 REM Pointer to new code, new code itself
-bytepatch.exe -a 0x011E2E kc.bin 008F 7596
-bytepatch.exe -a 0x077596 kc.bin -f "Assets\Code\LoopChunk.bin"
+bytepatch.exe -a 0x011E2E kc.bin 008F 75A6
+bytepatch.exe -a 0x0775A6 kc.bin -f "Assets\Code\LoopChunk.bin"
 
-REM Patch Small Hourglass monitor to goto new Combi Breaker code (at $8F75CE)
-bytepatch.exe -a 0x14C48 kc.bin 4E71 4E71 4EB9 008F 75CE
-bytepatch.exe -a 0x0775CE kc.bin -f "Assets\Code\Monitor_CombiBreaker.bin"
+REM Patch Small Hourglass monitor to goto new Combi Breaker code (at $8F75DE)
+bytepatch.exe -a 0x14C48 kc.bin 4E71 4E71 4EB9 008F 75DE
+bytepatch.exe -a 0x0775DE kc.bin -f "Assets\Code\Monitor_CombiBreaker.bin"
+
+REM Code patches to undo normal game progress for Demo
+bytepatch.exe -a 0x010F28 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x03E510 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x03EEC6 kc.bin 4E71 4E71
+bytepatch.exe -a 0x03EF6C kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x076FB8 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+REM Patch v_gameProg increment code to new code from RAW $10F86 (ROM $890F86) to RAW $77600 (ROM $8F7600)
+REM 4EB9 008F 7600
+REM 5241 41F8 DFFE 1181 0000 3238 E010 3001 0280 0000 0FFF E959 0241 000F C2FC 0F00 D081 D1B8 E016
+bytepatch.exe -a 0x010F86 kc.bin 4EB9 008F 7600 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x077600 kc.bin -f "Assets\Code\DemoPatch2.bin"

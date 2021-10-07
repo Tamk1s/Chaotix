@@ -7,4 +7,8 @@ Sega_Jingle:
 	jsr		LoadLevelStuff
 	moveq   #bgm_AllCRings,d0
 	jsr		PlaySound
-	rts
+	
+	;!@ Demo Code. Sets all other zone's act progress to $06 (cleared)
+	move.l  #$06060601,(v_gameProg1).l
+	move.w  #$0600,(v_gameProg3).w	
+	rts	

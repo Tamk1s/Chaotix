@@ -1093,8 +1093,11 @@ v_act_hi        EQU $FFFFDFF4          ; Current Act (0-6, word)
 v_act_lo        EQU $FFFFDFF5
 v_tod_hi        EQU $FFFFDFF6          ; Current Time-of-Day (TOD, word, see
 v_tod_lo        EQU $FFFFDFF7
+v_gameProg1:    EQU $FFFFDFFE
+v_gameProg2:    EQU $FFFFE000
+v_gameProg3:    EQU $FFFFE002
 v_SaveFile_ID   EQU $FFFFE01C          ; Game Save file ID. 1-based in menu, 0-based in game.
-                                        ; $FFFF = No Save; otherwise file ID
+                                       ; $FFFF = No Save; otherwise file ID
 v_SaveFile_Data1 EQU $FFFFE216         ; Cache for Save File 1 data (training/load game menus)
 v_SaveFile_Data2 EQU $FFFFE226         ; Cache for Save File 2 data
 v_SaveFile_Data3 EQU $FFFFE236         ; Cache for Save File 3 data

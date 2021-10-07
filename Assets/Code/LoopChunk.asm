@@ -1,5 +1,5 @@
-; ORG at raw ROM addr $77596 ($08F7596), within ROM padding
-; Patch longpointer at $11E2E ($891E2E) to $008F7596 to enable object
+; ORG at raw ROM addr $775A6 ($08F75A6), within ROM padding
+; Patch longpointer at $11E2E ($891E2E) to $008F75A6 to enable object
 
 ;Object type $00BC (SonED2 obj $2F)
 ;Loop Chunk spritemasker
