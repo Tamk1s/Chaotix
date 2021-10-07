@@ -83,10 +83,10 @@ EndSeg
 ;region @PalCycle_Set1
 ;!@ PalCycle dataset 1 pointers:
 ;Unk3_Data1-Unk3_Data2
- StartSeg MD_PalCycle_Unk3_Data1_Ptr	Big_Endian $031184
+ StartSeg MD_PalCycle_Unk3_Data1_Ptr Big_Endian $031184
 		 DWORD MD_PalCycle_Unk3_Data1
  EndSeg
- StartSeg MD_PalCycle_Unk3_Data2_Ptr	Big_Endian $0311E2 
+ StartSeg MD_PalCycle_Unk3_Data2_Ptr Big_Endian $0311E2 
 		 DWORD MD_PalCycle_Unk3_Data2
  EndSeg
 ;endregion
@@ -113,6 +113,9 @@ EndSeg
 ;WE_Data5 (x2), WE_Data4, WE_Data6
 StartSeg MD_PalCycle_BBZ_Data1_Ptr Big_Endian $03107A
 		DWORD MD_PalCycle_BBZ_Data1
+EndSeg
+StartSeg MD_PalCycle_BBZ_Data2_Ptr Big_Endian $031090
+		DWORD MD_PalCycle_BBZ_Data2
 EndSeg
 StartSeg MD_PalCycle_BBZ_Data3_Ptr Big_Endian $03109C
 		DWORD MD_PalCycle_BBZ_Data3
@@ -2384,11 +2387,11 @@ StartSeg Pal32X_Chars_Ptrs $0018E4 $40 Big_Endian
 	;DWORD	Pal32X_Espio	
 	DWORD	Pal32X_Mighty
 	DWORD	Pal32X_Mighty
-	DWORD	Pal32X_Knuckles_CS
-	DWORD	Pal32X_Vector_CS
-	DWORD	Pal32X_Charmy_CS
+	DWORD	Pal32X_Knuckles
+	DWORD	Pal32X_Vector
+	DWORD	Pal32X_Charmy
 	DWORD	Pal32X_Heavy
-	DWORD	Pal32X_Bomb_CS
+	DWORD	Pal32X_Bomb
 	DWORD	Pal32X_Espio
 	
 	DWORD	Pal32X_Mighty_CS
@@ -2404,16 +2407,16 @@ EndSeg
 StartSeg Pal32x_Chars_Data $22921A $1D2 Big_Endian
 	Pal32X_Mighty:		include	"Art/palettes/Mars/Global/Mighty.bin"
 	Pal32X_Knuckles:	include	"Art/palettes/Mars/Global/Knuckles.bin"
-	Pal32X_Vector:		include	"Art/palettes/Mars/Global/Vector.bin"
 	Pal32X_Charmy:		include	"Art/palettes/Mars/Global/Charmy.bin"
+	Pal32X_Vector:		include	"Art/palettes/Mars/Global/Vector.bin"	
 	Pal32X_Heavy:		include	"Art/palettes/Mars/Global/Heavy.bin"
 	Pal32X_Bomb:		include	"Art/palettes/Mars/Global/Bomb.bin"
 	Pal32X_Espio:		include	"Art/palettes/Mars/Global/Espio.bin"
 	
 	Pal32X_Mighty_CS:	include	"Art/palettes/Mars/Global/Mighty_CS.bin"
 	Pal32X_Knuckles_CS:	include	"Art/palettes/Mars/Global/Knuckles_CS.bin"
-	Pal32X_Vector_CS:	include	"Art/palettes/Mars/Global/Vector_CS.bin"
 	Pal32X_Charmy_CS:	include	"Art/palettes/Mars/Global/Charmy_CS.bin"
+	Pal32X_Vector_CS:	include	"Art/palettes/Mars/Global/Vector_CS.bin"	
 	Pal32X_Heavy_CS:	include	"Art/palettes/Mars/Global/Heavy_CS.bin"
 	Pal32X_Bomb_CS:		include	"Art/palettes/Mars/Global/Bomb_CS.bin"
 	Pal32X_Espio_CS:	include	"Art/palettes/Mars/Global/Espio_CS.bin"
@@ -5525,6 +5528,7 @@ EndSeg
 ;WE_Data5, WE_Data4, WE_Data6
 StartSeg MD_PalCycle_Set2 Big_Endian $2B6832 $3B22
 	MD_PalCycle_BBZ_Data1:		include	"Art/palettes/MD/Palcycles/BBZ01_Data.bin"
+	MD_PalCycle_BBZ_Data2:		include	"Art/palettes/MD/Palcycles/BBZ02_Data.bin"
 	MD_PalCycle_BBZ_Data3:		include	"Art/palettes/MD/Palcycles/BBZ03_Data.bin"
 	MD_PalCycle_WE_Data1:		include	"Art/palettes/MD/Palcycles/WE01_Data.bin"
 	MD_PalCycle_WE_Data3:		include	"Art/palettes/MD/Palcycles/WE03_Data.bin"

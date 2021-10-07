@@ -2991,7 +2991,7 @@ Extract	$006E98	$020 "Art/palettes/MD/Menus/Soundtest_Amy.bin"
 ;BBZ
 Extract $2B6832  $001A "Art/palettes/MD/Palcycles/BBZ01_Data.bin"
 Extract $2B684C  $0158 "Art/palettes/MD/Palcycles/BBZ02_Data.bin"
-Extract $2B68A4  $00C8 "Art/palettes/MD/Palcycles/BBZ03_Data.bin"
+Extract $2B69A4  $00C8 "Art/palettes/MD/Palcycles/BBZ03_Data.bin"
 Extract $2B6C5E  $0464 "Art/palettes/MD/Palcycles/BBZ04_Data.bin"
 
 ;SSZ
@@ -3029,7 +3029,7 @@ Extract $2B930E  $0886 "Art/palettes/MD/Palcycles/AAZ_Lit03_Data.bin"
 Extract $2B92D2  $003C "Art/palettes/MD/Palcycles/Unk1_01_Data.bin"
 
 ;Unk2
-Extract $2B9B94  $003C "Art/palettes/MD/Palcycles/Unk2_01_Data.bin"
+Extract $2B9B94  $0040 "Art/palettes/MD/Palcycles/Unk2_01_Data.bin"
 Extract $2B9BD4  $0040 "Art/palettes/MD/Palcycles/Unk2_02_Data.bin"
 
 ;Unk3

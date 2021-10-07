@@ -10,13 +10,13 @@ LoadFile orig.bin
 ;DestPath c:\dev\soned2\bin\Chaotix
 ; #Got
 
-Extract	$229300	$1E "Art/palettes/Mars/Global/Mighty_CS.bin"
-Extract	$22931E	$24 "Art/palettes/Mars/Global/Knuckles_CS.bin"
-Extract	$229342	$22 "Art/palettes/Mars/Global/Charmy_CS.bin"
-Extract	$229362	$24 "Art/palettes/Mars/Global/Vector_CS.bin"
-Extract	$229388	$1C "Art/palettes/Mars/Global/Heavy_CS.bin"
-Extract	$2293A4	$24 "Art/palettes/Mars/Global/Bomb_CS.bin"
-Extract	$2293C8	$24 "Art/palettes/Mars/Global/Espio_CS.bin"
+;Extract	$229300	$1E "Art/palettes/Mars/Global/Mighty_CS.bin"
+;Extract	$22931E	$24 "Art/palettes/Mars/Global/Knuckles_CS.bin"
+;Extract	$229342	$22 "Art/palettes/Mars/Global/Charmy_CS.bin"
+;Extract	$229362	$24 "Art/palettes/Mars/Global/Vector_CS.bin"
+;Extract	$229388	$1C "Art/palettes/Mars/Global/Heavy_CS.bin"
+;Extract	$2293A4	$24 "Art/palettes/Mars/Global/Bomb_CS.bin"
+;Extract	$2293C8	$24 "Art/palettes/Mars/Global/Espio_CS.bin"
 
 ; Extract	$2293A4	$24 "Art/palettes/Mars/Global/unk_9293A4.bin"
 
