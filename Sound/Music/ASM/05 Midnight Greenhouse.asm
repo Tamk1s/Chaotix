@@ -1,5 +1,5 @@
 
-Target	EQU	$41AC6
+Target	EQU	$41885
 	smpsHeaderVoice	Midnight_GH_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $48

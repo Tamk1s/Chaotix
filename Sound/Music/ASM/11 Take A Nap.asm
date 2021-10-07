@@ -1,4 +1,3 @@
-
 Target	EQU	$4A1E6
 	smpsHeaderVoice	TakeNap_Patches, Target
 	smpsHeaderChan	$06, $03

@@ -1,4 +1,4 @@
-Target	EQU	$4E37E
+Target	EQU	$4E893
 PWMVol1	EQU	$7F
 PWMVol2	EQU $8F
 PWMPitch	EQU	$00

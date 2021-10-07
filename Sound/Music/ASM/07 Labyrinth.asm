@@ -1,4 +1,4 @@
-Target	EQU	$41C8D
+Target	EQU	$41A4C
 
 FMDelta			EQU	$00
 FMVol1			EQU	$08
