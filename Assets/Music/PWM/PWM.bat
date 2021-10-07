@@ -37,7 +37,8 @@ REM !@ New Data (Sega, CloseHH, OpenHH, NepDada)
 copy /y "Orig\97.wav" "97.wav"
 copy /y "Orig\98.wav" "98.wav"
 copy /y "Orig\99.wav" "99.wav"
-copy /y "Orig\9D.wav" "9D.wav"
+REM !@ 
+copy /y "Orig\9D.bin" "9D.bin"
 
 REM Remove RIFF headers
 Echo Strip off the RIFF headers
@@ -62,7 +63,7 @@ REM !@ New Data
 riffstrip.exe "97.wav"
 riffstrip.exe "98.wav"
 riffstrip.exe "99.wav"
-riffstrip.exe "9D.wav"
+REM riffstrip.exe "9D.wav"
 
 REM Rename results from .wav.stripped to .bin . These are the raw LPCM samples (PWM Driver)
 Echo Rename stripped files
@@ -87,7 +88,7 @@ REM !@ New Data
 ren "97.wav.stripped" "97.bin"
 ren "98.wav.stripped" "98.bin"
 ren "99.wav.stripped" "99.bin"
-ren "9D.wav.stripped" "9D.bin"
+REM ren "9D.wav.stripped" "9D.bin"
 
 REM Copy all LPCM files, rename to PWM_XX (0-based naming for SMPSPlay)
 Echo Rename a copy of files for SMPSPlay
