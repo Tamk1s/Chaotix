@@ -94,6 +94,10 @@ REM GotThrough 2
 
 
 REM EndPadding area! (New code)
+REM bytepatch.exe -a 0x008F7C kc.bin 4E71 4E71
+REM bytepatch.exe -a 0x004C1E kc.bin 4E71 4E71 4E71
+REM bytepatch.exe -a 0x004C1A kc.bin 0006
+REM bytepatch.exe -a 0x3EFA8 kc.bin 0010
 
 REM Sega Chant subroutines (at EndPadding of Bank1)
 REM Patch Tribute at good ending to play Decision instead

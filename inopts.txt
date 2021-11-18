@@ -581,6 +581,11 @@ EndSeg
 StartSeg SFX1st_2 Big_Endian $00752D 1
 	BYTE $2A
 EndSeg
+StartSeg SFXLast Big_Endian $007446 2
+	;!@ New Data
+	;WORD $006F
+	WORD $00FF
+EndSeg
 ;EndRegion
 
 ;;;
@@ -592,7 +597,7 @@ StartSeg BGM_WE01_TOD Big_Endian $0076EF5 1
 	BYTE $09
 EndSeg
 
-;Region @Cheats
+;Region @Cheats/Config
 ;;;
 ;Cheat Codes
 ;;;
@@ -601,14 +606,43 @@ StartSeg Code_LevelSelectDebug Big_Endian $007A6A 4
 	;$06 0C 15
 	;$01 01 01
 	DWORD	$19950421
+EndSeg
 
+StartSeg Code_LevelSelectFull Big_Endian $0772BC 2
+	;!@ New Data	
+	;Restricted level sel
+	;WORD	$660A	
+	;Unrestricted
+	WORD	$600A
 EndSeg
 
 StartSeg Code_AmyInSoundTest Big_Endian $007A7C 4
 	;$06 0C 14
 	;$01 01 01
 	DWORD	$19940421
+EndSeg
 
+StartSeg Code_TrainingSelect_TOD Big_Endian $03F461 1
+;Region @Commentary
+; XYZ
+; 000 = random
+; 001 = morning (lit)
+; 010 = day
+; 011 = day (lit)
+; 100 = sunset
+; 101 = sunset (lit)
+; 110 = night
+; 111 = night (lit)	
+
+;%10|%100 = btn6_Y|btn6_X = $06
+	;BYTE	$06	
+	
+;!@
+;	   Change to %1 | %10 | %100 =
+;	   btn6_Z | btn6_Y | btn6_X =
+;	   $07 for full TOD control
+;EndRegion
+	BYTE	$07
 EndSeg
 ;EndRegion
 

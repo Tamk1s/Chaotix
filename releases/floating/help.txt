@@ -1,0 +1,31 @@
+usage:
+   flips
+or flips patch.ips
+or flips [--apply] [--exact] patch.bps rom.smc [outrom.smc]
+or flips [--create] [--exact] [--ips | --bps | --bps-delta] clean.smc
+  hack.smc [patch.bps]
+(for scripting, only the latter two are sensible)
+(patch.ips is valid in all cases patch.bps is)
+
+options:
+-a --apply: apply patch (default if given two arguments)
+-c --create: create patch (default if given three arguments)
+-i --ips, -b -B --bps --bps-delta, --bps-linear, --bps-delta-moremem:
+  create this patch format instead of guessing based on file extension
+  ignored when applying
+ bps formats:
+  delta is the recommended one; it's a good balance between creation time and
+    patch size
+    -b and -B both refer to this, for backwards compatibility reasons
+  delta-moremem is usually slightly faster than delta, but uses about twice
+    as much memory; it gives identical patches to delta
+  linear is the fastest, but tends to give pretty big patches
+--exact: do not remove SMC headers when applying or creating a BPS patch
+  (ignored for IPS)
+--ignore-checksum: accept checksum mismatches when applying a BPS patch
+-m or --manifest: emit or insert a manifest file as romname.bml
+  (valid only for BPS)
+-mfilename or --manifest=filename: emit or insert a manifest file exactly here
+-h -? --help: show this information
+-v --version: show application version
+
