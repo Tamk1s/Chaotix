@@ -73,6 +73,7 @@ REM NOP Out lighting for AAZ on button press
 REM bytepatch.exe -a 0x03147C kc.bin 4E75
 
 
+
 REM HACK PATCHES
 
 REM Enable official 6-button joypad support in ROM Header periph support
@@ -132,3 +133,44 @@ REM 4EB9 008F 7600
 REM 5241 41F8 DFFE 1181 0000 3238 E010 3001 0280 0000 0FFF E959 0241 000F C2FC 0F00 D081 D1B8 E016
 bytepatch.exe -a 0x010F86 kc.bin 4EB9 008F 7600 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x077600 kc.bin -f "Assets\Code\DemoPatch2.bin"
+
+
+REM New BigRing artwork (32x beta from unused Eggman Intro cutscene from 1207 proto)
+REM bytepatch.exe -a 0x0127F0 kc.bin 0080
+REM bytepatch.exe -a 0x012852 kc.bin 0080
+REM bytepatch.exe -a 0x012902 kc.bin -f "Assets\Code\BigRing_Frames.bin"
+
+
+REM Patch TrainingMenu for new Boss Mode
+REM JsrTo new zone LUT
+bytepatch.exe -a 0x03E7E4 kc.bin 4EB9 008F 76D8
+bytepatch.exe -a 0x03F476 kc.bin 4EB9 008F 7662
+bytepatch.exe -a 0x03F490 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x077662 kc.bin -f "Assets\Code\BossMode2.bin"
+bytepatch.exe -a 0x03F5C2 kc.bin 0C41 0006
+REM bytepatch.exe -a 0x03E7D0 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x03F7DC kc.bin 4EB9 008F 76B4
+
+
+REM New AAZ Miniboss artwork
+REM Disable AAZ Miniboss handler?
+REM bytepatch.exe -a 0x025BBA kc.bin 4E75
+
+REM Replace AAZ Mini boss body with ending
+bytepatch.exe -a 0x025C28 kc.bin 0024
+bytepatch.exe -a 0x2BE8A6 kc.bin 0000 0000 0000 0081
+REM Replace AAZ Mini boss head with ending
+bytepatch.exe -a 0x025D5C kc.bin 0024
+bytepatch.exe -a 0x2BE8B6 kc.bin 0000 0300 0000 0381 0000 0400 0000 0481 0000 0500 0000 0581
+
+REM SFX patches
+bytepatch.exe -a 0x02614E kc.bin 703A
+bytepatch.exe -a 0x026362 kc.bin 005B
+bytepatch.exe -a 0x026300 kc.bin 0067
+
+REM Head ycoord fixes
+REM bytepatch.exe -a 0x025D84 kc.bin 0030
+bytepatch.exe -a 0x025D90 kc.bin 003C
+bytepatch.exe -a 0x025DF4 kc.bin 4E71 4E71
+bytepatch.exe -a 0x025E12 kc.bin 4E71 4E71
+bytepatch.exe -a 0x025DC4 kc.bin 0300

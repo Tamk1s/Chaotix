@@ -7,7 +7,7 @@ REM SMPSOpt.exe S1 "81\Out\Mus81 - GHZ.bin" "81\Out\Mus81 - GHZ.bin"
 REM Moves all compiled songs from each folder into SMPSPlay
 REM Music
 
-REM Copy /y /b "01\Out\01 Door Into Summer.bin" "Preview\Data\Knuckles Maniax\01 Door Into Summer.skc"
+Copy /y /b "01\Out\01 Door Into Summer.bin" "Preview\Data\Knuckles Maniax\01 Door Into Summer.skc"
 Copy /y /b "02\Out\02 Electoria.bin" "Preview\Data\Knuckles Maniax\02 Electoria.skc"
 REM Copy /y /b "03\Out\03 Speed Of Sound.bin" "Preview\Data\Knuckles Maniax\03 Speed Of Sound.skc"
 REM Copy /y /b "04\Out\04 Seascape.bin" "Preview\Data\Knuckles Maniax\04 Seascape.skc"
@@ -23,12 +23,12 @@ REM Copy /y /b "0D\Out\0D Overture.bin" "Preview\Data\Knuckles Maniax\0D Overtur
 REM Copy /y /b "0E\Out\0E This Horizon.bin" "Preview\Data\Knuckles Maniax\0E This Horizon.skc"
 Copy /y /b "0F\Out\0F Take Off.bin" "Preview\Data\Knuckles Maniax\0F Take Off.skc"
 Copy /y /b "10\Out\10 Combination.bin" "Preview\Data\Knuckles Maniax\10 Combination.skc"
-REM Copy /y /b "11\Out\11 Take A Nap.bin" "Preview\Data\Knuckles Maniax\11 Take A Nap.skc"
+Copy /y /b "11\Out\11 Take A Nap.bin" "Preview\Data\Knuckles Maniax\11 Take A Nap.skc"
 Copy /y /b "12\Out\12 Surging Power.bin" "Preview\Data\Knuckles Maniax\12 Surging Power.skc"
 Copy /y /b "13\Out\13 Mechanical Dance.bin" "Preview\Data\Knuckles Maniax\13 Mechanical Dance.skc"
 REM Copy /y /b "14\Out\14 Tube Panic.bin" "Preview\Data\Knuckles Maniax\14 Tube Panic.skc"
 REM Copy /y /b "14\Out\14 Tube Panic [extra drums].bin" "Preview\Data\Knuckles Maniax\14 Tube Panic [extra drums].skc"
-REM Copy /y /b "15\Out\15 Crystal Nightmare.bin" "Preview\Data\Knuckles Maniax\15 Crystal Nightmare.skc"
+Copy /y /b "15\Out\15 Crystal Nightmare.bin" "Preview\Data\Knuckles Maniax\15 Crystal Nightmare.skc"
 REM Copy /y /b "16\Out\16 Childs Song.bin" "Preview\Data\Knuckles Maniax\16 Childs Song.skc"
 REM Copy /y /b "17\Out\17 Soda Pop.bin" "Preview\Data\Knuckles Maniax\17 Soda Pop.skc"
 REM Copy /y /b "18\Out\18 Pendulum.bin" "Preview\Data\Knuckles Maniax\18 Pendulum.skc"
@@ -47,18 +47,18 @@ Copy /y /b "24\Out\24 Oriental Legend.bin" "Preview\Data\Knuckles Maniax\24 Orie
 Copy /y /b "25\Out\25 Steel Heart.bin" "Preview\Data\Knuckles Maniax\25 Steel Heart.skc"
 Copy /y /b "26\Out\26 Tribute.bin" "Preview\Data\Knuckles Maniax\26 Tribute.skc"
 Copy /y /b "27\Out\27 Destructive Power.bin" "Preview\Data\Knuckles Maniax\27 Destructive Power.skc"
-REM Copy /y /b "28\Out\28 Just Another Day.bin" "Preview\Data\Knuckles Maniax\28 Just Another Day.skc"
+Copy /y /b "28\Out\28 Just Another Day.bin" "Preview\Data\Knuckles Maniax\28 Just Another Day.skc"
 Copy /y /b "29\Out\29 Decision 2nd.bin" "Preview\Data\Knuckles Maniax\29 Decision 2nd.skc"
 Copy /y /b "Test\PWM_PSG_Test\Out\Soundtest.bin" "Preview\Data\Knuckles Maniax\Soundtest.skc"
 
 REM SFX
-REM Copy /y /b "5F\Out\5F.bin" "Preview\Data\Knuckles Maniax\SFX\5F.sf3"
+Copy /y /b "5F\Out\5F.bin" "Preview\Data\Knuckles Maniax\SFX\5F.sf3"
 
 
 REM Copies all finalized ASM files to working project dir for recompilation into driver
 REM Music
 
-REM Copy /Y "01\Out\KC.asm" "..\..\Sound\Music\ASM\01 Door Into Summer.asm"
+Copy /Y "01\Out\KC.asm" "..\..\Sound\Music\ASM\01 Door Into Summer.asm"
 Copy /Y "02\Out\KC.asm" "..\..\Sound\Music\ASM\02 Electoria.asm"
 REM Copy /Y "03\Out\KC.asm" "..\..\Sound\Music\ASM\03 Speed Of Sound.asm"
 REM Copy /Y "04\Out\KC.asm" "..\..\Sound\Music\ASM\04 Seascape.asm"
@@ -74,7 +74,7 @@ REM Copy /Y "0D\Out\KC.asm" "..\..\Sound\Music\ASM\0D Overture.asm"
 REM Copy /Y "0E\Out\KC.asm" "..\..\Sound\Music\ASM\0E This Horizon.asm"
 Copy /Y "0F\Out\KC.asm" "..\..\Sound\Music\ASM\0F Take Off.asm"
 Copy /Y "10\Out\KC.asm" "..\..\Sound\Music\ASM\10 Combination.asm"
-REM Copy /Y "11\Out\KC.asm" "..\..\Sound\Music\ASM\11 Take A Nap.asm"
+Copy /Y "11\Out\KC.asm" "..\..\Sound\Music\ASM\11 Take A Nap.asm"
 Copy /Y "12\Out\KC.asm" "..\..\Sound\Music\ASM\12 Surging Power.asm"
 Copy /Y "13\Out\KC.asm" "..\..\Sound\Music\ASM\13 Mechanical Dance.asm"
 REM Copy /Y "14\Out\KC.asm" "..\..\Sound\Music\ASM\14 Tube Panic.asm"
@@ -97,9 +97,9 @@ Copy /Y "24\Out\KC.asm" "..\..\Sound\Music\ASM\24 Oriental Legend.asm"
 Copy /Y "25\Out\KC.asm" "..\..\Sound\Music\ASM\25 Steel Heart.asm"
 Copy /Y "26\Out\KC.asm" "..\..\Sound\Music\ASM\26 Tribute.asm"
 Copy /Y "27\Out\KC.asm" "..\..\Sound\Music\ASM\27 Destructive Power.asm"
-REM Copy /Y "28\Out\KC.asm" "..\..\Sound\Music\ASM\28 Just Another Day.asm"
+Copy /Y "28\Out\KC.asm" "..\..\Sound\Music\ASM\28 Just Another Day.asm"
 Copy /Y "29\Out\KC.asm" "..\..\Sound\Music\ASM\29 Decision 2nd.asm"
 
 REM SFX
-REM Copy /Y "5F\Out\5F.asm" "..\..\Sound\Music\ASM\5F.asm"
+Copy /Y "5F\Out\KC.asm" "..\..\Sound\Music\ASM\5F.asm"
 pause

@@ -1,0 +1,23 @@
+Tempo:
+MIDI 0403 (280 BPM)
+
+FM:
+Use defaults of Ins_Lib BUT override:
+- Electric Guitar (Clean)
+- Add Reverse Cymbal
+Use Bank2.gyb
+
+PSG:
+Voice #8 for PSG1
+Voice #0 for PSG2, PSG3
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+36	C3	Bass Drum		$8B/pAKick
+39	E-3	Hand Clap		$8A/pClap
+42	F#3	Closed Hi Hat	$98/pClosedHH
+46	B#3	Open Hi Hat 	$99/pOpenHH
+49	C#4	Crash Cymbal	$89/pCrashCymb
+52	E4	Chinese Cymbal	$83/pSplashCymb
+65	F5	High Timbale	$85/pTomHi ?
+69 	A5	Cabasa			$93/pBongoLo ?

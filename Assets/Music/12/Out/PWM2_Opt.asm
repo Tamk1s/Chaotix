@@ -1,11 +1,5 @@
-VOR_PWM2:
-	dc.b	pClosedHH, $06, pRideBell, pAKick, pClosedHH, $03, pESnare, $06
-	dc.b	pBongoHi, $03, pClosedHH, pClosedHH, pAKick, pClosedHH, pRideBell, $06
-	dc.b	pClosedHH, pRideBell, pAKick, pClosedHH, $03, pAKick, $06, $06
-	dc.b	pClosedHH, $03, pESnare, $06, pRideBell, pClosedHH, pRideBell, pAKick
-	dc.b	pClosedHH, $03, pESnare, $06, pBongoHi, $03, pClosedHH, pClosedHH
-	dc.b	pAKick, pClosedHH, pRideBell, $06, pClosedHH, pRideBell, pAKick, pClosedHH
-	dc.b	$03, pAKick, $06, $06, pClosedHH, $03, pESnare, $06
-	dc.b	pAKick, $03, $03
-	smpsLoop		$00, $04, VOR_PWM2, Target
-	smpsJump		VOR_PWM2, Target
+SRB2_INV_PWM2:
+	dc.b	nRst, $18, pCrashCymb, $17, nRst, $49, pCrashCymb, $17
+	dc.b	nRst, $49, pCrashCymb, $17, nRst, $2E, pCrashCymb, $03
+	dc.b	nRst, $09, pCrashCymb, $03, nRst, $0C, pSplashCymb, $05
+	smpsStop

@@ -1,20 +1,25 @@
 MID2SMPS Tempo:
-12/02
+06/03
 
 FM:
-Instruments.gyb + Contrabass override
+Replace with indicated banks (see bank.gyb)
 
 PSG:
-$02 for ch 11
-$03 for ch 12
+$00 for ch 11
+$04 for ch 12
+$06 for ch 13
 
 PWM:
 (Remember to subtract one from ASM ->octave here)
-36	B2	Acc Bass Drum	$8B/pAKick
-39	D3	Acc Snare	$8C/pASnare
+36	B2	Ekick		$81/pEKick
 41	E3	ESnare		$82/pESnare
-44	G#3	Pedal HH	$98/pClosedHH
-52	E-4	Ride cymbal	$99/pOpenHH
-53	F4	Ride Bell	$84/pRideBell
-63	D5	Mute Hi Congo	$92/pBongoHi
-86	D7	Bongo Drum?	$93/pBongoLo
+42	F#3	Closed HH	$98/pClosedHH
+43 	G3	Low Tom 	$87/pTomLow
+46	B-3	Open HH		$99/pOpenHH
+47 	B3	Low Mid Tom $86/pTomMid
+49  C4	Crash Cymb	$89/pCrashCymb
+50	D4	High Tom	$85/pTomHi
+52	E-4	Splash Cymb	$83/pSplashCymb
+55	G4	Splash Cymb	$83/pSplashCymb
+
+

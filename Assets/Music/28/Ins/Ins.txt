@@ -1,0 +1,31 @@
+MIDI Tempo:
+188 BPM
+08 Ticks/Quarter
+02 Tick mult
+= 187.5
+
+FM:
+Std library but override:
+DistortionGuitar
+
+PSG:
+PSG1 = p0
+PSG2 = p1
+PSG3 = p0
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+36	B2		Acc Drum	$8B/pAKick
+37	C-3		EKick		$81/pEKick
+39	D3		ASnare		$8C/pASnare
+41	E3		ESnare		$82/pESnare
+42	F3		Low FlrTom	$9A/pTomLower
+43	F#3		ClosedHH	$98/pClosedHH
+44	G3		Hi FlrTom	$87/pTomLow
+45	G#3		PedalHH		$99/pOpenHH
+46	A3		LowTom		$86/pTomMid
+47	B-3		OpenHH		$99/pOpenHH
+49 	C4		HiMidTom	$85/pTomHi
+50	C#4		CrashCymb	$89/pCrashCymb
+53	E4		ChinCymb	$83/pSplashCymb
+58	A4		Crash Cymb2	$89/pCrashCymb

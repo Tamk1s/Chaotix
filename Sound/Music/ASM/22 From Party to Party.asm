@@ -1,4 +1,4 @@
-Target	EQU	$4EBFA
+Target	EQU	$4EB4F
 	smpsHeaderVoice	VOC_Patches, Target
 	smpsHeaderChan		$06, $03
 	smpsHeaderTempoC	$05, $0C

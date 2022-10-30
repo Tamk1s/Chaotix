@@ -12,7 +12,7 @@
        = 0000DC         smpsPitch03lo		EQU	$DC
        = 0000E8         smpsPitch02lo		EQU	$E8
        = 0000F4         smpsPitch01lo		EQU	$F4
-       = 000000         smpsPitch00		EQU	$00
+       = 000000         smpsPitch00			EQU	$00
        = 00000C         smpsPitch01hi		EQU	$0C
        = 000018         smpsPitch02hi		EQU	$18
        = 000024         smpsPitch03hi		EQU	$24
@@ -132,6 +132,9 @@
        = 00008B         dVLowTimpani	EQU	$8B
        = 00008B         dFloorTimpani	EQU $8B
 
+                        ; !@ PSGDelta (S1->KC has 12 semitone increase between PSG)
+       = 00000C         PSGDelta	EQU	$0C
+
                         ; PWM Equates (KC)
        = 000081         pEKick		EQU	$81
        = 000082         pESnare		EQU	$82
@@ -146,7 +149,9 @@
        = 00008B         pAKick		EQU $8B
        = 00008C         pASnare		EQU	$8C
        = 00008D         pBell		EQU $8D
+                        ;!@ Enum due to late PWM driver revision
        = 00008E         pFingSnap	EQU	$8E
+       = 00008E         pFingSnapHi	EQU	$8E
        = 00008F         pCowbell	EQU	$8F
        = 000090         pClickHi	EQU	$90
        = 000091         pClickLo	EQU	$91
@@ -159,6 +164,22 @@
        = 000097         pSega		EQU $97
        = 000098         pClosedHH	EQU $98
        = 000099         pOpenHH		EQU $99
+       = 00009A         pTomLower		EQU	$9A
+       = 00009B         pTomLowerer		EQU	$9B
+       = 00009C         pTomLowerest	EQU	$9C
+       = 00009D         pNepDada		EQU	$9D
+       = 00009E         pFingSnapLo		EQU	$9E
+       = 00009F         pOrchHitHi		EQU	$9F
+       = 0000A0         pOrchHitMed		EQU	$A0
+       = 0000A1         pOrchHitLo		EQU	$A1
+       = 0000A2         pOrchHitLower	EQU	$A2
+
+                        ;!@ Crackers conversion enums. Knuckles Clackers equiv
+       = 000081         pCra_d81	EQU	pEKick
+       = 00008C         pCra_d82	EQU	pASnare
+       = 000085         pCra_d83	EQU	pTomHi
+       = 000086         pCra_d84	EQU	pTomMid
+       = 000087         pCra_d85	EQU	pTomLow
 
                         ;!@ Convert ptrs to z80Ptr
                         ; function to make a little-endian 16-bit pointer for the Z80 sound driver
@@ -185,7 +206,6 @@
                         			dc.b	((256 - ((((tempo)-1)*256 + ((tempo)/2)) / (tempo))) % 256)
                         		endif
                         	endm
-
                         	
                         ;!@
                         ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
@@ -397,6 +417,29 @@
                         	dc.b	$F0,wait,speed,change,step
                         	endm
                         	
+                        smpsModSet2	macro bytes
+                        	smpsModSet	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
+                        	endm
+                        	
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        ;!@
+                        smpsModSetC macro wait,speed,change,step
+                        	dc.b	$F0
+                        	;if (SonicDriverVer>=3)&&(SourceDriver<3)
+                        		dc.b	wait+1,speed,change,(step*speed+1)&$FF
+                        	;elseif (SonicDriverVer<3)&&(SourceDriver>=3)
+                        		;dc.b	wait-1,speed,change,(((step==0)<<8)|step)/(((step==0)<<8)|step)-1		
+                        	;else
+                        		;dc.b	wait,speed,change,step
+                        	;endif
+                        	;dc.b	speed,change,step
+                        	endm
+
+                        ;!@	
+                        smpsModSetC2 macro bytes
+                        	smpsModSetC	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
+                        	endm
+                        	
 
                         ;!@ Used very differently in S3; don't use
                         ; F1 - Turn on Modulation
@@ -568,8 +611,7 @@
                         	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
                         	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
                         	dc.b	vcTL4,vcTL3,vcTL2,vcTL1	
-000000                  	endm
-                        	
+000000                  	endm	
                         	
                         ;==============================================
                         ;!@ The following CF flags/macros are KC-drive specific!
@@ -578,12 +620,16 @@
                         ;!@
                         ; Header - Set up a secondary PWM Channel
                         ;smpsHeaderPWM macro loc
-                        smpsHeaderPWM macro loc, songstart,pitch,vol
+                        smpsHeaderPWM macro loc, songstart,pitch,volL,volR
                         	;dc.w	loc-songStart
                         	rom_ptr_z80(loc+songstart)	
                         	;!@
                         	dc.b	pitch
-                        	dc.b	vol
+                        	if \0==4
+                        		dc.b	volL
+                        	else
+                        		dc.b	(volL<<4)+volR
+                        	endif	
                         	endm
                         	
                         ;!@ Unused and unneeded; leftover Sonic 32x header stuff
@@ -730,13 +776,24 @@
 
 000000                  	include "KC.asm"
        = 040000         Target	EQU	$40000
-       = 000000         PSGVoi	EQU $00
+
+       = 000000         FMPitch		EQU	$00
+
+       = 00000C         PSGPitch	EQU	PSGDelta
+       = 000000         PSGMod		EQU	$00
+       = 000002         PSGVol1		EQU	$02
+       = 000003         PSGVol2		EQU	PSGVol1+$01
+       = 000000         PSGVoi		EQU $00
+
+       = 000000         PWMPitch1	EQU $00
+       = 000018         PWMPitch2	EQU	$02*PSGDelta
+       = 0000AA         PWMVol		EQU	$AA
 000000                  	smpsHeaderVoice		Elegy_Patches, Target
                         ;songStart set *
                         	;dc.w	loc-songStart
 000000                  	rom_ptr_z80(Elegy_Patches+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000000 D68C             	dc.w  (((((Elegy_Patches+Target))<<8)&$FF00)|((((Elegy_Patches+Target))>>8)&$7F)|$80)
+000000 AC8C             	dc.w  (((((Elegy_Patches+Target))<<8)&$FF00)|((((Elegy_Patches+Target))>>8)&$7F)|$80)
 000002                  	smpsHeaderChan		$06, $03
                         	if 2==2
 000002 0603             		dc.b	$06,$03
@@ -750,101 +807,113 @@
                         		else
 000005 1C               			dc.b	((256 - ((((($09))-1)*256 + ((($09))/2)) / (($09)))) % 256)
                         		endif
-000006                  	smpsHeaderFM		Elegy_FM1, Target, $00, $1F
+000006                  	smpsHeaderFM		Elegy_FM1, Target, FMPitch, $1F
                         	;dc.w	loc-songStart
 000006                  	rom_ptr_z80(Elegy_FM1+Target)
                         	;dc.w z80_ptr(ptr,addr)
 000006 4080             	dc.w  (((((Elegy_FM1+Target))<<8)&$FF00)|((((Elegy_FM1+Target))>>8)&$7F)|$80)
-000008 001F             	dc.b	$00,$1F
-00000A                  	smpsHeaderFM		Elegy_FM2, Target, $00, $24
+000008 001F             	dc.b	FMPitch,$1F
+00000A                  	smpsHeaderFM		Elegy_FM2, Target, FMPitch, $24
                         	;dc.w	loc-songStart
 00000A                  	rom_ptr_z80(Elegy_FM2+Target)
                         	;dc.w z80_ptr(ptr,addr)
 00000A BA81             	dc.w  (((((Elegy_FM2+Target))<<8)&$FF00)|((((Elegy_FM2+Target))>>8)&$7F)|$80)
-00000C 0024             	dc.b	$00,$24
-00000E                  	smpsHeaderFM		Elegy_FM3, Target, $00, $15
+00000C 0024             	dc.b	FMPitch,$24
+00000E                  	smpsHeaderFM		Elegy_FM3, Target, FMPitch, $15
                         	;dc.w	loc-songStart
 00000E                  	rom_ptr_z80(Elegy_FM3+Target)
                         	;dc.w z80_ptr(ptr,addr)
 00000E 3483             	dc.w  (((((Elegy_FM3+Target))<<8)&$FF00)|((((Elegy_FM3+Target))>>8)&$7F)|$80)
-000010 0015             	dc.b	$00,$15
-000012                  	smpsHeaderFM		Elegy_FM4, Target, $00, $17
+000010 0015             	dc.b	FMPitch,$15
+000012                  	smpsHeaderFM		Elegy_FM4, Target, FMPitch, $17
                         	;dc.w	loc-songStart
 000012                  	rom_ptr_z80(Elegy_FM4+Target)
                         	;dc.w z80_ptr(ptr,addr)
 000012 7485             	dc.w  (((((Elegy_FM4+Target))<<8)&$FF00)|((((Elegy_FM4+Target))>>8)&$7F)|$80)
-000014 0017             	dc.b	$00,$17
-000016                  	smpsHeaderFM		Elegy_FM5, Target, $00, $17
+000014 0017             	dc.b	FMPitch,$17
+000016                  	smpsHeaderFM		Elegy_FM5, Target, FMPitch, $17
                         	;dc.w	loc-songStart
 000016                  	rom_ptr_z80(Elegy_FM5+Target)
                         	;dc.w z80_ptr(ptr,addr)
 000016 CF86             	dc.w  (((((Elegy_FM5+Target))<<8)&$FF00)|((((Elegy_FM5+Target))>>8)&$7F)|$80)
-000018 0017             	dc.b	$00,$17
-00001A                  	smpsHeaderFM		Elegy_FM6, Target, $00, $16
+000018 0017             	dc.b	FMPitch,$17
+00001A                  	smpsHeaderFM		Elegy_FM6, Target, FMPitch, $16
                         	;dc.w	loc-songStart
 00001A                  	rom_ptr_z80(Elegy_FM6+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00001A 5387             	dc.w  (((((Elegy_FM6+Target))<<8)&$FF00)|((((Elegy_FM6+Target))>>8)&$7F)|$80)
-00001C 0016             	dc.b	$00,$16
+00001A CF86             	dc.w  (((((Elegy_FM6+Target))<<8)&$FF00)|((((Elegy_FM6+Target))>>8)&$7F)|$80)
+00001C 0016             	dc.b	FMPitch,$16
                         	;!@ smpsHeaderPSG		Elegy_PSG1, Target, $00, $06, $00, $00
                         	;!@ smpsHeaderPSG		Elegy_PSG2, Target, $00, $06, $00, $00
                         	;!@ smpsHeaderPSG		Elegy_PSG3, Target, $00, $07, $00, $00
-00001E                  	smpsHeaderPSG		Elegy_PSG1, Target, $00, $02, $00, PSGVoi
+00001E                  	smpsHeaderPSG		Elegy_PSG1, Target, PSGPitch, PSGVol1, PSGMod, PSGVoi
                         	;dc.w	loc-songStart
 00001E                  	rom_ptr_z80(Elegy_PSG1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00001E 7187             	dc.w  (((((Elegy_PSG1+Target))<<8)&$FF00)|((((Elegy_PSG1+Target))>>8)&$7F)|$80)
-000020 0002             	dc.b	$00,$02
+00001E D086             	dc.w  (((((Elegy_PSG1+Target))<<8)&$FF00)|((((Elegy_PSG1+Target))>>8)&$7F)|$80)
+000020 0C02             	dc.b	PSGPitch,PSGVol1
                         	;dc.w	voice
-000022 0000             	dc.b	$00,PSGVoi
-000024                  	smpsHeaderPSG		Elegy_PSG2, Target, $00, $02, $00, PSGVoi
+000022 0000             	dc.b	PSGMod,PSGVoi
+000024                  	smpsHeaderPSG		Elegy_PSG2, Target, PSGPitch, PSGVol1, PSGMod, PSGVoi
                         	;dc.w	loc-songStart
 000024                  	rom_ptr_z80(Elegy_PSG2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000024 8D89             	dc.w  (((((Elegy_PSG2+Target))<<8)&$FF00)|((((Elegy_PSG2+Target))>>8)&$7F)|$80)
-000026 0002             	dc.b	$00,$02
+000024 EC88             	dc.w  (((((Elegy_PSG2+Target))<<8)&$FF00)|((((Elegy_PSG2+Target))>>8)&$7F)|$80)
+000026 0C02             	dc.b	PSGPitch,PSGVol1
                         	;dc.w	voice
-000028 0000             	dc.b	$00,PSGVoi
-00002A                  	smpsHeaderPSG		Elegy_PSG3, Target, $00, $03, $00, PSGVoi
+000028 0000             	dc.b	PSGMod,PSGVoi
+00002A                  	smpsHeaderPSG		Elegy_PSG3, Target, PSGPitch, PSGVol2, PSGMod, PSGVoi
                         	;dc.w	loc-songStart
 00002A                  	rom_ptr_z80(Elegy_PSG3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00002A A58A             	dc.w  (((((Elegy_PSG3+Target))<<8)&$FF00)|((((Elegy_PSG3+Target))>>8)&$7F)|$80)
-00002C 0003             	dc.b	$00,$03
+00002A 048A             	dc.w  (((((Elegy_PSG3+Target))<<8)&$FF00)|((((Elegy_PSG3+Target))>>8)&$7F)|$80)
+00002C 0C03             	dc.b	PSGPitch,PSGVol2
                         	;dc.w	voice
-00002E 0000             	dc.b	$00,PSGVoi
-000030                  	smpsHeaderPWM		Elegy_PWM1, Target, $00, $AF
+00002E 0000             	dc.b	PSGMod,PSGVoi
+000030                  	smpsHeaderPWM		Elegy_PWM1, Target, PWMPitch1, PWMVol
                         	;dc.w	loc-songStart
 000030                  	rom_ptr_z80(Elegy_PWM1+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-000030 C28B             	dc.w  (((((Elegy_PWM1+Target))<<8)&$FF00)|((((Elegy_PWM1+Target))>>8)&$7F)|$80)
+000030 218B             	dc.w  (((((Elegy_PWM1+Target))<<8)&$FF00)|((((Elegy_PWM1+Target))>>8)&$7F)|$80)
                         	;!@
-000032 00               	dc.b	$00
-000033 AF               	dc.b	$AF
-000034                  	smpsHeaderPWM		Elegy_PWM2, Target, $00, $AF
+000032 00               	dc.b	PWMPitch1
+                        	if 4==4
+000033 AA               		dc.b	PWMVol
+                        	else
+                        	endif	
+000034                  	smpsHeaderPWM		Elegy_PWM2, Target, PWMPitch1, PWMVol
                         	;dc.w	loc-songStart
 000034                  	rom_ptr_z80(Elegy_PWM2+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-000034 138C             	dc.w  (((((Elegy_PWM2+Target))<<8)&$FF00)|((((Elegy_PWM2+Target))>>8)&$7F)|$80)
+000034 728B             	dc.w  (((((Elegy_PWM2+Target))<<8)&$FF00)|((((Elegy_PWM2+Target))>>8)&$7F)|$80)
                         	;!@
-000036 00               	dc.b	$00
-000037 AF               	dc.b	$AF
-000038                  	smpsHeaderPWM		Elegy_PWM3, Target, $00, $AF
+000036 00               	dc.b	PWMPitch1
+                        	if 4==4
+000037 AA               		dc.b	PWMVol
+                        	else
+                        	endif	
+000038                  	smpsHeaderPWM		Elegy_PWM3, Target, PWMPitch1, PWMVol
                         	;dc.w	loc-songStart
 000038                  	rom_ptr_z80(Elegy_PWM3+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-000038 978C             	dc.w  (((((Elegy_PWM3+Target))<<8)&$FF00)|((((Elegy_PWM3+Target))>>8)&$7F)|$80)
+000038 F68B             	dc.w  (((((Elegy_PWM3+Target))<<8)&$FF00)|((((Elegy_PWM3+Target))>>8)&$7F)|$80)
                         	;!@
-00003A 00               	dc.b	$00
-00003B AF               	dc.b	$AF
-00003C                  	smpsHeaderPWM		Elegy_PWM4, Target, $00, $AF
+00003A 00               	dc.b	PWMPitch1
+                        	if 4==4
+00003B AA               		dc.b	PWMVol
+                        	else
+                        	endif	
+00003C                  	smpsHeaderPWM		Elegy_PWM4, Target, PWMPitch2, PWMVol
                         	;dc.w	loc-songStart
 00003C                  	rom_ptr_z80(Elegy_PWM4+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-00003C D58C             	dc.w  (((((Elegy_PWM4+Target))<<8)&$FF00)|((((Elegy_PWM4+Target))>>8)&$7F)|$80)
+00003C 348C             	dc.w  (((((Elegy_PWM4+Target))<<8)&$FF00)|((((Elegy_PWM4+Target))>>8)&$7F)|$80)
                         	;!@
-00003E 00               	dc.b	$00
-00003F AF               	dc.b	$AF
+00003E 18               	dc.b	PWMPitch2
+                        	if 4==4
+00003F AA               		dc.b	PWMVol
+                        	else
+                        	endif	
 
 000040                  Elegy_FM1:
 000040                  	smpsPan		panCenter
@@ -1956,702 +2025,587 @@
                         	;dc.w	loc-*-1
 
 0006CF                  Elegy_FM5:
-0006CF                  	smpsFMvoice		$02
-                        	;if song<>""
-                        	if 1==2
-                        	else
-0006CF EF02             		dc.b $EF,$02
-                        	endif
-0006D1                  	smpsPan		panCenter
-       = 000000         panNone set $00
-       = 000040         panRight set $40
-       = 000080         panLeft set $80
-       = 0000C0         panCentre set $C0
-       = 0000C0         panCenter set $C0 ; silly Americans :U
-                        	;dc.b $E0,direction+amsfms
-                        	;endm		
-                        	if 1==2
-                        	else
-0006D1 E0C0             		dc.b $E0,panCenter
-                        	endif
+                        	;smpsFMvoice		$02
+                        	;smpsPan		panCenter
 
-0006D3                  Elegy_Loop31:
-0006D3 C12880           	dc.b	nE5, $28, nRst
-0006D6                  	smpsLoop		$00, $04, Elegy_Loop31, Target
-0006D6 F7               	dc.b	$F7
-0006D7 0004             	dc.b	$00,$04
-                        	if (Elegy_Loop31<*)
-0006D9                  		rom_ptr_z80(Elegy_Loop31+Target)
-                        	;dc.w z80_ptr(ptr,addr)
-0006D9 D386             	dc.w  (((((Elegy_Loop31+Target))<<8)&$FF00)|((((Elegy_Loop31+Target))>>8)&$7F)|$80)
-                        	else
-                        	endif
-                        	;dc.w	loc-*-1
+                        ;Elegy_Loop31:
+                        	;dc.b	nE5, $28, nRst
+                        	;smpsLoop		$00, $04, Elegy_Loop31, Target
 
-0006DB                  Elegy_Jump5:
-0006DB                  	smpsAlterVol	$10
-0006DB E610             	dc.b	$E6,$10
+                        ;Elegy_Jump5:
+                        	;smpsAlterVol	$10
 
-0006DD                  Elegy_Loop32:
-0006DD BA058003B8058002 	dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
-0006E5                  	smpsLoop		$00, $02, Elegy_Loop32, Target
-0006E5 F7               	dc.b	$F7
-0006E6 0002             	dc.b	$00,$02
-                        	if (Elegy_Loop32<*)
-0006E8                  		rom_ptr_z80(Elegy_Loop32+Target)
-                        	;dc.w z80_ptr(ptr,addr)
-0006E8 DD86             	dc.w  (((((Elegy_Loop32+Target))<<8)&$FF00)|((((Elegy_Loop32+Target))>>8)&$7F)|$80)
-                        	else
-                        	endif
-                        	;dc.w	loc-*-1
-0006EA BA05B8           	dc.b	nA4, $05, nG4
-0006ED                  	smpsAlterVol	$FF
-0006ED E6FF             	dc.b	$E6,$FF
-0006EF BA8003B8058002BA 	dc.b	nA4, nRst, $03, nG4, $05, nRst, $02, nA4
-0006F7 058014BA058003B8 	dc.b	$05, nRst, $14, nA4, $05, nRst, $03, nG4
-0006FF 058002           	dc.b	$05, nRst, $02
-000702                  	smpsAlterVol	$FF
-000702 E6FF             	dc.b	$E6,$FF
-000704 BA058003B8058002 	dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
-00070C BA05B8BA8003B805 	dc.b	nA4, $05, nG4, nA4, nRst, $03, nG4, $05
-000714 8002B6058014     	dc.b	nRst, $02, nF4, $05, nRst, $14
+                        ;Elegy_Loop32:
+                        	;dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
+                        	;smpsLoop		$00, $02, Elegy_Loop32, Target
+                        	;dc.b	nA4, $05, nG4
+                        	;smpsAlterVol	$FF
+                        	;dc.b	nA4, nRst, $03, nG4, $05, nRst, $02, nA4
+                        	;dc.b	$05, nRst, $14, nA4, $05, nRst, $03, nG4
+                        	;dc.b	$05, nRst, $02
+                        	;smpsAlterVol	$FF
+                        	;dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
+                        	;dc.b	nA4, $05, nG4, nA4, nRst, $03, nG4, $05
+                        	;dc.b	nRst, $02, nF4, $05, nRst, $14
 
-00071A                  Elegy_Loop33:
-00071A BA058003B8058002 	dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
-000722                  	smpsLoop		$00, $02, Elegy_Loop33, Target
-000722 F7               	dc.b	$F7
-000723 0002             	dc.b	$00,$02
-                        	if (Elegy_Loop33<*)
-000725                  		rom_ptr_z80(Elegy_Loop33+Target)
-                        	;dc.w z80_ptr(ptr,addr)
-000725 1A87             	dc.w  (((((Elegy_Loop33+Target))<<8)&$FF00)|((((Elegy_Loop33+Target))>>8)&$7F)|$80)
-                        	else
-                        	endif
-                        	;dc.w	loc-*-1
-000727 BA05B8BA8003B805 	dc.b	nA4, $05, nG4, nA4, nRst, $03, nG4, $05
-00072F 8002BA058014     	dc.b	nRst, $02, nA4, $05, nRst, $14
+                        ;Elegy_Loop33:
+                        	;dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
+                        	;smpsLoop		$00, $02, Elegy_Loop33, Target
+                        	;dc.b	nA4, $05, nG4, nA4, nRst, $03, nG4, $05
+                        	;dc.b	nRst, $02, nA4, $05, nRst, $14
 
-000735                  Elegy_Loop34:
-000735 BA058003B8058002 	dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
-00073D                  	smpsLoop		$00, $02, Elegy_Loop34, Target
-00073D F7               	dc.b	$F7
-00073E 0002             	dc.b	$00,$02
-                        	if (Elegy_Loop34<*)
-000740                  		rom_ptr_z80(Elegy_Loop34+Target)
-                        	;dc.w z80_ptr(ptr,addr)
-000740 3587             	dc.w  (((((Elegy_Loop34+Target))<<8)&$FF00)|((((Elegy_Loop34+Target))>>8)&$7F)|$80)
-                        	else
-                        	endif
-                        	;dc.w	loc-*-1
-000742 BA05B8           	dc.b	nA4, $05, nG4
-000745                  	smpsAlterNote	$00
-000745 E100             	dc.b	$E1,$00
+                        ;Elegy_Loop34:
+                        	;dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
+                        	;smpsLoop		$00, $02, Elegy_Loop34, Target
+                        	;dc.b	nA4, $05, nG4
+                        	;smpsAlterNote	$00
                         	;!@ dc.b	nRst
 
-000747                  Elegy_Loop35:
+                        ;Elegy_Loop35:
                         	;!@ dc.b	$55
-000747 8055             	dc.b		nRst, $55
-000749                  	smpsLoop		$00, $08, Elegy_Loop35, Target
-000749 F7               	dc.b	$F7
-00074A 0008             	dc.b	$00,$08
-                        	if (Elegy_Loop35<*)
-00074C                  		rom_ptr_z80(Elegy_Loop35+Target)
-                        	;dc.w z80_ptr(ptr,addr)
-00074C 4787             	dc.w  (((((Elegy_Loop35+Target))<<8)&$FF00)|((((Elegy_Loop35+Target))>>8)&$7F)|$80)
-                        	else
-                        	endif
-                        	;dc.w	loc-*-1
-00074E                  	smpsAlterVol	$F2
-00074E E6F2             	dc.b	$E6,$F2
-000750                  	smpsJump		Elegy_Jump5, Target
-000750 F6               	dc.b	$F6
-                        	if (Elegy_Jump5<*)
-000751                  		rom_ptr_z80(Elegy_Jump5+Target)
-                        	;dc.w z80_ptr(ptr,addr)
-000751 DB86             	dc.w  (((((Elegy_Jump5+Target))<<8)&$FF00)|((((Elegy_Jump5+Target))>>8)&$7F)|$80)
-                        	else
-                        	endif
-                        	;dc.w	loc-*-1
+                        	;dc.b		nRst, $55
+                        	;smpsLoop		$00, $08, Elegy_Loop35, Target
+                        	;smpsAlterVol	$F2
+                        	;smpsJump		Elegy_Jump5, Target
 
-000753                  Elegy_FM6:
-000753                  	smpsFMvoice		$02
-                        	;if song<>""
-                        	if 1==2
-                        	else
-000753 EF02             		dc.b $EF,$02
-                        	endif
-000755                  	smpsPan		panCenter
-       = 000000         panNone set $00
-       = 000040         panRight set $40
-       = 000080         panLeft set $80
-       = 0000C0         panCentre set $C0
-       = 0000C0         panCenter set $C0 ; silly Americans :U
-                        	;dc.b $E0,direction+amsfms
-                        	;endm		
-                        	if 1==2
-                        	else
-000755 E0C0             		dc.b $E0,panCenter
-                        	endif
+0006CF                  Elegy_FM6:
+                        	;smpsFMvoice		$02
+                        	;smpsPan		panCenter
 
-000757                  Elegy_Loop36:
-000757 B52880           	dc.b	nE4, $28, nRst
-00075A                  	smpsLoop		$00, $04, Elegy_Loop36, Target
-00075A F7               	dc.b	$F7
-00075B 0004             	dc.b	$00,$04
-                        	if (Elegy_Loop36<*)
-00075D                  		rom_ptr_z80(Elegy_Loop36+Target)
-                        	;dc.w z80_ptr(ptr,addr)
-00075D 5787             	dc.w  (((((Elegy_Loop36+Target))<<8)&$FF00)|((((Elegy_Loop36+Target))>>8)&$7F)|$80)
-                        	else
-                        	endif
-                        	;dc.w	loc-*-1
+                        ;Elegy_Loop36:
+                        	;dc.b	nE4, $28, nRst
+                        	;smpsLoop		$00, $04, Elegy_Loop36, Target
 
-00075F                  Elegy_Jump6:
+                        ;Elegy_Jump6:
                         	;!@ dc.b	nRst, $7F, $7F, $1A
-00075F 807F807F801A     	dc.b	nRst, $7F, nRst, $7F, nRst, $1A
-000765                  	smpsAlterNote	$00
-000765 E100             	dc.b	$E1,$00
+                        	;dc.b	nRst, $7F, nRst, $7F, nRst, $1A
+                        	;smpsAlterNote	$00
 
-000767                  Elegy_Loop37:
+                        ;Elegy_Loop37:
                         	;!@ dc.b	$55
-000767 8055             	dc.b		nRst, $55
-000769                  	smpsLoop		$00, $08, Elegy_Loop37, Target
-000769 F7               	dc.b	$F7
-00076A 0008             	dc.b	$00,$08
-                        	if (Elegy_Loop37<*)
-00076C                  		rom_ptr_z80(Elegy_Loop37+Target)
-                        	;dc.w z80_ptr(ptr,addr)
-00076C 6787             	dc.w  (((((Elegy_Loop37+Target))<<8)&$FF00)|((((Elegy_Loop37+Target))>>8)&$7F)|$80)
-                        	else
-                        	endif
-                        	;dc.w	loc-*-1
-00076E                  	smpsJump		Elegy_Jump6, Target
-00076E F6               	dc.b	$F6
-                        	if (Elegy_Jump6<*)
-00076F                  		rom_ptr_z80(Elegy_Jump6+Target)
-                        	;dc.w z80_ptr(ptr,addr)
-00076F 5F87             	dc.w  (((((Elegy_Jump6+Target))<<8)&$FF00)|((((Elegy_Jump6+Target))>>8)&$7F)|$80)
-                        	else
-                        	endif
-                        	;dc.w	loc-*-1
+                        	;dc.b		nRst, $55
+                        	;smpsLoop		$00, $08, Elegy_Loop37, Target
+                        	;smpsJump		Elegy_Jump6, Target
+0006CF                  	smpsStop
+0006CF F2               	dc.b	$F2
 
-000771                  Elegy_PSG1:
-000771 8028             	dc.b	nRst, $28
-000773                  	smpsPSGvoice	PSGVoi
-000773 F500             	dc.b	$F5,PSGVoi
+0006D0                  Elegy_PSG1:
+0006D0 8028             	dc.b	nRst, $28
+0006D2                  	smpsPSGvoice	PSGVoi
+0006D2 F500             	dc.b	$F5,PSGVoi
 
-000775                  Elegy_Loop38:
-000775 8C038F029203     	dc.b	nB0, $03, nD1, $02, nF1, $03
-00077B                  	smpsSetVol	$FF
-00077B ECFF             	dc.b	$EC,$FF
-00077D 9502980395029203 	dc.b	nAb1, $02, nB1, $03, nAb1, $02, nF1, $03
-000785 8F028C0392029503 	dc.b	nD1, $02, nB0, $03, nF1, $02, nAb1, $03
-00078D 98029B0398029503 	dc.b	nB1, $02, nD2, $03, nB1, $02, nAb1, $03
-000795 91028028         	dc.b	nE1, $02, nRst, $28
-000799                  	smpsSetVol	$01
-000799 EC01             	dc.b	$EC,$01
-00079B                  	smpsLoop		$00, $02, Elegy_Loop38, Target
-00079B F7               	dc.b	$F7
-00079C 0002             	dc.b	$00,$02
+0006D4                  Elegy_Loop38:
+0006D4 8C038F029203     	dc.b	nB0, $03, nD1, $02, nF1, $03
+0006DA                  	smpsSetVol	$FF
+0006DA ECFF             	dc.b	$EC,$FF
+0006DC 9502980395029203 	dc.b	nAb1, $02, nB1, $03, nAb1, $02, nF1, $03
+0006E4 8F028C0392029503 	dc.b	nD1, $02, nB0, $03, nF1, $02, nAb1, $03
+0006EC 98029B0398029503 	dc.b	nB1, $02, nD2, $03, nB1, $02, nAb1, $03
+0006F4 91028028         	dc.b	nE1, $02, nRst, $28
+0006F8                  	smpsSetVol	$01
+0006F8 EC01             	dc.b	$EC,$01
+0006FA                  	smpsLoop		$00, $02, Elegy_Loop38, Target
+0006FA F7               	dc.b	$F7
+0006FB 0002             	dc.b	$00,$02
                         	if (Elegy_Loop38<*)
-00079E                  		rom_ptr_z80(Elegy_Loop38+Target)
+0006FD                  		rom_ptr_z80(Elegy_Loop38+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00079E 7587             	dc.w  (((((Elegy_Loop38+Target))<<8)&$FF00)|((((Elegy_Loop38+Target))>>8)&$7F)|$80)
+0006FD D486             	dc.w  (((((Elegy_Loop38+Target))<<8)&$FF00)|((((Elegy_Loop38+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-0007A0 8C038F029203     	dc.b	nB0, $03, nD1, $02, nF1, $03
-0007A6                  	smpsSetVol	$FF
-0007A6 ECFF             	dc.b	$EC,$FF
-0007A8 9502980395029203 	dc.b	nAb1, $02, nB1, $03, nAb1, $02, nF1, $03
-0007B0 8F028C0392029503 	dc.b	nD1, $02, nB0, $03, nF1, $02, nAb1, $03
-0007B8 98029B0398029503 	dc.b	nB1, $02, nD2, $03, nB1, $02, nAb1, $03
-0007C0 910280288C038F02 	dc.b	nE1, $02, nRst, $28, nB0, $03, nD1, $02
-0007C8 9203950280058C03 	dc.b	nF1, $03, nAb1, $02, nRst, $05, nB0, $03
-0007D0 8F028C0392029503 	dc.b	nD1, $02, nB0, $03, nF1, $02, nAb1, $03
-0007D8 9802800A         	dc.b	nB1, $02, nRst, $0A
+0006FF 8C038F029203     	dc.b	nB0, $03, nD1, $02, nF1, $03
+000705                  	smpsSetVol	$FF
+000705 ECFF             	dc.b	$EC,$FF
+000707 9502980395029203 	dc.b	nAb1, $02, nB1, $03, nAb1, $02, nF1, $03
+00070F 8F028C0392029503 	dc.b	nD1, $02, nB0, $03, nF1, $02, nAb1, $03
+000717 98029B0398029503 	dc.b	nB1, $02, nD2, $03, nB1, $02, nAb1, $03
+00071F 910280288C038F02 	dc.b	nE1, $02, nRst, $28, nB0, $03, nD1, $02
+000727 9203950280058C03 	dc.b	nF1, $03, nAb1, $02, nRst, $05, nB0, $03
+00072F 8F028C0392029503 	dc.b	nD1, $02, nB0, $03, nF1, $02, nAb1, $03
+000737 9802800A         	dc.b	nB1, $02, nRst, $0A
 
-0007DC                  Elegy_Jump7:
+00073B                  Elegy_Jump7:
                         	;!@ dc.b	nRst, $7F, $7F, $42
-0007DC 807F807F8042     	dc.b	nRst, $7F, nRst, $7F, nRst, $42
-0007E2                  	smpsAlterNote	$00
-0007E2 E100             	dc.b	$E1,$00
+00073B 807F807F8042     	dc.b	nRst, $7F, nRst, $7F, nRst, $42
+000741                  	smpsAlterNote	$00
+000741 E100             	dc.b	$E1,$00
                         	;!@ dc.b	$0A
-0007E4 800A             	dc.b	nRst, $0A
-0007E6                  	smpsSetVol	$01
-0007E6 EC01             	dc.b	$EC,$01
-0007E8                  	smpsAlterNote	$FF
-0007E8 E1FF             	dc.b	$E1,$FF
-0007EA 9D01             	dc.b	nE2, $01
-0007EC                  	smpsAlterNote	$00
-0007EC E100             	dc.b	$E1,$00
-0007EE E7A204A005A20A9D 	dc.b	smpsNoAttack, nA2, $04, nG2, $05, nA2, $0A, nE2
-0007F6 05               	dc.b	$05
-0007F7                  	smpsAlterNote	$02
-0007F7 E102             	dc.b	$E1,$02
-0007F9 E79E01E7A0       	dc.b	smpsNoAttack, nF2, $01, smpsNoAttack, nG2
-0007FE                  	smpsAlterNote	$FC
-0007FE E1FC             	dc.b	$E1,$FC
-000800 E7A1             	dc.b	smpsNoAttack, nAb2
-000802                  	smpsAlterNote	$FD
-000802 E1FD             	dc.b	$E1,$FD
-000804 E7A3             	dc.b	smpsNoAttack, nBb2
-000806                  	smpsAlterNote	$FE
-000806 E1FE             	dc.b	$E1,$FE
-000808 E7A5             	dc.b	smpsNoAttack, nC3
-00080A                  	smpsAlterNote	$00
-00080A E100             	dc.b	$E1,$00
-00080C 08A407A012       	dc.b	$08, nB2, $07, nG2, $12
-000811                  	smpsAlterNote	$01
-000811 E101             	dc.b	$E1,$01
-000813 E702             	dc.b	smpsNoAttack, $02
-000815                  	smpsAlterNote	$02
-000815 E102             	dc.b	$E1,$02
-000817 E701             	dc.b	smpsNoAttack, $01
-000819                  	smpsAlterNote	$04
-000819 E104             	dc.b	$E1,$04
-00081B E701             	dc.b	smpsNoAttack, $01
-00081D                  	smpsAlterNote	$FF
-00081D E1FF             	dc.b	$E1,$FF
-00081F E79F             	dc.b	smpsNoAttack, nFs2
-000821                  	smpsAlterNote	$FD
-000821 E1FD             	dc.b	$E1,$FD
-000823 E79E             	dc.b	smpsNoAttack, nF2
-000825                  	smpsAlterNote	$00
-000825 E100             	dc.b	$E1,$00
-000827 E701             	dc.b	smpsNoAttack, $01
-000829                  	smpsAlterNote	$02
-000829 E102             	dc.b	$E1,$02
-00082B 800A             	dc.b	nRst, $0A
-00082D                  	smpsAlterNote	$FD
-00082D E1FD             	dc.b	$E1,$FD
-00082F A201             	dc.b	nA2, $01
-000831                  	smpsAlterNote	$01
-000831 E101             	dc.b	$E1,$01
-000833 E7A504           	dc.b	smpsNoAttack, nC3, $04
-000836                  	smpsAlterNote	$00
-000836 E100             	dc.b	$E1,$00
-000838 E7A40AA2078001A0 	dc.b	smpsNoAttack, nB2, $0A, nA2, $07, nRst, $01, nG2
-000840 07               	dc.b	$07
-000841                  	smpsAlterNote	$01
-000841 E101             	dc.b	$E1,$01
-000843 01               	dc.b	$01
-000844                  	smpsAlterNote	$00
-000844 E100             	dc.b	$E1,$00
-000846 E7A123           	dc.b	smpsNoAttack, nAb2, $23
-000849                  	smpsAlterNote	$02
-000849 E102             	dc.b	$E1,$02
-00084B E701             	dc.b	smpsNoAttack, $01
-00084D                  	smpsAlterNote	$FC
-00084D E1FC             	dc.b	$E1,$FC
-00084F E7A0             	dc.b	smpsNoAttack, nG2
-000851                  	smpsAlterNote	$FF
-000851 E1FF             	dc.b	$E1,$FF
-000853 E701             	dc.b	smpsNoAttack, $01
-000855                  	smpsAlterNote	$00
-000855 E100             	dc.b	$E1,$00
-000857 E79F             	dc.b	smpsNoAttack, nFs2
-000859                  	smpsAlterNote	$FD
-000859 E1FD             	dc.b	$E1,$FD
-00085B A1               	dc.b	nAb2
-00085C                  	smpsAlterNote	$00
-00085C E100             	dc.b	$E1,$00
-00085E E7A20E           	dc.b	smpsNoAttack, nA2, $0E
-000861                  	smpsAlterNote	$03
-000861 E103             	dc.b	$E1,$03
-000863 A301             	dc.b	nBb2, $01
-000865                  	smpsAlterNote	$00
-000865 E100             	dc.b	$E1,$00
-000867 E7A40E           	dc.b	smpsNoAttack, nB2, $0E
-00086A                  	smpsAlterNote	$01
-00086A E101             	dc.b	$E1,$01
-00086C 01               	dc.b	$01
-00086D                  	smpsAlterNote	$00
-00086D E100             	dc.b	$E1,$00
-00086F E7A50EA301E7A407 	dc.b	smpsNoAttack, nC3, $0E, nBb2, $01, smpsNoAttack, nB2, $07
-000877 A5A601E7A70F     	dc.b	nC3, nCs3, $01, smpsNoAttack, nD3, $0F
-00087D                  	smpsAlterNote	$01
-00087D E101             	dc.b	$E1,$01
-00087F E701             	dc.b	smpsNoAttack, $01
-000881                  	smpsAlterNote	$03
-000881 E103             	dc.b	$E1,$03
-000883 E701             	dc.b	smpsNoAttack, $01
-000885                  	smpsAlterNote	$01
-000885 E101             	dc.b	$E1,$01
-000887 E7A6             	dc.b	smpsNoAttack, nCs3
-000889                  	smpsAlterNote	$00
-000889 E100             	dc.b	$E1,$00
-00088B E7A58005         	dc.b	smpsNoAttack, nC3, nRst, $05
-00088F                  	smpsAlterNote	$FE
-00088F E1FE             	dc.b	$E1,$FE
-000891 A201             	dc.b	nA2, $01
-000893                  	smpsAlterNote	$00
-000893 E100             	dc.b	$E1,$00
-000895 E7A404A505A40AA7 	dc.b	smpsNoAttack, nB2, $04, nC3, $05, nB2, $0A, nD3
-00089D 08A507A403A502A4 	dc.b	$08, nC3, $07, nB2, $03, nC3, $02, nB2
-0008A5 1E               	dc.b	$1E
-0008A6                  	smpsAlterNote	$01
-0008A6 E101             	dc.b	$E1,$01
-0008A8 E701             	dc.b	smpsNoAttack, $01
-0008AA                  	smpsAlterNote	$03
-0008AA E103             	dc.b	$E1,$03
-0008AC E701             	dc.b	smpsNoAttack, $01
-0008AE                  	smpsAlterNote	$FE
-0008AE E1FE             	dc.b	$E1,$FE
-0008B0 E7A3E7A2         	dc.b	smpsNoAttack, nBb2, smpsNoAttack, nA2
-0008B4                  	smpsAlterNote	$00
-0008B4 E100             	dc.b	$E1,$00
-0008B6 E7019605999DA2A5 	dc.b	smpsNoAttack, $01, nA1, $05, nC2, nE2, nA2, nC3
-0008BE A7               	dc.b	nD3
-0008BF                  	smpsAlterNote	$FF
-0008BF E1FF             	dc.b	$E1,$FF
-0008C1 A801             	dc.b	nEb3, $01
-0008C3                  	smpsAlterNote	$00
-0008C3 E100             	dc.b	$E1,$00
-0008C5 E7A90C           	dc.b	smpsNoAttack, nE3, $0C
-0008C8                  	smpsAlterNote	$FF
-0008C8 E1FF             	dc.b	$E1,$FF
-0008CA E7A801           	dc.b	smpsNoAttack, nEb3, $01
-0008CD                  	smpsAlterNote	$FE
-0008CD E1FE             	dc.b	$E1,$FE
-0008CF E7A7             	dc.b	smpsNoAttack, nD3
-0008D1                  	smpsAlterNote	$00
-0008D1 E100             	dc.b	$E1,$00
-0008D3 05A9AA           	dc.b	$05, nE3, nF3
-0008D6                  	smpsAlterNote	$FE
-0008D6 E1FE             	dc.b	$E1,$FE
-0008D8 A701             	dc.b	nD3, $01
-0008DA                  	smpsAlterNote	$00
-0008DA E100             	dc.b	$E1,$00
-0008DC E7A907           	dc.b	smpsNoAttack, nE3, $07
-0008DF                  	smpsAlterNote	$02
-0008DF E102             	dc.b	$E1,$02
-0008E1 AA01             	dc.b	nF3, $01
-0008E3                  	smpsAlterNote	$00
-0008E3 E100             	dc.b	$E1,$00
-0008E5 E706AB01E7AC04   	dc.b	smpsNoAttack, $06, nFs3, $01, smpsNoAttack, nG3, $04
-0008EC                  	smpsAlterNote	$FE
-0008EC E1FE             	dc.b	$E1,$FE
-0008EE AA01             	dc.b	nF3, $01
-0008F0                  	smpsAlterNote	$00
-0008F0 E100             	dc.b	$E1,$00
-0008F2 E7AC0EAA0FA90AA7 	dc.b	smpsNoAttack, nG3, $0E, nF3, $0F, nE3, $0A, nD3
-0008FA 23               	dc.b	$23
-0008FB                  	smpsAlterNote	$01
-0008FB E101             	dc.b	$E1,$01
-0008FD E701             	dc.b	smpsNoAttack, $01
-0008FF                  	smpsAlterNote	$02
-0008FF E102             	dc.b	$E1,$02
-000901 E701             	dc.b	smpsNoAttack, $01
-000903                  	smpsAlterNote	$FE
-000903 E1FE             	dc.b	$E1,$FE
-000905 E7A6             	dc.b	smpsNoAttack, nCs3
-000907                  	smpsAlterNote	$01
-000907 E101             	dc.b	$E1,$01
-000909 E701             	dc.b	smpsNoAttack, $01
-00090B                  	smpsAlterNote	$00
-00090B E100             	dc.b	$E1,$00
-00090D E7A58005A203A402 	dc.b	smpsNoAttack, nC3, nRst, $05, nA2, $03, nB2, $02
-000915 A505A40AA005A206 	dc.b	nC3, $05, nB2, $0A, nG2, $05, nA2, $06
-00091D                  	smpsAlterNote	$01
-00091D E101             	dc.b	$E1,$01
-00091F E701             	dc.b	smpsNoAttack, $01
-000921                  	smpsAlterNote	$FD
-000921 E1FD             	dc.b	$E1,$FD
-000923 E7A1             	dc.b	smpsNoAttack, nAb2
-000925                  	smpsAlterNote	$01
-000925 E101             	dc.b	$E1,$01
-000927 E701             	dc.b	smpsNoAttack, $01
-000929                  	smpsAlterNote	$FE
-000929 E1FE             	dc.b	$E1,$FE
-00092B E7A0             	dc.b	smpsNoAttack, nG2
-00092D                  	smpsAlterNote	$00
-00092D E100             	dc.b	$E1,$00
-00092F 8005A003A202A405 	dc.b	nRst, $05, nG2, $03, nA2, $02, nB2, $05
-000937 A50AA705A406     	dc.b	nC3, $0A, nD3, $05, nB2, $06
-00093D                  	smpsAlterNote	$01
-00093D E101             	dc.b	$E1,$01
-00093F E701             	dc.b	smpsNoAttack, $01
-000941                  	smpsAlterNote	$FE
-000941 E1FE             	dc.b	$E1,$FE
-000943 E7A3             	dc.b	smpsNoAttack, nBb2
-000945                  	smpsAlterNote	$02
-000945 E102             	dc.b	$E1,$02
-000947 E701             	dc.b	smpsNoAttack, $01
-000949                  	smpsAlterNote	$FF
-000949 E1FF             	dc.b	$E1,$FF
-00094B E7A2             	dc.b	smpsNoAttack, nA2
-00094D                  	smpsAlterNote	$00
-00094D E100             	dc.b	$E1,$00
-00094F 800A             	dc.b	nRst, $0A
-000951                  	smpsSetVol	$FE
-000951 ECFE             	dc.b	$EC,$FE
-000953                  	smpsAlterNote	$02
-000953 E102             	dc.b	$E1,$02
-000955 A801             	dc.b	nEb3, $01
-000957                  	smpsAlterNote	$00
-000957 E100             	dc.b	$E1,$00
-000959 E7AA04A70AA105A4 	dc.b	smpsNoAttack, nF3, $04, nD3, $0A, nAb2, $05, nB2
-000961 AAA801E7AE13     	dc.b	nF3, nEb3, $01, smpsNoAttack, nA3, $13
-000967                  	smpsSetVol	$02
-000967 EC02             	dc.b	$EC,$02
-000969 E701             	dc.b	smpsNoAttack, $01
-00096B                  	smpsSetVol	$01
-00096B EC01             	dc.b	$EC,$01
-00096D E703             	dc.b	smpsNoAttack, $03
+000743 800A             	dc.b	nRst, $0A
+000745                  	smpsSetVol	$01
+000745 EC01             	dc.b	$EC,$01
+000747                  	smpsAlterNote	$FF
+000747 E1FF             	dc.b	$E1,$FF
+000749 9D01             	dc.b	nE2, $01
+00074B                  	smpsAlterNote	$00
+00074B E100             	dc.b	$E1,$00
+00074D E7A204A005A20A9D 	dc.b	smpsNoAttack, nA2, $04, nG2, $05, nA2, $0A, nE2
+000755 05               	dc.b	$05
+000756                  	smpsAlterNote	$02
+000756 E102             	dc.b	$E1,$02
+000758 E79E01E7A0       	dc.b	smpsNoAttack, nF2, $01, smpsNoAttack, nG2
+00075D                  	smpsAlterNote	$FC
+00075D E1FC             	dc.b	$E1,$FC
+00075F E7A1             	dc.b	smpsNoAttack, nAb2
+000761                  	smpsAlterNote	$FD
+000761 E1FD             	dc.b	$E1,$FD
+000763 E7A3             	dc.b	smpsNoAttack, nBb2
+000765                  	smpsAlterNote	$FE
+000765 E1FE             	dc.b	$E1,$FE
+000767 E7A5             	dc.b	smpsNoAttack, nC3
+000769                  	smpsAlterNote	$00
+000769 E100             	dc.b	$E1,$00
+00076B 08A407A012       	dc.b	$08, nB2, $07, nG2, $12
+000770                  	smpsAlterNote	$01
+000770 E101             	dc.b	$E1,$01
+000772 E702             	dc.b	smpsNoAttack, $02
+000774                  	smpsAlterNote	$02
+000774 E102             	dc.b	$E1,$02
+000776 E701             	dc.b	smpsNoAttack, $01
+000778                  	smpsAlterNote	$04
+000778 E104             	dc.b	$E1,$04
+00077A E701             	dc.b	smpsNoAttack, $01
+00077C                  	smpsAlterNote	$FF
+00077C E1FF             	dc.b	$E1,$FF
+00077E E79F             	dc.b	smpsNoAttack, nFs2
+000780                  	smpsAlterNote	$FD
+000780 E1FD             	dc.b	$E1,$FD
+000782 E79E             	dc.b	smpsNoAttack, nF2
+000784                  	smpsAlterNote	$00
+000784 E100             	dc.b	$E1,$00
+000786 E701             	dc.b	smpsNoAttack, $01
+000788                  	smpsAlterNote	$02
+000788 E102             	dc.b	$E1,$02
+00078A 800A             	dc.b	nRst, $0A
+00078C                  	smpsAlterNote	$FD
+00078C E1FD             	dc.b	$E1,$FD
+00078E A201             	dc.b	nA2, $01
+000790                  	smpsAlterNote	$01
+000790 E101             	dc.b	$E1,$01
+000792 E7A504           	dc.b	smpsNoAttack, nC3, $04
+000795                  	smpsAlterNote	$00
+000795 E100             	dc.b	$E1,$00
+000797 E7A40AA2078001A0 	dc.b	smpsNoAttack, nB2, $0A, nA2, $07, nRst, $01, nG2
+00079F 07               	dc.b	$07
+0007A0                  	smpsAlterNote	$01
+0007A0 E101             	dc.b	$E1,$01
+0007A2 01               	dc.b	$01
+0007A3                  	smpsAlterNote	$00
+0007A3 E100             	dc.b	$E1,$00
+0007A5 E7A123           	dc.b	smpsNoAttack, nAb2, $23
+0007A8                  	smpsAlterNote	$02
+0007A8 E102             	dc.b	$E1,$02
+0007AA E701             	dc.b	smpsNoAttack, $01
+0007AC                  	smpsAlterNote	$FC
+0007AC E1FC             	dc.b	$E1,$FC
+0007AE E7A0             	dc.b	smpsNoAttack, nG2
+0007B0                  	smpsAlterNote	$FF
+0007B0 E1FF             	dc.b	$E1,$FF
+0007B2 E701             	dc.b	smpsNoAttack, $01
+0007B4                  	smpsAlterNote	$00
+0007B4 E100             	dc.b	$E1,$00
+0007B6 E79F             	dc.b	smpsNoAttack, nFs2
+0007B8                  	smpsAlterNote	$FD
+0007B8 E1FD             	dc.b	$E1,$FD
+0007BA A1               	dc.b	nAb2
+0007BB                  	smpsAlterNote	$00
+0007BB E100             	dc.b	$E1,$00
+0007BD E7A20E           	dc.b	smpsNoAttack, nA2, $0E
+0007C0                  	smpsAlterNote	$03
+0007C0 E103             	dc.b	$E1,$03
+0007C2 A301             	dc.b	nBb2, $01
+0007C4                  	smpsAlterNote	$00
+0007C4 E100             	dc.b	$E1,$00
+0007C6 E7A40E           	dc.b	smpsNoAttack, nB2, $0E
+0007C9                  	smpsAlterNote	$01
+0007C9 E101             	dc.b	$E1,$01
+0007CB 01               	dc.b	$01
+0007CC                  	smpsAlterNote	$00
+0007CC E100             	dc.b	$E1,$00
+0007CE E7A50EA301E7A407 	dc.b	smpsNoAttack, nC3, $0E, nBb2, $01, smpsNoAttack, nB2, $07
+0007D6 A5A601E7A70F     	dc.b	nC3, nCs3, $01, smpsNoAttack, nD3, $0F
+0007DC                  	smpsAlterNote	$01
+0007DC E101             	dc.b	$E1,$01
+0007DE E701             	dc.b	smpsNoAttack, $01
+0007E0                  	smpsAlterNote	$03
+0007E0 E103             	dc.b	$E1,$03
+0007E2 E701             	dc.b	smpsNoAttack, $01
+0007E4                  	smpsAlterNote	$01
+0007E4 E101             	dc.b	$E1,$01
+0007E6 E7A6             	dc.b	smpsNoAttack, nCs3
+0007E8                  	smpsAlterNote	$00
+0007E8 E100             	dc.b	$E1,$00
+0007EA E7A58005         	dc.b	smpsNoAttack, nC3, nRst, $05
+0007EE                  	smpsAlterNote	$FE
+0007EE E1FE             	dc.b	$E1,$FE
+0007F0 A201             	dc.b	nA2, $01
+0007F2                  	smpsAlterNote	$00
+0007F2 E100             	dc.b	$E1,$00
+0007F4 E7A404A505A40AA7 	dc.b	smpsNoAttack, nB2, $04, nC3, $05, nB2, $0A, nD3
+0007FC 08A507A403A502A4 	dc.b	$08, nC3, $07, nB2, $03, nC3, $02, nB2
+000804 1E               	dc.b	$1E
+000805                  	smpsAlterNote	$01
+000805 E101             	dc.b	$E1,$01
+000807 E701             	dc.b	smpsNoAttack, $01
+000809                  	smpsAlterNote	$03
+000809 E103             	dc.b	$E1,$03
+00080B E701             	dc.b	smpsNoAttack, $01
+00080D                  	smpsAlterNote	$FE
+00080D E1FE             	dc.b	$E1,$FE
+00080F E7A3E7A2         	dc.b	smpsNoAttack, nBb2, smpsNoAttack, nA2
+000813                  	smpsAlterNote	$00
+000813 E100             	dc.b	$E1,$00
+000815 E7019605999DA2A5 	dc.b	smpsNoAttack, $01, nA1, $05, nC2, nE2, nA2, nC3
+00081D A7               	dc.b	nD3
+00081E                  	smpsAlterNote	$FF
+00081E E1FF             	dc.b	$E1,$FF
+000820 A801             	dc.b	nEb3, $01
+000822                  	smpsAlterNote	$00
+000822 E100             	dc.b	$E1,$00
+000824 E7A90C           	dc.b	smpsNoAttack, nE3, $0C
+000827                  	smpsAlterNote	$FF
+000827 E1FF             	dc.b	$E1,$FF
+000829 E7A801           	dc.b	smpsNoAttack, nEb3, $01
+00082C                  	smpsAlterNote	$FE
+00082C E1FE             	dc.b	$E1,$FE
+00082E E7A7             	dc.b	smpsNoAttack, nD3
+000830                  	smpsAlterNote	$00
+000830 E100             	dc.b	$E1,$00
+000832 05A9AA           	dc.b	$05, nE3, nF3
+000835                  	smpsAlterNote	$FE
+000835 E1FE             	dc.b	$E1,$FE
+000837 A701             	dc.b	nD3, $01
+000839                  	smpsAlterNote	$00
+000839 E100             	dc.b	$E1,$00
+00083B E7A907           	dc.b	smpsNoAttack, nE3, $07
+00083E                  	smpsAlterNote	$02
+00083E E102             	dc.b	$E1,$02
+000840 AA01             	dc.b	nF3, $01
+000842                  	smpsAlterNote	$00
+000842 E100             	dc.b	$E1,$00
+000844 E706AB01E7AC04   	dc.b	smpsNoAttack, $06, nFs3, $01, smpsNoAttack, nG3, $04
+00084B                  	smpsAlterNote	$FE
+00084B E1FE             	dc.b	$E1,$FE
+00084D AA01             	dc.b	nF3, $01
+00084F                  	smpsAlterNote	$00
+00084F E100             	dc.b	$E1,$00
+000851 E7AC0EAA0FA90AA7 	dc.b	smpsNoAttack, nG3, $0E, nF3, $0F, nE3, $0A, nD3
+000859 23               	dc.b	$23
+00085A                  	smpsAlterNote	$01
+00085A E101             	dc.b	$E1,$01
+00085C E701             	dc.b	smpsNoAttack, $01
+00085E                  	smpsAlterNote	$02
+00085E E102             	dc.b	$E1,$02
+000860 E701             	dc.b	smpsNoAttack, $01
+000862                  	smpsAlterNote	$FE
+000862 E1FE             	dc.b	$E1,$FE
+000864 E7A6             	dc.b	smpsNoAttack, nCs3
+000866                  	smpsAlterNote	$01
+000866 E101             	dc.b	$E1,$01
+000868 E701             	dc.b	smpsNoAttack, $01
+00086A                  	smpsAlterNote	$00
+00086A E100             	dc.b	$E1,$00
+00086C E7A58005A203A402 	dc.b	smpsNoAttack, nC3, nRst, $05, nA2, $03, nB2, $02
+000874 A505A40AA005A206 	dc.b	nC3, $05, nB2, $0A, nG2, $05, nA2, $06
+00087C                  	smpsAlterNote	$01
+00087C E101             	dc.b	$E1,$01
+00087E E701             	dc.b	smpsNoAttack, $01
+000880                  	smpsAlterNote	$FD
+000880 E1FD             	dc.b	$E1,$FD
+000882 E7A1             	dc.b	smpsNoAttack, nAb2
+000884                  	smpsAlterNote	$01
+000884 E101             	dc.b	$E1,$01
+000886 E701             	dc.b	smpsNoAttack, $01
+000888                  	smpsAlterNote	$FE
+000888 E1FE             	dc.b	$E1,$FE
+00088A E7A0             	dc.b	smpsNoAttack, nG2
+00088C                  	smpsAlterNote	$00
+00088C E100             	dc.b	$E1,$00
+00088E 8005A003A202A405 	dc.b	nRst, $05, nG2, $03, nA2, $02, nB2, $05
+000896 A50AA705A406     	dc.b	nC3, $0A, nD3, $05, nB2, $06
+00089C                  	smpsAlterNote	$01
+00089C E101             	dc.b	$E1,$01
+00089E E701             	dc.b	smpsNoAttack, $01
+0008A0                  	smpsAlterNote	$FE
+0008A0 E1FE             	dc.b	$E1,$FE
+0008A2 E7A3             	dc.b	smpsNoAttack, nBb2
+0008A4                  	smpsAlterNote	$02
+0008A4 E102             	dc.b	$E1,$02
+0008A6 E701             	dc.b	smpsNoAttack, $01
+0008A8                  	smpsAlterNote	$FF
+0008A8 E1FF             	dc.b	$E1,$FF
+0008AA E7A2             	dc.b	smpsNoAttack, nA2
+0008AC                  	smpsAlterNote	$00
+0008AC E100             	dc.b	$E1,$00
+0008AE 800A             	dc.b	nRst, $0A
+0008B0                  	smpsSetVol	$FE
+0008B0 ECFE             	dc.b	$EC,$FE
+0008B2                  	smpsAlterNote	$02
+0008B2 E102             	dc.b	$E1,$02
+0008B4 A801             	dc.b	nEb3, $01
+0008B6                  	smpsAlterNote	$00
+0008B6 E100             	dc.b	$E1,$00
+0008B8 E7AA04A70AA105A4 	dc.b	smpsNoAttack, nF3, $04, nD3, $0A, nAb2, $05, nB2
+0008C0 AAA801E7AE13     	dc.b	nF3, nEb3, $01, smpsNoAttack, nA3, $13
+0008C6                  	smpsSetVol	$02
+0008C6 EC02             	dc.b	$EC,$02
+0008C8 E701             	dc.b	smpsNoAttack, $01
+0008CA                  	smpsSetVol	$01
+0008CA EC01             	dc.b	$EC,$01
+0008CC E703             	dc.b	smpsNoAttack, $03
 
-00096F                  Elegy_Loop39:
-00096F                  	smpsSetVol	$01
-00096F EC01             	dc.b	$EC,$01
-000971 E702             	dc.b	smpsNoAttack, $02
-000973                  	smpsLoop		$00, $04, Elegy_Loop39, Target
-000973 F7               	dc.b	$F7
-000974 0004             	dc.b	$00,$04
+0008CE                  Elegy_Loop39:
+0008CE                  	smpsSetVol	$01
+0008CE EC01             	dc.b	$EC,$01
+0008D0 E702             	dc.b	smpsNoAttack, $02
+0008D2                  	smpsLoop		$00, $04, Elegy_Loop39, Target
+0008D2 F7               	dc.b	$F7
+0008D3 0004             	dc.b	$00,$04
                         	if (Elegy_Loop39<*)
-000976                  		rom_ptr_z80(Elegy_Loop39+Target)
+0008D5                  		rom_ptr_z80(Elegy_Loop39+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000976 6F89             	dc.w  (((((Elegy_Loop39+Target))<<8)&$FF00)|((((Elegy_Loop39+Target))>>8)&$7F)|$80)
+0008D5 CE88             	dc.w  (((((Elegy_Loop39+Target))<<8)&$FF00)|((((Elegy_Loop39+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000978                  	smpsSetVol	$01
-000978 EC01             	dc.b	$EC,$01
-00097A E701             	dc.b	smpsNoAttack, $01
-00097C                  	smpsSetVol	$01
-00097C EC01             	dc.b	$EC,$01
-00097E E702             	dc.b	smpsNoAttack, $02
-000980                  	smpsSetVol	$01
-000980 EC01             	dc.b	$EC,$01
-000982 E703             	dc.b	smpsNoAttack, $03
-000984                  	smpsSetVol	$01
-000984 EC01             	dc.b	$EC,$01
-000986 E702             	dc.b	smpsNoAttack, $02
-000988                  	smpsSetVol	$F6
-000988 ECF6             	dc.b	$EC,$F6
-00098A                  	smpsJump		Elegy_Jump7, Target
-00098A F6               	dc.b	$F6
+0008D7                  	smpsSetVol	$01
+0008D7 EC01             	dc.b	$EC,$01
+0008D9 E701             	dc.b	smpsNoAttack, $01
+0008DB                  	smpsSetVol	$01
+0008DB EC01             	dc.b	$EC,$01
+0008DD E702             	dc.b	smpsNoAttack, $02
+0008DF                  	smpsSetVol	$01
+0008DF EC01             	dc.b	$EC,$01
+0008E1 E703             	dc.b	smpsNoAttack, $03
+0008E3                  	smpsSetVol	$01
+0008E3 EC01             	dc.b	$EC,$01
+0008E5 E702             	dc.b	smpsNoAttack, $02
+0008E7                  	smpsSetVol	$F6
+0008E7 ECF6             	dc.b	$EC,$F6
+0008E9                  	smpsJump		Elegy_Jump7, Target
+0008E9 F6               	dc.b	$F6
                         	if (Elegy_Jump7<*)
-00098B                  		rom_ptr_z80(Elegy_Jump7+Target)
+0008EA                  		rom_ptr_z80(Elegy_Jump7+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00098B DC87             	dc.w  (((((Elegy_Jump7+Target))<<8)&$FF00)|((((Elegy_Jump7+Target))>>8)&$7F)|$80)
+0008EA 3B87             	dc.w  (((((Elegy_Jump7+Target))<<8)&$FF00)|((((Elegy_Jump7+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
 
-00098D                  Elegy_PSG2:
+0008EC                  Elegy_PSG2:
                         	;!@ dc.b	nRst, $7F, $7F, $42
-00098D 807F807F8042     	dc.b	nRst, $7F, nRst, $7F, nRst, $42
+0008EC 807F807F8042     	dc.b	nRst, $7F, nRst, $7F, nRst, $42
 
-000993                  Elegy_Jump8:
-000993                  	smpsPSGvoice	PSGVoi
-000993 F500             	dc.b	$F5,PSGVoi
+0008F2                  Elegy_Jump8:
+0008F2                  	smpsPSGvoice	PSGVoi
+0008F2 F500             	dc.b	$F5,PSGVoi
 
-000995                  Elegy_Loop40:
-000995 A2058003A0058002 	dc.b	nA2, $05, nRst, $03, nG2, $05, nRst, $02
-00099D                  	smpsLoop		$00, $02, Elegy_Loop40, Target
-00099D F7               	dc.b	$F7
-00099E 0002             	dc.b	$00,$02
+0008F4                  Elegy_Loop40:
+0008F4 A2058003A0058002 	dc.b	nA2, $05, nRst, $03, nG2, $05, nRst, $02
+0008FC                  	smpsLoop		$00, $02, Elegy_Loop40, Target
+0008FC F7               	dc.b	$F7
+0008FD 0002             	dc.b	$00,$02
                         	if (Elegy_Loop40<*)
-0009A0                  		rom_ptr_z80(Elegy_Loop40+Target)
+0008FF                  		rom_ptr_z80(Elegy_Loop40+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0009A0 9589             	dc.w  (((((Elegy_Loop40+Target))<<8)&$FF00)|((((Elegy_Loop40+Target))>>8)&$7F)|$80)
+0008FF F488             	dc.w  (((((Elegy_Loop40+Target))<<8)&$FF00)|((((Elegy_Loop40+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-0009A2 A205A0A28003A005 	dc.b	nA2, $05, nG2, nA2, nRst, $03, nG2, $05
-0009AA 8002A2058014     	dc.b	nRst, $02, nA2, $05, nRst, $14
+000901 A205A0A28003A005 	dc.b	nA2, $05, nG2, nA2, nRst, $03, nG2, $05
+000909 8002A2058014     	dc.b	nRst, $02, nA2, $05, nRst, $14
 
-0009B0                  Elegy_Loop41:
-0009B0 A2058003A0058002 	dc.b	nA2, $05, nRst, $03, nG2, $05, nRst, $02
-0009B8                  	smpsLoop		$00, $02, Elegy_Loop41, Target
-0009B8 F7               	dc.b	$F7
-0009B9 0002             	dc.b	$00,$02
+00090F                  Elegy_Loop41:
+00090F A2058003A0058002 	dc.b	nA2, $05, nRst, $03, nG2, $05, nRst, $02
+000917                  	smpsLoop		$00, $02, Elegy_Loop41, Target
+000917 F7               	dc.b	$F7
+000918 0002             	dc.b	$00,$02
                         	if (Elegy_Loop41<*)
-0009BB                  		rom_ptr_z80(Elegy_Loop41+Target)
+00091A                  		rom_ptr_z80(Elegy_Loop41+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0009BB B089             	dc.w  (((((Elegy_Loop41+Target))<<8)&$FF00)|((((Elegy_Loop41+Target))>>8)&$7F)|$80)
+00091A 0F89             	dc.w  (((((Elegy_Loop41+Target))<<8)&$FF00)|((((Elegy_Loop41+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-0009BD A205A0A28003A005 	dc.b	nA2, $05, nG2, nA2, nRst, $03, nG2, $05
-0009C5 80029E05         	dc.b	nRst, $02, nF2, $05
-0009C9                  	smpsSetVol	$02
-0009C9 EC02             	dc.b	$EC,$02
-0009CB A903A502A203A502 	dc.b	nE3, $03, nC3, $02, nA2, $03, nC3, $02
-0009D3 A203A902A403A902 	dc.b	nA2, $03, nE3, $02, nB2, $03, nE3, $02
-0009DB                  	smpsSetVol	$FE
-0009DB ECFE             	dc.b	$EC,$FE
+00091C A205A0A28003A005 	dc.b	nA2, $05, nG2, nA2, nRst, $03, nG2, $05
+000924 80029E05         	dc.b	nRst, $02, nF2, $05
+000928                  	smpsSetVol	$02
+000928 EC02             	dc.b	$EC,$02
+00092A A903A502A203A502 	dc.b	nE3, $03, nC3, $02, nA2, $03, nC3, $02
+000932 A203A902A403A902 	dc.b	nA2, $03, nE3, $02, nB2, $03, nE3, $02
+00093A                  	smpsSetVol	$FE
+00093A ECFE             	dc.b	$EC,$FE
 
-0009DD                  Elegy_Loop42:
-0009DD A2058003A0058002 	dc.b	nA2, $05, nRst, $03, nG2, $05, nRst, $02
-0009E5                  	smpsLoop		$00, $02, Elegy_Loop42, Target
-0009E5 F7               	dc.b	$F7
-0009E6 0002             	dc.b	$00,$02
+00093C                  Elegy_Loop42:
+00093C A2058003A0058002 	dc.b	nA2, $05, nRst, $03, nG2, $05, nRst, $02
+000944                  	smpsLoop		$00, $02, Elegy_Loop42, Target
+000944 F7               	dc.b	$F7
+000945 0002             	dc.b	$00,$02
                         	if (Elegy_Loop42<*)
-0009E8                  		rom_ptr_z80(Elegy_Loop42+Target)
+000947                  		rom_ptr_z80(Elegy_Loop42+Target)
                         	;dc.w z80_ptr(ptr,addr)
-0009E8 DD89             	dc.w  (((((Elegy_Loop42+Target))<<8)&$FF00)|((((Elegy_Loop42+Target))>>8)&$7F)|$80)
+000947 3C89             	dc.w  (((((Elegy_Loop42+Target))<<8)&$FF00)|((((Elegy_Loop42+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-0009EA A205A0A28003A005 	dc.b	nA2, $05, nG2, nA2, nRst, $03, nG2, $05
-0009F2 8002A2058014     	dc.b	nRst, $02, nA2, $05, nRst, $14
+000949 A205A0A28003A005 	dc.b	nA2, $05, nG2, nA2, nRst, $03, nG2, $05
+000951 8002A2058014     	dc.b	nRst, $02, nA2, $05, nRst, $14
 
-0009F8                  Elegy_Loop43:
-0009F8 A2058003A0058002 	dc.b	nA2, $05, nRst, $03, nG2, $05, nRst, $02
-000A00                  	smpsLoop		$00, $02, Elegy_Loop43, Target
-000A00 F7               	dc.b	$F7
-000A01 0002             	dc.b	$00,$02
+000957                  Elegy_Loop43:
+000957 A2058003A0058002 	dc.b	nA2, $05, nRst, $03, nG2, $05, nRst, $02
+00095F                  	smpsLoop		$00, $02, Elegy_Loop43, Target
+00095F F7               	dc.b	$F7
+000960 0002             	dc.b	$00,$02
                         	if (Elegy_Loop43<*)
-000A03                  		rom_ptr_z80(Elegy_Loop43+Target)
+000962                  		rom_ptr_z80(Elegy_Loop43+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000A03 F889             	dc.w  (((((Elegy_Loop43+Target))<<8)&$FF00)|((((Elegy_Loop43+Target))>>8)&$7F)|$80)
+000962 5789             	dc.w  (((((Elegy_Loop43+Target))<<8)&$FF00)|((((Elegy_Loop43+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000A05 A205A0A703A502A9 	dc.b	nA2, $05, nG2, nD3, $03, nC3, $02, nE3
-000A0D 03A707AA03A902A7 	dc.b	$03, nD3, $07, nF3, $03, nE3, $02, nD3
-000A15 03A90C80419D0580 	dc.b	$03, nE3, $0C, nRst, $41, nE2, $05, nRst
-000A1D 039B058002990580 	dc.b	$03, nD2, $05, nRst, $02, nC2, $05, nRst
-000A25 2891058003950580 	dc.b	$28, nE1, $05, nRst, $03, nAb1, $05, nRst
-000A2D 0298059B80039D05 	dc.b	$02, nB1, $05, nD2, nRst, $03, nE2, $05
-000A35 80029E059D8037A0 	dc.b	nRst, $02, nF2, $05, nE2, nRst, $37, nG2
-000A3D 0505A2A4800AA90F 	dc.b	$05, $05, nA2, nB2, nRst, $0A, nE3, $0F
-000A45 0FAA058003A90580 	dc.b	$0F, nF3, $05, nRst, $03, nE3, $05, nRst
-000A4D 02A705A58003A405 	dc.b	$02, nD3, $05, nC3, nRst, $03, nB2, $05
-000A55 8002A305A2801E9D 	dc.b	nRst, $02, nBb2, $05, nA2, nRst, $1E, nE2
-000A5D 039E02A00F9B980A 	dc.b	$03, nF2, $02, nG2, $0F, nD2, nB1, $0A
-000A65 9926019C9DA1079E 	dc.b	nC2, $26, $01, nEb2, nE2, nAb2, $07, nF2
-000A6D 9D059B0898079505 	dc.b	nE2, $05, nD2, $08, nB1, $07, nAb1, $05
-000A75 9699039B029D059B 	dc.b	nA1, nC2, $03, nD2, $02, nE2, $05, nD2
-000A7D 0A9805990D800298 	dc.b	$0A, nB1, $05, nC2, $0D, nRst, $02, nB1
-000A85 0399029B059D0A9E 	dc.b	$03, nC2, $02, nD2, $05, nE2, $0A, nF2
-000A8D 059B0D8007980A9B 	dc.b	$05, nD2, $0D, nRst, $07, nB1, $0A, nD2
-000A95 9E960399029D03A2 	dc.b	nF2, nA1, $03, nC2, $02, nE2, $03, nA2
-000A9D 16               	dc.b	$16
-000A9E                  	smpsAlterNote	$00
-000A9E E100             	dc.b	$E1,$00
-000AA0 800A             	dc.b	nRst, $0A
-000AA2                  	smpsJump		Elegy_Jump8, Target
-000AA2 F6               	dc.b	$F6
+000964 A205A0A703A502A9 	dc.b	nA2, $05, nG2, nD3, $03, nC3, $02, nE3
+00096C 03A707AA03A902A7 	dc.b	$03, nD3, $07, nF3, $03, nE3, $02, nD3
+000974 03A90C80419D0580 	dc.b	$03, nE3, $0C, nRst, $41, nE2, $05, nRst
+00097C 039B058002990580 	dc.b	$03, nD2, $05, nRst, $02, nC2, $05, nRst
+000984 2891058003950580 	dc.b	$28, nE1, $05, nRst, $03, nAb1, $05, nRst
+00098C 0298059B80039D05 	dc.b	$02, nB1, $05, nD2, nRst, $03, nE2, $05
+000994 80029E059D8037A0 	dc.b	nRst, $02, nF2, $05, nE2, nRst, $37, nG2
+00099C 0505A2A4800AA90F 	dc.b	$05, $05, nA2, nB2, nRst, $0A, nE3, $0F
+0009A4 0FAA058003A90580 	dc.b	$0F, nF3, $05, nRst, $03, nE3, $05, nRst
+0009AC 02A705A58003A405 	dc.b	$02, nD3, $05, nC3, nRst, $03, nB2, $05
+0009B4 8002A305A2801E9D 	dc.b	nRst, $02, nBb2, $05, nA2, nRst, $1E, nE2
+0009BC 039E02A00F9B980A 	dc.b	$03, nF2, $02, nG2, $0F, nD2, nB1, $0A
+0009C4 9926019C9DA1079E 	dc.b	nC2, $26, $01, nEb2, nE2, nAb2, $07, nF2
+0009CC 9D059B0898079505 	dc.b	nE2, $05, nD2, $08, nB1, $07, nAb1, $05
+0009D4 9699039B029D059B 	dc.b	nA1, nC2, $03, nD2, $02, nE2, $05, nD2
+0009DC 0A9805990D800298 	dc.b	$0A, nB1, $05, nC2, $0D, nRst, $02, nB1
+0009E4 0399029B059D0A9E 	dc.b	$03, nC2, $02, nD2, $05, nE2, $0A, nF2
+0009EC 059B0D8007980A9B 	dc.b	$05, nD2, $0D, nRst, $07, nB1, $0A, nD2
+0009F4 9E960399029D03A2 	dc.b	nF2, nA1, $03, nC2, $02, nE2, $03, nA2
+0009FC 16               	dc.b	$16
+0009FD                  	smpsAlterNote	$00
+0009FD E100             	dc.b	$E1,$00
+0009FF 800A             	dc.b	nRst, $0A
+000A01                  	smpsJump		Elegy_Jump8, Target
+000A01 F6               	dc.b	$F6
                         	if (Elegy_Jump8<*)
-000AA3                  		rom_ptr_z80(Elegy_Jump8+Target)
+000A02                  		rom_ptr_z80(Elegy_Jump8+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000AA3 9389             	dc.w  (((((Elegy_Jump8+Target))<<8)&$FF00)|((((Elegy_Jump8+Target))>>8)&$7F)|$80)
+000A02 F288             	dc.w  (((((Elegy_Jump8+Target))<<8)&$FF00)|((((Elegy_Jump8+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
 
-000AA5                  Elegy_PSG3:
+000A04                  Elegy_PSG3:
                         	;!@ dc.b	nRst, $7F, $7F, $42
-000AA5 807F807F8042     	dc.b	nRst, $7F, nRst, $7F, nRst, $42
+000A04 807F807F8042     	dc.b	nRst, $7F, nRst, $7F, nRst, $42
 
-000AAB                  Elegy_Jump9:
-000AAB                  	smpsPSGvoice	PSGVoi
-000AAB F500             	dc.b	$F5,PSGVoi
+000A0A                  Elegy_Jump9:
+000A0A                  	smpsPSGvoice	PSGVoi
+000A0A F500             	dc.b	$F5,PSGVoi
 
-000AAD                  Elegy_Loop44:
-000AAD 9905800398058002 	dc.b	nC2, $05, nRst, $03, nB1, $05, nRst, $02
-000AB5                  	smpsLoop		$00, $02, Elegy_Loop44, Target
-000AB5 F7               	dc.b	$F7
-000AB6 0002             	dc.b	$00,$02
+000A0C                  Elegy_Loop44:
+000A0C 9905800398058002 	dc.b	nC2, $05, nRst, $03, nB1, $05, nRst, $02
+000A14                  	smpsLoop		$00, $02, Elegy_Loop44, Target
+000A14 F7               	dc.b	$F7
+000A15 0002             	dc.b	$00,$02
                         	if (Elegy_Loop44<*)
-000AB8                  		rom_ptr_z80(Elegy_Loop44+Target)
+000A17                  		rom_ptr_z80(Elegy_Loop44+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000AB8 AD8A             	dc.w  (((((Elegy_Loop44+Target))<<8)&$FF00)|((((Elegy_Loop44+Target))>>8)&$7F)|$80)
+000A17 0C8A             	dc.w  (((((Elegy_Loop44+Target))<<8)&$FF00)|((((Elegy_Loop44+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000ABA 9905989980039805 	dc.b	nC2, $05, nB1, nC2, nRst, $03, nB1, $05
-000AC2 800299058014     	dc.b	nRst, $02, nC2, $05, nRst, $14
+000A19 9905989980039805 	dc.b	nC2, $05, nB1, nC2, nRst, $03, nB1, $05
+000A21 800299058014     	dc.b	nRst, $02, nC2, $05, nRst, $14
 
-000AC8                  Elegy_Loop45:
-000AC8 9905800398058002 	dc.b	nC2, $05, nRst, $03, nB1, $05, nRst, $02
-000AD0                  	smpsLoop		$00, $02, Elegy_Loop45, Target
-000AD0 F7               	dc.b	$F7
-000AD1 0002             	dc.b	$00,$02
+000A27                  Elegy_Loop45:
+000A27 9905800398058002 	dc.b	nC2, $05, nRst, $03, nB1, $05, nRst, $02
+000A2F                  	smpsLoop		$00, $02, Elegy_Loop45, Target
+000A2F F7               	dc.b	$F7
+000A30 0002             	dc.b	$00,$02
                         	if (Elegy_Loop45<*)
-000AD3                  		rom_ptr_z80(Elegy_Loop45+Target)
+000A32                  		rom_ptr_z80(Elegy_Loop45+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000AD3 C88A             	dc.w  (((((Elegy_Loop45+Target))<<8)&$FF00)|((((Elegy_Loop45+Target))>>8)&$7F)|$80)
+000A32 278A             	dc.w  (((((Elegy_Loop45+Target))<<8)&$FF00)|((((Elegy_Loop45+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000AD5 9905989980039805 	dc.b	nC2, $05, nB1, nC2, nRst, $03, nB1, $05
-000ADD 800296058001     	dc.b	nRst, $02, nA1, $05, nRst, $01
-000AE3                  	smpsSetVol	$04
-000AE3 EC04             	dc.b	$EC,$04
-000AE5 A902A503A202A503 	dc.b	nE3, $02, nC3, $03, nA2, $02, nC3, $03
-000AED A202A903A402A9   	dc.b	nA2, $02, nE3, $03, nB2, $02, nE3
-000AF4                  	smpsSetVol	$FC
-000AF4 ECFC             	dc.b	$EC,$FC
+000A34 9905989980039805 	dc.b	nC2, $05, nB1, nC2, nRst, $03, nB1, $05
+000A3C 800296058001     	dc.b	nRst, $02, nA1, $05, nRst, $01
+000A42                  	smpsSetVol	$04
+000A42 EC04             	dc.b	$EC,$04
+000A44 A902A503A202A503 	dc.b	nE3, $02, nC3, $03, nA2, $02, nC3, $03
+000A4C A202A903A402A9   	dc.b	nA2, $02, nE3, $03, nB2, $02, nE3
+000A53                  	smpsSetVol	$FC
+000A53 ECFC             	dc.b	$EC,$FC
 
-000AF6                  Elegy_Loop46:
-000AF6 9905800398058002 	dc.b	nC2, $05, nRst, $03, nB1, $05, nRst, $02
-000AFE                  	smpsLoop		$00, $02, Elegy_Loop46, Target
-000AFE F7               	dc.b	$F7
-000AFF 0002             	dc.b	$00,$02
+000A55                  Elegy_Loop46:
+000A55 9905800398058002 	dc.b	nC2, $05, nRst, $03, nB1, $05, nRst, $02
+000A5D                  	smpsLoop		$00, $02, Elegy_Loop46, Target
+000A5D F7               	dc.b	$F7
+000A5E 0002             	dc.b	$00,$02
                         	if (Elegy_Loop46<*)
-000B01                  		rom_ptr_z80(Elegy_Loop46+Target)
+000A60                  		rom_ptr_z80(Elegy_Loop46+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000B01 F68A             	dc.w  (((((Elegy_Loop46+Target))<<8)&$FF00)|((((Elegy_Loop46+Target))>>8)&$7F)|$80)
+000A60 558A             	dc.w  (((((Elegy_Loop46+Target))<<8)&$FF00)|((((Elegy_Loop46+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000B03 9905989980039805 	dc.b	nC2, $05, nB1, nC2, nRst, $03, nB1, $05
-000B0B 800299058014     	dc.b	nRst, $02, nC2, $05, nRst, $14
+000A62 9905989980039805 	dc.b	nC2, $05, nB1, nC2, nRst, $03, nB1, $05
+000A6A 800299058014     	dc.b	nRst, $02, nC2, $05, nRst, $14
 
-000B11                  Elegy_Loop47:
-000B11 9905800398058002 	dc.b	nC2, $05, nRst, $03, nB1, $05, nRst, $02
-000B19                  	smpsLoop		$00, $02, Elegy_Loop47, Target
-000B19 F7               	dc.b	$F7
-000B1A 0002             	dc.b	$00,$02
+000A70                  Elegy_Loop47:
+000A70 9905800398058002 	dc.b	nC2, $05, nRst, $03, nB1, $05, nRst, $02
+000A78                  	smpsLoop		$00, $02, Elegy_Loop47, Target
+000A78 F7               	dc.b	$F7
+000A79 0002             	dc.b	$00,$02
                         	if (Elegy_Loop47<*)
-000B1C                  		rom_ptr_z80(Elegy_Loop47+Target)
+000A7B                  		rom_ptr_z80(Elegy_Loop47+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000B1C 118B             	dc.w  (((((Elegy_Loop47+Target))<<8)&$FF00)|((((Elegy_Loop47+Target))>>8)&$7F)|$80)
+000A7B 708A             	dc.w  (((((Elegy_Loop47+Target))<<8)&$FF00)|((((Elegy_Loop47+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000B1E 9905989E039D02A0 	dc.b	nC2, $05, nB1, nF2, $03, nE2, $02, nG2
-000B26 039E07A203A0029E 	dc.b	$03, nF2, $07, nA2, $03, nG2, $02, nF2
-000B2E 03A00C8046       	dc.b	$03, nG2, $0C, nRst, $46
-000B33                  	smpsSetVol	$05
-000B33 EC05             	dc.b	$EC,$05
-000B35 9D0580039B058002 	dc.b	nE2, $05, nRst, $03, nD2, $05, nRst, $02
-000B3D 9905802891058003 	dc.b	nC2, $05, nRst, $28, nE1, $05, nRst, $03
-000B45 9505800298059B80 	dc.b	nAb1, $05, nRst, $02, nB1, $05, nD2, nRst
-000B4D 039D0580029E059D 	dc.b	$03, nE2, $05, nRst, $02, nF2, $05, nE2
-000B55 8037A00505A2A480 	dc.b	nRst, $37, nG2, $05, $05, nA2, nB2, nRst
-000B5D 0AA90F0FAA058003 	dc.b	$0A, nE3, $0F, $0F, nF3, $05, nRst, $03
-000B65 A9058002A705A580 	dc.b	nE3, $05, nRst, $02, nD3, $05, nC3, nRst
-000B6D 03A4058002A305A2 	dc.b	$03, nB2, $05, nRst, $02, nBb2, $05, nA2
-000B75 801E9D039E02A00F 	dc.b	nRst, $1E, nE2, $03, nF2, $02, nG2, $0F
-000B7D 9B980A9926019C9D 	dc.b	nD2, nB1, $0A, nC2, $26, $01, nEb2, nE2
-000B85 A1079E9D059B0898 	dc.b	nAb2, $07, nF2, nE2, $05, nD2, $08, nB1
-000B8D 0795059699039B02 	dc.b	$07, nAb1, $05, nA1, nC2, $03, nD2, $02
-000B95 9D059B0A9805990D 	dc.b	nE2, $05, nD2, $0A, nB1, $05, nC2, $0D
-000B9D 8002980399029B05 	dc.b	nRst, $02, nB1, $03, nC2, $02, nD2, $05
-000BA5 9D0A9E059B0D8007 	dc.b	nE2, $0A, nF2, $05, nD2, $0D, nRst, $07
-000BAD 980A9B9E96039902 	dc.b	nB1, $0A, nD2, nF2, nA1, $03, nC2, $02
-000BB5 9D03A216         	dc.b	nE2, $03, nA2, $16
-000BB9                  	smpsAlterNote	$00
-000BB9 E100             	dc.b	$E1,$00
-000BBB 8005             	dc.b	nRst, $05
-000BBD                  	smpsSetVol	$FB
-000BBD ECFB             	dc.b	$EC,$FB
-000BBF                  	smpsJump		Elegy_Jump9, Target
-000BBF F6               	dc.b	$F6
+000A7D 9905989E039D02A0 	dc.b	nC2, $05, nB1, nF2, $03, nE2, $02, nG2
+000A85 039E07A203A0029E 	dc.b	$03, nF2, $07, nA2, $03, nG2, $02, nF2
+000A8D 03A00C8046       	dc.b	$03, nG2, $0C, nRst, $46
+000A92                  	smpsSetVol	$05
+000A92 EC05             	dc.b	$EC,$05
+000A94 9D0580039B058002 	dc.b	nE2, $05, nRst, $03, nD2, $05, nRst, $02
+000A9C 9905802891058003 	dc.b	nC2, $05, nRst, $28, nE1, $05, nRst, $03
+000AA4 9505800298059B80 	dc.b	nAb1, $05, nRst, $02, nB1, $05, nD2, nRst
+000AAC 039D0580029E059D 	dc.b	$03, nE2, $05, nRst, $02, nF2, $05, nE2
+000AB4 8037A00505A2A480 	dc.b	nRst, $37, nG2, $05, $05, nA2, nB2, nRst
+000ABC 0AA90F0FAA058003 	dc.b	$0A, nE3, $0F, $0F, nF3, $05, nRst, $03
+000AC4 A9058002A705A580 	dc.b	nE3, $05, nRst, $02, nD3, $05, nC3, nRst
+000ACC 03A4058002A305A2 	dc.b	$03, nB2, $05, nRst, $02, nBb2, $05, nA2
+000AD4 801E9D039E02A00F 	dc.b	nRst, $1E, nE2, $03, nF2, $02, nG2, $0F
+000ADC 9B980A9926019C9D 	dc.b	nD2, nB1, $0A, nC2, $26, $01, nEb2, nE2
+000AE4 A1079E9D059B0898 	dc.b	nAb2, $07, nF2, nE2, $05, nD2, $08, nB1
+000AEC 0795059699039B02 	dc.b	$07, nAb1, $05, nA1, nC2, $03, nD2, $02
+000AF4 9D059B0A9805990D 	dc.b	nE2, $05, nD2, $0A, nB1, $05, nC2, $0D
+000AFC 8002980399029B05 	dc.b	nRst, $02, nB1, $03, nC2, $02, nD2, $05
+000B04 9D0A9E059B0D8007 	dc.b	nE2, $0A, nF2, $05, nD2, $0D, nRst, $07
+000B0C 980A9B9E96039902 	dc.b	nB1, $0A, nD2, nF2, nA1, $03, nC2, $02
+000B14 9D03A216         	dc.b	nE2, $03, nA2, $16
+000B18                  	smpsAlterNote	$00
+000B18 E100             	dc.b	$E1,$00
+000B1A 8005             	dc.b	nRst, $05
+000B1C                  	smpsSetVol	$FB
+000B1C ECFB             	dc.b	$EC,$FB
+000B1E                  	smpsJump		Elegy_Jump9, Target
+000B1E F6               	dc.b	$F6
                         	if (Elegy_Jump9<*)
-000BC0                  		rom_ptr_z80(Elegy_Jump9+Target)
+000B1F                  		rom_ptr_z80(Elegy_Jump9+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000BC0 AB8A             	dc.w  (((((Elegy_Jump9+Target))<<8)&$FF00)|((((Elegy_Jump9+Target))>>8)&$7F)|$80)
+000B1F 0A8A             	dc.w  (((((Elegy_Jump9+Target))<<8)&$FF00)|((((Elegy_Jump9+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
 
-000BC2                  Elegy_PWM1:
-000BC2                  	smpsPan		panCenter
+000B21                  Elegy_PWM1:
+000B21                  	smpsPan		panCenter
        = 000000         panNone set $00
        = 000040         panRight set $40
        = 000080         panLeft set $80
@@ -2661,282 +2615,384 @@
                         	;endm		
                         	if 1==2
                         	else
-000BC2 E0C0             		dc.b $E0,panCenter
+000B21 E0C0             		dc.b $E0,panCenter
                         	endif
-000BC4 8928             	dc.b pCrashCymb, $28
+000B23 8928             	dc.b pCrashCymb, $28
 
-000BC6                  Elegy_PWM1_Loop1:
-000BC6 810A82           	dc.b pEKick, $0A, pESnare
-000BC9                  	smpsLoop		$00, $0C, Elegy_PWM1_Loop1, Target
-000BC9 F7               	dc.b	$F7
-000BCA 000C             	dc.b	$00,$0C
+000B25                  Elegy_PWM1_Loop1:
+000B25 810A82           	dc.b pEKick, $0A, pESnare
+000B28                  	smpsLoop		$00, $0C, Elegy_PWM1_Loop1, Target
+000B28 F7               	dc.b	$F7
+000B29 000C             	dc.b	$00,$0C
                         	if (Elegy_PWM1_Loop1<*)
-000BCC                  		rom_ptr_z80(Elegy_PWM1_Loop1+Target)
+000B2B                  		rom_ptr_z80(Elegy_PWM1_Loop1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000BCC C68B             	dc.w  (((((Elegy_PWM1_Loop1+Target))<<8)&$FF00)|((((Elegy_PWM1_Loop1+Target))>>8)&$7F)|$80)
+000B2B 258B             	dc.w  (((((Elegy_PWM1_Loop1+Target))<<8)&$FF00)|((((Elegy_PWM1_Loop1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000BCE 891483           	dc.b pCrashCymb, $14, pSplashCymb
+000B2D 891483           	dc.b pCrashCymb, $14, pSplashCymb
 
-000BD1                  Elegy_PWM1_Jump1:
-000BD1 8928             	dc.b pCrashCymb, $28
+000B30                  Elegy_PWM1_Jump1:
+000B30 8928             	dc.b pCrashCymb, $28
 
-000BD3                  Elegy_PWM1_Loop2:
-000BD3 810A828182818298 	dc.b pEKick, $0A, pESnare, pEKick, pESnare, pEKick, pESnare, pClosedHH
-000BDB 05050505         	dc.b $05, $05, $05, $05
-000BDF                  	smpsLoop		$00, $02, Elegy_PWM1_Loop2, Target
-000BDF F7               	dc.b	$F7
-000BE0 0002             	dc.b	$00,$02
+000B32                  Elegy_PWM1_Loop2:
+000B32 810A828182818298 	dc.b pEKick, $0A, pESnare, pEKick, pESnare, pEKick, pESnare, pClosedHH
+000B3A 05050505         	dc.b $05, $05, $05, $05
+000B3E                  	smpsLoop		$00, $02, Elegy_PWM1_Loop2, Target
+000B3E F7               	dc.b	$F7
+000B3F 0002             	dc.b	$00,$02
                         	if (Elegy_PWM1_Loop2<*)
-000BE2                  		rom_ptr_z80(Elegy_PWM1_Loop2+Target)
+000B41                  		rom_ptr_z80(Elegy_PWM1_Loop2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000BE2 D38B             	dc.w  (((((Elegy_PWM1_Loop2+Target))<<8)&$FF00)|((((Elegy_PWM1_Loop2+Target))>>8)&$7F)|$80)
+000B41 328B             	dc.w  (((((Elegy_PWM1_Loop2+Target))<<8)&$FF00)|((((Elegy_PWM1_Loop2+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000BE4 810A82818298     	dc.b pEKick, $0A, pESnare, pEKick, pESnare, pClosedHH
+000B43 810A82818298     	dc.b pEKick, $0A, pESnare, pEKick, pESnare, pClosedHH
 
-000BEA                  Elegy_PWM1_Loop3:
-000BEA 05               	dc.b $05
-000BEB                  	smpsLoop		$00, $08, Elegy_PWM1_Loop3, Target
-000BEB F7               	dc.b	$F7
-000BEC 0008             	dc.b	$00,$08
+000B49                  Elegy_PWM1_Loop3:
+000B49 05               	dc.b $05
+000B4A                  	smpsLoop		$00, $08, Elegy_PWM1_Loop3, Target
+000B4A F7               	dc.b	$F7
+000B4B 0008             	dc.b	$00,$08
                         	if (Elegy_PWM1_Loop3<*)
-000BEE                  		rom_ptr_z80(Elegy_PWM1_Loop3+Target)
+000B4D                  		rom_ptr_z80(Elegy_PWM1_Loop3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000BEE EA8B             	dc.w  (((((Elegy_PWM1_Loop3+Target))<<8)&$FF00)|((((Elegy_PWM1_Loop3+Target))>>8)&$7F)|$80)
+000B4D 498B             	dc.w  (((((Elegy_PWM1_Loop3+Target))<<8)&$FF00)|((((Elegy_PWM1_Loop3+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000BF0 891483           	dc.b pCrashCymb, $14, pSplashCymb
+000B4F 891483           	dc.b pCrashCymb, $14, pSplashCymb
 
-000BF3                  Elegy_PWM1_Loop5:
-000BF3 8928             	dc.b pCrashCymb, $28
+000B52                  Elegy_PWM1_Loop5:
+000B52 8928             	dc.b pCrashCymb, $28
 
-000BF5                  Elegy_PWM1_Loop4:
-000BF5 810A828182818298 	dc.b pEKick, $0A, pESnare, pEKick, pESnare, pEKick, pESnare, pClosedHH
-000BFD 05050505         	dc.b $05, $05, $05, $05
-000C01                  	smpsLoop		$00, $03, Elegy_PWM1_Loop4, Target
-000C01 F7               	dc.b	$F7
-000C02 0003             	dc.b	$00,$03
+000B54                  Elegy_PWM1_Loop4:
+000B54 810A828182818298 	dc.b pEKick, $0A, pESnare, pEKick, pESnare, pEKick, pESnare, pClosedHH
+000B5C 05050505         	dc.b $05, $05, $05, $05
+000B60                  	smpsLoop		$00, $03, Elegy_PWM1_Loop4, Target
+000B60 F7               	dc.b	$F7
+000B61 0003             	dc.b	$00,$03
                         	if (Elegy_PWM1_Loop4<*)
-000C04                  		rom_ptr_z80(Elegy_PWM1_Loop4+Target)
+000B63                  		rom_ptr_z80(Elegy_PWM1_Loop4+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C04 F58B             	dc.w  (((((Elegy_PWM1_Loop4+Target))<<8)&$FF00)|((((Elegy_PWM1_Loop4+Target))>>8)&$7F)|$80)
+000B63 548B             	dc.w  (((((Elegy_PWM1_Loop4+Target))<<8)&$FF00)|((((Elegy_PWM1_Loop4+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C06 810A828182       	dc.b pEKick, $0A, pESnare, pEKick, pESnare
-000C0B                  	smpsLoop		$01, $02, Elegy_PWM1_Loop5, Target
-000C0B F7               	dc.b	$F7
-000C0C 0102             	dc.b	$01,$02
+000B65 810A828182       	dc.b pEKick, $0A, pESnare, pEKick, pESnare
+000B6A                  	smpsLoop		$01, $02, Elegy_PWM1_Loop5, Target
+000B6A F7               	dc.b	$F7
+000B6B 0102             	dc.b	$01,$02
                         	if (Elegy_PWM1_Loop5<*)
-000C0E                  		rom_ptr_z80(Elegy_PWM1_Loop5+Target)
+000B6D                  		rom_ptr_z80(Elegy_PWM1_Loop5+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C0E F38B             	dc.w  (((((Elegy_PWM1_Loop5+Target))<<8)&$FF00)|((((Elegy_PWM1_Loop5+Target))>>8)&$7F)|$80)
+000B6D 528B             	dc.w  (((((Elegy_PWM1_Loop5+Target))<<8)&$FF00)|((((Elegy_PWM1_Loop5+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C10                  	smpsJump		Elegy_PWM1_Jump1, Target
-000C10 F6               	dc.b	$F6
+000B6F                  	smpsJump		Elegy_PWM1_Jump1, Target
+000B6F F6               	dc.b	$F6
                         	if (Elegy_PWM1_Jump1<*)
-000C11                  		rom_ptr_z80(Elegy_PWM1_Jump1+Target)
+000B70                  		rom_ptr_z80(Elegy_PWM1_Jump1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C11 D18B             	dc.w  (((((Elegy_PWM1_Jump1+Target))<<8)&$FF00)|((((Elegy_PWM1_Jump1+Target))>>8)&$7F)|$80)
+000B70 308B             	dc.w  (((((Elegy_PWM1_Jump1+Target))<<8)&$FF00)|((((Elegy_PWM1_Jump1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
 
-000C13                  Elegy_PWM2:
-000C13 810A82818298     	dc.b pEKick, $0A, pESnare, pEKick, pESnare, pClosedHH
+000B72                  Elegy_PWM2:
+000B72 810A82818298     	dc.b pEKick, $0A, pESnare, pEKick, pESnare, pClosedHH
 
-000C19                  Elegy_PWM2_Loop1:
-000C19 05               	dc.b $05
-000C1A                  	smpsLoop		$00, $08, Elegy_PWM2_Loop1, Target
-000C1A F7               	dc.b	$F7
-000C1B 0008             	dc.b	$00,$08
+000B78                  Elegy_PWM2_Loop1:
+000B78 05               	dc.b $05
+000B79                  	smpsLoop		$00, $08, Elegy_PWM2_Loop1, Target
+000B79 F7               	dc.b	$F7
+000B7A 0008             	dc.b	$00,$08
                         	if (Elegy_PWM2_Loop1<*)
-000C1D                  		rom_ptr_z80(Elegy_PWM2_Loop1+Target)
+000B7C                  		rom_ptr_z80(Elegy_PWM2_Loop1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C1D 198C             	dc.w  (((((Elegy_PWM2_Loop1+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop1+Target))>>8)&$7F)|$80)
+000B7C 788B             	dc.w  (((((Elegy_PWM2_Loop1+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C1F 0302030205030502 	dc.b $03, $02, $03, $02, $05, $03, $05, $02
-000C27 0503020302       	dc.b $05, $03, $02, $03, $02
-000C2C                  	smpsLoop		$01, $03, Elegy_PWM2_Loop1, Target
-000C2C F7               	dc.b	$F7
-000C2D 0103             	dc.b	$01,$03
+000B7E 0302030205030502 	dc.b $03, $02, $03, $02, $05, $03, $05, $02
+000B86 0503020302       	dc.b $05, $03, $02, $03, $02
+000B8B                  	smpsLoop		$01, $03, Elegy_PWM2_Loop1, Target
+000B8B F7               	dc.b	$F7
+000B8C 0103             	dc.b	$01,$03
                         	if (Elegy_PWM2_Loop1<*)
-000C2F                  		rom_ptr_z80(Elegy_PWM2_Loop1+Target)
+000B8E                  		rom_ptr_z80(Elegy_PWM2_Loop1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C2F 198C             	dc.w  (((((Elegy_PWM2_Loop1+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop1+Target))>>8)&$7F)|$80)
+000B8E 788B             	dc.w  (((((Elegy_PWM2_Loop1+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C31 8103020307030285 	dc.b pEKick, $03, $02, $03, $07, $03, $02, $85
-000C39 03028603870C     	dc.b $03, $02, $86, $03, $87, $0C
+000B90 8103020307030285 	dc.b pEKick, $03, $02, $03, $07, $03, $02, $85
+000B98 03028603870C     	dc.b $03, $02, $86, $03, $87, $0C
 
-000C3F                  Elegy_PWM2_Jump1:
-000C3F 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
+000B9E                  Elegy_PWM2_Jump1:
+000B9E 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
 
-000C43                  Elegy_PWM2_Loop2:
-000C43 05               	dc.b $05
-000C44                  	smpsLoop		$00, $10, Elegy_PWM2_Loop2, Target
-000C44 F7               	dc.b	$F7
-000C45 0010             	dc.b	$00,$10
+000BA2                  Elegy_PWM2_Loop2:
+000BA2 05               	dc.b $05
+000BA3                  	smpsLoop		$00, $10, Elegy_PWM2_Loop2, Target
+000BA3 F7               	dc.b	$F7
+000BA4 0010             	dc.b	$00,$10
                         	if (Elegy_PWM2_Loop2<*)
-000C47                  		rom_ptr_z80(Elegy_PWM2_Loop2+Target)
+000BA6                  		rom_ptr_z80(Elegy_PWM2_Loop2+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C47 438C             	dc.w  (((((Elegy_PWM2_Loop2+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop2+Target))>>8)&$7F)|$80)
+000BA6 A28B             	dc.w  (((((Elegy_PWM2_Loop2+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop2+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C49 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
+000BA8 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
 
-000C4D                  Elegy_PWM2_Loop3:
-000C4D 05               	dc.b $05
-000C4E                  	smpsLoop		$00, $0C, Elegy_PWM2_Loop3, Target
-000C4E F7               	dc.b	$F7
-000C4F 000C             	dc.b	$00,$0C
+000BAC                  Elegy_PWM2_Loop3:
+000BAC 05               	dc.b $05
+000BAD                  	smpsLoop		$00, $0C, Elegy_PWM2_Loop3, Target
+000BAD F7               	dc.b	$F7
+000BAE 000C             	dc.b	$00,$0C
                         	if (Elegy_PWM2_Loop3<*)
-000C51                  		rom_ptr_z80(Elegy_PWM2_Loop3+Target)
+000BB0                  		rom_ptr_z80(Elegy_PWM2_Loop3+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C51 4D8C             	dc.w  (((((Elegy_PWM2_Loop3+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop3+Target))>>8)&$7F)|$80)
+000BB0 AC8B             	dc.w  (((((Elegy_PWM2_Loop3+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop3+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C53 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
+000BB2 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
 
-000C57                  Elegy_PWM2_Loop4:
-000C57 05               	dc.b $05
-000C58                  	smpsLoop		$00, $07, Elegy_PWM2_Loop4, Target
-000C58 F7               	dc.b	$F7
-000C59 0007             	dc.b	$00,$07
+000BB6                  Elegy_PWM2_Loop4:
+000BB6 05               	dc.b $05
+000BB7                  	smpsLoop		$00, $07, Elegy_PWM2_Loop4, Target
+000BB7 F7               	dc.b	$F7
+000BB8 0007             	dc.b	$00,$07
                         	if (Elegy_PWM2_Loop4<*)
-000C5B                  		rom_ptr_z80(Elegy_PWM2_Loop4+Target)
+000BBA                  		rom_ptr_z80(Elegy_PWM2_Loop4+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C5B 578C             	dc.w  (((((Elegy_PWM2_Loop4+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop4+Target))>>8)&$7F)|$80)
+000BBA B68B             	dc.w  (((((Elegy_PWM2_Loop4+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop4+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C5D 2D81030203070302 	dc.b $2D, pEKick, $03, $02, $03, $07, $03, $02
-000C65 8503028603870C   	dc.b $85, $03, $02, $86, $03, $87, $0C
+000BBC 2D81030203070302 	dc.b $2D, pEKick, $03, $02, $03, $07, $03, $02
+000BC4 8503028603870C   	dc.b $85, $03, $02, $86, $03, $87, $0C
 
-000C6C                  Elegy_PWM2_Loop9:
-000C6C 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
+000BCB                  Elegy_PWM2_Loop9:
+000BCB 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
 
-000C70                  Elegy_PWM2_Loop5:
-000C70 05               	dc.b $05
-000C71                  	smpsLoop		$00, $10, Elegy_PWM2_Loop5, Target
-000C71 F7               	dc.b	$F7
-000C72 0010             	dc.b	$00,$10
+000BCF                  Elegy_PWM2_Loop5:
+000BCF 05               	dc.b $05
+000BD0                  	smpsLoop		$00, $10, Elegy_PWM2_Loop5, Target
+000BD0 F7               	dc.b	$F7
+000BD1 0010             	dc.b	$00,$10
                         	if (Elegy_PWM2_Loop5<*)
-000C74                  		rom_ptr_z80(Elegy_PWM2_Loop5+Target)
+000BD3                  		rom_ptr_z80(Elegy_PWM2_Loop5+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C74 708C             	dc.w  (((((Elegy_PWM2_Loop5+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop5+Target))>>8)&$7F)|$80)
+000BD3 CF8B             	dc.w  (((((Elegy_PWM2_Loop5+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop5+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
 
-000C76                  Elegy_PWM2_Loop7:
-000C76 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
+000BD5                  Elegy_PWM2_Loop7:
+000BD5 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
 
-000C7A                  Elegy_PWM2_Loop6:
-000C7A 05               	dc.b $05
-000C7B                  	smpsLoop		$00, $0C, Elegy_PWM2_Loop6, Target
-000C7B F7               	dc.b	$F7
-000C7C 000C             	dc.b	$00,$0C
+000BD9                  Elegy_PWM2_Loop6:
+000BD9 05               	dc.b $05
+000BDA                  	smpsLoop		$00, $0C, Elegy_PWM2_Loop6, Target
+000BDA F7               	dc.b	$F7
+000BDB 000C             	dc.b	$00,$0C
                         	if (Elegy_PWM2_Loop6<*)
-000C7E                  		rom_ptr_z80(Elegy_PWM2_Loop6+Target)
+000BDD                  		rom_ptr_z80(Elegy_PWM2_Loop6+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C7E 7A8C             	dc.w  (((((Elegy_PWM2_Loop6+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop6+Target))>>8)&$7F)|$80)
+000BDD D98B             	dc.w  (((((Elegy_PWM2_Loop6+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop6+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C80                  	smpsLoop		$01, $02, Elegy_PWM2_Loop7, Target
-000C80 F7               	dc.b	$F7
-000C81 0102             	dc.b	$01,$02
+000BDF                  	smpsLoop		$01, $02, Elegy_PWM2_Loop7, Target
+000BDF F7               	dc.b	$F7
+000BE0 0102             	dc.b	$01,$02
                         	if (Elegy_PWM2_Loop7<*)
-000C83                  		rom_ptr_z80(Elegy_PWM2_Loop7+Target)
+000BE2                  		rom_ptr_z80(Elegy_PWM2_Loop7+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C83 768C             	dc.w  (((((Elegy_PWM2_Loop7+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop7+Target))>>8)&$7F)|$80)
+000BE2 D58B             	dc.w  (((((Elegy_PWM2_Loop7+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop7+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C85 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
+000BE4 810A8298         	dc.b pEKick, $0A, pESnare, pClosedHH
 
-000C89                  Elegy_PWM2_Loop8:
-000C89 05               	dc.b $05
-000C8A                  	smpsLoop		$00, $08, Elegy_PWM2_Loop8, Target
-000C8A F7               	dc.b	$F7
-000C8B 0008             	dc.b	$00,$08
+000BE8                  Elegy_PWM2_Loop8:
+000BE8 05               	dc.b $05
+000BE9                  	smpsLoop		$00, $08, Elegy_PWM2_Loop8, Target
+000BE9 F7               	dc.b	$F7
+000BEA 0008             	dc.b	$00,$08
                         	if (Elegy_PWM2_Loop8<*)
-000C8D                  		rom_ptr_z80(Elegy_PWM2_Loop8+Target)
+000BEC                  		rom_ptr_z80(Elegy_PWM2_Loop8+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C8D 898C             	dc.w  (((((Elegy_PWM2_Loop8+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop8+Target))>>8)&$7F)|$80)
+000BEC E88B             	dc.w  (((((Elegy_PWM2_Loop8+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop8+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C8F                  	smpsLoop		$02, $02, Elegy_PWM2_Loop9, Target
-000C8F F7               	dc.b	$F7
-000C90 0202             	dc.b	$02,$02
+000BEE                  	smpsLoop		$02, $02, Elegy_PWM2_Loop9, Target
+000BEE F7               	dc.b	$F7
+000BEF 0202             	dc.b	$02,$02
                         	if (Elegy_PWM2_Loop9<*)
-000C92                  		rom_ptr_z80(Elegy_PWM2_Loop9+Target)
+000BF1                  		rom_ptr_z80(Elegy_PWM2_Loop9+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C92 6C8C             	dc.w  (((((Elegy_PWM2_Loop9+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop9+Target))>>8)&$7F)|$80)
+000BF1 CB8B             	dc.w  (((((Elegy_PWM2_Loop9+Target))<<8)&$FF00)|((((Elegy_PWM2_Loop9+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000C94                  	smpsJump		Elegy_PWM2_Jump1, Target
-000C94 F6               	dc.b	$F6
+000BF3                  	smpsJump		Elegy_PWM2_Jump1, Target
+000BF3 F6               	dc.b	$F6
                         	if (Elegy_PWM2_Jump1<*)
-000C95                  		rom_ptr_z80(Elegy_PWM2_Jump1+Target)
+000BF4                  		rom_ptr_z80(Elegy_PWM2_Jump1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000C95 3F8C             	dc.w  (((((Elegy_PWM2_Jump1+Target))<<8)&$FF00)|((((Elegy_PWM2_Jump1+Target))>>8)&$7F)|$80)
+000BF4 9E8B             	dc.w  (((((Elegy_PWM2_Jump1+Target))<<8)&$FF00)|((((Elegy_PWM2_Jump1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
 
-000C97                  Elegy_PWM3:
-000C97 9803020302050305 	dc.b pClosedHH, $03, $02, $03, $02, $05, $03, $05
-000C9F 02050302037F8080 	dc.b $02, $05, $03, $02, $03, $7F, nRst, nRst
-000CA7 08810302030C     	dc.b $08, pEKick, $03, $02, $03, $0C
+000BF6                  Elegy_PWM3:
+000BF6 9803020302050305 	dc.b pClosedHH, $03, $02, $03, $02, $05, $03, $05
+000BFE 02050302037F8080 	dc.b $02, $05, $03, $02, $03, $7F, nRst, nRst
+000C06 08810302030C     	dc.b $08, pEKick, $03, $02, $03, $0C
 
-000CAD                  Elegy_PWM3_Jump1:
-000CAD 9805050505810A82 	dc.b pClosedHH, $05, $05, $05, $05, pEKick, $0A, pESnare
-000CB5 7F8003897F800D81 	dc.b $7F, nRst, $03, pCrashCymb, $7F, nRst, $0D, pEKick
-000CBD 0302030C         	dc.b $03, $02, $03, $0C
+000C0C                  Elegy_PWM3_Jump1:
+000C0C 9805050505810A82 	dc.b pClosedHH, $05, $05, $05, $05, pEKick, $0A, pESnare
+000C14 7F8003897F800D81 	dc.b $7F, nRst, $03, pCrashCymb, $7F, nRst, $0D, pEKick
+000C1C 0302030C         	dc.b $03, $02, $03, $0C
 
-000CC1                  Elegy_PWM3_Loop1:
-000CC1 9805050505810A82 	dc.b pClosedHH, $05, $05, $05, $05, pEKick, $0A, pESnare
-000CC9 7F808024         	dc.b $7F, nRst, nRst, $24
-000CCD                  	smpsLoop		$00, $02, Elegy_PWM3_Loop1, Target
-000CCD F7               	dc.b	$F7
-000CCE 0002             	dc.b	$00,$02
+000C20                  Elegy_PWM3_Loop1:
+000C20 9805050505810A82 	dc.b pClosedHH, $05, $05, $05, $05, pEKick, $0A, pESnare
+000C28 7F808024         	dc.b $7F, nRst, nRst, $24
+000C2C                  	smpsLoop		$00, $02, Elegy_PWM3_Loop1, Target
+000C2C F7               	dc.b	$F7
+000C2D 0002             	dc.b	$00,$02
                         	if (Elegy_PWM3_Loop1<*)
-000CD0                  		rom_ptr_z80(Elegy_PWM3_Loop1+Target)
+000C2F                  		rom_ptr_z80(Elegy_PWM3_Loop1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000CD0 C18C             	dc.w  (((((Elegy_PWM3_Loop1+Target))<<8)&$FF00)|((((Elegy_PWM3_Loop1+Target))>>8)&$7F)|$80)
+000C2F 208C             	dc.w  (((((Elegy_PWM3_Loop1+Target))<<8)&$FF00)|((((Elegy_PWM3_Loop1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
-000CD2                  	smpsJump		Elegy_PWM3_Jump1, Target
-000CD2 F6               	dc.b	$F6
+000C31                  	smpsJump		Elegy_PWM3_Jump1, Target
+000C31 F6               	dc.b	$F6
                         	if (Elegy_PWM3_Jump1<*)
-000CD3                  		rom_ptr_z80(Elegy_PWM3_Jump1+Target)
+000C32                  		rom_ptr_z80(Elegy_PWM3_Jump1+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000CD3 AD8C             	dc.w  (((((Elegy_PWM3_Jump1+Target))<<8)&$FF00)|((((Elegy_PWM3_Jump1+Target))>>8)&$7F)|$80)
+000C32 0C8C             	dc.w  (((((Elegy_PWM3_Jump1+Target))<<8)&$FF00)|((((Elegy_PWM3_Jump1+Target))>>8)&$7F)|$80)
                         	else
                         	endif
                         	;dc.w	loc-*-1
                         	
-000CD5                  Elegy_PWM4:
-000CD5                  	smpsStop
-000CD5 F2               	dc.b	$F2
+000C34                  Elegy_PWM4:
+000C34                  	smpsPan		panCenter
+       = 000000         panNone set $00
+       = 000040         panRight set $40
+       = 000080         panLeft set $80
+       = 0000C0         panCentre set $C0
+       = 0000C0         panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if 1==2
+                        	else
+000C34 E0C0             		dc.b $E0,panCenter
+                        	endif
 
-000CD6                  Elegy_Patches:
+000C36                  Elegy_PWM4_Loop1:
+000C36 9F2880           	dc.b	pOrchHitHi, $28, nRst
+000C39                  	smpsLoop		$00, $04, Elegy_PWM4_Loop1, Target
+000C39 F7               	dc.b	$F7
+000C3A 0004             	dc.b	$00,$04
+                        	if (Elegy_PWM4_Loop1<*)
+000C3C                  		rom_ptr_z80(Elegy_PWM4_Loop1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C3C 368C             	dc.w  (((((Elegy_PWM4_Loop1+Target))<<8)&$FF00)|((((Elegy_PWM4_Loop1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000C3E                  Elegy_PWM4_Jump1:
+                        	;smpsAlterVol	$10
+
+000C3E                  Elegy_PWM4_Loop2:
+000C3E A0058003A1058002 	dc.b	pOrchHitMed, $05, nRst, $03, pOrchHitLo, $05, nRst, $02
+000C46                  	smpsLoop		$00, $02, Elegy_PWM4_Loop2, Target
+000C46 F7               	dc.b	$F7
+000C47 0002             	dc.b	$00,$02
+                        	if (Elegy_PWM4_Loop2<*)
+000C49                  		rom_ptr_z80(Elegy_PWM4_Loop2+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C49 3E8C             	dc.w  (((((Elegy_PWM4_Loop2+Target))<<8)&$FF00)|((((Elegy_PWM4_Loop2+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C4B A005A1           	dc.b	pOrchHitMed, $05, pOrchHitLo
+                        	;smpsAlterVol	$FF
+000C4E A08003A1058002A0 	dc.b	pOrchHitMed, nRst, $03, pOrchHitLo, $05, nRst, $02, pOrchHitMed
+000C56 058014A0058003A1 	dc.b	$05, nRst, $14, pOrchHitMed, $05, nRst, $03, pOrchHitLo
+000C5E 058002           	dc.b	$05, nRst, $02
+                        	;smpsAlterVol	$FF
+000C61 A0058003A1058002 	dc.b	pOrchHitMed, $05, nRst, $03, pOrchHitLo, $05, nRst, $02
+000C69 A005A1A08003A105 	dc.b	pOrchHitMed, $05, pOrchHitLo, pOrchHitMed, nRst, $03, pOrchHitLo, $05
+000C71 8002A2058014     	dc.b	nRst, $02, pOrchHitLower, $05, nRst, $14
+
+000C77                  Elegy_PWM4_Loop3:
+000C77 A0058003A1058002 	dc.b	pOrchHitMed, $05, nRst, $03, pOrchHitLo, $05, nRst, $02
+000C7F                  	smpsLoop		$00, $02, Elegy_PWM4_Loop3, Target
+000C7F F7               	dc.b	$F7
+000C80 0002             	dc.b	$00,$02
+                        	if (Elegy_PWM4_Loop3<*)
+000C82                  		rom_ptr_z80(Elegy_PWM4_Loop3+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C82 778C             	dc.w  (((((Elegy_PWM4_Loop3+Target))<<8)&$FF00)|((((Elegy_PWM4_Loop3+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C84 A005A1A08003A105 	dc.b	pOrchHitMed, $05, pOrchHitLo, pOrchHitMed, nRst, $03, pOrchHitLo, $05
+000C8C 8002A0058014     	dc.b	nRst, $02, pOrchHitMed, $05, nRst, $14
+
+000C92                  Elegy_PWM4_Loop4:
+000C92 A0058003A1058002 	dc.b	pOrchHitMed, $05, nRst, $03, pOrchHitLo, $05, nRst, $02
+000C9A                  	smpsLoop		$00, $02, Elegy_PWM4_Loop4, Target
+000C9A F7               	dc.b	$F7
+000C9B 0002             	dc.b	$00,$02
+                        	if (Elegy_PWM4_Loop4<*)
+000C9D                  		rom_ptr_z80(Elegy_PWM4_Loop4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000C9D 928C             	dc.w  (((((Elegy_PWM4_Loop4+Target))<<8)&$FF00)|((((Elegy_PWM4_Loop4+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+000C9F A005A1           	dc.b	pOrchHitMed, $05, pOrchHitLo
+                        	;!@ smpsAlterNote	$00
+000CA2 80               	dc.b	nRst
+
+000CA3                  Elegy_PWM4_Loop5:
+000CA3 55               	dc.b	$55
+000CA4                  	smpsLoop		$00, $08, Elegy_PWM4_Loop5, Target
+000CA4 F7               	dc.b	$F7
+000CA5 0008             	dc.b	$00,$08
+                        	if (Elegy_PWM4_Loop5<*)
+000CA7                  		rom_ptr_z80(Elegy_PWM4_Loop5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CA7 A38C             	dc.w  (((((Elegy_PWM4_Loop5+Target))<<8)&$FF00)|((((Elegy_PWM4_Loop5+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+                        	;smpsAlterVol	$F2
+000CA9                  	smpsJump		Elegy_PWM4_Jump1, Target
+000CA9 F6               	dc.b	$F6
+                        	if (Elegy_PWM4_Jump1<*)
+000CAA                  		rom_ptr_z80(Elegy_PWM4_Jump1+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000CAA 3E8C             	dc.w  (((((Elegy_PWM4_Jump1+Target))<<8)&$FF00)|((((Elegy_PWM4_Jump1+Target))>>8)&$7F)|$80)
+                        	else
+                        	endif
+                        	;dc.w	loc-*-1
+
+000CAC                  Elegy_Patches:
                         	;dc.b	$38
                         	;dc.b	$75, $13, $71, $11, $D1, $52, $14, $14
                         	;dc.b	$0A, $07, $01, $01, $00, $00, $00, $00
@@ -2952,20 +3008,20 @@
                         	;dc.b	$04, $06, $04, $05, $1F, $05, $01, $01
                         	;dc.b	$A8, $25, $25, $55, $7F, $06, $14, $00
                         	
-000CD6 38               	dc.b	$38
-000CD7 75137111D1521414 	dc.b	$75, $13, $71, $11, $D1, $52, $14, $14
-000CDF 0A07010100000000 	dc.b	$0A, $07, $01, $01, $00, $00, $00, $00
-000CE7 F0F0F0FC231E1E14 	dc.b	$F0, $F0, $F0, $FC, $23, $1E, $1E, $14
+000CAC 38               	dc.b	$38
+000CAD 75137111D1521414 	dc.b	$75, $13, $71, $11, $D1, $52, $14, $14
+000CB5 0A07010100000000 	dc.b	$0A, $07, $01, $01, $00, $00, $00, $00
+000CBD F0F0F0FC231E1E14 	dc.b	$F0, $F0, $F0, $FC, $23, $1E, $1E, $14
                         	
-000CEF 08               	dc.b	$08
-000CF0 0A7030001F1F5F5F 	dc.b 	$0A, $70, $30, $00, $1F, $1F, $5F, $5F
-000CF8 120E0A0A00040403 	dc.b	$12, $0E, $0A, $0A, $00, $04, $04, $03
-000D00 2F2F2F2F242D1318 	dc.b	$2F, $2F, $2F, $2F, $24, $2D, $13, $18
+000CC5 08               	dc.b	$08
+000CC6 0A7030001F1F5F5F 	dc.b 	$0A, $70, $30, $00, $1F, $1F, $5F, $5F
+000CCE 120E0A0A00040403 	dc.b	$12, $0E, $0A, $0A, $00, $04, $04, $03
+000CD6 2F2F2F2F242D1318 	dc.b	$2F, $2F, $2F, $2F, $24, $2D, $13, $18
                         	
-000D08 3A               	dc.b	$3A
-000D09 646060309D9D504C 	dc.b	$64, $60, $60, $30, $9D, $9D, $50, $4C
-000D11 040604051F050101 	dc.b	$04, $06, $04, $05, $1F, $05, $01, $01
-000D19 A82525557F061414 	dc.b	$A8, $25, $25, $55, $7F, $06, $14, $14
+000CDE 3A               	dc.b	$3A
+000CDF 646060309D9D504C 	dc.b	$64, $60, $60, $30, $9D, $9D, $50, $4C
+000CE7 040604051F050101 	dc.b	$04, $06, $04, $05, $1F, $05, $01, $01
+000CEF A82525557F061414 	dc.b	$A8, $25, $25, $55, $7F, $06, $14, $14
 
 00000 Total Error(s)
 
@@ -2973,77 +3029,84 @@ DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK             
 DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
 DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  ELEGY_FM1          00000040
 ELEGY_FM2          000001BA    ELEGY_FM3          00000334    ELEGY_FM4          00000574
-ELEGY_FM5          000006CF    ELEGY_FM6          00000753    ELEGY_JUMP1        00000050
+ELEGY_FM5          000006CF    ELEGY_FM6          000006CF    ELEGY_JUMP1        00000050
 ELEGY_JUMP2        000001CA    ELEGY_JUMP3        0000037F    ELEGY_JUMP4        00000591
-ELEGY_JUMP5        000006DB    ELEGY_JUMP6        0000075F    ELEGY_JUMP7        000007DC
-ELEGY_JUMP8        00000993    ELEGY_JUMP9        00000AAB    ELEGY_LOO$8        0000038F
-ELEGY_LOO$9        00000399    ELEGY_LOOP1        00000046    ELEGY_LOOP10       000003B8
-ELEGY_LOOP11       000003C2    ELEGY_LOOP12       000003E1    ELEGY_LOOP13       000003EB
-ELEGY_LOOP14       00000442    ELEGY_LOOP15       00000458    ELEGY_LOOP16       0000046E
-ELEGY_LOOP17       00000484    ELEGY_LOOP18       0000049A    ELEGY_LOOP19       000004B0
-ELEGY_LOOP2        000001AE    ELEGY_LOOP20       000004A6    ELEGY_LOOP21       000004DE
-ELEGY_LOOP22       000004F4    ELEGY_LOOP23       0000050A    ELEGY_LOOP24       00000520
-ELEGY_LOOP25       00000536    ELEGY_LOOP26       0000054C    ELEGY_LOOP27       00000562
-ELEGY_LOOP28       00000586    ELEGY_LOOP29       00000579    ELEGY_LOOP3        000001C0
-ELEGY_LOOP30       0000063C    ELEGY_LOOP31       000006D3    ELEGY_LOOP32       000006DD
-ELEGY_LOOP33       0000071A    ELEGY_LOOP34       00000735    ELEGY_LOOP35       00000747
-ELEGY_LOOP36       00000757    ELEGY_LOOP37       00000767    ELEGY_LOOP38       00000775
-ELEGY_LOOP39       0000096F    ELEGY_LOOP4        00000328    ELEGY_LOOP40       00000995
-ELEGY_LOOP41       000009B0    ELEGY_LOOP42       000009DD    ELEGY_LOOP43       000009F8
-ELEGY_LOOP44       00000AAD    ELEGY_LOOP45       00000AC8    ELEGY_LOOP46       00000AF6
-ELEGY_LOOP47       00000B11    ELEGY_LOOP5        00000350    ELEGY_LOOP6        0000033A
-ELEGY_LOOP7        00000374    ELEGY_PATCHES      00000CD6    ELEGY_PSG1         00000771
-ELEGY_PSG2         0000098D    ELEGY_PSG3         00000AA5    ELEGY_PWM1         00000BC2
-ELEGY_PWM1_JUMP1   00000BD1    ELEGY_PWM1_LOOP1   00000BC6    ELEGY_PWM1_LOOP2   00000BD3
-ELEGY_PWM1_LOOP3   00000BEA    ELEGY_PWM1_LOOP4   00000BF5    ELEGY_PWM1_LOOP5   00000BF3
-ELEGY_PWM2         00000C13    ELEGY_PWM2_JUMP1   00000C3F    ELEGY_PWM2_LOOP1   00000C19
-ELEGY_PWM2_LOOP2   00000C43    ELEGY_PWM2_LOOP3   00000C4D    ELEGY_PWM2_LOOP4   00000C57
-ELEGY_PWM2_LOOP5   00000C70    ELEGY_PWM2_LOOP6   00000C7A    ELEGY_PWM2_LOOP7   00000C76
-ELEGY_PWM2_LOOP8   00000C89    ELEGY_PWM2_LOOP9   00000C6C    ELEGY_PWM3         00000C97
-ELEGY_PWM3_JUMP1   00000CAD    ELEGY_PWM3_LOOP1   00000CC1    ELEGY_PWM4         00000CD5
-NA0                0000008A E  NA1                00000096 E  NA2                000000A2 E
-NA3                000000AE E  NA4                000000BA E  NA5                000000C6 E
-NA6                000000D2 E  NA7                000000DE E  NAB0               00000089 E
-NAB1               00000095 E  NAB2               000000A1 E  NAB3               000000AD E
-NAB4               000000B9 E  NAB5               000000C5 E  NAB6               000000D1 E
-NAB7               000000DD E  NB0                0000008C E  NB1                00000098 E
-NB2                000000A4 E  NB3                000000B0 E  NB4                000000BC E
-NB5                000000C8 E  NB6                000000D4 E  NBB0               0000008B E
-NBB1               00000097 E  NBB2               000000A3 E  NBB3               000000AF E
-NBB4               000000BB E  NBB5               000000C7 E  NBB6               000000D3 E
-NBB7               000000DF E  NC0                00000081 E  NC1                0000008D E
-NC2                00000099 E  NC3                000000A5 E  NC4                000000B1 E
-NC5                000000BD E  NC6                000000C9 E  NC7                000000D5 E
-NCS0               00000082 E  NCS1               0000008E E  NCS2               0000009A E
-NCS3               000000A6 E  NCS4               000000B2 E  NCS5               000000BE E
-NCS6               000000CA E  NCS7               000000D6 E  ND0                00000083 E
-ND1                0000008F E  ND2                0000009B E  ND3                000000A7 E
-ND4                000000B3 E  ND5                000000BF E  ND6                000000CB E
-ND7                000000D7 E  NE0                00000085 E  NE1                00000091 E
-NE2                0000009D E  NE3                000000A9 E  NE4                000000B5 E
-NE5                000000C1 E  NE6                000000CD E  NE7                000000D9 E
-NEB0               00000084 E  NEB1               00000090 E  NEB2               0000009C E
-NEB3               000000A8 E  NEB4               000000B4 E  NEB5               000000C0 E
-NEB6               000000CC E  NEB7               000000D8 E  NF0                00000086 E
-NF1                00000092 E  NF2                0000009E E  NF3                000000AA E
-NF4                000000B6 E  NF5                000000C2 E  NF6                000000CE E
-NF7                000000DA E  NFS0               00000087 E  NFS1               00000093 E
-NFS2               0000009F E  NFS3               000000AB E  NFS4               000000B7 E
-NFS5               000000C3 E  NFS6               000000CF E  NFS7               000000DB E
-NG0                00000088 E  NG1                00000094 E  NG2                000000A0 E
-NG3                000000AC E  NG4                000000B8 E  NG5                000000C4 E
-NG6                000000D0 E  NG7                000000DC E  NRST               00000080 E
-PAKICK             0000008B E  PANCENTER          000000C0 S  PANCENTRE          000000C0 S
-PANLEFT            00000080 S  PANNONE            00000000 S  PANRIGHT           00000040 S
-PASNARE            0000008C E  PBELL              0000008D E  PBONGOHI           00000092 E
-PBONGOLO           00000093 E  PCLAP              0000008A E  PCLICKHI           00000090 E
-PCLICKLO           00000091 E  PCLOSEDHH          00000098 E  PCOWBELL           0000008F E
-PCRASHCYMB         00000089 E  PEHIHAT            00000088 E  PEKICK             00000081 E
-PESNARE            00000082 E  PFINGSNAP          0000008E E  POPENHH            00000099 E
-PRIDEBELL          00000084 E  PSEGA              00000097 E  PSGVOI             00000000 E
+ELEGY_JUMP7        0000073B    ELEGY_JUMP8        000008F2    ELEGY_JUMP9        00000A0A
+ELEGY_LOO$8        0000038F    ELEGY_LOO$9        00000399    ELEGY_LOOP1        00000046
+ELEGY_LOOP10       000003B8    ELEGY_LOOP11       000003C2    ELEGY_LOOP12       000003E1
+ELEGY_LOOP13       000003EB    ELEGY_LOOP14       00000442    ELEGY_LOOP15       00000458
+ELEGY_LOOP16       0000046E    ELEGY_LOOP17       00000484    ELEGY_LOOP18       0000049A
+ELEGY_LOOP19       000004B0    ELEGY_LOOP2        000001AE    ELEGY_LOOP20       000004A6
+ELEGY_LOOP21       000004DE    ELEGY_LOOP22       000004F4    ELEGY_LOOP23       0000050A
+ELEGY_LOOP24       00000520    ELEGY_LOOP25       00000536    ELEGY_LOOP26       0000054C
+ELEGY_LOOP27       00000562    ELEGY_LOOP28       00000586    ELEGY_LOOP29       00000579
+ELEGY_LOOP3        000001C0    ELEGY_LOOP30       0000063C    ELEGY_LOOP38       000006D4
+ELEGY_LOOP39       000008CE    ELEGY_LOOP4        00000328    ELEGY_LOOP40       000008F4
+ELEGY_LOOP41       0000090F    ELEGY_LOOP42       0000093C    ELEGY_LOOP43       00000957
+ELEGY_LOOP44       00000A0C    ELEGY_LOOP45       00000A27    ELEGY_LOOP46       00000A55
+ELEGY_LOOP47       00000A70    ELEGY_LOOP5        00000350    ELEGY_LOOP6        0000033A
+ELEGY_LOOP7        00000374    ELEGY_PATCHES      00000CAC    ELEGY_PSG1         000006D0
+ELEGY_PSG2         000008EC    ELEGY_PSG3         00000A04    ELEGY_PWM1         00000B21
+ELEGY_PWM1_JUMP1   00000B30    ELEGY_PWM1_LOOP1   00000B25    ELEGY_PWM1_LOOP2   00000B32
+ELEGY_PWM1_LOOP3   00000B49    ELEGY_PWM1_LOOP4   00000B54    ELEGY_PWM1_LOOP5   00000B52
+ELEGY_PWM2         00000B72    ELEGY_PWM2_JUMP1   00000B9E    ELEGY_PWM2_LOOP1   00000B78
+ELEGY_PWM2_LOOP2   00000BA2    ELEGY_PWM2_LOOP3   00000BAC    ELEGY_PWM2_LOOP4   00000BB6
+ELEGY_PWM2_LOOP5   00000BCF    ELEGY_PWM2_LOOP6   00000BD9    ELEGY_PWM2_LOOP7   00000BD5
+ELEGY_PWM2_LOOP8   00000BE8    ELEGY_PWM2_LOOP9   00000BCB    ELEGY_PWM3         00000BF6
+ELEGY_PWM3_JUMP1   00000C0C    ELEGY_PWM3_LOOP1   00000C20    ELEGY_PWM4         00000C34
+ELEGY_PWM4_JUMP1   00000C3E    ELEGY_PWM4_LOOP1   00000C36    ELEGY_PWM4_LOOP2   00000C3E
+ELEGY_PWM4_LOOP3   00000C77    ELEGY_PWM4_LOOP4   00000C92    ELEGY_PWM4_LOOP5   00000CA3
+FMPITCH            00000000 E  NA0                0000008A E  NA1                00000096 E
+NA2                000000A2 E  NA3                000000AE E  NA4                000000BA E
+NA5                000000C6 E  NA6                000000D2 E  NA7                000000DE E
+NAB0               00000089 E  NAB1               00000095 E  NAB2               000000A1 E
+NAB3               000000AD E  NAB4               000000B9 E  NAB5               000000C5 E
+NAB6               000000D1 E  NAB7               000000DD E  NB0                0000008C E
+NB1                00000098 E  NB2                000000A4 E  NB3                000000B0 E
+NB4                000000BC E  NB5                000000C8 E  NB6                000000D4 E
+NBB0               0000008B E  NBB1               00000097 E  NBB2               000000A3 E
+NBB3               000000AF E  NBB4               000000BB E  NBB5               000000C7 E
+NBB6               000000D3 E  NBB7               000000DF E  NC0                00000081 E
+NC1                0000008D E  NC2                00000099 E  NC3                000000A5 E
+NC4                000000B1 E  NC5                000000BD E  NC6                000000C9 E
+NC7                000000D5 E  NCS0               00000082 E  NCS1               0000008E E
+NCS2               0000009A E  NCS3               000000A6 E  NCS4               000000B2 E
+NCS5               000000BE E  NCS6               000000CA E  NCS7               000000D6 E
+ND0                00000083 E  ND1                0000008F E  ND2                0000009B E
+ND3                000000A7 E  ND4                000000B3 E  ND5                000000BF E
+ND6                000000CB E  ND7                000000D7 E  NE0                00000085 E
+NE1                00000091 E  NE2                0000009D E  NE3                000000A9 E
+NE4                000000B5 E  NE5                000000C1 E  NE6                000000CD E
+NE7                000000D9 E  NEB0               00000084 E  NEB1               00000090 E
+NEB2               0000009C E  NEB3               000000A8 E  NEB4               000000B4 E
+NEB5               000000C0 E  NEB6               000000CC E  NEB7               000000D8 E
+NF0                00000086 E  NF1                00000092 E  NF2                0000009E E
+NF3                000000AA E  NF4                000000B6 E  NF5                000000C2 E
+NF6                000000CE E  NF7                000000DA E  NFS0               00000087 E
+NFS1               00000093 E  NFS2               0000009F E  NFS3               000000AB E
+NFS4               000000B7 E  NFS5               000000C3 E  NFS6               000000CF E
+NFS7               000000DB E  NG0                00000088 E  NG1                00000094 E
+NG2                000000A0 E  NG3                000000AC E  NG4                000000B8 E
+NG5                000000C4 E  NG6                000000D0 E  NG7                000000DC E
+NRST               00000080 E  PAKICK             0000008B E  PANCENTER          000000C0 S
+PANCENTRE          000000C0 S  PANLEFT            00000080 S  PANNONE            00000000 S
+PANRIGHT           00000040 S  PASNARE            0000008C E  PBELL              0000008D E
+PBONGOHI           00000092 E  PBONGOLO           00000093 E  PCLAP              0000008A E
+PCLICKHI           00000090 E  PCLICKLO           00000091 E  PCLOSEDHH          00000098 E
+PCOWBELL           0000008F E  PCRASHCYMB         00000089 E  PCRA_D81           00000081 E
+PCRA_D82           0000008C E  PCRA_D83           00000085 E  PCRA_D84           00000086 E
+PCRA_D85           00000087 E  PEHIHAT            00000088 E  PEKICK             00000081 E
+PESNARE            00000082 E  PFINGSNAP          0000008E E  PFINGSNAPHI        0000008E E
+PFINGSNAPLO        0000009E E  PNEPDADA           0000009D E  POPENHH            00000099 E
+PORCHHITHI         0000009F E  PORCHHITLO         000000A1 E  PORCHHITLOWER      000000A2 E
+PORCHHITMED        000000A0 E  PRIDEBELL          00000084 E  PSEGA              00000097 E
+PSGDELTA           0000000C E  PSGMOD             00000000 E  PSGPITCH           0000000C E
+PSGVOI             00000000 E  PSGVOL1            00000002 E  PSGVOL2            00000003 E
 PSILENCE           00000096 E  PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E
 PTIMPANILO         00000095 E  PTOMHI             00000085 E  PTOMLOW            00000087 E
-PTOMMID            00000086 E  SMPSED             000000ED E  SMPSEE             000000EE E
+PTOMLOWER          0000009A E  PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E
+PTOMMID            00000086 E  PWMPITCH1          00000000 E  PWMPITCH2          00000018 E
+PWMVOL             000000AA E  SMPSED             000000ED E  SMPSEE             000000EE E
 SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E
 SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E
 SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E  SMPSPITCH02LO      000000E8 E

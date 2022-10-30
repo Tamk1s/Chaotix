@@ -12,6 +12,11 @@ JJFTails
 - Chaotix Stats Editor notes
 - Chaotix Art Format notes
 
+Cokie:
+- S3K Chunk Viewer (LUA), modified for KC
+- S3K Obj Viewer/History
+- https://forums.sonicretro.org/index.php?threads/sonic-3k-gens-chunk-overlay-lua-script.41256/
+
 Natsumi/Aurora Fields
 - MDMusicPlayer 1.1 (Chaotix music to ASM, Sonic 1 to ASM, Z80 Type 2 basic driver for Sonic Crackers)
 - ChaotixCompressor.exe
@@ -59,6 +64,9 @@ HiveBrain
 Shiru
 - VGM Music Maker and command line utils (FM instrument creation/sampling)
 
+TCRF
+- Beta content
+
 
 Misc:
 - Irfanview
@@ -68,6 +76,7 @@ Misc:
 - filesize.bat
 - Riffstrip.exe
 - Sox.exe
+- VGMTrans (NDS MIDI soundfont/ripping for KSSU)
 - EvalBat_vbs.vbs
 
 
@@ -76,6 +85,8 @@ Misc:
 Beta testers/reviewers:
 - RedHotSonic
 - MegaGWolf
+- ProjectFM
+- DeltaWooloo
 
 Artwork/assets:
 Geo Prower
@@ -93,6 +104,13 @@ Compile Heart, IdeaFactory et. al
 - Neptune character
 - "Hail to Planeptune baby"
 - Neptune logo
+
+Jackbh (Deviantart)/Jack Holland
+- Sonic Crackers/Chaotix SSZ/TTZ Level Icons (MD/32x)
+https://www.deviantart.com/jackbh/about
+https://hollandjack270.wixsite.com/website
+https://www.deviantart.com/jackbh/art/Sonic-The-Hedgehog-s-Chaotix-Stadium-Icons-650473751
+
 
 Microsoft
 - Various Windows 3.11/9X assets

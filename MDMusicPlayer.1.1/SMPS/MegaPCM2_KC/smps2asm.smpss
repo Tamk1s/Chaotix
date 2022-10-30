@@ -202,6 +202,10 @@ c '\type\' == 'sfx' {
 	=pTomLowerest 0x9C
 	=pNepDada 0x9D
 	=pFingSnapLo 0x9E
+	=pOrchHitHi 0x9F
+	=pOrchHitMed 0xA0
+	=pOrchHitLo 0xA1
+	=pOrchHitLower 0xA2
 }
 
 	sinc "..\SMPS\SMPS default notes.smpss"

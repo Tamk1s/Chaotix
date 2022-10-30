@@ -14,6 +14,7 @@ Define	LastPage			$1000000		;This page of tiles/mappings is the last for this "l
 Define	NoNewLayer			$2000000		;All tiles/mappings pages of this type are loaded for the same "layer"
 Define	Entry_MasterSH2		$6000000		;Logical ROM offset addr for SH2 (Master)
 Define	Offset_MasterSH2	$0077800		;Offset for calculating between raw ROM and SH2 area
+Define	NopLPtr				$00000000
 Define	NullLPtr_Terminator $FFFFFFFF
 
 MaxSize				$400000				;Maximum Genesis ROM size
@@ -2338,9 +2339,15 @@ StartSeg Pal32x_LevelS_Levels_Data $001A40 $6D6 Big_Endian
 	PalD32xS_SSZ15N:		include	"Levels/SSZ/Pal32x/S_15N.bin"
 EndSeg
 
-StartSeg Pal32x_Level_WE_Data $2BC110 $6D6 Big_Endian
-	PalD32xP_WE0MN:		include	"Levels/Entrance/Pal32x/P_0MN.bin"
-	PalD32xS_WE0MN:		include	"Levels/Entrance/Pal32x/S_0MN.bin"
+;!@ Ptr to LvlSigns palette
+StartSeg Pal32xX_WE_LvlSigns_Ptr $027F0A $04 Big_Endian
+	DWORD	Pal32xX_WE_LvlSigns
+EndSeg
+
+StartSeg Pal32x_Level_WE_Data $2BC110 $9AE Big_Endian
+	PalD32xP_WE0MN:			include	"Levels/Entrance/Pal32x/P_0MN.bin"
+	PalD32xS_WE0MN:			include	"Levels/Entrance/Pal32x/S_0MN.bin"
+	Pal32xX_WE_LvlSigns:	include	"Levels/Entrance/Pal32x/X_LvlIcons.bin"
 EndSeg
 ;EndRegion
 
@@ -2789,96 +2796,96 @@ StartSeg LevelTile_Ptrs Big_Endian	;Level tile data pointers
 	BBZ12MDSN_TilePtr:
 		DWORD BBZ_FG_Tiles_Pri
 		DWORD BBZ12_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD BBZ_BG_Tiles_Pri
 		DWORD BBZ12_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	BBZ3MDSN_TilePtr:
 		DWORD BBZ_FG_Tiles_Pri
 		DWORD BBZ3_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD BBZ_BG_Tiles_Pri
 		DWORD BBZ3_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	BBZ4MDSN_TilePtr:
 		DWORD BBZ_FG_Tiles_Pri
 		DWORD BBZ4_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD BBZ_BG_Tiles_Pri
 		DWORD BBZ4_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	BBZ5MDSN_TilePtr:
 		DWORD BBZ_FG_Tiles_Pri
 		DWORD BBZ5_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD BBZ_BG_Tiles_Pri
 		DWORD BBZ5_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	SSZ12MD_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ12_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ12MD_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	SSZ12SN_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ12_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ12SN_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	SSZ3MD_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ3_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ3MD_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	SSZ3SN_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ3_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ3SN_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	SSZ45MD_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ45_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ45MD_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	SSZ45SN_TilePtr:
 		DWORD SSZ_FG_Tiles_Pri
 		DWORD SSZ45_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD SSZ_BG_Tiles_Pri
 		DWORD SSZ45SN_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	AAZ12MDSN_TilePtr:
 		DWORD AAZ_FG_Tiles_Pri
 		DWORD AAZ12_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD AAZ12_BG_Tiles_Pri
 		DWORD AAZ12_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	AAZ3MDSN_TilePtr:
 		DWORD AAZ_FG_Tiles_Pri
 		DWORD AAZ3_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD AAZ34_BG_Tiles
 		DWORD NullLPtr_Terminator
 	AAZ4MDSN_TilePtr:
 		DWORD AAZ_FG_Tiles_Pri
 		DWORD AAZ4_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD AAZ34_BG_Tiles
 		DWORD NullLPtr_Terminator
 	AAZ5MDSN_TilePtr:
 		DWORD AAZ_FG_Tiles_Pri
 		DWORD AAZ5_FG_Tiles_Pri
-		DWORD 0
+		DWORD NopLPtr
 		DWORD AAZ5_BG_Tiles
 		DWORD NullLPtr_Terminator
 		DWORD TTZ_BG_Tiles_Pri			;!@ WTF? Unused clouds for AAZ5MN
@@ -2886,33 +2893,33 @@ StartSeg LevelTile_Ptrs Big_Endian	;Level tile data pointers
 		DWORD NullLPtr_Terminator
 	TTZ12MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
-		DWORD 0
+		DWORD NopLPtr
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ12_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	TTZ3MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
 		;!@ DWORD TTZ3_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ34_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	TTZ4MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
-		DWORD 0
+		DWORD NopLPtr
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ34_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	TTZ5MDSN_TilePtr:
 		DWORD TTZ_FG_Tiles_Pri
 		;!@ DWORD TTZ5_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ5_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
 	TTZBMDSN_TilePtr:
 		DWORD TTZB_FG_Tiles
-		DWORD 0
+		DWORD NopLPtr
 		DWORD TTZ_BG_Tiles_Pri
 		DWORD TTZ5_BG_Tiles_Sec
 		DWORD NullLPtr_Terminator
@@ -2942,12 +2949,12 @@ StartSeg LevelTile_Ptrs Big_Endian	;Level tile data pointers
 	Tutorial_TilePtr:
 		DWORD Tutorial_FG_Tiles_Pri
 		DWORD Tutorial_FG_Tiles_Sec
-		DWORD 0
+		DWORD NopLPtr
 		DWORD Tutorial_BG_Tiles
 		DWORD NullLPtr_Terminator
 	WorldEnt_TilePtr:
 		DWORD WorldEnt_FG_Tiles
-		DWORD 0
+		DWORD NopLPtr
 		DWORD WorldEnt_BG_Tiles
 		DWORD NullLPtr_Terminator
 	FinalBoss_TilePtr:
@@ -5409,19 +5416,81 @@ EndSeg
 ;Region @ArtNem_Stuff
 
 ;Region @ArtNem_Ptrs
-StartSeg ArtNem_ST_Menu_Ptr Big_Endian $006CA4
-	DWORD ArtNem_ST_Menu
-EndSeg
-StartSeg ArtNem_ST_Font_Ptr Big_Endian $006CBA
-	DWORD ArtNem_ST_Font
-EndSeg
 StartSeg ArtNem_ST_Amy_Ptr Big_Endian $006CD0
 	DWORD ArtNem_ST_Amy
 EndSeg
-StartSeg MapEni_ST_Menu_Ptr Big_Endian $006CE6
-	DWORD MapEni_ST_Menu
+
+StartSeg ArtNem_ST_Font_Ptr1 Big_Endian $006CBA
+	DWORD ArtNem_ST_Font
+EndSeg
+StartSeg ArtNem_ST_Font_Ptr2 Big_Endian $032264
+	DWORD ArtNem_ST_Font
+EndSeg
+StartSeg ArtNem_ST_Font_Ptr3 Big_Endian $03E69E
+	DWORD ArtNem_ST_Font
+EndSeg
+StartSeg ArtNem_ST_Font_Ptr4 Big_Endian $03FCA6
+	DWORD ArtNem_ST_Font
+EndSeg
+
+
+StartSeg ArtNem_ST_Menu_Ptr Big_Endian $006CA4
+	DWORD ArtNem_ST_Menu
+EndSeg
+StartSeg MapEni_ST_MenuBG_Ptr Big_Endian $006CE6
+	DWORD MapEni_ST_MenuBG
+EndSeg
+
+StartSeg ArtNem_DL_Menu_Ptr1 Big_Endian $03224E
+	DWORD ArtNem_DL_Menu
+EndSeg
+StartSeg ArtNem_DL_Menu_Ptr2 Big_Endian $03E66C
+	DWORD ArtNem_DL_Menu
+EndSeg
+
+StartSeg ArtNem_DL_BorderLabels_Ptr Big_Endian $03E682
+	DWORD ArtNem_DL_BorderLabels
+EndSeg
+StartSeg ArtNem_DL_Training_Ptr Big_Endian $03E6B4
+	DWORD ArtNem_DL_Training
+EndSeg
+
+StartSeg MapEni_DL_OvalBG_Ptr1 Big_Endian $03227A
+	DWORD MapEni_DL_OvalBG
+EndSeg
+StartSeg MapEni_DL_OvalBG_Ptr2 Big_Endian $03E75A
+	DWORD MapEni_DL_OvalBG
+EndSeg
+
+StartSeg MapEni_DL_OvalLarge_Ptr Big_Endian $03E742
+	DWORD MapEni_DL_OvalLarge
+EndSeg
+
+StartSeg MapEni_DL_OvalSmall_Ptr1 Big_Endian $032294
+	DWORD MapEni_DL_OvalSmall
+EndSeg
+StartSeg MapEni_DL_OvalSmall_Ptr2 Big_Endian $03E772
+	DWORD MapEni_DL_OvalSmall
+EndSeg
+
+StartSeg MapEni_DL_PlayStyle_Box_Ptr Big_Endian $03E78E
+	DWORD MapEni_DL_PlayStyle_Box
+EndSeg
+StartSeg MapEni_DL_PlayStyle_ProtoBox_Ptr Big_Endian $03E7A0
+	DWORD MapEni_DL_PlayStyle_ProtoBox
+EndSeg
+StartSeg MapEni_DL_SaveSlot_Box_Ptr Big_Endian $03E7F0
+	DWORD MapEni_DL_SaveSlot_Box
+EndSeg
+StartSeg MapEni_DL_Training_Box_Ptr Big_Endian $03E7B8
+	DWORD MapEni_DL_Training_Box
 EndSeg
 ;EndRegion
+
+;!@ Update me with ability to update ptr to here and other data content nearby
+StartSeg Pal_DataLoad_ptr Big_Endian $03E8CA $0080
+	Pal_DataLoad:	include	"Art/palettes/MD/Menus/DataLoad.bin"
+EndSeg
 
 ;Region @ArtNem_Bank2
 StartSeg ArtNem_Data1 Big_Endian $2C2DC8 $046E
@@ -5434,13 +5503,23 @@ StartSeg ArtNem_Data1 Big_Endian $2C2DC8 $046E
 EndSeg
 
 StartSeg ArtNem_Data2 Big_Endian $2C4B20 $047A
-	ArtNem_ST_Font:	include		"Art/artnem/Menus/Soundtest/Font.bin"
+	ArtNem_ST_Font:	include		"Art/artnem/Menus/Font.bin"
 	;unk_9C4F9A
 EndSeg
 
-StartSeg ArtNem_Data3 Big_Endian $2C7818 $0960
-	ArtNem_ST_Menu:	include		"Art/artnem/Menus/Soundtest/Menu.bin"
-	MapEni_ST_Menu:	include		"Art/tilemaps/Menus/Soundtest.bin"
+StartSeg ArtNem_Data3 Big_Endian $2C7818 $4AE6
+	ArtNem_ST_Menu:					include		"Art/artnem/Menus/Soundtest/Menu.bin"
+	MapEni_ST_MenuBG:				include		"Art/tilemaps/Menus/Soundtest/SoundtestBG.bin"	
+	ArtNem_DL_Menu:					include		"Art/artnem/Menus/DataLoad/Menu.bin"
+	ArtNem_DL_BorderLabels:			include		"Art/artnem/Menus/DataLoad/BorderLabels.bin"
+	ArtNem_DL_Training:				include		"Art/artnem/Menus/DataLoad/Training.bin"
+	MapEni_DL_OvalBG:				include		"Art/tilemaps/Menus/DataLoad/OvalBG.bin"
+	MapEni_DL_OvalLarge:			include		"Art/tilemaps/Menus/DataLoad/OvalLarge.bin"
+	MapEni_DL_OvalSmall:			include		"Art/tilemaps/Menus/DataLoad/OvalSmall.bin"
+	MapEni_DL_PlayStyle_Box:		include		"Art/tilemaps/Menus/DataLoad/PlayStyle_Box.bin"
+	MapEni_DL_PlayStyle_ProtoBox:	include		"Art/tilemaps/Menus/DataLoad/PlayStyle_ProtoBox.bin"
+	MapEni_DL_SaveSlot_Box:			include		"Art/tilemaps/Menus/DataLoad/SaveSlot_Box.bin"
+	MapEni_DL_Training_Box:			include		"Art/tilemaps/Menus/DataLoad/Training_Box.bin"	
 EndSeg
 ;EndRegion
 ;EndRegion

@@ -184,25 +184,40 @@ call JREPL.bat "sSSGEG" "KC_smpsSSGEG" /f "%ASMFILE%" /o -
 REM Rename sVolEnvFM to KC_smpsFMVolEnv
 call JREPL.bat "sVolEnvFM" "KC_smpsFMVolEnv" /f "%ASMFILE%" /o -
 
+
 REM Cleanup FM voices. Removed all macros, just allow the comments on each line
 REM (which have the macros contents already expanded as pure byte array)
-call JREPL.bat "(spAlgorithm.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spFeedback.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spDetune.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spMultiple.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spRateScale.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spAttackRt.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spAmpMod.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spSustainRt.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spSustainLv.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spDecayRt.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spReleaseRt.*)" " " /f "%ASMFILE%" /o -
-call JREPL.bat "(spTotalLv.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spAlgorithm.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spFeedback.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spDetune.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spMultiple.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spRateScale.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spAttackRt.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spAmpMod.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spSustainRt.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spSustainLv.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spDecayRt.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spReleaseRt.*)" " " /f "%ASMFILE%" /o -
+REM call JREPL.bat "(spTotalLv.*)" " " /f "%ASMFILE%" /o -
 
 REM Remove all comments containing "Patch", then Find all comments with $ signs
 REM Only line with $ signs should be the FM voice definitions;
 REM we need to add a dc.b to initalize a byte array (for the expanded macro contents)
-call JREPL.bat ";.*Patch.*" "" /f "%ASMFILE%" /o -
-call JREPL.bat ";(.*\x24)" "dc.b\t$1" /XSEQ /f "%ASMFILE%" /o -
-call JREPL.bat "dc.b\t " "dc.b\t" /XSEQ /f "%ASMFILE%" /o -
-call JREPL.bat "dc.b " "dc.b\t" /XSEQ /f "%ASMFILE%" /o -
+REM call JREPL.bat ";.*Patch.*" "" /f "%ASMFILE%" /o -
+REM call JREPL.bat ";(.*\x24)" "dc.b\t$1" /XSEQ /f "%ASMFILE%" /o -
+REM call JREPL.bat "dc.b\t " "dc.b\t" /XSEQ /f "%ASMFILE%" /o -
+REM call JREPL.bat "dc.b " "dc.b\t" /XSEQ /f "%ASMFILE%" /o -
+
+REM Cleanup FM voices
+call JREPL.bat "spAlgorithm" "smpsVcAlgorithm" /f "%ASMFILE%" /o -
+call JREPL.bat "spFeedback" "smpsVcFeedback" /f "%ASMFILE%" /o -
+call JREPL.bat "spDetune" "smpsVcDetune" /f "%ASMFILE%" /o -
+call JREPL.bat "spMultiple" "smpsVcCoarseFreq" /f "%ASMFILE%" /o -
+call JREPL.bat "spRateScale" "smpsVcRateScale" /f "%ASMFILE%" /o -
+call JREPL.bat "spAttackRt" "smpsVcAttackRate" /f "%ASMFILE%" /o -
+call JREPL.bat "spAmpMod" "smpsVcAmpMod" /f "%ASMFILE%" /o -
+call JREPL.bat "spSustainRt" "smpsVcDecayRate1" /f "%ASMFILE%" /o -
+call JREPL.bat "spSustainLv" "smpsVcDecayRate2" /f "%ASMFILE%" /o -
+call JREPL.bat "spDecayRt" "smpsVcDecayLevel" /f "%ASMFILE%" /o -
+call JREPL.bat "spReleaseRt" "smpsVcReleaseRate" /f "%ASMFILE%" /o -
+call JREPL.bat "spTotalLv" "smpsVcTotalLevel" /f "%ASMFILE%" /o -

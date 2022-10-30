@@ -4,3 +4,6 @@ asmx -e -w -l Sega_Jingle2.lst -C 68K -b 0x8F7594 -o Sega_Jingle2.bin cSega_Jing
 asmx -e -w -l LoopChunk.lst -C 68K -b 0x8F75A6 -o LoopChunk.bin cLoopChunk.asm > LoopChunk.log
 asmx -e -w -l Monitor_CombiBreaker.lst -C 68K -b 0x8F75DE -o Monitor_CombiBreaker.bin cMonitor_CombiBreaker.asm > Monitor_CombiBreaker.log
 asmx -e -w -l DemoPatch2.lst -C 68K -b 0x8F7600 -o DemoPatch2.bin cDemoPatch2.asm > DemoPatch2.log
+
+REM asmx -e -w -l BigRing_Frames.lst -C 68K -b 0x892902 -o BigRing_Frames.bin cBigRing_Frames.asm > BigRing_Frames.log
+asmx -e -w -l BossMode2.lst -C 68K -b 0x8F7662 -o BossMode2.bin cBossMode2.asm > BossMode2.log

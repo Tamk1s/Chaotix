@@ -39,6 +39,7 @@ copy /y "Orig\98.wav" "98.wav"
 copy /y "Orig\99.wav" "99.wav"
 REM !@ 
 copy /y "Orig\9D.bin" "9D.bin"
+copy /y "Orig\9F.wav" "9F.wav"
 
 REM Remove RIFF headers
 Echo Strip off the RIFF headers
@@ -64,6 +65,7 @@ riffstrip.exe "97.wav"
 riffstrip.exe "98.wav"
 riffstrip.exe "99.wav"
 REM riffstrip.exe "9D.wav"
+riffstrip.exe "9F.wav"
 
 REM Rename results from .wav.stripped to .bin . These are the raw LPCM samples (PWM Driver)
 Echo Rename stripped files
@@ -89,6 +91,7 @@ ren "97.wav.stripped" "97.bin"
 ren "98.wav.stripped" "98.bin"
 ren "99.wav.stripped" "99.bin"
 REM ren "9D.wav.stripped" "9D.bin"
+ren "9F.wav.stripped" "9F.bin"
 
 REM Copy all LPCM files, rename to PWM_XX (0-based naming for SMPSPlay)
 Echo Rename a copy of files for SMPSPlay
@@ -114,6 +117,7 @@ Copy /Y "97.bin" "PWM_16.bin"
 Copy /Y "98.bin" "PWM_17.bin"
 Copy /Y "99.bin" "PWM_18.bin"
 Copy /Y "9D.bin" "PWM_1C.bin"
+Copy /Y "9F.bin" "PWM_1E.bin"
 
 REM Copy all LPCM files to SMPSPlay
 Echo Copy all files to SMPSPlay
@@ -123,7 +127,7 @@ SetLocal EnableDelayedExpansion
 REM Generate new PWM.ini for SMPSPlay, copy it over
 
 REM Length of struct array (0-based)
-SET LEN=29
+SET LEN=33
 
 REM Struct array elements:
 REM .file = Original wav file (for sampling)
@@ -166,6 +170,10 @@ SET PAR[26].file=85-87.wav
 SET PAR[27].file=85-87.wav
 SET PAR[28].file=9D.wav
 SET PAR[29].file=8E.wav
+SET PAR[30].file=9F.wav
+SET PAR[31].file=9F.wav
+SET PAR[32].file=9F.wav
+SET PAR[33].file=9F.wav
 
 SET PAR[0].dfile=PWM_00.bin
 SET PAR[1].dfile=PWM_01.bin
@@ -198,6 +206,10 @@ SET PAR[26].dfile=PWM_04.bin
 SET PAR[27].dfile=PWM_04.bin
 SET PAR[28].dfile=PWM_1C.bin
 SET PAR[29].dfile=PWM_0D.bin
+SET PAR[30].dfile=PWM_1E.bin
+SET PAR[31].dfile=PWM_1E.bin
+SET PAR[32].dfile=PWM_1E.bin
+SET PAR[33].dfile=PWM_1E.bin
 
 SET PAR[0].rate="s"
 SET PAR[1].rate="s"
@@ -230,6 +242,10 @@ SET PAR[26].rate="4252"
 SET PAR[27].rate="3376"
 SET PAR[28].rate="5514"
 SET PAR[29].rate="8258"
+SET PAR[30].rate="8258"
+SET PAR[31].rate="6557"
+SET PAR[32].rate="5514"
+SET PAR[33].rate="4252"
 
 SET PAR[0].create="y"
 SET PAR[1].create="y"
@@ -262,6 +278,10 @@ SET PAR[26].create="n"
 SET PAR[27].create="n"
 SET PAR[28].create="y"
 SET PAR[29].create="n"
+SET PAR[30].create="y"
+SET PAR[31].create="n"
+SET PAR[32].create="n"
+SET PAR[33].create="n"
 
 SET PAR[0].addr=0
 SET PAR[1].addr=0
@@ -297,6 +317,11 @@ REM !@ New sample (Neptune Dada)
 SET PAR[28].addr=222FA098
 REM !@ Manual override back to sample $8E
 SET PAR[29].addr=2206BC74
+REM !@ New samples ($9F-$A2 VCop Orchit)
+SET PAR[30].addr=222F9150
+SET PAR[31].addr=222F9150
+SET PAR[32].addr=222F9150
+SET PAR[33].addr=222F9150
 
 REM Create header of SMPSPlay PWM.INI 
 call create_PWM_INI_Hdr.bat
@@ -318,8 +343,9 @@ FOR /L %%G IN (0,1,!LEN!) DO (
 	call create_PWM_INI_Meat.bat !_file! !_dfile! !_rate! !_create! !_addr! !_id!
 )
 
-REM Copy over finalized PWM.ini to SMPSPlay preview folder
+REM Copy over finalized PWM.ini and PWM samples to SMPSPlay preview folder
 Echo Done! Copying over PWM.ini to SMPSPlay preview folder
+Copy /Y PWM_*.bin "..\Preview\Data\Knuckles Maniax\PWM"
 copy /y "PWM.ini" "..\Preview\Data\Knuckles Maniax"
 
 REM Create a new PWM table for Sound Driver
@@ -357,6 +383,10 @@ SET PAR[26].dfile=85-87.bin
 SET PAR[27].dfile=85-87.bin
 SET PAR[28].dfile=9D.bin
 SET PAR[29].dfile=8E.bin
+SET PAR[30].dfile=9F.bin
+SET PAR[31].dfile=9F.bin
+SET PAR[32].dfile=9F.bin
+SET PAR[33].dfile=9F.bin
 
 REM Base SH-2 virtual addr for raw ROM addr ($580000)
 REM Offset from base for PWMTable.bin (array entries * 8 bc longwords)

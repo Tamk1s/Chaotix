@@ -272,43 +272,44 @@ z8vb_bitC       EQU $C
 z8vb_bitD       EQU $D
 z8vb_bitE       EQU $E
 z8vb_bitF       EQU $F
- ; ---------------------------------------------------------------------------
 
- ; enum z80_version mask (bitfield)
-z8vm_v0_tmss    EQU 1                  ;z80_version register (word)
-                                         ;
-                                         ; bit/readfield
-                                         ; 00000000 MVDRVVVV
-                                         ; 00000000 RRRRRRRR
-                                         ;
-                                         ; V=Mega Drive version (4-bits)
-                                         ; VVV0=no TMSS
-                                         ; VVV1=has TMSS
+; ---------------------------------------------------------------------------
+
+; enum z80_version mask (bitfield)
+z8vm_v0_tmss    EQU 1                  ; z80_version register (word)
+                                        ;
+                                        ; bit/readfield
+                                        ; 00000000 MVDRVVVV
+                                        ; 00000000 RRRRRRRR
+                                        ;
+                                        ; V=Mega Drive version (4-bits)
+                                        ; VVV0=no TMSS
+                                        ; VVV1=has TMSS
 z8vm_v1         EQU %10
 z8vm_v2         EQU %100
 z8vm_v3         EQU %1000
 z8vm_rsv        EQU %10000             ; R=RSV Currently not used/reserved
-                                         ;
+                                        ;
 z8vm_disk       EQU %100000            ; D=Disk FDD presence (Sega CD)
-                                         ;
-                                         ; 0=FDD/SCD not connected
-                                         ; 1=FDD/SCD not connected
-                                         ;
-                                         ; Check this bit for Sega CD presence,
-                                         ; to handle SegaCD 32x support
-                                         ;
-                                         ; (See https//plutiedev.com/subcpu-in-mode1#check-if-present)
-                                         ;
+                                        ;
+                                        ; 0=FDD/SCD not connected
+                                        ; 1=FDD/SCD not connected
+                                        ;
+                                        ; Check this bit for Sega CD presence,
+                                        ; to handle SegaCD 32x support
+                                        ;
+                                        ; (See https//plutiedev.com/subcpu-in-mode1#check-if-present)
+                                        ;
 z8vm_vmod       EQU %1000000           ; V=VMOD Video mode CPU clock
-                                         ;
-                                         ; 0=NTSC CPU clock (7.67 MHz)
-                                         ; 1=PAL CPU clock (7.60 MHz)
-                                         ;
+                                        ;
+                                        ; 0=NTSC CPU clock (7.67 MHz)
+                                        ; 1=PAL CPU clock (7.60 MHz)
+                                        ;
 z8vm_mode       EQU %10000000          ; M=Mode/model
-                                         ;
-                                         ; 0=Domestic Model (USA?)
-                                         ; 1=Overseas Model (Japan)
-                                         ;
+                                        ;
+                                        ; 0=Domestic Model (USA?)
+                                        ; 1=Overseas Model (Japan)
+                                        ;
 z8vm_bit8       EQU %100000000         ; All bits of upper word are unused
 z8vm_bitA       EQU %10000000000
 z8vm_bitC       EQU %1000000000000
@@ -324,36 +325,36 @@ adcb_res        EQU 1
 adcb_ren        EQU 7
 adcb_fm         EQU $F
 
- ; ---------------------------------------------------------------------------
+; ---------------------------------------------------------------------------
 
- ; enum _32x_adpCtrl bitmask (bitfield)
+; enum _32x_adpCtrl bitmask (bitfield)
 adcm_aden       EQU 1                  ; Adapter control register (word);
-                                         ; see page 21 of 32x hw manual
-                                         ;
-                                         ; Bitmask
-                                         ; 0bF0000000 N00000SA
-                                         ; F = VDP Access Auth
-                                         ; N = SH2 Reset Enable
-                                         ; S = Reset SH2
-                                         ; A = Adapter Enable Bit
-                                         ;
-                                         ; Adapter Enable bit
-                                         ;
-                                         ; 0=Prohibit 32x
-                                         ; 1=Permit 32x (initz by initprg; change prohibited)
-                                         ;
-                                         ; Switching access authorization is done while writing to the FM bit. Therefore, be aware
-                                         ; that if writing to the FM bit is done by MEGA Drive while SH2 accesses VDP, access
-                                         ; authorization is forced to switch to MEGA Drive.
+                                        ; see page 21 of 32x hw manual
+                                        ;
+                                        ; Bitmask
+                                        ; 0bF0000000 N00000SA
+                                        ; F = VDP Access Auth
+                                        ; N = SH2 Reset Enable
+                                        ; S = Reset SH2
+                                        ; A = Adapter Enable Bit
+                                        ;
+                                        ; Adapter Enable bit
+                                        ;
+                                        ; 0=Prohibit 32x
+                                        ; 1=Permit 32x (initz by initprg; change prohibited)
+                                        ;
+                                        ; Switching access authorization is done while writing to the FM bit. Therefore, be aware
+                                        ; that if writing to the FM bit is done by MEGA Drive while SH2 accesses VDP, access
+                                        ; authorization is forced to switch to MEGA Drive.
 adcm_res        EQU %10                ; Resets SH2
-                                         ; 0=Reset
-                                         ; 1=Cancel reset (initz by initprg. Change prohibited)
+                                        ; 0=Reset
+                                        ; 1=Cancel reset (initz by initprg. Change prohibited)
 adcm_ren        EQU %10000000          ; SH2 Reset Enable
-                                         ; 0=Disable
-                                         ; 1=Enable
+                                        ; 0=Disable
+                                        ; 1=Enable
 adcm_fm         EQU %1000000000000000  ; VDP Access Authz
-                                         ; 0=MD (Default)
-                                         ; 1=SH2
+                                        ; 0=MD (Default)
+                                        ; 1=SH2
 ; ---------------------------------------------------------------------------
 
 ; enum _32x_dreqCtrl bits
@@ -364,64 +365,64 @@ dqcb_dmaFifo_Full EQU 7
 dqcb_FB_WCacheEmpty EQU $E
 dqcb_FB_WCacheFull EQU $F
 
- ; ---------------------------------------------------------------------------
+; ---------------------------------------------------------------------------
 
- ; enum _32x_dreqCtrl mask (bitfield)
+; enum _32x_dreqCtrl mask (bitfield)
 dqcm_RV_DMA     EQU 1                  ; ROM to VRAM DMA
-                                         ; 0 NO OPERATION (initial value)
-                                         ; 1 DMA Start Allowed
-                                         ;
-                                         ; The SH2 side cannot access the ROM when RV = 1 (when doing ROM to VRAM DMA,
-                                         ; be sure that RV = 1). Waits until value becomes 0 (RV = 0) before accessing.
-                                         ;
-                                         ; Basically when SRAM_Acess is toggled to SRAM mode,
-                                         ; RV bit must be set off (and vice versa)
-                                         ;
-                                         ; https//gendev.spritesmind.net/forum/viewtopic.php?p=12036#p12036
-                                         ;
-                                         ; MD=R/W, 32x=readonly
+                                        ; 0 NO OPERATION (initial value)
+                                        ; 1 DMA Start Allowed
+                                        ;
+                                        ; The SH2 side cannot access the ROM when RV = 1 (when doing ROM to VRAM DMA,
+                                        ; be sure that RV = 1). Waits until value becomes 0 (RV = 0) before accessing.
+                                        ;
+                                        ; Basically when SRAM_Acess is toggled to SRAM mode,
+                                        ; RV bit must be set off (and vice versa)
+                                        ;
+                                        ; https//gendev.spritesmind.net/forum/viewtopic.php?p=12036#p12036
+                                        ;
+                                        ; MD=R/W, 32x=readonly
 dqcm_bit1       EQU %10                ; Always 0
-                                         ; MD=R/W, 32x=readonly
+                                        ; MD=R/W, 32x=readonly
 dqcm_68S        EQU %100               ; 68S/Mode
-                                         ; 0=No Operation
-                                         ; 1=CPU Write (68K writes data in FIFO)
-                                         ;
-                                         ; The internal system starts operation when 68S is 1.
-                                         ; Writing 0 force-ends the operation.
-                                         ; It is automatically set to 0 after DMA ends.
-                                         ;
-                                         ; MD=R/W, 32x=readonly
+                                        ; 0=No Operation
+                                        ; 1=CPU Write (68K writes data in FIFO)
+                                        ;
+                                        ; The internal system starts operation when 68S is 1.
+                                        ; Writing 0 force-ends the operation.
+                                        ; It is automatically set to 0 after DMA ends.
+                                        ;
+                                        ; MD=R/W, 32x=readonly
 dqcm_dmaFifo_Full EQU %10000000        ; DMA FIFO Full
-                                         ; 0=Can write
-                                         ; 1=Cannot write
-                                         ;
-                                         ; MD=readonly, 32x=inacc
+                                        ; 0=Can write
+                                        ; 1=Cannot write
+                                        ;
+                                        ; MD=readonly, 32x=inacc
 dqcm_FB_WCacheEmpty EQU %100000000000000 ; EMPT Frame Buffer, Write Cache Empty
-                                         ; 0=Data
-                                         ; 1=No Data
-                                         ;
-                                         ; MD=inacc, 32x=readonly
+                                        ; 0=Data
+                                        ; 1=No Data
+                                        ;
+                                        ; MD=inacc, 32x=readonly
 dqcm_FB_WCacheFull EQU %1000000000000000 ; Full 32x Frame Buffer, Write Cache Full
-                                         ; 0=Space
-                                         ; 1=No Space
-                                         ;
-                                         ; MD=inacc, 32x=readonly
+                                        ; 0=Space
+                                        ; 1=No Space
+                                        ;
+                                        ; MD=inacc, 32x=readonly
 ; ---------------------------------------------------------------------------
 
 ; enum _32x_intCtrl bits
 intb_master     EQU 0
 intb_slave      EQU 1
 
- ; ---------------------------------------------------------------------------
+; ---------------------------------------------------------------------------
 
- ; enum _32x_intCtrl mask (bitfield)
+; enum _32x_intCtrl mask (bitfield)
 intm_master     EQU 1                  ; Master SH2 interrupt command
-                                         ; 0=NO OPERATION (initial value)
-                                         ; 1=Interrupt command
-                                         ;
+                                        ; 0=NO OPERATION (initial value)
+                                        ; 1=Interrupt command
+                                        ;
 intm_slave      EQU %10                ; Slave SH2 interrupt command
-                                         ; 0=NO OPERATION (initial value)
-                                         ; 1=Interrupt command
+                                        ; 0=NO OPERATION (initial value)
+                                        ; 1=Interrupt command
 ; ---------------------------------------------------------------------------
 
 ; enum pwm_ctrl bits
@@ -442,63 +443,63 @@ pwcb_bitD       EQU $D
 pwcb_bitE       EQU $E
 pwcb_bitF       EQU $F
 
- ; ---------------------------------------------------------------------------
+; ---------------------------------------------------------------------------
 
- ; enum pwcm_ctrl mask (bitfield)
+; enum pwcm_ctrl mask (bitfield)
 pwcm_lmd1       EQU 1                  ; PWM Control Register (word)
-                                         ;
-                                         ; Bitmask
-                                         ; MD/32x 0000ABCD R000WXYZ
-                                         ;
-                                         ; Readmask
-                                         ; MD     0000RRRR B000BBBB   $  A15130
-                                         ; 32x    0000BBBB B000BBBB   $20004030
-                                         ;
-                                         ;
-                                         ; Bits YZ
-                                         ; Y=LMD0
-                                         ; Z=LMD1
-                                         ;
-                                         ;  Truth table
-                                         ; LMD0 |LMD1 |OUT
-                                         ; -----------------
-                                         ;   0  |  0  |OFF
-                                         ; -----------------
-                                         ;   0  |  1  |L
-                                         ;   1  |  0  |R
-                                         ; -----------------
-                                         ;   1  |  1  |Prohib
-                                         ;
-                                         ; Both cannot be set to Lch or Rch.
+                                        ;
+                                        ; Bitmask
+                                        ; MD/32x 0000ABCD R000WXYZ
+                                        ;
+                                        ; Readmask
+                                        ; MD     0000RRRR B000BBBB   $  A15130
+                                        ; 32x    0000BBBB B000BBBB   $20004030
+                                        ;
+                                        ;
+                                        ; Bits YZ
+                                        ; Y=LMD0
+                                        ; Z=LMD1
+                                        ;
+                                        ;  Truth table
+                                        ; LMD0 |LMD1 |OUT
+                                        ; -----------------
+                                        ;   0  |  0  |OFF
+                                        ; -----------------
+                                        ;   0  |  1  |L
+                                        ;   1  |  0  |R
+                                        ; -----------------
+                                        ;   1  |  1  |Prohib
+                                        ;
+                                        ; Both cannot be set to Lch or Rch.
 pwcm_lmd0       EQU %10                ;
-                                         ;
+                                        ;
 pwcm_rmd1       EQU %100               ; Bits WX
-                                         ; W=RMD0
-                                         ; X=RMD1
-                                         ;
-                                         ;  Truth table
-                                         ; RMD0 |RMD1 |OUT
-                                         ; -----------------
-                                         ;   0  |  0  |OFF
-                                         ; -----------------
-                                         ;   0  |  1  |R
-                                         ;   1  |  0  |L
-                                         ; -----------------
-                                         ;   1  |  1  |Prohib
-                                         ;
-                                         ; Both cannot be set to Lch or Rch.
+                                        ; W=RMD0
+                                        ; X=RMD1
+                                        ;
+                                        ;  Truth table
+                                        ; RMD0 |RMD1 |OUT
+                                        ; -----------------
+                                        ;   0  |  0  |OFF
+                                        ; -----------------
+                                        ;   0  |  1  |R
+                                        ;   1  |  0  |L
+                                        ; -----------------
+                                        ;   1  |  1  |Prohib
+                                        ;
+                                        ; Both cannot be set to Lch or Rch.
 pwcm_rmd0       EQU %1000              ;
-                                         ;
+                                        ;
 pwcm_bit4       EQU %10000
 pwcm_bit5       EQU %100000
 pwcm_bit6       EQU %1000000
 pwcm_rtp        EQU %10000000          ; R=RTP DREQ1 occurrence enable (SH2 side only)
-                                         ; 0= off (initial value)
-                                         ; 1= on
-                                         ;
+                                        ; 0= off (initial value)
+                                        ; 1= on
+                                        ;
 pwcm_tm0        EQU %100000000         ; Bits ABCD=TM3-TM0
-                                         ; PWM Timer interrupt interval
-                                         ;
+                                        ; PWM Timer interrupt interval
+                                        ;
 pwcm_tm1        EQU %1000000000
 pwcm_tm2        EQU %10000000000
 pwcm_tm3        EQU %100000000000
@@ -527,27 +528,27 @@ pwxb_bitD       EQU $D
 pwxb_empty      EQU $E
 pwxb_full       EQU $F
 
- ; ---------------------------------------------------------------------------
+; ---------------------------------------------------------------------------
 
- ; enum pwm_xch mask (bitfield)
+; enum pwm_xch mask (bitfield)
 pwxm_p0         EQU 1                  ; X Channel PWM Register (word)
-                                         ; Fifo which write pulse data/gives FIFO status
-                                         ;
-                                         ; Handles left, right, and mono (both) channels
-                                         ; depending on register
-                                         ;
-                                         ; $A1513X, $2000403X
-                                         ; X=$34, $36, $38
-                                         ;
-                                         ; Bitmask
-                                         ; MD/32x FE00PPPP PPPPPPPP
-                                         ;
-                                         ; Readmask
-                                         ; MD/32x RR00WWWW WWWWWWWW
-                                         ;
-                                         ;
-                                         ; P=Pulse
-                                         ; 12-bit Pulse width value
+                                        ; Fifo which write pulse data/gives FIFO status
+                                        ;
+                                        ; Handles left, right, and mono (both) channels
+                                        ; depending on register
+                                        ;
+                                        ; $A1513X, $2000403X
+                                        ; X=$34, $36, $38
+                                        ;
+                                        ; Bitmask
+                                        ; MD/32x FE00PPPP PPPPPPPP
+                                        ;
+                                        ; Readmask
+                                        ; MD/32x RR00WWWW WWWWWWWW
+                                        ;
+                                        ;
+                                        ; P=Pulse
+                                        ; 12-bit Pulse width value
 pwxm_p1         EQU %10
 pwxm_p2         EQU %100
 pwxm_p3         EQU %1000
@@ -559,17 +560,17 @@ pwxm_p8         EQU %100000000
 pwxm_p9         EQU %1000000000
 pwxm_pA         EQU %10000000000
 pwxm_pB         EQU %100000000000      ;
-                                         ;
+                                        ;
 pwxm_bitC       EQU %1000000000000
 pwxm_bitD       EQU %10000000000000    ;
-                                         ;
+                                        ;
 pwxm_empty      EQU %100000000000000   ; F=Full Conditions of pulse width FIFO
-                                         ; 0=Space available
-                                         ; 1=No space available
-                                         ;
+                                        ; 0=Space available
+                                        ; 1=No space available
+                                        ;
 pwxm_full       EQU %1000000000000000  ; E=Empty Conditions of pulse width FIFO
-                                         ; 0=Data per FIFO
-                                         ; 1=No data per FIFO
+                                        ; 0=Data per FIFO
+                                        ; 1=No data per FIFO
 ; ---------------------------------------------------------------------------
 
 ; enum svdp_bitmap bits
@@ -591,6 +592,7 @@ bmm_bitE        EQU $E
 bmm_tv          EQU $F
 
 ; ---------------------------------------------------------------------------
+
 ; enum svdp_bitmap mask (bitfield)
 bmb_mode_lo     EQU 1                  ; Bitmap mode register; see page 36 of 32x hw manual
                                         ; 0bT0000000 PL0000MM
@@ -641,35 +643,36 @@ fbcb_bitC       EQU $C
 fbcb_pen        EQU $D
 fbcb_hbla       EQU $E
 fbcb_vbla       EQU $F
- ; ---------------------------------------------------------------------------
 
- ; enum svdp_fb_ctr mask (bitfield)
+; ---------------------------------------------------------------------------
+
+; enum svdp_fb_ctr mask (bitfield)
 fbcm_fs         EQU 1                  ; Super VDP Framebuffer Control Reg (Word)
-                                         ; See page 37 of 32x manual
-                                         ;
-                                         ; Bit/readmask
-                                         ; 0bVHP00000 000000FS
-                                         ; 0bRRR00000 000000BB
-                                         ;
-                                         ; S=FS Frame Buffer Swap
-                                         ; 0=Transfers DRAM0 to VDP side (initial value)
-                                         ; 1=Transfers DRAM1 to VDP side
-                                         ;
-                                         ; ? Swapping the Frame Buffer is allowed during V Blank (VBLK = 1) or
-                                         ;   when in the blank mode. However, writing the FS bit is always allowed,
-                                         ;   and when written during display, swapping is done at the next V Blank.
-                                         ;   With respect to read, the value, which indicates DRAM during display
-                                         ;   until the next V Blank, is returned.
-                                         ;
-                                         ; ? When having swapped the Frame Buffer, be sure to access the Frame
-                                         ;   Buffer after confirming that VBLK = 1 or FS bit has changed.
-                                         ;
+                                        ; See page 37 of 32x manual
+                                        ;
+                                        ; Bit/readmask
+                                        ; 0bVHP00000 000000FS
+                                        ; 0bRRR00000 000000BB
+                                        ;
+                                        ; S=FS Frame Buffer Swap
+                                        ; 0=Transfers DRAM0 to VDP side (initial value)
+                                        ; 1=Transfers DRAM1 to VDP side
+                                        ;
+                                        ; ? Swapping the Frame Buffer is allowed during V Blank (VBLK = 1) or
+                                        ;   when in the blank mode. However, writing the FS bit is always allowed,
+                                        ;   and when written during display, swapping is done at the next V Blank.
+                                        ;   With respect to read, the value, which indicates DRAM during display
+                                        ;   until the next V Blank, is returned.
+                                        ;
+                                        ; ? When having swapped the Frame Buffer, be sure to access the Frame
+                                        ;   Buffer after confirming that VBLK = 1 or FS bit has changed.
+                                        ;
 fbcm_fen        EQU %10                ; F=FEN Frame Buffer Authz
-                                         ; 0=Access approved
-                                         ; 1=Access denied
-                                         ;
-                                         ; ? When having performed FILL, be sure to access the Frame Buffer after
-                                         ;   confirming that FEN is EQUal to 0.
+                                        ; 0=Access approved
+                                        ; 1=Access denied
+                                        ;
+                                        ; ? When having performed FILL, be sure to access the Frame Buffer after
+                                        ;   confirming that FEN is EQUal to 0.
 fbcm_bit2       EQU %100
 fbcm_bit3       EQU %1000
 fbcm_bit4       EQU %10000
@@ -682,21 +685,21 @@ fbcm_bitA       EQU %10000000000
 fbcm_bitB       EQU %100000000000
 fbcm_bitC       EQU %1000000000000
 fbcm_pen        EQU %10000000000000    ; P=PEN Palette Access Approval
-                                         ; 0=Access denied
-                                         ; 1=Access approved
-                                         ;
-                                         ; ? Palette access is possible only during H and V blank.
-                                         ;
-                                         ; ? Palette can access whenever the bitmap mode is in
-                                         ;   the direct color mode, as well as during Blank.
-                                         ;
+                                        ; 0=Access denied
+                                        ; 1=Access approved
+                                        ;
+                                        ; ? Palette access is possible only during H and V blank.
+                                        ;
+                                        ; ? Palette can access whenever the bitmap mode is in
+                                        ;   the direct color mode, as well as during Blank.
+                                        ;
 fbcm_hbla       EQU %100000000000000   ; H=HBLK HBlank
-                                         ; 0=During display period
-                                         ; 1=During HBlank
-                                         ;
+                                        ; 0=During display period
+                                        ; 1=During HBlank
+                                        ;
 fbcm_vbla       EQU %1000000000000000  ; V=VBLK VBlank
-                                         ; 0=During display period
-                                         ; 1=During VBlank
+                                        ; 0=During display period
+                                        ; 1=During VBlank
 ; ---------------------------------------------------------------------------
 
 ; enum Bus rEQUest constants
@@ -710,6 +713,7 @@ msr_EnableInts  EQU $2300
 msr_DisableInts EQU $2700
 
 ; ---------------------------------------------------------------------------
+
 ; enum M68K SR Bits (bitfield)
 msr_Carry       EQU 1
 msr_oVerflow    EQU %10
@@ -723,6 +727,7 @@ msr_supervisor  EQU %10000000000000
 msr_Trace       EQU %1000000000000000
 
 ; ---------------------------------------------------------------------------
+
 ; enum SRAM Type bits (bitfield)
 stb_Alignment   EQU %1000              ; Alignment of bits. 0=even, 1=odd
                                         ;
@@ -843,43 +848,43 @@ errb_bitE       EQU $E                 ;
                                         ;
 errb_Reset      EQU $F
 
- ; ---------------------------------------------------------------------------
+; ---------------------------------------------------------------------------
 
- ; enum MarsError_Results mask (bitfield)
+; enum MarsError_Results mask (bitfield)
 errm_Mars       EQU 1                  ; MarsError status (d0.w)
-                                         ;
-                                         ; Bitmask
-                                         ; R0000000 DSC000TM
-                                         ;
-                                         ; M=MARS ID Error (no 32x MARS TMSS string/presence)
-                                         ;
+                                        ;
+                                        ; Bitmask
+                                        ; R0000000 DSC000TM
+                                        ;
+                                        ; M=MARS ID Error (no 32x MARS TMSS string/presence)
+                                        ;
 errm_TV         EQU %10                ; T=TV Mode Error
-                                         ; (Genesis and 32x hardware not
-                                         ; matching same TV Video mode regions)
-                                         ;
+                                        ; (Genesis and 32x hardware not
+                                        ; matching same TV Video mode regions)
+                                        ;
 errm_bit2       EQU %100               ; bits 2-4 are unused
 errm_bit3       EQU %1000
 errm_bit4       EQU %10000
 errm_Chksum     EQU %100000            ; C=Check Sum Error
-                                         ; (Calculated checksum
-                                         ; does not meet expected)
-                                         ;
+                                        ; (Calculated checksum
+                                        ; does not meet expected)
+                                        ;
 errm_SQER       EQU %1000000           ; S=Security error
-                                         ;
+                                        ;
 errm_SDER       EQU %10000000          ; D=SDRAM Self Check Error
-                                         ; Bad 32x SDRAM
-                                         ;
-errm_bit8        EQU %100000000         ; Bits 8-E are unused
-errm_bit9        EQU %1000000000
-errm_bitA        EQU %10000000000
-errm_bitB        EQU %100000000000
-errm_bitC        EQU %1000000000000
-errm_bitD        EQU %10000000000000
-errm_bitE        EQU %100000000000000
-errm_Reset       EQU %1000000000000000  ; R=Reset type
-                                         ;
-                                         ; 0=Cold Start
-                                         ; 1=Hot Start
+                                        ; Bad 32x SDRAM
+                                        ;
+errm_bit8       EQU %100000000         ; Bits 8-E are unused
+errm_bit9       EQU %1000000000
+errm_bitA       EQU %10000000000
+errm_bitB       EQU %100000000000
+errm_bitC       EQU %1000000000000
+errm_bitD       EQU %10000000000000
+errm_bitE       EQU %100000000000000
+errm_Reset      EQU %1000000000000000  ; R=Reset type
+                                        ;
+                                        ; 0=Cold Start
+                                        ; 1=Hot Start
 ; ---------------------------------------------------------------------------
 
 ; enum General bool & status consts
@@ -952,7 +957,6 @@ btn6_Z          EQU 1
 btn6_Y          EQU %10
 btn6_X          EQU %100
 btn6_Mode       EQU %1000
-
 ; ---------------------------------------------------------------------------
 
 ; enum Joypad input bits 6btn (width 1 byte)
@@ -997,8 +1001,13 @@ v_gamemode      EQU $FFFFDFDE          ; Current gamemode
 
 ; enum Level stats and demos
 MaxDemo         EQU 5                  ; Max amount of autodemos
+pts_100         EQU $64                ; 100 Pts
+pts_500         EQU $1F4               ; 500 pts
+pts_5k          EQU $1388              ; 5,000 pts
+pts_10k         EQU $2710              ; 10,000 pts
+pts_50k         EQU $C350              ; 50,000 pts
 v_rings         EQU $FFFFE008          ; Rings (word)
-v_score         EQU $FFFFE00A          ; Score (long)
+v_score_tatime  EQU $FFFFE00A          ; Score/Time Attack time (long)
 v_time          EQU $FFFFE010          ; Level time in frames (word)
 v_chRings       EQU $FFFFE01A          ; Current Special Stage/Chaos Ring count (word)
 v_btnpushtime2  EQU $FFFFFD28          ; Time (in frames) for the current demo button (1 byte)
@@ -1018,7 +1027,12 @@ v_gamesubmode   EQU $FFFFDFE0          ; Game submode (word)
 ; ---------------------------------------------------------------------------
 
 ; enum id_CharSel Submodes
-id_GMCharSel_Menu2P EQU $10            ; Combi Select submenu (2P)
+id_GM_CharSel_Init EQU 0               ; Initializtion
+id_GM_CharSel_Menu1P EQU 4             ; CharSel 1P Menu
+id_GM_CharSel_Menu1P_Sel EQU 8         ; CharSel Process (1P)
+id_GM_CharSel_Transition EQU $C        ; Transition from 1P to 2P menu
+id_GM_CharSel_Menu2P EQU $10           ; Combi Select submenu (2P)
+id_GM_CharSel_Menu2P_Sel EQU $14       ; CharSel Process (2P)
 
 ; ---------------------------------------------------------------------------
 
@@ -1093,11 +1107,11 @@ v_act_hi        EQU $FFFFDFF4          ; Current Act (0-6, word)
 v_act_lo        EQU $FFFFDFF5
 v_tod_hi        EQU $FFFFDFF6          ; Current Time-of-Day (TOD, word, see
 v_tod_lo        EQU $FFFFDFF7
-v_gameProg1:    EQU $FFFFDFFE
-v_gameProg2:    EQU $FFFFE000
-v_gameProg3:    EQU $FFFFE002
+v_gameProg1     EQU $FFFFDFFE
+v_gameProg2     EQU $FFFFE000
+v_gameProg3     EQU $FFFFE002
 v_SaveFile_ID   EQU $FFFFE01C          ; Game Save file ID. 1-based in menu, 0-based in game.
-                                       ; $FFFF = No Save; otherwise file ID
+                                        ; $FFFF = No Save; otherwise file ID
 v_SaveFile_Data1 EQU $FFFFE216         ; Cache for Save File 1 data (training/load game menus)
 v_SaveFile_Data2 EQU $FFFFE226         ; Cache for Save File 2 data
 v_SaveFile_Data3 EQU $FFFFE236         ; Cache for Save File 3 data
@@ -1111,6 +1125,9 @@ v_curSong       EQU $FFFFFCFC          ; Current level Song ID (byte).
 v_numCBtnPress  EQU $FFFFFD36          ; Number of C button presses (word, for player jumps/actions) within the team.
                                         ; Zero presses gives a Secret Bonus at end of level
 f_SaveMode      EQU $FFFFFD38          ; How this save file should be saved (sccFalse = Autosave, sccTrue = Manual)
+v_actConc_hi    EQU $FFFFFDE2          ; Current Act (0-6 word)
+                                        ; Variant of v_act_hi, used for concurrent act hopping (Intro, Practice)
+v_actConc_lo    EQU $FFFFFDE3
 
 ; ---------------------------------------------------------------------------
 
@@ -1135,8 +1152,8 @@ id_we           EQU 7                  ; World Entrance
                                         ; Act 3 = Bonus Stage
                                         ; Act 5 Sunset = SEGA Screen (silence)
 id_notused      EQU 8                  ; Not used. Act 0=Credits
-;id_bonus        EQU 9                  ; Bonus stages
-;id_special      EQU $A                 ; Special Stages
+id_lBonus        EQU 9                  ; Bonus stages
+id_lSpecial      EQU $A                 ; Special Stages
 
 ; ---------------------------------------------------------------------------
 
@@ -1167,6 +1184,7 @@ id_lsn4         EQU 6                  ; 5 = Throw, 6 = invalid
 v_rubberband    EQU $FFFFFCEA          ; Bitfield status for rubber band/team stuff (byte,
                                         ; see Rubberband bits/masks)
 ; ---------------------------------------------------------------------------
+
 ; enum Rubberband bit masks (bitfield)
 rbm_Active_Player2 EQU 1
 rbm_TwoPlayer   EQU %10
@@ -1202,7 +1220,9 @@ v_ObjLimit_Btm  EQU $FFFFE092          ; Bottom ypos viewport for objpos bounds 
 v_ObjPos_Ptr    EQU $FFFFE09C          ; Ptr to current level's ObjPos data addr (long)
 v_ObjPos_Index  EQU $FFFFE0A0          ; Index into v_ObjPos_Ptr for leftmost onscreen object (word)
 v_ObjPos_Cache  EQU $FFFFE0A2          ; Cache for current level's ObjPos data (long, $100 bytes)
+
 ; ---------------------------------------------------------------------------
+
 ; enum Common OST Constants (width 1 byte)
 obLLPtr         EQU 0                  ; OST Linked-List allocator chain ptr (word)
 obSST_02_Hi     EQU 2                  ; Cache word offset? Word $02 (hi byte)
@@ -1215,7 +1235,10 @@ obX_Hi          EQU 8                  ; x-axis position (upper byte of word, S1
 obX_Lo          EQU 9                  ; x-axis position (lower byte of word, S1)
 obY_Hi          EQU $C                 ; y-axis position (upper byte of word, S1)
 obY_Lo          EQU $D                 ; x-axis position (lower byte of word, S1)
-obArt_Bank      EQU $10                ; 32x Art Bank ID (word)
+obArt_BankHiA   EQU $10                ; 32x Art Bank ID (Long. Upper word, hi)
+obArt_BankHiB   EQU $11                ; 32x Art Bank ID (upper word, lo)
+obArt_BankLoA   EQU $12                ; 32x Art Bank ID (Lower word, hi)
+obArt_BankLoB   EQU $13                ; 32x Art Bank ID (Lower word, lo)
 obScreenX_Hi    EQU $14                ; x-axis screen position (upper byte of word, S1)
 obScreenX_Lo    EQU $15                ; x-axis screen position (lower byte of word, S1)
 obScreenY_Hi    EQU $16                ; y-axis screen position (upper byte of word, S1)
@@ -1223,7 +1246,24 @@ obScreenY_Lo    EQU $17                ; y-axis screen position (lower byte of w
 obArt_Frame     EQU $20                ; 32x Art frame in Bank ID (word)
 obSubtype_Hi    EQU $28                ; object subtype (upper byte of word, S1)
 obSubtype_Lo    EQU $29                ; object subtype (lower byte of word, S1)
+
 ; ---------------------------------------------------------------------------
+
+; enum BonusStage_Stuff
+BS_LayoutMax    EQU $F
+BS_LayoutMax2   EQU $3C
+v_BS_ScreenX    EQU $FFFFF610          ; BS Screenpos X (word)
+v_BS_ScreenY    EQU $FFFFF612          ; BS Screenpos Y (word)
+v_BS_ScreenZ    EQU $FFFFF614          ; BS Screenpos Z (word)
+v_BS_SpeedZ     EQU $FFFFF616
+v_BS_MaxSpeedZ  EQU $FFFFF692          ; Max velocity for acceleration
+f_BS_Exit_hi    EQU $FFFFF696          ; Stop BS flag (word, hi byte)? $FF00 if stopped; else $0000
+f_BS_Exit_lo    EQU $FFFFF697
+BS_LayoutTerm   EQU $FFFFF81E
+BS_MaxSpeedZ    EQU $FFFFFFC0
+
+; ---------------------------------------------------------------------------
+
 ; enum obArt_Bank IDs
 AP3_Mighty      EQU 0                  ; See SonED2 ROMulan split.txt extraction, and SH2 disasm
                                         ; for what 32x art file data is contained in which banks/purpose of each banks
@@ -1360,11 +1400,14 @@ ArtPtr32X_Offset EQU $2000000
 Art32x_DREQ_Src EQU $FFFFD01E          ; 32x DREQ Source address variable
 Art32x_DREQ_Dest EQU $FFFFD45E         ; 32x DREQ dest address variable
 f_DREQ_Success  EQU $FFFFFCE7          ; Some flag that is set when DREQ successfully completed (SH2DREQSend)
+
 ; ---------------------------------------------------------------------------
+
 ; enum obType IDs (width 4 bytes)
 objID_Monitor   EQU $10C
 objID_Spring    EQU $164
 objID_Signpost  EQU $1C8
+
 ; ---------------------------------------------------------------------------
 
 ; enum Player specific OST constants Table1 (width 1 byte)
@@ -1386,14 +1429,19 @@ Pow_CombiCatcher EQU $FFFFFDD7         ; Powerup for easy Combi Catcher claw gam
 Pow_LevelSel_Roulette EQU $FFFFFDD8    ; Powerup for easy LevelSelect roulette (byte, sccFalse/True)
 
 ; ---------------------------------------------------------------------------
+
 ; enum obChrT2_PowStatus masks (bitfield)
 psm_Shield      EQU 1
 psm_Size        EQU $1000
+
 ; ---------------------------------------------------------------------------
+
 ; enum obChrT2_PowStatus bits
 psb_Shield      EQU 0                  ; Shield enabled bit
 psb_Size        EQU 3                  ; Size powerup bit. 1=shrunken, 0=grown. Only checked when obChrT2_PowTimer_SizeTimer != 0
+
 ; ---------------------------------------------------------------------------
+
 ; enum bgm IDs (width 1 byte)
 bgm_Null        EQU 0
 bgm_IIZ         EQU 1
@@ -1437,7 +1485,9 @@ bgm_AllCRings   EQU $26
 bgm_CreditsBad  EQU $27
 bgm_CreditsGood EQU $28
 bgm_WE_Roulette_Decision2nd EQU $29
+
 ; ---------------------------------------------------------------------------
+
 ; enum sfx IDs (width 1 byte)
 sfx_Bomb        EQU $2A                ; Bomb-sound sfx (various uses)
 sfx_Skid        EQU $2B                ; Player skidding (S1)
@@ -1503,9 +1553,11 @@ sfx_SSZ_UFO     EQU $66                ; SSZ UFO whirr
 sfx_WE_ClawGame_Whirr2 EQU $67         ; Whirr2 for WE Claw Game (various other uses)
 sfx_WE_MSBoss_EnterRoulette EQU $68    ; Metal Sonic boss enterring roulette (other uses)
 sfx_RingRight   EQU $69                ; Ring (Right, S1)
-sfx_sfxLoopStop EQU $6A                ; Stops looping SFX
+sfx_cmd_LoopStop EQU $6A               ; Stops looping SFX
 sfx_Jingle_SegaBeta EQU $6B            ; !@ Unused Beta Sega Jingle
 sfx_Spindash    EQU $6C                ; Spindash chargeup (S1). No pitch shifting
 sfx_ExitSS      EQU $6D                ; Same SFX/usage as S1's sfx_EnterSS, but only used when exiting SS after getting Chaos Ring
 sfx_AAZ_Suction EQU $6E                ; Suction sfx for AAZ Tubes (hard to trigger)
+sfx_cmd_FadeOut EQU $F0
+v_sndStereo     EQU $FFFFE208
 v_ring_speaker  EQU $FFFFFCE6          ; Current pan of the ring sound; positive is left, negative/zero is right.

@@ -15,6 +15,72 @@ MaxSize	$400000				;Maximum Genesis ROM size
 Define CASC_NullTerm	$00
 Define CASC_NullTerm2	$0000
 
+; Std Sega Ascii Chars (Crackers-debug styled)
+Define _SPC		$00
+Define _Excl	$01
+Define _DQUOT	$02
+Define _DNUM	$03
+Define _CASH	$04
+Define _PCent	$05
+Define _AMP		$06
+Define _SQUOT	$07
+Define _LPAREN	$08
+Define _RPAREN	$09
+Define _ASTK	$0A
+Define _PLUS	$0B
+Define _COMMA	$0C
+Define _DASH 	$0D
+Define _Period 	$0E
+Define _LDIV $0F
+Define _0 $10
+Define _1 $11
+Define _2 $12
+Define _3 $13
+Define _4 $14
+Define _5 $15
+Define _6 $16
+Define _7 $17
+Define _8 $18
+Define _9 $19
+Define _Colon $1A
+Define _SColon $1B
+Define _BLT $1C
+Define _EQU $1D
+Define _BGT $1E
+Define _QMARK $1F
+Define _Copy $20
+Define _A $21
+Define _B $22
+Define _C $23
+Define _D $24
+Define _E $25
+Define _F $26
+Define _G $27
+Define _H $28
+Define _I $29
+Define _J $2A
+Define _K $2B
+Define _L $2C
+Define _M $2D
+Define _N $2E
+Define _O $2F
+Define _P $30
+Define _Q $31
+Define _R $32
+Define _S $33
+Define _T $34
+Define _U $35
+Define _V $36
+Define _W $37
+Define _X $38
+Define _Y $39
+Define _Z $3A
+Define _LBRACK $3B
+Define _RDIV $3C
+Define _RBRACK $3D
+Define _CARROT $3E
+Define _USCORE $3F
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Manual Settings Segments ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -26,12 +92,81 @@ Define CASC_NullTerm2	$0000
 StartSeg GameHeader Big_Endian $000100 $8E
 
 	String	"SEGA 32X        "					;Console Name
-	String	"(C)GENESISDOES 2021.OCT"					;Copyright Date
-	String  "KNUCKLES CLACKERS V0.1A DEMO                "	;Domestic Game Name
-	String  "KNUCKLES CLACKERS V0.1A DEMO                 "	;Foreign Game Name
+	String	"(C)GENESISDOES 2022.NOV"					;Copyright Date
+	String  "KNUCKLES CLACKERS V0.2A DEMO                "	;Domestic Game Name
+	String  "KNUCKLES CLACKERS V0.2A DEMO                 "	;Foreign Game Name
 	String	"GM MK-84503-01"					;Game Serial Number
 EndSeg
 ;EndRegion
+
+;Region
+; !@ Main Menu text
+StartSeg MainMenu_Strings Big_Endian $003E5E $40
+	;BYTE CASC_NullTerm
+	;BYTE _S,_C,_E,_N,_A,_R,_I,_O 	; "SCENARIO"
+	;BYTE _SPC
+	;BYTE _Q,_U,_E,_S,_T 			; "QUEST"
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE _T,_R,_A,_I,_N,_I,_N,_G	; "TRAINING"
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE _O,_P,_T,_I,_O,_N,_S ; "OPTIONS"
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE _S,_T,_A,_G,_E ; "STAGE"
+	;BYTE _SPC
+	;BYTE _S,_E,_L,_E,_C,_T ; "SELECT"
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	
+	BYTE CASC_NullTerm
+	BYTE _S,_C,_E,_N,_A,_R,_I,_O 	; "SCENARIO"
+	BYTE _SPC
+	BYTE _Q,_U,_E,_S,_T 			; "QUEST"
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE _B,_O,_S,_S,_SPC,_R,_U,_S	; "TRAINING"
+	BYTE _H
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE _O,_P,_T,_I,_O,_N,_S ; "OPTIONS"
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+	BYTE _L,_E,_V,_E,_L 		; "STAGE"
+	BYTE _SPC
+	BYTE _S,_E,_L,_E,_C,_T ; "SELECT"
+	BYTE CASC_NullTerm
+	BYTE CASC_NullTerm
+EndSeg
+;Endregion
 
 ;Region @Exit_Strings
 StartSeg ExitScreen_Strings Big_Endian $03FDEA $80
@@ -296,7 +431,9 @@ EndSeg
 StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	String "-SOUND TEST-"
 	BYTE	CASC_NullTerm
-	String "DOOR INTO SUMMER"
+	;!@ New data
+	;String "DOOR INTO SUMMER"
+	String "SOUTH ISLAND"
 	BYTE	CASC_NullTerm
 	String "ELECTORIA BETA"
 	BYTE	CASC_NullTerm
@@ -348,13 +485,15 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "COMBINATION"
-	 String "SONIC FACTORY-SA3"
+	String "SONIC FACTORY-SA3"
 	BYTE	CASC_NullTerm
-	String "TAKE A NAP"
+	;!@ NEW DATA
+	; String "TAKE A NAP"
+	String 	"HELPERS= REST-KSSU"
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "SURGING POWER"
-	String "RANKING-CTVO"
+	 String "SRB2 INVIN"
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "MECHANICAL DANCE"
@@ -439,7 +578,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	;String "DESTRUCTIVE POWER"
 	String "BLUE TWILIGHT-HDN"
 	BYTE	CASC_NullTerm
-	String "JUST ANOTHER DAY"
+	;!@ New Data
+	;String "JUST ANOTHER DAY"
+	String "DIMENSION TRIPPER!!!"
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "DECISION 2ND"
@@ -645,4 +786,3 @@ StartSeg Code_TrainingSelect_TOD Big_Endian $03F461 1
 	BYTE	$07
 EndSeg
 ;EndRegion
-

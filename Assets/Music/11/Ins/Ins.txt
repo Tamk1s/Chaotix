@@ -1,0 +1,24 @@
+MIDI Tempo:
+98 BPM
+08 Ticks/Quarter
+04 Tick mult
+= 98.4375
+
+FM:
+Std library but override:
+Piccolo
+Violin
+
+PSG:
+PSG1 = p0
+PSG2 = p0
+PSG3 = p0
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+37	C-3		EKick		$81/pEKick
+41	E3		ESnare		$82/pESnare
+45	G#3		PedalHH		$99/pOpenHH
+47	B-3		OpenHH		$99/pOpenHH
+50	C#4		CrashCymb	$89/pCrashCymb
+58	A4		Crash Cymb2	$89/pCrashCymb

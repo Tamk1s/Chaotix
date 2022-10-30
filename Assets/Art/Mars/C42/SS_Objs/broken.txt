@@ -1,0 +1,9 @@
+Broken:
+Saw (bad decomp)
+Spheres (crash)
+Bumpers (crash)
+
+Working (colors off-by-1):
+Spikeball_chain
+CourseOutX
+Spikeball

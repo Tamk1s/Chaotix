@@ -174,10 +174,15 @@ MakePath "Art/artnem/aniart"
 MakePath "Art/artnem/aniart/Data"
 MakePath "Art/artnem/Menus"
 MakePath "Art/artnem/Menus/Soundtest"
+MakePath "Art/artnem/Menus/Endings"
+MakePath "Art/artnem/Menus/DataLoad"
 
 ;!@
 MakePath "Art/tilemaps"
 MakePath "Art/tilemaps/Menus"
+MakePath "Art/tilemaps/Menus/Soundtest"
+MakePath "Art/tilemaps/Menus/Endings"
+MakePath "Art/tilemaps/Menus/DataLoad"
 
 MakePath "Levels"
 MakePath "Levels/BBZ"
@@ -2979,6 +2984,7 @@ Extract $2BA6E4  $80 "Levels/SSZ/Pal/BossN.bin"
 ;;;;;;;;;;;;;;;;;;;;;;
 ;Other non-level palette Data
 ;;;;;;;;;;;;;;;;;;;;;;
+Extract	$03E8CA	$080 "Art/palettes/MD/Menus/DataLoad.bin"
 Extract	$006E18	$080 "Art/palettes/MD/Menus/Soundtest.bin"
 Extract	$006E98	$020 "Art/palettes/MD/Menus/Soundtest_Amy.bin"
 ;EndRegion
@@ -3096,8 +3102,9 @@ Extract $012E86	$40 "Levels/Intro/Pal32x/P_IIZN.bin"
 ;EndRegion
 
 ;Region @Mixed
-Extract $2BC110	$40 "Levels/Entrance/Pal32x/P_0MN.bin"
-Extract $2BC150	$40 "Levels/Entrance/Pal32x/S_0MN.bin"
+Extract $2BC110	$0040 "Levels/Entrance/Pal32x/P_0MN.bin"
+Extract $2BC150	$0040 "Levels/Entrance/Pal32x/S_0MN.bin"
+Extract $2BC190	$02D8 "Levels/Entrance/Pal32x/X_LvlIcons.bin"
 ;EndRegion
 ;EndRegion
 
@@ -3589,11 +3596,24 @@ Extract $2C23E0 $1064 "Art/artnem/aniart/MMZ.bin"
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Artnem, sprite/plane tilemaps
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-;Region @X_ArtNem
+;Region @X_ArtNem_Menus
 Extract $2C2DC8 $046E "Art/artnem/Menus/Soundtest/Amy.bin"
-Extract $2C4B20 $047A "Art/artnem/Menus/Soundtest/Font.bin"
+Extract $2C3236 $020E "Art/tilemaps/Menus/Endings/BadEnding.bin"
+Extract $2C3444 $04CC "Art/artnem/Menus/Endings/BadEnding.bin"
+Extract $2C4B20 $047A "Art/artnem/Menus/Font.bin"
+
 Extract $2C7818 $0802 "Art/artnem/Menus/Soundtest/Menu.bin"
-Extract $2C801A	$015E "Art/tilemaps/Menus/Soundtest.bin"
+Extract $2C801A	$015E "Art/tilemaps/Menus/Soundtest/SoundtestBG.bin"
+Extract $2C8178	$2A48 "Art/artnem/Menus/DataLoad/Menu.bin"
+Extract $2CABC0	$0EC2 "Art/artnem/Menus/DataLoad/BorderLabels.bin"
+Extract $2CBA82	$0524 "Art/artnem/Menus/DataLoad/Training.bin"
+Extract $2CBFA6	$0060 "Art/tilemaps/Menus/DataLoad/OvalBG.bin"
+Extract $2CC006	$0098 "Art/tilemaps/Menus/DataLoad/OvalLarge.bin"
+Extract $2CC09E	$0058 "Art/tilemaps/Menus/DataLoad/OvalSmall.bin"
+Extract $2CC0F6	$0088 "Art/tilemaps/Menus/DataLoad/PlayStyle_Box.bin"
+Extract $2CC17E	$00A0 "Art/tilemaps/Menus/DataLoad/PlayStyle_ProtoBox.bin"
+Extract $2CC21E	$0098 "Art/tilemaps/Menus/DataLoad/SaveSlot_Box.bin"
+Extract $2CC2B6	$0048 "Art/tilemaps/Menus/DataLoad/Training_Box.bin"
 ;Endregion
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;

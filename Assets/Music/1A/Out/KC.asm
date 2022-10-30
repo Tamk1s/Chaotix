@@ -1,24 +1,35 @@
 Target	EQU	$40000
-PSGVoi	EQU $00
+
+FMPitch		EQU	$00
+
+PSGPitch	EQU	PSGDelta
+PSGMod		EQU	$00
+PSGVol1		EQU	$02
+PSGVol2		EQU	PSGVol1+$01
+PSGVoi		EQU $00
+
+PWMPitch1	EQU $00
+PWMPitch2	EQU	$02*PSGDelta
+PWMVol		EQU	$AA
 	smpsHeaderVoice		Elegy_Patches, Target
 	smpsHeaderChan		$06, $03
 	smpsHeaderTempoC	$02, $09
-	smpsHeaderFM		Elegy_FM1, Target, $00, $1F
-	smpsHeaderFM		Elegy_FM2, Target, $00, $24
-	smpsHeaderFM		Elegy_FM3, Target, $00, $15
-	smpsHeaderFM		Elegy_FM4, Target, $00, $17
-	smpsHeaderFM		Elegy_FM5, Target, $00, $17
-	smpsHeaderFM		Elegy_FM6, Target, $00, $16
+	smpsHeaderFM		Elegy_FM1, Target, FMPitch, $1F
+	smpsHeaderFM		Elegy_FM2, Target, FMPitch, $24
+	smpsHeaderFM		Elegy_FM3, Target, FMPitch, $15
+	smpsHeaderFM		Elegy_FM4, Target, FMPitch, $17
+	smpsHeaderFM		Elegy_FM5, Target, FMPitch, $17
+	smpsHeaderFM		Elegy_FM6, Target, FMPitch, $16
 	;!@ smpsHeaderPSG		Elegy_PSG1, Target, $00, $06, $00, $00
 	;!@ smpsHeaderPSG		Elegy_PSG2, Target, $00, $06, $00, $00
 	;!@ smpsHeaderPSG		Elegy_PSG3, Target, $00, $07, $00, $00
-	smpsHeaderPSG		Elegy_PSG1, Target, $00, $02, $00, PSGVoi
-	smpsHeaderPSG		Elegy_PSG2, Target, $00, $02, $00, PSGVoi
-	smpsHeaderPSG		Elegy_PSG3, Target, $00, $03, $00, PSGVoi
-	smpsHeaderPWM		Elegy_PWM1, Target, $00, $AF
-	smpsHeaderPWM		Elegy_PWM2, Target, $00, $AF
-	smpsHeaderPWM		Elegy_PWM3, Target, $00, $AF
-	smpsHeaderPWM		Elegy_PWM4, Target, $00, $AF
+	smpsHeaderPSG		Elegy_PSG1, Target, PSGPitch, PSGVol1, PSGMod, PSGVoi
+	smpsHeaderPSG		Elegy_PSG2, Target, PSGPitch, PSGVol1, PSGMod, PSGVoi
+	smpsHeaderPSG		Elegy_PSG3, Target, PSGPitch, PSGVol2, PSGMod, PSGVoi
+	smpsHeaderPWM		Elegy_PWM1, Target, PWMPitch1, PWMVol
+	smpsHeaderPWM		Elegy_PWM2, Target, PWMPitch1, PWMVol
+	smpsHeaderPWM		Elegy_PWM3, Target, PWMPitch1, PWMVol
+	smpsHeaderPWM		Elegy_PWM4, Target, PWMPitch2, PWMVol
 
 Elegy_FM1:
 	smpsPan		panCenter
@@ -596,67 +607,68 @@ Elegy_Loop30:
 	smpsJump		Elegy_Jump4, Target
 
 Elegy_FM5:
-	smpsFMvoice		$02
-	smpsPan		panCenter
+	;smpsFMvoice		$02
+	;smpsPan		panCenter
 
-Elegy_Loop31:
-	dc.b	nE5, $28, nRst
-	smpsLoop		$00, $04, Elegy_Loop31, Target
+;Elegy_Loop31:
+	;dc.b	nE5, $28, nRst
+	;smpsLoop		$00, $04, Elegy_Loop31, Target
 
-Elegy_Jump5:
-	smpsAlterVol	$10
+;Elegy_Jump5:
+	;smpsAlterVol	$10
 
-Elegy_Loop32:
-	dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
-	smpsLoop		$00, $02, Elegy_Loop32, Target
-	dc.b	nA4, $05, nG4
-	smpsAlterVol	$FF
-	dc.b	nA4, nRst, $03, nG4, $05, nRst, $02, nA4
-	dc.b	$05, nRst, $14, nA4, $05, nRst, $03, nG4
-	dc.b	$05, nRst, $02
-	smpsAlterVol	$FF
-	dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
-	dc.b	nA4, $05, nG4, nA4, nRst, $03, nG4, $05
-	dc.b	nRst, $02, nF4, $05, nRst, $14
+;Elegy_Loop32:
+	;dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
+	;smpsLoop		$00, $02, Elegy_Loop32, Target
+	;dc.b	nA4, $05, nG4
+	;smpsAlterVol	$FF
+	;dc.b	nA4, nRst, $03, nG4, $05, nRst, $02, nA4
+	;dc.b	$05, nRst, $14, nA4, $05, nRst, $03, nG4
+	;dc.b	$05, nRst, $02
+	;smpsAlterVol	$FF
+	;dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
+	;dc.b	nA4, $05, nG4, nA4, nRst, $03, nG4, $05
+	;dc.b	nRst, $02, nF4, $05, nRst, $14
 
-Elegy_Loop33:
-	dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
-	smpsLoop		$00, $02, Elegy_Loop33, Target
-	dc.b	nA4, $05, nG4, nA4, nRst, $03, nG4, $05
-	dc.b	nRst, $02, nA4, $05, nRst, $14
+;Elegy_Loop33:
+	;dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
+	;smpsLoop		$00, $02, Elegy_Loop33, Target
+	;dc.b	nA4, $05, nG4, nA4, nRst, $03, nG4, $05
+	;dc.b	nRst, $02, nA4, $05, nRst, $14
 
-Elegy_Loop34:
-	dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
-	smpsLoop		$00, $02, Elegy_Loop34, Target
-	dc.b	nA4, $05, nG4
-	smpsAlterNote	$00
+;Elegy_Loop34:
+	;dc.b	nA4, $05, nRst, $03, nG4, $05, nRst, $02
+	;smpsLoop		$00, $02, Elegy_Loop34, Target
+	;dc.b	nA4, $05, nG4
+	;smpsAlterNote	$00
 	;!@ dc.b	nRst
 
-Elegy_Loop35:
+;Elegy_Loop35:
 	;!@ dc.b	$55
-	dc.b		nRst, $55
-	smpsLoop		$00, $08, Elegy_Loop35, Target
-	smpsAlterVol	$F2
-	smpsJump		Elegy_Jump5, Target
+	;dc.b		nRst, $55
+	;smpsLoop		$00, $08, Elegy_Loop35, Target
+	;smpsAlterVol	$F2
+	;smpsJump		Elegy_Jump5, Target
 
 Elegy_FM6:
-	smpsFMvoice		$02
-	smpsPan		panCenter
+	;smpsFMvoice		$02
+	;smpsPan		panCenter
 
-Elegy_Loop36:
-	dc.b	nE4, $28, nRst
-	smpsLoop		$00, $04, Elegy_Loop36, Target
+;Elegy_Loop36:
+	;dc.b	nE4, $28, nRst
+	;smpsLoop		$00, $04, Elegy_Loop36, Target
 
-Elegy_Jump6:
+;Elegy_Jump6:
 	;!@ dc.b	nRst, $7F, $7F, $1A
-	dc.b	nRst, $7F, nRst, $7F, nRst, $1A
-	smpsAlterNote	$00
+	;dc.b	nRst, $7F, nRst, $7F, nRst, $1A
+	;smpsAlterNote	$00
 
-Elegy_Loop37:
+;Elegy_Loop37:
 	;!@ dc.b	$55
-	dc.b		nRst, $55
-	smpsLoop		$00, $08, Elegy_Loop37, Target
-	smpsJump		Elegy_Jump6, Target
+	;dc.b		nRst, $55
+	;smpsLoop		$00, $08, Elegy_Loop37, Target
+	;smpsJump		Elegy_Jump6, Target
+	smpsStop
 
 Elegy_PSG1:
 	dc.b	nRst, $28
@@ -1071,7 +1083,46 @@ Elegy_PWM3_Loop1:
 	smpsJump		Elegy_PWM3_Jump1, Target
 	
 Elegy_PWM4:
-	smpsStop
+	smpsPan		panCenter
+
+Elegy_PWM4_Loop1:
+	dc.b	pOrchHitHi, $28, nRst
+	smpsLoop		$00, $04, Elegy_PWM4_Loop1, Target
+
+Elegy_PWM4_Jump1:
+	;smpsAlterVol	$10
+
+Elegy_PWM4_Loop2:
+	dc.b	pOrchHitMed, $05, nRst, $03, pOrchHitLo, $05, nRst, $02
+	smpsLoop		$00, $02, Elegy_PWM4_Loop2, Target
+	dc.b	pOrchHitMed, $05, pOrchHitLo
+	;smpsAlterVol	$FF
+	dc.b	pOrchHitMed, nRst, $03, pOrchHitLo, $05, nRst, $02, pOrchHitMed
+	dc.b	$05, nRst, $14, pOrchHitMed, $05, nRst, $03, pOrchHitLo
+	dc.b	$05, nRst, $02
+	;smpsAlterVol	$FF
+	dc.b	pOrchHitMed, $05, nRst, $03, pOrchHitLo, $05, nRst, $02
+	dc.b	pOrchHitMed, $05, pOrchHitLo, pOrchHitMed, nRst, $03, pOrchHitLo, $05
+	dc.b	nRst, $02, pOrchHitLower, $05, nRst, $14
+
+Elegy_PWM4_Loop3:
+	dc.b	pOrchHitMed, $05, nRst, $03, pOrchHitLo, $05, nRst, $02
+	smpsLoop		$00, $02, Elegy_PWM4_Loop3, Target
+	dc.b	pOrchHitMed, $05, pOrchHitLo, pOrchHitMed, nRst, $03, pOrchHitLo, $05
+	dc.b	nRst, $02, pOrchHitMed, $05, nRst, $14
+
+Elegy_PWM4_Loop4:
+	dc.b	pOrchHitMed, $05, nRst, $03, pOrchHitLo, $05, nRst, $02
+	smpsLoop		$00, $02, Elegy_PWM4_Loop4, Target
+	dc.b	pOrchHitMed, $05, pOrchHitLo
+	;!@ smpsAlterNote	$00
+	dc.b	nRst
+
+Elegy_PWM4_Loop5:
+	dc.b	$55
+	smpsLoop		$00, $08, Elegy_PWM4_Loop5, Target
+	;smpsAlterVol	$F2
+	smpsJump		Elegy_PWM4_Jump1, Target
 
 Elegy_Patches:
 	;dc.b	$38

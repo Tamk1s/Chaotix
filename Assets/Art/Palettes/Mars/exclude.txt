@@ -6,5 +6,6 @@
 .pal
 .log
 .7z
+.txt
 pal32x.bat
 exclude.txt

@@ -173,6 +173,10 @@
        = 00009C         pTomLowerest	EQU	$9C
        = 00009D         pNepDada		EQU	$9D
        = 00009E         pFingSnapLo		EQU	$9E
+       = 00009F         pOrchHitHi		EQU	$9F
+       = 0000A0         pOrchHitMed		EQU	$A0
+       = 0000A1         pOrchHitLo		EQU	$A1
+       = 0000A2         pOrchHitLower	EQU	$A2
 
                         ;!@ Crackers conversion enums. Knuckles Clackers equiv
        = 000081         pCra_d81	EQU	pEKick
@@ -621,12 +625,16 @@
                         ;!@
                         ; Header - Set up a secondary PWM Channel
                         ;smpsHeaderPWM macro loc
-                        smpsHeaderPWM macro loc, songstart,pitch,vol
+                        smpsHeaderPWM macro loc, songstart,pitch,volL,volR
                         	;dc.w	loc-songStart
                         	rom_ptr_z80(loc+songstart)	
                         	;!@
                         	dc.b	pitch
-                        	dc.b	vol
+                        	if \0==4
+                        		dc.b	volL
+                        	else
+                        		dc.b	(volL<<4)+volR
+                        	endif	
                         	endm
                         	
                         ;!@ Unused and unneeded; leftover Sonic 32x header stuff
@@ -780,7 +788,7 @@
                         	;dc.w	loc-songStart
 000000                  	rom_ptr_z80(Test_Patches+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000000 FB81             	dc.w  (((((Test_Patches+Target))<<8)&$FF00)|((((Test_Patches+Target))>>8)&$7F)|$80)
+000000 FF81             	dc.w  (((((Test_Patches+Target))<<8)&$FF00)|((((Test_Patches+Target))>>8)&$7F)|$80)
 000002                  	smpsHeaderChan	6,3
                         	if 2==2
 000002 0603             		dc.b	6,3
@@ -856,31 +864,43 @@
 000030 CC81             	dc.w  (((((Test_PWM1+Target))<<8)&$FF00)|((((Test_PWM1+Target))>>8)&$7F)|$80)
                         	;!@
 000032 00               	dc.b	$00
-000033 1A               	dc.b	$1A
+                        	if 4==4
+000033 1A               		dc.b	$1A
+                        	else
+                        	endif	
 000034                  	smpsHeaderPWM	Test_PWM2, Target, $00, $1A	
                         	;dc.w	loc-songStart
 000034                  	rom_ptr_z80(Test_PWM2+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-000034 FA81             	dc.w  (((((Test_PWM2+Target))<<8)&$FF00)|((((Test_PWM2+Target))>>8)&$7F)|$80)
+000034 FE81             	dc.w  (((((Test_PWM2+Target))<<8)&$FF00)|((((Test_PWM2+Target))>>8)&$7F)|$80)
                         	;!@
 000036 00               	dc.b	$00
-000037 1A               	dc.b	$1A
+                        	if 4==4
+000037 1A               		dc.b	$1A
+                        	else
+                        	endif	
 000038                  	smpsHeaderPWM	Test_PWM3, Target, $00, $1A	
                         	;dc.w	loc-songStart
 000038                  	rom_ptr_z80(Test_PWM3+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-000038 FA81             	dc.w  (((((Test_PWM3+Target))<<8)&$FF00)|((((Test_PWM3+Target))>>8)&$7F)|$80)
+000038 FE81             	dc.w  (((((Test_PWM3+Target))<<8)&$FF00)|((((Test_PWM3+Target))>>8)&$7F)|$80)
                         	;!@
 00003A 00               	dc.b	$00
-00003B 1A               	dc.b	$1A
+                        	if 4==4
+00003B 1A               		dc.b	$1A
+                        	else
+                        	endif	
 00003C                  	smpsHeaderPWM	Test_PWM4, Target, $00, $1A	
                         	;dc.w	loc-songStart
 00003C                  	rom_ptr_z80(Test_PWM4+Target)	
                         	;dc.w z80_ptr(ptr,addr)
-00003C FA81             	dc.w  (((((Test_PWM4+Target))<<8)&$FF00)|((((Test_PWM4+Target))>>8)&$7F)|$80)
+00003C FE81             	dc.w  (((((Test_PWM4+Target))<<8)&$FF00)|((((Test_PWM4+Target))>>8)&$7F)|$80)
                         	;!@
 00003E 00               	dc.b	$00
-00003F 1A               	dc.b	$1A
+                        	if 4==4
+00003F 1A               		dc.b	$1A
+                        	else
+                        	endif	
 
 000040                  Test_FM1:
 000040                  Test_FM2:
@@ -990,19 +1010,20 @@
 0001DC 8C8D8E188F0C9091 	dc.b $8C, $8D, $8E, $18, $8F, $0C, $90, $91
 0001E4 24920C9394189524 	dc.b $24, $92, $0C, $93, $94, $18, $95, $24
 0001EC 960C9724980C9918 	dc.b $96, $0C, $97, $24, $98, $0C, $99, $18
-0001F4 9A9B9C9D9E       	dc.b $9A, $9B, $9C, $9D, $9E
-0001F9                  	smpsStop
-0001F9 F2               	dc.b	$F2
+0001F4 9A9B9C9D9E9FA0A1 	dc.b $9A, $9B, $9C, $9D, $9E, $9F, $A0, $A1
+0001FC A2               	dc.b $A2
+0001FD                  	smpsStop
+0001FD F2               	dc.b	$F2
                         	;smpsJump	Test_PWM1,Target
                         	
-0001FA                  Test_PWM2:
-0001FA                  Test_PWM3:
-0001FA                  Test_PWM4:
-0001FA                  	smpsStop
-0001FA F2               	dc.b	$F2
+0001FE                  Test_PWM2:
+0001FE                  Test_PWM3:
+0001FE                  Test_PWM4:
+0001FE                  	smpsStop
+0001FE F2               	dc.b	$F2
 
-0001FB                  Test_Patches:
-0001FB  (000001)        	even
+0001FF                  Test_Patches:
+0001FF  (000001)        	even
 
 00000 Total Error(s)
 
@@ -1048,23 +1069,24 @@ PCRASHCYMB         00000089 E  PCRA_D81           00000081 E  PCRA_D82          
 PCRA_D83           00000085 E  PCRA_D84           00000086 E  PCRA_D85           00000087 E
 PEHIHAT            00000088 E  PEKICK             00000081 E  PESNARE            00000082 E
 PFINGSNAP          0000008E E  PFINGSNAPHI        0000008E E  PFINGSNAPLO        0000009E E
-PNEPDADA           0000009D E  POPENHH            00000099 E  PRIDEBELL          00000084 E
-PSEGA              00000097 E  PSGDELTA           0000000C E  PSILENCE           00000096 E
-PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E
-PTOMHI             00000085 E  PTOMLOW            00000087 E  PTOMLOWER          0000009A E
-PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E  PTOMMID            00000086 E
-SMPSED             000000ED E  SMPSEE             000000EE E  SMPSF9             000000F9 E
-SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E  SMPSNOATTACK       000000E7 E
-SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E  SMPSPITCH01LO      000000F4 E
-SMPSPITCH02HI      00000018 E  SMPSPITCH02LO      000000E8 E  SMPSPITCH03HI      00000024 E
-SMPSPITCH03LO      000000DC E  SMPSPITCH04HI      00000030 E  SMPSPITCH04LO      000000D0 E
-SMPSPITCH05HI      0000003C E  SMPSPITCH05LO      000000C4 E  SMPSPITCH06HI      00000048 E
-SMPSPITCH06LO      000000B8 E  SMPSPITCH07HI      00000054 E  SMPSPITCH07LO      000000AC E
-SMPSPITCH08HI      00000060 E  SMPSPITCH08LO      000000A0 E  SMPSPITCH09HI      0000006C E
-SMPSPITCH09LO      00000094 E  SMPSPITCH10HI      00000078 E  SMPSPITCH10LO      00000088 E
-TARGET             00040000 E  TEST_FM1           00000040    TEST_FM2           00000040
-TEST_FM3           00000040    TEST_FM4           00000040    TEST_FM5           00000040
-TEST_FM6           00000040    TEST_HEADER        00000000    TEST_PATCHES       000001FB
-TEST_PSG1          00000041    TEST_PSG2          000001CB    TEST_PSG3          000001CB
-TEST_PWM1          000001CC    TEST_PWM2          000001FA    TEST_PWM3          000001FA
-TEST_PWM4          000001FA
+PNEPDADA           0000009D E  POPENHH            00000099 E  PORCHHITHI         0000009F E
+PORCHHITLO         000000A1 E  PORCHHITLOWER      000000A2 E  PORCHHITMED        000000A0 E
+PRIDEBELL          00000084 E  PSEGA              00000097 E  PSGDELTA           0000000C E
+PSILENCE           00000096 E  PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E
+PTIMPANILO         00000095 E  PTOMHI             00000085 E  PTOMLOW            00000087 E
+PTOMLOWER          0000009A E  PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E
+PTOMMID            00000086 E  SMPSED             000000ED E  SMPSEE             000000EE E
+SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E
+SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E
+SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E  SMPSPITCH02LO      000000E8 E
+SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E  SMPSPITCH04HI      00000030 E
+SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E  SMPSPITCH05LO      000000C4 E
+SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E  SMPSPITCH07HI      00000054 E
+SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E  SMPSPITCH08LO      000000A0 E
+SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E  SMPSPITCH10HI      00000078 E
+SMPSPITCH10LO      00000088 E  TARGET             00040000 E  TEST_FM1           00000040
+TEST_FM2           00000040    TEST_FM3           00000040    TEST_FM4           00000040
+TEST_FM5           00000040    TEST_FM6           00000040    TEST_HEADER        00000000
+TEST_PATCHES       000001FF    TEST_PSG1          00000041    TEST_PSG2          000001CB
+TEST_PSG3          000001CB    TEST_PWM1          000001CC    TEST_PWM2          000001FE
+TEST_PWM3          000001FE    TEST_PWM4          000001FE

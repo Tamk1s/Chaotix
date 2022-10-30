@@ -1,4 +1,4 @@
-Target	EQU	$4BFDC
+Target	EQU	$4BF31
 
 PSGVoi	EQU $02
 PSGPitch1	EQU	PSGDelta

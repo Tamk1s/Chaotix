@@ -1,0 +1,10 @@
+; provided by GenesisDoes, to be placed in some subfolder
+Palette File: ../../../Palettes/MD/Menus/DataLoad.bin
+Mapping File: BadEnding.bin
+Art File: ../../../artnem/Menus/Endings/BadEnding.bin
+Mapping Compression: Enigma
+Art Compression: Nemesis
+Palette Length: 0x40
+Palette Offset: 0x00
+x-Size: 32
+y-Size: 28

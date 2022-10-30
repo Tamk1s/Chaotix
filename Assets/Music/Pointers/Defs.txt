@@ -18,7 +18,7 @@ Chaotix (Stock)
 8B - Acoustic Kick
 8C - Acoustic Snare
 8D - Bell
-8E - Fingers Snapping
+8E - Fingers Snapping (Hi)
 8F - Cowbell
 90 - High Click
 91 - Low Click (use SMPS speed $10)
@@ -36,3 +36,8 @@ Knux Clackers extended:
 9B - Lowerer Tom
 9C - Lowest Tom
 9D - Nep Dada
+9E - Fingers Snapping (Lo)
+9F - Orchestral Hit (Hi)
+A0 - Orchestral Hit (Mid)
+A1 - Orchestral Hit (Lo)
+A2 - Orchestral Hit (Lower)

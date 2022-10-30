@@ -1,5 +1,5 @@
 
-Target	EQU	$56EEB
+Target	EQU	$56ECE
 	dc.w	$B1E0
 	smpsHeaderTick	$01
 	smpsHeaderChan	$01

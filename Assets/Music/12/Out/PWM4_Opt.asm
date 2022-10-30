@@ -1,11 +1,28 @@
-VOR_PWM4:
-	dc.b	pOpenHH, $0C, pClosedHH, $03, $03, pRideBell, pBongoHi, pBongoHi
-	dc.b	$06, pRideBell, pClosedHH, $03, pBongoLo, $09, pOpenHH, $0C
-	dc.b	pClosedHH, $03, $03, pRideBell, pBongoHi, pBongoHi, pClosedHH, pClosedHH
-	dc.b	$06, $03, pBongoLo, $09, pOpenHH, $0C, pClosedHH, $03
-	dc.b	$03, pRideBell, pBongoHi, pBongoHi, $06, pRideBell, pClosedHH, $03
-	dc.b	pBongoLo, $09, pOpenHH, $0C, pClosedHH, $03, $03, pRideBell
-	dc.b	pBongoHi, pBongoHi, pClosedHH, pClosedHH, $06, $03, pBongoLo, $06
-	dc.b	pClosedHH, $03
-	smpsLoop		$00, $04, VOR_PWM4, Target
-	smpsJump		VOR_PWM4, Target
+SRB2_INV_PWM4:
+	;smpsPan		panCenter
+	dc.b	nRst, $18
+
+SRB2_INV_PWM4_Loop3:
+	dc.b	pClosedHH, $02, $01, $02, $01
+
+SRB2_INV_PWM4_Loop2:
+	dc.b	pOpenHH
+
+SRB2_INV_PWM4_Loop1:
+	dc.b	$02, pClosedHH, $01
+	smpsLoop		$00, $04, SRB2_INV_PWM4_Loop1, Target
+	smpsLoop		$01, $07, SRB2_INV_PWM4_Loop2, Target
+	dc.b	pOpenHH, $02, $01, $02, $01
+	smpsLoop		$02, $02, SRB2_INV_PWM4_Loop3, Target
+	dc.b	pClosedHH, $02, $01, $02, $01
+
+SRB2_INV_PWM4_Loop5:
+	dc.b	pOpenHH
+
+SRB2_INV_PWM4_Loop4:
+	dc.b	$02, pClosedHH, $01
+	smpsLoop		$00, $04, SRB2_INV_PWM4_Loop4, Target
+	smpsLoop		$01, $06, SRB2_INV_PWM4_Loop5, Target
+	dc.b	$02, $01, pOpenHH, $02, pClosedHH, $01, $02, $01
+	dc.b	$02, $01, pOpenHH, $02, $01, $02, $01
+	smpsStop

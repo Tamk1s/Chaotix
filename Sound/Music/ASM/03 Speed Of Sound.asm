@@ -1,4 +1,4 @@
-Target	EQU	$415FE
+Target	EQU	$4180B
 
 Test_Header:
 	smpsHeaderVoice	Test_Patches,Target
@@ -102,7 +102,8 @@ Test_PWM1:
 	dc.b $8C, $8D, $8E, $18, $8F, $0C, $90, $91
 	dc.b $24, $92, $0C, $93, $94, $18, $95, $24
 	dc.b $96, $0C, $97, $24, $98, $0C, $99, $18
-	dc.b $9A, $9B, $9C, $9D, $9E
+	dc.b $9A, $9B, $9C, $9D, $9E, $9F, $A0, $A1
+	dc.b $A2
 	smpsStop
 	;smpsJump	Test_PWM1,Target
 	

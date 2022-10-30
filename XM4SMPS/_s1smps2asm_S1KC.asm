@@ -146,11 +146,9 @@ pClap		EQU $8A
 pAKick		EQU $8B
 pASnare		EQU	$8C
 pBell		EQU $8D
-
 ;!@ Enum due to late PWM driver revision
 pFingSnap	EQU	$8E
 pFingSnapHi	EQU	$8E
-
 pCowbell	EQU	$8F
 pClickHi	EQU	$90
 pClickLo	EQU	$91
@@ -159,8 +157,6 @@ pBongoLo	EQU	$93
 pTimpaniHi	EQU	$94
 pTimpaniLo	EQU	$95
 pSilence	EQU $96
-
-
 ;!@ NEW DATA
 pSega		EQU $97
 pClosedHH	EQU $98
@@ -170,6 +166,10 @@ pTomLowerer		EQU	$9B
 pTomLowerest	EQU	$9C
 pNepDada		EQU	$9D
 pFingSnapLo		EQU	$9E
+pOrchHitHi		EQU	$9F
+pOrchHitMed		EQU	$A0
+pOrchHitLo		EQU	$A1
+pOrchHitLower	EQU	$A2
 
 ;!@ Crackers conversion enums. Knuckles Clackers equiv
 pCra_d81	EQU	pEKick
@@ -608,8 +608,7 @@ vcTL4 set op4
 	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
 	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
 	dc.b	vcTL4,vcTL3,vcTL2,vcTL1	
-	endm
-	
+	endm	
 	
 ;==============================================
 ;!@ The following CF flags/macros are KC-drive specific! 

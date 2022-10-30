@@ -1,4 +1,4 @@
-Target	EQU	$4A996
+Target	EQU	$4A915
 	smpsHeaderVoice	TubePanic_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $0A

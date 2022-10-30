@@ -2,7 +2,7 @@ Tempo:
 MIDI 0603
 
 PSG:
-Voice # for all
+Voice #0 for all
 
 PWM:
 (Remember to subtract one from ASM ->octave here)
@@ -13,3 +13,7 @@ PWM:
 42	F#3	Closed Hi Hat	$98/pClosedHH
 49	C#4	Crash Cymbal	$89/pCrashCymb
 57	A4	Crash Cymbal2	$83/pSplashCymb
+71	B-5	Maraccas		$A2/pOrchHitLower
+74	C#6	Short Guiro		$A1/pOrchHitLo
+77	E6	Wood HiBlock	$A0/pOrchHitMed
+83	B-6	Hi orch			$9F/pOrchHitHi
