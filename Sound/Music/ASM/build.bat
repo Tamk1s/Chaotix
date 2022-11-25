@@ -15,486 +15,490 @@ SET BANK2=327680
 SET BANK2S=352256
 
 REM Vanilla bank listing of songs per bank. Used for BUILD_MODE=0 FOR file loops
-SET LEN=0x6E
-SET LEN_B=0x03
-SET BANKI0=0x18
-SET BANKI1=0x19
-SET BANKI2=0x1A
-SET BANKI2S=0x1B
-SET BANK[0x01].file="01 Door Into Summer"
-SET BANK[0x02].file="02 Electoria"
-SET BANK[0x03].file="03 Speed Of Sound"
-SET BANK[0x04].file="04 Seascape"
-SET BANK[0x05].file="05 Midnight Greenhouse"
-SET BANK[0x06].file="06 New Moon"
-SET BANK[0x07].file="07 Labyrinth"
-SET BANK[0x08].file="08 Trial And Error"
-SET BANK[0x09].file="09 Walkin"
-SET BANK[0x0A].file="0A Hyper-Hyper"
-SET BANK[0x0B].file="0B Evening Star"
-SET BANK[0x0C].file="0C Moonrise"
-SET BANK[0x0D].file="0D Overture"
-SET BANK[0x0E].file="0E This Horizon"
-SET BANK[0x0F].file="0F Take Off"
-SET BANK[0x10].file="10 Combination"
-SET BANK[0x11].file="11 Take A Nap"
-SET BANK[0x12].file="12 Surging Power"
-SET BANK[0x13].file="13 Mechanical Dance"
-SET BANK[0x14].file="14 Tube Panic"
-SET BANK[0x15].file="15 Crystal Nightmare"
-SET BANK[0x16].file="16 Childs Song"
-SET BANK[0x17].file="17 Soda Pop"
-SET BANK[0x18].file="18 Pendulum"
-SET BANK[0x19].file="19 Silver Screen"
-SET BANK[0x1A].file="1A Tachy Touch"
-SET BANK[0x1B].file="1B Chaotic World"
-SET BANK[0x1C].file="1C Surprise"
-SET BANK[0x1D].file="1D Nice Meeting You"
-SET BANK[0x1E].file="1E Have A Happy Day"
-SET BANK[0x1F].file="1F Reach The Goal"
-SET BANK[0x20].file="20 High Five"
-SET BANK[0x21].file="21 Decision"
-SET BANK[0x22].file="22 From Party To Party"
-SET BANK[0x23].file="23 Have Some Fun"
-SET BANK[0x24].file="24 Oriental Legend"
-SET BANK[0x25].file="25 Steel Heart"
-SET BANK[0x26].file="26 Tribute"
-SET BANK[0x27].file="27 Destructive Power"
-SET BANK[0x28].file="28 Just Another Day"
-SET BANK[0x29].file="29 Decision 2nd"
-SET BANK[0x2A].file="2A"
-SET BANK[0x2B].file="2B"
-SET BANK[0x2C].file="2C"
-SET BANK[0x2D].file="2D"
-SET BANK[0x2E].file="2E"
-SET BANK[0x2F].file="2F"
-SET BANK[0x30].file="30"
-SET BANK[0x31].file="31"
-SET BANK[0x32].file="32"
-SET BANK[0x33].file="33"
-SET BANK[0x34].file="34"
-SET BANK[0x35].file="35"
-SET BANK[0x36].file="36"
-SET BANK[0x37].file="37"
-SET BANK[0x38].file="38"
-SET BANK[0x39].file="39"
-SET BANK[0x3A].file="3A"
-SET BANK[0x3B].file="3B"
-SET BANK[0x3C].file="3C"
-SET BANK[0x3D].file="3D"
-SET BANK[0x3E].file="3E"
-SET BANK[0x3F].file="3F"
-SET BANK[0x40].file="40"
-SET BANK[0x41].file="41"
-SET BANK[0x42].file="42"
-SET BANK[0x43].file="43"
-SET BANK[0x44].file="44"
-SET BANK[0x45].file="45"
-SET BANK[0x46].file="46"
-SET BANK[0x47].file="47"
-SET BANK[0x48].file="48"
-SET BANK[0x49].file="49"
-SET BANK[0x4A].file="4A"
-SET BANK[0x4B].file="4B"
-SET BANK[0x4C].file="4C"
-SET BANK[0x4D].file="4D"
-SET BANK[0x4E].file="4E"
-SET BANK[0x4F].file="4F"
-SET BANK[0x50].file="50"
-SET BANK[0x51].file="51"
-SET BANK[0x52].file="52"
-SET BANK[0x53].file="53"
-SET BANK[0x54].file="54"
-SET BANK[0x55].file="55"
-SET BANK[0x56].file="56"
-SET BANK[0x57].file="57"
-SET BANK[0x58].file="58"
-SET BANK[0x59].file="59"
-SET BANK[0x5A].file="5A"
-SET BANK[0x5B].file="5B"
-SET BANK[0x5C].file="5C"
-SET BANK[0x5D].file="5D"
-SET BANK[0x5E].file="5E"
-SET BANK[0x5F].file="5F"
-SET BANK[0x60].file="60"
-SET BANK[0x61].file="61"
-SET BANK[0x62].file="62"
-SET BANK[0x63].file="63"
-SET BANK[0x64].file="64"
-SET BANK[0x65].file="65"
-SET BANK[0x66].file="66"
-SET BANK[0x67].file="67"
-SET BANK[0x68].file="68"
-SET BANK[0x69].file="69"
-SET BANK[0x6A].file="6A"
-SET BANK[0x6B].file="6B"
-SET BANK[0x6C].file="6C"
-SET BANK[0x6D].file="6D"
-SET BANK[0x6E].file="6E"
+SET LEN=110
+SET LEN_B=3
+SET BANKI0=24
+SET BANKI1=25
+SET BANKI2=26
+SET BANKI2S=27
+SET BANK[1].file=01 Door Into Summer
+SET BANK[2].file=02 Electoria
+SET BANK[3].file=03 Speed Of Sound
+SET BANK[4].file=04 Seascape
+SET BANK[5].file=05 Midnight Greenhouse
+SET BANK[6].file=06 New Moon
+SET BANK[7].file=07 Labyrinth
+SET BANK[8].file=08 Trial And Error
+SET BANK[9].file=09 Walkin
+SET BANK[10].file=0A Hyper-Hyper
+SET BANK[11].file=0B Evening Star
+SET BANK[12].file=0C Moonrise
+SET BANK[13].file=0D Overture
+SET BANK[14].file=0E This Horizon
+SET BANK[15].file=0F Take Off
+SET BANK[16].file=10 Combination
+SET BANK[17].file=11 Take A Nap
+SET BANK[18].file=12 Surging Power
+SET BANK[19].file=13 Mechanical Dance
+SET BANK[20].file=14 Tube Panic
+SET BANK[21].file=15 Crystal Nightmare
+SET BANK[22].file=16 Childs Song
+SET BANK[23].file=17 Soda Pop
+SET BANK[24].file=18 Pendulum
+SET BANK[25].file=19 Silver Screen
+SET BANK[26].file=1A Tachy Touch
+SET BANK[27].file=1B Chaotic World
+SET BANK[28].file=1C Surprise
+SET BANK[29].file=1D Nice Meeting You
+SET BANK[30].file=1E Have A Happy Day
+SET BANK[31].file=1F Reach The Goal
+SET BANK[32].file=20 High Five
+SET BANK[33].file=21 Decision
+SET BANK[34].file=22 From Party To Party
+SET BANK[35].file=23 Have Some Fun
+SET BANK[36].file=24 Oriental Legend
+SET BANK[37].file=25 Steel Heart
+SET BANK[38].file=26 Tribute
+SET BANK[39].file=27 Destructive Power
+SET BANK[40].file=28 Just Another Day
+SET BANK[41].file=29 Decision 2nd
+SET BANK[42].file=2A
+SET BANK[43].file=2B
+SET BANK[44].file=2C
+SET BANK[45].file=2D
+SET BANK[46].file=2E
+SET BANK[47].file=2F
+SET BANK[48].file=30
+SET BANK[49].file=31
+SET BANK[50].file=32
+SET BANK[51].file=33
+SET BANK[52].file=34
+SET BANK[53].file=35
+SET BANK[54].file=36
+SET BANK[55].file=37
+SET BANK[56].file=38
+SET BANK[57].file=39
+SET BANK[58].file=3A
+SET BANK[59].file=3B
+SET BANK[60].file=3C
+SET BANK[61].file=3D
+SET BANK[62].file=3E
+SET BANK[63].file=3F
+SET BANK[64].file=40
+SET BANK[65].file=41
+SET BANK[66].file=42
+SET BANK[67].file=43
+SET BANK[68].file=44
+SET BANK[69].file=45
+SET BANK[70].file=46
+SET BANK[71].file=47
+SET BANK[72].file=48
+SET BANK[73].file=49
+SET BANK[74].file=4A
+SET BANK[75].file=4B
+SET BANK[76].file=4C
+SET BANK[77].file=4D
+SET BANK[78].file=4E
+SET BANK[79].file=4F
+SET BANK[80].file=50
+SET BANK[81].file=51
+SET BANK[82].file=52
+SET BANK[83].file=53
+SET BANK[84].file=54
+SET BANK[85].file=55
+SET BANK[86].file=56
+SET BANK[87].file=57
+SET BANK[88].file=58
+SET BANK[89].file=59
+SET BANK[90].file=5A
+SET BANK[91].file=5B
+SET BANK[92].file=5C
+SET BANK[93].file=5D
+SET BANK[94].file=5E
+SET BANK[95].file=5F
+SET BANK[96].file=60
+SET BANK[97].file=61
+SET BANK[98].file=62
+SET BANK[99].file=63
+SET BANK[100].file=64
+SET BANK[101].file=65
+SET BANK[102].file=66
+SET BANK[103].file=67
+SET BANK[104].file=68
+SET BANK[105].file=69
+SET BANK[106].file=6A
+SET BANK[107].file=6B
+SET BANK[108].file=6C
+SET BANK[109].file=6D
+SET BANK[110].file=6E
 
-SET BANK[0x01].size=0
-SET BANK[0x02].size=0
-SET BANK[0x03].size=0
-SET BANK[0x04].size=0
-SET BANK[0x05].size=0
-SET BANK[0x06].size=0
-SET BANK[0x07].size=0
-SET BANK[0x08].size=0
-SET BANK[0x09].size=0
-SET BANK[0x0A].size=0
-SET BANK[0x0B].size=0
-SET BANK[0x0C].size=0
-SET BANK[0x0D].size=0
-SET BANK[0x0E].size=0
-SET BANK[0x0F].size=0
-SET BANK[0x10].size=0
-SET BANK[0x11].size=0
-SET BANK[0x12].size=0
-SET BANK[0x13].size=0
-SET BANK[0x14].size=0
-SET BANK[0x15].size=0
-SET BANK[0x16].size=0
-SET BANK[0x17].size=0
-SET BANK[0x18].size=0
-SET BANK[0x19].size=0
-SET BANK[0x1A].size=0
-SET BANK[0x1B].size=0
-SET BANK[0x1C].size=0
-SET BANK[0x1D].size=0
-SET BANK[0x1E].size=0
-SET BANK[0x1F].size=0
-SET BANK[0x20].size=0
-SET BANK[0x21].size=0
-SET BANK[0x22].size=0
-SET BANK[0x23].size=0
-SET BANK[0x24].size=0
-SET BANK[0x25].size=0
-SET BANK[0x26].size=0
-SET BANK[0x27].size=0
-SET BANK[0x28].size=0
-SET BANK[0x29].size=0
-SET BANK[0x2A].size=0
-SET BANK[0x2B].size=0
-SET BANK[0x2C].size=0
-SET BANK[0x2D].size=0
-SET BANK[0x2E].size=0
-SET BANK[0x2F].size=0
-SET BANK[0x30].size=0
-SET BANK[0x31].size=0
-SET BANK[0x32].size=0
-SET BANK[0x33].size=0
-SET BANK[0x34].size=0
-SET BANK[0x35].size=0
-SET BANK[0x36].size=0
-SET BANK[0x37].size=0
-SET BANK[0x38].size=0
-SET BANK[0x39].size=0
-SET BANK[0x3A].size=0
-SET BANK[0x3B].size=0
-SET BANK[0x3C].size=0
-SET BANK[0x3D].size=0
-SET BANK[0x3E].size=0
-SET BANK[0x3F].size=0
-SET BANK[0x40].size=0
-SET BANK[0x41].size=0
-SET BANK[0x42].size=0
-SET BANK[0x43].size=0
-SET BANK[0x44].size=0
-SET BANK[0x45].size=0
-SET BANK[0x46].size=0
-SET BANK[0x47].size=0
-SET BANK[0x48].size=0
-SET BANK[0x49].size=0
-SET BANK[0x4A].size=0
-SET BANK[0x4B].size=0
-SET BANK[0x4C].size=0
-SET BANK[0x4D].size=0
-SET BANK[0x4E].size=0
-SET BANK[0x4F].size=0
-SET BANK[0x50].size=0
-SET BANK[0x51].size=0
-SET BANK[0x52].size=0
-SET BANK[0x53].size=0
-SET BANK[0x54].size=0
-SET BANK[0x55].size=0
-SET BANK[0x56].size=0
-SET BANK[0x57].size=0
-SET BANK[0x58].size=0
-SET BANK[0x59].size=0
-SET BANK[0x5A].size=0
-SET BANK[0x5B].size=0
-SET BANK[0x5C].size=0
-SET BANK[0x5D].size=0
-SET BANK[0x5E].size=0
-SET BANK[0x5F].size=0
-SET BANK[0x60].size=0
-SET BANK[0x61].size=0
-SET BANK[0x62].size=0
-SET BANK[0x63].size=0
-SET BANK[0x64].size=0
-SET BANK[0x65].size=0
-SET BANK[0x66].size=0
-SET BANK[0x67].size=0
-SET BANK[0x68].size=0
-SET BANK[0x69].size=0
-SET BANK[0x6A].size=0
-SET BANK[0x6B].size=0
-SET BANK[0x6C].size=0
-SET BANK[0x6D].size=0
-SET BANK[0x6E].size=0
+SET BANK[1].size=0
+SET BANK[2].size=0
+SET BANK[3].size=0
+SET BANK[4].size=0
+SET BANK[5].size=0
+SET BANK[6].size=0
+SET BANK[7].size=0
+SET BANK[8].size=0
+SET BANK[9].size=0
+SET BANK[10].size=0
+SET BANK[11].size=0
+SET BANK[12].size=0
+SET BANK[13].size=0
+SET BANK[14].size=0
+SET BANK[15].size=0
+SET BANK[16].size=0
+SET BANK[17].size=0
+SET BANK[18].size=0
+SET BANK[19].size=0
+SET BANK[20].size=0
+SET BANK[21].size=0
+SET BANK[22].size=0
+SET BANK[23].size=0
+SET BANK[24].size=0
+SET BANK[25].size=0
+SET BANK[26].size=0
+SET BANK[27].size=0
+SET BANK[28].size=0
+SET BANK[29].size=0
+SET BANK[30].size=0
+SET BANK[31].size=0
+SET BANK[32].size=0
+SET BANK[33].size=0
+SET BANK[34].size=0
+SET BANK[35].size=0
+SET BANK[36].size=0
+SET BANK[37].size=0
+SET BANK[38].size=0
+SET BANK[39].size=0
+SET BANK[40].size=0
+SET BANK[41].size=0
+SET BANK[42].size=0
+SET BANK[43].size=0
+SET BANK[44].size=0
+SET BANK[45].size=0
+SET BANK[46].size=0
+SET BANK[47].size=0
+SET BANK[48].size=0
+SET BANK[49].size=0
+SET BANK[50].size=0
+SET BANK[51].size=0
+SET BANK[52].size=0
+SET BANK[53].size=0
+SET BANK[54].size=0
+SET BANK[55].size=0
+SET BANK[56].size=0
+SET BANK[57].size=0
+SET BANK[58].size=0
+SET BANK[59].size=0
+SET BANK[60].size=0
+SET BANK[61].size=0
+SET BANK[62].size=0
+SET BANK[63].size=0
+SET BANK[64].size=0
+SET BANK[65].size=0
+SET BANK[66].size=0
+SET BANK[67].size=0
+SET BANK[68].size=0
+SET BANK[69].size=0
+SET BANK[70].size=0
+SET BANK[71].size=0
+SET BANK[72].size=0
+SET BANK[73].size=0
+SET BANK[74].size=0
+SET BANK[75].size=0
+SET BANK[76].size=0
+SET BANK[77].size=0
+SET BANK[78].size=0
+SET BANK[79].size=0
+SET BANK[80].size=0
+SET BANK[81].size=0
+SET BANK[82].size=0
+SET BANK[83].size=0
+SET BANK[84].size=0
+SET BANK[85].size=0
+SET BANK[86].size=0
+SET BANK[87].size=0
+SET BANK[88].size=0
+SET BANK[89].size=0
+SET BANK[90].size=0
+SET BANK[91].size=0
+SET BANK[92].size=0
+SET BANK[93].size=0
+SET BANK[94].size=0
+SET BANK[95].size=0
+SET BANK[96].size=0
+SET BANK[97].size=0
+SET BANK[98].size=0
+SET BANK[99].size=0
+SET BANK[100].size=0
+SET BANK[101].size=0
+SET BANK[102].size=0
+SET BANK[103].size=0
+SET BANK[104].size=0
+SET BANK[105].size=0
+SET BANK[106].size=0
+SET BANK[107].size=0
+SET BANK[108].size=0
+SET BANK[109].size=0
+SET BANK[110].size=0
 
-SET BANK[0x01].bank=BANKI0
-SET BANK[0x02].bank=BANKI0
-SET BANK[0x03].bank=BANKI0
-SET BANK[0x04].bank=BANKI0
-SET BANK[0x05].bank=BANKI0
-SET BANK[0x06].bank=BANKI0
-SET BANK[0x07].bank=BANKI0
-SET BANK[0x08].bank=BANKI0
-SET BANK[0x09].bank=BANKI0
-SET BANK[0x0A].bank=BANKI0
-SET BANK[0x0B].bank=BANKI0
-SET BANK[0x0C].bank=BANKI0
-SET BANK[0x0D].bank=BANKI0
-SET BANK[0x0E].bank=BANKI0
-SET BANK[0x0F].bank=BANKI1
-SET BANK[0x10].bank=BANKI1
-SET BANK[0x11].bank=BANKI1
-SET BANK[0x12].bank=BANKI1
-SET BANK[0x13].bank=BANKI1
-SET BANK[0x14].bank=BANKI1
-SET BANK[0x15].bank=BANKI1
-SET BANK[0x16].bank=BANKI1
-SET BANK[0x17].bank=BANKI1
-SET BANK[0x18].bank=BANKI1
-SET BANK[0x19].bank=BANKI1
-SET BANK[0x1A].bank=BANKI1
-SET BANK[0x1B].bank=BANKI1
-SET BANK[0x1C].bank=BANKI1
-SET BANK[0x1D].bank=BANKI1
-SET BANK[0x1E].bank=BANKI1
-SET BANK[0x1F].bank=BANKI1
-SET BANK[0x20].bank=BANKI1
-SET BANK[0x21].bank=BANKI1
-SET BANK[0x22].bank=BANKI1
-SET BANK[0x23].bank=BANKI1
-SET BANK[0x24].bank=BANKI1
-SET BANK[0x25].bank=BANKI1
-SET BANK[0x26].bank=BANKI2
-SET BANK[0x27].bank=BANKI2
-SET BANK[0x28].bank=BANKI2
-SET BANK[0x29].bank=BANKI2
-SET BANK[0x2A].bank=BANKI2S
-SET BANK[0x2B].bank=BANKI2S
-SET BANK[0x2C].bank=BANKI2S
-SET BANK[0x2D].bank=BANKI2S
-SET BANK[0x2E].bank=BANKI2S
-SET BANK[0x2F].bank=BANKI2S
-SET BANK[0x30].bank=BANKI2S
-SET BANK[0x31].bank=BANKI2S
-SET BANK[0x32].bank=BANKI2S
-SET BANK[0x33].bank=BANKI2S
-SET BANK[0x34].bank=BANKI2S
-SET BANK[0x35].bank=BANKI2S
-SET BANK[0x36].bank=BANKI2S
-SET BANK[0x37].bank=BANKI2S
-SET BANK[0x38].bank=BANKI2S
-SET BANK[0x39].bank=BANKI2S
-SET BANK[0x3A].bank=BANKI2S
-SET BANK[0x3B].bank=BANKI2S
-SET BANK[0x3C].bank=BANKI2S
-SET BANK[0x3D].bank=BANKI2S
-SET BANK[0x3E].bank=BANKI2S
-SET BANK[0x3F].bank=BANKI2S
-SET BANK[0x40].bank=BANKI2S
-SET BANK[0x41].bank=BANKI2S
-SET BANK[0x42].bank=BANKI2S
-SET BANK[0x43].bank=BANKI2S
-SET BANK[0x44].bank=BANKI2S
-SET BANK[0x45].bank=BANKI2S
-SET BANK[0x46].bank=BANKI2S
-SET BANK[0x47].bank=BANKI2S
-SET BANK[0x48].bank=BANKI2S
-SET BANK[0x49].bank=BANKI2S
-SET BANK[0x4A].bank=BANKI2S
-SET BANK[0x4B].bank=BANKI2S
-SET BANK[0x4C].bank=BANKI2S
-SET BANK[0x4D].bank=BANKI2S
-SET BANK[0x4E].bank=BANKI2S
-SET BANK[0x4F].bank=BANKI2S
-SET BANK[0x50].bank=BANKI2S
-SET BANK[0x51].bank=BANKI2S
-SET BANK[0x52].bank=BANKI2S
-SET BANK[0x53].bank=BANKI2S
-SET BANK[0x54].bank=BANKI2S
-SET BANK[0x55].bank=BANKI2S
-SET BANK[0x56].bank=BANKI2S
-SET BANK[0x57].bank=BANKI2S
-SET BANK[0x58].bank=BANKI2S
-SET BANK[0x59].bank=BANKI2S
-SET BANK[0x5A].bank=BANKI2S
-SET BANK[0x5B].bank=BANKI2S
-SET BANK[0x5C].bank=BANKI2S
-SET BANK[0x5D].bank=BANKI2S
-SET BANK[0x5E].bank=BANKI2S
-SET BANK[0x5F].bank=BANKI2S
-SET BANK[0x60].bank=BANKI2S
-SET BANK[0x61].bank=BANKI2S
-SET BANK[0x62].bank=BANKI2S
-SET BANK[0x63].bank=BANKI2S
-SET BANK[0x64].bank=BANKI2S
-SET BANK[0x65].bank=BANKI2S
-SET BANK[0x66].bank=BANKI2S
-SET BANK[0x67].bank=BANKI2S
-SET BANK[0x68].bank=BANKI2S
-SET BANK[0x69].bank=BANKI2S
-SET BANK[0x6A].bank=BANKI2S
-SET BANK[0x6B].bank=BANKI2S
-SET BANK[0x6C].bank=BANKI2S
-SET BANK[0x6D].bank=BANKI2S
-SET BANK[0x6E].bank=BANKI2S
+SET BANK[1].bank=BANKI0
+SET BANK[2].bank=BANKI0
+SET BANK[3].bank=BANKI0
+SET BANK[4].bank=BANKI0
+SET BANK[5].bank=BANKI0
+SET BANK[6].bank=BANKI0
+SET BANK[7].bank=BANKI0
+SET BANK[8].bank=BANKI0
+SET BANK[9].bank=BANKI0
+SET BANK[10].bank=BANKI0
+SET BANK[11].bank=BANKI0
+SET BANK[12].bank=BANKI0
+SET BANK[13].bank=BANKI0
+SET BANK[14].bank=BANKI0
+SET BANK[15].bank=BANKI1
+SET BANK[16].bank=BANKI1
+SET BANK[17].bank=BANKI1
+SET BANK[18].bank=BANKI1
+SET BANK[19].bank=BANKI1
+SET BANK[20].bank=BANKI1
+SET BANK[21].bank=BANKI1
+SET BANK[22].bank=BANKI1
+SET BANK[23].bank=BANKI1
+SET BANK[24].bank=BANKI1
+SET BANK[25].bank=BANKI1
+SET BANK[26].bank=BANKI1
+SET BANK[27].bank=BANKI1
+SET BANK[28].bank=BANKI1
+SET BANK[29].bank=BANKI1
+SET BANK[30].bank=BANKI1
+SET BANK[31].bank=BANKI1
+SET BANK[32].bank=BANKI1
+SET BANK[33].bank=BANKI1
+SET BANK[34].bank=BANKI1
+SET BANK[35].bank=BANKI1
+SET BANK[36].bank=BANKI1
+SET BANK[37].bank=BANKI1
+SET BANK[38].bank=BANKI2
+SET BANK[39].bank=BANKI2
+SET BANK[40].bank=BANKI2
+SET BANK[41].bank=BANKI2
+SET BANK[42].bank=BANKI2S
+SET BANK[43].bank=BANKI2S
+SET BANK[44].bank=BANKI2S
+SET BANK[45].bank=BANKI2S
+SET BANK[46].bank=BANKI2S
+SET BANK[47].bank=BANKI2S
+SET BANK[48].bank=BANKI2S
+SET BANK[49].bank=BANKI2S
+SET BANK[50].bank=BANKI2S
+SET BANK[51].bank=BANKI2S
+SET BANK[52].bank=BANKI2S
+SET BANK[53].bank=BANKI2S
+SET BANK[54].bank=BANKI2S
+SET BANK[55].bank=BANKI2S
+SET BANK[56].bank=BANKI2S
+SET BANK[57].bank=BANKI2S
+SET BANK[58].bank=BANKI2S
+SET BANK[59].bank=BANKI2S
+SET BANK[60].bank=BANKI2S
+SET BANK[61].bank=BANKI2S
+SET BANK[62].bank=BANKI2S
+SET BANK[63].bank=BANKI2S
+SET BANK[64].bank=BANKI2S
+SET BANK[65].bank=BANKI2S
+SET BANK[66].bank=BANKI2S
+SET BANK[67].bank=BANKI2S
+SET BANK[68].bank=BANKI2S
+SET BANK[69].bank=BANKI2S
+SET BANK[70].bank=BANKI2S
+SET BANK[71].bank=BANKI2S
+SET BANK[72].bank=BANKI2S
+SET BANK[73].bank=BANKI2S
+SET BANK[74].bank=BANKI2S
+SET BANK[75].bank=BANKI2S
+SET BANK[76].bank=BANKI2S
+SET BANK[77].bank=BANKI2S
+SET BANK[78].bank=BANKI2S
+SET BANK[79].bank=BANKI2S
+SET BANK[80].bank=BANKI2S
+SET BANK[81].bank=BANKI2S
+SET BANK[82].bank=BANKI2S
+SET BANK[83].bank=BANKI2S
+SET BANK[84].bank=BANKI2S
+SET BANK[85].bank=BANKI2S
+SET BANK[86].bank=BANKI2S
+SET BANK[87].bank=BANKI2S
+SET BANK[88].bank=BANKI2S
+SET BANK[89].bank=BANKI2S
+SET BANK[90].bank=BANKI2S
+SET BANK[91].bank=BANKI2S
+SET BANK[92].bank=BANKI2S
+SET BANK[93].bank=BANKI2S
+SET BANK[94].bank=BANKI2S
+SET BANK[95].bank=BANKI2S
+SET BANK[96].bank=BANKI2S
+SET BANK[97].bank=BANKI2S
+SET BANK[98].bank=BANKI2S
+SET BANK[99].bank=BANKI2S
+SET BANK[100].bank=BANKI2S
+SET BANK[101].bank=BANKI2S
+SET BANK[102].bank=BANKI2S
+SET BANK[103].bank=BANKI2S
+SET BANK[104].bank=BANKI2S
+SET BANK[105].bank=BANKI2S
+SET BANK[106].bank=BANKI2S
+SET BANK[107].bank=BANKI2S
+SET BANK[108].bank=BANKI2S
+SET BANK[109].bank=BANKI2S
+SET BANK[110].bank=BANKI2S
 
-SET BANK[0x01].locn=0
-SET BANK[0x02].locn=0
-SET BANK[0x03].locn=0
-SET BANK[0x04].locn=0
-SET BANK[0x05].locn=0
-SET BANK[0x06].locn=0
-SET BANK[0x07].locn=0
-SET BANK[0x08].locn=0
-SET BANK[0x09].locn=0
-SET BANK[0x0A].locn=0
-SET BANK[0x0B].locn=0
-SET BANK[0x0C].locn=0
-SET BANK[0x0D].locn=0
-SET BANK[0x0E].locn=0
-SET BANK[0x0F].locn=0
-SET BANK[0x10].locn=0
-SET BANK[0x11].locn=0
-SET BANK[0x12].locn=0
-SET BANK[0x13].locn=0
-SET BANK[0x14].locn=0
-SET BANK[0x15].locn=0
-SET BANK[0x16].locn=0
-SET BANK[0x17].locn=0
-SET BANK[0x18].locn=0
-SET BANK[0x19].locn=0
-SET BANK[0x1A].locn=0
-SET BANK[0x1B].locn=0
-SET BANK[0x1C].locn=0
-SET BANK[0x1D].locn=0
-SET BANK[0x1E].locn=0
-SET BANK[0x1F].locn=0
-SET BANK[0x20].locn=0
-SET BANK[0x21].locn=0
-SET BANK[0x22].locn=0
-SET BANK[0x23].locn=0
-SET BANK[0x24].locn=0
-SET BANK[0x25].locn=0
-SET BANK[0x26].locn=0
-SET BANK[0x27].locn=0
-SET BANK[0x28].locn=0
-SET BANK[0x29].locn=0
-SET BANK[0x2A].locn=0
-SET BANK[0x2B].locn=0
-SET BANK[0x2C].locn=0
-SET BANK[0x2D].locn=0
-SET BANK[0x2E].locn=0
-SET BANK[0x2F].locn=0
-SET BANK[0x30].locn=0
-SET BANK[0x31].locn=0
-SET BANK[0x32].locn=0
-SET BANK[0x33].locn=0
-SET BANK[0x34].locn=0
-SET BANK[0x35].locn=0
-SET BANK[0x36].locn=0
-SET BANK[0x37].locn=0
-SET BANK[0x38].locn=0
-SET BANK[0x39].locn=0
-SET BANK[0x3A].locn=0
-SET BANK[0x3B].locn=0
-SET BANK[0x3C].locn=0
-SET BANK[0x3D].locn=0
-SET BANK[0x3E].locn=0
-SET BANK[0x3F].locn=0
-SET BANK[0x40].locn=0
-SET BANK[0x41].locn=0
-SET BANK[0x42].locn=0
-SET BANK[0x43].locn=0
-SET BANK[0x44].locn=0
-SET BANK[0x45].locn=0
-SET BANK[0x46].locn=0
-SET BANK[0x47].locn=0
-SET BANK[0x48].locn=0
-SET BANK[0x49].locn=0
-SET BANK[0x4A].locn=0
-SET BANK[0x4B].locn=0
-SET BANK[0x4C].locn=0
-SET BANK[0x4D].locn=0
-SET BANK[0x4E].locn=0
-SET BANK[0x4F].locn=0
-SET BANK[0x50].locn=0
-SET BANK[0x51].locn=0
-SET BANK[0x52].locn=0
-SET BANK[0x53].locn=0
-SET BANK[0x54].locn=0
-SET BANK[0x55].locn=0
-SET BANK[0x56].locn=0
-SET BANK[0x57].locn=0
-SET BANK[0x58].locn=0
-SET BANK[0x59].locn=0
-SET BANK[0x5A].locn=0
-SET BANK[0x5B].locn=0
-SET BANK[0x5C].locn=0
-SET BANK[0x5D].locn=0
-SET BANK[0x5E].locn=0
-SET BANK[0x5F].locn=0
-SET BANK[0x60].locn=0
-SET BANK[0x61].locn=0
-SET BANK[0x62].locn=0
-SET BANK[0x63].locn=0
-SET BANK[0x64].locn=0
-SET BANK[0x65].locn=0
-SET BANK[0x66].locn=0
-SET BANK[0x67].locn=0
-SET BANK[0x68].locn=0
-SET BANK[0x69].locn=0
-SET BANK[0x6A].locn=0
-SET BANK[0x6B].locn=0
-SET BANK[0x6C].locn=0
-SET BANK[0x6D].locn=0
-SET BANK[0x6E].locn=0
+SET BANK[1].locn=0
+SET BANK[2].locn=0
+SET BANK[3].locn=0
+SET BANK[4].locn=0
+SET BANK[5].locn=0
+SET BANK[6].locn=0
+SET BANK[7].locn=0
+SET BANK[8].locn=0
+SET BANK[9].locn=0
+SET BANK[10].locn=0
+SET BANK[11].locn=0
+SET BANK[12].locn=0
+SET BANK[13].locn=0
+SET BANK[14].locn=0
+SET BANK[15].locn=0
+SET BANK[16].locn=0
+SET BANK[17].locn=0
+SET BANK[18].locn=0
+SET BANK[19].locn=0
+SET BANK[20].locn=0
+SET BANK[21].locn=0
+SET BANK[22].locn=0
+SET BANK[23].locn=0
+SET BANK[24].locn=0
+SET BANK[25].locn=0
+SET BANK[26].locn=0
+SET BANK[27].locn=0
+SET BANK[28].locn=0
+SET BANK[29].locn=0
+SET BANK[30].locn=0
+SET BANK[31].locn=0
+SET BANK[32].locn=0
+SET BANK[33].locn=0
+SET BANK[34].locn=0
+SET BANK[35].locn=0
+SET BANK[36].locn=0
+SET BANK[37].locn=0
+SET BANK[38].locn=0
+SET BANK[39].locn=0
+SET BANK[40].locn=0
+SET BANK[41].locn=0
+SET BANK[42].locn=0
+SET BANK[43].locn=0
+SET BANK[44].locn=0
+SET BANK[45].locn=0
+SET BANK[46].locn=0
+SET BANK[47].locn=0
+SET BANK[48].locn=0
+SET BANK[49].locn=0
+SET BANK[50].locn=0
+SET BANK[51].locn=0
+SET BANK[52].locn=0
+SET BANK[53].locn=0
+SET BANK[54].locn=0
+SET BANK[55].locn=0
+SET BANK[56].locn=0
+SET BANK[57].locn=0
+SET BANK[58].locn=0
+SET BANK[59].locn=0
+SET BANK[60].locn=0
+SET BANK[61].locn=0
+SET BANK[62].locn=0
+SET BANK[63].locn=0
+SET BANK[64].locn=0
+SET BANK[65].locn=0
+SET BANK[66].locn=0
+SET BANK[67].locn=0
+SET BANK[68].locn=0
+SET BANK[69].locn=0
+SET BANK[70].locn=0
+SET BANK[71].locn=0
+SET BANK[72].locn=0
+SET BANK[73].locn=0
+SET BANK[74].locn=0
+SET BANK[75].locn=0
+SET BANK[76].locn=0
+SET BANK[77].locn=0
+SET BANK[78].locn=0
+SET BANK[79].locn=0
+SET BANK[80].locn=0
+SET BANK[81].locn=0
+SET BANK[82].locn=0
+SET BANK[83].locn=0
+SET BANK[84].locn=0
+SET BANK[85].locn=0
+SET BANK[86].locn=0
+SET BANK[87].locn=0
+SET BANK[88].locn=0
+SET BANK[89].locn=0
+SET BANK[90].locn=0
+SET BANK[91].locn=0
+SET BANK[92].locn=0
+SET BANK[93].locn=0
+SET BANK[94].locn=0
+SET BANK[95].locn=0
+SET BANK[96].locn=0
+SET BANK[97].locn=0
+SET BANK[98].locn=0
+SET BANK[99].locn=0
+SET BANK[100].locn=0
+SET BANK[101].locn=0
+SET BANK[102].locn=0
+SET BANK[103].locn=0
+SET BANK[104].locn=0
+SET BANK[105].locn=0
+SET BANK[106].locn=0
+SET BANK[107].locn=0
+SET BANK[108].locn=0
+SET BANK[109].locn=0
+SET BANK[110].locn=0
 
-SET BANKD[0x00].file="Bank0_dum"
-SET BANKD[0x01].file="Bank1_dum"
-SET BANKD[0x02].file="Bank2_dum"
-SET BANKD[0x03].file="Bank3_dum"
-SET BANKD[0x00].size=0
-SET BANKD[0x01].size=0
-SET BANKD[0x02].size=0
-SET BANKD[0x03].size=0
-SET BANKD[0x00].bank=BANKI0
-SET BANKD[0x01].bank=BANKI1
-SET BANKD[0x02].bank=BANKI2
-SET BANKD[0x03].bank=BANKI2S
-SET BANKD[0x00].locn=0
-SET BANKD[0x01].locn=0
-SET BANKD[0x02].locn=0
-SET BANKD[0x03].locn=0
+SET BANKD[0].file=Bank0_dum
+SET BANKD[1].file=Bank1_dum
+SET BANKD[2].file=Bank2_dum
+SET BANKD[3].file=Bank3_dum
+SET BANKD[0].size=0
+SET BANKD[1].size=0
+SET BANKD[2].size=0
+SET BANKD[3].size=0
+SET BANKD[0].bank=BANKI0
+SET BANKD[1].bank=BANKI1
+SET BANKD[2].bank=BANKI2
+SET BANKD[3].bank=BANKI2S
+SET BANKD[0].locn=0
+SET BANKD[1].locn=0
+SET BANKD[2].locn=0
+SET BANKD[3].locn=0
 
 
 REM Bank ID constants (hexadecimal without 0x/$ prefix)
 REM Bank sizes for BUILD_MODE=0
 SET BANK01_LIM=0x8000
-SET /a BANK2_LIM=0x6000-0x01
-SET /a BANK2S_LIM=0x8000-0x6000
+SET /a "BANK2_LIM=0x6000-0x01"
+SET /a "BANK2S_LIM=0x8000-0x6000"
 
 REM IF [%BUILD_MODE%] EQU [] GOTO HELP
-IF %BUILD_MODE% EQU 0 ECHO Rebuilding sound-driver sequentially...
-IF %BUILD_MODE% EQU 0 GOTO BUILD_SEQUENTIAL
+IF %BUILD_MODE% EQU 0 (
+	ECHO Rebuilding sound-driver sequentially...
+	GOTO BUILD_SEQUENTIAL
+)
 
-IF %BUILD_MODE% EQU 1 ECHO Rebuilding sound-driver optimally...
-IF %BUILD_MODE% EQU 1 GOTO BUILD_OPT
+IF %BUILD_MODE% EQU 1 (
+	ECHO Rebuilding sound-driver optimally...
+	GOTO BUILD_OPT
+)
 
 :HELP 
 ECHO ON
@@ -516,6 +520,9 @@ Exit /b 1
 
 REM Rebuilds the vanilla sound driver (standard banking)
 :BUILD_SEQUENTIAL
+	ECHO ON
+	ECHO Recompiling Banks...
+	ECHO OFF
 	REM call :BANKING_CLN
 	REM call :BANKING_DUMMYCLN
 
@@ -524,15 +531,15 @@ REM Rebuilds the vanilla sound driver (standard banking)
 	call :BANKING_CHECK
 	call :BANKING_LOCN
 
-	call :BUILD_BANKS
-	call :BUILD_BANK_TBLS
-	call :BUILD_BLOB
+	REM call :BUILD_BANKS
+	REM call :BUILD_BANK_TBLS
+	REM call :BUILD_BLOB
 	
 :Fail
 	REM call :BANKING_CLN
 	REM call :BANKING_DUMMYCLN
 	Pause
-	Exit /b
+	Goto:eof
 	
 :BANKING_CLN
 	REM Remove all bin, lst, log, and txt file assets in BIN for clean-slate sound-driver rebuilding
@@ -540,11 +547,8 @@ REM Rebuilds the vanilla sound driver (standard banking)
 	del /Q "..\BIN\*.bin"	
 	del /Q "..\BIN\*.lst"
 	del /Q "..\BIN\*.log"
-	del /Q "..\BIN\*.txt"
-	ECHO ON
-	ECHO Recompiling Banks...
-	ECHO OFF
-	Exit /b
+	del /Q "..\BIN\*.txt"	
+	EXIT /B
 	
 :BANKING_DUMMYCMP
 	REM Dummy-compile all songs to bin (regardless of target location)
@@ -557,89 +561,72 @@ REM Rebuilds the vanilla sound driver (standard banking)
 	Call compile_all.bat 1		
 	ECHO ON
 	ECHO Dummy-banks compiled!
+	ECHO .
 	ECHO OFF
-	Pause
-	Exit /b
+	REM Pause
+	EXIT /B
 	
 :BANKING_FILESIZES
 	REM Setup all filesizes in array	
+	ECHO ON
+	ECHO Fetching filesizes...
+	ECHO OFF
+	SetLocal EnableDelayedExpansion	
 	FOR /L %%G IN (1,1,!LEN!) DO (	
-		SET FBANK=!BANK[%%G].bank!
 		SET FILENAME=!BANK[%%G].file!
 		SET FILEDUMBIN="Dum\!FILENAME!.bin"
 		SET FILESIZE=0
 		Call filesize.bat !FILEDUMBIN! FILESIZE
 		SET BANK[%%G].size=!FILESIZE!
-	)
-	Pause
-	Exit /b
+		Echo Filesize: !FILEDUMBIN! !FILESIZE!
+	)	
+	EndLocal
+	ECHO .
+	EXIT /B
 	
 :BANKING_CHECK
 	REM Check for overflows in banks		
-	SetLocal EnableDelayedExpansion	
 	ECHO ON
 	ECHO Checking for overflows in banks...
+	pause
 	ECHO OFF
-	SET ERR=0
-	SET FREE=0
-	call :BANKING_SEQ 0 FREE
-	IF !FREE! LSS 0 SET ERR=1
-	call :BANKING_SEQ 1 FREE
-	IF !FREE! LSS 0 SET ERR=1
-	call :BANKING_SEQ 2 FREE
-	IF !FREE! LSS 0 SET ERR=1
-	call :BANKING_SEQ 3 FREE
-	IF !FREE! LSS 0 SET ERR=1
+	call :BANKING_SEQ 0
+	call :BANKING_SEQ 1
+	call :BANKING_SEQ 2
+	call :BANKING_SEQ 3
+	ECHO ON
+	ECHO All banks good!
+	ECHO .
+	ECHO OFF
+	Pause
+	EXIT /B
 	
-	IF !ERR! EQU 1 DO (
-		ECHO ON
-		ECHO Some banks were overflowed; cannot build sound driver!
-		ECHO OFF
-		PAUSE
-		call :Fail		
-	)
-	
-	IF !ERR! EQU 0 DO (
-		ECHO ON
-		ECHO All banks good!
-		ECHO OFF
-		PAUSE
-	)
-	EndLocal
-	Exit /b
 	
 :BANKING_LOCN
-	SetLocal EnableDelayedExpansion		
+	SetLocal EnableDelayedExpansion
 	SET prevBank=!BANK[1].bank!
 	SET SUM=!BANK0!
 	FOR /L %%G IN (1,1,!LEN!) DO (
 		SET _BANK=!BANK[%%G].bank!
-		
-		IF !prevBank! NEQ !_BANK! DO (
-			SET ID=!prevBank!-!BANKI0!
-			SET SIZE=!BANKD[%ID%].size!
+			
+		SET S=0
+		IF !prevBank! NEQ !_BANK! (
+			SET /a "ID=!prevBank!-!BANKI0!"
+			SET S=!BANKD[%ID%].size!
 			SET BANKD[!ID!].locn=!SUM!
-		)
-		
-		IF !prevBank! EQU !_BANK! DO (		
-			SET SIZE=!BANK[%%G].size!
+			ECHO "padding(!ID!) locn: !SUM!"
+		) ELSE (
+			SET S=!BANK[%%G].size!
 			SET BANK[%%G].locn=!SUM!
-		)	
-		
-		SET SUM /a=!SUM!+!SIZE!
-		SET prevBank=!_BANK!		
+			ECHO "File(%%G) locn: !SUM!"
+		)
+
+		SET SIZE=!S!
+		SET /a "SUM=!SUM!+!SIZE!"
+		SET prevBank=!_BANK!
 	)
 	EndLocal
-	Exit /b
-	
-:BUILD_BANKS
-	REM Rebuild each bank in sequential mode
-	call :BUILD_BANK_SEQ
-	ECHO ON
-	ECHO Banks recompiled!	
-	ECHO OFF
-	PAUSE
-	Exit /b
+	EXIT /B
 	
 :BUILD_BANK_TBLS
 	REM Write hex data to both Bank ID List and Music Ptr Table file blobs: https://stackoverflow.com/a/47826309
@@ -657,7 +644,7 @@ REM Rebuilds the vanilla sound driver (standard banking)
 	ECHO Awaiting injection of modified sound data/pointer tables into ROM!
 	ECHO OFF
 	PAUSE
-	exit /b
+	EXIT /B
 	
 :BUILD_BLOB
 	REM Generate BGM/SFX blob
@@ -691,7 +678,7 @@ REM Rebuilds the vanilla sound driver (standard banking)
 	ECHO OFF
 	PAUSE
 	EndLocal
-	exit /b
+	EXIT /B
 
 :BANKING_DUMMYCLN
 	REM Cleanup ASM\dum folder
@@ -707,7 +694,7 @@ REM Rebuilds the vanilla sound driver (standard banking)
 	)
 	EndLocal
 	Pause
-	Exit /b
+	EXIT /B
 	
 REM Subroutine dummy-builds a particular bank in sequential mode and checks if all of the data can fit within its bank
 REM Inputs: %1
@@ -717,6 +704,7 @@ REM Outputs: %2
 REM %2 = Amount of space leftover (bytes)
 :BANKING_SEQ
 	REM Set the music fileset to use in next for loop based on current bank (%%F)
+	SetLocal EnableDelayedExpansion	
 	if %1 EQU 0 SET FSET=!BANKI0!
 	if %1 EQU 1 SET FSET=!BANKI1!
 	if %1 EQU 2 SET FSET=!BANKI2!
@@ -731,40 +719,42 @@ REM %2 = Amount of space leftover (bytes)
 	If %1 EQU 3 SET LIMIT=!BANK2S_LIM!
 	
 	SET SUM=0
-	FOR /L %%G IN (1,1,!LEN!) DO (			
+	FOR /L %%G IN (1,1,!LEN!) DO (
 		SET FBANK=!BANK[%%G].bank!
-		IF %FBANK% EQU %FSET% (
+		IF !FBANK! EQU !FSET! (
 			SET FILESIZE=!BANK[%%G].size!
 			SET /a SUM=!SUM!+!FILESIZE!
 		)
 	)
 
 	REM If the total filsize freespace is negative, then overflow
-	SET /a %2=!LIMIT!-!SUM!
-	IF %2 LSS 0
+	SET ERR=0
+	SET /a ERR=!LIMIT!-!SUM!
+	IF !ERR! LSS 0 (
 		ECHO ON
 		ECHO Error, Bank%1 too large!
-		ECHO Overflow by %2 bytes
+		ECHO Overflow by !ERR! bytes		
 		Pause
-		ECHO OFF
-	)
-	
-	IF %2 GEQ 0
+		ECHO OFF		
+	) ELSE ( 
 		ECHO ON
-		ECHO Bank%1 freespace = %2 bytes
-		SET ID=!FSET!-!BANKI0!
-		SET FNAME=!BANKD[%ID%].file!
-		SET FNAME="!FNAME!.bin"
-		SET BANKD[!ID!].size=%2
-		call zerofill.exe -f -q %2 !FNAME!
+		ECHO Bank%1 freespace = !ERR! bytes
+		SET ID=0
+		SET /a ID=!FSET!-!BANKI0!
+		SET FILE=!BANKD[%ID%].file!
+		SET FNAME="..\BIN\!FILE!.bin"
+		SET BANKD[!ID!].size=!ERR!
+		call zerofill.exe -f -q !ERR! !FNAME!
+		pause
 		ECHO OFF
 	)
-	Exit /b
+	EndLocal
+	EXIT /B
 	
 REM Subroutine builds all music in array order
-:BUILD_BANK_SEQ
+:BUILD_BANKS
 	SetLocal EnableDelayedExpansion
-	Echo off
+	REM Rebuild each bank in sequential mode
 		
 	REM Iterate through all files
 	FOR /L %%G IN (1,1,!LEN!) DO (
@@ -822,5 +812,9 @@ REM Subroutine builds all music in array order
 		REM Recompile the new ASMFILE at new location!
 		Call Comp.bat !FILENAME! 0
 	)
+	
+	ECHO ON
+	ECHO Banks recompiled!	
+	ECHO OFF
 	EndLocal
-	Exit /b
+	EXIT /B
