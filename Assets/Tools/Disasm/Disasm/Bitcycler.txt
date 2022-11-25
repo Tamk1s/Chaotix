@@ -1,0 +1,72 @@
+THE BIT CYCLING ALGORITHM
+=========================
+The art compression revolves around a bit cycling algorithm that I don't understand:
+ 
+    bitcycle(numbits):
+        output = 0
+        while numbits != 0 do
+            if maxbits == 0 then
+                maxbits = 8
+                datum = next byte in file << 24
+            counter = numbits
+            if numbits > maxbits then
+                counter = maxbits
+            numbits = numbits - counter
+            until counter == 0 do
+                shift datum left, saving topmost bit in carry
+                rotate (carry bit, output) left
+                maxbits = maxbits - 1
+                counter = counter - 1
+ 
+ 
+ 
+HEADER FORMAT
+=============
+OFFSET    SIZE    NAME    DESCRIPTION
+0    Word        Number of bytes in output data
+2    Byte        Always 0x42 to identify input data as compressed
+3    Byte        base x coordinate (x0)
+4    Byte    r5    number of bits to cycle for x coordinates
+5    Byte        base y coordinate (y0)
+6    Byte    r7    number of bits to cycle for y coordinates
+7    Byte        base color value (c0)
+8    Byte    r9    number of bits to cycle for color value
+ 
+I will use the name as a mnemonic throughout this specification. The name is the SH-2 register the value is assigned to in the original code.
+ 
+The final x1 value is
+    x1 = x0 + bitcycle(r5)
+The final y1 value is
+    y1 = (y0 + bitcycle(r6)) << 8
+ 
+So the program beings with
+ 
+    write word x0
+    write word x1
+    write word (y0 << 8)
+    write word y1
+ 
+ 
+ 
+DATA
+====
+Now begins each line:
+ 
+    x0_line = bitcycle(r5) + x0
+    x1_line = bitcycle(r5) + x0
+ 
+If x1_line == x0_line then the art is fully decompressed. Otherwise processing continues:
+ 
+    write byte x0_line
+    write byte x1_line
+    n_pixels_per_line = x1_line - x0_line
+    y_line = (bitcycle(r7) + y0) << 8
+    write word y_line
+    until n_pixels_per_line == 0 do
+        pixel_color_value = bitcycle(r9) + c0
+        if pixel_color_value == 0 then
+            pixel_color_value = fallback_pixel_color
+        write byte pixel_color_value
+        n_pixels_per_line = n_pixels_per_line - 1
+ 
+The fallback pixel color is either 0x80 or another color determined at runtime by the drawing routine. After the loop terminates, we go back to the x0_line/x1_line calculations; we have finished processing this line.
