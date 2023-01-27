@@ -1,5 +1,5 @@
 
-Target	EQU	$56EE3
+Target	EQU	$56F0D
 	smpsHeaderVoice	SFX_6A_Patches, Target
 	smpsHeaderTick	$01
 	smpsHeaderChan	$02

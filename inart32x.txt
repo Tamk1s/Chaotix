@@ -2326,7 +2326,11 @@ StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
 			DWORD	AP3_HUD_RingsR+ArtPtr32X_Offset
 			DWORD	AP3_HUD_Time+ArtPtr32X_Offset
 			DWORD	AP3_HUD_TimeR+ArtPtr32X_Offset
-			DWORD	AP3_HUD_Pause+ArtPtr32X_Offset
+			
+			; !@ Debug enable for pal32x test obj
+			;DWORD	AP3_HUD_Pause+ArtPtr32X_Offset
+			DWORD	AP3_MiscEnd_Test+ArtPtr32X_Offset
+			
 			DWORD	AP3_HUD_Exclame+ArtPtr32X_Offset
 			DWORD	AP3_HUD_Limits+ArtPtr32X_Offset
 			DWORD	AP3_HUD_LimitsR+ArtPtr32X_Offset

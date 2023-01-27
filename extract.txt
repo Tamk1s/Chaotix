@@ -16,6 +16,10 @@ LoadFile orig.bin
 ;MakePath "Art/tilemaps/Menus/Endings"
 ;MakePath "Art/tilemaps/Menus/DataLoad"
 
+Extract $01310C	$0048 "Levels/Entrance/Pal32x/X_MSKai_Lvl.bin"
+Extract $013145	$0048 "Levels/Entrance/Pal32x/X_MSKai_Boss.bin"
+;Extract	$032392	$060 "Art/palettes/MD/Menus/CharSel.bin"
+
 ;Extract $2C2DC8 $046E "Art/artnem/Menus/Soundtest/Amy.bin"
 ;Extract $2C3236 $020E "Art/tilemaps/Menus/Endings/BadEnding.bin"
 ;Extract $2C3444 $04CC "Art/artnem/Menus/Endings/BadEnding.bin"

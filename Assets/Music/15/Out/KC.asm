@@ -5,13 +5,13 @@ FMPitch	EQU	$00
 FMVol1	EQU	$10	;$17
 FMVol2  EQU	FMVol1-$04
 FMVol3  EQU	$0E-$04
-FMVol4  EQU	$19-$09		;Now $25
+FMVol4  EQU	$19-$07		;Now $25
 FMVol5  EQU	FMVol4-$03	;Now $22
-FMVol6  EQU	$1B
+FMVol6  EQU	$0B			;$1B
 
 PSGPitch	EQU	PSGDelta
 PSGVoi	EQU $00
-PSGVol1	EQU	$02				;$05
+PSGVol1	EQU	$00				;$05
 PSGVol2	EQU	PSGVol1+$01		;$0B
 PSGVol3	EQU	PSGVol2-$01		;$0A
 PSGMod	EQU	$00
@@ -618,15 +618,9 @@ HDNR1S_Loop62:
 	smpsAlterVol		$FF
 	smpsJump		HDNR1S_Jump2, Target
 
-HDNR1S_FM4:
-	
-	smpsPan		panCenter
-	
+HDNR1S_FM4:	
+	smpsPan		panCenter	
 	smpsFMvoice		$02
-	
-	
-	
-	
 	dc.b nRst, $55, nRst, nRst, $16
 	smpsFMvoice		$04
 	dc.b nRst, $06, nD4
@@ -819,22 +813,16 @@ HDNR1S_Loop83:
 	smpsFMvoice		$02
 	dc.b nRst, $06
 	smpsAlterVol		$FD
-	dc.b nB2, $05, $04, $09, nRst, $06, nC3, $05
-	dc.b $04, $09, nRst, $06, nCs3, $05, $04, $03
+	;!@ dc.b nB2, $05, $04, $09, nRst, $06, nC3, $05
+	;!@ dc.b $04, $09, nRst, $06, nCs3, $05, $04, $03
+	dc.b	nRst, $05, nRst, $04, nRst, $09, nRst, $06, nRst, $05
+	dc.b	nRst, $04, nRst, $09, nRst, $06, nRst, $05, nRst, $04, nRst, $03
 	smpsAlterVol		$FD
 	smpsJump		HDNR1S_Jump3, Target
 
-HDNR1S_FM5:
-	
+HDNR1S_FM5:	
 	smpsPan		panCenter
-	
-	
-	
-	
-	
 	smpsFMvoice		$02
-	
-	
 	dc.b nRst, $55, nRst, nRst, $16
 	smpsFMvoice		$04
 	dc.b nRst, $06, nD3
@@ -1027,8 +1015,10 @@ HDNR1S_Loop103:
 	smpsFMvoice		$02
 	dc.b nRst, $06
 	smpsAlterVol		$FD
-	dc.b nB3, $05, $04, $09, nRst, $06, nC4, $05
-	dc.b $04, $09, nRst, $06, nCs4, $05, $04, $03
+	;!@ dc.b nB3, $05, $04, $09, nRst, $06, nC4, $05
+	;!@ dc.b $04, $09, nRst, $06, nCs4, $05, $04, $03
+	dc.b nRst, $05, nRst, $04, nRst, $09, nRst, $06, nRst, $05
+	dc.b nRst, $04, nRst, $09, nRst, $06, nRst, $05, nRst, $04, nRst, $03
 	smpsAlterVol		$FD
 	smpsJump		HDNR1S_Jump4, Target
 
@@ -2145,10 +2135,9 @@ HDNR1S_PWM3_Loop11:
 
 HDNR1S_PWM4:
 	smpsPan		panCenter
-
 ;HDNR1S_PWM4_Loop1:
 	;sModOff
-	;smpsLoop		$00, $07, HDNR1S_PWM4_Loop1, Target
+	;smpsLoop		$00, $0D, HDNR1S_PWM4_Loop1, Target
 	dc.b nRst, $06
 
 HDNR1S_PWM4_Loop2:
@@ -2159,7 +2148,7 @@ HDNR1S_PWM4_Loop2:
 	smpsAlterVol		$02
 	dc.b pClosedHH, $01, nRst, $02
 	smpsAlterVol		$06
-	dc.b pFingSnap, $06, nRst, $09
+	dc.b pASnare, $06, nRst, $09
 	smpsAlterVol		$FA
 
 HDNR1S_PWM4_Loop3:
@@ -2173,7 +2162,7 @@ HDNR1S_PWM4_Jump1:
 HDNR1S_PWM4_Loop5:
 	dc.b pClosedHH, $01, nRst, $02
 	smpsAlterVol		$08
-	dc.b pFingSnap, $06, nRst, $09
+	dc.b pASnare, $06, nRst, $09
 	smpsAlterVol		$F8
 
 HDNR1S_PWM4_Loop4:
@@ -2183,7 +2172,7 @@ HDNR1S_PWM4_Loop4:
 	smpsLoop		$01, $02, HDNR1S_PWM4_Loop5, Target
 	dc.b pClosedHH, $01, nRst, $02
 	smpsAlterVol		$08
-	dc.b pFingSnap, $06, nRst, $09
+	dc.b pASnare, $06, nRst, $09
 	smpsAlterVol		$F8
 
 HDNR1S_PWM4_Loop6:
@@ -2199,7 +2188,7 @@ HDNR1S_PWM4_Loop7:
 	smpsLoop		$00, $1C, HDNR1S_PWM4_Loop7, Target
 	dc.b pClosedHH, $01, nRst, $1D, pClosedHH, $01, nRst, $02
 	smpsAlterVol		$08
-	dc.b pFingSnap, $06, nRst, $09
+	dc.b pASnare, $06, nRst, $09
 	smpsAlterVol		$F8
 
 HDNR1S_PWM4_Loop8:
@@ -2213,16 +2202,11 @@ HDNR1S_PWM4_Loop8:
 HDNR1S_PWM4_Loop9:
 	dc.b pClosedHH, $01, nRst, $0B
 	smpsLoop		$00, $2A, HDNR1S_PWM4_Loop9, Target
-	dc.b pClosedHH, $01, nRst, $1A
-	smpsAlterVol		$FB
-
-HDNR1S_PWM4_Loop10:
-	dc.b pAKick, $03, nRst, $02, pAKick, $03, nRst, $01
-	dc.b pAKick, $03, nRst, $0C
-	smpsLoop		$00, $02, HDNR1S_PWM4_Loop10, Target
-	smpsAlterVol		$05
-	dc.b pCrashCymb
-	smpsJump		HDNR1S_PWM4_Jump1, Target	
+	dc.b pClosedHH, $01, nRst, $1A, pOrchHitLo, $05, $04, $09
+	dc.b nRst, $06, pOrchHitMed, $05, $04, $09, nRst, $06
+	dc.b pOrchHitHi, $05, $04, $03
+	smpsAlterNote	$00
+	smpsJump		HDNR1S_PWM4_Jump1, Target
 
 HDNR1S_Patches:
 	; Patch $00

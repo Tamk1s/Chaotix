@@ -90,12 +90,13 @@ Define _USCORE $3F
 ;;;
 
 StartSeg GameHeader Big_Endian $000100 $8E
-
-	String	"SEGA 32X        "					;Console Name
-	String	"(C)GENESISDOES 2022.NOV"					;Copyright Date
+	;!@ MSU 32x
+	String	"SEGA 32X        "								;Console Name	
+	;String	"SEGA MEGASD     "								;Console Name
+	String	"(C)GENESISDOES 2023.APR"						;Copyright Date
 	String  "KNUCKLES CLACKERS V0.2A DEMO                "	;Domestic Game Name
 	String  "KNUCKLES CLACKERS V0.2A DEMO                 "	;Foreign Game Name
-	String	"GM MK-84503-01"					;Game Serial Number
+	String	"GM MK-84503-01"								;Game Serial Number
 EndSeg
 ;EndRegion
 

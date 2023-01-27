@@ -119,6 +119,20 @@ nAb7			EQU	$DD
 nA7			EQU	$DE
 nBb7			EQU	$DF
 
+; Channel IDs for SFX
+cPSG1				EQU $80
+cPSG2				EQU $A0
+cPSG3				EQU $C0
+cNoise				EQU $E0	; Not for use in S3/S&K/S3D
+cFM3				EQU $02
+cFM4				EQU $04
+cFM5				EQU $05
+cFM6				EQU $06	; Only in S3/S&K/S3D, overrides DAC
+cPWM1				EQU	$18
+cPWM2				EQU	$1A
+cPWM3				EQU	$1C
+cPWM4				EQU	$1E
+
 ; DAC Equates (S1)
 dKick			EQU	$81
 dSnare			EQU	$82

@@ -1,5 +1,0 @@
-The Z80 writes volume+drum into 1BF8..1BFF. [Vol1, Drum1, Vol2, Drum2, ...]
-
-The 68k reads them [see routine at 8F6EFA (ingame) and 88783A (sound test)] and writes them to the 32x communication area [A1512x], at A15128/1A512C.
-
-The SH2 slave reads them then from 4028..402F and plays+mixes the sounds.

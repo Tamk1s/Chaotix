@@ -253,6 +253,21 @@ vdp_control_port_lo EQU $C00005        ; VDP Control Port (word, lower byte)
 vdp_counter     EQU $C00008
 psg_input       EQU $C00011
 
+PauseTick_Instant	EQU 0
+MCMD_Play       	EQU $11
+MCMD_PlayLoop   	EQU $12
+MCMD_Pause      	EQU $13
+MCMD_Resume     	EQU $14
+MCMD_Vol        	EQU $15
+MCMD_NoSeek     	EQU $16
+MCMD_PlayOf     	EQU $1A
+PauseTick       	EQU $4B
+MCD_CMD         	EQU $A12010
+MCD_ARG         	EQU $A12011
+MCD_CMD_CK      	EQU $A1201F
+MCD_STAT        	EQU $A12020
+
+
 ; ---------------------------------------------------------------------------
 
 ; enum z80_version bits

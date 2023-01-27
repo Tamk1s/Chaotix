@@ -107,8 +107,8 @@ REM SFX $5E is special, because its Patch pointer is above/below its own file!
 REM Patch "	smpsHeaderVoice	SFX_5E_Patches, Target" with "	dc.w	$2BEC"
 REM This will ensure bitperfect recompile for vanilla SFX bank.
 REM HOWEVER, if the location it is supposed to point to moves, you'll need to update that manually in the ASM file!
-call conv.bat "5E.asm" "$56C6E"
-call JREPL.bat "\tsmpsHeaderVoice\tSFX_5E_Patches, Target" "\tdc.w\t\x242BEC" /XSEQ /f "5E.asm" /o -
+REM call conv.bat "5E.asm" "$56C6E"
+REM call JREPL.bat "\tsmpsHeaderVoice\tSFX_5E_Patches, Target" "\tdc.w\t\x242BEC" /XSEQ /f "5E.asm" /o -
 
 call conv.bat "5F.asm" "$56C97"
 call conv.bat "60.asm" "$56CCA"

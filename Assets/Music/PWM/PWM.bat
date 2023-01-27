@@ -306,22 +306,22 @@ SET PAR[19].addr=0
 SET PAR[20].addr=0
 SET PAR[21].addr=0
 REM !@ New Data. Manually force this sample to addr of ROMEnd ($300000) - size at end of ROM
-SET PAR[22].addr=222FE63C
-SET PAR[23].addr=222FDAC8
-SET PAR[24].addr=222FDD70
+SET PAR[22].addr=222F9250
+SET PAR[23].addr=222FAB14
+SET PAR[24].addr=222FADBC
 REM !@ Manual override back to samples $85-87
 SET PAR[25].addr=2205F7B8
 SET PAR[26].addr=2205F7B8
 SET PAR[27].addr=2205F7B8
 REM !@ New sample (Neptune Dada)
-SET PAR[28].addr=222FA098
+SET PAR[28].addr=222FB687
 REM !@ Manual override back to sample $8E
 SET PAR[29].addr=2206BC74
 REM !@ New samples ($9F-$A2 VCop Orchit)
-SET PAR[30].addr=222F9150
-SET PAR[31].addr=222F9150
-SET PAR[32].addr=222F9150
-SET PAR[33].addr=222F9150
+SET PAR[30].addr=222FF0B8
+SET PAR[31].addr=222FF0B8
+SET PAR[32].addr=222FF0B8
+SET PAR[33].addr=222FF0B8
 
 REM Create header of SMPSPlay PWM.INI 
 call create_PWM_INI_Hdr.bat

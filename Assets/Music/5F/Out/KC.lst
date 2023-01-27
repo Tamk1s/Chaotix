@@ -122,6 +122,20 @@
        = 0000DE         nA7			EQU	$DE
        = 0000DF         nBb7			EQU	$DF
 
+                        ; Channel IDs for SFX
+       = 000080         cPSG1				EQU $80
+       = 0000A0         cPSG2				EQU $A0
+       = 0000C0         cPSG3				EQU $C0
+       = 0000E0         cNoise				EQU $E0	; Not for use in S3/S&K/S3D
+       = 000002         cFM3				EQU $02
+       = 000004         cFM4				EQU $04
+       = 000005         cFM5				EQU $05
+       = 000006         cFM6				EQU $06	; Only in S3/S&K/S3D, overrides DAC
+       = 000018         cPWM1				EQU	$18
+       = 00001A         cPWM2				EQU	$1A
+       = 00001C         cPWM3				EQU	$1C
+       = 00001E         cPWM4				EQU	$1E
+
                         ; DAC Equates (S1)
        = 000081         dKick			EQU	$81
        = 000082         dSnare			EQU	$82
@@ -812,6 +826,10 @@
 
 00000 Total Error(s)
 
+CFM3               00000002 E  CFM4               00000004 E  CFM5               00000005 E
+CFM6               00000006 E  CNOISE             000000E0 E  CPSG1              00000080 E
+CPSG2              000000A0 E  CPSG3              000000C0 E  CPWM1              00000018 E
+CPWM2              0000001A E  CPWM3              0000001C E  CPWM4              0000001E E
 DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK              00000081 E
 DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
 DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  NA0                0000008A E

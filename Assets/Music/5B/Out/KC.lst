@@ -1,0 +1,969 @@
+                        	LIST MACRO
+                        	LIST EXPAND
+000000                  	include _s1smps2asm_S1KC.asm
+                        ; Standard Octave Pitch Equates
+       = 000088         smpsPitch10lo		EQU	$88
+       = 000094         smpsPitch09lo		EQU	$94
+       = 0000A0         smpsPitch08lo		EQU	$A0
+       = 0000AC         smpsPitch07lo		EQU	$AC
+       = 0000B8         smpsPitch06lo		EQU	$B8
+       = 0000C4         smpsPitch05lo		EQU	$C4
+       = 0000D0         smpsPitch04lo		EQU	$D0
+       = 0000DC         smpsPitch03lo		EQU	$DC
+       = 0000E8         smpsPitch02lo		EQU	$E8
+       = 0000F4         smpsPitch01lo		EQU	$F4
+       = 000000         smpsPitch00			EQU	$00
+       = 00000C         smpsPitch01hi		EQU	$0C
+       = 000018         smpsPitch02hi		EQU	$18
+       = 000024         smpsPitch03hi		EQU	$24
+       = 000030         smpsPitch04hi		EQU	$30
+       = 00003C         smpsPitch05hi		EQU	$3C
+       = 000048         smpsPitch06hi		EQU	$48
+       = 000054         smpsPitch07hi		EQU	$54
+       = 000060         smpsPitch08hi		EQU	$60
+       = 00006C         smpsPitch09hi		EQU	$6C
+       = 000078         smpsPitch10hi		EQU	$78
+
+                        ; Note Equates
+       = 000080         nRst			EQU	$80
+       = 000081         nC0			EQU	$81
+       = 000082         nCs0			EQU	$82
+       = 000083         nD0			EQU	$83
+       = 000084         nEb0			EQU	$84
+       = 000085         nE0			EQU	$85
+       = 000086         nF0			EQU	$86
+       = 000087         nFs0			EQU	$87
+       = 000088         nG0			EQU	$88
+       = 000089         nAb0			EQU	$89
+       = 00008A         nA0			EQU	$8A
+       = 00008B         nBb0			EQU	$8B
+       = 00008C         nB0			EQU	$8C
+       = 00008D         nC1			EQU	$8D
+       = 00008E         nCs1			EQU	$8E
+       = 00008F         nD1			EQU	$8F
+       = 000090         nEb1			EQU	$90
+       = 000091         nE1			EQU	$91
+       = 000092         nF1			EQU	$92
+       = 000093         nFs1			EQU	$93
+       = 000094         nG1			EQU	$94
+       = 000095         nAb1			EQU	$95
+       = 000096         nA1			EQU	$96
+       = 000097         nBb1			EQU	$97
+       = 000098         nB1			EQU	$98
+       = 000099         nC2			EQU	$99
+       = 00009A         nCs2			EQU	$9A
+       = 00009B         nD2			EQU	$9B
+       = 00009C         nEb2			EQU	$9C
+       = 00009D         nE2			EQU	$9D
+       = 00009E         nF2			EQU	$9E
+       = 00009F         nFs2			EQU	$9F
+       = 0000A0         nG2			EQU	$A0
+       = 0000A1         nAb2			EQU	$A1
+       = 0000A2         nA2			EQU	$A2
+       = 0000A3         nBb2			EQU	$A3
+       = 0000A4         nB2			EQU	$A4
+       = 0000A5         nC3			EQU	$A5
+       = 0000A6         nCs3			EQU	$A6
+       = 0000A7         nD3			EQU	$A7
+       = 0000A8         nEb3			EQU	$A8
+       = 0000A9         nE3			EQU	$A9
+       = 0000AA         nF3			EQU	$AA
+       = 0000AB         nFs3			EQU	$AB
+       = 0000AC         nG3			EQU	$AC
+       = 0000AD         nAb3			EQU	$AD
+       = 0000AE         nA3			EQU	$AE
+       = 0000AF         nBb3			EQU	$AF
+       = 0000B0         nB3			EQU	$B0
+       = 0000B1         nC4			EQU	$B1
+       = 0000B2         nCs4			EQU	$B2
+       = 0000B3         nD4			EQU	$B3
+       = 0000B4         nEb4			EQU	$B4
+       = 0000B5         nE4			EQU	$B5
+       = 0000B6         nF4			EQU	$B6
+       = 0000B7         nFs4			EQU	$B7
+       = 0000B8         nG4			EQU	$B8
+       = 0000B9         nAb4			EQU	$B9
+       = 0000BA         nA4			EQU	$BA
+       = 0000BB         nBb4			EQU	$BB
+       = 0000BC         nB4			EQU	$BC
+       = 0000BD         nC5			EQU	$BD
+       = 0000BE         nCs5			EQU	$BE
+       = 0000BF         nD5			EQU	$BF
+       = 0000C0         nEb5			EQU	$C0
+       = 0000C1         nE5			EQU	$C1
+       = 0000C2         nF5			EQU	$C2
+       = 0000C3         nFs5			EQU	$C3
+       = 0000C4         nG5			EQU	$C4
+       = 0000C5         nAb5			EQU	$C5
+       = 0000C6         nA5			EQU	$C6
+       = 0000C7         nBb5			EQU	$C7
+       = 0000C8         nB5			EQU	$C8
+       = 0000C9         nC6			EQU	$C9
+       = 0000CA         nCs6			EQU	$CA
+       = 0000CB         nD6			EQU	$CB
+       = 0000CC         nEb6			EQU	$CC
+       = 0000CD         nE6			EQU	$CD
+       = 0000CE         nF6			EQU	$CE
+       = 0000CF         nFs6			EQU	$CF
+       = 0000D0         nG6			EQU	$D0
+       = 0000D1         nAb6			EQU	$D1
+       = 0000D2         nA6			EQU	$D2
+       = 0000D3         nBb6			EQU	$D3
+       = 0000D4         nB6			EQU	$D4
+       = 0000D5         nC7			EQU	$D5
+       = 0000D6         nCs7			EQU	$D6
+       = 0000D7         nD7			EQU	$D7
+       = 0000D8         nEb7			EQU	$D8
+       = 0000D9         nE7			EQU	$D9
+       = 0000DA         nF7			EQU	$DA
+       = 0000DB         nFs7			EQU	$DB
+       = 0000DC         nG7			EQU	$DC
+       = 0000DD         nAb7			EQU	$DD
+       = 0000DE         nA7			EQU	$DE
+       = 0000DF         nBb7			EQU	$DF
+
+                        ; Channel IDs for SFX
+       = 000080         cPSG1				EQU $80
+       = 0000A0         cPSG2				EQU $A0
+       = 0000C0         cPSG3				EQU $C0
+       = 0000E0         cNoise				EQU $E0	; Not for use in S3/S&K/S3D
+       = 000002         cFM3				EQU $02
+       = 000004         cFM4				EQU $04
+       = 000005         cFM5				EQU $05
+       = 000006         cFM6				EQU $06	; Only in S3/S&K/S3D, overrides DAC
+       = 000018         cPWM1				EQU	$18
+       = 00001A         cPWM2				EQU	$1A
+       = 00001C         cPWM3				EQU	$1C
+       = 00001E         cPWM4				EQU	$1E
+
+                        ; DAC Equates (S1)
+       = 000081         dKick			EQU	$81
+       = 000082         dSnare			EQU	$82
+       = 000083         dTimpani		EQU	$83
+       = 000088         dHiTimpani		EQU	$88
+       = 000089         dMidTimpani		EQU	$89
+       = 00008A         dLowTimpani		EQU	$8A
+       = 00008B         dVLowTimpani	EQU	$8B
+       = 00008B         dFloorTimpani	EQU $8B
+
+                        ; !@ PSGDelta (S1->KC has 12 semitone increase between PSG)
+       = 00000C         PSGDelta	EQU	$0C
+
+                        ; PWM Equates (KC)
+       = 000081         pEKick		EQU	$81
+       = 000082         pESnare		EQU	$82
+       = 000083         pSplashCymb	EQU	$83
+       = 000084         pRideBell	EQU $84
+       = 000085         pTomHi		EQU	$85
+       = 000086         pTomMid		EQU	$86
+       = 000087         pTomLow		EQU	$87
+       = 000088         pEHiHat		EQU	$88
+       = 000089         pCrashCymb	EQU $89
+       = 00008A         pClap		EQU $8A
+       = 00008B         pAKick		EQU $8B
+       = 00008C         pASnare		EQU	$8C
+       = 00008D         pBell		EQU $8D
+                        ;!@ Enum due to late PWM driver revision
+       = 00008E         pFingSnap	EQU	$8E
+       = 00008E         pFingSnapHi	EQU	$8E
+       = 00008F         pCowbell	EQU	$8F
+       = 000090         pClickHi	EQU	$90
+       = 000091         pClickLo	EQU	$91
+       = 000092         pBongoHi	EQU	$92
+       = 000093         pBongoLo	EQU	$93
+       = 000094         pTimpaniHi	EQU	$94
+       = 000095         pTimpaniLo	EQU	$95
+       = 000096         pSilence	EQU $96
+                        ;!@ NEW DATA
+       = 000097         pSega		EQU $97
+       = 000098         pClosedHH	EQU $98
+       = 000099         pOpenHH		EQU $99
+       = 00009A         pTomLower		EQU	$9A
+       = 00009B         pTomLowerer		EQU	$9B
+       = 00009C         pTomLowerest	EQU	$9C
+       = 00009D         pNepDada		EQU	$9D
+       = 00009E         pFingSnapLo		EQU	$9E
+       = 00009F         pOrchHitHi		EQU	$9F
+       = 0000A0         pOrchHitMed		EQU	$A0
+       = 0000A1         pOrchHitLo		EQU	$A1
+       = 0000A2         pOrchHitLower	EQU	$A2
+
+                        ;!@ Crackers conversion enums. Knuckles Clackers equiv
+       = 000081         pCra_d81	EQU	pEKick
+       = 00008C         pCra_d82	EQU	pASnare
+       = 000085         pCra_d83	EQU	pTomHi
+       = 000086         pCra_d84	EQU	pTomMid
+       = 000087         pCra_d85	EQU	pTomLow
+
+                        ;!@ Convert ptrs to z80Ptr
+                        ; function to make a little-endian 16-bit pointer for the Z80 sound driver
+                        ;z80_ptr function x,y,((((x)|(y))<<8)&$FF00)|((((x)|(y))>>8)&$7F)|$80
+                        ;z80_ptr_neg function x,y,((((y)-(x))<<8)&$FF00)|((((y)-(x))>>8)&$7F)|$80
+
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        rom_ptr_z80 macro addr
+                        	;dc.w z80_ptr(ptr,addr)
+                        	dc.w  ((((addr)<<8)&$FF00)|(((addr)>>8)&$7F)|$80)
+                            endm
+                        	
+                        ;Funciton to convert S1 tempo to S2 and then S3+
+                        ;The conversion works for all values of main tempo other than 0 — this value cannot be converted exactly between the two drivers. The conversion of main tempos from Sonic 1 to Sonic 2 can be done (approximately) with the following formul
+                        ;S2 main tempo = floor{ [ (S1 main tempo-1) * 256 + floor(S1 main tempo/2) ] / S1 main tempo }			
+                        ;It is easy to convert between Sonic 2 and Sonic 3+ main tempo values:
+                        ;S2 main tempo = (256 - S3 main tempo) mod 256
+                        ;S3 main tempo = (256 - S2 main tempo) mod 256
+                        tempo_conv macro tempo
+                        		if tempo==0
+                        			dc.b	((256 - (((256-1)*256 + (256/2)) / 256)) % 256)
+                        		else
+                        			dc.b	((256 - ((((tempo)-1)*256 + ((tempo)/2)) / (tempo))) % 256)
+                        		endif
+                        	endm
+                        	
+                        ;!@
+                        ; macro to declare a little-endian 16-bit pointer for the Z80 sound driver
+                        ;rom_ptr_z80_neg macro ptr,addr
+                        	;dc.w z80_ptr_neg(ptr,addr)
+                        	;dc.w	(((((addr)-(ptr))<<8)&$FF00)|((((addr)-(ptr))>>8)&$7F)|$80)
+                            ;endm
+
+                        ; Header Macros
+
+                        ;!@
+                        ; Header - Set up Voice Location
+                        ;smpsHeaderVoice macro loc
+                        smpsHeaderVoice macro loc,songstart
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+                        ; Header - Set up Channel Usage	
+                        smpsHeaderChan macro fm,psg
+                        	if \0==2
+                        		dc.b	fm,psg
+                        	else
+                        		dc.b	fm
+                        	endif	
+                        	endm	
+                        	
+
+                        	
+                        smpsHeaderTempo macro div,mod
+                        	dc.b	div,mod
+                        	endm
+
+                        ;!@
+                        ; Header - Set up Tempo. Mod is converted from S1 to S3 tempo
+                        smpsHeaderTempoC macro div,mod
+                        TempDiv set div
+                        	dc.b	div
+                        	tempo_conv(mod)
+000000                  	endm
+                        	
+                        ; Header - Set up DAC Channel
+                        smpsHeaderDAC macro loc
+                        	dc.w	loc-songStart
+                        	dc.w	$00
+                        	endm
+                        	
+                        ;!@
+                        ; Header - Set up FM Channel	
+                        ;smpsHeaderFM macro loc,pitch,vol
+                        smpsHeaderFM macro loc,songstart,pitch,vol
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	endm
+
+                        ;!@	
+                        ; Header - Set up PSG Channel
+                        ;smpsHeaderPSG macro loc,pitch,vol,voice
+                        smpsHeaderPSG macro loc,songstart,pitch,vol,null,voice
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b	pitch,vol
+                        	;dc.w	voice
+                        	dc.b	null,voice
+                        	endm
+
+                        ;!@
+                        ; Header - Set up SFX Channel
+                        ;sHeaderSFX	macro play,patch,loc,pitch,vol
+                        smpsHeaderSFX	macro play,patch,loc,pitch,vol,songstart
+                        	dc.b play,patch
+                        	;dc.w loc-sPointZero
+                        	rom_ptr_z80(loc+songstart)
+                        	dc.b pitch,vol
+                            endm
+
+                        ; Co-ord Flag Macros and Equates
+                        ; E0xx - Panning, AMS, FMS
+                        smpsPan macro direction,amsfms
+                        panNone set $00
+                        panRight set $40
+                        panLeft set $80
+                        panCentre set $C0
+                        panCenter set $C0 ; silly Americans :U
+                        	;dc.b $E0,direction+amsfms
+                        	;endm		
+                        	if \0==2
+                        		dc.b $E0,direction|amsfms
+                        	else
+                        		dc.b $E0,direction
+                        	endif
+000000                  	endm
+                        	
+                        ; E1xx - Alter note values by xx
+                        smpsAlterNote macro val
+                        	dc.b	$E1,val
+                        	endm
+                        	
+                        ; E2xx - Unknown
+                        smpsE2 macro val
+                        	dc.b	$E2,val
+                        	endm
+
+                        ; E3 - Return (generally used after F8)
+                        ; F9 - Return (generally used after F8)
+                        smpsReturn macro val
+                        	;!@
+                        	;dc.b	$E3
+                        	dc.b	$F9
+                        	endm
+                        	
+                        ; E4 - Fade in previous song (ie. 1-Up)
+                        smpsFade macro val
+                        	dc.b	$E4
+                        	endm
+
+                        ;!@ Invalid for S3+!
+                        ; E5xx - Set channel tempo divider to xx
+                        smpsChanTempoDiv macro val
+                        	;Error No S3 equivalent for CF!
+                        	dc.b	$E5,val	
+                        	endm
+                        	
+                        ; E6xx - Alter Volume by xx
+                        smpsAlterVol macro val
+                        	dc.b	$E6,val
+                        	endm
+                        	
+                        ; E7 - Prevent attack of next note
+       = 0000E7         smpsNoAttack	EQU $E7
+
+                        ;!@ This may have problems, needs some convesion factor due to usage of mult by tempo div in S3+
+                        ; E8xx - Set note fill to xx
+                        smpsNoteFill macro val		
+                        	dc.b	$E8,(val/TempDiv)
+                        	endm
+                        	
+                        ;!@
+                        ; E9xx - Add xx to channel pitch
+                        ; FBxx - Add xx to channel pitch
+                        smpsAlterPitch macro val
+                        	;!@
+                        	;dc.b	$E9,val
+                        	dc.b	$FB,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3
+                        smpsSetTempoMod macro val
+                        	;dc.b	$EA,val
+                        	dc.b	$FF,$00,val
+                        	endm
+                        	
+                        ;!@
+                        ; EAxx - Set music tempo modifier to xx
+                        ; FF00xx - Set music tempo to xx S3 (TEMPO - TEMPO_SET)
+                        smpsSetTempoModC macro val
+                        	;dc.b	$EA,val
+                        	dc.b $FF,$00
+                        	tempo_conv(val)
+                        	endm
+                        	
+                        ;!@
+                        ; EBxx - Set music tempo divider to xx
+                        ; FF04xx - Set global tick multiplier to xx (TICK_MULT - TMULT_ALL)
+                        smpsSetTempoDiv macro val
+                        	;dc.b	$EB,val
+                        TempDiv set val
+                        	dc.b $FF,$04,val
+000000                  	endm
+
+                        ;!@	
+                        ; ECxx - Add xx to PSG channel volume (VOLUME - VOL_NN_PSG)
+                        ;
+                        ; May need interpolation/conversion factor:
+                        ; Change volume attenuation of PSG track.
+                        ;The single parameter byte is added to track's current volume attenuation;
+                        ;anything greater than $0F (unsigned comparison) is set to $0F (silence). Also, the flutter index is reduced by 1.
+                        smpsSetVol macro val
+                        	dc.b	$EC,val
+                        	endm
+                        	
+                        ; ED - Unknown
+       = 0000ED         smpsED		EQU $ED
+                        	
+                        ;!@ S3K= send cmd to YM2612 port; unused in S1
+                        ; EE - Stops special SFX ($D0-$D4, S1 only) and restarts overridden music track
+       = 0000EE         smpsEE 		EQU $EE
+                        	
+                        ;!@
+                        ; EFxx - Set Voice of FM channel to xx
+                        ; EFxx[yy] - Set patch id of FM channel to xx. If xx bit7 set, read from another song instead
+                        ; (INSTRUMENT - INS_C_FMP)
+                        ;smpsFMvoice macro voice
+                        	;dc.b	$EF,voice
+                        smpsFMvoice macro pat, song		
+                        	;if song<>""
+                        	if \0==2
+                        		dc.b $EF,pat|$80,song+$81
+                        	else
+                        		dc.b $EF,pat
+                        	endif
+                            endm
+
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        smpsModSet macro wait,speed,change,step
+                        	dc.b	$F0,wait,speed,change,step
+                        	endm
+                        	
+                        smpsModSet2	macro bytes
+                        	smpsModSet	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
+                        	endm
+                        	
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        ;!@
+                        smpsModSetC macro wait,speed,change,step
+                        	dc.b	$F0
+                        	;if (SonicDriverVer>=3)&&(SourceDriver<3)
+                        		dc.b	wait+1,speed,change,(step*speed+1)&$FF
+                        	;elseif (SonicDriverVer<3)&&(SourceDriver>=3)
+                        		;dc.b	wait-1,speed,change,(((step==0)<<8)|step)/(((step==0)<<8)|step)-1		
+                        	;else
+                        		;dc.b	wait,speed,change,step
+                        	;endif
+                        	;dc.b	speed,change,step
+                        	endm
+
+                        ;!@	
+                        smpsModSetC2 macro bytes
+                        	smpsModSetC	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
+                        	endm
+                        	
+
+                        ;!@ Used very differently in S3; don't use
+                        ; F1 - Turn on Modulation
+       = 0000F1         smpsModOn 	EQU $F1
+                        ; F4 - Turn off Modulation
+       = 0000F4         smpsModOff 	EQU $F4
+
+                        ; F2 - End of channel
+                        smpsStop macro
+                        	dc.b	$F2
+                        	endm
+                        	
+                        ;!@
+                        ; F3xx - PSG waveform to xx
+                        ; S3+ only: If parameter byte is zero, the channel is converted
+                        ; back into a normal PSG channel and the noise channel is silenced.
+                        ; Otherwise, sets the PSG track to noise and sets PSG noise to parameter byte, which should be from $E0 to $E7 (inclusive).
+                        smpsPSGform macro form
+                        	dc.b	$F3,form
+                        	endm
+                        	
+                        ; F5xx - PSG voice to xx
+                        smpsPSGvoice macro voice
+                        	dc.b	$F5,voice
+                        	endm
+                        	
+                        ;BAD Cmpr
+                        ;if (loc<*)
+                        	;rom_ptr_z80_neg(*-loc,songstart)
+                        ;else
+                        	;rom_ptr_z80(loc-*-1,songstart)
+                        ;endif
+
+                        ;!@
+                        ; F6xxxx - Jump to xxxx
+                        ;smpsJump macro loc
+                        smpsJump macro loc,songstart
+                        	dc.b	$F6
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F7xxyyzzzz - Loop back to zzzz yy times, xx being the loop index for loop recursion fixing
+                        ;smpsLoop macro index,loops,loc
+                        smpsLoop macro index,loops,loc,songstart
+                        	dc.b	$F7
+                        	dc.b	index,loops
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+
+                        ;!@
+                        ; F8xxxx - Call pattern at xxxx, saving return point
+                        ;smpsCall macro loc
+                        smpsCall macro loc,songstart
+                        	dc.b	$F8
+                        	if (loc<*)
+                        		rom_ptr_z80(loc+songstart)
+                        	else
+                        		rom_ptr_z80(loc+songstart)
+                        	endif
+                        	;dc.w	loc-*-1
+                        	endm
+                        	
+                        ; F9 - Unknown
+       = 0000F9         smpsF9		EQU $F9
+
+                        ; Voices - Feedback
+                        smpsVcFeedback macro val
+                        vcFeedback set val
+000000                  	endm
+
+                        ; Voices - Algorithm
+                        smpsVcAlgorithm macro val
+                        vcAlgorithm set val
+000000                  	endm
+
+                        ; Voices - Detune
+                        smpsVcDetune macro op1,op2,op3,op4
+                        vcDT1 set op1
+                        vcDT2 set op2
+                        vcDT3 set op3
+                        vcDT4 set op4
+000000                  	endm
+
+                        ; Voices - Coarse-Frequency
+                        smpsVcCoarseFreq macro op1,op2,op3,op4
+                        vcCF1 set op1
+                        vcCF2 set op2
+                        vcCF3 set op3
+                        vcCF4 set op4
+000000                  	endm
+
+                        ; Voices - Rate Scale
+                        smpsVcRateScale macro op1,op2,op3,op4
+                        vcRS1 set op1
+                        vcRS2 set op2
+                        vcRS3 set op3
+                        vcRS4 set op4
+000000                  	endm
+
+                        ; Voices - Attack Rate
+                        smpsVcAttackRate macro op1,op2,op3,op4
+                        vcAR1 set op1
+                        vcAR2 set op2
+                        vcAR3 set op3
+                        vcAR4 set op4
+000000                  	endm
+
+                        ; Voices - Amplitude Modulation
+                        smpsVcAmpMod macro op1,op2,op3,op4
+                        vcAM1 set op1
+                        vcAM2 set op2
+                        vcAM3 set op3
+                        vcAM4 set op4
+000000                  	endm
+
+                        ; Voices - First Decay Rate
+                        smpsVcDecayRate1 macro op1,op2,op3,op4
+                        vcD1R1 set op1
+                        vcD1R2 set op2
+                        vcD1R3 set op3
+                        vcD1R4 set op4
+000000                  	endm
+
+                        ; Voices - Second Decay Rate
+                        smpsVcDecayRate2 macro op1,op2,op3,op4
+                        vcD2R1 set op1
+                        vcD2R2 set op2
+                        vcD2R3 set op3
+                        vcD2R4 set op4
+000000                  	endm
+
+                        ; Voices - Decay Level	
+                        smpsVcDecayLevel macro op1,op2,op3,op4
+                        vcDL1 set op1
+                        vcDL2 set op2
+                        vcDL3 set op3
+                        vcDL4 set op4
+000000                  	endm
+
+                        ; Voices - Release Rate
+                        smpsVcReleaseRate macro op1,op2,op3,op4
+                        vcRR1 set op1
+                        vcRR2 set op2
+                        vcRR3 set op3
+                        vcRR4 set op4
+000000                  	endm
+
+                        ; Voices - Total Level
+                        smpsVcTotalLevel macro op1,op2,op3,op4
+                        vcTL1 set op1
+                        vcTL2 set op2
+                        vcTL3 set op3
+                        vcTL4 set op4
+                        	dc.b	(vcFeedback<<3)+vcAlgorithm
+                        	dc.b	(vcDT4<<4)+vcCF4,(vcDT3<<4)+vcCF3,(vcDT2<<4)+vcCF2,(vcDT1<<4)+vcCF1
+                        	dc.b	(vcRS4<<6)+vcAR4,(vcRS3<<6)+vcAR3,(vcRS2<<6)+vcAR2,(vcRS1<<6)+vcAR1
+                        	dc.b	(vcAM4<<5)+vcD1R4,(vcAM3<<5)+vcD1R3,(vcAM2<<5)+vcD1R2,(vcAM1<<5)+vcD1R1
+                        	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
+                        	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
+                        	dc.b	vcTL4,vcTL3,vcTL2,vcTL1	
+000000                  	endm	
+                        	
+                        ;==============================================
+                        ;!@ The following CF flags/macros are KC-drive specific!
+                        ;Rest here mostly used  to compile KC/Nat ASM files for BC purposes...
+
+                        ;!@
+                        ; Header - Set up a secondary PWM Channel
+                        ;smpsHeaderPWM macro loc
+                        smpsHeaderPWM macro loc, songstart,pitch,volL,volR
+                        	;dc.w	loc-songStart
+                        	rom_ptr_z80(loc+songstart)	
+                        	;!@
+                        	dc.b	pitch
+                        	if \0==4
+                        		dc.b	volL
+                        	else
+                        		dc.b	(volL<<4)+volR
+                        	endif	
+                        	endm
+                        	
+                        ;!@ Unused and unneeded; leftover Sonic 32x header stuff
+                        ; Header - Set up first PWM Channel
+                        ;smpsHeaderPWM1 macro loc,num
+                        	;dc.w	loc-songStart
+                        	;dc.b	num,0
+                        	;endm
+
+                        ;!@
+                        ; Header - Set up Tick Multiplier (for Sfx)
+                        ;sHeaderSFX
+                        smpsHeaderTick	macro tmul
+                        	dc.b tmul
+                            endm
+
+                        ;!@ KC Exclusives!
+                        ;# PAN_ANIM
+                        ;# pan animation has 2 modes; if first arg is 0, it will end it. Otherwise, more args will be used
+                        ;!0xE4, 0 > sPanAni:;								
+                        ;!0xE4, 1-0xFF > sPanAni: .lb, .db, .db, .db, .db;	
+                        KC_smpsPanAni macro val1,val2,val3,val4,val5
+                        	if val1==0
+                        		dc.b	$E4,$00
+                        	else
+                        		dc.b	$E4,val1,val2,val3,val4,val5
+                        	endif
+                        	endm
+
+
+                        ; Alter Volume
+                        ;!0xE5 > saVolFMP: .db, .db;								
+                        KC_smpsFMAlterVol macro val1,val2
+                        	dc.b	$E5,val1,val2
+                        	endm
+
+                        ;!@ KC Exclusive!	
+                        ;!0xE9 > ssLFO: .db, .db;									
+                        KC_smpsSetLFO macro enable,amsfms
+                        	dc.b	$E9,enable,amsfms
+                        	endm
+
+                        ;!0xEA > sPlayDAC: .db | 0x80;								
+                        KC_smpsPlayDACSample macro sample
+                        	dc.b	$EA,(sample&$7F)
+                        	endm
+
+                        ;!@ Songstart param added
+                        ;!0xEB > sLoopExit: .db, .dw {						
+                        ;smpsConditionalJump macro index,loc
+                        KC_smpsConditionalJump macro index,loc,songstart
+                        	dc.b	$EB
+                        	dc.b	index
+                        	;dc.w	z80_ptr(loc)
+                        	rom_ptr_z80(loc+songstart)
+                        	endm
+
+                        ;!@ Usage/naming is speculative. Called ssTransposeS3K in S3k/Nat driver...	
+                        ;!0xED > sYMcmd: .db, .db;							
+                        ; Set note values to xx-$40
+                        KC_smpsSetNote macro val
+                        	dc.b	$ED,val
+                        	endm
+
+                        ;!0xEE > sYM1cmd: .db, .db;							
+                        KC_smpsFMICommand macro reg,val
+                        	dc.b	$EE,reg,val
+                        	endm
+
+                        ;!0xF1 > sModEnv: .db, .db {							
+                        ; Set Modulation
+                        KC_smpsModChange2 macro fmmod,psgmod
+                        	dc.b	$F1,fmmod,psgmod
+                        	endm
+                        	
+                        ;!0xF4 > sModEnv: .db {
+                        ; Set Modulation
+                        KC_smpsModChange macro val
+                        	dc.b	$F4,val
+                        	endm
+
+                        ;!@ KC exclusive!
+                        ;!0xFC > sPitchSlide: .db;						
+                        KC_smpsPitchSlide macro enable
+                        	dc.b	$FC,enable
+                        	endm
+                        	
+                        ;!0xFD > sRawFreq: .db;							
+                        KC_smpsAlternateSMPS macro flag
+                        	dc.b	$FD,flag
+                        	endm
+
+                        ;!0xFE > sSpecFM3: .db, .db, .db, .db {			
+                        	;%; Broken?
+                        ;}
+                        KC_smpsFM3SpecialMode macro ind1,ind2,ind3,ind4
+                        	dc.b	$FE,ind1,ind2,ind3,ind4
+                        	Error Broken?
+                        	endm
+
+                        ;!0xFF, 1 > sPlaySound: .db;						
+                        KC_smpsPlaySound macro index
+                        	dc.b	$FF,$01,index
+                        	endm
+
+                        ;!0xFF, 2 > sMusPause: .db;						
+                        KC_smpsHaltMusic macro flag
+                        	dc.b	$FF,$02,flag
+                        	endm
+
+                        ;!@ Modified with SongStart	param
+                        ;!0xFF, 3 > sCopyMem: .dw, .db {					
+                        	;%; No song should ever use this command. It may good idea to remove it.
+                        ;}
+                        ;KC_smpsCopyData macro data,len
+                        KC_smpsCopyData macro data,len,songstart
+                        	Error Coord. Flag to copy data should not be used. Complain to GenesisDoes if any music uses it.
+                        	;Error No song should ever use this command. It may be a good idea to remove it.
+                        	dc.b	$FF,$03
+                        	;dc.w	little_endian(data)
+                        	rom_ptr_z80(data+songstart)
+                        	dc.b	len
+                        	endm
+
+                        ;!0xFF, 5 > sSSGEG: .db, .db, .db, .db {			
+                        	;=op2 .a2
+                        	;:=2 .a1
+                        	;:=1 \op2\
+                        ;}
+                        KC_smpsSSGEG macro op1,op2,op3,op4
+                        	dc.b	$FF,$05,op1,op3,op2,op4
+                        	endm
+                        	
+                        	
+                        ;!0xFF, 6 > sVolEnvFM: .db, .db {
+                        	;:?0 {
+                        		;?volenv;
+                        	;}
+                        ;}	
+                        KC_smpsFMVolEnv macro tone,mask
+                        	dc.b	$FF,$06,tone,mask
+                        	endm
+                        ;==============================================
+
+000000                  	include "KC.asm"
+       = 040000         Target	EQU	$40000
+       = 000080         Play	EQU	$80
+       = 000000         FM_Pitch	EQU	$00
+       = 000000         FM_Vol	EQU	FM_Pitch
+
+000000                  SonicCD_CE_Header:
+                        	;sHeaderInit						; Z80 offset is $DFE6
+000000                  	smpsHeaderVoice	SonicCD_CE_Patches, Target
+                        ;songStart set *
+                        	;dc.w	loc-songStart
+000000                  	rom_ptr_z80(SonicCD_CE_Patches+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000000 2480             	dc.w  (((((SonicCD_CE_Patches+Target))<<8)&$FF00)|((((SonicCD_CE_Patches+Target))>>8)&$7F)|$80)
+000002                  	smpsHeaderTick	$01
+000002 01               	dc.b $01
+000003                  	smpsHeaderChan	$02
+                        	if 1==2
+                        	else
+000003 02               		dc.b	$02
+                        	endif	
+000004                  	smpsHeaderSFX	Play, cFM4, SonicCD_CE_FM4, FM_Pitch, FM_Vol, Target
+000004 8004             	dc.b Play,cFM4
+                        	;dc.w loc-sPointZero
+000006                  	rom_ptr_z80(SonicCD_CE_FM4+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000006 1080             	dc.w  (((((SonicCD_CE_FM4+Target))<<8)&$FF00)|((((SonicCD_CE_FM4+Target))>>8)&$7F)|$80)
+000008 0000             	dc.b FM_Pitch,FM_Vol
+00000A                  	smpsHeaderSFX	Play, cFM5, SonicCD_CE_FM5, FM_Pitch, FM_Vol, Target
+00000A 8005             	dc.b Play,cFM5
+                        	;dc.w loc-sPointZero
+00000C                  	rom_ptr_z80(SonicCD_CE_FM5+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000C 1A80             	dc.w  (((((SonicCD_CE_FM5+Target))<<8)&$FF00)|((((SonicCD_CE_FM5+Target))>>8)&$7F)|$80)
+00000E 0000             	dc.b FM_Pitch,FM_Vol
+
+000010                  SonicCD_CE_FM4:
+000010                  	smpsFMVoice		$00
+                        	;if song<>""
+                        	if 1==2
+                        	else
+000010 EF00             		dc.b $EF,$00
+                        	endif
+000012                  	smpsModSet	$02, $01, $01, $02
+000012 F002010102       	dc.b	$F0,$02,$01,$01,$02
+000017 9E1C             	dc.b nF2, $1C
+000019                  	smpsStop
+000019 F2               	dc.b	$F2
+
+00001A                  SonicCD_CE_FM5:
+00001A                  	smpsFMVoice		$01
+                        	;if song<>""
+                        	if 1==2
+                        	else
+00001A EF01             		dc.b $EF,$01
+                        	endif
+00001C                  	smpsModSet	$02, $01, $A4, $57
+00001C F00201A457       	dc.b	$F0,$02,$01,$A4,$57
+000021 C11D             	dc.b nE5, $1D
+000023                  	smpsStop
+000023 F2               	dc.b	$F2
+
+000024                  SonicCD_CE_Patches:
+                        	; Patch $00
+                        	; $3C
+                        	; $02, $00, $01, $01,	$1F, $1F, $1F, $1F
+                        	; $00, $0E, $19, $10,	$00, $0C, $00, $0F
+                        	; $0F, $EF, $FF, $FF,	$05, $80, $00, $80
+000024 3C               	dc.b	$3C
+000025 02000101         	dc.b	$02, $00, $01, $01
+000029 1F1F1F1F         	dc.b	$1F, $1F, $1F, $1F
+00002D 000E1910         	dc.b	$00, $0E, $19, $10
+000031 000C000F         	dc.b	$00, $0C, $00, $0F
+000035 0FEFFFFF         	dc.b	$0F, $EF, $FF, $FF
+000039 05800080         	dc.b	$05, $80, $00, $80
+                        	;spAlgorithm	$04
+                        	;spFeedback	$07
+                        	;spDetune	$00, $00, $00, $00
+                        	;spMultiple	$02, $01, $00, $01
+                        	;spRateScale	$00, $00, $00, $00
+                        	;spAttackRt	$1F, $1F, $1F, $1F
+                        	;spAmpMod	$00, $00, $00, $00
+                        	;spSustainRt	$00, $19, $0E, $10
+                        	;spSustainLv	$00, $0F, $0E, $0F
+                        	;spDecayRt	$00, $00, $0C, $0F
+                        	;spReleaseRt	$0F, $0F, $0F, $0F
+                        	;spTotalLv	$05, $00, $00, $00
+
+                        	; Patch $01
+                        	; $03
+                        	; $02, $37, $33, $31,	$1F, $1F, $1F, $54
+                        	; $03, $05, $04, $0A,	$02, $02, $02, $03
+                        	; $2F, $2F, $2F, $5F,	$03, $15, $22, $80
+00003D 03               	dc.b	$03
+00003E 02373331         	dc.b	$02, $37, $33, $31
+000042 1F1F1F54         	dc.b	$1F, $1F, $1F, $54
+000046 0305040A         	dc.b	$03, $05, $04, $0A
+00004A 02020203         	dc.b	$02, $02, $02, $03
+00004E 2F2F2F5F         	dc.b	$2F, $2F, $2F, $5F
+000052 03152280         	dc.b	$03, $15, $22, $80
+                        	;spAlgorithm	$03
+                        	;spFeedback	$00
+                        	;spDetune	$00, $03, $03, $03
+                        	;spMultiple	$02, $03, $07, $01
+                        	;spRateScale	$00, $00, $00, $01
+                        	;spAttackRt	$1F, $1F, $1F, $14
+                        	;spAmpMod	$00, $00, $00, $00
+                        	;spSustainRt	$03, $04, $05, $0A
+                        	;spSustainLv	$02, $02, $02, $05
+                        	;spDecayRt	$02, $02, $02, $03
+                        	;spReleaseRt	$0F, $0F, $0F, $0F
+                        	;spTotalLv	$03, $22, $15, $00
+
+00000 Total Error(s)
+
+CFM3               00000002 E  CFM4               00000004 E  CFM5               00000005 E
+CFM6               00000006 E  CNOISE             000000E0 E  CPSG1              00000080 E
+CPSG2              000000A0 E  CPSG3              000000C0 E  CPWM1              00000018 E
+CPWM2              0000001A E  CPWM3              0000001C E  CPWM4              0000001E E
+DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK              00000081 E
+DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
+DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  FM_PITCH           00000000 E
+FM_VOL             00000000 E  NA0                0000008A E  NA1                00000096 E
+NA2                000000A2 E  NA3                000000AE E  NA4                000000BA E
+NA5                000000C6 E  NA6                000000D2 E  NA7                000000DE E
+NAB0               00000089 E  NAB1               00000095 E  NAB2               000000A1 E
+NAB3               000000AD E  NAB4               000000B9 E  NAB5               000000C5 E
+NAB6               000000D1 E  NAB7               000000DD E  NB0                0000008C E
+NB1                00000098 E  NB2                000000A4 E  NB3                000000B0 E
+NB4                000000BC E  NB5                000000C8 E  NB6                000000D4 E
+NBB0               0000008B E  NBB1               00000097 E  NBB2               000000A3 E
+NBB3               000000AF E  NBB4               000000BB E  NBB5               000000C7 E
+NBB6               000000D3 E  NBB7               000000DF E  NC0                00000081 E
+NC1                0000008D E  NC2                00000099 E  NC3                000000A5 E
+NC4                000000B1 E  NC5                000000BD E  NC6                000000C9 E
+NC7                000000D5 E  NCS0               00000082 E  NCS1               0000008E E
+NCS2               0000009A E  NCS3               000000A6 E  NCS4               000000B2 E
+NCS5               000000BE E  NCS6               000000CA E  NCS7               000000D6 E
+ND0                00000083 E  ND1                0000008F E  ND2                0000009B E
+ND3                000000A7 E  ND4                000000B3 E  ND5                000000BF E
+ND6                000000CB E  ND7                000000D7 E  NE0                00000085 E
+NE1                00000091 E  NE2                0000009D E  NE3                000000A9 E
+NE4                000000B5 E  NE5                000000C1 E  NE6                000000CD E
+NE7                000000D9 E  NEB0               00000084 E  NEB1               00000090 E
+NEB2               0000009C E  NEB3               000000A8 E  NEB4               000000B4 E
+NEB5               000000C0 E  NEB6               000000CC E  NEB7               000000D8 E
+NF0                00000086 E  NF1                00000092 E  NF2                0000009E E
+NF3                000000AA E  NF4                000000B6 E  NF5                000000C2 E
+NF6                000000CE E  NF7                000000DA E  NFS0               00000087 E
+NFS1               00000093 E  NFS2               0000009F E  NFS3               000000AB E
+NFS4               000000B7 E  NFS5               000000C3 E  NFS6               000000CF E
+NFS7               000000DB E  NG0                00000088 E  NG1                00000094 E
+NG2                000000A0 E  NG3                000000AC E  NG4                000000B8 E
+NG5                000000C4 E  NG6                000000D0 E  NG7                000000DC E
+NRST               00000080 E  PAKICK             0000008B E  PASNARE            0000008C E
+PBELL              0000008D E  PBONGOHI           00000092 E  PBONGOLO           00000093 E
+PCLAP              0000008A E  PCLICKHI           00000090 E  PCLICKLO           00000091 E
+PCLOSEDHH          00000098 E  PCOWBELL           0000008F E  PCRASHCYMB         00000089 E
+PCRA_D81           00000081 E  PCRA_D82           0000008C E  PCRA_D83           00000085 E
+PCRA_D84           00000086 E  PCRA_D85           00000087 E  PEHIHAT            00000088 E
+PEKICK             00000081 E  PESNARE            00000082 E  PFINGSNAP          0000008E E
+PFINGSNAPHI        0000008E E  PFINGSNAPLO        0000009E E  PLAY               00000080 E
+PNEPDADA           0000009D E  POPENHH            00000099 E  PORCHHITHI         0000009F E
+PORCHHITLO         000000A1 E  PORCHHITLOWER      000000A2 E  PORCHHITMED        000000A0 E
+PRIDEBELL          00000084 E  PSEGA              00000097 E  PSGDELTA           0000000C E
+PSILENCE           00000096 E  PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E
+PTIMPANILO         00000095 E  PTOMHI             00000085 E  PTOMLOW            00000087 E
+PTOMLOWER          0000009A E  PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E
+PTOMMID            00000086 E  SMPSED             000000ED E  SMPSEE             000000EE E
+SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E
+SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E
+SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E  SMPSPITCH02LO      000000E8 E
+SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E  SMPSPITCH04HI      00000030 E
+SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E  SMPSPITCH05LO      000000C4 E
+SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E  SMPSPITCH07HI      00000054 E
+SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E  SMPSPITCH08LO      000000A0 E
+SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E  SMPSPITCH10HI      00000078 E
+SMPSPITCH10LO      00000088 E  SONICCD_CE_FM4     00000010    SONICCD_CE_FM5     0000001A
+SONICCD_CE_HEADER  00000000    SONICCD_CE_PATCHES 00000024    TARGET             00040000 E

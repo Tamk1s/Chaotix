@@ -192,11 +192,11 @@ EndSeg
 
 ;!@ NEW Data
 ;Extra-large PWM samples. Padded to end of ROM
-StartSeg PWMDataX Big_Endian $2F9150
-	include	"Sound/PWM/9F.bin"
-	include	"Sound/PWM/9D.bin"
+StartSeg PWMDataX Big_Endian $2F9250	
+	include	"Sound/PWM/97.bin"
 	include	"Sound/PWM/98.bin"
 	include	"Sound/PWM/99.bin"
-	include	"Sound/PWM/97.bin"
+	include	"Sound/PWM/9D.bin"
+	include	"Sound/PWM/9F.bin"
 EndSeg
 ;endregion

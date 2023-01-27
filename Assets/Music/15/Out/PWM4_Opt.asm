@@ -1,9 +1,8 @@
 HDNR1S_PWM4:
 	smpsPan		panCenter
-
 ;HDNR1S_PWM4_Loop1:
 	;sModOff
-	;smpsLoop		$00, $07, HDNR1S_PWM4_Loop1, Target
+	;smpsLoop		$00, $0D, HDNR1S_PWM4_Loop1, Target
 	dc.b nRst, $06
 
 HDNR1S_PWM4_Loop2:
@@ -14,7 +13,7 @@ HDNR1S_PWM4_Loop2:
 	smpsAlterVol		$02
 	dc.b pClosedHH, $01, nRst, $02
 	smpsAlterVol		$06
-	dc.b pFingSnap, $06, nRst, $09
+	dc.b pASnare, $06, nRst, $09
 	smpsAlterVol		$FA
 
 HDNR1S_PWM4_Loop3:
@@ -28,7 +27,7 @@ HDNR1S_PWM4_Jump1:
 HDNR1S_PWM4_Loop5:
 	dc.b pClosedHH, $01, nRst, $02
 	smpsAlterVol		$08
-	dc.b pFingSnap, $06, nRst, $09
+	dc.b pASnare, $06, nRst, $09
 	smpsAlterVol		$F8
 
 HDNR1S_PWM4_Loop4:
@@ -38,7 +37,7 @@ HDNR1S_PWM4_Loop4:
 	smpsLoop		$01, $02, HDNR1S_PWM4_Loop5, Target
 	dc.b pClosedHH, $01, nRst, $02
 	smpsAlterVol		$08
-	dc.b pFingSnap, $06, nRst, $09
+	dc.b pASnare, $06, nRst, $09
 	smpsAlterVol		$F8
 
 HDNR1S_PWM4_Loop6:
@@ -54,7 +53,7 @@ HDNR1S_PWM4_Loop7:
 	smpsLoop		$00, $1C, HDNR1S_PWM4_Loop7, Target
 	dc.b pClosedHH, $01, nRst, $1D, pClosedHH, $01, nRst, $02
 	smpsAlterVol		$08
-	dc.b pFingSnap, $06, nRst, $09
+	dc.b pASnare, $06, nRst, $09
 	smpsAlterVol		$F8
 
 HDNR1S_PWM4_Loop8:
@@ -68,13 +67,8 @@ HDNR1S_PWM4_Loop8:
 HDNR1S_PWM4_Loop9:
 	dc.b pClosedHH, $01, nRst, $0B
 	smpsLoop		$00, $2A, HDNR1S_PWM4_Loop9, Target
-	dc.b pClosedHH, $01, nRst, $1A
-	smpsAlterVol		$FB
-
-HDNR1S_PWM4_Loop10:
-	dc.b pAKick, $03, nRst, $02, pAKick, $03, nRst, $01
-	dc.b pAKick, $03, nRst, $0C
-	smpsLoop		$00, $02, HDNR1S_PWM4_Loop10, Target
-	smpsAlterVol		$05
-	dc.b pCrashCymb
+	dc.b pClosedHH, $01, nRst, $1A, pOrchHitLo, $05, $04, $09
+	dc.b nRst, $06, pOrchHitMed, $05, $04, $09, nRst, $06
+	dc.b pOrchHitHi, $05, $04, $03
+	smpsAlterNote	$00
 	smpsJump		HDNR1S_PWM4_Jump1, Target

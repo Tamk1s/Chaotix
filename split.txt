@@ -2984,9 +2984,11 @@ Extract $2BA6E4  $80 "Levels/SSZ/Pal/BossN.bin"
 ;;;;;;;;;;;;;;;;;;;;;;
 ;Other non-level palette Data
 ;;;;;;;;;;;;;;;;;;;;;;
+Extract	$032392	$060 "Art/palettes/MD/Menus/CharSel.bin"
 Extract	$03E8CA	$080 "Art/palettes/MD/Menus/DataLoad.bin"
 Extract	$006E18	$080 "Art/palettes/MD/Menus/Soundtest.bin"
 Extract	$006E98	$020 "Art/palettes/MD/Menus/Soundtest_Amy.bin"
+
 ;EndRegion
 
 ;Region @X_PalcData_Gens
@@ -3102,6 +3104,8 @@ Extract $012E86	$40 "Levels/Intro/Pal32x/P_IIZN.bin"
 ;EndRegion
 
 ;Region @Mixed
+Extract $01310C	$0048 "Levels/Entrance/Pal32x/X_MSKai_Lvl.bin"
+Extract $013145	$0048 "Levels/Entrance/Pal32x/X_MSKai_Boss.bin"
 Extract $2BC110	$0040 "Levels/Entrance/Pal32x/P_0MN.bin"
 Extract $2BC150	$0040 "Levels/Entrance/Pal32x/S_0MN.bin"
 Extract $2BC190	$02D8 "Levels/Entrance/Pal32x/X_LvlIcons.bin"

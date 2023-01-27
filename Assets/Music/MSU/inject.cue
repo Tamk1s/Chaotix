@@ -1,0 +1,121 @@
+FILE "inject.bin" BINARY
+FILE "01 Door Into Summer.wav" WAVE
+  TRACK 01 AUDIO
+    INDEX 01 00:00:00
+FILE "02 Electoria.wav" WAVE
+  TRACK 02 AUDIO
+    INDEX 02 00:00:00
+FILE "03 Speed Of Sound.wav" WAVE
+  TRACK 03 AUDIO
+    INDEX 03 00:00:00
+FILE "04 Seascape.wav" WAVE
+  TRACK 04 AUDIO
+    INDEX 04 00:00:00	
+FILE "05 Midnight Greenhouse.wav" WAVE
+  TRACK 05 AUDIO
+    INDEX 05 00:00:00
+FILE "06 New Moon.wav" WAVE
+  TRACK 06 AUDIO
+    INDEX 06 00:00:00
+FILE "07 Labyrinth.wav" WAVE
+  TRACK 07 AUDIO
+    INDEX 07 00:00:00
+FILE "08 Trial And Error.wav" WAVE
+  TRACK 08 AUDIO
+    INDEX 08 00:00:00
+FILE "09 Walkin.wav" WAVE
+  TRACK 09 AUDIO
+    INDEX 09 00:00:00
+FILE "0A Hyper-Hyper.wav" WAVE
+  TRACK 10 AUDIO
+    INDEX 10 00:00:00	
+FILE "0B Evening Star.wav" WAVE
+  TRACK 11 AUDIO
+    INDEX 11 00:00:00		
+FILE "0C Moonrise.wav" WAVE
+  TRACK 12 AUDIO
+    INDEX 12 00:00:00			
+FILE "0E This Horizon.wav" WAVE
+  TRACK 13 AUDIO
+    INDEX 13 00:00:00				
+FILE "0F Take Off.wav" WAVE
+  TRACK 14 AUDIO
+    INDEX 14 00:00:00				
+FILE "10 Combination.wav" WAVE
+  TRACK 15 AUDIO
+    INDEX 15 00:00:00				
+FILE "11 Take A Nap.wav" WAVE
+  TRACK 16 AUDIO
+    INDEX 16 00:00:00				
+FILE "12 Surging Power.wav" WAVE
+  TRACK 17 AUDIO
+    INDEX 17 00:00:00				
+FILE "13 Mechanical Dance (PAL).wav" WAVE
+  TRACK 18 AUDIO
+    INDEX 18 00:00:00				
+FILE "14 Tube Panic.wav" WAVE
+  TRACK 19 AUDIO
+    INDEX 19 00:00:00				
+FILE "15 Crystal Nightmare.wav" WAVE
+  TRACK 20 AUDIO
+    INDEX 20 00:00:00				
+FILE "16 Child's Song.wav" WAVE
+  TRACK 21 AUDIO
+    INDEX 21 00:00:00				
+FILE "17 Soda Pop.wav" WAVE
+  TRACK 22 AUDIO
+    INDEX 22 00:00:00				
+FILE "18 Pendulum.wav" WAVE
+  TRACK 23 AUDIO
+    INDEX 23 00:00:00				
+FILE "19 Silver Screen.wav" WAVE
+  TRACK 24 AUDIO
+    INDEX 24 00:00:00				
+FILE "1A Tachy Touch.wav" WAVE
+  TRACK 25 AUDIO
+    INDEX 25 00:00:00				
+FILE "1B Chaotic World.wav" WAVE
+  TRACK 26 AUDIO
+    INDEX 26 00:00:00				
+FILE "1C Surprise.wav" WAVE
+  TRACK 27 AUDIO
+    INDEX 27 00:00:00				
+FILE "1D Nice Meeting You.wav" WAVE
+  TRACK 28 AUDIO
+    INDEX 28 00:00:00				
+FILE "1E Have a Happy Day.wav" WAVE
+  TRACK 29 AUDIO
+    INDEX 29 00:00:00				
+FILE "1F Reach The Goal.wav" WAVE
+  TRACK 30 AUDIO
+    INDEX 30 00:00:00				
+FILE "20 Hive Five.wav" WAVE
+  TRACK 31 AUDIO
+    INDEX 31 00:00:00	
+FILE "21 Decision.wav" WAVE
+	TRACK 32 AUDIO
+		INDEX 32 00:00:00	
+FILE "22 From Party to Party.wav" WAVE
+	TRACK 33 AUDIO
+		INDEX 33 00:00:00	
+FILE "23 Have Some Fun.wav" WAVE
+	TRACK 34 AUDIO
+		INDEX 34 00:00:00	
+FILE "24 Oriental Legend.wav" WAVE
+	TRACK 35 AUDIO
+		INDEX 35 00:00:00	
+FILE "25 Steel Heart.wav" WAVE
+	TRACK 36 AUDIO
+		INDEX 36 00:00:00	
+FILE "26 Tribute.wav" WAVE
+	TRACK 37 AUDIO
+		INDEX 37 00:00:00	
+FILE "27 Destructive Power.wav" WAVE
+	TRACK 38 AUDIO
+		INDEX 38 00:00:00	
+FILE "28 Just Another Day.wav" WAVE
+	TRACK 39 AUDIO
+		INDEX 39 00:00:00	
+FILE "29 Decision 2nd.wav" WAVE
+	TRACK 40 AUDIO
+		INDEX 40 00:00:00	

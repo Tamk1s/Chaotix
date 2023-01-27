@@ -82,6 +82,12 @@ bytepatch.exe -a 0x000191 kc.bin 3620
 REM Patch Shield monitor to play sphere get sfx
 bytepatch.exe -a 0x101D0 kc.bin 705E
 
+REM Patch Combi Ring monitor to play new sfx
+bytepatch.exe -a 0x14B8C kc.bin 003E
+
+REM Patch Growth sfx in lvlsel roulette
+bytepatch.exe -a 0x2833c kc.bin 005D
+
 REM BGScroll deformation byte patch to force AAZ parallax for TTZ Classic!
 bytepatch.exe -a 0x8082 kc.bin 0706 0704 0702 0700 06FE 06F6 06FA
 
@@ -92,6 +98,15 @@ REM Gameover/neg rings 1
 REM Gameover/neg rings 2
 REM GotThrough 1
 REM GotThrough 2
+
+
+REM MegaSD MSU support!
+REM bytepatch.exe -a 0x000B0C kc.bin 4EB9 009E 9500 4E71
+REM bytepatch.exe -a 0x000B0C kc.bin 4EB9 009E 9534 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x004DEA kc.bin 4EB9 009E 95FA 4E71 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x004E8A kc.bin 4EB9 009E 9610 4E71 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x076E96 kc.bin 4EB9 009E 9626 4E71 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x2E9500 kc.bin -f "Assets\Code\msu.bin"
 
 
 REM EndPadding area! (New code)
@@ -148,7 +163,7 @@ bytepatch.exe -a 0x03F476 kc.bin 4EB9 008F 7662
 bytepatch.exe -a 0x03F490 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x077662 kc.bin -f "Assets\Code\BossMode2.bin"
 bytepatch.exe -a 0x03F5C2 kc.bin 0C41 0006
-REM bytepatch.exe -a 0x03E7D0 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x03E7D0 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x03F7DC kc.bin 4EB9 008F 76B4
 
 
@@ -174,3 +189,34 @@ bytepatch.exe -a 0x025D90 kc.bin 003C
 bytepatch.exe -a 0x025DF4 kc.bin 4E71 4E71
 bytepatch.exe -a 0x025E12 kc.bin 4E71 4E71
 bytepatch.exe -a 0x025DC4 kc.bin 0300
+
+
+
+REM Pal32x_Debug (LUA)
+REM bytepatch.exe -a 0x003158 kc.bin 7000 4E75
+REM bytepatch.exe -a 0x013388 kc.bin 4E71 4E71
+REM bytepatch.exe -a 0x0136AC kc.bin 4E71 4E71 4E71
+REM bytepatch.exe -a 0x0136BA kc.bin 4E71 4E71 4E71
+REM bytepatch.exe -a 0x0136C4 kc.bin 4E71 4E71 4E71
+REM bytepatch.exe -a 0x01FA8C kc.bin 4E71 4E71 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x02AE78 kc.bin 43F8 D460
+REM bytepatch.exe -a 0x02CEF4 kc.bin 43F8 D460
+REM bytepatch.exe -a 0x02CF38 kc.bin 4E71 4E71
+REM bytepatch.exe -a 0x02D61A kc.bin 43F8 D460
+REM bytepatch.exe -a 0x02D6F6 kc.bin 43F8 D460
+REM bytepatch.exe -a 0x02DC76 kc.bin 43F8 D460
+REM bytepatch.exe -a 0x02E0C6 kc.bin 43F8 D460
+REM bytepatch.exe -a 0x02E1B0 kc.bin 43F8 D460
+REM bytepatch.exe -a 0x02E4B4 kc.bin 43F8 D460
+REM bytepatch.exe -a 0x02F850 kc.bin 41F8 D460
+REM bytepatch.exe -a 0x031492 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x0314A4 kc.bin 43F8 D460
+REM bytepatch.exe -a 0x0320C2 kc.bin 45F8 D460
+REM bytepatch.exe -a 0x0320F4 kc.bin 4E71 4E71
+REM !@
+REM bytepatch.exe -a 0x03E228 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x074370 kc.bin 43F8 D460
+
+REM bytepatch.exe -a 0x00314E kc.bin 4EB9 008F 7680 4E71
+REM bytepatch.exe -a 0x0031E6 kc.bin 4EB9 008F 7650 4E71
+REM bytepatch.exe -a 0x077650 kc.bin -f "Assets\Code\Pal32x_Debug.bin"

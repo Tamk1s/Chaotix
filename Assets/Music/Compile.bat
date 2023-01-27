@@ -28,7 +28,7 @@ Copy /y /b "12\Out\12 Surging Power.bin" "Preview\Data\Knuckles Maniax\12 Surgin
 Copy /y /b "13\Out\13 Mechanical Dance.bin" "Preview\Data\Knuckles Maniax\13 Mechanical Dance.skc"
 REM Copy /y /b "14\Out\14 Tube Panic.bin" "Preview\Data\Knuckles Maniax\14 Tube Panic.skc"
 REM Copy /y /b "14\Out\14 Tube Panic [extra drums].bin" "Preview\Data\Knuckles Maniax\14 Tube Panic [extra drums].skc"
-Copy /y /b "15\Out\15 Crystal Nightmare.bin" "Preview\Data\Knuckles Maniax\15 Crystal Nightmare.skc"
+REM Copy /y /b "15\Out\15 Crystal Nightmare.bin" "Preview\Data\Knuckles Maniax\15 Crystal Nightmare.skc"
 REM Copy /y /b "16\Out\16 Childs Song.bin" "Preview\Data\Knuckles Maniax\16 Childs Song.skc"
 REM Copy /y /b "17\Out\17 Soda Pop.bin" "Preview\Data\Knuckles Maniax\17 Soda Pop.skc"
 REM Copy /y /b "18\Out\18 Pendulum.bin" "Preview\Data\Knuckles Maniax\18 Pendulum.skc"
@@ -52,8 +52,13 @@ Copy /y /b "29\Out\29 Decision 2nd.bin" "Preview\Data\Knuckles Maniax\29 Decisio
 Copy /y /b "Test\PWM_PSG_Test\Out\Soundtest.bin" "Preview\Data\Knuckles Maniax\Soundtest.skc"
 
 REM SFX
+Copy /y /b "3E\Out\3E.bin" "Preview\Data\Knuckles Maniax\SFX\3E.sf3"
+Copy /y /b "59\Out\59.bin" "Preview\Data\Knuckles Maniax\SFX\59.sf3"
+Copy /y /b "5A\Out\5A.bin" "Preview\Data\Knuckles Maniax\SFX\5A.sf3"
+Copy /y /b "5B\Out\5B.bin" "Preview\Data\Knuckles Maniax\SFX\5B.sf3"
+Copy /y /b "5E\Out\5E.bin" "Preview\Data\Knuckles Maniax\SFX\5E.sf3"
 Copy /y /b "5F\Out\5F.bin" "Preview\Data\Knuckles Maniax\SFX\5F.sf3"
-
+Copy /y /b "69\Out\69.bin" "Preview\Data\Knuckles Maniax\SFX\69.sf3"
 
 REM Copies all finalized ASM files to working project dir for recompilation into driver
 REM Music
@@ -101,5 +106,11 @@ Copy /Y "28\Out\KC.asm" "..\..\Sound\Music\ASM\28 Just Another Day.asm"
 Copy /Y "29\Out\KC.asm" "..\..\Sound\Music\ASM\29 Decision 2nd.asm"
 
 REM SFX
+Copy /Y "3E\Out\KC.asm" "..\..\Sound\Music\ASM\3E.asm"
+Copy /Y "59\Out\KC.asm" "..\..\Sound\Music\ASM\59.asm"
+Copy /Y "5A\Out\KC.asm" "..\..\Sound\Music\ASM\5A.asm"
+Copy /Y "5B\Out\KC.asm" "..\..\Sound\Music\ASM\5B.asm"
+Copy /Y "5E\Out\KC.asm" "..\..\Sound\Music\ASM\5E.asm"
 Copy /Y "5F\Out\KC.asm" "..\..\Sound\Music\ASM\5F.asm"
+Copy /Y "69\Out\KC.asm" "..\..\Sound\Music\ASM\69.asm"
 pause

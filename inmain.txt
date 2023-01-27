@@ -2344,6 +2344,11 @@ StartSeg Pal32xX_WE_LvlSigns_Ptr $027F0A $04 Big_Endian
 	DWORD	Pal32xX_WE_LvlSigns
 EndSeg
 
+StartSeg Pal32x_Level_WE_Data2 $01310C $0090 Big_Endian
+	Pal32xX_MSKai_Lvl:			include	"Levels/Entrance/Pal32x/X_MSKai_Lvl.bin"
+	Pal32xX_MSKai_Boss:			include	"Levels/Entrance/Pal32x/X_MSKai_Boss.bin"
+EndSeg
+
 StartSeg Pal32x_Level_WE_Data $2BC110 $9AE Big_Endian
 	PalD32xP_WE0MN:			include	"Levels/Entrance/Pal32x/P_0MN.bin"
 	PalD32xS_WE0MN:			include	"Levels/Entrance/Pal32x/S_0MN.bin"
@@ -5441,6 +5446,11 @@ StartSeg MapEni_ST_MenuBG_Ptr Big_Endian $006CE6
 	DWORD MapEni_ST_MenuBG
 EndSeg
 
+StartSeg Pal_CharSel_Ptr Big_Endian $032364 $0002
+	Pal_CharSel_PtrL:
+		WORD	Pal_CharSel-Pal_CharSel_PtrL
+EndSeg
+
 StartSeg ArtNem_DL_Menu_Ptr1 Big_Endian $03224E
 	DWORD ArtNem_DL_Menu
 EndSeg
@@ -5487,8 +5497,16 @@ StartSeg MapEni_DL_Training_Box_Ptr Big_Endian $03E7B8
 EndSeg
 ;EndRegion
 
-;!@ Update me with ability to update ptr to here and other data content nearby
-StartSeg Pal_DataLoad_ptr Big_Endian $03E8CA $0080
+StartSeg Pal_CharSel_Data Big_Endian $032392 $0060
+	Pal_CharSel:	include	"Art/palettes/MD/Menus/CharSel.bin"
+EndSeg
+
+StartSeg Pal_DataLoad_Ptr Big_Endian $03E658 $0002
+	Pal_DataLoad_PtrL:
+		WORD	(Pal_DataLoad-Pal_DataLoad_PtrL)
+EndSeg
+
+StartSeg Pal_DataLoad_data Big_Endian $03E8CA $0080
 	Pal_DataLoad:	include	"Art/palettes/MD/Menus/DataLoad.bin"
 EndSeg
 

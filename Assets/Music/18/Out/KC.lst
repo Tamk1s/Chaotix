@@ -149,11 +149,9 @@
        = 00008B         pAKick		EQU $8B
        = 00008C         pASnare		EQU	$8C
        = 00008D         pBell		EQU $8D
-
                         ;!@ Enum due to late PWM driver revision
        = 00008E         pFingSnap	EQU	$8E
        = 00008E         pFingSnapHi	EQU	$8E
-
        = 00008F         pCowbell	EQU	$8F
        = 000090         pClickHi	EQU	$90
        = 000091         pClickLo	EQU	$91
@@ -162,8 +160,6 @@
        = 000094         pTimpaniHi	EQU	$94
        = 000095         pTimpaniLo	EQU	$95
        = 000096         pSilence	EQU $96
-
-
                         ;!@ NEW DATA
        = 000097         pSega		EQU $97
        = 000098         pClosedHH	EQU $98
@@ -173,6 +169,10 @@
        = 00009C         pTomLowerest	EQU	$9C
        = 00009D         pNepDada		EQU	$9D
        = 00009E         pFingSnapLo		EQU	$9E
+       = 00009F         pOrchHitHi		EQU	$9F
+       = 0000A0         pOrchHitMed		EQU	$A0
+       = 0000A1         pOrchHitLo		EQU	$A1
+       = 0000A2         pOrchHitLower	EQU	$A2
 
                         ;!@ Crackers conversion enums. Knuckles Clackers equiv
        = 000081         pCra_d81	EQU	pEKick
@@ -611,8 +611,7 @@
                         	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
                         	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
                         	dc.b	vcTL4,vcTL3,vcTL2,vcTL1	
-000000                  	endm
-                        	
+000000                  	endm	
                         	
                         ;==============================================
                         ;!@ The following CF flags/macros are KC-drive specific!
@@ -9952,18 +9951,19 @@ PCRA_D81           00000081 E  PCRA_D82           0000008C E  PCRA_D83          
 PCRA_D84           00000086 E  PCRA_D85           00000087 E  PEHIHAT            00000088 E
 PEKICK             00000081 E  PESNARE            00000082 E  PFINGSNAP          0000008E E
 PFINGSNAPHI        0000008E E  PFINGSNAPLO        0000009E E  PNEPDADA           0000009D E
-POPENHH            00000099 E  PRIDEBELL          00000084 E  PSEGA              00000097 E
-PSGDELTA           0000000C E  PSILENCE           00000096 E  PSPLASHCYMB        00000083 E
-PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E  PTOMHI             00000085 E
-PTOMLOW            00000087 E  PTOMLOWER          0000009A E  PTOMLOWERER        0000009B E
-PTOMLOWEREST       0000009C E  PTOMMID            00000086 E  PWMPITCH           00000000 E
-PWMVOL             000000FF E  SMPSED             000000ED E  SMPSEE             000000EE E
-SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E
-SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E
-SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E  SMPSPITCH02LO      000000E8 E
-SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E  SMPSPITCH04HI      00000030 E
-SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E  SMPSPITCH05LO      000000C4 E
-SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E  SMPSPITCH07HI      00000054 E
-SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E  SMPSPITCH08LO      000000A0 E
-SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E  SMPSPITCH10HI      00000078 E
-SMPSPITCH10LO      00000088 E  TARGET             00040000 E
+POPENHH            00000099 E  PORCHHITHI         0000009F E  PORCHHITLO         000000A1 E
+PORCHHITLOWER      000000A2 E  PORCHHITMED        000000A0 E  PRIDEBELL          00000084 E
+PSEGA              00000097 E  PSGDELTA           0000000C E  PSILENCE           00000096 E
+PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E
+PTOMHI             00000085 E  PTOMLOW            00000087 E  PTOMLOWER          0000009A E
+PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E  PTOMMID            00000086 E
+PWMPITCH           00000000 E  PWMVOL             000000FF E  SMPSED             000000ED E
+SMPSEE             000000EE E  SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E
+SMPSMODON          000000F1 E  SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E
+SMPSPITCH01HI      0000000C E  SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E
+SMPSPITCH02LO      000000E8 E  SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E
+SMPSPITCH04HI      00000030 E  SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E
+SMPSPITCH05LO      000000C4 E  SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E
+SMPSPITCH07HI      00000054 E  SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E
+SMPSPITCH08LO      000000A0 E  SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E
+SMPSPITCH10HI      00000078 E  SMPSPITCH10LO      00000088 E  TARGET             00040000 E
