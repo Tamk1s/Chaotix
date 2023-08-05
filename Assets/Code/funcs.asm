@@ -8,3 +8,4 @@ IssuePwmRequests	EQU $008F6EFA
 TrainingMenu_InitSlot	EQU	$008BF77C
 LoadPalette32X		EQU	$00883102
 LoadAndMirrorPalette32X	EQU	$008830B8
+BS_DestroyCube		EQU	$008BD824

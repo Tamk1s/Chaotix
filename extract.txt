@@ -8,6 +8,7 @@ LoadFile orig.bin
 ;MakePath "Art/artnem/Menus/Soundtest"
 ;MakePath "Art/artnem/Menus/Endings"
 ;MakePath "Art/artnem/Menus/DataLoad"
+;MakePath "Art/artnem/Menus/Title/"
 
 ;Region @X_ArtNem_Menus
 ;MakePath "Art/tilemaps"
@@ -15,15 +16,24 @@ LoadFile orig.bin
 ;MakePath "Art/tilemaps/Menus/Soundtest"
 ;MakePath "Art/tilemaps/Menus/Endings"
 ;MakePath "Art/tilemaps/Menus/DataLoad"
+;MakePath "Art/tilemaps/Menus/Title/"
 
-Extract $01310C	$0048 "Levels/Entrance/Pal32x/X_MSKai_Lvl.bin"
-Extract $013145	$0048 "Levels/Entrance/Pal32x/X_MSKai_Boss.bin"
+;Extract	$003F88 $A8 "Art/palettes/Mars/Menus/Title_Logo_palc.bin"
+;Extract $2C3910 $00BC "Art/tilemaps/Menus/Title/Road.bin"
+;Extract $2C39CC $022E "Art/tilemaps/Menus/Title/Sides.bin"
+;Extract $2C3BFA $069C "Art/artnem/Menus/Title/Roadsides.bin"
+;Extract	$003A60	$060 "Art/palettes/MD/Menus/Title_Roadside.bin"
+;Extract	$003ED8	$020 "Art/palettes/MD/Menus/Title_Roadside_palc.bin"
+
+;Extract $01310C	$0048 "Levels/Entrance/Pal32x/X_MSKai_Lvl.bin"
+;Extract $013145	$0048 "Levels/Entrance/Pal32x/X_MSKai_Boss.bin"
 ;Extract	$032392	$060 "Art/palettes/MD/Menus/CharSel.bin"
 
 ;Extract $2C2DC8 $046E "Art/artnem/Menus/Soundtest/Amy.bin"
 ;Extract $2C3236 $020E "Art/tilemaps/Menus/Endings/BadEnding.bin"
 ;Extract $2C3444 $04CC "Art/artnem/Menus/Endings/BadEnding.bin"
 ;Extract $2C4B20 $047A "Art/artnem/Menus/Font.bin"
+;Extract $22E100 $030E "Art/artnem/Menus/ascFont.bin"
 
 ;Extract $2C7818 $0802 "Art/artnem/Menus/Soundtest/Menu.bin"
 ;Extract $2C801A	$015E "Art/tilemaps/Menus/Soundtest/SoundtestBG.bin"
@@ -139,6 +149,26 @@ Extract $013145	$0048 "Levels/Entrance/Pal32x/X_MSKai_Boss.bin"
 ; Extract $00BFEA	$4A	"Misc/CharStats/CT_Bomb.bin"
 ; Extract $00C034	$4A	"Misc/CharStats/CT_Espio.bin"
 ; ;EndRegion
+
+;Region @BonusStage
+;Bonus Stage layout
+;MakePath "Misc/BonusStage"
+;Extract	$2D13D0 $00C2	"Misc/BonusStage/BS_Layout00.bin"
+;Extract	$2D1492 $00C8	"Misc/BonusStage/BS_Layout01.bin"
+;Extract	$2D155A $00C6	"Misc/BonusStage/BS_Layout02.bin"
+;Extract	$2D1620 $00D0	"Misc/BonusStage/BS_Layout03.bin"
+;Extract	$2D16F0 $00C0	"Misc/BonusStage/BS_Layout04.bin"
+;Extract	$2D17B0 $00CE	"Misc/BonusStage/BS_Layout05.bin"
+;Extract	$2D187E $00CA	"Misc/BonusStage/BS_Layout06.bin"
+;Extract	$2D1948 $00C0	"Misc/BonusStage/BS_Layout07.bin"
+;Extract	$2D1A08 $00D0	"Misc/BonusStage/BS_Layout08.bin"
+;Extract	$2D1AD8 $00C8	"Misc/BonusStage/BS_Layout09.bin"
+;Extract	$2D1BA0 $00C0	"Misc/BonusStage/BS_Layout0A.bin"
+;Extract	$2D1C60 $00C0	"Misc/BonusStage/BS_Layout0B.bin"
+;Extract	$2D1D20 $00C6	"Misc/BonusStage/BS_Layout0C.bin"
+;Extract	$2D1DE6 $00C0	"Misc/BonusStage/BS_Layout0D.bin"
+;Extract	$2D1EA6 $00C6	"Misc/BonusStage/BS_Layout0E.bin"
+;EndRegion
 
 ; ;Region @X_PalMars_SS
 ; MakePath "Art/palettes/Mars/SS"

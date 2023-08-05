@@ -1,5 +1,5 @@
-2
-73
+0
+76
 00000	00FFE026	w	h	0	v_Obj_E026
 00001	00FFE02C	d	h	0	v_objspace
 00002	00FFE02E	d	h	0	v_objSpace_Singleton
@@ -66,10 +66,15 @@
 0003F	00FFFCCC	d	h	0	DemoTrig
 00040	00FFD860	w	h	0	32xCRAM_Cache
 00041	00000000	S	S	0	----------------------------
-00042	00FFF610	w	h	0	v_BS_ScreenX
-00043	00FFF612	w	h	0	v_BS_ScreenY
-00044	00FFF614	w	h	0	v_BS_ScreenZ
-00045	00FFF616	w	h	0	v_BS_SpeedZ
-00046	00FFF692	w	h	0	v_BS_MaxSpeedZ
-00047	00FFF696	w	h	0	f_BS_Exit
-00048	00FFFCC0	b	h	0	Thing
+00042	00FFF60E	w	h	0	v_BS_RingCntdwn
+00043	00FFF610	w	h	0	v_BS_ScreenX
+00044	00FFF612	w	h	0	v_BS_ScreenY
+00045	00FFF614	w	h	0	v_BS_ScreenZ
+00046	00FFF616	w	h	0	v_BS_SpeedZ
+00047	00FFF692	w	h	0	v_BS_MaxSpeedZ
+00048	00FFF696	w	h	0	f_BS_Exit
+00049	00FFF79E	d	h	0	v_BS_LayoutPtr
+0004A	00FFFDC5	b	h	0	dc5
+0004B	00FFFD39	b	h	0	D39
+1E	d	h	0	Wut
+0004D	00FFFCE4	d	h	0	Rng

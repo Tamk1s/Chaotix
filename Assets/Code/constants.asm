@@ -1015,20 +1015,39 @@ v_gamemode      EQU $FFFFDFDE          ; Current gamemode
 ; ---------------------------------------------------------------------------
 
 ; enum Level stats and demos
-MaxDemo         EQU 5                  ; Max amount of autodemos
-pts_100         EQU $64                ; 100 Pts
-pts_500         EQU $1F4               ; 500 pts
-pts_5k          EQU $1388              ; 5,000 pts
-pts_10k         EQU $2710              ; 10,000 pts
-pts_50k         EQU $C350              ; 50,000 pts
-v_rings         EQU $FFFFE008          ; Rings (word)
-v_score_tatime  EQU $FFFFE00A          ; Score/Time Attack time (long)
-v_time          EQU $FFFFE010          ; Level time in frames (word)
-v_chRings       EQU $FFFFE01A          ; Current Special Stage/Chaos Ring count (word)
-v_btnpushtime2  EQU $FFFFFD28          ; Time (in frames) for the current demo button (1 byte)
-v_demo_btn      EQU $FFFFFD29          ; Demo button (1 byte)
-v_demo_btnAddr  EQU $FFFFFD2A          ; Address of current demo button data frame
-v_demonum       EQU $FFFFFFD0          ; 0-based ID of current autoplay demo (byte)
+pts_0:           EQU 0                  ; 0 pts
+pos1_RingGet:    EQU 1                  ; Single ring get
+neg1_RingLoss:   EQU 1                  ; Single ring loss (partner hit)
+MaxDemo:         EQU 5                  ; Max amount of autodemos
+neg10_ringdebt:  EQU $A                 ; Amount of rings to subtract (absval) for Partner Call ring debt
+pos10_Rings:     EQU $A                 ; Add 10 rings (monitors)
+pos10_RingFBoss: EQU $A                 ; Amount of rings to start with on MSKai Boss
+neg10_ringLoss_BS: EQU $A				; Rings loss from BS Spikes
+pos20_RingBonus: EQU $14                ; Amount of rings to spawn Bonus BigRing
+pos50_RingSpecial: EQU $32              ; Amount of rings to spawn Special BigRing
+pts_100:         EQU $64                ; 100 Pts
+pos200_RingBSSS_Start: EQU $C8          ; 200 Rings (used for BS/SS init from level select)
+pos255_Rings:    EQU $FF                ; Cap for Bonus Stage rings
+pos256_Rings:    EQU $100               ; Upper limit for Bonus Stage Rings
+pts_500:         EQU $1F4               ; 500 pts
+pts_1k:          EQU $3E8               ; 1000 pts
+pts_2k:          EQU $7D0               ; 2000 pts
+pts_3k:          EQU $BB8               ; 3000 pts
+pts_4k:          EQU $FA0               ; 4000 pts
+pts_5k:          EQU $1388              ; 5,000 pts
+pts_10k:         EQU $2710              ; 10,000 pts
+pts_50k:         EQU $C350              ; 50,000 pts
+neg999_rings:    EQU $FC19              ; -999 rings (when dead)
+neg99_rings:     EQU $FF9D              ; -99 rings (die at <=-100 rings)
+v_rings:         EQU $FFFFE008          ; Rings (word)
+v_score_tatime:  EQU $FFFFE00A          ; Score/Time Attack time (long)
+v_time:          EQU $FFFFE010          ; Level time in frames (word)
+v_chRings:       EQU $FFFFE01A          ; Current Special Stage/Chaos Ring count (word)
+v_btnpushtime2:  EQU $FFFFFD28          ; Time (in frames) for the current demo button (1 byte)
+v_demo_btn:      EQU $FFFFFD29          ; Demo button (1 byte)
+v_demo_btnAddr:  EQU $FFFFFD2A          ; Address of current demo button data frame
+v_demonum:       EQU $FFFFFFD0          ; 0-based ID of current autoplay demo (byte)
+
 
 ; ---------------------------------------------------------------------------
 
@@ -1265,18 +1284,20 @@ obSubtype_Lo    EQU $29                ; object subtype (lower byte of word, S1)
 ; ---------------------------------------------------------------------------
 
 ; enum BonusStage_Stuff
-BS_LayoutMax    EQU $F
-BS_LayoutMax2   EQU $3C
-v_BS_ScreenX    EQU $FFFFF610          ; BS Screenpos X (word)
-v_BS_ScreenY    EQU $FFFFF612          ; BS Screenpos Y (word)
-v_BS_ScreenZ    EQU $FFFFF614          ; BS Screenpos Z (word)
-v_BS_SpeedZ     EQU $FFFFF616
-v_BS_MaxSpeedZ  EQU $FFFFF692          ; Max velocity for acceleration
-f_BS_Exit_hi    EQU $FFFFF696          ; Stop BS flag (word, hi byte)? $FF00 if stopped; else $0000
-f_BS_Exit_lo    EQU $FFFFF697
-BS_LayoutTerm   EQU $FFFFF81E
-BS_MaxSpeedZ    EQU $FFFFFFC0
-
+BS_LayoutMax:    EQU $F                 ; Max amount of layouts for Bonus Stage
+BS_LayoutMax2:   EQU $3C                ; Mask for max amount of layouts (ptrs, BS_LayoutMax * 4)
+v_BS_RingCntdwn_hi: EQU $FFFFF60E
+v_BS_RingCntdwn_lo: EQU $FFFFF60F
+v_BS_ScreenX:    EQU $FFFFF610          ; BS Screenpos X (word)
+v_BS_ScreenY:    EQU $FFFFF612          ; BS Screenpos Y (word)
+v_BS_ScreenZ:    EQU $FFFFF614          ; BS Screenpos Z (word)
+v_BS_SpeedZ:     EQU $FFFFF616          ; Current z-velocity
+v_BS_MaxSpeedZ:  EQU $FFFFF692          ; Max z-velocity possible from speed boxes
+f_BS_Exit_hi:    EQU $FFFFF696          ; Stop BS flag (word, hi byte)? $FF00 if stopped; else $0000
+f_BS_Exit_lo:    EQU $FFFFF697
+v_BS_LayoutPtr:  EQU $FFFFF79E          ; Ptr to current BS Layout file addr (long)
+BS_LayoutTerm:   EQU $FFFFF81E          ; Special Layout ptr to default/1st layout. (Special Ram addr?)
+BS_MaxSpeedZ:    EQU $FFFFFFC0
 ; ---------------------------------------------------------------------------
 
 ; enum obArt_Bank IDs

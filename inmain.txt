@@ -16,6 +16,9 @@ Define	Entry_MasterSH2		$6000000		;Logical ROM offset addr for SH2 (Master)
 Define	Offset_MasterSH2	$0077800		;Offset for calculating between raw ROM and SH2 area
 Define	NopLPtr				$00000000
 Define	NullLPtr_Terminator $FFFFFFFF
+Define	Bank1_MemOffset		$700000            ; Logical offset for addresses in Bank1
+Define	Bank0_MemOffset		$880000            ; Logical offset for addresses in Bank0
+
 
 MaxSize				$400000				;Maximum Genesis ROM size
 
@@ -394,7 +397,24 @@ EndSeg
 StartSeg Angles Big_Endian $22E000		;Replace the Angle Array
 		include	"Collisn/Angles.bin"
 EndSeg
+
 ;EndRegion
+
+;Region @Demos
+;!@ Demo data
+StartSeg Demo_Ptrs Big_Endian $2275FA $3EC
+		DWORD Demo_1
+		DWORD Demo_2
+		DWORD Demo_3
+		DWORD Demo_4
+		DWORD Demo_5
+		
+		Demo_1:	include	"Misc/Demos/Demo1.bin"	;MMZ1N, Charmy/Heavy
+		Demo_2:	include	"Misc/Demos/Demo2.bin"	;TTZ2S, Vector/Bomb
+		Demo_3:	include	"Misc/Demos/Demo3.bin"	;BBZ3D, Knuckles/Mighty
+		Demo_4:	include	"Misc/Demos/Demo4.bin"	;IIZ (intro) 3M, Espio/Knuckles
+		Demo_5:	include	"Misc/Demos/Demo5.bin"	;AAZ1D, Mighty/Espio
+EndSeg
 
 ;!@ 
 ;Region @CharStats
@@ -425,6 +445,45 @@ StartSeg CharStats $00BE58 $0226 Big_Endian
 EndSeg
 ;EndRegion
 
+;Region @BonusStage
+StartSeg BS_Ptrs Big_Endian $03D42C $0040
+		DWORD	BS_Layout00
+		DWORD	BS_Layout01
+		DWORD	BS_Layout02
+		DWORD	BS_Layout03
+		DWORD	BS_Layout04
+		DWORD	BS_Layout05
+		DWORD	BS_Layout06
+		DWORD	BS_Layout07
+		DWORD	BS_Layout08
+		DWORD	BS_Layout09
+		DWORD	BS_Layout0A
+		DWORD	BS_Layout0B
+		DWORD	BS_Layout0C
+		DWORD	BS_Layout0D
+		DWORD	BS_Layout0E
+		DWORD	$FFFFF81E
+EndSeg
+
+StartSeg BS_Ptr_Data Big_Endian $2D13D0 $0B9C
+		BS_Layout00:	include		"Misc/BonusStage/BS_Layout00.bin"
+		BS_Layout01:	include		"Misc/BonusStage/BS_Layout01.bin"
+		BS_Layout02:	include		"Misc/BonusStage/BS_Layout02.bin"
+		BS_Layout03:	include		"Misc/BonusStage/BS_Layout03.bin"
+		BS_Layout04:	include		"Misc/BonusStage/BS_Layout04.bin"
+		BS_Layout05:	include		"Misc/BonusStage/BS_Layout05.bin"
+		BS_Layout06:	include		"Misc/BonusStage/BS_Layout06.bin"
+		BS_Layout07:	include		"Misc/BonusStage/BS_Layout07.bin"
+		BS_Layout08:	include		"Misc/BonusStage/BS_Layout08.bin"
+		BS_Layout09:	include		"Misc/BonusStage/BS_Layout09.bin"
+		BS_Layout0A:	include		"Misc/BonusStage/BS_Layout0A.bin"
+		BS_Layout0B:	include		"Misc/BonusStage/BS_Layout0B.bin"
+		BS_Layout0C:	include		"Misc/BonusStage/BS_Layout0C.bin"
+		BS_Layout0D:	include		"Misc/BonusStage/BS_Layout0D.bin"
+		BS_Layout0E:	include		"Misc/BonusStage/BS_Layout0E.bin"		
+EndSeg
+;EndRegion
+
 ;!@
 ;Misc menu palettes and stuff in early ROM (Bank0)
 ;Region @PalMD_Misc
@@ -440,21 +499,6 @@ EndSeg
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Moveable Data Segments ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;!@ Demo data
-StartSeg Demo_Ptrs Big_Endian $2275FA $3EC
-		DWORD Demo_1
-		DWORD Demo_2
-		DWORD Demo_3
-		DWORD Demo_4
-		DWORD Demo_5
-		
-		Demo_1:	include	"Misc/Demos/Demo1.bin"	;MMZ1N, Charmy/Heavy
-		Demo_2:	include	"Misc/Demos/Demo2.bin"	;TTZ2S, Vector/Bomb
-		Demo_3:	include	"Misc/Demos/Demo3.bin"	;BBZ3D, Knuckles/Mighty
-		Demo_4:	include	"Misc/Demos/Demo4.bin"	;IIZ (intro) 3M, Espio/Knuckles
-		Demo_5:	include	"Misc/Demos/Demo5.bin"	;AAZ1D, Mighty/Espio
-EndSeg
 
 StartSeg Objlayout_Ptrs Big_Endian	;Level Object Layout Pointers
 
@@ -2520,6 +2564,10 @@ StartSeg Pal32x_SpacePal_CodeL $02BF46 $0C Big_Endian
 	;moveq   #$1E,d3
 	BYTE	$76
 	BYTE	$1E
+EndSeg
+
+StartSeg Palc32x_TitleLogo_Data $003F88 $A8 Big_Endian
+	Palc32x_TitleLogo:	include	"Art/palettes/Mars/Menus/Title_Logo_palc.bin"
 EndSeg
 
 StartSeg Pal32x_GoodEnding $229802 $262 Big_Endian
@@ -5424,6 +5472,45 @@ EndSeg
 StartSeg ArtNem_ST_Amy_Ptr Big_Endian $006CD0
 	DWORD ArtNem_ST_Amy
 EndSeg
+StartSeg MapEni_EB_Menu_Ptr Big_Endian $006136
+	DWORD MapEni_EB_Menu
+EndSeg
+StartSeg ArtNem_EB_Menu_Ptr Big_Endian $006150
+	DWORD ArtNem_EB_Menu
+EndSeg
+StartSeg MapEni_Ttl_Road_Ptr Big_Endian $0038A4
+	DWORD MapEni_Ttl_Road
+EndSeg
+StartSeg MapEni_Ttl_Sides_Ptr Big_Endian $0038D2
+	DWORD MapEni_Ttl_Sides
+EndSeg
+StartSeg ArtNem_Ttl_Roadsides_Ptr Big_Endian $00388E
+	DWORD ArtNem_Ttl_Roadsides
+EndSeg
+;StartSeg Pal_Ttl_Roadside_Ptr Big_Endian $003900
+	;DWORD Pal_Ttl_Roadside-Pal_Ttl_Roadside_Ptr
+;EndSeg
+
+
+;Region @ArtNem_ascFont
+StartSeg ArtNem_ST_ascFont_Ptr1 $0000996 $0004 Big_Endian
+		DWORD	(ArtNem_ST_ascFont-Bank1_MemOffset)
+EndSeg
+StartSeg ArtNem_ST_ascFont_Ptr2 $0000B8A $0004 Big_Endian
+		DWORD	ArtNem_ST_ascFont
+EndSeg
+StartSeg ArtNem_ST_ascFont_Ptr3 $000381E $0004 Big_Endian
+		DWORD	ArtNem_ST_ascFont
+EndSeg
+StartSeg ArtNem_ST_ascFont_Ptr4 $002F626 $0004 Big_Endian
+		DWORD	ArtNem_ST_ascFont
+EndSeg
+;!@ Moved to end of ROM due to being too large for regular segment
+;StartSeg ascFont $22E100 $030E Big_Endian	;ASCII Font
+StartSeg ascFont $2F8E08 $0448 Big_Endian	;ASCII Font
+		ArtNem_ST_ascFont:	include	"Art/artnem/Menus/ascFont.bin"
+EndSeg
+;EndRegion
 
 StartSeg ArtNem_ST_Font_Ptr1 Big_Endian $006CBA
 	DWORD ArtNem_ST_Font
@@ -5510,14 +5597,25 @@ StartSeg Pal_DataLoad_data Big_Endian $03E8CA $0080
 	Pal_DataLoad:	include	"Art/palettes/MD/Menus/DataLoad.bin"
 EndSeg
 
+StartSeg Pal_Ttl_Roadside_Data Big_Endian $003A60 $0060
+	Pal_Ttl_Roadside:	include	"Art/palettes/MD/Menus/Title_Roadside.bin"
+EndSeg
+StartSeg Palc_Ttl_Roadside_Data Big_Endian $003ED8 $0060
+	Palc_Ttl_Roadside:	include	"Art/palettes/MD/Menus/Title_Roadside_palc.bin"
+EndSeg
+
 ;Region @ArtNem_Bank2
-StartSeg ArtNem_Data1 Big_Endian $2C2DC8 $046E
-	ArtNem_ST_Amy:	include		"Art/artnem/Menus/Soundtest/Amy.bin"	
-	;byte_9C3236
-	;byte_9C3444
-	;MapEni_TitleScreen_Road
-	;MapEni_TitleScreen_SidesOfRoad
-	;Etc
+StartSeg ArtNem_Data1 Big_Endian $2C2DC8 $14CE
+	ArtNem_ST_Amy:			include		"Art/artnem/Menus/Soundtest/Amy.bin"	
+	MapEni_EB_Menu:			include		"Art/tilemaps/Menus/Endings/BadEnding.bin"
+	ArtNem_EB_Menu:			include		"Art/artnem/Menus/Endings/BadEnding.bin"
+	MapEni_Ttl_Road:		include		"Art/tilemaps/Menus/Title/Road.bin"
+	MapEni_Ttl_Sides:		include		"Art/tilemaps/Menus/Title/Sides.bin"
+	ArtNem_Ttl_Roadsides:	include		"Art/artnem/Menus/Title/Roadsides.bin"	
+	
+	;!@ Add
+	;byte_9C4296
+	;byte_9C43D8
 EndSeg
 
 StartSeg ArtNem_Data2 Big_Endian $2C4B20 $047A

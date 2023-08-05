@@ -1,4 +1,3 @@
-
 Target	EQU	$56E39
 	smpsHeaderVoice	SFX_66_Patches, Target
 	smpsHeaderTick	$01
@@ -16,21 +15,7 @@ SFX_66_Jump1:
 	smpsJump		SFX_66_Jump1, Target
 
 SFX_66_Patches:
-
-	
 	dc.b	$54
 	dc.b	$30, $06, $5A, $0B,	$17, $17, $07, $17
 	dc.b	$00, $00, $00, $00,	$00, $00, $00, $00
 	dc.b	$0F, $0F, $0F, $0F,	$31, $80, $08, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 

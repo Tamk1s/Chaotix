@@ -1,5 +1,5 @@
 
-Target	EQU	$463E2
+Target	EQU	$46610
 	smpsHeaderVoice	ThisHorizon_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $03

@@ -156,6 +156,19 @@ REM bytepatch.exe -a 0x012852 kc.bin 0080
 REM bytepatch.exe -a 0x012902 kc.bin -f "Assets\Code\BigRing_Frames.bin"
 
 
+REM Patches for enhanced Intro
+
+REM Slower Intro zoom in (Overture song sync)
+bytepatch.exe -a 0x004BA2 kc.bin 0002
+
+REM Mosqui sfx (flight loop)
+bytepatch.exe -a 0x004560 kc.bin 4EF9 008F 769A
+bytepatch.exe -a 0x07769A kc.bin -f "Assets\Code\Intro_Mosqui.bin"
+bytepatch.exe -a 0x004A1C kc.bin 4EF9 008F 76A6 4E71 4E71
+bytepatch.exe -a 0x004ACA kc.bin 4EF9 008F 76BA
+bytepatch.exe -a 0x0045EC kc.bin 4EF9 008F 76C6 4E71 4E71
+REM bytepatch.exe -a 0x0045D8 kc.bin 4EF9 008F 76D6 4E71 4E71
+
 REM Patch TrainingMenu for new Boss Mode
 REM JsrTo new zone LUT
 bytepatch.exe -a 0x03E7E4 kc.bin 4EB9 008F 76D8
@@ -220,3 +233,19 @@ REM bytepatch.exe -a 0x074370 kc.bin 43F8 D460
 REM bytepatch.exe -a 0x00314E kc.bin 4EB9 008F 7680 4E71
 REM bytepatch.exe -a 0x0031E6 kc.bin 4EB9 008F 7650 4E71
 REM bytepatch.exe -a 0x077650 kc.bin -f "Assets\Code\Pal32x_Debug.bin"
+
+
+REM Bugfixes for Ring Cap, Bonus Stages
+REM Bugfix to hide Bonus Stage ring if <10 seconds left
+bytepatch.exe -a 0x0127D2 kc.bin 4EF9 008F 7720 4E71 4E71 4E71 4E71
+REM Ring Cap patch (levels)
+bytepatch.exe -a 0x02AFDC kc.bin 3038 E008 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 31C0 E008
+REM Spikes ring loss timing(BS)
+bytepatch.exe -a 0x03DA68 kc.bin 4EB9 008F 76F4 4E71 4E71
+REM Ring box ring cap/timing (BS)
+bytepatch.exe -a 0x03DAB8 kc.bin 4EB9 008F 76E6 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+REM Single ring ring cap/timing (BS)
+bytepatch.exe -a 0x03DD0A kc.bin 4EB9 008F 76E0 4E71 4E71 4E71 4E71 4E71 4E71								 								 								 
+REM Bugfix to kick player out of BS if around 10 seconds of game timer left (prevent 9'59"99 overflow bug)
+bytepatch.exe -a 0x03DDF4 kc.bin 4EB9 008F 7708 4E71
+bytepatch.exe -a 0x0776E0 kc.bin -f "Assets\Code\BSRing_Fix.bin"

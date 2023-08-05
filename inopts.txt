@@ -93,7 +93,7 @@ StartSeg GameHeader Big_Endian $000100 $8E
 	;!@ MSU 32x
 	String	"SEGA 32X        "								;Console Name	
 	;String	"SEGA MEGASD     "								;Console Name
-	String	"(C)GENESISDOES 2023.APR"						;Copyright Date
+	String	"(C)GENESISDOES 2023.AUG"						;Copyright Date
 	String  "KNUCKLES CLACKERS V0.2A DEMO                "	;Domestic Game Name
 	String  "KNUCKLES CLACKERS V0.2A DEMO                 "	;Foreign Game Name
 	String	"GM MK-84503-01"								;Game Serial Number
@@ -476,9 +476,9 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	;String "MOONRISE"
 	String "LAND OF DARKNESS"
 	BYTE	CASC_NullTerm
-	String "OVERTURE"
+	String "INTRO-GSX"
 	BYTE	CASC_NullTerm
-	String "THIS HORIZON"
+	String "OPENING-GSX"
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "TAKE OFF"
@@ -486,7 +486,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "COMBINATION"
-	String "SONIC FACTORY-SA3"
+	String "SONIC FACTORY"
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	; String "TAKE A NAP"

@@ -1,0 +1,18 @@
+vgm2mid_ym2151 conversion settings:
+TL_Tl = 17
+BPM = 120
+Vol gain = 1.09
+TQN = 22050
+Transpose Down for VOPM = true
+
+MID2SMPS Settings:
+TQN/TM = 12/02
+Chorus CC Vol Boost = false
+Pan Law = false
+
+FM:
+Assign MIDI instrums 1-7 to FM instruments 0-6 from OPM
+
+PSG:
+PSG1 = Voice $06
+PSG2 = Voice $01
