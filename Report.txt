@@ -1,216 +1,14 @@
 Fixed Segments:
 
-*Segment 000 - Objlayout_Ptr: Offset $4EBA  Size $4
-*Segment 001 - Demo_Index_Ptr: Offset $6934  Size $4
-*Segment 002 - Solid_Index_Ptr: Offset $9482  Size $4
-*Segment 003 - LevSize_Data_Ptr: Offset $939E  Size $4
-*Segment 004 - MD_Palette_Index_Ptr: Offset $1369E  Size $4
-*Segment 005 - MD_PalCycle_Unk3_Data1_Ptr: Offset $31184  Size $4
-*Segment 006 - MD_PalCycle_Unk3_Data2_Ptr: Offset $311E2  Size $4
-*Segment 007 - MD_Palette_AAZLit_Index_Ptr: Offset $1FA76  Size $4
-*Segment 008 - MD_PalCycle_BBZ_Data1_Ptr: Offset $3107A  Size $4
-*Segment 009 - MD_PalCycle_BBZ_Data2_Ptr: Offset $31090  Size $4
-*Segment 00A - MD_PalCycle_BBZ_Data3_Ptr: Offset $3109C  Size $4
-*Segment 00B - MD_PalCycle_WE_Data1_Ptr: Offset $31348  Size $4
-*Segment 00C - MD_PalCycle_WE_Data3_Ptr: Offset $3136E  Size $4
-*Segment 00D - MD_PalCycle_WE_Data2_Ptr: Offset $31362  Size $4
-*Segment 00E - MD_PalCycle_BBZ_Data4_Ptr: Offset $310A6  Size $4
-*Segment 00F - MD_PalCycle_SSZ_Data3_Ptr: Offset $31148  Size $4
-*Segment 010 - MD_PalCycle_SSZ_Data2_Ptr: Offset $3112E  Size $4
-*Segment 011 - MD_PalCycle_AAZ_Lit_Data2_Ptr: Offset $312AE  Size $4
-*Segment 012 - MD_PalCycle_AAZ_Data_Ptr: Offset $3112E  Size $4
-*Segment 013 - MD_PalCycle_Unk1_Data1_Ptr: Offset $31502  Size $4
-*Segment 014 - MD_PalCycle_AAZ_Lit_Data3_Ptr: Offset $312E4  Size $4
-*Segment 015 - MD_PalCycle_Unk2_Data1_Ptr: Offset $31528  Size $4
-*Segment 016 - MD_PalCycle_Unk2_Data2_Ptr: Offset $31532  Size $4
-*Segment 017 - MD_PalCycle_TTZ_Data_Ptr: Offset $312FA  Size $4
-*Segment 018 - MD_PalCycle_MMZ_Data_Ptr: Offset $3130E  Size $4
-*Segment 019 - MD_PalCycle_IIZ_Data_Ptr: Offset $3132A  Size $4
-*Segment 01A - MD_PalCycle_WE_Data5_Ptr1: Offset $313B2  Size $4
-*Segment 01B - MD_PalCycle_WE_Data5_Ptr2: Offset $313DE  Size $4
-*Segment 01C - MD_PalCycle_WE_Data4_Ptr: Offset $313B2  Size $4
-*Segment 01D - MD_PalCycle_WE_Data6_Ptr: Offset $313CA  Size $4
-*Segment 01E - Level_Index_Ptr: Offset $2F7EE  Size $4
-*Segment 01F - LevSize_Data_Ptr2: Offset $2FB24  Size $4
-*Segment 020 - Level_Index_Ptr2: Offset $302C2  Size $4
-*Segment 021 - MD_Palette_AAZLit_Index_Ptr2: Offset $3148A  Size $4
-*Segment 022 - LevelTile_Ptr: Offset $319C0  Size $4
-*Segment 023 - Level_Index_Ptr3: Offset $31ADA  Size $4
-*Segment 024 - AnimArtV_Index_Ptr1: Offset $31D0C  Size $4
-*Segment 025 - LevelTile_Ptr2: Offset $31F80  Size $4
-*Segment 026 - AnimArt_Index_Ptr1: Offset $3203A  Size $4
-*Segment 027 - MD_Palette_Index_Ptr2: Offset $320C8  Size $4
-*Segment 028 - SSZB_Pal_Ptr: Offset $2D6F2  Size $4
-*Segment 029 - SSZB_FG_Tiles_Ptr: Offset $2D88C  Size $4
-*Segment 02A - SSZ45MD_BG_Tiles_Sec_Ptr: Offset $2D8BA  Size $4
-*Segment 02B - SSZB_FG_Blocks_Ptr: Offset $2D8FC  Size $4
-*Segment 02C - SSZ45MD_BG_Blocks_Sec_Ptr: Offset $2D918  Size $4
-*Segment 02D - SSZB_FG_Chunks_Ptr: Offset $2D930  Size $4
-*Segment 02E - SSZB_BG_Chunks_Ptr: Offset $2D948  Size $4
-*Segment 02F - SSZB_FG_Layout_Ptr: Offset $2D960  Size $4
-*Segment 030 - SSZB_BG_Layout_Ptr: Offset $2D978  Size $4
-*Segment 031 - SSZB_Solids_Ptr: Offset $2D988  Size $4
-*Segment 032 - SSZB_FG_LS_Ptr: Offset $2D9E8  Size $4
-*Segment 033 - SSZB_BG_LS_Ptr: Offset $2DA00  Size $4
-*Segment 034 - TTZB_FG_Tiles_Ptr: Offset $2DFE0  Size $4
-*Segment 035 - TTZB_FG_Blocks_Ptr: Offset $2E018  Size $4
-*Segment 036 - TTZB_FG_Chunks_Ptr: Offset $2E030  Size $4
-*Segment 037 - TTZB_FG_Layout_Ptr: Offset $2E04A  Size $4
-*Segment 038 - TTZB_Solids_Ptr: Offset $2E05C  Size $4
-*Segment 039 - TTZB_Pal_Ptr: Offset $2E0C2  Size $4
-*Segment 03A - TTZB_FG_LS_Ptr: Offset $2E138  Size $4
-*Segment 03B - MD_PalCycle_Unk3_Data3_Ptr: Offset $311C6  Size $4
-*Segment 03C - MD_PalCycle_SSZ_Data1_Ptr: Offset $310FC  Size $4
-*Segment 03D - MD_PalCycle_AAZ_Lit_Data1_Ptr: Offset $31292  Size $4
-*Segment 03E - HMaps: Offset $22D000  Size $1000
-*Segment 03F - HMapsR: Offset $22C000  Size $1000
-*Segment 040 - Angles: Offset $22E000  Size $100
-*Segment 041 - Demo_Ptrs: Offset $2275FA  Size $3E0
-*Segment 042 - CharStats_Ptr1: Offset $9D90  Size $4
-*Segment 043 - CharStats_Ptr1: Offset $3003C  Size $4
-*Segment 044 - CharStats: Offset $BE58  Size $226
-*Segment 045 - BS_Ptrs: Offset $3D42C  Size $40
-*Segment 046 - BS_Ptr_Data: Offset $2D13D0  Size $B9C
-*Segment 047 - Pal_Soundtest: Offset $6E18  Size $A0
-*Segment 04B - Pal32x_Levels_AAZ_Lit_Code: Offset $219E  Size $4
-*Segment 04C - Pal32x_LevelsS_AAZ_Lit_Ptrs: Offset $21E0  Size $10
-*Segment 04D - Pal32x_LevelP_Levels_Code: Offset $2116  Size $6
-*Segment 04E - Pal32x_LevelP_Levels_Ptrs: Offset $21F0  Size $560
-*Segment 04F - Pal32x_LevelS_Levels_Code: Offset $2156  Size $6
-*Segment 050 - Pal32x_LevelS_Levels_Ptrs: Offset $2750  Size $694
-*Segment 051 - Pal32x_LevelP_Levels_Data: Offset $12C66  Size $260
-*Segment 052 - Pal32x_LevelS_Levels_Data: Offset $1A40  Size $6D6
-*Segment 053 - Pal32xX_WE_LvlSigns_Ptr: Offset $27F0A  Size $4
-*Segment 054 - Pal32x_Level_WE_Data2: Offset $1310C  Size $90
-*Segment 055 - Pal32x_Level_WE_Data: Offset $2BC110  Size $358
-*Segment 056 - Pal32x_Chars_Code1: Offset $18BC  Size $4
-*Segment 057 - Pal32x_Chars_Code2: Offset $18D0  Size $4
-*Segment 058 - Pal32x_Chars_Code3: Offset $2E3A  Size $4
-*Segment 059 - Pal32x_Chars_Code4: Offset $F8EA  Size $6
-*Segment 05A - Pal32x_Chars_Code5: Offset $294AE  Size $6
-*Segment 05B - Pal32X_Chars_Ptrs: Offset $18E4  Size $40
-*Segment 05C - Pal32x_Chars_Data: Offset $22921A  Size $1CC
-*Segment 05D - Palswap_Tut: Offset $2293EC  Size $3C0
-*Segment 05E - PalSwap32x_TitleCards: Offset $2BA90C  Size $48
-*Segment 05F - Pal32x_SegaLogo_CodeL: Offset $3496  Size $A
-*Segment 060 - Pal32x_Title_CodeL1: Offset $3CBA  Size $C
-*Segment 061 - Pal32x_Title_CodeL2: Offset $45B6  Size $12
-*Segment 062 - Pal32x_GoodEnding_CodeL: Offset $641A  Size $C
-*Segment 063 - Pal32x_SpacePal_CodeL: Offset $2BF46  Size $C
-*Segment 064 - Palc32x_TitleLogo_Data: Offset $3F88  Size $A8
-*Segment 065 - Pal32x_GoodEnding: Offset $229802  Size $23C
-*Segment 066 - Pal32x_GridCodeL1: Offset $7F48  Size $A
-*Segment 067 - Pal32x_GridCodeL2: Offset $321BC  Size $C
-*Segment 068 - Pal32x_Grid: Offset $2271A0  Size $70
-*Segment 06F - ArtNem_ST_Amy_Ptr: Offset $6CD0  Size $4
-*Segment 070 - MapEni_EB_Menu_Ptr: Offset $6136  Size $4
-*Segment 071 - ArtNem_EB_Menu_Ptr: Offset $6150  Size $4
-*Segment 072 - MapEni_Ttl_Road_Ptr: Offset $38A4  Size $4
-*Segment 073 - MapEni_Ttl_Sides_Ptr: Offset $38D2  Size $4
-*Segment 074 - ArtNem_Ttl_Roadsides_Ptr: Offset $388E  Size $4
-*Segment 075 - ArtNem_ST_ascFont_Ptr1: Offset $996  Size $4
-*Segment 076 - ArtNem_ST_ascFont_Ptr2: Offset $B8A  Size $4
-*Segment 077 - ArtNem_ST_ascFont_Ptr3: Offset $381E  Size $4
-*Segment 078 - ArtNem_ST_ascFont_Ptr4: Offset $2F626  Size $4
-*Segment 079 - ascFont: Offset $2F8E08  Size $448
-*Segment 07A - ArtNem_ST_Font_Ptr1: Offset $6CBA  Size $4
-*Segment 07B - ArtNem_ST_Font_Ptr2: Offset $32264  Size $4
-*Segment 07C - ArtNem_ST_Font_Ptr3: Offset $3E69E  Size $4
-*Segment 07D - ArtNem_ST_Font_Ptr4: Offset $3FCA6  Size $4
-*Segment 07E - ArtNem_ST_Menu_Ptr: Offset $6CA4  Size $4
-*Segment 07F - MapEni_ST_MenuBG_Ptr: Offset $6CE6  Size $4
-*Segment 080 - Pal_CharSel_Ptr: Offset $32364  Size $2
-*Segment 081 - ArtNem_DL_Menu_Ptr1: Offset $3224E  Size $4
-*Segment 082 - ArtNem_DL_Menu_Ptr2: Offset $3E66C  Size $4
-*Segment 083 - ArtNem_DL_BorderLabels_Ptr: Offset $3E682  Size $4
-*Segment 084 - ArtNem_DL_Training_Ptr: Offset $3E6B4  Size $4
-*Segment 085 - MapEni_DL_OvalBG_Ptr1: Offset $3227A  Size $4
-*Segment 086 - MapEni_DL_OvalBG_Ptr2: Offset $3E75A  Size $4
-*Segment 087 - MapEni_DL_OvalLarge_Ptr: Offset $3E742  Size $4
-*Segment 088 - MapEni_DL_OvalSmall_Ptr1: Offset $32294  Size $4
-*Segment 089 - MapEni_DL_OvalSmall_Ptr2: Offset $3E772  Size $4
-*Segment 08A - MapEni_DL_PlayStyle_Box_Ptr: Offset $3E78E  Size $4
-*Segment 08B - MapEni_DL_PlayStyle_ProtoBox_Ptr: Offset $3E7A0  Size $4
-*Segment 08C - MapEni_DL_SaveSlot_Box_Ptr: Offset $3E7F0  Size $4
-*Segment 08D - MapEni_DL_Training_Box_Ptr: Offset $3E7B8  Size $4
-*Segment 08E - Pal_CharSel_Data: Offset $32392  Size $5C
-*Segment 08F - Pal_DataLoad_Ptr: Offset $3E658  Size $2
-*Segment 090 - Pal_DataLoad_data: Offset $3E8CA  Size $80
-*Segment 091 - Pal_Ttl_Roadside_Data: Offset $3A60  Size $60
-*Segment 092 - Palc_Ttl_Roadside_Data: Offset $3ED8  Size $60
-*Segment 093 - ArtNem_Data1: Offset $2C2DC8  Size $14CE
-*Segment 094 - ArtNem_Data2: Offset $2C4B20  Size $47A
-*Segment 095 - ArtNem_Data3: Offset $2C7818  Size $4ABE
-*Segment 096 - MD_PalCycle_Set1: Offset $2B55E8  Size $C12
-*Segment 097 - MD_Palette_AAZLit_Index: Offset $2B61FA  Size $638
-*Segment 098 - MD_PalCycle_Set2: Offset $2B6832  Size $3AFE
-*Segment 09A - MD_PalCycle_Set3: Offset $2BE356  Size $110
-*Segment 09B - AnimArtV_Ptrs: Offset $2BF854  Size $500
-*Segment 09D - GameHeader: Offset $100  Size $8E
-*Segment 09E - MainMenu_Strings: Offset $3E5E  Size $40
-*Segment 09F - ExitScreen_Strings: Offset $3FDEA  Size $80
-*Segment 0A0 - LevelSel_Strings: Offset $7739E  Size $1B6
-*Segment 0A1 - LevelPlaylist: Offset $76ED0  Size $8
-*Segment 0A2 - LevelPlaylist: Offset $76EE4  Size $6
-*Segment 0A3 - *Unnamed*: Offset $2997C  Size $2
-*Segment 0A4 - *Unnamed*: Offset $2998C  Size $2
-*Segment 0A5 - SoundTestSongNames: Offset $227338  Size $207
-*Segment 0A6 - CharSel_ID_Max1a: Offset $322B9  Size $1
-*Segment 0A7 - CharSel_ID_Max1b: Offset $3258B  Size $1
-*Segment 0A8 - CharSel_ID_Max1c: Offset $32597  Size $1
-*Segment 0A9 - CharSel_ID_Max2a: Offset $3245D  Size $1
-*Segment 0AA - CharSel_ID_Max2b: Offset $32475  Size $1
-*Segment 0AB - CharSel_ID_Max2c: Offset $32479  Size $1
-*Segment 0AC - CharSel_IDs: Offset $323F2  Size $E
-*Segment 0AD - CharSel_IDs: Offset $32518  Size $8
-*Segment 0AE - CharSel_Names: Offset $32678  Size $11C
-*Segment 0AF - aOutputMonoStereo: Offset $75D8  Size $1E
-*Segment 0B0 - aSpeed: Offset $7636  Size $8
-*Segment 0B1 - SFX1st_1: Offset $7527  Size $1
-*Segment 0B2 - SFX1st_2: Offset $752D  Size $1
-*Segment 0B3 - SFXLast: Offset $7446  Size $2
-*Segment 0B4 - BGM_WE01_TOD: Offset $76EF5  Size $1
-*Segment 0B5 - Code_LevelSelectDebug: Offset $7A6A  Size $4
-*Segment 0B6 - Code_LevelSelectFull: Offset $772BC  Size $2
-*Segment 0B7 - Code_AmyInSoundTest: Offset $7A7C  Size $4
-*Segment 0B8 - Code_TrainingSelect_TOD: Offset $3F461  Size $1
-*Segment 0B9 - BankTbl: Offset $76AC0  Size $29
-*Segment 0BA - PtrTbl: Offset $76AE9  Size $DC
-*Segment 0BB - BankData0: Offset $40000  Size $6E06
-*Segment 0BC - BankData1: Offset $48000  Size $7BEC
-*Segment 0BD - BankData2: Offset $50000  Size $1DB0
-*Segment 0BE - BankData2S: Offset $56000  Size $10B9
-*Segment 0BF - PWMData: Offset $58000  Size $1B284
-*Segment 0C0 - PWMDataX: Offset $2F9250  Size $6DB0
+*Segment 000 - ArtPtr32x: Offset $A0000  Size $179A92
+*Segment 001 - Pal32X_SSPalc_Ptr: Offset $7D5F4  Size $4
+*Segment 002 - Pal32X_SSGlbl_Ptr: Offset $7D608  Size $4
+*Segment 003 - Pal32X_SS_Ptr: Offset $7D60C  Size $4
+*Segment 004 - Pal32X_SSObjs_Ptr: Offset $7F170  Size $4
+*Segment 005 - Pal32X_SS: Offset $7F638  Size $270
 
 
 Floating Segments:
-
-*Dispose 000: Offset $22E974  End $2B52B4  Size $86940
- *Segment 048 - Objlayout_Ptrs: Offset $22E974  Size $800
- *Segment 049 - MD_Palette_Index: Offset $22F174  Size $18C4
- *Segment 04A - MD_Boss_Palette_Index: Offset $230A38  Size $410
- *Segment 069 - LevelTile_Ptrs: Offset $230E48  Size $3E8
- *Segment 06A - Level_Index: Offset $231230  Size $828
- *Segment 06B - Solid_Index: Offset $231A58  Size $208
- *Segment 06C - Level_Data: Offset $231C60  Size $80DD6
- *Segment 06D - LevSize_Data: Offset $2B2A36  Size $740
- *Segment 06E - AnimArt_Ptrs: Offset $2B3176  Size $1F44
- *Segment 099 - LevSize_Boss_Data: Offset $2B50BA  Size $2A
- *Unused Space: Offset $2B50E4  Size $1D0
-
-*Dispose 001: Offset $2BDE18  End $2BDE42  Size $2A
- *Unused Space: Offset $2BDE18  Size $2A
-
-*Dispose 002: Offset $2DA05E  End $300000  Size $25FA2
- *Segment 09C - Objlayout_Data: Offset $2DA05E  Size $F378
- *Unused Space: Offset $2E93D6  Size $16C2A
-
-*Dispose 003: Offset $40000  End $74000  Size $34000
- *Unused Space: Offset $40000  Size $34000
-
-*Dispose 004: Offset $76AC0  End $76BC3  Size $103
- *Unused Space: Offset $76AC0  Size $103
 
 *File End: Offset $300000  Size $100000
  *Remaining Available Space: Offset $300000  Size $100000
@@ -218,3421 +16,2363 @@ Floating Segments:
 
 Segment\Label Placement
 
-*Segment 000 - Objlayout_Ptr: Offset $4EBA  Size $4
-
-*Segment 001 - Demo_Index_Ptr: Offset $6934  Size $4
-
-*Segment 002 - Solid_Index_Ptr: Offset $9482  Size $4
-
-*Segment 003 - LevSize_Data_Ptr: Offset $939E  Size $4
-
-*Segment 004 - MD_Palette_Index_Ptr: Offset $1369E  Size $4
-
-*Segment 005 - MD_PalCycle_Unk3_Data1_Ptr: Offset $31184  Size $4
-
-*Segment 006 - MD_PalCycle_Unk3_Data2_Ptr: Offset $311E2  Size $4
-
-*Segment 007 - MD_Palette_AAZLit_Index_Ptr: Offset $1FA76  Size $4
-
-*Segment 008 - MD_PalCycle_BBZ_Data1_Ptr: Offset $3107A  Size $4
-
-*Segment 009 - MD_PalCycle_BBZ_Data2_Ptr: Offset $31090  Size $4
-
-*Segment 00A - MD_PalCycle_BBZ_Data3_Ptr: Offset $3109C  Size $4
-
-*Segment 00B - MD_PalCycle_WE_Data1_Ptr: Offset $31348  Size $4
-
-*Segment 00C - MD_PalCycle_WE_Data3_Ptr: Offset $3136E  Size $4
-
-*Segment 00D - MD_PalCycle_WE_Data2_Ptr: Offset $31362  Size $4
-
-*Segment 00E - MD_PalCycle_BBZ_Data4_Ptr: Offset $310A6  Size $4
-
-*Segment 00F - MD_PalCycle_SSZ_Data3_Ptr: Offset $31148  Size $4
-
-*Segment 010 - MD_PalCycle_SSZ_Data2_Ptr: Offset $3112E  Size $4
-
-*Segment 011 - MD_PalCycle_AAZ_Lit_Data2_Ptr: Offset $312AE  Size $4
-
-*Segment 012 - MD_PalCycle_AAZ_Data_Ptr: Offset $3112E  Size $4
-
-*Segment 013 - MD_PalCycle_Unk1_Data1_Ptr: Offset $31502  Size $4
-
-*Segment 014 - MD_PalCycle_AAZ_Lit_Data3_Ptr: Offset $312E4  Size $4
-
-*Segment 015 - MD_PalCycle_Unk2_Data1_Ptr: Offset $31528  Size $4
-
-*Segment 016 - MD_PalCycle_Unk2_Data2_Ptr: Offset $31532  Size $4
-
-*Segment 017 - MD_PalCycle_TTZ_Data_Ptr: Offset $312FA  Size $4
-
-*Segment 018 - MD_PalCycle_MMZ_Data_Ptr: Offset $3130E  Size $4
-
-*Segment 019 - MD_PalCycle_IIZ_Data_Ptr: Offset $3132A  Size $4
-
-*Segment 01A - MD_PalCycle_WE_Data5_Ptr1: Offset $313B2  Size $4
-
-*Segment 01B - MD_PalCycle_WE_Data5_Ptr2: Offset $313DE  Size $4
-
-*Segment 01C - MD_PalCycle_WE_Data4_Ptr: Offset $313B2  Size $4
-
-*Segment 01D - MD_PalCycle_WE_Data6_Ptr: Offset $313CA  Size $4
-
-*Segment 01E - Level_Index_Ptr: Offset $2F7EE  Size $4
-
-*Segment 01F - LevSize_Data_Ptr2: Offset $2FB24  Size $4
-
-*Segment 020 - Level_Index_Ptr2: Offset $302C2  Size $4
-
-*Segment 021 - MD_Palette_AAZLit_Index_Ptr2: Offset $3148A  Size $4
-
-*Segment 022 - LevelTile_Ptr: Offset $319C0  Size $4
-
-*Segment 023 - Level_Index_Ptr3: Offset $31ADA  Size $4
-
-*Segment 024 - AnimArtV_Index_Ptr1: Offset $31D0C  Size $4
-
-*Segment 025 - LevelTile_Ptr2: Offset $31F80  Size $4
-
-*Segment 026 - AnimArt_Index_Ptr1: Offset $3203A  Size $4
-
-*Segment 027 - MD_Palette_Index_Ptr2: Offset $320C8  Size $4
-
-*Segment 028 - SSZB_Pal_Ptr: Offset $2D6F2  Size $4
-
-*Segment 029 - SSZB_FG_Tiles_Ptr: Offset $2D88C  Size $4
-
-*Segment 02A - SSZ45MD_BG_Tiles_Sec_Ptr: Offset $2D8BA  Size $4
-
-*Segment 02B - SSZB_FG_Blocks_Ptr: Offset $2D8FC  Size $4
-
-*Segment 02C - SSZ45MD_BG_Blocks_Sec_Ptr: Offset $2D918  Size $4
-
-*Segment 02D - SSZB_FG_Chunks_Ptr: Offset $2D930  Size $4
-
-*Segment 02E - SSZB_BG_Chunks_Ptr: Offset $2D948  Size $4
-
-*Segment 02F - SSZB_FG_Layout_Ptr: Offset $2D960  Size $4
-
-*Segment 030 - SSZB_BG_Layout_Ptr: Offset $2D978  Size $4
-
-*Segment 031 - SSZB_Solids_Ptr: Offset $2D988  Size $4
-
-*Segment 032 - SSZB_FG_LS_Ptr: Offset $2D9E8  Size $4
-
-*Segment 033 - SSZB_BG_LS_Ptr: Offset $2DA00  Size $4
-
-*Segment 034 - TTZB_FG_Tiles_Ptr: Offset $2DFE0  Size $4
-
-*Segment 035 - TTZB_FG_Blocks_Ptr: Offset $2E018  Size $4
-
-*Segment 036 - TTZB_FG_Chunks_Ptr: Offset $2E030  Size $4
-
-*Segment 037 - TTZB_FG_Layout_Ptr: Offset $2E04A  Size $4
-
-*Segment 038 - TTZB_Solids_Ptr: Offset $2E05C  Size $4
-
-*Segment 039 - TTZB_Pal_Ptr: Offset $2E0C2  Size $4
-
-*Segment 03A - TTZB_FG_LS_Ptr: Offset $2E138  Size $4
-
-*Segment 03B - MD_PalCycle_Unk3_Data3_Ptr: Offset $311C6  Size $4
-
-*Segment 03C - MD_PalCycle_SSZ_Data1_Ptr: Offset $310FC  Size $4
-
-*Segment 03D - MD_PalCycle_AAZ_Lit_Data1_Ptr: Offset $31292  Size $4
-
-*Segment 03E - HMaps: Offset $22D000  Size $1000
-
-*Segment 03F - HMapsR: Offset $22C000  Size $1000
-
-*Segment 040 - Angles: Offset $22E000  Size $100
-
-*Segment 041 - Demo_Ptrs: Offset $2275FA  Size $3E0
- Demo_1: $22760E
- Demo_2: $227696
- Demo_3: $2277D2
- Demo_4: $227858
- Demo_5: $22791C
-
-*Segment 042 - CharStats_Ptr1: Offset $9D90  Size $4
-
-*Segment 043 - CharStats_Ptr1: Offset $3003C  Size $4
-
-*Segment 044 - CharStats: Offset $BE58  Size $226
- CT_Mighty: $BE78
- CT_Knuckles: $BEC2
- CT_Vector: $BF0C
- CT_Charmy: $BF56
- CT_Heavy: $BFA0
- CT_Bomb: $BFEA
- CT_Espio: $C034
-
-*Segment 045 - BS_Ptrs: Offset $3D42C  Size $40
-
-*Segment 046 - BS_Ptr_Data: Offset $2D13D0  Size $B9C
- BS_Layout00: $2D13D0
- BS_Layout01: $2D1492
- BS_Layout02: $2D155A
- BS_Layout03: $2D1620
- BS_Layout04: $2D16F0
- BS_Layout05: $2D17B0
- BS_Layout06: $2D187E
- BS_Layout07: $2D1948
- BS_Layout08: $2D1A08
- BS_Layout09: $2D1AD8
- BS_Layout0A: $2D1BA0
- BS_Layout0B: $2D1C60
- BS_Layout0C: $2D1D20
- BS_Layout0D: $2D1DE6
- BS_Layout0E: $2D1EA6
-
-*Segment 047 - Pal_Soundtest: Offset $6E18  Size $A0
- Pal_ST_Menu: $6E18
- Pal_ST_Amy: $6E98
-
-*Segment 048 - Objlayout_Ptrs: Offset $22E974  Size $800
- SLPtrs_BBZ: $22E994
- SLPtrs_SSZ: $22E9B0
- SLPtrs_AAZ: $22E9CC
- SLPtrs_TTZ: $22E9E8
- SLPtrs_MMZ: $22EA04
- SLPtrs_Train: $22EA20
- SLPtrs_Intro: $22EA3C
- SLPtrs_World: $22EA58
- SLPtrs_BBZ0: $22EA74
- SLPtrs_BBZ1: $22EA84
- SLPtrs_BBZ2: $22EA94
- SLPtrs_BBZ3: $22EAA4
- SLPtrs_BBZ4: $22EAB4
- SLPtrs_BBZ5: $22EAC4
- SLPtrs_BBZ6: $22EAD4
- SLPtrs_SSZ0: $22EAE4
- SLPtrs_SSZ1: $22EAF4
- SLPtrs_SSZ2: $22EB04
- SLPtrs_SSZ3: $22EB14
- SLPtrs_SSZ4: $22EB24
- SLPtrs_SSZ5: $22EB34
- SLPtrs_SSZ6: $22EB44
- SLPtrs_AAZ0: $22EB54
- SLPtrs_AAZ1: $22EB64
- SLPtrs_AAZ2: $22EB74
- SLPtrs_AAZ3: $22EB84
- SLPtrs_AAZ4: $22EB94
- SLPtrs_AAZ5: $22EBA4
- SLPtrs_AAZ6: $22EBB4
- SLPtrs_TTZ0: $22EBC4
- SLPtrs_TTZ1: $22EBD4
- SLPtrs_TTZ2: $22EBE4
- SLPtrs_TTZ3: $22EBF4
- SLPtrs_TTZ4: $22EC04
- SLPtrs_TTZ5: $22EC14
- SLPtrs_TTZ6: $22EC24
- SLPtrs_MMZ0: $22EC34
- SLPtrs_MMZ1: $22EC44
- SLPtrs_MMZ2: $22EC54
- SLPtrs_MMZ3: $22EC64
- SLPtrs_MMZ4: $22EC74
- SLPtrs_MMZ5: $22EC84
- SLPtrs_MMZ6: $22EC94
- SLPtrs_Train0: $22ECA4
- SLPtrs_Train1: $22ECB4
- SLPtrs_Train2: $22ECC4
- SLPtrs_Train3: $22ECD4
- SLPtrs_Train4: $22ECE4
- SLPtrs_Train5: $22ECF4
- SLPtrs_Train6: $22ED04
- SLPtrs_Intro0: $22ED14
- SLPtrs_Intro1: $22ED24
- SLPtrs_Intro2: $22ED34
- SLPtrs_Intro3: $22ED44
- SLPtrs_Intro4: $22ED54
- SLPtrs_Intro5: $22ED64
- SLPtrs_Intro6: $22ED74
- SLPtrs_World0: $22ED84
- SLPtrs_World1: $22ED94
- SLPtrs_World2: $22EDA4
- SLPtrs_World3: $22EDB4
- SLPtrs_World4: $22EDC4
- SLPtrs_World5: $22EDD4
- SLPtrs_World6: $22EDE4
- SLPtrs_BBZ0M: $22EDF4
- SLPtrs_BBZ0D: $22EDF8
- SLPtrs_BBZ0S: $22EDFC
- SLPtrs_BBZ0N: $22EE00
- SLPtrs_BBZ1M: $22EE04
- SLPtrs_BBZ1D: $22EE08
- SLPtrs_BBZ1S: $22EE0C
- SLPtrs_BBZ1N: $22EE10
- SLPtrs_BBZ2M: $22EE14
- SLPtrs_BBZ2D: $22EE18
- SLPtrs_BBZ2S: $22EE1C
- SLPtrs_BBZ2N: $22EE20
- SLPtrs_BBZ3M: $22EE24
- SLPtrs_BBZ3D: $22EE28
- SLPtrs_BBZ3S: $22EE2C
- SLPtrs_BBZ3N: $22EE30
- SLPtrs_BBZ4M: $22EE34
- SLPtrs_BBZ4D: $22EE38
- SLPtrs_BBZ4S: $22EE3C
- SLPtrs_BBZ4N: $22EE40
- SLPtrs_BBZ5M: $22EE44
- SLPtrs_BBZ5D: $22EE48
- SLPtrs_BBZ5S: $22EE4C
- SLPtrs_BBZ5N: $22EE50
- SLPtrs_BBZ6M: $22EE54
- SLPtrs_BBZ6D: $22EE58
- SLPtrs_BBZ6S: $22EE5C
- SLPtrs_BBZ6N: $22EE60
- SLPtrs_SSZ0M: $22EE64
- SLPtrs_SSZ0D: $22EE68
- SLPtrs_SSZ0S: $22EE6C
- SLPtrs_SSZ0N: $22EE70
- SLPtrs_SSZ1M: $22EE74
- SLPtrs_SSZ1D: $22EE78
- SLPtrs_SSZ1S: $22EE7C
- SLPtrs_SSZ1N: $22EE80
- SLPtrs_SSZ2M: $22EE84
- SLPtrs_SSZ2D: $22EE88
- SLPtrs_SSZ2S: $22EE8C
- SLPtrs_SSZ2N: $22EE90
- SLPtrs_SSZ3M: $22EE94
- SLPtrs_SSZ3D: $22EE98
- SLPtrs_SSZ3S: $22EE9C
- SLPtrs_SSZ3N: $22EEA0
- SLPtrs_SSZ4M: $22EEA4
- SLPtrs_SSZ4D: $22EEA8
- SLPtrs_SSZ4S: $22EEAC
- SLPtrs_SSZ4N: $22EEB0
- SLPtrs_SSZ5M: $22EEB4
- SLPtrs_SSZ5D: $22EEB8
- SLPtrs_SSZ5S: $22EEBC
- SLPtrs_SSZ5N: $22EEC0
- SLPtrs_SSZ6M: $22EEC4
- SLPtrs_SSZ6D: $22EEC8
- SLPtrs_SSZ6S: $22EECC
- SLPtrs_SSZ6N: $22EED0
- SLPtrs_AAZ0M: $22EED4
- SLPtrs_AAZ0D: $22EED8
- SLPtrs_AAZ0S: $22EEDC
- SLPtrs_AAZ0N: $22EEE0
- SLPtrs_AAZ1M: $22EEE4
- SLPtrs_AAZ1D: $22EEE8
- SLPtrs_AAZ1S: $22EEEC
- SLPtrs_AAZ1N: $22EEF0
- SLPtrs_AAZ2M: $22EEF4
- SLPtrs_AAZ2D: $22EEF8
- SLPtrs_AAZ2S: $22EEFC
- SLPtrs_AAZ2N: $22EF00
- SLPtrs_AAZ3M: $22EF04
- SLPtrs_AAZ3D: $22EF08
- SLPtrs_AAZ3S: $22EF0C
- SLPtrs_AAZ3N: $22EF10
- SLPtrs_AAZ4M: $22EF14
- SLPtrs_AAZ4D: $22EF18
- SLPtrs_AAZ4S: $22EF1C
- SLPtrs_AAZ4N: $22EF20
- SLPtrs_AAZ5M: $22EF24
- SLPtrs_AAZ5D: $22EF28
- SLPtrs_AAZ5S: $22EF2C
- SLPtrs_AAZ5N: $22EF30
- SLPtrs_AAZ6M: $22EF34
- SLPtrs_AAZ6D: $22EF38
- SLPtrs_AAZ6S: $22EF3C
- SLPtrs_AAZ6N: $22EF40
- SLPtrs_TTZ0M: $22EF44
- SLPtrs_TTZ0D: $22EF48
- SLPtrs_TTZ0S: $22EF4C
- SLPtrs_TTZ0N: $22EF50
- SLPtrs_TTZ1M: $22EF54
- SLPtrs_TTZ1D: $22EF58
- SLPtrs_TTZ1S: $22EF5C
- SLPtrs_TTZ1N: $22EF60
- SLPtrs_TTZ2M: $22EF64
- SLPtrs_TTZ2D: $22EF68
- SLPtrs_TTZ2S: $22EF6C
- SLPtrs_TTZ2N: $22EF70
- SLPtrs_TTZ3M: $22EF74
- SLPtrs_TTZ3D: $22EF78
- SLPtrs_TTZ3S: $22EF7C
- SLPtrs_TTZ3N: $22EF80
- SLPtrs_TTZ4M: $22EF84
- SLPtrs_TTZ4D: $22EF88
- SLPtrs_TTZ4S: $22EF8C
- SLPtrs_TTZ4N: $22EF90
- SLPtrs_TTZ5M: $22EF94
- SLPtrs_TTZ5D: $22EF98
- SLPtrs_TTZ5S: $22EF9C
- SLPtrs_TTZ5N: $22EFA0
- SLPtrs_TTZ6M: $22EFA4
- SLPtrs_TTZ6D: $22EFA8
- SLPtrs_TTZ6S: $22EFAC
- SLPtrs_TTZ6N: $22EFB0
- SLPtrs_MMZ0M: $22EFB4
- SLPtrs_MMZ0D: $22EFB8
- SLPtrs_MMZ0S: $22EFBC
- SLPtrs_MMZ0N: $22EFC0
- SLPtrs_MMZ1M: $22EFC4
- SLPtrs_MMZ1D: $22EFC8
- SLPtrs_MMZ1S: $22EFCC
- SLPtrs_MMZ1N: $22EFD0
- SLPtrs_MMZ2M: $22EFD4
- SLPtrs_MMZ2D: $22EFD8
- SLPtrs_MMZ2S: $22EFDC
- SLPtrs_MMZ2N: $22EFE0
- SLPtrs_MMZ3M: $22EFE4
- SLPtrs_MMZ3D: $22EFE8
- SLPtrs_MMZ3S: $22EFEC
- SLPtrs_MMZ3N: $22EFF0
- SLPtrs_MMZ4M: $22EFF4
- SLPtrs_MMZ4D: $22EFF8
- SLPtrs_MMZ4S: $22EFFC
- SLPtrs_MMZ4N: $22F000
- SLPtrs_MMZ5M: $22F004
- SLPtrs_MMZ5D: $22F008
- SLPtrs_MMZ5S: $22F00C
- SLPtrs_MMZ5N: $22F010
- SLPtrs_MMZ6M: $22F014
- SLPtrs_MMZ6D: $22F018
- SLPtrs_MMZ6S: $22F01C
- SLPtrs_MMZ6N: $22F020
- SLPtrs_Train0M: $22F024
- SLPtrs_Train0D: $22F028
- SLPtrs_Train0S: $22F02C
- SLPtrs_Train0N: $22F030
- SLPtrs_Train1M: $22F034
- SLPtrs_Train1D: $22F038
- SLPtrs_Train1S: $22F03C
- SLPtrs_Train1N: $22F040
- SLPtrs_Train2M: $22F044
- SLPtrs_Train2D: $22F048
- SLPtrs_Train2S: $22F04C
- SLPtrs_Train2N: $22F050
- SLPtrs_Train3M: $22F054
- SLPtrs_Train3D: $22F058
- SLPtrs_Train3S: $22F05C
- SLPtrs_Train3N: $22F060
- SLPtrs_Train4M: $22F064
- SLPtrs_Train4D: $22F068
- SLPtrs_Train4S: $22F06C
- SLPtrs_Train4N: $22F070
- SLPtrs_Train5M: $22F074
- SLPtrs_Train5D: $22F078
- SLPtrs_Train5S: $22F07C
- SLPtrs_Train5N: $22F080
- SLPtrs_Train6M: $22F084
- SLPtrs_Train6D: $22F088
- SLPtrs_Train6S: $22F08C
- SLPtrs_Train6N: $22F090
- SLPtrs_Intro0M: $22F094
- SLPtrs_Intro0D: $22F098
- SLPtrs_Intro0S: $22F09C
- SLPtrs_Intro0N: $22F0A0
- SLPtrs_Intro1M: $22F0A4
- SLPtrs_Intro1D: $22F0A8
- SLPtrs_Intro1S: $22F0AC
- SLPtrs_Intro1N: $22F0B0
- SLPtrs_Intro2M: $22F0B4
- SLPtrs_Intro2D: $22F0B8
- SLPtrs_Intro2S: $22F0BC
- SLPtrs_Intro2N: $22F0C0
- SLPtrs_Intro3M: $22F0C4
- SLPtrs_Intro3D: $22F0C8
- SLPtrs_Intro3S: $22F0CC
- SLPtrs_Intro3N: $22F0D0
- SLPtrs_Intro4M: $22F0D4
- SLPtrs_Intro4D: $22F0D8
- SLPtrs_Intro4S: $22F0DC
- SLPtrs_Intro4N: $22F0E0
- SLPtrs_Intro5M: $22F0E4
- SLPtrs_Intro5D: $22F0E8
- SLPtrs_Intro5S: $22F0EC
- SLPtrs_Intro5N: $22F0F0
- SLPtrs_Intro6M: $22F0F4
- SLPtrs_Intro6D: $22F0F8
- SLPtrs_Intro6S: $22F0FC
- SLPtrs_Intro6N: $22F100
- SLPtrs_World0M: $22F104
- SLPtrs_World0D: $22F108
- SLPtrs_World0S: $22F10C
- SLPtrs_World0N: $22F110
- SLPtrs_World1M: $22F114
- SLPtrs_World1D: $22F118
- SLPtrs_World1S: $22F11C
- SLPtrs_World1N: $22F120
- SLPtrs_World2M: $22F124
- SLPtrs_World2D: $22F128
- SLPtrs_World2S: $22F12C
- SLPtrs_World2N: $22F130
- SLPtrs_World3M: $22F134
- SLPtrs_World3D: $22F138
- SLPtrs_World3S: $22F13C
- SLPtrs_World3N: $22F140
- SLPtrs_World4M: $22F144
- SLPtrs_World4D: $22F148
- SLPtrs_World4S: $22F14C
- SLPtrs_World4N: $22F150
- SLPtrs_World5M: $22F154
- SLPtrs_World5D: $22F158
- SLPtrs_World5S: $22F15C
- SLPtrs_World5N: $22F160
- SLPtrs_World6M: $22F164
- SLPtrs_World6D: $22F168
- SLPtrs_World6S: $22F16C
- SLPtrs_World6N: $22F170
-
-*Segment 049 - MD_Palette_Index: Offset $22F174  Size $18C4
- LPPtrBBZ0M: $22F174
- LPPtrBBZ0D: $22F176
- LPPtrBBZ0S: $22F178
- LPPtrBBZ0N: $22F17A
- LPPtrBBZ1M: $22F17C
- LPPtrBBZ1D: $22F17E
- LPPtrBBZ1S: $22F180
- LPPtrBBZ1N: $22F182
- LPPtrBBZ2M: $22F184
- LPPtrBBZ2D: $22F186
- LPPtrBBZ2S: $22F188
- LPPtrBBZ2N: $22F18A
- LPPtrBBZ3M: $22F18C
- LPPtrBBZ3D: $22F18E
- LPPtrBBZ3S: $22F190
- LPPtrBBZ3N: $22F192
- LPPtrBBZ4M: $22F194
- LPPtrBBZ4D: $22F196
- LPPtrBBZ4S: $22F198
- LPPtrBBZ4N: $22F19A
- LPPtrBBZ5M: $22F19C
- LPPtrBBZ5D: $22F19E
- LPPtrBBZ5S: $22F1A0
- LPPtrBBZ5N: $22F1A2
- LPPtrBBZ6M: $22F1A4
- LPPtrBBZ6D: $22F1A6
- LPPtrBBZ6S: $22F1A8
- LPPtrBBZ6N: $22F1AA
- LPPtrSSZ0M: $22F1AC
- LPPtrSSZ0D: $22F1AE
- LPPtrSSZ0S: $22F1B0
- LPPtrSSZ0N: $22F1B2
- LPPtrSSZ1M: $22F1B4
- LPPtrSSZ1D: $22F1B6
- LPPtrSSZ1S: $22F1B8
- LPPtrSSZ1N: $22F1BA
- LPPtrSSZ2M: $22F1BC
- LPPtrSSZ2D: $22F1BE
- LPPtrSSZ2S: $22F1C0
- LPPtrSSZ2N: $22F1C2
- LPPtrSSZ3M: $22F1C4
- LPPtrSSZ3D: $22F1C6
- LPPtrSSZ3S: $22F1C8
- LPPtrSSZ3N: $22F1CA
- LPPtrSSZ4M: $22F1CC
- LPPtrSSZ4D: $22F1CE
- LPPtrSSZ4S: $22F1D0
- LPPtrSSZ4N: $22F1D2
- LPPtrSSZ5M: $22F1D4
- LPPtrSSZ5D: $22F1D6
- LPPtrSSZ5S: $22F1D8
- LPPtrSSZ5N: $22F1DA
- LPPtrSSZ6M: $22F1DC
- LPPtrSSZ6D: $22F1DE
- LPPtrSSZ6S: $22F1E0
- LPPtrSSZ6N: $22F1E2
- LPPtrAAZ0M: $22F1E4
- LPPtrAAZ0D: $22F1E6
- LPPtrAAZ0S: $22F1E8
- LPPtrAAZ0N: $22F1EA
- LPPtrAAZ1M: $22F1EC
- LPPtrAAZ1D: $22F1EE
- LPPtrAAZ1S: $22F1F0
- LPPtrAAZ1N: $22F1F2
- LPPtrAAZ2M: $22F1F4
- LPPtrAAZ2D: $22F1F6
- LPPtrAAZ2S: $22F1F8
- LPPtrAAZ2N: $22F1FA
- LPPtrAAZ3M: $22F1FC
- LPPtrAAZ3D: $22F1FE
- LPPtrAAZ3S: $22F200
- LPPtrAAZ3N: $22F202
- LPPtrAAZ4M: $22F204
- LPPtrAAZ4D: $22F206
- LPPtrAAZ4S: $22F208
- LPPtrAAZ4N: $22F20A
- LPPtrAAZ5M: $22F20C
- LPPtrAAZ5D: $22F20E
- LPPtrAAZ5S: $22F210
- LPPtrAAZ5N: $22F212
- LPPtrAAZ6M: $22F214
- LPPtrAAZ6D: $22F216
- LPPtrAAZ6S: $22F218
- LPPtrAAZ6N: $22F21A
- LPPtrTTZ0M: $22F21C
- LPPtrTTZ0D: $22F21E
- LPPtrTTZ0S: $22F220
- LPPtrTTZ0N: $22F222
- LPPtrTTZ1M: $22F224
- LPPtrTTZ1D: $22F226
- LPPtrTTZ1S: $22F228
- LPPtrTTZ1N: $22F22A
- LPPtrTTZ2M: $22F22C
- LPPtrTTZ2D: $22F22E
- LPPtrTTZ2S: $22F230
- LPPtrTTZ2N: $22F232
- LPPtrTTZ3M: $22F234
- LPPtrTTZ3D: $22F236
- LPPtrTTZ3S: $22F238
- LPPtrTTZ3N: $22F23A
- LPPtrTTZ4M: $22F23C
- LPPtrTTZ4D: $22F23E
- LPPtrTTZ4S: $22F240
- LPPtrTTZ4N: $22F242
- LPPtrTTZ5M: $22F244
- LPPtrTTZ5D: $22F246
- LPPtrTTZ5S: $22F248
- LPPtrTTZ5N: $22F24A
- LPPtrTTZ6M: $22F24C
- LPPtrTTZ6D: $22F24E
- LPPtrTTZ6S: $22F250
- LPPtrTTZ6N: $22F252
- LPPtrMMZ0M: $22F254
- LPPtrMMZ0D: $22F256
- LPPtrMMZ0S: $22F258
- LPPtrMMZ0N: $22F25A
- LPPtrMMZ1M: $22F25C
- LPPtrMMZ1D: $22F25E
- LPPtrMMZ1S: $22F260
- LPPtrMMZ1N: $22F262
- LPPtrMMZ2M: $22F264
- LPPtrMMZ2D: $22F266
- LPPtrMMZ2S: $22F268
- LPPtrMMZ2N: $22F26A
- LPPtrMMZ3M: $22F26C
- LPPtrMMZ3D: $22F26E
- LPPtrMMZ3S: $22F270
- LPPtrMMZ3N: $22F272
- LPPtrMMZ4M: $22F274
- LPPtrMMZ4D: $22F276
- LPPtrMMZ4S: $22F278
- LPPtrMMZ4N: $22F27A
- LPPtrMMZ5M: $22F27C
- LPPtrMMZ5D: $22F27E
- LPPtrMMZ5S: $22F280
- LPPtrMMZ5N: $22F282
- LPPtrMMZ6M: $22F284
- LPPtrMMZ6D: $22F286
- LPPtrMMZ6S: $22F288
- LPPtrMMZ6N: $22F28A
- LPPtrTrain0M: $22F28C
- LPPtrTrain0D: $22F28E
- LPPtrTrain0S: $22F290
- LPPtrTrain0N: $22F292
- LPPtrTrain1M: $22F294
- LPPtrTrain1D: $22F296
- LPPtrTrain1S: $22F298
- LPPtrTrain1N: $22F29A
- LPPtrTrain2M: $22F29C
- LPPtrTrain2D: $22F29E
- LPPtrTrain2S: $22F2A0
- LPPtrTrain2N: $22F2A2
- LPPtrTrain3M: $22F2A4
- LPPtrTrain3D: $22F2A6
- LPPtrTrain3S: $22F2A8
- LPPtrTrain3N: $22F2AA
- LPPtrTrain4M: $22F2AC
- LPPtrTrain4D: $22F2AE
- LPPtrTrain4S: $22F2B0
- LPPtrTrain4N: $22F2B2
- LPPtrTrain5M: $22F2B4
- LPPtrTrain5D: $22F2B6
- LPPtrTrain5S: $22F2B8
- LPPtrTrain5N: $22F2BA
- LPPtrTrain6M: $22F2BC
- LPPtrTrain6D: $22F2BE
- LPPtrTrain6S: $22F2C0
- LPPtrTrain6N: $22F2C2
- LPPtrIntro0M: $22F2C4
- LPPtrIntro0D: $22F2C6
- LPPtrIntro0S: $22F2C8
- LPPtrIntro0N: $22F2CA
- LPPtrIntro1M: $22F2CC
- LPPtrIntro1D: $22F2CE
- LPPtrIntro1S: $22F2D0
- LPPtrIntro1N: $22F2D2
- LPPtrIntro2M: $22F2D4
- LPPtrIntro2D: $22F2D6
- LPPtrIntro2S: $22F2D8
- LPPtrIntro2N: $22F2DA
- LPPtrIntro3M: $22F2DC
- LPPtrIntro3D: $22F2DE
- LPPtrIntro3S: $22F2E0
- LPPtrIntro3N: $22F2E2
- LPPtrIntro4M: $22F2E4
- LPPtrIntro4D: $22F2E6
- LPPtrIntro4S: $22F2E8
- LPPtrIntro4N: $22F2EA
- LPPtrIntro5M: $22F2EC
- LPPtrIntro5D: $22F2EE
- LPPtrIntro5S: $22F2F0
- LPPtrIntro5N: $22F2F2
- LPPtrIntro6M: $22F2F4
- LPPtrIntro6D: $22F2F6
- LPPtrIntro6S: $22F2F8
- LPPtrIntro6N: $22F2FA
- LPPtrWorld0M: $22F2FC
- LPPtrWorld0D: $22F2FE
- LPPtrWOrld0S: $22F300
- LPPtrWorld0N: $22F302
- LPPtrWorld1M: $22F304
- LPPtrWorld1D: $22F306
- LPPtrWorld1S: $22F308
- LPPtrWorld1N: $22F30A
- LPPtrWorld2M: $22F30C
- LPPtrWorld2D: $22F30E
- LPPtrWorld2S: $22F310
- LPPtrWorld2N: $22F312
- LPPtrWorld3M: $22F314
- LPPtrWorld3D: $22F316
- LPPtrWorld3S: $22F318
- LPPtrWorld3N: $22F31A
- LPPtrWorld4M: $22F31C
- LPPtrWorld4D: $22F31E
- LPPtrWorld4S: $22F320
- LPPtrWorld4N: $22F322
- LPPtrWorld5M: $22F324
- LPPtrWorld5D: $22F326
- LPPtrWorld5S: $22F328
- LPPtrWorld5N: $22F32A
- LPPtrWorld6M: $22F32C
- LPPtrWorld6D: $22F32E
- LPPtrWorld6S: $22F330
- LPPtrWorld6N: $22F332
- Pal_BBZ123M: $22F334
- Pal_BBZ123D: $22F3B4
- Pal_BBZ123S: $22F434
- Pal_BBZ123N: $22F4B4
- Pal_BBZ4M: $22F534
- Pal_BBZ4D: $22F5B4
- Pal_BBZ4S: $22F634
- Pal_BBZ4N: $22F6B4
- Pal_BBZ5M: $22F734
- Pal_BBZ5D: $22F7B4
- Pal_BBZ5S: $22F834
- Pal_BBZ5N: $22F8B4
- Pal_SSZM: $22F934
- Pal_SSZD: $22F9B4
- Pal_SSZ12S: $22FA34
- Pal_SSZ345S: $22FAB4
- Pal_SSZN: $22FB34
- Pal_AAZ12MD: $22FBB4
- Pal_AAZ12SN: $22FC34
- Pal_AAZ34: $22FCB4
- Pal_AAZ5: $22FD34
- Pal_TTZ12M: $22FDB4
- Pal_TTZ34M: $22FE34
- Pal_TTZ5M: $22FEB4
- Pal_TTZ12D: $22FF34
- Pal_TTZ34D: $22FFB4
- Pal_TTZ5D: $230034
- Pal_TTZ1234S: $2300B4
- Pal_TTZ5S: $230134
- Pal_TTZ12N: $2301B4
- Pal_TTZ34N: $230234
- Pal_TTZ5N: $2302B4
- Pal_MMZM: $230334
- Pal_MMZD: $2303B4
- Pal_MMZS: $230434
- Pal_MMZN: $2304B4
- Pal_TrainingM: $230534
- Pal_TrainingD: $2305B4
- Pal_TrainingS: $230634
- Pal_TrainingN: $2306B4
- Pal_Tutorial: $230734
- Pal_WorldEntM: $2307B4
- Pal_WorldEntD: $230834
- Pal_WorldEntS: $2308B4
- Pal_WorldEntN: $230934
- Pal_FinalBoss: $2309B4
- Pal_NULL: $230A34
-
-*Segment 04A - MD_Boss_Palette_Index: Offset $230A38  Size $410
- PalPtr_TTZBoss: $230A38
- Pal_TTZBossM: $230A40
- Pal_TTZBossD: $230AC0
- Pal_TTZBossS: $230B40
- Pal_TTZBossN: $230BC0
- PalPtr_SSZBoss: $230C40
- Pal_SSZBossM: $230C48
- Pal_SSZBossD: $230CC8
- Pal_SSZBossS: $230D48
- Pal_SSZBossN: $230DC8
-
-*Segment 04B - Pal32x_Levels_AAZ_Lit_Code: Offset $219E  Size $4
- P32xLAAZL_Code: $21A0
-
-*Segment 04C - Pal32x_LevelsS_AAZ_Lit_Ptrs: Offset $21E0  Size $10
-
-*Segment 04D - Pal32x_LevelP_Levels_Code: Offset $2116  Size $6
-
-*Segment 04E - Pal32x_LevelP_Levels_Ptrs: Offset $21F0  Size $560
- Pal32xP_Levels: $21F0
- Pal32xP_BBZ: $2210
- Pal32xP_SSZ: $222C
- Pal32xP_AAZ: $2248
- Pal32xP_TTZ: $2264
- Pal32xP_MMZ: $2280
- Pal32xP_IIZ_Tut: $229C
- Pal32xP_IIZ_Intro: $22B8
- Pal32xP_WE: $22D4
- Pal32xP_BBZ0: $22F0
- Pal32xP_BBZ1: $2300
- Pal32xP_BBZ2: $2310
- Pal32xP_BBZ3: $2320
- Pal32xP_BBZ4: $2330
- Pal32xP_BBZ5: $2340
- Pal32xP_BBZ6: $2350
- Pal32xP_SSZ0: $2360
- Pal32xP_SSZ1: $2370
- Pal32xP_SSZ2: $2380
- Pal32xP_SSZ3: $2390
- Pal32xP_SSZ4: $23A0
- Pal32xP_SSZ5: $23B0
- Pal32xP_SSZ6: $23C0
- Pal32xP_AAZ0: $23D0
- Pal32xP_AAZ1: $23E0
- Pal32xP_AAZ2: $23F0
- Pal32xP_AAZ3: $2400
- Pal32xP_AAZ4: $2410
- Pal32xP_AAZ5: $2420
- Pal32xP_AAZ6: $2430
- Pal32xP_TTZ0: $2440
- Pal32xP_TTZ1: $2450
- Pal32xP_TTZ2: $2460
- Pal32xP_TTZ3: $2470
- Pal32xP_TTZ4: $2480
- Pal32xP_TTZ5: $2490
- Pal32xP_TTZ6: $24A0
- Pal32xP_MMZ0: $24B0
- Pal32xP_MMZ1: $24C0
- Pal32xP_MMZ2: $24D0
- Pal32xP_MMZ3: $24E0
- Pal32xP_MMZ4: $24F0
- Pal32xP_MMZ5: $2500
- Pal32xP_MMZ6: $2510
- Pal32xP_IIZ_Tut0: $2520
- Pal32xP_IIZ_Tut1: $2530
- Pal32xP_IIZ_Tut2: $2540
- Pal32xP_IIZ_Tut3: $2550
- Pal32xP_IIZ_Tut4: $2560
- Pal32xP_IIZ_Tut5: $2570
- Pal32xP_IIZ_Tut6: $2580
- Pal32xP_IIZ_Intro0: $2590
- Pal32xP_IIZ_Intro1: $25A0
- Pal32xP_IIZ_Intro2: $25B0
- Pal32xP_IIZ_Intro3: $25C0
- Pal32xP_IIZ_Intro4: $25D0
- Pal32xP_IIZ_Intro5: $25E0
- Pal32xP_IIZ_Intro6: $25F0
- Pal32xP_WE0: $2600
- Pal32xP_WE1: $2610
- Pal32xP_WE2: $2620
- Pal32xP_WE3: $2630
- Pal32xP_WE4: $2640
- Pal32xP_WE5: $2650
- Pal32xP_WE6: $2660
- Pal32xP_BBZ06MN: $2670
- Pal32xP_SSZ06MN: $2674
- Pal32xP_AAZ06MN: $2678
- Pal32xP_TTZ06MN: $267C
- Pal32xP_MMZ06MN: $2680
- Pal32xP_IIZ_Tut0M: $2684
- Pal32xP_IIZ_Tut0D: $2688
- Pal32xP_IIZ_Tut0S: $268C
- Pal32xP_IIZ_Tut0N: $2690
- Pal32xP_IIZ_Tut1M: $2694
- Pal32xP_IIZ_Tut1D: $2698
- Pal32xP_IIZ_Tut1S: $269C
- Pal32xP_IIZ_Tut1N: $26A0
- Pal32xP_IIZ_Tut2M: $26A4
- Pal32xP_IIZ_Tut2D: $26A8
- Pal32xP_IIZ_Tut2S: $26AC
- Pal32xP_IIZ_Tut2N: $26B0
- Pal32xP_IIZ_Tut3M: $26B4
- Pal32xP_IIZ_Tut3D: $26B8
- Pal32xP_IIZ_Tut3S: $26BC
- Pal32xP_IIZ_Tut3N: $26C0
- Pal32xP_IIZ_Tut4M: $26C4
- Pal32xP_IIZ_Tut4D: $26C8
- Pal32xP_IIZ_Tut4S: $26CC
- Pal32xP_IIZ_Tut4N: $26D0
- Pal32xP_IIZ_Tut5M: $26D4
- Pal32xP_IIZ_Tut5D: $26D8
- Pal32xP_IIZ_Tut5S: $26DC
- Pal32xP_IIZ_Tut5N: $26E0
- Pal32xP_IIZ_Tut6M: $26E4
- Pal32xP_IIZ_Tut6D: $26E8
- Pal32xP_IIZ_Tut6S: $26EC
- Pal32xP_IIZ_Tut6N: $26F0
- Pal32xP_IIZ_Intro0M: $26F4
- Pal32xP_IIZ_Intro0D: $26F8
- Pal32xP_IIZ_Intro0S: $26FC
- Pal32xP_IIZ_Intro0N: $2700
- Pal32xP_IIZ_Intro1M: $2704
- Pal32xP_IIZ_Intro1D: $2708
- Pal32xP_IIZ_Intro1S: $270C
- Pal32xP_IIZ_Intro1N: $2710
- Pal32xP_IIZ_Intro2M: $2714
- Pal32xP_IIZ_Intro2D: $2718
- Pal32xP_IIZ_Intro2S: $271C
- Pal32xP_IIZ_Intro2N: $2720
- Pal32xP_IIZ_Intro3M: $2724
- Pal32xP_IIZ_Intro3D: $2728
- Pal32xP_IIZ_Intro3S: $272C
- Pal32xP_IIZ_Intro3N: $2730
- Pal32xP_IIZ_Intro4M: $2734
- Pal32xP_IIZ_Intro4D: $2738
- Pal32xP_IIZ_Intro4S: $273C
- Pal32xP_IIZ_Intro4N: $2740
- Pal32xP_Practice: $2744
- Pal32xP_WE0MN: $2748
- Pal32xP_WE16MN: $274C
-
-*Segment 04F - Pal32x_LevelS_Levels_Code: Offset $2156  Size $6
-
-*Segment 050 - Pal32x_LevelS_Levels_Ptrs: Offset $2750  Size $694
- Pal32xS_Levels: $2750
- Pal32xS_BBZ: $2770
- Pal32xS_SSZ: $278C
- Pal32xS_AAZ: $27A8
- Pal32xS_TTZ: $27C4
- Pal32xS_MMZ: $27E0
- Pal32xS_IIZ_Tut: $27FC
- Pal32xS_IIZ_Intro: $2818
- Pal32xS_WE: $2834
- Pal32xS_BBZ0: $2850
- Pal32xS_BBZ1: $2860
- Pal32xS_BBZ2: $2870
- Pal32xS_BBZ3: $2880
- Pal32xS_BBZ4: $2890
- Pal32xS_BBZ5: $28A0
- Pal32xS_BBZ6: $28B0
- Pal32xS_SSZ0: $28C0
- Pal32xS_SSZ1: $28D0
- Pal32xS_SSZ2: $28E0
- Pal32xS_SSZ3: $28F0
- Pal32xS_SSZ4: $2900
- Pal32xS_SSZ5: $2910
- Pal32xS_SSZ6: $2920
- Pal32xS_AAZ0: $2930
- Pal32xS_AAZ1: $2940
- Pal32xS_AAZ2: $2950
- Pal32xS_AAZ3: $2960
- Pal32xS_AAZ4: $2970
- Pal32xS_AAZ5: $2980
- Pal32xS_AAZ6: $2990
- Pal32xS_TTZ0: $29A0
- Pal32xS_TTZ1: $29B0
- Pal32xS_TTZ2: $29C0
- Pal32xS_TTZ3: $29D0
- Pal32xS_TTZ4: $29E0
- Pal32xS_TTZ5: $29F0
- Pal32xS_TTZ6: $2A00
- Pal32xS_MMZ0: $2A10
- Pal32xS_MMZ1: $2A20
- Pal32xS_MMZ2: $2A30
- Pal32xS_MMZ3: $2A40
- Pal32xS_MMZ4: $2A50
- Pal32xS_MMZ5: $2A60
- Pal32xS_MMZ6: $2A70
- Pal32xS_IIZ_Tut0: $2A80
- Pal32xS_IIZ_Tut1: $2A90
- Pal32xS_IIZ_Tut2: $2AA0
- Pal32xS_IIZ_Tut3: $2AB0
- Pal32xS_IIZ_Tut4: $2AC0
- Pal32xS_IIZ_Tut5: $2AD0
- Pal32xS_IIZ_Tut6: $2AE0
- Pal32xS_IIZ_Intro0: $2AF0
- Pal32xS_IIZ_Intro1: $2B00
- Pal32xS_IIZ_Intro2: $2B10
- Pal32xS_IIZ_Intro3: $2B20
- Pal32xS_IIZ_Intro4: $2B30
- Pal32xS_IIZ_Intro5: $2B40
- Pal32xS_IIZ_Intro6: $2B50
- Pal32xS_WE0: $2B60
- Pal32xS_WE1: $2B70
- Pal32xS_WE2: $2B80
- Pal32xS_WE3: $2B90
- Pal32xS_WE4: $2BA0
- Pal32xS_WE5: $2BB0
- Pal32xS_WE6: $2BC0
- Pal32xS_BBZ0MD: $2BD0
- Pal32xS_BBZ0SN: $2BD4
- Pal32xS_BBZ1M: $2BD8
- Pal32xS_BBZ1D: $2BDC
- Pal32xS_BBZ1S: $2BE0
- Pal32xS_BBZ1N: $2BE4
- Pal32xS_BBZ2M: $2BE8
- Pal32xS_BBZ2D: $2BEC
- Pal32xS_BBZ2S: $2BF0
- Pal32xS_BBZ2N: $2BF4
- Pal32xS_BBZ3M: $2BF8
- Pal32xS_BBZ3D: $2BFC
- Pal32xS_BBZ3S: $2C00
- Pal32xS_BBZ3N: $2C04
- Pal32xS_BBZ4M: $2C08
- Pal32xS_BBZ4D: $2C0C
- Pal32xS_BBZ4S: $2C10
- Pal32xS_BBZ4N: $2C14
- Pal32xS_BBZ5M: $2C18
- Pal32xS_BBZ5D: $2C1C
- Pal32xS_BBZ5S: $2C20
- Pal32xS_BBZ5N: $2C24
- Pal32xS_BBZ6MD: $2C28
- Pal32xS_BBZ6SN: $2C2C
- Pal32xS_SSZ1M: $2C30
- Pal32xS_SSZ1D: $2C34
- Pal32xS_SSZ1S: $2C38
- Pal32xS_SSZ1N: $2C3C
- Pal32xS_SSZ2M: $2C40
- Pal32xS_SSZ2D: $2C44
- Pal32xS_SSZ2S: $2C48
- Pal32xS_SSZ2N: $2C4C
- Pal32xS_SSZ3M: $2C50
- Pal32xS_SSZ3D: $2C54
- Pal32xS_SSZ3S: $2C58
- Pal32xS_SSZ3N: $2C5C
- Pal32xS_SSZ4M: $2C60
- Pal32xS_SSZ4D: $2C64
- Pal32xS_SSZ4S: $2C68
- Pal32xS_SSZ4N: $2C6C
- Pal32xS_SSZ5M: $2C70
- Pal32xS_SSZ5D: $2C74
- Pal32xS_SSZ5S: $2C78
- Pal32xS_SSZ5N: $2C7C
- Pal32xS_SSZ6MN: $2C80
- Pal32xS_AAZ0M: $2C84
- Pal32xS_AAZ0D: $2C88
- Pal32xS_AAZ0S: $2C8C
- Pal32xS_AAZ0N: $2C90
- Pal32xS_AAZ1M: $2C94
- Pal32xS_AAZ1D: $2C98
- Pal32xS_AAZ1S: $2C9C
- Pal32xS_AAZ1N: $2CA0
- Pal32xS_AAZ2M: $2CA4
- Pal32xS_AAZ2D: $2CA8
- Pal32xS_AAZ2S: $2CAC
- Pal32xS_AAZ2N: $2CB0
- Pal32xS_AAZ3M: $2CB4
- Pal32xS_AAZ3D: $2CB8
- Pal32xS_AAZ3S: $2CBC
- Pal32xS_AAZ3N: $2CC0
- Pal32xS_AAZ4M: $2CC4
- Pal32xS_AAZ4D: $2CC8
- Pal32xS_AAZ4S: $2CCC
- Pal32xS_AAZ4N: $2CD0
- Pal32xS_AAZ5M: $2CD4
- Pal32xS_AAZ5D: $2CD8
- Pal32xS_AAZ5S: $2CDC
- Pal32xS_AAZ5N: $2CE0
- Pal32xS_AAZ6M: $2CE4
- Pal32xS_AAZ6D: $2CE8
- Pal32xS_AAZ6S: $2CEC
- Pal32xS_AAZ6N: $2CF0
- Pal32xS_TTZ0M: $2CF4
- Pal32xS_TTZ0D: $2CF8
- Pal32xS_TTZ0S: $2CFC
- Pal32xS_TTZ0N: $2D00
- Pal32xS_TTZ1M: $2D04
- Pal32xS_TTZ1D: $2D08
- Pal32xS_TTZ1S: $2D0C
- Pal32xS_TTZ1N: $2D10
- Pal32xS_TTZ2M: $2D14
- Pal32xS_TTZ2D: $2D18
- Pal32xS_TTZ2S: $2D1C
- Pal32xS_TTZ2N: $2D20
- Pal32xS_TTZ3M: $2D24
- Pal32xS_TTZ3D: $2D28
- Pal32xS_TTZ3S: $2D2C
- Pal32xS_TTZ3N: $2D30
- Pal32xS_TTZ4M: $2D34
- Pal32xS_TTZ4D: $2D38
- Pal32xS_TTZ4S: $2D3C
- Pal32xS_TTZ4N: $2D40
- Pal32xS_TTZ5M: $2D44
- Pal32xS_TTZ5D: $2D48
- Pal32xS_TTZ5S: $2D4C
- Pal32xS_TTZ5N: $2D50
- Pal32xS_TTZ6M: $2D54
- Pal32xS_TTZ6D: $2D58
- Pal32xS_TTZ6S: $2D5C
- Pal32xS_TTZ6N: $2D60
- Pal32xS_MMZ0M: $2D64
- Pal32xS_MMZ0D: $2D68
- Pal32xS_MMZ0S: $2D6C
- Pal32xS_MMZ0N: $2D70
- Pal32xS_MMZ1M: $2D74
- Pal32xS_MMZ1D: $2D78
- Pal32xS_MMZ1S: $2D7C
- Pal32xS_MMZ1N: $2D80
- Pal32xS_MMZ2M: $2D84
- Pal32xS_MMZ2D: $2D88
- Pal32xS_MMZ2S: $2D8C
- Pal32xS_MMZ2N: $2D90
- Pal32xS_MMZ3M: $2D94
- Pal32xS_MMZ3D: $2D98
- Pal32xS_MMZ3S: $2D9C
- Pal32xS_MMZ3N: $2DA0
- Pal32xS_MMZ4M: $2DA4
- Pal32xS_MMZ4D: $2DA8
- Pal32xS_MMZ4S: $2DAC
- Pal32xS_MMZ4N: $2DB0
- Pal32xS_MMZ5M: $2DB4
- Pal32xS_MMZ5D: $2DB8
- Pal32xS_MMZ5S: $2DBC
- Pal32xS_MMZ5N: $2DC0
- Pal32xS_MMZ6M: $2DC4
- Pal32xS_MMZ6D: $2DC8
- Pal32xS_MMZ6S: $2DCC
- Pal32xS_MMZ6N: $2DD0
- Pal32xS_IIZ_Tut06MN: $2DD4
- Pal32xS_IIZ_Intro06MN: $2DD8
- Pal32xS_WE0MN: $2DDC
- Pal32xS_WE16MN: $2DE0
-
-*Segment 051 - Pal32x_LevelP_Levels_Data: Offset $12C66  Size $260
- PalD32xP_BBZ06MN: $12C66
- PalD32xP_SSZ06MN: $12CAE
- PalD32xP_AAZ06MN: $12CF6
- PalD32xP_TTZ06MN: $12D36
- PalD32xP_MMZ06MN: $12D7E
- PalD32xP_IIZD: $12DC6
- PalD32xP_IIZM: $12E06
- PalD32xP_IIZS: $12E46
- PalD32xP_IIZN: $12E86
-
-*Segment 052 - Pal32x_LevelS_Levels_Data: Offset $1A40  Size $6D6
- PalD32xS_BBZ06D: $1A40
- PalD32xS_BBZ06N: $1A80
- PalD32xS_BBZ13S: $1ADE
- PalD32xS_BBZ14M: $1B1E
- PalD32xS_BBZ45S: $1B5E
- PalD32xS_BBZ5M: $1B9E
- PalD32xS_MMZ06M: $1BDE
- PalD32xS_Various: $1C1E
- PalD32xS_MMZ06S: $1C5E
- PalD32xS_MMZ06N: $1C9E
- PalD32xS_AAZ06D_Lit: $1CDE
- PalD32xS_AAZ06D: $1D1E
- PalD32xS_AAZ06M_Lit: $1D5E
- PalD32xS_AAZ06M: $1D9E
- PalD32xS_AAZ06S_Lit: $1DDE
- PalD32xS_AAZ06S: $1E1E
- PalD32xS_AAZ06N_Lit: $1E5E
- PalD32xS_AAZ06N: $1E9E
- PalD32xS_TTZ06M: $1EDE
- PalD32xS_TTZ06D: $1F1E
- PalD32xS_TTZ06S: $1F5E
- PalD32xS_TTZ06N: $1F9E
- PalD32xS_SSZ15D: $1FDE
- PalD32xS_SSZ15M: $202C
- PalD32xS_SSZ15S: $207A
- PalD32xS_SSZ15N: $20C8
-
-*Segment 053 - Pal32xX_WE_LvlSigns_Ptr: Offset $27F0A  Size $4
-
-*Segment 054 - Pal32x_Level_WE_Data2: Offset $1310C  Size $90
- Pal32xX_MSKai_Lvl: $1310C
- Pal32xX_MSKai_Boss: $13154
-
-*Segment 055 - Pal32x_Level_WE_Data: Offset $2BC110  Size $358
- PalD32xP_WE0MN: $2BC110
- PalD32xS_WE0MN: $2BC150
- Pal32xX_WE_LvlSigns: $2BC190
-
-*Segment 056 - Pal32x_Chars_Code1: Offset $18BC  Size $4
- P32x_C_Code1: $18BE
-
-*Segment 057 - Pal32x_Chars_Code2: Offset $18D0  Size $4
- P32x_C_Code2: $18D2
-
-*Segment 058 - Pal32x_Chars_Code3: Offset $2E3A  Size $4
- P32x_C_Code3: $2E3C
-
-*Segment 059 - Pal32x_Chars_Code4: Offset $F8EA  Size $6
-
-*Segment 05A - Pal32x_Chars_Code5: Offset $294AE  Size $6
-
-*Segment 05B - Pal32X_Chars_Ptrs: Offset $18E4  Size $40
-
-*Segment 05C - Pal32x_Chars_Data: Offset $22921A  Size $1CC
- Pal32X_Mighty: $22921A
- Pal32X_Knuckles: $22923E
- Pal32X_Charmy: $22925C
- Pal32X_Vector: $22927E
- Pal32X_Heavy: $2292A0
- Pal32X_Bomb: $2292BE
- Pal32X_Espio: $2292DC
- Pal32X_Mighty_CS: $2292FA
- Pal32X_Knuckles_CS: $229318
- Pal32X_Charmy_CS: $22933C
- Pal32X_Vector_CS: $22935E
- Pal32X_Heavy_CS: $229382
- Pal32X_Bomb_CS: $22939E
- Pal32X_Espio_CS: $2293C2
-
-*Segment 05D - Palswap_Tut: Offset $2293EC  Size $3C0
- Palswap_Tut_FG: $2293EC
- Palswap_Tut_BG: $2295CC
-
-*Segment 05E - PalSwap32x_TitleCards: Offset $2BA90C  Size $48
-
-*Segment 05F - Pal32x_SegaLogo_CodeL: Offset $3496  Size $A
-
-*Segment 060 - Pal32x_Title_CodeL1: Offset $3CBA  Size $C
-
-*Segment 061 - Pal32x_Title_CodeL2: Offset $45B6  Size $12
-
-*Segment 062 - Pal32x_GoodEnding_CodeL: Offset $641A  Size $C
-
-*Segment 063 - Pal32x_SpacePal_CodeL: Offset $2BF46  Size $C
-
-*Segment 064 - Palc32x_TitleLogo_Data: Offset $3F88  Size $A8
- Palc32x_TitleLogo: $3F88
-
-*Segment 065 - Pal32x_GoodEnding: Offset $229802  Size $23C
- _Pal32x_GoodEnding: $229802
- _Pal32x_SegaLogo: $2299D6
- _Pal32x_Space: $229A00
-
-*Segment 066 - Pal32x_GridCodeL1: Offset $7F48  Size $A
-
-*Segment 067 - Pal32x_GridCodeL2: Offset $321BC  Size $C
-
-*Segment 068 - Pal32x_Grid: Offset $2271A0  Size $70
- _Pal32x_Grid: $2271A0
-
-*Segment 069 - LevelTile_Ptrs: Offset $230E48  Size $3E8
- LTPtrBBZ0M: $230E48
- LTPtrBBZ0D: $230E4A
- LTPtrBBZ0S: $230E4C
- LTPtrBBZ0N: $230E4E
- LTPtrBBZ1M: $230E50
- LTPtrBBZ1D: $230E52
- LTPtrBBZ1S: $230E54
- LTPtrBBZ1N: $230E56
- LTPtrBBZ2M: $230E58
- LTPtrBBZ2D: $230E5A
- LTPtrBBZ2S: $230E5C
- LTPtrBBZ2N: $230E5E
- LTPtrBBZ3M: $230E60
- LTPtrBBZ3D: $230E62
- LTPtrBBZ3S: $230E64
- LTPtrBBZ3N: $230E66
- LTPtrBBZ4M: $230E68
- LTPtrBBZ4D: $230E6A
- LTPtrBBZ4S: $230E6C
- LTPtrBBZ4N: $230E6E
- LTPtrBBZ5M: $230E70
- LTPtrBBZ5D: $230E72
- LTPtrBBZ5S: $230E74
- LTPtrBBZ5N: $230E76
- LTPtrBBZ6M: $230E78
- LTPtrBBZ6D: $230E7A
- LTPtrBBZ6S: $230E7C
- LTPtrBBZ6N: $230E7E
- LTPtrSSZ0M: $230E80
- LTPtrSSZ0D: $230E82
- LTPtrSSZ0S: $230E84
- LTPtrSSZ0N: $230E86
- LTPtrSSZ1M: $230E88
- LTPtrSSZ1D: $230E8A
- LTPtrSSZ1S: $230E8C
- LTPtrSSZ1N: $230E8E
- LTPtrSSZ2M: $230E90
- LTPtrSSZ2D: $230E92
- LTPtrSSZ2S: $230E94
- LTPtrSSZ2N: $230E96
- LTPtrSSZ3M: $230E98
- LTPtrSSZ3D: $230E9A
- LTPtrSSZ3S: $230E9C
- LTPtrSSZ3N: $230E9E
- LTPtrSSZ4M: $230EA0
- LTPtrSSZ4D: $230EA2
- LTPtrSSZ4S: $230EA4
- LTPtrSSZ4N: $230EA6
- LTPtrSSZ5M: $230EA8
- LTPtrSSZ5D: $230EAA
- LTPtrSSZ5S: $230EAC
- LTPtrSSZ5N: $230EAE
- LTPtrSSZ6M: $230EB0
- LTPtrSSZ6D: $230EB2
- LTPtrSSZ6S: $230EB4
- LTPtrSSZ6N: $230EB6
- LTPtrAAZ0M: $230EB8
- LTPtrAAZ0D: $230EBA
- LTPtrAAZ0S: $230EBC
- LTPtrAAZ0N: $230EBE
- LTPtrAAZ1M: $230EC0
- LTPtrAAZ1D: $230EC2
- LTPtrAAZ1S: $230EC4
- LTPtrAAZ1N: $230EC6
- LTPtrAAZ2M: $230EC8
- LTPtrAAZ2D: $230ECA
- LTPtrAAZ2S: $230ECC
- LTPtrAAZ2N: $230ECE
- LTPtrAAZ3M: $230ED0
- LTPtrAAZ3D: $230ED2
- LTPtrAAZ3S: $230ED4
- LTPtrAAZ3N: $230ED6
- LTPtrAAZ4M: $230ED8
- LTPtrAAZ4D: $230EDA
- LTPtrAAZ4S: $230EDC
- LTPtrAAZ4N: $230EDE
- LTPtrAAZ5M: $230EE0
- LTPtrAAZ5D: $230EE2
- LTPtrAAZ5S: $230EE4
- LTPtrAAZ5N: $230EE6
- LTPtrAAZ6M: $230EE8
- LTPtrAAZ6D: $230EEA
- LTPtrAAZ6S: $230EEC
- LTPtrAAZ6N: $230EEE
- LTPtrTTZ0M: $230EF0
- LTPtrTTZ0D: $230EF2
- LTPtrTTZ0S: $230EF4
- LTPtrTTZ0N: $230EF6
- LTPtrTTZ1M: $230EF8
- LTPtrTTZ1D: $230EFA
- LTPtrTTZ1S: $230EFC
- LTPtrTTZ1N: $230EFE
- LTPtrTTZ2M: $230F00
- LTPtrTTZ2D: $230F02
- LTPtrTTZ2S: $230F04
- LTPtrTTZ2N: $230F06
- LTPtrTTZ3M: $230F08
- LTPtrTTZ3D: $230F0A
- LTPtrTTZ3S: $230F0C
- LTPtrTTZ3N: $230F0E
- LTPtrTTZ4M: $230F10
- LTPtrTTZ4D: $230F12
- LTPtrTTZ4S: $230F14
- LTPtrTTZ4N: $230F16
- LTPtrTTZ5M: $230F18
- LTPtrTTZ5D: $230F1A
- LTPtrTTZ5S: $230F1C
- LTPtrTTZ5N: $230F1E
- LTPtrTTZ6M: $230F20
- LTPtrTTZ6D: $230F22
- LTPtrTTZ6S: $230F24
- LTPtrTTZ6N: $230F26
- LTPtrMMZ0M: $230F28
- LTPtrMMZ0D: $230F2A
- LTPtrMMZ0S: $230F2C
- LTPtrMMZ0N: $230F2E
- LTPtrMMZ1M: $230F30
- LTPtrMMZ1D: $230F32
- LTPtrMMZ1S: $230F34
- LTPtrMMZ1N: $230F36
- LTPtrMMZ2M: $230F38
- LTPtrMMZ2D: $230F3A
- LTPtrMMZ2S: $230F3C
- LTPtrMMZ2N: $230F3E
- LTPtrMMZ3M: $230F40
- LTPtrMMZ3D: $230F42
- LTPtrMMZ3S: $230F44
- LTPtrMMZ3N: $230F46
- LTPtrMMZ4M: $230F48
- LTPtrMMZ4D: $230F4A
- LTPtrMMZ4S: $230F4C
- LTPtrMMZ4N: $230F4E
- LTPtrMMZ5M: $230F50
- LTPtrMMZ5S: $230F52
- LTPtrMMZ5D: $230F54
- LTPtrMMZ5N: $230F56
- LTPtrMMZ6M: $230F58
- LTPtrMMZ6D: $230F5A
- LTPtrMMZ6S: $230F5C
- LTPtrMMZ6N: $230F5E
- LTPtrTrain0M: $230F60
- LTPtrTrain0D: $230F62
- LTPtrTrain0S: $230F64
- LTPtrTrain0N: $230F66
- LTPtrTrain1M: $230F68
- LTPtrTrain1D: $230F6A
- LTPtrTrain1S: $230F6C
- LTPtrTrain1N: $230F6E
- LTPtrTrain2M: $230F70
- LTPtrTrain2D: $230F72
- LTPtrTrain2S: $230F74
- LTPtrTrain2N: $230F76
- LTPtrTrain3M: $230F78
- LTPtrTrain3D: $230F7A
- LTPtrTrain3S: $230F7C
- LTPtrTrain3N: $230F7E
- LTPtrTrain4M: $230F80
- LTPtrTrain4D: $230F82
- LTPtrTrain4S: $230F84
- LTPtrTrain4N: $230F86
- LTPtrTrain5M: $230F88
- LTPtrTrain5D: $230F8A
- LTPtrTrain5S: $230F8C
- LTPtrTrain5N: $230F8E
- LTPtrTrain6M: $230F90
- LTPtrTrain6D: $230F92
- LTPtrTrain6S: $230F94
- LTPtrTrain6N: $230F96
- LTPtrIntro0M: $230F98
- LTPtrIntro0D: $230F9A
- LTPtrIntro0S: $230F9C
- LTPtrIntro0N: $230F9E
- LTPtrIntro1M: $230FA0
- LTPtrIntro1D: $230FA2
- LTPtrIntro1S: $230FA4
- LTPtrIntro1N: $230FA6
- LTPtrIntro2M: $230FA8
- LTPtrIntro2D: $230FAA
- LTPtrIntro2S: $230FAC
- LTPtrIntro2N: $230FAE
- LTPtrIntro3M: $230FB0
- LTPtrIntro3D: $230FB2
- LTPtrIntro3S: $230FB4
- LTPtrIntro3N: $230FB6
- LTPtrIntro4M: $230FB8
- LTPtrIntro4D: $230FBA
- LTPtrIntro4S: $230FBC
- LTPtrIntro4N: $230FBE
- LTPtrIntro5M: $230FC0
- LTPtrIntro5D: $230FC2
- LTPtrIntro5S: $230FC4
- LTPtrIntro5N: $230FC6
- LTPtrIntro6M: $230FC8
- LTPtrIntro6D: $230FCA
- LTPtrIntro6S: $230FCC
- LTPtrIntro6N: $230FCE
- LTPtrWorld0M: $230FD0
- LTPtrWorld0D: $230FD2
- LTPtrWorld0S: $230FD4
- LTPtrWorld0N: $230FD6
- LTPtrWorld1M: $230FD8
- LTPtrWorld1D: $230FDA
- LTPtrWorld1S: $230FDC
- LTPtrWorld1N: $230FDE
- LTPtrWorld2M: $230FE0
- LTPtrWorld2D: $230FE2
- LTPtrWorld2S: $230FE4
- LTPtrWorld2N: $230FE6
- LTPtrWorld3M: $230FE8
- LTPtrWorld3D: $230FEA
- LTPtrWorld3S: $230FEC
- LTPtrWorld3N: $230FEE
- LTPtrWorld4M: $230FF0
- LTPtrWorld4D: $230FF2
- LTPtrWorld4S: $230FF4
- LTPtrWorld4N: $230FF6
- LTPtrWorld5M: $230FF8
- LTPtrWorld5D: $230FFA
- LTPtrWorld5S: $230FFC
- LTPtrWorld5N: $230FFE
- LTPtrWorld6M: $231000
- LTPtrWorld6D: $231002
- LTPtrWorld6S: $231004
- LTPtrWorld6N: $231006
- BBZ12MDSN_TilePtr: $231008
- BBZ3MDSN_TilePtr: $231020
- BBZ4MDSN_TilePtr: $231038
- BBZ5MDSN_TilePtr: $231050
- SSZ12MD_TilePtr: $231068
- SSZ12SN_TilePtr: $231080
- SSZ3MD_TilePtr: $231098
- SSZ3SN_TilePtr: $2310B0
- SSZ45MD_TilePtr: $2310C8
- SSZ45SN_TilePtr: $2310E0
- AAZ12MDSN_TilePtr: $2310F8
- AAZ3MDSN_TilePtr: $231110
- AAZ4MDSN_TilePtr: $231124
- AAZ5MDSN_TilePtr: $231138
- TTZ12MDSN_TilePtr: $231158
- TTZ3MDSN_TilePtr: $23116C
- TTZ4MDSN_TilePtr: $231180
- TTZ5MDSN_TilePtr: $231194
- TTZBMDSN_TilePtr: $2311A8
- MMZ1MDSN_TilePtr: $2311BC
- MMZ2MDSN_TilePtr: $2311C8
- MMZ3MDSN_TilePtr: $2311D0
- MMZ4MDSN_TilePtr: $2311DC
- MMZ5MDSN_TilePtr: $2311E8
- Training_TilePtr: $2311F4
- Tutorial_TilePtr: $231200
- WorldEnt_TilePtr: $231214
- FinalBoss_TilePtr: $231224
- NULL_TilePtr: $23122C
-
-*Segment 06A - Level_Index: Offset $231230  Size $828
- BPLPtrBBZ0M: $231230
- BPLPtrBBZ0D: $231232
- BPLPtrBBZ0S: $231234
- BPLPtrBBZ0N: $231236
- BPLPtrBBZ1M: $231238
- BPLPtrBBZ1D: $23123A
- BPLPtrBBZ1S: $23123C
- BPLPtrBBZ1N: $23123E
- BPLPtrBBZ2M: $231240
- BPLPtrBBZ2D: $231242
- BPLPtrBBZ2S: $231244
- BPLPtrBBZ2N: $231246
- BPLPtrBBZ3M: $231248
- BPLPtrBBZ3D: $23124A
- BPLPtrBBZ3S: $23124C
- BPLPtrBBZ3N: $23124E
- BPLPtrBBZ4M: $231250
- BPLPtrBBZ4D: $231252
- BPLPtrBBZ4S: $231254
- BPLPtrBBZ4N: $231256
- BPLPtrBBZ5M: $231258
- BPLPtrBBZ5D: $23125A
- BPLPtrBBZ5S: $23125C
- BPLPtrBBZ5N: $23125E
- BPLPtrBBZ6M: $231260
- BPLPtrBBZ6D: $231262
- BPLPtrBBZ6S: $231264
- BPLPtrBBZ6N: $231266
- BPLPtrSSZ0M: $231268
- BPLPtrSSZ0D: $23126A
- BPLPtrSSZ0S: $23126C
- BPLPtrSSZ0N: $23126E
- BPLPtrSSZ1M: $231270
- BPLPtrSSZ1D: $231272
- BPLPtrSSZ1S: $231274
- BPLPtrSSZ1N: $231276
- BPLPtrSSZ2M: $231278
- BPLPtrSSZ2D: $23127A
- BPLPtrSSZ2S: $23127C
- BPLPtrSSZ2N: $23127E
- BPLPtrSSZ3M: $231280
- BPLPtrSSZ3D: $231282
- BPLPtrSSZ3S: $231284
- BPLPtrSSZ3N: $231286
- BPLPtrSSZ4M: $231288
- BPLPtrSSZ4D: $23128A
- BPLPtrSSZ4S: $23128C
- BPLPtrSSZ4N: $23128E
- BPLPtrSSZ5M: $231290
- BPLPtrSSZ5D: $231292
- BPLPtrSSZ5S: $231294
- BPLPtrSSZ5N: $231296
- BPLPtrSSZ6M: $231298
- BPLPtrSSZ6D: $23129A
- BPLPtrSSZ6S: $23129C
- BPLPtrSSZ6N: $23129E
- BPLPtrAAZ0M: $2312A0
- BPLPtrAAZ0D: $2312A2
- BPLPtrAAZ0S: $2312A4
- BPLPtrAAZ0N: $2312A6
- BPLPtrAAZ1M: $2312A8
- BPLPtrAAZ1D: $2312AA
- BPLPtrAAZ1S: $2312AC
- BPLPtrAAZ1N: $2312AE
- BPLPtrAAZ2M: $2312B0
- BPLPtrAAZ2D: $2312B2
- BPLPtrAAZ2S: $2312B4
- BPLPtrAAZ2N: $2312B6
- BPLPtrAAZ3M: $2312B8
- BPLPtrAAZ3D: $2312BA
- BPLPtrAAZ3S: $2312BC
- BPLPtrAAZ3N: $2312BE
- BPLPtrAAZ4M: $2312C0
- BPLPtrAAZ4D: $2312C2
- BPLPtrAAZ4S: $2312C4
- BPLPtrAAZ4N: $2312C6
- BPLPtrAAZ5M: $2312C8
- BPLPtrAAZ5D: $2312CA
- BPLPtrAAZ5S: $2312CC
- BPLPtrAAZ5N: $2312CE
- BPLPtrAAZ6M: $2312D0
- BPLPtrAAZ6D: $2312D2
- BPLPtrAAZ6S: $2312D4
- BPLPtrAAZ6N: $2312D6
- BPLPtrTTZ0M: $2312D8
- BPLPtrTTZ0D: $2312DA
- BPLPtrTTZ0S: $2312DC
- BPLPtrTTZ0N: $2312DE
- BPLPtrTTZ1M: $2312E0
- BPLPtrTTZ1D: $2312E2
- BPLPtrTTZ1S: $2312E4
- BPLPtrTTZ1N: $2312E6
- BPLPtrTTZ2M: $2312E8
- BPLPtrTTZ2D: $2312EA
- BPLPtrTTZ2S: $2312EC
- BPLPtrTTZ2N: $2312EE
- BPLPtrTTZ3M: $2312F0
- BPLPtrTTZ3D: $2312F2
- BPLPtrTTZ3S: $2312F4
- BPLPtrTTZ3N: $2312F6
- BPLPtrTTZ4M: $2312F8
- BPLPtrTTZ4D: $2312FA
- BPLPtrTTZ4S: $2312FC
- BPLPtrTTZ4N: $2312FE
- BPLPtrTTZ5M: $231300
- BPLPtrTTZ5D: $231302
- BPLPtrTTZ5S: $231304
- BPLPtrTTZ5N: $231306
- BPLPtrTTZ6M: $231308
- BPLPtrTTZ6D: $23130A
- BPLPtrTTZ6S: $23130C
- BPLPtrTTZ6N: $23130E
- BPLPtrMMZ0M: $231310
- BPLPtrMMZ0D: $231312
- BPLPtrMMZ0S: $231314
- BPLPtrMMZ0N: $231316
- BPLPtrMMZ1M: $231318
- BPLPtrMMZ1D: $23131A
- BPLPtrMMZ1S: $23131C
- BPLPtrMMZ1N: $23131E
- BPLPtrMMZ2M: $231320
- BPLPtrMMZ2D: $231322
- BPLPtrMMZ2S: $231324
- BPLPtrMMZ2N: $231326
- BPLPtrMMZ3M: $231328
- BPLPtrMMZ3D: $23132A
- BPLPtrMMZ3S: $23132C
- BPLPtrMMZ3N: $23132E
- BPLPtrMMZ4M: $231330
- BPLPtrMMZ4D: $231332
- BPLPtrMMZ4S: $231334
- BPLPtrMMZ4N: $231336
- BPLPtrMMZ5M: $231338
- BPLPtrMMZ5D: $23133A
- BPLPtrMMZ5S: $23133C
- BPLPtrMMZ5N: $23133E
- BPLPtrMMZ6M: $231340
- BPLPtrMMZ6D: $231342
- BPLPtrMMZ6S: $231344
- BPLPtrMMZ6N: $231346
- BPLPtrTrain0M: $231348
- BPLPtrTrain0D: $23134A
- BPLPtrTrain0S: $23134C
- BPLPtrTrain0N: $23134E
- BPLPtrTrain1M: $231350
- BPLPtrTrain1D: $231352
- BPLPtrTrain1S: $231354
- BPLPtrTrain1N: $231356
- BPLPtrTrain2M: $231358
- BPLPtrTrain2D: $23135A
- BPLPtrTrain2S: $23135C
- BPLPtrTrain2N: $23135E
- BPLPtrTrain3M: $231360
- BPLPtrTrain3D: $231362
- BPLPtrTrain3S: $231364
- BPLPtrTrain3N: $231366
- BPLPtrTrain4M: $231368
- BPLPtrTrain4D: $23136A
- BPLPtrTrain4S: $23136C
- BPLPtrTrain4N: $23136E
- BPLPtrTrain5M: $231370
- BPLPtrTrain5D: $231372
- BPLPtrTrain5S: $231374
- BPLPtrTrain5N: $231376
- BPLPtrTrain6M: $231378
- BPLPtrTrain6D: $23137A
- BPLPtrTrain6S: $23137C
- BPLPtrTrain6N: $23137E
- BPLPtrIntro0M: $231380
- BPLPtrIntro0D: $231382
- BPLPtrIntro0S: $231384
- BPLPtrIntro0N: $231386
- BPLPtrIntro1M: $231388
- BPLPtrIntro1D: $23138A
- BPLPtrIntro1S: $23138C
- BPLPtrIntro1N: $23138E
- BPLPtrIntro2M: $231390
- BPLPtrIntro2D: $231392
- BPLPtrIntro2S: $231394
- BPLPtrIntro2N: $231396
- BPLPtrIntro3M: $231398
- BPLPtrIntro3D: $23139A
- BPLPtrIntro3S: $23139C
- BPLPtrIntro3N: $23139E
- BPLPtrIntro4M: $2313A0
- BPLPtrIntro4D: $2313A2
- BPLPtrIntro4S: $2313A4
- BPLPtrIntro4N: $2313A6
- BPLPtrIntro5M: $2313A8
- BPLPtrIntro5D: $2313AA
- BPLPtrIntro5S: $2313AC
- BPLPtrIntro5N: $2313AE
- BPLPtrIntro6M: $2313B0
- BPLPtrIntro6D: $2313B2
- BPLPtrIntro6S: $2313B4
- BPLPtrIntro6N: $2313B6
- BPLPtrWorld0M: $2313B8
- BPLPtrWorld0D: $2313BA
- BPLPtrWorld0S: $2313BC
- BPLPtrWorld0N: $2313BE
- BPLPtrWorld1M: $2313C0
- BPLPtrWorld1D: $2313C2
- BPLPtrWorld1S: $2313C4
- BPLPtrWorld1N: $2313C6
- BPLPtrWorld2M: $2313C8
- BPLPtrWorld2D: $2313CA
- BPLPtrWorld2S: $2313CC
- BPLPtrWorld2N: $2313CE
- BPLPtrWorld3M: $2313D0
- BPLPtrWorld3D: $2313D2
- BPLPtrWorld3S: $2313D4
- BPLPtrWorld3N: $2313D6
- BPLPtrWorld4M: $2313D8
- BPLPtrWorld4D: $2313DA
- BPLPtrWorld4S: $2313DC
- BPLPtrWorld4N: $2313DE
- BPLPtrWorld5M: $2313E0
- BPLPtrWorld5D: $2313E2
- BPLPtrWorld5S: $2313E4
- BPLPtrWorld5N: $2313E6
- BPLPtrWorld6M: $2313E8
- BPLPtrWorld6D: $2313EA
- BPLPtrWorld6S: $2313EC
- BPLPtrWorld6N: $2313EE
- BBZ1_MapPtr: $2313F0
- BBZ2_MapPtr: $231418
- BBZ3_MapPtr: $231440
- BBZ4_MapPtr: $231468
- BBZ5_MapPtr: $231490
- SSZ1MD_MapPtr: $2314B8
- SSZ1SN_MapPtr: $2314E0
- SSZ2MD_MapPtr: $231508
- SSZ2SN_MapPtr: $231530
- SSZ3MD_MapPtr: $231558
- SSZ3SN_MapPtr: $231580
- SSZ4MD_MapPtr: $2315A8
- SSZ4SN_MapPtr: $2315D0
- SSZ5MD_MapPtr: $2315F8
- SSZ5SN_MapPtr: $231620
- AAZ1_MapPtr: $231648
- AAZ2_MapPtr: $231670
- AAZ3_MapPtr: $231698
- AAZ4_MapPtr: $2316B8
- AAZ5_MapPtr: $2316D8
- TTZ1MDS_MapPtr: $2316F8
- TTZ1N_MapPtr: $23171C
- TTZ2MDS_MapPtr: $231740
- TTZ2N_MapPtr: $231764
- TTZ3MDS_MapPtr: $231788
- TTZ3N_MapPtr: $2317AC
- TTZ4MDS_MapPtr: $2317D0
- TTZ4N_MapPtr: $2317F4
- TTZ5_MDS_MapPtr: $231818
- TTZ5N_MapPtr: $23183C
- TTZNULL_MapPtr: $231860
- MMZ1_MapPtr: $231864
- MMZ2_MapPtr: $23187C
- MMZ3_MapPtr: $231890
- MMZ4_MapPtr: $2318AC
- MMZ5_MapPtr: $2318CC
- Training1_MapPtr: $2318EC
- Training2_MapPtr: $2318FC
- Training3_MapPtr: $23190C
- Training4_MapPtr: $23191C
- TrainNULL_MapPtr: $23192C
- Intro0_MapPtr: $231930
- Intro1_MapPtr: $231940
- Intro2_MapPtr: $231950
- Intro3_MapPtr: $231960
- Intro4_MapPtr: $231970
- Tut1_MapPtr: $231980
- Tut2_MapPtr: $231998
- Tut3_MapPtr: $2319B0
- Tut4_MapPtr: $2319C8
- Tut5_MapPtr: $2319E0
- Tut6_MapPtr: $2319F8
- Tut7_MapPtr: $231A10
- TutNULL_MapPtr: $231A28
- WorldEnt_MapPtr: $231A2C
- FinalBoss_MapPtr: $231A44
- NULL_MapPtr: $231A54
-
-*Segment 06B - Solid_Index: Offset $231A58  Size $208
- SIPtrBBZ0M: $231A58
- SIPtrBBZ0D: $231A5A
- SIPtrBBZ0S: $231A5C
- SIPtrBBZ0N: $231A5E
- SIPtrBBZ1M: $231A60
- SIPtrBBZ1D: $231A62
- SIPtrBBZ1S: $231A64
- SIPtrBBZ1N: $231A66
- SIPtrBBZ2M: $231A68
- SIPtrBBZ2D: $231A6A
- SIPtrBBZ2S: $231A6C
- SIPtrBBZ2N: $231A6E
- SIPtrBBZ3M: $231A70
- SIPtrBBZ3D: $231A72
- SIPtrBBZ3S: $231A74
- SIPtrBBZ3N: $231A76
- SIPtrBBZ4M: $231A78
- SIPtrBBZ4D: $231A7A
- SIPtrBBZ4S: $231A7C
- SIPtrBBZ4N: $231A7E
- SIPtrBBZ5M: $231A80
- SIPtrBBZ5D: $231A82
- SIPtrBBZ5S: $231A84
- SIPtrBBZ5N: $231A86
- SIPtrBBZ6M: $231A88
- SIPtrBBZ6D: $231A8A
- SIPtrBBZ6S: $231A8C
- SIPtrBBZ6N: $231A8E
- SIPtrSSZ0M: $231A90
- SIPtrSSZ0D: $231A92
- SIPtrSSZ0S: $231A94
- SIPtrSSZ0N: $231A96
- SIPtrSSZ1M: $231A98
- SIPtrSSZ1D: $231A9A
- SIPtrSSZ1S: $231A9C
- SIPtrSSZ1N: $231A9E
- SIPtrSSZ2M: $231AA0
- SIPtrSSZ2D: $231AA2
- SIPtrSSZ2S: $231AA4
- SIPtrSSZ2N: $231AA6
- SIPtrSSZ3M: $231AA8
- SIPtrSSZ3D: $231AAA
- SIPtrSSZ3S: $231AAC
- SIPtrSSZ3N: $231AAE
- SIPtrSSZ4M: $231AB0
- SIPtrSSZ4D: $231AB2
- SIPtrSSZ4S: $231AB4
- SIPtrSSZ4N: $231AB6
- SIPtrSSZ5M: $231AB8
- SIPtrSSZ5D: $231ABA
- SIPtrSSZ5S: $231ABC
- SIPtrSSZ5N: $231ABE
- SIPtrSSZ6M: $231AC0
- SIPtrSSZ6D: $231AC2
- SIPtrSSZ6S: $231AC4
- SIPtrSSZ6N: $231AC6
- SIPtrAAZ0M: $231AC8
- SIPtrAAZ0D: $231ACA
- SIPtrAAZ0S: $231ACC
- SIPtrAAZ0N: $231ACE
- SIPtrAAZ1M: $231AD0
- SIPtrAAZ1D: $231AD2
- SIPtrAAZ1S: $231AD4
- SIPtrAAZ1N: $231AD6
- SIPtrAAZ2M: $231AD8
- SIPtrAAZ2D: $231ADA
- SIPtrAAZ2S: $231ADC
- SIPtrAAZ2N: $231ADE
- SIPtrAAZ3M: $231AE0
- SIPtrAAZ3D: $231AE2
- SIPtrAAZ3S: $231AE4
- SIPtrAAZ3N: $231AE6
- SIPtrAAZ4M: $231AE8
- SIPtrAAZ4D: $231AEA
- SIPtrAAZ4S: $231AEC
- SIPtrAAZ4N: $231AEE
- SIPtrAAZ5M: $231AF0
- SIPtrAAZ5D: $231AF2
- SIPtrAAZ5S: $231AF4
- SIPtrAAZ5N: $231AF6
- SIPtrAAZ6M: $231AF8
- SIPtrAAZ6D: $231AFA
- SIPtrAAZ6S: $231AFC
- SIPtrAAZ6N: $231AFE
- SIPtrTTZ0M: $231B00
- SIPtrTTZ0D: $231B02
- SIPtrTTZ0S: $231B04
- SIPtrTTZ0N: $231B06
- SIPtrTTZ1M: $231B08
- SIPtrTTZ1D: $231B0A
- SIPtrTTZ1S: $231B0C
- SIPtrTTZ1N: $231B0E
- SIPtrTTZ2M: $231B10
- SIPtrTTZ2D: $231B12
- SIPtrTTZ2S: $231B14
- SIPtrTTZ2N: $231B16
- SIPtrTTZ3M: $231B18
- SIPtrTTZ3D: $231B1A
- SIPtrTTZ3S: $231B1C
- SIPtrTTZ3N: $231B1E
- SIPtrTTZ4M: $231B20
- SIPtrTTZ4D: $231B22
- SIPtrTTZ4S: $231B24
- SIPtrTTZ4N: $231B26
- SIPtrTTZ5M: $231B28
- SIPtrTTZ5D: $231B2A
- SIPtrTTZ5S: $231B2C
- SIPtrTTZ5N: $231B2E
- SIPtrTTZ6M: $231B30
- SIPtrTTZ6D: $231B32
- SIPtrTTZ6S: $231B34
- SIPtrTTZ6N: $231B36
- SIPtrMMZ0M: $231B38
- SIPtrMMZ0D: $231B3A
- SIPtrMMZ0S: $231B3C
- SIPtrMMZ0N: $231B3E
- SIPtrMMZ1M: $231B40
- SIPtrMMZ1D: $231B42
- SIPtrMMZ1S: $231B44
- SIPtrMMZ1N: $231B46
- SIPtrMMZ2M: $231B48
- SIPtrMMZ2D: $231B4A
- SIPtrMMZ2S: $231B4C
- SIPtrMMZ2N: $231B4E
- SIPtrMMZ3M: $231B50
- SIPtrMMZ3D: $231B52
- SIPtrMMZ3S: $231B54
- SIPtrMMZ3N: $231B56
- SIPtrMMZ4M: $231B58
- SIPtrMMZ4D: $231B5A
- SIPtrMMZ4S: $231B5C
- SIPtrMMZ4N: $231B5E
- SIPtrMMZ5M: $231B60
- SIPtrMMZ5D: $231B62
- SIPtrMMZ5S: $231B64
- SIPtrMMZ5N: $231B66
- SIPtrMMZ6M: $231B68
- SIPtrMMZ6D: $231B6A
- SIPtrMMZ6S: $231B6C
- SIPtrMMZ6N: $231B6E
- SIPtrTrain0M: $231B70
- SIPtrTrain0D: $231B72
- SIPtrTrain0S: $231B74
- SIPtrTrain0N: $231B76
- SIPtrTrain1M: $231B78
- SIPtrTrain1D: $231B7A
- SIPtrTrain1S: $231B7C
- SIPtrTrain1N: $231B7E
- SIPtrTrain2M: $231B80
- SIPtrTrain2D: $231B82
- SIPtrTrain2S: $231B84
- SIPtrTrain2N: $231B86
- SIPtrTrain3M: $231B88
- SIPtrTrain3D: $231B8A
- SIPtrTrain3S: $231B8C
- SIPtrTrain3N: $231B8E
- SIPtrTrain4M: $231B90
- SIPtrTrain4D: $231B92
- SIPtrTrain4S: $231B94
- SIPtrTrain4N: $231B96
- SIPtrTrain5M: $231B98
- SIPtrTrain5D: $231B9A
- SIPtrTrain5S: $231B9C
- SIPtrTrain5N: $231B9E
- SIPtrTrain6M: $231BA0
- SIPtrTrain6D: $231BA2
- SIPtrTrain6S: $231BA4
- SIPtrTrain6N: $231BA6
- SIPtrIntro0M: $231BA8
- SIPtrIntro0D: $231BAA
- SIPtrIntro0S: $231BAC
- SIPtrIntro0N: $231BAE
- SIPtrIntro1M: $231BB0
- SIPtrIntro1D: $231BB2
- SIPtrIntro1S: $231BB4
- SIPtrIntro1N: $231BB6
- SIPtrIntro2M: $231BB8
- SIPtrIntro2D: $231BBA
- SIPtrIntro2S: $231BBC
- SIPtrIntro2N: $231BBE
- SIPtrIntro3M: $231BC0
- SIPtrIntro3D: $231BC2
- SIPtrIntro3S: $231BC4
- SIPtrIntro3N: $231BC6
- SIPtrIntro4M: $231BC8
- SIPtrIntro4D: $231BCA
- SIPtrIntro4S: $231BCC
- SIPtrIntro4N: $231BCE
- SIPtrIntro5M: $231BD0
- SIPtrIntro5D: $231BD2
- SIPtrIntro5S: $231BD4
- SIPtrIntro5N: $231BD6
- SIPtrIntro6M: $231BD8
- SIPtrIntro6D: $231BDA
- SIPtrIntro6S: $231BDC
- SIPtrIntro6N: $231BDE
- SIPtrWorld0M: $231BE0
- SIPtrWorld0D: $231BE2
- SIPtrWorld0S: $231BE4
- SIPtrWorld0N: $231BE6
- SIPtrWorld1M: $231BE8
- SIPtrWorld1D: $231BEA
- SIPtrWorld1S: $231BEC
- SIPtrWorld1N: $231BEE
- SIPtrWorld2M: $231BF0
- SIPtrWorld2D: $231BF2
- SIPtrWorld2S: $231BF4
- SIPtrWorld2N: $231BF6
- SIPtrWorld3M: $231BF8
- SIPtrWorld3D: $231BFA
- SIPtrWorld3S: $231BFC
- SIPtrWorld3N: $231BFE
- SIPtrWorld4M: $231C00
- SIPtrWorld4D: $231C02
- SIPtrWorld4S: $231C04
- SIPtrWorld4N: $231C06
- SIPtrWorld5M: $231C08
- SIPtrWorld5D: $231C0A
- SIPtrWorld5S: $231C0C
- SIPtrWorld5N: $231C0E
- SIPtrWorld6M: $231C10
- SIPtrWorld6D: $231C12
- SIPtrWorld6S: $231C14
- SIPtrWorld6N: $231C16
- BBZ12_SolidPtr: $231C18
- BBZ345_SolidPtr: $231C1C
- SSZ12_SolidPtr: $231C20
- SSZ3_SolidPtr: $231C24
- SSZ_45_SolidPtr: $231C28
- AAZ12_SolidPtr: $231C2C
- AAZ34_SolidPtr: $231C30
- AAZ5_SolidPtr: $231C34
- TTZ12_SolidPtr: $231C38
- TTZ3_SolidPtr: $231C3C
- TTZ4_SolidPtr: $231C40
- TTZ5_SolidPtr: $231C44
- TTZB_SolidPtr: $231C48
- MMZ_SolidPtr: $231C4C
- Training_SolidPtr: $231C50
- Tutorial_SolidPtr: $231C54
- WorldEnt_SolidPtr: $231C58
- NULL_SolidPtr: $231C5C
-
-*Segment 06C - Level_Data: Offset $231C60  Size $80DD6
- BBZ_FG_Tiles_Pri: $231C60
- BBZ12_FG_Tiles_Sec: $234FE2
- BBZ3_FG_Tiles_Sec: $235E92
- BBZ4_FG_Tiles_Sec: $236C80
- BBZ5_FG_Tiles_Sec: $237E2E
- BBZ_FG_Blocks_Pri: $238EB4
- BBZ12_FG_Blocks_Sec: $239A16
- BBZ3_FG_Blocks_Sec: $239AAE
- BBZ4_FG_Blocks_Sec: $239BB6
- BBZ5_FG_Blocks_Sec: $239DC6
- BBZ_FG_Chunks_Pri: $239FDC
- BBZ1_FG_Chunks_Sec: $23BC74
- BBZ2_FG_Chunks_Sec: $23BFCE
- BBZ3_FG_Chunks_Sec: $23C7D6
- BBZ4_FG_Chunks_Sec: $23D96E
- BBZ5_FG_Chunks_Sec: $23ECCE
- BBZ1_FG_Layout: $2400A0
- BBZ2_FG_Layout: $24030E
- BBZ3_FG_Layout: $2405FE
- BBZ4_FG_Layout: $240A34
- BBZ5_FG_Layout: $240EA6
- BBZ_BG_Tiles_Pri: $241320
- BBZ12_BG_Tiles_Sec: $241C18
- BBZ3_BG_Tiles_Sec: $2422A8
- BBZ4_BG_Tiles_Sec: $242C18
- BBZ5_BG_Tiles_Sec: $2433A8
- BBZ_BG_Blocks_Pri: $243DC8
- BBZ12_BG_Blocks_Sec: $243EEC
- BBZ3_BG_Blocks_Sec: $244052
- BBZ4_BG_Blocks_Sec: $244258
- BBZ5_BG_Blocks_Sec: $2443B4
- BBZ_BG_Chunks_Pri: $244558
- BBZ12_BG_Chunks_Sec: $2446D8
- BBZ3_BG_Chunks_Sec: $2447E2
- BBZ4_BG_Chunks_Sec: $2448F6
- BBZ5_BG_Chunks_Sec: $244A06
- BBZ12_BG_Layout: $244B3C
- BBZ3_BG_Layout: $244B4E
- BBZ4_BG_Layout: $244B60
- BBZ5_BG_Layout: $244B72
- SSZ_FG_Tiles_Pri: $244B84
- SSZ12_FG_Tiles_Sec: $24778C
- SSZ3_FG_Tiles_Sec: $24837E
- SSZ45_FG_Tiles_Sec: $249292
- SSZB_FG_Tiles: $24A59A
- SSZ_FG_Blocks_Pri: $24C100
- SSZ12_FG_Blocks_Sec: $24CCD2
- SSZ3_FG_Blocks_Sec: $24D0BA
- SSZ45_FG_Blocks_Sec: $24D4DA
- SSZB_FG_Blocks: $24DB1A
- SSZ_FG_Chunks_Pri: $24DF08
- SSZ12_FG_Chunks_Sec: $250D88
- SSZ3_FG_Chunks_Sec: $251CF6
- SSZ45_FG_Chunks_Sec: $252E9C
- SSZB_FG_Chunks: $254946
- SSZ1_FG_Layout: $254C00
- SSZ2_FG_Layout: $254F36
- SSZ3_FG_Layout: $2552D4
- SSZ4_FG_Layout: $255696
- SSZ5_FG_Layout: $255A9C
- SSZB_FG_Layout: $255FA8
- SSZ_BG_Tiles_Pri: $255FBA
- SSZ12MD_BG_Tiles_Sec: $256964
- SSZ12SN_BG_Tiles_Sec: $257D08
- SSZ3MD_BG_Tiles_Sec: $259014
- SSZ3SN_BG_Tiles_Sec: $25A8E2
- SSZ45MD_BG_Tiles_Sec: $25C182
- SSZ45SN_BG_Tiles_Sec: $25D8EC
- SSZ_BG_Blocks_Pri: $25F012
- SSZ12MD_BG_Blocks_Sec: $25F104
- SSZ12SN_BG_Blocks_Sec: $25F4B0
- SSZ3MD_BG_Blocks_Sec: $25F802
- SSZ3SN_BG_Blocks_Sec: $25FCA6
- SSZ45MD_BG_Blocks_Sec: $2600FC
- SSZ45SN_BG_Blocks_Sec: $2604FE
- SSZ_BG_Chunks_Pri: $2608B4
- SSZ12MD_BG_Chunks_Sec: $260962
- SSZ12SN_BG_Chunks_Sec: $260E80
- SSZ3MD_BG_Chunks_Sec: $2614B4
- SSZ3SN_BG_Chunks_Sec: $261A16
- SSZ45MD_BG_Chunks_Sec: $262056
- SSZ45SN_BG_Chunks_Sec: $262660
- SSZB_BG_Chunks: $262C9A
- SSZ12MD_BG_Layout: $262D20
- SSZ12SN_BG_Layout: $262D3E
- SSZ3MD_BG_Layout: $262D62
- SSZ3SN_BG_Layout: $262D80
- SSZ45MD_BG_Layout: $262DAA
- SSZ45SN_BG_Layout: $262DCA
- SSZB_BG_Layout: $262DF4
- AAZ_FG_Tiles_Pri: $262E00
- AAZ12_FG_Tiles_Sec: $265A2A
- AAZ3_FG_Tiles_Sec: $266244
- AAZ4_FG_Tiles_Sec: $267530
- AAZ5_FG_Tiles_Pri: $26890E
- AAZ_FG_Blocks_Pri: $26A3E8
- AAZ12_FG_Blocks_Sec: $26ADFA
- AAZ3_FG_Blocks_Sec: $26AEEC
- AAZ4_FG_Blocks_Sec: $26B100
- AAZ5_FG_Blocks_Sec: $26B324
- AAZ_FG_Chunks_Pri: $26B4CC
- AAZ12_FG_Chunks_Sec: $26CE0C
- AAZ3_FG_Chunks_Sec: $26E29A
- AAZ4_FG_Chunks_Sec: $26F886
- AAZ5_FG_Chunks_Sec: $270FC2
- AAZ1_FG_Layout: $2727AA
- AAZ2_FG_Layout: $272AE6
- AAZ3_FG_Layout: $272E54
- AAZ4_FG_Layout: $27333A
- AAZ5_FG_Layout: $27369C
- AAZ12_BG_Tiles_Pri: $273B9C
- AAZ12_BG_Tiles_Sec: $27439E
- AAZ34_BG_Tiles: $2744B4
- AAZ5_BG_Tiles: $275352
- AAZ12_BG_Blocks_Pri: $2761C0
- AAZ12_BG_Blocks_Sec: $276516
- AAZ34_BG_Blocks: $276534
- AAZ5_BG_Blocks: $276886
- AAZ12_BG_Chunks_Pri: $276AD4
- AAZ12_BG_Chunks_Sec: $276E24
- AAZ34_BG_Chunks: $276E76
- AAZ5_BG_Chunks: $277248
- AAZ12_BG_Layout: $277512
- AAZ34_BG_Layout: $27754C
- AAZ5_BG_Layout: $277586
- TTZ_FG_Tiles_Pri: $2775BE
- TTZB_FG_Tiles: $27898C
- TTZ3_FG_Tiles_Sec: $27A692
- TTZ5_FG_Tiles_Sec: $27A768
- TTZB_FG_Tiles: $27A83E
- TTZ_FG_Blocks_Pri: $27C544
- TTZ3_FG_Blocks_Sec: $27D764
- TTZ5_FG_Blocks_Sec: $27D780
- TTZB_FG_Blocks: $27D79C
- TTZ_FG_Chunks_Pri: $27DD1C
- TTZ1_FG_Chunks_Sec: $281908
- TTZ2_FG_Chunks_Sec: $281920
- TTZ3_FG_Chunks_Sec: $281938
- TTZ4_FG_Chunks_Sec: $281950
- TTZ5_FG_Chunks_Sec: $281968
- TTZB_FG_Chunks: $281980
- TTZ1_FG_Layout: $281CC0
- TTZ2_FG_Layout: $281F0E
- TTZ3_FG_Layout: $2821BE
- TTZ4_FG_Layout: $282468
- TTZ5_FG_Layout: $282748
- TTZB_FG_Layout: $282A48
- TTZ_BG_Tiles_Pri: $282A62
- TTZ12_BG_Tiles_Sec: $283D18
- TTZ34_BG_Tiles_Sec: $283D3A
- TTZ5_BG_Tiles_Sec: $283D5C
- TTZ_BG_Blocks_Pri: $283D7E
- TTZ12_BG_Blocks_Sec: $284616
- TTZ34_BG_Blocks_Sec: $28462E
- TTZ5_BG_Blocks_Sec: $284646
- TTZ_BG_Chunks_Pri: $28465E
- TTZ12_BG_Chunks_Sec: $2852B2
- TTZ34_BG_Chunks_Sec: $2852CA
- TTZ5_BG_Chunks_Sec: $2852E2
- TTZ1234MDS_BG_Layout: $2852FA
- TTZ1234N_BG_Layout: $285472
- TTZ5MDS_BG_Layout: $2855EA
- TTZ5N_BG_Layout: $285762
- MMZ_Tiles_Pri: $2858DA
- MMZ1_Tiles_Sec: $289886
- MMZ3_Tiles_Sec: $2899B2
- MMZ4_Tiles_Sec: $28A0C8
- MMZ5_Tiles_Sec: $28B350
- MMZ_Blocks_Pri: $28CE28
- MMZ345_Blocks_Sec: $28DBC8
- MMZ45_Blocks_Third: $28DC1C
- MMZ1_Blocks_Sec: $28DC70
- MMZ3_Blocks_Third: $28DC88
- MMZ4_Blocks_Fourth: $28DCFC
- MMZ5_Blocks_Fourth: $28DFBA
- MMZ_Chunks_Pri: $28E256
- MMZ1_Chunks_Sec: $29000C
- MMZ2_Chunks_Sec: $290266
- MMZ3_Chunks_Sec: $2902A8
- MMZ4_Chunks_Sec: $29084E
- MMZ5_Chunks_Sec: $290F34
- MMZ1_FG_Layout: $29196E
- MMZ2_FG_Layout: $291B3A
- MMZ3_FG_Layout: $291D16
- MMZ4_FG_Layout: $291EB2
- MMZ5_FG_Layout: $29208A
- MMZ1_BG_Layout: $292282
- MMZ2_BG_Layout: $292378
- MMZ3_BG_Layout: $29248A
- MMZ4_BG_Layout: $29259C
- MMZ5_BG_Layout: $292692
- Trainig_Tiles_Pri: $29274E
- Training_Tiles_Sec: $29488E
- Training_Blocks: $296994
- Training_Chunks: $297B72
- Training1_FG_Layout: $29C5E2
- Training2_FG_Layout: $29C9E0
- Training3_FG_Layout: $29CE06
- Training4_FG_Layout: $29CF04
- Training_BG_Layout: $29D236
- Intro01_FG_Layout: $29D24A
- Intro2_FG_Layout: $29D3DE
- Intro3_FG_Layout: $29D512
- Intro4_FG_Layout: $29D620
- Tutorial_FG_Tiles_Pri: $29D70E
- Tutorial_FG_Tiles_Sec: $29DC9A
- Tutorial_BG_Tiles: $29DCA6
- Tutorial_FG_Blocks: $29E042
- Tutorial_BG_Blocks: $29E462
- Tutorial_FG_Chunks: $29E530
- Tutorial_BG_Chunks: $29F788
- Tutorial1_FG_Layout: $29F7D6
- Tutorial2_FG_Layout: $29F7F0
- Tutorial3_FG_Layout: $29F818
- Tutorial45_FG_Layout: $29F85C
- Tutorial67_FG_Layout: $29F884
- Tutorial_BG_Layout: $29F89C
- WorldEnt_FG_Tiles: $29F8AA
- WorldEnt_FG_Blocks: $2A27B6
- WorldEnt_FG_Chunks: $2A3412
- WorldEnt_FG_Layout: $2A4126
- WorldEnt_BG_Tiles: $2A4188
- WorldEnt_BG_Blocks: $2A5E8A
- WorldEnt_BG_Chunks: $2A6418
- WorldEnt_BG_Layout: $2A66CC
- FinalBoss_Tiles: $2A66EC
- FinalBoss_Blocks: $2AA0AE
- FinalBoss_Chunks: $2AA6BE
- FinalBoss_FG_Layout: $2AA9FC
- FinalBoss_BG_Layout: $2AAA24
- BBZ12_Solids: $2AAA36
- BBZ345_Solids: $2AB236
- SSZ12_Solids: $2ABA36
- SSZ3_Solids: $2AC236
- SSZ45_Solids: $2ACA36
- SSZB_Solids: $2AD236
- AAZ12_Solids: $2ADA36
- AAZ34_Solids: $2AE236
- AAZ5_Solids: $2AEA36
- TTZ124_Solids: $2AF236
- TTZ3_Solids: $2AF836
- TTZ5_Solids: $2AFE36
- TTZB_Solids: $2B0436
- MMZ_Solids: $2B0C36
- Training_Solids: $2B1436
- Training56_Solids: $2B1C36
- WorldEnt_Solids: $2B2236
-
-*Segment 06D - LevSize_Data: Offset $2B2A36  Size $740
- LSPtrLst_BBZ0M: $2B2A36
- LSPtrLst_BBZ0D: $2B2A38
- LSPtrLst_BBZ0S: $2B2A3A
- LSPtrLst_BBZ0N: $2B2A3C
- LSPtrLst_BBZ1M: $2B2A3E
- LSPtrLst_BBZ1D: $2B2A40
- LSPtrLst_BBZ1S: $2B2A42
- LSPtrLst_BBZ1N: $2B2A44
- LSPtrLst_BBZ2M: $2B2A46
- LSPtrLst_BBZ2D: $2B2A48
- LSPtrLst_BBZ2S: $2B2A4A
- LSPtrLst_BBZ2N: $2B2A4C
- LSPtrLst_BBZ3M: $2B2A4E
- LSPtrLst_BBZ3D: $2B2A50
- LSPtrLst_BBZ3S: $2B2A52
- LSPtrLst_BBZ3N: $2B2A54
- LSPtrLst_BBZ4M: $2B2A56
- LSPtrLst_BBZ4D: $2B2A58
- LSPtrLst_BBZ4S: $2B2A5A
- LSPtrLst_BBZ4N: $2B2A5C
- LSPtrLst_BBZ5M: $2B2A5E
- LSPtrLst_BBZ5D: $2B2A60
- LSPtrLst_BBZ5S: $2B2A62
- LSPtrLst_BBZ5N: $2B2A64
- LSPtrLst_BBZ6M: $2B2A66
- LSPtrLst_BBZ6D: $2B2A68
- LSPtrLst_BBZ6S: $2B2A6A
- LSPtrLst_BBZ6N: $2B2A6C
- LSPtrLst_SSZ0M: $2B2A6E
- LSPtrLst_SSZ0D: $2B2A70
- LSPtrLst_SSZ0S: $2B2A72
- LSPtrLst_SSZ0N: $2B2A74
- LSPtrLst_SSZ1M: $2B2A76
- LSPtrLst_SSZ1D: $2B2A78
- LSPtrLst_SSZ1S: $2B2A7A
- LSPtrLst_SSZ1N: $2B2A7C
- LSPtrLst_SSZ2M: $2B2A7E
- LSPtrLst_SSZ2D: $2B2A80
- LSPtrLst_SSZ2S: $2B2A82
- LSPtrLst_SSZ2N: $2B2A84
- LSPtrLst_SSZ3M: $2B2A86
- LSPtrLst_SSZ3D: $2B2A88
- LSPtrLst_SSZ3S: $2B2A8A
- LSPtrLst_SSZ3N: $2B2A8C
- LSPtrLst_SSZ4M: $2B2A8E
- LSPtrLst_SSZ4D: $2B2A90
- LSPtrLst_SSZ4S: $2B2A92
- LSPtrLst_SSZ4N: $2B2A94
- LSPtrLst_SSZ5M: $2B2A96
- LSPtrLst_SSZ5D: $2B2A98
- LSPtrLst_SSZ5S: $2B2A9A
- LSPtrLst_SSZ5N: $2B2A9C
- LSPtrLst_SSZ6M: $2B2A9E
- LSPtrLst_SSZ6D: $2B2AA0
- LSPtrLst_SSZ6S: $2B2AA2
- LSPtrLst_SSZ6N: $2B2AA4
- LSPtrLst_AAZ0M: $2B2AA6
- LSPtrLst_AAZ0D: $2B2AA8
- LSPtrLst_AAZ0S: $2B2AAA
- LSPtrLst_AAZ0N: $2B2AAC
- LSPtrLst_AAZ1M: $2B2AAE
- LSPtrLst_AAZ1D: $2B2AB0
- LSPtrLst_AAZ1S: $2B2AB2
- LSPtrLst_AAZ1N: $2B2AB4
- LSPtrLst_AAZ2M: $2B2AB6
- LSPtrLst_AAZ2D: $2B2AB8
- LSPtrLst_AAZ2S: $2B2ABA
- LSPtrLst_AAZ2N: $2B2ABC
- LSPtrLst_AAZ3M: $2B2ABE
- LSPtrLst_AAZ3D: $2B2AC0
- LSPtrLst_AAZ3S: $2B2AC2
- LSPtrLst_AAZ3N: $2B2AC4
- LSPtrLst_AAZ4M: $2B2AC6
- LSPtrLst_AAZ4D: $2B2AC8
- LSPtrLst_AAZ4S: $2B2ACA
- LSPtrLst_AAZ4N: $2B2ACC
- LSPtrLst_AAZ5M: $2B2ACE
- LSPtrLst_AAZ5D: $2B2AD0
- LSPtrLst_AAZ5S: $2B2AD2
- LSPtrLst_AAZ5N: $2B2AD4
- LSPtrLst_AAZ6M: $2B2AD6
- LSPtrLst_AAZ6D: $2B2AD8
- LSPtrLst_AAZ6S: $2B2ADA
- LSPtrLst_AAZ6N: $2B2ADC
- LSPtrLst_TTZ0M: $2B2ADE
- LSPtrLst_TTZ0D: $2B2AE0
- LSPtrLst_TTZ0S: $2B2AE2
- LSPtrLst_TTZ0N: $2B2AE4
- LSPtrLst_TTZ1M: $2B2AE6
- LSPtrLst_TTZ1D: $2B2AE8
- LSPtrLst_TTZ1S: $2B2AEA
- LSPtrLst_TTZ1N: $2B2AEC
- LSPtrLst_TTZ2M: $2B2AEE
- LSPtrLst_TTZ2D: $2B2AF0
- LSPtrLst_TTZ2S: $2B2AF2
- LSPtrLst_TTZ2N: $2B2AF4
- LSPtrLst_TTZ3M: $2B2AF6
- LSPtrLst_TTZ3D: $2B2AF8
- LSPtrLst_TTZ3S: $2B2AFA
- LSPtrLst_TTZ3N: $2B2AFC
- LSPtrLst_TTZ4M: $2B2AFE
- LSPtrLst_TTZ4D: $2B2B00
- LSPtrLst_TTZ4S: $2B2B02
- LSPtrLst_TTZ4N: $2B2B04
- LSPtrLst_TTZ5M: $2B2B06
- LSPtrLst_TTZ5D: $2B2B08
- LSPtrLst_TTZ5S: $2B2B0A
- LSPtrLst_TTZ5N: $2B2B0C
- LSPtrLst_TTZ6M: $2B2B0E
- LSPtrLst_TTZ6D: $2B2B10
- LSPtrLst_TTZ6S: $2B2B12
- LSPtrLst_TTZ6N: $2B2B14
- LSPtrLst_MMZ0M: $2B2B16
- LSPtrLst_MMZ0D: $2B2B18
- LSPtrLst_MMZ0S: $2B2B1A
- LSPtrLst_MMZ0N: $2B2B1C
- LSPtrLst_MMZ1M: $2B2B1E
- LSPtrLst_MMZ1D: $2B2B20
- LSPtrLst_MMZ1S: $2B2B22
- LSPtrLst_MMZ1N: $2B2B24
- LSPtrLst_MMZ2M: $2B2B26
- LSPtrLst_MMZ2D: $2B2B28
- LSPtrLst_MMZ2S: $2B2B2A
- LSPtrLst_MMZ2N: $2B2B2C
- LSPtrLst_MMZ3M: $2B2B2E
- LSPtrLst_MMZ3D: $2B2B30
- LSPtrLst_MMZ3S: $2B2B32
- LSPtrLst_MMZ3N: $2B2B34
- LSPtrLst_MMZ4M: $2B2B36
- LSPtrLst_MMZ4D: $2B2B38
- LSPtrLst_MMZ4S: $2B2B3A
- LSPtrLst_MMZ4N: $2B2B3C
- LSPtrLst_MMZ5M: $2B2B3E
- LSPtrLst_MMZ5D: $2B2B40
- LSPtrLst_MMZ5S: $2B2B42
- LSPtrLst_MMZ5N: $2B2B44
- LSPtrLst_MMZ6M: $2B2B46
- LSPtrLst_MMZ6D: $2B2B48
- LSPtrLst_MMZ6S: $2B2B4A
- LSPtrLst_MMZ6N: $2B2B4C
- LSPtrLst_Train0M: $2B2B4E
- LSPtrLst_Train0D: $2B2B50
- LSPtrLst_Train0S: $2B2B52
- LSPtrLst_Train0N: $2B2B54
- LSPtrLst_Train1M: $2B2B56
- LSPtrLst_Train1D: $2B2B58
- LSPtrLst_Train1S: $2B2B5A
- LSPtrLst_Train1N: $2B2B5C
- LSPtrLst_Train2M: $2B2B5E
- LSPtrLst_Train2D: $2B2B60
- LSPtrLst_Train2S: $2B2B62
- LSPtrLst_Train2N: $2B2B64
- LSPtrLst_Train3M: $2B2B66
- LSPtrLst_Train3D: $2B2B68
- LSPtrLst_Train3S: $2B2B6A
- LSPtrLst_Train3N: $2B2B6C
- LSPtrLst_Train4M: $2B2B6E
- LSPtrLst_Train4D: $2B2B70
- LSPtrLst_Train4S: $2B2B72
- LSPtrLst_Train4N: $2B2B74
- LSPtrLst_Train5M: $2B2B76
- LSPtrLst_Train5D: $2B2B78
- LSPtrLst_Train5S: $2B2B7A
- LSPtrLst_Train5N: $2B2B7C
- LSPtrLst_Train6M: $2B2B7E
- LSPtrLst_Train6D: $2B2B80
- LSPtrLst_Train6S: $2B2B82
- LSPtrLst_Train6N: $2B2B84
- LSPtrLst_Intro0M: $2B2B86
- LSPtrLst_Intro0D: $2B2B88
- LSPtrLst_Intro0S: $2B2B8A
- LSPtrLst_Intro0N: $2B2B8C
- LSPtrLst_Intro1M: $2B2B8E
- LSPtrLst_Intro1D: $2B2B90
- LSPtrLst_Intro1S: $2B2B92
- LSPtrLst_Intro1N: $2B2B94
- LSPtrLst_Intro2M: $2B2B96
- LSPtrLst_Intro2D: $2B2B98
- LSPtrLst_Intro2S: $2B2B9A
- LSPtrLst_Intro2N: $2B2B9C
- LSPtrLst_Intro3M: $2B2B9E
- LSPtrLst_Intro3D: $2B2BA0
- LSPtrLst_Intro3S: $2B2BA2
- LSPtrLst_Intro3N: $2B2BA4
- LSPtrLst_Intro4M: $2B2BA6
- LSPtrLst_Intro4D: $2B2BA8
- LSPtrLst_Intro4S: $2B2BAA
- LSPtrLst_Intro4N: $2B2BAC
- LSPtrLst_Intro5M: $2B2BAE
- LSPtrLst_Intro5D: $2B2BB0
- LSPtrLst_Intro5S: $2B2BB2
- LSPtrLst_Intro5N: $2B2BB4
- LSPtrLst_Intro6M: $2B2BB6
- LSPtrLst_Intro6D: $2B2BB8
- LSPtrLst_Intro6S: $2B2BBA
- LSPtrLst_Intro6N: $2B2BBC
- LSPtrLst_World0M: $2B2BBE
- LSPtrLst_World0D: $2B2BC0
- LSPtrLst_World0S: $2B2BC2
- LSPtrLst_World0N: $2B2BC4
- LSPtrLst_World1M: $2B2BC6
- LSPtrLst_World1D: $2B2BC8
- LSPtrLst_World1S: $2B2BCA
- LSPtrLst_World1N: $2B2BCC
- LSPtrLst_World2M: $2B2BCE
- LSPtrLst_World2D: $2B2BD0
- LSPtrLst_World2S: $2B2BD2
- LSPtrLst_World2N: $2B2BD4
- LSPtrLst_World3M: $2B2BD6
- LSPtrLst_World3D: $2B2BD8
- LSPtrLst_World3S: $2B2BDA
- LSPtrLst_World3N: $2B2BDC
- LSPtrLst_World4M: $2B2BDE
- LSPtrLst_World4D: $2B2BE0
- LSPtrLst_World4S: $2B2BE2
- LSPtrLst_World4N: $2B2BE4
- LSPtrLst_World5M: $2B2BE6
- LSPtrLst_World5D: $2B2BE8
- LSPtrLst_World5S: $2B2BEA
- LSPtrLst_World5N: $2B2BEC
- LSPtrLst_World6M: $2B2BEE
- LSPtrLst_World6D: $2B2BF0
- LSPtrLst_World6S: $2B2BF2
- LSPtrLst_World6N: $2B2BF4
- LSPtr_BBZ01MN: $2B2BF6
- LSPtr_BBZ2MN: $2B2C02
- LSPtr_BBZ3MN: $2B2C0E
- LSPtr_BBZ4MN: $2B2C1A
- LSPtr_BBZ56MN: $2B2C26
- LSPtr_SSZ01MD: $2B2C32
- LSPtr_SSZ2MD: $2B2C3E
- LSPtr_SSZ01SN: $2B2C4A
- LSPtr_SSZ2SN: $2B2C56
- LSPtr_SSZ3MD: $2B2C62
- LSPtr_SSZ4MD: $2B2C6E
- LSPtr_SSZ3SN: $2B2C7A
- LSPtr_SSZ4SN: $2B2C86
- LSPtr_SSZ5MD: $2B2C92
- LSPtr_SSZ5SN: $2B2C9E
- LSPtr_AAZ01MN: $2B2CAA
- LSPtr_AAZ2MN: $2B2CB6
- LSPtr_AAZ3MN: $2B2CC2
- LSPtr_AAZ4MN: $2B2CCE
- LSPtr_AAZ56MN: $2B2CDA
- LSPtr_TTZ06MN: $2B2CE6
- LSPtr_MMZ01MN: $2B2CF2
- LSPtr_MMZ2MN: $2B2CFE
- LSPtr_MMZ3MN: $2B2D0A
- LSPtr_MMZ4MN: $2B2D16
- LSPtr_MMZ56MN: $2B2D22
- LSPtr_Train01MN: $2B2D2E
- LSPtr_Train2MN: $2B2D3A
- LSPtr_Train3MN: $2B2D46
- LSPtr_Train4MN: $2B2D52
- LSPtr_Train56MN: $2B2D5E
- LSPtr_Intro0MN: $2B2D62
- LSPtr_Intro1MN: $2B2D6E
- LSPtr_Intro2MN: $2B2D7A
- LSPtr_Intro3MN: $2B2D86
- LSPtr_Intro4MN: $2B2D92
- LSPtr_Intro5M: $2B2D9E
- LSPtr_Intro5D: $2B2DAA
- LSPtr_Intro5S: $2B2DB6
- LSPtr_Intro5N: $2B2DC2
- LSPtr_Intro6M: $2B2DCE
- LSPtr_Intro6D: $2B2DDA
- LSPtr_Intro6S: $2B2DE6
- LSPtr_Intro6N: $2B2DF2
- LSPtr_World01MN: $2B2DF6
- LSPtr_World2M: $2B2E02
- LSPtr_World26MN: $2B2E0E
- LS_FG_BBZ01MN: $2B2E12
- LS_BG_BBZ01MN: $2B2E20
- LS_FG_BBZ2MN: $2B2E2E
- LS_BG_BBZ2MN: $2B2E3C
- LS_FG_BBZ4MN: $2B2E4A
- LS_BG_BBZ4MN: $2B2E58
- LS_FG_BBZ356MN: $2B2E66
- LS_BG_BBZ356MN: $2B2E74
- LS_FG_SSZ01MN: $2B2E82
- LS_FG_SSZ2MN: $2B2E90
- LS_FG_SSZ3MN: $2B2E9E
- LS_FG_SSZ4MN: $2B2EAC
- LS_FG_SSZ5MN: $2B2EBA
- LS_BG_SSZ02MD: $2B2EC8
- LS_BG_SSZ02SN: $2B2ED6
- LS_BG_SSZ35MD: $2B2EE4
- LS_BG_SSZ35SN: $2B2EF2
- LS_FG_AAZ01MN: $2B2F00
- LS_BG_AAZ01MN: $2B2F0E
- LS_FG_AAZ2MN: $2B2F1C
- LS_BG_AAZ2MN: $2B2F2A
- LS_FG_AAZ3MN: $2B2F38
- LS_BG_AAZ34MN: $2B2F46
- LS_FG_AAZ4MN: $2B2F54
- LS_FG_AAZ56MN: $2B2F62
- LS_BG_AAZ56MN: $2B2F70
- LS_FG_TTZ06MN: $2B2F7E
- LS_BG_TTZ06MN: $2B2F8C
- LS_FG_MMZ01MN: $2B2F9A
- LS_BG_MMZ01MN: $2B2FA8
- LS_FGBG_MMZ2MN: $2B2FB6
- LS_FGBG_MMZ3MN: $2B2FC4
- LS_FGBG_MMZ4MN: $2B2FD2
- LS_FGBG_MMZ56MN: $2B2FE0
- LS_FG_Train01MN: $2B2FEE
- LS_BG_Train01MN: $2B2FFC
- LS_FG_Train2MN: $2B300A
- LS_BG_Train2MN: $2B3018
- LS_FG_Train3MN: $2B3026
- LS_BG_Train3MN: $2B3034
- LS_FG_Train4MN: $2B3042
- LS_BG_Train4MN: $2B3050
- LS_FG_Intro0MN: $2B305E
- LS_FG_Intro1MN: $2B306C
- LS_FG_Intro2MN: $2B307A
- LS_FG_Intro3MN: $2B3088
- LS_FG_Intro4MN: $2B3096
- LS_BG_Intro01MN: $2B30A4
- LS_BG_Intro2MN: $2B30B2
- LS_BG_Intro3MN: $2B30C0
- LS_BG_Intro4MN: $2B30CE
- LS_FG_Intro5M: $2B30DC
- LS_FG_Intro5D: $2B30EA
- LS_FG_Intro4S: $2B30F8
- LS_FG_Intro5N: $2B3106
- LS_FG_Intro6M: $2B3114
- LS_FG_Intro6S: $2B3122
- LS_BG_Intro5MN: $2B3130
- LS_FG_World01MN: $2B313E
- LS_BG_World01MN: $2B314C
- LS_FG_World2M: $2B315A
- LS_BG_World2M: $2B3168
-
-*Segment 06E - AnimArt_Ptrs: Offset $2B3176  Size $1F44
- AniPtrLst_BBZ0M: $2B3176
- AniPtrLst_BBZ0D: $2B3178
- AniPtrLst_BBZ0S: $2B317A
- AniPtrLst_BBZ0N: $2B317C
- AniPtrLst_BBZ1M: $2B317E
- AniPtrLst_BBZ1D: $2B3180
- AniPtrLst_BBZ1S: $2B3182
- AniPtrLst_BBZ1N: $2B3184
- AniPtrLst_BBZ2M: $2B3186
- AniPtrLst_BBZ2S: $2B3188
- AniPtrLst_BBZ2D: $2B318A
- AniPtrLst_BBZ2N: $2B318C
- AniPtrLst_BBZ3M: $2B318E
- AniPtrLst_BBZ3D: $2B3190
- AniPtrLst_BBZ3S: $2B3192
- AniPtrLst_BBZ3N: $2B3194
- AniPtrLst_BBZ4M: $2B3196
- AniPtrLst_BBZ4D: $2B3198
- AniPtrLst_BBZ4S: $2B319A
- AniPtrLst_BBZ4N: $2B319C
- AniPtrLst_BBZ5M: $2B319E
- AniPtrLst_BBZ5D: $2B31A0
- AniPtrLst_BBZ5S: $2B31A2
- AniPtrLst_BBZ5N: $2B31A4
- AniPtrLst_BBZ6M: $2B31A6
- AniPtrLst_BBZ6D: $2B31A8
- AniPtrLst_BBZ6S: $2B31AA
- AniPtrLst_BBZ6N: $2B31AC
- AniPtrLst_SSZ0M: $2B31AE
- AniPtrLst_SSZ0D: $2B31B0
- AniPtrLst_SSZ0S: $2B31B2
- AniPtrLst_SSZ0N: $2B31B4
- AniPtrLst_SSZ1M: $2B31B6
- AniPtrLst_SSZ1D: $2B31B8
- AniPtrLst_SSZ1S: $2B31BA
- AniPtrLst_SSZ1N: $2B31BC
- AniPtrLst_SSZ2M: $2B31BE
- AniPtrLst_SSZ2D: $2B31C0
- AniPtrLst_SSZ2S: $2B31C2
- AniPtrLst_SSZ2N: $2B31C4
- AniPtrLst_SSZ3M: $2B31C6
- AniPtrLst_SSZ3D: $2B31C8
- AniPtrLst_SSZ3S: $2B31CA
- AniPtrLst_SSZ3N: $2B31CC
- AniPtrLst_SSZ4M: $2B31CE
- AniPtrLst_SSZ4D: $2B31D0
- AniPtrLst_SSZ4S: $2B31D2
- AniPtrLst_SSZ4N: $2B31D4
- AniPtrLst_SSZ5M: $2B31D6
- AniPtrLst_SSZ5D: $2B31D8
- AniPtrLst_SSZ5S: $2B31DA
- AniPtrLst_SSZ5N: $2B31DC
- AniPtrLst_SSZ6M: $2B31DE
- AniPtrLst_SSZ6D: $2B31E0
- AniPtrLst_SSZ6S: $2B31E2
- AniPtrLst_SSZ6N: $2B31E4
- AniPtrLst_AAZ0M: $2B31E6
- AniPtrLst_AAZ0D: $2B31E8
- AniPtrLst_AAZ0S: $2B31EA
- AniPtrLst_AAZ0N: $2B31EC
- AniPtrLst_AAZ1M: $2B31EE
- AniPtrLst_AAZ1D: $2B31F0
- AniPtrLst_AAZ1S: $2B31F2
- AniPtrLst_AAZ1N: $2B31F4
- AniPtrLst_AAZ2M: $2B31F6
- AniPtrLst_AAZ2D: $2B31F8
- AniPtrLst_AAZ2S: $2B31FA
- AniPtrLst_AAZ2N: $2B31FC
- AniPtrLst_AAZ3M: $2B31FE
- AniPtrLst_AAZ3D: $2B3200
- AniPtrLst_AAZ3S: $2B3202
- AniPtrLst_AAZ3N: $2B3204
- AniPtrLst_AAZ4M: $2B3206
- AniPtrLst_AAZ4D: $2B3208
- AniPtrLst_AAZ4S: $2B320A
- AniPtrLst_AAZ4N: $2B320C
- AniPtrLst_AAZ5M: $2B320E
- AniPtrLst_AAZ5D: $2B3210
- AniPtrLst_AAZ5S: $2B3212
- AniPtrLst_AAZ5N: $2B3214
- AniPtrLst_AAZ6M: $2B3216
- AniPtrLst_AAZ6D: $2B3218
- AniPtrLst_AAZ6S: $2B321A
- AniPtrLst_AAZ6N: $2B321C
- AniPtrLst_TTZ0M: $2B321E
- AniPtrLst_TTZ0D: $2B3220
- AniPtrLst_TTZ0S: $2B3222
- AniPtrLst_TTZ0N: $2B3224
- AniPtrLst_TTZ1M: $2B3226
- AniPtrLst_TTZ1D: $2B3228
- AniPtrLst_TTZ1S: $2B322A
- AniPtrLst_TTZ1N: $2B322C
- AniPtrLst_TTZ2M: $2B322E
- AniPtrLst_TTZ2D: $2B3230
- AniPtrLst_TTZ2S: $2B3232
- AniPtrLst_TTZ2N: $2B3234
- AniPtrLst_TTZ3M: $2B3236
- AniPtrLst_TTZ3D: $2B3238
- AniPtrLst_TTZ3S: $2B323A
- AniPtrLst_TTZ3N: $2B323C
- AniPtrLst_TTZ4M: $2B323E
- AniPtrLst_TTZ4D: $2B3240
- AniPtrLst_TTZ4S: $2B3242
- AniPtrLst_TTZ4N: $2B3244
- AniPtrLst_TTZ5M: $2B3246
- AniPtrLst_TTZ5D: $2B3248
- AniPtrLst_TTZ5S: $2B324A
- AniPtrLst_TTZ5N: $2B324C
- AniPtrLst_TTZ6M: $2B324E
- AniPtrLst_TTZ6D: $2B3250
- AniPtrLst_TTZ6S: $2B3252
- AniPtrLst_TTZ6N: $2B3254
- AniPtrLst_MMZ0M: $2B3256
- AniPtrLst_MMZ0D: $2B3258
- AniPtrLst_MMZ0S: $2B325A
- AniPtrLst_MMZ0N: $2B325C
- AniPtrLst_MMZ1M: $2B325E
- AniPtrLst_MMZ1D: $2B3260
- AniPtrLst_MMZ1S: $2B3262
- AniPtrLst_MMZ1N: $2B3264
- AniPtrLst_MMZ2M: $2B3266
- AniPtrLst_MMZ2D: $2B3268
- AniPtrLst_MMZ2S: $2B326A
- AniPtrLst_MMZ2N: $2B326C
- AniPtrLst_MMZ3M: $2B326E
- AniPtrLst_MMZ3D: $2B3270
- AniPtrLst_MMZ3S: $2B3272
- AniPtrLst_MMZ3N: $2B3274
- AniPtrLst_MMZ4M: $2B3276
- AniPtrLst_MMZ4D: $2B3278
- AniPtrLst_MMZ4S: $2B327A
- AniPtrLst_MMZ4N: $2B327C
- AniPtrLst_MMZ5M: $2B327E
- AniPtrLst_MMZ5D: $2B3280
- AniPtrLst_MMZ5S: $2B3282
- AniPtrLst_MMZ5N: $2B3284
- AniPtrLst_MMZ6M: $2B3286
- AniPtrLst_MMZ6D: $2B3288
- AniPtrLst_MMZ6S: $2B328A
- AniPtrLst_MMZ6N: $2B328C
- AniPtrLst_Train0M: $2B328E
- AniPtrLst_Train0D: $2B3290
- AniPtrLst_Train0S: $2B3292
- AniPtrLst_Train0N: $2B3294
- AniPtrLst_Train1M: $2B3296
- AniPtrLst_Train1D: $2B3298
- AniPtrLst_Train1S: $2B329A
- AniPtrLst_Train1N: $2B329C
- AniPtrLst_Train2M: $2B329E
- AniPtrLst_Train2D: $2B32A0
- AniPtrLst_Train2S: $2B32A2
- AniPtrLst_Train2N: $2B32A4
- AniPtrLst_Train3M: $2B32A6
- AniPtrLst_Train3D: $2B32A8
- AniPtrLst_Train3S: $2B32AA
- AniPtrLst_Train3N: $2B32AC
- AniPtrLst_Train4M: $2B32AE
- AniPtrLst_Train4D: $2B32B0
- AniPtrLst_Train4S: $2B32B2
- AniPtrLst_Train4N: $2B32B4
- AniPtrLst_Train5M: $2B32B6
- AniPtrLst_Train5D: $2B32B8
- AniPtrLst_Train5S: $2B32BA
- AniPtrLst_Train5N: $2B32BC
- AniPtrLst_Train6M: $2B32BE
- AniPtrLst_Train6D: $2B32C0
- AniPtrLst_Train6S: $2B32C2
- AniPtrLst_Train6N: $2B32C4
- AniPtrLst_Intro0M: $2B32C6
- AniPtrLst_Intro0D: $2B32C8
- AniPtrLst_Intro0S: $2B32CA
- AniPtrLst_Intro0N: $2B32CC
- AniPtrLst_Intro1M: $2B32CE
- AniPtrLst_Intro1D: $2B32D0
- AniPtrLst_Intro1S: $2B32D2
- AniPtrLst_Intro1N: $2B32D4
- AniPtrLst_Intro2M: $2B32D6
- AniPtrLst_Intro2D: $2B32D8
- AniPtrLst_Intro2S: $2B32DA
- AniPtrLst_Intro2N: $2B32DC
- AniPtrLst_Intro3M: $2B32DE
- AniPtrLst_Intro3D: $2B32E0
- AniPtrLst_Intro3S: $2B32E2
- AniPtrLst_Intro3N: $2B32E4
- AniPtrLst_Intro4M: $2B32E6
- AniPtrLst_Intro4D: $2B32E8
- AniPtrLst_Intro4S: $2B32EA
- AniPtrLst_Intro4N: $2B32EC
- AniPtrLst_Intro5M: $2B32EE
- AniPtrLst_Intro5D: $2B32F0
- AniPtrLst_Intro5S: $2B32F2
- AniPtrLst_Intro5N: $2B32F4
- AniPtrLst_Intro6M: $2B32F6
- AniPtrLst_Intro6D: $2B32F8
- AniPtrLst_Intro6S: $2B32FA
- AniPtrLst_Intro6N: $2B32FC
- AniPtrLst_World0M: $2B32FE
- AniPtrLst_World0D: $2B3300
- AniPtrLst_World0S: $2B3302
- AniPtrLst_World0N: $2B3304
- AniPtrLst_World1M: $2B3306
- AniPtrLst_World1D: $2B3308
- AniPtrLst_World1S: $2B330A
- AniPtrLst_World1N: $2B330C
- AniPtrLst_World2M: $2B330E
- AniPtrLst_World2D: $2B3310
- AniPtrLst_World2S: $2B3312
- AniPtrLst_World2N: $2B3314
- AniPtrLst_World3M: $2B3316
- AniPtrLst_World3D: $2B3318
- AniPtrLst_World3S: $2B331A
- AniPtrLst_World3N: $2B331C
- AniPtrLst_World4M: $2B331E
- AniPtrLst_World4D: $2B3320
- AniPtrLst_World4S: $2B3322
- AniPtrLst_World4N: $2B3324
- AniPtrLst_World5M: $2B3326
- AniPtrLst_World5D: $2B3328
- AniPtrLst_World5S: $2B332A
- AniPtrLst_World5N: $2B332C
- AniPtrLst_World6M: $2B332E
- AniPtrLst_World6D: $2B3330
- AniPtrLst_World6S: $2B3332
- AniPtrLst_World6N: $2B3334
- AnimArtPtr_BBZ06MN: $2B3336
- AnimArtPtr_TTZ06MN: $2B333E
- AnimArtPtr_MMZ06MN: $2B3346
- AnimArtPtr_NULL: $2B334E
- AniArt_BBZ_1: $2B3352
- AnimArt_TTZ_1: $2B3ACA
- AnimArt_MMZ_1: $2B4056
-
-*Segment 06F - ArtNem_ST_Amy_Ptr: Offset $6CD0  Size $4
-
-*Segment 070 - MapEni_EB_Menu_Ptr: Offset $6136  Size $4
-
-*Segment 071 - ArtNem_EB_Menu_Ptr: Offset $6150  Size $4
-
-*Segment 072 - MapEni_Ttl_Road_Ptr: Offset $38A4  Size $4
-
-*Segment 073 - MapEni_Ttl_Sides_Ptr: Offset $38D2  Size $4
-
-*Segment 074 - ArtNem_Ttl_Roadsides_Ptr: Offset $388E  Size $4
-
-*Segment 075 - ArtNem_ST_ascFont_Ptr1: Offset $996  Size $4
-
-*Segment 076 - ArtNem_ST_ascFont_Ptr2: Offset $B8A  Size $4
-
-*Segment 077 - ArtNem_ST_ascFont_Ptr3: Offset $381E  Size $4
-
-*Segment 078 - ArtNem_ST_ascFont_Ptr4: Offset $2F626  Size $4
-
-*Segment 079 - ascFont: Offset $2F8E08  Size $448
- ArtNem_ST_ascFont: $2F8E08
-
-*Segment 07A - ArtNem_ST_Font_Ptr1: Offset $6CBA  Size $4
-
-*Segment 07B - ArtNem_ST_Font_Ptr2: Offset $32264  Size $4
-
-*Segment 07C - ArtNem_ST_Font_Ptr3: Offset $3E69E  Size $4
-
-*Segment 07D - ArtNem_ST_Font_Ptr4: Offset $3FCA6  Size $4
-
-*Segment 07E - ArtNem_ST_Menu_Ptr: Offset $6CA4  Size $4
-
-*Segment 07F - MapEni_ST_MenuBG_Ptr: Offset $6CE6  Size $4
-
-*Segment 080 - Pal_CharSel_Ptr: Offset $32364  Size $2
- Pal_CharSel_PtrL: $32364
-
-*Segment 081 - ArtNem_DL_Menu_Ptr1: Offset $3224E  Size $4
-
-*Segment 082 - ArtNem_DL_Menu_Ptr2: Offset $3E66C  Size $4
-
-*Segment 083 - ArtNem_DL_BorderLabels_Ptr: Offset $3E682  Size $4
-
-*Segment 084 - ArtNem_DL_Training_Ptr: Offset $3E6B4  Size $4
-
-*Segment 085 - MapEni_DL_OvalBG_Ptr1: Offset $3227A  Size $4
-
-*Segment 086 - MapEni_DL_OvalBG_Ptr2: Offset $3E75A  Size $4
-
-*Segment 087 - MapEni_DL_OvalLarge_Ptr: Offset $3E742  Size $4
-
-*Segment 088 - MapEni_DL_OvalSmall_Ptr1: Offset $32294  Size $4
-
-*Segment 089 - MapEni_DL_OvalSmall_Ptr2: Offset $3E772  Size $4
-
-*Segment 08A - MapEni_DL_PlayStyle_Box_Ptr: Offset $3E78E  Size $4
-
-*Segment 08B - MapEni_DL_PlayStyle_ProtoBox_Ptr: Offset $3E7A0  Size $4
-
-*Segment 08C - MapEni_DL_SaveSlot_Box_Ptr: Offset $3E7F0  Size $4
-
-*Segment 08D - MapEni_DL_Training_Box_Ptr: Offset $3E7B8  Size $4
-
-*Segment 08E - Pal_CharSel_Data: Offset $32392  Size $5C
- Pal_CharSel: $32392
-
-*Segment 08F - Pal_DataLoad_Ptr: Offset $3E658  Size $2
- Pal_DataLoad_PtrL: $3E658
-
-*Segment 090 - Pal_DataLoad_data: Offset $3E8CA  Size $80
- Pal_DataLoad: $3E8CA
-
-*Segment 091 - Pal_Ttl_Roadside_Data: Offset $3A60  Size $60
- Pal_Ttl_Roadside: $3A60
-
-*Segment 092 - Palc_Ttl_Roadside_Data: Offset $3ED8  Size $60
- Palc_Ttl_Roadside: $3ED8
-
-*Segment 093 - ArtNem_Data1: Offset $2C2DC8  Size $14CE
- ArtNem_ST_Amy: $2C2DC8
- MapEni_EB_Menu: $2C3236
- ArtNem_EB_Menu: $2C3444
- MapEni_Ttl_Road: $2C3910
- MapEni_Ttl_Sides: $2C39CC
- ArtNem_Ttl_Roadsides: $2C3BFA
-
-*Segment 094 - ArtNem_Data2: Offset $2C4B20  Size $47A
- ArtNem_ST_Font: $2C4B20
-
-*Segment 095 - ArtNem_Data3: Offset $2C7818  Size $4ABE
- ArtNem_ST_Menu: $2C7818
- MapEni_ST_MenuBG: $2C801A
- ArtNem_DL_Menu: $2C8178
- ArtNem_DL_BorderLabels: $2CAB44
- ArtNem_DL_Training: $2CBA06
- MapEni_DL_OvalBG: $2CBF2A
- MapEni_DL_OvalLarge: $2CBFE6
- MapEni_DL_OvalSmall: $2CC07E
- MapEni_DL_PlayStyle_Box: $2CC16E
- MapEni_DL_SaveSlot_Box: $2CC1F6
- MapEni_DL_Training_Box: $2CC28E
-
-*Segment 096 - MD_PalCycle_Set1: Offset $2B55E8  Size $C12
- MD_PalCycle_Unk3_Data1: $2B55E8
- MD_PalCycle_Unk3_Data2: $2B573A
-
-*Segment 097 - MD_Palette_AAZLit_Index: Offset $2B61FA  Size $638
- LPPtrAAZ0M_L: $2B61FA
- LPPtrAAZ0D_L: $2B61FC
- LPPtrAAZ0S_L: $2B61FE
- LPPtrAAZ0N_L: $2B6200
- LPPtrAAZ1M_L: $2B6202
- LPPtrAAZ1D_L: $2B6204
- LPPtrAAZ1S_L: $2B6206
- LPPtrAAZ1N_L: $2B6208
- LPPtrAAZ2M_L: $2B620A
- LPPtrAAZ2D_L: $2B620C
- LPPtrAAZ2S_L: $2B620E
- LPPtrAAZ2N_L: $2B6210
- LPPtrAAZ3M_L: $2B6212
- LPPtrAAZ3D_L: $2B6214
- LPPtrAAZ3S_L: $2B6216
- LPPtrAAZ3N_L: $2B6218
- LPPtrAAZ4M_L: $2B621A
- LPPtrAAZ4D_L: $2B621C
- LPPtrAAZ4S_L: $2B621E
- LPPtrAAZ4N_L: $2B6220
- LPPtrAAZ5M_L: $2B6222
- LPPtrAAZ5D_L: $2B6224
- LPPtrAAZ5S_L: $2B6226
- LPPtrAAZ5N_L: $2B6228
- LPPtrAAZ6M_L: $2B622A
- LPPtrAAZ6D_L: $2B622C
- LPPtrAAZ6S_L: $2B622E
- LPPtrAAZ6N_L: $2B6230
- Pal_AAZ12M_L: $2B6232
- Pal_AAZ34M_L: $2B62B2
- Pal_AAZ5M_L: $2B6332
- Pal_AAZ12D_L: $2B63B2
- Pal_AAZ34D_L: $2B6432
- Pal_AAZ5D_L: $2B64B2
- Pal_AAZ12S_L: $2B6532
- Pal_AAZ34S_L: $2B65B2
- Pal_AAZ5S_L: $2B6632
- Pal_AAZ12N_L: $2B66B2
- Pal_AAZ34N_L: $2B6732
- Pal_AAZ5N_L: $2B67B2
-
-*Segment 098 - MD_PalCycle_Set2: Offset $2B6832  Size $3AFE
- MD_PalCycle_BBZ_Data1: $2B6832
- MD_PalCycle_BBZ_Data2: $2B684C
- MD_PalCycle_BBZ_Data3: $2B69A4
- MD_PalCycle_WE_Data1: $2B6A6C
- MD_PalCycle_WE_Data3: $2B6AAE
- MD_PalCycle_WE_Data2: $2B6BE6
- MD_PalCycle_BBZ_Data4: $2B6C5E
- MD_PalCycle_SSZ_Data3: $2B70C2
- MD_PalCycle_SSZ_Data2: $2B7248
- MD_PalCycle_AAZ_Lit_Data2: $2B9184
- MD_PalCycle_AAZ_Data: $2B9276
- MD_PalCycle_Unk1_Data1: $2B92D2
- MD_PalCycle_AAZ_Lit_Data3: $2B930E
- MD_PalCycle_Unk2_Data1: $2B9B94
- MD_PalCycle_Unk2_Data2: $2B9BD4
- MD_PalCycle_TTZ_Data: $2B9C14
- MD_PalCycle_MMZ_Data: $2B9D9E
- MD_PalCycle_IIZ_Data: $2B9DE8
- MD_PalCycle_WE_Data5: $2B9E58
- MD_PalCycle_WE_Data4: $2B9EA4
- MD_PalCycle_WE_Data6: $2B9EF2
-
-*Segment 099 - LevSize_Boss_Data: Offset $2B50BA  Size $2A
- LS_FG_SSZBoss: $2B50BA
- LS_BG_SSZBoss: $2B50C8
- LS_FG_TTZBoss: $2B50D6
-
-*Segment 09A - MD_PalCycle_Set3: Offset $2BE356  Size $110
- MD_PalCycle_Unk3_Data3: $2BE356
- MD_PalCycle_SSZ_Data1: $2BE402
- MD_PalCycle_AAZ_Lit_Data1: $2BE41A
-
-*Segment 09B - AnimArtV_Ptrs: Offset $2BF854  Size $500
- AniVPtrLst_BBZ0M: $2BF854
- AniVPtrLst_BBZ0D: $2BF856
- AniVPtrLst_BBZ0S: $2BF858
- AniVPtrLst_BBZ0N: $2BF85A
- AniVPtrLst_BBZ1M: $2BF85C
- AniVPtrLst_BBZ1D: $2BF85E
- AniVPtrLst_BBZ1S: $2BF860
- AniVPtrLst_BBZ1N: $2BF862
- AniVPtrLst_BBZ2M: $2BF864
- AniVPtrLst_BBZ2D: $2BF866
- AniVPtrLst_BBZ2S: $2BF868
- AniVPtrLst_BBZ2N: $2BF86A
- AniVPtrLst_BBZ3M: $2BF86C
- AniVPtrLst_BBZ3D: $2BF86E
- AniVPtrLst_BBZ3S: $2BF870
- AniVPtrLst_BBZ3N: $2BF872
- AniVPtrLst_BBZ4M: $2BF874
- AniVPtrLst_BBZ4D: $2BF876
- AniVPtrLst_BBZ4S: $2BF878
- AniVPtrLst_BBZ4N: $2BF87A
- AniVPtrLst_BBZ5M: $2BF87C
- AniVPtrLst_BBZ5D: $2BF87E
- AniVPtrLst_BBZ5S: $2BF880
- AniVPtrLst_BBZ5N: $2BF882
- AniVPtrLst_BBZ6M: $2BF884
- AniVPtrLst_BBZ6D: $2BF886
- AniVPtrLst_BBZ6S: $2BF888
- AniVPtrLst_BBZ6N: $2BF88A
- AniVPtrLst_SSZ0M: $2BF88C
- AniVPtrLst_SSZ0D: $2BF88E
- AniVPtrLst_SSZ0S: $2BF890
- AniVPtrLst_SSZ0N: $2BF892
- AniVPtrLst_SSZ1M: $2BF894
- AniVPtrLst_SSZ1D: $2BF896
- AniVPtrLst_SSZ1S: $2BF898
- AniVPtrLst_SSZ1N: $2BF89A
- AniVPtrLst_SSZ2M: $2BF89C
- AniVPtrLst_SSZ2D: $2BF89E
- AniVPtrLst_SSZ2S: $2BF8A0
- AniVPtrLst_SSZ2N: $2BF8A2
- AniVPtrLst_SSZ3M: $2BF8A4
- AniVPtrLst_SSZ3D: $2BF8A6
- AniVPtrLst_SSZ3S: $2BF8A8
- AniVPtrLst_SSZ3N: $2BF8AA
- AniVPtrLst_SSZ4M: $2BF8AC
- AniVPtrLst_SSZ4D: $2BF8AE
- AniVPtrLst_SSZ4S: $2BF8B0
- AniVPtrLst_SSZ4N: $2BF8B2
- AniVPtrLst_SSZ5M: $2BF8B4
- AniVPtrLst_SSZ5D: $2BF8B6
- AniVPtrLst_SSZ5S: $2BF8B8
- AniVPtrLst_SSZ5N: $2BF8BA
- AniVPtrLst_SSZ6M: $2BF8BC
- AniVPtrLst_SSZ6D: $2BF8BE
- AniVPtrLst_SSZ6S: $2BF8C0
- AniVPtrLst_SSZ6N: $2BF8C2
- AniVPtrLst_AAZ0M: $2BF8C4
- AniVPtrLst_AAZ0D: $2BF8C6
- AniVPtrLst_AAZ0S: $2BF8C8
- AniVPtrLst_AAZ0N: $2BF8CA
- AniVPtrLst_AAZ1M: $2BF8CC
- AniVPtrLst_AAZ1D: $2BF8CE
- AniVPtrLst_AAZ1S: $2BF8D0
- AniVPtrLst_AAZ1N: $2BF8D2
- AniVPtrLst_AAZ2M: $2BF8D4
- AniVPtrLst_AAZ2D: $2BF8D6
- AniVPtrLst_AAZ2S: $2BF8D8
- AniVPtrLst_AAZ2N: $2BF8DA
- AniVPtrLst_AAZ3M: $2BF8DC
- AniVPtrLst_AAZ3D: $2BF8DE
- AniVPtrLst_AAZ3S: $2BF8E0
- AniVPtrLst_AAZ3N: $2BF8E2
- AniVPtrLst_AAZ4M: $2BF8E4
- AniVPtrLst_AAZ4D: $2BF8E6
- AniVPtrLst_AAZ4S: $2BF8E8
- AniVPtrLst_AAZ4N: $2BF8EA
- AniVPtrLst_AAZ5M: $2BF8EC
- AniVPtrLst_AAZ5D: $2BF8EE
- AniVPtrLst_AAZ5S: $2BF8F0
- AniVPtrLst_AAZ5N: $2BF8F2
- AniVPtrLst_AAZ6M: $2BF8F4
- AniVPtrLst_AAZ6D: $2BF8F6
- AniVPtrLst_AAZ6S: $2BF8F8
- AniVPtrLst_AAZ6N: $2BF8FA
- AniVPtrLst_TTZ0M: $2BF8FC
- AniVPtrLst_TTZ0D: $2BF8FE
- AniVPtrLst_TTZ0S: $2BF900
- AniVPtrLst_TTZ0N: $2BF902
- AniVPtrLst_TTZ1M: $2BF904
- AniVPtrLst_TTZ1D: $2BF906
- AniVPtrLst_TTZ1S: $2BF908
- AniVPtrLst_TTZ1N: $2BF90A
- AniVPtrLst_TTZ2M: $2BF90C
- AniVPtrLst_TTZ2D: $2BF90E
- AniVPtrLst_TTZ2S: $2BF910
- AniVPtrLst_TTZ2N: $2BF912
- AniVPtrLst_TTZ3M: $2BF914
- AniVPtrLst_TTZ3D: $2BF916
- AniVPtrLst_TTZ3S: $2BF918
- AniVPtrLst_TTZ3N: $2BF91A
- AniVPtrLst_TTZ4M: $2BF91C
- AniVPtrLst_TTZ4D: $2BF91E
- AniVPtrLst_TTZ4S: $2BF920
- AniVPtrLst_TTZ4N: $2BF922
- AniVPtrLst_TTZ5M: $2BF924
- AniVPtrLst_TTZ5D: $2BF926
- AniVPtrLst_TTZ5S: $2BF928
- AniVPtrLst_TTZ5N: $2BF92A
- AniVPtrLst_TTZ6M: $2BF92C
- AniVPtrLst_TTZ6D: $2BF92E
- AniVPtrLst_TTZ6S: $2BF930
- AniVPtrLst_TTZ6N: $2BF932
- AniVPtrLst_MMZ0M: $2BF934
- AniVPtrLst_MMZ0D: $2BF936
- AniVPtrLst_MMZ0S: $2BF938
- AniVPtrLst_MMZ0N: $2BF93A
- AniVPtrLst_MMZ1M: $2BF93C
- AniVPtrLst_MMZ1D: $2BF93E
- AniVPtrLst_MMZ1S: $2BF940
- AniVPtrLst_MMZ1N: $2BF942
- AniVPtrLst_MMZ2M: $2BF944
- AniVPtrLst_MMZ2D: $2BF946
- AniVPtrLst_MMZ2S: $2BF948
- AniVPtrLst_MMZ2N: $2BF94A
- AniVPtrLst_MMZ3M: $2BF94C
- AniVPtrLst_MMZ3D: $2BF94E
- AniVPtrLst_MMZ3S: $2BF950
- AniVPtrLst_MMZ3N: $2BF952
- AniVPtrLst_MMZ4M: $2BF954
- AniVPtrLst_MMZ4D: $2BF956
- AniVPtrLst_MMZ4S: $2BF958
- AniVPtrLst_MMZ4N: $2BF95A
- AniVPtrLst_MMZ5M: $2BF95C
- AniVPtrLst_MMZ5D: $2BF95E
- AniVPtrLst_MMZ5S: $2BF960
- AniVPtrLst_MMZ5N: $2BF962
- AniVPtrLst_MMZ6M: $2BF964
- AniVPtrLst_MMZ6D: $2BF966
- AniVPtrLst_MMZ6S: $2BF968
- AniVPtrLst_MMZ6N: $2BF96A
- AniVPtrLst_Train0M: $2BF96C
- AniVPtrLst_Train0D: $2BF96E
- AniVPtrLst_Train0S: $2BF970
- AniVPtrLst_Train0N: $2BF972
- AniVPtrLst_Train1M: $2BF974
- AniVPtrLst_Train1D: $2BF976
- AniVPtrLst_Train1S: $2BF978
- AniVPtrLst_Train1N: $2BF97A
- AniVPtrLst_Train2M: $2BF97C
- AniVPtrLst_Train2D: $2BF97E
- AniVPtrLst_Train2S: $2BF980
- AniVPtrLst_Train2N: $2BF982
- AniVPtrLst_Train3M: $2BF984
- AniVPtrLst_Train3D: $2BF986
- AniVPtrLst_Train3S: $2BF988
- AniVPtrLst_Train3N: $2BF98A
- AniVPtrLst_Train4M: $2BF98C
- AniVPtrLst_Train4D: $2BF98E
- AniVPtrLst_Train4S: $2BF990
- AniVPtrLst_Train4N: $2BF992
- AniVPtrLst_Train5M: $2BF994
- AniVPtrLst_Train5D: $2BF996
- AniVPtrLst_Train5S: $2BF998
- AniVPtrLst_Train5N: $2BF99A
- AniVPtrLst_Train6M: $2BF99C
- AniVPtrLst_Train6D: $2BF99E
- AniVPtrLst_Train6S: $2BF9A0
- AniVPtrLst_Train6N: $2BF9A2
- AniVPtrLst_Intro0M: $2BF9A4
- AniVPtrLst_Intro0D: $2BF9A6
- AniVPtrLst_Intro0S: $2BF9A8
- AniVPtrLst_Intro0N: $2BF9AA
- AniVPtrLst_Intro1M: $2BF9AC
- AniVPtrLst_Intro1D: $2BF9AE
- AniVPtrLst_Intro1S: $2BF9B0
- AniVPtrLst_Intro1N: $2BF9B2
- AniVPtrLst_Intro2M: $2BF9B4
- AniVPtrLst_Intro2D: $2BF9B6
- AniVPtrLst_Intro2S: $2BF9B8
- AniVPtrLst_Intro2N: $2BF9BA
- AniVPtrLst_Intro3M: $2BF9BC
- AniVPtrLst_Intro3D: $2BF9BE
- AniVPtrLst_Intro3S: $2BF9C0
- AniVPtrLst_Intro3N: $2BF9C2
- AniVPtrLst_Intro4M: $2BF9C4
- AniVPtrLst_Intro4D: $2BF9C6
- AniVPtrLst_Intro4S: $2BF9C8
- AniVPtrLst_Intro4N: $2BF9CA
- AniVPtrLst_Intro5M: $2BF9CC
- AniVPtrLst_Intro5D: $2BF9CE
- AniVPtrLst_Intro5S: $2BF9D0
- AniVPtrLst_Intro5N: $2BF9D2
- AniVPtrLst_Intro6M: $2BF9D4
- AniVPtrLst_Intro6D: $2BF9D6
- AniVPtrLst_Intro6S: $2BF9D8
- AniVPtrLst_Intro6N: $2BF9DA
- AniVPtrLst_World0M: $2BF9DC
- AniVPtrLst_World0D: $2BF9DE
- AniVPtrLst_World0S: $2BF9E0
- AniVPtrLst_World0N: $2BF9E2
- AniVPtrLst_World1M: $2BF9E4
- AniVPtrLst_World1D: $2BF9E6
- AniVPtrLst_World1S: $2BF9E8
- AniVPtrLst_World1N: $2BF9EA
- AniVPtrLst_World2M: $2BF9EC
- AniVPtrLst_World2D: $2BF9EE
- AniVPtrLst_World2S: $2BF9F0
- AniVPtrLst_World2N: $2BF9F2
- AniVPtrLst_World3M: $2BF9F4
- AniVPtrLst_World3D: $2BF9F6
- AniVPtrLst_World3S: $2BF9F8
- AniVPtrLst_World3N: $2BF9FA
- AniVPtrLst_World4M: $2BF9FC
- AniVPtrLst_World4D: $2BF9FE
- AniVPtrLst_World4S: $2BFA00
- AniVPtrLst_World4N: $2BFA02
- AniVPtrLst_World5M: $2BFA04
- AniVPtrLst_World5D: $2BFA06
- AniVPtrLst_World5S: $2BFA08
- AniVPtrLst_World5N: $2BFA0A
- AniVPtrLst_World6M: $2BFA0C
- AniVPtrLst_World6D: $2BFA0E
- AniVPtrLst_World6S: $2BFA10
- AniVPtrLst_World6N: $2BFA12
- AnimVPtr_BBZ13MN: $2BFA14
- AnimVPtr_BBZ45MN: $2BFA3E
- AnimVPtr_TTZ15MN: $2BFA5E
- AnimVPtr_MMZ1MN: $2BFA7E
- AnimVPtr_MMZ25MN: $2BFAB2
- AnimVPtr_NULL: $2BFAF0
- AnimArtV_BBZ_1: $2BFAF2
- AnimArtV_BBZ_2: $2BFB10
- AnimArtV_BBZ_3: $2BFB18
- AnimArtV_BBZ_4: $2BFB36
- AnimArtV_BBZ_5: $2BFB3E
- AnimArtV_BBZ_6: $2BFB5C
- AnimArtV_BBZ_7: $2BFB66
- AnimArtV_BBZ_8: $2BFB84
- AnimArtV_TTZ_1: $2BFB8E
- AnimArtV_TTZ_2: $2BFBB6
- AnimArtV_TTZ_3: $2BFBC0
- AnimArtV_TTZ_4: $2BFBE8
- AnimArtV_TTZ_5: $2BFBF2
- AnimArtV_TTZ_6: $2BFC1A
- AnimArtV_MMZ_1: $2BFC24
- AnimArtV_MMZ_2: $2BFC60
- AnimArtV_MMZ_3: $2BFC6E
- AnimArtV_MMZ_4: $2BFC8C
- AnimArtV_MMZ_5: $2BFC94
- AnimArtV_MMZ_6: $2BFCB2
- AnimArtV_MMZ_7: $2BFCBA
- AnimArtV_MMZ_8: $2BFCD8
- AnimArtV_MMZ_10: $2BFCE0
- AnimArtV_MMZ_11: $2BFD26
- AnimArtV_MMZ_9: $2BFD36
-
-*Segment 09C - Objlayout_Data: Offset $2DA05E  Size $F378
- ObjLoc_BBZ1M: $2DA05E
- ObjLoc_BBZ1D: $2DA060
- ObjLoc_BBZ1S: $2DA062
- ObjLoc_BBZ1N: $2DA064
- ObjLoc_BBZ2M: $2DA066
- ObjLoc_BBZ2D: $2DA068
- ObjLoc_BBZ2S: $2DA06A
- ObjLoc_BBZ2N: $2DA06C
- ObjLoc_BBZ3M: $2DA06E
- ObjLoc_BBZ3D: $2DA070
- ObjLoc_BBZ3S: $2DA072
- ObjLoc_BBZ3N: $2DA074
- ObjLoc_BBZ4M: $2DA076
- ObjLoc_BBZ4D: $2DA078
- ObjLoc_BBZ4S: $2DA07A
- ObjLoc_BBZ4N: $2DA07C
- ObjLoc_BBZ5M: $2DA07E
- ObjLoc_BBZ5D: $2DA080
- ObjLoc_BBZ5S: $2DA082
- ObjLoc_BBZ5N: $2DA084
- ObjLoc_SSZ1M: $2DA086
- ObjLoc_SSZ1D: $2DA088
- ObjLoc_SSZ1S: $2DA08A
- ObjLoc_SSZ1N: $2DA08C
- ObjLoc_SSZ2M: $2DA08E
- ObjLoc_SSZ2D: $2DA090
- ObjLoc_SSZ2S: $2DA092
- ObjLoc_SSZ2N: $2DA094
- ObjLoc_SSZ3M: $2DA096
- ObjLoc_SSZ3D: $2DA098
- ObjLoc_SSZ3S: $2DA09A
- ObjLoc_SSZ3N: $2DA09C
- ObjLoc_SSZ4M: $2DA09E
- ObjLoc_SSZ4D: $2DA0A0
- ObjLoc_SSZ4S: $2DA0A2
- ObjLoc_SSZ4N: $2DA0A4
- ObjLoc_SSZ5M: $2DA0A6
- ObjLoc_SSZ5D: $2DA0A8
- ObjLoc_SSZ5S: $2DA0AA
- ObjLoc_SSZ5N: $2DA0AC
- ObjLoc_AAZ1M: $2DA0AE
- ObjLoc_AAZ1D: $2DA620
- ObjLoc_AAZ1S: $2DAB5A
- ObjLoc_AAZ1N: $2DB03C
- ObjLoc_AAZ2M: $2DB526
- ObjLoc_AAZ2D: $2DB9A8
- ObjLoc_AAZ2S: $2DBE2A
- ObjLoc_AAZ2N: $2DC2DC
- ObjLoc_AAZ3M: $2DC77E
- ObjLoc_AAZ3D: $2DCCD8
- ObjLoc_AAZ3S: $2DD232
- ObjLoc_AAZ3N: $2DD7D4
- ObjLoc_AAZ4M: $2DDD66
- ObjLoc_AAZ4D: $2DE298
- ObjLoc_AAZ4S: $2DE76A
- ObjLoc_AAZ4N: $2DEC84
- ObjLoc_AAZ5M: $2DF13E
- ObjLoc_AAZ5D: $2DF830
- ObjLoc_AAZ5S: $2DFEB2
- ObjLoc_AAZ5N: $2E05A4
- ObjLoc_AAZNULL: $2E0C36
- ObjLoc_TTZ1M: $2E0C38
- ObjLoc_TTZ1D: $2E0FE2
- ObjLoc_TTZ1S: $2E1434
- ObjLoc_TTZ1N: $2E17AE
- ObjLoc_TTZ2M: $2E1AF8
- ObjLoc_TTZ2D: $2E227A
- ObjLoc_TTZ2S: $2E2A74
- ObjLoc_TTZ2N: $2E3246
- ObjLoc_TTZ3M: $2E3860
- ObjLoc_TTZ3D: $2E404A
- ObjLoc_TTZ3S: $2E491C
- ObjLoc_TTZ3N: $2E514E
- ObjLoc_TTZ4M: $2E5808
- ObjLoc_TTZ4D: $2E5CB2
- ObjLoc_TTZ4S: $2E6084
- ObjLoc_TTZ4N: $2E64BE
- ObjLoc_TTZ5M: $2E68F8
- ObjLoc_TTZ5D: $2E6E32
- ObjLoc_TTZ5S: $2E736C
- ObjLoc_TTZ5N: $2E78AE
- ObjLoc_MMZ1M: $2E7DF4
- ObjLoc_MMZ1D: $2E7DF6
- ObjLoc_MMZ1S: $2E7DF8
- ObjLoc_MMZ1N: $2E7DFA
- ObjLoc_MMZ2M: $2E7DFC
- ObjLoc_MMZ2D: $2E7DFE
- ObjLoc_MMZ2S: $2E7E00
- ObjLoc_MMZ2N: $2E7E02
- ObjLoc_MMZ3M: $2E7E04
- ObjLoc_MMZ3D: $2E7E06
- ObjLoc_MMZ3S: $2E7E08
- ObjLoc_MMZ3N: $2E7E0A
- ObjLoc_MMZ4M: $2E7E0C
- ObjLoc_MMZ4D: $2E7E0E
- ObjLoc_MMZ4S: $2E7E10
- ObjLoc_MMZ4N: $2E7E12
- ObjLoc_MMZ5M: $2E7E14
- ObjLoc_MMZ5D: $2E7E16
- ObjLoc_MMZ5S: $2E7E18
- ObjLoc_MMZ5N: $2E7E1A
- ObjLoc_Train1: $2E7E1C
- ObjLoc_Train2: $2E8186
- ObjLoc_Train3: $2E86F8
- ObjLoc_Train4: $2E88A2
- ObjLoc_Train5: $2E8CBC
- ObjLoc_Intro0: $2E8CBE
- ObjLoc_Intro1: $2E8D90
- ObjLoc_Intro2: $2E8E62
- ObjLoc_Intro3: $2E8F04
- ObjLoc_Intro4: $2E9106
- ObjLoc_Tutorial: $2E9280
- ObjLoc_World: $2E9282
- ObjLoc_WorldNULL: $2E93D4
-
-*Segment 09D - GameHeader: Offset $100  Size $8E
-
-*Segment 09E - MainMenu_Strings: Offset $3E5E  Size $40
-
-*Segment 09F - ExitScreen_Strings: Offset $3FDEA  Size $80
-
-*Segment 0A0 - LevelSel_Strings: Offset $7739E  Size $1B6
-
-*Segment 0A1 - LevelPlaylist: Offset $76ED0  Size $8
-
-*Segment 0A2 - LevelPlaylist: Offset $76EE4  Size $6
-
-*Segment 0A3 - *Unnamed*: Offset $2997C  Size $2
-
-*Segment 0A4 - *Unnamed*: Offset $2998C  Size $2
-
-*Segment 0A5 - SoundTestSongNames: Offset $227338  Size $207
-
-*Segment 0A6 - CharSel_ID_Max1a: Offset $322B9  Size $1
-
-*Segment 0A7 - CharSel_ID_Max1b: Offset $3258B  Size $1
-
-*Segment 0A8 - CharSel_ID_Max1c: Offset $32597  Size $1
-
-*Segment 0A9 - CharSel_ID_Max2a: Offset $3245D  Size $1
-
-*Segment 0AA - CharSel_ID_Max2b: Offset $32475  Size $1
-
-*Segment 0AB - CharSel_ID_Max2c: Offset $32479  Size $1
-
-*Segment 0AC - CharSel_IDs: Offset $323F2  Size $E
-
-*Segment 0AD - CharSel_IDs: Offset $32518  Size $8
-
-*Segment 0AE - CharSel_Names: Offset $32678  Size $11C
-
-*Segment 0AF - aOutputMonoStereo: Offset $75D8  Size $1E
-
-*Segment 0B0 - aSpeed: Offset $7636  Size $8
-
-*Segment 0B1 - SFX1st_1: Offset $7527  Size $1
-
-*Segment 0B2 - SFX1st_2: Offset $752D  Size $1
-
-*Segment 0B3 - SFXLast: Offset $7446  Size $2
-
-*Segment 0B4 - BGM_WE01_TOD: Offset $76EF5  Size $1
-
-*Segment 0B5 - Code_LevelSelectDebug: Offset $7A6A  Size $4
-
-*Segment 0B6 - Code_LevelSelectFull: Offset $772BC  Size $2
-
-*Segment 0B7 - Code_AmyInSoundTest: Offset $7A7C  Size $4
-
-*Segment 0B8 - Code_TrainingSelect_TOD: Offset $3F461  Size $1
-
-*Segment 0B9 - BankTbl: Offset $76AC0  Size $29
-
-*Segment 0BA - PtrTbl: Offset $76AE9  Size $DC
-
-*Segment 0BB - BankData0: Offset $40000  Size $6E06
-
-*Segment 0BC - BankData1: Offset $48000  Size $7BEC
-
-*Segment 0BD - BankData2: Offset $50000  Size $1DB0
-
-*Segment 0BE - BankData2S: Offset $56000  Size $10B9
-
-*Segment 0BF - PWMData: Offset $58000  Size $1B284
-
-*Segment 0C0 - PWMDataX: Offset $2F9250  Size $6DB0
+*Segment 000 - ArtPtr32x: Offset $A0000  Size $179A92
+ ArtPtr32X_Mighty: $A0504
+ AP3_Mighty: $A0674
+ AP3_Mighty_Lookup: $A098E
+ AP3_Mighty_Crouch: $A0CAA
+ AP3_Mighty_Hurt: $A0F88
+ AP3_Mighty_Idle_00: $A12F8
+ AP3_Mighty_Idle_01: $A1642
+ AP3_Mighty_Idle_02: $A19EC
+ AP3_Mighty_Idle_03: $A1D1C
+ AP3_Mighty_LedgeFwd_00: $A2050
+ AP3_Mighty_LedgeFwd_01: $A2366
+ AP3_Mighty_LedgeFwd_02: $A2688
+ AP3_Mighty_LedgeBack_00: $A29B2
+ AP3_Mighty_LedgeBack_01: $A2CE6
+ AP3_Mighty_LedgeBack_02: $A3012
+ AP3_Mighty_Walk0d_00: $A3308
+ AP3_Mighty_Walk0d_01: $A3678
+ AP3_Mighty_Walk0d_02: $A39A6
+ AP3_Mighty_Walk0d_03: $A3C84
+ AP3_Mighty_Walk0d_04: $A3FCC
+ AP3_Mighty_Walk0d_05: $A42F4
+ AP3_Mighty_Walk45d_00: $A460C
+ AP3_Mighty_Walk45d_01: $A49E0
+ AP3_Mighty_Walk45d_02: $A4D4A
+ AP3_Mighty_Walk45d_03: $A5044
+ AP3_Mighty_Walk45d_04: $A53A6
+ AP3_Mighty_Walk45d_05: $A570A
+ AP3_Mighty_Walk90d_00: $A5A38
+ AP3_Mighty_Walk90d_01: $A5DAA
+ AP3_Mighty_Walk90d_02: $A60C0
+ AP3_Mighty_Walk90d_03: $A6396
+ AP3_Mighty_Walk90d_04: $A66B6
+ AP3_Mighty_Walk90d_05: $A69C8
+ AP3_Mighty_Walk135d_00: $A6CD8
+ AP3_Mighty_Walk135d_01: $A704C
+ AP3_Mighty_Walk135d_02: $A73AA
+ AP3_Mighty_Walk135d_03: $A76AE
+ AP3_Mighty_Walk135d_04: $A79C6
+ AP3_Mighty_Walk135d_05: $A7CE4
+ AP3_Mighty_Run0d_00: $A8026
+ AP3_Mighty_Run0d_01: $A83AC
+ AP3_Mighty_Run0d_02: $A8736
+ AP3_Mighty_Run0d_03: $A8AAA
+ AP3_Mighty_Run45d_00: $A8E2A
+ AP3_Mighty_Run45d_01: $A91E4
+ AP3_Mighty_Run45d_02: $A95D2
+ AP3_Mighty_Run45d_03: $A9984
+ AP3_Mighty_Run90d_00: $A9D66
+ AP3_Mighty_Run90d_01: $AA100
+ AP3_Mighty_Run90d_02: $AA47A
+ AP3_Mighty_Run90d_03: $AA7FA
+ AP3_Mighty_Run135d_00: $AAB70
+ AP3_Mighty_Run135d_01: $AAF32
+ AP3_Mighty_Run135d_02: $AB2B6
+ AP3_Mighty_Run135d_03: $AB660
+ AP3_Mighty_Skid_00: $AB9DC
+ AP3_Mighty_Skid_01: $ABCB2
+ AP3_Mighty_SkidSTurn: $ABFA8
+ AP3_Mighty_Hold: $AC2F2
+ AP3_Mighty_HoldMax: $AC606
+ AP3_Mighty_Jump_00: $AC8CA
+ AP3_Mighty_Jump_01: $ACB5E
+ AP3_Mighty_Jump_02: $ACE00
+ AP3_Mighty_Jump_03: $AD094
+ AP3_Mighty_Jump_04: $AD336
+ AP3_Mighty_DrunkHurt_00: $AD5E0
+ AP3_Mighty_DrunkHurt_01: $AD918
+ AP3_Mighty_DrunkHurt_02: $ADBF6
+ AP3_Mighty_DrunkHurt_03: $ADF3E
+ AP3_Mighty_DrunkHurt_04: $AE244
+ AP3_Mighty_DrunkHurt_05: $AE552
+ AP3_Mighty_Throw_00: $AE848
+ AP3_Mighty_Throw_01: $AEBD0
+ AP3_Mighty_Throw_02: $AEF12
+ AP3_Mighty_Throw_03: $AF278
+ AP3_Mighty_UnkSkid: $AF55A
+ AP3_Mighty_SpcWallJump: $AF8E2
+ AP3_Mighty_SpcAirDash_00: $AFC0A
+ AP3_Mighty_SpcAirDash_01: $AFEF2
+ AP3_Mighty_SpcAirDash_02: $B01A0
+ AP3_Mighty_SpinDash_00: $B046C
+ AP3_Mighty_SpinDash_01: $B074A
+ AP3_Mighty_SpinDash_02: $B0A12
+ AP3_Mighty_SpinDash_03: $B0CD6
+ AP3_Mighty_SpinDash_04: $B0F9C
+ AP3_Mighty_SpinDash_05: $B1262
+ AP3_Mighty_IdleObj: $B1528
+ ArtPtr32X_Wechnia: $B18B8
+ ArtPtr32X_Knuckles: $B18BC
+ AP3_Knux: $B1A80
+ AP3_Knux_Lookup: $B1E48
+ AP3_Knux_Crouch_00: $B21D0
+ AP3_Knux_Crouch_01: $B2514
+ AP3_Knux_Walk0d_00: $B27B2
+ AP3_Knux_Walk0d_01: $B2B44
+ AP3_Knux_Walk0d_02: $B2EC8
+ AP3_Knux_Walk0d_03: $B31DA
+ AP3_Knux_Walk0d_04: $B3522
+ AP3_Knux_Walk0d_05: $B38B2
+ AP3_Knux_Walk0d_06: $B3C5A
+ AP3_Knux_Walk0d_07: $B3F68
+ AP3_Knux_Walk45d_00: $B428C
+ AP3_Knux_Walk45d_01: $B4648
+ AP3_Knux_Walk45d_02: $B498A
+ AP3_Knux_Walk45d_03: $B4CA0
+ AP3_Knux_Walk45d_04: $B5004
+ AP3_Knux_Walk45d_05: $B53E0
+ AP3_Knux_Walk45d_06: $B57B8
+ AP3_Knux_Walk45d_07: $B5AF6
+ AP3_Knux_Walk90d_00: $B5E26
+ AP3_Knux_Walk90d_01: $B61DA
+ AP3_Knux_Walk90d_02: $B6550
+ AP3_Knux_Walk90d_03: $B688A
+ AP3_Knux_Walk90d_04: $B6BCA
+ AP3_Knux_Walk90d_05: $B6F5E
+ AP3_Knux_Walk90d_06: $B7310
+ AP3_Knux_Walk90d_07: $B7630
+ AP3_Knux_Walk135d_00: $B796A
+ AP3_Knux_Walk135d_01: $B7CE2
+ AP3_Knux_Walk135d_02: $B800C
+ AP3_Knux_Walk135d_03: $B831E
+ AP3_Knux_Walk135d_04: $B8694
+ AP3_Knux_Walk135d_05: $B8A46
+ AP3_Knux_Walk135d_06: $B8DEE
+ AP3_Knux_Walk135d_07: $B910E
+ AP3_Knux_Run0d_00: $B945C
+ AP3_Knux_Run0d_01: $B9836
+ AP3_Knux_Run0d_02: $B9C34
+ AP3_Knux_Run0d_03: $BA038
+ AP3_Knux_Run45d_00: $BA40C
+ AP3_Knux_Run45d_01: $BA810
+ AP3_Knux_Run45d_02: $BAC28
+ AP3_Knux_Run45d_03: $BB04C
+ AP3_Knux_Run90d_00: $BB466
+ AP3_Knux_Run90d_01: $BB890
+ AP3_Knux_Run90d_02: $BBC96
+ AP3_Knux_Run90d_03: $BC0F4
+ AP3_Knux_Run135d_00: $BC51A
+ AP3_Knux_Run135d_01: $BC93A
+ AP3_Knux_Run135d_02: $BCD12
+ AP3_Knux_Run135d_03: $BD144
+ AP3_Knux_Spindash_00: $BD56A
+ AP3_Knux_Spindash_01: $BD848
+ AP3_Knux_Spindash_02: $BDB0E
+ AP3_Knux_Spindash_03: $BDDD4
+ AP3_Knux_Spindash_04: $BE09A
+ AP3_Knux_Spindash_05: $BE360
+ AP3_Knux_Hold: $BE626
+ AP3_Knux_HoldMax: $BEA2E
+ AP3_Knux_Skid_00: $BEDFE
+ AP3_Knux_Skid_01: $BF1DE
+ AP3_Knux_SkidSTurn: $BF634
+ AP3_Knux_Hurt: $BFA50
+ AP3_Knux_Jump_00: $BFECC
+ AP3_Knux_Jump_01: $C01D6
+ AP3_Knux_Jump_02: $C04CC
+ AP3_Knux_Jump_03: $C07D8
+ AP3_Knux_Jump_04: $C0AD8
+ AP3_Knux_LedgeBack_00: $C0DEA
+ AP3_Knux_LedgeBack_01: $C121A
+ AP3_Knux_LedgeBack_02: $C1684
+ AP3_Knux_LedgeFwd_00: $C1A92
+ AP3_Knux_LedgeFwd_01: $C1DDE
+ AP3_Knux_LedgeFwd_02: $C2100
+ AP3_Knux_DrunkHurt_00: $C244E
+ AP3_Knux_DrunkHurt_01: $C2818
+ AP3_Knux_DrunkHurt_02: $C2BEA
+ AP3_Knux_DrunkHurt_03: $C2FD2
+ AP3_Knux_DrunkHurt_04: $C335E
+ AP3_Knux_DrunkHurt_05: $C36AC
+ AP3_Knux_Idle_00: $C3A5C
+ AP3_Knux_Idle_01: $C3E00
+ AP3_Knux_Idle_02: $C411E
+ AP3_Knux_Throw_00: $C4430
+ AP3_Knux_Throw_01: $C4878
+ AP3_Knux_Throw_02: $C4C7A
+ AP3_Knux_Throw_03: $C50C4
+ AP3_Knux_Spikey: $C544A
+ AP3_Knux_SpcGlide_Start_00: $C57AC
+ AP3_Knux_SpcGlide_Start_01: $C5B82
+ AP3_Knux_SpcGlide_00: $C5EC4
+ AP3_Knux_SpcGlide_01: $C6282
+ AP3_Knux_SpcGlide_Turn_00: $C6648
+ AP3_Knux_SpcGlide_Turn_01: $C69A6
+ AP3_Knux_SpcGlide_Turn_02: $C6CF6
+ AP3_Knux_SpcWClimb_Grab: $C7044
+ AP3_Knux_SpcWClimb_Idle: $C7556
+ AP3_Knux_SpcWClimb_Up_00: $C7996
+ AP3_Knux_SpcWClimb_Up_01: $C7DFA
+ AP3_Knux_SpcWClimb_Up_02: $C819A
+ AP3_Knux_SpcWClimb_Up_03: $C8590
+ AP3_Knux_SpcWClimb_Down_00: $C89FA
+ AP3_Knux_SpcWClimb_Down_01: $C8DEE
+ AP3_Knux_SpcWClimbup_00: $C91DE
+ AP3_KNux_SpcWClimbup_01: $C9618
+ AP3_KNux_SpcWClimbup_02: $C99C8
+ AP3_KNux_SpcWClimbup_03: $C9D82
+ AP3_KNux_SpcWClimbup_04: $CA184
+ AP3_KNux_SpcWClimbup_05: $CA4E8
+ AP3_Knux_SpcWClimb_Up2_00: $CA800
+ AP3_Knux_SpcWClimb_Up2_01: $CAB8A
+ AP3_Knux_IdleObj: $CAF92
+ ArtPtr32X_Charmy: $CB3B4
+ AP3_Charmy_Hurt2: $CB5A8
+ AP3_Charmy: $CB728
+ AP3_Charmy_Lookup: $CB880
+ AP3_Charmy_Crouch: $CB9DA
+ AP3_Charmy_Idle_00: $CBAEC
+ AP3_Charmy_Idle_01: $CBC30
+ AP3_Charmy_Idle_02: $CBD88
+ AP3_Charmy_LedgeFwd_00: $CBECE
+ AP3_Charmy_LedgeFwd_01: $CC028
+ AP3_Charmy_LedgeFwd_02: $CC182
+ AP3_Charmy_LedgeBack_00: $CC2DE
+ AP3_Charmy_LedgeBack_01: $CC43C
+ AP3_Charmy_LedgeBack_02: $CC5AA
+ AP3_Charmy_Walk0d_00: $CC6F8
+ AP3_Charmy_Walk0d_01: $CC864
+ AP3_Charmy_Walk0d_02: $CC9F4
+ AP3_Charmy_Walk0d_03: $CCB78
+ AP3_Charmy_Walk0d_04: $CCCEE
+ AP3_Charmy_Walk0d_05: $CCE84
+ AP3_Charmy_Walk135d_00: $CCFF8
+ AP3_Charmy_Walk135d_01: $CD166
+ AP3_Charmy_Walk135d_02: $CD2DE
+ AP3_Charmy_Walk135d_03: $CD45E
+ AP3_Charmy_Walk135d_04: $CD5DE
+ AP3_Charmy_Walk135d_05: $CD76C
+ AP3_Charmy_Walk90d_00: $CD8C0
+ AP3_Charmy_Walk90d_01: $CDA38
+ AP3_Charmy_Walk90d_02: $CDBB0
+ AP3_Charmy_Walk90d_03: $CDD30
+ AP3_Charmy_Walk90d_04: $CDEAA
+ AP3_Charmy_Walk90d_05: $CE03E
+ AP3_Charmy_Walk45d_00: $CE194
+ AP3_Charmy_Walk45d_01: $CE31E
+ AP3_Charmy_Walk45d_02: $CE49A
+ AP3_Charmy_Walk45d_03: $CE630
+ AP3_Charmy_Walk45d_04: $CE7C6
+ AP3_Charmy_Walk45d_05: $CE954
+ AP3_Charmy_Run0d_00: $CEAC2
+ AP3_Charmy_Run0d_01: $CEC1C
+ AP3_Charmy_Run0d_02: $CED6C
+ AP3_Charmy_Run45d_00: $CEEE6
+ AP3_Charmy_Run45d_01: $CF06A
+ AP3_Charmy_Run45d_02: $CF1DE
+ AP3_Charmy_Run90d_00: $CF382
+ AP3_Charmy_Run90d_01: $CF4C2
+ AP3_Charmy_Run90d_02: $CF5F4
+ AP3_Charmy_Run135d_00: $CF754
+ AP3_Charmy_Run135d_01: $CF8AA
+ AP3_Charmy_Run135d_02: $CF9F0
+ AP3_Charmy_FloatL_00: $CFB6E
+ AP3_Charmy_FloatL_01: $CFCBC
+ AP3_Charmy_FloatR_00: $CFDF4
+ AP3_Charmy_FloatR_01: $CFF46
+ AP3_Charmy_FloatU_00: $D0082
+ AP3_Charmy_FloatU_01: $D01D0
+ AP3_Charmy_Float_00: $D0308
+ AP3_Charmy_Float_01: $D0446
+ AP3_Charmy_Hurt: $D056E
+ AP3_Charmy_AirDash0d_00: $D06A6
+ AP3_Charmy_AirDash0d_01: $D07EA
+ AP3_Charmy_AirDash45d_00: $D0922
+ AP3_Charmy_AirDash45d_01: $D0A8A
+ AP3_Charmy_AirDash90d_00: $D0C06
+ AP3_Charmy_AirDash90d_01: $D0D48
+ AP3_Charmy_UnkFrame: $D0ED6
+ AP3_Charmy_AirDash135d_00: $D105C
+ AP3_Charmy_AirDash135d_01: $D11BC
+ AP3_Charmy_Skid: $D1326
+ AP3_Charmy_InAir_00: $D14A4
+ AP3_Charmy_InAir_01: $D15F4
+ AP3_CharmyUnk: $D173A
+ AP3_Charmy_Hold2_00: $D187E
+ AP3_Charmy_Hold2_01: $D19DC
+ AP3_Charmy_Grab0d_00: $D1B06
+ AP3_Charmy_Grab0d_01: $D1C34
+ AP3_Charmy_Grab0d_02: $D1D84
+ AP3_Charmy_Grab0d_03: $D1EC8
+ AP3_Charmy_Grab0d_04: $D1FFC
+ AP3_Charmy_Grab0d_05: $D2140
+ AP3_Charmy_Grab45d_00: $D2280
+ AP3_Charmy_Grab45d_01: $D23B8
+ AP3_Charmy_Grab45d_02: $D2504
+ AP3_Charmy_Grab45d_03: $D2664
+ AP3_Charmy_Grab45d_04: $D2796
+ AP3_Charmy_Grab45d_05: $D28E6
+ AP3_Charmy_Grab90d_00: $D2A3C
+ AP3_Charmy_Grab90d_01: $D2B6E
+ AP3_Charmy_Grab90d_02: $D2CC8
+ AP3_Charmy_Grab90d_03: $D2E0E
+ AP3_Charmy_Grab90d_04: $D2F40
+ AP3_Charmy_Grab90d_05: $D3082
+ AP3_Charmy_Grab135d_00: $D31C8
+ AP3_Charmy_Grab135d_01: $D32F8
+ AP3_Charmy_Grab135d_02: $D3444
+ AP3_Charmy_Grab135d_03: $D3588
+ AP3_Charmy_Grab135d_04: $D36B4
+ AP3_Charmy_Grab135d_05: $D37F0
+ AP3_Charmy_DrunkHurt_00: $D3928
+ AP3_Charmy_DrunkHurt_01: $D3A74
+ AP3_Charmy_DrunkHurt_02: $D3BE4
+ AP3_Charmy_DrunkHurt_03: $D3D38
+ AP3_Charmy_DrunkHurt_04: $D3E94
+ AP3_Charmy_DrunkHurt_05: $D3FFE
+ AP3_Charmy_DrunkHurt_06: $D415E
+ AP3_Charmy_DrunkHurt_07: $D42A2
+ AP3_Charmy_20D43F4: $D43F4
+ AP3_Charmy_20D4562: $D4562
+ AP3_Charmy_Hold: $D46C8
+ AP3_Charmy_Crouch2: $D4816
+ AP3_Charmy_Wings_00: $D4928
+ AP3_Charmy_Wings_01: $D4978
+ AP3_Charmy_Wings_02: $D49A4
+ AP3_Charmy_Wings_03: $D49F0
+ AP3_Charmy_Wings_04: $D4A16
+ AP3_Charmy_Wings_05: $D4A5C
+ AP3_Charmy_Wings_06: $D4A8A
+ AP3_Charmy_Wings_07: $D4ACC
+ AP3_Charmy_Wings_08: $D4AF2
+ AP3_Charmy_Wings_09: $D4B34
+ AP3_Charmy_Wings_0A: $D4B5A
+ AP3_Charmy_Wings_0B: $D4BA6
+ AP3_Charmy_Wings2_00: $D4BCA
+ AP3_Charmy_Wings2_01: $D4C36
+ AP3_Charmy_IdleObj: $D4C88
+ ArtPtr32X_Vector: $D4E44
+ AP3_Vector: $D5000
+ AP3_Vector_Body: $D54DA
+ AP3_Vector_Lookup_Legs: $D57A0
+ AP3_Vector_Lookup_Body: $D59C0
+ AP3_Vector_Crouch_00: $D5D02
+ AP3_Vector_Crouch_01: $D60FE
+ AP3_Vector_Walk0d_00: $D64DA
+ AP3_Vector_Walk0d_01: $D693C
+ AP3_Vector_Walk0d_02: $D6D74
+ AP3_Vector_Walk0d_03: $D71CA
+ AP3_Vector_Walk0d_04: $D7688
+ AP3_Vector_Walk0d_05: $D7AF6
+ AP3_Vector_Walk45d_00: $D800A
+ AP3_Vector_Walk45d_01: $D845E
+ AP3_Vector_Walk45d_02: $D888C
+ AP3_Vector_Walk45d_03: $D8CE4
+ AP3_Vector_Walk45d_04: $D9194
+ AP3_Vector_Walk45d_05: $D95D6
+ AP3_Vector_Walk90d_00: $D9AEC
+ AP3_Vector_Walk90d_01: $D9F70
+ AP3_Vector_Walk90d_02: $DA3C0
+ AP3_Vector_Walk90d_03: $DA820
+ AP3_Vector_Walk90d_04: $DACD2
+ AP3_Vector_Walk90d_05: $DB158
+ AP3_Vector_Walk135d_00: $DB64E
+ AP3_Vector_Walk135d_01: $DBAEC
+ AP3_Vector_Walk135d_02: $DBF02
+ AP3_Vector_Walk135d_03: $DC32A
+ AP3_Vector_Walk135d_04: $DC82C
+ AP3_Vector_Walk135d_05: $DCC7C
+ AP3_Vector_RunF0d_00: $DD128
+ AP3_Vector_RunF0d_01: $DD3A0
+ AP3_Vector_RunB0d_00: $DD648
+ AP3_Vector_RunB0d_01: $DD8C6
+ AP3_Vector_RunB0d_02: $DDB48
+ AP3_Vector_RunB0d_03: $DDD5E
+ AP3_Vector_RunF45d_00: $DDF96
+ AP3_Vector_RunF45d_01: $DE214
+ AP3_Vector_RunB45d_00: $DE4D6
+ AP3_Vector_RunB45d_01: $DE6E0
+ AP3_Vector_RunB45d_02: $DE93A
+ AP3_Vector_RunB45d_03: $DEB28
+ AP3_Vector_RunF90d_00: $DED50
+ AP3_Vector_RunF90d_01: $DEFB8
+ AP3_Vector_RunB90d_00: $DF25A
+ AP3_Vector_RunB90d_01: $DF4F4
+ AP3_Vector_RunB90d_02: $DF7A0
+ AP3_Vector_RunB90d_03: $DF9F0
+ AP3_Vector_RunF135d_00: $DFC70
+ AP3_Vector_RunF135d_01: $DFEB8
+ AP3_Vector_RunB135d_00: $E0146
+ AP3_Vector_RunB135d_01: $E036C
+ AP3_Vector_RunB135d_02: $E05D2
+ AP3_Vector_RunB135d_03: $E07C2
+ AP3_Vector_Jump_00: $E09E8
+ AP3_Vector_Jump_01: $E0ED6
+ AP3_Vector_Jump_02: $E13C6
+ AP3_Vector_Jump_03: $E18B4
+ AP3_Vector_Jump_04: $E1DA6
+ AP3_Vector_SpcJumpF_00: $E2272
+ AP3_Vector_SpcJumpF_01: $E260C
+ AP3_Vector_SpcJumpF_02: $E29A6
+ AP3_Vector_LedgeFwdBack_00: $E2D00
+ AP3_Vector_LedgeFwdBack_01: $E3208
+ AP3_Vector_LedgeFwdBack_02: $E3788
+ AP3_Vector_SpcThrowWU_00: $E3BF4
+ AP3_Vector_SpcThrowWU_01: $E4116
+ AP3_Vector_SpcThrowWU_02: $E45B0
+ AP3_Vector_SpcThrowWU_03: $E4A2E
+ AP3_Vector_Throw: $E4EB4
+ AP3_Vector_Hurt: $E537C
+ AP3_Vector_Idle_00: $E5884
+ AP3_Vector_Idle_01: $E5B9C
+ AP3_Vector_Idle_02: $E60F8
+ AP3_Vector_Idle_03: $E654E
+ AP3_Vector_DrunkHurt_00: $E6A44
+ AP3_Vector_DrunkHurt_01: $E6EC4
+ AP3_Vector_DrunkHurt_02: $E73B4
+ AP3_Vector_DrunkHurt_03: $E77CA
+ AP3_Vector_Skid_00: $E7BD4
+ AP3_Vector_Skid_01: $E812C
+ AP3_Vector_SkidSTurn: $E85B0
+ AP3_Vector_SpcHang: $E8A86
+ AP3_Vector_SpcClimbUpTop_00: $E8F94
+ AP3_Vector_SpcClimbUpTop_01: $E94D6
+ AP3_Vector_SpcClimbUpTop_02: $E9902
+ AP3_Vector_SpcClimbUpTop_03: $E9D9A
+ AP3_Vector_SpcClimbUp_00: $EA396
+ AP3_Vector_SpcClimbUp_01: $EA88C
+ AP3_Vector_SpcClimbUp_02: $EAD9A
+ AP3_Vector_SpcClimbUp_03: $EB318
+ AP3_Vector_Spindash_00: $EB7E0
+ AP3_Vector_Spindash_01: $EBC66
+ AP3_Vector_Spindash_02: $EC0DE
+ AP3_Vector_Spindash_03: $EC556
+ AP3_Vector_Spindash_04: $EC9CE
+ AP3_Vector_Spindash_05: $ECE46
+ AP3_Vector_Hold: $ED2BE
+ AP3_Vector_SpcWallHold2_00: $ED794
+ AP3_Vector_SpcWallHold2_01: $EDCA8
+ AP3_Vector_SpcAirDash_0d: $EE188
+ AP3_Vector_SpcAirDash_45d: $EE67C
+ AP3_Vector_SpcAirDash_90d: $EEBA0
+ AP3_Vector_SpcAirDash_135d: $EF154
+ AP3_Vector_SpcWallHold2_02: $EF67C
+ AP3_Vector_SpcWallHold2_03: $EFC0E
+ AP3_Vector_RunHead0d: $F01B8
+ AP3_Vector_RunHead45d: $F0428
+ AP3_Vector_RunHead90d: $F06A8
+ AP3_Vector_RunHead135d: $F0938
+ AP3_Vector_IdleObj: $F0BA0
+ ArtPtr32X_Bomb: $F1130
+ AP3_Bomb: $F11E8
+ AP3_Bomb_WalkRun0d_00: $F13C6
+ AP3_Bomb_WalkRun0d_01: $F15D4
+ AP3_Bomb_WalkRun0d_02: $F17C8
+ AP3_Bomb_WalkRun0d_03: $F19A0
+ AP3_Bomb_WalkRun0d_04: $F1BA8
+ AP3_Bomb_WalkRun0d_05: $F1D94
+ AP3_Bomb_WalkRun45d_00: $F1F78
+ AP3_Bomb_WalkRun45d_01: $F218A
+ AP3_Bomb_WalkRun45d_02: $F235E
+ AP3_Bomb_WalkRun45d_03: $F2552
+ AP3_Bomb_WalkRun45d_04: $F2768
+ AP3_Bomb_WalkRun45d_05: $F2944
+ AP3_Bomb_WalkRun90d_00: $F2B38
+ AP3_Bomb_WalkRun90d_01: $F2D4E
+ AP3_Bomb_WalkRun90d_02: $F2F4E
+ AP3_Bomb_WalkRun90d_03: $F3136
+ AP3_Bomb_WalkRun90d_04: $F3348
+ AP3_Bomb_WalkRun90d_05: $F3550
+ AP3_Bomb_WalkRun135d_00: $F3748
+ AP3_Bomb_WalkRun135d_01: $F3958
+ AP3_Bomb_WalkRun135d_02: $F3B3C
+ AP3_Bomb_WalkRun135d_03: $F3D36
+ AP3_Bomb_WalkRun135d_04: $F3F4E
+ AP3_Bomb_WalkRun135d_05: $F413E
+ AP3_Bomb_Backwards: $F4336
+ AP3_Bomb_Jump: $F4514
+ AP3_Bomb_Hold: $F46EA
+ AP3_Bomb_Skid: $F4942
+ AP3_Bomb_SkidSTurn: $F4B92
+ AP3_Bomb_Hurt: $F4E1E
+ AP3_Bomb_LedgeFwdBack_00: $F506A
+ AP3_Bomb_LedgeFwdBack_01: $F53B2
+ AP3_Bomb_SpcDieExplode_00: $F56D0
+ AP3_Bomb_SpcDieExplode_01: $F595E
+ AP3_Bomb_SpcDieExplode_02: $F5C10
+ AP3_Bomb_SpcDieExplode_03: $F6074
+ AP3_Bomb_LedgeFwdBack_02: $F636A
+ AP3_Bomb_Explosion_00: $F66B8
+ AP3_Bomb_Explosion_01: $F672C
+ AP3_Bomb_IdleObj: $F6796
+ ArtPtr32X_Heavy: $F6A18
+ AP3_Heavy: $F6ACC
+ AP3_Heavy_WalkRun0d_00: $F6EBA
+ AP3_Heavy_WalkRun0d_01: $F7246
+ AP3_Heavy_WalkRun0d_02: $F75BC
+ AP3_Heavy_WalkRun0d_03: $F7926
+ AP3_Heavy_WalkRun0d_04: $F7C90
+ AP3_Heavy_WalkRun0d_05: $F7FF6
+ AP3_Heavy_WalkRun0d_06: $F8370
+ AP3_Heavy_WalkRun0d_07: $F86DC
+ AP3_Heavy_WalkRun45d_00: $F8A50
+ AP3_Heavy_WalkRun45d_01: $F8DCE
+ AP3_Heavy_WalkRun45d_02: $F9166
+ AP3_Heavy_WalkRun45d_03: $F94F8
+ AP3_Heavy_WalkRun45d_04: $F987C
+ AP3_Heavy_WalkRun45d_05: $F9C22
+ AP3_Heavy_WalkRun45d_06: $F9FF0
+ AP3_Heavy_WalkRun45d_07: $FA390
+ AP3_Heavy_WalkRun90d_00: $FA700
+ AP3_Heavy_WalkRun90d_01: $FAA86
+ AP3_Heavy_WalkRun90d_02: $FADFC
+ AP3_Heavy_WalkRun90d_03: $FB15C
+ AP3_Heavy_WalkRun90d_04: $FB4C4
+ AP3_Heavy_WalkRun90d_05: $FB842
+ AP3_Heavy_WalkRun90d_06: $FBBC8
+ AP3_Heavy_WalkRun90d_07: $FBF3E
+ AP3_Heavy_WalkRun135d_00: $FC2A6
+ AP3_Heavy_WalkRun135d_01: $FC618
+ AP3_Heavy_WalkRun135d_02: $FC9AC
+ AP3_Heavy_WalkRun135d_03: $FCD4A
+ AP3_Heavy_WalkRun135d_04: $FD0D6
+ AP3_Heavy_WalkRun135d_05: $FD47E
+ AP3_Heavy_WalkRun135d_06: $FD854
+ AP3_Heavy_WalkRun135d_07: $FDBFA
+ AP3_Heavy_Jump: $FDF72
+ AP3_Heavy_Skid_00: $FE3E8
+ AP3_Heavy_Skid_01: $FE81E
+ AP3_Heavy_Throw2_00: $FEC1A
+ AP3_Heavy_Throw2_01: $FF07C
+ AP3_Heavy_Throw2_02: $FF5E0
+ AP3_Heavy_Throw2_03: $FF9C2
+ AP3_Heavy_LedgeFwdBack_00: $FFE8A
+ AP3_Heavy_LedgeFwdBack_01: $1003EC
+ AP3_Heavy_LedgeFwdBack_02: $100940
+ AP3_Heavy_IdleObj: $100E6C
+ ArtPtr32X_Espio: $101304
+ AP3_EspioH: $1014AC
+ AP3_Espio_LookupH: $10189A
+ AP3_Espio_CrouchH_00: $101CA4
+ AP3_Espio_CrouchH_01: $10207C
+ AP3_Espio_CrouchH_02: $102428
+ AP3_Espio_IdleHeadH_00: $1027D0
+ AP3_Espio_IdleHeadH_01: $1029C6
+ AP3_Espio_IdleHeadH_02: $102BC8
+ AP3_Espio_IdleHeadH_03: $102DB8
+ AP3_Espio_IdleHeadH_04: $102F9A
+ AP3_Espio_IdleLegsH_00: $10318A
+ AP3_Espio_IdleLegsH_01: $103356
+ AP3_Espio_IdleLegsH_02: $1034EC
+ AP3_EspioV: $103680
+ AP3_Espio_LookupV: $103AAC
+ AP3_Espio_CrouchV_00: $103EAE
+ AP3_Espio_CrouchV_01: $1042A4
+ AP3_Espio_IdleHeadV_00: $10466A
+ AP3_Espio_IdleHeadV_01: $104896
+ AP3_Espio_IdleHeadV_02: $104AC8
+ AP3_Espio_IdleHeadV_03: $104CE2
+ AP3_Espio_IdleHeadV_04: $104EC4
+ AP3_Espio_IdleLegsV_00: $1050BE
+ AP3_Espio_IdleLegsV_01: $1052DC
+ AP3_Espio_IdleLegsV_02: $1054D4
+ AP3_Espio_Walk0d_00: $1056B6
+ AP3_Espio_Walk0d_01: $105AB6
+ AP3_Espio_Walk0d_02: $105EA6
+ AP3_Espio_Walk0d_03: $106252
+ AP3_Espio_Walk0d_04: $106652
+ AP3_Espio_Walk0d_05: $106A7C
+ AP3_Espio_Walk45d_00: $106E52
+ AP3_Espio_Walk45d_01: $1072C4
+ AP3_Espio_Walk45d_02: $1076EC
+ AP3_Espio_Walk45d_03: $107AD0
+ AP3_Espio_Walk45d_04: $107F2A
+ AP3_Espio_Walk45d_05: $10837E
+ AP3_Espio_Walk90d_00: $108778
+ AP3_Espio_Walk90d_01: $108B9A
+ AP3_Espio_Walk90d_02: $108FA4
+ AP3_Espio_Walk90d_03: $109374
+ AP3_Espio_Walk90d_04: $10977C
+ AP3_Espio_Walk90d_05: $109BB8
+ AP3_Espio_Walk135d_00: $109FD4
+ AP3_Espio_Walk135d_01: $10A40A
+ AP3_Espio_Walk135d_02: $10A842
+ AP3_Espio_Walk135d_03: $10AC14
+ AP3_Espio_Walk135d_04: $10B038
+ AP3_Espio_Walk135d_05: $10B482
+ AP3_Espio_Run0d_00: $10B896
+ AP3_Espio_Run0d_01: $10BCE0
+ AP3_Espio_Run0d_02: $10C1A8
+ AP3_Espio_Run0d_03: $10C638
+ AP3_Espio_Run45d_00: $10CA88
+ AP3_Espio_Run45d_01: $10CEF4
+ AP3_Espio_Run45d_02: $10D3CE
+ AP3_Espio_Run45d_03: $10D874
+ AP3_Espio_Run90d_00: $10DC9E
+ AP3_Espio_Run90d_01: $10E154
+ AP3_Espio_Run90d_02: $10E652
+ AP3_Espio_Run90d_03: $10EB44
+ AP3_Espio_Run135d_00: $10EFA6
+ AP3_Espio_Run135d_01: $10F404
+ AP3_Espio_Run135d_02: $10F920
+ AP3_Espio_Run135d_03: $10FE06
+ AP3_Espio_JumpSpinH_00: $110272
+ AP3_Espio_JumpSpinH_01: $110708
+ AP3_Espio_JumpSpinH_02: $110B70
+ AP3_Espio_JumpSpinV_00: $110FAC
+ AP3_Espio_JumpSpinV_01: $111450
+ AP3_Espio_JumpSpinV_02: $1118D8
+ AP3_Espio_Spindash_00: $111D86
+ AP3_Espio_Spindash_01: $1121C4
+ AP3_Espio_Spindash_02: $112626
+ AP3_Espio_Spindash_03: $112A94
+ AP3_Espio_Spindash_04: $112EBC
+ AP3_Espio_Spindash_05: $1132F4
+ AP3_Espio_LedgeBackH_00: $1136EC
+ AP3_Espio_LedgeBackH_01: $113B1A
+ AP3_Espio_LedgeBackH_02: $113F42
+ AP3_Espio_LedgeFwdH_00: $114354
+ AP3_Espio_LedgeFwdH_01: $1147A4
+ AP3_Espio_LedgeFwdH_02: $114BEA
+ AP3_Espio_LedgeFwdBackV_00: $114FE8
+ AP3_Espio_LedgeFwdBackV_01: $11540A
+ AP3_Espio_LedgeFwdBackV_02: $11584E
+ AP3_Espio_HoldH: $115C9E
+ AP3_Espio_HoldHMax: $11604C
+ AP3_Espio_HoldV: $1163FA
+ AP3_Espio_HoldVMax: $1167D6
+ AP3_Espio_Hurt: $116B94
+ AP3_Espio_WeirdTurnH: $116FAE
+ AP3_Espio_WeirdTurnV: $1173CC
+ AP3_Espio_SkidH_00: $1177D0
+ AP3_Espio_SkidH_01: $117BE6
+ AP3_Espio_SkidH_STurn: $117FD4
+ AP3_Espio_SkidV_00: $118408
+ AP3_Espio_SkidV_01: $11884C
+ AP3_Espio_SkidV_STurn: $118C74
+ AP3_Espio_DrunkHurt_00: $1190B8
+ AP3_Espio_DrunkHurt_01: $11955E
+ AP3_Espio_DrunkHurt_02: $119A28
+ AP3_Espio_DrunkHurt_03: $119EEA
+ AP3_Espio_DrunkHurt_04: $11A394
+ AP3_Espio_DrunkHurt_05: $11A80E
+ AP3_Espio_IdleObj: $11AC3E
+ ArtPtr32X_Mighty_ArmHandRing: $11B088
+ AP3_MightyArms_Idle_00: $11B1D8
+ AP3_MightyArms_Idle_01: $11B260
+ AP3_MightyArms_Idle_02: $11B292
+ AP3_MightyArms_Walk0d_00: $11B31A
+ AP3_MightyArms_Walk0d_01: $11B42C
+ AP3_MightyArms_Walk0d_02: $11B528
+ AP3_MightyArms_Walk0d_03: $11B62A
+ AP3_MightyArms_Walk0d_04: $11B722
+ AP3_MightyArms_Walk0d_05: $11B804
+ AP3_MightyArms_Walk45d_00: $11B8F0
+ AP3_MightyArms_Walk45d_01: $11BA08
+ AP3_MightyArms_Walk45d_02: $11BAFA
+ AP3_MightyArms_Walk45d_03: $11BBF0
+ AP3_MightyArms_Walk45d_04: $11BD0C
+ AP3_MightyArms_Walk45d_05: $11BDFC
+ AP3_MightyArms_Walk90d_00: $11BEF0
+ AP3_MightyArms_Walk90d_01: $11C01E
+ AP3_MightyArms_Walk90d_02: $11C132
+ AP3_MightyArms_Walk90d_03: $11C22C
+ AP3_MightyArms_Walk90d_04: $11C350
+ AP3_MightyArms_Walk90d_05: $11C432
+ AP3_MightyArms_Walk135d_00: $11C532
+ AP3_MightyArms_Walk135d_01: $11C63A
+ AP3_MightyArms_Walk135d_02: $11C742
+ AP3_MightyArms_Walk135d_03: $11C834
+ AP3_MightyArms_Walk135d_04: $11C938
+ AP3_MightyArms_Walk135d_05: $11CA1C
+ AP3_MightyArms_Run0d: $11CB0C
+ AP3_MightyArms_Run45d: $11CC06
+ AP3_MightyArms_Run90d: $11CD04
+ AP3_MightyArms_Run135d: $11CE1C
+ AP3_MightyArm_Tug_W: $11CF16
+ AP3_MightyArm_Tug_WSW: $11CF90
+ AP3_MightyArm_Tug_SW: $11D038
+ AP3_MightyArm_Tug_SSW: $11D110
+ AP3_MightyArm_Tug_S: $11D21A
+ AP3_MightyArm_Tug_SSE: $11D340
+ AP3_MightyArm_Tug_SE: $11D456
+ AP3_MightyArm_Tug_ESE: $11D566
+ AP3_MightyArm_Tug_E: $11D670
+ AP3_MightyArm_Tug_ENE: $11D770
+ AP3_MightyArm_Tug_NE: $11D854
+ AP3_MightyArm_Tug_NNE: $11D940
+ AP3_MightyArm_Tug_N: $11DA22
+ AP3_MightyArm_Tug_NNW: $11DAFC
+ AP3_MightyArm_Tug_NW: $11DC04
+ AP3_MightyArm_Tug_WNW: $11DD02
+ AP3_MightyArm_Hold0d_00: $11DDAE
+ AP3_MightyArm_Hold0d_01: $11DE36
+ AP3_MightyArm_Hold0d_02: $11DEC8
+ AP3_MightyArm_Hold45d_00: $11DF50
+ AP3_MightyArm_Hold45d_01: $11E008
+ AP3_MightyArm_Hold45d_02: $11E0B0
+ AP3_MightyArm_Hold90d_00: $11E160
+ AP3_MightyArm_Hold90d_01: $11E218
+ AP3_MightyArm_Hold90d_02: $11E2D4
+ AP3_MightyArm_Hold135d_00: $11E38E
+ AP3_MightyArm_Hold135d_01: $11E42C
+ AP3_MightyArm_Hold135d_02: $11E4CE
+ AP3_MightyArm_IdleObj: $11E578
+ AP3_MightyArm_211E67C: $11E67C
+ AP3_MightyArm_211E750: $11E750
+ AP3_MightyArm_LedgeFwd_00: $11E81A
+ AP3_MightyArm_LedgeFwd_01: $11E926
+ AP3_MightyArm_LedgeFwd_02: $11E9C2
+ AP3_MightyArm_LedgeBack_00: $11EAC4
+ AP3_MightyArm_LedgeBack_01: $11EB5E
+ AP3_MightyArm_LedgeBack_02: $11EC00
+ AP3_MightyArm_211ED04: $11ED04
+ AP3_MightyArm_211EDF0: $11EDF0
+ AP3_MightyArm_211EE8E: $11EE8E
+ AP3_MightyArm_Crouch: $11EF58
+ AP3_MightyArm_SpcWallJump: $11F054
+ AP3_MightyArm_211F136: $11F136
+ AP3_MightyArm_211F21C: $11F21C
+ AP3_MightyArm_211F316: $11F316
+ AP3_MightyArm_211F404: $11F404
+ AP3_MightyArm_211F4E2: $11F4E2
+ AP3_MightyArm_211F5C2: $11F5C2
+ AP3_MightyArm_211F6A4: $11F6A4
+ ArtPtr32X_Wechnia_ArmHandRing: $11F7A4
+ ArtPtr32X_Knuckles_ArmHandRing: $11F7A8
+ AP3_KnuxArm_Idle_00: $11F838
+ AP3_KnuxArm_Idle_01: $11F92A
+ AP3_KnuxArm_Idle_02: $11FA06
+ AP3_KnuxArm_Idle_03: $11FABC
+ AP3_KnuxArm_Tug_E: $11FB36
+ AP3_KnuxArm_Tug_ESE: $11FC3C
+ AP3_KnuxArm_Tug_SE: $11FD4C
+ AP3_KnuxArm_Tug_SSE: $11FE6E
+ AP3_KnuxArm_Tug_S: $11FFAA
+ AP3_KnuxArm_Tug_SSW: $1200F8
+ AP3_KnuxArm_Tug_SW: $120244
+ AP3_KnuxArm_Tug_WSW: $120366
+ AP3_KnuxArm_Tug_W: $120446
+ AP3_KnuxArm_Tug_WNW: $1204F2
+ AP3_KnuxArm_Tug_NW: $1205EE
+ AP3_KnuxArm_Tug_NNW: $12071E
+ AP3_KnuxArm_Tug_N: $12084A
+ AP3_KnuxArm_Tug_NNE: $120968
+ AP3_KnuxArm_Tug_NE: $120A9A
+ AP3_KnuxArm_Tug_ENE: $120BD4
+ AP3_KnuxArm: $120CDA
+ AP3_KnuxArm_Walk_00: $120E0C
+ AP3_KnuxArm_Walk_01: $120F3E
+ AP3_KnuxArm_Walk_02: $121060
+ AP3_KnuxArm_Walk_03: $12116E
+ AP3_KnuxArm_Walk_04: $12129C
+ AP3_KnuxArm_Run45d: $1213D2
+ AP3_KnuxArm_Run90d: $1214C8
+ AP3_KnuxArm_Run135d: $1215C6
+ AP3_KnuxArm_Run0d: $1216D6
+ AP3_KnuxArm_Hold0d: $1217D4
+ AP3_KnuxArm_Hold45d: $12186A
+ AP3_KnuxArm_Hold90d: $121926
+ AP3_KnuxArm_Hold135d: $1219F0
+ ArtPtr32X_Charmy_ArmHandRing: $121AA4
+ AP3_CharmyArm: $121BD0
+ AP3_CharmyArm_Crouch: $121CA4
+ AP3_CharmyArm_InAir: $121D62
+ AP3_CharmyArm_Idle_00: $121E3E
+ AP3_CharmyArm_Idle_01: $121F14
+ AP3_CharmyArm_Idle_02: $121FF8
+ AP3_CharmyArm_LedgeFront_00: $1220C4
+ AP3_CharmyArm_LedgeFront_01: $12215E
+ AP3_CharmyArm_LedgeFront_02: $122204
+ AP3_CharmyArm_LedgeBack_00: $1222D4
+ AP3_CharmyArm_LedgeBack_01: $12235A
+ AP3_CharmyArm_LedgeBack_02: $122400
+ AP3_CharmyArm_Walk0d_00: $1224D8
+ AP3_CharmyArm_Walk0d_01: $122596
+ AP3_CharmyArm_Walk0d_02: $12266E
+ AP3_CharmyArm_Walk0d_03: $122756
+ AP3_CharmyArm_Walk0d_04: $1227FE
+ AP3_CharmyArm_Walk0d_05: $1228D8
+ AP3_CharmyArm_Walk45d_00: $1229B4
+ AP3_CharmyArm_Walk45d_01: $122A4E
+ AP3_CharmyArm_Walk45d_02: $122B28
+ AP3_CharmyArm_Walk45d_03: $122C02
+ AP3_CharmyArm_Walk45d_04: $122CC0
+ AP3_CharmyArm_Walk45d_05: $122D8E
+ AP3_CharmyArm_Walk90d_00: $122E72
+ AP3_CharmyArm_Walk90d_01: $122F36
+ AP3_CharmyArm_Walk90d_02: $12301E
+ AP3_CharmyArm_Walk90d_03: $1230F8
+ AP3_CharmyArm_Walk90d_04: $1231C4
+ AP3_CharmyArm_Walk90d_05: $1232A6
+ AP3_CharmyArm_Walk135d_00: $123392
+ AP3_CharmyArm_Walk135d_01: $12344C
+ AP3_CharmyArm_Walk135d_02: $12351E
+ AP3_CharmyArm_Walk135d_03: $1235F2
+ AP3_CharmyArm_Walk135d_04: $1236A8
+ AP3_CharmyArm_Walk135d_05: $123788
+ AP3_CharmyArm_Run0d: $12385E
+ AP3_CharmyArm_Run45d: $123950
+ AP3_CharmyArm_Run90d: $123A2A
+ AP3_CharmyArm_Run135d: $123B18
+ AP3_CharmyArm_Float: $123C0A
+ AP3_CharmyArm_2123CE6: $123CE6
+ AP3_CharmyArm_AirDash0d: $123DB6
+ AP3_CharmyArm_AirDash45d: $123E8A
+ AP3_CharmyArm_2123F6A: $123F6A
+ AP3_CharmyArm_AirDash90d: $124046
+ AP3_CharmyArm_212413A: $12413A
+ AP3_CharmyArm_2124214: $124214
+ AP3_CharmyArm_21242E6: $1242E6
+ AP3_CharmyArm_21243B0: $1243B0
+ AP3_CharmyArm_2124458: $124458
+ AP3_CharmyArm_21244FC: $1244FC
+ AP3_CharmyArm_21245BE: $1245BE
+ AP3_CharmyArm_212465A: $12465A
+ AP3_CharmyArm_21246DC: $1246DC
+ AP3_CharmyArm_2124766: $124766
+ AP3_CharmyArm_2124842: $124842
+ AP3_CharmyArm_2124904: $124904
+ AP3_CharmyArm_21249D0: $1249D0
+ AP3_CharmyArm_Tug_W: $124A9E
+ AP3_CharmyArm_Tug_WSW: $124AF2
+ AP3_CharmyArm_Tug_SW: $124B7E
+ AP3_CharmyArm_Tug_SSW: $124C32
+ AP3_CharmyArm_Tug_S: $124D16
+ AP3_CharmyArm_Tug_SSE: $124E04
+ AP3_CharmyArm_Tug_SE: $124EEA
+ AP3_CharmyArm_Tug_ESE: $124FC6
+ AP3_CharmyArm_Tug_E: $1250A2
+ AP3_CharmyArm_Tug_ENE: $125188
+ AP3_CharmyArm_Tug_NE: $12524E
+ AP3_CharmyArm_Tug_NNE: $12531A
+ AP3_CharmyArm_Tug_N: $1253DC
+ AP3_CharmyArm_Tug_NNW: $12547A
+ AP3_CharmyArm_Tug_NW: $12554E
+ AP3_CharmyArm_Tug_WNW: $125626
+ ArtPtr32X_Vector_ArmHandRing: $1256B0
+ AP3_VectorArm_Tug_E: $1257A0
+ AP3_VectorArm_Tug_ESE: $1258C4
+ AP3_VectorArm_Tug_SE: $1259F2
+ AP3_VectorArm_Tug_SSE: $125B40
+ AP3_VectorArm_Tug_S: $125C9E
+ AP3_VectorArm_Tug_SSW: $125E18
+ AP3_VectorArm_Tug_SW: $125F76
+ AP3_VectorArm_Tug_WSW: $1260B4
+ AP3_VectorArm_Tug_W: $1261B8
+ AP3_VectorArm_Tug_WNW: $126262
+ AP3_VectorArm_Tug_NW: $126360
+ AP3_VectorArm_Tug_NNW: $1264AA
+ AP3_VectorArm_Tug_N: $1265F0
+ AP3_VectorArm_Tug_NNE: $12671E
+ AP3_VectorArm_Tug_NE: $12686E
+ AP3_VectorArm_Tug_ENE: $1269B4
+ AP3_VectorArm_Unk0d_00: $126AEC
+ AP3_VectorArm_Unk0d_01: $126B76
+ AP3_VectorArm_Unk45d_00: $126C1A
+ AP3_VectorArm_Unk45d_01: $126CCC
+ AP3_VectorArm_Unk90d_00: $126D7E
+ AP3_VectorArm_Unk90d_01: $126E2C
+ AP3_VectorArm_Unk135d_00: $126EDE
+ AP3_VectorArm_Unk135d_01: $126F70
+ AP3_VectorArm_Grab0d: $127010
+ AP3_VectorArm_Grab45d: $127114
+ AP3_VectorArm_Grab90d: $12720E
+ AP3_VectorArm_Grab135d: $1272EE
+ AP3_VectorArm_Run0d: $1273BE
+ AP3_VectorArm_Run45d: $1274F8
+ AP3_VectorArm_Run90d: $12764A
+ AP3_VectorArm_Run135d: $1277A6
+ AP3_VectorArm_Walk0d_00: $1278D8
+ AP3_VectorArm_Walk0d_01: $1279EC
+ AP3_VectorArm_Walk0d_02: $127ACA
+ AP3_VectorArm_Walk0d_03: $127BEA
+ AP3_VectorArm_Walk0d_04: $127D4A
+ AP3_VectorArm_Walk0d_05: $127E88
+ AP3_VectorArm_Walk45d_00: $127FA0
+ AP3_VectorArm_Walk45d_01: $1280BE
+ AP3_VectorArm_Walk45d_02: $128198
+ AP3_VectorArm_Walk45d_03: $1282C4
+ AP3_VectorArm_Walk45d_04: $1283D6
+ AP3_VectorArm_Walk45d_05: $1284D0
+ AP3_VectorArm_Walk90d_00: $1285A8
+ AP3_VectorArm_Walk90d_01: $1286AA
+ AP3_VectorArm_Walk90d_02: $12878A
+ AP3_VectorArm_Walk90d_03: $1288C6
+ AP3_VectorArm_Walk90d_04: $128A38
+ AP3_VectorArm_Walk90d_05: $128B56
+ AP3_VectorArm_Walk135d_00: $128C48
+ AP3_VectorArm_Walk135d_01: $128D5E
+ AP3_VectorArm_Walk135d_02: $128E4A
+ AP3_VectorArm_Walk135d_03: $128F6E
+ AP3_VectorArm_Walk135d_04: $1290CE
+ AP3_VectorArm_Walk135d_05: $1291EA
+ AP3_VectorArm: $1292DA
+ ArtPtr32X_Bomb_ArmHandRing: $1293E0
+ AP3_BombArm_Tug_SW: $129438
+ AP3_BombArm_Tug_WSW: $12952A
+ AP3_BombArm_Tug_W: $1295EA
+ AP3_BombArm_Tug_WNW: $129662
+ AP3_BombArm_Tug_NW: $12971A
+ AP3_BombArm_Tug_NNW: $129816
+ AP3_BombArm_Tug_N: $129928
+ AP3_BombArm_Tug_NNE: $1299F4
+ AP3_BombArm_Tug_NE: $129B04
+ AP3_BombArm_Tug_ENE: $129C0A
+ AP3_BombArm_Tug_E: $129CFC
+ AP3_BombArm_Tug_ESE: $129DF2
+ AP3_BombArm_Tug_SE: $129F04
+ AP3_BombArm_Tug_SSE: $12A018
+ AP3_BombArm_Tug_S: $12A122
+ AP3_BombArm_Tug_SSW: $12A24E
+ AP3_BombArm_Idle: $12A368
+ AP3_BombArm_WalkRun_00: $12A480
+ AP3_BombArm_WalkRun_01: $12A5A0
+ AP3_BombArm_WalkRun_02: $12A6AA
+ AP3_BombArm_WalkRun_03: $12A7A4
+ AP3_BombArm_WalkRun_04: $12A8C0
+ ArtPtr32X_Heavy_ArmHandRing: $12A9E8
+ AP3_HeavyArm_Tug_S: $12AA28
+ AP3_HeavyArm_Tug_SSE: $12ABE8
+ AP3_HeavyArm_Tug_SE: $12ADA8
+ AP3_HeavyArm_Tug_ESE: $12AF2C
+ AP3_HeavyArm_Tug_E: $12B0AE
+ AP3_HeavyArm_Tug_ENE: $12B218
+ AP3_HeavyArm_Tug_NE: $12B38A
+ AP3_HeavyArm_Tug_NNE: $12B514
+ AP3_HeavyArm_WalkRun0d: $12B6B6
+ AP3_HeavyArm_WalkRun45d: $12B826
+ AP3_HeavyArm_WalkRun90d: $12B9A8
+ AP3_HeavyArm_WalkRun135d: $12BB4C
+ AP3_HeavyArm_Grab0d: $12BCCC
+ AP3_HeavyArm_Grab45d: $12BDF4
+ AP3_HeavyArm_Grab90d: $12BF18
+ AP3_HeavyArm_Grab135d: $12C028
+ ArtPtr32X_Espio_ArmHandRing: $12C120
+ AP3_EspioArm_Tug_W: $12C210
+ AP3_EspioArm_Tug_WSW: $12C28A
+ AP3_EspioArm_Tug_SW: $12C336
+ AP3_EspioArm_Tug_SSW: $12C412
+ AP3_EspioArm_Tug_S: $12C51C
+ AP3_EspioArm_Tug_SSE: $12C642
+ AP3_EspioArm_Tug_SE: $12C75A
+ AP3_EspioArm_Tug_ESE: $12C86A
+ AP3_EspioArm_Tug_E: $12C976
+ AP3_EspioArm_Tug_ENE: $12CA76
+ AP3_EspioArm_Tug_NE: $12CB68
+ AP3_EspioArm_Tug_NNE: $12CC68
+ AP3_EspioArm_Tug_N: $12CD66
+ AP3_EspioArm_Tug_NNW: $12CE60
+ AP3_EspioArm_Tug_NW: $12CF80
+ AP3_EspioArm_Tug_WNW: $12D08A
+ AP3_EspioArm_Grab0d_00: $12D13A
+ AP3_EspioArm_Grab0d_01: $12D1CE
+ AP3_EspioArm_Grab0d_02: $12D264
+ AP3_EspioArm_Grab45d_00: $12D2F6
+ AP3_EspioArm_Grab45d_01: $12D3B6
+ AP3_EspioArm_Grab45d_02: $12D464
+ AP3_EspioArm_Grab90d_00: $12D516
+ AP3_EspioArm_Grab90d_01: $12D5DC
+ AP3_EspioArm_Grab90d_02: $12D6A2
+ AP3_EspioArm_Grab135d_00: $12D76C
+ AP3_EspioArm_Grab135d_01: $12D812
+ AP3_EspioArm_Grab135d_02: $12D8B8
+ AP3_EspioArm_Walk0d_00: $12D966
+ AP3_EspioArm_Walk0d_01: $12DA80
+ AP3_EspioArm_Walk0d_02: $12DB6A
+ AP3_EspioArm_Walk0d_03: $12DC66
+ AP3_EspioArm_Walk0d_04: $12DD5C
+ AP3_EspioArm_Walk0d_05: $12DE62
+ AP3_EspioArm_Walk45d_00: $12DF5E
+ AP3_EspioArm_Walk45d_01: $12E06A
+ AP3_EspioArm_Walk45d_02: $12E168
+ AP3_EspioArm_Walk45d_03: $12E24A
+ AP3_EspioArm_Walk45d_04: $12E33C
+ AP3_EspioArm_Walk45d_05: $12E466
+ AP3_EspioArm_Walk90d_00: $12E55C
+ AP3_EspioArm_Walk90d_01: $12E67A
+ AP3_EspioArm_Walk90d_02: $12E788
+ AP3_EspioArm_Walk90d_03: $12E87A
+ AP3_EspioArm_Walk90d_04: $12E970
+ AP3_EspioArm_Walk90d_05: $12EAAC
+ AP3_EspioArm_Walk135d_00: $12EBC2
+ AP3_EspioArm_Walk135d_01: $12ECCC
+ AP3_EspioArm_Walk135d_02: $12EDF6
+ AP3_EspioArm_Walk135d_03: $12EED8
+ AP3_EspioArm_Walk135d_04: $12EFD8
+ AP3_EspioArm_Walk135d_05: $12F0EC
+ AP3_EspioArm_212F1FE: $12F1FE
+ AP3_EspioArm_212F320: $12F320
+ AP3_EspioArm_212F438: $12F438
+ AP3_EspioArm_212F522: $12F522
+ AP3_EspioArm_Run0d: $12F606
+ AP3_EspioArm_Run45d: $12F6EE
+ AP3_EspioArm_Run90d: $12F7EA
+ AP3_EspioArm_Run135d: $12F8D2
+ ArtPtr32X_LvlGlbl: $12F9D8
+ AP3_LvlGbl_SpringH_Coil: $12FA40
+ AP3_LvlGbl_SpringH_CoilX: $12FA94
+ AP3_LvlGbl_SpringD_Coil: $12FB3A
+ AP3_LvlGbl_SpringD_CoilX: $12FBE4
+ AP3_LvlGbl_SpringV_Coil: $12FCEE
+ AP3_LvlGbl_SpringV_CoilX: $12FD38
+ AP3_LvlGbl_SpringB_BH: $12FDB2
+ AP3_LvlGbl_SpringB_RH: $12FE72
+ AP3_LvlGbl_SpringB_YH: $12FF32
+ AP3_LvlGbl_SpringB_BV: $12FFF2
+ AP3_LvlGbl_SpringB_RV: $13008E
+ AP3_LvlGbl_SpringB_YV: $13012A
+ AP3_LvlGbl_SpringB_BD: $1301C6
+ AP3_LvlGbl_SpringB_RD: $130294
+ AP3_LvlGbl_SpringB_YD: $130386
+ AP3_LvlGbl_SpikeV: $130454
+ AP3_LvlGbl_SpikeH: $1305FA
+ AP3_LvlGbl_BallR_00: $130744
+ AP3_LvlGbl_BallR_01: $130750
+ AP3_LvlGbl_BallR_02: $13075C
+ AP3_LvlGbl_BallR_03: $130768
+ AP3_LvlGbl_BallY_00: $130774
+ AP3_LvlGbl_BallY_01: $130780
+ AP3_LvlGbl_BallY_02: $13078C
+ AP3_LvlGbl_BallY_03: $130798
+ AP3_LvlGbl_Banner: $1307A4
+ ArtPtr32X_MonitorAndStatusIcons: $1307B0
+ AP3_Monitor_Chassis: $130820
+ AP3_Monitor_Broken: $130A78
+ AP3_Monitor_Fuzz_00: $130BD6
+ AP3_Monitor_Fuzz_01: $130C14
+ AP3_Monitor_Fuzz_02: $130C76
+ AP3_Monitor_Fuzz_03: $130D16
+ AP3_Monitor_RingIcon: $130DB2
+ AP3_Monitor_CombiRIcon: $130E46
+ AP3_Monitor_ShoeIcon: $130EDA
+ AP3_Monitor_ShieldIcon: $130F8A
+ AP3_Monitor_InvinIcon: $13101E
+ AP3_Monitor_SwapIcon: $1310B2
+ AP3_Monitor_HGlassSIcon: $131146
+ AP3_Monitor_HGlassLIcon: $1311F6
+ AP3_Monitor_GrowIcon: $1312A6
+ AP3_Monitor_ShrinkIcon: $13133A
+ AP3_Monitor_FlipIcon_00: $1313EA
+ AP3_Monitor_FlipIcon_01: $131448
+ AP3_Monitor_FlipIcon_02: $13146A
+ AP3_Monitor_LvlSelIcon: $1314C8
+ AP3_Monitor_CharSelIcon: $131578
+ AP3_Monitor_CharMightyIcon: $13160C
+ AP3_Monitor_CharKnuxIcon: $1316BC
+ AP3_Monitor_CharCharmyIcon: $13176C
+ AP3_Monitor_CharVectorIcon: $131800
+ AP3_Monitor_CharBombIcon: $1318B0
+ AP3_Monitor_CharHeavyIcon: $131960
+ AP3_Monitor_CharEspioIcon: $1319D8
+ ArtPtr32X_HUD_Lvl: $131A88
+ AP3_HUD_Pts: $131B8C
+ AP3_HUD_Rings: $131CCA
+ AP3_HUD_RingsR: $131DDA
+ AP3_HUD_Time: $131F24
+ AP3_HUD_TimeR: $132002
+ AP3_HUD_Pause: $13210E
+ AP3_HUD_Exclame: $132226
+ AP3_HUD_Limits: $132232
+ AP3_HUD_LimitsR: $132360
+ AP3_HUD_Atk: $1324D0
+ AP3_HUD_AtkR: $1324DC
+ AP3_HUD_Hurry: $1324E8
+ AP3_HUD_Up: $1324F4
+ AP3_HUD_Slash: $132578
+ AP3_HUD_Gtr: $1325B4
+ AP3_HUD_D0: $1325C0
+ AP3_HUD_D1: $132606
+ AP3_HUD_D2: $132638
+ AP3_HUD_D3: $132676
+ AP3_HUD_D4: $1326B4
+ AP3_HUD_D5: $1326EE
+ AP3_HUD_D6: $13272A
+ AP3_HUD_D7: $132768
+ AP3_HUD_D8: $1327A0
+ AP3_HUD_D9: $1327E4
+ AP3_HUD_Min: $132822
+ AP3_HUD_Sec: $13283A
+ AP3_HUD_DB0: $13285A
+ AP3_HUD_DB1: $1328BC
+ AP3_HUD_DB2: $132900
+ AP3_HUD_DB3: $132950
+ AP3_HUD_DB4: $1329A2
+ AP3_HUD_DB5: $1329F4
+ AP3_HUD_DB6: $132A40
+ AP3_HUD_DB7: $132A96
+ AP3_HUD_DB8: $132ADE
+ AP3_HUD_DB9: $132B3E
+ AP3_HUD_Score: $132B94
+ AP3_HUD_Hold: $132CA8
+ AP3_HUD_ArrowB_DL: $132D9A
+ AP3_HUD_ArrowB_DR: $132DA6
+ AP3_HUD_ArrowB_UL: $132DB2
+ AP3_HUD_ArrowB_UR: $132DBE
+ AP3_HUD_ArrowR_DL: $132DCA
+ AP3_HUD_ArrowR_DR: $132DD6
+ AP3_HUD_ArrowR_UL: $132DE2
+ AP3_HUD_ArrowR_UR: $132DEE
+ AP3_HUD_DR0: $132DFA
+ AP3_HUD_DR1: $132E5A
+ AP3_HUD_DR2: $132E9A
+ AP3_HUD_DR3: $132EEC
+ AP3_HUD_DR4: $132F3E
+ AP3_HUD_DR5: $132F8A
+ AP3_HUD_DR6: $132FD8
+ AP3_HUD_DR7: $13302C
+ AP3_HUD_DR8: $133074
+ AP3_HUD_DR9: $1330D2
+ AP3_HUD_Neg: $133126
+ AP3_HUD_ScoreR: $13313E
+ AP3_HUD_MinR: $13328E
+ AP3_HUD_SecR: $1332AA
+ AP3_HUD_Level: $1332D4
+ AP3_HUD_NegR: $1333E8
+ AP3_HUD_Neg2: $133406
+ AP3_HUD_Demo: $133422
+ ArtPtr32X_BBZ_Enemies1: $133554
+ AP3_BBZEns1_Happa_FaceF: $1335A0
+ AP3_BBZEns1_Happa_FaceL: $13370C
+ AP3_BBZEns1_Happa_FaceR: $133878
+ AP3_BBZEns1_Happa_FaceZap: $1339E4
+ AP3_BBZEns1_Happa_BodyFlwr_00: $133BF6
+ AP3_BBZEns1_Happa_BodyFlwr_01: $133CFC
+ AP3_BBZEns1_Happa_Base_00: $133DC6
+ AP3_BBZEns1_Happa_Base_01: $133EBE
+ AP3_BBZEns1_Badnik3_Top: $133FB6
+ AP3_BBZEns1_Badnik3_Face: $1341BA
+ AP3_BBZEns1_Badnik2X_Face: $134272
+ AP3_BBZEns1_Badnik2X_Middle: $1343E6
+ AP3_BBZEns1_Badnik2X_Back: $13448A
+ AP3_BBZEns1_Badnik2_Short: $13459E
+ AP3_BBZEns1_Badnik2_Front: $13476A
+ AP3_BBZEns1_Zakku_Spike: $1348A4
+ AP3_BBZEns1_Zakku_Head: $134940
+ AP3_BBZEns1_Zakku_SpikeH: $134AE8
+ ArtPtr32X_MS_Intro1: $134BDC
+ AP3_TitleScreen_MS_Front: $134BE4
+ AP3_TitleScreen_MS_Front_Thrust: $1357DE
+ ArtPtr32X_SSZ_Mosqui: $135B50
+ AP3_SSZ_Mosqui_Flap_00: $135B6C
+ AP3_SSZ_Mosqui_Flap_01: $135C3C
+ AP3_SSZ_Mosqui_Flap_02: $135D7C
+ AP3_SSZ_Mosqui_Fall_00: $135E80
+ AP3_SSZ_Mosqui_Fall_01: $135FA8
+ AP3_SSZ_Mosqui_Parts_00: $1360C2
+ AP3_SSZ_Mosqui_Parts_01: $1360F0
+ ArtPtr32X_SSZ_Spikeball: $136118
+ AP3_SSZ_Spikeball_Spike: $136124
+ AP3_SSZ_Spikeball_Base: $13666A
+ AP3_SSZ_Spikeball_Ball: $1367F0
+ ArtPtr32X_BBZ_Boss: $13683C
+ AP3_BBZBoss_Body: $1368FC
+ AP3_BBZBoss_Vent_00: $13753E
+ AP3_BBZBoss_Vent_01: $137562
+ AP3_BBZBoss_Vent_02: $1375A4
+ AP3_BBZBoss_Vent_03: $1375E6
+ AP3_BBZBoss_Vent_04: $13762E
+ AP3_BBZBoss_Vent_05: $137664
+ AP3_BBZBoss_Vent_06: $13769A
+ AP3_BBZBoss_Vent_07: $1376D6
+ AP3_BBZBoss_DRingChamber_00: $13771C
+ AP3_BBZBoss_DRingChamber_01: $1377B8
+ AP3_BBZBoss_DRingChamber_02: $1378CA
+ AP3_BBZBoss_DRingChamber_03: $137A1E
+ AP3_BBZBoss_DRingChamber_04: $137B78
+ AP3_BBZBoss_DRingChamber_05: $137CD8
+ AP3_BBZBoss_DRingChamber_06: $137E02
+ AP3_BBZBoss_EggmanFaceF: $137F08
+ AP3_BBZBoss_EggmanFaceS: $137FB8
+ AP3_BBZBoss_EggmanFaceFHit_00: $13806A
+ AP3_BBZBoss_EggmanFaceFHit_01: $138124
+ AP3_BBZBoss_EggmanArms_00: $1381DE
+ AP3_BBZBoss_EggmanArms_01: $1382B4
+ AP3_BBZBoss_EggmanArms_02: $1383C2
+ AP3_BBZBoss_ClawBase: $1384CE
+ AP3_BBZBoss_ClawVPole: $1387D6
+ AP3_BBZBoss_ClawHPole: $1389F6
+ AP3_BBZBoss_Claw: $138B42
+ AP3_BBZBoss_Shine_00: $138C6C
+ AP3_BBZBoss_Shine_01: $138CB0
+ AP3_BBZBoss_Shine_02: $138D06
+ AP3_BBZBoss_HZap_00: $138D4E
+ AP3_BBZBoss_HZap_01: $138E72
+ AP3_BBZBoss_MiscSpark_00: $138F6E
+ AP3_BBZBoss_MiscSpark_01: $1390E0
+ AP3_BBZBoss_MiscSpark_02: $13926A
+ AP3_BBZBoss_MiscSpark_03: $1392C0
+ AP3_BBZBoss_Spark_00: $13938A
+ AP3_BBZBoss_Spark_01: $1393DE
+ AP3_BBZBoss_ShieldZap_00: $13949C
+ AP3_BBZBoss_ShieldZap_01: $139A70
+ AP3_BBZBoss_ShieldZap_02: $13A1D6
+ ArtPtr32X_MS_Intro2: $13A878
+ AP3_HUD_DR0_2: $13A898
+ AP3_HUD_DR1_2: $13A8F8
+ AP3_MS_HFlight_00: $13A938
+ AP3_MS_HFlight_01: $13AD40
+ AP3_MS_HFlight_02: $13B0CC
+ AP3_MS_FFlight_00: $13B4CE
+ AP3_MS_FFlight_01: $13B90C
+ AP3_MS_FFlight_Booster: $13BB4C
+ ArtPtr32X_WE_LvlIcons1: $13BD58
+ AP3_LvlIcons1_BBZ: $13BD6C
+ AP3_LvlIcons1_AAZ: $13C73E
+ AP3_LvlIcons1_TTZ: $13D110
+ AP3_LvlIcon1s_MMZ: $13DC72
+ AP3_LvlIcon1s_IIZ: $13E644
+ ArtPtr32X_BBZ_Enemies2: $13EE88
+ AP3_BBZEns2_Badnik1_BodyBase: $13EE98
+ AP3_BBZEns2_Badnik1_BodySpike: $13F032
+ AP3_BBZEns2_Badnik1_Parts_00: $13F264
+ AP3_BBZEns2_Badnik1_Parts_01: $13F292
+ ArtPtr32X_EnParts_Explos: $13F2B4
+ AP3_EnParts_Explosion_00: $13F300
+ AP3_EnParts_Explosion_01: $13F374
+ AP3_EnParts_Explosion_02: $13F49E
+ AP3_EnParts_Explosion_03: $13F5C6
+ AP3_EnParts_Explosion_04: $13F806
+ AP3_EnParts_Explosion_05: $13FB24
+ AP3_EnParts_Explosion_06: $13FD96
+ AP3_EnParts_Explosion_07: $13FEBA
+ AP3_EnParts_Poof_00: $13FF6C
+ AP3_EnParts_Poof_01: $14008A
+ AP3_EnParts_Poof_02: $1401DE
+ AP3_EnParts_Poof_03: $140322
+ AP3_EnParts_Poof_04: $140458
+ AP3_EnParts_Poof_05: $140504
+ AP3_EnParts_DRing_00: $140578
+ AP3_EnParts_DRing_01: $1405EC
+ AP3_EnParts_DRing_02: $140660
+ AP3_EnParts_DRing_03: $1406C4
+ AP3_EnParts_DRing_04: $140716
+ ArtPtr32X_Rubberband: $140768
+ AP3_RBand_00: $1407C8
+ AP3_RBand_01: $1407E4
+ AP3_RBand_02: $14080E
+ AP3_RBand_03: $140850
+ AP3_RBand_04: $14088C
+ AP3_RBand_05: $1408BC
+ AP3_RBand_06: $1408E8
+ AP3_RBand_07: $140912
+ AP3_RBand_08: $140958
+ AP3_RBand_09: $1409B2
+ AP3_RBand_0A: $140A00
+ AP3_RBand_0B: $140A30
+ AP3_RBand_0C: $140A44
+ AP3_RBand_0D: $140A56
+ AP3_RBand_0E: $140A6C
+ AP3_RBand_0F: $140A8A
+ AP3_RBand_10: $140AA2
+ AP3_RBand_11: $140AB4
+ AP3_RBand_12: $140AC0
+ AP3_RBand_13: $140AE8
+ AP3_RBand_14: $140B28
+ AP3_RBand_15: $140B7C
+ AP3_RBand_16: $140BC4
+ AP3_RBand_17: $140BF2
+ ArtPtr32X_MMZ_Enemies1: $140C08
+ AP3_MMZEns1_Piranha_HFlySpit_00: $140C28
+ AP3_MMZEns1_Piranha_HFlySpit_01: $140E98
+ AP3_MMZEns1_Piranha_HFly_00: $1410B6
+ AP3_MMZEns1_Piranha_HFly_01: $141322
+ AP3_MMZEns1_Piranha_Mine: $14153C
+ AP3_MMZEns1_Piranha_MineExplode: $141570
+ AP3_MMZEns1_Piranha_MineSmoke_00: $1415D6
+ AP3_MMZEns1_Piranha_MineSmoke_01: $1416B4
+ ArtPtr32X_Explosions: $141824
+ AP3_UnkExplo_00: $141830
+ AP3_UnkExplo_01: $141908
+ AP3_UnkExplo_02: $141B56
+ ArtPtr32X_MMZ_Enemies2: $141E28
+ AP3_MMZEns2_Badnik3_PeriscopeL: $141E40
+ AP3_MMZEns2_Badnik3_PeriscopeF: $141E8C
+ AP3_MMZEns2_Badnik3_PeriscopeR: $141ECC
+ AP3_MMZEns2_Badnik3_WaterPtcl_00: $141F1A
+ AP3_MMZEns2_Badnik3_WaterPtcl_01: $141F6C
+ AP3_MMZEns2_Badnik3_Body: $141FAA
+ ArtPtr32X_MMZ_BG: $1421D4
+ AP3_MMZBG_CloudsMS_00: $142208
+ AP3_MMZBG_CloudsMS_01: $142BC4
+ AP3_MMZBG_CloudsMS_02: $1432F8
+ AP3_MMZBG_CloudsMS_03: $1439A6
+ AP3_MMZBG_CloudsMS_04: $143EEC
+ AP3_MMZBG_StarsN_00: $14436C
+ AP3_MMZBG_StarsN_01: $144602
+ AP3_MMZBG_StuffN_00: $14488C
+ AP3_MMZBG_LightsN_00: $144F6A
+ AP3_MMZBG_LightsN_01: $1450FA
+ AP3_MMZBG_LightsN_02: $1452DE
+ AP3_MMZBG_LightsN_03: $14544E
+ AP3_MMZBG_StuffN_01: $145750
+ ArtPtr32X_MiscGlbl_Objs: $145850
+ AP3_MiscGlbl_Ring_00: $14592C
+ AP3_MiscGlbl_Ring_01: $1459B2
+ AP3_MiscGlbl_Ring_02: $145A3A
+ AP3_MiscGlbl_Ring_03: $145AB0
+ AP3_MiscGlbl_Ring_04: $145B10
+ AP3_MiscGlbl_SignPost: $145B6C
+ AP3_MiscGlbl_SignFront: $145BEC
+ AP3_MiscGlbl_SignSide: $14610A
+ AP3_MiscGlbl_InvinStar_00: $146226
+ AP3_MiscGlbl_InvinStar_01: $146232
+ AP3_MiscGlbl_InvinStar_02: $14623E
+ AP3_MiscGlbl_InvinStar_03: $14624A
+ AP3_MiscGlbl_UnkStar_00: $146256
+ AP3_MiscGlbl_UnkStar_01: $146282
+ AP3_MiscGlbl_UnkStar_02: $1462AC
+ AP3_MiscGlbl_UnkStar_03: $1462CE
+ AP3_MiscGlbl_Bubble: $1462F0
+ AP3_MiscGlbl_WaterSpl_00: $1462FC
+ AP3_MiscGlbl_WaterSpl_01: $146308
+ AP3_MiscGlbl_WaterSpl_02: $146314
+ AP3_MiscGlbl_WaterSpl_03: $146320
+ AP3_MiscGlbl_WaterSpl_04: $14632C
+ AP3_MiscGlbl_WaterSpl_05: $146338
+ AP3_MiscGlbl_SpinDashPtcl_00: $146344
+ AP3_MiscGlbl_SpinDashPtcl_01: $146382
+ AP3_MiscGlbl_SpinDashPtcl_02: $1463DC
+ AP3_MiscGlbl_SpinDashPtcl_03: $146452
+ AP3_MiscGlbl_SpinDashPtcl_04: $1464C2
+ AP3_MiscGlbl_SpinDashPtcl_05: $14652C
+ AP3_MiscGlbl_SpinDashPtcl_06: $146588
+ AP3_MiscGlbl_SpinDashPtcl_07: $1465D0
+ AP3_MiscGlbl_Ptcl_00: $1465F4
+ AP3_MiscGlbl_Ptcl_01: $14662A
+ AP3_MiscGlbl_SkidPtcl_00: $14667E
+ AP3_MiscGlbl_SkidPtcl_01: $1466B0
+ AP3_MiscGlbl_SkidPtcl_02: $1466F4
+ AP3_MiscGlbl_SkidPtcl_03: $146752
+ AP3_MiscGlbl_SkidPtcl_04: $1467AA
+ AP3_MiscGlbl_SkidPtcl_05: $1467FC
+ AP3_MiscGlbl_SkidPtcl_06: $146840
+ AP3_MiscGlbl_SkidPtcl_07: $146878
+ AP3_MiscGlbl_BigRing_00: $146896
+ AP3_MiscGlbl_BigRing_01: $146AFC
+ AP3_MiscGlbl_BigRing_02: $146D56
+ AP3_MiscGlbl_BigRing_03: $146F9E
+ AP3_MiscGlbl_BigRing_04: $1471D2
+ AP3_MiscGlbl_BigRing_05: $1473D4
+ AP3_MiscGlbl_BigRing_06: $14757A
+ AP3_MiscGlbl_Shield_00: $1476AE
+ AP3_MiscGlbl_Shield_01: $1478C4
+ AP3_MiscGlbl_Shield_02: $147ADE
+ AP3_MiscGlbl_Shield_03: $147CFA
+ AP3_MiscGlbl_Shield_04: $147F18
+ AP3_MiscGlbl_Shield_05: $148138
+ AP3_MiscGlbl_Shield_06: $148354
+ ArtPtr32X_MiscEnd: $148570
+ AP3_MiscEnd_Bad_Eggman_Body: $1485DC
+ AP3_MiscEnd_Bad_Eggman_Arms: $1489DC
+ AP3_MiscEnd_UnkOval: $148B8A
+ AP3_MiscEnd_Bad_Eggman_Laugh_00: $148B98
+ AP3_MiscEnd_Bad_Eggman_Laugh_01: $148CD6
+ AP3_MiscEnd_Bad_Eggman_Laugh_02: $148E1A
+ AP3_MiscEnd_Bad_Eggman_Weigh_00: $148F60
+ AP3_MiscEnd_Bad_Eggman_Weigh_01: $1491EC
+ AP3_MiscEnd_Bad_Eggman_Weigh_02: $1497D2
+ AP3_MiscEnd_BtnH: $149DA6
+ AP3_MiscEnd_BtnHPressed: $149E9C
+ AP3_MiscEnd_BtnV: $149F2C
+ AP3_MiscEnd_BtnVPressed: $14A03E
+ AP3_MiscEnd_Skull: $14A0F8
+ AP3_MiscEnd_Test: $14A104
+ ArtPtr32X_BBZ_Objs: $14A2E0
+ AP3_BBZObjs_HVMetalWall: $14A334
+ AP3_BBZObjs_Door_Panel: $14AE72
+ AP3_BBZObjs_Door_Panel_SprMasker: $14B1FE
+ AP3_BBZObjs_GlyphTop: $14B29A
+ AP3_BBZObjs_GlyphBot: $14B3A8
+ AP3_BBZObjs_GlyphBot2: $14B4BA
+ AP3_BBZObjs_Door_Frame: $14B556
+ AP3_BBZObjs_TimeWall_Bot: $14BBA4
+ AP3_BBZObjs_TimeWall_Top: $14BCF2
+ AP3_BBZObjs_TimeWall_Bot2: $14BE32
+ AP3_BBZObjs_TransWall_Trans: $14BEA8
+ AP3_BBZObjs_TransWall: $14C88A
+ AP3_BBZObjs_SwitchWall_Top: $14D524
+ AP3_BBZObjs_SwitchWall_Bot: $14D686
+ AP3_BBZObjs_SwitchWall_Bot2: $14D7D4
+ AP3_BBZObjs_Elev_Top: $14D890
+ AP3_BBZObjs_Elev_Bot: $14DBBA
+ AP3_BBZObjs_ElevBase_Bot: $14E00C
+ AP3_BBZObjs_Elev_Door: $14E34A
+ AP3_BBZObjs_ElevBase_Top: $14E9A6
+ AP3_BBZObjs_CollaspPlat: $14EB82
+ ArtPtr32X_BS_Objs: $14F420
+ AP3_BSObjs_RingBox: $14F4AC
+ AP3_BSObjs_PtsBox: $14F6FC
+ AP3_BSObjs_LvlSelBox: $14F94C
+ AP3_BSObjs_SpringBoxY_00: $14FC1E
+ AP3_BSObjs_SpringBoxY_01: $14FE6E
+ AP3_BSObjs_SpringBoxY_02: $1500BE
+ AP3_BSObjs_SpringBoxR_00: $15030E
+ AP3_BSObjs_SpringBoxR_01: $1505DE
+ AP3_BSObjs_SpringBoxR_02: $15082E
+ AP3_BSObjs_SpringBoxYC0_00: $150AFE
+ AP3_BSObjs_SpringBoxYC0_01: $150D4E
+ AP3_BSObjs_SpringBoxYC0_02: $150F9E
+ AP3_BSObjs_SpringBoxRC0_00: $1511EE
+ AP3_BSObjs_SpringBoxRC0_01: $1514BE
+ AP3_BSObjs_SpringBoxRC0_02: $15170E
+ AP3_BSObjs_SpringBoxYC1_00: $1519DE
+ AP3_BSObjs_SpringBoxYC1_01: $151C2E
+ AP3_BSObjs_SpringBoxYC1_02: $151E7E
+ AP3_BSObjs_SpringBoxRC1_00: $1520CE
+ AP3_BSObjs_SpringBoxRC1_01: $15239E
+ AP3_BSObjs_SpringBoxRC1_02: $1525EE
+ AP3_BSObjs_Brick: $1528BE
+ AP3_BSObjs_BrickC: $152A90
+ AP3_BSObjs_Spikes_00: $152CE0
+ AP3_BSObjs_Spikes_01: $152EB0
+ AP3_BSObjs_Spikes_02: $153080
+ AP3_BSObjs_Exit_00: $153250
+ AP3_BSObjs_Exit_01: $1534A0
+ AP3_BSObjs_Exit_02: $1536F0
+ AP3_BSObjs_JunkGreen: $1539C0
+ AP3_BSObjs_JunkRY_V: $153C90
+ AP3_BSObjs_JunkRY_H: $153EFC
+ AP3_BSObjs_SpeedU: $1541A4
+ AP3_BSObjs_SpeedD: $1543F4
+ AP3_BSObjs_CharSelBox: $154644
+ ArtPtr32X_Knuckles_SpecialStage: $154894
+ AP3_Knux_SS_Jump_00: $1548C8
+ AP3_Knux_SS_Jump_01: $154C9A
+ AP3_Knux_SS_Jump_02: $15505A
+ AP3_Knux_SS_Jump_03: $15542C
+ AP3_Knux_SS_Jump_04: $1557FE
+ AP3_Knux_SS_Walk_00: $155BD0
+ AP3_Knux_SS_Walk_01: $156016
+ AP3_Knux_SS_Walk_02: $15649E
+ AP3_Knux_SS_Walk_03: $1568E0
+ AP3_Knux_SS_Run_00: $156CF6
+ AP3_Knux_SS_Run_01: $157114
+ AP3_Knux_SS_Run_02: $157526
+ AP3_Knux_SS_Run_03: $1578DC
+ ArtPtr32X_TTZ_Objs: $157C98
+ AP3_TTZObjs_SwitchPlatBlock: $157D50
+ AP3_TTZObjs_DrillBlock_00: $158020
+ AP3_TTZObjs_DrillBlock_01: $1582F0
+ AP3_TTZObjs_OneWayWall_Left: $1585C0
+ AP3_TTZObjs_OneWayWall_Right: $158890
+ AP3_TTZObjs_Claw_00: $158B60
+ AP3_TTZObjs_Claw_01: $158FAA
+ AP3_TTZObjs_Claw_02: $159402
+ AP3_TTZObjs_ClawFan_00: $1597E4
+ AP3_TTZObjs_ClawFan_01: $15987A
+ AP3_TTZObjs_ClawFan_02: $159942
+ AP3_TTZObjs_ClawFan_03: $1599E6
+ AP3_TTZObjs_ClawFan_04: $159A7A
+ AP3_TTZObjs_Drill_00: $159ADE
+ AP3_TTZObjs_Drill_01: $159C1C
+ AP3_TTZObjs_Drill_02: $159D30
+ AP3_TTZObjs_DrillBroke: $159E50
+ AP3_TTZObjs_DrillMachBdy: $159F94
+ AP3_TTZObjs_ConvSwMachine: $15A514
+ AP3_TTZObjs_ConvSw_Left: $15AFBC
+ AP3_TTZObjs_ConvSw_Right: $15B2E4
+ AP3_TTZObjs_ConvSw_Stop: $15B61C
+ AP3_TTZObjs_ElevDoor_00: $15B944
+ AP3_TTZObjs_ElevDoor_01: $15BA76
+ AP3_TTZObjs_ElevDoor_02: $15BCD0
+ AP3_TTZObjs_Elev_Back: $15C10A
+ AP3_TTZObjs_ElevFrame: $15C4A6
+ AP3_TTZObjs_HoopFrame: $15C9E6
+ AP3_TTZObjs_HoopPiece: $15D128
+ AP3_TTZObjs_GrowShrinkPlat: $15D1F4
+ AP3_TTZObjs_PlatSw_Base: $15D4C2
+ AP3_TTZObjs_PlatSw_Toggle: $15D5CA
+ AP3_TTZObjs_Girder_Hook: $15D626
+ AP3_TTZObjs_Girder_EdgeL: $15D864
+ AP3_TTZObjs_Girder_Mid: $15D994
+ AP3_TTZObjs_Girder_EdgeR: $15DC2C
+ AP3_TTZObjs_SaucerSpring_Pan: $15DD66
+ AP3_TTZObjs_SaucerSpring_PanX_00: $15DFDE
+ AP3_TTZObjs_SaucerSpring_PanX_01: $15E556
+ AP3_TTZObjs_SaucerSpring_Base: $15EED0
+ AP3_TTZObjs_TransWall_Opq: $15F0A2
+ ArtPtr32X_SSZ_Enemies: $160EFC
+ AP3_SSZEns_HoverM2_Body: $160F5C
+ AP3_SSZEns_HoverM2_Fan_90d: $1610B2
+ AP3_SSZEns_HoverM2_Fan_45d: $161156
+ AP3_SSZEns_HoverM2_Fan_0d: $161218
+ AP3_SSZEns_Dribbler_Body_00: $1612F2
+ AP3_SSZEns_Dribbler_Body_01: $161836
+ AP3_SSZEns_Dribbler_Body_02: $161CAA
+ AP3_SSZEns_Dribbler_Ball_00: $1620BE
+ AP3_SSZEns_Dribbler_Ball_01: $16225E
+ AP3_SSZEns_Dribbler_Ball_02: $1623DA
+ AP3_SSZEns_Gotcha_HFly_00: $162564
+ AP3_SSZEns_Gotcha_HFly_01: $1628D8
+ AP3_SSZEns_Gotcha_HFly_02: $162C6A
+ AP3_SSZEns_Gotcha_FloatD: $162FF8
+ AP3_SSZEns_Gotcha_FloatV: $16338E
+ AP3_SSZEns_Gotcha_Sphere: $16373E
+ AP3_SSZEns_UnkLoopChkMask: $163E44
+ ArtPtr32X_AAZ_Objs1: $16517C
+ AP3_AAZObjs1_CollapsePlat: $16520C
+ AP3_AAZObjs1_UnkMach_00: $16571C
+ AP3_AAZObjs1_UnkMach_01: $16598C
+ AP3_AAZObjs1_UnkMach_02: $165D44
+ AP3_AAZObjs1_ConvPulley: $166164
+ AP3_AAZObjs1_UFO: $166610
+ AP3_AAZObjs1_HSuckTube_LowPrio: $1669CC
+ AP3_AAZObjs1_HSuckTube_HighPrio: $166C96
+ AP3_AAZObjs1_HSuckTube_Piece: $166F24
+ AP3_AAZObjs1_VSuckTube: $166F6A
+ AP3_AAZObjs1_HSuckTube2: $1670E4
+ AP3_AAZObjs1_ClockRadar_ArrV: $1674F8
+ AP3_AAZObjs1_ClockRadar_ArrH: $1675F4
+ AP3_AAZObjs1_ClockRadar_ArrD: $1676C6
+ AP3_AAZObjs1_SwH: $1677C6
+ AP3_AAZObjs1_SwH_Pressed: $167910
+ AP3_AAZObjs1_SwV: $1679C2
+ AP3_AAZObjs1_SwV_Pressed: $167B2E
+ AP3_AAZObjs1_UnkBlock: $167C06
+ AP3_AAZObjs1_SwDoor: $167ED6
+ AP3_AAZObjs1_TransWall_Opq: $16801C
+ AP3_AAZObjs1_UnkStars: $1690DA
+ AP3_AAZObjs1_ClockRadar_Icon: $16920E
+ AP3_AAZObjs1_ClockRadar_FailIcon: $16979E
+ AP3_AAZObjs1_UnkClouds: $16A002
+ AP3_AAZObjs1_Suctions_00: $16A754
+ AP3_AAZObjs1_Suctions_01: $16A788
+ AP3_AAZObjs1_Suctions_02: $16A7B0
+ AP3_AAZObjs1_Suctions_03: $16A7E2
+ AP3_AAZObjs1_Suctions_04: $16A818
+ AP3_AAZObjs1_Suctions_05: $16A850
+ AP3_AAZObjs1_Suctions_06: $16A888
+ AP3_AAZObjs1_Suctions_07: $16A8B8
+ AP3_AAZObjs1_Suctions_08: $16A8E4
+ AP3_AAZObjs1_ClockRadar_FailChalAgain: $16A91C
+ ArtPtr32X_MMZ_Objs: $16AC50
+ AP3_MMZObjs_UnkGoopTube_00: $16AC6C
+ AP3_MMZObjs_UnkGoopTube_01: $16AD08
+ AP3_MMZObjs_UnkGoopTube_02: $16ADA4
+ AP3_MMZObjs_UnkGoopTube_Base: $16AE40
+ AP3_MMZObjs_Door_Mid: $16AF22
+ AP3_MMZObjs_Door_Top: $16B0E2
+ AP3_MMZObjs_Door_Bot: $16B384
+ ArtPtr32X_MMZ_Boss: $16B6F0
+ AP3_MMZBoss_Body_Float0d: $16B738
+ AP3_MMZBoss_Body_Float45d: $16C4BA
+ AP3_MMZBoss_Body_Float90d: $16D180
+ AP3_MMZBoss_DRingChamber_00: $16DD7A
+ AP3_MMZBoss_DRingChamber_01: $16DF3C
+ AP3_MMZBoss_DRingChamber_02: $16E0FE
+ AP3_MMZBoss_DRingChamber_03: $16E2C0
+ AP3_MMZBoss_DRingChamber_04: $16E482
+ AP3_MMZBoss_DRingChamber_05: $16E644
+ AP3_MMZBoss_DRingChamber_06: $16E806
+ AP3_MMZBoss_UnkCircle: $16E9C8
+ AP3_MMZBoss_EggmanFace_Side: $16ED0A
+ AP3_MMZBoss_EggmanFace_FrontLaugh_00: $16EE26
+ AP3_MMZBoss_EggmanFace_FrontLaugh_01: $16F010
+ AP3_MMZBoss_EggmanFace_FrontLaugh_02: $16F1FA
+ AP3_MMZBoss_EggmanFace_SideLaugh_00: $16F3E4
+ AP3_MMZBoss_EggmanFace_SideLaugh_01: $16F57A
+ AP3_MMZBoss_DRingLoose: $16F704
+ ArtPtr32X_TTZ_Enemies: $16F98C
+ AP3_TTZEns_Badnik2_Body: $16FA38
+ AP3_TTZEns_Badnik2_Reticle: $16FDF2
+ AP3_TTZEns_Badnik2_ReticleLockon: $16FE90
+ AP3_TTZEns_Badnik2_MissileThrust: $16FF96
+ AP3_TTZEns_Badnik2_UnkMissileThrust_00: $170004
+ AP3_TTZEns_Badnik2_UnkMissileThrust_01: $170030
+ AP3_TTZEns_Badnik2_MissileV: $170046
+ AP3_TTZEns_Badnik2_MissileH: $170078
+ AP3_TTZEns_Badnik2_MissileD: $1700A6
+ AP3_TTZEns_Badnik2_MissileLauncher: $1700DA
+ AP3_TTZEns_Uniformer_Arm_00: $1701EC
+ AP3_TTZEns_Uniformer_Arm_01: $1702D2
+ AP3_TTZEns_Uniformer_Arm_02: $170388
+ AP3_TTZEns_Uniformer_Body: $170416
+ AP3_TTZEns_Uniformer_Propeller_00: $1706F0
+ AP3_TTZEns_Uniformer_Propeller_01: $1707EA
+ AP3_TTZEns_Uniformer_Propeller_02: $1708FC
+ AP3_TTZEns_Carry_Body: $1709DA
+ AP3_TTZEns_Carry_Bomb_00: $170BEE
+ AP3_TTZEns_Carry_Bomb_01: $170C5A
+ AP3_TTZEns_Carry_Cargo: $170CF2
+ AP3_TTZEns_Carry_Wings_00: $170EE6
+ AP3_TTZEns_Carry_Wings_01: $170F3C
+ AP3_TTZEns_UnkSpike_00: $170F5E
+ AP3_TTZEns_UnkSpike_01: $170FB4
+ AP3_TTZEns_Badnik1_Body: $17100E
+ AP3_TTZEns_Badnik1_WheelY_00: $171284
+ AP3_TTZEns_Badnik1_WheelY_01: $17135A
+ AP3_TTZEns_Badnik1_WheelBlk: $171430
+ AP3_TTZEns_Badnik3_Legs_00: $1714F0
+ AP3_TTZEns_Badnik3_Legs_01: $1716E2
+ AP3_TTZEns_Badnik3_Legs_02: $1718C2
+ AP3_TTZEns_Badnik3_Legs_03: $171AD6
+ AP3_TTZEns_Badnik3_Bomb_00: $171CEA
+ AP3_TTZEns_Badnik3_Bomb_01: $171DCA
+ AP3_TTZEns_Badnik3_Head_00: $171EAA
+ AP3_TTZEns_Badnik3_Head_01: $171FB0
+ AP3_TTZEns_Badnik3_Head_02: $1720BA
+ AP3_TTZEns_Badnik3_Head_03: $1721DA
+ AP3_TTZEns_Badnik3_Head_04: $1722FA
+ AP3_TTZEns_Badnik3_Poof_00: $172454
+ AP3_TTZEns_Badnik3_Poof_01: $17247A
+ AP3_TTZEns_Badnik3_BodyIdle: $172490
+ ArtPtr32X_IIZ_Objs1: $172730
+ AP3_IIZObjs1_Badnik: $172798
+ AP3_IIZObjs1_FlowerCube: $172916
+ AP3_IIZObjs1_UnkSparkle: $172AD0
+ AP3_IIZObjs1_FlowerCircle: $172B36
+ AP3_IIZObjs1_FlowerTriangle: $172CF4
+ AP3_IIZObjs1_Grabber_Closed: $172E8C
+ AP3_IIZObjs1_Grabber_Open: $173112
+ AP3_IIZObjs1_CharSwitch1: $17345A
+ AP3_IIZObjs1_CharSwitch1_Pressed: $1735A4
+ AP3_IIZObjs1_CharSwitch2: $1736A6
+ AP3_IIZObjs1_CharSwitch2_Pressed: $1737F0
+ AP3_IIZObjs1_CharSwitch_Door: $1738F2
+ AP3_IIZObjs1_CombiCatcher_Frame: $173BBE
+ AP3_IIZObjs1_CombiCatcher_Back: $174144
+ AP3_IIZObjs1_CombiCatcher_Lid_00: $17434E
+ AP3_IIZObjs1_CombiCatcher_Lid_01: $1743B8
+ AP3_IIZObjs1_CombiCatcher_Lid_02: $174474
+ ArtPtr32X_IIZ_Objs2: $1745BC
+ AP3_IIZObjs2_FlowerCube_00: $1745F4
+ AP3_IIZObjs2_FlowerCube_01: $174874
+ AP3_IIZObjs2_FlowerCube_02: $174AC2
+ AP3_IIZObjs2_FlowerCube_03: $174D42
+ AP3_IIZObjs2_FlowerCircle_00: $174F90
+ AP3_IIZObjs2_FlowerCircle_01: $175210
+ AP3_IIZObjs2_FlowerCircle_02: $175462
+ AP3_IIZObjs2_FlowerCircle_03: $1756AA
+ AP3_IIZObjs2_FlowerTriangle_00: $1758EE
+ AP3_IIZObjs2_FlowerTriangle_01: $175B30
+ AP3_IIZObjs2_FlowerTriangle_02: $175D54
+ AP3_IIZObjs2_FlowerTriangle_03: $175F78
+ AP3_IIZObjs2_CharPlat: $1761BA
+ AP3_IIZObjs2_CollaspePlat: $1763C6
+ ArtPtr32X_SegaLogo: $1768FC
+ AP3_Sega: $176900
+ ArtPtr32X_BBZ_BossCut: $17894C
+ AP3_BBZCut_BG: $178964
+ AP3_BBZCut_MidG: $17A390
+ AP3_BBZCut_FG: $17BB58
+ AP3_BBZCut_Zap_00: $17EB78
+ AP3_BBZCut_Zap_01: $17EE92
+ AP3_BBZCut_Boss: $17EFD4
+ ArtPtr32X_MMZ_Enemies3: $17FA28
+ AP3_MMZEns3_Badnik1_00: $17FA50
+ AP3_MMZEns3_Badnik1_01: $17FC5C
+ AP3_MMZEns3_Badnik1_02: $17FE5E
+ AP3_MMZEns3_Badnik1_03: $180074
+ AP3_MMZEns3_Badnik2_Body: $180278
+ AP3_MMZEns3_Badnik2_Thrust: $18048E
+ AP3_MMZEns3_PopTank_Idle0d: $180570
+ AP3_MMZEns3_PopTank_Idle45d: $18083E
+ AP3_MMZEns3_PopTank_Idle60d: $180AF0
+ AP3_MMZEns3_PopTank_Idle90d: $180DB4
+ ArtPtr32X_MMZ_BossCut: $181098
+ AP3_MMZCut_FG: $1810BC
+ AP3_MMZCut_BG: $18326E
+ AP3_MMZCut_Boss: $18577A
+ AP3_MMZCut_Clouds: $185FE8
+ AP3_MMZCut_Splash_00: $18632E
+ AP3_MMZCut_Splash_01: $186342
+ AP3_MMZCut_Splash_02: $186364
+ AP3_MMZCut_Splash_03: $1863A6
+ AP3_MMZCut_Splash_04: $1863D4
+ ArtPtr32X_BBZ_BG1: $1863F4
+ AP3_BBZBG1_Clouds_MS: $1863F8
+ ArtPtr32X_BBZ_BG2: $186900
+ AP3_BBZBG2_Stars_N: $186904
+ ArtPtr32X_AAZ_Enemies1: $186AC8
+ AP3_AAZEns1_TickTock_Body: $186AE0
+ AP3_AAZEns1_TickTock_Spike: $186E84
+ AP3_AAZEns1_Badnik1_Body: $186F72
+ AP3_AAZEns1_Badnik1_Spike_00: $1871CC
+ AP3_AAZEns1_Badnik1_Spike_01: $18737E
+ AP3_AAZEns1_Badnik1_Spike_02: $18754A
+ ArtPtr32X_TTZ_Boss: $187708
+ AP3_TTZBoss_Fishbowl: $1877EC
+ AP3_TTZBoss_DRing_Chamber: $187D22
+ AP3_TTZBoss_ArmSleeve: $187F62
+ AP3_TTZBoss_Head_Hoodie: $1881D2
+ AP3_TTZBoss_Head_Neck: $1883E0
+ AP3_TTZBoss_Head: $18867C
+ AP3_TTZBoss_Fishbowl_Mask: $188A98
+ AP3_TTZBoss_Panel: $189474
+ AP3_TTZBoss_Ear: $189584
+ AP3_TTZBoss_Arm_00: $189784
+ AP3_TTZBoss_Arm_01: $189A9C
+ AP3_TTZBoss_Arm_02: $189DBE
+ AP3_TTZBoss_Arm_03: $18A0DA
+ AP3_TTZBoss_ArmA_00: $18A40C
+ AP3_TTZBoss_ArmA_01: $18A6EC
+ AP3_TTZBoss_ArmA_02: $18AA08
+ AP3_TTZBoss_Reflector_Front: $18ACDE
+ AP3_TTZBoss_Reflector_Side: $18B334
+ AP3_TTZBoss_Leg: $18B920
+ AP3_TTZBoss_Spark_00: $18BFBC
+ AP3_TTZBoss_Spark_01: $18BFD8
+ AP3_TTZBoss_Spark_02: $18C00E
+ AP3_TTZBoss_Arm_BallChain: $18C07C
+ AP3_TTZBoss_Parts_00: $18C0BC
+ AP3_TTZBoss_Parts_01: $18C12C
+ AP3_TTZBoss_Parts_02: $18C1A6
+ AP3_TTZBoss_Parts_03: $18C200
+ AP3_TTZBoss_DRing_00: $18C266
+ AP3_TTZBoss_DRing_01: $18C37C
+ AP3_TTZBoss_DRing_02: $18C4E2
+ AP3_TTZBoss_DRing_03: $18C6D8
+ AP3_TTZBoss_DRing_04: $18C8C0
+ AP3_TTZBoss_DRing_05: $18CAD2
+ AP3_TTZBoss_DRing_06: $18CD00
+ AP3_TTZBoss_Diamond_00: $18CF22
+ AP3_TTZBoss_Diamond_01: $18D186
+ AP3_TTZBoss_Diamond_02: $18D3EA
+ AP3_TTZBoss_Diamond_03: $18D64E
+ AP3_TTZBoss_Diamond_04: $18D8B2
+ AP3_TTZBoss_Diamond_05: $18DB16
+ AP3_TTZBoss_Cube_00: $18DD7A
+ AP3_TTZBoss_Cube_01: $18E0A2
+ AP3_TTZBoss_Cube_02: $18E3C2
+ AP3_TTZBoss_Cube_03: $18E69A
+ AP3_TTZBoss_Cube_04: $18E972
+ AP3_TTZBoss_Cube_05: $18ECCC
+ AP3_TTZBoss_EggmanFaceF_00: $18F07C
+ AP3_TTZBoss_EggmanFaceF_01: $18F184
+ AP3_TTZBoss_EggmanFaceS_00: $18F28C
+ AP3_TTZBoss_EggmanFaceS_01: $18F3A0
+ AP3_TTZBoss_Fishbowl_Refl: $18F50C
+ AP3_TTZBoss_ElevDoor_00: $193110
+ AP3_TTZBoss_ElevDoor_01: $1932FC
+ AP3_TTZBoss_ElevDoor_02: $193726
+ AP3_TTZBoss_ElevFrame: $193F02
+ AP3_TTZBoss_Elev_Back: $19460A
+ ArtPtr32X_AAZ_MiniBoss: $194C9C
+ AP3_AAZMBoss_UnkBeamV: $194CB8
+ AP3_AAZMBoss_UnkBeamH: $194D98
+ AP3_AAZMBoss_UnkBeamD45: $194E54
+ AP3_AAZMBoss_UnkBeamD60: $194F20
+ AP3_AAZMBoss_Head: $19501E
+ AP3_AAZMBoss_Body: $195268
+ AP3_AAZMBoss_Fist: $19599E
+ ArtPtr32X_AAZ_BossCut: $195AF0
+ AP3_AAZCut_BG: $195B0C
+ AP3_AAZCut_Projector: $199D9E
+ AP3_AAZCut_Boss: $19A092
+ AP3_AAZCut_ProjLight: $19A4D4
+ AP3_AAZCut_FilmCnt1: $19B054
+ AP3_AAZCut_FilmCnt2: $19B1B2
+ AP3_AAZCut_FilmCnt3: $19B326
+ ArtPtr32X_AAZ_Objs2: $19B4B0
+ AP3_AAZObjs2_TSolidPlat_Long: $19B4CC
+ AP3_AAZObjs2_TSolidPlat_Short: $19B95A
+ AP3_AAZObjs2_FlatThing: $19BC02
+ AP3_AAZObjs2_PrsSpring_PoleV: $19BC58
+ AP3_AAZObjs2_PrsSpring_IndicatorR: $19BD82
+ AP3_AAZObjs2_PrsSpring_IndicatorL: $19BF08
+ AP3_AAZObjs2_PrsSpring_PoleH: $19C08E
+ ArtPtr32X_AAZ_Objs3: $19C218
+ AP3_AAZObjs3_PrsSpringY: $19C228
+ AP3_AAZObjs3_PrsSpringR: $19C454
+ AP3_AAZObjs3_PrsSpringB: $19C680
+ AP3_AAZObjs3_ClockRadar_FailNoClear: $19C8AC
+ ArtPtr32X_Tutorial_HUD: $19CC7C
+ AP3_THud_DPad_dead: $19CCA8
+ AP3_THud_DPad_L: $19CE8E
+ AP3_THud_DPad_UL: $19D078
+ AP3_THud_DPad_U: $19D25A
+ AP3_THud_DPad_UR: $19D44A
+ AP3_THud_DPad_R: $19D630
+ AP3_THud_DPad_DR: $19D81E
+ AP3_THud_DPad_D: $19DA06
+ AP3_THud_DPad_DL: $19DBF8
+ AP3_THud_Btn: $19DDD8
+ AP3_THud_BtnD: $19DE70
+ ArtPtr32X_TTZ_BossCut: $19DF24
+ AP3_TTZCut_Building: $19DF44
+ AP3_TTZCut_BG: $1A02D4
+ AP3_TTZCut_Claw_00: $1A56A6
+ AP3_TTZCut_Claw_01: $1A5860
+ AP3_TTZCut_Dome: $1A5A1C
+ AP3_TTZCut_CloudSml: $1A5DF2
+ AP3_TTZCut_CloudMed: $1A5E42
+ AP3_TTZCut_CloudLg: $1A5F0A
+ ArtPtr32X_LevelTitleCards: $1A60E0
+ AP3_LTC_LargeJBars: $1A6124
+ AP3_LTC_SmallJBars: $1A61FA
+ AP3_LTC_Act1: $1A622E
+ AP3_LTC_Act2: $1A7678
+ AP3_LTC_Act3: $1A8AC2
+ AP3_LTC_Act4: $1A9F0C
+ AP3_LTC_Act5: $1AB356
+ AP3_LTC_Level: $1AC7A0
+ AP3_LTC_BBZ: $1ACBB6
+ AP3_LTC_MMZ: $1ADAC2
+ AP3_LTC_AAZ: $1AEDB0
+ AP3_LTC_TTZ: $1AFF4A
+ AP3_LTC_SSZ: $1B292E
+ AP3_LTC_Chars: $1B3820
+ AP3_LTC_Box: $1B44F2
+ AP3_LTC_Barcode: $1B4690
+ AP3_LTC_IIZ: $1B527E
+ ArtPtr32X_Heavy_SpecialStage: $1B6400
+ AP3_HeavySS_Jump_02: $1B641C
+ AP3_HeavySS_Jump_01: $1B6DC6
+ AP3_HeavySS_Jump_00: $1B779E
+ AP3_HeavySS_WalkRun_00: $1B8054
+ AP3_HeavySS_WalkRun_01: $1B87AE
+ AP3_HeavySS_WalkRun_02: $1B8F14
+ AP3_HeavySS_WalkRun_03: $1B96B2
+ ArtPtr32X_Mighty_SpecialStage: $1B9D78
+ AP3_MightySS_Jump_00: $1B9DAC
+ AP3_MightySS_Jump_01: $1BA0BE
+ AP3_MightySS_Jump_02: $1BA3D0
+ AP3_MightySS_Jump_03: $1BA6E2
+ AP3_MightySS_Jump_04: $1BA9F4
+ AP3_MightySS_Walk_00: $1BAD06
+ AP3_MightySS_Walk_01: $1BB168
+ AP3_MightySS_Walk_02: $1BB56A
+ AP3_MightySS_Walk_03: $1BB9B4
+ AP3_MightySS_Run_00: $1BBE28
+ AP3_MightySS_Run_01: $1BC260
+ AP3_MightySS_Run_02: $1BC6B8
+ AP3_MightySS_Run_03: $1BCAA6
+ ArtPtr32X_Vector_SpecialStage: $1BCE8C
+ AP3_VectorSS_Jump_00: $1BCEBC
+ AP3_VectorSS_Jump_01: $1BD366
+ AP3_VectorSS_Jump_02: $1BD780
+ AP3_VectorSS_Jump_03: $1BDC2A
+ AP3_VectorSS_Walk_00: $1BE0D4
+ AP3_VectorSS_Walk_01: $1BE7EC
+ AP3_VectorSS_Walk_02: $1BEED4
+ AP3_VectorSS_Walk_03: $1BF534
+ AP3_VectorSS_Run_00: $1BFBBE
+ AP3_VectorSS_Run_01: $1C0146
+ AP3_VectorSS_Run_02: $1C06C4
+ AP3_VectorSS_Run_03: $1C0CB6
+ ArtPtr32X_Bomb_SpecialStage: $1C1180
+ AP3_BombSS_Jump_00: $1C11A0
+ AP3_BombSS_Jump_01: $1C151A
+ AP3_BombSS_Jump_02: $1C182C
+ AP3_BombSS_Rebound: $1C1AF6
+ AP3_BombSS_WalkRun_00: $1C1F64
+ AP3_BombSS_WalkRun_01: $1C2312
+ AP3_BombSS_WalkRun_02: $1C26AC
+ AP3_BombSS_WalkRun_03: $1C2A1E
+ ArtPtr32X_SSZ_BossCut: $1C2D84
+ AP3_SSZCut_Dust: $1C2D98
+ AP3_SSZCut_SpaceShuttle: $1C3080
+ AP3_SSZCut_Island: $1C472A
+ AP3_SSZCut_ShuttleThrust_00: $1C54AE
+ AP3_SSZCut_ShuttleThrust_01: $1C567A
+ ArtPtr32X_Charmy_SpecialStage: $1C5AA0
+ AP3_CharmySS_Jump_00: $1C5AC8
+ AP3_CharmySS_Jump_01: $1C5D56
+ AP3_CharmySS_Jump_02: $1C5FDC
+ AP3_CharmySS_Jump_03: $1C624A
+ AP3_CharmySS_Walk_00: $1C64BE
+ AP3_CharmySS_Walk_01: $1C672E
+ AP3_CharmySS_Walk_02: $1C699C
+ AP3_CharmySS_Walk_03: $1C6C20
+ AP3_CharmySS_Run_00: $1C6E80
+ AP3_CharmySS_Run_01: $1C7106
+ ArtPtr32X_Espio_SpecialStage: $1C73C8
+ AP3_EspioSS_Jump_00: $1C73F4
+ AP3_EspioSS_Jump_01: $1C792E
+ AP3_EspioSS_Jump_02: $1C7E88
+ AP3_EspioSS_Walk_00: $1C8390
+ AP3_EspioSS_Walk_01: $1C885A
+ AP3_EspioSS_Walk_02: $1C8D40
+ AP3_EspioSS_Walk_03: $1C921C
+ AP3_EspioSS_Run_00: $1C96EE
+ AP3_EspioSS_Run_01: $1C9B92
+ AP3_EspioSS_Run_02: $1CA03C
+ AP3_EspioSS_Run_03: $1CA4EA
+ ArtPtr32X_AAZ_Enemies3: $1CA980
+ AP3_AAZEns3_Steamer_Head_00: $1CA9B8
+ AP3_AAZEns3_Steamer_Head_01: $1CAA7C
+ AP3_AAZEns3_Steamer_Head_02: $1CAB80
+ AP3_AAZEns3_Steamer_Body: $1CACA8
+ AP3_AAZEns3_Steamer_Throat: $1CAE7C
+ AP3_AAZEns3_Steamer_Apple: $1CAED0
+ AP3_AAZEns3_Steamer_Leg: $1CAF16
+ AP3_AAZEns3_MotorSpike_Body: $1CAFE2
+ AP3_AAZEns3_MotorSpike_Engine: $1CB34A
+ AP3_AAZEns3_Badnik2_Head: $1CB3F4
+ AP3_AAZEns3_Badnik2_Walk_00: $1CB5AC
+ AP3_AAZEns3_Badnik2_Walk_01: $1CB760
+ AP3_AAZEns3_Badnik2_Walk_02: $1CB91E
+ AP3_AAZEns3_Badnik2_Idle: $1CBAA8
+ ArtPtr32X_AAZ_Boss: $1CBC0C
+ AP3_AAZBoss_BodyF: $1CBC9C
+ AP3_AAZBoss_BodyS: $1CC44C
+ AP3_AAZBoss_ProjLight_H: $1CD3B4
+ AP3_AAZBoss_ProjLight_TwdsF_00: $1CD44E
+ AP3_AAZBoss_ProjLight_TwdsF_01: $1CD4E8
+ AP3_AAZBoss_ProjLight_TwdsF_02: $1CD598
+ AP3_AAZBoss_ProjLight_D_00: $1CD634
+ AP3_AAZBoss_ProjLight_D_01: $1CD6C4
+ AP3_AAZBoss_ProjTop: $1CD75E
+ AP3_AAZBoss_ProjBase: $1CDA0C
+ AP3_AAZBoss_EggmanFaceS: $1CDBC8
+ AP3_AAZBoss_EggmanFaceF: $1CDCD8
+ AP3_AAZBoss_EggmanFaceS_Hit00: $1CDE5A
+ AP3_AAZBoss_EggmanFaceS_Hit01: $1CDF34
+ AP3_AAZBoss_DRingChamberF_00: $1CE00C
+ AP3_AAZBoss_DRingChamberF_01: $1CE160
+ AP3_AAZBoss_DRingChamberF_02: $1CE286
+ AP3_AAZBoss_DRingChamberF_03: $1CE332
+ AP3_AAZBoss_DRingChamberF_04: $1CE3F0
+ AP3_AAZBoss_DRingChamberF_05: $1CE4B8
+ AP3_AAZBoss_DRingChamberF_06: $1CE602
+ AP3_AAZBoss_DRingChamberS_00: $1CE73E
+ AP3_AAZBoss_DRingChamberS_01: $1CE8EC
+ AP3_AAZBoss_DRingChamberS_02: $1CEA9A
+ AP3_AAZBoss_DRingChamberS_03: $1CEC4C
+ AP3_AAZBoss_DRingChamberS_04: $1CEE7A
+ AP3_AAZBoss_DRingChamberS_05: $1CF0EC
+ AP3_AAZBoss_DRingChamberS_06: $1CF368
+ AP3_AAZBoss_DRingChamberS_07: $1CF570
+ AP3_AAZBoss_DRingChamberS_08: $1CF778
+ AP3_AAZBoss_DRingChamberS_09: $1CF92A
+ AP3_AAZBoss_DRingChamberS_0A: $1CFADC
+ AP3_AAZBoss_DRingChamberS_0B: $1CFC8E
+ AP3_AAZBoss_BallChain: $1CFE3C
+ AP3_AAZBoss_Ball: $1CFEF0
+ AP3_AAZBoss_DRingLoose: $1CFFF0
+ ArtPtr32X_LevelEndText: $1D017C
+ AP3_GT_You: $1D0238
+ AP3_GT_Got: $1D03D4
+ AP3_GT_Through: $1D0568
+ AP3_GT_Time: $1D08DE
+ AP3_GT_Ring: $1D0AD4
+ AP3_GT_Secret: $1D0CD4
+ AP3_GT_Bonus: $1D0FB6
+ AP3_GT_Total: $1D1266
+ AP3_GT_Score: $1D14BC
+ AP3_GT_Up: $1D1732
+ AP3_GT_Player: $1D18B2
+ AP3_GT_Miss: $1D1BC2
+ AP3_GT_BBZ: $1D1DDC
+ AP3_GT_SSZ: $1D2736
+ AP3_GT_AAZ: $1D2F54
+ AP3_GT_TTZ: $1D3B4E
+ AP3_GT_MMZ: $1D4428
+ AP3_GT_Lvl1: $1D512C
+ AP3_GT_Lvl2: $1D525A
+ AP3_GT_Lvl3: $1D5398
+ AP3_GT_Lvl4: $1D54DA
+ AP3_GT_Lvl5: $1D5618
+ AP3_GT_Start: $1D575C
+ AP3_GT_The: $1D59CC
+ AP3_GT_Clock: $1D5B4A
+ AP3_GT_To: $1D5E40
+ AP3_GT_Next: $1D5F5E
+ AP3_GT_Level: $1D61A8
+ AP3_GT_Go: $1D6488
+ AP3_GT_For: $1D65BC
+ AP3_GT_Goal: $1D6768
+ AP3_GT_Get: $1D69CE
+ AP3_GT_Enemies: $1D6B56
+ AP3_GT_Score2: $1D6F48
+ AP3_GT_Points: $1D71BE
+ AP3_GT_Finish: $1D74A2
+ AP3_GT_Its: $1D775E
+ AP3_GT_A: $1D78F2
+ AP3_GT_New: $1D79B0
+ AP3_GT_Record: $1D7BB6
+ AP3_GT_To2: $1D7F40
+ AP3_GT_Next2: $1D805E
+ AP3_GT_Level2: $1D82A8
+ AP3_GT_Colon: $1D8588
+ AP3_GT_Bars: $1D85D6
+ AP3_GT_X: $1D86DA
+ AP3_GT_Rings: $1D873C
+ ArtPtr32X_SS_HUD: $1D895C
+ AP3_SSH_Time: $1D8998
+ AP3_SSH_Course: $1D8A64
+ AP3_SSH_Out: $1D8B92
+ AP3_SSH_GotPts: $1D8C36
+ AP3_SSH_Bad: $1D8D90
+ AP3_SSH_Too: $1D8E64
+ AP3_SSH_Cooool: $1D8F08
+ AP3_SSH_Next: $1D902E
+ AP3_SSH_Exclam: $1D910C
+ AP3_SSH_Togo: $1D9140
+ AP3_SSH_Spheres: $1D9232
+ AP3_SSH_Blue: $1D938A
+ AP3_SSH_Get: $1D9460
+ AP3_SSH_SemiC_R: $1D9500
+ AP3_SSH_SemiC_L: $1D96E4
+ ArtPtr32X_SS_CRing_Results: $1D98C0
+ AP3_CRingR_GotCRing: $1D98CC
+ AP3_CRingR_YouDidIt: $1DA01A
+ AP3_CRingR_Perfect: $1DA410
+ ArtPtr32X_SS_Objects: $1DA750
+ AP3_SSObjs_Spikeball_00: $1DA788
+ AP3_SSObjs_Spikeball_01: $1DA94C
+ AP3_SSObjs_Spikeball_02: $1DAB30
+ AP3_SSObjs_Spikeball_03: $1DAD12
+ AP3_SSObjs_Sphere_00: $1DAF0E
+ AP3_SSObjs_Sphere_01: $1DB074
+ AP3_SSObjs_Sphere_02: $1DB19E
+ AP3_SSObjs_Bumper_00: $1DB304
+ AP3_SSObjs_Bumper_01: $1DB46A
+ AP3_SSObjs_Bumper_02: $1DB5D0
+ AP3_SSObjs_Spikeball_Chain: $1DB736
+ AP3_SSObjs_Saw_00: $1DB762
+ AP3_SSObjs_Saw_01: $1DC0EC
+ AP3_SSObjs_CourseOutX: $1DCA6E
+ ArtPtr32X_Space1: $1DCE90
+ AP3_Space1_Piece: $1DCE94
+ ArtPtr32X_Space2: $1DD940
+ AP3_Space2_BG_Left: $1DD948
+ AP3_Space2_BG_Middle: $1DD954
+ ArtPtr32X_Ring32x: $1DD960
+ AP3_Ring32x_00: $1DD978
+ AP3_Ring32x_01: $1DD9FE
+ AP3_Ring32x_02: $1DDA86
+ AP3_Ring32x_03: $1DDAFC
+ AP3_Ring32x_04: $1DDB5C
+ AP3_Ring32x_Collected: $1DDBB8
+ ArtPtr32X_BigRing: $1DDC1C
+ AP3_BigRing_00: $1DDC38
+ AP3_BigRing_01: $1DDE9E
+ AP3_BigRing_02: $1DE0F8
+ AP3_BigRing_03: $1DE340
+ AP3_BigRing_04: $1DE574
+ AP3_BigRing_05: $1DE776
+ AP3_BigRing_06: $1DE91C
+ ArtPtr32X_TitleScreenCharacters: $1DEA50
+ AP3_TSChars_VectorHand_00: $1DEAC4
+ AP3_TSChars_VectorHand_01: $1DED82
+ AP3_TSChars_VectorHand_02: $1DF036
+ AP3_TSChars_VectorBody: $1DF2B0
+ AP3_TSChars_VectorHead: $1DFD88
+ AP3_TSChars_VectorLegs: $1E05F0
+ AP3_TSChars_KnuxHand_R: $1E0B9C
+ AP3_TSChars_KnuxHand_L: $1E0D06
+ AP3_TSChars_KnuxHead: $1E0E94
+ AP3_TSChars_KnuxBody: $1E1500
+ AP3_TSChars_CharmyBody: $1E1C64
+ AP3_TSChars_CharmyWings_00: $1E238C
+ AP3_TSChars_CharmyWings_01: $1E2432
+ AP3_TSChars_CharmyWings_02: $1E24CC
+ AP3_TSChars_EspioHead: $1E251A
+ AP3_TSChars_EspioHandL_00: $1E2B48
+ AP3_TSChars_EspioHandL_01: $1E2D50
+ AP3_TSChars_EspioHandL_02: $1E2F60
+ AP3_TSChars_EspioHandL_03: $1E31C2
+ AP3_TSChars_EspioBody: $1E33E2
+ AP3_TSChars_EspioFeet: $1E385C
+ AP3_TSChars_EspioHandR: $1E3BDE
+ AP3_TSChars_MightyBody: $1E3CEC
+ AP3_TSChars_MightyHead_00: $1E458A
+ AP3_TSChars_MightyHead_01: $1E46D6
+ AP3_TSChars_MightyHead_02: $1E48E8
+ AP3_TSChars_MightyFeet_00: $1E4B8E
+ AP3_TSChars_MightyFeet_01: $1E4FF6
+ AP3_TSChars_MightyFeet_02: $1E5444
+ ArtPtr32X_TitleScreen: $1E588C
+ AP3_TS_NHZ_L: $1E58C4
+ AP3_TS_NHZ_R: $1E73A2
+ AP3_TS_NHZ_GlowL: $1E8F0A
+ AP3_TS_NHZ_GlowR: $1EA1A4
+ AP3_TS_Light: $1EB70E
+ AP3_TS_PushStart: $1EB71C
+ AP3_TS_SignTopL: $1EB8AC
+ AP3_TS_SignTopR: $1EE4B4
+ AP3_TS_SignBot: $1F101C
+ AP3_TS_Copyright: $1F19F8
+ ArtPtr32X_SSZ_Boss: $1F1E34
+ AP3_SSZBoss_Jewel_00: $1F1EC4
+ AP3_SSZBoss_Jewel_01: $1F2224
+ AP3_SSZBoss_Jewel_02: $1F28A6
+ AP3_SSZBoss_Jewel_03: $1F2E82
+ AP3_SSZBoss_Jewel_04: $1F33A4
+ AP3_SSZBoss_Jewel_05: $1F37BE
+ AP3_SSZBoss_Jewel_06: $1F3CB6
+ AP3_SSZBoss_Jewel_07: $1F403A
+ AP3_SSZBoss_Jewel_08: $1F438A
+ AP3_SSZBoss_DRingF_00: $1F4506
+ AP3_SSZBoss_DRingF_01: $1F461C
+ AP3_SSZBoss_DRingF_02: $1F4782
+ AP3_SSZBoss_DRingF_03: $1F4978
+ AP3_SSZBoss_DRingF_04: $1F4B60
+ AP3_SSZBoss_DRingF_05: $1F4D72
+ AP3_SSZBoss_DRingF_06: $1F4FA0
+ AP3_SSZBoss_DRingS_00: $1F51C2
+ AP3_SSZBoss_DRingS_01: $1F5298
+ AP3_SSZBoss_DRingS_02: $1F5396
+ AP3_SSZBoss_DRingS_03: $1F54AC
+ AP3_SSZBoss_DRingS_04: $1F55C6
+ AP3_SSZBoss_DRingS_05: $1F56EC
+ AP3_SSZBoss_DRingS_06: $1F581C
+ AP3_SSZBoss_DRingS_07: $1F5940
+ AP3_SSZBoss_DRingS_08: $1F5A6A
+ AP3_SSZBoss_DRingS_09: $1F5B8C
+ AP3_SSZBoss_DRingS_0A: $1F5C8E
+ AP3_SSZBoss_DRingS_0B: $1F5D94
+ AP3_SSZBoss_SpikePlat_00: $1F5E9A
+ AP3_SSZBoss_SpikePlat_01: $1F6182
+ AP3_SSZBoss_SpikePlat_02: $1F646A
+ AP3_SSZBoss_SpikePlat_03: $1F6A0A
+ AP3_SSZBoss_SpikePlat_04: $1F6FAA
+ AP3_SSZBoss_SpikePlat_05: $1F7282
+ AP3_SSZBoss_CarouselSprMask: $1F755A
+ AP3_SSZBoss_Pole: $1F844C
+ ArtPtr32X_Eggman_JPack: $1F8958
+ AP3_EggJPack_JPack: $1F8960
+ AP3_EggJPack_Thrust: $1F8EE8
+ ArtPtr32X_WE_CombiCatcher: $1F8F94
+ AP3_WECC_SignCatcher: $1F8FB4
+ AP3_WECC_SignArrowV: $1F9690
+ AP3_WECC_SignArrowH: $1F96B6
+ AP3_WECC_CombiCatcher_Lid_00: $1F96D4
+ AP3_WECC_CombiCatcher_Lid_01: $1F974E
+ AP3_WECC_CombiCatcher_Lid_02: $1F97CE
+ AP3_WECC_CombiCatcher_Frame: $1F9910
+ AP3_WECC_CombiCatcher_Back: $1F9EF4
+ ArtPtr32X_WE_Signs: $1FA158
+ AP3_WESigns_Exit: $1FA168
+ AP3_WESigns_Play: $1FA4EA
+ AP3_WESigns_Arrow: $1FA8AA
+ AP3_WESigns_Base: $1FAA82
+ ArtPtr32X_WE_Boss: $1FABE4
+ AP3_WEBoss_Squisher: $1FAC08
+ AP3_WEBoss_RocketThruster_00: $1FAE46
+ AP3_WEBoss_RocketThruster_01: $1FAEE4
+ AP3_WEBoss_Rocket: $1FAF3C
+ AP3_WEBoss_Saw_00: $1FB218
+ AP3_WEBoss_Saw_01: $1FB3DE
+ AP3_WEBoss_SquisherBase: $1FB54A
+ AP3_WEBoss_Squisher_BallChain: $1FB72C
+ AP3_WEBoss_Pusher: $1FB7FC
+ ArtPtr32X_WE_Claw: $1FB990
+ AP3_WEClaw_Pole: $1FB9A8
+ AP3_WEClaw_ClawTop: $1FB9FA
+ AP3_WEClaw_Claw_00: $1FBD1E
+ AP3_WEClaw_Claw_01: $1FBE5A
+ AP3_WEClaw_Claw_02: $1FBF8E
+ AP3_WEClaw_Claw_03: $1FC0B8
+ ArtPtr32X_WE_LvlIcons2: $1FC1F0
+ AP3_LvlIcon2_SSZ: $1FC1F8
+ AP3_LvlIcon2_AAZ: $1FCDE6
+ ArtPtr32X_WE_LvlIcons3: $1FD6C8
+ AP3_LvlIcon3_BBZ: $1FD6D4
+ AP3_LvlIcon3_TTZ: $1FDFB6
+ AP3_LvlIcon3_MMZ: $1FEBA4
+ ArtPtr32X_WE_LvlStatus: $1FF488
+ AP3_LvlStatus_NHZ: $1FF4A8
+ AP3_LvlStatus_Clr: $1FFDA2
+ AP3_LvlStatus_Lvl: $1FFE06
+ AP3_LvlStatus_A1: $1FFE4C
+ AP3_LvlStatus_A2: $1FFE6C
+ AP3_LvlStatus_A3: $1FFE98
+ AP3_LvlStatus_A4: $1FFEC4
+ AP3_LvlStatus_A5: $1FFEEE
+ ArtPtr32X_CRings: $1FFF1C
+ AP3_CRings_CRing0_00: $1FFF7C
+ AP3_CRings_CRing0_01: $200094
+ AP3_CRings_CRing0_02: $200172
+ AP3_CRings_CRing0_03: $20023C
+ AP3_CRings_CRing1_00: $2002AE
+ AP3_CRings_CRing1_01: $2003F2
+ AP3_CRings_CRing1_02: $2004F2
+ AP3_CRings_CRing1_03: $2005DE
+ AP3_CRings_CRing2_00: $20065E
+ AP3_CRings_CRing2_01: $2007A2
+ AP3_CRings_CRing2_02: $2008A2
+ AP3_CRings_CRing2_03: $20098E
+ AP3_CRings_CRing3_00: $200A0E
+ AP3_CRings_CRing3_01: $200B52
+ AP3_CRings_CRing3_02: $200C52
+ AP3_CRings_CRing3_03: $200D3E
+ AP3_CRings_CRing4_00: $200DBE
+ AP3_CRings_CRing4_01: $200F02
+ AP3_CRings_CRing4_02: $201002
+ AP3_CRings_CRing4_03: $2010EE
+ AP3_CRings_CRing5_00: $20116E
+ AP3_CRings_CRing5_01: $2012B2
+ AP3_CRings_CRing5_02: $2013B2
+ AP3_CRings_CRing5_03: $20149E
+ ArtPtr32X_AAZ_Enemies2: $201520
+ AP3_AAZEns2_FilmBadnik_Idle_0d: $201588
+ AP3_AAZEns2_FilmBadnik_Idle_135d: $201596
+ AP3_AAZEns2_FilmBadnik_Idle_45d: $2015A4
+ AP3_AAZEns2_FilmBadnik_Idle_90d: $2015B2
+ AP3_AAZEns2_BigRingChkrd: $2015C0
+ AP3_AAZEns2_BigRingChkrd_Shine: $2015CE
+ AP3_AAZEns2_FilmBadnik_Wind0d_00: $2015DC
+ AP3_AAZEns2_FilmBadnik_Wind0d_01: $2015E8
+ AP3_AAZEns2_FilmBadnik_Wind0d_02: $2015F4
+ AP3_AAZEns2_FilmBadnik_Wind0d_03: $201600
+ AP3_AAZEns2_FilmBadnik_Wind0d_04: $20160C
+ AP3_AAZEns2_FilmBadnik_Wind45d_00: $201618
+ AP3_AAZEns2_FilmBadnik_Wind45d_01: $201624
+ AP3_AAZEns2_FilmBadnik_Wind45d_02: $201630
+ AP3_AAZEns2_FilmBadnik_Wind45d_03: $20163C
+ AP3_AAZEns2_FilmBadnik_Wind45d_04: $201648
+ AP3_AAZEns2_FilmBadnik_Wind135d_00: $201654
+ AP3_AAZEns2_FilmBadnik_Wind135d_01: $201660
+ AP3_AAZEns2_FilmBadnik_Wind135d_02: $20166C
+ AP3_AAZEns2_FilmBadnik_Wind135d_03: $201678
+ AP3_AAZEns2_FilmBadnik_Wind135d_04: $201684
+ AP3_AAZEns2_FilmBadnik_Wind270d_00: $201690
+ AP3_AAZEns2_FilmBadnik_Wind270d_01: $20169C
+ AP3_AAZEns2_FilmBadnik_Wind270d_02: $2016A8
+ AP3_AAZEns2_FilmBadnik_Wind270d_03: $2016B4
+ AP3_AAZEns2_FilmBadnik_Wind270d_04: $2016C0
+ ArtPtr32X_SSZ_Objects: $2016CC
+ AP3_SSZObjs_3DPlatLift: $201708
+ AP3_SSZObjs_TransRoom_Top: $2019AA
+ AP3_SSZObjs_TransRoom: $2026F6
+ AP3_SSZObjs_UnkMachine: $204376
+ AP3_SSZObjs_OneWayDoor_Top: $2047AE
+ AP3_SSZObjs_OneWayDoor: $2048EC
+ AP3_SSZObjs_OneWayDoor2: $204ABC
+ AP3_SSZObjs_UnkMachine2: $204D0C
+ AP3_SSZObjs_Balloons: $204FDC
+ AP3_SSZObjs_CollaspePlat: $205606
+ AP3_SSZObjs_SwPlat: $2058D2
+ AP3_SSZObjs_BalloonsTop: $205BA2
+ AP3_SSZObjs_BalloonsString: $2060D0
+ ArtPtr32X_SSZ_Elevator: $2061B8
+ AP3_SSZ_Elev_Frame: $2061C4
+ AP3_SSZ_Elev_Ribbon: $2067DE
+ AP3_SSZ_Elev_Door: $2068B0
+ ArtPtr32X_SSZ_UFO: $2068E0
+ AP3_SSZUFO_UFO: $2068E4
+ ArtPtr32X_SSZ_Bell: $206DAC
+ AP3_SSZBell_Bell: $206DBC
+ AP3_SSZBell_Ball: $2073E8
+ AP3_SSZBell_ChainBot: $207434
+ AP3_SSZBell_Chain: $207482
+ ArtPtr32X_SSZ_Plunger: $207578
+ AP3_SSZPlunger_Base: $207594
+ AP3_SSZPlunger_SpringR: $2078F8
+ AP3_SSZPlunger_Plunger: $2079B4
+ AP3_SSZPlunger_SpringX_00: $207C34
+ AP3_SSZPlunger_SpringX_01: $207CB6
+ AP3_SSZPlunger_SpringX_02: $207D62
+ AP3_SSZPlunger_SpringX_03: $207E26
+ ArtPtr32X_SSBumper: $207F14
+ AP3_SSBumper_Bumper_00: $207F20
+ AP3_SSBumper_Bumper_01: $208086
+ AP3_SSBumper_Bumper_02: $2081EC
+ ArtPtr32X_EggmanIntro: $208354
+ AP3_EggmanIntro_Laugh_00: $208380
+ AP3_EggmanIntro_Laugh_01: $2087DE
+ AP3_EggmanIntro_Laugh_02: $208C2A
+ AP3_EggmanIntro_Grabbed: $20906C
+ AP3_EggmanIntro_Repair: $2094EA
+ AP3_EggmanIntro_SkidScared: $2098B2
+ AP3_EggmanIntro_Run_00: $209C9E
+ AP3_EggmanIntro_Run_01: $20A06E
+ AP3_EggmanIntro_Run_02: $20A45A
+ AP3_EggmanIntro_Run_03: $20A804
+ AP3_EggmanIntro_Run_04: $20ABBE
+ ArtPtr32X_WE_MSBoss: $20AF9C
+ AP3_MSBoss_LegAttach: $20AFBC
+ AP3_MSBoss_FaceAttach_00: $20B0C8
+ AP3_MSBoss_FaceAttach_01: $20B200
+ AP3_MSBoss_FaceAttach_02: $20B336
+ AP3_MSBoss_FaceAttach_03: $20B3FE
+ AP3_MSBoss_FaceAttach_04: $20B4C6
+ AP3_MSBoss_WE2Intro_ShameFlight: $20B58E
+ AP3_MSBoss_WE2Intro_Defeated: $20B7F4
+ ArtPtr32X_IntroMosqui: $20BA00
+ AP3_IntroMosq_BodyL: $20BA38
+ AP3_IntroMosq_BodyLFly_00: $20BA44
+ AP3_IntroMosq_BodyLFly_01: $20BA50
+ AP3_IntroMosq_BodyLFly_02: $20BA5C
+ AP3_IntroMosq_BodyLExplode_00: $20BA68
+ AP3_IntroMosq_BodyLExplode_01: $20BA74
+ AP3_IntroMosq_BodyLExplode_02: $20BA80
+ AP3_IntroMosq_BodyLExplode_03: $20BA8C
+ AP3_IntroMosq_BodyR: $20BA98
+ AP3_IntroMosq_BodyRFly_00: $20BAA4
+ AP3_IntroMosq_BodyRFly_01: $20BAB0
+ AP3_IntroMosq_BodyRFly_02: $20BABC
+ AP3_IntroMosq_ThrustR: $20BAC8
+ AP3_IntroMosq_ThrustL: $20BAD4
+ ArtPtr32X_TailsBiPlane: $20BAE0
+ AP3_TailsBiplane_Plane: $20BAF0
+ AP3_TailsBiplane_Fly_00: $20C898
+ AP3_TailsBiplane_Fly_01: $20CA6C
+ AP3_TailsBiplane_Fly_02: $20CB4A
+ ArtPtr32X_SuperSonic: $20CC30
+ AP3_SuperSonic_Super_00: $20CC40
+ AP3_SuperSonic_Super_01: $20CE70
+ AP3_SuperSonic_Hands_00: $20D0AA
+ AP3_SuperSonic_Hands_01: $20D0F8
+ ArtPtr32X_EndingSonicTailsBiplane: $20D148
+ AP3_EndingBiplane_Plane: $20D154
+ AP3_EndingBiplane_Prop_00: $20F714
+ AP3_EndingBiplane_Prop_01: $20FC26
+ ArtPtr32X_MSKai: $210128
+ AP3_MSKai_GreenBlob_00: $2101DC
+ AP3_MSKai_GreenBlob_01: $210ABC
+ AP3_MSKai_Shots_00: $211408
+ AP3_MSKai_Shots_01: $2115C8
+ AP3_MSKai_P0_ArmHandJoint: $211736
+ AP3_MSKai_P0_ArmFront: $21179A
+ AP3_MSKai_P0_WristSpike_00: $21223E
+ AP3_MSKai_P0_WristSpike_01: $212304
+ AP3_MSKai_P0_WristSpike_02: $2123DE
+ AP3_MSKai_P0_WristSpike_03: $2124A4
+ AP3_MSKai_P0_WristFire_00: $212578
+ AP3_MSKai_P0_WristFire_01: $2125F2
+ AP3_MSKai_P0_WristFire_02: $212664
+ AP3_MSKai_Fire_00: $2126B8
+ AP3_MSKai_Fire_01: $212722
+ AP3_MSKai_Fire_02: $2127E0
+ AP3_MSKai_Fire_03: $2128A2
+ AP3_MSKai_Fire_04: $2129D8
+ AP3_MSKai_P2_LaserBeam_00: $212B12
+ AP3_MSKai_P2_LaserBeam_01: $212E60
+ AP3_MSKai_P0_HandFinger_00: $213382
+ AP3_MSKai_P0_HandFinger_01: $2134DE
+ AP3_MSKai_P0_HandFinger_02: $21363A
+ AP3_MSKai_P0_HandFinger_03: $2137B8
+ AP3_MSKai_P0_HandFinger_04: $21393A
+ AP3_MSKai_P0_HandFinger_05: $213AC6
+ AP3_MSKai_P0_HandFront_Twist_00: $213C5C
+ AP3_MSKai_P0_HandFront_Twist_01: $21403A
+ AP3_MSKai_P0_HandFront_Twist_02: $21438E
+ AP3_MSKai_P0_LegFront: $21465A
+ AP3_MSKai_P0_LegBack: $21514C
+ AP3_MSKai_P0_FootFront: $215C0A
+ AP3_MSKai_P0_FootBack: $2160FA
+ AP3_MSKai_P1_BodyF: $21658E
+ AP3_MSKai_P1_Leg: $21760C
+ AP3_MSKai_P1_BeamAtk1: $2179EA
+ AP3_MSKai_P1_BeamAtk2: $217BC6
+ AP3_MSKai_P1_HandSmash_00: $217FDE
+ AP3_MSKai_P1_HandSmash_01: $2183E6
+ AP3_MSKai_P1_HandSmash_02: $2185CA
+ AP3_MSKai_P1_HandSmash_03: $21888C
+ AP3_MSKai_P1_ArmSmash_00: $218AF6
+ AP3_MSKai_P1_ArmSmash_01: $218EDA
+ AP3_MSKai_P1_ArmSmash_02: $219252
+ AP3_MSKai_P1_ArmSmash_03: $2195CC
+ ArtPtr32X_InvinStars: $219900
+ AP3_InvinStars_Stars_00: $219910
+ AP3_InvinStars_Stars_01: $219940
+ AP3_InvinStars_Stars_02: $219994
+ AP3_InvinStars_Stars_03: $2199FE
+
+*Segment 001 - Pal32X_SSPalc_Ptr: Offset $7D5F4  Size $4
+
+*Segment 002 - Pal32X_SSGlbl_Ptr: Offset $7D608  Size $4
+
+*Segment 003 - Pal32X_SS_Ptr: Offset $7D60C  Size $4
+
+*Segment 004 - Pal32X_SSObjs_Ptr: Offset $7F170  Size $4
+
+*Segment 005 - Pal32X_SS: Offset $7F638  Size $270
+ Pal32X_SSGlbl: $7F648
+ Pal32X_SSObjs: $7F66A
+ Pal32X_SSPalc: $7F704
+ Pal32X_SSMighty: $7F7C4
+ Pal32X_SSKnuckles: $7F7E2
+ Pal32X_SSCharmy: $7F806
+ Pal32X_SSVector: $7F82A
+ Pal32X_SSBomb: $7F84C
+ Pal32X_SSHeavy: $7F868
+ Pal32X_SSEspio: $7F88C
 
