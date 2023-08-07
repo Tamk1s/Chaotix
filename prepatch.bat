@@ -137,10 +137,12 @@ REM Patch Small Hourglass monitor to goto new Combi Breaker code (at $8F75DE)
 bytepatch.exe -a 0x14C48 kc.bin 4E71 4E71 4EB9 008F 75DE
 bytepatch.exe -a 0x0775DE kc.bin -f "Assets\Code\Monitor_CombiBreaker.bin"
 
+
 REM Code patch to disable AutoDemos
 bytepatch.exe -a 0x003DBE kc.bin 6012
 bytepatch.exe -a 0x0044F4 kc.bin 6012
-
+REM Attempt to fix Tutorial Zone 8x8 text
+bytepatch.exe -a 0x02F62A kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 49F8 E600
 REM Code patches to undo normal game progress for Demo
 bytepatch.exe -a 0x010F28 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x03E510 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71
@@ -253,3 +255,19 @@ bytepatch.exe -a 0x03DD0A kc.bin 4EB9 008F 76E0 4E71 4E71 4E71 4E71 4E71 4E71
 REM Bugfix to kick player out of BS if around 10 seconds of game timer left (prevent 9'59"99 overflow bug)
 bytepatch.exe -a 0x03DDF4 kc.bin 4EB9 008F 7708 4E71
 bytepatch.exe -a 0x0776E0 kc.bin -f "Assets\Code\BSRing_Fix.bin"
+
+
+REM Survival mode
+REM NOP IIZ Zone force
+REM SNEEP bytepatch.exe -a 0x004C18 kc.bin 4E71 4E71 4E71
+REM NOP Act 0/4 checks
+REM SNEEP bytepatch.exe -a 0x008EE8 kc.bin 0C78 0005 6C00 00A8
+REM Patch out IIZ checks from act jumper object
+REM bytepatch.exe -a 0x026C98 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 6006
+
+REM Proper concurrent act setup, Force Practice mode from NHZ eject, 
+REM bytepatch.exe -a 0x02901C kc.bin 31D8 FDE2
+REM bytepatch.exe -a 0x029026 kc.bin 31FC 0058 DFDE
+
+REM Modify Act jumper object to set Practice mode, goto next act
+REM SNEEP bytepatch.exe -a 0x026C94 kc.bin 3038 DFF4 31C0 FDE2 4EB9 0088 8F78

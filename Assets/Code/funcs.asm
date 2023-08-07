@@ -9,3 +9,4 @@ TrainingMenu_InitSlot	EQU	$008BF77C
 LoadPalette32X		EQU	$00883102
 LoadAndMirrorPalette32X	EQU	$008830B8
 BS_DestroyCube		EQU	$008BD824
+Level_IntroPractice_GotoNext	EQU	$00888F78
