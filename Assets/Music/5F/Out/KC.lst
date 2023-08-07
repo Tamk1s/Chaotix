@@ -813,8 +813,10 @@
 000008 0000             	dc.b $00,$00
 
 00000A                  S3K_Jump62_PSG1:
-00000A                  	smpsPSGvoice	$0D
-00000A F50D             	dc.b	$F5,$0D
+                        	;!@
+                        	;smpsPSGvoice	$0D
+00000A                  	smpsPSGvoice	$00
+00000A F500             	dc.b	$F5,$00
 00000C 9E05             	dc.b nF2, $05
 00000E                  	smpsModSet	$02, $01, $F8, $65
 00000E F00201F865       	dc.b	$F0,$02,$01,$F8,$65

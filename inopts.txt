@@ -94,8 +94,8 @@ StartSeg GameHeader Big_Endian $000100 $8E
 	String	"SEGA 32X        "								;Console Name	
 	;String	"SEGA MEGASD     "								;Console Name
 	String	"(C)GENESISDOES 2023.AUG"						;Copyright Date
-	String  "KNUCKLES CLACKERS V0.2A DEMO                "	;Domestic Game Name
-	String  "KNUCKLES CLACKERS V0.2A DEMO                 "	;Foreign Game Name
+	String  "KNUCKLES CLACKERS V0.1B DEMO                "	;Domestic Game Name
+	String  "KNUCKLES CLACKERS V0.1B DEMO                 "	;Foreign Game Name
 	String	"GM MK-84503-01"								;Game Serial Number
 EndSeg
 ;EndRegion
@@ -144,8 +144,18 @@ StartSeg MainMenu_Strings Big_Endian $003E5E $40
 	BYTE CASC_NullTerm
 	BYTE CASC_NullTerm
 	BYTE CASC_NullTerm
-	BYTE _B,_O,_S,_S,_SPC,_R,_U,_S	; "TRAINING"
-	BYTE _H
+	;BYTE _B,_O,_S,_S,_SPC,_R,_U,_S	; "TRAINING"
+	;BYTE _H
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	;BYTE CASC_NullTerm
+	BYTE _T,_R,_A,_I,_N,_I,_N,_G	; "TRAINING"
+	BYTE CASC_NullTerm
 	BYTE CASC_NullTerm
 	BYTE CASC_NullTerm
 	BYTE CASC_NullTerm
@@ -161,7 +171,7 @@ StartSeg MainMenu_Strings Big_Endian $003E5E $40
 	BYTE CASC_NullTerm
 	BYTE CASC_NullTerm
 	BYTE CASC_NullTerm
-	BYTE _L,_E,_V,_E,_L 		; "STAGE"
+	BYTE _L,_E,_V,_E,_L 		; "LEVEL"
 	BYTE _SPC
 	BYTE _S,_E,_L,_E,_C,_T ; "SELECT"
 	BYTE CASC_NullTerm
@@ -311,10 +321,16 @@ StartSeg LevelSel_Strings Big_Endian $07739E	$1B6
 	BYTE	CASC_NullTerm
 	String	"SPECIAL STAGE       "		;Special Stage
 	BYTE	CASC_NullTerm
-	String	"PLACE     "				;Place
+	;!@
+	;String	"PLACE     "				;Place
+	;BYTE	CASC_NullTerm
+	String	"ZONE      "				;Zone
 	BYTE	CASC_NullTerm
-	String	"LEVEL     "				;Level
-	BYTE	CASC_NullTerm
+	;!@
+	;String	"LEVEL     "				;Level
+	;BYTE	CASC_NullTerm
+	String	"ACT       "				;Act
+	BYTE	CASC_NullTerm	
 	String	"AT-TIME   "				;At-time
 	BYTE	CASC_NullTerm
 	String	"PLAYERS   "				;Players
@@ -478,7 +494,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	String "INTRO-GSX"
 	BYTE	CASC_NullTerm
-	String "OPENING-GSX"
+	String "THIS HORIZON"
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "TAKE OFF"
@@ -486,7 +502,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String "COMBINATION"
-	String "SONIC FACTORY"
+	String "SONIC FACTORY-SA3"
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	; String "TAKE A NAP"
@@ -510,7 +526,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "CHILD=S SONG"
-	String	"NOP ODD MARCH-BHGE"
+	String	"NOP"
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "SODA POP"
@@ -522,7 +538,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "SILVER SCREEN"
-	String	"NOP WIZARDS OF THE SONIC"
+	String	"NOP"
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "TACHY TOUCH"

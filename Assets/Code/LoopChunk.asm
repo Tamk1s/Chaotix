@@ -4,7 +4,7 @@
 ;Object type $00BC (SonED2 obj $2F)
 ;Loop Chunk spritemasker
 Obj_LoopChunkMasker:
-                move.l  #AP3_LvlGlbl,obArt_Bank(a6) ; Load LvlGlbl 32x ArtBank
+                move.l  #AP3_LvlGlbl,obArt_BankHiA(a6) ; Load LvlGlbl 32x ArtBank
                 move.w  #$1080,obSST_04_Hi(a6) 		; Set 32x sprite prio (svdp_bitmap_mode) to above MD artwork with high sprite priority $80
                 move.w  obSubType_Hi(a6),d0			; Move subtypes into d0.
                 lsr.w   #1,d0						; d0 = d0 >> 1

@@ -5574,7 +5574,9 @@ StartSeg MapEni_DL_PlayStyle_Box_Ptr Big_Endian $03E78E
 	DWORD MapEni_DL_PlayStyle_Box
 EndSeg
 StartSeg MapEni_DL_PlayStyle_ProtoBox_Ptr Big_Endian $03E7A0
-	DWORD MapEni_DL_PlayStyle_ProtoBox
+	;!@
+	;DWORD MapEni_DL_PlayStyle_ProtoBox
+	DWORD MapEni_DL_PlayStyle_Box
 EndSeg
 StartSeg MapEni_DL_SaveSlot_Box_Ptr Big_Endian $03E7F0
 	DWORD MapEni_DL_SaveSlot_Box
@@ -5632,8 +5634,9 @@ StartSeg ArtNem_Data3 Big_Endian $2C7818 $4AE6
 	MapEni_DL_OvalBG:				include		"Art/tilemaps/Menus/DataLoad/OvalBG.bin"
 	MapEni_DL_OvalLarge:			include		"Art/tilemaps/Menus/DataLoad/OvalLarge.bin"
 	MapEni_DL_OvalSmall:			include		"Art/tilemaps/Menus/DataLoad/OvalSmall.bin"
-	MapEni_DL_PlayStyle_Box:		include		"Art/tilemaps/Menus/DataLoad/PlayStyle_Box.bin"
-	MapEni_DL_PlayStyle_ProtoBox:	include		"Art/tilemaps/Menus/DataLoad/PlayStyle_ProtoBox.bin"
+	MapEni_DL_PlayStyle_Box:		include		"Art/tilemaps/Menus/DataLoad/PlayStyle_Box.bin"	
+	;MapEni_DL_PlayStyle_ProtoBox:	include		"Art/tilemaps/Menus/DataLoad/PlayStyle_ProtoBox.bin"
+	;!@ 
 	MapEni_DL_SaveSlot_Box:			include		"Art/tilemaps/Menus/DataLoad/SaveSlot_Box.bin"
 	MapEni_DL_Training_Box:			include		"Art/tilemaps/Menus/DataLoad/Training_Box.bin"	
 EndSeg

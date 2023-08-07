@@ -137,6 +137,10 @@ REM Patch Small Hourglass monitor to goto new Combi Breaker code (at $8F75DE)
 bytepatch.exe -a 0x14C48 kc.bin 4E71 4E71 4EB9 008F 75DE
 bytepatch.exe -a 0x0775DE kc.bin -f "Assets\Code\Monitor_CombiBreaker.bin"
 
+REM Code patch to disable AutoDemos
+bytepatch.exe -a 0x003DBE kc.bin 6012
+bytepatch.exe -a 0x0044F4 kc.bin 6012
+
 REM Code patches to undo normal game progress for Demo
 bytepatch.exe -a 0x010F28 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x03E510 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71
@@ -163,7 +167,7 @@ bytepatch.exe -a 0x004BA2 kc.bin 0002
 
 REM Mosqui sfx (flight loop)
 bytepatch.exe -a 0x004560 kc.bin 4EF9 008F 769A
-bytepatch.exe -a 0x07769A kc.bin -f "Assets\Code\Intro_Mosqui.bin"
+bytepatch.exe -a 0x07769A kc.bin -f "Assets\Code\Intro.bin"
 bytepatch.exe -a 0x004A1C kc.bin 4EF9 008F 76A6 4E71 4E71
 bytepatch.exe -a 0x004ACA kc.bin 4EF9 008F 76BA
 bytepatch.exe -a 0x0045EC kc.bin 4EF9 008F 76C6 4E71 4E71
@@ -171,13 +175,13 @@ REM bytepatch.exe -a 0x0045D8 kc.bin 4EF9 008F 76D6 4E71 4E71
 
 REM Patch TrainingMenu for new Boss Mode
 REM JsrTo new zone LUT
-bytepatch.exe -a 0x03E7E4 kc.bin 4EB9 008F 76D8
-bytepatch.exe -a 0x03F476 kc.bin 4EB9 008F 7662
-bytepatch.exe -a 0x03F490 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
-bytepatch.exe -a 0x077662 kc.bin -f "Assets\Code\BossMode2.bin"
-bytepatch.exe -a 0x03F5C2 kc.bin 0C41 0006
-bytepatch.exe -a 0x03E7D0 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
-bytepatch.exe -a 0x03F7DC kc.bin 4EB9 008F 76B4
+REM bytepatch.exe -a 0x03E7E4 kc.bin 4EB9 008F 76D8
+REM bytepatch.exe -a 0x03F476 kc.bin 4EB9 008F 7662
+REM bytepatch.exe -a 0x03F490 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x077662 kc.bin -f "Assets\Code\BossMode2.bin"
+REM bytepatch.exe -a 0x03F5C2 kc.bin 0C41 0006
+REM bytepatch.exe -a 0x03E7D0 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x03F7DC kc.bin 4EB9 008F 76B4
 
 
 REM New AAZ Miniboss artwork
@@ -185,23 +189,23 @@ REM Disable AAZ Miniboss handler?
 REM bytepatch.exe -a 0x025BBA kc.bin 4E75
 
 REM Replace AAZ Mini boss body with ending
-bytepatch.exe -a 0x025C28 kc.bin 0024
-bytepatch.exe -a 0x2BE8A6 kc.bin 0000 0000 0000 0081
+REM bytepatch.exe -a 0x025C28 kc.bin 0024
+REM bytepatch.exe -a 0x2BE8A6 kc.bin 0000 0000 0000 0081
 REM Replace AAZ Mini boss head with ending
-bytepatch.exe -a 0x025D5C kc.bin 0024
-bytepatch.exe -a 0x2BE8B6 kc.bin 0000 0300 0000 0381 0000 0400 0000 0481 0000 0500 0000 0581
+REM bytepatch.exe -a 0x025D5C kc.bin 0024
+REM bytepatch.exe -a 0x2BE8B6 kc.bin 0000 0300 0000 0381 0000 0400 0000 0481 0000 0500 0000 0581
 
 REM SFX patches
-bytepatch.exe -a 0x02614E kc.bin 703A
-bytepatch.exe -a 0x026362 kc.bin 005B
-bytepatch.exe -a 0x026300 kc.bin 0067
+REM bytepatch.exe -a 0x02614E kc.bin 703A
+REM bytepatch.exe -a 0x026362 kc.bin 005B
+REM bytepatch.exe -a 0x026300 kc.bin 0067
 
 REM Head ycoord fixes
 REM bytepatch.exe -a 0x025D84 kc.bin 0030
-bytepatch.exe -a 0x025D90 kc.bin 003C
-bytepatch.exe -a 0x025DF4 kc.bin 4E71 4E71
-bytepatch.exe -a 0x025E12 kc.bin 4E71 4E71
-bytepatch.exe -a 0x025DC4 kc.bin 0300
+REM bytepatch.exe -a 0x025D90 kc.bin 003C
+REM bytepatch.exe -a 0x025DF4 kc.bin 4E71 4E71
+REM bytepatch.exe -a 0x025E12 kc.bin 4E71 4E71
+REM bytepatch.exe -a 0x025DC4 kc.bin 0300
 
 
 
