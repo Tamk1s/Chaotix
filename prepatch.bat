@@ -92,6 +92,9 @@ REM Patch out same-char check in CharSel_2P submenu
 bytepatch.exe -a 0x032440 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x032462 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x03259A kc.bin 4E71 4E71
+REM Patch out same-char check for claw game
+REM bytepatch.exe -a 0x0294AA kc.bin 4E71 6008 ; This enables WE Clawgame 32x palette for P1 character
+
 
 REM Patches to remove vflip from Space BG (Right side)
 REM SegaScreen
@@ -150,6 +153,8 @@ bytepatch.exe -a 0x003DBE kc.bin 6012
 bytepatch.exe -a 0x0044F4 kc.bin 6012
 REM Attempt to fix Tutorial Zone 8x8 text
 bytepatch.exe -a 0x02F62A kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 49F8 E600
+REM Patch Special Stage to use Bonus Stage music
+bytepatch.exe -a 0x005A30 kc.bin 701A
 REM Code patches to undo normal game progress for Demo
 bytepatch.exe -a 0x010F28 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x03E510 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71
@@ -255,7 +260,7 @@ bytepatch.exe -a 0x0127D2 kc.bin 4EF9 008F 7720 4E71 4E71 4E71 4E71
 REM Ring Cap patch (levels)
 bytepatch.exe -a 0x02AFDC kc.bin 3038 E008 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 31C0 E008
 REM Spikes ring loss timing(BS)
-bytepatch.exe -a 0x03DA68 kc.bin 4EB9 008F 76F4 4E71 4E71
+bytepatch.exe -a 0x03DA68 kc.bin 4EF9 008F 76F4 4E71 4E71
 REM Ring box ring cap/timing (BS)
 bytepatch.exe -a 0x03DAB8 kc.bin 4EB9 008F 76E6 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 REM Single ring ring cap/timing (BS)
@@ -279,3 +284,5 @@ REM bytepatch.exe -a 0x029026 kc.bin 31FC 0058 DFDE
 
 REM Modify Act jumper object to set Practice mode, goto next act
 REM SNEEP bytepatch.exe -a 0x026C94 kc.bin 3038 DFF4 31C0 FDE2 4EB9 0088 8F78
+
+

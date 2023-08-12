@@ -398,7 +398,9 @@ StartSeg LevelPlaylist Big_Endian $076EE4 6
 	BYTE	$1B	;Act 1 (unused). WE Roulette
 	BYTE	$24 ;Act 2 (Metal Sonic Kai Final Boss)
 	BYTE	$1A ;Act 3 (unused). Bonus Stage
-	BYTE	$14 ;Act 4 (unused). Special Stage
+	;!@ 
+	; BYTE	$14 ;Act 4 (unused). Special Stage
+	BYTE	$1A ;Act 4 (unused). Special Stage
 	BYTE	$F1 ;Act 5 (unused). SMPS Stop
 	BYTE	$F1 ;Act 6 (unused). SMPS Stop
 EndSeg
