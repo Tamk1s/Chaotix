@@ -4,6 +4,11 @@ VarionIcaria
 - Disasm research and other assistance
 - Notes on how to expand to another 1MB ROM Data bank
 
+JCFields:
+- Research and documentation on the SRAM format in Chaotix
+- https://gitlab.com/jcfields/chaotix-save-editor
+- https://jcfields.gitlab.io/chaotix-save-editor/
+
 Heran Bago
 - Lots of Chaotix research
 - Notes on GBA<->32x color conversion
@@ -12,20 +17,37 @@ JJFTails
 - Chaotix Stats Editor notes
 - Chaotix Art Format notes
 
+MainMemory
+- ChaotixSpriteEdit tool (Sega 32x art editor)
+
+The Poke Community:
+- GBA/RGB555 (Sega 32x) color conversion formulas
+- https://www.pokecommunity.com/showthread.php?t=354075
+
 Cokie:
 - S3K Chunk Viewer (LUA), modified for KC
 - S3K Obj Viewer/History
 - https://forums.sonicretro.org/index.php?threads/sonic-3k-gens-chunk-overlay-lua-script.41256/
 
+Tribeam:
+- Tribeam's Realtime Palette Editor (expanded to handle Chaotix/SuperVDP CRAM, for Knuckles' Clackers development)
+- https://info.sonicretro.org/Tribeam%27s_Realtime_Palette_Editor
+
+Clownacy:
+- Captain PlanED
+- https://forums.sonicretro.org/index.php?threads/captain-planeed.35372/
+
+FragGag:
+- KENSSharp
+- https://github.com/sonicretro/KENSSharp/
+
 Natsumi/Aurora Fields
 - MDMusicPlayer 1.1 (Chaotix music to ASM, Sonic 1 to ASM, Z80 Type 2 basic driver for Sonic Crackers)
 - ChaotixCompressor.exe
 
-MainMemory
-- ChaotixSpriteEdit
-
 FlameWing et. al.
 - S3K SMPS2ASM, used for S1toKC SMPS2ASM conversion base script
+- Sonic 3K Flamewing driver (used for some finetuning/SMPS conversion)
 - Sonic Retro Music Hacking guide info
 
 Oerg & Puto
@@ -39,30 +61,43 @@ ValleyBell
 - Info on VGI->TFI conversion
 - DPCM2PCM (PWM sample creation)
 
+Shiru
+- VGM Music Maker and command line utils (FM instrument creation/sampling)
+
+Neologix:
+- VGM2PRE instrument ripping utility
+- https://vgmrips.net/wiki/Vgm2pre
+
+Yarm
+- VGM2MID (YM2151 edition)
+- Used to convert Sharp X68000 VGMs to MID for SMPS32x conversion (MID2SMPS)
+- Used for replacement of song $0D Overture (Intro song from Geograph Seal, Sharp X68000)
+- https://vgmrips.net/forum/viewtopic.php?t=2421
+
 MarkeyJester
 - Sonic Crackers disasm (game, z80 Sound Driver)
 
 AkumaYin
-- New Sonic crackers findings
+- New Sonic crackers findings/research
 
 Andlabs
 - Initial Chaotix disasm
-- KC 
-- Info on PWM sample table
-- Chaotix32XSideArtAndPaletteViewer.exe
+- Info on PWM sample table (https://forums.sonicretro.org/index.php?threads/knuckles-chaotixs-pwm-samples-drums.17220/)
+- Chaotix32XSideArtAndPaletteViewer.exe utility (Sega 32x/Chaotix art viewer for ArtBanks)
 - 32x Bitcycler art compression format notes
 
 Stealth
 - Initial SonED2 ROMulan scripts/project files
+- SonED2 & ROMulan utilities
 - KCPosFix.exe
 - objyadj.exe
 - fixheadr.exe
 
 HiveBrain
-- HivePal utility (VDP palette searching)
-
-Shiru
-- VGM Music Maker and command line utils (FM instrument creation/sampling)
+- PCXPal and HivePal utilities
+- https://segaretro.org/PCXpal
+- https://retrocdn.net/images/0/0c/HivePal_v2.1.7z
+- https://retrocdn.net/images/f/f3/HivePal_v2.2.7z
 
 TCRF
 - Beta content
@@ -83,10 +118,10 @@ Misc:
 
 
 Beta testers/reviewers:
+- DeltaWooloo
+- ProjectFM
 - RedHotSonic
 - MegaGWolf
-- ProjectFM
-- DeltaWooloo
 
 Artwork/assets:
 Geo Prower
@@ -101,9 +136,7 @@ SonicRetro/CulT
 
 Compile Heart, IdeaFactory et. al
 - Inspriation for Tetris Coins from Lowee (BS Assets, from the anime)
-- Neptune character
-- "Hail to Planeptune baby"
-- Neptune logo
+- Neptune character/logo
 
 Jackbh (Deviantart)/Jack Holland
 - Sonic Crackers/Chaotix SSZ/TTZ Level Icons (MD/32x)
@@ -123,20 +156,36 @@ Unknown
 - Sonic Crackers logo
 
 Sega
-- "Welcome to the Next Level"
-- Chaotix
+- "Welcome to the Next Level" PWM sample (https://youtu.be/aeqYSO7byCA)
+- KChaotix
 - S1
 - CD
 - Knuckles logo (S3K)
 - Crackers beta
 
 
-Music:
+Music/SFX:
 LukeeGD
-- Elegy (HyperDimension Neptunia V)
+- Elegy score (HyperDimension Neptunia V, https://lukezgd.github.io/midi-files/midis/Hyperdimension%20Neptunia%20ReBirth%203%20-%20Elegy%20(Incomplete)%20-%20MIDI%20by%20LukeeGD.mid)
+- Splash Battle Theme (HyperDimension Neptunia Re;birth 1, https://lukezgd.github.io/midi-files/midis/Hyperdimension%20Neptunia%20ReBirth%201%20-%20Splash%20-%20MIDI%20by%20LukeeGD.mid)
+- Outside of the Dimension (MegaDimension Neptuniva V2, https://lukezgd.github.io/midi-files/midis/Megadimension%20Neptunia%20VII%20-%20Outside%20the%20Dimension%20-%20MIDI%20by%20LukeeGD.mid)
+RedHotSonic:
 - Sonic Factory SMPS (SAdv3, RedHotSonic patches)
-- Various others
-
+Unknown Authors:
+- Dimension Tripper (HyperDimension Neptunia OP, https://onlinesequencer.net/1412428)
+JangoBoba
+- Blue Twilight score (HyperDimension Neptunia series, https://musescore.com/user/13260206/scores/5516068)
+- Blue Moon score (MegaDimension Neptunia V2, https://musescore.com/user/13260206/scores/3918921)
+Nomy:
+- Original Zelda vs. Nomy XM module file for final boss fight
+- https://modarchive.org/index.php?request=view_by_moduleid&query=67866
+Sonic Team JR
+- Original invicinbility MIDI theme for SRB2 (Sonic Robo Blast 2)
 ValleyBell
 - Technical Notes on Chaotix PWM driver SMPS CF features
 - Permission given to use instrument patches from Sonic 2 Recreation's Sonic Factory SMPS port (for my own SMPS32x conversion)
+Devon
+- Sonic CD diassembly, used for SFX ports of SFX $BC, $C5, $CE
+- https://github.com/DevsArchive/sonic-cd-disassembly
+Flamewing
+- Sonic 3K Flamwing driver, used for SFX port of S3K $62 (PSG Jump)
