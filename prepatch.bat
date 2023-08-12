@@ -256,7 +256,7 @@ REM bytepatch.exe -a 0x077650 kc.bin -f "Assets\Code\Pal32x_Debug.bin"
 
 REM Bugfixes for Ring Cap, Bonus Stages
 REM Bugfix to hide Bonus Stage ring if <10 seconds left
-bytepatch.exe -a 0x0127D2 kc.bin 4EF9 008F 7720 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x0127D2 kc.bin 4EF9 008F 7720 4E71 4E71 4E71 4E71
 REM Ring Cap patch (levels)
 bytepatch.exe -a 0x02AFDC kc.bin 3038 E008 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 31C0 E008
 REM Spikes ring loss timing(BS)
@@ -266,7 +266,11 @@ bytepatch.exe -a 0x03DAB8 kc.bin 4EB9 008F 76E6 4E71 4E71 4E71 4E71 4E71 4E71 4E
 REM Single ring ring cap/timing (BS)
 bytepatch.exe -a 0x03DD0A kc.bin 4EB9 008F 76E0 4E71 4E71 4E71 4E71 4E71 4E71								 								 								 
 REM Bugfix to kick player out of BS if around 10 seconds of game timer left (prevent 9'59"99 overflow bug)
-bytepatch.exe -a 0x03DDF4 kc.bin 4EB9 008F 7708 4E71
+REM bytepatch.exe -a 0x03DDF4 kc.bin 4EB9 008F 7708 4E71
+REM Patch Bonus Stage start code to cache level time
+bytepatch.exe -a 0x03CCC8 kc.bin 4EB9 008F 7708 4E71 4E71 4E71
+REM Patch Bonus Stage Exit code to restore level time
+bytepatch.exe -a 0x03E0F2 kc.bin 4EB9 008F 7724 4E71									  
 bytepatch.exe -a 0x0776E0 kc.bin -f "Assets\Code\BSRing_Fix.bin"
 
 
