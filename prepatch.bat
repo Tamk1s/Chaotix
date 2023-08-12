@@ -88,8 +88,10 @@ bytepatch.exe -a 0x14B8C kc.bin 003E
 REM Patch Growth sfx in lvlsel roulette
 bytepatch.exe -a 0x2833c kc.bin 005D
 
-REM BGScroll deformation byte patch to force AAZ parallax for TTZ Classic!
-bytepatch.exe -a 0x8082 kc.bin 0706 0704 0702 0700 06FE 06F6 06FA
+REM Patch out same-char check in CharSel_2P submenu
+bytepatch.exe -a 0x032440 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x032462 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x03259A kc.bin 4E71 4E71
 
 REM Patches to remove vflip from Space BG (Right side)
 REM SegaScreen
@@ -124,7 +126,7 @@ bytepatch.exe -a 0x003446 kc.bin 4EB9 008F 7574
 bytepatch.exe -a 0x077574 kc.bin -f "Assets\Code\Sega_Jingle1.bin"
 
 REM Patch jsr ReadControllers in SegaScreen_Vint with jsr to new routine at $077594/$8F7594:
-REM New code for PWM issues request for Sega Screen
+REM New code for PWMIssueRequest for Sega Screen
 bytepatch.exe -a 0x0036EC kc.bin 4EB9 008F 7594
 bytepatch.exe -a 0x077594 kc.bin -f "Assets\Code\Sega_Jingle2.bin"
 
@@ -138,6 +140,11 @@ bytepatch.exe -a 0x14C48 kc.bin 4E71 4E71 4EB9 008F 75DE
 bytepatch.exe -a 0x0775DE kc.bin -f "Assets\Code\Monitor_CombiBreaker.bin"
 
 
+
+
+REM Release demo stuff
+REM BGScroll deformation byte patch to force AAZ parallax for TTZ Classic!
+bytepatch.exe -a 0x8082 kc.bin 0706 0704 0702 0700 06FE 06F6 06FA
 REM Code patch to disable AutoDemos
 bytepatch.exe -a 0x003DBE kc.bin 6012
 bytepatch.exe -a 0x0044F4 kc.bin 6012
@@ -154,6 +161,7 @@ REM 4EB9 008F 7600
 REM 5241 41F8 DFFE 1181 0000 3238 E010 3001 0280 0000 0FFF E959 0241 000F C2FC 0F00 D081 D1B8 E016
 bytepatch.exe -a 0x010F86 kc.bin 4EB9 008F 7600 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x077600 kc.bin -f "Assets\Code\DemoPatch2.bin"
+
 
 
 REM New BigRing artwork (32x beta from unused Eggman Intro cutscene from 1207 proto)

@@ -93,6 +93,31 @@ ren "99.wav.stripped" "99.bin"
 REM ren "9D.wav.stripped" "9D.bin"
 ren "9F.wav.stripped" "9F.bin"
 
+REM Patch last 4 bytes of all samples with $8080 8080 bytes
+REM This will make the samples silences (no weird looping tone) 
+Echo Patch silence into last 4 bytes of samples
+call silenceFix.bat "81.bin"
+call silenceFix.bat "82.bin"
+call silenceFix.bat "83.bin"
+call silenceFix.bat "84.bin"
+call silenceFix.bat "85-87.bin"
+call silenceFix.bat "88.bin"
+call silenceFix.bat "89.bin"
+call silenceFix.bat "8A.bin"
+call silenceFix.bat "8B.bin"
+call silenceFix.bat "8C.bin"
+call silenceFix.bat "8D.bin"
+call silenceFix.bat "8E.bin"
+call silenceFix.bat "8F.bin"
+call silenceFix.bat "90-91.bin"
+call silenceFix.bat "92-93.bin"
+call silenceFix.bat "94-95.bin"
+call silenceFix.bat "96.bin"
+call silenceFix.bat "97.bin"
+call silenceFix.bat "98.bin"
+call silenceFix.bat "99.bin"
+call silenceFix.bat "9F.bin"
+
 REM Copy all LPCM files, rename to PWM_XX (0-based naming for SMPSPlay)
 Echo Rename a copy of files for SMPSPlay
 Copy /Y "81.bin" "PWM_00.bin"
@@ -310,13 +335,13 @@ SET PAR[22].addr=222F9250
 SET PAR[23].addr=222FAB14
 SET PAR[24].addr=222FADBC
 REM !@ Manual override back to samples $85-87
-SET PAR[25].addr=2205F7B8
-SET PAR[26].addr=2205F7B8
-SET PAR[27].addr=2205F7B8
+SET PAR[25].addr=2205F808
+SET PAR[26].addr=2205F808
+SET PAR[27].addr=2205F808
 REM !@ New sample (Neptune Dada)
 SET PAR[28].addr=222FB687
 REM !@ Manual override back to sample $8E
-SET PAR[29].addr=2206BC74
+SET PAR[29].addr=2206BCC4
 REM !@ New samples ($9F-$A2 VCop Orchit)
 SET PAR[30].addr=222FF0B8
 SET PAR[31].addr=222FF0B8

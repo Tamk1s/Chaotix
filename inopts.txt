@@ -522,7 +522,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "CRYSTAL NIGHTMARE"
-	String "SPLASH-HDNR1"
+	String "NOP"
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "CHILD=S SONG"
