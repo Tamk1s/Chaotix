@@ -38,7 +38,10 @@ Extern  "KCPosFix" "1" "Levels/AAZ/FG/PlSt3MN.bin" "Levels/AAZ/FG/FGSt3MN.bin"
 Extern  "KCPosFix" "1" "Levels/AAZ/FG/PlSt4MN.bin" "Levels/AAZ/FG/FGSt4MN.bin"
 Extern  "KCPosFix" "1" "Levels/AAZ/FG/PlSt56MN.bin" "Levels/AAZ/FG/FGSt56MN.bin"
 
-Extern  "KCPosFix" "1" "Levels/TTZ/FG/PlSt06MN.bin" "Levels/TTZ/FG/FGSt06MN.bin"
+;!@
+;Extern  "KCPosFix" "1" "Levels/TTZ/FG/PlSt06MN.bin" "Levels/TTZ/FG/FGSt06MN.bin"
+Extern  "KCPosFix" "1" "Levels/TTZ/FG/PlSt03MN.bin" "Levels/TTZ/FG/FGSt03MN.bin"
+Extern  "KCPosFix" "1" "Levels/TTZ/FG/PlSt4MN.bin" "Levels/TTZ/FG/FGSt4MN.bin"
 
 Extern  "KCPosFix" "1" "Levels/MMZ/FG/PlSt01MN.bin" "Levels/MMZ/FG/FGSt01MN.bin"
 Extern  "KCPosFix" "1" "Levels/MMZ/FG/PlSt2MN.bin" "Levels/MMZ/FG/FGSt2MN.bin"
