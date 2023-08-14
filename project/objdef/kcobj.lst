@@ -10408,8 +10408,8 @@ Type 0    XMin: -16
 
      Object ID:  24
     # of Zones:   1
-    Zone Entry:  1 way door (left)(TTZ)
-   Description: Unknown
+    Zone Entry:  FF
+   Description: 1 way door (left)(TTZ)
  Num Bitfields:   0
   DefaultParam:   0
    DefaultFlag:   0
