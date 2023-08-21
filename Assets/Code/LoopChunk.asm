@@ -4,16 +4,16 @@
 ;Object type $00BC (SonED2 obj $2F)
 ;Loop Chunk spritemasker
 Obj_LoopChunkMasker:
-                move.l  #AP3_LvlGlbl,obArt_BankHiA(a6) ; Load LvlGlbl 32x ArtBank
-                move.w  #$1080,obSST_04_Hi(a6) 		; Set 32x sprite prio (svdp_bitmap_mode) to above MD artwork with high sprite priority $80
-                move.w  obSubType_Hi(a6),d0			; Move subtypes into d0.
-                lsr.w   #1,d0						; d0 = d0 >> 1
-                lea     (Obj_Chunk_Frames).l,a0		; Load addr of sprite frame table into a0
-                move.w  (a0,d0.w),obArt_Frame(a6) 	; Move subtypes's 32x sprite frame into SST from table 
+                move.l  #AP3_LvlGlbl,obArt_BankHiA(a6) 	; Load LvlGlbl 32x ArtBank
+                move.w  #$1080,obPriority_hi(a6) 			; Set 32x sprite prio to above MD artwork with high sprite priority $80
+                move.w  obPriority_hi(a6),d0			; Move subtypes into d0.
+                lsr.w   #1,d0							; d0 = d0 >> 1
+                lea     (Obj_Chunk_Frames).l,a0			; Load addr of sprite frame table into a0
+                move.w  (a0,d0.w),obArt_Frame_hi(a6) 	; Move subtypes's 32x sprite frame into SST from table 
 
-                jsr     ChkObjectVisible			; Handle visibility of object while scrolling
-                bcc.s   locret_lcm					; If on screen, skip
-                jsr     DeleteObject				; If off screen, delete
+                jsr     ChkObjectVisible				; Handle visibility of object while scrolling
+                bcc.s   locret_lcm						; If on screen, skip
+                jsr     DeleteObject					; If off screen, delete
 
 locret_lcm:
                 rts

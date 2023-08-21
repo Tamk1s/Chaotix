@@ -1,0 +1,49 @@
+Formats:
+
+
+		tiles	blocks		chunks		layout	objs
+S1		nem		eni			kos			unc?
+SCD		nem		nem			unc?		unc?
+S2		kos		kos			kos			unc?
+S2NA	nem		unc?/nem	unc?/kos	unc?
+S3K		KosM	Kos			Kos			unc?
+SC		nem		eni			enig		enig
+KC		nem		eni			enig		enig
+
+
+
+Chunks:
+	Level sizes:
+	w	h   =	t
+FG Level:
+AAZ1-5	40	40	1000
+BBZ1-5	40	20	800
+SSZ1-5	40	20	800
+TTZ1-5	20	20	400
+WE01	40	8	200
+IIZ1	40	8	200
+MMZ1-5	20	10	200
+IIZ2	20	10	200
+WE2	10	10	100
+IIZ4	10	10	100
+IIZ3	8	20	100	
+TZ3	8	8	40
+TTZB	8	4	20
+TZ2,4-5	8	4	20
+SSZBoss	4	8	20
+TZ1,6-7	4	4	10
+
+BG Level:
+MMZ1	20	20?	400
+MMZ2-5	20	10?	200
+AAZ1-5	8	8	40
+SSZ3-5	4	10?	40
+BBZ1-5	4	8	20
+WE01	10	2	20
+TTZ1-5B	4	8	20
+SSZ1-2	4	8	20
+WE2	4	4	10	
+IIZ1-4	4	4	10
+TZ1-6	4	4	10 (invalid)
+Tut1-4	4	4	10
+SSZB	4	2	8

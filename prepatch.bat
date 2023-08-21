@@ -6,6 +6,7 @@ cd Assets/Code
 call cleanup.bat
 call cmp.bat
 cd ../../
+copy /b "kc.bin"+"Assets\Code\PAD.bin" "kc.bin"
 
 
 REM EXPERIMENTS

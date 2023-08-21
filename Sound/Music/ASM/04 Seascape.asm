@@ -1,4 +1,4 @@
-Target	EQU	$41A0A
+Target	EQU	$42453
 	smpsHeaderVoice	Seascape_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $33

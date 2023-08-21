@@ -1,4 +1,4 @@
-Target	EQU	$42B8E
+Target	EQU	$435D7
 
 PSGVol	EQU $05
 PSGModCtrl EQU $00

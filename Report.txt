@@ -10,8 +10,8 @@ Fixed Segments:
 
 Floating Segments:
 
-*File End: Offset $300000  Size $100000
- *Remaining Available Space: Offset $300000  Size $100000
+*File End: Offset $400000  Size $0
+ *Remaining Available Space: Offset $400000  Size $0
 
 
 Segment\Label Placement

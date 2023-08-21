@@ -9,7 +9,7 @@ REM Music
 
 Copy /y /b "01\Out\01 Door Into Summer.bin" "Preview\Data\Knuckles Maniax\01 Door Into Summer.skc"
 Copy /y /b "02\Out\02 Electoria.bin" "Preview\Data\Knuckles Maniax\02 Electoria.skc"
-REM Copy /y /b "03\Out\03 Speed Of Sound.bin" "Preview\Data\Knuckles Maniax\03 Speed Of Sound.skc"
+Copy /y /b "03\Out\03 Speed Of Sound.bin" "Preview\Data\Knuckles Maniax\03 Speed Of Sound.skc"
 REM Copy /y /b "04\Out\04 Seascape.bin" "Preview\Data\Knuckles Maniax\04 Seascape.skc"
 REM Copy /y /b "05\Out\05 Midnight Greenhouse.bin" "Preview\Data\Knuckles Maniax\05 Midnight Greenhouse.skc"
 REM Copy /y /b "06\Out\06 New Moon.bin" "Preview\Data\Knuckles Maniax\06 New Moon.skc"
@@ -65,7 +65,7 @@ REM Music
 
 Copy /Y "01\Out\KC.asm" "..\..\Sound\Music\ASM\01 Door Into Summer.asm"
 Copy /Y "02\Out\KC.asm" "..\..\Sound\Music\ASM\02 Electoria.asm"
-REM Copy /Y "03\Out\KC.asm" "..\..\Sound\Music\ASM\03 Speed Of Sound.asm"
+Copy /Y "03\Out\KC.asm" "..\..\Sound\Music\ASM\03 Speed Of Sound.asm"
 REM Copy /Y "04\Out\KC.asm" "..\..\Sound\Music\ASM\04 Seascape.asm"
 REM Copy /Y "05\Out\KC.asm" "..\..\Sound\Music\ASM\05 Midnight Greenhouse.asm"
 REM Copy /Y "06\Out\KC.asm" "..\..\Sound\Music\ASM\06 New Moon.asm"

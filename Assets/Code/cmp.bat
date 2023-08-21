@@ -12,3 +12,5 @@ REM asmx -e -w -l BigRing_Frames.lst -C 68K -b 0x892902 -o BigRing_Frames.bin cB
 REM asmx -e -w -l BossMode2.lst -C 68K -b 0x8F7662 -o BossMode2.bin cBossMode2.asm > BossMode2.log
 REM asmx -e -w -l Menu_Palc.lst -C 68K -b 0x8F76FA -o Menu_Palc.bin cMenu_Palc.asm > Menu_Palc.log
 REM asmx -e -w -l Msu.lst -C 68K -b 0x9E9500 -o Msu.bin cMsu.asm > Msu.log
+
+zerofill.exe -f -q 1048576 PAD.bin

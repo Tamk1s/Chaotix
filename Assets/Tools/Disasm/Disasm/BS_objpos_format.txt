@@ -1,0 +1,93 @@
+Block data format: xxyy ttcc
+xx = xcoord?
+yy = ycoord?
+tt = type
+cc = command ($00 = do nothing, $FF = terminate segment)
+
+
+Block types (tt):
+
+Cube types:
+$00 = Exit cube
+$01 = SpringY (Phase 0)
+$02 = SpringY (P1)
+$03 = SpringY (P2)
+$04 = Spikes
+$05 = SpringR (Phase 0)
+$06 = SpringR (P1)
+$07 = SpringR (P2)
+$08 = Ring Box
+$09 = Pts Box
+$0A = Speed Up
+$0B = Speed Down
+$0C = Solid Block
+$0D = Break Block
+$0E = LvlSel Powerup
+$0F = Square obstacle (green)
+$10 = Combi Catcher Powerup
+
+Not cubes:
+$FE = Vertical girder
+$FD = Horizontal Girder
+$FF = Ring
+
+
+
+BS_Layout02 bytecode disassembly:
+
+Header (byte pointer offset for segments within file)
+0020 0020 0020 0020 0020 0020 0020 0022 00A2 00A4 00C4 00C4 00C4 00C4 00C4 00C4
+
+Segments:
+Seg 0 = $20
+Seg 1 = $22
+Seg 2 = $A2
+Seg 3 = $A4
+Seg 4 = $C4
+
+
+ 0000 nop	= Seg 0
+ 9088 0000	= Seg 1.	Exit block
+ D088 0000				Exit block, etc.
+ 1088 0000
+ 5088 0000
+ B098 0000
+ F098 0000
+ 3098 0000
+ 7098 0000
+ 90C8 0000
+ D0C8 0000
+ 10C8 0000
+ 50C8 0000
+ B0D8 0000
+ F0D8 0000
+ 30D8 0000
+ 70D8 0000
+ 9008 0000
+ D008 0000
+ 1008 0000
+ 5008 0000
+ B018 0000
+ F018 0000
+ 3018 0000
+ 7018 0000
+ 9048 0000
+ D048 0000
+ 1048 0000
+ 5048 0000
+ B058 0000
+ F058 0000
+ 3058 0000
+ 7058 00FF 	Terminate segment
+
+ 0000 nop	= Seg 2
+ 90A8 0000	= Seg 3
+ 10A8 0000
+ B0F8 0000
+ 30F8 0000
+ 9028 0000
+ 1028 0000
+ B078 0000
+ 3078 00FF 	Terminate segment
+
+ 0000 nop	= Seg 4

@@ -1015,38 +1015,38 @@ v_gamemode      EQU $FFFFDFDE          ; Current gamemode
 ; ---------------------------------------------------------------------------
 
 ; enum Level stats and demos
-pts_0:           EQU 0                  ; 0 pts
-pos1_RingGet:    EQU 1                  ; Single ring get
-neg1_RingLoss:   EQU 1                  ; Single ring loss (partner hit)
-MaxDemo:         EQU 5                  ; Max amount of autodemos
-neg10_ringdebt:  EQU $A                 ; Amount of rings to subtract (absval) for Partner Call ring debt
-pos10_Rings:     EQU $A                 ; Add 10 rings (monitors)
-pos10_RingFBoss: EQU $A                 ; Amount of rings to start with on MSKai Boss
-neg10_ringLoss_BS: EQU $A				; Rings loss from BS Spikes
-pos20_RingBonus: EQU $14                ; Amount of rings to spawn Bonus BigRing
-pos50_RingSpecial: EQU $32              ; Amount of rings to spawn Special BigRing
-pts_100:         EQU $64                ; 100 Pts
-pos200_RingBSSS_Start: EQU $C8          ; 200 Rings (used for BS/SS init from level select)
-pos255_Rings:    EQU $FF                ; Cap for Bonus Stage rings
-pos256_Rings:    EQU $100               ; Upper limit for Bonus Stage Rings
-pts_500:         EQU $1F4               ; 500 pts
-pts_1k:          EQU $3E8               ; 1000 pts
-pts_2k:          EQU $7D0               ; 2000 pts
-pts_3k:          EQU $BB8               ; 3000 pts
-pts_4k:          EQU $FA0               ; 4000 pts
-pts_5k:          EQU $1388              ; 5,000 pts
-pts_10k:         EQU $2710              ; 10,000 pts
-pts_50k:         EQU $C350              ; 50,000 pts
-neg999_rings:    EQU $FC19              ; -999 rings (when dead)
-neg99_rings:     EQU $FF9D              ; -99 rings (die at <=-100 rings)
-v_rings:         EQU $FFFFE008          ; Rings (word)
-v_score_tatime:  EQU $FFFFE00A          ; Score/Time Attack time (long)
-v_time:          EQU $FFFFE010          ; Level time in frames (word)
-v_chRings:       EQU $FFFFE01A          ; Current Special Stage/Chaos Ring count (word)
-v_btnpushtime2:  EQU $FFFFFD28          ; Time (in frames) for the current demo button (1 byte)
-v_demo_btn:      EQU $FFFFFD29          ; Demo button (1 byte)
-v_demo_btnAddr:  EQU $FFFFFD2A          ; Address of current demo button data frame
-v_demonum:       EQU $FFFFFFD0          ; 0-based ID of current autoplay demo (byte)
+pts_0           EQU 0                  ; 0 pts
+pos1_RingGet    EQU 1                  ; Single ring get
+neg1_RingLoss   EQU 1                  ; Single ring loss (partner hit)
+MaxDemo         EQU 5                  ; Max amount of autodemos
+neg10_ringdebt  EQU $A                 ; Amount of rings to subtract (absval) for Partner Call ring debt
+pos10_Rings     EQU $A                 ; Add 10 rings (monitors)
+pos10_RingFBoss EQU $A                 ; Amount of rings to start with on MSKai Boss
+neg10_ringLoss_BS EQU $A				; Rings loss from BS Spikes
+pos20_RingBonus EQU $14                ; Amount of rings to spawn Bonus BigRing
+pos50_RingSpecial EQU $32              ; Amount of rings to spawn Special BigRing
+pts_100         EQU $64                ; 100 Pts
+pos200_RingBSSS_Start EQU $C8          ; 200 Rings (used for BS/SS init from level select)
+pos255_Rings    EQU $FF                ; Cap for Bonus Stage rings
+pos256_Rings    EQU $100               ; Upper limit for Bonus Stage Rings
+pts_500         EQU $1F4               ; 500 pts
+pts_1k          EQU $3E8               ; 1000 pts
+pts_2k          EQU $7D0               ; 2000 pts
+pts_3k          EQU $BB8               ; 3000 pts
+pts_4k          EQU $FA0               ; 4000 pts
+pts_5k          EQU $1388              ; 5,000 pts
+pts_10k         EQU $2710              ; 10,000 pts
+pts_50k         EQU $C350              ; 50,000 pts
+neg999_rings    EQU $FC19              ; -999 rings (when dead)
+neg99_rings     EQU $FF9D              ; -99 rings (die at <=-100 rings)
+v_rings         EQU $FFFFE008          ; Rings (word)
+v_score_tatime  EQU $FFFFE00A          ; Score/Time Attack time (long)
+v_time          EQU $FFFFE010          ; Level time in frames (word)
+v_chRings       EQU $FFFFE01A          ; Current Special Stage/Chaos Ring count (word)
+v_btnpushtime2  EQU $FFFFFD28          ; Time (in frames) for the current demo button (1 byte)
+v_demo_btn      EQU $FFFFFD29          ; Demo button (1 byte)
+v_demo_btnAddr  EQU $FFFFFD2A          ; Address of current demo button data frame
+v_demonum       EQU $FFFFFFD0          ; 0-based ID of current autoplay demo (byte)
 
 
 ; ---------------------------------------------------------------------------
@@ -1258,17 +1258,22 @@ v_ObjPos_Cache  EQU $FFFFE0A2          ; Cache for current level's ObjPos data (
 ; ---------------------------------------------------------------------------
 
 ; enum Common OST Constants (width 1 byte)
-obLLPtr         EQU 0                  ; OST Linked-List allocator chain ptr (word)
-obSST_02_Hi     EQU 2                  ; Cache word offset? Word $02 (hi byte)
-obSST_02_Lo     EQU 3                  ; Cache word offset? Word $02 (lo byte)
-obSST_04_Hi     EQU 4                  ; Word $04 (upper byte). Appears to be to set 32x prio (svdp_bitmap_mode)
-obSST_04_Lo     EQU 5                  ; Word $04 (lower byte). Appears to be to set 32x prio (svdp_bitmap_mode)
-obType_Hi       EQU 6                  ; object Type (upper byte of word, S1)
-obType_Lo       EQU 7                  ; object Type (lower byte of word, S1)
-obX_Hi          EQU 8                  ; x-axis position (upper byte of word, S1)
-obX_Lo          EQU 9                  ; x-axis position (lower byte of word, S1)
-obY_Hi          EQU $C                 ; y-axis position (upper byte of word, S1)
-obY_Lo          EQU $D                 ; x-axis position (lower byte of word, S1)
+obNextObjChain_hi EQU 0                ; Next object chain (upper byte of word)
+obNextObjChain_lo EQU 1
+obPrevObjChain_hi EQU 2                ; Previous object chain (upper byte of word)
+obPrevObjChain_lo EQU 3
+obPriority_hi   EQU 4                  ; 32x sprite prio (upper byte of word, S1)
+obPriority_lo   EQU 5                  ; 32x sprite prio (lower byte of word, S1)
+obType_hi       EQU 6                  ; object Type (upper byte of word, S1)
+obType_lo       EQU 7                  ; object Type (lower byte of word, S1)
+obX_hi          EQU 8                  ; x-axis position (long/upper word, hi byte, S1)
+obX_lo          EQU 9                  ; x-axis position (upper word, lo byte, S1)
+obXs_hi         EQU $A                 ; x-axis position (lower word, hi byte, S1)
+obXs_lo         EQU $B                 ; x-axis position (lower word, lo byte, S1)
+obY_hi          EQU $C                 ; y-axis position (long/upper word, hi byte, S1)
+obY_lo          EQU $D                 ; y-axis position (upper word, lo byte, S1)
+obYs_hi         EQU $E                 ; y-axis position (lower word, hi byte, S1)
+obYs_lo         EQU $F                 ; y-axis position (lower word, lo byte, S1)
 obArt_BankHiA   EQU $10                ; 32x Art Bank ID (Long. Upper word, hi)
 obArt_BankHiB   EQU $11                ; 32x Art Bank ID (upper word, lo)
 obArt_BankLoA   EQU $12                ; 32x Art Bank ID (Lower word, hi)
@@ -1277,27 +1282,73 @@ obScreenX_Hi    EQU $14                ; x-axis screen position (upper byte of w
 obScreenX_Lo    EQU $15                ; x-axis screen position (lower byte of word, S1)
 obScreenY_Hi    EQU $16                ; y-axis screen position (upper byte of word, S1)
 obScreenY_Lo    EQU $17                ; y-axis screen position (lower byte of word, S1)
-obArt_Frame     EQU $20                ; 32x Art frame in Bank ID (word)
+obVelX_hi       EQU $18                ; x-axis velocity (long/upper word, hi byte)
+obVelX_lo       EQU $19                ; x-axis velocity (upper word, lo byte)
+obVelXs_hi      EQU $1A                ; sub x-axis velocity (lower word, hi byte)
+obVelXs_lo      EQU $1B                ; sub x-axis velocity (lower word, lo byte)
+obVelY_hi       EQU $1C                ; y-axis velocity (long/upper word, hi byte)
+obVelY_lo       EQU $1D                ; y-axis velocity (upper word, lo byte)
+obVelYs_hi      EQU $1E                ; sub y-axis velocity (lower word, hi byte)
+obVelYs_lo      EQU $1F                ; sub y-axis velocity (lower word, lo byte)
+obArt_Frame_hi  EQU $20                ; 32x Art frame in Bank ID (word, upper byte). Sprite ID
+obArt_Frame_lo  EQU $21                ; 32x Art frame in Bank ID (word, lower byte). Orientation flags
+obWidth         EQU $22                ; Collision width (byte, S1)
+obHeight        EQU $23                ; Collision height (byte, S1)
+obRoutine_hi    EQU $24                ; object routine (word, upper byte, S1)
+obSubObjID_hi   EQU $24                ; SubObj ID (word, hi byte, S1)
+obSST_24        EQU $24
+obSubObjID_lo   EQU $25                ; SubObj ID (word, lo byte, S1)
+obRoutine_lo    EQU $25                ; object routine (word, lo byte, S1)
+obSST_25        EQU $25
+obRoutine_SubObj EQU $26
+obSST_26        EQU $26
+obFrame_Speed   EQU $26
 obSubtype_Hi    EQU $28                ; object subtype (upper byte of word, S1)
 obSubtype_Lo    EQU $29                ; object subtype (lower byte of word, S1)
+obAngle_hi      EQU $2A                ; Angle (word, upper byte, S1)
+obSST_2A        EQU $2A
+obAngle_lo      EQU $2B                ; Angle (word, lower byte, S1)
+obSST_2B        EQU $2B
+obSST_2C        EQU $2C
+obInertia_hi    EQU $2C                ; Inertia (word, hi byte, S1)
+obInertia_lo    EQU $2D                ; Inertia (word, lo byte, S1)
+obSST_2D        EQU $2D
+obXOffMan_hi    EQU $38                ; x-offset manual (word, hi byte)
+obSST_38        EQU $38
+obXOffMan_lo    EQU $39                ; x-offset manual (word, lo byte)
+obSST_39        EQU $39
+obYOffMan_hi    EQU $3A                ; y-offset manual (word, hi byte)
+obSST_3A        EQU $3A
+obYOffMan_lo    EQU $3B                ; y-offset manual (word, lo byte)
+obSST_3B        EQU $3B
+obXScale_hi     EQU $3C                ; x-scale (word, hi byte)
+obSST_3C        EQU $3C
+obXScale_lo     EQU $3D                ; x-scale (word, lo byte)
+obSST_3D        EQU $3D
+obYScale_hi     EQU $3E                ; y-scale (word, hi byte)
+obSST_3E        EQU $3E
+obYScale_lo     EQU $3F                ; y-scale (word, lo byte)
+obSST_3F        EQU $3F
+obNextObjSlot   EQU $40                ; Offset to next object
+
 
 ; ---------------------------------------------------------------------------
 
 ; enum BonusStage_Stuff
-BS_LayoutMax:    EQU $F                 ; Max amount of layouts for Bonus Stage
-BS_LayoutMax2:   EQU $3C                ; Mask for max amount of layouts (ptrs, BS_LayoutMax * 4)
-v_BS_RingCntdwn_hi: EQU $FFFFF60E
-v_BS_RingCntdwn_lo: EQU $FFFFF60F
-v_BS_ScreenX:    EQU $FFFFF610          ; BS Screenpos X (word)
-v_BS_ScreenY:    EQU $FFFFF612          ; BS Screenpos Y (word)
-v_BS_ScreenZ:    EQU $FFFFF614          ; BS Screenpos Z (word)
-v_BS_SpeedZ:     EQU $FFFFF616          ; Current z-velocity
-v_BS_MaxSpeedZ:  EQU $FFFFF692          ; Max z-velocity possible from speed boxes
-f_BS_Exit_hi:    EQU $FFFFF696          ; Stop BS flag (word, hi byte)? $FF00 if stopped; else $0000
-f_BS_Exit_lo:    EQU $FFFFF697
-v_BS_LayoutPtr:  EQU $FFFFF79E          ; Ptr to current BS Layout file addr (long)
-BS_LayoutTerm:   EQU $FFFFF81E          ; Special Layout ptr to default/1st layout. (Special Ram addr?)
-BS_MaxSpeedZ:    EQU $FFFFFFC0
+BS_LayoutMax    EQU $F                 ; Max amount of layouts for Bonus Stage
+BS_LayoutMax2   EQU $3C                ; Mask for max amount of layouts (ptrs, BS_LayoutMax * 4)
+v_BS_RingCntdwn_hi EQU $FFFFF60E
+v_BS_RingCntdwn_lo EQU $FFFFF60F
+v_BS_ScreenX    EQU $FFFFF610          ; BS Screenpos X (word)
+v_BS_ScreenY    EQU $FFFFF612          ; BS Screenpos Y (word)
+v_BS_ScreenZ    EQU $FFFFF614          ; BS Screenpos Z (word)
+v_BS_SpeedZ     EQU $FFFFF616          ; Current z-velocity
+v_BS_MaxSpeedZ  EQU $FFFFF692          ; Max z-velocity possible from speed boxes
+f_BS_Exit_hi    EQU $FFFFF696          ; Stop BS flag (word, hi byte)? $FF00 if stopped; else $0000
+f_BS_Exit_lo    EQU $FFFFF697
+v_BS_LayoutPtr  EQU $FFFFF79E          ; Ptr to current BS Layout file addr (long)
+BS_LayoutTerm   EQU $FFFFF81E          ; Special Layout ptr to default/1st layout. (Special Ram addr?)
+BS_MaxSpeedZ    EQU $FFFFFFC0
 ; ---------------------------------------------------------------------------
 
 ; enum obArt_Bank IDs

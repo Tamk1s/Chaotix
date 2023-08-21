@@ -5,7 +5,7 @@ Intro_Mosqui_FlySFX:
 	rts
 
 Intro_Mosqui_StopSFX:
-	move.w  #$2080,obSST_04_Hi(a6)
+	move.w  #$2080,obPriority_hi(a6)
 	addq.w  #4,$24(a6)
 	moveq   #sfx_cmd_LoopStop,d0
 	bsr.s	PlaySFX
