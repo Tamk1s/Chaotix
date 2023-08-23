@@ -1,4 +1,4 @@
-Target	EQU	$46B1E
+Target	EQU	$46CB3
 
 FMPitch	EQU	$00
 ;!@

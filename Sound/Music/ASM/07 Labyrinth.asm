@@ -1,4 +1,4 @@
-Target	EQU	$426A6
+Target	EQU	$4283B
 
 FMDelta			EQU	$00
 FMVol1			EQU	$08

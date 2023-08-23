@@ -290,7 +290,7 @@ EndSeg
 
 ;$1B6 bytes available
 StartSeg LevelSel_Strings Big_Endian $07739E	$1B6
-	String	"BOTANIC BASE        "		;BBZ
+	String	"PROTO PALACE        "		;BBZ
 	BYTE	CASC_NullTerm
 	;!@ NEW DATA
 	;String	"SPEED SLIDER        "		;SSZ
@@ -465,7 +465,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "MIDNIGHT GREENHOUSE"
-	String	"NOP"
+	String	"HPZ - S2B"
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "NEW MOON"

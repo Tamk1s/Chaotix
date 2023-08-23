@@ -7,7 +7,7 @@ PSGVol	EQU	$04
 PSGVoi	EQU	$00
 PSGNull	EQU	$00
 PWMPitch	EQU	$00
-PWMVol	EQU	$AA
+PWMVol	EQU	$CC
 
 	smpsHeaderVoice	S2Cabar_Patches, Target
 	smpsHeaderChan	$06, $03
@@ -17,7 +17,7 @@ PWMVol	EQU	$AA
 	smpsHeaderFM	S2Cabar_FM3, Target, FMPitch, FMVol2
 	smpsHeaderFM	S2Cabar_FM4, Target, FMPitch, FMVol1
 	smpsHeaderFM	S2Cabar_FM5, Target, FMPitch, FMVol1
-	smpsHeaderFM	S2Cabar_NOP, Target, FMPitch, FMVol1
+	smpsHeaderFM	S2Cabar_NOP, Target, FMPitch, FMVol2
 	smpsHeaderPSG	S2Cabar_PSG1, Target, PSGDelta, PSGVol, PSGNull, PSGVoi
 	smpsHeaderPSG	S2Cabar_PSG2, Target, PSGDelta, PSGVol, PSGNull, PSGVoi
 	smpsHeaderPSG	S2Cabar_PSG3, Target, PSGDelta, PSGVol, PSGNull, PSGVoi
@@ -221,9 +221,10 @@ S2Cabar_Loop19:
 	smpsPan		panLeft
 	smpsFMvoice		$02
 	smpsJump	S2Cabar_FM3, Target
-
+	
 S2Cabar_FM4:
-	smpsPan		panCenter
+	;!@ smpsPan		panCenter
+	smpsPan		panLeft
 	smpsFMvoice		$03
 
 S2Cabar_Loop21:
@@ -267,8 +268,9 @@ S2Cabar_Loop27:
 	smpsLoop		$01, $02, S2Cabar_Loop28, Target
 	dc.b nE2, nAb2, nB1, nAb2, nE2, nAb2, nB1, nAb2
 	dc.b nA1, nC2, nE1, nC2, nA1, nC2, nE1, nC2
-	smpsPan		panCenter
-	smpsFMvoice		$03
+	;!@
+	;smpsPan		panCenter
+	;smpsFMvoice		$03
 	smpsJump	S2Cabar_FM4, Target
 
 S2Cabar_FM5:
@@ -749,45 +751,45 @@ S2Cabar_Loop58:
 S2Cabar_PWM1:
 	; dKick, dSnare, dClap
 	smpsPan		panCenter
-	dc.b nRst, $60, pEKick, $18, pESnare, pEKick, pESnare, pEKick
-	dc.b pESnare, pEKick, pESnare, $12, pCrashCymb, $06, pEKick, $18
-	dc.b pESnare, pEKick, pESnare, pEKick, pESnare, pEKick, pESnare, $12
-	dc.b $06, pEKick, $18, pESnare, pEKick, pESnare, pEKick, $06
-	dc.b $06, $06, pESnare, $12, pEKick, $06, pCrashCymb, pEKick
-	dc.b $0C, $0C, pESnare, $12, $06, pEKick, $0C, $0C
-	dc.b pESnare, pEKick, $06, pESnare, pEKick, pEKick, pEKick, pESnare
-	dc.b $0C, $06, pEKick, pCrashCymb, pEKick, $0C, $0C, pESnare
-	dc.b $12, pCrashCymb, $06, pEKick, $0C, $0C, pESnare, $12
-	dc.b $06, pEKick, $18, pESnare, pEKick, pESnare, $12, $66
-	dc.b pEKick, $18, pESnare, pEKick, pESnare, pEKick, pESnare, pEKick
-	dc.b pESnare, $12, pCrashCymb, $06, pEKick, $18, pESnare, pEKick
-	dc.b pESnare, pEKick
+	dc.b nRst, $60, pAKick, $18, pASnare, pAKick, pASnare, pAKick
+	dc.b pASnare, pAKick, pASnare, $12, pTimpaniHi, $06, pAKick, $18
+	dc.b pASnare, pAKick, pASnare, pAKick, pASnare, pAKick, pASnare, $12
+	dc.b $06, pAKick, $18, pASnare, pAKick, pASnare, pAKick, $06
+	dc.b $06, $06, pASnare, $12, pAKick, $06, pTimpaniHi, pAKick
+	dc.b $0C, $0C, pASnare, $12, $06, pAKick, $0C, $0C
+	dc.b pASnare, pAKick, $06, pASnare, pAKick, pAKick, pAKick, pASnare
+	dc.b $0C, $06, pAKick, pTimpaniHi, pAKick, $0C, $0C, pASnare
+	dc.b $12, pTimpaniHi, $06, pAKick, $0C, $0C, pASnare, $12
+	dc.b $06, pAKick, $18, pASnare, pAKick, pASnare, $12, $66
+	dc.b pAKick, $18, pASnare, pAKick, pASnare, pAKick, pASnare, pAKick
+	dc.b pASnare, $12, pTimpaniHi, $06, pAKick, $18, pASnare, pAKick
+	dc.b pASnare, pAKick
 
 S2Cabar_Loop59:
-	dc.b pESnare, pEKick, pESnare, $12, $06, pEKick, $18
+	dc.b pASnare, pAKick, pASnare, $12, $06, pAKick, $18
 	smpsLoop		$00, $02, S2Cabar_Loop59, Target
-	dc.b pESnare, pEKick, pESnare, pEKick, pESnare, pEKick, pESnare, $12
-	dc.b pCrashCymb, $06, pEKick, $18, pESnare, pEKick, pESnare, pEKick
-	dc.b pESnare, pEKick, pESnare, $12, $66, pEKick, $18, pESnare
-	dc.b pEKick, pESnare, pEKick, pESnare, pEKick, pESnare, $12, pCrashCymb
-	dc.b $06, pEKick, $18, pESnare, pEKick, pESnare, pEKick, pESnare
-	dc.b pEKick, pESnare, $12, $06, pEKick, $18, pESnare, pEKick
-	dc.b pESnare, pEKick, $06, $06, $06, pESnare, $12, pEKick
-	dc.b $06, pCrashCymb, pEKick, $0C, $0C, pESnare, $12, $06
-	dc.b pEKick, $0C, $0C, pESnare, pEKick, $06, pESnare, pEKick
-	dc.b pEKick, pEKick, pESnare, $0C, $06, pEKick, pCrashCymb, pEKick
-	dc.b $0C, $0C, pESnare, $12, pCrashCymb, $06, pEKick, $0C
-	dc.b $0C, pESnare, $12, $06, pEKick, $18, pESnare, pEKick
-	dc.b pESnare, $12, $66, pEKick, $18, pESnare, pEKick, pESnare
-	dc.b pEKick, pESnare, pEKick, pESnare, $12, pCrashCymb, $06, pEKick
-	dc.b $18, pESnare, pEKick, pESnare, pEKick
+	dc.b pASnare, pAKick, pASnare, pAKick, pASnare, pAKick, pASnare, $12
+	dc.b pTimpaniHi, $06, pAKick, $18, pASnare, pAKick, pASnare, pAKick
+	dc.b pASnare, pAKick, pASnare, $12, $66, pAKick, $18, pASnare
+	dc.b pAKick, pASnare, pAKick, pASnare, pAKick, pASnare, $12, pTimpaniHi
+	dc.b $06, pAKick, $18, pASnare, pAKick, pASnare, pAKick, pASnare
+	dc.b pAKick, pASnare, $12, $06, pAKick, $18, pASnare, pAKick
+	dc.b pASnare, pAKick, $06, $06, $06, pASnare, $12, pAKick
+	dc.b $06, pTimpaniHi, pAKick, $0C, $0C, pASnare, $12, $06
+	dc.b pAKick, $0C, $0C, pASnare, pAKick, $06, pASnare, pAKick
+	dc.b pAKick, pAKick, pASnare, $0C, $06, pAKick, pTimpaniHi, pAKick
+	dc.b $0C, $0C, pASnare, $12, pTimpaniHi, $06, pAKick, $0C
+	dc.b $0C, pASnare, $12, $06, pAKick, $18, pASnare, pAKick
+	dc.b pASnare, $12, $66, pAKick, $18, pASnare, pAKick, pASnare
+	dc.b pAKick, pASnare, pAKick, pASnare, $12, pTimpaniHi, $06, pAKick
+	dc.b $18, pASnare, pAKick, pASnare, pAKick
 
 S2Cabar_Loop60:
-	dc.b pESnare, pEKick, pESnare, $12, $06, pEKick, $18
+	dc.b pASnare, pAKick, pASnare, $12, $06, pAKick, $18
 	smpsLoop		$00, $02, S2Cabar_Loop60, Target
-	dc.b pESnare, pEKick, pESnare, pEKick, pESnare, pEKick, pESnare, $12
-	dc.b pCrashCymb, $06, pEKick, $18, pESnare, pEKick, pESnare, pEKick
-	dc.b pESnare, pEKick, pESnare, $12, $06
+	dc.b pASnare, pAKick, pASnare, pAKick, pASnare, pAKick, pASnare, $12
+	dc.b pTimpaniHi, $06, pAKick, $18, pASnare, pAKick, pASnare, pAKick
+	dc.b pASnare, pAKick, pASnare, $12, $06
 	smpsPan		panCenter
 	smpsJump	S2Cabar_PWM1, Target
 	

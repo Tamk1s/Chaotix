@@ -107,13 +107,12 @@ REM GotThrough 2
 
 
 REM MegaSD MSU support!
-REM bytepatch.exe -a 0x000B0C kc.bin 4EB9 009E 9500 4E71
-REM bytepatch.exe -a 0x000B0C kc.bin 4EB9 009E 9534 4E71 4E71 4E71 4E71
-REM bytepatch.exe -a 0x004DEA kc.bin 4EB9 009E 95FA 4E71 4E71 4E71 4E71 4E71
-REM bytepatch.exe -a 0x004E8A kc.bin 4EB9 009E 9610 4E71 4E71 4E71 4E71 4E71
-REM bytepatch.exe -a 0x076E96 kc.bin 4EB9 009E 9626 4E71 4E71 4E71 4E71 4E71
-REM bytepatch.exe -a 0x2E9500 kc.bin -f "Assets\Code\msu.bin"
-
+REM bytepatch.exe -a 0x0007B0 kc.bin 4EB9 008F 773C 4E71 4E71 4E71
+REM bytepatch.exe -a 0x040000 kc.bin -f "Assets\Code\msu-drv.bin"
+REM bytepatch.exe -a 0x048000 kc.bin -f "Assets\Code\msuLockout.bin"
+REM bytepatch.exe -a 0x076E96 kc.bin 4EB9 008F 7778 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x076EFA kc.bin 4E75 4E71
+REM bytepatch.exe -a 0x07773C kc.bin -f "Assets\Code\MSU.bin"
 
 REM EndPadding area! (New code)
 REM bytepatch.exe -a 0x008F7C kc.bin 4E71 4E71
