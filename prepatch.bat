@@ -121,10 +121,10 @@ REM bytepatch.exe -a 0x004C1A kc.bin 0006
 REM bytepatch.exe -a 0x3EFA8 kc.bin 0010
 
 REM Sega Chant subroutines (at EndPadding of Bank1)
-REM Patch Tribute at good ending to play Decision instead
+REM Patch Tribute at good ending to play Have a Nice Day instead
 REM Jsr to sfx_Jingle_SegaBeta instead of LoadLevelStuff in SegaScreen init
 REM New code for LoadLevelStuff/jingle playback
-bytepatch.exe -a 0x005DA8 kc.bin 7021
+bytepatch.exe -a 0x005DA8 kc.bin 701D
 bytepatch.exe -a 0x003446 kc.bin 4EB9 008F 7574
 bytepatch.exe -a 0x077574 kc.bin -f "Assets\Code\Sega_Jingle1.bin"
 
