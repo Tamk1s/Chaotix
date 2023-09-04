@@ -28,18 +28,18 @@ Page0 16x16 Page:     0
 128x128 Tiles Page 0: ..\..\Levels\TTZ\128x128\0_15MN.bin
 Page1 16x16 Page:     0
 128x128 Tiles Page 1: ..\..\Levels\TTZ\128x128\1_4MN.bin
-Page2 16x16 Page:     1
-128x128 Tiles Page 2: ..\..\Levels\TTZ\128x128\2_15MN.bin
-Page3 16x16 Page:     1
-128x128 Tiles Page 3: ..\..\Levels\TTZ\128x128\3_34MN.bin
+;Page2 16x16 Page:     1
+;128x128 Tiles Page 2: ..\..\Levels\TTZ\128x128\2_15MN.bin
+;Page3 16x16 Page:     1
+;128x128 Tiles Page 3: ..\..\Levels\TTZ\128x128\3_34MN.bin
 
 Layout Format:        3
 Layout Compression:   2
 FG Size:              ..\..\Levels\TTZ\FG\Size4MN.bin
 FG Level Layout:      ..\..\Levels\TTZ\FG\4MN.bin
 BG 128x128 Page:      2
-BG Size:              ..\..\Levels\TTZ\BG\Size06MN.bin
-BG Level Layout:      ..\..\Levels\TTZ\BG\14MS.bin
+BG Size:              ..\..\Levels\TTZ\BG\Size4MN.bin
+BG Level Layout:      ..\..\Levels\TTZ\BG\4MS.bin
 
 Objects Format:       5
 Objects:              ..\..\Levels\TTZ\Sprites\4D.bin
