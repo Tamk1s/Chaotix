@@ -20,9 +20,9 @@ SET BANK2L="26 Tribute" "27 Destructive Power" "28 Just Another Day" "29 Decisio
 SET BANK2SL="2A" "2B" "2C" "2D" "2E" "2F" "30" "31" "32" "33" "34" "35" "36" "37" "38" "39" "3A" "3B" "3C" "3D" "3E" "3F" "40" "41" "42" "43" "44" "45" "46" "47" "48" "49" "4A" "4B" "4C" "4D" "4E" "4F" "50" "51" "52" "53" "54" "55" "56" "57" "58" "59" "5A" "5B" "5C" "5D" "5E" "5F" "60" "61" "62" "63" "64" "65" "66" "67" "68" "69" "6A" "6B" "6C" "6D" "6E"
 
 REM Bank ID constants (hexadecimal without 0x/$ prefix)
-SEt BANK0I=18
-SEt BANK1I=19
-SEt BANK2I=1A
+SET BANK0I=18
+SET BANK1I=19
+SET BANK2I=1A
 
 REM Bank sizes for BUILD_MODE=0
 SET BANK01_LIM=0x8000
@@ -151,9 +151,9 @@ REM %1 = BankID (0-3). 0-2 = Bank0-Bank2, 3=Bank2 Sound
 	REM If the total filsize (%SUM%) in that bank is > %LIMIT%, then throw error
 	IF %SUM% GTR %LIMIT% (
 		ECHO ON
-		SET /a OVERFLOW=LIMIT-SUM
+		SET /a OVERFLOW=!SUM!-!LIMIT!
 		ECHO Error, Bank%1 too large!
-		ECHO Overflow by %OVERFLOW% bytes
+		ECHO Overflow by !OVERFLOW! bytes
 		Pause
 		ECHO OFF
 		Exit 1		
