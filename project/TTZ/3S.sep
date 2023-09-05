@@ -15,7 +15,7 @@ Num 8x8 Pages:        3
 16x16 Compression:    2
 Num 16x16 Pages:      3
 Page0 8x8 Page:       0
-16x16 Tiles Page 0:   ..\..\Levels\TTZ\16x16\0_15MN.bin
+16x16 Tiles Page 0:   ..\..\Levels\TTZ\16x16\0_13MN.bin
 Page2 8x8 Page:       1
 16x16 Tiles Page 2:   ..\..\Levels\TTZ\16x16\2_15MN.bin
 Page3 8x8 Page:       1
@@ -65,7 +65,7 @@ Angle Array:             ..\..\Collisn\Angles.bin
 
 Collision Index Format:      4
 Collision Index Compression: 0
-Collision Index: ..\..\Levels\TTZ\Collisn\14.bin
+Collision Index: ..\..\Levels\TTZ\Collisn\3.bin
 
 Game Name: Chaotix
 

@@ -3460,7 +3460,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD AAZ5_FG_Layout
 		DWORD AAZ5_BG_Layout
 	TTZ1MDS_MapPtr:
-		DWORD TTZ_FG_Blocks_Pri+LastPage
+		DWORD TTZ13_FG_Blocks_Pri+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ12_BG_Blocks_Sec+LastPage
 		DWORD TTZ_FG_Chunks_Pri
@@ -3471,7 +3471,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		;!@ DWORD TTZ1234MDS_BG_Layout
 		DWORD TTZ13MDS_BG_Layout
 	TTZ1N_MapPtr:
-		DWORD TTZ_FG_Blocks_Pri+LastPage
+		DWORD TTZ13_FG_Blocks_Pri+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ12_BG_Blocks_Sec+LastPage
 		DWORD TTZ_FG_Chunks_Pri
@@ -3482,7 +3482,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		;!@ DWORD TTZ1234N_BG_Layout
 		DWORD TTZ13N_BG_Layout
 	TTZ2MDS_MapPtr:
-		DWORD TTZ_FG_Blocks_Pri+LastPage
+		DWORD TTZ13_FG_Blocks_Pri+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ12_BG_Blocks_Sec+LastPage
 		DWORD TTZ_FG_Chunks_Pri
@@ -3493,7 +3493,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		;!@ DWORD TTZ1234MDS_BG_Layout
 		DWORD TTZ13MDS_BG_Layout
 	TTZ2N_MapPtr:
-		DWORD TTZ_FG_Blocks_Pri+LastPage
+		DWORD TTZ13_FG_Blocks_Pri+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ12_BG_Blocks_Sec+LastPage
 		DWORD TTZ_FG_Chunks_Pri
@@ -3505,7 +3505,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD TTZ13N_BG_Layout
 	TTZ3MDS_MapPtr:
 		;!@ DWORD TTZ_FG_Blocks_Pri
-		DWORD TTZ_FG_Blocks_Pri+LastPage
+		DWORD TTZ13_FG_Blocks_Pri+LastPage
 		;!@ DWORD TTZ3_FG_Blocks_Sec+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ34_BG_Blocks_Sec+LastPage
@@ -3518,7 +3518,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD TTZ13MDS_BG_Layout
 	TTZ3N_MapPtr:
 		;!@ DWORD TTZ_FG_Blocks_Pri
-		DWORD TTZ_FG_Blocks_Pri+LastPage
+		DWORD TTZ13_FG_Blocks_Pri+LastPage
 		;!@ DWORD TTZ3_FG_Blocks_Sec+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ34_BG_Blocks_Sec+LastPage
@@ -3530,9 +3530,9 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		;!@ DWORD TTZ1234N_BG_Layout
 		DWORD TTZ13N_BG_Layout
 	TTZ4MDS_MapPtr:
-		DWORD TTZ_FG_Blocks_Pri+LastPage
-		DWORD TTZ_BG_Blocks_Pri
-		DWORD TTZ34_BG_Blocks_Sec+LastPage
+		DWORD TTZ4_FG_Blocks_Pri+NoNewLayer+LastPage
+		;!@ DWORD TTZ_BG_Blocks_Pri
+		;!@ DWORD TTZ34_BG_Blocks_Sec+LastPage
 		;!@
 		;DWORD TTZ_FG_Chunks_Pri
 		;DWORD TTZ4_FG_Chunks_Sec+LastPage
@@ -3544,9 +3544,10 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		;!@ DWORD TTZ1234MDS_BG_Layout
 		DWORD TTZ4MDS_BG_Layout
 	TTZ4N_MapPtr:
-		DWORD TTZ_FG_Blocks_Pri+LastPage
-		DWORD TTZ_BG_Blocks_Pri
-		DWORD TTZ34_BG_Blocks_Sec+LastPage
+		;!@ DWORD TTZ_FG_Blocks_Pri+LastPage
+		;DWORD TTZ_BG_Blocks_Pri
+		;DWORD TTZ34_BG_Blocks_Sec+LastPage
+		DWORD TTZ4_FG_Blocks_Pri+NoNewLayer+LastPage
 		;!@
 		;DWORD TTZ_FG_Chunks_Pri
 		;DWORD TTZ4_FG_Chunks_Sec+LastPage
@@ -3560,7 +3561,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD TTZ4N_BG_Layout
 	TTZ5_MDS_MapPtr:
 		;!@ DWORD TTZ_FG_Blocks_Pri
-		DWORD TTZ_FG_Blocks_Pri+LastPage
+		DWORD TTZ13_FG_Blocks_Pri+LastPage
 		;!@ DWORD TTZ5_FG_Blocks_Sec+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ5_BG_Blocks_Sec+LastPage
@@ -3572,7 +3573,7 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD TTZ5MDS_BG_Layout
 	TTZ5N_MapPtr:
 		;!@ DWORD TTZ_FG_Blocks_Pri
-		DWORD TTZ_FG_Blocks_Pri+LastPage
+		DWORD TTZ13_FG_Blocks_Pri+LastPage
 		;!@ DWORD TTZ5_FG_Blocks_Sec+LastPage
 		DWORD TTZ_BG_Blocks_Pri
 		DWORD TTZ5_BG_Blocks_Sec+LastPage
@@ -3974,9 +3975,11 @@ StartSeg Solid_Index Big_Endian	;Solidity index list pointers and data
 	AAZ34_SolidPtr:		DWORD AAZ34_Solids
 	AAZ5_SolidPtr:		DWORD AAZ5_Solids
 
-	TTZ12_SolidPtr:		DWORD TTZ124_Solids	
+	;!@ TTZ12_SolidPtr:	DWORD TTZ124_Solids	
+	TTZ12_SolidPtr:		DWORD TTZ12_Solids	
 	TTZ3_SolidPtr:		DWORD TTZ3_Solids
-	TTZ4_SolidPtr:		DWORD TTZ124_Solids
+	;!@ TTZ4_SolidPtr:	DWORD TTZ124_Solids
+	TTZ4_SolidPtr:		DWORD TTZ4_Solids
 	TTZ5_SolidPtr:		DWORD TTZ5_Solids
 	TTZB_SolidPtr:		DWORD TTZB_Solids
 	
@@ -4162,7 +4165,9 @@ StartSeg Level_Data Big_Endian	;Level Layout and Mappings Data Segment
 	TTZ5_FG_Tiles_Sec:	include	 "Levels/TTZ/8x8/1_5MN.bin"
 	TTZB_FG_Tiles:		include	 "Levels/TTZ/8x8/0_Boss.bin"
 
-	TTZ_FG_Blocks_Pri:	include	 "Levels/TTZ/16x16/0_15MN.bin"
+	;!@ TTZ_FG_Blocks_Pri:	include	 "Levels/TTZ/16x16/0_15MN.bin"
+	TTZ13_FG_Blocks_Pri:	include	 "Levels/TTZ/16x16/0_13MN.bin"
+	TTZ4_FG_Blocks_Pri:	include	 "Levels/TTZ/16x16/0_4MN.bin"	;!@ NEW
 	TTZ3_FG_Blocks_Sec:	include	 "Levels/TTZ/16x16/1_3MN.bin"
 	TTZ5_FG_Blocks_Sec:	include	 "Levels/TTZ/16x16/1_5MN.bin"
 	TTZB_FG_Blocks:		include	 "Levels/TTZ/16x16/0_Boss.bin"
@@ -4340,8 +4345,11 @@ StartSeg Level_Data Big_Endian	;Level Layout and Mappings Data Segment
 	AAZ34_Solids:		include	"Levels/AAZ/Collisn/34.bin"
 	AAZ5_Solids:		include	"Levels/AAZ/Collisn/5.bin"
 
-	TTZ124_Solids:		include	"Levels/TTZ/Collisn/14.bin"
+	;!@ TTZ124_Solids:		include	"Levels/TTZ/Collisn/14.bin"
+	TTZ12_Solids:		include	"Levels/TTZ/Collisn/12.bin"
 	TTZ3_Solids:		include	"Levels/TTZ/Collisn/3.bin"
+	;!@ NEW
+	TTZ4_Solids:		include	"Levels/TTZ/Collisn/4.bin"
 	TTZ5_Solids:		include	"Levels/TTZ/Collisn/5.bin"
 	TTZB_Solids:		include	"Levels/TTZ/Collisn/Boss.bin"
 
