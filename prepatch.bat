@@ -273,6 +273,10 @@ REM Patch Bonus Stage Exit code to restore level time
 bytepatch.exe -a 0x03E0F2 kc.bin 4EB9 008F 7724 4E71									  
 bytepatch.exe -a 0x0776E0 kc.bin -f "Assets\Code\BSRing_Fix.bin"
 
+REM Modify IIZ Grabber for zone-indep/size param
+bytepatch.exe -a 0x01AC12 kc.bin 4EB9 008F 773C 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x07773C kc.bin -f "Assets\Code\IIZ_Grabber.bin"
+ 
 
 REM Survival mode
 REM NOP IIZ Zone force

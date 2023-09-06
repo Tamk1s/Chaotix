@@ -7,8 +7,10 @@ asmx -e -w -l DemoPatch2.lst -C 68K -b 0x8F7600 -o DemoPatch2.bin cDemoPatch2.as
 REM asmx -e -w -l Pal32x_Debug.lst -C 68K -b 0x8F7650 -o Pal32x_Debug.bin cPal32x_Debug.asm > Pal32x_Debug.log
 asmx -e -w -l Intro.lst -C 68K -b 0x8F769A -o Intro.bin cIntro.asm > Intro.log
 asmx -e -w -l BSRing_Fix.lst -C 68K -b 0x8F76E0 -o BSRing_Fix.bin cBSRing_Fix.asm > BSRing_Fix.log
-asmx -e -w -l MSU.lst -C 68K -b 0x8F773C -o MSU.bin cMSU.asm > MSU.log
+asmx -e -w -l IIZ_Grabber.lst -C 68K -b 0x8F773C -o IIZ_Grabber.bin cIIZ_Grabber.asm > IIZ_Grabber.log
 
+
+REM asmx -e -w -l MSU.lst -C 68K -b 0x8F773C -o MSU.bin cMSU.asm > MSU.log
 REM asmx -e -w -l BigRing_Frames.lst -C 68K -b 0x892902 -o BigRing_Frames.bin cBigRing_Frames.asm > BigRing_Frames.log
 REM asmx -e -w -l BossMode2.lst -C 68K -b 0x8F7662 -o BossMode2.bin cBossMode2.asm > BossMode2.log
 REM asmx -e -w -l Menu_Palc.lst -C 68K -b 0x8F76FA -o Menu_Palc.bin cMenu_Palc.asm > Menu_Palc.log
