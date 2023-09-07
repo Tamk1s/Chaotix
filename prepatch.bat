@@ -274,9 +274,38 @@ bytepatch.exe -a 0x03E0F2 kc.bin 4EB9 008F 7724 4E71
 bytepatch.exe -a 0x0776E0 kc.bin -f "Assets\Code\BSRing_Fix.bin"
 
 REM Modify IIZ Grabber for zone-indep/size param
-bytepatch.exe -a 0x01AC12 kc.bin 4EB9 008F 773C 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x01AC12 kc.bin 4EF9 008F 773C 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x07773C kc.bin -f "Assets\Code\IIZ_Grabber.bin"
- 
+
+
+REM Boss spawn object
+REM BBZ
+bytepatch.exe -a 0x02D646 kc.bin 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x00829C kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 0829 0003 003E 6632 0829 0001 003E 672A
+REM													 6100 003E
+REM															   0829 0003 003E 6632
+REM																				   0829 0001 003E 672A
+REM SSZ
+bytepatch.exe -a 0x0086BE kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 6632 0829 0001 003E 672A
+REM													 0829 0003 003E 6632
+REM 																	 0829 0001 003E 672A
+REM NOP out AAZ BossSpawn check
+REM bytepatch.exe -a 0x008794 kc.bin 4E71 4E71
+REM AAZ Boss
+bytepatch.exe -a 0x0087EC kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 6642 0829 0002 003E 673A 0829 0001 003E 6732 08E9 0003 003E 0829 0005 003F 6726
+REM TTZ
+bytepatch.exe -a 0x00896A kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 663A 0829 0002 003E 6732 0829 0001 003E 672A
+REM MMZ
+bytepatch.exe -a 0x008C58 kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 6632 0829 0001 003E 672A
+bytepatch.exe -a 0x011058 kc.bin 4EF9 008F 7810
+bytepatch.exe -a 0x011E32 kc.bin 008F 779C
+bytepatch.exe -a 0x07779C kc.bin -f "Assets\Code\BossSpawn.bin"
+
+
+REM Spikes extension (invis hurt)
+bytepatch.exe -a 0x023BBA kc.bin 4EF9 008F 784E 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x07784E kc.bin -f "Assets\Code\Spikes2.bin"
+
 
 REM Survival mode
 REM NOP IIZ Zone force

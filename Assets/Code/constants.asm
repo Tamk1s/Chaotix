@@ -1080,14 +1080,19 @@ v_16x16s        EQU $FFFFC246          ; Current uncomp 16x16 secondary block ma
 ; ---------------------------------------------------------------------------
 
 ; enum cambounds (width 2 bytes)
-v_screenposx    EQU $FFFFC1DE          ; FG/screen x-position (word)
-v_limitright1   EQU $FFFFC1E6          ; Screenpos x right limit (word)
-v_limitleft1    EQU $FFFFC1E8          ; Screenpos x left limit (word)
-v_limitbtm1     EQU $FFFFC1EA          ; Screenpos y btm limit (word)
-v_limittop1     EQU $FFFFC1EC          ; Screenpos y top limit (word)
-v_screenposy    EQU $FFFFC1EE          ; FG/screen y-position (word)
-v_screenposx_target EQU $FFFFDFE8      ; Target position for FG/screen x-position movement (word)
-v_screenposy_target EQU $FFFFDFEA      ; Target position for FG/screen y-position movement (word)
+pixP10					EQU $10
+pixN10          		EQU $FFF0
+v_screenposx_fg 		EQU $FFFFC1DE          ; FG/screen x-position (word)
+v_limitright1   		EQU $FFFFC1E6          ; Screenpos x right limit (word)
+v_limitleft1    		EQU $FFFFC1E8          ; Screenpos x left limit (word)
+v_limitbtm1     		EQU $FFFFC1EA          ; Screenpos y btm limit (word)
+v_limittop1     		EQU $FFFFC1EC          ; Screenpos y top limit (word)
+v_screenposy_fg 		EQU $FFFFC1EE          ; FG/screen y-position (word)
+v_screenposx_bg 		EQU $FFFFC21E
+v_screenposy_bg 		EQU $FFFFC22E
+v_screenposx_fg_target 	EQU $FFFFDFE8   ; Target position for FG/screen x-position movement (word)
+v_screenposy_fg_target 	EQU $FFFFDFEA   ; Target position for FG/screen y-position movement (word)
+
 
 ; ---------------------------------------------------------------------------
 

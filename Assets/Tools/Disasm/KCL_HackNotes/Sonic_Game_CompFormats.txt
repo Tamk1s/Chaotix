@@ -50,3 +50,12 @@ IIZ1-4	4	4	10
 TZ1-6	4	4	10 (invalid)
 Tut1-4	4	4	10
 SSZB	4	2	8
+
+
+Bosses:
+AAZ			9DA8
+AAZ_Mini	9DAC
+BBZ			9DAC
+MMZ			9DA8
+xTTZ		9DA8
+xSSZ		9DA8

@@ -1,0 +1,17 @@
+MIDI Tempo:
+105=16/02
+
+PWM:
+(Remember to subtract one from ASM ->octave here)
+
+Ch1:
+All OpenHH
+47	B-3	OpenHH			$99/pOpenHH
+
+Ch2-4:
+71	B5	ShortWhistle	$82/pESnare
+69	A5	Cabasa			$8C/pASnare
+67	G5	HiAgogog		$8B/pAKick
+
+
+

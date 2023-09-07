@@ -1,12 +1,25 @@
+Contest:
+- TTZ4x palettes
+- Fix bad TTZ4 collision (slopes)
+- TTZ4x objpos, bumper area
+- TTZ4 Boss Rush stability
+- TTZ4 32x sprite background
+- Extended level playlist (TTZ DEZ song)
+- Patch all boss music to song $15/import song (extend/optimize banks)
+- Improve/fix TTZ BG parallax, fix animart
+- Change APB global/level tables to load dummy AAZ Ens 2 bank for invis art
+
+- Restore 32x Title Screen edits
+- DataLoad art edits (Big/Small ovals etc)?
+- Ensure demo is 4 acts
+
 Next release:
 - ASCII art tutorial fix
 - SSZC level icon 32x disabled, x new Title Card
 - Change "level" to "act" (title cards)
 - Restore Pause logo Pal32x sprite
-- Restore 32x Title Screen edits
 - Opening/Special Stage songs
 - Double check PSG edits for SFX ports
-- DataLoad art edits (Big/Small ovals etc)
 - Random starting partner (new game)
 - Kill off partner at claw game (press up). Single-player modes
 - MSU Mode 1!

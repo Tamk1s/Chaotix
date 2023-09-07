@@ -35,4 +35,4 @@ loc_89AC40	EQU	$0089AC40
 	move.w  d0,obWidth(a6)
 	clr.w   $26(a6)
 	clr.l   $2A(a6)
-	rts
+	jmp		(loc_89AC40).l
