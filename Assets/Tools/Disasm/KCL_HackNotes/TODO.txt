@@ -2,7 +2,7 @@ Contest:
 x Patch all boss music to song $15/import song
 x TTZ4x palettes
 x Ensure demo is 4 acts
-- Change APB global/level tables to load dummy AAZ Ens 2 bank for invis art
+x Change APB global/level tables to load dummy AAZ Ens 2 bank for invis art
 - Fix bad TTZ4 collision (slopes)
 - TTZ4x objpos, bumper area
 - TTZ4 Boss Rush stability

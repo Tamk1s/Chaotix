@@ -9,7 +9,7 @@ asmx -e -w -l Intro.lst -C 68K -b 0x8F769A -o Intro.bin cIntro.asm > Intro.log
 asmx -e -w -l BSRing_Fix.lst -C 68K -b 0x8F76E0 -o BSRing_Fix.bin cBSRing_Fix.asm > BSRing_Fix.log
 asmx -e -w -l IIZ_Grabber.lst -C 68K -b 0x8F773C -o IIZ_Grabber.bin cIIZ_Grabber.asm > IIZ_Grabber.log
 asmx -e -w -l BossSpawn.lst -C 68K -b 0x8F779C -o BossSpawn.bin cBossSpawn.asm > BossSpawn.log
-asmx -e -w -l Spikes2.lst -C 68K -b 0x8F784E -o Spikes2.bin cSpikes2.asm > Spikes2.log
+asmx -e -w -l Spikes2.lst -C 68K -b 0x8F78A2 -o Spikes2.bin cSpikes2.asm > Spikes2.log
 
 
 REM asmx -e -w -l MSU.lst -C 68K -b 0x8F773C -o MSU.bin cMSU.asm > MSU.log

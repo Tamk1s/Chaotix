@@ -9,7 +9,7 @@ loc_8A3C0E	EQU	$008A3C0E
 	andi.w	#$7FFF,d0
 	beq.s	@normal
 	;!@ move.l  #AP3_AAZ_Ens2,obArt_BankHiA(a6)	
-	move.l  #AP3_TTZ_Objs,obArt_BankHiA(a6)		
+	move.l  #AP3_AAZ_Ens2,obArt_BankHiA(a6)		
 	bra.s	@prio
 
 @normal:	

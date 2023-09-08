@@ -176,7 +176,7 @@ StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
 		
 		;Region @APB_Global
 	APB_Glbl:
-		include	"Art/Mars/APB/Global.dat"
+		include	"Art/Mars/APB/Global.bin"
 		;EndRegion
 		
 		;Region @APB_Level

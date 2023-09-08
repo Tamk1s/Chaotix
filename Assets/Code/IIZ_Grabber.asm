@@ -18,7 +18,7 @@ loc_89AC40	EQU	$0089AC40
 	beq.s	@iiz
 	
 	;If NOT IIZ, setup to dummy AAZ Ens2 bank (obliterated transparent art), and set size to subtype
-	move.l  #$28,obArt_BankHiA(a6)
+	move.l  #AP3_AAZ_Ens2,obArt_BankHiA(a6)
 	move.w	obSubtype_Hi(a6),d0
 	andi.w	#$7FFF,d0
 	bra.s	@common_config

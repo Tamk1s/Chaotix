@@ -1,12 +1,12 @@
-	;New v_gameProg1-3 increment patch, to force TTZ>act 3 TTZ to finish game
+	;New v_gameProg1-3 increment patch, to force TTZ>act 4 TTZ to finish game
 	;Patch code at $010F86 (ROM $890F86) to jump to new code here
 	
-	;Patch increment of v_gameProg1-3 progerss to check for act 3 for TTZ, and finish game (set to $06 for TTZ prog byte)
+	;Patch increment of v_gameProg1-3 progerss to check for act 4 for TTZ, and finish game (set to $06 for TTZ prog byte)
 	;ORG at RAW $77600 (ROM $8F7600)	
 	addq.w  #1,d1					
 	
-	;!@ New code to compare new saved act ID (d1) against 3. If >=3, set to complete zone ($06)
-	cmpi.b	#3, d1
+	;!@ New code to compare new saved act ID (d1) against 4. If >=4, set to complete zone ($06)
+	cmpi.b	#4, d1
 	bls.s	Skip
 	move.b	#$06,d1
 

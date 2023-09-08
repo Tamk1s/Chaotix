@@ -1,10 +1,17 @@
 ObjSE_BossSpawner1_ActJumper		EQU	$008A6C6A
 ObjSE_BossSpawner2					EQU	$008A6CCA
 Level_SpawnGoal_Resume	EQU	$0089105E
-LoadLevelStuff			EQU	$00881948
-SetupCamera				EQU	$00889358
-LoadLevelPalette		EQU	$008B20B6
+;LoadLevelStuff			EQU	$00881948
+;SetupCamera				EQU	$00889358
+LoadLevelPalette_Resume	EQU	$008B20CE
+Pointa6ToLevel2			EQU	$008B207E
+LoadGlobalPalettes32X	EQU	$008818AE
+LoadLevelPalette32X_Primary_2	EQU	$00882122
+LoadLevelPalette32X_Secondary_2	EQU	$00882162                 
 
+Pal32xP_Levels			EQU	$008821F0
+Pal32xS_Levels			EQU	$00882750 
+PalPtr_Level			EQU	$002B32B0
 
 ;!@ Subtypes:
 ;$00=AAZ
@@ -13,15 +20,15 @@ LoadLevelPalette		EQU	$008B20B6
 ;$03=AAZ_Mini
 BossSpawner:
 	tst.b   obSubtype_Hi(a6)
-	bne.w   locret
+	bne.s   locret
 
-	move.w  obSubtype_Hi(a6),d0
+	move.w	#1,(v_actConc_hi).w
 	;andi.w	#$00FF,d0
 	;cmp.w	(v_actConc_hi).w,d0
 	;bne.w	locret
 	
 	;addq.w	#$01,(v_actConc_hi).w
-	move.w	#0,(v_actConc_hi).w
+	move.w  obSubtype_Hi(a6),d0
 	add.w	d0,d0
 	
 	cmpi.w  #5,(v_act_hi).w
@@ -53,12 +60,14 @@ BossSpawner:
 	beq.s	@special
 	;move.b	#sfx_Error,d0
 	;jsr		(PlaySound).l
-	jmp		(ObjSE_BossSpawner1_ActJumper).l
+	jsr		(ObjSE_BossSpawner1_ActJumper).l
+	bra.s	locret
 @special:
 	;move.b	#sfx_PixelPlatCollapse,d0
 	;jsr		(PlaySound).l
-	jmp		(ObjSE_BossSpawner1_ActJumper).l
+	jsr		(ObjSE_BossSpawner1_ActJumper).l
 locret:
+	jsr     (DeleteObject).l
 	rts
 	
 zoneTable_TTZ4:
@@ -76,18 +85,34 @@ zoneTable_TTZ5:
 
 Level_SpawnGoal_x:
 	cmpi.w	#0,(v_actConc_hi).w
-	beq.s	@spawnIt
+	beq.s	@spawnIt	
 	
+	cmpi.w  #4,(v_act_hi).w ; Current Act (0-6, word)
+	bne.s	@b_act5
+		
+@b_act4:
 	move.l	#$3EC00000,(v_limitright1).l
-	move.l	#$F2000000,(v_limitbtm1).l
-	clr.w   $3E(a1)	
+	move.l	#$0F200000,(v_limitbtm1).l
+	bra.s	@colors
+@b_act5:
+	move.l	#$3EC00000,(v_limitright1).l
+	move.l	#$0F200000,(v_limitbtm1).l
+	
+@colors:
+	clr.w   ($FFFFC21C).w
+	move.w	#id_TTZ,d1
+	;jsr     (LoadLevelPalette2).l
+	jsr		(LoadGlobalPalettes32X).l
+	move.w	#id_TTZ,d0
+	lea     (Pal32xP_Levels).l,a0
+	jsr		(LoadLevelPalette32X_Primary_2).l
+	move.w	#id_TTZ,d0
+	lea     (Pal32xS_Levels).l,a0
+	jsr		(LoadLevelPalette32X_Secondary_2).l
+	
 	move.b  #bgm_TTZ,d0 ; Current level Song ID (byte).
 	jsr     PlaySound
-	;move.w	#id_TTZ,(v_zone_hi).w	
-	;jsr		(LoadLevelStuff).l
-	;jsr     (LoadLevelPalette).l
-	
-	;jsr		(SetupCamera).l		
+	move.w	#0,(v_actConc_hi).w
 	rts
 	
 @spawnIt:
@@ -96,3 +121,17 @@ Level_SpawnGoal_x:
 	rts
 	
 	
+; LoadLevelPalette2:
+	; lea     ($FFFFDC60).w,a0
+	; moveq   #4,d0
+
+; loc_8B20BC:
+	; clr.l   (a0)+
+	; dbf     d0,loc_8B20BC
+	; lea     (v_pal_buffer2).w,a2
+
+	; lea     (PalPtr_Level).l,a6
+	; move.w	d1,d0
+	; jsr		(Pointa6ToLevel2).l
+	; jmp		(LoadLevelPalette_Resume).l
+	; rts

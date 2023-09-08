@@ -194,7 +194,7 @@ LoadFile orig.bin
 ; ;EndRegion
 
 ;Region @ArtPtrBanks
-Extract $0A0200 $0010	"Art/Mars/APB/Global.dat"
+Extract $0A0200 $0010	"Art/Mars/APB/Global.bin"
 
 Extract $0A03D0	$0001	"Art/Mars/APB/BBZ0MN.bin"
 Extract $0A03D1	$0009	"Art/Mars/APB/BBZ1MDS.bin"

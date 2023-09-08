@@ -124,6 +124,7 @@ REM Sega Chant subroutines (at EndPadding of Bank1)
 REM Patch Tribute at good ending to play Have a Nice Day instead
 REM Jsr to sfx_Jingle_SegaBeta instead of LoadLevelStuff in SegaScreen init
 REM New code for LoadLevelStuff/jingle playback
+REM Play Claw game for tribute (partial/good endings)
 bytepatch.exe -a 0x005DA8 kc.bin 701D
 bytepatch.exe -a 0x003446 kc.bin 4EB9 008F 7574
 bytepatch.exe -a 0x077574 kc.bin -f "Assets\Code\Sega_Jingle1.bin"
@@ -155,6 +156,14 @@ REM Attempt to fix Tutorial Zone 8x8 text
 bytepatch.exe -a 0x02F62A kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 49F8 E600
 REM Patch Special Stage to use Bonus Stage music
 bytepatch.exe -a 0x005A30 kc.bin 701A
+REM Patch boss songs to use 21 (new TTZ Boss)
+bytepatch.exe -a 0x02D66C kc.bin 103C 0029
+bytepatch.exe -a 0x02D6E0 kc.bin 103C 0029
+bytepatch.exe -a 0x02DC06 kc.bin 103C 0029
+bytepatch.exe -a 0x02E0B0 kc.bin 103C 0029
+bytepatch.exe -a 0x02E45C kc.bin 103C 0029
+REM Patch Decision 2nd with 1st
+bytepatch.exe -a 0x027BB8 kc.bin 7021
 REM Code patches to undo normal game progress for Demo
 bytepatch.exe -a 0x010F28 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x03E510 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71
@@ -278,6 +287,8 @@ bytepatch.exe -a 0x01AC12 kc.bin 4EF9 008F 773C 4E71 4E71 4E71 4E71 4E71 4E71 4E
 bytepatch.exe -a 0x07773C kc.bin -f "Assets\Code\IIZ_Grabber.bin"
 
 
+REM Patch Boss cutscene music to use PlaySound instead of _save
+bytepatch.exe -a 0x02E674 kc.bin 008F 6E76
 REM Boss spawn object
 REM BBZ
 bytepatch.exe -a 0x02D646 kc.bin 4E71 4E71 4E71 4E71
@@ -296,16 +307,16 @@ bytepatch.exe -a 0x0087EC kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 6642 0829 00
 REM TTZ
 bytepatch.exe -a 0x00896A kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 663A 0829 0002 003E 6732 0829 0001 003E 672A
 REM MMZ
+bytepatch.exe -a 0x008AC8 kc.bin 4E75 4E71
 bytepatch.exe -a 0x008C58 kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 6632 0829 0001 003E 672A
-bytepatch.exe -a 0x011058 kc.bin 4EF9 008F 7810
+bytepatch.exe -a 0x011058 kc.bin 4EF9 008F 781A
 bytepatch.exe -a 0x011E32 kc.bin 008F 779C
 bytepatch.exe -a 0x07779C kc.bin -f "Assets\Code\BossSpawn.bin"
 
 
 REM Spikes extension (invis hurt)
-bytepatch.exe -a 0x023BBA kc.bin 4EF9 008F 784E 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
-bytepatch.exe -a 0x07784E kc.bin -f "Assets\Code\Spikes2.bin"
-
+bytepatch.exe -a 0x023BBA kc.bin 4EF9 008F 78A2 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x0778A2 kc.bin -f "Assets\Code\Spikes2.bin"
 
 REM Survival mode
 REM NOP IIZ Zone force
