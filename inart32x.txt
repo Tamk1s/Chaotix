@@ -26,6 +26,20 @@ Define 	Max32xArtSize_Full $187000
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 ;Region @32xArt
+;Region @Ptrs
+;!@ Insert ArtPtr32x pts later
+
+;Ptr to APB_Global
+StartSeg APB_Global_Ptr	$0077BA4 $0004 Big_Endian
+		DWORD	APB_Glbl+ArtPtr32X_Offset
+EndSeg
+
+;Ptr to APB_Level
+StartSeg APB_Level_Ptr	$0077BD0 $0004 Big_Endian
+		DWORD	APB_Level+ArtPtr32X_Offset
+EndSeg
+;EndRegion
+
 ;StartSeg ArtPtr32x Big_Endian $A0000 Max32xArtSize_Stock
 ;!@ 
 StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
@@ -157,10 +171,285 @@ StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
 		DWORD	ArtPtr32X_Mighty+ArtPtr32X_Offset
 		DWORD	ArtPtr32X_Mighty+ArtPtr32X_Offset
 		DWORD	ArtPtr32X_Mighty+ArtPtr32X_Offset
-		DWORD	ArtPtr32X_Mighty+ArtPtr32X_Offset
-		include	"Art/Mars/byte_20A0200.bin"
-		include	"Art/Mars/word_20A0210.bin"
+		DWORD	ArtPtr32X_Mighty+ArtPtr32X_Offset		
 		;EndRegion		
+		
+		;Region @APB_Global
+	APB_Glbl:
+		include	"Art/Mars/APB/Global.dat"
+		;EndRegion
+		
+		;Region @APB_Level
+	APB_Level:      
+		WORD	APB_BBZ0MN-APB_Level
+		WORD	APB_BBZ0MN-APB_Level
+		WORD	APB_BBZ0MN-APB_Level
+		WORD	APB_BBZ0MN-APB_Level
+		WORD	APB_BBZ1MDS-APB_Level
+		WORD	APB_BBZ1MDS-APB_Level
+		WORD	APB_BBZ1MDS-APB_Level
+		WORD	APB_BBZ1N-APB_Level
+		WORD	APB_BBZ2MDS-APB_Level
+		WORD	APB_BBZ2MDS-APB_Level
+		WORD	APB_BBZ2MDS-APB_Level
+		WORD	APB_BBZ2N-APB_Level
+		WORD	APB_BBZ3MDS-APB_Level
+		WORD	APB_BBZ3MDS-APB_Level
+		WORD	APB_BBZ3MDS-APB_Level
+		WORD	APB_BBZ3N-APB_Level
+		WORD	APB_BBZ4MDS-APB_Level
+		WORD	APB_BBZ4MDS-APB_Level
+		WORD	APB_BBZ4MDS-APB_Level
+		WORD	APB_BBZ4N-APB_Level
+		WORD	APB_BBZ5MDS-APB_Level
+		WORD	APB_BBZ5MDS-APB_Level
+		WORD	APB_BBZ5MDS-APB_Level
+		WORD	APB_BBZ5N-APB_Level
+		WORD	APB_BBZ6MN-APB_Level
+		WORD	APB_BBZ6MN-APB_Level
+		WORD	APB_BBZ6MN-APB_Level
+		WORD	APB_BBZ6MN-APB_Level
+		WORD	APB_SSZ0MN-APB_Level
+		WORD	APB_SSZ0MN-APB_Level
+		WORD	APB_SSZ0MN-APB_Level
+		WORD	APB_SSZ0MN-APB_Level
+		WORD	APB_SSZ1MN-APB_Level
+		WORD	APB_SSZ1MN-APB_Level
+		WORD	APB_SSZ1MN-APB_Level
+		WORD	APB_SSZ1MN-APB_Level
+		WORD	APB_SSZ2MN-APB_Level
+		WORD	APB_SSZ2MN-APB_Level
+		WORD	APB_SSZ2MN-APB_Level
+		WORD	APB_SSZ2MN-APB_Level
+		WORD	APB_SSZ3MN-APB_Level
+		WORD	APB_SSZ3MN-APB_Level
+		WORD	APB_SSZ3MN-APB_Level
+		WORD	APB_SSZ3MN-APB_Level
+		WORD	APB_SSZ4MN-APB_Level
+		WORD	APB_SSZ4MN-APB_Level
+		WORD	APB_SSZ4MN-APB_Level
+		WORD	APB_SSZ4MN-APB_Level
+		WORD	APB_SSZ5MN-APB_Level
+		WORD	APB_SSZ5MN-APB_Level
+		WORD	APB_SSZ5MN-APB_Level
+		WORD	APB_SSZ5MN-APB_Level
+		WORD	APB_SSZ6MN-APB_Level
+		WORD	APB_SSZ6MN-APB_Level
+		WORD	APB_SSZ6MN-APB_Level
+		WORD	APB_SSZ6MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_AAZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_TTZ06MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ04MN-APB_Level
+		WORD	APB_MMZ5MN-APB_Level 
+		WORD	APB_MMZ5MN-APB_Level
+		WORD	APB_MMZ5MN-APB_Level
+		WORD	APB_MMZ5MN-APB_Level
+		WORD	APB_MMZ6MN-APB_Level 
+		WORD	APB_MMZ6MN-APB_Level
+		WORD	APB_MMZ6MN-APB_Level
+		WORD	APB_MMZ6MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training04MN-APB_Level
+		WORD	APB_Training56MN_Tut-APB_Level
+		WORD	APB_Training56MN_Tut-APB_Level
+		WORD	APB_Training56MN_Tut-APB_Level
+		WORD	APB_Training56MN_Tut-APB_Level
+		WORD	APB_Training56MN_Tut-APB_Level
+		WORD	APB_Training56MN_Tut-APB_Level
+		WORD	APB_Training56MN_Tut-APB_Level
+		WORD	APB_Training56MN_Tut-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ03MN-APB_Level
+		WORD	APB_IIZ4MN-APB_Level 
+		WORD	APB_IIZ4MN-APB_Level
+		WORD	APB_IIZ4MN-APB_Level
+		WORD	APB_IIZ4MN-APB_Level
+		WORD	APB_IIZ56MN-APB_Level
+		WORD	APB_IIZ56MN-APB_Level
+		WORD	APB_IIZ56MN-APB_Level
+		WORD	APB_IIZ56MN-APB_Level
+		WORD	APB_IIZ56MN-APB_Level
+		WORD	APB_IIZ56MN-APB_Level
+		WORD	APB_IIZ56MN-APB_Level
+		WORD	APB_IIZ56MN-APB_Level
+		WORD	APB_WE0MN-APB_Level
+		WORD	APB_WE0MN-APB_Level
+		WORD	APB_WE0MN-APB_Level
+		WORD	APB_WE0MN-APB_Level
+		WORD	APB_WE1MN_Boss-APB_Level
+		WORD	APB_WE1MN_Boss-APB_Level
+		WORD	APB_WE1MN_Boss-APB_Level
+		WORD	APB_WE1MN_Boss-APB_Level
+		WORD	APB_WE2M_FinalBoss-APB_Level
+		WORD	APB_WE2DN-APB_Level
+		WORD	APB_WE2DN-APB_Level
+		WORD	APB_WE2DN-APB_Level
+		WORD	APB_SS-APB_Level
+		WORD	APB_SS-APB_Level
+		WORD	APB_SS-APB_Level
+		WORD	APB_SS-APB_Level
+		WORD	APB_TA-APB_Level
+		WORD	APB_TA-APB_Level
+		WORD	APB_TA-APB_Level
+		WORD	APB_TA-APB_Level
+		WORD	APB_SpecialEnd-APB_Level
+		WORD	APB_SpecialEnd-APB_Level
+		WORD	APB_WE5S-APB_Level
+		WORD	APB_Title-APB_Level
+		WORD	APB_Menu-APB_Level
+		WORD	APB_WE6D-APB_Level
+		WORD	APB_WE6SN-APB_Level
+		WORD	APB_WE6SN-APB_Level
+		
+		APB_BBZ0MN:				include	"Art/Mars/APB/BBZ0MN.bin"
+		APB_BBZ1MDS:			include	"Art/Mars/APB/BBZ1MDS.bin"
+		APB_BBZ1N:				include	"Art/Mars/APB/BBZ1N.bin"
+		APB_BBZ2MDS:			include	"Art/Mars/APB/BBZ2MDS.bin"
+		APB_BBZ2N:				include	"Art/Mars/APB/BBZ2N.bin"
+		APB_BBZ3MDS:			include	"Art/Mars/APB/BBZ3MDS.bin"
+		APB_BBZ3N:				include	"Art/Mars/APB/BBZ3N.bin"
+		APB_BBZ4MDS:			include	"Art/Mars/APB/BBZ4MDS.bin"
+		APB_BBZ4N:				include	"Art/Mars/APB/BBZ4N.bin"
+		APB_BBZ5MDS:			include	"Art/Mars/APB/BBZ5MDS.bin"
+		APB_BBZ5N:				include	"Art/Mars/APB/BBZ5N.bin"
+		APB_BBZ6MN:				include	"Art/Mars/APB/BBZ6MN.bin"
+		APB_SSZ0MN:				include	"Art/Mars/APB/SSZ0MN.bin"
+		APB_SSZ1MN:				include	"Art/Mars/APB/SSZ1MN.bin"
+		APB_SSZ2MN:				include	"Art/Mars/APB/SSZ2MN.bin"
+		APB_SSZ3MN:				include	"Art/Mars/APB/SSZ3MN.bin"
+		APB_SSZ4MN:				include	"Art/Mars/APB/SSZ4MN.bin"
+		APB_SSZ5MN:				include	"Art/Mars/APB/SSZ5MN.bin"
+		APB_SSZ6MN:				include	"Art/Mars/APB/SSZ6MN.bin"
+		APB_AAZ06MN:			include	"Art/Mars/APB/AAZ06MN.bin"
+		APB_TTZ06MN:			include	"Art/Mars/APB/TTZ06MN.bin"
+		APB_MMZ04MN:			include	"Art/Mars/APB/MMZ04MN.bin"
+		APB_MMZ5MN:				include	"Art/Mars/APB/MMZ5MN.bin"
+		APB_MMZ6MN:				include	"Art/Mars/APB/MMZ6MN.bin"
+		APB_Training04MN:		include	"Art/Mars/APB/Training04MN.bin"
+		APB_Training56MN_Tut:	include	"Art/Mars/APB/Training56MN_Tut.bin"
+		APB_IIZ03MN:			include	"Art/Mars/APB/IIZ03MN.bin"
+		APB_IIZ4MN:				include	"Art/Mars/APB/IIZ4MN.bin"
+		APB_IIZ56MN:			include	"Art/Mars/APB/IIZ56MN.bin"
+		APB_WE0MN:				include	"Art/Mars/APB/WE0MN.bin"
+		APB_WE1MN_Boss:			include	"Art/Mars/APB/WE1MN_Boss.bin"
+		APB_WE2M_FinalBoss:		include	"Art/Mars/APB/WE2M_FinalBoss.bin"
+		APB_WE2DN:				include	"Art/Mars/APB/WE2DN.bin"
+		APB_SS:					include	"Art/Mars/APB/SS.bin"
+		APB_TA:					include	"Art/Mars/APB/TA.bin"
+		APB_SpecialEnd:			include	"Art/Mars/APB/SpecialEnd.bin"
+		APB_WE5S:				include	"Art/Mars/APB/WE5S.bin"
+		APB_Title:				include	"Art/Mars/APB/Title.bin"
+		APB_Menu:				include	"Art/Mars/APB/Menu.bin"
+		APB_WE6D:				include	"Art/Mars/APB/WE6D.bin"
+		APB_WE6SN:				include	"Art/Mars/APB/WE6SN.bin"
+		APB_PADDING:			include	"Art/Mars/APB/PADDING.pad"	;Padding for alignment to longword
+		;EndRegion
+		
 		
 		;Region @ArtPtr32X_Mighty
 		ArtPtr32X_Mighty:

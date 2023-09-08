@@ -1,4 +1,5 @@
 32x_PalTemplate.bin
+.bat
 .bmp
 .dat
 .jpg

@@ -52,6 +52,7 @@ MakePath "Art/palettes/Mars/SS"
 ;Region @ArtPaths
 MakePath "Art/Mars"						;!@
 MakePath "Art/Mars/C42"					;!@
+MakePath "Art/Mars/APB"					;!@
 
 ;Region @Path_Chars
 MakePath "Art/Mars/Uncomp"				;!@
@@ -275,9 +276,51 @@ MakePath "Collisn"
 
 ;Region @MarsArt
 
-;Region @ArtPtr32x_JunkData
-Extract $0A0200 $0010	"Art/Mars/byte_20A0200.bin"
-Extract $0A0210	$02F4	"Art/Mars/word_20A0210.bin"
+;Region @ArtPtrBanks
+Extract $0A0200 $0010	"Art/Mars/APB/Global.dat"
+
+Extract $0A03D0	$0001	"Art/Mars/APB/BBZ0MN.bin"
+Extract $0A03D1	$0009	"Art/Mars/APB/BBZ1MDS.bin"
+Extract $0A03DA	$0009	"Art/Mars/APB/BBZ1N.bin"
+Extract $0A03E3	$0009	"Art/Mars/APB/BBZ2MDS.bin"
+Extract $0A03EC	$0009	"Art/Mars/APB/BBZ2N.bin"
+Extract $0A03F5	$0009	"Art/Mars/APB/BBZ3MDS.bin"
+Extract $0A03FE	$0009	"Art/Mars/APB/BBZ3N.bin"
+Extract $0A0407	$0009	"Art/Mars/APB/BBZ4MDS.bin"
+Extract $0A0410	$0009	"Art/Mars/APB/BBZ4N.bin"
+Extract $0A0419	$0009	"Art/Mars/APB/BBZ5MDS.bin"
+Extract $0A0422	$0009	"Art/Mars/APB/BBZ5N.bin"
+Extract $0A042B	$0001	"Art/Mars/APB/BBZ6MN.bin"
+Extract $0A042C	$0001	"Art/Mars/APB/SSZ0MN.bin"
+Extract $0A042D	$0013	"Art/Mars/APB/SSZ1MN.bin"
+Extract $0A0440	$0013	"Art/Mars/APB/SSZ2MN.bin"
+Extract $0A0453	$0013	"Art/Mars/APB/SSZ3MN.bin"
+Extract $0A0466	$0013	"Art/Mars/APB/SSZ4MN.bin"
+Extract $0A0479	$0013	"Art/Mars/APB/SSZ5MN.bin"
+Extract $0A048C	$0001	"Art/Mars/APB/SSZ6MN.bin"
+Extract $0A048D	$000D	"Art/Mars/APB/AAZ06MN.bin"
+Extract $0A049A	$0005	"Art/Mars/APB/TTZ06MN.bin"
+Extract $0A049F	$000D	"Art/Mars/APB/MMZ04MN.bin"
+Extract $0A04AC	$000D	"Art/Mars/APB/MMZ5MN.bin"
+Extract $0A04B9	$0001	"Art/Mars/APB/MMZ6MN.bin"
+Extract $0A04BA	$0005	"Art/Mars/APB/Training04MN.bin"
+Extract $0A04BF	$0001	"Art/Mars/APB/Training56MN_Tut.bin"
+Extract $0A04C0	$0005	"Art/Mars/APB/IIZ03MN.bin"
+Extract $0A04C5	$0005	"Art/Mars/APB/IIZ4MN.bin"
+Extract $0A04CA	$0003	"Art/Mars/APB/IIZ56MN.bin"
+Extract $0A04CD	$0011	"Art/Mars/APB/WE0MN.bin"
+Extract $0A04DE	$0001	"Art/Mars/APB/WE1MN_Boss.bin"
+Extract $0A04DF	$0005	"Art/Mars/APB/WE2M_FinalBoss.bin"
+Extract $0A04E4	$0001	"Art/Mars/APB/WE2DN.bin"
+Extract $0A04E5	$0007	"Art/Mars/APB/SS.bin"
+Extract $0A04EC	$0003	"Art/Mars/APB/TA.bin"
+Extract $0A04EF	$0007	"Art/Mars/APB/SpecialEnd.bin"
+Extract $0A04F6	$0001	"Art/Mars/APB/WE5S.bin"
+Extract $0A04F7	$0005	"Art/Mars/APB/Title.bin"
+Extract $0A04FC	$0003	"Art/Mars/APB/Menu.bin"
+Extract $0A04FF	$0001	"Art/Mars/APB/WE6D.bin"
+Extract $0A0500	$0001	"Art/Mars/APB/WE6SN.bin"
+Extract $0A0501	$0003	"Art/Mars/APB/PADDING.pad"
 ;EndRegion
 
 ;Region @ArtPtr32X_Chars
