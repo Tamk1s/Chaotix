@@ -1,17 +1,18 @@
 Contest:
-- TTZ4x palettes
+x Patch all boss music to song $15/import song
+x TTZ4x palettes
+x Ensure demo is 4 acts
+- Change APB global/level tables to load dummy AAZ Ens 2 bank for invis art
 - Fix bad TTZ4 collision (slopes)
 - TTZ4x objpos, bumper area
 - TTZ4 Boss Rush stability
 - TTZ4 32x sprite background
 - Extended level playlist (TTZ DEZ song)
-- Patch all boss music to song $15/import song (extend/optimize banks)
 - Improve/fix TTZ BG parallax, fix animart
-- Change APB global/level tables to load dummy AAZ Ens 2 bank for invis art
-
+- Add LordXernon/DJError (S2 Club Edit) and StephenUK (ASCII art) to credits
 - Restore 32x Title Screen edits
 - DataLoad art edits (Big/Small ovals etc)?
-- Ensure demo is 4 acts
+
 
 Next release:
 - ASCII art tutorial fix
