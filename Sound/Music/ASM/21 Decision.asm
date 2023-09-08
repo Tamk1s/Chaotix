@@ -1,225 +1,165 @@
-
 Target	EQU	$4E9AC
-	smpsHeaderVoice	Decision_Patches, Target
-	smpsHeaderChan	$06, $03
-	smpsHeaderTempo	$01, $44
-	smpsHeaderFM	Decision_FM1, Target, $F4, $0B
-	smpsHeaderFM	Decision_FM2, Target, $0C, $0F
-	smpsHeaderFM	Decision_FM3, Target, $0C, $0F
-	smpsHeaderFM	Decision_FM4, Target, $0C, $0F
-	smpsHeaderFM	Decision_FM5, Target, $0C, $16
-	smpsHeaderFM	Decision_FM6, Target, $0C, $18
-	smpsHeaderPSG	Decision_PSG1, Target, $00, $00, $00, $00
-	smpsHeaderPSG	Decision_PSG2, Target, $00, $00, $00, $00
-	smpsHeaderPSG	Decision_PSG3, Target, $23, $01, $00, $00
-	smpsHeaderPWM	Decision_PWM1, Target, $00, $AA
-	smpsHeaderPWM	Decision_PWM2, Target, $00, $88
-	smpsHeaderPWM	Decision_PWM3, Target, $00, $BB
-	smpsHeaderPWM	Decision_PWM4, Target, $00, $00
 
-Decision_FM1:
-	smpsFMvoice		$00
-	smpsPan		panCenter
+PWMVol	EQU	$7F
+PWMPitch	EQU	$00
+FMVol1 	EQU $0A-$04
+FMVol2 	EQU $0E-$04
+PSGVoi	EQU	$00
+PSGVol	EQU $06
+Silence	EQU	$E3
 
-Decision_Jump1:
-	dc.b	nRst, $08, nAb3, $04
-	smpsAlterVol		$FD
-	dc.b	nRst, $0C, nBb3, $04
-	smpsAlterVol		$FC
-	dc.b	nRst, $0C, nB3, $04
-	smpsAlterVol		$FC
-	dc.b	nRst, $0C, nCs4, $04, nRst, $04
-	smpsAlterVol		$0B
-	smpsE2		$01
-	smpsJump		Decision_Jump1, Target
+; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+Mod1	EQU	$01010605
+Mod2	EQU	$01010305
+Mod3	EQU	$01020306
+Mod4	EQU	$01020106
 
-Decision_FM2:
-	smpsFMvoice		$01
-	smpsPan		panCenter
+	smpsHeaderVoice	SMB3_Cards3_Patches, Target
+	smpsHeaderChan		$06, $03
+	smpsHeaderTempo		$03, $20
+	smpsHeaderFM	SMB3_Cards3_FM1, Target, $00, FMVol1
+	smpsHeaderFM	SMB3_Cards3_FM2, Target, $00, FMVol1
+	smpsHeaderFM	SMB3_Cards3_FM3, Target, $00, FMVol2
+	smpsHeaderFM	SMB3_Cards3_FM4, Target, $00, FMVol2
+	smpsHeaderFM	SMB3_Cards3_FM5, Target, $00, FMVol1
+	smpsHeaderFM	SMB3_Cards3_FM6, Target, $00, FMVol1
+	smpsHeaderPSG	SMB3_Cards3_PSG1, Target, PSGDelta, PSGVol, $00, PSGVoi
+	smpsHeaderPSG	SMB3_Cards3_PSG2, Target, PSGDelta, PSGVol, $00, PSGVoi
+	smpsHeaderPSG	SMB3_Cards3_PSG3, Target, PSGDelta, PSGVol, $00, PSGVoi
+	smpsHeaderPWM	SMB3_Cards3_PWM1, Target, PWMPitch, PWMVol
+	smpsHeaderPWM	SMB3_Cards3_PWM2, Target, PWMPitch, PWMVol
+	smpsHeaderPWM	SMB3_Cards3_PWM3, Target, PWMPitch, PWMVol
+	smpsHeaderPWM	SMB3_Cards3_PWM4, Target, PWMPitch, PWMVol
 
-Decision_Jump2:
-	smpsCall		Decision_Call1, Target
-	smpsJump		Decision_Jump2, Target
-
-Decision_Call1:
-	dc.b	nRst, $08, nBb3, $02, nRst
-	smpsAlterVol		$11
+SMB3_Cards3_FM1:
 	smpsPan		panLeft
-	dc.b	nBb3, $04
-	smpsAlterVol		$EF
-	smpsPan		panCenter
-	smpsAlterVol		$FD
-	dc.b	nRst, $08, nC4, $02, nRst
-	smpsAlterVol		$11
-	smpsPan		panLeft
-	dc.b	nC4, $04
-	smpsAlterVol		$EF
-	smpsPan		panCenter
-	smpsAlterVol		$FC
-	dc.b	nRst, $08, nCs4, $02, nRst
-	smpsAlterVol		$11
-	smpsPan		panLeft
-	dc.b	nCs4, $04
-	smpsAlterVol		$EF
-	smpsPan		panCenter
-	smpsAlterVol		$FC
-	dc.b	nRst, $08, nEb4, $02, nRst
-	smpsAlterVol		$11
-	smpsPan		panLeft
-	dc.b	nEb4, $04
-	smpsAlterVol		$EF
-	smpsPan		panCenter
-	smpsAlterVol		$0B
-	smpsReturn
-
-Decision_FM3:
 	smpsFMvoice		$00
-	smpsPan		panCenter
+	dc.b nA4, $03, nA4, $03, nRst, $03, nB4, $03
+	dc.b nC5, $03, nRst, $03, nD5, $03
+	smpsModSet2	Mod1	
+	dc.b nD5, $21
+	dc.b	Silence
 
-Decision_Jump3:
-	smpsCall		Decision_Call2, Target
-	smpsJump		Decision_Jump3, Target
-
-Decision_Call2:
-	dc.b	nRst, $08, nCs4, $04
-	smpsAlterVol		$11
-	smpsPan		panRight
-	dc.b	nCs4, $04
-	smpsAlterVol		$EF
-	smpsPan		panCenter
-	smpsAlterVol		$FD
-	dc.b	nRst, $08, nEb4, $04
-	smpsAlterVol		$11
-	smpsPan		panRight
-	dc.b	nEb4, $04
-	smpsAlterVol		$EF
-	smpsPan		panCenter
-	smpsAlterVol		$FC
-	dc.b	nRst, $08, nE4, $04
-	smpsAlterVol		$11
-	smpsPan		panRight
-	dc.b	nE4, $04
-	smpsAlterVol		$EF
-	smpsPan		panCenter
-	smpsAlterVol		$FC
-	dc.b	nRst, $08, nFs4, $04
-	smpsAlterVol		$11
-	smpsPan		panRight
-	dc.b	nFs4, $04
-	smpsAlterVol		$EF
-	smpsPan		panCenter
-	smpsAlterVol		$0B
-	smpsReturn
-
-Decision_FM4:
+SMB3_Cards3_FM2:
+	smpsPan		panLeft
 	smpsFMvoice		$00
-	smpsPan		panCenter
-
-Decision_Jump4:
-	dc.b	nRst, $08, nFs4, $02, nRst
-	smpsAlterVol		$15
-	dc.b	nFs4, $04
-	smpsAlterVol		$E8
-	dc.b	nRst, $08, nAb4, $02, nRst
-	smpsAlterVol		$15
-	dc.b	nAb4, $04
-	smpsAlterVol		$E7
-	dc.b	nRst, $08, nA4, $02, nRst
-	smpsAlterVol		$15
-	dc.b	nA4, $04
-	smpsAlterVol		$E7
-	dc.b	nRst, $08, nB4, $02, nRst
-	smpsAlterVol		$15
-	dc.b	nB4, $04
-	smpsAlterVol		$F6
-	smpsJump		Decision_Jump4, Target
-
-Decision_FM5:
-	smpsFMvoice		$01
-	smpsPan		panCenter
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $08
-
-Decision_Jump5:
-	smpsCall		Decision_Call1, Target
-	smpsJump		Decision_Jump5, Target
-
-Decision_FM6:
-	smpsFMvoice		$00
-	smpsPan		panCenter
-	smpsModSet	$01, $01, $02, $05
-	dc.b	nRst, $08
-
-Decision_Jump6:
-	smpsCall		Decision_Call2, Target
-	smpsJump		Decision_Jump6, Target
-
-Decision_PSG1:
-	smpsStop
-
-Decision_PSG2:
-	smpsStop
-
-Decision_PSG3:
-	smpsPSGform	$E7
-
-Decision_Jump7:
-	smpsPSGvoice	$05
-	dc.b	nC4, $08
-	smpsSetVol	$03
-	smpsPSGvoice	$02
-	dc.b	nC4
-	smpsSetVol	$FD
-	smpsJump		Decision_Jump7, Target
-
-Decision_PWM1:
-	dc.b	$96, $08, $8B
-	smpsJump		Decision_PWM1, Target
-
-Decision_PWM2:
-	dc.b	$8C, $10
-	smpsJump		Decision_PWM2, Target
-
-Decision_PWM3:
-	smpsStop
-
-Decision_PWM4:
-	smpsStop
-
-Decision_Patches:
-
+	dc.b nG2, $03, nG2, $03, nRst, $03, nG2, $03
+	dc.b nG2, $03, nRst, $03, nC2, $03
+	smpsModSet2	Mod1
 	
-	dc.b	$38
-	dc.b	$0A, $70, $30, $00,	$1F, $1F, $1F, $1F
-	dc.b	$12, $0E, $0A, $0A,	$00, $04, $04, $03
-	dc.b	$26, $26, $26, $28,	$24, $2D, $12, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	dc.b nC2, $21
+	dc.b	Silence
 
+SMB3_Cards3_FM3:
+	smpsPan		panCenter
+	smpsFMvoice		$00
+	dc.b nD4, $03, nD4, $03, nRst, $03, nE4, $03
+	dc.b nF4, $03, nRst, $03, nG4, $03
+	smpsModSet2	Mod2
+	
+	dc.b nG4, $21
+	dc.b	Silence
+
+SMB3_Cards3_FM4:
+	smpsFMvoice		$01
+	smpsPan		panCenter
+	dc.b nC4, $03, nC4, $03, nRst, $03, nD4, $03
+	dc.b nE4, $03, nRst, $03, nE4, $03
+	smpsModSet2	Mod1
+	
+	dc.b nE4, $21
+	dc.b	Silence
+
+SMB3_Cards3_FM5:
+	smpsFMvoice		$01
+	smpsPan		panRight
+	dc.b nA5, $03, nA5, $03, nRst, $03, nB5, $03
+	dc.b nC6, $03, nRst, $03, nD6, $03
+	smpsModSet2	Mod1
+	
+	dc.b nD6, $21
+	dc.b	Silence
+
+SMB3_Cards3_FM6:
+	smpsFMvoice		$01
+	smpsPan		panRight
+	dc.b nF4, $03, nF4, $03, nRst, $03, nG4, $03
+	dc.b nA4, $03, nRst, $03, nB4, $03
+	smpsModSet2	Mod1
+	
+	dc.b nB4, $21
+	dc.b	Silence
+
+SMB3_Cards3_PSG1:
+	dc.b nA1, $03, nA1, $03, nRst, $03, nB1, $03
+	dc.b nC2, $03, nRst, $03, nD2, $03
+	smpsModSet2	Mod3
+	
+	dc.b nD2, $21
+	smpsStop
+
+SMB3_Cards3_PSG2:
+	dc.b nD1, $03, nD1, $03, nRst, $03, nE1, $03
+	dc.b nF1, $03, nRst, $03, nG1, $03
+	smpsModSet2	Mod4
+	
+	dc.b nG1, $21
+	smpsStop
+
+SMB3_Cards3_PSG3:
+	dc.b nC1, $03, nC1, $03, nRst, $03, nD1, $03
+	dc.b nE1, $03, nRst, $03, nE1, $03
+	smpsModSet2	Mod3
+	
+	dc.b nE1, $21
+	smpsStop
+	
+SMB3_Cards3_PWM1:
+	dc.b	pClosedHH, $03, $03, $03, $03, pCrashCymb, $06, $06
+	smpsStop
+	
+SMB3_Cards3_PWM2:
+	dc.b	pAKick, $03, $03, $03, $03, pASnare, $06, $06
+	smpsStop
+	
+SMB3_Cards3_PWM3:
+	dc.b	pEKick, $03, $03, $03, $03, pESnare, $06, $06
+	smpsStop
+	
+SMB3_Cards3_PWM4:
+	dc.b	nRst, $0C, pSplashCymb, $06, $06
+	smpsStop
+
+SMB3_Cards3_Patches:
+	;S1_Opt Set
+	; dc.b	$3D
+	; dc.b	$01, $00, $01, $02,	$12, $1F, $1F, $14
+	; dc.b	$07, $02, $02, $0A,	$05, $05, $05, $05
+	; dc.b	$25, $27, $27, $A7,	$1C, $0C, $0E, $0C
+	
+	; dc.b	$3A
+	; dc.b	$01, $02, $01, $01,	$14, $14, $17, $14
+	; dc.b	$0A, $0C, $03, $07,	$02, $08, $08, $03
+	; dc.b	$07, $E9, $A8, $18,	$1C, $2B, $28, $0C
+	
+	;S3K Set
+	; dc.b	$3D
+	; dc.b	$01, $00, $01, $02,	$12, $1F, $1F, $14
+	; dc.b	$07, $02, $02, $0A,	$05, $05, $05, $05
+	; dc.b	$25, $27, $27, $A7,	$1C, $8C, $8E, $8C
+	
+	; dc.b	$3A
+	; dc.b	$01, $02, $01, $01,	$14, $14, $17, $14
+	; dc.b	$0A, $0C, $03, $07,	$02, $08, $08, $03
+	; dc.b	$07, $E9, $A8, $18,	$1C, $2B, $28, $8C
+	
+	;Optimize set
+	dc.b	$3D
+	dc.b	$01, $00, $01, $02, $12, $1F, $1F, $14
+	dc.b	$07, $02, $02, $0A, $05, $05, $05, $05
+	dc.b	$22, $23, $23, $A3, $1C, $0C, $0E, $0C
 	
 	dc.b	$3A
-	dc.b	$01, $02, $01, $01,	$14, $14, $17, $14
-	dc.b	$0A, $0C, $03, $07,	$02, $08, $08, $03
-	dc.b	$07, $E9, $A8, $18,	$1C, $2B, $28, $80
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	dc.b	$01, $02, $01, $01, $14, $14, $17, $14
+	dc.b	$0A, $0C, $03, $07, $02, $08, $08, $03
+	dc.b	$03, $E2, $A2, $11, $1C, $2B, $28, $0C

@@ -571,7 +571,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	String	"FF1 VICTORY"
 	BYTE	CASC_NullTerm
 	;!@ New data
-	String "DECISION"
+	String "3 CARDS-SMB3"
 	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "FROM PARTY TO PARTY"
@@ -603,7 +603,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ New Data
 	;String "DECISION 2ND"
-	String "3 CARDS-SMB3"
+	String "SPLASH-HDN1R"
 	BYTE	CASC_NullTerm
 	String "S.E."
 	BYTE	CASC_NullTerm	
