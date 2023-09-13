@@ -634,7 +634,7 @@
                  Width:    62
                 Height:    95
 
- # of Sprites in set 7:    16
+ # of Sprites in set 7:    18
  ;TTZ Objects
 
          ;Conveyor Switch
@@ -748,6 +748,20 @@
           yoff in file:    96
                  Width:    136
                 Height:    96
+				
+		;Bumper 1        				
+        Sprite 16 file:     7
+		  xoff in file:    52
+          yoff in file:    57
+                 Width:    32
+                Height:    32          
+				
+		;Bumper 2
+		Sprite 17 file:     7          
+		  xoff in file:     1
+          yoff in file:    57
+                 Width:    48
+                Height:    32
 
  # of Sprites in set 8:    7
  ;Intro/Training
@@ -13035,14 +13049,21 @@ Num Dependants:   0
     # of Zones:   1
     Zone Entry:  FF
    Description: Balloon (SSZ)
- Num Bitfields:   0
+ 	Num Bitfields:   1
+    BitField 0: 00000011
+       Desc  0: Balloon
+       Desc  1: Bumper 1
+       Desc  2: Bumper 2
+       Desc  3: Invalid
   DefaultParam:   0
    DefaultFlag:   0
     DefaultDir:   0
  DefltRemember:   0
-Num Dependants:   0
-     Num Types:   1
-Type 0    XMin:  -32
+Num Dependants:   1
+   Dependant 0:   0
+     Num Types:   3
+ Type 0   Val0:   0
+		  XMin:  -32
           YMin:  -35
           XMax:   32
           YMax:   35
@@ -13052,6 +13073,28 @@ Type 0    XMin:  -32
      Direction:   0
           xoff:  -32
           yoff:  -35
+ Type 1   Val0:   1
+		  XMin:  -16
+          YMin:  -16
+          XMax:   16
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:   16
+           Set:   7
+     Direction:   0
+          xoff:  -16
+          yoff:  -16
+ Type 2   Val0:   2
+		  XMin:  -24
+          YMin:  -16
+          XMax:   24
+          YMax:   16
+  # of Sprites:   1
+   Sprite 0 ID:   17
+           Set:   7
+     Direction:   0
+          xoff:  -20
+          yoff:  -16
 
      Object ID:  9A
     # of Zones:   1

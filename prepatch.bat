@@ -77,6 +77,9 @@ REM bytepatch.exe -a 0x03147C kc.bin 4E75
 
 REM HACK PATCHES
 
+REM Disable chksum
+bytepatch.exe -a 0x0007BE kc.bin 6000
+
 REM Enable official 6-button joypad support in ROM Header periph support
 bytepatch.exe -a 0x000191 kc.bin 3620
 
@@ -317,6 +320,16 @@ bytepatch.exe -a 0x07779C kc.bin -f "Assets\Code\BossSpawn.bin"
 REM Spikes extension (invis hurt)
 bytepatch.exe -a 0x023BBA kc.bin 4EF9 008F 78A2 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x0778A2 kc.bin -f "Assets\Code\Spikes2.bin"
+
+
+REM Balloons extension (new art for TTZ)
+bytepatch.exe -a 0x023D32 kc.bin 4EB9 008F 78E6 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x023D5C kc.bin 4E71 4E71 4E71
+bytepatch.exe -a 0x023E2C kc.bin 4EB9 008F 794C 4E71 4E71
+bytepatch.exe -a 0x023E48 kc.bin 4EB9 008F 794C 4E71 4E71
+bytepatch.exe -a 0x023D8E kc.bin 4EB9 008F 7970 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x0778E6 kc.bin -f "Assets\Code\Balloons.bin"
+
 
 REM Survival mode
 REM NOP IIZ Zone force

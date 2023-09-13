@@ -1025,6 +1025,7 @@ pos10_RingFBoss EQU $A                 ; Amount of rings to start with on MSKai 
 neg10_ringLoss_BS EQU $A				; Rings loss from BS Spikes
 pos20_RingBonus EQU $14                ; Amount of rings to spawn Bonus BigRing
 pos50_RingSpecial EQU $32              ; Amount of rings to spawn Special BigRing
+pts_10         	EQU $0A                ; 10 Pts
 pts_100         EQU $64                ; 100 Pts
 pos200_RingBSSS_Start EQU $C8          ; 200 Rings (used for BS/SS init from level select)
 pos255_Rings    EQU $FF                ; Cap for Bonus Stage rings
