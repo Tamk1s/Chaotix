@@ -307,6 +307,14 @@ REM NOP out AAZ BossSpawn check
 REM bytepatch.exe -a 0x008794 kc.bin 4E71 4E71
 REM AAZ Boss
 bytepatch.exe -a 0x0087EC kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 6642 0829 0002 003E 673A 0829 0001 003E 6732 08E9 0003 003E 0829 0005 003F 6726
+bytepatch.exe -a 0x034CD4 kc.bin 3D7C 1040 0008 3D7C 02A0 000C
+bytepatch.exe -a 0x034F40 kc.bin 3D7C 10C0 0008 3D7C 0250 000C
+bytepatch.exe -a 0x0350BC kc.bin 0C6E 0250 000C
+bytepatch.exe -a 0x03511E kc.bin 0C6E 1130 0008
+bytepatch.exe -a 0x035154 kc.bin 0C6E 0228 000C
+bytepatch.exe -a 0x035240 kc.bin 0C6E 0208 000C
+bytepatch.exe -a 0x035240 kc.bin 0C6E 0208 000C
+bytepatch.exe -a 0x0352C2 kc.bin 0C6E 1050 0008
 REM TTZ
 bytepatch.exe -a 0x00896A kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 663A 0829 0002 003E 6732 0829 0001 003E 672A
 REM MMZ

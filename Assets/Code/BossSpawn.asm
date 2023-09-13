@@ -65,16 +65,16 @@ BossSpawner:
 @special:
 	;move.b	#sfx_PixelPlatCollapse,d0
 	;jsr		(PlaySound).l
-	jsr		(ObjSE_BossSpawner1_ActJumper).l
+	jsr		(ObjSE_BossSpawner2).l
 locret:
 	jsr     (DeleteObject).l
 	rts
 	
 zoneTable_TTZ4:
+	dc.b	$00,id_AAZ
 	dc.b	$00,id_MMZ
-	dc.b	$00,id_MMZ
-	dc.b	$00,id_MMZ
-	dc.b	$00,id_MMZ
+	dc.b	$01,id_BBZ
+	dc.b	$01,id_AAZ
 	
 zoneTable_TTZ5:
 	dc.b	$00,id_MMZ
