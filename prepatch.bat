@@ -312,23 +312,23 @@ bytepatch.exe -a 0x00896A kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 663A 0829 00
 REM MMZ
 bytepatch.exe -a 0x008AC8 kc.bin 4E75 4E71
 bytepatch.exe -a 0x008C58 kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 6632 0829 0001 003E 672A
-bytepatch.exe -a 0x011058 kc.bin 4EF9 008F 781A
-bytepatch.exe -a 0x011E32 kc.bin 008F 779C
-bytepatch.exe -a 0x07779C kc.bin -f "Assets\Code\BossSpawn.bin"
+bytepatch.exe -a 0x011058 kc.bin 4EF9 009F 8458
+bytepatch.exe -a 0x011E32 kc.bin 009F 83DA
+bytepatch.exe -a 0x2F83DA kc.bin -f "Assets\Code\BossSpawn.bin"
 
 
 REM Spikes extension (invis hurt)
-bytepatch.exe -a 0x023BBA kc.bin 4EF9 008F 78A2 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
-bytepatch.exe -a 0x0778A2 kc.bin -f "Assets\Code\Spikes2.bin"
+bytepatch.exe -a 0x023BBA kc.bin 4EF9 009F 84E0 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x2F84E0 kc.bin -f "Assets\Code\Spikes2.bin"
 
 
 REM Balloons extension (new art for TTZ)
-bytepatch.exe -a 0x023D32 kc.bin 4EB9 008F 78E6 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x023D32 kc.bin 4EB9 009F 8524 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x023D5C kc.bin 4E71 4E71 4E71
-bytepatch.exe -a 0x023E2C kc.bin 4EB9 008F 794C 4E71 4E71
-bytepatch.exe -a 0x023E48 kc.bin 4EB9 008F 794C 4E71 4E71
-bytepatch.exe -a 0x023D8E kc.bin 4EB9 008F 7970 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
-bytepatch.exe -a 0x0778E6 kc.bin -f "Assets\Code\Balloons.bin"
+bytepatch.exe -a 0x023E2C kc.bin 4EB9 009F 858A 4E71 4E71
+bytepatch.exe -a 0x023E48 kc.bin 4EB9 009F 858A 4E71 4E71
+bytepatch.exe -a 0x023D8E kc.bin 4EB9 009F 85AE 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x2F8524 kc.bin -f "Assets\Code\Balloons.bin"
 
 
 REM Survival mode
