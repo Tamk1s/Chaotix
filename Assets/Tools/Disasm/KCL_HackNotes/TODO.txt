@@ -4,9 +4,9 @@ x TTZ4x palettes
 x Ensure demo is 4 acts
 x Change APB global/level tables to load dummy AAZ Ens 2 bank for invis art
 x Bumper area
+| TTZ4 Boss Rush stability
 - Fix bad TTZ4 collision (slopes)
 - TTZ4x objpos
-- TTZ4 Boss Rush stability
 - TTZ4 32x sprite background
 - Extended level playlist (TTZ DEZ song)
 - Improve/fix TTZ BG parallax, fix animart

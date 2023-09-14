@@ -47,7 +47,7 @@ BossSpawner:
 	bne.s	@skip
 
 	
-	bset    #5,$3F(a1)		
+	bset    #5,$3F(a1)
 @skip:
 	;bset    #2,$3E(a1)
 	;bset    #1,$3E(a1)
@@ -60,20 +60,20 @@ BossSpawner:
 	beq.s	@special
 	;move.b	#sfx_Error,d0
 	;jsr		(PlaySound).l
-	jsr		(ObjSE_BossSpawner1_ActJumper).l
-	bra.s	locret
+	jsr		(ObjSE_BossSpawner1_ActJumper).l	
 @special:
 	;move.b	#sfx_PixelPlatCollapse,d0
 	;jsr		(PlaySound).l
-	jsr		(ObjSE_BossSpawner2).l
-locret:
-	jsr     (DeleteObject).l
+	;!@ jsr		(ObjSE_BossSpawner2).l	
+	dc.w	$4E71,$4E71,$4E71
+@locret:
+	jmp     (DeleteObject).l
 	rts
 	
 zoneTable_TTZ4:
 	dc.b	$00,id_AAZ
 	dc.b	$00,id_MMZ
-	dc.b	$01,id_BBZ
+	dc.b	$00,id_MMZ
 	dc.b	$01,id_AAZ
 	
 zoneTable_TTZ5:
