@@ -11,7 +11,7 @@ asmx -e -w -l IIZ_Grabber.lst -C 68K -b 0x8F773C -o IIZ_Grabber.bin cIIZ_Grabber
 asmx -e -w -l BossSpawn.lst -C 68K -b 0x9F83DA -o BossSpawn.bin cBossSpawn.asm > BossSpawn.log
 asmx -e -w -l Spikes2.lst -C 68K -b 0x9F84E0 -o Spikes2.bin cSpikes2.asm > Spikes2.log
 asmx -e -w -l Balloons.lst -C 68K -b 0x9F8524 -o Balloons.bin cBalloons.asm > Balloons.log
-asmx -e -w -l Spritemask.lst -C 68K -b 0x9F85DA -o Spritemask.bin cSpritemask.asm > Spritemask.log
+asmx -e -w -l BossSpawnEnd.lst -C 68K -b 0x9F85DA -o BossSpawnEnd.bin cBossSpawnEnd.asm > BossSpawnEnd.log
 
 
 REM asmx -e -w -l MSU.lst -C 68K -b 0x8F773C -o MSU.bin cMSU.asm > MSU.log

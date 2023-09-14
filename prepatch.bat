@@ -152,6 +152,11 @@ bytepatch.exe -a 0x0775DE kc.bin -f "Assets\Code\Monitor_CombiBreaker.bin"
 REM Release demo stuff
 REM BGScroll deformation byte patch to force AAZ parallax for TTZ Classic!
 bytepatch.exe -a 0x8082 kc.bin 0706 0704 0702 0700 06FE 06F6 06FA
+REM BGScroll deformation byte patch to force AAZ-like parallax for MMZ!
+bytepatch.exe -a 0x8B24 kc.bin 6614
+bytepatch.exe -a 0x8B26 kc.bin 4E71 4E71
+bytepatch.exe -a 0x8B2A kc.bin 4EF9 0088 87B8 4E71 4E71 4E71 4E71 4E71
+
 REM Code patch to disable AutoDemos
 bytepatch.exe -a 0x003DBE kc.bin 6012
 bytepatch.exe -a 0x0044F4 kc.bin 6012
@@ -294,6 +299,7 @@ REM Patch Boss cutscene music to use PlaySound instead of _save
 REM bytepatch.exe -a 0x02E674 kc.bin 008F 6E76
 REM Boss spawn object
 REM AAZ Miniboss
+bytepatch.exe -a 0x025D04 kc.bin 103C 0002
 bytepatch.exe -a 0x02CD86 kc.bin 323C B652
 REM BBZ
 bytepatch.exe -a 0x02D646 kc.bin 4E71 4E71 4E71 4E71
@@ -342,7 +348,7 @@ bytepatch.exe -a 0x2F8524 kc.bin -f "Assets\Code\Balloons.bin"
 
 REM Custom spritemasker object
 bytepatch.exe -a 0x011E36 kc.bin 009F 85DA
-bytepatch.exe -a 0x2F85DA kc.bin -f "Assets\Code\Spritemask.bin" 
+bytepatch.exe -a 0x2F85DA kc.bin -f "Assets\Code\BossSpawnEnd.bin" 
 
 
 REM Survival mode
