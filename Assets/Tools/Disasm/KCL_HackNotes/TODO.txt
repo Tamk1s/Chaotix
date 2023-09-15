@@ -4,15 +4,16 @@ x TTZ4x palettes
 x Ensure demo is 4 acts
 x Change APB global/level tables to load dummy AAZ Ens 2 bank for invis art
 x Bumper area
-| TTZ4 Boss Rush stability
+x Fix animart
+x TTZ4x objpos
+- Fix backgrounds
+| TTZ4 Boss Rush stability (end of level boss)
+- Fix zoom tube
 - Fix bad TTZ4 collision (slopes)
-- TTZ4x objpos
-- TTZ4 32x sprite background
+- Fix parallax
 - Extended level playlist (TTZ DEZ song)
-- Improve/fix TTZ BG parallax, fix animart
 - Add LordXernon/DJError (S2 Club Edit) and StephenUK (ASCII art) to credits
 - Restore 32x Title Screen edits
-- DataLoad art edits (Big/Small ovals etc)?
 
 
 Next release:
@@ -26,3 +27,4 @@ Next release:
 - Kill off partner at claw game (press up). Single-player modes
 - MSU Mode 1!
 - "Break out (XMVSF)" (Steel Heart) song incomplete
+- DataLoad art edits (Big/Small ovals etc)?

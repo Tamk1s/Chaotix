@@ -9,6 +9,11 @@ cd ../../
 copy /b "kc.bin"+"Assets\Code\PAD.bin" "kc.bin"
 
 
+SetLocal EnableDelayedExpansion	
+SET NOP=4E71
+SET RTS=4E75
+SET JSR_ABS=4EB9
+SET JMP_ABS=4EF9
 REM EXPERIMENTS
 
 REM Patch out jumps to various routines, to remove DLE for SSZ Pal cycles
@@ -152,6 +157,8 @@ bytepatch.exe -a 0x0775DE kc.bin -f "Assets\Code\Monitor_CombiBreaker.bin"
 REM Release demo stuff
 REM BGScroll deformation byte patch to force AAZ parallax for TTZ Classic!
 bytepatch.exe -a 0x8082 kc.bin 0706 0704 0702 0700 06FE 06F6 06FA
+REM Patchout special code for TTZ (LSC table)
+bytepatch.exe -a 0x884C kc.bin 4E75
 REM BGScroll deformation byte patch to force AAZ-like parallax for MMZ!
 bytepatch.exe -a 0x8B24 kc.bin 6614
 bytepatch.exe -a 0x8B26 kc.bin 4E71 4E71
@@ -170,6 +177,17 @@ bytepatch.exe -a 0x02D6E0 kc.bin 103C 0029
 bytepatch.exe -a 0x02DC06 kc.bin 103C 0029
 bytepatch.exe -a 0x02E0B0 kc.bin 103C 0029
 bytepatch.exe -a 0x02E45C kc.bin 103C 0029
+REM Patch powerup timers
+SET PowTimer=0E10
+bytepatch.exe -a 0x0101C8 kc.bin 0668 !PowTimer! 0034
+bytepatch.exe -a 0x0101F0 kc.bin 0668 !PowTimer! 0032
+bytepatch.exe -a 0x0101FE kc.bin 0668 !PowTimer! 0032
+bytepatch.exe -a 0x01023E kc.bin 317C !PowTimer! 0036
+bytepatch.exe -a 0x010256 kc.bin 317C !PowTimer! 0036
+bytepatch.exe -a 0x0102CE kc.bin 317C !PowTimer! 0036
+bytepatch.exe -a 0x010314 kc.bin 317C !PowTimer! 0036
+bytepatch.exe -a 0x010334 kc.bin 0668 !PowTimer! 0038
+bytepatch.exe -a 0x010358 kc.bin 0668 !PowTimer! 0038
 REM Patch Decision 2nd with 1st
 bytepatch.exe -a 0x027BB8 kc.bin 7021
 REM Code patches to undo normal game progress for Demo
@@ -365,5 +383,4 @@ REM bytepatch.exe -a 0x029026 kc.bin 31FC 0058 DFDE
 
 REM Modify Act jumper object to set Practice mode, goto next act
 REM SNEEP bytepatch.exe -a 0x026C94 kc.bin 3038 DFF4 31C0 FDE2 4EB9 0088 8F78
-
-
+endlocal
