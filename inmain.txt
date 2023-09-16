@@ -1183,16 +1183,23 @@ StartSeg MD_Palette_Index Big_Endian	;Megadrive format palette pointers and data
 	;!@ LPPtrTTZ2S:	WORD Pal_TTZ1234S-LPPtrTTZ2S
 	LPPtrTTZ2S:	WORD Pal_TTZ13S-LPPtrTTZ2S
 	LPPtrTTZ2N:	WORD Pal_TTZ12N-LPPtrTTZ2N
-	LPPtrTTZ3M:	WORD Pal_TTZ34M-LPPtrTTZ3M
-	LPPtrTTZ3D:	WORD Pal_TTZ34D-LPPtrTTZ3D
+	;!@ LPPtrTTZ3M:	WORD Pal_TTZ34M-LPPtrTTZ3M
+	LPPtrTTZ3M:	WORD Pal_TTZ3M-LPPtrTTZ3M
+	;!@ LPPtrTTZ3D:	WORD Pal_TTZ34D-LPPtrTTZ3D
+	LPPtrTTZ3D:	WORD Pal_TTZ3D-LPPtrTTZ3D
 	;!@ LPPtrTTZ3S:	WORD Pal_TTZ1234S-LPPtrTTZ3S
 	LPPtrTTZ3S:	WORD Pal_TTZ13S-LPPtrTTZ3S
-	LPPtrTTZ3N:	WORD Pal_TTZ34N-LPPtrTTZ3N
-	LPPtrTTZ4M:	WORD Pal_TTZ34M-LPPtrTTZ4M
-	LPPtrTTZ4D:	WORD Pal_TTZ34D-LPPtrTTZ4D
-	;!@ LPPtrTTZ4S:	WORD Pal_TTZ1234S-LPPtrTTZ4S
-	LPPtrTTZ4S:	WORD Pal_TTZ4S-LPPtrTTZ4S
-	LPPtrTTZ4N:	WORD Pal_TTZ34N-LPPtrTTZ4N
+	;!@ LPPtrTTZ3N:	WORD Pal_TTZ34N-LPPtrTTZ3N
+	LPPtrTTZ3N:	WORD Pal_TTZ3N-LPPtrTTZ3N
+	;!@ LPPtrTTZ4M:	WORD Pal_TTZ34M-LPPtrTTZ4M
+	;!@ LPPtrTTZ4D:	WORD Pal_TTZ34D-LPPtrTTZ4D
+	;!@ LPPtrTTZ4S:	WORD Pal_TTZ1234S-LPPtrTTZ4S	
+	;!@ LPPtrTTZ4N:	WORD Pal_TTZ34N-LPPtrTTZ4N
+	LPPtrTTZ4M:	WORD Pal_TTZ4M-LPPtrTTZ4M
+	LPPtrTTZ4D:	WORD Pal_TTZ4D-LPPtrTTZ4D
+	LPPtrTTZ4S:	WORD Pal_TTZ4S-LPPtrTTZ4S	
+	LPPtrTTZ4N:	WORD Pal_TTZ4N-LPPtrTTZ4N
+	
 	LPPtrTTZ5M:	WORD Pal_TTZ5M-LPPtrTTZ5M
 	LPPtrTTZ5D:	WORD Pal_TTZ5D-LPPtrTTZ5D
 	LPPtrTTZ5S:	WORD Pal_TTZ5S-LPPtrTTZ5S
@@ -1339,17 +1346,26 @@ StartSeg MD_Palette_Index Big_Endian	;Megadrive format palette pointers and data
 	Pal_AAZ5:	include	"Levels/AAZ/Pal/5MN.bin"
 
 	Pal_TTZ12M:	include	"Levels/TTZ/Pal/12M.bin"
-	Pal_TTZ34M:	include	"Levels/TTZ/Pal/34M.bin"
+	;!@ Pal_TTZ34M:	include	"Levels/TTZ/Pal/34M.bin"
+	Pal_TTZ3M:	include	"Levels/TTZ/Pal/3M.bin"
+	Pal_TTZ4M:	include	"Levels/TTZ/Pal/4M.bin"	;!@ NEW
+	
 	Pal_TTZ5M:	include	"Levels/TTZ/Pal/5M.bin"
 	Pal_TTZ12D:	include	"Levels/TTZ/Pal/12D.bin"
-	Pal_TTZ34D:	include	"Levels/TTZ/Pal/34D.bin"
+	
+	;!@ Pal_TTZ34D:	include	"Levels/TTZ/Pal/34D.bin"
+	Pal_TTZ3D:	include	"Levels/TTZ/Pal/3D.bin"
+	Pal_TTZ4D:	include	"Levels/TTZ/Pal/3D.bin"	;!@ NEW
+	
 	Pal_TTZ5D:	include	"Levels/TTZ/Pal/5D.bin"
 	;!@ Pal_TTZ1234S:	include	"Levels/TTZ/Pal/14S.bin"
 	Pal_TTZ13S:	include	"Levels/TTZ/Pal/13S.bin"
 	Pal_TTZ4S:	include	"Levels/TTZ/Pal/4S.bin"	;!@ NEW
 	Pal_TTZ5S:	include	"Levels/TTZ/Pal/5S.bin"
 	Pal_TTZ12N:	include	"Levels/TTZ/Pal/12N.bin"
-	Pal_TTZ34N:	include	"Levels/TTZ/Pal/34N.bin"
+	;!@ Pal_TTZ34N:	include	"Levels/TTZ/Pal/34N.bin"
+	Pal_TTZ3N:	include	"Levels/TTZ/Pal/3N.bin"
+	Pal_TTZ4N:	include	"Levels/TTZ/Pal/4N.bin"	;!@ NEW
 	Pal_TTZ5N:	include	"Levels/TTZ/Pal/5N.bin"
 
 	Pal_MMZM:	include	"Levels/MMZ/Pal/15M.bin"
