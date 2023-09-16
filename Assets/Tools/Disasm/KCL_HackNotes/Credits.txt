@@ -17,6 +17,9 @@ JJFTails
 - Chaotix Stats Editor notes
 - Chaotix Art Format notes
 
+StephenUK
+- Notes on ASCII art encoding format (Title Screen menu)
+
 MainMemory
 - ChaotixSpriteEdit tool (Sega 32x art editor)
 
@@ -169,6 +172,13 @@ LukeeGD
 - Elegy score (HyperDimension Neptunia V, https://lukezgd.github.io/midi-files/midis/Hyperdimension%20Neptunia%20ReBirth%203%20-%20Elegy%20(Incomplete)%20-%20MIDI%20by%20LukeeGD.mid)
 - Splash Battle Theme (HyperDimension Neptunia Re;birth 1, https://lukezgd.github.io/midi-files/midis/Hyperdimension%20Neptunia%20ReBirth%201%20-%20Splash%20-%20MIDI%20by%20LukeeGD.mid)
 - Outside of the Dimension (MegaDimension Neptuniva V2, https://lukezgd.github.io/midi-files/midis/Megadimension%20Neptunia%20VII%20-%20Outside%20the%20Dimension%20-%20MIDI%20by%20LukeeGD.mid)
+LordXernon/DJ Error
+- Sonic 2 - Club Scene (Unreleased) SMPS
+- https://youtu.be/q0TuoI-vz8Q?si=DWIPDwdq3xB8fTdm
+- Ported to SMPS32x with written permission
+m1crowave/David Javelosa
+- Sonic 2 Cabaret "Night Club Scene" original tune
+- https://youtu.be/rJLkkOxRP8Y?si=JZ1CIf9ZKQLsFx4z
 RedHotSonic:
 - Sonic Factory SMPS (SAdv3, RedHotSonic patches)
 Unknown Authors:

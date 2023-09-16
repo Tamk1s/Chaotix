@@ -1355,7 +1355,7 @@ StartSeg MD_Palette_Index Big_Endian	;Megadrive format palette pointers and data
 	
 	;!@ Pal_TTZ34D:	include	"Levels/TTZ/Pal/34D.bin"
 	Pal_TTZ3D:	include	"Levels/TTZ/Pal/3D.bin"
-	Pal_TTZ4D:	include	"Levels/TTZ/Pal/3D.bin"	;!@ NEW
+	Pal_TTZ4D:	include	"Levels/TTZ/Pal/4D.bin"	;!@ NEW
 	
 	Pal_TTZ5D:	include	"Levels/TTZ/Pal/5D.bin"
 	;!@ Pal_TTZ1234S:	include	"Levels/TTZ/Pal/14S.bin"

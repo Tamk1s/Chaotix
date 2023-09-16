@@ -6,14 +6,13 @@ x Change APB global/level tables to load dummy AAZ Ens 2 bank for invis art
 x Bumper area
 x Fix animart
 x TTZ4x objpos
-- Fix backgrounds
+x Fix backgrounds
+x Add LordXernon/DJError (S2 Club Edit) and StephenUK (ASCII art notes) to credits
+| Fix parallax
 | TTZ4 Boss Rush stability (end of level boss)
-- Fix zoom tube
+- Fix zoom tube, bumper offsets/palette cycling (?)
 - Fix bad TTZ4 collision (slopes)
-- Fix parallax
 - Extended level playlist (TTZ DEZ song)
-- Add LordXernon/DJError (S2 Club Edit) and StephenUK (ASCII art) to credits
-- Restore 32x Title Screen edits
 
 
 Next release:
@@ -28,3 +27,4 @@ Next release:
 - MSU Mode 1!
 - "Break out (XMVSF)" (Steel Heart) song incomplete
 - DataLoad art edits (Big/Small ovals etc)?
+- Restore 32x Title Screen edits
