@@ -9,7 +9,7 @@ x TTZ4x objpos
 x Fix backgrounds
 x Fix parallax
 x Add LordXernon/DJError (S2 Club Edit) and StephenUK (ASCII art notes) to credits
-| TTZ4 Boss Rush stability (end of level boss)
+x TTZ4 Boss Rush stability (end of level boss)
 
 Next release:
 | Bumper offsets/palette cycling
