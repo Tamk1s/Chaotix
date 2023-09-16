@@ -8,9 +8,9 @@ x Fix animart
 x TTZ4x objpos
 x Fix backgrounds
 x Add LordXernon/DJError (S2 Club Edit) and StephenUK (ASCII art notes) to credits
+| Bumper offsets/palette cycling
 | Fix parallax
 | TTZ4 Boss Rush stability (end of level boss)
-- Fix zoom tube, bumper offsets/palette cycling (?)
 - Fix bad TTZ4 collision (slopes)
 - Extended level playlist (TTZ DEZ song)
 

@@ -167,6 +167,8 @@ bytepatch.exe -a 0x8B2A kc.bin 4EF9 0088 87B8 4E71 4E71 4E71 4E71 4E71
 REM Code patch to disable AutoDemos
 bytepatch.exe -a 0x003DBE kc.bin 6012
 bytepatch.exe -a 0x0044F4 kc.bin 6012
+REM Code patch for ZoomTube
+bytepatch.exe -a 0x01D610 kc.bin 0046 0000 0000 0008 0000 0036 0008 0000 0000 0000 8003 FFFF FFFF FFFF FFFF 014A 0008 0000 0000 0000
 REM Attempt to fix Tutorial Zone 8x8 text
 bytepatch.exe -a 0x02F62A kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 49F8 E600
 REM Patch Special Stage to use Bonus Stage music
