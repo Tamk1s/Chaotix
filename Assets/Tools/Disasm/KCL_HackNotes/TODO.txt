@@ -7,15 +7,14 @@ x Bumper area
 x Fix animart
 x TTZ4x objpos
 x Fix backgrounds
+x Fix parallax
 x Add LordXernon/DJError (S2 Club Edit) and StephenUK (ASCII art notes) to credits
-| Bumper offsets/palette cycling
-| Fix parallax
 | TTZ4 Boss Rush stability (end of level boss)
-- Fix bad TTZ4 collision (slopes)
-- Extended level playlist (TTZ DEZ song)
-
 
 Next release:
+| Bumper offsets/palette cycling
+| Fix bad TTZ4 collision (slopes)
+| Extended level playlist (TTZ DEZ song)
 - ASCII art tutorial fix
 - SSZC level icon 32x disabled, x new Title Card
 - Change "level" to "act" (title cards)
