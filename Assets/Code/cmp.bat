@@ -9,9 +9,9 @@ asmx -e -w -l Intro.lst -C 68K -b 0x8F769A -o Intro.bin cIntro.asm > Intro.log
 asmx -e -w -l BSRing_Fix.lst -C 68K -b 0x8F76E0 -o BSRing_Fix.bin cBSRing_Fix.asm > BSRing_Fix.log
 asmx -e -w -l IIZ_Grabber.lst -C 68K -b 0x8F773C -o IIZ_Grabber.bin cIIZ_Grabber.asm > IIZ_Grabber.log
 asmx -e -w -l BossSpawn.lst -C 68K -b 0x9F83DA -o BossSpawn.bin cBossSpawn.asm > BossSpawn.log
-asmx -e -w -l Spikes2.lst -C 68K -b 0x9F84E0 -o Spikes2.bin cSpikes2.asm > Spikes2.log
-asmx -e -w -l Balloons.lst -C 68K -b 0x9F8524 -o Balloons.bin cBalloons.asm > Balloons.log
-asmx -e -w -l BossSpawnEnd.lst -C 68K -b 0x9F85DA -o BossSpawnEnd.bin cBossSpawnEnd.asm > BossSpawnEnd.log
+asmx -e -w -l Spikes2.lst -C 68K -b 0x9F84E6 -o Spikes2.bin cSpikes2.asm > Spikes2.log
+asmx -e -w -l Balloons.lst -C 68K -b 0x9F852A -o Balloons.bin cBalloons.asm > Balloons.log
+asmx -e -w -l BossSpawnEnd.lst -C 68K -b 0x9F85E0 -o BossSpawnEnd.bin cBossSpawnEnd.asm > BossSpawnEnd.log
 
 
 REM asmx -e -w -l MSU.lst -C 68K -b 0x8F773C -o MSU.bin cMSU.asm > MSU.log

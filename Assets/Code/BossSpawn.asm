@@ -13,6 +13,9 @@ Pal32xP_Levels			EQU	$008821F0
 Pal32xS_Levels			EQU	$00882750 
 PalPtr_Level			EQU	$002B32B0
 
+DeleteObject			EQU	$008B1852
+DeleteObject2			EQU	$008B188A
+
 ;!@ Subtypes:
 ;$00=AAZ
 ;$01=BBZ
@@ -20,7 +23,7 @@ PalPtr_Level			EQU	$002B32B0
 ;$03=AAZ_Mini
 BossSpawner:
 	tst.b   obSubtype_Hi(a6)
-	bne.s   locret
+	bne.s   @locret
 
 	move.w	#1,(v_actConc_hi).w
 	;andi.w	#$00FF,d0
@@ -67,7 +70,7 @@ BossSpawner:
 	;!@ jsr		(ObjSE_BossSpawner2).l	
 	dc.w	$4E71,$4E71,$4E71
 @locret:
-	jmp     (DeleteObject).l
+	jmp     (DeleteObject2).l
 	rts
 	
 zoneTable_TTZ4:
@@ -85,7 +88,7 @@ zoneTable_TTZ5:
 
 Level_SpawnGoal_x:
 	cmpi.w	#0,(v_actConc_hi).w
-	beq.s	@spawnIt	
+	beq.s	@spawnIt
 	
 	cmpi.w  #4,(v_act_hi).w ; Current Act (0-6, word)
 	bne.s	@b_act5
@@ -115,9 +118,13 @@ Level_SpawnGoal_x:
 	move.w	#0,(v_actConc_hi).w
 	rts
 	
-@spawnIt:
+@spawnIt:	
+	cmpi.w	#0,($FFFFFDE8).w
+	bne.s	@locret2
+	
 	bset    #0,($FFFFC21D).w ; !@ Possibly spawns end-of-level results
 	jmp		(Level_SpawnGoal_Resume).l
+@locret2:
 	rts
 	
 	

@@ -180,15 +180,17 @@ bytepatch.exe -a 0x02DC06 kc.bin 103C 0029
 bytepatch.exe -a 0x02E0B0 kc.bin 103C 0029
 bytepatch.exe -a 0x02E45C kc.bin 103C 0029
 REM Patch powerup timers
-SET PowTimer=0E10
-bytepatch.exe -a 0x0101C8 kc.bin 0668 !PowTimer! 0034
-bytepatch.exe -a 0x0101F0 kc.bin 0668 !PowTimer! 0032
-bytepatch.exe -a 0x0101FE kc.bin 0668 !PowTimer! 0032
-bytepatch.exe -a 0x01023E kc.bin 317C !PowTimer! 0036
-bytepatch.exe -a 0x010256 kc.bin 317C !PowTimer! 0036
-bytepatch.exe -a 0x0102CE kc.bin 317C !PowTimer! 0036
-bytepatch.exe -a 0x010314 kc.bin 317C !PowTimer! 0036
-bytepatch.exe -a 0x010334 kc.bin 0668 !PowTimer! 0038
+SET PowTimer1=04B0
+SET PowTimer2=0960
+SET PowTimer3=0E10
+bytepatch.exe -a 0x0101C8 kc.bin 0668 !PowTimer2! 0034
+bytepatch.exe -a 0x0101F0 kc.bin 0668 !PowTimer1! 0032
+bytepatch.exe -a 0x0101FE kc.bin 0668 !PowTimer1! 0032
+bytepatch.exe -a 0x01023E kc.bin 317C !PowTimer2! 0036
+bytepatch.exe -a 0x010256 kc.bin 317C !PowTimer2! 0036
+bytepatch.exe -a 0x0102CE kc.bin 317C !PowTimer2! 0036
+bytepatch.exe -a 0x010314 kc.bin 317C !PowTimer2! 0036
+bytepatch.exe -a 0x010334 kc.bin 0668 !PowTimer2! 0038
 bytepatch.exe -a 0x010358 kc.bin 0668 !PowTimer! 0038
 REM Patch Decision 2nd with 1st
 bytepatch.exe -a 0x027BB8 kc.bin 7021
@@ -322,19 +324,19 @@ REM AAZ Miniboss
 bytepatch.exe -a 0x025D04 kc.bin 103C 0002
 bytepatch.exe -a 0x02CD86 kc.bin 323C B652
 REM BBZ
-bytepatch.exe -a 0x02D646 kc.bin 4E71 4E71 4E71 4E71
-bytepatch.exe -a 0x00829C kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 0829 0003 003E 6632 0829 0001 003E 672A
+REM bytepatch.exe -a 0x02D646 kc.bin 4E71 4E71 4E71 4E71								 
+REM bytepatch.exe -a 0x00829C kc.bin 0C78 0004 DFF4 653E 4E71 4E71 0829 0003 003E 6632 0829 0001 003E 672A
 REM													 6100 003E
 REM															   0829 0003 003E 6632
 REM																				   0829 0001 003E 672A
 REM SSZ
-bytepatch.exe -a 0x0086BE kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 6632 0829 0001 003E 672A
+REM bytepatch.exe -a 0x0086BE kc.bin 0C78 0004 DFF4 653A 0829 0003 003E 6632 0829 0001 003E 672A							 
 REM													 0829 0003 003E 6632
 REM 																	 0829 0001 003E 672A
 REM NOP out AAZ BossSpawn check
 REM bytepatch.exe -a 0x008794 kc.bin 4E71 4E71
 REM AAZ Boss
-bytepatch.exe -a 0x0087EC kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 6642 0829 0002 003E 673A 0829 0001 003E 6732 08E9 0003 003E 0829 0005 003F 6726
+bytepatch.exe -a 0x0087EC kc.bin 0C78 0004 DFF4 654A 0829 0003 003E 6642 0829 0002 003E 673A 0829 0001 003E 6732 08E9 0003 003E 0829 0005 003F 6726
 bytepatch.exe -a 0x034CD4 kc.bin 3D7C 1040 0008 3D7C 02A0 000C
 bytepatch.exe -a 0x034F40 kc.bin 3D7C 10C0 0008 3D7C 0250 000C
 bytepatch.exe -a 0x0350BC kc.bin 0C6E 0250 000C
@@ -344,31 +346,35 @@ bytepatch.exe -a 0x035240 kc.bin 0C6E 0208 000C
 bytepatch.exe -a 0x035240 kc.bin 0C6E 0208 000C
 bytepatch.exe -a 0x0352C2 kc.bin 0C6E 1050 0008
 REM TTZ
-bytepatch.exe -a 0x00896A kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 663A 0829 0002 003E 6732 0829 0001 003E 672A
+REM bytepatch.exe -a 0x00896A kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 663A 0829 0002 003E 6732 0829 0001 003E 672A
 REM MMZ
 bytepatch.exe -a 0x008AC8 kc.bin 4E75 4E71
-bytepatch.exe -a 0x008C58 kc.bin 4E71 4E71 4E71 4E71 0829 0003 003E 6632 0829 0001 003E 672A
-bytepatch.exe -a 0x011058 kc.bin 4EF9 009F 8458
+bytepatch.exe -a 0x008C58 kc.bin 0C78 0004 DFF4 653A 0829 0003 003E 6632 0829 0001 003E 672A								 
+REM Spawn end of level results
 bytepatch.exe -a 0x011E32 kc.bin 009F 83DA
+bytepatch.exe -a 0x011058 kc.bin 4EF9 009F 8456
+bytepatch.exe -a 0x026C80 kc.bin 4EB9 009F 8606 4E71 4E71 4E71
+bytepatch.exe -a 0x026CE0 kc.bin 4EB9 009F 8606 4E71 4E71 4E71
 bytepatch.exe -a 0x2F83DA kc.bin -f "Assets\Code\BossSpawn.bin"
 
+
 REM Spikes extension (invis hurt)
-bytepatch.exe -a 0x023BBA kc.bin 4EF9 009F 84E0 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
-bytepatch.exe -a 0x2F84E0 kc.bin -f "Assets\Code\Spikes2.bin"
+bytepatch.exe -a 0x023BBA kc.bin 4EF9 009F 84E6 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x2F84E6 kc.bin -f "Assets\Code\Spikes2.bin"
 
 
 REM Balloons extension (new art for TTZ)
-bytepatch.exe -a 0x023D32 kc.bin 4EB9 009F 8524 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x023D32 kc.bin 4EB9 009F 852A 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 bytepatch.exe -a 0x023D5C kc.bin 4E71 4E71 4E71
-bytepatch.exe -a 0x023E2C kc.bin 4EB9 009F 858A 4E71 4E71
-bytepatch.exe -a 0x023E48 kc.bin 4EB9 009F 858A 4E71 4E71
-bytepatch.exe -a 0x023D8E kc.bin 4EB9 009F 85AE 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
-bytepatch.exe -a 0x2F8524 kc.bin -f "Assets\Code\Balloons.bin"
+bytepatch.exe -a 0x023E2C kc.bin 4EB9 009F 8590 4E71 4E71
+bytepatch.exe -a 0x023E48 kc.bin 4EB9 009F 8590 4E71 4E71
+bytepatch.exe -a 0x023D8E kc.bin 4EB9 009F 85B4 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+bytepatch.exe -a 0x2F852A kc.bin -f "Assets\Code\Balloons.bin"
 
 
 REM Custom spritemasker object
-bytepatch.exe -a 0x011E36 kc.bin 009F 85DA
-bytepatch.exe -a 0x2F85DA kc.bin -f "Assets\Code\BossSpawnEnd.bin" 
+bytepatch.exe -a 0x011E36 kc.bin 009F 85E0
+bytepatch.exe -a 0x2F85E0 kc.bin -f "Assets\Code\BossSpawnEnd.bin" 
 
 
 REM Survival mode
