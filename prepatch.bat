@@ -83,7 +83,8 @@ REM bytepatch.exe -a 0x03147C kc.bin 4E75
 REM HACK PATCHES
 
 REM Disable chksum
-bytepatch.exe -a 0x0007BE kc.bin 6000
+REM bytepatch.exe -a 0x0007BE kc.bin 6000
+
 
 REM Enable official 6-button joypad support in ROM Header periph support
 bytepatch.exe -a 0x000191 kc.bin 3620
@@ -353,8 +354,8 @@ bytepatch.exe -a 0x008C58 kc.bin 0C78 0004 DFF4 653A 0829 0003 003E 6632 0829 00
 REM Spawn end of level results
 bytepatch.exe -a 0x011E32 kc.bin 009F 83DA
 bytepatch.exe -a 0x011058 kc.bin 4EF9 009F 8456
-bytepatch.exe -a 0x026C80 kc.bin 4EB9 009F 8606 4E71 4E71 4E71
-bytepatch.exe -a 0x026CE0 kc.bin 4EB9 009F 8606 4E71 4E71 4E71
+bytepatch.exe -a 0x026C80 kc.bin 4EB9 009F 8610 4E71 4E71 4E71
+bytepatch.exe -a 0x026CE0 kc.bin 4EB9 009F 8610 4E71 4E71 4E71
 bytepatch.exe -a 0x2F83DA kc.bin -f "Assets\Code\BossSpawn.bin"
 
 
