@@ -1,0 +1,687 @@
+                        	LIST MACRO
+                        	LIST EXPAND
+000000                  	include _s1smps2asm_inc.asm
+                        ; Standard Octave Pitch Equates
+       = 000088         smpsPitch10lo		EQU	$88
+       = 000094         smpsPitch09lo		EQU	$94
+       = 0000A0         smpsPitch08lo		EQU	$A0
+       = 0000AC         smpsPitch07lo		EQU	$AC
+       = 0000B8         smpsPitch06lo		EQU	$B8
+       = 0000C4         smpsPitch05lo		EQU	$C4
+       = 0000D0         smpsPitch04lo		EQU	$D0
+       = 0000DC         smpsPitch03lo		EQU	$DC
+       = 0000E8         smpsPitch02lo		EQU	$E8
+       = 0000F4         smpsPitch01lo		EQU	$F4
+       = 000000         smpsPitch00		EQU	$00
+       = 00000C         smpsPitch01hi		EQU	$0C
+       = 000018         smpsPitch02hi		EQU	$18
+       = 000024         smpsPitch03hi		EQU	$24
+       = 000030         smpsPitch04hi		EQU	$30
+       = 00003C         smpsPitch05hi		EQU	$3C
+       = 000048         smpsPitch06hi		EQU	$48
+       = 000054         smpsPitch07hi		EQU	$54
+       = 000060         smpsPitch08hi		EQU	$60
+       = 00006C         smpsPitch09hi		EQU	$6C
+       = 000078         smpsPitch10hi		EQU	$78
+
+                        ; Note Equates
+       = 000080         nRst			EQU	$80
+       = 000081         nC0			EQU	$81
+       = 000082         nCs0			EQU	$82
+       = 000083         nD0			EQU	$83
+       = 000084         nEb0			EQU	$84
+       = 000085         nE0			EQU	$85
+       = 000086         nF0			EQU	$86
+       = 000087         nFs0			EQU	$87
+       = 000088         nG0			EQU	$88
+       = 000089         nAb0			EQU	$89
+       = 00008A         nA0			EQU	$8A
+       = 00008B         nBb0			EQU	$8B
+       = 00008C         nB0			EQU	$8C
+       = 00008D         nC1			EQU	$8D
+       = 00008E         nCs1			EQU	$8E
+       = 00008F         nD1			EQU	$8F
+       = 000090         nEb1			EQU	$90
+       = 000091         nE1			EQU	$91
+       = 000092         nF1			EQU	$92
+       = 000093         nFs1			EQU	$93
+       = 000094         nG1			EQU	$94
+       = 000095         nAb1			EQU	$95
+       = 000096         nA1			EQU	$96
+       = 000097         nBb1			EQU	$97
+       = 000098         nB1			EQU	$98
+       = 000099         nC2			EQU	$99
+       = 00009A         nCs2			EQU	$9A
+       = 00009B         nD2			EQU	$9B
+       = 00009C         nEb2			EQU	$9C
+       = 00009D         nE2			EQU	$9D
+       = 00009E         nF2			EQU	$9E
+       = 00009F         nFs2			EQU	$9F
+       = 0000A0         nG2			EQU	$A0
+       = 0000A1         nAb2			EQU	$A1
+       = 0000A2         nA2			EQU	$A2
+       = 0000A3         nBb2			EQU	$A3
+       = 0000A4         nB2			EQU	$A4
+       = 0000A5         nC3			EQU	$A5
+       = 0000A6         nCs3			EQU	$A6
+       = 0000A7         nD3			EQU	$A7
+       = 0000A8         nEb3			EQU	$A8
+       = 0000A9         nE3			EQU	$A9
+       = 0000AA         nF3			EQU	$AA
+       = 0000AB         nFs3			EQU	$AB
+       = 0000AC         nG3			EQU	$AC
+       = 0000AD         nAb3			EQU	$AD
+       = 0000AE         nA3			EQU	$AE
+       = 0000AF         nBb3			EQU	$AF
+       = 0000B0         nB3			EQU	$B0
+       = 0000B1         nC4			EQU	$B1
+       = 0000B2         nCs4			EQU	$B2
+       = 0000B3         nD4			EQU	$B3
+       = 0000B4         nEb4			EQU	$B4
+       = 0000B5         nE4			EQU	$B5
+       = 0000B6         nF4			EQU	$B6
+       = 0000B7         nFs4			EQU	$B7
+       = 0000B8         nG4			EQU	$B8
+       = 0000B9         nAb4			EQU	$B9
+       = 0000BA         nA4			EQU	$BA
+       = 0000BB         nBb4			EQU	$BB
+       = 0000BC         nB4			EQU	$BC
+       = 0000BD         nC5			EQU	$BD
+       = 0000BE         nCs5			EQU	$BE
+       = 0000BF         nD5			EQU	$BF
+       = 0000C0         nEb5			EQU	$C0
+       = 0000C1         nE5			EQU	$C1
+       = 0000C2         nF5			EQU	$C2
+       = 0000C3         nFs5			EQU	$C3
+       = 0000C4         nG5			EQU	$C4
+       = 0000C5         nAb5			EQU	$C5
+       = 0000C6         nA5			EQU	$C6
+       = 0000C7         nBb5			EQU	$C7
+       = 0000C8         nB5			EQU	$C8
+       = 0000C9         nC6			EQU	$C9
+       = 0000CA         nCs6			EQU	$CA
+       = 0000CB         nD6			EQU	$CB
+       = 0000CC         nEb6			EQU	$CC
+       = 0000CD         nE6			EQU	$CD
+       = 0000CE         nF6			EQU	$CE
+       = 0000CF         nFs6			EQU	$CF
+       = 0000D0         nG6			EQU	$D0
+       = 0000D1         nAb6			EQU	$D1
+       = 0000D2         nA6			EQU	$D2
+       = 0000D3         nBb6			EQU	$D3
+       = 0000D4         nB6			EQU	$D4
+       = 0000D5         nC7			EQU	$D5
+       = 0000D6         nCs7			EQU	$D6
+       = 0000D7         nD7			EQU	$D7
+       = 0000D8         nEb7			EQU	$D8
+       = 0000D9         nE7			EQU	$D9
+       = 0000DA         nF7			EQU	$DA
+       = 0000DB         nFs7			EQU	$DB
+       = 0000DC         nG7			EQU	$DC
+       = 0000DD         nAb7			EQU	$DD
+       = 0000DE         nA7			EQU	$DE
+       = 0000DF         nBb7			EQU	$DF
+
+                        ; DAC Equates
+       = 000081         dKick			EQU	$81
+       = 000082         dSnare			EQU	$82
+       = 000083         dTimpani		EQU	$83
+       = 000088         dHiTimpani		EQU	$88
+       = 000089         dMidTimpani		EQU	$89
+       = 00008A         dLowTimpani		EQU	$8A
+       = 00008B         dVLowTimpani		EQU	$8B
+
+                        ; Header Macros
+                        ; Header - Set up Voice Location
+                        smpsHeaderVoice macro loc
+                        songStart set *
+                        	dc.w	loc-songStart
+000000                  	endm
+                        ; Header - Set up Channel Usage	
+                        smpsHeaderChan macro fm,psg
+                        	dc.b	fm,psg
+                        	endm
+                        ; Header - Set up Tempo
+                        smpsHeaderTempo macro div,mod
+                        	dc.b	div,mod
+                        	endm
+                        ; Header - Set up DAC Channel
+                        smpsHeaderDAC macro loc
+                        	dc.w	loc-songStart
+                        	dc.w	$00
+                        	endm
+                        ; Header - Set up FM Channel	
+                        smpsHeaderFM macro loc,pitch,vol
+                        	dc.w	loc-songStart
+                        	dc.b	pitch,vol
+                        	endm
+                        ; Header - Set up PSG Channel
+                        smpsHeaderPSG macro loc,pitch,vol,voice
+                        	dc.w	loc-songStart
+                        	dc.b	pitch,vol
+                        	dc.w	voice
+                        	endm
+
+                        ; Co-ord Flag Macros and Equates
+                        ; E0xx - Panning, AMS, FMS
+                        smpsPan macro direction,amsfms
+                        panNone set $00
+                        panRight set $40
+                        panLeft set $80
+                        panCentre set $C0
+                        panCenter set $C0 ; silly Americans :U
+                        	dc.b $E0,direction+amsfms
+000000                  	endm
+                        	
+                        ; E1xx - Alter note values by xx
+                        smpsAlterNote macro val
+                        	dc.b	$E1,val
+                        	endm
+                        	
+                        ; E2xx - Unknown
+                        smpsE2 macro val
+                        	dc.b	$E2,val
+                        	endm
+
+                        ; E3 - Return (generally used after F8)
+                        smpsReturn macro val
+                        	dc.b	$E3
+                        	endm
+                        	
+                        ; E4 - Fade in previous song (ie. 1-Up)
+                        smpsFade macro val
+                        	dc.b	$E4
+                        	endm
+
+                        ; E5xx - Set channel tempo divider to xx
+                        smpsChanTempoDiv macro val
+                        	dc.b	$E5,val
+                        	endm
+                        	
+                        ; E6xx - Alter Volume by xx
+                        smpsAlterVol macro val
+                        	dc.b	$E6,val
+                        	endm
+                        	
+                        ; E7 - Prevent attack of next note
+       = 0000E7         smpsNoAttack	EQU $E7
+
+                        ; E8xx - Set note fill to xx
+                        smpsNoteFill macro val
+                        	dc.b	$E8,val
+                        	endm
+                        	
+                        ; E9xx - Add xx to channel pitch
+                        smpsAlterPitch macro val
+                        	dc.b	$E9,val
+                        	endm
+                        	
+                        ; EAxx - Set music tempo modifier to xx
+                        smpsSetTempoMod macro val
+                        	dc.b	$EA,val
+                        	endm
+                        	
+                        ; EBxx - Set music tempo divider to xx
+                        smpsSetTempoDiv macro val
+                        	dc.b	$EB,val
+                        	endm
+                        	
+                        ; ECxx - Set Volume to xx
+                        smpsSetVol macro val
+                        	dc.b	$EC,val
+                        	endm
+                        	
+                        ; ED - Unknown
+       = 0000ED         smpsED		EQU $ED
+                        	
+                        ; EE - Unknown (Something to do with voice selection)
+       = 0000EE         smpsEE 		EQU $EE
+                        	
+                        ; EFxx - Set Voice of FM channel to xx
+                        smpsFMvoice macro voice
+                        	dc.b	$EF,voice
+                        	endm
+
+                        ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
+                        smpsModSet macro wait,speed,change,step
+                        	dc.b	$F0,wait,speed,change,step
+                        	endm
+                        	
+                        smpsModSet2	macro bytes
+                        	smpsModSet	((bytes&$FF000000)>>24),((bytes&$00FF0000)>>16),((bytes&$0000FF00)>>8),(bytes&$000000FF)
+                        	endm
+                        	
+                        ; F1 - Turn on Modulation
+       = 0000F1         smpsModOn 	EQU $F1
+
+                        ; F2 - End of channel
+                        smpsStop macro
+                        	dc.b	$F2
+                        	endm
+                        	
+                        ; F3xx - PSG waveform to xx
+                        smpsPSGform macro form
+                        	dc.b	$F3,form
+                        	endm
+                        	
+                        ; F4 - Turn off Modulation
+       = 0000F4         smpsModOff 	EQU $F4
+                        	
+                        ; F5xx - PSG voice to xx
+                        smpsPSGvoice macro voice
+                        	dc.b	$F5,voice
+                        	endm
+
+                        ; F6xxxx - Jump to xxxx
+                        smpsJump macro loc
+                        	dc.b	$F6
+                        	dc.w	loc-*-1
+                        	endm
+
+                        ; F7xxyyzzzz - Loop back to zzzz yy times, xx being the loop index for loop recursion fixing
+                        smpsLoop macro index,loops,loc
+                        	dc.b	$F7
+                        	dc.b	index,loops
+                        	dc.w	loc-*-1
+                        	endm
+
+                        ; F8xxxx - Call pattern at xxxx, saving return point
+                        smpsCall macro loc
+                        	dc.b	$F8
+                        	dc.w	loc-*-1
+                        	endm
+                        	
+                        ; F9 - Unknown
+       = 0000F9         smpsF9		EQU $F9
+
+                        ; Voices - Feedback
+                        smpsVcFeedback macro val
+                        vcFeedback set val
+000000                  	endm
+
+                        ; Voices - Algorithm
+                        smpsVcAlgorithm macro val
+                        vcAlgorithm set val
+000000                  	endm
+
+                        ; Voices - Detune
+                        smpsVcDetune macro op1,op2,op3,op4
+                        vcDT1 set op1
+                        vcDT2 set op2
+                        vcDT3 set op3
+                        vcDT4 set op4
+000000                  	endm
+
+                        ; Voices - Coarse-Frequency
+                        smpsVcCoarseFreq macro op1,op2,op3,op4
+                        vcCF1 set op1
+                        vcCF2 set op2
+                        vcCF3 set op3
+                        vcCF4 set op4
+000000                  	endm
+
+                        ; Voices - Rate Scale
+                        smpsVcRateScale macro op1,op2,op3,op4
+                        vcRS1 set op1
+                        vcRS2 set op2
+                        vcRS3 set op3
+                        vcRS4 set op4
+000000                  	endm
+
+                        ; Voices - Attack Rate
+                        smpsVcAttackRate macro op1,op2,op3,op4
+                        vcAR1 set op1
+                        vcAR2 set op2
+                        vcAR3 set op3
+                        vcAR4 set op4
+000000                  	endm
+
+                        ; Voices - Amplitude Modulation
+                        smpsVcAmpMod macro op1,op2,op3,op4
+                        vcAM1 set op1
+                        vcAM2 set op2
+                        vcAM3 set op3
+                        vcAM4 set op4
+000000                  	endm
+
+                        ; Voices - First Decay Rate
+                        smpsVcDecayRate1 macro op1,op2,op3,op4
+                        vcD1R1 set op1
+                        vcD1R2 set op2
+                        vcD1R3 set op3
+                        vcD1R4 set op4
+000000                  	endm
+
+                        ; Voices - Second Decay Rate
+                        smpsVcDecayRate2 macro op1,op2,op3,op4
+                        vcD2R1 set op1
+                        vcD2R2 set op2
+                        vcD2R3 set op3
+                        vcD2R4 set op4
+000000                  	endm
+
+                        ; Voices - Decay Level	
+                        smpsVcDecayLevel macro op1,op2,op3,op4
+                        vcDL1 set op1
+                        vcDL2 set op2
+                        vcDL3 set op3
+                        vcDL4 set op4
+000000                  	endm
+
+                        ; Voices - Release Rate
+                        smpsVcReleaseRate macro op1,op2,op3,op4
+                        vcRR1 set op1
+                        vcRR2 set op2
+                        vcRR3 set op3
+                        vcRR4 set op4
+000000                  	endm
+
+                        ; Voices - Total Level
+                        smpsVcTotalLevel macro op1,op2,op3,op4
+                        vcTL1 set op1
+                        vcTL2 set op2
+                        vcTL3 set op3
+                        vcTL4 set op4
+                        	dc.b	(vcFeedback<<3)+vcAlgorithm
+                        	dc.b	(vcDT4<<4)+vcCF4,(vcDT3<<4)+vcCF3,(vcDT2<<4)+vcCF2,(vcDT1<<4)+vcCF1
+                        	dc.b	(vcRS4<<6)+vcAR4,(vcRS3<<6)+vcAR3,(vcRS2<<6)+vcAR2,(vcRS1<<6)+vcAR1
+                        	dc.b	(vcAM4<<5)+vcD1R4,(vcAM3<<5)+vcD1R3,(vcAM2<<5)+vcD1R2,(vcAM1<<5)+vcD1R1
+                        	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
+                        	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
+                        	dc.b	vcTL4,vcTL3,vcTL2,vcTL1	
+000000                  	endm
+
+                        ; Header - Set up a secondary PWM Channel
+                        smpsHeaderPWM macro loc
+                        	dc.w	loc-songStart
+                        	endm
+                        	
+                        ; Header - Set up first PWM Channel
+                        smpsHeaderPWM1 macro loc,num
+                        	dc.w	loc-songStart
+                        	dc.b	num,0
+                        	endm
+                        	
+000000                  	include "S1.asm"
+       = 0000F4         SmpsModOff	EQU	$F4
+       = 010504         SmpsModF1	EQU	$08010504
+       = 01FFFF         SmpsModF2	EQU	$1001FFFF
+       = 01FEFF         SmpsModF3	EQU	$1001FEFF
+       = 0110FF         SmpsModF4	EQU	$000110FF
+       = 02FEFF         SmpsModP1	EQU	$0602FEFF
+       = 0101FF         SmpsModP2	EQU	$060101FF
+       = 01FAFF         SmpsModP3	EQU	$0001FAFF
+       = 01FDFF         SmpsModP4	EQU	$0001FDFF
+       = 01FCFF         SmpsModP5	EQU	$0001FCFF
+       = 0101FF         SmpsModP6	EQU	$000101FF
+
+       = 000000         FMPitch	EQU	$00
+       = 000016         FMVol1	EQU	$16
+       = 000008         FMVol2	EQU	$08
+       = 000010         FMVol3	EQU	$10
+       = 000006         FMVol4	EQU	$06
+
+       = 0000E8         PSGPitch1	EQU	$E8
+       = 000000         PSGPitch2	EQU	$00
+       = 000006         PSGVol1		EQU	$06
+       = 000002         PSGVol2		EQU	$02
+       = 000000         PSGVoi1		EQU	$00
+       = 000001         PSGVoi2		EQU	$01
+       = 000000         PWMPitch	EQU	$00
+       = 000099         PWMVol		EQU	$99
+
+000000                  	smpsHeaderVoice	S2DEZ_Patches
+       = 000000         songStart set *
+000000 006F             	dc.w	S2DEZ_Patches-songStart
+000002                  	smpsHeaderChan	$06, $03
+000002 0603             	dc.b	$06,$03
+                        	;!@ smpsHeaderTempoC	$01, $60	
+000004                  	smpsHeaderTempo	$01, $97
+000004 0197             	dc.b	$01,$97
+000006                  	smpsHeaderDAC	S2DEZ_NOP
+000006 006E             	dc.w	S2DEZ_NOP-songStart
+000008 0000             	dc.w	$00
+00000A                  	smpsHeaderFM	S2DEZ_FM1, FMPitch, FMVol1
+00000A 0030             	dc.w	S2DEZ_FM1-songStart
+00000C 0016             	dc.b	FMPitch,FMVol1
+00000E                  	smpsHeaderFM	S2DEZ_NOP, FMPitch, FMVol2
+00000E 006E             	dc.w	S2DEZ_NOP-songStart
+000010 0008             	dc.b	FMPitch,FMVol2
+000012                  	smpsHeaderFM	S2DEZ_NOP, FMPitch, FMVol3
+000012 006E             	dc.w	S2DEZ_NOP-songStart
+000014 0010             	dc.b	FMPitch,FMVol3
+000016                  	smpsHeaderFM	S2DEZ_NOP, FMPitch, FMVol3
+000016 006E             	dc.w	S2DEZ_NOP-songStart
+000018 0010             	dc.b	FMPitch,FMVol3
+00001A                  	smpsHeaderFM	S2DEZ_NOP, FMPitch, FMVol4
+00001A 006E             	dc.w	S2DEZ_NOP-songStart
+00001C 0006             	dc.b	FMPitch,FMVol4
+00001E                  	smpsHeaderPSG	S2DEZ_PSG1, PSGPitch1, PSGVol1, PSGVoi1
+00001E 0049             	dc.w	S2DEZ_PSG1-songStart
+000020 E806             	dc.b	PSGPitch1,PSGVol1
+000022 0000             	dc.w	PSGVoi1
+000024                  	smpsHeaderPSG	S2DEZ_NOP, PSGPitch1, PSGVol1, PSGVoi1
+000024 006E             	dc.w	S2DEZ_NOP-songStart
+000026 E806             	dc.b	PSGPitch1,PSGVol1
+000028 0000             	dc.w	PSGVoi1
+00002A                  	smpsHeaderPSG	S2DEZ_NOP, PSGPitch2, PSGVol2, PSGVoi2
+00002A 006E             	dc.w	S2DEZ_NOP-songStart
+00002C 0002             	dc.b	PSGPitch2,PSGVol2
+00002E 0001             	dc.w	PSGVoi2
+
+000030                  S2DEZ_FM1:
+000030                  	smpsModSet2	SmpsModF1
+000030                  	smpsModSet	((SmpsModF1&$FF000000)>>24),((SmpsModF1&$00FF0000)>>16),((SmpsModF1&$0000FF00)>>8),(SmpsModF1&$000000FF)
+000030 F008010504       	dc.b	$F0,((SmpsModF1&$FF000000)>>24),((SmpsModF1&$00FF0000)>>16),((SmpsModF1&$0000FF00)>>8),(SmpsModF1&$000000FF)
+000035 F4               	dc.b	SmpsModOff
+000036                  	smpsModSet2	SmpsModF2
+000036                  	smpsModSet	((SmpsModF2&$FF000000)>>24),((SmpsModF2&$00FF0000)>>16),((SmpsModF2&$0000FF00)>>8),(SmpsModF2&$000000FF)
+000036 F01001FFFF       	dc.b	$F0,((SmpsModF2&$FF000000)>>24),((SmpsModF2&$00FF0000)>>16),((SmpsModF2&$0000FF00)>>8),(SmpsModF2&$000000FF)
+00003B F4               	dc.b	SmpsModOff
+00003C                  	smpsModSet2	SmpsModF3
+00003C                  	smpsModSet	((SmpsModF3&$FF000000)>>24),((SmpsModF3&$00FF0000)>>16),((SmpsModF3&$0000FF00)>>8),(SmpsModF3&$000000FF)
+00003C F01001FEFF       	dc.b	$F0,((SmpsModF3&$FF000000)>>24),((SmpsModF3&$00FF0000)>>16),((SmpsModF3&$0000FF00)>>8),(SmpsModF3&$000000FF)
+000041 F4               	dc.b	SmpsModOff
+000042                  	smpsModSet2	SmpsModF4
+000042                  	smpsModSet	((SmpsModF4&$FF000000)>>24),((SmpsModF4&$00FF0000)>>16),((SmpsModF4&$0000FF00)>>8),(SmpsModF4&$000000FF)
+000042 F0000110FF       	dc.b	$F0,((SmpsModF4&$FF000000)>>24),((SmpsModF4&$00FF0000)>>16),((SmpsModF4&$0000FF00)>>8),(SmpsModF4&$000000FF)
+000047 F4               	dc.b	SmpsModOff
+000048                  	smpsStop
+000048 F2               	dc.b	$F2
+
+000049                  S2DEZ_PSG1:
+000049                  	smpsModSet2	SmpsModP1
+000049                  	smpsModSet	((SmpsModP1&$FF000000)>>24),((SmpsModP1&$00FF0000)>>16),((SmpsModP1&$0000FF00)>>8),(SmpsModP1&$000000FF)
+000049 F00602FEFF       	dc.b	$F0,((SmpsModP1&$FF000000)>>24),((SmpsModP1&$00FF0000)>>16),((SmpsModP1&$0000FF00)>>8),(SmpsModP1&$000000FF)
+00004E F4               	dc.b	SmpsModOff
+00004F                  	smpsModSet2	SmpsModP2
+00004F                  	smpsModSet	((SmpsModP2&$FF000000)>>24),((SmpsModP2&$00FF0000)>>16),((SmpsModP2&$0000FF00)>>8),(SmpsModP2&$000000FF)
+00004F F0060101FF       	dc.b	$F0,((SmpsModP2&$FF000000)>>24),((SmpsModP2&$00FF0000)>>16),((SmpsModP2&$0000FF00)>>8),(SmpsModP2&$000000FF)
+000054 F4               	dc.b	SmpsModOff
+000055                  	smpsModSet2	SmpsModP3
+000055                  	smpsModSet	((SmpsModP3&$FF000000)>>24),((SmpsModP3&$00FF0000)>>16),((SmpsModP3&$0000FF00)>>8),(SmpsModP3&$000000FF)
+000055 F00001FAFF       	dc.b	$F0,((SmpsModP3&$FF000000)>>24),((SmpsModP3&$00FF0000)>>16),((SmpsModP3&$0000FF00)>>8),(SmpsModP3&$000000FF)
+00005A F4               	dc.b	SmpsModOff
+00005B                  	smpsModSet2	SmpsModP4
+00005B                  	smpsModSet	((SmpsModP4&$FF000000)>>24),((SmpsModP4&$00FF0000)>>16),((SmpsModP4&$0000FF00)>>8),(SmpsModP4&$000000FF)
+00005B F00001FDFF       	dc.b	$F0,((SmpsModP4&$FF000000)>>24),((SmpsModP4&$00FF0000)>>16),((SmpsModP4&$0000FF00)>>8),(SmpsModP4&$000000FF)
+000060 F4               	dc.b	SmpsModOff
+000061                  	smpsModSet2	SmpsModP5
+000061                  	smpsModSet	((SmpsModP5&$FF000000)>>24),((SmpsModP5&$00FF0000)>>16),((SmpsModP5&$0000FF00)>>8),(SmpsModP5&$000000FF)
+000061 F00001FCFF       	dc.b	$F0,((SmpsModP5&$FF000000)>>24),((SmpsModP5&$00FF0000)>>16),((SmpsModP5&$0000FF00)>>8),(SmpsModP5&$000000FF)
+000066 F4               	dc.b	SmpsModOff
+000067                  	smpsModSet2	SmpsModP6
+000067                  	smpsModSet	((SmpsModP6&$FF000000)>>24),((SmpsModP6&$00FF0000)>>16),((SmpsModP6&$0000FF00)>>8),(SmpsModP6&$000000FF)
+000067 F0000101FF       	dc.b	$F0,((SmpsModP6&$FF000000)>>24),((SmpsModP6&$00FF0000)>>16),((SmpsModP6&$0000FF00)>>8),(SmpsModP6&$000000FF)
+00006C F4               	dc.b	SmpsModOff
+00006D                  	smpsStop
+00006D F2               	dc.b	$F2
+                        		
+00006E                  S2DEZ_NOP:
+00006E                  	smpsStop
+00006E F2               	dc.b	$F2
+
+00006F                  S2DEZ_Patches:
+                        	; Patch $00
+00006F 30               	dc.b	$30
+000070 75757131D8589694 	dc.b	$75, $75, $71, $31,	$D8, $58, $96, $94
+000078 011B030801040101 	dc.b	$01, $1B, $03, $08,	$01, $04, $01, $01
+000080 FF2F3F3F34291080 	dc.b	$FF, $2F, $3F, $3F,	$34, $29, $10, $80
+                        	;smpsVcAlgorithm	$00
+                        	;smpsVcFeedback	$06
+                        	;smpsVcDetune	$07, $07, $07, $03
+                        	;smpsVcCoarseFreq	$05, $01, $05, $01
+                        	;smpsVcRateScale	$03, $02, $01, $02
+                        	;smpsVcAttackRate	$18, $16, $18, $14
+                        	;smpsVcAmpMod	$00, $00, $00, $00
+                        	;smpsVcDecayRate1	$01, $03, $1B, $08
+                        	;smpsVcDecayRate2	$0F, $03, $02, $03
+                        	;smpsVcDecayLevel	$01, $01, $04, $01
+                        	;smpsVcReleaseRate	$0F, $0F, $0F, $0F
+                        	;smpsVcTotalLevel	$34, $10, $29, $00
+
+                        	; Patch $01
+000088 3A               	dc.b	$3A
+000089 321172111F1F9F1F 	dc.b	$32, $11, $72, $11,	$1F, $1F, $9F, $1F
+000091 030A030A02020202 	dc.b	$03, $0A, $03, $0A,	$02, $02, $02, $02
+000099 AF7FAF7F1E002880 	dc.b	$AF, $7F, $AF, $7F,	$1E, $00, $28, $80
+                        	;smpsVcAlgorithm	$02
+                        	;smpsVcFeedback	$07
+                        	;smpsVcDetune	$03, $07, $01, $01
+                        	;smpsVcCoarseFreq	$02, $02, $01, $01
+                        	;smpsVcRateScale	$00, $02, $00, $00
+                        	;smpsVcAttackRate	$1F, $1F, $1F, $1F
+                        	;smpsVcAmpMod	$00, $00, $00, $00
+                        	;smpsVcDecayRate1	$03, $03, $0A, $0A
+                        	;smpsVcDecayRate2	$0A, $0A, $07, $07
+                        	;smpsVcDecayLevel	$02, $02, $02, $02
+                        	;smpsVcReleaseRate	$0F, $0F, $0F, $0F
+                        	;smpsVcTotalLevel	$1E, $28, $00, $00
+
+                        	; Patch $02
+0000A1 3A               	dc.b	$3A
+0000A2 1115011159595C4E 	dc.b	$11, $15, $01, $11,	$59, $59, $5C, $4E
+0000AA 0A0B0D0400000000 	dc.b	$0A, $0B, $0D, $04,	$00, $00, $00, $00
+0000B2 1F5F2F0F1A0E2E80 	dc.b	$1F, $5F, $2F, $0F,	$1A, $0E, $2E, $80
+                        	;smpsVcAlgorithm	$02
+                        	;smpsVcFeedback	$07
+                        	;smpsVcDetune	$01, $00, $01, $01
+                        	;smpsVcCoarseFreq	$01, $01, $05, $01
+                        	;smpsVcRateScale	$01, $01, $01, $01
+                        	;smpsVcAttackRate	$19, $1C, $19, $0E
+                        	;smpsVcAmpMod	$00, $00, $00, $00
+                        	;smpsVcDecayRate1	$0A, $0D, $0B, $04
+                        	;smpsVcDecayRate2	$01, $02, $05, $00
+                        	;smpsVcDecayLevel	$00, $00, $00, $00
+                        	;smpsVcReleaseRate	$0F, $0F, $0F, $0F
+                        	;smpsVcTotalLevel	$1A, $2E, $0E, $00
+
+                        	; Patch $03
+0000BA 06               	dc.b	$06
+0000BB 013372310A8C4C52 	dc.b	$01, $33, $72, $31,	$0A, $8C, $4C, $52
+0000C3 0000000001000100 	dc.b	$00, $00, $00, $00,	$01, $00, $01, $00
+0000CB 0F0F2F0F4D878091 	dc.b	$0F, $0F, $2F, $0F,	$4D, $87, $80, $91
+                        	;smpsVcAlgorithm	$06
+                        	;smpsVcFeedback	$00
+                        	;smpsVcDetune	$00, $07, $03, $03
+                        	;smpsVcCoarseFreq	$01, $02, $03, $01
+                        	;smpsVcRateScale	$00, $01, $02, $01
+                        	;smpsVcAttackRate	$0A, $0C, $0C, $12
+                        	;smpsVcAmpMod	$00, $00, $00, $00
+                        	;smpsVcDecayRate1	$00, $00, $00, $00
+                        	;smpsVcDecayRate2	$00, $02, $00, $00
+                        	;smpsVcDecayLevel	$01, $01, $00, $00
+                        	;smpsVcReleaseRate	$0F, $0F, $0F, $0F
+                        	;smpsVcTotalLevel	$4D, $00, $07, $11
+
+                        	; Patch $04
+0000D3 3A               	dc.b	$3A
+0000D4 01020101100E1410 	dc.b	$01, $02, $01, $01,	$10, $0E, $14, $10
+0000DC 0C0E0E0E00000000 	dc.b	$0C, $0E, $0E, $0E,	$00, $00, $00, $00
+0000E4 0FFF7F1F1C283180 	dc.b	$0F, $FF, $7F, $1F,	$1C, $28, $31, $80
+                        	;smpsVcAlgorithm	$02
+                        	;smpsVcFeedback	$07
+                        	;smpsVcDetune	$00, $00, $00, $00
+                        	;smpsVcCoarseFreq	$01, $01, $02, $01
+                        	;smpsVcRateScale	$00, $00, $00, $00
+                        	;smpsVcAttackRate	$10, $14, $0E, $10
+                        	;smpsVcAmpMod	$00, $00, $00, $00
+                        	;smpsVcDecayRate1	$0C, $0E, $0E, $0E
+                        	;smpsVcDecayRate2	$00, $07, $0F, $01
+                        	;smpsVcDecayLevel	$00, $00, $00, $00
+                        	;smpsVcReleaseRate	$0F, $0F, $0F, $0F
+                        	;smpsVcTotalLevel	$1C, $31, $28, $00
+
+                        	; Patch $05
+0000EC 39               	dc.b	$39
+0000ED 020102011F1F1F1F 	dc.b	$02, $01, $02, $01,	$1F, $1F, $1F, $1F
+0000F5 0000000000000000 	dc.b	$00, $00, $00, $00,	$00, $00, $00, $00
+0000FD 0F0F0F0F1B322880 	dc.b	$0F, $0F, $0F, $0F,	$1B, $32, $28, $80
+                        	;smpsVcAlgorithm	$01
+                        	;smpsVcFeedback	$07
+                        	;smpsVcDetune	$00, $00, $00, $00
+                        	;smpsVcCoarseFreq	$02, $02, $01, $01
+                        	;smpsVcRateScale	$00, $00, $00, $00
+                        	;smpsVcAttackRate	$1F, $1F, $1F, $1F
+                        	;smpsVcAmpMod	$00, $00, $00, $00
+                        	;smpsVcDecayRate1	$00, $00, $00, $00
+                        	;smpsVcDecayRate2	$00, $00, $00, $00
+                        	;smpsVcDecayLevel	$00, $00, $00, $00
+                        	;smpsVcReleaseRate	$0F, $0F, $0F, $0F
+                        	;smpsVcTotalLevel	$1B, $28, $32, $00
+
+00000 Total Error(s)
+
+DHITIMPANI         00000088 E  DKICK              00000081 E  DLOWTIMPANI        0000008A E
+DMIDTIMPANI        00000089 E  DSNARE             00000082 E  DTIMPANI           00000083 E
+DVLOWTIMPANI       0000008B E  FMPITCH            00000000 E  FMVOL1             00000016 E
+FMVOL2             00000008 E  FMVOL3             00000010 E  FMVOL4             00000006 E
+NA0                0000008A E  NA1                00000096 E  NA2                000000A2 E
+NA3                000000AE E  NA4                000000BA E  NA5                000000C6 E
+NA6                000000D2 E  NA7                000000DE E  NAB0               00000089 E
+NAB1               00000095 E  NAB2               000000A1 E  NAB3               000000AD E
+NAB4               000000B9 E  NAB5               000000C5 E  NAB6               000000D1 E
+NAB7               000000DD E  NB0                0000008C E  NB1                00000098 E
+NB2                000000A4 E  NB3                000000B0 E  NB4                000000BC E
+NB5                000000C8 E  NB6                000000D4 E  NBB0               0000008B E
+NBB1               00000097 E  NBB2               000000A3 E  NBB3               000000AF E
+NBB4               000000BB E  NBB5               000000C7 E  NBB6               000000D3 E
+NBB7               000000DF E  NC0                00000081 E  NC1                0000008D E
+NC2                00000099 E  NC3                000000A5 E  NC4                000000B1 E
+NC5                000000BD E  NC6                000000C9 E  NC7                000000D5 E
+NCS0               00000082 E  NCS1               0000008E E  NCS2               0000009A E
+NCS3               000000A6 E  NCS4               000000B2 E  NCS5               000000BE E
+NCS6               000000CA E  NCS7               000000D6 E  ND0                00000083 E
+ND1                0000008F E  ND2                0000009B E  ND3                000000A7 E
+ND4                000000B3 E  ND5                000000BF E  ND6                000000CB E
+ND7                000000D7 E  NE0                00000085 E  NE1                00000091 E
+NE2                0000009D E  NE3                000000A9 E  NE4                000000B5 E
+NE5                000000C1 E  NE6                000000CD E  NE7                000000D9 E
+NEB0               00000084 E  NEB1               00000090 E  NEB2               0000009C E
+NEB3               000000A8 E  NEB4               000000B4 E  NEB5               000000C0 E
+NEB6               000000CC E  NEB7               000000D8 E  NF0                00000086 E
+NF1                00000092 E  NF2                0000009E E  NF3                000000AA E
+NF4                000000B6 E  NF5                000000C2 E  NF6                000000CE E
+NF7                000000DA E  NFS0               00000087 E  NFS1               00000093 E
+NFS2               0000009F E  NFS3               000000AB E  NFS4               000000B7 E
+NFS5               000000C3 E  NFS6               000000CF E  NFS7               000000DB E
+NG0                00000088 E  NG1                00000094 E  NG2                000000A0 E
+NG3                000000AC E  NG4                000000B8 E  NG5                000000C4 E
+NG6                000000D0 E  NG7                000000DC E  NRST               00000080 E
+PSGPITCH1          000000E8 E  PSGPITCH2          00000000 E  PSGVOI1            00000000 E
+PSGVOI2            00000001 E  PSGVOL1            00000006 E  PSGVOL2            00000002 E
+PWMPITCH           00000000 E  PWMVOL             00000099 E  S2DEZ_FM1          00000030
+S2DEZ_NOP          0000006E    S2DEZ_PATCHES      0000006F    S2DEZ_PSG1         00000049
+SMPSED             000000ED E  SMPSEE             000000EE E  SMPSF9             000000F9 E
+SMPSMODF1          08010504 E  SMPSMODF2          1001FFFF E  SMPSMODF3          1001FEFF E
+SMPSMODF4          000110FF E  SMPSMODOFF         000000F4 E  SMPSMODON          000000F1 E
+SMPSMODP1          0602FEFF E  SMPSMODP2          060101FF E  SMPSMODP3          0001FAFF E
+SMPSMODP4          0001FDFF E  SMPSMODP5          0001FCFF E  SMPSMODP6          000101FF E
+SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E  SMPSPITCH01HI      0000000C E
+SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E  SMPSPITCH02LO      000000E8 E
+SMPSPITCH03HI      00000024 E  SMPSPITCH03LO      000000DC E  SMPSPITCH04HI      00000030 E
+SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI      0000003C E  SMPSPITCH05LO      000000C4 E
+SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E  SMPSPITCH07HI      00000054 E
+SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E  SMPSPITCH08LO      000000A0 E
+SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E  SMPSPITCH10HI      00000078 E
+SMPSPITCH10LO      00000088 E  SONGSTART          00000000 S

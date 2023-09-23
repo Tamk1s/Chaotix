@@ -1,5 +1,5 @@
 
-Target	EQU	$56425
+Target	EQU	$5643C
 	smpsHeaderVoice	SFX_3B_Patches, Target
 	smpsHeaderTick	$01
 	smpsHeaderChan	$03

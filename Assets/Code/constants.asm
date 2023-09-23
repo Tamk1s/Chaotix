@@ -1535,6 +1535,10 @@ psb_Size        EQU 3                  ; Size powerup bit. 1=shrunken, 0=grown. 
 
 ; ---------------------------------------------------------------------------
 
+vmp_sndtst_ID   EQU $FFFFDFE6          ; Soundtest SFX ID
+
+; ---------------------------------------------------------------------------
+
 ; enum bgm IDs (width 1 byte)
 bgm_Null        EQU 0
 bgm_IIZ         EQU 1
@@ -1651,6 +1655,18 @@ sfx_Jingle_SegaBeta EQU $6B            ; !@ Unused Beta Sega Jingle
 sfx_Spindash    EQU $6C                ; Spindash chargeup (S1). No pitch shifting
 sfx_ExitSS      EQU $6D                ; Same SFX/usage as S1's sfx_EnterSS, but only used when exiting SS after getting Chaos Ring
 sfx_AAZ_Suction EQU $6E                ; Suction sfx for AAZ Tubes (hard to trigger)
-sfx_cmd_FadeOut EQU $F0
-v_sndStereo     EQU $FFFFE208
+sfx_Last        EQU $6F
+sfx_cmd_FadeOut EQU $F0                ; CF Fadeout music
+sfx_cmd_Stop    EQU $F1                ; CF Stop music
+v_sndStereo     EQU $FFFFE208          ; Stereo mode?
 v_ring_speaker  EQU $FFFFFCE6          ; Current pan of the ring sound; positive is left, negative/zero is right.
+
+; ---------------------------------------------------------------------------
+
+; enum SoundDriver_Vars
+smpsSpeed_NTSCn EQU $80
+smpsSpeed_PALn  EQU $9A
+smpsSpeed_NTSCf EQU $B0
+smpsSpeed_Palf  EQU $D4
+smpsSpeed       EQU $A0003F
+

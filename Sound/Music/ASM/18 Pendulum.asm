@@ -1,4 +1,4 @@
-Target	EQU	$4B0BE
+Target	EQU	$4AFF9
 	smpsHeaderVoice	Pend_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $25

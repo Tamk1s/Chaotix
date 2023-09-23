@@ -124,7 +124,7 @@ cPSG1				EQU $80
 cPSG2				EQU $A0
 cPSG3				EQU $C0
 cNoise				EQU $E0	; Not for use in S3/S&K/S3D
-cFM3				EQU $02
+cFM3				EQU $03
 cFM4				EQU $04
 cFM5				EQU $05
 cFM6				EQU $06	; Only in S3/S&K/S3D, overrides DAC
@@ -247,6 +247,8 @@ smpsHeaderChan macro fm,psg
 
 	
 smpsHeaderTempo macro div,mod
+TempDiv set div
+	;!@ New
 	dc.b	div,mod
 	endm
 

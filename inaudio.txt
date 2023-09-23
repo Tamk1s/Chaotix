@@ -16,6 +16,9 @@ Dispose				$040000	$058000			;Original Audio data (Banks 0-2, 2S)
 Dispose				$058000 $074000			;PWM Table/data
 Dispose				$076AC0 $076AE9			;Table of bank IDs for each song ($18 = Bank 0, $19 = Bank 1, $1A = Bank 2). SFX appears to be hardcoded to Bank 2 (at $56000)
 Dispose				$076AE9	$076BC3			;Original Audio pointers (Banks 0-2 + 2_SFX)
+
+Define 				z80_Start	$075B6A
+Define				z80_dataOffset	$00BC
 ;endregion
 
 ;Region @FixedData
@@ -23,14 +26,99 @@ Dispose				$076AE9	$076BC3			;Original Audio pointers (Banks 0-2 + 2_SFX)
 ; Fixed Data Segments ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-;Replace the Music Bank ID table
-StartSeg BankTbl Big_Endian $076AC0
-		include	"Sound/Music/BIN/BankList.bin"
+;!@ Driver signature
+StartSeg DriverSig Big_Endian $075BBA $0B
+	;String	"on by MILPO"
+	String	"GenesisDoes"
 EndSeg
 
-;Replace the Music Ptr table
-StartSeg PtrTbl Big_Endian $076AE9
-		include	"Sound/Music/BIN/PtrList.bin"
+;!@
+;StartSeg PanAnim_Ptr Little_Endian $075E44 $02
+	;WORD	(PanAnim-z80_Start)
+;EndSeg
+StartSeg PanAnim_Data Little_Endian $075E79 $0E
+	PanAnim:
+		WORD	(Pan_01-z80_Start)
+		WORD	(Pan_02-z80_Start)
+		WORD	(Pan_03-z80_Start)
+		WORD	(Pan_04-z80_Start)
+		
+		Pan_01:	include	"Sound/FM/Pan_01.bin"
+		Pan_02:	include	"Sound/FM/Pan_02.bin"
+		Pan_03:	include	"Sound/FM/Pan_03.bin"
+		Pan_04:	include	"Sound/FM/Pan_04.bin"
+EndSeg
+
+;Replace the Music Bank ID table
+StartSeg Data Little_Endian $076AAE	$03C4
+	SndPrioPtr:		WORD	(SFXPrio-SndPrioPtr)+$1000
+					WORD	(PtrTbl_SFX-z80_Start)+z80_dataOffset
+	MusListPtr:		WORD	(PtrTbl_BGM-z80_Start)+z80_dataOffset
+	SFXListPtr:		WORD	(PtrTbl_SFX-z80_Start)+z80_dataOffset
+	ModEnvListPtr:	WORD	(ModEnvPtrs-z80_Start)+z80_dataOffset
+	PSGListPtr:		WORD	(PSGPtrs-z80_Start)+z80_dataOffset
+					WORD	$002A
+					WORD	$0000
+	SongBankPtr:	WORD	(BankTbl-z80_Start)+$00BC
+
+	BankTbl:	include	"Sound/Music/BIN/BankList.bin"
+	PtrTbl_BGM:	include	"Sound/Music/BIN/BGM_PtrList.bin"
+	PtrTbl_SFX:	include	"Sound/Music/BIN/SFX_PtrList.bin"
+	SFXPrio:	include	"Sound/Music/BIN/SndPriorities.bin"
+	
+	PSGPtrs:
+		WORD	(PSG_01-z80_Start)+z80_dataOffset
+		WORD	(PSG_02-z80_Start)+z80_dataOffset
+		WORD	(PSG_03-z80_Start)+z80_dataOffset
+		WORD	(PSG_04-z80_Start)+z80_dataOffset
+		WORD	(PSG_05-z80_Start)+z80_dataOffset
+		WORD	(PSG_06-z80_Start)+z80_dataOffset
+		WORD	(PSG_07-z80_Start)+z80_dataOffset
+		WORD	(PSG_08-z80_Start)+z80_dataOffset
+		WORD	(PSG_09-z80_Start)+z80_dataOffset
+		WORD	(PSG_0A-z80_Start)+z80_dataOffset
+		WORD	(PSG_0B-z80_Start)+z80_dataOffset
+		WORD	(PSG_0C-z80_Start)+z80_dataOffset
+		WORD	(PSG_0D-z80_Start)+z80_dataOffset
+		WORD	(PSG_0E-z80_Start)+z80_dataOffset
+		
+		PSG_01:	include	"Sound/PSG/PSG_01.bin"
+		PSG_02:	include	"Sound/PSG/PSG_02.bin"
+		PSG_03:	include	"Sound/PSG/PSG_03.bin"
+		PSG_04:	include	"Sound/PSG/PSG_04.bin"
+		PSG_05:	include	"Sound/PSG/PSG_05.bin"
+		PSG_06:	include	"Sound/PSG/PSG_06.bin"
+		PSG_07:	include	"Sound/PSG/PSG_07.bin"
+		PSG_08:	include	"Sound/PSG/PSG_08.bin"
+		PSG_09:	include	"Sound/PSG/PSG_09.bin"
+		PSG_0A:	include	"Sound/PSG/PSG_0A.bin"
+		PSG_0B:	include	"Sound/PSG/PSG_0B.bin"
+		PSG_0C:	include	"Sound/PSG/PSG_0C.bin"
+		PSG_0D:	include	"Sound/PSG/PSG_0D.bin"
+		PSG_0E:	include	"Sound/PSG/PSG_0E.bin"		
+		
+	ModEnvPtrs:
+		WORD	(Mod_01-z80_Start)+z80_dataOffset
+		WORD	(Mod_02-z80_Start)+z80_dataOffset
+		WORD	(Mod_03-z80_Start)+z80_dataOffset
+		WORD	(Mod_04-z80_Start)+z80_dataOffset
+		WORD	(Mod_05-z80_Start)+z80_dataOffset
+		WORD	(Mod_06-z80_Start)+z80_dataOffset
+		WORD	(Mod_07-z80_Start)+z80_dataOffset
+		WORD	(Mod_08-z80_Start)+z80_dataOffset
+		WORD	(Mod_09-z80_Start)+z80_dataOffset
+		WORD	(Mod_0A-z80_Start)+z80_dataOffset
+		
+		Mod_01:	include	"Sound/FM/Mod_01.bin"
+		Mod_02:	include	"Sound/FM/Mod_02.bin"
+		Mod_03:	include	"Sound/FM/Mod_03.bin"
+		Mod_04:	include	"Sound/FM/Mod_04.bin"
+		Mod_05:	include	"Sound/FM/Mod_05.bin"
+		Mod_06:	include	"Sound/FM/Mod_06.bin"
+		Mod_07:	include	"Sound/FM/Mod_07.bin"
+		Mod_08:	include	"Sound/FM/Mod_08.bin"
+		Mod_09:	include	"Sound/FM/Mod_09.bin"
+		Mod_0A:	include	"Sound/FM/Mod_0A.bin"		
 EndSeg
 ;EndRegion
 

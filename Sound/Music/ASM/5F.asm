@@ -1,5 +1,5 @@
 
-Target	EQU	$56CA8
+Target	EQU	$56CBF
 	smpsHeaderVoice	S3K_Jump62_Patches, Target
 	smpsHeaderTick	$01
 	smpsHeaderChan	$01

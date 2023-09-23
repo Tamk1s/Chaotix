@@ -4,6 +4,7 @@ ChkObjectVisible 	EQU	$008B18A6
 ReadController		EQU $008F454A
 ReadControllers		EQU ReadController
 PlaySound			EQU $008F6E76
+PlaySound_Save		EQU	$008F6E72 
 IssuePwmRequests	EQU $008F6EFA
 TrainingMenu_InitSlot	EQU	$008BF77C
 LoadPalette32X		EQU	$00883102

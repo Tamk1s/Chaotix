@@ -8,6 +8,7 @@ Pointa6ToLevel2			EQU	$008B207E
 LoadGlobalPalettes32X	EQU	$008818AE
 LoadLevelPalette32X_Primary_2	EQU	$00882122
 LoadLevelPalette32X_Secondary_2	EQU	$00882162                 
+bgm_EGZ					EQU	bgm_TTZ_Boss
 
 Pal32xP_Levels			EQU	$008821F0
 Pal32xS_Levels			EQU	$00882750 
@@ -113,7 +114,7 @@ Level_SpawnGoal_x:
 	lea     (Pal32xS_Levels).l,a0
 	jsr		(LoadLevelPalette32X_Secondary_2).l
 	
-	move.b  #bgm_TTZ,d0 ; Current level Song ID (byte).
+	move.b  #bgm_EGZ,d0 ; Current level Song ID (byte).
 	jsr     PlaySound
 	move.w	#0,(v_actConc_hi).w
 	rts

@@ -85,6 +85,9 @@ REM HACK PATCHES
 REM Disable chksum
 REM bytepatch.exe -a 0x0007BE kc.bin 6000
 
+REM SHC Logo
+REM bytepatch.exe -a 0x003426 kc.bin 4EB9 00A0 0000
+REM bytepatch.exe -a 0x300000 kc.bin -f "Assets\Code\SHC_Logo.bin"
 
 REM Enable official 6-button joypad support in ROM Header periph support
 bytepatch.exe -a 0x000191 kc.bin 3620
@@ -99,9 +102,9 @@ REM Patch Growth sfx in lvlsel roulette
 bytepatch.exe -a 0x2833c kc.bin 005D
 
 REM Patch out same-char check in CharSel_2P submenu
-bytepatch.exe -a 0x032440 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
-bytepatch.exe -a 0x032462 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
-bytepatch.exe -a 0x03259A kc.bin 4E71 4E71
+REM bytepatch.exe -a 0x032440 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x032462 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+REM bytepatch.exe -a 0x03259A kc.bin 4E71 4E71
 REM Patch out same-char check for claw game
 REM bytepatch.exe -a 0x0294AA kc.bin 4E71 6008 ; This enables WE Clawgame 32x palette for P1 character
 
@@ -322,7 +325,7 @@ REM Patch Boss cutscene music to use PlaySound instead of _save
 REM bytepatch.exe -a 0x02E674 kc.bin 008F 6E76
 REM Boss spawn object
 REM AAZ Miniboss
-bytepatch.exe -a 0x025D04 kc.bin 103C 0002
+bytepatch.exe -a 0x025D04 kc.bin 103C 0015
 bytepatch.exe -a 0x02CD86 kc.bin 323C B652
 REM BBZ
 REM bytepatch.exe -a 0x02D646 kc.bin 4E71 4E71 4E71 4E71								 
@@ -373,9 +376,14 @@ bytepatch.exe -a 0x023D8E kc.bin 4EB9 009F 85B4 4E71 4E71 4E71 4E71 4E71 4E71 4E
 bytepatch.exe -a 0x2F852A kc.bin -f "Assets\Code\Balloons.bin"
 
 
-REM Custom spritemasker object
+REM Custom Boss Spawn End (restore OG zone from AAZ Miniboss at end of TTZ4/5)
 bytepatch.exe -a 0x011E36 kc.bin 009F 85E0
 bytepatch.exe -a 0x2F85E0 kc.bin -f "Assets\Code\BossSpawnEnd.bin" 
+REM Patch all PlaySound subrout calls to use new PlaySound_SFX subrout (to fix SFX IDs with extended BGM Bank02)
+set PlaySoundSFX_Subrout=!JSR_ABS! 009F 8620
+REM bytepatch.exe -a 0x000000 kc.bin !PlaySoundSFX_Subrout!
+REM Enabled Extended Z/A/T level playlist
+bytepatch.exe -a 0x076EC0 kc.bin 4EF9 009F 862E 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 
 
 REM Survival mode

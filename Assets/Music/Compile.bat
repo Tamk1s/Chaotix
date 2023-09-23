@@ -40,7 +40,9 @@ Copy /y /b "1D\Out\1D Nice Meeting You.bin" "Preview\Data\Knuckles Maniax\1D Nic
 Copy /y /b "1E\Out\1E Have A Happy Day.bin" "Preview\Data\Knuckles Maniax\1E Have A Happy Day.skc"
 Copy /y /b "1F\Out\1F Reach The Goal.bin" "Preview\Data\Knuckles Maniax\1F Reach The Goal.skc"
 Copy /y /b "20\Out\20 High Five.bin" "Preview\Data\Knuckles Maniax\20 High Five.skc"
-REM Copy /y /b "21\Out\21 Decision.bin" "Preview\Data\Knuckles Maniax\21 Decision.skc"
+
+Copy /y /b "21\Out\15 Crystal Nightmare.bin" "Preview\Data\Knuckles Maniax\15 Crystal Nightmare.skc"
+
 Copy /y /b "22\Out\22 From Party To Party.bin" "Preview\Data\Knuckles Maniax\22 From Party To Party.skc"
 Copy /y /b "23\Out\23 Have Some Fun.bin" "Preview\Data\Knuckles Maniax\23 Have Some Fun.skc"
 Copy /y /b "24\Out\24 Oriental Legend.bin" "Preview\Data\Knuckles Maniax\24 Oriental Legend.skc"
@@ -52,6 +54,7 @@ Copy /y /b "29\Out\29 Decision 2nd.bin" "Preview\Data\Knuckles Maniax\29 Decisio
 Copy /y /b "Test\PWM_PSG_Test\Out\Soundtest.bin" "Preview\Data\Knuckles Maniax\Soundtest.skc"
 
 REM SFX
+Copy /y /b "2D\Out\2D.bin" "Preview\Data\Knuckles Maniax\SFX\2D.sf3"
 Copy /y /b "3E\Out\3E.bin" "Preview\Data\Knuckles Maniax\SFX\3E.sf3"
 Copy /y /b "59\Out\59.bin" "Preview\Data\Knuckles Maniax\SFX\59.sf3"
 Copy /y /b "5A\Out\5A.bin" "Preview\Data\Knuckles Maniax\SFX\5A.sf3"
@@ -95,7 +98,9 @@ Copy /Y "1D\Out\KC.asm" "..\..\Sound\Music\ASM\1D Nice Meeting You.asm"
 Copy /Y "1E\Out\KC.asm" "..\..\Sound\Music\ASM\1E Have A Happy Day.asm"
 Copy /Y "1F\Out\KC.asm" "..\..\Sound\Music\ASM\1F Reach The Goal.asm"
 Copy /Y "20\Out\KC.asm" "..\..\Sound\Music\ASM\20 High Five.asm"
-REM Copy /Y "21\Out\KC.asm" "..\..\Sound\Music\ASM\21 Decision.asm"
+
+Copy /Y "21\Out\KC.asm" "..\..\Sound\Music\ASM\15 Crystal Nightmare.asm"
+
 Copy /Y "22\Out\KC.asm" "..\..\Sound\Music\ASM\22 From Party to Party.asm"
 Copy /Y "23\Out\KC.asm" "..\..\Sound\Music\ASM\23 Have Some Fun.asm"
 Copy /Y "24\Out\KC.asm" "..\..\Sound\Music\ASM\24 Oriental Legend.asm"
@@ -106,6 +111,7 @@ Copy /Y "28\Out\KC.asm" "..\..\Sound\Music\ASM\28 Just Another Day.asm"
 Copy /Y "29\Out\KC.asm" "..\..\Sound\Music\ASM\29 Decision 2nd.asm"
 
 REM SFX
+Copy /Y "2D\Out\KC.asm" "..\..\Sound\Music\ASM\2D.asm"
 Copy /Y "3E\Out\KC.asm" "..\..\Sound\Music\ASM\3E.asm"
 Copy /Y "59\Out\KC.asm" "..\..\Sound\Music\ASM\59.asm"
 Copy /Y "5A\Out\KC.asm" "..\..\Sound\Music\ASM\5A.asm"

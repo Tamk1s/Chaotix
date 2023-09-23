@@ -1,4 +1,4 @@
-Target	EQU	$4D029
+Target	EQU	$4CF64
 
 FMVoi_SteelGit1	EQU	$00
 FMVoi_Bass		EQU	$01

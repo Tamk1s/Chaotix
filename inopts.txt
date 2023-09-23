@@ -12,8 +12,12 @@
 ;;;;;;;;;;;;;;;;;;;;
 
 MaxSize	$400000				;Maximum Genesis ROM size
-Define CASC_NullTerm	$00
-Define CASC_NullTerm2	$0000
+Define 	CASC_NullTerm	$00
+Define 	CASC_NullTerm2	$0000
+;!@ Define	SFX_First		$2A
+;Define	SFX_Last		$6F
+Define	SFX_First		$2A
+Define	SFX_Last		$6F
 
 ; Std Sega Ascii Chars (Crackers-debug styled)
 Define _SPC		$00
@@ -380,30 +384,30 @@ EndSeg
 
 ;!@
 ;StartSeg LevelPlaylist Big_Endian $076ED0 7
-StartSeg LevelPlaylist Big_Endian $076ED0 8
-	BYTE	$05	;BBZ
-	BYTE	$03	;SSZ
-	BYTE	$07	;AAZ
-	BYTE	$02	;TTZ
-	BYTE	$04	;MMZ
-	BYTE	$01	;Intro/Training
-	BYTE	$11	;Tutorial
-	BYTE	$00	;World Entrance (Null, normally unused)
-EndSeg
+;StartSeg LevelPlaylist Big_Endian $076ED0 8
+	;BYTE	$05	;BBZ
+	;BYTE	$03	;SSZ
+	;BYTE	$07	;AAZ
+	;BYTE	$02	;TTZ
+	;BYTE	$04	;MMZ
+	;BYTE	$01	;Intro/Training
+	;BYTE	$11	;Tutorial
+	;BYTE	$00	;World Entrance (Null, normally unused)
+;EndSeg
 
 ;;;
 ;!@ World Entrance Act Song playlis 
 ;;;
-StartSeg LevelPlaylist Big_Endian $076EE4 6
-	BYTE	$1B	;Act 1 (unused). WE Roulette
-	BYTE	$24 ;Act 2 (Metal Sonic Kai Final Boss)
-	BYTE	$1A ;Act 3 (unused). Bonus Stage
+;StartSeg LevelPlaylist Big_Endian $076EE4 6
+	;BYTE	$1B	;Act 1 (unused). WE Roulette
+	;BYTE	$24 ;Act 2 (Metal Sonic Kai Final Boss)
+	;BYTE	$1A ;Act 3 (unused). Bonus Stage
 	;!@ 
 	; BYTE	$14 ;Act 4 (unused). Special Stage
-	BYTE	$1A ;Act 4 (unused). Special Stage
-	BYTE	$F1 ;Act 5 (unused). SMPS Stop
-	BYTE	$F1 ;Act 6 (unused). SMPS Stop
-EndSeg
+	;BYTE	$1A ;Act 4 (unused). Special Stage
+	;BYTE	$F1 ;Act 5 (unused). SMPS Stop
+	;BYTE	$F1 ;Act 6 (unused). SMPS Stop
+;EndSeg
 
 ;;;
 ;!@ Timing stats for special event songs (NHZ CharGet etc)
@@ -524,7 +528,7 @@ StartSeg SoundTestSongNames Big_Endian $227338 $22A
 	BYTE	CASC_NullTerm
 	;!@ NEW Data
 	;String "CRYSTAL NIGHTMARE"
-	String "NOP"
+	String  "DEZ - S2"
 	BYTE	CASC_NullTerm
 	;!@ New data
 	;String "CHILD=S SONG"
@@ -735,16 +739,38 @@ EndSeg
 
 ;These 2 segments allows you to define the 1st SFX ID in sound test, for displaying either a song name/"--- SOUND  TEST ---" string from above segement, or "S.E." string.
 ;Both should be the same byte value
+;!@ 
 StartSeg SFX1st_1 Big_Endian $007527 1
-	BYTE $2A
+	BYTE SFX_First
 EndSeg
 StartSeg SFX1st_2 Big_Endian $00752D 1
-	BYTE $2A
+	BYTE SFX_First
 EndSeg
-StartSeg SFXLast Big_Endian $007446 2
-	;!@ New Data
-	;WORD $006F
-	WORD $00FF
+;!@ This is the 1st SFX, used for applying the default BGM tempo
+StartSeg SFX1st_3 Big_Endian $076E93 1
+	BYTE SFX_First
+EndSeg
+;!@ First SFX for z80 driver
+StartSeg SFX1stZ80_1 Big_Endian $07602C 1
+	BYTE SFX_First
+EndSeg
+StartSeg SFX1stZ80_2 Big_Endian $07617A 1
+	BYTE SFX_First
+EndSeg
+StartSeg SFX1stZ80_3 Big_Endian $0763F3 1
+	BYTE SFX_First
+EndSeg
+;!@ Last SFX for SoundTest navigation
+StartSeg SFXLast Big_Endian $007447 1
+	BYTE SFX_Last
+EndSeg
+;!@ Last SFX for z80 Driver
+StartSeg SFXLastZ80_1 Big_Endian $076031 1
+	BYTE SFX_Last
+EndSeg
+;!@ Partial little-endian Offset within last bank for SFX 
+StartSeg SFX_BankOff Little_Endian $076169 2
+	WORD $6000
 EndSeg
 ;EndRegion
 
@@ -752,10 +778,10 @@ EndSeg
 ;!@ WE Acts 0/1 Base BGM ID for TOD
 ;;;
 
-;Base BGM ID for WE Acts 0/1
-StartSeg BGM_WE01_TOD Big_Endian $0076EF5 1
-	BYTE $09
-EndSeg
+;!@ Base BGM ID for WE Acts 0/1
+;StartSeg BGM_WE01_TOD Big_Endian $0076EF5 1
+	;BYTE $09
+;EndSeg
 
 ;Region @Cheats/Config
 ;;;

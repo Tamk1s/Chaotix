@@ -82,8 +82,10 @@ REM Rebuilds the vanilla sound driver (standard banking)
 	ECHO All banks good!
 	ECHO OFF
 	
-	REM Remove all bin, lst, log, and txt file assets in BIN for clean-slate sound-driver rebuilding
-	del /Q "..\BIN\*.bin"	
+	REM !@ Remove all bin, lst, log, and txt file assets in BIN for clean-slate sound-driver rebuilding
+	attrib +h "..\BIN\SndPriorities.bin"
+	del /Q "..\BIN\*.bin"
+	attrib -h "..\BIN\SndPriorities.bin"
 	del /Q "..\BIN\*.lst"
 	del /Q "..\BIN\*.log"
 	del /Q "..\BIN\*.txt"
@@ -102,9 +104,11 @@ REM Rebuilds the vanilla sound driver (standard banking)
 	ECHO Writing Music Pointer table and Music Bank ID blobs...
 	ECHO OFF
 	
-	REM Write hex data to both Bank ID List and Music Ptr Table file blobs: https://stackoverflow.com/a/47826309
-	certutil -f -decodehex "..\BIN\temp.txt" "..\BIN\PtrList.bin" >>nul
-	del /Q "..\BIN\temp.txt"
+	REM Write hex data to both Bank ID List and Music/SFX Ptr Table file blobs: https://stackoverflow.com/a/47826309
+	certutil -f -decodehex "..\BIN\tempB.txt" "..\BIN\BGM_PtrList.bin" >>nul
+	del /Q "..\BIN\tempB.txt"
+	certutil -f -decodehex "..\BIN\tempS.txt" "..\BIN\SFX_PtrList.bin" >>nul
+	del /Q "..\BIN\tempS.txt"
 		
 	certutil -f -decodehex "..\BIN\temp2.txt" "..\BIN\BankList.bin" >>nul
 	del /Q "..\BIN\temp2.txt"
@@ -228,7 +232,9 @@ REM %1 = BankID (0-3). 0-2 = Bank0-Bank2, 3=Bank2 Sound
 		ECHO PtrStr=!HEXSTR!
 		
 		REM Append Hex string to temp file
-		echo !HEXSTR!>>"..\BIN\temp.txt"
+		if %1 NEQ 3 echo !HEXSTR!>>"..\BIN\tempB.txt"
+		if %1 EQU 3 echo !HEXSTR!>>"..\BIN\tempS.txt"
+		
 		REM Append BankID to temp2 file for this song if not Bank2S
 		if %1 NEQ 3 echo %BANKI%>>"..\BIN\temp2.txt"
 		ECHO OFF

@@ -102,8 +102,8 @@ VInt:
 		call	loc_3C
 
 loc_3C:					; DATA XREF: RAM:loc_40w
-		ld	a, 0
-		add	a, 80h
+		ld	a, 0		; $3E 00
+		add	a, 80h		; $C6 80
 
 loc_40:
 		ld	(loc_3C+1), a
@@ -221,7 +221,7 @@ UpdateAll:				; CODE XREF: RAM:0048p
 UpdateSFXTracks:			; CODE XREF: UpdateAll+Cp
 		ld	a, 1
 		ld	(byte_1C19), a	; 01 - SFX Mode
-		ld	hl, 6000h	; switch to SFX	Bank (8D0000)
+		ld	hl, 6000h	; !@ switch to SFX	Bank (8D0000)
 		xor	a		; Bank bits written: 11Ah
 		ld	e, 1
 		ld	(hl), a
@@ -979,14 +979,14 @@ PlaySoundID:				; CODE XREF: UpdateAll+9p
 ; FUNCTION CHUNK AT 05FD SIZE 000000A2 BYTES
 
 		ld	a, (byte_1C09)	; read Sound ID
-		cp	2Ah
-		jp	c, PlayMusic	; 00-29	- Music
+		cp	2Ah				;!@
+		jp	c, PlayMusic	; 00-29	- Music !@
 		cp	6Fh
-		jp	c, PlaySFX	; 2A-6E	- SFX
+		jp	c, PlaySFX	; 2A-6E	- SFX !@
 		cp	0F0h
-		jp	c, StopAllSound	; 6F-EF	- Stop All
+		jp	c, StopAllSound	; 6F-EF	- Stop All !@ 
 		cp	0FFh
-		jp	nc, StopAllSound ; FF -	Stop All
+		jp	nc, StopAllSound ; FF -	Stop All !@
 
 PlaySnd_Command:			; F0-FE	- Control Commands
 		sub	0F0h
@@ -1157,20 +1157,20 @@ PWMInitBytes:	db  80h, 18h		; DATA XREF: PlaySoundID+F1o
 
 PlaySFX:				; CODE XREF: PlaySoundID+Aj
 		ex	af, af'
-		ld	hl, 6000h
-		xor	a
-		ld	e, 1		; set Bank 8D0000
-		ld	(hl), a
-		ld	(hl), e
-		ld	(hl), a
-		ld	(hl), e
-		ld	(hl), e
-		ld	(hl), a
-		ld	(hl), a
-		ld	(hl), a
-		ld	(hl), 1
+		ld	hl, 6000h	;$210060 !@ Hardcoded-partial bank offset for SFX 0x086E in driver
+		xor	a			;$AF
+		ld	e, 1		;$1E01
+		ld	(hl), a		;$77
+		ld	(hl), e		;$73
+		ld	(hl), a		;$77
+		ld	(hl), e		;$73
+		ld	(hl), e		;$73
+		ld	(hl), a		;$77
+		ld	(hl), a		;$77
+		ld	(hl), a		;$77
+		ld	(hl), 1		;$3601
 		ex	af, af'
-		sub	2Ah		; Sound	ID -> SFX Index
+		sub	2Ah		; !@ Sound	ID -> SFX Index
 		ex	af, af'
 		xor	a
 		ld	hl, (SFXListPtr)
@@ -1626,21 +1626,21 @@ loc_880:				; CODE XREF: DoSoundQueue+31j
 		or	a
 		jr	z, loc_8A4
 		jp	m, DequeueSound
-		sub	2Ah
-		jr	c, DequeueSound
-		ld	hl, (SndPrioPtr)
-		add	a, l
+		sub	2Ah					;!@D62A
+		jr	c, DequeueSound		;$38xx
+		ld	hl, (SndPrioPtr)	;$2Axxxx
+		add	a, l				;$85
 		ld	l, a
 		adc	a, h
 		sub	l
 		ld	h, a
 		ld	a, (byte_1C18)
 		cp	(hl)
-		jr	z, loc_89C
-		jr	nc, loc_8A4
+		jr	z, loc_89C	;$28xx If positive?
+		jr	nc, loc_8A4	;$30xx If negative?
 
 loc_89C:				; CODE XREF: DoSoundQueue+22j
-		ld	a, c
+		ld	a, c		;$79
 		ld	(byte_1C09), a
 		ld	a, (hl)
 		ld	(byte_1C18), a
@@ -2177,7 +2177,7 @@ loc_B84:				; CODE XREF: cfE3_SilenceTrk+15Fj
 		call	JumpToInsData
 		call	SendFMIns
 		push	hl
-		ld	hl, 6000h	; switch to SFX	Bank (8D0000)
+		ld	hl, 6000h	; !@ switch to SFX	Bank (8D0000)
 		xor	a		; Bank bits written: 11Ah
 		ld	e, 1
 		ld	(hl), a
@@ -3030,8 +3030,8 @@ SFXPtrs:	dw  0E000h, 0E028h, 0E05Bh, 0E09Ch, 0E0CAh, 0E11Bh, 0E174h, 0E19Eh
 		dw  0EB78h, 0EBB0h, 0EBF6h, 0EC44h, 0EC6Eh, 0EC97h, 0ECCAh, 0ED45h
 		dw  0ED79h, 0EDA6h, 0EDD8h, 0EE18h, 0EE45h, 0EE7Bh, 0EEA8h, 0EEEBh
 		dw  0EF00h, 0EF11h, 0F010h, 0F04Eh, 0F07Bh
-SndPriorities:	db 7Fh,	7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh,	7Fh, 7Fh
-					; DATA XREF: RAM:SndPrioPtro
+SndPriorities:
+		db 7Fh,	7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh,	7Fh, 7Fh
 		db 7Fh,	7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh,	7Fh, 7Fh
 		db 7Fh,	7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh,	7Fh, 7Fh
 		db 7Fh,	7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh, 7Fh,	7Fh, 7Fh

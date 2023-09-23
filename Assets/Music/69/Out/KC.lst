@@ -250,8 +250,10 @@
 
                         	
                         smpsHeaderTempo macro div,mod
+                        TempDiv set div
+                        	;!@ New
                         	dc.b	div,mod
-                        	endm
+000000                  	endm
 
                         ;!@
                         ; Header - Set up Tempo. Mod is converted from S1 to S3 tempo
@@ -789,33 +791,83 @@
                         ;==============================================
 
 000000                  	include "KC.asm"
-       = 056EEB         Target	EQU	$56EEB
-       = 000080         Play	EQU	$80
-       = 000000         FM_Pitch	EQU	$00
-       = 000005         FM_Vol	EQU	$05
+       = 040000         Target	EQU	$40000
 000000                  	smpsHeaderVoice	SFX_69_Patches, Target
                         ;songStart set *
                         	;dc.w	loc-songStart
 000000                  	rom_ptr_z80(SFX_69_Patches+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000000 00EF             	dc.w  (((((SFX_69_Patches+Target))<<8)&$FF00)|((((SFX_69_Patches+Target))>>8)&$7F)|$80)
+000000 2C80             	dc.w  (((((SFX_69_Patches+Target))<<8)&$FF00)|((((SFX_69_Patches+Target))>>8)&$7F)|$80)
 000002                  	smpsHeaderTick	$01
 000002 01               	dc.b $01
-000003                  	smpsHeaderChan	$01
+000003                  	smpsHeaderChan	$02
                         	if 1==2
                         	else
-000003 01               		dc.b	$01
+000003 02               		dc.b	$02
                         	endif	
-000004                  	smpsHeaderSFX	Play, cFM5, SFX_69_FM5, FM_Pitch, FM_Vol, Target
-000004 8005             	dc.b Play,cFM5
+000004                  	smpsHeaderSFX	$80, cFM5, SFX_69_FM5, $00, $0F, Target
+000004 8005             	dc.b $80,cFM5
                         	;dc.w loc-sPointZero
 000006                  	rom_ptr_z80(SFX_69_FM5+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000006 F5EE             	dc.w  (((((SFX_69_FM5+Target))<<8)&$FF00)|((((SFX_69_FM5+Target))>>8)&$7F)|$80)
-000008 0005             	dc.b FM_Pitch,FM_Vol
+000006 1080             	dc.w  (((((SFX_69_FM5+Target))<<8)&$FF00)|((((SFX_69_FM5+Target))>>8)&$7F)|$80)
+000008 000F             	dc.b $00,$0F
+00000A                  	smpsHeaderSFX	$80, cFM6, SFX_69_FM6, $00, $05, Target
+00000A 8006             	dc.b $80,cFM6
+                        	;dc.w loc-sPointZero
+00000C                  	rom_ptr_z80(SFX_69_FM6+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00000C 1980             	dc.w  (((((SFX_69_FM6+Target))<<8)&$FF00)|((((SFX_69_FM6+Target))>>8)&$7F)|$80)
+00000E 0005             	dc.b $00,$05
+                        	
+000010                  SFX_69_FM5:
+000010                  	smpsCall	SFX_69_Setup, Target
+000010 F8               	dc.b	$F8
+                        	if (SFX_69_Setup<*)
+                        	else
+000011                  		rom_ptr_z80(SFX_69_Setup+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000011 2080             	dc.w  (((((SFX_69_Setup+Target))<<8)&$FF00)|((((SFX_69_Setup+Target))>>8)&$7F)|$80)
+                        	endif
+                        	;dc.w	loc-*-1
+000013 8008             	dc.b		nRst, $08
+000015                  	smpsCall	SFX_69_Notes, Target
+000015 F8               	dc.b	$F8
+                        	if (SFX_69_Notes<*)
+                        	else
+000016                  		rom_ptr_z80(SFX_69_Notes+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+000016 2580             	dc.w  (((((SFX_69_Notes+Target))<<8)&$FF00)|((((SFX_69_Notes+Target))>>8)&$7F)|$80)
+                        	endif
+                        	;dc.w	loc-*-1
+000018                  	smpsStop
+000018 F2               	dc.b	$F2
 
-00000A                  SFX_69_FM5:
-00000A                  	smpsPan		panRight
+000019                  SFX_69_FM6:
+000019                  	smpsCall	SFX_69_Setup, Target
+000019 F8               	dc.b	$F8
+                        	if (SFX_69_Setup<*)
+                        	else
+00001A                  		rom_ptr_z80(SFX_69_Setup+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001A 2080             	dc.w  (((((SFX_69_Setup+Target))<<8)&$FF00)|((((SFX_69_Setup+Target))>>8)&$7F)|$80)
+                        	endif
+                        	;dc.w	loc-*-1
+00001C                  	smpsCall	SFX_69_Notes, Target
+00001C F8               	dc.b	$F8
+                        	if (SFX_69_Notes<*)
+                        	else
+00001D                  		rom_ptr_z80(SFX_69_Notes+Target)
+                        	;dc.w z80_ptr(ptr,addr)
+00001D 2580             	dc.w  (((((SFX_69_Notes+Target))<<8)&$FF00)|((((SFX_69_Notes+Target))>>8)&$7F)|$80)
+                        	endif
+                        	;dc.w	loc-*-1
+00001F                  	smpsStop
+00001F F2               	dc.b	$F2
+                        	
+
+000020                  SFX_69_Setup:
+000020                  	smpsPan		panRight
        = 000000         panNone set $00
        = 000040         panRight set $40
        = 000080         panLeft set $80
@@ -825,23 +877,31 @@
                         	;endm		
                         	if 1==2
                         	else
-00000A E040             		dc.b $E0,panRight
+000020 E040             		dc.b $E0,panRight
                         	endif
-00000C                  	smpsFMvoice		$00
+000022                  	smpsFMvoice		$00
                         	;if song<>""
                         	if 1==2
                         	else
-00000C EF00             		dc.b $EF,$00
+000022 EF00             		dc.b $EF,$00
                         	endif
-00000E C105C405C91B     	dc.b	nE5, $05, nG5, $05, nC6, $1B
-000014                  	smpsStop
-000014 F2               	dc.b	$F2
+000024                  	smpsReturn
+                        	;!@
+                        	;dc.b	$E3
+000024 F9               	dc.b	$F9
+
+000025                  SFX_69_Notes:
+000025 C105C405C91B     	dc.b	nE5, $05, nG5, $05, nC6, $1B
+00002B                  	smpsReturn
+                        	;!@
+                        	;dc.b	$E3
+00002B F9               	dc.b	$F9
                         	
-000015                  SFX_69_Patches:
-000015 04               	dc.b	$04
-000016 377277491F1F1F1F 	dc.b	$37, $72, $77, $49, $1F, $1F, $1F, $1F
-00001E 070A070D000B000B 	dc.b	$07, $0A, $07, $0D, $00, $0B, $00, $0B
-000026 1F0F1F0F23802380 	dc.b	$1F, $0F, $1F, $0F, $23, $80, $23, $80
+00002C                  SFX_69_Patches:
+00002C 04               	dc.b	$04
+00002D 377277491F1F1F1F 	dc.b	$37, $72, $77, $49,	$1F, $1F, $1F, $1F
+000035 070A070D000B000B 	dc.b	$07, $0A, $07, $0D,	$00, $0B, $00, $0B
+00003D 1F0F1F0F23802380 	dc.b	$1F, $0F, $1F, $0F,	$23, $80, $23, $80
 
 00000 Total Error(s)
 
@@ -851,56 +911,56 @@ CPSG2              000000A0 E  CPSG3              000000C0 E  CPWM1             
 CPWM2              0000001A E  CPWM3              0000001C E  CPWM4              0000001E E
 DFLOORTIMPANI      0000008B E  DHITIMPANI         00000088 E  DKICK              00000081 E
 DLOWTIMPANI        0000008A E  DMIDTIMPANI        00000089 E  DSNARE             00000082 E
-DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  FM_PITCH           00000000 E
-FM_VOL             00000005 E  NA0                0000008A E  NA1                00000096 E
-NA2                000000A2 E  NA3                000000AE E  NA4                000000BA E
-NA5                000000C6 E  NA6                000000D2 E  NA7                000000DE E
-NAB0               00000089 E  NAB1               00000095 E  NAB2               000000A1 E
-NAB3               000000AD E  NAB4               000000B9 E  NAB5               000000C5 E
-NAB6               000000D1 E  NAB7               000000DD E  NB0                0000008C E
-NB1                00000098 E  NB2                000000A4 E  NB3                000000B0 E
-NB4                000000BC E  NB5                000000C8 E  NB6                000000D4 E
-NBB0               0000008B E  NBB1               00000097 E  NBB2               000000A3 E
-NBB3               000000AF E  NBB4               000000BB E  NBB5               000000C7 E
-NBB6               000000D3 E  NBB7               000000DF E  NC0                00000081 E
-NC1                0000008D E  NC2                00000099 E  NC3                000000A5 E
-NC4                000000B1 E  NC5                000000BD E  NC6                000000C9 E
-NC7                000000D5 E  NCS0               00000082 E  NCS1               0000008E E
-NCS2               0000009A E  NCS3               000000A6 E  NCS4               000000B2 E
-NCS5               000000BE E  NCS6               000000CA E  NCS7               000000D6 E
-ND0                00000083 E  ND1                0000008F E  ND2                0000009B E
-ND3                000000A7 E  ND4                000000B3 E  ND5                000000BF E
-ND6                000000CB E  ND7                000000D7 E  NE0                00000085 E
-NE1                00000091 E  NE2                0000009D E  NE3                000000A9 E
-NE4                000000B5 E  NE5                000000C1 E  NE6                000000CD E
-NE7                000000D9 E  NEB0               00000084 E  NEB1               00000090 E
-NEB2               0000009C E  NEB3               000000A8 E  NEB4               000000B4 E
-NEB5               000000C0 E  NEB6               000000CC E  NEB7               000000D8 E
-NF0                00000086 E  NF1                00000092 E  NF2                0000009E E
-NF3                000000AA E  NF4                000000B6 E  NF5                000000C2 E
-NF6                000000CE E  NF7                000000DA E  NFS0               00000087 E
-NFS1               00000093 E  NFS2               0000009F E  NFS3               000000AB E
-NFS4               000000B7 E  NFS5               000000C3 E  NFS6               000000CF E
-NFS7               000000DB E  NG0                00000088 E  NG1                00000094 E
-NG2                000000A0 E  NG3                000000AC E  NG4                000000B8 E
-NG5                000000C4 E  NG6                000000D0 E  NG7                000000DC E
-NRST               00000080 E  PAKICK             0000008B E  PANCENTER          000000C0 S
-PANCENTRE          000000C0 S  PANLEFT            00000080 S  PANNONE            00000000 S
-PANRIGHT           00000040 S  PASNARE            0000008C E  PBELL              0000008D E
-PBONGOHI           00000092 E  PBONGOLO           00000093 E  PCLAP              0000008A E
-PCLICKHI           00000090 E  PCLICKLO           00000091 E  PCLOSEDHH          00000098 E
-PCOWBELL           0000008F E  PCRASHCYMB         00000089 E  PCRA_D81           00000081 E
-PCRA_D82           0000008C E  PCRA_D83           00000085 E  PCRA_D84           00000086 E
-PCRA_D85           00000087 E  PEHIHAT            00000088 E  PEKICK             00000081 E
-PESNARE            00000082 E  PFINGSNAP          0000008E E  PFINGSNAPHI        0000008E E
-PFINGSNAPLO        0000009E E  PLAY               00000080 E  PNEPDADA           0000009D E
+DTIMPANI           00000083 E  DVLOWTIMPANI       0000008B E  NA0                0000008A E
+NA1                00000096 E  NA2                000000A2 E  NA3                000000AE E
+NA4                000000BA E  NA5                000000C6 E  NA6                000000D2 E
+NA7                000000DE E  NAB0               00000089 E  NAB1               00000095 E
+NAB2               000000A1 E  NAB3               000000AD E  NAB4               000000B9 E
+NAB5               000000C5 E  NAB6               000000D1 E  NAB7               000000DD E
+NB0                0000008C E  NB1                00000098 E  NB2                000000A4 E
+NB3                000000B0 E  NB4                000000BC E  NB5                000000C8 E
+NB6                000000D4 E  NBB0               0000008B E  NBB1               00000097 E
+NBB2               000000A3 E  NBB3               000000AF E  NBB4               000000BB E
+NBB5               000000C7 E  NBB6               000000D3 E  NBB7               000000DF E
+NC0                00000081 E  NC1                0000008D E  NC2                00000099 E
+NC3                000000A5 E  NC4                000000B1 E  NC5                000000BD E
+NC6                000000C9 E  NC7                000000D5 E  NCS0               00000082 E
+NCS1               0000008E E  NCS2               0000009A E  NCS3               000000A6 E
+NCS4               000000B2 E  NCS5               000000BE E  NCS6               000000CA E
+NCS7               000000D6 E  ND0                00000083 E  ND1                0000008F E
+ND2                0000009B E  ND3                000000A7 E  ND4                000000B3 E
+ND5                000000BF E  ND6                000000CB E  ND7                000000D7 E
+NE0                00000085 E  NE1                00000091 E  NE2                0000009D E
+NE3                000000A9 E  NE4                000000B5 E  NE5                000000C1 E
+NE6                000000CD E  NE7                000000D9 E  NEB0               00000084 E
+NEB1               00000090 E  NEB2               0000009C E  NEB3               000000A8 E
+NEB4               000000B4 E  NEB5               000000C0 E  NEB6               000000CC E
+NEB7               000000D8 E  NF0                00000086 E  NF1                00000092 E
+NF2                0000009E E  NF3                000000AA E  NF4                000000B6 E
+NF5                000000C2 E  NF6                000000CE E  NF7                000000DA E
+NFS0               00000087 E  NFS1               00000093 E  NFS2               0000009F E
+NFS3               000000AB E  NFS4               000000B7 E  NFS5               000000C3 E
+NFS6               000000CF E  NFS7               000000DB E  NG0                00000088 E
+NG1                00000094 E  NG2                000000A0 E  NG3                000000AC E
+NG4                000000B8 E  NG5                000000C4 E  NG6                000000D0 E
+NG7                000000DC E  NRST               00000080 E  PAKICK             0000008B E
+PANCENTER          000000C0 S  PANCENTRE          000000C0 S  PANLEFT            00000080 S
+PANNONE            00000000 S  PANRIGHT           00000040 S  PASNARE            0000008C E
+PBELL              0000008D E  PBONGOHI           00000092 E  PBONGOLO           00000093 E
+PCLAP              0000008A E  PCLICKHI           00000090 E  PCLICKLO           00000091 E
+PCLOSEDHH          00000098 E  PCOWBELL           0000008F E  PCRASHCYMB         00000089 E
+PCRA_D81           00000081 E  PCRA_D82           0000008C E  PCRA_D83           00000085 E
+PCRA_D84           00000086 E  PCRA_D85           00000087 E  PEHIHAT            00000088 E
+PEKICK             00000081 E  PESNARE            00000082 E  PFINGSNAP          0000008E E
+PFINGSNAPHI        0000008E E  PFINGSNAPLO        0000009E E  PNEPDADA           0000009D E
 POPENHH            00000099 E  PORCHHITHI         0000009F E  PORCHHITLO         000000A1 E
 PORCHHITLOWER      000000A2 E  PORCHHITMED        000000A0 E  PRIDEBELL          00000084 E
 PSEGA              00000097 E  PSGDELTA           0000000C E  PSILENCE           00000096 E
 PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E
 PTOMHI             00000085 E  PTOMLOW            00000087 E  PTOMLOWER          0000009A E
 PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E  PTOMMID            00000086 E
-SFX_69_FM5         0000000A    SFX_69_PATCHES     00000015    SMPSED             000000ED E
+SFX_69_FM5         00000010    SFX_69_FM6         00000019    SFX_69_NOTES       00000025
+SFX_69_PATCHES     0000002C    SFX_69_SETUP       00000020    SMPSED             000000ED E
 SMPSEE             000000EE E  SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E
 SMPSMODON          000000F1 E  SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E
 SMPSPITCH01HI      0000000C E  SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E
@@ -909,4 +969,4 @@ SMPSPITCH04HI      00000030 E  SMPSPITCH04LO      000000D0 E  SMPSPITCH05HI     
 SMPSPITCH05LO      000000C4 E  SMPSPITCH06HI      00000048 E  SMPSPITCH06LO      000000B8 E
 SMPSPITCH07HI      00000054 E  SMPSPITCH07LO      000000AC E  SMPSPITCH08HI      00000060 E
 SMPSPITCH08LO      000000A0 E  SMPSPITCH09HI      0000006C E  SMPSPITCH09LO      00000094 E
-SMPSPITCH10HI      00000078 E  SMPSPITCH10LO      00000088 E  TARGET             00056EEB E
+SMPSPITCH10HI      00000078 E  SMPSPITCH10LO      00000088 E  TARGET             00040000 E

@@ -38,6 +38,7 @@ RunInject  "inject.bin"
 ;Extern     "#Batch\\fixheadr" "#Got"
 ;Extern     "#Batch\\fixheadr" "inject.bin"
 WorkPath "#Batch"
+Extern "renReport.bat" "ReportArt.txt"
 Extern "fixheadr" "inject.bin"
 Extern "fix.bat" "0"
 ;

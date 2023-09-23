@@ -1,0 +1,102 @@
+Pass 1
+Pass 2
+KC.asm:422: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+00067E 8040000808080808 	dc.b nRst, $40, dEchoedClapHit2, $08, $08, $08, $08, $08
+KC.asm:423: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+000686 0800010101010202 	dc.b $08, dLowerEchoedClapHit2, $01, $01, $01, $01, $02, $02
+KC.asm:424: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:424: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:424: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+00068E 00000080         	dc.b dEchoedClapHit2, dLowerEchoedClapHit2, dLowerEchoedClapHit2, nRst
+KC.asm:427: *** Error:  Symbol 'DFLOORTOM' undefined ***
+KC.asm:427: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:427: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+000692 0008000602000602 	dc.b dFloorTom, $08, dLowerEchoedClapHit2, $06, $02, dEchoedClapHit2, $06, $02
+KC.asm:428: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:428: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:428: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:428: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:428: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+00069A 0008000004000200 	dc.b dLowerEchoedClapHit2, $08, dEchoedClapHit2, dLowerEchoedClapHit2, $04, dEchoedClapHit2, $02, dLowerEchoedClapHit2
+KC.asm:429: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:429: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:429: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:429: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+0006A2 0402000400000008 	dc.b $04, $02, dEchoedClapHit2, $04, dLowerEchoedClapHit2, dLowerEchoedClapHit2, dEchoedClapHit2, $08
+KC.asm:430: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:430: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:430: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+0006AA 0006020006020008 	dc.b dLowerEchoedClapHit2, $06, $02, dEchoedClapHit2, $06, $02, dLowerEchoedClapHit2, $08
+KC.asm:431: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:431: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:431: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:431: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+0006B2 0000040002000402 	dc.b dEchoedClapHit2, dLowerEchoedClapHit2, $04, dEchoedClapHit2, $02, dLowerEchoedClapHit2, $04, $02
+KC.asm:432: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:432: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:432: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:432: *** Error:  Symbol 'DFLOORTOM' undefined ***
+KC.asm:432: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+0006BA 0004000000080006 	dc.b dEchoedClapHit2, $04, dLowerEchoedClapHit2, dLowerEchoedClapHit2, dFloorTom, $08, dLowerEchoedClapHit2, $06
+KC.asm:433: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:433: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:433: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:433: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+0006C2 0200060200080000 	dc.b $02, dEchoedClapHit2, $06, $02, dLowerEchoedClapHit2, $08, dEchoedClapHit2, dLowerEchoedClapHit2
+KC.asm:434: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:434: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:434: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+0006CA 0400020004020004 	dc.b $04, dEchoedClapHit2, $02, dLowerEchoedClapHit2, $04, $02, dEchoedClapHit2, $04
+KC.asm:435: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:435: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:435: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:435: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:435: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+0006D2 0000000800060200 	dc.b dLowerEchoedClapHit2, dLowerEchoedClapHit2, dEchoedClapHit2, $08, dLowerEchoedClapHit2, $06, $02, dEchoedClapHit2
+KC.asm:436: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+0006DA 06020008         	dc.b $06, $02, dLowerEchoedClapHit2, $08
+KC.asm:444: *** Error:  Symbol 'DFLOORTOM' undefined ***
+KC.asm:444: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:444: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:444: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:444: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+0006E9 0004000000020080 	dc.b dFloorTom, $04, dEchoedClapHit2, dLowerEchoedClapHit2, dEchoedClapHit2, $02, dLowerEchoedClapHit2, nRst
+KC.asm:445: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:445: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:445: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:445: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:445: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+0006F1 0000800080008000 	dc.b dLowerEchoedClapHit2, dEchoedClapHit2, nRst, dLowerEchoedClapHit2, nRst, dEchoedClapHit2, nRst, dEchoedClapHit2
+KC.asm:446: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:446: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:446: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:446: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+0006F9 8000800080000080 	dc.b nRst, dEchoedClapHit2, nRst, dLowerEchoedClapHit2, nRst, dEchoedClapHit2, dLowerEchoedClapHit2, nRst
+KC.asm:447: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:447: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:447: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:447: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:447: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:447: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+000701 0000800080000000 	dc.b dLowerEchoedClapHit2, dEchoedClapHit2, nRst, dLowerEchoedClapHit2, nRst, dLowerEchoedClapHit2, dLowerEchoedClapHit2, dEchoedClapHit2
+KC.asm:448: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:448: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:448: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+000709 0404000002000402 	dc.b $04, $04, dLowerEchoedClapHit2, dEchoedClapHit2, $02, dLowerEchoedClapHit2, $04, $02
+KC.asm:449: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:449: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:449: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:449: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:449: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:449: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:449: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+000711 0004000000000000 	dc.b dEchoedClapHit2, $04, dLowerEchoedClapHit2, dEchoedClapHit2, dEchoedClapHit2, dEchoedClapHit2, dLowerEchoedClapHit2, dEchoedClapHit2
+KC.asm:450: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+KC.asm:450: *** Error:  Symbol 'DECHOEDCLAPHIT2' undefined ***
+KC.asm:450: *** Error:  Symbol 'DLOWERECHOEDCLAPHIT2' undefined ***
+000719 0200040200060001 	dc.b $02, dLowerEchoedClapHit2, $04, $02, dEchoedClapHit2, $06, dLowerEchoedClapHit2, $01
+KC.asm:530: *** Warning:  Byte out of range ***
+000789 155515F8         	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
+
+00075 Total Error(s)
+

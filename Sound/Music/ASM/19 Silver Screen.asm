@@ -1,4 +1,4 @@
-Target	EQU	$4B17C
+Target	EQU	$4B0B7
 	smpsHeaderVoice	SScreen_Patches, Target
 	smpsHeaderChan	$06, $03
 	smpsHeaderTempo	$01, $25

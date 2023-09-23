@@ -1,4 +1,4 @@
-Target	EQU	$4EDCE
+Target	EQU	$4ED09
 FMVol_Half		EQU $40
 PSGVol_Max		EQU	$00
 PSGVol_Half		EQU	$03
