@@ -195,7 +195,7 @@ bytepatch.exe -a 0x010256 kc.bin 317C !PowTimer2! 0036
 bytepatch.exe -a 0x0102CE kc.bin 317C !PowTimer2! 0036
 bytepatch.exe -a 0x010314 kc.bin 317C !PowTimer2! 0036
 bytepatch.exe -a 0x010334 kc.bin 0668 !PowTimer2! 0038
-bytepatch.exe -a 0x010358 kc.bin 0668 !PowTimer! 0038
+bytepatch.exe -a 0x010358 kc.bin 0668 !PowTimer1! 0038
 REM Patch Decision 2nd with 1st
 bytepatch.exe -a 0x027BB8 kc.bin 7021
 REM Code patches to undo normal game progress for Demo

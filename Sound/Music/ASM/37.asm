@@ -1,5 +1,5 @@
 
-Target	EQU	$5636D
+Target	EQU	$56367
 	smpsHeaderVoice	SFX_37_Patches, Target
 	smpsHeaderTick	$01
 	smpsHeaderChan	$01

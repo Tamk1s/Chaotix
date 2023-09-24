@@ -1,8 +1,9 @@
 Target	EQU	$40000
 	smpsHeaderVoice	SFX_69_Patches, Target
 	smpsHeaderTick	$01
-	smpsHeaderChan	$02
-	smpsHeaderSFX	$80, cFM5, SFX_69_FM5, $00, $0F, Target
+	;!@ smpsHeaderChan	$02
+	;!@ smpsHeaderSFX	$80, cFM5, SFX_69_FM5, $00, $0F, Target
+	smpsHeaderChan	$01
 	smpsHeaderSFX	$80, cFM6, SFX_69_FM6, $00, $05, Target
 	
 SFX_69_FM5:

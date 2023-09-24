@@ -1,4 +1,4 @@
-Target	EQU	$56B82
+Target	EQU	$56B7C
 Play	EQU	$80
 FM_Pitch	EQU	$00
 FM_Vol	EQU	$05

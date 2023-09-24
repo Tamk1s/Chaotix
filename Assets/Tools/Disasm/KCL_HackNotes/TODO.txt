@@ -12,11 +12,12 @@ x Lava palette cycle
 | TTZ4 Boss Rush stability (end of level boss)
 | Fix backgrounds
 | Fix parallax
-| Bumper offsets/palette cycling
+
 
 
 Next release:
 | Fix bad TTZ4 collision (slopes)
+| Bumper offsets/palette cycling
 - ASCII art tutorial fix
 - SSZC level icon 32x disabled, x new Title Card
 - Change "level" to "act" (title cards)

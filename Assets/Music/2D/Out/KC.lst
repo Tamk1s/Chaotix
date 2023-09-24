@@ -127,7 +127,7 @@
        = 0000A0         cPSG2				EQU $A0
        = 0000C0         cPSG3				EQU $C0
        = 0000E0         cNoise				EQU $E0	; Not for use in S3/S&K/S3D
-       = 000002         cFM3				EQU $02
+       = 000003         cFM3				EQU $03
        = 000004         cFM4				EQU $04
        = 000005         cFM5				EQU $05
        = 000006         cFM6				EQU $06	; Only in S3/S&K/S3D, overrides DAC
@@ -797,76 +797,71 @@
                         	;dc.w	loc-songStart
 000000                  	rom_ptr_z80(SFX_2D_Patches+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000000 2C80             	dc.w  (((((SFX_2D_Patches+Target))<<8)&$FF00)|((((SFX_2D_Patches+Target))>>8)&$7F)|$80)
+000000 2680             	dc.w  (((((SFX_2D_Patches+Target))<<8)&$FF00)|((((SFX_2D_Patches+Target))>>8)&$7F)|$80)
 000002                  	smpsHeaderTick	$01
 000002 01               	dc.b $01
-000003                  	smpsHeaderChan	$02
+                        	;!@ smpsHeaderChan	$02
+                        	;!@ smpsHeaderSFX	$80, cFM3, SFX_2D_FM3, $00, $0F, Target
+000003                  	smpsHeaderChan	$01
                         	if 1==2
                         	else
-000003 02               		dc.b	$02
+000003 01               		dc.b	$01
                         	endif	
-000004                  	smpsHeaderSFX	$80, cFM3, SFX_2D_FM3, $00, $0F, Target
-000004 8002             	dc.b $80,cFM3
+000004                  	smpsHeaderSFX	$80, cFM5, SFX_2D_FM4, $00, $05, Target
+000004 8005             	dc.b $80,cFM5
                         	;dc.w loc-sPointZero
-000006                  	rom_ptr_z80(SFX_2D_FM3+Target)
+000006                  	rom_ptr_z80(SFX_2D_FM4+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000006 1780             	dc.w  (((((SFX_2D_FM3+Target))<<8)&$FF00)|((((SFX_2D_FM3+Target))>>8)&$7F)|$80)
-000008 000F             	dc.b $00,$0F
-00000A                  	smpsHeaderSFX	$80, cFM4, SFX_2D_FM4, $00, $05, Target
-00000A 8004             	dc.b $80,cFM4
-                        	;dc.w loc-sPointZero
-00000C                  	rom_ptr_z80(SFX_2D_FM4+Target)
-                        	;dc.w z80_ptr(ptr,addr)
-00000C 1080             	dc.w  (((((SFX_2D_FM4+Target))<<8)&$FF00)|((((SFX_2D_FM4+Target))>>8)&$7F)|$80)
-00000E 0005             	dc.b $00,$05
+000006 0A80             	dc.w  (((((SFX_2D_FM4+Target))<<8)&$FF00)|((((SFX_2D_FM4+Target))>>8)&$7F)|$80)
+000008 0005             	dc.b $00,$05
 
-000010                  SFX_2D_FM4:
-000010                  	smpsCall	SFX_2D_Setup, Target
-000010 F8               	dc.b	$F8
+00000A                  SFX_2D_FM4:
+00000A                  	smpsCall	SFX_2D_Setup, Target
+00000A F8               	dc.b	$F8
                         	if (SFX_2D_Setup<*)
                         	else
-000011                  		rom_ptr_z80(SFX_2D_Setup+Target)
+00000B                  		rom_ptr_z80(SFX_2D_Setup+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000011 2080             	dc.w  (((((SFX_2D_Setup+Target))<<8)&$FF00)|((((SFX_2D_Setup+Target))>>8)&$7F)|$80)
+00000B 1A80             	dc.w  (((((SFX_2D_Setup+Target))<<8)&$FF00)|((((SFX_2D_Setup+Target))>>8)&$7F)|$80)
                         	endif
                         	;dc.w	loc-*-1
-000013                  	smpsCall	SFX_2D_Notes, Target
-000013 F8               	dc.b	$F8
+00000D                  	smpsCall	SFX_2D_Notes, Target
+00000D F8               	dc.b	$F8
                         	if (SFX_2D_Notes<*)
                         	else
-000014                  		rom_ptr_z80(SFX_2D_Notes+Target)
+00000E                  		rom_ptr_z80(SFX_2D_Notes+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000014 2580             	dc.w  (((((SFX_2D_Notes+Target))<<8)&$FF00)|((((SFX_2D_Notes+Target))>>8)&$7F)|$80)
+00000E 1F80             	dc.w  (((((SFX_2D_Notes+Target))<<8)&$FF00)|((((SFX_2D_Notes+Target))>>8)&$7F)|$80)
                         	endif
                         	;dc.w	loc-*-1
-000016                  	smpsStop
-000016 F2               	dc.b	$F2
+000010                  	smpsStop
+000010 F2               	dc.b	$F2
                         	
-000017                  SFX_2D_FM3:
-000017                  	smpsCall	SFX_2D_Setup, Target
-000017 F8               	dc.b	$F8
+000011                  SFX_2D_FM3:
+000011                  	smpsCall	SFX_2D_Setup, Target
+000011 F8               	dc.b	$F8
                         	if (SFX_2D_Setup<*)
                         	else
-000018                  		rom_ptr_z80(SFX_2D_Setup+Target)
+000012                  		rom_ptr_z80(SFX_2D_Setup+Target)
                         	;dc.w z80_ptr(ptr,addr)
-000018 2080             	dc.w  (((((SFX_2D_Setup+Target))<<8)&$FF00)|((((SFX_2D_Setup+Target))>>8)&$7F)|$80)
+000012 1A80             	dc.w  (((((SFX_2D_Setup+Target))<<8)&$FF00)|((((SFX_2D_Setup+Target))>>8)&$7F)|$80)
                         	endif
                         	;dc.w	loc-*-1
-00001A 8008             	dc.b		nRst, $08
-00001C                  	smpsCall	SFX_2D_Notes, Target
-00001C F8               	dc.b	$F8
+000014 8008             	dc.b		nRst, $08
+000016                  	smpsCall	SFX_2D_Notes, Target
+000016 F8               	dc.b	$F8
                         	if (SFX_2D_Notes<*)
                         	else
-00001D                  		rom_ptr_z80(SFX_2D_Notes+Target)
+000017                  		rom_ptr_z80(SFX_2D_Notes+Target)
                         	;dc.w z80_ptr(ptr,addr)
-00001D 2580             	dc.w  (((((SFX_2D_Notes+Target))<<8)&$FF00)|((((SFX_2D_Notes+Target))>>8)&$7F)|$80)
+000017 1F80             	dc.w  (((((SFX_2D_Notes+Target))<<8)&$FF00)|((((SFX_2D_Notes+Target))>>8)&$7F)|$80)
                         	endif
                         	;dc.w	loc-*-1
-00001F                  	smpsStop
-00001F F2               	dc.b	$F2
+000019                  	smpsStop
+000019 F2               	dc.b	$F2
 
-000020                  SFX_2D_Setup:
-000020                  	smpsPan		panLeft
+00001A                  SFX_2D_Setup:
+00001A                  	smpsPan		panLeft
        = 000000         panNone set $00
        = 000040         panRight set $40
        = 000080         panLeft set $80
@@ -876,35 +871,35 @@
                         	;endm		
                         	if 1==2
                         	else
-000020 E080             		dc.b $E0,panLeft
+00001A E080             		dc.b $E0,panLeft
                         	endif
-000022                  	smpsFMvoice		$00	
+00001C                  	smpsFMvoice		$00	
                         	;if song<>""
                         	if 1==2
                         	else
-000022 EF00             		dc.b $EF,$00
+00001C EF00             		dc.b $EF,$00
                         	endif
-000024                  	smpsReturn
+00001E                  	smpsReturn
                         	;!@
                         	;dc.b	$E3
-000024 F9               	dc.b	$F9
+00001E F9               	dc.b	$F9
 
-000025                  SFX_2D_Notes:
-000025 C105C405C91B     	dc.b	nE5, $05, nG5, $05, nC6, $1B
-00002B                  	smpsReturn
+00001F                  SFX_2D_Notes:
+00001F C105C405C91B     	dc.b	nE5, $05, nG5, $05, nC6, $1B
+000025                  	smpsReturn
                         	;!@
                         	;dc.b	$E3
-00002B F9               	dc.b	$F9
+000025 F9               	dc.b	$F9
 
-00002C                  SFX_2D_Patches:
-00002C 04               	dc.b	$04
-00002D 377277491F1F1F1F 	dc.b	$37, $72, $77, $49,	$1F, $1F, $1F, $1F
-000035 070A070D000B000B 	dc.b	$07, $0A, $07, $0D,	$00, $0B, $00, $0B
-00003D 1F0F1F0F23802380 	dc.b	$1F, $0F, $1F, $0F,	$23, $80, $23, $80
+000026                  SFX_2D_Patches:
+000026 04               	dc.b	$04
+000027 377277491F1F1F1F 	dc.b	$37, $72, $77, $49,	$1F, $1F, $1F, $1F
+00002F 070A070D000B000B 	dc.b	$07, $0A, $07, $0D,	$00, $0B, $00, $0B
+000037 1F0F1F0F23802380 	dc.b	$1F, $0F, $1F, $0F,	$23, $80, $23, $80
 
 00000 Total Error(s)
 
-CFM3               00000002 E  CFM4               00000004 E  CFM5               00000005 E
+CFM3               00000003 E  CFM4               00000004 E  CFM5               00000005 E
 CFM6               00000006 E  CNOISE             000000E0 E  CPSG1              00000080 E
 CPSG2              000000A0 E  CPSG3              000000C0 E  CPWM1              00000018 E
 CPWM2              0000001A E  CPWM3              0000001C E  CPWM4              0000001E E
@@ -958,8 +953,8 @@ PSEGA              00000097 E  PSGDELTA           0000000C E  PSILENCE          
 PSPLASHCYMB        00000083 E  PTIMPANIHI         00000094 E  PTIMPANILO         00000095 E
 PTOMHI             00000085 E  PTOMLOW            00000087 E  PTOMLOWER          0000009A E
 PTOMLOWERER        0000009B E  PTOMLOWEREST       0000009C E  PTOMMID            00000086 E
-SFX_2D_FM3         00000017    SFX_2D_FM4         00000010    SFX_2D_NOTES       00000025
-SFX_2D_PATCHES     0000002C    SFX_2D_SETUP       00000020    SMPSED             000000ED E
+SFX_2D_FM3         00000011    SFX_2D_FM4         0000000A    SFX_2D_NOTES       0000001F
+SFX_2D_PATCHES     00000026    SFX_2D_SETUP       0000001A    SMPSED             000000ED E
 SMPSEE             000000EE E  SMPSF9             000000F9 E  SMPSMODOFF         000000F4 E
 SMPSMODON          000000F1 E  SMPSNOATTACK       000000E7 E  SMPSPITCH00        00000000 E
 SMPSPITCH01HI      0000000C E  SMPSPITCH01LO      000000F4 E  SMPSPITCH02HI      00000018 E

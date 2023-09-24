@@ -64,6 +64,12 @@ ValleyBell
 - Info on VGI->TFI conversion
 - DPCM2PCM (PWM sample creation)
 
+Erik JS
+-Music Pointer Fixer utility
+	
+Esrael
+-Esrael Sonic Editor II - Sound Importer
+
 Shiru
 - VGM Music Maker and command line utils (FM instrument creation/sampling)
 

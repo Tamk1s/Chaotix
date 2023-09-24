@@ -1,4 +1,4 @@
-Target	EQU	$5650F
+Target	EQU	$56509
 Play	EQU	$80
 FM_Pitch	EQU	$00
 FM_Vol	EQU	$05

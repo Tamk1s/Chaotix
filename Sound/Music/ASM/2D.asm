@@ -1,9 +1,10 @@
 Target	EQU	$5609C
 	smpsHeaderVoice	SFX_2D_Patches, Target
 	smpsHeaderTick	$01
-	smpsHeaderChan	$02
-	smpsHeaderSFX	$80, cFM3, SFX_2D_FM3, $00, $0F, Target
-	smpsHeaderSFX	$80, cFM4, SFX_2D_FM4, $00, $05, Target
+	;!@ smpsHeaderChan	$02
+	;!@ smpsHeaderSFX	$80, cFM3, SFX_2D_FM3, $00, $0F, Target
+	smpsHeaderChan	$01
+	smpsHeaderSFX	$80, cFM5, SFX_2D_FM4, $00, $05, Target
 
 SFX_2D_FM4:
 	smpsCall	SFX_2D_Setup, Target
