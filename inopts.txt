@@ -97,9 +97,9 @@ StartSeg GameHeader Big_Endian $000100 $8E
 	;!@ MSU 32x
 	String	"SEGA 32X        "								;Console Name	
 	;String	"SEGA MEGASD     "								;Console Name
-	String	"(C)GENESISDOES 2023.SEP"						;Copyright Date
-	String  "KNUCKLES CLACKERS V0.2A DEMO                "	;Domestic Game Name
-	String  "KNUCKLES CLACKERS V0.2A DEMO                 "	;Foreign Game Name
+	String	"(C)GENESISDOES 2023.OCT"						;Copyright Date
+	String  "KNUCKLES CLACKERS V0.2B DEMO                "	;Domestic Game Name
+	String  "KNUCKLES CLACKERS V0.2B DEMO                 "	;Foreign Game Name
 	String	"GM MK-84503-01"								;Game Serial Number
 EndSeg
 ;EndRegion
