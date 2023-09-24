@@ -4,25 +4,25 @@ x TTZ4x palettes
 x Ensure demo is 4 acts
 x Change APB global/level tables to load dummy AAZ Ens 2 bank for invis art
 x Fix animart
-x TTZ4x objpos
 x Add LordXernon/DJError (S2 Club Edit) and StephenUK (ASCII art notes) to credits
-x TTZ4 Boss Rush stability (end of level boss)
 x Extended level playlist (TTZ DEZ song)
-| Bumper area
+x TTZ4x objpos
+x Bumper area
+x Lava palette cycle
+| TTZ4 Boss Rush stability (end of level boss)
 | Fix backgrounds
 | Fix parallax
 | Bumper offsets/palette cycling
-| Fix bad TTZ4 collision (slopes)
+
 
 Next release:
+| Fix bad TTZ4 collision (slopes)
 - ASCII art tutorial fix
 - SSZC level icon 32x disabled, x new Title Card
 - Change "level" to "act" (title cards)
 - Restore Pause logo Pal32x sprite
 - Opening/Special Stage songs
 - Double check PSG edits for SFX ports
-- Random starting partner (new game)
-- Kill off partner at claw game (press up). Single-player modes
 - MSU Mode 1!
 - "Break out (XMVSF)" (Steel Heart) song incomplete
 - DataLoad art edits (Big/Small ovals etc)?
