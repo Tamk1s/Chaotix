@@ -10,6 +10,9 @@ bgm_EGZ1				EQU	bgm_TTZ_Boss
 bgm_EGZ2				EQU	bgm_TTZ_Boss
 bgm_TTZB				EQU	bgm_WE_Roulette_Decision2nd
 
+loc_89A5A4				EQU	$0089A5A4
+loc_89A568				EQU	$0089A568
+
 	move.b	obSubType_lo(a6),d0
 	bne.s	@end
 @reset:	
@@ -152,3 +155,36 @@ LevelPlaylist_X:
 	dc.b	bgm_Special, bgm_Special, bgm_Special, bgm_Special
 	dc.b	bgm_Special, bgm_Special, bgm_Special, bgm_Special
 	dc.b	bgm_Special, bgm_Special, bgm_Special, bgm_Special
+	
+Obj_IIZ_PlatGuy_MoveColsn:
+	add.w   d4,d4
+	move.b	obSubType_lo(a6),d0
+	bne.s	PlatB
+	jmp     loc_PlatA(pc,d4.w)
+PlatB:
+	jmp     loc_PlatB(pc,d4.w)
+	
+loc_PlatA:
+	bra.w   Display
+	bra.w   Display
+	bra.w   Display
+	bra.w   Display
+	bra.w   onHit
+	bra.w   onHit
+	bra.w   Display
+	bra.w   Display
+	
+loc_PlatB:
+	bra.w   Display
+	bra.w   Display
+	bra.w   Display
+	bra.w   Display
+	bra.w   Display
+	bra.w   Display
+	bra.w   Display
+	bra.w   Display
+	
+Display:
+	jmp		(loc_89A5A4).l
+onHit:
+	jmp		(loc_89A568).l

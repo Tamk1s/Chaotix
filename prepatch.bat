@@ -382,8 +382,11 @@ bytepatch.exe -a 0x2F85E0 kc.bin -f "Assets\Code\BossSpawnEnd.bin"
 REM Patch all PlaySound subrout calls to use new PlaySound_SFX subrout (to fix SFX IDs with extended BGM Bank02)
 set PlaySoundSFX_Subrout=!JSR_ABS! 009F 8620
 REM bytepatch.exe -a 0x000000 kc.bin !PlaySoundSFX_Subrout!
-REM Enabled Extended Z/A/T level playlist
+REM Enable Extended Z/A/T level playlist
 bytepatch.exe -a 0x076EC0 kc.bin 4EF9 009F 862E 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
+REM Enable invin subtype for IIZ PlatGuy 
+bytepatch.exe -a 0x01A562 kc.bin 4EF9 009F 878C
+bytepatch.exe -a 0x01A5B4 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 
 
 REM Survival mode
