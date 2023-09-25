@@ -9,15 +9,13 @@ x Extended level playlist (TTZ DEZ song)
 x TTZ4x objpos
 x Bumper area
 x Lava palette cycle
-| TTZ4 Boss Rush stability (end of level boss)
-| Fix backgrounds
+x TTZ4 Boss Rush stability (end of level boss)
+x Fix backgrounds
 | Fix parallax
 
-
-
 Next release:
-| Fix bad TTZ4 collision (slopes)
 | Bumper offsets/palette cycling
+| Fix bad TTZ4 collision (upside down quarterpipes)
 - ASCII art tutorial fix
 - SSZC level icon 32x disabled, x new Title Card
 - Change "level" to "act" (title cards)
