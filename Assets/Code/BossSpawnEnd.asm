@@ -31,9 +31,17 @@ loc_89A568				EQU	$0089A568
 	rts	
 
 CallPartner:	
-	movea.w (v_player1_T2Ptr).w,a0
-	movea.w (v_player2_T2Ptr).w,a1
-	jsr     PossiblyInitiateCall
+	;!@
+	;movea.w (v_player1_T2Ptr).w,a0
+	;movea.w (v_player2_T2Ptr).w,a1
+	;jsr     PossiblyInitiateCall
+	nop
+	nop	
+	nop
+	nop	
+	nop
+	nop
+	nop
 	rts
 	
 PlaySound_SFX:
