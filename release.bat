@@ -3,8 +3,8 @@ REM Generates a release (Demo binary, patch)
 cls
 REM Setup some folder/filename vars
 SET FOLDERNAME="Demo"
-SET ROMNAME="Knuckles_Clackers_v02b"
-SET ARCHNAME="KCl_02b_Demo"
+SET ROMNAME="Knuckles_Clackers_v02d"
+SET ARCHNAME="KCl_02d_Demo"
 REM Delete archive files, folders, create new dirs
 del /q releases\%ARCHNAME%.7z
 del /q releases\%ARCHNAME%Patch.7z
