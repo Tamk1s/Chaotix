@@ -3595,28 +3595,22 @@ StartSeg Level_Index Big_Endian	;Level Layout and Mappings Pointers Segment
 		DWORD TTZ4N_BG_Layout
 	TTZ5_MDS_MapPtr:
 		;!@ DWORD TTZ_FG_Blocks_Pri
-		DWORD TTZ13_FG_Blocks_Pri+LastPage
+		DWORD TTZ5_FG_Blocks_Pri+LastPage+NoNewLayer
 		;!@ DWORD TTZ5_FG_Blocks_Sec+LastPage
-		DWORD TTZ_BG_Blocks_Pri
-		DWORD TTZ5_BG_Blocks_Sec+LastPage
-		DWORD TTZ_FG_Chunks_Pri
-		DWORD TTZ5_FG_Chunks_Sec+LastPage
 		;!@ DWORD TTZ_BG_Chunks_Pri
-		DWORD TTZ13_BG_Chunks_Pri
-		DWORD TTZ5_BG_Chunks_Sec+LastPage
+		DWORD TTZ_FG_Chunks_Pri+NoNewLayer
+		DWORD TTZ5_FG_Chunks_Sec+NoNewLayer
+		DWORD TTZ45_BG_Chunks_Pri+LastPage+NoNewLayer	;!@ NEW
 		DWORD TTZ5_FG_Layout
 		DWORD TTZ5MDS_BG_Layout
 	TTZ5N_MapPtr:
 		;!@ DWORD TTZ_FG_Blocks_Pri
-		DWORD TTZ13_FG_Blocks_Pri+LastPage
 		;!@ DWORD TTZ5_FG_Blocks_Sec+LastPage
-		DWORD TTZ_BG_Blocks_Pri
-		DWORD TTZ5_BG_Blocks_Sec+LastPage
-		DWORD TTZ_FG_Chunks_Pri
-		DWORD TTZ5_FG_Chunks_Sec+LastPage
 		;!@ DWORD TTZ_BG_Chunks_Pri
-		DWORD TTZ13_BG_Chunks_Pri
-		DWORD TTZ5_BG_Chunks_Sec+LastPage
+		DWORD TTZ5_FG_Blocks_Pri+LastPage+NoNewLayer
+		DWORD TTZ_FG_Chunks_Pri+NoNewLayer
+		DWORD TTZ5_FG_Chunks_Sec+NoNewLayer
+		DWORD TTZ45_BG_Chunks_Pri+LastPage+NoNewLayer	;!@ NEW
 		DWORD TTZ5_FG_Layout
 		DWORD TTZ5N_BG_Layout
 	TTZNULL_MapPtr:
@@ -4204,6 +4198,7 @@ StartSeg Level_Data Big_Endian	;Level Layout and Mappings Data Segment
 	;!@ TTZ_FG_Blocks_Pri:	include	 "Levels/TTZ/16x16/0_15MN.bin"
 	TTZ13_FG_Blocks_Pri:	include	 "Levels/TTZ/16x16/0_13MN.bin"
 	TTZ4_FG_Blocks_Pri:	include	 "Levels/TTZ/16x16/0_4MN.bin"	;!@ NEW
+	TTZ5_FG_Blocks_Pri:	include	 "Levels/TTZ/16x16/0_5MN.bin"	;!@ NEW
 	TTZ3_FG_Blocks_Sec:	include	 "Levels/TTZ/16x16/1_3MN.bin"
 	TTZ5_FG_Blocks_Sec:	include	 "Levels/TTZ/16x16/1_5MN.bin"
 	TTZB_FG_Blocks:		include	 "Levels/TTZ/16x16/0_Boss.bin"
@@ -4507,14 +4502,23 @@ StartSeg LevSize_Data Big_Endian	;Level Size and other Setup Data
 	LSPtrLst_TTZ4D:	WORD 	LSPtr_TTZ4MN-LSPtrLst_TTZ4D
 	LSPtrLst_TTZ4S:	WORD 	LSPtr_TTZ4MN-LSPtrLst_TTZ4S
 	LSPtrLst_TTZ4N:	WORD 	LSPtr_TTZ4MN-LSPtrLst_TTZ4N
-	LSPtrLst_TTZ5M:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ5M	;!@ Modify me
-	LSPtrLst_TTZ5D:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ5D
-	LSPtrLst_TTZ5S:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ5S
-	LSPtrLst_TTZ5N:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ5N
-	LSPtrLst_TTZ6M:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ6M
-	LSPtrLst_TTZ6D:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ6D
-	LSPtrLst_TTZ6S:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ6S
-	LSPtrLst_TTZ6N:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ6N
+	;!@ LSPtrLst_TTZ5M:	WORD 	LSPtr_TTZ4MN-LSPtrLst_TTZ5M
+	;LSPtrLst_TTZ5D:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ5D
+	;LSPtrLst_TTZ5S:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ5S
+	;LSPtrLst_TTZ5N:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ5N
+	;LSPtrLst_TTZ6M:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ6M
+	;LSPtrLst_TTZ6D:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ6D
+	;LSPtrLst_TTZ6S:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ6S
+	;LSPtrLst_TTZ6N:	WORD 	LSPtr_TTZ03MN-LSPtrLst_TTZ6N
+	LSPtrLst_TTZ5M:	WORD 	LSPtr_TTZ5MN-LSPtrLst_TTZ5M
+	LSPtrLst_TTZ5D:	WORD 	LSPtr_TTZ5MN-LSPtrLst_TTZ5D
+	LSPtrLst_TTZ5S:	WORD 	LSPtr_TTZ5MN-LSPtrLst_TTZ5S
+	LSPtrLst_TTZ5N:	WORD 	LSPtr_TTZ5MN-LSPtrLst_TTZ5N
+	LSPtrLst_TTZ6M:	WORD 	LSPtr_TTZ5MN-LSPtrLst_TTZ6M
+	LSPtrLst_TTZ6D:	WORD 	LSPtr_TTZ5MN-LSPtrLst_TTZ6D
+	LSPtrLst_TTZ6S:	WORD 	LSPtr_TTZ5MN-LSPtrLst_TTZ6S
+	LSPtrLst_TTZ6N:	WORD 	LSPtr_TTZ5MN-LSPtrLst_TTZ6N
+	
 	LSPtrLst_MMZ0M:	WORD 	LSPtr_MMZ01MN-LSPtrLst_MMZ0M
 	LSPtrLst_MMZ0D:	WORD 	LSPtr_MMZ01MN-LSPtrLst_MMZ0D
 	LSPtrLst_MMZ0S:	WORD 	LSPtr_MMZ01MN-LSPtrLst_MMZ0S
@@ -4700,6 +4704,11 @@ StartSeg LevSize_Data Big_Endian	;Level Size and other Setup Data
 	LSPtr_TTZ4MN:		DWORD LS_FG_TTZ4MN
 				;!@ DWORD LS_BG_TTZ06MN
 				DWORD LS_BG_TTZ4MN
+				DWORD NullLPtr_Terminator
+	;!@ NEW
+	LSPtr_TTZ5MN:
+				DWORD LS_FG_TTZ5MN
+				DWORD LS_BG_TTZ5MN
 				DWORD NullLPtr_Terminator
 				
 	LSPtr_MMZ01MN:		DWORD LS_FG_MMZ01MN
@@ -4964,6 +4973,11 @@ StartSeg LevSize_Data Big_Endian	;Level Size and other Setup Data
 				include "Levels/TTZ/FG/FGSt4MN.bin"
 				include "Levels/TTZ/FG/Size4MN.bin"
 				include "Levels/TTZ/FG/ScSize4MN.bin"
+	;!@ NEW
+	LS_FG_TTZ5MN:
+				include "Levels/TTZ/FG/FGSt5MN.bin"
+				include "Levels/TTZ/FG/Size5MN.bin"
+				include "Levels/TTZ/FG/ScSize5MN.bin"
 	;!@ LS_BG_TTZ06MN:
 	LS_BG_TTZ03MN:
 				;WORD 0
@@ -4984,6 +4998,12 @@ StartSeg LevSize_Data Big_Endian	;Level Size and other Setup Data
 				include "Levels/TTZ/BG/BGSt4MN.bin"
 				include "Levels/TTZ/BG/Size4MN.bin"
 				include "Levels/TTZ/BG/ScSize4MN.bin"
+	;!@ New
+	LS_BG_TTZ5MN:
+				include "Levels/TTZ/BG/BGSt5MN.bin"
+				include "Levels/TTZ/BG/Size5MN.bin"
+				include "Levels/TTZ/BG/ScSize5MN.bin"
+				
 	LS_FG_MMZ01MN:		include "Levels/MMZ/FG/FGSt01MN.bin"
 				include "Levels/MMZ/FG/Size01MN.bin"
 				WORD $EC0
