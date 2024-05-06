@@ -1,5 +1,5 @@
 2
-77
+85
 00000	00FFE026	w	h	0	v_Obj_E026
 00001	00FFE02C	d	h	0	v_objspace
 00002	00FFE02E	d	h	0	v_objSpace_Singleton
@@ -69,11 +69,19 @@
 00042	00FFFCCC	d	h	0	DemoTrig
 00043	00FFD860	w	h	0	32xCRAM_Cache
 00044	00000000	S	S	0	----------------------------
-00045	00FFF60E	w	h	0	v_BS_RingCntdwn
-00046	00FFF610	w	h	0	v_BS_ScreenX
-00047	00FFF612	w	h	0	v_BS_ScreenY
-00048	00FFF614	w	h	0	v_BS_ScreenZ
-00049	00FFF616	w	h	0	v_BS_SpeedZ
-0004A	00FFF692	w	h	0	v_BS_MaxSpeedZ
-0004B	00FFF696	w	h	0	f_BS_Exit
-0004C	00FFF79E	d	h	0	v_BS_LayoutPtr
+00045	00FFD01E	d	h	0	Art32x_DREQ_Src
+00046	00FFD45E	d	h	0	Art32x_DREQ_Dest
+00047	00FFFCE7	b	h	0	f_DREQ_Success
+00048	00000000	S	S	0	----------------------------
+00049	00FFF60E	w	h	0	v_BS_RingCntdwn
+0004A	00FFF610	w	h	0	v_BS_ScreenX
+0004B	00FFF612	w	h	0	v_BS_ScreenY
+0004C	00FFF614	w	h	0	v_BS_ScreenZ
+0004D	00FFF616	w	h	0	v_BS_SpeedZ
+0004E	00FFF692	w	h	0	v_BS_MaxSpeedZ
+0004F	00FFF696	w	h	0	f_BS_Exit
+00050	00FFF79E	d	h	0	v_BS_LayoutPtr
+00051	00000000	S	S	0	----------------------------
+00052	0600382A	w	h	0	v_SS_RingCntdwn
+00053	06007DF0	b	h	0	v_rings_BS
+00054	06007DEE	w	h	0	nChaosRingsGot
