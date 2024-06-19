@@ -1,0 +1,707 @@
+			======================================================
+			 Dr. DevSter's Guide to The Sega 32x
+			 ">>ALMOST<< Everything you wanted to know, that you
+			  never knew, and that you're going to know about
+			  the 32x"
+			 Joseph Norman - pimp, http://devster.monkeeh.com
+			======================================================
+
+This info is presented to ALMOST inform a user on how their Sega 32x
+works and what makes it "tick". Sega is copyrighted by Sega. Any reference
+to copyrighted material is not presented for monetary gain, but for
+educational purposes and higher learning. Everything found in the doc
+was discovered from the means of dissassembling the beast and browsing
+through the Gens source code, and with the help of the Sega dev forums here
+and there. This contains everything you need to know to get code started on
+the 68k, and sh2.
+
+					Contents
+					========
+	] 32X Specs
+		]] Proccessor
+	] 32x Cartridges
+		]] 32x Security
+		]] 32x Cartridge Map+Headers
+		]] Getting the 32x to start up
+		]] The 32x Custom Vector ROM Hex Dump
+		]] The 68k New Exception Table
+	] Programming
+		]] Memory Map on the Genesis 68k
+		]] Master and Slave SH2 Memory Map
+		]] Description of the 32x Registers
+		]] Description of the 32x VDP Registers
+	] Video
+		]] The Frame Buffer
+		]] The VDP Modes
+		]] CRAM
+	] PWM (Coming Later)
+	] Document History
+
+32X Specs
+=========
+CPUs: Dual SH2 RISC
+Main RAM: 256k
+Video RAM: 256k
+Screen Resolution: 320x224
+Clock Speed: 23 Mhz
+Color depth: 15 bits, 32768 unique colors
+Number of Video Modes: 3
+Sound: 2-channel PWM
+
+Although many specs claim that the 32x can generate polygons and texture mapping
+through hardware, this is untrue, and false. All software generates this.
+
+Proccessor
+==========
+The 32x contains dual SH2 proccessors, one acting as a master, and the other acting
+as a slave. Usually, the configuration of a game is to make the master cpu is used
+for the game coding, and the slave cpu used for VDP manipulation. The SH2 (Super-Hitachi
+2) is a RISC proccessor, and each instruction is 2 bytes long. The SH2 is stock, so
+there are publically released manuals for these CPUs. Both CPUs share 256k of SDRAM.
+
+Here is an extract from the SH2 Hardware Manual on the overview of these CPUs:
+ CPU:
+  -Original Hitachi architecture
+  -32-bit internal configuration
+  -General-registers:
+   -Sixteen 32-bit general registers
+   -Three 32-bit control registers
+   -Four 32-bit system registers
+  -RISC-type instruction set:
+   -Instruction length: 16-bit fixed length for improved code efficiency
+   -Load-store architecture (basic arithmetic and logic operations are executed between registers)
+   -Delayed conditional/unconditional branch instructions reduce pipeline disruption during
+    branching
+   -Instruction set based on C language
+  -Instruction execution time: one instruction/state (35 ns/instruction at 28.7 MHz operation)
+  -Address space: 4 Gbytes available in the architecture (128-Mbyte memory space)
+  -On-chip multiplier: multiply operations (32 bits ´ 32 bits ® 64 bits) and multiply-and-accumulate
+   operations (32 bits ´ 32 bits + 64 bits ® 64 bits) executed in 2 to 4 states
+  -Five-stage pipeline
+ Operating Modes:
+  -Clock mode: selected from the combination of an on-chip oscillator module, a frequency
+   multiplier, clock output, PLL synchronization, and 90° phase shifting
+  -Slave/master mode
+  -Processing states
+   -Power-on reset state
+   -Manual reset state
+   -Exception handling state
+   -Program execution state
+   -Power-down state
+   -Bus-released state
+  -Power-down states
+   -Sleep mode
+   -Standby mode
+   -Module stop mode
+ Interrupt Controller (INTC):
+  -Five external interrupt pins (NMI, IRL0 to IRL3), encoded input of 15 external interrupt
+   sources via pins IRL0 to IRL3
+  -Twelve internal interrupt sources (DMAC ´ 2, DIVU ´ 1, FRT ´ 3, WDT ´ 1, SCI ´ 4, REF ´ 1)
+  -Sixteen programmable priority levels
+  -Vector number settable for each internal interrupt source
+  -Auto-vector or external vector selectable as vector for external interrupts via pins IRL0 to IRL3
+   User Break Controller (UBC):
+  -Generates an interrupt when the CPU or DMAC generates an address, data, or bus cycle with
+   the specified conditions (address, data, CPU cycle/non-CUP cycle, instruction fetch/data access,
+   read/write, byte/word/longword access)
+  -Simplifies configuration of a self-debugger
+  -Clock Pulse Generator (CPG)/Phase Locked Loop (PLL):
+  -On-chip clock pulse generator
+  -Crystal clock source or external clock source can be selected
+  -Clock multiplication (´1, ´2, ´4), PLL synchronization, or 90° phase shift can be selected
+  -Supports clock pause function for frequency change of external clock
+ Bus State Controller (BSC):
+  -Supports external memory access
+   -32-bit external data bus
+  -Memory address space divided into four areas. It is possible to set the following characteristics
+   for each area (32 Mbyte linear):
+   -Bus size (8, 16, or 32 bits)
+   -Number of wait cycles settable or not settable
+   -Setting the memory space type simplifies connection to DRAM, synchronous DRAM,
+    pseudo-SRAM, and burst ROM
+   -Outputs signals RAS, CAS, CE, and OE corresponding to DRAM, synchronous DRAM,
+    and pseudo-SRAM areas
+   -Tp cycles can be generated to assure RAS precharge time
+   -Address multiplexing is supported internally, so DRAM and synchronous DRAM can be
+    connected directly
+   -Outputs chip select signals (CS0 to CS3) for each area
+  -DRAM/synchronous DRAM/pseudo-SRAM refresh functions
+   -Programmable refresh interval
+   -Supports CAS-before-RAS refresh and self-refresh modes
+  -DRAM/synchronous DRAM/pseudo-SRAM burst access function
+   -Supports high-speed access modes for DRAM/synchronous DRAM/pseudo-SRAM
+  -Wait cycles can be inserted by an external WAIT signal
+ Cache Memory:
+  -4 kbytes
+  -64 entries, 4-way set associative, 16-byte line length
+  -Write-through data writing method
+  -LRU replacement algorithm
+  -2 kbytes of the cache can be used as 2-kbyte internal RAM
+ Direct Memory Access Controller (DMAC) (2 Channels):
+  -Permits DMA transfer between external memory, external I/O, on-chip peripheral modules
+  -Enables DMA transfer request and auto-request from external pins, on-chip SCI, and on-chip
+   timers
+  -Cycle-steal mode or burst mode
+  -Channel priority level is selectable (fixed mode or round-robin mode)
+  -Dual or single address transfer mode is selectable
+  -Transfer data width: 1/2/4/16 bytes
+  -Address space: 4 Gbytes; maximum number of transfers: 16,777,216
+ Division Unit (DIVU):
+  -Executes 64 ¸ 32 ® 32… 32 and 32 ¸ 32 ® 32… 32 divisions in 39 cycles
+  -Overflow interrupt
+ 16-Bit Free-Running Timer (FRT) (1 Channel):
+  -Selects input from three internal/external clocks
+  -Input capture and output compare
+  -Counter overflow, compare match, and input capture interrupts
+ Watchdog Timer (WDT) (1 Channel):
+  -Can be switched between watchdog timer and interval timer functions
+  -Count overflow can generate an internal reset, external signal, or interrupt
+  -Power-on reset or manual reset can be selected as the internal reset
+ Serial Communication Interface (SCI) (1 Channel):
+  -Asynchronous or synchronous mode is selectable
+  -Simultaneous transmission and reception (full duplex)
+  -Dedicated baud rate generator
+  -Multiprocessor communication function
+ Package:
+  -144-pin plastic QFP (FP-144)
+
+32x Cartridges
+==============
+32x cartridges are normal 16-bit ROM. Addresses from the cartridge connector are
+connected to the addresses of the ROM, data goes to data, etc. For propper operation,
+the 32x needs 86ns, or faster ROMs (((23 Mhz)^-1)*(2 clocks per R/W)*(1000 ns/ms)=86 ns)
+if code/data is executing directly on the cartridge from the SH2. If this is not the
+case, then ROMs can be as slow as 150ns, for 68k timing. I've successfully used 70ns
+non-volatile SRAMs directly connected the the 32x from the cartridge connector. The
+odd/even write lines existing on the original Genesis cartridge connector still have
+the same function going from the 32x cart connector, so writing to SRAMs are the same.
+
+When accessing the cartridge from the 68k and sh2, the sh2 gets to access it first. The
+68k can only access cartridge rom from the bank areas. The 68k does not have full view
+of the rom. The sh2 does not need any banking areas, and it has full view of the rom.
+
+32x Security
+============
+Each 32x cartridge has a special header at the begining of $400. This is the hex dump
+of the security code+data:
+
+0000036C 46FC 2700 4BF9 00A1 0000 7001 0CAD 4D41 F.'.K.....p...MA
+0000037C 5253 30EC 6600 03E6 082D 0007 5101 67F8 RS0.f....-..Q.g.
+0000038C 4AAD 0008 6710 4A6D 000C 670A 082D 0000 J...g.Jm..g..-..
+0000039C 5101 6600 03B8 102D 0001 0200 000F 6706 Q.f....-......g.
+000003AC 2B78 055A 4000 7200 2C41 4E66 41F9 0000 +x.Z@.r.,ANfA...
+000003BC 04D4 6100 0152 6100 0176 47F9 0000 04E8 ..a..Ra..vG.....
+000003CC 43F9 00A0 0000 45F9 00C0 0011 3E3C 0100 C.....E.....><..
+000003DC 7000 3B47 1100 3B47 1200 012D 1100 66FA p.;G..;G...-..f.
+000003EC 7425 12DB 51CA FFFC 3B40 1200 3B40 1100 t%..Q...;@..;@..
+000003FC 3B47 1200 149B 149B 149B 149B 41F9 0000 ;G..........A...
+0000040C 04C0 43F9 00FF 0000 22D8 22D8 22D8 22D8 ..C.....".".".".
+0000041C 22D8 22D8 22D8 22D8 41F9 00FF 0000 4ED0 ".".".".A.....N.
+0000042C 1B7C 0001 5101 41F9 0000 06BC D1FC 0088 .|..Q.A.........
+0000043C 0000 4ED0 0404 303C 076C 0000 0000 FF00 ..N...0<.l......
+0000044C 8137 0002 0100 0000 AF01 D91F 1127 0021 .7...........'.!
+0000045C 2600 F977 EDB0 DDE1 FDE1 ED47 ED4F D1E1 &..w.......G.O..
+0000046C F108 D9C1 D1E1 F1F9 F3ED 5636 E9E9 9FBF ..........V6....
+0000047C DFFF 4D41 5253 2049 6E69 7469 616C 2026 ..MARS Initial &
+0000048C 2053 6563 7572 6974 7920 5072 6F67 7261  Security Progra
+0000049C 6D20 2020 2020 2020 2020 2043 6172 7472 m          Cartr
+000004AC 6964 6765 2056 6572 7369 6F6E 2020 2020 idge Version    
+000004BC 436F 7079 7269 6768 7420 5345 4741 2045 Copyright SEGA E
+000004CC 4E54 4552 5052 4953 4553 2C4C 5444 2E20 NTERPRISES,LTD. 
+000004DC 3139 3934 2020 2020 2020 2020 2020 2020 1994            
+000004EC 2020 2020 2020 2020 2020 2020 2020 2020                 
+000004FC 2020 2020 2020 524F 4D20 5665 7273 696F       ROM Versio
+0000050C 6E20 312E 3000 48E7 C040 43F9 00C0 0004 n 1.0.H..@C.....
+0000051C 3011 303C 8000 323C 0100 3E3C 0012 1018 0.0<..2<..><....
+0000052C 3280 D041 51CF FFF8 4CDF 0203 4E75 48E7 2..AQ...L...NuH.
+0000053C 81C0 41F9 0000 063E 43F9 00C0 0004 3298 ..A....>C.....2.
+0000054C 3298 3298 3298 3298 3298 3298 2298 3341 2.2.2.2.2.2.".3A
+0000055C FFFC 3011 0800 0001 66F8 3298 3298 7000 ..0.....f.2.2.p.
+0000056C 22BC C000 0000 7E0F 3340 FFFC 3340 FFFC ".....~.3@..3@..
+0000057C 3340 FFFC 3340 FFFC 51CF FFEE 22BC 4000 3@..3@..Q...".@.
+0000058C 0010 7E09 3340 FFFC 3340 FFFC 3340 FFFC ..~.3@..3@..3@..
+0000059C 3340 FFFC 51CF FFEE 4CDF 0381 4E75 8114 3@..Q...L...Nu..
+000005AC 8F01 93FF 94FF 9500 9600 9780 4000 0080 ............@...
+000005BC 8104 8F02 48E7 C140 43F9 00A1 5180 08A9 ....H..@C...Q...
+000005CC 0007 FF80 66F8 3E3C 00FF 7000 7200 337C ....f.><..p.r.3|
+000005DC 00FF 0004 3341 0006 3340 0008 4E71 0829 ....3A..3@..Nq.)
+000005EC 0001 000B 66F8 0641 0100 51CF FFE8 4CDF ....f..A..Q...L.
+000005FC 0283 4E75 48E7 8180 41F9 00A1 5200 08A8 ..NuH...A...R...
+0000060C 0007 FF00 66F8 3E3C 001F 20C0 20C0 20C0 ....f.><.. . . .
+0000061C 20C0 51CF FFF6 4CDF 0181 4E75 41F9 00FF  .Q...L...NuA...
+0000062C 0000 3E3C 07FF 7000 20C0 20C0 20C0 20C0 ..><..p. . . . .
+0000063C 20C0 20C0 20C0 20C0 51CF FFEE 3B7C 0000  . . . .Q...;|..
+0000064C 1200 7E0A 51CF FFFE 43F9 00A1 5100 7000 ..~.Q...C...Q.p.
+0000065C 2340 0020 2340 0024 1B7C 0003 5101 2E79 #@. #@.$.|..Q..y
+0000066C 0088 0000 0891 0007 66FA 7000 3340 0002 ........f.p.3@..
+0000067C 3340 0004 3340 0006 2340 0008 2340 000C 3@..3@..#@..#@..
+0000068C 3340 0010 3340 0030 3340 0032 3340 0038 3@..3@.03@.23@.8
+0000069C 3340 0080 3340 0082 08A9 0000 008B 66F8 3@..3@........f.
+000006AC 6100 FF12 08E9 0000 008B 67F8 6100 FF06 a.........g.a...
+000006BC 08A9 0000 008B 6100 FF3C 303C 0040 2229 ......a..<0<.@")
+000006CC 0020 0C81 5351 4552 6700 0092 303C 0080 . ..SQERg...0<..
+000006DC 2229 0020 0C81 5344 4552 6700 0080 21FC "). ..SDERg...!.
+000006EC 0088 02A2 0070 303C 0002 7200 122D 0001 .....p0<..r..-..
+000006FC 1429 0080 E14A 8242 0801 000F 660A 0801 .)...J.B....f...
+0000070C 0006 6700 0058 6008 0801 0006 6600 004E ..g..X`.....f..N
+0000071C 7020 41F9 0088 0000 3C28 018E 4A46 6700 p A.....<(..JFg.
+0000072C 0010 3429 0028 0C42 0000 67F6 B446 662C ..4).(.B..g..Ff,
+0000073C 7000 2340 0028 2340 002C 3E14 2C7C FFFF p.#@.(#@.,>.,|..
+0000074C FFC0 4CD6 7FF9 44FC 0000 6014 43F9 00A1 ..L...D...`.C...
+0000075C 5100 3340 0006 303C 8000 6004 44FC 0001 Q.3@..0<..`.D...
+
+This data NEEDS to reside at locations $400-$7FF in the cartridge,
+or else the 32x will lock up, and not go into 32x mode.
+
+32x Cartridge Map+Headers
+=========================
+A 32x game cartridge has some additional vectors. These vectors determine how the SH2
+code initially runs.
+
+0x000000 - 0x0000FF	68k Vectors
+0x000100 - 0x0001FF	Regular Sega Genesis header
+0x000200 - 0x000319	68k Exception Table Code. Description in section: The 68k New
+			Exception Table
+0x00031A - 0x0003D3	Can be anything
+0x0003D4.l		Source address of the data to be copied from the cartridge
+			to the Master SH2 RAM (cartridge starts at 0x00000000).
+0x0003D8.l		Destination address of the data to be copied from the cartridge
+			to the Master SH2 RAM (RAM starts at 0x00000000).
+0x0003DC.l		Size of the data to be copied from the cartridge to the 32x RAM
+			in bytes.
+0x0003E0.l		Absolute address that the Master SH2 will jump to when it has
+			finished copying data from cartridge to RAM on startup.
+0x0003E4.l		Absolute address that the Slave SH2 will jump to
+0x0003E8.l		New vector base address for Master SH2 after copying is done.
+0x0003EC.l		New vector base address for Slave SH2
+0x0003F0 - 0x0003FF	32x security code set up. The 68k reset vector always points
+			to $3F0. Description in section: Getting the 32x to start up
+0x000400 - 0x0007FF	32x Security Code Image + 68k initialization for the 32x.
+			Description in section: 32x Security
+0x000800 - etc.		68k User Code Start
+
+Getting the 32x to start up
+===========================
+To start up the 32x, the Genesis needs to have these two lines of code at $3F0-$3FF,
+right before the 32x security header. These two lines of code don't start up the 32x
+itself, but sets up the 32x security header. These lines are not scanned by the 32x,
+unlike the code from $400-$7FF.
+
+	MOVE.L	#$FFFFFFC0,A4
+	MOVE.L	#$00000000,($A15128)
+
+The 68k reset vector HAS to jump to $3F0. The reset vector is located at $000004 in
+the cartridge. The stack reset value can have any value.
+
+Now, execution for 68k code now starts at $880800, right after the 32x security header.
+
+The 32x Custom Vector ROM Hex Dump
+==================================
+00000000 	00000000 00880200 00880206 0088020C 	................
+00000010 	00880212 00880218 0088021E 00880224 	...............$
+00000020 	0088022A 00880230 00880236 0088023C 	...*...0...6...<
+00000030 	00880242 00880248 0088024E 00880254 	...B...H...N...T
+00000040 	0088025A 00880260 00880266 0088026C 	...Z...`...f...l
+00000050 	00880272 00880278 0088027E 00880284 	...r...x...~....
+00000060 	0088028A 00880290 00880296 0088029C 	................
+00000070 	008802A2 008802A8 008802AE 008802B4 	................
+00000080 	008802BA 008802C0 008802C6 008802CC 	................
+00000090 	008802D2 008802D8 008802DE 008802E4 	................
+000000A0 	008802EA 008802F0 008802F6 008802FC 	................
+000000B0 	00880302 00880308 0088030E 00880314 	................
+000000C0 	08F90000 00A15107 128008B9 000000A1 	......Q.........
+000000D0 	51074E75 48E70140 08F90000 00A15107 	Q.NuH..@......Q.
+000000E0 	43F900A1 30F17E07 1298D2FC 000251CF 	C...0.~.......Q.
+000000F0	FFF808B9 000000A1 51074CDF 02804E75 	........Q.L...Nu
+
+The 68k New Exception Table
+===========================
+All Addresses are actual code, these are not pointers. Each entry of code
+is 6 bytes each. A JMP command is enough to fit in 6 bytes. BRA can also
+be used too.
+
+Running 68k Address	Cartridge Address	Description
+$880200			$200			Reset Code
+$880206			$206			Bus Error
+$88020C			$20C			Address Error
+$880212			$212			Illegal Instruction
+$880218			$218			Divide by 0
+$88021E			$21E			CHK Instruction
+$880224			$224			TRAPV Instruction
+$88022A			$22A			Privilege Violation
+$880230			$230			Trace
+$880236			$236			Line 1010 Emulator
+$88023C			$23C			Line 1111 Emulator
+$880242			$242			RESERVED (Can actually be anything)
+$880248			$248			RESERVED (Can actually be anything)
+$88024E			$24E			RESERVED (Can actually be anything)
+$880254			$254			RESERVED (Can actually be anything)
+$88025A			$25A			RESERVED (Can actually be anything)
+$880260			$260			RESERVED (Can actually be anything)
+$880266			$266			RESERVED (Can actually be anything)
+$88026C			$26C			RESERVED (Can actually be anything)
+$880272			$272			RESERVED (Can actually be anything)
+$880278			$278			RESERVED (Can actually be anything)
+$88027E			$27E			RESERVED (Can actually be anything)
+$880284			$284			RESERVED (Can actually be anything)
+$88028A			$28A			Spurious Interrupt
+$880290			$290			Level 1 Interrupt
+$880296			$296			Level 2 Interrupt (TH)
+$88029C			$29C			Level 3 Interrupt
+$8802A2			$2A2			Level 4 Interrupt (H-Blank)
+$8802A8			$2A8			Level 5 Interrupt
+$8802AE			$2AE			Level 6 Interrupt (V-Blank)
+$8802B4			$2B4			Level 7 Interrupt
+$8802BA			$2BA			Trap #0 Instruction
+$8802C0			$2C0			Trap #1 Instruction
+$8802C6			$2C6			Trap #2 Instruction
+$8802CC			$2CC			Trap #3 Instruction
+$8802D2			$2D2			Trap #4 Instruction
+$8802D8			$2D8			Trap #5 Instruction
+$8802DE			$2DE			Trap #6 Instruction
+$8802E4			$2E4			Trap #7 Instruction
+$8802EA			$2EA			Trap #8 Instruction
+$8802F0			$2F0			Trap #9 Instruction
+$8802F6			$2F6			Trap #10 Instruction
+$8802FC			$2FC			Trap #11 Instruction
+$880302			$302			Trap #12 Instruction
+$880308			$308			Trap #13 Instruction
+$88030E			$30E			Trap #14 Instruction
+$880314			$314			Trap #15 Instruction
+
+Programming
+===========
+I used snasm68k.exe and snasmsh2.exe to assemble all my assembly code. These files
+can be found on the internet, and are free.
+
+Memory Map on the Genesis 68k
+=============================
+0x000000 - 0x0000FF	Genesis Vector ROM provided by the 32x (256 bytes)
+0x000100 - 0x3FFFFF	NOTHING
+0x400000 - 0x4FFFFF	Genesis Vector ROM provided by the 32x (256 bytes)
+0x480000 - 0x4800FF	Genesis Vector ROM provided by the 32x (256 bytes)
+0x4800FF - 0x4FFFFF	Cartridge (Appears as 0x000100 - 0x080000)
+0x780000 - 0x7FFFFF	???
+0x840000 - 0x85FFFF	Frame Buffer
+0x860000 - 0x87FFFF	Frame Buffer Overwrite mode
+0x880000 - 0x8FFFFF	Cartridge (Appears as 0x000000 - 0x07FFFF)
+0x900000 - 0x9FFFFF	Bankswitched cartridge
+0xA00000 - 0xA7FFFF	32x Registers:
+32x Identification:
+	0xA130EC.l		R:	"MARS"
+32x Regsiters:			32X_Reg
+	0xA15100	Register base address (64 bytes)
+		+ 0x00		R/W:	32X_ACR			Bus Arbiter Controller
+		+ 0x02		R/W:	32X_INT			Interruper Controller
+		+ 0x04		R/W:	32X_Bank		Cartridge Bankswitching
+		+ 0x06		R/W:	32X_DREQ_C 		Data Request
+		+ 0x08		R/W:	32X_DREQ_Src 		Data Request Source
+		+ 0x0C		R/W:	32X_DREQ_Dest 		Data Request Destination
+		+ 0x10		R/W:	32X_DREQ_Len 		Data Request Length
+		+ 0x12		R/W:	32X_FIFO		TV FIFO???
+		+ 0x20 - 0x2F	R/W:				Communications RAM
+		+ 0x30		R/W:	32X_PWM_Cont		Sound PWM
+		+ 0x32		R/W:	32X_PWM_Cycle		Sound PWM
+		+ 0x34		R/W:	32X_PWM_Pulse_L		Sound PWM
+		+ 0x36		R/W:	32X_PWM_Pulse_R		Sound PWM
+		+ 0x38		R/W:	32X_PWM_Pulse_C		Sound PWM
+32x VDP Registers:		32X_VDP_Reg
+	0xA15180	Register base address (16 bytes)
+		+ 0x00		R/W:	32X_VDP_Mode		VDP Mode Select
+		+ 0x02		R/W:	32X_VDP_Shift		VDP Mode Select
+		+ 0x04		R/W:	32X_VDP_AF_Len		VDP Fill Length
+		+ 0x06		R/W:	32X_VDP_AF_St		VDP Fill Start Address
+		+ 0x08		R/W:	32X_VDP_AF_Data		VDP Fill Data
+		+ 0x0A		R/W:	32X_VDP_State		VDP Status
+32x VDP CRAM			R:	32X_VDP_CRAM		VDP Color RAM
+	0xA15200	CRAM Base Address (512 bytes)
+
+Master and Slave SH2 Memory Map
+===============================
+0x00000000 - 0x000007FF		SH2 Firmware (2k bytes)
+0x00004000 - 0x000040FF		32x Registers (64 bytes)
+		+ 0x00 		R/W:	MSH2_WW_IntC		Bus Arbitter/Interrupter Controller
+		+ 0x04		R/W: 	SH2_RB_HCnt		???
+		+ 0x06		R: 	SH2_RB_DREQ		Data Request
+		+ 0x08		R: 	SH2_RW_DREQ_Src		Data Request Source
+		+ 0x0C		R: 	SH2_RW_DREQ_Dst		Data Request Destination
+		+ 0x10		R: 	SH2_RW_DREQ_Len		Data Request Length
+		+ 0x12		R: 	SH2_RW_FIFO		TV FIFO???
+		+ 0x20 - 0x2F	R/W:	SH2_RB_Com		Communication RAM
+		+ 0x30		R/W: 	SH2_RB_PWM_Cont		Sound PWM
+		+ 0x32		R/W: 	SH2_RB_PWM_Cycle	Sound PWM
+		+ 0x34		R/W: 	SH2_RB_PWM_Pulse_L	Sound PWM
+		+ 0x36		R/W: 	SH2_RB_PWM_Pulse_R	Sound PWM
+		+ 0x38		R/W: 	SH2_RB_PWM_Pulse_c	Sound PWM
+0x00004100 - 0x000041FF		VDP Registers (16 bytes)
+		+ 0x00		R/W:	SH2_RB_VDP_Mode		VDP Mode Select
+		+ 0x02		R/W:	SH2_RB_VDP_Shift	VDP Mode Select
+		+ 0x04		R/W:	SH2_RB_VDP_AF_Len	VDP Fill Length
+		+ 0x06		R/W:	SH2_RB_VDP_AF_St	VDP Fill Start Address
+		+ 0x08		R/W:	SH2_RB_VDP_AF_Data	VDP Fill Data
+		+ 0x0A		R/W:	SH2_RB_VDP_State	VDP Status
+0x00004200 - 0x000043FF		VDP CRAM (512 bytes)
+0x02000000 - 0x023FFFFF		Cartridge (4 mbytes)
+0x04000000 - 0x0401FFFF		Frame Buffer (128k bytes)
+0x04020000 - 0x0403FFFF		Frame Buffer Overwrite mode (128k bytes)
+0x06000000 - 0x0603FFFF		SDRAM (256k bytes)
+0x20000000 - 0x200007FF		SH2 Firmware (2k bytes)	 	- MIRROR
+0x20004000 - 0x200040FF		32x Registers (64 bytes) 	- MIRROR
+0x20004100 - 0x200041FF		VDP Registers (16 bytes) 	- MIRROR
+0x20004200 - 0x200043FF		VDP CRAM (512 bytes)	 	- MIRROR
+0x22000000 - 0x223FFFFF		Cartridge (4 mbytes)	 	- MIRROR
+0x24000000 - 0x2401FFFF		Frame Buffer (128k bytes)	- MIRROR
+0x04020000 - 0x0403FFFF		Frame Buffer Ovr (128k bytes)	- MIRROR
+0x26000000 - 0x2603FFFF		SDRAM (256k bytes)	 	- MIRROR
+0xC0000000 - 0xC0000FFF		SH2 Chache (4k bytes)
+0xFFFFFE00 - 0xFFFFFFFF		SH2 Internal registers
+
+Notes: Firmware is different for both the Master and Slave SH2s. Also, both CPUs
+share the same RAM, this is why both initial stacks are different.
+
+Description of the 32x Registers
+================================
+0x00.b	Bus Arbiter Controller High
+-----------------------------------
+Write:	Bit 7:	Frame Mode Select
+		1: Switch the currently unselected frame buffer to SH2 memory
+		0: Switch the currently unselected frame buffer to Genesis 68k memory
+Read:	Bit 7:	1-The cram and currently unselected frame buffer will appear on the
+		  SH2 memory
+		0-The cram and currently unselected frame buffer will appear on the
+		  Genesis 68k memory
+	Bit 5:	Always reads as 1
+
+0x01.b	Bus Arbiter Controller Low
+----------------------------------
+
+0x02.w	Interruper Controller
+-----------------------------
+
+0x04.w	Cartridge Bankswitching
+-------------------------------
+Write:	Bits 0-1:	Determines which 1 mb long cartridge ROM bank will appear at
+			0x900000-0x9FFFFF on the 68k. Each bank is one megabyte long.
+
+Bankswitching Example Values (FOR THE 68k !!!)
+ 0x0000: 0x900000-0x9FFFFF appears as 0x000000-0x0FFFFF ROM
+ 0x0001: 0x900000-0x9FFFFF appears as 0x100000-0x1FFFFF ROM
+ 0x0002: 0x900000-0x9FFFFF appears as 0x200000-0x2FFFFF ROM
+ 0x0003: 0x900000-0x9FFFFF appears as 0x300000-0x3FFFFF ROM
+
+Read:	Reflects the bank that is set
+
+0x06.w	Data Request Control
+----------------------------
+
+0x08.l	Data Request Source
+---------------------------
+
+0x0C.l	Data Request Destination
+--------------------------------
+
+0x10.w	Data Request Length
+---------------------------
+
+0x12	TV FIFO???
+------------------
+
+Communication between the Genesis 68k, Master SH2, and Slave SH2
+================================================================
+There is a communications RAM located from 0x20 - 0x2F from the 32x register offsets.
+Each proccessor can read or write to this RAM at any time. For example, if the Master
+SH2 writes "1234" to 0x20, then the Genesis 68k sees it as "1234", and the slave SH2
+sees it as "1234", der =).
+
+Firmware Startup Messages_________________________________
+| Text   | SH2 Address | Function                        |
+----------------------------------------------------------
+| "M_OK" | 0xA15120    | Master SH2 ready                |
+| "S_OK" | 0xA15124    | Slave SH2 ready                 |
+| "SQER" | 0xA15120    | Security code mismatch          |
+| "_CD_" | 0xA15120    | Sega CD game inserted?          |
+| "SDER" | 0xA15120    | SDRAM check error               |
+----------------------------------------------------------
+
+Video
+=====
+Video is very simple in the 32x compared to the Genesis VDP. First of all, only a frame
+buffer is used, so all drawing should be stright foreward, and linear. There has always
+been talk that the 32x has internal hardware for rotating and scaling, but this isn't
+true, all is done in software. The slave sh2 usually handles all complex video effects.
+The 32x video can also be appear on top, or on bottem of the Genesis VDP video, depending
+on 32x priority levels.
+
+Description of the 32x VDP Registers
+====================================
+0x00.b	VDP Mode Select High
+----------------------------
+Write:	Undetermined
+Read:	Bit7:	0:	32x system is a PAL unit
+		1:	32x system is an NTSC unit
+
+0x01.b	VDP Mode Select Low
+---------------------------
+Write:	Bits 0-1:	Select the VDP operating mode
+			0: VDP drawing disabled
+			1: VDP drawing mode 1, 8 BPP Mode
+			2: VDP drawing mode 2, 15 BPP Mode
+			3: VDP drawing mode 3, RUNLENGTH MODE
+	Bit 6:		Does have a purpose, but this is undetermined
+	Bit 7:		Select Genesis/32x VDP overlaying priorities
+			0: Genesis in front if alpha bit is 0
+			   Genesis in back if alpha bit is 1
+			1: Genesis in front if alpha bit is 1
+			   Genesis in back if alpha bit is 0
+Read:	Bits 0-1:	Reflects the operating mode of the VDP
+	Bit 7:		Yes
+
+0x02.b	VDP Mode Select High
+----------------------------
+Does Nothing
+
+0x03.b	VDP Mode Select Low
+---------------------------
+Write:	Bit 0:		0: Do not shift pixels left by 1
+			1: Shift pixels left by 1
+Read:	Bit 0:		Shift mode
+
+0x04.w	VDP Fill Length
+-----------------------
+Read+Write
+Specifies the number of words that will be filed in with the VDP fill function. A VDP
+Fill Length of 0 will specify one word to be filled.
+
+0x06.w	VDP Fill Start Address
+------------------------------
+Read+Write
+Specifies the start address inside the current frame buffer in the 32x VDP RAM
+where the VDP fill function will start to copy. Fills only start at even addresses,
+so this function shifts the register data to the left by 1. [0x06] = (YOUR_ADDRESS & 1) / 2
+
+0x08.w	VDP Fill Data
+---------------------
+Read+Write
+Write the fill data here. Fill data is word length. When a word is written here, the
+fill function starts immediately.
+
+0x0B.b	VDP Status High
+-----------------------
+Write:	-Writing a 0x00 will draw frame buffer 0, and frame buffer 1 will appear
+	 in memory space for reading+writing
+	-Writing a 0x01 will draw frame buffer 1, and frame buffer 0 will appear
+	 in memory space for reading+writing
+Read:	Bit 0:	Which Framebuffer selected
+	Bit 1:	If 0, then the Genesis has authorization to read/write to the frame
+		buffer
+
+0x0C.b	VDP Status High
+-----------------------
+Read:	Bit 6:	Hblank Status, 1=Triggered
+	Bit 7:	Vblank Status, 1=Triggered
+
+The Frame Buffer
+================
+The 32x has two memory sets for displaying graphics. When one memory location
+is used, graphics are displayed from that location, and no graphics are displayed
+for the other. These two different locations are called frame buffers, and are 128k
+bytes each. The 32x selects between them by writing to the VDP Status register, and
+the frame buffer select can only be changed at any time. When one frame buffer is
+used, then that frame buffer is displayed on the screen, and the other frame buffer
+is not displayed, but reads/writes can be made from the frame buffer memory space.
+
+Overwrite mode:	Writing a 0 to the frame buffer will leave the frame buffer
+		unchanged at that byte position. Writing any other value will
+		replace the byte with the new one.
+
+The VDP Modes
+=============
+PAL = 240 lines of video, screen is refreshed 50 times per second
+NTSC = 224 lines of video, screen is refreshed 60 times per second
+
+Mode 1, 8 BPP (Bits Per Pixel) MODE
+-----------------------------------
+In this mode, the CRAM is used to reference the RGB values for the colors used for
+each pixel. The data in the frame buffer points to the data in the cram to generate
+color. Each byte in the frame buffer corresponds to one entry in the cram.
+
+Frame Buffer Address		Prupose
+PAL:	0x00000 - 0x001DF	Each word value points to an address in the frame
+NTSC:	0x00000 - 0x001BF	buffer. Each value is for each line of the display.
+				EG: Address 0x00000.w in the frame buffer points to
+				line 0 on the TV, and address 0x00100.w points to line
+				128 on the TV. The pointer data is shifted to the left
+				by 1 (or multiplied by 2) by the VDP. So putting a value
+				of 0x01C0 at 0x00002.w will make the VDP use the frame
+				buffer address at 0x00380 to display the line at line
+				1 on the TV.
+
+PAL:	0x001E0 - 0x1FFFF	Each byte value points to an entry in CRAM.
+NTSC:	0x001C0 - 0x1FFFF
+
+Mode 2, 15 BPP (Bits Per Pixel) MODE
+------------------------------------
+In this mode, the Frame Buffer Data is used to reference the RGB values for the colors
+used for each pixel. Each word in the frame buffer corresponds to one pixel. The CRAM
+is unused in this mode.
+
+Frame Buffer Address		Prupose
+PAL:	0x00000 - 0x001DF	Each word value points to an address in the frame
+NTSC:	0x00000 - 0x001BF	buffer. Each value is for each line of the display.
+				EG: Address 0x00000.w in the frame buffer points to
+				line 0 on the TV, and address 0x00100.w points to line
+				128 on the TV. The pointer data is shifted to the left
+				by 1 (or multiplied by 2) by the VDP. So putting a value
+				of 0x01C0 at 0x00002.w will make the VDP use the frame
+				buffer address at 0x00380 to display the line at line
+				1 on the TV.
+
+PAL:	0x001E0 - 0x1FFFF	Each byte value contains the pixel data.
+NTSC:	0x001C0 - 0x1FFFF	15             0
+				ABBBBBGGGGGRRRRR
+				See the section CRAM for more info on the pixel format
+
+Mode 3, RUNLENGTH MODE
+----------------------
+This is a weird mode for the 32x, although there are many purposes for it. A pixel in
+this mode is generated by a CRAM entry refrerence, and a number to count how many times
+to display that given pixel, like RLE compression. This is almose like VDP MODE 1 using
+8 BPP, except that each data display entry is 2 bytes.
+
+Frame Buffer Address		Prupose
+PAL:	0x00000 - 0x001DF	Each word value points to an address in the frame
+NTSC:	0x00000 - 0x001BF	buffer. Each value is for each line of the display.
+				EG: Address 0x00000.w in the frame buffer points to
+				line 0 on the TV, and address 0x00100.w points to line
+				128 on the TV. The pointer data is shifted to the left
+				by 1 (or multiplied by 2) by the VDP. So putting a value
+				of 0x01C0 at 0x00002.w will make the VDP use the frame
+				buffer address at 0x00380 to display the line at line
+				1 on the TV.
+
+PAL:	0x001E0 - 0x1FFFF	Each byte value contains the runlength data. The first
+NTSC:	0x001C0 - 0x1FFFF	byte holds the number or times to draw the pixel. The
+				second byte holds the CRAM entry number. If the pixel
+				count number is 0, then nothing is drawn. Each value
+				for the pixel count is equal to one pixel.
+
+CRAM
+====
+The 32x can generate a maximum color pallette of 32768 colors. There is also an alpha
+bit, which selects priority between which will be drawn in front of the TV, either
+the Genesis VDP, or 32x VDP (Alpha is a name i came up with, since no name is
+designated yet, and that it isn't really an aplha :D)
+
+15             0
+ABBBBBGGGGGRRRRR
+
+Bits 0-4:	Red Value
+Bits 5-9:	Green Value
+Bits 10-14:	Blue Value
+Bit 15:		Alpha (see the 0x01.b VDP Mode Select Register in VDP register
+		descriptions)
+
+Document History
+================
+version 1	8/23/04		First Public Release
+				Doc first typed up on 6/10/04

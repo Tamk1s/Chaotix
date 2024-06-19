@@ -1,0 +1,8 @@
+cd /D "%~dp0"
+KENSSharp.exe -r e "Boss.bin"
+KENSSharp.exe -r e "12MD.bin"
+KENSSharp.exe -r e "12SN.bin"
+KENSSharp.exe -r e "3MD.bin"
+KENSSharp.exe -r e "3SN.bin"
+KENSSharp.exe -r e "45MD.bin"
+KENSSharp.exe -r e "45SN.bin"

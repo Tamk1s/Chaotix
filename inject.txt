@@ -4,6 +4,7 @@
 ; 2011-02-24 - Stealth - First Release
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;region @Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ; Source folder prompt ;
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -12,7 +13,9 @@
 ;SrcPath #Got
 
 ;WorkPath	"#Src"
+;EndRegion
 
+;region @PlayerPos
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Player/Plane start location correction ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -68,15 +71,25 @@ Extern  "KCPosFix" "1" "Levels/Tutorial/FG/PlSt6D.bin" "Levels/Tutorial/FG/FGSt6
 
 Extern  "KCPosFix" "1" "Levels/Entrance/FG/PlSt01MN.bin" "Levels/Entrance/FG/FGSt01MN.bin"
 Extern  "KCPosFix" "1" "Levels/Entrance/FG/PlSt2M.bin" "Levels/Entrance/FG/FGSt2M.bin"
+;EndRegion
 
+;region @Compression
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; !@ Level asset ultra re-compression (KENSSharp)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+WorkPath "#Batch/Levels"
+Extern "recmp.bat" 0
+;EndRegion
 
+;region @YWrap
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; YLoop Object Vertical location correction ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+WorkPath "#Batch"
 Extern "ObjYAdj" "1024" "Levels/Intro/Sprites/1MN.bin" "Levels/Intro/Sprites/Conv/1MN.bin"
+;EndRegion
 
-
+;region @Batch
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Injector prompt and call ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -120,7 +133,9 @@ AddInject  "#Batch/inaudio.txt"
 ;GetFile "Please name the output file"
 ;RunInject  #Got
 RunInject  "temp.bin"
+;EndRegion
 
+;region @ROMCleanup
 ;;;;;;;;;;;;;;;
 ; ROM cleanup ;
 ;;;;;;;;;;;;;;;
@@ -131,5 +146,7 @@ WorkPath "#Batch"
 Extern "renReport.bat" "ReportMain.txt"
 Extern "fixheadr" "temp.bin"
 Extern "fix.bat" "0"
+;EndRegion
+
 ;
 ;EOF

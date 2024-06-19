@@ -1,14 +1,12 @@
 Formats:
-
-
-		tiles	blocks		chunks		layout	objs
+		tiles		blocks			chunks		layout	objs
 S1		nem		eni			kos			unc?
-SCD		nem		nem			unc?		unc?
+SCD		nem		nem			unc?		unc?	unc
 S2		kos		kos			kos			unc?
-S2NA	nem		unc?/nem	unc?/kos	unc?
-S3K		KosM	Kos			Kos			unc?
-SC		nem		eni			enig		enig
-KC		nem		eni			enig		enig
+S2NA		nem		unc?/nem		unc?/kos	unc?	unc
+S3K		KosM		Kos			Kos			unc?
+SC		nem		eni			enig		enig	unc
+KC		nem		eni			enig		enig	unc
 
 
 

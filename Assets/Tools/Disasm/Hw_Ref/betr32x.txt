@@ -1,0 +1,154 @@
+					A Better Sega 32X reverse engineering v0.01
+					By DevSter - Joseph Norman 12/2/2003
+					http://devster.netfirms.com
+
+32x Cartridge Memory Map
+========================
+0x000000 - 0x000100	68k Vectors
+0x0003D4.l	Source address of the data to be copied from the cartridge
+		to the Master SH2 RAM (cartridge starts at 0x00000000).
+0x0003D8.l	Destination address of the data to be copied from the cartridge
+		to the Master SH2 RAM (RAM starts at 0x00000000).
+0x0003DC.l	Size of the data to be copied from the cartridge to the 32x RAM
+		in bytes.
+0x0003E0.l	Absolute address that the Master SH2 will jump to when it has
+		finished copying data from cartridge to RAM on startup.
+0x0003E8.l	New vector base address for Master SH2 after copying is done.
+0x000400 - 0x000800	32x Security Code + 68k initialization for the 32x
+
+
+68k Memory Map
+==============
+0x000000 - 0x3FFFFF	Cartridge (4 mbyte)
+0x400000 - 0x4FFFFF	Genesis ROM provided by the 32x (256 bytes)
+0x480000 - 0x4800FF	Genesis ROM provided by the 32x (256 bytes)
+0x4800FF - 0x4FFFFF	Cartridge (Appears as 0x000100 - 0x080000)
+0x780000 - 0x7FFFFF	Frame Buffer 0 AKA 32x VDP-RAM (128k bytes)
+0x800000 - 0x87FFFF	Frame Buffer 1 AKA 32x VDP-RAM (128k bytes)
+0x880000 - 0x9FFFFF	Cartridge (Appears as 0x000000 - 0x17FFFF)
+0xA00000 - 0xA7FFFF	32x Identification:			.32X_ID
+				0xA130EC.l		R:	"MARS"
+			32x Regsiters:			.32X_Reg
+				0xA15100	Register base address (64 bytes)
+					+ 0x00		R/W:	.32X_ACR		Bus Controller
+					+ 0x02		R/W:	.32X_INT
+					+ 0x04		R/W:	.32X_Bank
+					+ 0x06		R/W:	.32X_DREQ_C 		Data Request
+					+ 0x08		R/W:	.32X_DREQ_Src 		Data Request Source
+					+ 0x0C		R/W:	.32X_DREQ_Dest 		Data Request Destination
+					+ 0x10		R/W:	.32X_DREQ_Len 		Data Request Length
+					+ 0x12		R/W:	.32X_FIFO		FIFO
+					+ 0x20 - 0x2F	R/W:				Communications
+					+ 0x30		R/W:	.32X_PWM_Cont
+					+ 0x32		R/W:	.32X_PWM_Cycle
+					+ 0x34		R/W:	.32X_PWM_Pulse_L
+					+ 0x36		R/W:	.32X_PWM_Pulse_R
+					+ 0x38		R/W:	.32X_PWM_Pulse_C
+			32x VDP Registers:		.32X_VDP_Reg
+				0xA15180	Register base address (16 bytes)
+					+ 0x00		R/W:	.32X_VDP_Mode
+					+ 0x02		R/W:	.32X_VDP_Shift
+					+ 0x04		R/W:	.32X_VDP_AF_Len		VDP Fill Length
+					+ 0x06		R/W:	.32X_VDP_AF_St		VDP Fill Start Address
+					+ 0x08		R/W:	.32X_VDP_AF_Data	VDP Fill Data
+					+ 0x0A		R/W:	.32X_VDP_State
+			32x VDP CRAM			R:	.32X_VDP_CRAM
+				0xA15200	CRAM Base Address (512 bytes)
+
+32x Memory Map
+==============
+0x00000000 - 0x000007FF		&_32X_MSH2_Rom[0]	SH2 Firmware (2k bytes)
+0x00004000 - 0x000040FF					32x Registers (64 bytes)
+					+ 0x00 		R/W:	MSH2_WW_IntC		Bus Controller
+					+ 0x04		R/W: 	SH2_RB_HCnt		 
+					+ 0x06		R: 	SH2_RB_DREQ		Data Request
+					+ 0x08		R: 	SH2_RW_DREQ_Src		Data Request Source
+					+ 0x0C		R: 	SH2_RW_DREQ_Dst	R: 	Data Request Destination
+					+ 0x10		R: 	SH2_RW_DREQ_Len	R: 	Data Request Length
+					+ 0x12		R: 	SH2_RW_FIFO		FIFO
+					+ 0x20 - 0x2F	R/W:	SH2_RB_Com		Communication
+					+ 0x30		R/W: 	SH2_RB_PWM_Cont	R/W: 	PWM? Pulse Width Modulation?
+					+ 0x32		R/W: 	SH2_RB_PWM_Cycle	
+					+ 0x34		R/W: 	SH2_RB_PWM_Pulse_L	
+					+ 0x36		R/W: 	SH2_RB_PWM_Pulse_R	
+					+ 0x38		R/W: 	SH2_RB_PWM_Pulse_c	
+0x00004100 - 0x000041FF					VDP Registers (16 bytes)
+					+ 0x00		R/W:	SH2_RB_VDP_Mode
+					+ 0x02		R/W:	SH2_RB_VDP_Shift
+					+ 0x04		R/W:	SH2_RB_VDP_AF_Len	VDP Fill Length
+					+ 0x06		R/W:	SH2_RB_VDP_AF_St	VDP Fill Start Address
+					+ 0x08		R/W:	SH2_RB_VDP_AF_Data	VDP Fill Data
+					+ 0x0A		R/W:	SH2_RB_VDP_State
+0x00004200 - 0x000043FF					VDP CRAM (512 bytes)
+0x02000000 - 0x023FFFFF		&_32X_Rom[0]		Cartridge (4 mbytes)
+0x04000000 - 0x0401FFFF					Frame Buffer (128k bytes)
+0x06000000 - 0x0603FFFF		&_32X_Ram[0]		SDRAM (256k bytes)
+0x20000000 - 0x200007FF		&_32X_MSH2_Rom[0]	SH2 Firmware (2k bytes)	 - MIRROR of 0x00000000
+0x20004000 - 0x200040FF					32x Registers (64 bytes) - MIRROR
+0x20004100 - 0x200041FF					VDP Registers (16 bytes) - MIRROR
+0x20004200 - 0x200043FF					VDP CRAM (512 bytes)	 - MIRROR
+0x22000000 - 0x223FFFFF		&_32X_Rom[0]		Cartridge (4 mbytes)	 - MIRROR
+0x24000000 - 0x2401FFFF					Frame Buffer (128k bytes)- MIRROR
+0x26000000 - 0x2603FFFF		&_32X_Ram[0]		SDRAM (256k bytes)	 - MIRROR
+0xC0000000 - 0xC0000FFF		&(M_SH2.Cache[0])	SH2 Chache (4k bytes)
+0xFFFFFE00 - 0xFFFFFFFF					SH2 Internal registers
+
+The Frame Buffer
+================
+The 32x has two memory locations for displaying graphics. When one memory location
+is used, graphics are displayed from that location, and no graphics are displayed
+for the other. These two different locations are called frame buffers, and are 128k
+bytes each. The 32x selects between them at VDP register 0x0000410A, and the frame
+buffer select can only be changed during verticle blank.
+
+Register Descriptions
+=====================
+0x00	Bus Controller
+----------------------
+Byte Transfer
+
+Bit 0:	The 32x goes into Sega CD mose when thiss bit is set during initialization.
+	If this bit is clear, then the 32x goes into cartridge mode.
+Bit 1:	The 32x freezes if this bit is clear during initialization.
+Bit 7:	If the 32x encounters an error during initialization, this bit will be set.
+
+0x20	Communications
+----------------------
+This register is used to communicate between the 68k, master SH2, and slave SH2.
+The data is constant for all processors. It 16 Bytes long. Data can be read/written
+at any time.
+
+Startup Messages_____________________________________________________________________
+| Text   | Master SH2 Address | Slave SH2 Address | Function                        |
+-------------------------------------------------------------------------------------
+| "M_OK" | 0xA15120           |                   | Master SH2 ready                |
+| "S_OK" |                    | 0xA15124          | Slave SH2 ready                 |
+| "SQER" | 0xA15120           | 0xA15124          | Security code mismatch          |
+| "_CD_" | 0xA15120           | 0xA15124          | Sega CD game inserted?          |
+| "SDER" | 0xA15120           | 0xA15124          | SDRAM check error               |
+-------------------------------------------------------------------------------------
+
+VDP Register Descriptions
+=========================
+0x0A	VDP State
+-----------------
+Bit 0:	Select Frame Buffer, must be in verticle blank
+
+0x00	SH2_RB_VDP_Mode
+-----------------------
+
+0x04	VDP Fill Length
+-----------------------
+Specifies the number of words that will be filed in with the VDP fill function. A VDP
+Fill Length of 0 will specify one word to be filled.
+
+0x06	VDP Fill Start Address
+------------------------------
+Specifies the start address inside the current frame buffer in the 32x VDP RAM
+where the VDP fill function will start to copy. Fills only start at even addresses,
+so this function shifts the register data to the left by 1. [0x06] = (YOUR_ADDRESS & 1) / 2
+
+0x08	VDP Fill Data
+---------------------
+Write the fill data here. Fill data is word length. When a word is written here, the
+fill function starts immediately.

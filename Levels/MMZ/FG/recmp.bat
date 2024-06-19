@@ -1,0 +1,6 @@
+cd /D "%~dp0"
+KENSSharp.exe -r e "1MN.bin"
+KENSSharp.exe -r e "2MN.bin"
+KENSSharp.exe -r e "3MN.bin"
+KENSSharp.exe -r e "4MN.bin"
+KENSSharp.exe -r e "5MN.bin"
