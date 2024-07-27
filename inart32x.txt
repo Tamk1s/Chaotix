@@ -8,10 +8,10 @@
 ;;;;;;;;;;;;;;;;;;;;
 ; Setup Directives ;
 ;;;;;;;;;;;;;;;;;;;;
-Define 	ArtPtr32X_Offset 	$2000000
+Define 	ArtPtr32X_Offset 	$02000000
 Define	NullLPtr_Terminator $FFFFFFFF
-Define	Entry_MasterSH2		$6000000		;Logical ROM offset addr for SH2 (Master)
-Define	Offset_MasterSH2	$0077800		;Offset for calculating between raw ROM and SH2 area
+Define	Entry_MasterSH2		$06000000		;Logical ROM offset addr for SH2 (Master)
+Define	Offset_MasterSH2	$00077800		;Offset for calculating between raw ROM and SH2 area
 MaxSize	$400000				;Maximum Genesis ROM size
 
 ;Max size for 32x Art space (art banks) ($20A0000-$222438A)
@@ -37,6 +37,11 @@ EndSeg
 ;Ptr to APB_Level
 StartSeg APB_Level_Ptr	$0077BD0 $0004 Big_Endian
 		DWORD	APB_Level+ArtPtr32X_Offset
+EndSeg
+
+;Ptr to APB_SS_Level
+StartSeg APB_SS_Level_Ptr	$0077B78 $0004 Big_Endian
+		DWORD	(APB_SS_Level-Offset_MasterSH2)+Entry_MasterSH2
 EndSeg
 ;EndRegion
 
@@ -5522,6 +5527,31 @@ StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
 			AP3_InvinStars_Stars_02:	include	"Art/Mars/Uncomp/InvinStars/InvinStars_Stars_02.bin"
 			AP3_InvinStars_Stars_03:	include	"Art/Mars/Uncomp/InvinStars/InvinStars_Stars_03.bin"
 		;EndRegion
+EndSeg
+;endregion
+
+;Region @APB_Special
+StartSeg APB_SS_Level $077B7C $0010 Big_Endian
+	include	"Art/Mars/APB/Special/SS_Level.bin"
+	include	"Art/Mars/APB/Special/SS_LevelPad.pad"
+EndSeg
+
+StartSeg APB_SS_Results $077B94 $000A Big_Endian
+	include	"Art/Mars/APB/Special/SS_Results.bin"
+	include	"Art/Mars/APB/Special/SS_ResultsPad.pad"
+EndSeg
+;endregion
+
+;Region @PolygonData
+StartSeg Poly_SprBounds $0787E4 $00CC Big_Endian
+	include	"Art/Mars/Poly/SprBounds.bin"	
+	include	"Art/Mars/Poly/TitleCards.bin"
+EndSeg
+StartSeg Poly_SprBounds $07CFEC	$0004 Big_Endian
+	include	"Art/Mars/Poly/SS_Bounds.bin"
+EndSeg
+StartSeg SprGameover $07AC7C $0018 Big_Endian
+	include	"Art/Mars/Poly/SprGameover.bin"
 EndSeg
 ;endregion
 

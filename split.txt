@@ -55,6 +55,8 @@ MakePath "Art/palettes/Mars/SS"
 MakePath "Art/Mars"						;!@
 MakePath "Art/Mars/C42"					;!@
 MakePath "Art/Mars/APB"					;!@
+MakePath "Art/Mars/APB/Special"			;!@
+MakePath "Art/Mars/Poly"				;!@
 
 ;Region @Path_Chars
 MakePath "Art/Mars/Uncomp"				;!@
@@ -277,6 +279,20 @@ MakePath "Collisn"
 ;endregion
 
 ;Region @MarsArt
+
+;Region @PolygonData
+Extract $0787E4	$000C	"Art/Mars/Poly/SprBounds.bin"
+Extract $0787F0 $00C0	"Art/Mars/Poly/TitleCards.bin"
+Extract $07CFEC	$0004	"Art/Mars/Poly/SS_Bounds.bin"
+Extract $07AC7C	$0018	"Art/Mars/Poly/SprGameover.bin"
+;EndRegion
+
+;Region @ArtPtrBanks_Special
+Extract $077B7C	$000E	"Art/Mars/APB/Special/SS_Level.bin"
+Extract $077B8A	$0002	"Art/Mars/APB/Special/SS_LevelPad.pad"
+Extract $077B94	$0008	"Art/Mars/APB/Special/SS_Results.bin"
+Extract $077B9C	$0002	"Art/Mars/APB/Special/SS_ResultsPad.pad"
+;EndRegion
 
 ;Region @ArtPtrBanks
 Extract $0A0200 $0010	"Art/Mars/APB/Global.dat"

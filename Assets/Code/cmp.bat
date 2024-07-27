@@ -18,7 +18,8 @@ asmx -e -w -l Spikes2.lst -C 68K -b 0x9F84E6 -o Spikes2.bin cSpikes2.asm > Spike
 asmx -e -w -l Balloons.lst -C 68K -b 0x9F852A -o Balloons.bin cBalloons.asm > Balloons.log
 asmx -e -w -l BossSpawnEnd.lst -C 68K -b 0x9F85E0 -o BossSpawnEnd.bin cBossSpawnEnd.asm > BossSpawnEnd.log
 
-asmx -e -w -l SHC_Logo.lst -C 68K -b 0xA00000 -o SHC_Logo.bin cSHC_Logo.asm > SHC_Logo.log
+asmsh /q /p /o i+ /o psh2 /o w- "SSRing_Fix.asm","SSRing_Fix.bin", ,"SSRing_Fix.out" > SSRing_Fix.log
+REM asmx -e -w -l SHC_Logo.lst -C 68K -b 0xA00000 -o SHC_Logo.bin cSHC_Logo.asm > SHC_Logo.log
 
 
 zerofill.exe -f -q 1048576 PAD.bin

@@ -1,0 +1,63 @@
+00000000                      ;		ORG 0x9F8BE0
+00000000 =022F8BE0            Code:			equ	$022F8BE0	; SDRAM
+00000000 =20004020            PlaySound:		equ $20004020
+00000000 =06007DDC            dword_6007DDC:	equ	$06007DDC
+00000000 =06007DF0            v_rings_SS:		equ	$06007DF0
+00000000 =06003828            v_SS_RingCntdwn:equ	$06003828	
+00000000 =060066E4            SS_GetRingChain:equ	$060066E4
+00000000                      	org Code
+022F8BE0                      		
+022F8BE0                      SS_GetRing2:
+022F8BE0 D000                 	mov.l   cntdwn, r0 ; v_SS_RingCntdwn
+022F8BE2 E100                 	mov.l	#0,r1
+022F8BE4 2012                 	mov.l   r1, @r0
+022F8BE6                      	
+022F8BE6 D300                 	mov.l   off_60054DC, r3 ; v_rings_SS
+022F8BE8 D100                 	mov.l   off_60054E0, r1 ; SS_GetRingChain ; DONE
+022F8BEA 6030                 	mov.b   @r3, r0
+022F8BEC C801                 	tst     #1, r0
+022F8BEE 8D00                 	bt/s    restore
+022F8BF0 E22D                 	mov     #$2D, r2 ; '-' ; one of these is left pan, one right (TODO)
+022F8BF2 E269                 	mov     #$69, r2 ; 'i'
+022F8BF4 0009                 	nop
+022F8BF6 0009                 	nop
+022F8BF8                      restore:	
+022F8BF8 000B                 	rts
+022F8BFA 0009                 	nop
+022F8BFC                      	
+022F8BFC                      	
+022F8BFC                      SS_LoseRings2:
+022F8BFC D000                 	mov.l   cntdwn, r0 ; v_SS_RingCntdwn
+022F8BFE E100                 	mov.l	#0,r1
+022F8C00 2012                 	mov.l   r1, @r0
+022F8C02                      
+022F8C02 4F22                 	sts.l   pr, @-r15
+022F8C04 84D4                 	mov.b   @(4,r13), r0
+022F8C06 CB10                 	or      #$10, r0
+022F8C08 80D4                 	mov.b   r0, @(4,r13)
+022F8C0A D100                 	mov.l   off_600623C, r1 ; dword_6007DDC
+022F8C0C 9000                 	mov.w   dword_6006238, r0 ; h'8000000
+022F8C0E 000B                 	rts
+022F8C10 0009                 	nop
+022F8C12                      	
+022F8C14 0000 0600 7DF0       off_60054DC:    	dc.l	v_rings_SS
+022F8C18 0600 66E4            off_60054E0:    	dc.l	SS_GetRingChain
+022F8C1C 0600 7DDC            off_600623C:    	dc.l 	dword_6007DDC   ; DATA XREF: SS_LoseRings+8r
+022F8C20 0800 0000            dword_6006238:  	dc.l	$08000000
+022F8C24 0600 3828            cntdwn:				dc.l	v_SS_RingCntdwn
+022F8C28 2000 4020            playSound_ptr:  	dc.l	PlaySound
+022F8C2C                      
+022F8C2C                      
+022F8C2C                      	; org	$060054AE
+022F8C2C                      ; SS_GetRing_Jump:
+022F8C2C                      	; mov.l offset1_r0
+022F8C2C                      	; jsr @r0
+022F8C2C                      	; nop
+022F8C2C                      ; offset1_r0:			dc.l	$022F8BE0
+022F8C2C                      
+022F8C2C                      	; org	$060061D4
+022F8C2C                      ; SS_LoseRings2:
+022F8C2C                      	; mov.l offset2_r0
+022F8C2C                      	; jsr @r0
+022F8C2C                      	; nop	
+022F8C2C                      ; offset2_r0:			dc.l	$022F8BF2

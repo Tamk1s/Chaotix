@@ -389,6 +389,19 @@ bytepatch.exe -a 0x01A562 kc.bin 4EF9 009F 878C
 bytepatch.exe -a 0x01A5B4 kc.bin 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71 4E71
 
 
+
+REM Bonus Stage Ring bugfix
+
+REM mov.l offset_r0
+REM jsr @r0
+REM nop
+REM								 D001 400B 0009 022F 8BE0
+REM bytepatch.exe -a 0x07CCAE kc.bin D001 400B 0009 022F 8BE0 0009 0009
+REM bytepatch.exe -a 0x07D9D4 kc.bin D001 400B 0009 022F 8BF8 0009
+REM bytepatch.exe -a 0x2F8BE0 kc.bin -f "Assets\Code\SSRing_Fix.bin" 
+
+
+
 REM Survival mode
 REM NOP IIZ Zone force
 REM SNEEP bytepatch.exe -a 0x004C18 kc.bin 4E71 4E71 4E71
