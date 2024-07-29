@@ -5772,23 +5772,27 @@ EndSeg
 ;EndRegion
 ;EndRegion
 
-;!@ TODO: Extract/allow editing of entire ArtNem table. Possibly merge into artnem AniArt blobs. Also pointer editing
+;!@ TODO: Extract/allow editing of entire ArtNem table pointers.
 ;region @Artnem_LevelObjs
-StartSeg Artnem_LevelObjs_Set1 Big_Endian $2D4718 $0440
-	ArtNem_MMZ_Clouds:		include		"Art/artnem/LevelObjs/MMZ_Clouds.bin"
-	ArtNem_TTZ_Palmtree:	include		"Art/artnem/LevelObjs/TTZ_Palmtree.bin"
+StartSeg Artnem_LevelObjs_Set Big_Endian $2D4718 $3910
+	ArtNem_MMZ_Clouds:				include		"Art/artnem/LevelObjs/MMZ_Clouds.bin"
+	ArtNem_TTZ_Palmtree:			include		"Art/artnem/LevelObjs/TTZ_Palmtree.bin"
+	ArtNem_BBZ_Boss_GroundChunk:	include		"Art/artnem/LevelObjs/BBZ_Boss_GroundChunk.bin"
+	ArtNem_BBZ_Pillar1:				include		"Art/artnem/LevelObjs/BBZ_Pillar1.bin"
+	ArtNem_BBZ_Pillar2:				include		"Art/artnem/LevelObjs/BBZ_Pillar2.bin"
+	ArtNem_BBZ_Pillar3:				include		"Art/artnem/LevelObjs/BBZ_Pillar3.bin"
+	ArtNem_WE_ObjSet:				include		"Art/artnem/LevelObjs/WE_ObjSet.bin"
+	ArtNem_WE_Shadows:				include		"Art/artnem/LevelObjs/WE_Shadows.bin"
+	ArtNem_unk_ArchDecor:			include		"Art/artnem/LevelObjs/unk_ArchDecor.bin"
+	ArtNem_unk_Battery:				include		"Art/artnem/LevelObjs/unk_Battery.bin"
+	ArtNem_unk_TechPillar1:			include		"Art/artnem/LevelObjs/unk_TechPillar1.bin"
+	ArtNem_unk_TechPillar2:			include		"Art/artnem/LevelObjs/unk_TechPillar2.bin"
+	ArtNem_SSZ_Decor:				include		"Art/artnem/LevelObjs/SSZ_Decor.bin"
+	ArtNem_WE_BumperChair:			include		"Art/artnem/LevelObjs/WE_BumperChair.bin"
+	ArtNem_IIZ_Block:				include		"Art/artnem/LevelObjs/IIZ_Block.bin"
+	ArtNem_IIZ_Palmtree:			include		"Art/artnem/LevelObjs/IIZ_Palmtree.bin"
 EndSeg
-StartSeg Artnem_LevelObjs_Set2 Big_Endian $2D6B50 $101A
-	ArtNem_unk_ArchDecor:	include		"Art/artnem/LevelObjs/unk_ArchDecor.bin"
-	ArtNem_unk_Battery:		include		"Art/artnem/LevelObjs/unk_Battery.bin"
-	ArtNem_unk_TechPillar1:	include		"Art/artnem/LevelObjs/unk_TechPillar1.bin"
-	ArtNem_unk_TechPillar2:	include		"Art/artnem/LevelObjs/unk_TechPillar2.bin"
-	ArtNem_SSZ_Decor:		include		"Art/artnem/LevelObjs/SSZ_Decor.bin"
-EndSeg
-StartSeg Artnem_LevelObjs_Set3 Big_Endian $2D6C6A $03BE
-	ArtNem_IIZ_Block:		include		"Art/artnem/LevelObjs/IIZ_Block.bin"
-	ArtNem_IIZ_Palmtree:	include		"Art/artnem/LevelObjs/IIZ_Palmtree.bin"
-EndSeg
+;EndRegion
 ;EndRegion
 
 ;!@ PalCycle dataset 1 data:

@@ -71,14 +71,20 @@ MakePath "Art/artnem/LevelObjs/"
 ;Endregion
 
 ;Region @X_ArtNem_LevelObjs
-;!@ A Few missing arntnem blobs within this range
 Extract	$2D4718	$0216 "Art/artnem/LevelObjs/MMZ_Clouds.bin"
 Extract	$2D492E	$022A "Art/artnem/LevelObjs/TTZ_Palmtree.bin"
+Extract	$2D4B58	$0482 "Art/artnem/LevelObjs/BBZ_Boss_GroundChunk.bin"
+Extract	$2D4FDA	$03FA "Art/artnem/LevelObjs/BBZ_Pillar1.bin"
+Extract	$2D53D4	$034C "Art/artnem/LevelObjs/BBZ_Pillar2.bin"
+Extract	$2D5720	$02EC "Art/artnem/LevelObjs/BBZ_Pillar3.bin"
+Extract	$2D5A0C	$10C0 "Art/artnem/LevelObjs/WE_ObjSet.bin"
+Extract	$2D6ACC	$0084 "Art/artnem/LevelObjs/WE_Shadows.bin"
 Extract	$2D6B50	$0234 "Art/artnem/LevelObjs/unk_ArchDecor.bin"
 Extract	$2D6D84	$0130 "Art/artnem/LevelObjs/unk_Battery.bin"
 Extract	$2D6EB4	$019C "Art/artnem/LevelObjs/unk_TechPillar1.bin"
 Extract	$2D7050	$05FC "Art/artnem/LevelObjs/unk_TechPillar2.bin"
 Extract	$2D764C	$051E "Art/artnem/LevelObjs/SSZ_Decor.bin"
+Extract	$2D7B6A	$0100 "Art/artnem/LevelObjs/WE_BumperChair.bin"
 Extract	$2D7C6A	$00AA "Art/artnem/LevelObjs/IIZ_Block.bin"
 Extract	$2D7D14	$0314 "Art/artnem/LevelObjs/IIZ_Palmtree.bin"
 Extract	$22E40E	$0176 "Art/artnem/LevelObjs/Rings.bin"
