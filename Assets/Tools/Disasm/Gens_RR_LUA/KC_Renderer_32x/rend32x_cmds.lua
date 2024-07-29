@@ -166,6 +166,9 @@ ArtPtr32X_Bank7F = 0x7F
 
 newline = "\n"
 tab = "  "
+bTerm = 0xFF
+wTerm = 0xFFFF
+lTerm = 0xFFFFFFFF
 
 -- Convert to hex string
 function tohex_byte(v) return string.format("%02x",v) end
@@ -189,7 +192,10 @@ function Update()
 	local CMD_OFF = memory.readlong(FB_BUFF1_PTR)
 	CMD_OFF = CMD_OFF + FB_BUFF_CMDOFF
 	local PC = 0x00
+	local PC2 = 0x00
 	local i=0x00
+	local j=0x00
+	local count=0x00
 	local params={}	
 	local paramsH={}	
 	for i=0,14 do
@@ -202,6 +208,7 @@ function Update()
 	
 	local drawCmd=0x00
 	local quit=0x00
+	local quit2=0x00
 	while(quit==0x00)
 	do
 		drawCmd = memory.readbyte(CMD_OFF+PC)
@@ -370,10 +377,59 @@ function Update()
 				PC = PC + 0x0A
 			end,
 			[draw_dPolygon] = function()
-				PC = PC + 0x01
+				params[0] = memory.readbyte(CMD_OFF+PC+0x01)
+				params[1] = memory.readbyte(CMD_OFF+PC+0x02)
+				params[2] = memory.readbyte(CMD_OFF+PC+0x03)
+				paramsH[0] = tohex_byte(params[0])
+				paramsH[1] = tohex_byte(params[1])
+				paramsH[2] = tohex_byte(params[2])				
+				text = text .. tab .. drawName .. tab .. "PalInd" .. tab .. "drawMode" .. tab .. "nVtx" .. newline
+				text = text .. tohex_byte(i) .. tab .. tohex_byte(drawCmd) .. tab .. paramsH[0] .. tab .. paramsH[1] .. tab .. paramsH[2] .. newline
+				text = text .. tab .. tab .. tab .. tab .. tab .. tab .. GetDrawMode(params[1]) .. newline .. newline
+				
+				PC = PC + 0x04
+				count = params[2]
+				count = count-0x01
+				text = text .. tab .. drawName .. " Vertices:" .. newline
+				text = text .. "vtxID" .. tab .. "xpos" .. tab .. "ypos" .. newline
+				for j=0,count do
+					params[0]=j
+					params[1]=memory.readword(CMD_OFF+PC)
+					params[2]=memory.readword(CMD_OFF+PC+0x02)
+					paramsH[0]=tohex_byte(params[0])
+					paramsH[1]=tohex_word(params[1])
+					paramsH[2]=tohex_word(params[2])					
+					text = text .. paramsH[0] .. tab .. paramsH[1] .. tab .. paramsH[2] .. newline
+					PC = PC + 0x04
+				end
+				text = text .. newline
 			end,
 			[draw_df3DPolySh] = function()
-				PC = PC + 0x01
+				params[0] = memory.readbyte(CMD_OFF+PC+0x01)
+				params[1] = memory.readbyte(CMD_OFF+PC+0x02)
+				params[2] = memory.readbyte(CMD_OFF+PC+0x03)
+				paramsH[0] = tohex_byte(params[0])
+				paramsH[1] = tohex_byte(params[1])
+				paramsH[2] = tohex_byte(params[2])				
+				text = text .. tab .. drawName .. tab .. "0x00" .. tab .. "shapeID" .. tab .. "nVtx" .. newline
+				text = text .. tohex_byte(i) .. tab .. tohex_byte(drawCmd) .. tab .. paramsH[0] .. tab .. paramsH[1] .. tab .. paramsH[2] .. newline .. newline
+				
+				PC = PC + 0x04
+				count = params[2]
+				count = count-0x01
+				text = text .. tab .. drawName .. " Vertices:" .. newline
+				text = text .. "vtxID" .. tab .. "xpos" .. tab .. "ypos" .. newline
+				for j=0,count do
+					params[0]=j
+					params[1]=memory.readword(CMD_OFF+PC)
+					params[2]=memory.readword(CMD_OFF+PC+0x02)
+					paramsH[0]=tohex_byte(params[0])
+					paramsH[1]=tohex_word(params[1])
+					paramsH[2]=tohex_word(params[2])					
+					text = text .. paramsH[0] .. tab .. paramsH[1] .. tab .. paramsH[2] .. newline
+					PC = PC + 0x04
+				end
+				text = text .. newline
 			end,
 			[draw_d3DPolySh] = function()
 				params[0] = memory.readbyte(CMD_OFF+PC+0x01)
@@ -434,7 +490,29 @@ function Update()
 				PC = PC + 0x08
 			end,
 			[draw_dBarStack] = function()
-				PC = PC + 0x01
+				params[0] = memory.readbyte(CMD_OFF+PC+0x01)
+				paramsH[0] = tohex_byte(params[0])
+				text = text .. tab .. drawName .. tab .. "nBar" .. newline
+				text = text .. tohex_byte(i) .. tab .. tohex_byte(drawCmd) .. tab .. paramsH[0] .. newline .. newline
+				
+				PC = PC + 0x02
+				count = params[0]
+				count = count-0x01
+				text = text .. tab .. drawName .. " Bars:" .. newline
+				text = text .. "barID" .. tab .. "hgt" .. tab .. "evnPalInd" .. tab .. "oddPalInd" .. newline
+				for j=0,count do
+					params[0]=j
+					params[1]=memory.readword(CMD_OFF+PC)
+					params[2]=memory.readbyte(CMD_OFF+PC+0x02)
+					params[3]=memory.readbyte(CMD_OFF+PC+0x03)
+					paramsH[0]=tohex_byte(params[0])
+					paramsH[1]=tohex_byte(params[1])
+					paramsH[2]=tohex_word(params[2])
+					paramsH[3]=tohex_word(params[3])					
+					text = text .. paramsH[0] .. tab .. paramsH[1] .. tab .. paramsH[2] .. tab .. paramsH[3] .. newline
+					PC = PC + 0x04
+				end
+				text = text .. newline
 			end,
 			[draw_dSega_Distortion] = function()
 				params[0] = memory.readbyte(CMD_OFF+PC+0x01)
@@ -523,7 +601,42 @@ function Update()
 				PC = PC + 0x10
 			end,
 			[draw_LoadSprBank] = function()
-				PC = PC + 0x01
+				-- Count how many APB pairs (search until bTerm byte)
+				PC2=PC			
+				quit2=0x00
+				count=0x00
+				while(quit==0x00)
+				do
+					params[0] = memory.readbyte(CMD_OFF+PC2+0x01)
+					if (params[0]==bTerm) then
+						quit=0x01
+					else
+						params[1] = memory.readbyte(CMD_OFF+PC2+0x02)
+						PC2 = PC2 + 0x03
+						count=count+0x01
+					end
+				end
+				
+				params[0]=count
+				paramsH[0]=tohex_byte(params[0])
+				text = text .. tab .. drawName .. tab .. "nSpr" .. newline
+				text = text .. tohex_byte(i) .. tab .. tohex_byte(drawCmd) .. tab .. paramsH[0] .. newline .. newline
+				text = text .. drawName .. " sprites:" .. newline
+				
+				text = text .. "apbInd" .. tab .. "sprSetID" .. tab .. "palInd" .. tab .. "enum(sprSetID)" .. newline
+				for j=0,count do
+					params[0]=j
+					params[1]=memory.readbyte(CMD_OFF+PC+0x01)
+					params[2]=memory.readbyte(CMD_OFF+PC+0x02)
+					paramsH[0]=tohex_byte(params[0])
+					paramsH[1]=tohex_byte(params[1])
+					paramsH[2]=tohex_byte(params[2])										
+					text = text .. paramsH[0] .. tab .. paramsH[1] .. tab .. paramsH[2] .. tab .. GetSpriteSet_Name(params[1]) .. newline
+					PC = PC + 0x03
+				end
+				params[0]=bTerm
+				paramsH[0]=tohex_byte(params[0])
+				text = text .. paramsH[0] .. newline .. newline
 			end,
 			[draw_UnkHUD] = function()
 				params[0] = memory.readbyte(CMD_OFF+PC+0x01)

@@ -184,6 +184,7 @@ MakePath "Art/artnem/Menus/Soundtest"
 MakePath "Art/artnem/Menus/Endings"
 MakePath "Art/artnem/Menus/DataLoad"
 MakePath "Art/artnem/Menus/Title/"
+MakePath "Art/artnem/LevelObjs/"
 
 ;!@
 MakePath "Art/tilemaps"
@@ -2061,7 +2062,8 @@ Extract $173304 $0066		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_UnkSparkle.bin"
 Extract $17336A $01BE		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_FlowerCircle.bin"
 Extract $173528 $0198		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_FlowerTriangle.bin"
 Extract $1736C0 $0286		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_Grabber_Closed.bin"
-Extract $173946 $0348		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_Grabber_Open.bin"
+Extract $173946 $0222		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_Grabber_Open.bin"
+Extract $173B68 $0126		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_UnkSpring.bin"
 Extract $173C8E $014A		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_CharSwitch1.bin"
 Extract $173DD8 $0102		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_CharSwitch1_Pressed.bin"
 Extract $173EDA $014A		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_CharSwitch2.bin"
@@ -2969,6 +2971,10 @@ Extract	$2D1D20 $00C6	"Misc/BonusStage/BS_Layout0C.bin"
 Extract	$2D1DE6 $00C0	"Misc/BonusStage/BS_Layout0D.bin"
 Extract	$2D1EA6 $00C6	"Misc/BonusStage/BS_Layout0E.bin"
 ;EndRegion
+
+;Region @Misc
+Extract	$2D997E	$011C	"Misc/CreditsEasterEgg.bin"
+;EndRegion
 ;EndRegion
 
 ;Region @X_LevelData
@@ -3712,6 +3718,20 @@ Extract $2CC17E	$00A0 "Art/tilemaps/Menus/DataLoad/PlayStyle_ProtoBox.bin"
 Extract $2CC21E	$0098 "Art/tilemaps/Menus/DataLoad/SaveSlot_Box.bin"
 Extract $2CC2B6	$0048 "Art/tilemaps/Menus/DataLoad/Training_Box.bin"
 ;Endregion
+
+;Region @X_ArtNem_LevelObjs
+;!@ A Few missing arntnem blobs within this range
+Extract	$2D4718	$0216 "Art/artnem/LevelObjs/MMZ_Clouds.bin"
+Extract	$2D492E	$022A "Art/artnem/LevelObjs/TTZ_Palmtree.bin"
+Extract	$2D6B50	$0234 "Art/artnem/LevelObjs/unk_ArchDecor.bin"
+Extract	$2D6D84	$0130 "Art/artnem/LevelObjs/unk_Battery.bin"
+Extract	$2D6EB4	$019C "Art/artnem/LevelObjs/unk_TechPillar1.bin"
+Extract	$2D7050	$05FC "Art/artnem/LevelObjs/unk_TechPillar2.bin"
+Extract	$2D764C	$051E "Art/artnem/LevelObjs/SSZ_Decor.bin"
+Extract	$2D7C6A	$00AA "Art/artnem/LevelObjs/IIZ_Block.bin"
+Extract	$2D7D14	$0314 "Art/artnem/LevelObjs/IIZ_Palmtree.bin"
+Extract	$22E40E	$0176 "Art/artnem/LevelObjs/Rings.bin"
+;EndRegion
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Level Size Data Extract

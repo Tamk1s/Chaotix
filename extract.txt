@@ -6,6 +6,11 @@
 ;LoadFile #got
 LoadFile orig.bin
 
+;Region @ArtPtr32_IIZ_Objects1
+Extract $173946 $0222		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_Grabber_Open.bin"
+Extract $173B68 $0126		"Art/Mars/C42/IIZ_Objs1/IIZObjs1_UnkSpring.bin"
+;EndRegion
+
 ;Region @PolygonData
 Extract $0787E4	$000C	"Art/Mars/Poly/SprBounds.bin"
 Extract $0787F0 $00C0	"Art/Mars/Poly/TitleCards.bin"
@@ -24,6 +29,7 @@ Extract $077B9C	$0002	"Art/Mars/APB/Special/SS_ResultsPad.pad"
 ;MakePath "Art/artnem/Menus/Endings"
 ;MakePath "Art/artnem/Menus/DataLoad"
 ;MakePath "Art/artnem/Menus/Title/"
+MakePath "Art/artnem/LevelObjs/"
 
 ;Region @X_ArtNem_Menus
 ;MakePath "Art/tilemaps"
@@ -63,6 +69,20 @@ Extract $077B9C	$0002	"Art/Mars/APB/Special/SS_ResultsPad.pad"
 ;Extract $2CC21E	$0098 "Art/tilemaps/Menus/DataLoad/SaveSlot_Box.bin"
 ;Extract $2CC2B6	$0048 "Art/tilemaps/Menus/DataLoad/Training_Box.bin"
 ;Endregion
+
+;Region @X_ArtNem_LevelObjs
+;!@ A Few missing arntnem blobs within this range
+Extract	$2D4718	$0216 "Art/artnem/LevelObjs/MMZ_Clouds.bin"
+Extract	$2D492E	$022A "Art/artnem/LevelObjs/TTZ_Palmtree.bin"
+Extract	$2D6B50	$0234 "Art/artnem/LevelObjs/unk_ArchDecor.bin"
+Extract	$2D6D84	$0130 "Art/artnem/LevelObjs/unk_Battery.bin"
+Extract	$2D6EB4	$019C "Art/artnem/LevelObjs/unk_TechPillar1.bin"
+Extract	$2D7050	$05FC "Art/artnem/LevelObjs/unk_TechPillar2.bin"
+Extract	$2D764C	$051E "Art/artnem/LevelObjs/SSZ_Decor.bin"
+Extract	$2D7C6A	$00AA "Art/artnem/LevelObjs/IIZ_Block.bin"
+Extract	$2D7D14	$0314 "Art/artnem/LevelObjs/IIZ_Palmtree.bin"
+Extract	$22E40E	$0176 "Art/artnem/LevelObjs/Rings.bin"
+;EndRegion
 
 
 ;GetPath "Please select the destination folder for the data"
@@ -183,6 +203,11 @@ Extract $077B9C	$0002	"Art/Mars/APB/Special/SS_ResultsPad.pad"
 ;Extract	$2D1D20 $00C6	"Misc/BonusStage/BS_Layout0C.bin"
 ;Extract	$2D1DE6 $00C0	"Misc/BonusStage/BS_Layout0D.bin"
 ;Extract	$2D1EA6 $00C6	"Misc/BonusStage/BS_Layout0E.bin"
+;EndRegion
+
+;Region @Misc
+Extract	$2D997E	$011C	"Misc/CreditsEasterEgg.bin"
+;EndRegion
 ;EndRegion
 
 ; ;Region @X_PalMars_SS

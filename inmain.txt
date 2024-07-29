@@ -5621,10 +5621,23 @@ EndSeg
 StartSeg ArtNem_ST_ascFont_Ptr4 $002F626 $0004 Big_Endian
 		DWORD	ArtNem_ST_ascFont
 EndSeg
+
 ;!@ Moved to end of ROM due to being too large for regular segment
 ;StartSeg ascFont $22E100 $030E Big_Endian	;ASCII Font
 StartSeg ascFont $2F8E08 $0448 Big_Endian	;ASCII Font
 		ArtNem_ST_ascFont:	include	"Art/artnem/Menus/ascFont.bin"
+EndSeg
+;EndRegion
+
+;Region @ArtNem_Rings
+StartSeg ArtNem_Rings_Ptr1 $031A2A $0004 Big_Endian
+		DWORD	ArtNem_Rings
+EndSeg
+StartSeg ArtNem_Rings_Ptr2 $032064 $0004 Big_Endian
+		DWORD	ArtNem_Rings
+EndSeg
+StartSeg ArtNem_Rings $22E40E $0176 Big_Endian
+		include	"Art/artnem/LevelObjs/Rings.bin"
 EndSeg
 ;EndRegion
 
@@ -5757,6 +5770,25 @@ StartSeg ArtNem_Data3 Big_Endian $2C7818 $4AE6
 	MapEni_DL_Training_Box:			include		"Art/tilemaps/Menus/DataLoad/Training_Box.bin"	
 EndSeg
 ;EndRegion
+;EndRegion
+
+;!@ TODO: Extract/allow editing of entire ArtNem table. Possibly merge into artnem AniArt blobs. Also pointer editing
+;region @Artnem_LevelObjs
+StartSeg Artnem_LevelObjs_Set1 Big_Endian $2D4718 $0440
+	ArtNem_MMZ_Clouds:		include		"Art/artnem/LevelObjs/MMZ_Clouds.bin"
+	ArtNem_TTZ_Palmtree:	include		"Art/artnem/LevelObjs/TTZ_Palmtree.bin"
+EndSeg
+StartSeg Artnem_LevelObjs_Set2 Big_Endian $2D6B50 $101A
+	ArtNem_unk_ArchDecor:	include		"Art/artnem/LevelObjs/unk_ArchDecor.bin"
+	ArtNem_unk_Battery:		include		"Art/artnem/LevelObjs/unk_Battery.bin"
+	ArtNem_unk_TechPillar1:	include		"Art/artnem/LevelObjs/unk_TechPillar1.bin"
+	ArtNem_unk_TechPillar2:	include		"Art/artnem/LevelObjs/unk_TechPillar2.bin"
+	ArtNem_SSZ_Decor:		include		"Art/artnem/LevelObjs/SSZ_Decor.bin"
+EndSeg
+StartSeg Artnem_LevelObjs_Set3 Big_Endian $2D6C6A $03BE
+	ArtNem_IIZ_Block:		include		"Art/artnem/LevelObjs/IIZ_Block.bin"
+	ArtNem_IIZ_Palmtree:	include		"Art/artnem/LevelObjs/IIZ_Palmtree.bin"
+EndSeg
 ;EndRegion
 
 ;!@ PalCycle dataset 1 data:

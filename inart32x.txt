@@ -3882,6 +3882,8 @@ StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
 			AP3_IIZObjs1_FlowerTriangle:		include	"Art/Mars/C42/IIZ_Objs1/IIZObjs1_FlowerTriangle.bin"
 			AP3_IIZObjs1_Grabber_Closed:		include	"Art/Mars/C42/IIZ_Objs1/IIZObjs1_Grabber_Closed.bin"
 			AP3_IIZObjs1_Grabber_Open:			include	"Art/Mars/C42/IIZ_Objs1/IIZObjs1_Grabber_Open.bin"
+			;!@ Unreferenced, unused spring! https://forums.sonicretro.org/index.php?posts/1055054/
+			AP3_IIZObjs1_UnkSpring:				include	"Art/Mars/C42/IIZ_Objs1/IIZObjs1_UnkSpring.bin"							
 			AP3_IIZObjs1_CharSwitch1:			include	"Art/Mars/C42/IIZ_Objs1/IIZObjs1_CharSwitch1.bin"
 			AP3_IIZObjs1_CharSwitch1_Pressed:	include	"Art/Mars/C42/IIZ_Objs1/IIZObjs1_CharSwitch1_Pressed.bin"
 			AP3_IIZObjs1_CharSwitch2:			include	"Art/Mars/C42/IIZ_Objs1/IIZObjs1_CharSwitch2.bin"

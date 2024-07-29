@@ -830,4 +830,9 @@ StartSeg Code_TrainingSelect_TOD Big_Endian $03F461 1
 ;EndRegion
 	BYTE	$07
 EndSeg
+
+;!@ Credits easter egg (std ASCII; unused)
+StartSeg Code_TrainingSelect_TOD Big_Endian $2D997E $011C
+	include		"Misc/CreditsEasterEgg.bin"
+EndSeg
 ;EndRegion
