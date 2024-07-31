@@ -15,6 +15,7 @@ Define	NoNewLayer			$2000000		;All tiles/mappings pages of this type are loaded 
 Define	Entry_MasterSH2		$6000000		;Logical ROM offset addr for SH2 (Master)
 Define	Offset_MasterSH2	$0077800		;Offset for calculating between raw ROM and SH2 area
 Define	NopLPtr				$00000000
+Define	NullTerm			$FFFFFFFF
 Define	NullLPtr_Terminator $FFFFFFFF
 Define	Bank1_MemOffset		$700000            ; Logical offset for addresses in Bank1
 Define	Bank0_MemOffset		$880000            ; Logical offset for addresses in Bank0
@@ -1416,6 +1417,16 @@ EndSeg
 ;!@
 ;Region @Pal32xStuff
 
+;Region pal32x_Global HUD
+;Ptr
+StartSeg Pal32x_HUD_Ptr	$00219E	$02 Big_Endian
+	WORD Pal32x_HUD-Pal32x_HUD_Ptr
+EndSeg
+;Data
+StartSeg Pal32x_HUD	$001924	$24 Big_Endian
+	include	"Art/palettes/Mars/Global/HUD.bin"
+EndSeg
+;EndRegion
 
 ;Region Pal32x_Levels_AAZ_Lit_Secondary
 StartSeg Pal32x_Levels_AAZ_Lit_Code	$00219E	$04 Big_Endian
@@ -5772,9 +5783,559 @@ EndSeg
 ;EndRegion
 ;EndRegion
 
-;!@ TODO: Extract/allow editing of entire ArtNem table pointers.
 ;region @Artnem_LevelObjs
-StartSeg Artnem_LevelObjs_Set Big_Endian $2D4718 $3910
+StartSeg Artnem_LevelObjs_Ptr1 Big_Endian $0319F0 $04
+	DWORD	Artnem_LevelObjs_Tbl
+EndSeg
+StartSeg Artnem_LevelObjs_Ptr2 Big_Endian $031FDC $04
+	DWORD	Artnem_LevelObjs_Tbl
+EndSeg
+StartSeg Artnem_LevelObjs_Tbl Big_Endian $2D4098 $3F90
+	artnem_LevelObjs_T:	WORD	anlo_bbz0m-artnem_LevelObjs_T
+	anlop_bbz0d:	WORD	anlo_bbz0d-anlop_bbz0d
+	anlop_bbz0s:	WORD	anlo_bbz0s-anlop_bbz0s
+	anlop_bbz0n:	WORD	anlo_bbz0n-anlop_bbz0n
+	anlop_bbz1m:	WORD	anlo_bbz1m-anlop_bbz1m
+	anlop_bbz1d:	WORD	anlo_bbz1d-anlop_bbz1d
+	anlop_bbz1s:	WORD	anlo_bbz1s-anlop_bbz1s
+	anlop_bbz1n:	WORD	anlo_bbz1n-anlop_bbz1n
+	anlop_bbz2m:	WORD	anlo_bbz2m-anlop_bbz2m
+	anlop_bbz2d:	WORD	anlo_bbz2d-anlop_bbz2d
+	anlop_bbz2s:	WORD	anlo_bbz2s-anlop_bbz2s
+	anlop_bbz2n:	WORD	anlo_bbz2n-anlop_bbz2n
+	anlop_bbz3m:	WORD	anlo_bbz3m-anlop_bbz3m
+	anlop_bbz3d:	WORD	anlo_bbz3d-anlop_bbz3d
+	anlop_bbz3s:	WORD	anlo_bbz3s-anlop_bbz3s
+	anlop_bbz3n:	WORD	anlo_bbz3n-anlop_bbz3n
+	anlop_bbz4m:	WORD	anlo_bbz4m-anlop_bbz4m
+	anlop_bbz4d:	WORD	anlo_bbz4d-anlop_bbz4d
+	anlop_bbz4s:	WORD	anlo_bbz4s-anlop_bbz4s
+	anlop_bbz4n:	WORD	anlo_bbz4n-anlop_bbz4n
+	anlop_bbz5m:	WORD	anlo_bbz5m-anlop_bbz5m
+	anlop_bbz5d:	WORD	anlo_bbz5d-anlop_bbz5d
+	anlop_bbz5s:	WORD	anlo_bbz5s-anlop_bbz5s
+	anlop_bbz5n:	WORD	anlo_bbz5n-anlop_bbz5n
+	anlop_bbz6m:	WORD	anlo_bbz6m-anlop_bbz6m
+	anlop_bbz6d:	WORD	anlo_bbz6d-anlop_bbz6d
+	anlop_bbz6s:	WORD	anlo_bbz6s-anlop_bbz6s
+	anlop_bbz6n:	WORD	anlo_bbz6n-anlop_bbz6n
+	
+	anlop_ssz0m:	WORD	anlo_ssz0m-anlop_ssz0m
+	anlop_ssz0d:	WORD	anlo_ssz0d-anlop_ssz0d
+	anlop_ssz0s:	WORD	anlo_ssz0s-anlop_ssz0s
+	anlop_ssz0n:	WORD	anlo_ssz0n-anlop_ssz0n
+	anlop_ssz1m:	WORD	anlo_ssz1m-anlop_ssz1m
+	anlop_ssz1d:	WORD	anlo_ssz1d-anlop_ssz1d
+	anlop_ssz1s:	WORD	anlo_ssz1s-anlop_ssz1s
+	anlop_ssz1n:	WORD	anlo_ssz1n-anlop_ssz1n
+	anlop_ssz2m:	WORD	anlo_ssz2m-anlop_ssz2m
+	anlop_ssz2d:	WORD	anlo_ssz2d-anlop_ssz2d
+	anlop_ssz2s:	WORD	anlo_ssz2s-anlop_ssz2s
+	anlop_ssz2n:	WORD	anlo_ssz2n-anlop_ssz2n
+	anlop_ssz3m:	WORD	anlo_ssz3m-anlop_ssz3m
+	anlop_ssz3d:	WORD	anlo_ssz3d-anlop_ssz3d
+	anlop_ssz3s:	WORD	anlo_ssz3s-anlop_ssz3s
+	anlop_ssz3n:	WORD	anlo_ssz3n-anlop_ssz3n
+	anlop_ssz4m:	WORD	anlo_ssz4m-anlop_ssz4m
+	anlop_ssz4d:	WORD	anlo_ssz4d-anlop_ssz4d
+	anlop_ssz4s:	WORD	anlo_ssz4s-anlop_ssz4s
+	anlop_ssz4n:	WORD	anlo_ssz4n-anlop_ssz4n
+	anlop_ssz5m:	WORD	anlo_ssz5m-anlop_ssz5m
+	anlop_ssz5d:	WORD	anlo_ssz5d-anlop_ssz5d
+	anlop_ssz5s:	WORD	anlo_ssz5s-anlop_ssz5s
+	anlop_ssz5n:	WORD	anlo_ssz5n-anlop_ssz5n
+	anlop_ssz6m:	WORD	anlo_ssz6m-anlop_ssz6m
+	anlop_ssz6d:	WORD	anlo_ssz6d-anlop_ssz6d
+	anlop_ssz6s:	WORD	anlo_ssz6s-anlop_ssz6s
+	anlop_ssz6n:	WORD	anlo_ssz6n-anlop_ssz6n
+	
+	anlop_aaz0m:	WORD	anlo_aaz0m-anlop_aaz0m
+	anlop_aaz0d:	WORD	anlo_aaz0d-anlop_aaz0d
+	anlop_aaz0s:	WORD	anlo_aaz0s-anlop_aaz0s
+	anlop_aaz0n:	WORD	anlo_aaz0n-anlop_aaz0n
+	anlop_aaz1m:	WORD	anlo_aaz1m-anlop_aaz1m
+	anlop_aaz1d:	WORD	anlo_aaz1d-anlop_aaz1d
+	anlop_aaz1s:	WORD	anlo_aaz1s-anlop_aaz1s
+	anlop_aaz1n:	WORD	anlo_aaz1n-anlop_aaz1n
+	anlop_aaz2m:	WORD	anlo_aaz2m-anlop_aaz2m
+	anlop_aaz2d:	WORD	anlo_aaz2d-anlop_aaz2d
+	anlop_aaz2s:	WORD	anlo_aaz2s-anlop_aaz2s
+	anlop_aaz2n:	WORD	anlo_aaz2n-anlop_aaz2n
+	anlop_aaz3m:	WORD	anlo_aaz3m-anlop_aaz3m
+	anlop_aaz3d:	WORD	anlo_aaz3d-anlop_aaz3d
+	anlop_aaz3s:	WORD	anlo_aaz3s-anlop_aaz3s
+	anlop_aaz3n:	WORD	anlo_aaz3n-anlop_aaz3n
+	anlop_aaz4m:	WORD	anlo_aaz4m-anlop_aaz4m
+	anlop_aaz4d:	WORD	anlo_aaz4d-anlop_aaz4d
+	anlop_aaz4s:	WORD	anlo_aaz4s-anlop_aaz4s
+	anlop_aaz4n:	WORD	anlo_aaz4n-anlop_aaz4n
+	anlop_aaz5m:	WORD	anlo_aaz5m-anlop_aaz5m
+	anlop_aaz5d:	WORD	anlo_aaz5d-anlop_aaz5d
+	anlop_aaz5s:	WORD	anlo_aaz5s-anlop_aaz5s
+	anlop_aaz5n:	WORD	anlo_aaz5n-anlop_aaz5n
+	anlop_aaz6m:	WORD	anlo_aaz6m-anlop_aaz6m
+	anlop_aaz6d:	WORD	anlo_aaz6d-anlop_aaz6d
+	anlop_aaz6s:	WORD	anlo_aaz6s-anlop_aaz6s
+	anlop_aaz6n:	WORD	anlo_aaz6n-anlop_aaz6n
+	
+	anlop_ttz0m:	WORD	anlo_ttz0m-anlop_ttz0m
+	anlop_ttz0d:	WORD	anlo_ttz0d-anlop_ttz0d
+	anlop_ttz0s:	WORD	anlo_ttz0s-anlop_ttz0s
+	anlop_ttz0n:	WORD	anlo_ttz0n-anlop_ttz0n
+	anlop_ttz1m:	WORD	anlo_ttz1m-anlop_ttz1m
+	anlop_ttz1d:	WORD	anlo_ttz1d-anlop_ttz1d
+	anlop_ttz1s:	WORD	anlo_ttz1s-anlop_ttz1s
+	anlop_ttz1n:	WORD	anlo_ttz1n-anlop_ttz1n
+	anlop_ttz2m:	WORD	anlo_ttz2m-anlop_ttz2m
+	anlop_ttz2d:	WORD	anlo_ttz2d-anlop_ttz2d
+	anlop_ttz2s:	WORD	anlo_ttz2s-anlop_ttz2s
+	anlop_ttz2n:	WORD	anlo_ttz2n-anlop_ttz2n
+	anlop_ttz3m:	WORD	anlo_ttz3m-anlop_ttz3m
+	anlop_ttz3d:	WORD	anlo_ttz3d-anlop_ttz3d
+	anlop_ttz3s:	WORD	anlo_ttz3s-anlop_ttz3s
+	anlop_ttz3n:	WORD	anlo_ttz3n-anlop_ttz3n
+	anlop_ttz4m:	WORD	anlo_ttz4m-anlop_ttz4m
+	anlop_ttz4d:	WORD	anlo_ttz4d-anlop_ttz4d
+	anlop_ttz4s:	WORD	anlo_ttz4s-anlop_ttz4s
+	anlop_ttz4n:	WORD	anlo_ttz4n-anlop_ttz4n
+	anlop_ttz5m:	WORD	anlo_ttz5m-anlop_ttz5m
+	anlop_ttz5d:	WORD	anlo_ttz5d-anlop_ttz5d
+	anlop_ttz5s:	WORD	anlo_ttz5s-anlop_ttz5s
+	anlop_ttz5n:	WORD	anlo_ttz5n-anlop_ttz5n
+	anlop_ttz6m:	WORD	anlo_ttz6m-anlop_ttz6m
+	anlop_ttz6d:	WORD	anlo_ttz6d-anlop_ttz6d
+	anlop_ttz6s:	WORD	anlo_ttz6s-anlop_ttz6s
+	anlop_ttz6n:	WORD	anlo_ttz6n-anlop_ttz6n
+	
+	anlop_mmz0m:	WORD	anlo_mmz0m-anlop_mmz0m
+	anlop_mmz0d:	WORD	anlo_mmz0d-anlop_mmz0d
+	anlop_mmz0s:	WORD	anlo_mmz0s-anlop_mmz0s
+	anlop_mmz0n:	WORD	anlo_mmz0n-anlop_mmz0n
+	anlop_mmz1m:	WORD	anlo_mmz1m-anlop_mmz1m
+	anlop_mmz1d:	WORD	anlo_mmz1d-anlop_mmz1d
+	anlop_mmz1s:	WORD	anlo_mmz1s-anlop_mmz1s
+	anlop_mmz1n:	WORD	anlo_mmz1n-anlop_mmz1n
+	anlop_mmz2m:	WORD	anlo_mmz2m-anlop_mmz2m
+	anlop_mmz2d:	WORD	anlo_mmz2d-anlop_mmz2d
+	anlop_mmz2s:	WORD	anlo_mmz2s-anlop_mmz2s
+	anlop_mmz2n:	WORD	anlo_mmz2n-anlop_mmz2n
+	anlop_mmz3m:	WORD	anlo_mmz3m-anlop_mmz3m
+	anlop_mmz3d:	WORD	anlo_mmz3d-anlop_mmz3d
+	anlop_mmz3s:	WORD	anlo_mmz3s-anlop_mmz3s
+	anlop_mmz3n:	WORD	anlo_mmz3n-anlop_mmz3n
+	anlop_mmz4m:	WORD	anlo_mmz4m-anlop_mmz4m
+	anlop_mmz4d:	WORD	anlo_mmz4d-anlop_mmz4d
+	anlop_mmz4s:	WORD	anlo_mmz4s-anlop_mmz4s
+	anlop_mmz4n:	WORD	anlo_mmz4n-anlop_mmz4n
+	anlop_mmz5m:	WORD	anlo_mmz5m-anlop_mmz5m
+	anlop_mmz5d:	WORD	anlo_mmz5d-anlop_mmz5d
+	anlop_mmz5s:	WORD	anlo_mmz5s-anlop_mmz5s
+	anlop_mmz5n:	WORD	anlo_mmz5n-anlop_mmz5n
+	anlop_mmz6m:	WORD	anlo_mmz6m-anlop_mmz6m
+	anlop_mmz6d:	WORD	anlo_mmz6d-anlop_mmz6d
+	anlop_mmz6s:	WORD	anlo_mmz6s-anlop_mmz6s
+	anlop_mmz6n:	WORD	anlo_mmz6n-anlop_mmz6n
+	
+	anlop_iiztut_0m:	WORD	anlo_iiztut_0m-anlop_iiztut_0m
+	anlop_iiztut_0d:	WORD	anlo_iiztut_0d-anlop_iiztut_0d                                       
+	anlop_iiztut_0s:	WORD	anlo_iiztut_0s-anlop_iiztut_0s                                       
+	anlop_iiztut_0n:	WORD	anlo_iiztut_0n-anlop_iiztut_0n                                       
+	anlop_iiztut_1m:	WORD	anlo_iiztut_1m-anlop_iiztut_1m
+	anlop_iiztut_1d:	WORD	anlo_iiztut_1d-anlop_iiztut_1d                                       
+	anlop_iiztut_1s:	WORD	anlo_iiztut_1s-anlop_iiztut_1s                                       
+	anlop_iiztut_1n:	WORD	anlo_iiztut_1n-anlop_iiztut_1n                                       
+	anlop_iiztut_2m:	WORD	anlo_iiztut_2m-anlop_iiztut_2m                                       
+	anlop_iiztut_2d:	WORD	anlo_iiztut_2d-anlop_iiztut_2d                                       
+	anlop_iiztut_2s:	WORD	anlo_iiztut_2s-anlop_iiztut_2s                                       
+	anlop_iiztut_2n:	WORD	anlo_iiztut_2n-anlop_iiztut_2n                                       
+	anlop_iiztut_3m:	WORD	anlo_iiztut_3m-anlop_iiztut_3m                                       
+	anlop_iiztut_3d:	WORD	anlo_iiztut_3d-anlop_iiztut_3d                                       
+	anlop_iiztut_3s:	WORD	anlo_iiztut_3s-anlop_iiztut_3s                                       
+	anlop_iiztut_3n:	WORD	anlo_iiztut_3n-anlop_iiztut_3n                                       
+	anlop_iiztut_4m:	WORD	anlo_iiztut_4m-anlop_iiztut_4m                                       
+	anlop_iiztut_4d:	WORD	anlo_iiztut_4d-anlop_iiztut_4d
+	anlop_iiztut_4s:	WORD	anlo_iiztut_4s-anlop_iiztut_4s
+	anlop_iiztut_4n:	WORD	anlo_iiztut_4n-anlop_iiztut_4n
+	anlop_iiztut_5m:	WORD	anlo_iiztut_5m-anlop_iiztut_5m
+	anlop_iiztut_5d:	WORD	anlo_iiztut_5d-anlop_iiztut_5d                                       
+	anlop_iiztut_5s:	WORD	anlo_iiztut_5s-anlop_iiztut_5s                                       
+	anlop_iiztut_5n:	WORD	anlo_iiztut_5n-anlop_iiztut_5n                                       
+	anlop_iiztut_6m:	WORD	anlo_iiztut_6m-anlop_iiztut_6m
+	anlop_iiztut_6d:	WORD	anlo_iiztut_6d-anlop_iiztut_6d                                       
+	anlop_iiztut_6s:	WORD	anlo_iiztut_6s-anlop_iiztut_6s                                       
+	anlop_iiztut_6n:	WORD	anlo_iiztut_6n-anlop_iiztut_6n
+										
+	anlop_iizintro_0m:	WORD	anlo_iizintro_0m-anlop_iizintro_0m
+	anlop_iizintro_0d:	WORD	anlo_iizintro_0d-anlop_iizintro_0d                                       
+	anlop_iizintro_0s:	WORD	anlo_iizintro_0s-anlop_iizintro_0s                                       
+	anlop_iizintro_0n:	WORD	anlo_iizintro_0n-anlop_iizintro_0n                                       
+	anlop_iizintro_1m:	WORD	anlo_iizintro_1m-anlop_iizintro_1m
+	anlop_iizintro_1d:	WORD	anlo_iizintro_1d-anlop_iizintro_1d                                       
+	anlop_iizintro_1s:	WORD	anlo_iizintro_1s-anlop_iizintro_1s                                      
+	anlop_iizintro_1n:	WORD	anlo_iizintro_1n-anlop_iizintro_1n                                       
+	anlop_iizintro_2m:	WORD	anlo_iizintro_2m-anlop_iizintro_2m                                       
+	anlop_iizintro_2d:	WORD	anlo_iizintro_2d-anlop_iizintro_2d                                       
+	anlop_iizintro_2s:	WORD	anlo_iizintro_2s-anlop_iizintro_2s                                       
+	anlop_iizintro_2n:	WORD	anlo_iizintro_2n-anlop_iizintro_2n                                       
+	anlop_iizintro_3m:	WORD	anlo_iizintro_3m-anlop_iizintro_3m                                       
+	anlop_iizintro_3d:	WORD	anlo_iizintro_3d-anlop_iizintro_3d                                       
+	anlop_iizintro_3s:	WORD	anlo_iizintro_3s-anlop_iizintro_3s                                       
+	anlop_iizintro_3n:	WORD	anlo_iizintro_3n-anlop_iizintro_3n                                       
+	anlop_iizintro_4m:	WORD	anlo_iizintro_4m-anlop_iizintro_4m                                       
+	anlop_iizintro_4d:	WORD	anlo_iizintro_4d-anlop_iizintro_4d                                       
+	anlop_iizintro_4s:	WORD	anlo_iizintro_4s-anlop_iizintro_4s                                       
+	anlop_iizintro_4n:	WORD	anlo_iizintro_4n-anlop_iizintro_4n                                       
+	anlop_iizintro_5m:	WORD	anlo_iizintro_5m-anlop_iizintro_5m                                       
+	anlop_iizintro_5d:	WORD	anlo_iizintro_5d-anlop_iizintro_5d                                       
+	anlop_iizintro_5s:	WORD	anlo_iizintro_5s-anlop_iizintro_5s                                       
+	anlop_iizintro_5n:	WORD	anlo_iizintro_5n-anlop_iizintro_5n                                       
+	anlop_iizintro_6m:	WORD	anlo_iizintro_6m-anlop_iizintro_6m                                       
+	anlop_iizintro_6d:	WORD	anlo_iizintro_6d-anlop_iizintro_6d                                       
+	anlop_iizintro_6s:	WORD	anlo_iizintro_6s-anlop_iizintro_6s                                       
+	anlop_iizintro_6n:	WORD	anlo_iizintro_6n-anlop_iizintro_6n
+										
+	anlop_we0m: 	WORD	anlo_we0m-anlop_we0m
+	anlop_we0d: 	WORD	anlo_we0d-anlop_we0d
+	anlop_we0s: 	WORD	anlo_we0s-anlop_we0s
+	anlop_we0n: 	WORD	anlo_we0n-anlop_we0n
+	anlop_we1m: 	WORD	anlo_we1m-anlop_we1m
+	anlop_we1d: 	WORD	anlo_we1d-anlop_we1d
+	anlop_we1s: 	WORD	anlo_we1s-anlop_we1s
+	anlop_we1n: 	WORD	anlo_we1n-anlop_we1n
+	anlop_we2m: 	WORD	anlo_we2m-anlop_we2m
+	anlop_we2d: 	WORD	anlo_we2d-anlop_we2d
+	anlop_we2s: 	WORD	anlo_we2s-anlop_we2s
+	anlop_we2n: 	WORD	anlo_we2n-anlop_we2n
+	anlop_we3m: 	WORD	anlo_we3m-anlop_we3m
+	anlop_we3d: 	WORD	anlo_we3d-anlop_we3d
+	anlop_we3s: 	WORD	anlo_we3s-anlop_we3s
+	anlop_we3n: 	WORD	anlo_we3n-anlop_we3n
+	anlop_we4m: 	WORD	anlo_we4m-anlop_we4m
+	anlop_we4d: 	WORD	anlo_we4d-anlop_we4d
+	anlop_we4s: 	WORD	anlo_we4s-anlop_we4s
+	anlop_we4n: 	WORD	anlo_we4n-anlop_we4n
+	anlop_we5m: 	WORD	anlo_we5m-anlop_we5m
+	anlop_we5d: 	WORD	anlo_we5d-anlop_we5d
+	anlop_we5s: 	WORD	anlo_we5s-anlop_we5s
+	anlop_we5n: 	WORD	anlo_we5n-anlop_we5n
+	anlop_we6m: 	WORD	anlo_we6m-anlop_we6m
+	anlop_we6d: 	WORD	anlo_we6d-anlop_we6d
+	anlop_we6s: 	WORD	anlo_we6s-anlop_we6s
+	anlop_we6n: 	WORD	anlo_we6n-anlop_we6n
+	
+	
+	anlo_bbz0m:     DWORD	NullTerm
+	anlo_bbz0d:     DWORD	NullTerm
+	anlo_bbz0s:     DWORD	NullTerm
+	anlo_bbz0n:     DWORD	NullTerm
+	anlo_bbz1m:     DWORD	ArtNem_BBZ_Pillar1
+					DWORD	NullTerm
+	anlo_bbz1d:     DWORD	ArtNem_BBZ_Pillar1
+					DWORD	NullTerm
+	anlo_bbz1s:     DWORD	ArtNem_BBZ_Pillar1
+					DWORD	NullTerm
+	anlo_bbz1n:     DWORD	ArtNem_BBZ_Pillar1
+					DWORD	NullTerm
+	anlo_bbz2m:     DWORD	ArtNem_BBZ_Pillar1
+					DWORD	NullTerm
+	anlo_bbz2d:     DWORD	ArtNem_BBZ_Pillar1
+					DWORD	NullTerm
+	anlo_bbz2s:     DWORD	ArtNem_BBZ_Pillar1
+					DWORD	NullTerm
+	anlo_bbz2n:     DWORD	ArtNem_BBZ_Pillar1
+					DWORD	NullTerm
+	anlo_bbz3m:     DWORD	ArtNem_BBZ_Pillar2
+					DWORD	NullTerm
+	anlo_bbz3d:     DWORD	ArtNem_BBZ_Pillar2
+					DWORD	NullTerm
+	anlo_bbz3s:     DWORD	ArtNem_BBZ_Pillar2
+					DWORD	NullTerm
+	anlo_bbz3n:     DWORD	ArtNem_BBZ_Pillar2
+					DWORD	NullTerm
+	anlo_bbz4m:     DWORD	ArtNem_BBZ_Pillar2
+					DWORD	NullTerm
+	anlo_bbz4d:     DWORD	ArtNem_BBZ_Pillar2
+					DWORD	NullTerm
+	anlo_bbz4s:     DWORD	ArtNem_BBZ_Pillar2
+					DWORD	NullTerm
+	anlo_bbz4n:     DWORD	ArtNem_BBZ_Pillar2
+					DWORD	NullTerm
+	anlo_bbz5m:     DWORD	ArtNem_BBZ_Pillar3
+					DWORD	ArtNem_BBZ_Boss_GroundChunk
+					DWORD	NullTerm
+	anlo_bbz5d:     DWORD	ArtNem_BBZ_Pillar3
+					DWORD	ArtNem_BBZ_Boss_GroundChunk
+					DWORD	NullTerm
+	anlo_bbz5s:     DWORD	ArtNem_BBZ_Pillar3
+					DWORD	ArtNem_BBZ_Boss_GroundChunk
+					DWORD	NullTerm
+	anlo_bbz5n:     DWORD	ArtNem_BBZ_Pillar3
+					DWORD	ArtNem_BBZ_Boss_GroundChunk
+					DWORD	NullTerm
+	anlo_bbz6m:     DWORD	ArtNem_BBZ_Boss_GroundChunk
+					DWORD	NullTerm
+	anlo_bbz6d:     DWORD	ArtNem_BBZ_Boss_GroundChunk
+					DWORD	NullTerm
+	anlo_bbz6s:     DWORD	ArtNem_BBZ_Boss_GroundChunk
+					DWORD	NullTerm
+	anlo_bbz6n:     DWORD	ArtNem_BBZ_Boss_GroundChunk
+					DWORD	NullTerm
+	
+	anlo_ssz0m:     DWORD	NullTerm
+	anlo_ssz0d:     DWORD	NullTerm
+	anlo_ssz0s:     DWORD	NullTerm
+	anlo_ssz0n:     DWORD	NullTerm
+	anlo_ssz1m:     DWORD	NullTerm          
+	anlo_ssz1d:     DWORD	NullTerm          
+	anlo_ssz1s:     DWORD	NullTerm          
+	anlo_ssz1n:     DWORD	NullTerm          
+	anlo_ssz2m:     DWORD	NullTerm          
+	anlo_ssz2d:     DWORD	NullTerm          
+	anlo_ssz2s:     DWORD	NullTerm
+	anlo_ssz2n:     DWORD	NullTerm          
+	anlo_ssz3m:     DWORD	NullTerm          
+	anlo_ssz3d:     DWORD	NullTerm          
+	anlo_ssz3s:     DWORD	NullTerm          
+	anlo_ssz3n:     DWORD	NullTerm          
+	anlo_ssz4m:     DWORD	NullTerm          
+	anlo_ssz4d:     DWORD	NullTerm          
+	anlo_ssz4s:     DWORD	NullTerm          
+	anlo_ssz4n:     DWORD	NullTerm          
+	anlo_ssz5m:     DWORD	NullTerm          
+	anlo_ssz5d:     DWORD	NullTerm          
+	anlo_ssz5s:     DWORD	NullTerm          
+	anlo_ssz5n:     DWORD	NullTerm          
+	anlo_ssz6m:     DWORD	NullTerm           
+	anlo_ssz6d:     DWORD	NullTerm
+	anlo_ssz6s:     DWORD	NullTerm
+	anlo_ssz6n:     DWORD	NullTerm
+	
+	anlo_aaz0m:     DWORD	NullTerm
+	anlo_aaz0d:     DWORD	NullTerm
+	anlo_aaz0s:     DWORD	NullTerm
+	anlo_aaz0n:     DWORD	NullTerm
+	anlo_aaz1m:     DWORD	NullTerm          
+	anlo_aaz1d:     DWORD	NullTerm          
+	anlo_aaz1s:     DWORD	NullTerm          
+	anlo_aaz1n:     DWORD	NullTerm          
+	anlo_aaz2m:     DWORD	NullTerm          
+	anlo_aaz2d:     DWORD	NullTerm          
+	anlo_aaz2s:     DWORD	NullTerm
+	anlo_aaz2n:     DWORD	NullTerm          
+	anlo_aaz3m:     DWORD	NullTerm          
+	anlo_aaz3d:     DWORD	NullTerm          
+	anlo_aaz3s:     DWORD	NullTerm          
+	anlo_aaz3n:     DWORD	NullTerm          
+	anlo_aaz4m:     DWORD	NullTerm          
+	anlo_aaz4d:     DWORD	NullTerm          
+	anlo_aaz4s:     DWORD	NullTerm          
+	anlo_aaz4n:     DWORD	NullTerm          
+	anlo_aaz5m:     DWORD	NullTerm          
+	anlo_aaz5d:     DWORD	NullTerm          
+	anlo_aaz5s:     DWORD	NullTerm          
+	anlo_aaz5n:     DWORD	NullTerm          
+	anlo_aaz6m:     DWORD	NullTerm           
+	anlo_aaz6d:     DWORD	NullTerm
+	anlo_aaz6s:     DWORD	NullTerm
+	anlo_aaz6n:     DWORD	NullTerm
+	
+	anlo_ttz0m:     DWORD	NullTerm
+	anlo_ttz0d:     DWORD	NullTerm
+	anlo_ttz0s:     DWORD	NullTerm
+	anlo_ttz0n:     DWORD	NullTerm
+	anlo_ttz1m:     DWORD	ArtNem_TTZ_Palmtree
+					DWORD	NullTerm
+	anlo_ttz1d:     DWORD	ArtNem_TTZ_Palmtree
+					DWORD	NullTerm
+	anlo_ttz1s:     DWORD	ArtNem_TTZ_Palmtree
+					DWORD	NullTerm
+	anlo_ttz1n:     DWORD	ArtNem_TTZ_Palmtree
+					DWORD	NullTerm
+	anlo_ttz2m:     DWORD	NullTerm          
+	anlo_ttz2d:     DWORD	NullTerm          
+	anlo_ttz2s:     DWORD	NullTerm
+	anlo_ttz2n:     DWORD	NullTerm          
+	anlo_ttz3m:     DWORD	NullTerm          
+	anlo_ttz3d:     DWORD	NullTerm          
+	anlo_ttz3s:     DWORD	NullTerm          
+	anlo_ttz3n:     DWORD	NullTerm          
+	anlo_ttz4m:     DWORD	NullTerm          
+	anlo_ttz4d:     DWORD	NullTerm          
+	anlo_ttz4s:     DWORD	NullTerm          
+	anlo_ttz4n:     DWORD	NullTerm          
+	anlo_ttz5m:     DWORD	NullTerm          
+	anlo_ttz5d:     DWORD	NullTerm          
+	anlo_ttz5s:     DWORD	NullTerm          
+	anlo_ttz5n:     DWORD	NullTerm          
+	anlo_ttz6m:     DWORD	NullTerm           
+	anlo_ttz6d:     DWORD	NullTerm
+	anlo_ttz6s:     DWORD	NullTerm
+	anlo_ttz6n:     DWORD	NullTerm
+	
+	anlo_mmz0m:     DWORD	NullTerm
+	anlo_mmz0d:     DWORD	NullTerm
+	anlo_mmz0s:     DWORD	NullTerm
+	anlo_mmz0n:     DWORD	NullTerm
+	anlo_mmz1m:     DWORD	ArtNem_MMZ_Clouds 
+					DWORD	NullTerm
+	anlo_mmz1d:     DWORD	ArtNem_MMZ_Clouds 
+					DWORD	NullTerm
+	anlo_mmz1s:     DWORD	ArtNem_MMZ_Clouds 
+					DWORD	NullTerm
+	anlo_mmz1n:     DWORD	ArtNem_MMZ_Clouds 
+					DWORD	NullTerm
+	anlo_mmz2m:     DWORD	NullTerm          
+	anlo_mmz2d:     DWORD	NullTerm          
+	anlo_mmz2s:     DWORD	NullTerm
+	anlo_mmz2n:     DWORD	NullTerm          
+	anlo_mmz3m:     DWORD	NullTerm          
+	anlo_mmz3d:     DWORD	NullTerm          
+	anlo_mmz3s:     DWORD	NullTerm          
+	anlo_mmz3n:     DWORD	NullTerm          
+	anlo_mmz4m:     DWORD	NullTerm          
+	anlo_mmz4d:     DWORD	NullTerm          
+	anlo_mmz4s:     DWORD	NullTerm          
+	anlo_mmz4n:     DWORD	NullTerm          
+	anlo_mmz5m:     DWORD	NullTerm          
+	anlo_mmz5d:     DWORD	NullTerm          
+	anlo_mmz5s:     DWORD	NullTerm          
+	anlo_mmz5n:     DWORD	NullTerm          
+	anlo_mmz6m:     DWORD	NullTerm           
+	anlo_mmz6d:     DWORD	NullTerm
+	anlo_mmz6s:     DWORD	NullTerm
+	anlo_mmz6n:     DWORD	NullTerm
+	
+	anlo_iiztut_0m: DWORD	NullTerm
+	anlo_iiztut_0d: DWORD	NullTerm
+	anlo_iiztut_0s: DWORD	NullTerm
+	anlo_iiztut_0n: DWORD	NullTerm
+	anlo_iiztut_1m: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_1d: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_1s: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_1n: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_2m: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_2d: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_2s: DWORD	ArtNem_IIZ_Block
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_2n: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_3m: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_3d: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_3s: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_3n: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_4m: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_4d: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_4s: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_4n: DWORD	ArtNem_IIZ_Block  
+					DWORD	ArtNem_IIZ_Palmtree
+					DWORD	NullTerm
+	anlo_iiztut_5m: DWORD	NullTerm          
+	anlo_iiztut_5d: DWORD	NullTerm          
+	anlo_iiztut_5s: DWORD	NullTerm          
+	anlo_iiztut_5n: DWORD	NullTerm          
+	anlo_iiztut_6m: DWORD	NullTerm           
+	anlo_iiztut_6d: DWORD	NullTerm
+	anlo_iiztut_6s: DWORD	NullTerm
+	anlo_iiztut_6n: DWORD	NullTerm
+	
+	anlo_iizintro_0m:	DWORD	NullTerm
+	anlo_iizintro_0d:	DWORD	NullTerm
+	anlo_iizintro_0s:	DWORD	NullTerm
+	anlo_iizintro_0n:	DWORD	NullTerm
+	anlo_iizintro_1m:	DWORD	NullTerm         
+	anlo_iizintro_1d:	DWORD	NullTerm         
+	anlo_iizintro_1s:	DWORD	NullTerm         
+	anlo_iizintro_1n:	DWORD	NullTerm         
+	anlo_iizintro_2m:	DWORD	NullTerm         
+	anlo_iizintro_2d:	DWORD	NullTerm         
+	anlo_iizintro_2s:	DWORD	NullTerm       
+	anlo_iizintro_2n:	DWORD	NullTerm         
+	anlo_iizintro_3m:	DWORD	NullTerm         
+	anlo_iizintro_3d:	DWORD	NullTerm         
+	anlo_iizintro_3s:	DWORD	NullTerm         
+	anlo_iizintro_3n:	DWORD	NullTerm         
+	anlo_iizintro_4m:	DWORD	NullTerm         
+	anlo_iizintro_4d:	DWORD	NullTerm         
+	anlo_iizintro_4s:	DWORD	NullTerm         
+	anlo_iizintro_4n:	DWORD	NullTerm         
+	anlo_iizintro_5m:	DWORD	NullTerm         
+	anlo_iizintro_5d:	DWORD	NullTerm         
+	anlo_iizintro_5s:	DWORD	NullTerm         
+	anlo_iizintro_5n:	DWORD	NullTerm         
+	anlo_iizintro_6m:	DWORD	NullTerm          
+	anlo_iizintro_6d:	DWORD	NullTerm
+	anlo_iizintro_6s:	DWORD	NullTerm
+	anlo_iizintro_6n:	DWORD	NullTerm
+	
+	anlo_we0m:      DWORD	ArtNem_WE_BumperChair
+					DWORD	ArtNem_WE_Shadows
+					DWORD	ArtNem_WE_ObjSet
+					DWORD	NullTerm
+	anlo_we0d:      DWORD	ArtNem_WE_BumperChair
+					DWORD	ArtNem_WE_Shadows
+					DWORD	ArtNem_WE_ObjSet
+					DWORD	NullTerm
+	anlo_we0s:      DWORD	ArtNem_WE_BumperChair
+					DWORD	ArtNem_WE_Shadows
+					DWORD	ArtNem_WE_ObjSet
+					DWORD	NullTerm
+	anlo_we0n:      DWORD	ArtNem_WE_BumperChair
+					DWORD	ArtNem_WE_Shadows
+					DWORD	ArtNem_WE_ObjSet
+					DWORD	NullTerm
+	anlo_we1m:      DWORD	NullTerm          
+	anlo_we1d:      DWORD	NullTerm          
+	anlo_we1s:      DWORD	NullTerm          
+	anlo_we1n:      DWORD	NullTerm          
+	anlo_we2m:      DWORD	NullTerm          
+	anlo_we2d:      DWORD	NullTerm          
+	anlo_we2s:      DWORD	NullTerm
+	anlo_we2n:      DWORD	NullTerm          
+	anlo_we3m:      DWORD	NullTerm          
+	anlo_we3d:      DWORD	NullTerm          
+	anlo_we3s:      DWORD	NullTerm          
+	anlo_we3n:      DWORD	NullTerm          
+	anlo_we4m:      DWORD	NullTerm          
+	anlo_we4d:      DWORD	NullTerm          
+	anlo_we4s:      DWORD	NullTerm          
+	anlo_we4n:      DWORD	NullTerm          
+	anlo_we5m:      DWORD	NullTerm          
+	anlo_we5d:      DWORD	NullTerm          
+	anlo_we5s:      DWORD	NullTerm          
+	anlo_we5n:      DWORD	NullTerm          
+	anlo_we6m:      DWORD	NullTerm           
+	anlo_we6d:      DWORD	NullTerm
+	anlo_we6s:      DWORD	NullTerm
+	anlo_we6n:      DWORD	NullTerm
+
 	ArtNem_MMZ_Clouds:				include		"Art/artnem/LevelObjs/MMZ_Clouds.bin"
 	ArtNem_TTZ_Palmtree:			include		"Art/artnem/LevelObjs/TTZ_Palmtree.bin"
 	ArtNem_BBZ_Boss_GroundChunk:	include		"Art/artnem/LevelObjs/BBZ_Boss_GroundChunk.bin"

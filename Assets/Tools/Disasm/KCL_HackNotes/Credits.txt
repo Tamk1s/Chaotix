@@ -4,6 +4,16 @@ VarionIcaria
 - Disasm research and other assistance
 - Notes on how to expand to another 1MB ROM Data bank
 
+Devon
+- Incomplete Chaotix final Disasm (https://forums.sonicretro.org/index.php?posts/1076272/)
+- Secret Credits ASCII Easter Egg (https://forums.sonicretro.org/index.php?posts/1055946/)
+- Information on unused, unreferenced spring 32x sprite (https://forums.sonicretro.org/index.php?posts/1055054/)
+- Information on unused level object artnem assets (https://forums.sonicretro.org/index.php?posts/1056217/)
+- Information on 32x draw commands (https://forums.sonicretro.org/index.php?threads/chaotixs-32x-graphics-drawing-system.42122/)
+- https://forums.sonicretro.org/index.php?threads/adventures-with-chaotix.39934/
+
+https://forums.sonicretro.org/index.php?posts/1056217/
+
 JCFields:
 - Research and documentation on the SRAM format in Chaotix
 - https://gitlab.com/jcfields/chaotix-save-editor

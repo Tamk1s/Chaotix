@@ -3,17 +3,27 @@ Fixed Segments:
 *Segment 000 - APB_Global_Ptr: Offset $77BA4  Size $4
 *Segment 001 - APB_Level_Ptr: Offset $77BD0  Size $4
 *Segment 002 - APB_SS_Level_Ptr: Offset $77B78  Size $4
-*Segment 003 - ArtPtr32x: Offset $A0000  Size $17C4B6
-*Segment 004 - APB_SS_Level: Offset $77B7C  Size $10
-*Segment 005 - APB_SS_Results: Offset $77B94  Size $A
-*Segment 006 - Poly_SprBounds: Offset $787E4  Size $CC
-*Segment 007 - Poly_SprBounds: Offset $7CFEC  Size $4
-*Segment 008 - SprGameover: Offset $7AC7C  Size $18
-*Segment 009 - Pal32X_SSPalc_Ptr: Offset $7D5F4  Size $4
-*Segment 00A - Pal32X_SSGlbl_Ptr: Offset $7D608  Size $4
-*Segment 00B - Pal32X_SS_Ptr: Offset $7D60C  Size $4
-*Segment 00C - Pal32X_SSObjs_Ptr: Offset $7F170  Size $4
-*Segment 00D - Pal32X_SS: Offset $7F638  Size $270
+*Segment 003 - APB_MetalSonic_Intro2: Offset $4A14  Size $2
+*Segment 004 - APB_MetalSonic_Intro1: Offset $4B72  Size $2
+*Segment 005 - APB_CRings_Ending: Offset $5DA0  Size $2
+*Segment 006 - APB_Plane_GoodEnding: Offset $642E  Size $2
+*Segment 007 - APB_WE_MSBoss: Offset $130B0  Size $2
+*Segment 008 - APB_MS_Level: Offset $29DD8  Size $2
+*Segment 009 - APB_Space: Offset $2BF26  Size $2
+*Segment 00A - APB_MS_Level2: Offset $3BC48  Size $2
+*Segment 00B - ArtPtr32x: Offset $A0000  Size $17C4B6
+*Segment 00C - APBc_BS_Chars: Offset $3D24A  Size $2
+*Segment 00D - APB_BS_Chars: Offset $3D268  Size $10
+*Segment 00E - APB_SS_Level: Offset $77B7C  Size $10
+*Segment 00F - APB_SS_Results: Offset $77B94  Size $A
+*Segment 010 - Poly_SprBounds: Offset $787E4  Size $CC
+*Segment 011 - Poly_SprBounds: Offset $7CFEC  Size $4
+*Segment 012 - SprGameover: Offset $7AC7C  Size $18
+*Segment 013 - Pal32X_SSPalc_Ptr: Offset $7D5F4  Size $4
+*Segment 014 - Pal32X_SSGlbl_Ptr: Offset $7D608  Size $4
+*Segment 015 - Pal32X_SS_Ptr: Offset $7D60C  Size $4
+*Segment 016 - Pal32X_SSObjs_Ptr: Offset $7F170  Size $4
+*Segment 017 - Pal32X_SS: Offset $7F638  Size $270
 
 
 Floating Segments:
@@ -30,7 +40,23 @@ Segment\Label Placement
 
 *Segment 002 - APB_SS_Level_Ptr: Offset $77B78  Size $4
 
-*Segment 003 - ArtPtr32x: Offset $A0000  Size $17C4B6
+*Segment 003 - APB_MetalSonic_Intro2: Offset $4A14  Size $2
+
+*Segment 004 - APB_MetalSonic_Intro1: Offset $4B72  Size $2
+
+*Segment 005 - APB_CRings_Ending: Offset $5DA0  Size $2
+
+*Segment 006 - APB_Plane_GoodEnding: Offset $642E  Size $2
+
+*Segment 007 - APB_WE_MSBoss: Offset $130B0  Size $2
+
+*Segment 008 - APB_MS_Level: Offset $29DD8  Size $2
+
+*Segment 009 - APB_Space: Offset $2BF26  Size $2
+
+*Segment 00A - APB_MS_Level2: Offset $3BC48  Size $2
+
+*Segment 00B - ArtPtr32x: Offset $A0000  Size $17C4B6
  APB_Glbl: $A0200
  APB_Level: $A0212
  APB_BBZ0MN: $A03D2
@@ -2415,25 +2441,29 @@ Segment\Label Placement
  AP3_InvinStars_Stars_02: $21C3B8
  AP3_InvinStars_Stars_03: $21C422
 
-*Segment 004 - APB_SS_Level: Offset $77B7C  Size $10
+*Segment 00C - APBc_BS_Chars: Offset $3D24A  Size $2
 
-*Segment 005 - APB_SS_Results: Offset $77B94  Size $A
+*Segment 00D - APB_BS_Chars: Offset $3D268  Size $10
 
-*Segment 006 - Poly_SprBounds: Offset $787E4  Size $CC
+*Segment 00E - APB_SS_Level: Offset $77B7C  Size $10
 
-*Segment 007 - Poly_SprBounds: Offset $7CFEC  Size $4
+*Segment 00F - APB_SS_Results: Offset $77B94  Size $A
 
-*Segment 008 - SprGameover: Offset $7AC7C  Size $18
+*Segment 010 - Poly_SprBounds: Offset $787E4  Size $CC
 
-*Segment 009 - Pal32X_SSPalc_Ptr: Offset $7D5F4  Size $4
+*Segment 011 - Poly_SprBounds: Offset $7CFEC  Size $4
 
-*Segment 00A - Pal32X_SSGlbl_Ptr: Offset $7D608  Size $4
+*Segment 012 - SprGameover: Offset $7AC7C  Size $18
 
-*Segment 00B - Pal32X_SS_Ptr: Offset $7D60C  Size $4
+*Segment 013 - Pal32X_SSPalc_Ptr: Offset $7D5F4  Size $4
 
-*Segment 00C - Pal32X_SSObjs_Ptr: Offset $7F170  Size $4
+*Segment 014 - Pal32X_SSGlbl_Ptr: Offset $7D608  Size $4
 
-*Segment 00D - Pal32X_SS: Offset $7F638  Size $270
+*Segment 015 - Pal32X_SS_Ptr: Offset $7D60C  Size $4
+
+*Segment 016 - Pal32X_SSObjs_Ptr: Offset $7F170  Size $4
+
+*Segment 017 - Pal32X_SS: Offset $7F638  Size $270
  Pal32X_SSGlbl: $7F648
  Pal32X_SSObjs: $7F66A
  Pal32X_SSPalc: $7F704

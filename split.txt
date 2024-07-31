@@ -289,6 +289,7 @@ Extract $07AC7C	$0018	"Art/Mars/Poly/SprGameover.bin"
 ;EndRegion
 
 ;Region @ArtPtrBanks_Special
+Extract $03D268	$0010	"Art/Mars/APB/Special/BS_Chars.bin"
 Extract $077B7C	$000E	"Art/Mars/APB/Special/SS_Level.bin"
 Extract $077B8A	$0002	"Art/Mars/APB/Special/SS_LevelPad.pad"
 Extract $077B94	$0008	"Art/Mars/APB/Special/SS_Results.bin"

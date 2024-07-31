@@ -14,6 +14,138 @@ Define	Entry_MasterSH2		$06000000		;Logical ROM offset addr for SH2 (Master)
 Define	Offset_MasterSH2	$00077800		;Offset for calculating between raw ROM and SH2 area
 MaxSize	$400000				;Maximum Genesis ROM size
 
+;region ArtPtr32x_BankIDs
+Define	AP3_Mighty						$00
+Define	AP3_Wechnia						$01
+Define	AP3_Knuckles					$02
+Define	AP3_Charmy						$03
+Define	AP3_Vector						$04
+Define	AP3_Bomb						$05
+Define	AP3_Heavy						$06
+Define	AP3_Espio						$07
+Define	AP3_Mighty_ArmHandRing			$08
+Define	AP3_Wechnia_ArmHandRing			$09
+Define	AP3_Knuckles_ArmHandRing		$0A
+Define	AP3_Charmy_ArmHandRing			$0B
+Define	AP3_Vector_ArmHandRing			$0C
+Define	AP3_Bomb_ArmHandRing			$0D
+Define	AP3_Heavy_ArmHandRing			$0E
+Define	AP3_Espio_ArmHandRing			$0F
+Define	AP3_Bank10						$10
+Define	AP3_LvlGlbl						$11
+Define	AP3_Monitor						$12
+Define	AP3_HUD_Lvl						$13
+Define	AP3_BBZ_Ens1					$14
+Define	AP3_SSZ_Mosqui					$15
+Define	AP3_MS_Intro1					$16
+Define	AP3_SSZ_Spikeball				$17
+Define	AP3_BBZ_Boss					$18
+Define	AP3_MS_Intro2					$19
+Define	AP3_WE_LvlIcons1				$1A
+Define	AP3_BBZ_Ens2					$1B
+Define	AP3_EnParts_Explos				$1C
+Define	AP3_RBand						$1D
+Define	AP3_Bank1E						$1E
+Define	AP3_MMZ_Ens1					$1F
+Define	AP3_Explosions					$20
+Define	AP3_MMZ_Ens2					$21
+Define	AP3_MMZ_BG						$22
+Define	AP3_MiscGlbl					$23
+Define	AP3_MiscEnd						$24
+Define	AP3_BBZ_Objs					$25
+Define	AP3_BS_Objs						$26
+Define	AP3_Knuckles_SS					$27
+Define	AP3_TTZ_Objs					$28
+Define	AP3_AAZ_Objs1					$29
+Define	AP3_SSZ_Ens						$2A
+Define	AP3_MMZ_Objs					$2B
+Define	AP3_MMZ_Boss					$2C
+Define	AP3_TTZ_Ens						$2D
+Define	AP3_IIZ_Objs1					$2E
+Define	AP3_IIZ_Objs2					$2F
+Define	AP3_SegaLogo					$30
+Define	AP3_BBZ_BossCut					$31
+Define	AP3_MMZ_Ens3					$32
+Define	AP3_MMZ_BossCut					$33
+Define	AP3_BBZ_BG1						$34
+Define	AP3_BBZ_BG2						$35
+Define	AP3_AAZ_Ens1					$36
+Define	AP3_TTZ_Boss					$37
+Define	AP3_AAZ_MiniBoss				$38
+Define	AP3_AAZ_Ens2					$39
+Define	AP3_Bank3A						$3A
+Define	AP3_AAZ_BossCut					$3B
+Define	AP3_AAZ_Objs2					$3C
+Define	AP3_AAZ_Objs3					$3D
+Define	AP3_TutHUD						$3E
+Define	AP3_TTZ_BossCut					$3F
+Define	AP3_LevelTCs					$40
+Define	AP3_Heavy_SS					$41
+Define	AP3_Mighty_SS					$42
+Define	AP3_Vector_SS					$43
+Define	AP3_Bomb_SS						$44
+Define	AP3_SSZ_BossCut					$45
+Define	AP3_Charmy_SS					$46
+Define	AP3_Espio_SS					$47
+Define	AP3_AAZ_Ens3					$48
+Define	AP3_AAZ_Boss					$49
+Define	AP3_GotThrough					$4A
+Define	AP3_WE_MSBoss					$4B
+Define	AP3_Bank4C						$4C
+Define	AP3_SS_HUD						$4D
+Define	AP3_SS_CRingR					$4E
+Define	AP3_SS_Objs						$4F
+Define	AP3_Space1						$50
+Define	AP3_Space2						$51
+Define	AP3_Ring32x						$52
+Define	AP3_BigRing						$53
+Define	AP3_TSChars						$54
+Define	AP3_TS							$55
+Define	AP3_SSZ_Boss					$56
+Define	AP3_Eggman_JPack				$57
+Define	AP3_WE_CombiCatcher				$58
+Define	AP3_WE_Signs					$59
+Define	AP3_WE_Boss						$5A
+Define	AP3_WE_Claw						$5B
+Define	AP3_WE_LvlIcons2				$5C
+Define	AP3_WE_LvlIcons3				$5D
+Define	AP3_WE_LvlStatus				$5E
+Define	AP3_CRings						$5F
+Define	AP3_SSZ_Objs					$60
+Define	AP3_Bank61						$61
+Define	AP3_SSZ_Elevator				$62
+Define	AP3_SSZ_UFO						$63
+Define	AP3_Bank64						$64
+Define	AP3_Bank65						$65
+Define	AP3_SSZ_Bell					$66
+Define	AP3_SSZ_Plunger					$67
+Define	AP3_Bank68						$68
+Define	AP3_Bank69						$69
+Define	AP3_SSBumper					$6A
+Define	AP3_EggmanIntro					$6B
+Define	AP3_IntroMosqui					$6C
+Define	AP3_Bank6D						$6D
+Define	AP3_TailsBiPlane				$6E
+Define	AP3_SuperSonic					$6F
+Define	AP3_EndingPlane					$70
+Define	AP3_MSKai						$71
+Define	AP3_InvinStars					$72
+Define	AP3_Bank73						$73
+Define	AP3_Bank74						$74
+Define	AP3_Bank75						$75
+Define	AP3_Bank76						$76
+Define	AP3_Bank77						$77
+Define	AP3_Bank78						$78
+Define	AP3_Bank79						$79
+Define	AP3_Bank7A						$7A
+Define	AP3_Bank7B						$7B
+Define	AP3_Bank7C						$7C
+Define	AP3_Bank7D						$7D
+Define	AP3_Bank7E						$7E
+Define	AP3_Bank7F						$7F
+Define	AP3_NULL						$FF
+;EndRegion
+
 ;Max size for 32x Art space (art banks) ($20A0000-$222438A)
 Define 	Max32xArtSize_Stock $18438A
 ;Max size for 32x Art space (art banks), including dummy padding ($20A0000-$2227000)
@@ -27,24 +159,49 @@ Define 	Max32xArtSize_Full $187000
 
 ;Region @32xArt
 ;Region @Ptrs
-;!@ Insert ArtPtr32x pts later
-
 ;Ptr to APB_Global
 StartSeg APB_Global_Ptr	$0077BA4 $0004 Big_Endian
 		DWORD	APB_Glbl+ArtPtr32X_Offset
 EndSeg
-
 ;Ptr to APB_Level
 StartSeg APB_Level_Ptr	$0077BD0 $0004 Big_Endian
 		DWORD	APB_Level+ArtPtr32X_Offset
 EndSeg
-
 ;Ptr to APB_SS_Level
 StartSeg APB_SS_Level_Ptr	$0077B78 $0004 Big_Endian
 		DWORD	(APB_SS_Level-Offset_MasterSH2)+Entry_MasterSH2
 EndSeg
 ;EndRegion
 
+;!@ Manually defined APBs in 68k code (calls to Load_SpriteBank_APB, or 32x draw command dcid_load_sprBank/$07)
+;Region APBs_Manual
+StartSeg APB_MetalSonic_Intro2	$004A14 $0004 Big_Endian
+		BYTE	AP3_MS_Intro2, $60
+EndSeg
+StartSeg APB_MetalSonic_Intro1	$004B72 $0004 Big_Endian
+		BYTE	AP3_MS_Intro1, $60
+EndSeg
+StartSeg APB_CRings_Ending		$005DA0 $0004 Big_Endian
+		BYTE	AP3_CRings, $3C
+EndSeg
+StartSeg APB_Plane_GoodEnding	$00642E $0004 Big_Endian
+		BYTE	AP3_EndingPlane, $02
+EndSeg
+StartSeg APB_WE_MSBoss	$0130B0 $0004 Big_Endian
+		BYTE	AP3_WE_MSBoss, $3C
+EndSeg
+StartSeg APB_MS_Level			$029DD8 $0004 Big_Endian
+		BYTE	AP3_MS_Intro2, $14
+EndSeg
+StartSeg APB_Space			$02BF26 $0004 Big_Endian
+		BYTE	AP3_Space2, $BC
+EndSeg
+StartSeg APB_MS_Level2			$03BC48 $0004 Big_Endian
+		BYTE	AP3_MS_Intro2, $61
+EndSeg
+;EndRegion
+
+;!@ Insert ArtPtr32x pts later
 ;StartSeg ArtPtr32x Big_Endian $A0000 Max32xArtSize_Stock
 ;!@ 
 StartSeg ArtPtr32x $A0000 Max32xArtSize_Full Big_Endian
@@ -5533,11 +5690,17 @@ EndSeg
 ;endregion
 
 ;Region @APB_Special
+;PalInd offset for Bonus stage charactrs
+StartSeg APBc_BS_Chars			$03D24A $0004 Big_Endian
+		WORD	$0013
+EndSeg
+StartSeg APB_BS_Chars			$03D268 $0010 Big_Endian
+		include	"Art/Mars/APB/Special/BS_Chars.bin"
+EndSeg
 StartSeg APB_SS_Level $077B7C $0010 Big_Endian
 	include	"Art/Mars/APB/Special/SS_Level.bin"
 	include	"Art/Mars/APB/Special/SS_LevelPad.pad"
 EndSeg
-
 StartSeg APB_SS_Results $077B94 $000A Big_Endian
 	include	"Art/Mars/APB/Special/SS_Results.bin"
 	include	"Art/Mars/APB/Special/SS_ResultsPad.pad"
