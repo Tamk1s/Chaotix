@@ -6,8 +6,12 @@ S2		kos		kos			kos			unc?
 S2NA		nem		unc?/nem		unc?/kos	unc?	unc
 S3K		KosM		Kos			Kos			unc?
 SC		nem		eni			enig		enig	unc
-KC		nem		eni			enig		enig	unc
+KC		nem		eni			enig		enig	enig
 
+HPZ - S2
+		tiles		blocks			chunks		layout	objs
+		kos			kos				kos			unc
+		art/kosinski/HPZ.kos	mappings/16x16/HPZ.kos	mappings/128x128/HPZ.kos	level/layout/HPZ_1_FG.dat/HPZ_1_BG.dat
 
 
 Chunks:
